@@ -16,18 +16,27 @@ after(async () => {
       .update(cookie.slice(14))
       .digest("hex");
     const visitor = (
-      await db.query("SELECT id FROM visitor WHERE token_hash=$1", [tokenHash])
+      await db.query(
+        "SELECT identity_id AS id FROM browser_session WHERE token_hash=$1",
+        [tokenHash],
+      )
     ).rows[0];
     if (visitor) {
-      await db.query("DELETE FROM answer WHERE visitor_id=$1", [visitor.id]);
-      await db.query("DELETE FROM visitor WHERE id=$1", [visitor.id]);
+      await db.query("DELETE FROM answer WHERE owner_id=$1", [visitor.id]);
+      await db.query("DELETE FROM browser_session WHERE identity_id=$1", [
+        visitor.id,
+      ]);
+      await db.query("DELETE FROM study_identity WHERE id=$1", [visitor.id]);
     }
   }
   await app.close();
   await db.end();
 });
 async function session() {
-  const r = await fetch(base + "/api/session", { method: "POST" });
+  const r = await fetch(base + "/api/session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
   assert.equal(r.status, 201);
   const cookie = r.headers.get("set-cookie")!.split(";")[0];
   cookies.push(cookie);

@@ -548,3 +548,111 @@ legend {
     font-size: 12px;
   }
 }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  min-width: 0;
+}
+.header-actions button {
+  font-size: 13px;
+}
+.account-email {
+  max-width: 230px;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  color: var(--muted);
+}
+.account-page {
+  max-width: 540px;
+}
+.account-intro {
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.account-page form {
+  margin-top: 30px;
+}
+.account-field {
+  margin-bottom: 22px;
+}
+.account-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.account-help,
+.account-limit {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 8px;
+}
+.account-limit {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-bottom: 24px;
+}
+.field-error {
+  font-size: 13px;
+  color: #8a2c16;
+  margin: 6px 0 0;
+}
+.field-error:empty {
+  display: none;
+}
+.account-switch {
+  margin-top: 28px;
+  font-size: 14px;
+}
+.account-success {
+  background: var(--soft);
+  border-left: 3px solid var(--primary);
+  padding: 12px 18px;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+@media (max-width: 1000px) {
+  header {
+    height: auto;
+    min-height: 100px;
+    padding-block: 18px;
+  }
+  .header-actions .environment {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  header {
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 80px;
+    padding-block: 14px;
+  }
+  .header-actions {
+    gap: 8px 12px;
+  }
+  .header-actions .account-email {
+    max-width: 170px;
+  }
+  .header-actions button {
+    padding-inline: 10px;
+  }
+  .account-intro {
+    font-size: 16px;
+  }
+}
+@media (max-width: 400px) {
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .header-actions .account-email {
+    max-width: calc(100% - 120px);
+  }
+}

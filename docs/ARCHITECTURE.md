@@ -94,4 +94,4 @@ As capacidades gerais foram consultadas em 22/10/2026. Comandos e APIs devem ser
 
 ## Estado da implementação inicial
 
-A base executável agora contém `apps/web` (Angular), `apps/api` (NestJS) e migrations SQL/PostgreSQL. A adoção de Prisma foi adiada pelas razões registradas na [ADR 001](ADR-001-initial-persistence.md). Existe catálogo/resolução com sessão anônima e respostas persistidas; o modelo editorial completo e identidade por conta permanecem propostos. Consulte o README para comandos e limites efetivamente verificados.
+A base executável agora contém `apps/web` (Angular), `apps/api` (NestJS) e migrations SQL/PostgreSQL. A adoção de Prisma foi adiada pelas razões registradas na [ADR 001](ADR-001-initial-persistence.md). Existe catálogo/resolução com respostas persistidas e identidade anônima ou por conta. A [ADR 002](ADR-002-account-sessions.md) registra cadastro, sessões e limites de autenticação; o modelo editorial completo permanece proposto. Consulte o README para comandos e limites efetivamente verificados.

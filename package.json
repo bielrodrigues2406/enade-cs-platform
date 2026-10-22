@@ -12,7 +12,7 @@
     "dev:api": "tsx --tsconfig apps/api/tsconfig.json apps/api/src/serve.ts",
     "dev:web": "ng serve web --host 0.0.0.0",
     "build": "tsc -p apps/api/tsconfig.json && ng build web",
-    "test": "node --import tsx --test tests/api.test.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {

@@ -6,11 +6,13 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 
 - Catálogo com busca, filtro por assunto e indicação de resposta salva.
 - Resolução com alternativas identificadas, feedback após confirmação, alteração e retomada da resposta.
-- Persistência PostgreSQL e sessão anônima por navegador (30 dias), isolada no servidor.
+- Persistência PostgreSQL com prática anônima ou conta por e-mail/senha.
+- Cadastro preserva as respostas da sessão atual; login em outro navegador recupera o histórico da conta.
+- Sessões de 30 dias, rotação de tokens ao autenticar e saída com revogação no servidor.
 - Revisões de resposta: retry idempotente e rejeição de gravações antigas/conflitantes.
 - Três questões **autorais demonstrativas**; nenhuma questão oficial importada. Conteúdo pendente não é acessível pela API de estudo.
 
-Esta entrega é uma fatia inicial dos incrementos A/B, não a conclusão deles. Não inclui contas, curadoria por interface, lote oficial revisado, simulados, IA nem infraestrutura de produção. Sessão anônima não substitui autenticação de conta: apagar o cookie perde o acesso ao histórico; não há sincronização entre dispositivos.
+Esta entrega é uma fatia inicial dos incrementos A/B, não a conclusão deles. Não inclui curadoria por interface, lote oficial revisado, simulados, IA nem infraestrutura de produção. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
 
 ## Preparação local
 
@@ -49,19 +51,20 @@ npm test
 npm run test:e2e
 ```
 
-Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os E2E usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
+Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build e testes foram executados no ambiente de onboarding: 5 testes API/PostgreSQL e 5 testes Chromium, incluindo teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build e testes foram executados no ambiente de onboarding: 15 testes API/PostgreSQL e 9 testes Chromium, incluindo cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
-Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web podem ser encerradas com Ctrl+C. O build da API pode ser iniciado na raiz com `node dist/api/serve.js`; o build web fica em `dist/web/browser`. Servir esse build em produção exige HTTPS, proxy, autenticação de conta, limites operacionais e demais medidas descritas nos documentos.
+Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web podem ser encerradas com Ctrl+C. O build da API pode ser iniciado na raiz com `node dist/api/serve.js`; o build web fica em `dist/web/browser`. Servir esse build em produção exige HTTPS, proxy, gestão e recuperação de contas, limites operacionais e demais medidas descritas nos documentos.
 
 ## Documentação e próximos incrementos
 
 - [Produto e sequência de entregas](docs/MASTER-SPEC.md)
 - [Experiência de uso](docs/UX-DESIGN-SPEC.md)
 - [Arquitetura](docs/ARCHITECTURE.md) e [decisão sobre persistência](docs/ADR-001-initial-persistence.md)
-- [Contrato da API inicial](docs/API.md)
+- [Contas e sessões](docs/ADR-002-account-sessions.md)
+- [Contrato da API](docs/API.md)
 - [Engenharia e validação](docs/ENGINEERING-AND-DELIVERY.md)
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
 
-Próxima entrega: autenticação de conta, modelo de fonte/revisão editorial e importação conferida do lote oficial. Não habilitar publicação oficial antes de implementar procedência e revisão. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
+Próxima entrega: modelo de fonte/revisão editorial e importação conferida do lote oficial. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. Não habilitar publicação oficial antes de implementar procedência e revisão. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
