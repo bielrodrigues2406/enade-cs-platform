@@ -1,0 +1,43 @@
+{
+  "name": "enade-cs-platform",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=24.15.0 <25"
+  },
+  "scripts": {
+    "db:up": "node scripts/local-env.mjs && docker compose up -d --wait db",
+    "db:migrate": "node scripts/migrate.mjs",
+    "db:seed": "tsx scripts/seed.ts",
+    "dev:api": "tsx --tsconfig apps/api/tsconfig.json apps/api/src/serve.ts",
+    "dev:web": "ng serve web --host 0.0.0.0",
+    "build": "tsc -p apps/api/tsconfig.json && ng build web",
+    "test": "node --import tsx --test tests/api.test.ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@angular/common": "22.2.3",
+    "@angular/compiler": "22.2.3",
+    "@angular/core": "22.2.3",
+    "@angular/forms": "22.2.3",
+    "@angular/platform-browser": "22.2.3",
+    "@nestjs/common": "12.2.0",
+    "@nestjs/core": "12.2.0",
+    "@nestjs/platform-express": "12.2.0",
+    "dotenv": "18.0.9",
+    "pg": "8.23.1",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2"
+  },
+  "devDependencies": {
+    "@angular/build": "22.2.3",
+    "@angular/cli": "22.2.3",
+    "@angular/compiler-cli": "22.2.3",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "@types/pg": "8.23.1",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3"
+  },
+  "type": "module"
+}

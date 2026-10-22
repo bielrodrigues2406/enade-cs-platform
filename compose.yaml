@@ -1,0 +1,19 @@
+name: enade-cs-dev
+services:
+  db:
+    image: postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3
+    environment:
+      POSTGRES_USER: enade
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run node scripts/local-env.mjs}
+      POSTGRES_DB: enade
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U enade -d enade"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  database:
