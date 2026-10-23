@@ -17,18 +17,41 @@ type Summary = {
   demonstration: boolean;
   versionNumber: number;
 };
+type PublicDocument = {
+  id: string;
+  title: string;
+  officialUrl: string;
+  sha256: string;
+  year: number;
+  area: string;
+  modality: string;
+  pageCount: number;
+};
 type Answer = {
   optionId: string;
   revision: number;
   correct: boolean;
   correctOptionId: string;
   explanation: string;
+  explanationCredit?: string;
+  answerKey?: {
+    id: string;
+    title: string;
+    officialUrl: string;
+    sha256: string;
+    page: number;
+  };
 };
 type Question = Summary & {
   authorCredit: string;
   prompt: string;
   options: { id: string; text: string }[];
   answer: Answer | null;
+  provenance: {
+    exam: PublicDocument;
+    page: number;
+    questionNumber: number;
+  } | null;
 };
 
 @Component({
@@ -110,8 +133,9 @@ type Question = Summary & {
           <h2>Uma questão.<br />Um conceito mais claro.</h2>
           <p>Leia com atenção, confirme sua resposta e retome de onde parou.</p>
           <p class="muted">
-            O catálogo reúne conteúdo autoral. As questões iniciais são
-            demonstrações; questões oficiais ainda não foram importadas.
+            O catálogo identifica a origem de cada questão. Conteúdo oficial
+            informa a prova e a edição; as questões iniciais autorais são
+            demonstrações.
           </p>
         </div>
       </aside>
@@ -165,8 +189,8 @@ type Question = Summary & {
             <div class="source-note">
               <span class="dot" aria-hidden="true"></span>
               <p>
-                <strong>Conteúdo autoral</strong> · As questões iniciais são
-                demonstrações. Nenhuma questão oficial do ENADE foi importada.
+                <strong>Origem do conteúdo</strong> · Questões oficiais indicam
+                prova e edição. As questões iniciais autorais são demonstrações.
               </p>
             </div>
             <form class="filters" (ngSubmit)="loadCatalog()">
@@ -233,11 +257,7 @@ type Question = Summary & {
                     <div class="question-summary">
                       <p class="metadata">
                         {{ row.topic }} <span>·</span>
-                        {{
-                          row.demonstration
-                            ? "Autoral demonstrativa"
-                            : "Autoral"
-                        }}
+                        {{ originLabel(row.origin, row.demonstration) }}
                       </p>
                       <h3>{{ row.title }}</h3>
                       <p class="state">
@@ -286,17 +306,36 @@ type Question = Summary & {
             <article class="resolution">
               <p class="metadata">
                 {{ question()!.topic }} <span>·</span>
-                {{
-                  question()!.demonstration
-                    ? "Autoral demonstrativa"
-                    : "Autoral"
-                }}
+                {{ originLabel(question()!.origin, question()!.demonstration) }}
                 <span>·</span> Versão {{ question()!.versionNumber }}
               </p>
               <p class="metadata question-credit">
-                Autoria: {{ question()!.authorCredit }}
+                {{ question()!.origin === "OFFICIAL" ? "Fonte" : "Autoria" }}:
+                {{ question()!.authorCredit }}
               </p>
               <h1>{{ question()!.title }}</h1>
+              @if (question()!.provenance) {
+                <section
+                  class="question-provenance"
+                  aria-label="Fonte da questão"
+                >
+                  <p>
+                    ENADE {{ question()!.provenance!.exam.year }} ·
+                    {{ question()!.provenance!.exam.area }} ·
+                    {{ modalityLabel(question()!.provenance!.exam.modality) }}
+                  </p>
+                  <p>
+                    Questão {{ question()!.provenance!.questionNumber }} ·
+                    página {{ question()!.provenance!.page }}
+                  </p>
+                  <a
+                    [href]="question()!.provenance!.exam.officialUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Prova oficial: {{ question()!.provenance!.exam.title }}</a
+                  >
+                </section>
+              }
               <p class="prompt">{{ question()!.prompt }}</p>
               <form (ngSubmit)="save()">
                 <fieldset
@@ -317,7 +356,7 @@ type Question = Summary & {
                         [value]="option.id"
                         [(ngModel)]="selected"
                       /><span class="letter" aria-hidden="true">{{
-                        "ABCD"[i]
+                        "ABCDE"[i]
                       }}</span
                       ><span>{{ option.text }}</span></label
                     >
@@ -363,6 +402,24 @@ type Question = Summary & {
                     <strong>Alternativa correta:</strong> {{ correctText() }}
                   </p>
                   <p>{{ question()!.answer!.explanation }}</p>
+                  @if (question()!.answer!.explanationCredit) {
+                    <p class="metadata">
+                      Explicação editorial:
+                      {{ question()!.answer!.explanationCredit }}
+                    </p>
+                  }
+                  @if (question()!.answer!.answerKey) {
+                    <p class="answer-key-source">
+                      <a
+                        [href]="question()!.answer!.answerKey!.officialUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Gabarito definitivo:
+                        {{ question()!.answer!.answerKey!.title }}</a
+                      >
+                      · página {{ question()!.answer!.answerKey!.page }}
+                    </p>
+                  }
                   <button class="text-button" (click)="editing.set(true)">
                     Alterar resposta
                   </button>
@@ -740,6 +797,24 @@ class App {
         "Não foi possível confirmar sua sessão. Tente abrir o caderno novamente.",
       );
     }
+  }
+  originLabel(origin: string, demonstration = false) {
+    return origin === "OFFICIAL"
+      ? "Oficial · Inep"
+      : demonstration
+        ? "Autoral demonstrativa"
+        : "Autoral";
+  }
+  modalityLabel(modality: string) {
+    return (
+      (
+        {
+          BACHARELADO: "Bacharelado",
+          LICENCIATURA: "Licenciatura",
+          CST: "Curso superior de tecnologia",
+        } as Record<string, string>
+      )[modality] || modality
+    );
   }
   correctText() {
     const q = this.question();

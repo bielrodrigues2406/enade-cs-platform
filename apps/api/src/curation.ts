@@ -13,9 +13,14 @@ import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
+import { object, text, revision, curator, transaction } from "./editorial.js";
+import { verifyProvenance, type Provenance } from "./source-store.js";
 
 type Option = { id: string; text: string };
 type Content = {
+  origin: "AUTHOR_CREATED" | "OFFICIAL";
+  explanationCredit: string;
+  provenance: Provenance | null;
   title: string;
   topic: string;
   prompt: string;
@@ -34,35 +39,38 @@ type Version = Content & {
   createdBy: string | null;
   lastEditor: string | null;
 };
-const object = (value: unknown): Record<string, unknown> => {
-  if (!value || typeof value !== "object" || Array.isArray(value))
-    fail("Dados inválidos.", 400);
-  return value as Record<string, unknown>;
-};
-function text(value: unknown, name: string, max: number, min = 1): string {
-  if (
-    typeof value !== "string" ||
-    value.trim().length < min ||
-    value.length > max
-  )
-    fail(`${name}: use de ${min} a ${max} caracteres.`, 400);
-  return (value as string).trim();
-}
-function revision(body: Record<string, unknown>) {
-  if (
-    !Number.isSafeInteger(body.baseRevision) ||
-    (body.baseRevision as number) < 1 ||
-    (body.baseRevision as number) > 1000000
-  )
-    fail("Revisão inválida. Reabra a versão.", 400);
-  return body.baseRevision as number;
-}
 function content(body: Record<string, unknown>): Content {
-  if (body.origin !== undefined && body.origin !== "AUTHOR_CREATED")
-    fail(
-      "Este fluxo aceita somente questões autorais. Importação oficial ainda não está habilitada.",
-      400,
-    );
+  const origin = body.origin ?? "AUTHOR_CREATED";
+  if (!["AUTHOR_CREATED", "OFFICIAL"].includes(origin as string))
+    fail("Origem inválida.", 400);
+  let provenance: Provenance | null = null;
+  if (origin === "OFFICIAL") {
+    const raw = object(body.provenance);
+    if (
+      ![raw.examSourceId, raw.keySourceId].every(
+        (id) =>
+          typeof id === "string" &&
+          /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(id),
+      ) ||
+      ![raw.page, raw.keyPage, raw.questionNumber].every(
+        (n) =>
+          Number.isInteger(n) && (n as number) > 0 && (n as number) <= 1000,
+      )
+    )
+      fail("Informe fontes, páginas e número original válidos.", 400);
+    provenance = {
+      examSourceId: raw.examSourceId as string,
+      keySourceId: raw.keySourceId as string,
+      page: raw.page as number,
+      questionNumber: raw.questionNumber as number,
+      keyPage: raw.keyPage as number,
+    };
+  } else if (body.provenance != null)
+    fail("Questões autorais não recebem procedência oficial.", 400);
+  const authorCredit =
+    origin === "OFFICIAL"
+      ? "Inep"
+      : text(body.authorCredit, "Crédito autoral", 160);
   const options = body.options;
   if (!Array.isArray(options) || options.length < 2 || options.length > 5)
     fail("Use de 2 a 5 alternativas.", 400);
@@ -80,45 +88,24 @@ function content(body: Record<string, unknown>): Content {
   )
     fail("Alternativas repetidas ou gabarito incompatível.", 400);
   return {
+    origin: origin as Content["origin"],
+    provenance,
+    explanationCredit:
+      origin === "OFFICIAL"
+        ? text(body.explanationCredit, "Crédito do comentário editorial", 160)
+        : body.explanationCredit === undefined
+          ? authorCredit
+          : text(body.explanationCredit, "Crédito da explicação", 160),
     title: text(body.title, "Título", 160),
     topic: text(body.topic, "Assunto", 80),
     prompt: text(body.prompt, "Enunciado", 6000),
-    authorCredit: text(body.authorCredit, "Crédito autoral", 160),
+    authorCredit,
     explanation: text(body.explanation, "Explicação", 4000),
     correctOptionId,
     options: parsed,
   };
 }
-async function curator(req: any, client?: PoolClient, lock = false) {
-  const user = await requireIdentity(req, client, lock);
-  const role = await (client ?? db).query(
-    `SELECT identity_id FROM curator_role WHERE identity_id=$1 ${lock ? "FOR SHARE" : ""}`,
-    [user.id],
-  );
-  if (!user.email || !role.rowCount) fail("Acesso reservado à curadoria.", 403);
-  return user;
-}
-async function transaction<T>(
-  req: any,
-  action: (client: PoolClient, actorId: string) => Promise<T>,
-): Promise<T> {
-  const client = await db.connect();
-  try {
-    await client.query("BEGIN");
-    const user = await curator(req, client, true);
-    const result = await action(client, user.id);
-    await client.query("COMMIT");
-    return result;
-  } catch (error) {
-    await client.query("ROLLBACK");
-    if ((error as { code?: string }).code === "23505")
-      fail("Já existe uma versão aberta. Atualize a fila.", 409);
-    throw error;
-  } finally {
-    client.release();
-  }
-}
-const fields = `v.id,v.question_id AS "questionId",v.version_number AS sequence,v.editorial_revision AS revision,v.title,v.topic,v.prompt,v.origin,v.editorial_status AS "editorialStatus",v.author_credit AS "authorCredit",v.explanation,v.correct_option_id AS "correctOptionId",v.demonstration,v.created_by AS "createdBy",v.last_editor_id AS "lastEditor"`;
+const fields = `v.id,v.question_id AS "questionId",v.version_number AS sequence,v.editorial_revision AS revision,v.title,v.topic,v.prompt,v.origin,v.editorial_status AS "editorialStatus",v.author_credit AS "authorCredit",v.explanation,v.correct_option_id AS "correctOptionId",v.demonstration,v.created_by AS "createdBy",v.last_editor_id AS "lastEditor",COALESCE(v.explanation_credit,v.author_credit) AS "explanationCredit",CASE WHEN v.origin='OFFICIAL' THEN json_build_object('examSourceId',v.exam_source_id,'keySourceId',v.key_source_id,'page',v.source_page,'questionNumber',v.source_question_number,'keyPage',v.key_page) ELSE NULL END AS provenance`;
 async function detail(id: string, actorId: string, client?: PoolClient) {
   if (id.length > 100) fail("Versão não encontrada.", 404);
   const row = (
@@ -198,8 +185,9 @@ async function insertVersion(
   demonstration = false,
 ) {
   const id = randomUUID();
+  const p = input.provenance;
   await client.query(
-    `INSERT INTO question_version(id,question_id,version_number,title,topic,prompt,origin,editorial_status,author_credit,explanation,correct_option_id,created_by,last_editor_id,demonstration) VALUES($1,$2,$3,$4,$5,$6,'AUTHOR_CREATED','DRAFT',$7,$8,$9,$10,$10,$11)`,
+    `INSERT INTO question_version(id,question_id,version_number,title,topic,prompt,origin,editorial_status,author_credit,explanation,correct_option_id,created_by,last_editor_id,demonstration,explanation_credit,exam_source_id,key_source_id,source_page,source_question_number,key_page) VALUES($1,$2,$3,$4,$5,$6,$7,'DRAFT',$8,$9,$10,$11,$11,$12,$13,$14,$15,$16,$17,$18)`,
     [
       id,
       questionId,
@@ -207,11 +195,18 @@ async function insertVersion(
       input.title,
       input.topic,
       input.prompt,
+      input.origin,
       input.authorCredit,
       input.explanation,
       input.correctOptionId,
       actorId,
       demonstration,
+      input.explanationCredit,
+      p?.examSourceId ?? null,
+      p?.keySourceId ?? null,
+      p?.page ?? null,
+      p?.questionNumber ?? null,
+      p?.keyPage ?? null,
     ],
   );
   await options(client, id, input.options);
@@ -245,9 +240,16 @@ export class CurationController {
     const input = content(object(body));
     return transaction(req, async (client, actor) => {
       const questionId = randomUUID();
+      if (input.provenance)
+        await verifyProvenance(input.provenance, client, true);
       await client.query(
-        "INSERT INTO editorial_question(id,origin) VALUES($1,'AUTHOR_CREATED')",
-        [questionId],
+        "INSERT INTO editorial_question(id,origin,official_exam_id,official_question_number) VALUES($1,$2,$3,$4)",
+        [
+          questionId,
+          input.origin,
+          input.provenance?.examSourceId ?? null,
+          input.provenance?.questionNumber ?? null,
+        ],
       );
       const id = await insertVersion(client, questionId, actor, input);
       await event(client, questionId, id, actor, "CREATED");
@@ -266,8 +268,22 @@ export class CurationController {
       const current = await lockedVersion(client, id, expected);
       if (!["DRAFT", "REJECTED"].includes(current.editorialStatus))
         fail("Só é possível editar rascunhos ou versões devolvidas.", 409);
+      if (
+        values.origin !== current.origin ||
+        (current.provenance &&
+          (values.provenance?.examSourceId !==
+            current.provenance.examSourceId ||
+            values.provenance?.questionNumber !==
+              current.provenance.questionNumber))
+      )
+        fail(
+          "A origem e a identidade oficial da questão não podem ser alteradas.",
+          400,
+        );
+      if (values.provenance)
+        await verifyProvenance(values.provenance, client, true);
       await client.query(
-        `UPDATE question_version SET title=$2,topic=$3,prompt=$4,author_credit=$5,explanation=$6,correct_option_id=$7,last_editor_id=$8,reviewed_by=NULL,reviewed_at=NULL,editorial_status='DRAFT',editorial_revision=editorial_revision+1 WHERE id=$1`,
+        `UPDATE question_version SET title=$2,topic=$3,prompt=$4,author_credit=$5,explanation=$6,correct_option_id=$7,last_editor_id=$8,explanation_credit=$9,exam_source_id=$10,key_source_id=$11,source_page=$12,source_question_number=$13,key_page=$14,reviewed_by=NULL,reviewed_at=NULL,editorial_status='DRAFT',editorial_revision=editorial_revision+1 WHERE id=$1`,
         [
           id,
           values.title,
@@ -277,6 +293,12 @@ export class CurationController {
           values.explanation,
           values.correctOptionId,
           actor,
+          values.explanationCredit,
+          values.provenance?.examSourceId ?? null,
+          values.provenance?.keySourceId ?? null,
+          values.provenance?.page ?? null,
+          values.provenance?.questionNumber ?? null,
+          values.provenance?.keyPage ?? null,
         ],
       );
       await options(client, id, values.options);
@@ -331,6 +353,14 @@ export class CurationController {
       if (current.createdBy === actor || current.lastEditor === actor)
         fail("Outra pessoa da curadoria deve revisar esta versão.", 403);
       const publish = input.decision === "PUBLISH";
+      if (publish && current.origin === "OFFICIAL") {
+        if (object(input.checklist).source !== true)
+          fail(
+            "Confira a transcrição com a prova e o gabarito definitivo antes de publicar.",
+            400,
+          );
+        await verifyProvenance(current.provenance!, client, true);
+      }
       await client.query(
         "UPDATE question_version SET editorial_status=$2,reviewed_by=$3,reviewed_at=now(),editorial_revision=editorial_revision+1 WHERE id=$1",
         [id, publish ? "PUBLISHED" : "REJECTED", actor],
@@ -367,8 +397,8 @@ export class CurationController {
         )
       ).rows[0];
       if (!parent) fail("Questão não encontrada.", 404);
-      if (parent.origin !== "AUTHOR_CREATED")
-        fail("Este fluxo aceita somente conteúdo autoral.", 400);
+      if (!["AUTHOR_CREATED", "OFFICIAL"].includes(parent.origin))
+        fail("Origem não suportada neste fluxo.", 400);
       if (parent.current_version_id !== base)
         fail("A publicação atual mudou. Atualize a fila.", 409);
       const open = await client.query(

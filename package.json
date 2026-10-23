@@ -14,7 +14,8 @@
     "build": "tsc -p apps/api/tsconfig.json && ng build web",
     "test": "node --import tsx --test tests/*.test.ts",
     "test:e2e": "playwright test",
-    "curator:role": "tsx scripts/curator-role.ts"
+    "curator:role": "tsx scripts/curator-role.ts",
+    "import:source": "tsx scripts/import-source.ts"
   },
   "dependencies": {
     "@angular/common": "22.2.3",

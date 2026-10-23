@@ -15,6 +15,12 @@ export type Question = {
   demonstration: boolean;
   versionNumber: number;
   explanation: string;
+  explanationCredit: string | null;
+  examSourceId: string | null;
+  keySourceId: string | null;
+  sourcePage: number | null;
+  sourceQuestionNumber: number | null;
+  keyPage: number | null;
   correctOptionId: string;
   options: { id: string; text: string }[];
 };

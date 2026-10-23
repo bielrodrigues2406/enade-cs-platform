@@ -12,13 +12,15 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Revisões de resposta: retry idempotente e rejeição de gravações antigas/conflitantes.
 - Curadoria de questões autorais: rascunho, revisão por outra pessoa, devolução, publicação e nova versão.
 - Versões publicadas e feedback histórico preservados; conflitos não sobrescrevem alterações.
-- Três questões iniciais **autorais demonstrativas**; nenhuma questão oficial importada. Conteúdo pendente não é acessível pela API de estudo.
+- Registro de PDFs oficiais por ferramenta local, arquivo com SHA-256 e conferência independente na seção Fontes.
+- Curadoria de questões oficiais com prova, página, número original e gabarito definitivo conferidos; procedência pública e comentário editorial com crédito próprio.
+- Três questões iniciais **autorais demonstrativas**; nenhuma questão oficial publicada nesta entrega. Conteúdo pendente não é acessível pela API de estudo.
 
-Esta entrega é uma fatia inicial dos incrementos A/B, não a conclusão deles. Não inclui lote oficial revisado, importador de PDF, simulados, IA nem infraestrutura de produção. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
+Esta entrega é uma fatia inicial dos incrementos A/B, não a conclusão deles. Não inclui lote oficial revisado, extração automática de questões de PDF, simulados, IA nem infraestrutura de produção. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
 
 ## Preparação local
 
-Requisitos: Node **24.19.0** (`.node-version`), npm 11 e Docker com Compose v2. Chromium instalado para os testes de navegador. A API escuta apenas no loopback; o servidor de desenvolvimento web escuta na porta 4200. Não expor esse ambiente como produção.
+Requisitos: Node **24.19.0** (`.node-version`), npm 11 e Docker com Compose v2. Chromium instalado para os testes de navegador. A importação de fontes exige `curl` e `pdfinfo` (pacote `poppler-utils`). A API escuta apenas no loopback; o servidor de desenvolvimento web escuta na porta 4200. Não expor esse ambiente como produção.
 
 Na raiz do repositório:
 
@@ -54,7 +56,22 @@ npm run curator:role -- revoke <identity-uuid>
 
 O UUID pertence a `account.identity_id`. Consulte-o no banco administrativo local após verificar a conta; o e-mail não verificado não é autorização. O comando não cria contas nem senhas. Não há papel privilegiado automático, endpoint público de concessão ou usuário padrão. Depois da concessão, recarregue a aplicação para aparecer a navegação Curadoria. Publicação exige outra conta de curadoria que não tenha criado nem sido a última editora da versão.
 
-A curadoria aceita apenas questões autorais e informa crédito e versão ao estudante. HTML é exibido como texto; não há importação oficial habilitada. Para corrigir conteúdo publicado, crie nova versão: a anterior continua disponível e as respostas existentes mantêm seu gabarito.
+A curadoria aceita questões autorais e oficiais. Questões oficiais exigem fontes conferidas; o crédito da questão é Inep e o comentário editorial tem crédito separado. HTML é exibido como texto. Para corrigir conteúdo publicado, crie nova versão: a anterior continua disponível e as respostas existentes mantêm seu gabarito.
+
+## Fontes oficiais
+
+O importador administrativo registra e arquiva o PDF; não extrai nem publica questões. Exemplo para a prova de Computação de 2021:
+
+```sh
+npm run import:source -- \
+  --url https://download.inep.gov.br/enade/provas_e_gabaritos/2021_PV_bacharelado_ciencia_computacao.pdf \
+  --kind EXAM --year 2021 --area 'Ciência da Computação' \
+  --modality BACHARELADO --title 'ENADE 2021 · Ciência da Computação · Prova'
+```
+
+`--actor <identity-uuid>` atribui a importação a uma conta de curadoria existente. Sem ele, o evento é administrativo, sem identidade de revisão humana. O registro nasce IMPORTED; outro curador confere origem, edição e integridade na seção Fontes. Para gabarito, também confirma que é definitivo. Fontes conferidas são imutáveis; uma correção documental recebe novo arquivo/hash. Reimportar o mesmo PDF preserva o registro e restaura um arquivo ausente/corrompido.
+
+Arquivos ficam em `.local/sources/<sha256>.pdf`, ignorados pelo Git. `SOURCE_ARCHIVE_DIR` permite configurar armazenamento persistente fora do checkout. Preserve o arquivo junto ao banco em backups; a publicação verifica novamente seu hash. O download arquivado exige papel de curadoria. A fonte oficial pública permanece identificada pela URL do Inep. Veja [procedência e limites](docs/ADR-004-official-sources.md) e o [inventário](docs/OFFICIAL-SOURCES.md).
 
 ## Validação
 
@@ -68,7 +85,7 @@ npm run test:e2e
 
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build e testes foram executados no ambiente de onboarding: 23 testes API/PostgreSQL e 12 testes Chromium, incluindo curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build e testes foram executados no ambiente de onboarding: 32 testes API/PostgreSQL e 15 testes Chromium, incluindo fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
 Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web podem ser encerradas com Ctrl+C. O build da API pode ser iniciado na raiz com `node dist/api/serve.js`; o build web fica em `dist/web/browser`. Servir esse build em produção exige HTTPS, proxy, gestão e recuperação de contas, limites operacionais e demais medidas descritas nos documentos.
 
@@ -79,8 +96,9 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Arquitetura](docs/ARCHITECTURE.md) e [decisão sobre persistência](docs/ADR-001-initial-persistence.md)
 - [Contas e sessões](docs/ADR-002-account-sessions.md)
 - [Curadoria e versões](docs/ADR-003-editorial-versions.md)
+- [Fontes oficiais e procedência](docs/ADR-004-official-sources.md) e [inventário inicial](docs/OFFICIAL-SOURCES.md)
 - [Contrato da API](docs/API.md)
 - [Engenharia e validação](docs/ENGINEERING-AND-DELIVERY.md)
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
 
-Próxima entrega: modelo de documentos/fontes oficiais e importação conferida do lote inicial. A revisão editorial autoral já está disponível; publicação oficial permanece bloqueada. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. Não habilitar publicação oficial antes de implementar procedência e revisão. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
+Próxima entrega: transcrição e revisão humana do lote oficial inicial, incluindo imagens e itens anulados quando necessário. O registro de documentos e o fluxo de publicação oficial estão disponíveis; nenhum item oficial foi publicado automaticamente. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
