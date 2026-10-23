@@ -18,12 +18,14 @@ import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
 import { AuthController } from "./auth.js";
 import { CurationController } from "./curation.js";
+import { SourcesController } from "./sources.js";
+import { sourceById, publicExam } from "./source-store.js";
 
 async function published(id: string) {
   if (id.length > 100) fail("Questão não encontrada.", 404);
   const q = (
     await db.query<Question>(
-      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,correct_option_id AS "correctOptionId" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
+      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,explanation_credit AS "explanationCredit",exam_source_id AS "examSourceId",key_source_id AS "keySourceId",source_page AS "sourcePage",source_question_number AS "sourceQuestionNumber",key_page AS "keyPage",correct_option_id AS "correctOptionId" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
       [id],
     )
   ).rows[0];
@@ -36,11 +38,24 @@ async function published(id: string) {
   ).rows;
   return q;
 }
-function feedback(
+async function feedback(
   answer: { optionId: string; revision: number },
-  q: { correctOptionId: string; explanation: string },
+  q: Question,
 ) {
+  const key = q.keySourceId ? await sourceById(q.keySourceId) : null;
   return {
+    explanationCredit: q.explanationCredit || q.authorCredit,
+    ...(key
+      ? {
+          answerKey: {
+            id: key.id,
+            title: key.title,
+            officialUrl: key.officialUrl,
+            sha256: key.sha256,
+            page: q.keyPage,
+          },
+        }
+      : {}),
     optionId: answer.optionId,
     revision: answer.revision,
     correct: answer.optionId === q.correctOptionId,
@@ -98,7 +113,14 @@ class StudyController {
       demonstration: q.demonstration,
       versionNumber: q.versionNumber,
       options: q.options.map(({ id, text }) => ({ id, text })),
-      answer: answer ? feedback(answer, q) : null,
+      provenance: q.examSourceId
+        ? {
+            exam: publicExam(await sourceById(q.examSourceId)),
+            page: q.sourcePage,
+            questionNumber: q.sourceQuestionNumber,
+          }
+        : null,
+      answer: answer ? await feedback(answer, q) : null,
     };
   }
 
@@ -164,7 +186,14 @@ class StudyController {
     }
   }
 }
-@Module({ controllers: [AuthController, StudyController, CurationController] })
+@Module({
+  controllers: [
+    AuthController,
+    StudyController,
+    CurationController,
+    SourcesController,
+  ],
+})
 class AppModule {}
 export async function createApp() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
