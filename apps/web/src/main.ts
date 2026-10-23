@@ -3,6 +3,11 @@ import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
 import {
+  ReviewComponent,
+  type ReviewItem,
+  type ReviewPosition,
+} from "./review.component";
+import {
   AccountComponent,
   type AccountMode,
   type Credentials,
@@ -56,7 +61,7 @@ type Question = Summary & {
 
 @Component({
   selector: "app-root",
-  imports: [FormsModule, AccountComponent, CurationComponent],
+  imports: [FormsModule, AccountComponent, CurationComponent, ReviewComponent],
   template: `
     <a class="skip" href="#content">Ir para o conteúdo</a>
     <header>
@@ -108,6 +113,25 @@ type Question = Summary & {
         }
       </div>
     </header>
+    @if (!booting() && !bootError()) {
+      <nav class="mobile-study-nav" aria-label="Navegação de estudo">
+        <button
+          class="text-button"
+          (click)="back()"
+          [disabled]="saving() || authBusy() || curationBusy()"
+        >
+          Banco de questões
+        </button>
+        <button
+          class="text-button"
+          (click)="openReview()"
+          [disabled]="saving() || authBusy() || curationBusy()"
+          [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
+        >
+          Caderno de erros
+        </button>
+      </nav>
+    }
     <div class="layout">
       <aside aria-label="Sobre este caderno">
         <p class="eyebrow">SEU ESPAÇO DE ESTUDO</p>
@@ -115,8 +139,24 @@ type Question = Summary & {
           class="nav"
           (click)="back()"
           [disabled]="saving() || authBusy() || curationBusy()"
+          [attr.aria-current]="
+            !curationView() &&
+            !reviewView() &&
+            !reviewReturn() &&
+            !accountView()
+              ? 'page'
+              : null
+          "
         >
           Banco de questões <span aria-hidden="true">→</span>
+        </button>
+        <button
+          class="nav secondary-nav"
+          (click)="openReview()"
+          [disabled]="saving() || authBusy() || curationBusy()"
+          [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
+        >
+          Caderno de erros <span aria-hidden="true">→</span>
         </button>
         @if (canCurate()) {
           <button
@@ -147,9 +187,11 @@ type Question = Summary & {
               ? "CONTA"
               : curationView()
                 ? "CURADORIA"
-                : question()
-                  ? "RESOLUÇÃO"
-                  : "BANCO DE QUESTÕES"
+                : reviewView()
+                  ? "CADERNO DE ERROS"
+                  : question()
+                    ? "RESOLUÇÃO"
+                    : "BANCO DE QUESTÕES"
           }}
         </div>
         @if (booting()) {
@@ -177,6 +219,17 @@ type Question = Summary & {
             <p role="status">Atualizando sua sessão…</p>
           } @else if (curationView()) {
             <app-curation (busyChange)="curationBusy.set($event)" />
+          } @else if (reviewView()) {
+            <app-review
+              [position]="reviewPosition"
+              [opening]="loading()"
+              (positionChange)="reviewPosition = $event"
+              (resolve)="openReviewQuestion($event)"
+              (browse)="back()"
+            />
+            @if (error()) {
+              <p class="notice" role="alert">{{ error() }}</p>
+            }
           } @else if (!question()) {
             <section class="page-intro">
               <p class="eyebrow">PRÁTICA COM CONTEXTO</p>
@@ -300,9 +353,36 @@ type Question = Summary & {
               }
             </footer>
           } @else {
-            <button class="back text-button" (click)="back()">
-              ← Voltar ao banco
+            <button
+              class="back text-button"
+              (click)="reviewReturn() ? openReview() : back()"
+              [disabled]="saving() || authBusy()"
+            >
+              {{
+                reviewReturn()
+                  ? "← Voltar ao caderno de erros"
+                  : "← Voltar ao banco"
+              }}
             </button>
+            @if (reviewReturn()) {
+              <p class="review-context">
+                {{
+                  question()!.answer && !editing()
+                    ? "Resposta confirmada. Volte ao caderno para conferir as questões a retomar."
+                    : "Resolva novamente. A resposta anterior só será substituída após confirmar."
+                }}
+              </p>
+              @if (
+                reviewCurrentVersion() &&
+                reviewCurrentVersion() !== question()!.id
+              ) {
+                <p class="review-version">
+                  Existe uma versão publicada mais recente. O resultado desta
+                  resolução usa o gabarito da versão
+                  {{ question()!.versionNumber }}.
+                </p>
+              }
+            }
             <article class="resolution">
               <p class="metadata">
                 {{ question()!.topic }} <span>·</span>
@@ -453,6 +533,10 @@ class App {
   canCurate = signal(false);
   curationView = signal(false);
   curationBusy = signal(false);
+  reviewView = signal(false);
+  reviewReturn = signal(false);
+  reviewCurrentVersion = signal<string | null>(null);
+  reviewPosition: ReviewPosition = { topic: "", offset: 0 };
   private identityGeneration = 0;
   private identityTransition = 0;
   private requestNumber = 0;
@@ -541,6 +625,8 @@ class App {
     )
       return;
     this.requestNumber++;
+    this.reviewView.set(false);
+    this.reviewReturn.set(false);
     this.loading.set(false);
     this.question.set(null);
     this.accountView.set(null);
@@ -548,6 +634,26 @@ class App {
     this.error.set("");
     this.curationView.set(true);
     this.focusMain();
+  }
+  openReview() {
+    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    this.requestNumber++;
+    this.loading.set(false);
+    this.question.set(null);
+    this.accountView.set(null);
+    this.curationView.set(false);
+    this.reviewReturn.set(false);
+    this.reviewCurrentVersion.set(null);
+    this.accountNotice.set("");
+    this.error.set("");
+    this.reviewView.set(true);
+    this.focusMain();
+  }
+  async openReviewQuestion(item: ReviewItem) {
+    if (this.loading() || this.authBusy()) return;
+    this.reviewReturn.set(true);
+    this.reviewCurrentVersion.set(item.currentVersionId);
+    await this.open(item.id, true);
   }
   async loadCatalog(duringTransition = false) {
     if (this.authBusy() && !duringTransition) return;
@@ -573,7 +679,7 @@ class App {
       if (request === this.requestNumber) this.loading.set(false);
     }
   }
-  async open(id: string) {
+  async open(id: string, retry = false) {
     if (this.authBusy()) return;
     const request = ++this.requestNumber;
     this.loading.set(true);
@@ -581,9 +687,10 @@ class App {
     try {
       const q = await this.api<Question>("questions/" + encodeURIComponent(id));
       if (request !== this.requestNumber) return;
+      this.reviewView.set(false);
       this.question.set(q);
-      this.selected = q.answer?.optionId || "";
-      this.editing.set(false);
+      this.selected = retry ? "" : q.answer?.optionId || "";
+      this.editing.set(retry);
       this.focusMain();
     } catch (err) {
       if (request === this.requestNumber) this.error.set(this.message(err));
@@ -622,6 +729,9 @@ class App {
   back() {
     if (this.saving() || this.authBusy() || this.curationBusy()) return;
     this.curationView.set(false);
+    this.reviewView.set(false);
+    this.reviewReturn.set(false);
+    this.reviewCurrentVersion.set(null);
     this.accountView.set(null);
     this.authError.set("");
     this.accountNotice.set("");
@@ -658,10 +768,14 @@ class App {
     if (this.authBusy()) return;
     this.accountView.set(null);
     this.authError.set("");
-    if (!this.question()) void this.loadCatalog();
+    if (!this.question() && !this.reviewView()) void this.loadCatalog();
     this.focusMain();
   }
   private clearStudyState() {
+    this.reviewView.set(false);
+    this.reviewReturn.set(false);
+    this.reviewCurrentVersion.set(null);
+    this.reviewPosition = { topic: "", offset: 0 };
     this.curationView.set(false);
     this.canCurate.set(false);
     this.curationBusy.set(false);

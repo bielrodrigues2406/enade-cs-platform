@@ -70,3 +70,28 @@ Todas as rotas exigem papel de curadoria. A importação local usa `npm run impo
 Metadados: `{id,title,officialUrl,kind,year,area,modality,sha256,byteSize,pageCount,status,revision,canReview,note,isFinal}`. Tipos EXAM/ANSWER_KEY/RESPONSE_STANDARD; modalidades BACHARELADO/LICENCIATURA/CST; título até 200 e área até 120 caracteres; edição de 2004 até o ano atual. URL, hash, tamanho, páginas e identidade do importador são imutáveis. VERIFIED congela também os metadados editoriais. Parecer tem 10–2000 caracteres. Identidades privadas de importação/revisão não são retornadas.
 
 VERIFY exige checklist `{origin:true,edition:true,integrity:true}` e, para ANSWER_KEY, `final:true`. A pessoa importadora e a última editora não podem conferir a própria fonte; importação administrativa sem ator não simula revisão. As escritas serializam sessão, papel e fonte, registrando eventos. Arquivo faltante ou alterado bloqueia conferência e download (409). Reimportação idêntica recupera o arquivo sem alterar o estado de uma fonte existente. Consulte ADR 004 para limites de armazenamento e operação.
+
+
+## Caderno de erros
+
+`GET /api/review?topic=&offset=0` exige sessão válida (anônima ou conta). `topic` é correspondência exata de até 80 caracteres; `offset` aceita inteiro decimal de 0 a 1.000.000. Valores repetidos, negativos ou fracionários retornam 400. A página tem 20 itens; não há parâmetro de tamanho. Offset além do total retorna lista vazia. A leitura não muda respostas nem concede acesso por IDs de pessoa enviados no query.
+
+Retorno:
+
+```ts
+{
+  summary: { answered, correct, incorrect, demonstration },
+  topics: [{ topic, answered, incorrect }],
+  total, offset, pageSize: 20,
+  items: [{
+    id, questionId, title, topic, origin, demonstration,
+    versionNumber, answeredAt, currentVersionId
+  }]
+}
+```
+
+Os números são inteiros e representam questões lógicas distintas, considerando a resposta salva mais recente entre versões publicadas. Em empate de horário, prevalecem sequência de versão mais alta e ID. `correct + incorrect = answered`; demonstrações são um subconjunto de `answered`. Questões não respondidas e versões pendentes não entram na amostra. Não é contagem de tentativas nem de acertos iniciais.
+
+Resumo e assuntos incluem todo o histórico elegível da pessoa. `total` e `items` incluem apenas respostas incorretas no assunto filtrado, ordenadas por horário crescente e ID. Contagens e página usam o mesmo snapshot de consulta; mudanças de respostas podem alterar a paginação em leituras seguintes. Não depende do limite de 50 itens do catálogo público.
+
+`id` identifica a versão respondida; `questionId`, a questão lógica. `currentVersionId` permite informar uma publicação mais recente sem substituir o gabarito histórico. O DTO não inclui alternativas, explicação ou alternativa correta; a resolução e a alteração usam as rotas de estudo existentes. Corrigir uma resposta só retira o item após PUT confirmado. Veja ADR 005 para limites de interpretação e concorrência.

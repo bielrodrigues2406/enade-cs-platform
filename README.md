@@ -12,11 +12,12 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Revisões de resposta: retry idempotente e rejeição de gravações antigas/conflitantes.
 - Curadoria de questões autorais: rascunho, revisão por outra pessoa, devolução, publicação e nova versão.
 - Versões publicadas e feedback histórico preservados; conflitos não sobrescrevem alterações.
+- Caderno de erros com filtro por assunto, paginação e nova resolução; resumo por questão distinta, sem multiplicar contagens por edições ou versões.
 - Registro de PDFs oficiais por ferramenta local, arquivo com SHA-256 e conferência independente na seção Fontes.
 - Curadoria de questões oficiais com prova, página, número original e gabarito definitivo conferidos; procedência pública e comentário editorial com crédito próprio.
 - Três questões iniciais **autorais demonstrativas**; nenhuma questão oficial publicada nesta entrega. Conteúdo pendente não é acessível pela API de estudo.
 
-Esta entrega é uma fatia inicial dos incrementos A/B, não a conclusão deles. Não inclui lote oficial revisado, extração automática de questões de PDF, simulados, IA nem infraestrutura de produção. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
+Esta entrega cobre partes dos incrementos A/B e o início de C, não a conclusão deles. Não inclui lote oficial revisado, extração automática de questões de PDF, simulados, IA nem infraestrutura de produção. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
 
 ## Preparação local
 
@@ -83,9 +84,11 @@ npm test
 npm run test:e2e
 ```
 
+Neste ambiente, execute as suítes API e E2E em sequência: a execução simultânea atingiu timeouts de autenticação.
+
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build e testes foram executados no ambiente de onboarding: 32 testes API/PostgreSQL e 15 testes Chromium, incluindo fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build e testes foram executados no ambiente de onboarding: 39 testes API/PostgreSQL e 18 testes Chromium, incluindo caderno de erros, contagem por questão/versão, ordenação de gravações concorrentes, paginação, fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
 Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web podem ser encerradas com Ctrl+C. O build da API pode ser iniciado na raiz com `node dist/api/serve.js`; o build web fica em `dist/web/browser`. Servir esse build em produção exige HTTPS, proxy, gestão e recuperação de contas, limites operacionais e demais medidas descritas nos documentos.
 
@@ -97,8 +100,9 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Contas e sessões](docs/ADR-002-account-sessions.md)
 - [Curadoria e versões](docs/ADR-003-editorial-versions.md)
 - [Fontes oficiais e procedência](docs/ADR-004-official-sources.md) e [inventário inicial](docs/OFFICIAL-SOURCES.md)
+- [Caderno de erros e contagens](docs/ADR-005-error-notebook.md)
 - [Contrato da API](docs/API.md)
 - [Engenharia e validação](docs/ENGINEERING-AND-DELIVERY.md)
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
 
-Próxima entrega: transcrição e revisão humana do lote oficial inicial, incluindo imagens e itens anulados quando necessário. O registro de documentos e o fluxo de publicação oficial estão disponíveis; nenhum item oficial foi publicado automaticamente. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
+Próxima entrega: transcrição e revisão humana do lote oficial inicial, incluindo imagens e itens anulados quando necessário. O registro de documentos e o fluxo de publicação oficial estão disponíveis; nenhum item oficial foi publicado automaticamente. Repetição espaçada, plano de estudos e tendências ainda não estão implementados. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
