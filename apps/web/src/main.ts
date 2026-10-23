@@ -1,6 +1,7 @@
 import { Component, signal } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
+import { CurationComponent } from "./curation.component";
 import {
   AccountComponent,
   type AccountMode,
@@ -13,6 +14,8 @@ type Summary = {
   topic: string;
   origin: string;
   answered: boolean;
+  demonstration: boolean;
+  versionNumber: number;
 };
 type Answer = {
   optionId: string;
@@ -22,6 +25,7 @@ type Answer = {
   explanation: string;
 };
 type Question = Summary & {
+  authorCredit: string;
   prompt: string;
   options: { id: string; text: string }[];
   answer: Answer | null;
@@ -29,7 +33,7 @@ type Question = Summary & {
 
 @Component({
   selector: "app-root",
-  imports: [FormsModule, AccountComponent],
+  imports: [FormsModule, AccountComponent, CurationComponent],
   template: `
     <a class="skip" href="#content">Ir para o conteúdo</a>
     <header>
@@ -42,6 +46,15 @@ type Question = Summary & {
       <div class="header-actions">
         <span class="environment">Base de desenvolvimento</span>
         @if (!booting() && !bootError()) {
+          @if (canCurate()) {
+            <button
+              class="text-button mobile-curation"
+              (click)="openCuration()"
+              [disabled]="saving() || authBusy() || curationBusy()"
+            >
+              Curadoria
+            </button>
+          }
           @if (session().mode === "account") {
             <span class="account-email" aria-label="Conta conectada">{{
               accountEmail()
@@ -49,7 +62,7 @@ type Question = Summary & {
             <button
               class="text-button"
               (click)="logout()"
-              [disabled]="saving() || authBusy()"
+              [disabled]="saving() || authBusy() || curationBusy()"
             >
               Sair da conta
             </button>
@@ -57,14 +70,14 @@ type Question = Summary & {
             <button
               class="text-button"
               (click)="openAccount('login')"
-              [disabled]="saving() || authBusy()"
+              [disabled]="saving() || authBusy() || curationBusy()"
             >
               Entrar
             </button>
             <button
               class="outline"
               (click)="openAccount('register')"
-              [disabled]="saving() || authBusy()"
+              [disabled]="saving() || authBusy() || curationBusy()"
             >
               Criar conta
             </button>
@@ -78,17 +91,27 @@ type Question = Summary & {
         <button
           class="nav"
           (click)="back()"
-          [disabled]="saving() || authBusy()"
+          [disabled]="saving() || authBusy() || curationBusy()"
         >
           Banco de questões <span aria-hidden="true">→</span>
         </button>
+        @if (canCurate()) {
+          <button
+            class="nav secondary-nav"
+            (click)="openCuration()"
+            [disabled]="saving() || authBusy() || curationBusy()"
+            [attr.aria-current]="curationView() ? 'page' : null"
+          >
+            Curadoria <span aria-hidden="true">→</span>
+          </button>
+        }
         <div class="sidebar-note">
           <span class="small-rule"></span>
           <h2>Uma questão.<br />Um conceito mais claro.</h2>
           <p>Leia com atenção, confirme sua resposta e retome de onde parou.</p>
           <p class="muted">
-            Nesta base, as questões são autorais demonstrativas. Ainda não há
-            questões oficiais importadas.
+            O catálogo reúne conteúdo autoral. As questões iniciais são
+            demonstrações; questões oficiais ainda não foram importadas.
           </p>
         </div>
       </aside>
@@ -98,9 +121,11 @@ type Question = Summary & {
           {{
             accountView()
               ? "CONTA"
-              : question()
-                ? "RESOLUÇÃO"
-                : "BANCO DE QUESTÕES"
+              : curationView()
+                ? "CURADORIA"
+                : question()
+                  ? "RESOLUÇÃO"
+                  : "BANCO DE QUESTÕES"
           }}
         </div>
         @if (booting()) {
@@ -126,6 +151,8 @@ type Question = Summary & {
             />
           } @else if (authBusy()) {
             <p role="status">Atualizando sua sessão…</p>
+          } @else if (curationView()) {
+            <app-curation (busyChange)="curationBusy.set($event)" />
           } @else if (!question()) {
             <section class="page-intro">
               <p class="eyebrow">PRÁTICA COM CONTEXTO</p>
@@ -138,9 +165,8 @@ type Question = Summary & {
             <div class="source-note">
               <span class="dot" aria-hidden="true"></span>
               <p>
-                <strong>Conteúdo de demonstração</strong> · Questões autorais
-                para experimentar o fluxo de estudo. Não são questões oficiais
-                do ENADE.
+                <strong>Conteúdo autoral</strong> · As questões iniciais são
+                demonstrações. Nenhuma questão oficial do ENADE foi importada.
               </p>
             </div>
             <form class="filters" (ngSubmit)="loadCatalog()">
@@ -158,9 +184,14 @@ type Question = Summary & {
                 <label for="topic">Assunto</label
                 ><select id="topic" name="topic" [(ngModel)]="topic">
                   <option value="">Todos os assuntos</option>
-                  <option>Algoritmos</option>
-                  <option>Banco de dados</option>
-                  <option>Redes</option>
+                  @for (
+                    availableTopic of catalogTopics();
+                    track availableTopic
+                  ) {
+                    <option [value]="availableTopic">
+                      {{ availableTopic }}
+                    </option>
+                  }
                 </select>
               </div>
               <button type="submit" [disabled]="loading()">Filtrar</button>
@@ -201,7 +232,12 @@ type Question = Summary & {
                     }}</span>
                     <div class="question-summary">
                       <p class="metadata">
-                        {{ row.topic }} <span>·</span> Autoral demonstrativa
+                        {{ row.topic }} <span>·</span>
+                        {{
+                          row.demonstration
+                            ? "Autoral demonstrativa"
+                            : "Autoral"
+                        }}
                       </p>
                       <h3>{{ row.title }}</h3>
                       <p class="state">
@@ -249,8 +285,16 @@ type Question = Summary & {
             </button>
             <article class="resolution">
               <p class="metadata">
-                {{ question()!.topic }} <span>·</span> Autoral demonstrativa
-                <span>·</span> Versão 1
+                {{ question()!.topic }} <span>·</span>
+                {{
+                  question()!.demonstration
+                    ? "Autoral demonstrativa"
+                    : "Autoral"
+                }}
+                <span>·</span> Versão {{ question()!.versionNumber }}
+              </p>
+              <p class="metadata question-credit">
+                Autoria: {{ question()!.authorCredit }}
               </p>
               <h1>{{ question()!.title }}</h1>
               <p class="prompt">{{ question()!.prompt }}</p>
@@ -333,6 +377,7 @@ type Question = Summary & {
 })
 class App {
   rows = signal<Summary[]>([]);
+  catalogTopics = signal<string[]>([]);
   question = signal<Question | null>(null);
   booting = signal(true);
   bootError = signal("");
@@ -348,6 +393,9 @@ class App {
   authBusy = signal(false);
   authError = signal("");
   accountNotice = signal("");
+  canCurate = signal(false);
+  curationView = signal(false);
+  curationBusy = signal(false);
   private identityGeneration = 0;
   private identityTransition = 0;
   private requestNumber = 0;
@@ -399,6 +447,8 @@ class App {
       });
       if (transition !== this.identityTransition) return;
       this.session.set(session);
+      await this.loadCurationAccess(transition);
+      if (transition !== this.identityTransition) return;
       await this.loadCatalog(true);
       if (fromOtherTab && transition === this.identityTransition)
         this.accountNotice.set("Sua sessão foi atualizada em outra aba.");
@@ -412,6 +462,36 @@ class App {
       }
     }
   }
+  private async loadCurationAccess(transition: number) {
+    if (this.session().mode !== "account") {
+      this.canCurate.set(false);
+      return;
+    }
+    try {
+      const access = await this.api<{ canCurate: boolean }>("curation/access");
+      if (transition === this.identityTransition)
+        this.canCurate.set(access.canCurate);
+    } catch {
+      if (transition === this.identityTransition) this.canCurate.set(false);
+    }
+  }
+  openCuration() {
+    if (
+      !this.canCurate() ||
+      this.saving() ||
+      this.authBusy() ||
+      this.curationBusy()
+    )
+      return;
+    this.requestNumber++;
+    this.loading.set(false);
+    this.question.set(null);
+    this.accountView.set(null);
+    this.accountNotice.set("");
+    this.error.set("");
+    this.curationView.set(true);
+    this.focusMain();
+  }
   async loadCatalog(duringTransition = false) {
     if (this.authBusy() && !duringTransition) return;
     const request = ++this.requestNumber;
@@ -422,7 +502,14 @@ class App {
         "questions?" +
           new URLSearchParams({ q: this.search, topic: this.topic }),
       );
-      if (request === this.requestNumber) this.rows.set(rows);
+      if (request === this.requestNumber) {
+        this.rows.set(rows);
+        this.catalogTopics.update((previous) =>
+          [...new Set([...previous, ...rows.map((row) => row.topic)])].sort(
+            (a, b) => a.localeCompare(b, "pt-BR"),
+          ),
+        );
+      }
     } catch (err) {
       if (request === this.requestNumber) this.error.set(this.message(err));
     } finally {
@@ -476,7 +563,8 @@ class App {
     }
   }
   back() {
-    if (this.saving() || this.authBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    this.curationView.set(false);
     this.accountView.set(null);
     this.authError.set("");
     this.accountNotice.set("");
@@ -517,9 +605,13 @@ class App {
     this.focusMain();
   }
   private clearStudyState() {
+    this.curationView.set(false);
+    this.canCurate.set(false);
+    this.curationBusy.set(false);
     this.identityGeneration++;
     this.requestNumber++;
     this.rows.set([]);
+    this.catalogTopics.set([]);
     this.question.set(null);
     this.selected = "";
     this.search = "";
@@ -549,6 +641,8 @@ class App {
       }
       this.clearStudyState();
       this.session.set(session);
+      await this.loadCurationAccess(transition);
+      if (transition !== this.identityTransition) return;
       this.accountView.set(null);
       this.accountNotice.set(
         mode === "register"
@@ -571,7 +665,7 @@ class App {
     }
   }
   async logout() {
-    if (this.authBusy() || this.saving()) return;
+    if (this.authBusy() || this.saving() || this.curationBusy()) return;
     const transition = ++this.identityTransition;
     this.authBusy.set(true);
     this.authError.set("");
@@ -588,6 +682,8 @@ class App {
       }
       this.clearStudyState();
       this.session.set(session);
+      await this.loadCurationAccess(transition);
+      if (transition !== this.identityTransition) return;
       this.accountView.set(null);
       this.accountNotice.set(
         "Você saiu da conta. Seu histórico continua guardado para o próximo acesso.",
@@ -620,6 +716,8 @@ class App {
       });
       if (transition !== this.identityTransition) return;
       this.session.set(session);
+      await this.loadCurationAccess(transition);
+      if (transition !== this.identityTransition) return;
       if (
         previous.mode !== session.mode ||
         (previous.mode === "account" &&

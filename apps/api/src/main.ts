@@ -17,12 +17,13 @@ export { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
 import { AuthController } from "./auth.js";
+import { CurationController } from "./curation.js";
 
 async function published(id: string) {
   if (id.length > 100) fail("Questão não encontrada.", 404);
   const q = (
     await db.query<Question>(
-      `SELECT id,title,topic,prompt,origin,explanation,correct_option_id AS "correctOptionId" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
+      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,correct_option_id AS "correctOptionId" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
       [id],
     )
   ).rows[0];
@@ -69,7 +70,7 @@ class StudyController {
       fail("Filtro inválido.", 400);
     return (
       await db.query(
-        `SELECT q.id,q.title,q.topic,q.origin,EXISTS(SELECT 1 FROM answer a WHERE a.question_id=q.id AND a.owner_id=$1) AS answered FROM question_version q WHERE editorial_status='PUBLISHED' AND ($2='' OR topic=$2) AND ($3='' OR strpos(lower(title),lower($3)) > 0 OR strpos(lower(prompt),lower($3)) > 0) ORDER BY q.id LIMIT 50`,
+        `SELECT q.id,q.title,q.topic,q.origin,q.demonstration,q.version_number AS "versionNumber",EXISTS(SELECT 1 FROM answer a WHERE a.question_id=q.id AND a.owner_id=$1) AS answered FROM editorial_question c JOIN question_version q ON q.id=c.current_version_id WHERE editorial_status='PUBLISHED' AND ($2='' OR topic=$2) AND ($3='' OR strpos(lower(title),lower($3)) > 0 OR strpos(lower(prompt),lower($3)) > 0) ORDER BY q.id LIMIT 50`,
         [user.id, topic, search],
       )
     ).rows;
@@ -93,6 +94,9 @@ class StudyController {
       topic: q.topic,
       prompt: q.prompt,
       origin: q.origin,
+      authorCredit: q.authorCredit,
+      demonstration: q.demonstration,
+      versionNumber: q.versionNumber,
       options: q.options.map(({ id, text }) => ({ id, text })),
       answer: answer ? feedback(answer, q) : null,
     };
@@ -160,7 +164,7 @@ class StudyController {
     }
   }
 }
-@Module({ controllers: [AuthController, StudyController] })
+@Module({ controllers: [AuthController, StudyController, CurationController] })
 class AppModule {}
 export async function createApp() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -185,6 +189,12 @@ export async function createApp() {
         .json({ message: "Envie os dados em formato JSON." });
     }
     next();
+  });
+  app.useBodyParser("json", {
+    limit: "64kb",
+    type: (req: any) =>
+      /^\/api\/curation(?:\/|$)/.test(req.url || "") &&
+      !!req.is("application/json"),
   });
   app.useBodyParser("json", { limit: "16kb" });
   await app.init();

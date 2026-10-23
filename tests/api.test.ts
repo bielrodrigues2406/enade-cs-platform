@@ -136,7 +136,11 @@ test("unpublished content is inaccessible, even when its ID is known", async () 
   const client = await db.connect();
   await client.query("BEGIN");
   await client.query(
-    "INSERT INTO question_version(id,title,topic,prompt,origin,editorial_status,explanation,correct_option_id) VALUES($1,'Pending','test','<script>untrusted</script>','AUTHOR_CREATED','DRAFT','private','a')",
+    "INSERT INTO editorial_question(id,origin) VALUES($1,'AUTHOR_CREATED')",
+    [id],
+  );
+  await client.query(
+    "INSERT INTO question_version(id,question_id,title,topic,prompt,origin,editorial_status,explanation,correct_option_id) VALUES($1,$1,'Pending','test','<script>untrusted</script>','AUTHOR_CREATED','DRAFT','private','a')",
     [id],
   );
   await client.query(
@@ -168,7 +172,7 @@ test("unpublished content is inaccessible, even when its ID is known", async () 
       await cleanup.query("DELETE FROM question_option WHERE question_id=$1", [
         id,
       ]);
-      await cleanup.query("DELETE FROM question_version WHERE id=$1", [id]);
+      await cleanup.query("DELETE FROM editorial_question WHERE id=$1", [id]);
       await cleanup.query("COMMIT");
     } finally {
       cleanup.release();
