@@ -72,6 +72,8 @@ Proposta de piloto: 10–20 estudantes por pelo menos uma semana. Não é amostr
 
 Para alegar ganho de aprendizagem, planejar avaliação com itens inéditos e critério definido antes da análise, sem misturar memorização de itens repetidos com transferência de conhecimento.
 
-## 8. Próxima entrega de implementação
+## 8. Estado e próxima entrega
 
-Criar uma fatia funcional de catálogo → questão → resposta → feedback → persistência → retomada, acompanhada de uma fila editorial simples. A tela de resolução e o banco de questões são os primeiros padrões de qualidade visual. Depois ampliar funcionalidades preservando os critérios de engenharia e UX.
+Catálogo → questão → resposta → feedback → persistência → retomada estão implementados com prática anônima/contas e curadoria versionada. O registro de PDFs oficiais, a conferência independente e a procedência por versão também estão disponíveis; isso não comprova revisão pedagógica de um lote real. O README registra os testes executados.
+
+Próximo incremento: transcrever e revisar o lote oficial inicial a partir dos documentos conferidos, medindo erros e esforço antes de ampliar. Imagens, discursivas, anulações, taxonomia avançada, simulados e IA continuam pendentes.

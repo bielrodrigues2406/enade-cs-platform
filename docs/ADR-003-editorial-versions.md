@@ -4,7 +4,7 @@ Data: 22/10/2026. Estado: adotada para a base de desenvolvimento.
 
 ## Resultado e limite de conteúdo
 
-A curadoria permite criar uma questão autoral, salvar rascunho, enviar para revisão, devolver para correção, publicar e preparar nova versão. Questões oficiais e geradas por IA não são aceitas por esse fluxo. O bloqueio de publicação oficial da migration 001 permanece ativo: ainda não há modelo/importador/conferência de documentos oficiais. A consulta do portal Inep também depende de liberar www.gov.br na rede deste ambiente. Nenhum item oficial foi importado ou inventado.
+A curadoria permite criar uma questão autoral, salvar rascunho, enviar para revisão, devolver para correção, publicar e preparar nova versão. Esta decisão originalmente cobria apenas questões autorais. A [ADR 004](ADR-004-official-sources.md) amplia o fluxo para questões oficiais e substitui o bloqueio inicial da migration 001 por procedência obrigatória e conferência independente. Conteúdo gerado por IA continua fora deste fluxo.
 
 A autoria editorial é um crédito público informado no conteúdo. Identidades que editaram/revisaram são registradas privadamente para autorização e auditoria; seus e-mails não aparecem no conteúdo público. As três demonstrações iniciais mantêm rótulo próprio, inclusive em versões clonadas. Novas questões autorais revisadas não são rotuladas automaticamente como demonstração.
 
@@ -28,6 +28,6 @@ A navegação só aparece quando o servidor confirma a permissão. Esconder o bo
 
 ## Escopo operacional
 
-A fila lista as últimas versões de até 50 questões, sem paginação nesta base. Texto é renderizado por interpolação; HTML, PDF, Markdown e execução de código não foram introduzidos. Limites de campos e de corpo JSON (64 KiB na curadoria; 16 KiB nos demais endpoints) permitem conteúdo com acentos e impedem entradas sem limite. PDF, imagens, taxonomia editorial avançada, fontes oficiais, múltiplas referências, revogação de publicação, política de retenção e interface de administração de papéis continuam pendentes.
+A fila lista as últimas versões de até 50 questões, sem paginação nesta base. Texto é renderizado por interpolação; HTML, Markdown e execução de código não foram introduzidos no renderer. Limites de campos e de corpo JSON (64 KiB na curadoria; 16 KiB nos demais endpoints) permitem conteúdo com acentos e impedem entradas sem limite. A ADR 004 acrescenta arquivos PDF e fontes oficiais. Imagens no enunciado, taxonomia editorial avançada, múltiplas referências, revogação de publicação, política de retenção e interface de administração de papéis continuam pendentes.
 
 O seed usa transação e somente insere as três demonstrações ausentes. Não altera versões existentes nem o ponteiro de uma questão já publicada. Não há conta privilegiada ou senha padrão no seed. Migrations/seed foram exercitados também em schema temporário vazio, preservando o banco de desenvolvimento.
