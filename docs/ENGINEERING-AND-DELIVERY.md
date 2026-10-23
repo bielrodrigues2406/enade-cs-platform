@@ -70,11 +70,11 @@ Pseudonimização não equivale automaticamente a anonimização. Notas e histó
 
 1. Definir resultado, telas/contratos afetados e critérios relevantes.
 2. Verificar trabalho concorrente e criar branch isolada a partir da base atual.
-3. Implementar fatia pequena, com dados e estados reais.
+3. Implementar fatia pequena, com dados e estados reais, em commits Conventional Commits coesos por responsabilidade. Agrupar os testes com o comportamento que validam.
 4. Validar comportamento e inspecionar UI quando aplicável.
 5. Revisar o diff: escopo, legibilidade, riscos, dependências e efeitos nas propriedades.
-6. Atualizar documentação e abrir PR com evidência de validação e limitações.
-7. Conferir se main mudou antes da integração. Resolver conflitos com atenção ao significado; não escolher automaticamente "ours/theirs".
+6. Atualizar documentação e abrir PR curto: mudança em uma ou duas frases, validação executada e limitações relevantes.
+7. Conferir se main mudou antes da integração. Resolver conflitos com atenção ao significado; não escolher automaticamente "ours/theirs". Quando o merge estiver autorizado, concluí-lo após as verificações, conferindo o HEAD revisado e preservando os commits.
 
 Trabalho paralelo tem um responsável por mudança/contrato. Combinar ownership de arquivos compartilhados ou dividir em PRs dependentes. Não deixar agentes editarem o mesmo arquivo sem coordenação. Não exigir sincronização remota a cada pequena edição; publicar incrementos coerentes e conferir a base antes da integração.
 
