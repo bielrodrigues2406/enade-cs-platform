@@ -25,5 +25,8 @@
 - Mudanças de interface exigem execução no navegador, estados relevantes, teclado e larguras desktop/mobile. Build e screenshot isolado não validam o fluxo completo.
 - Se o ambiente impedir uma verificação, registre a limitação e não declare que ela passou.
 - Antes de publicar trabalho, revise diff e mudanças remotas. Não sobrescreva commits concorrentes; atualize a base e resolva conflitos preservando a intenção de ambos.
-- Use commits com propósito claro, preferencialmente Conventional Commits, e PRs revisáveis. A descrição deve informar problema, comportamento resultante, validação e limitações.
+- Use Conventional Commits com descrição curta no imperativo e escopo quando ajudar: feat, fix, refactor, test, docs ou chore.
+- Divida incrementos maiores em alguns commits coesos por responsabilidade: banco/API com seus testes, interface com seus testes e documentação quando fizer sentido. Cada commit deve ser revisável e manter o projeto coerente; mudanças pequenas podem ficar em um commit.
+- Use títulos objetivos de PR. Descreva a mudança em uma ou duas frases, informe a validação executada e inclua limitações somente quando relevantes. Siga o template do repositório.
+- Quando a criação do PR e o merge já estiverem autorizados no contexto, conclua ambos após validar e revisar o diff. Confirme o HEAD revisado antes de integrar e preserve os commits no merge; use squash somente quando solicitado.
 - Não faça force push, merge em main, deploy ou mudanças destrutivas sem autorização que cubra a ação.
