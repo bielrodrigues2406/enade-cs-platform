@@ -1,5 +1,13 @@
 import { Component, EventEmitter, Output, signal } from "@angular/core";
 import { FormsModule, type NgForm } from "@angular/forms";
+import { SourcesComponent, type OfficialSource } from "./sources.component";
+type OfficialProvenance = {
+  examSourceId: string;
+  keySourceId: string;
+  page: number;
+  questionNumber: number;
+  keyPage: number;
+};
 
 type EditorialStatus = "DRAFT" | "IN_REVIEW" | "REJECTED" | "PUBLISHED";
 type EditorialRow = {
@@ -7,7 +15,7 @@ type EditorialRow = {
   id: string;
   title: string;
   topic: string;
-  origin: "AUTHOR_CREATED";
+  origin: "AUTHOR_CREATED" | "OFFICIAL";
   editorialStatus: EditorialStatus;
   sequence: number;
   revision: number;
@@ -22,6 +30,8 @@ type EditorialDetail = EditorialRow & {
   correctOptionId: string;
   options: { id: string; text: string }[];
   reviewNote: string | null;
+  explanationCredit: string;
+  provenance: OfficialProvenance | null;
 };
 type Draft = Pick<
   EditorialDetail,
@@ -32,12 +42,29 @@ type Draft = Pick<
   | "explanation"
   | "correctOptionId"
   | "options"
+  | "origin"
+  | "explanationCredit"
+  | "provenance"
 >;
-const emptyDraft = (): Draft => ({
+const emptyDraft = (
+  origin: "AUTHOR_CREATED" | "OFFICIAL" = "AUTHOR_CREATED",
+): Draft => ({
+  origin,
+  explanationCredit: "",
+  provenance:
+    origin === "OFFICIAL"
+      ? {
+          examSourceId: "",
+          keySourceId: "",
+          page: 1,
+          questionNumber: 1,
+          keyPage: 1,
+        }
+      : null,
   title: "",
   topic: "",
   prompt: "",
-  authorCredit: "",
+  authorCredit: origin === "OFFICIAL" ? "Inep" : "",
   explanation: "",
   correctOptionId: "option-a",
   options: ["a", "b", "c", "d"].map((id) => ({ id: `option-${id}`, text: "" })),
@@ -45,24 +72,51 @@ const emptyDraft = (): Draft => ({
 
 @Component({
   selector: "app-curation",
-  imports: [FormsModule],
+  imports: [FormsModule, SourcesComponent],
   template: `
     @if (!editing()) {
+      <nav class="curation-sections" aria-label="Área da curadoria">
+        <button
+          class="text-button"
+          (click)="showQuestions()"
+          [attr.aria-current]="!sourceView() ? 'page' : null"
+          [disabled]="busy() || sourceBusy()"
+        >
+          Questões</button
+        ><button
+          class="text-button"
+          (click)="showSources()"
+          [attr.aria-current]="sourceView() ? 'page' : null"
+          [disabled]="busy() || sourceBusy()"
+        >
+          Fontes
+        </button>
+      </nav>
+    }
+    @if (sourceView()) {
+      <app-sources (busyChange)="setSourceBusy($event)" />
+    } @else if (!editing()) {
       <section class="curation-intro">
         <div>
           <p class="eyebrow">CONTEÚDO E REVISÃO</p>
           <h1>Curadoria</h1>
-          <p>
-            Prepare questões autorais e confira cada versão antes de publicar.
-          </p>
+          <p>Prepare questões e confira fontes e versões antes de publicar.</p>
         </div>
-        <button (click)="newDraft()" [disabled]="busy()">
-          Nova questão autoral
-        </button>
+        <div class="curation-create-actions">
+          <button (click)="newDraft()" [disabled]="busy()">
+            Nova questão autoral</button
+          ><button
+            class="outline"
+            (click)="newDraft('OFFICIAL')"
+            [disabled]="busy()"
+          >
+            Nova questão oficial
+          </button>
+        </div>
       </section>
       <p class="editorial-scope">
-        A publicação de questões oficiais continua indisponível. Esta fila
-        recebe somente conteúdo autoral, com crédito e revisão independente.
+        Questões oficiais exigem prova e gabarito definitivo verificados. Todo
+        conteúdo passa por revisão independente antes de ser publicado.
       </p>
       <div class="editorial-queue-heading">
         <h2>Fila editorial</h2>
@@ -106,7 +160,9 @@ const emptyDraft = (): Draft => ({
                 <td>
                   <strong>{{ row.title }}</strong
                   ><span class="editorial-row-meta"
-                    >{{ row.topic }} · {{ row.authorCredit }}</span
+                    >{{ row.topic }} ·
+                    {{ row.origin === "OFFICIAL" ? "Oficial" : "Autoral" }} ·
+                    {{ row.authorCredit }}</span
                   >
                 </td>
                 <td>
@@ -151,7 +207,9 @@ const emptyDraft = (): Draft => ({
       </button>
       <section class="editorial-document">
         <p class="eyebrow">
-          QUESTÃO AUTORAL
+          {{
+            draft.origin === "OFFICIAL" ? "QUESTÃO OFICIAL" : "QUESTÃO AUTORAL"
+          }}
           @if (detail()) {
             · VERSÃO {{ detail()!.sequence }}
           }
@@ -161,7 +219,9 @@ const emptyDraft = (): Draft => ({
             editable()
               ? detail()
                 ? "Editar rascunho"
-                : "Nova questão autoral"
+                : draft.origin === "OFFICIAL"
+                  ? "Nova questão oficial"
+                  : "Nova questão autoral"
               : detail()!.title
           }}
         </h1>
@@ -187,6 +247,126 @@ const emptyDraft = (): Draft => ({
           <form #draftForm="ngForm" (ngSubmit)="save(draftForm)" novalidate>
             <fieldset [disabled]="busy()">
               <legend class="visually-hidden">Conteúdo da questão</legend>
+              @if (draft.origin === "OFFICIAL") {
+                <fieldset class="official-provenance-fields">
+                  <legend>Procedência da questão oficial</legend>
+                  <p class="account-help">
+                    Selecione documentos verificados da mesma edição, área e
+                    modalidade. Confira as páginas e o número na prova.
+                  </p>
+                  @if (sourceLoading()) {
+                    <p role="status">Carregando fontes verificadas…</p>
+                  }
+                  <div class="editorial-field">
+                    <label for="draft-exam">Prova oficial verificada</label
+                    ><select
+                      id="draft-exam"
+                      name="examSourceId"
+                      [(ngModel)]="draft.provenance!.examSourceId"
+                      (ngModelChange)="examChanged()"
+                      [disabled]="!!detail()"
+                      required
+                    >
+                      <option value="">Selecione uma prova</option>
+                      @for (source of verifiedExams(); track source.id) {
+                        <option [value]="source.id">
+                          {{ source.year }} · {{ source.area }} ·
+                          {{ source.title }}
+                        </option>
+                      }
+                    </select>
+                    @if (exam()) {
+                      <p class="account-help">
+                        <a
+                          [href]="exam()!.officialUrl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Conferir prova oficial</a
+                        >
+                        · {{ exam()!.pageCount }} páginas
+                      </p>
+                    }
+                  </div>
+                  <div class="editorial-field">
+                    <label for="draft-key">Gabarito definitivo verificado</label
+                    ><select
+                      id="draft-key"
+                      name="keySourceId"
+                      [(ngModel)]="draft.provenance!.keySourceId"
+                      required
+                      [disabled]="!exam()"
+                    >
+                      <option value="">
+                        Selecione o gabarito da mesma edição
+                      </option>
+                      @for (source of compatibleKeys(); track source.id) {
+                        <option [value]="source.id">{{ source.title }}</option>
+                      }
+                    </select>
+                    @if (keySource()) {
+                      <p class="account-help">
+                        <a
+                          [href]="keySource()!.officialUrl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Conferir gabarito definitivo</a
+                        >
+                        · {{ keySource()!.pageCount }} páginas
+                      </p>
+                    }
+                  </div>
+                  <div class="provenance-page-fields">
+                    <div class="editorial-field">
+                      <label for="draft-page">Página da questão</label
+                      ><input
+                        id="draft-page"
+                        name="page"
+                        type="number"
+                        [(ngModel)]="draft.provenance!.page"
+                        required
+                        min="1"
+                        [max]="exam()?.pageCount || 1"
+                        step="1"
+                      />
+                    </div>
+                    <div class="editorial-field">
+                      <label for="draft-question-number">Número na prova</label
+                      ><input
+                        id="draft-question-number"
+                        name="questionNumber"
+                        type="number"
+                        [(ngModel)]="draft.provenance!.questionNumber"
+                        [readonly]="!!detail()"
+                        required
+                        min="1"
+                        max="1000"
+                        step="1"
+                      />
+                    </div>
+                    <div class="editorial-field">
+                      <label for="draft-key-page">Página do gabarito</label
+                      ><input
+                        id="draft-key-page"
+                        name="keyPage"
+                        type="number"
+                        [(ngModel)]="draft.provenance!.keyPage"
+                        required
+                        min="1"
+                        [max]="keySource()?.pageCount || 1"
+                        step="1"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="text-button"
+                    (click)="loadSources()"
+                    [disabled]="sourceLoading()"
+                  >
+                    Atualizar fontes verificadas
+                  </button>
+                </fieldset>
+              }
               <div class="editorial-field">
                 <label for="draft-title">Título</label
                 ><input
@@ -208,20 +388,27 @@ const emptyDraft = (): Draft => ({
                     maxlength="80"
                   />
                 </div>
-                <div class="editorial-field">
-                  <label for="draft-credit">Crédito de autoria</label
-                  ><input
-                    id="draft-credit"
-                    name="authorCredit"
-                    [(ngModel)]="draft.authorCredit"
-                    required
-                    maxlength="160"
-                    aria-describedby="credit-help"
-                  />
-                  <p id="credit-help" class="account-help">
-                    Nome ou equipe responsável pelo conteúdo autoral.
+                @if (draft.origin === "AUTHOR_CREATED") {
+                  <div class="editorial-field">
+                    <label for="draft-credit">Crédito de autoria</label
+                    ><input
+                      id="draft-credit"
+                      name="authorCredit"
+                      [(ngModel)]="draft.authorCredit"
+                      required
+                      maxlength="160"
+                      aria-describedby="credit-help"
+                    />
+                    <p id="credit-help" class="account-help">
+                      Nome ou equipe responsável pelo conteúdo autoral.
+                    </p>
+                  </div>
+                } @else {
+                  <p class="account-help">
+                    Fonte da questão: Inep. A explicação abaixo é um comentário
+                    editorial, com crédito próprio.
                   </p>
-                </div>
+                }
               </div>
               <div class="editorial-field">
                 <label for="draft-prompt">Enunciado</label
@@ -295,6 +482,23 @@ const emptyDraft = (): Draft => ({
                   Adicionar alternativa
                 </button>
               </fieldset>
+              @if (draft.origin === "OFFICIAL") {
+                <div class="editorial-field">
+                  <label for="draft-explanation-credit"
+                    >Crédito da explicação editorial</label
+                  ><input
+                    id="draft-explanation-credit"
+                    name="explanationCredit"
+                    [(ngModel)]="draft.explanationCredit"
+                    required
+                    maxlength="160"
+                  />
+                  <p class="account-help">
+                    Identifique quem escreveu o comentário. A explicação não é
+                    uma correção oficial do Inep.
+                  </p>
+                </div>
+              }
               <div class="editorial-field">
                 <label for="draft-explanation">Explicação do gabarito</label
                 ><textarea
@@ -335,7 +539,40 @@ const emptyDraft = (): Draft => ({
           </form>
         } @else {
           <section class="editorial-readonly">
-            <p class="metadata">{{ detail()!.topic }} · Autoral</p>
+            <p class="metadata">
+              {{ detail()!.topic }} ·
+              {{ detail()!.origin === "OFFICIAL" ? "Oficial" : "Autoral" }}
+            </p>
+            @if (detail()!.provenance) {
+              <section class="question-provenance">
+                <h2>Procedência</h2>
+                <p>
+                  {{ exam()?.title || "Prova oficial" }} · questão
+                  {{ detail()!.provenance!.questionNumber }}, página
+                  {{ detail()!.provenance!.page }}
+                </p>
+                <p>
+                  {{ keySource()?.title || "Gabarito definitivo" }} · página
+                  {{ detail()!.provenance!.keyPage }}
+                </p>
+                @if (exam()) {
+                  <a
+                    [href]="exam()!.officialUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Conferir prova oficial</a
+                  >
+                }
+                @if (keySource()) {
+                  <a
+                    [href]="keySource()!.officialUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Conferir gabarito definitivo</a
+                  >
+                }
+              </section>
+            }
             <h2>Enunciado</h2>
             <p class="editorial-text">{{ detail()!.prompt }}</p>
             <h2>Alternativas</h2>
@@ -355,6 +592,11 @@ const emptyDraft = (): Draft => ({
               }
             </ol>
             <h2>Explicação do gabarito</h2>
+            @if (detail()!.explanationCredit) {
+              <p class="metadata">
+                Comentário editorial: {{ detail()!.explanationCredit }}
+              </p>
+            }
             <p class="editorial-text">{{ detail()!.explanation }}</p>
           </section>
           @if (detail()!.editorialStatus === "IN_REVIEW") {
@@ -384,6 +626,15 @@ const emptyDraft = (): Draft => ({
                       [(ngModel)]="checks.credit"
                     />Conferi o crédito de autoria.</label
                   >
+                  @if (detail()!.origin === "OFFICIAL") {
+                    <label class="editorial-check"
+                      ><input
+                        type="checkbox"
+                        [(ngModel)]="checks.source"
+                      />Conferi a questão e o gabarito nos documentos oficiais
+                      indicados.</label
+                    >
+                  }
                   <div class="editorial-field">
                     <label for="review-note">Parecer da revisão</label
                     ><textarea
@@ -495,6 +746,10 @@ const emptyDraft = (): Draft => ({
 export class CurationComponent {
   @Output() busyChange = new EventEmitter<boolean>();
   rows = signal<EditorialRow[]>([]);
+  sourceView = signal(false);
+  sourceBusy = signal(false);
+  sourceLoading = signal(false);
+  sources = signal<OfficialSource[]>([]);
   detail = signal<EditorialDetail | null>(null);
   editing = signal(false);
   loading = signal(false);
@@ -504,7 +759,7 @@ export class CurationComponent {
   confirmPublication = signal(false);
   draft = emptyDraft();
   reviewNote = "";
-  checks = { content: false, answer: false, credit: false };
+  checks = { content: false, answer: false, credit: false, source: false };
   readonly letters = "ABCDE";
   private active = true;
   private sequence = 0;
@@ -560,8 +815,71 @@ export class CurationComponent {
       this.validReviewNote() &&
       this.checks.content &&
       this.checks.answer &&
-      this.checks.credit
+      this.checks.credit &&
+      (this.detail()?.origin !== "OFFICIAL" || this.checks.source)
     );
+  }
+  showSources() {
+    if (this.busy() || this.sourceBusy()) return;
+    this.sequence++;
+    this.loading.set(false);
+    this.sourceView.set(true);
+  }
+  showQuestions() {
+    if (this.busy() || this.sourceBusy()) return;
+    this.sourceView.set(false);
+    void this.loadQueue();
+  }
+  setSourceBusy(value: boolean) {
+    this.sourceBusy.set(value);
+    this.busyChange.emit(value);
+  }
+  verifiedExams() {
+    return this.sources().filter(
+      (source) => source.status === "VERIFIED" && source.kind === "EXAM",
+    );
+  }
+  exam() {
+    return this.sources().find(
+      (source) => source.id === this.draft.provenance?.examSourceId,
+    );
+  }
+  keySource() {
+    return this.sources().find(
+      (source) => source.id === this.draft.provenance?.keySourceId,
+    );
+  }
+  compatibleKeys() {
+    const exam = this.exam();
+    return this.sources().filter(
+      (source) =>
+        source.status === "VERIFIED" &&
+        source.kind === "ANSWER_KEY" &&
+        source.isFinal &&
+        !!exam &&
+        source.year === exam.year &&
+        source.area === exam.area &&
+        source.modality === exam.modality,
+    );
+  }
+  examChanged() {
+    if (this.draft.provenance) {
+      this.draft.provenance.keySourceId = "";
+      this.draft.provenance.page = 1;
+      this.draft.provenance.keyPage = 1;
+    }
+  }
+  async loadSources() {
+    if (this.sourceLoading()) return;
+    this.sourceLoading.set(true);
+    try {
+      const sources = await this.api<OfficialSource[]>("sources");
+      if (this.active) this.sources.set(sources);
+    } catch (err) {
+      if (this.active) this.error.set(this.message(err));
+    } finally {
+      if (this.active) this.sourceLoading.set(false);
+    }
   }
   async loadQueue() {
     if (this.busy()) return;
@@ -578,16 +896,17 @@ export class CurationComponent {
       if (this.active && sequence === this.sequence) this.loading.set(false);
     }
   }
-  newDraft() {
-    if (this.busy()) return;
+  newDraft(origin: "AUTHOR_CREATED" | "OFFICIAL" = "AUTHOR_CREATED") {
+    if (this.busy() || this.sourceBusy()) return;
     this.sequence++;
     this.loading.set(false);
     this.detail.set(null);
-    this.draft = emptyDraft();
+    this.draft = emptyDraft(origin);
     this.savedDraft = "";
     this.error.set("");
     this.notice.set("");
     this.editing.set(true);
+    if (origin === "OFFICIAL") void this.loadSources();
     this.focusHeading();
   }
   async open(id: string) {
@@ -648,8 +967,26 @@ export class CurationComponent {
       );
       return;
     }
+    if (
+      this.draft.origin === "OFFICIAL" &&
+      (!this.draft.explanationCredit.trim() ||
+        !this.draft.provenance?.examSourceId ||
+        !this.draft.provenance.keySourceId ||
+        ![
+          this.draft.provenance.page,
+          this.draft.provenance.keyPage,
+          this.draft.provenance.questionNumber,
+        ].every((value) => Number.isInteger(value) && value > 0))
+    ) {
+      this.error.set(
+        "Informe as fontes verificadas, páginas, número da questão e crédito da explicação.",
+      );
+      return;
+    }
     const current = this.detail();
-    const payload = structuredClone(this.draft);
+    const copy = structuredClone(this.draft);
+    const { explanationCredit, ...authored } = copy;
+    const payload = copy.origin === "OFFICIAL" ? copy : authored;
     await this.mutate(
       current ? `versions/${current.id}` : "questions",
       current ? "PUT" : "POST",
@@ -736,6 +1073,9 @@ export class CurationComponent {
     this.detail.set(detail);
     this.editing.set(true);
     this.draft = {
+      origin: detail.origin,
+      explanationCredit: detail.explanationCredit || "",
+      provenance: detail.provenance ? { ...detail.provenance } : null,
       title: detail.title,
       topic: detail.topic,
       prompt: detail.prompt,
@@ -746,8 +1086,14 @@ export class CurationComponent {
     };
     this.savedDraft = JSON.stringify(this.draft);
     this.reviewNote = "";
-    this.checks = { content: false, answer: false, credit: false };
+    this.checks = {
+      content: false,
+      answer: false,
+      credit: false,
+      source: false,
+    };
     this.confirmPublication.set(false);
+    if (detail.origin === "OFFICIAL") void this.loadSources();
   }
   private focusHeading() {
     setTimeout(() => {
