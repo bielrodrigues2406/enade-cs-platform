@@ -11,6 +11,9 @@ export type Question = {
   topic: string;
   prompt: string;
   origin: string;
+  authorCredit: string;
+  demonstration: boolean;
+  versionNumber: number;
   explanation: string;
   correctOptionId: string;
   options: { id: string; text: string }[];

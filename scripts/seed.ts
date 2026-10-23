@@ -45,8 +45,20 @@ async function seed() {
     await client.query("BEGIN");
     await client.query("SELECT pg_advisory_xact_lock(67124301)");
     for (const q of questions) {
+      if (
+        (
+          await client.query("SELECT 1 FROM question_version WHERE id=$1", [
+            q.id,
+          ])
+        ).rowCount
+      )
+        continue;
+      await client.query(
+        "INSERT INTO editorial_question(id,origin) VALUES($1,'AUTHOR_CREATED') ON CONFLICT(id) DO NOTHING",
+        [q.id],
+      );
       const created = await client.query(
-        `INSERT INTO question_version(id,title,topic,prompt,origin,editorial_status,explanation,correct_option_id) VALUES($1,$2,$3,$4,'AUTHOR_CREATED','PUBLISHED',$5,$6) ON CONFLICT(id) DO NOTHING RETURNING id`,
+        `INSERT INTO question_version(id,question_id,title,topic,prompt,origin,editorial_status,explanation,correct_option_id,demonstration,author_credit) VALUES($1,$1,$2,$3,$4,'AUTHOR_CREATED','DRAFT',$5,$6,true,'Conteúdo demonstrativo da base') ON CONFLICT(id) DO NOTHING RETURNING id`,
         [
           q.id,
           q.title,
@@ -63,6 +75,14 @@ async function seed() {
           "INSERT INTO question_option(question_id,id,text,position) VALUES($1,$2,$3,$4)",
           [q.id, `${q.id}-${i}`, text, i],
         );
+      await client.query(
+        "UPDATE question_version SET editorial_status='PUBLISHED' WHERE id=$1",
+        [q.id],
+      );
+      await client.query(
+        "UPDATE editorial_question SET current_version_id=$1 WHERE id=$1",
+        [q.id],
+      );
     }
     await client.query("COMMIT");
     console.log(
