@@ -1,6 +1,6 @@
 # Produto, escopo e sequência de entregas
 
-Status: especificação de produto. A base inicial de catálogo/resolução foi implementada; critérios A/B ainda estão parcialmente atendidos. Consulte o README para evidências e pendências. Referência: 22/10/2026.
+Status: especificação de produto. A base inicial de catálogo/resolução foi implementada; critérios A/B ainda estão parcialmente atendidos; C começou pelo caderno de erros. Consulte o README para evidências e pendências. Referência: 22/10/2026.
 
 ## 1. Objetivo
 
@@ -74,6 +74,6 @@ Para alegar ganho de aprendizagem, planejar avaliação com itens inéditos e cr
 
 ## 8. Estado e próxima entrega
 
-Catálogo → questão → resposta → feedback → persistência → retomada estão implementados com prática anônima/contas e curadoria versionada. O registro de PDFs oficiais, a conferência independente e a procedência por versão também estão disponíveis; isso não comprova revisão pedagógica de um lote real. O README registra os testes executados.
+Catálogo → questão → resposta → feedback → persistência → retomada estão implementados com prática anônima/contas e curadoria versionada. O registro de PDFs oficiais, a conferência independente e a procedência por versão também estão disponíveis; isso não comprova revisão pedagógica de um lote real. O caderno de erros inclui filtro por assunto, paginação, nova resolução e contagens por questão lógica, derivadas das respostas salvas. Repetição espaçada, plano de estudos e tendências permanecem pendentes. O README registra os testes executados.
 
 Próximo incremento: transcrever e revisar o lote oficial inicial a partir dos documentos conferidos, medindo erros e esforço antes de ampliar. Imagens, discursivas, anulações, taxonomia avançada, simulados e IA continuam pendentes.

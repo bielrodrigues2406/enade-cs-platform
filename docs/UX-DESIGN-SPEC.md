@@ -1,6 +1,6 @@
 # Direção visual e experiência de uso
 
-Status: direção e critérios de aceitação. Catálogo e resolução da base demonstrativa foram implementados e exercitados em Chromium; demais telas permanecem propostas. Referência: 22/10/2026.
+Status: direção e critérios de aceitação. Catálogo, resolução, contas, curadoria, fontes e caderno de erros foram implementados e exercitados em Chromium na base de desenvolvimento; demais telas permanecem propostas. Referência: 22/10/2026.
 
 ## 1. Intenção e identidade
 
