@@ -19,6 +19,7 @@ import { requireIdentity } from "./session.js";
 import { AuthController } from "./auth.js";
 import { CurationController } from "./curation.js";
 import { SourcesController } from "./sources.js";
+import { ReviewController } from "./review.js";
 import { sourceById, publicExam } from "./source-store.js";
 
 async function published(id: string) {
@@ -172,7 +173,7 @@ class StudyController {
         );
       const result = (
         await client.query<Answer>(
-          `INSERT INTO answer(owner_id,question_id,option_id,revision) VALUES($1,$2,$3,$4) ON CONFLICT(owner_id,question_id) DO UPDATE SET option_id=EXCLUDED.option_id,revision=EXCLUDED.revision,updated_at=now() RETURNING option_id AS "optionId",revision`,
+          `INSERT INTO answer(owner_id,question_id,option_id,revision,updated_at) VALUES($1,$2,$3,$4,clock_timestamp()) ON CONFLICT(owner_id,question_id) DO UPDATE SET option_id=EXCLUDED.option_id,revision=EXCLUDED.revision,updated_at=clock_timestamp() RETURNING option_id AS "optionId",revision`,
           [user.id, id, optionId, (baseRevision as number) + 1],
         )
       ).rows[0];
@@ -192,6 +193,7 @@ class StudyController {
     StudyController,
     CurationController,
     SourcesController,
+    ReviewController,
   ],
 })
 class AppModule {}
