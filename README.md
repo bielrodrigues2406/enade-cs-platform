@@ -13,6 +13,8 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Curadoria de questões autorais: rascunho, revisão por outra pessoa, devolução, publicação e nova versão.
 - Versões publicadas e feedback histórico preservados; conflitos não sobrescrevem alterações.
 - Caderno de erros com filtro por assunto, paginação e nova resolução; resumo por questão distinta, sem multiplicar contagens por edições ou versões.
+- Tabela por assunto no caderno de erros (a retomar e respondidas) com ação de retomar cada assunto; no catálogo, quantas questões da seleção têm resposta salva; na resolução, posição na seleção e "Próxima questão" após o feedback.
+- Interface com tokens, fontes auto-hospedadas e transições de tela que respeitam movimento reduzido ([design](docs/DESIGN-QUALITY.md)).
 - Registro de PDFs por download oficial, cópia pública fixada em commit ou arquivo local, com SHA-256 e conferência independente na seção Fontes.
 - Catálogo de todos os anos localizados: 61 referências; 27 PDFs históricos obtidos/cadastrados e 34 documentos recentes ainda pendentes. Cadernos compartilhados, Licenciatura e PND têm identificação própria.
 - Curadoria de questões oficiais com prova, página, número original e gabarito definitivo conferidos; procedência pública e comentário editorial com crédito próprio.
