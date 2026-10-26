@@ -5,10 +5,12 @@ export type OfficialSource = {
   id: string;
   title: string;
   officialUrl: string;
-  kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD";
+  kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD" | "EXAM_MAP";
   year: number;
   area: string;
-  modality: "BACHARELADO" | "LICENCIATURA" | "CST";
+  modality: "BACHARELADO" | "LICENCIATURA" | "CST" | "COMUM";
+  acquisitionMethod: "DIRECT" | "MIRROR" | "LOCAL";
+  retrievalUrl: string | null;
   sha256: string;
   byteSize: number;
   pageCount: number;
@@ -145,6 +147,29 @@ export type OfficialSource = {
             >
           </p>
           <p class="source-url">{{ selected()!.officialUrl }}</p>
+          @if (selected()!.acquisitionMethod === "MIRROR") {
+            <p>
+              Arquivo obtido como cópia em repositório público.
+              <a
+                [href]="selected()!.retrievalUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Consultar a cópia identificada pelo commit</a
+              >. Confira a correspondência com a referência oficial antes de
+              verificar a fonte.
+            </p>
+          } @else if (selected()!.acquisitionMethod === "LOCAL") {
+            <p>
+              Arquivo fornecido localmente. A URL oficial é uma referência; o
+              servidor não confirmou um download direto desse endereço.
+            </p>
+          }
+          @if (selected()!.modality === "COMUM") {
+            <p>
+              Caderno compartilhado: contém blocos de cursos diferentes. Confira
+              o bloco e o número original ao transcrever uma questão.
+            </p>
+          }
           <p>
             <a [href]="'/api/curation/sources/' + selected()!.id + '/file'"
               >Baixar PDF arquivado</a
@@ -194,6 +219,7 @@ export type OfficialSource = {
                     <option value="RESPONSE_STANDARD">
                       Padrão de resposta
                     </option>
+                    <option value="EXAM_MAP">Mapa de prova</option>
                   </select>
                 </div>
                 <div class="editorial-field">
@@ -230,6 +256,7 @@ export type OfficialSource = {
                     <option value="BACHARELADO">Bacharelado</option>
                     <option value="LICENCIATURA">Licenciatura</option>
                     <option value="CST">Curso superior de tecnologia</option>
+                    <option value="COMUM">Caderno compartilhado</option>
                   </select>
                 </div>
               </div>
@@ -407,6 +434,7 @@ export class SourcesComponent {
       EXAM: "Prova",
       ANSWER_KEY: "Gabarito",
       RESPONSE_STANDARD: "Padrão de resposta",
+      EXAM_MAP: "Mapa de prova",
     }[kind];
   }
   statusLabel(status: OfficialSource["status"]) {
@@ -421,6 +449,7 @@ export class SourcesComponent {
       BACHARELADO: "Bacharelado",
       LICENCIATURA: "Licenciatura",
       CST: "Curso superior de tecnologia",
+      COMUM: "Caderno compartilhado",
     }[modality];
   }
   bytes(value: number) {

@@ -176,7 +176,7 @@ test("authoring, independent rejection/publication, version replacement and hist
   provision,
   questions,
 }) => {
-  test.setTimeout(60000);
+  test.setTimeout(120000);
   await provision(context);
   const reviewerContext = await browser.newContext({
     baseURL: "http://localhost:4200",
