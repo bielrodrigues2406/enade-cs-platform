@@ -3,20 +3,30 @@ import { mkdtemp, readFile, rm, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
+import { createHash } from "node:crypto";
+import { resolve } from "node:path";
 import { db } from "../apps/api/src/database.js";
+import { downloadPdf } from "./lib/source-download.mjs";
 
 const run = promisify(execFile);
 const MAX_BYTES = 10 * 1024 * 1024;
 const HELP = `Importa um PDF oficial como IMPORTED, com revisão editorial pendente.
 
 Uso:
-  npm run import:source -- --url URL --kind EXAM|ANSWER_KEY|RESPONSE_STANDARD \\
-    --year ANO --area AREA --modality BACHARELADO|LICENCIATURA|CST \\
-    --title TITULO [--actor ID_DA_IDENTIDADE]
+  npm run import:source -- --url URL --kind EXAM|ANSWER_KEY|RESPONSE_STANDARD|EXAM_MAP \\
+    --year ANO --area AREA --modality BACHARELADO|LICENCIATURA|CST|COMUM \\
+    --title TITULO [--actor ID_DA_IDENTIDADE] \\
+    [--mirror-url URL_COM_COMMIT | --file CAMINHO] [--sha256 HASH_ESPERADO]
 
 A URL precisa ser HTTPS, sem credenciais, porta, query ou fragmento, em:
   download.inep.gov.br/enade/...pdf
   www.gov.br/inep/...pdf
+São aceitos também os caminhos históricos do Inep e /pnd/.
+
+--mirror-url baixa uma cópia raw.githubusercontent.com fixada em um commit.
+--file importa um PDF local, sem afirmar que o servidor o baixou do Inep.
+As duas opções preservam a URL oficial como referência e ficam pendentes
+de conferência independente. COMUM identifica cadernos compartilhados.
 
 O comando verifica o PDF, calcula tamanho/hash e arquiva o documento.
 Redirecionamentos são validados antes de cada acesso; o limite é três.
@@ -28,12 +38,15 @@ class CliError extends Error {}
 
 type Flags = {
   url: string;
-  kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD";
+  kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD" | "EXAM_MAP";
   year: number;
   area: string;
-  modality: "BACHARELADO" | "LICENCIATURA" | "CST";
+  modality: "BACHARELADO" | "LICENCIATURA" | "CST" | "COMUM";
   title: string;
   actorId?: string;
+  mirrorUrl?: string;
+  file?: string;
+  sha256?: string;
 };
 function parse(args: string[]): Flags {
   const allowed = new Set([
@@ -44,6 +57,9 @@ function parse(args: string[]): Flags {
     "--modality",
     "--title",
     "--actor",
+    "--mirror-url",
+    "--file",
+    "--sha256",
   ]);
   if (!args.length || args.length % 2)
     throw new CliError(
@@ -88,18 +104,22 @@ function parse(args: string[]): Flags {
     return value;
   };
   const kind = values.get("--kind")!;
-  if (!["EXAM", "ANSWER_KEY", "RESPONSE_STANDARD"].includes(kind))
+  if (!["EXAM", "ANSWER_KEY", "RESPONSE_STANDARD", "EXAM_MAP"].includes(kind))
     throw new CliError(
-      "Tipo inválido. Use EXAM, ANSWER_KEY ou RESPONSE_STANDARD.",
+      "Tipo inválido. Use EXAM, ANSWER_KEY, RESPONSE_STANDARD ou EXAM_MAP.",
     );
   const modality = values.get("--modality")!;
-  if (!["BACHARELADO", "LICENCIATURA", "CST"].includes(modality))
+  if (!["BACHARELADO", "LICENCIATURA", "CST", "COMUM"].includes(modality))
     throw new CliError(
-      "Modalidade inválida. Use BACHARELADO, LICENCIATURA ou CST.",
+      "Modalidade inválida. Use BACHARELADO, LICENCIATURA, CST ou COMUM.",
     );
   const year = values.get("--year")!;
   const currentYear = new Date().getUTCFullYear();
-  if (!/^\d{4}$/.test(year) || Number(year) < 2004 || Number(year) > currentYear)
+  if (
+    !/^\d{4}$/.test(year) ||
+    Number(year) < 2004 ||
+    Number(year) > currentYear
+  )
     throw new CliError(`Informe uma edição entre 2004 e ${currentYear}.`);
   const url = values.get("--url")!;
   if (url.length > 2000) throw new CliError("A URL excede o limite permitido.");
@@ -111,6 +131,13 @@ function parse(args: string[]): Flags {
     )
   )
     throw new CliError("A identidade de curadoria deve ser um UUID válido.");
+  if (values.has("--mirror-url") && values.has("--file"))
+    throw new CliError(
+      "Escolha cópia remota ou arquivo local, sem combinar as opções.",
+    );
+  const sha256 = values.get("--sha256");
+  if (sha256 && !/^[a-f0-9]{64}$/.test(sha256))
+    throw new CliError("SHA-256 esperado inválido.");
   return {
     url,
     kind: kind as Flags["kind"],
@@ -119,6 +146,9 @@ function parse(args: string[]): Flags {
     modality: modality as Flags["modality"],
     title: text("--title", 200),
     ...(actorId ? { actorId } : {}),
+    mirrorUrl: values.get("--mirror-url"),
+    file: values.get("--file"),
+    sha256,
   };
 }
 
@@ -127,58 +157,13 @@ async function download(
   destination: string,
   validate: (input: string) => string,
 ) {
-  let current = validate(url);
-  for (let redirects = 0; redirects <= 3; redirects++) {
-    let output: string;
-    try {
-      const result = await run(
-        "curl",
-        [
-          "--disable",
-          "--silent",
-          "--show-error",
-          "--proto",
-          "=https",
-          "--connect-timeout",
-          "10",
-          "--max-time",
-          "30",
-          "--max-filesize",
-          String(MAX_BYTES),
-          "--output",
-          destination,
-          "--write-out",
-          "%{http_code}\n%{redirect_url}",
-          "--url",
-          current,
-        ],
-        {
-          timeout: 35000,
-          killSignal: "SIGKILL",
-          maxBuffer: 65536,
-          encoding: "utf8",
-        },
-      );
-      output = result.stdout;
-    } catch {
-      throw new CliError(
-        "Não foi possível baixar o PDF com TLS verificado. Confira o acesso de rede ao domínio oficial e os limites de tempo/tamanho.",
-      );
-    }
-    const [status, redirect] = output.trim().split(/\r?\n/);
-    if (status === "200") return current;
-    if (!["301", "302", "303", "307", "308"].includes(status))
-      throw new CliError(
-        "O endereço oficial não retornou um PDF disponível (HTTP diferente de 200).",
-      );
-    if (redirects === 3 || !redirect)
-      throw new CliError(
-        "O documento excedeu o limite de redirecionamentos ou não informou destino.",
-      );
-    // Never fetch a redirect before validating its complete destination.
-    current = validate(redirect);
+  try {
+    return await downloadPdf(url, destination, validate);
+  } catch (error) {
+    throw new CliError(
+      error instanceof Error ? error.message : "Falha no download.",
+    );
   }
-  throw new CliError("Não foi possível resolver o endereço oficial.");
 }
 
 async function main() {
@@ -188,19 +173,34 @@ async function main() {
     return;
   }
   const flags = parse(args);
-  const { validateOfficialUrl, importDocument } = await import(
-    "../apps/api/src/source-store.js"
-  );
+  const { validateOfficialUrl, validateMirrorUrl, importDocument } =
+    await import("../apps/api/src/source-store.js");
   // Reject invalid URLs before creating files or attempting any network access.
   const officialUrl = validateOfficialUrl(flags.url);
+  if (flags.mirrorUrl) validateMirrorUrl(flags.mirrorUrl);
   const temporary = await mkdtemp(join(tmpdir(), "enade-source-"));
   try {
-    const file = join(temporary, "document.pdf");
-    const finalUrl = await download(officialUrl, file, validateOfficialUrl);
+    const file = flags.file
+      ? resolve(flags.file)
+      : join(temporary, "document.pdf");
+    const finalUrl = flags.file
+      ? null
+      : await download(
+          flags.mirrorUrl ?? officialUrl,
+          file,
+          flags.mirrorUrl ? validateMirrorUrl : validateOfficialUrl,
+        );
     const info = await stat(file);
     if (!info.isFile() || info.size < 5 || info.size > MAX_BYTES)
       throw new CliError("O arquivo recebido não atende ao limite de 10 MiB.");
     const bytes = await readFile(file);
+    if (
+      flags.sha256 &&
+      createHash("sha256").update(bytes).digest("hex") !== flags.sha256
+    )
+      throw new CliError(
+        "O PDF não corresponde ao SHA-256 esperado. Não foi importado.",
+      );
     if (!bytes.subarray(0, 5).equals(Buffer.from("%PDF-", "ascii")))
       throw new CliError("O conteúdo recebido não é um PDF.");
     let output: string;
@@ -224,7 +224,13 @@ async function main() {
       throw new CliError("O PDF deve informar de 1 a 1000 páginas.");
     const result = await importDocument({
       title: flags.title,
-      officialUrl: finalUrl,
+      officialUrl: flags.file || flags.mirrorUrl ? officialUrl : finalUrl!,
+      acquisitionMethod: flags.file
+        ? "LOCAL"
+        : flags.mirrorUrl
+          ? "MIRROR"
+          : "DIRECT",
+      ...(flags.mirrorUrl ? { retrievalUrl: finalUrl! } : {}),
       kind: flags.kind,
       year: flags.year,
       area: flags.area,

@@ -9,10 +9,12 @@ export type Source = {
   id: string;
   title: string;
   officialUrl: string;
-  kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD";
+  kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD" | "EXAM_MAP";
   year: number;
   area: string;
-  modality: "BACHARELADO" | "LICENCIATURA" | "CST";
+  modality: "BACHARELADO" | "LICENCIATURA" | "CST" | "COMUM";
+  acquisitionMethod: "DIRECT" | "MIRROR" | "LOCAL";
+  retrievalUrl: string | null;
   sha256: string;
   byteSize: number;
   pageCount: number;
@@ -23,7 +25,7 @@ export type Source = {
   note: string | null;
   isFinal: boolean;
 };
-export const sourceFields = `id,title,official_url AS "officialUrl",kind,year,area,modality,sha256,byte_size AS "byteSize",page_count AS "pageCount",status,revision,imported_by AS "importedBy",last_editor_id AS "lastEditor",note,is_final AS "isFinal"`;
+export const sourceFields = `id,title,official_url AS "officialUrl",kind,year,area,modality,sha256,byte_size AS "byteSize",page_count AS "pageCount",status,revision,imported_by AS "importedBy",last_editor_id AS "lastEditor",note,is_final AS "isFinal",acquisition_method AS "acquisitionMethod",retrieval_url AS "retrievalUrl"`;
 export function validateOfficialUrl(input: string) {
   let url: URL;
   try {
@@ -33,7 +35,9 @@ export function validateOfficialUrl(input: string) {
   }
   const allowed =
     (url.hostname === "download.inep.gov.br" &&
-      url.pathname.startsWith("/enade/")) ||
+      /^\/(?:enade|pnd|educacao_superior\/enade|download\/(?:enade|Enade2008_RNP))\//.test(
+        url.pathname,
+      )) ||
     (url.hostname === "www.gov.br" && url.pathname.startsWith("/inep/"));
   if (
     url.protocol !== "https:" ||
@@ -52,13 +56,43 @@ export function validateOfficialUrl(input: string) {
     );
   return url.toString();
 }
+export function validateMirrorUrl(input: string) {
+  let url: URL;
+  try {
+    url = new URL(input);
+  } catch {
+    return fail("URL da cópia inválida.", 400);
+  }
+  if (
+    url.protocol !== "https:" ||
+    url.hostname !== "raw.githubusercontent.com" ||
+    url.username ||
+    url.password ||
+    url.port ||
+    url.search ||
+    url.hash ||
+    input.length > 2000 ||
+    !/^\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\/[a-f0-9]{40}\/.+\.pdf$/.test(
+      url.pathname,
+    )
+  )
+    fail(
+      "Use uma cópia HTTPS do GitHub fixada no SHA completo do commit, sem credenciais ou parâmetros.",
+      400,
+    );
+  return url.toString();
+}
 export function sourceMetadata(input: Record<string, unknown>) {
   const kind = input.kind,
     modality = input.modality,
     year = input.year;
   if (
-    !["EXAM", "ANSWER_KEY", "RESPONSE_STANDARD"].includes(kind as string) ||
-    !["BACHARELADO", "LICENCIATURA", "CST"].includes(modality as string) ||
+    !["EXAM", "ANSWER_KEY", "RESPONSE_STANDARD", "EXAM_MAP"].includes(
+      kind as string,
+    ) ||
+    !["BACHARELADO", "LICENCIATURA", "CST", "COMUM"].includes(
+      modality as string,
+    ) ||
     !Number.isInteger(year) ||
     (year as number) < 2004 ||
     (year as number) > new Date().getUTCFullYear()
@@ -144,10 +178,19 @@ export async function importDocument(input: {
   pageCount: number;
   bytes: Buffer;
   actorId?: string;
+  acquisitionMethod?: Source["acquisitionMethod"];
+  retrievalUrl?: string;
 }) {
   const meta = sourceMetadata(input),
     url = validateOfficialUrl(input.officialUrl),
     bytes = input.bytes;
+  const method = input.acquisitionMethod ?? "DIRECT";
+  if (!["DIRECT", "MIRROR", "LOCAL"].includes(method))
+    fail("Forma de obtenção inválida.", 400);
+  const retrievalUrl =
+    method === "MIRROR" ? validateMirrorUrl(input.retrievalUrl ?? "") : null;
+  if (method !== "MIRROR" && input.retrievalUrl !== undefined)
+    fail("Somente cópias remotas registram URL de obtenção.", 400);
   if (
     !Buffer.isBuffer(bytes) ||
     bytes.length < 5 ||
@@ -191,7 +234,7 @@ export async function importDocument(input: {
     }
     const id = randomUUID();
     const inserted = await client.query(
-      "INSERT INTO source_document(id,title,official_url,kind,year,area,modality,sha256,byte_size,page_count,imported_by,last_editor_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$11) ON CONFLICT(sha256) DO NOTHING RETURNING id",
+      "INSERT INTO source_document(id,title,official_url,kind,year,area,modality,sha256,byte_size,page_count,imported_by,last_editor_id,acquisition_method,retrieval_url) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$11,$12,$13) ON CONFLICT(sha256) DO NOTHING RETURNING id",
       [
         id,
         meta.title,
@@ -204,6 +247,8 @@ export async function importDocument(input: {
         bytes.length,
         input.pageCount,
         input.actorId ?? null,
+        method,
+        retrievalUrl,
       ],
     );
     if (!inserted.rowCount) {

@@ -13,17 +13,21 @@ const previousArchiveDir = process.env.SOURCE_ARCHIVE_DIR;
 const archiveDir = await mkdtemp(path.join(tmpdir(), "enade-sources-test-"));
 process.env.SOURCE_ARCHIVE_DIR = archiveDir;
 const { createApp, db } = await import("../apps/api/src/main.js");
-const { importDocument } = await import("../apps/api/src/source-store.js");
+const { importDocument, validateOfficialUrl, validateMirrorUrl } = await import(
+  "../apps/api/src/source-store.js"
+);
 
 type Actor = { cookie: string; identityId: string };
 type Source = {
   id: string;
   title: string;
   officialUrl: string;
-  kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD";
+  kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD" | "EXAM_MAP";
   year: number;
   area: string;
-  modality: "BACHARELADO" | "LICENCIATURA" | "CST";
+  modality: "BACHARELADO" | "LICENCIATURA" | "CST" | "COMUM";
+  acquisitionMethod?: "DIRECT" | "MIRROR" | "LOCAL";
+  retrievalUrl?: string | null;
   sha256: string;
   byteSize: number;
   pageCount: number;
@@ -275,7 +279,7 @@ async function getSource(id: string, as = author): Promise<Source> {
   return response.json();
 }
 
-async function verify(source: Fixture): Promise<Fixture> {
+async function verify<T extends Source>(source: T): Promise<T> {
   const response = await request(
     `curation/sources/${source.id}/review`,
     reviewer.cookie,
@@ -909,5 +913,79 @@ test("a new final answer-key version preserves historical provenance and feedbac
       [key.id],
     ),
     immutable,
+  );
+});
+
+test("mirror and local imports preserve their acquisition provenance and remain independently reviewable", async () => {
+  const officialUrl =
+    "https://download.inep.gov.br/download/Enade2008_RNP/COMPUTACAO.pdf";
+  const mirror =
+    "https://raw.githubusercontent.com/test/fixture/" +
+    "a".repeat(40) +
+    "/test.pdf";
+  for (const method of ["MIRROR", "LOCAL"] as const) {
+    const imported = await importDocument({
+      title: "Synthetic shared source",
+      officialUrl,
+      kind: "EXAM",
+      year: 2008,
+      area: "Computação — TEST ONLY",
+      modality: "COMUM",
+      pageCount: 1,
+      bytes: Buffer.from("%PDF-1.7\nSYNTHETIC " + randomUUID()),
+      actorId: author.identityId,
+      acquisitionMethod: method,
+      ...(method === "MIRROR" ? { retrievalUrl: mirror } : {}),
+    });
+    sourceIds.add(imported.id);
+    const source = await getSource(imported.id, reviewer);
+    assert.equal(source.acquisitionMethod, method);
+    assert.equal(source.retrievalUrl, method === "MIRROR" ? mirror : null);
+    assert.equal(source.status, "IMPORTED");
+    assert.equal(source.canReview, true);
+    assert.equal((await getSource(imported.id, author)).canReview, false);
+    await assert.rejects(
+      db.query(
+        "UPDATE source_document SET acquisition_method=$2,retrieval_url=NULL WHERE id=$1",
+        [source.id, method === "MIRROR" ? "LOCAL" : "DIRECT"],
+      ),
+      { code: "23514" },
+    );
+    if (method === "MIRROR")
+      await assert.rejects(
+        db.query("UPDATE source_document SET retrieval_url=$2 WHERE id=$1", [
+          source.id,
+          mirror.replace("a".repeat(40), "b".repeat(40)),
+        ]),
+        { code: "23514" },
+      );
+    assert.equal((await verify(source)).status, "VERIFIED");
+  }
+  const map = await fixture({ kind: "EXAM_MAP" });
+  assert.equal((await verify(map)).kind, "EXAM_MAP");
+});
+
+test("source URLs reject unpinned mirrors and preserve HTTPS for historical Inep paths", () => {
+  for (const url of [
+    "https://download.inep.gov.br/download/enade/2005/provas/COMPUTACAO.pdf",
+    "https://download.inep.gov.br/download/Enade2008_RNP/COMPUTACAO.pdf",
+    "https://download.inep.gov.br/educacao_superior/enade/provas/2011/COMPUTACAO.pdf",
+    "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_1.pdf",
+  ])
+    assert.equal(validateOfficialUrl(url), url);
+  const mirror =
+    "https://raw.githubusercontent.com/test/fixture/" +
+    "a".repeat(40) +
+    "/test.pdf";
+  assert.equal(validateMirrorUrl(mirror), mirror);
+  for (const url of [
+    mirror.replace("a".repeat(40), "main"),
+    mirror + "?token=x",
+    mirror.replace("https:", "http:"),
+    mirror.replace("raw.githubusercontent.com", "evil.example"),
+  ])
+    assert.throws(() => validateMirrorUrl(url));
+  assert.throws(() =>
+    validateOfficialUrl("https://download.inep.gov.br/unrelated/file.pdf"),
   );
 });
