@@ -55,6 +55,31 @@ npm run import:sources -- --directory enade-pdfs
 
 O comando usa os metadados do catálogo, revalida PDF/páginas/hash e importa como LOCAL. Caminhos que escapam da pasta, inclusive por symlink, são rejeitados. Arquivos ausentes ou divergentes são reportados; o processo não marca a fila como completa. `--years` permite selecionar edições explicitamente; a omissão inclui todas. Importações idênticas preservam o registro e sua forma de obtenção original.
 
+## Análise do conteúdo obtido (26/10/2026)
+
+Os 27 PDFs históricos foram baixados de novo com `download-sources.mjs --source mirror` e todos conferiram com o SHA-256 do catálogo. Análise automática com `pdftotext`/`pdfimages`; serve para planejar a transcrição, não substitui a conferência humana.
+
+- **Texto extraível em todos os documentos** (são PDFs digitais, não digitalizações). Transcrição pode partir do texto do próprio PDF, com revisão.
+- **Imagens em bitmap são poucas**: 3 a 6 por prova recente. Diagramas vetoriais podem existir e só aparecem na revisão.
+- **Gabaritos**: 2014, 2017 e 2021 se declaram *definitivos*; 2005, 2008 e 2011 não trazem essa palavra e exigem confirmação antes de uso como gabarito definitivo.
+
+| Edição | Gabarito | Objetivas no gabarito | Anuladas |
+| --- | --- | ---: | --- |
+| 2005 (comum) | sem "definitivo" | 54 itens de vários cursos | — |
+| 2008 (comum) | sem "definitivo" | discursivas misturadas na numeração | — |
+| 2011 (comum) | sem "definitivo" | 50 | 13, 44 |
+| 2014 Bacharelado | definitivo | 35 | nenhuma |
+| 2017 Bacharelado | definitivo | 35 | nenhuma |
+| 2021 Bacharelado | definitivo | 35 | 29, 33 |
+
+Estrutura das provas recentes: 8 objetivas e 2 discursivas de Formação Geral, 27 objetivas e 3 discursivas do componente específico. Para Bacharelado, 2014, 2017 e 2021 somam **103 objetivas utilizáveis** (105 menos 2 anuladas) e 15 discursivas; os cadernos de 2005–2011 acrescentam os blocos de Computação após separar os de outros cursos.
+
+### Bacharelado × Licenciatura
+
+A Formação Geral é a mesma para todos os cursos da edição. No componente específico, a comparação de trechos de texto mostrou que boa parte das questões é idêntica: em 2021, as objetivas 10 a 26 e as discursivas 3 e 4 aparecem nas duas provas; só as objetivas 27 a 35 e a discursiva 5 são exclusivas do Bacharelado. As exclusivas da Licenciatura tratam de tecnologia na educação, EaD, AVA e objetos de aprendizagem. Em 2014 e 2017 a extração por colunas foi menos limpa, mas também mostrou itens comuns.
+
+Consequências: para estudantes de Bacharelado, as provas de Licenciatura **não acrescentam questões técnicas novas relevantes**; servem como segunda procedência de itens comuns (registrar as duas fontes na mesma questão, sem duplicar) e como material próprio se o produto atender Licenciatura no futuro. ENADE das Licenciaturas 2024 e PND 2025/2026 são provas docentes; não são prioridade para R1.
+
 ## Revisão editorial ainda necessária
 
 Os cadernos antigos são compartilhados: em 2005/2008 incluem blocos de Ciência da Computação, Engenharia e Sistemas de Informação; 2011 também inclui Licenciatura. O rótulo COMUM preserva esse fato. Não transcrever automaticamente todos os blocos como questões de Ciência da Computação.
