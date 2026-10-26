@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    services:
+      db:
+        # Mesma imagem fixada em compose.yaml.
+        image: postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3
+        env:
+          POSTGRES_USER: enade
+          POSTGRES_PASSWORD: ci-only-disposable
+          POSTGRES_DB: enade
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U enade -d enade"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 30
+    env:
+      CI: "true"
+      # Banco descartável do job; não é credencial de nenhum ambiente real.
+      DATABASE_URL: postgresql://enade:ci-only-disposable@127.0.0.1:5432/enade
+      APP_ORIGIN: http://localhost:4200
+      SOURCE_ARCHIVE_DIR: /tmp/enade-ci-sources
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Ferramentas de PDF usadas pelos importadores
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+      - run: npm ci
+      - name: Auditoria de dependências de produção
+        run: npm audit --omit=dev --audit-level=high
+      - run: npm run db:migrate
+      - run: npm run db:seed
+      - run: npm run build
+      - run: npm test
+      - name: Chromium do Playwright fixado no lockfile
+        run: |
+          npx playwright install --with-deps chromium
+          echo "CHROMIUM_PATH=$(node -e "console.log(require('playwright').chromium.executablePath())")" >> "$GITHUB_ENV"
+      - run: npm run test:e2e
+      - name: Relatório do Playwright em falha
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-results
+          path: test-results/
+          retention-days: 7
+
+  image:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - name: Construir a imagem de produção
+        run: docker build --pull -t enade-cs-platform:ci .
