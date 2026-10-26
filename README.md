@@ -101,7 +101,7 @@ Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de 
 
 Build e testes foram executados no ambiente de onboarding: 47 testes API/PostgreSQL/utilitários e 18 testes Chromium, incluindo downloads com TLS, redirecionamentos, cópias locais/compartilhadas, quarentena e caminhos de pacotes, caderno de erros, contagem por questão/versão, ordenação de gravações concorrentes, paginação, fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
-Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web podem ser encerradas com Ctrl+C. O build da API pode ser iniciado na raiz com `node dist/api/serve.js`; o build web fica em `dist/web/browser`. Servir esse build em produção exige HTTPS, proxy, gestão e recuperação de contas, limites operacionais e demais medidas descritas nos documentos.
+Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web podem ser encerradas com Ctrl+C. Produção usa a imagem do `Dockerfile`, em que a API serve também a aplicação web; configuração, checklist de segurança e escolha de provedor estão em [deploy e segurança](docs/DEPLOY.md). O CI do GitHub roda auditoria de dependências, build, `npm test`, E2E e o build da imagem em cada PR.
 
 ## Documentação e próximos incrementos
 
@@ -114,6 +114,7 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Caderno de erros e contagens](docs/ADR-005-error-notebook.md)
 - [Cópias, arquivos locais e cadernos compartilhados](docs/ADR-006-source-acquisition.md)
 - [Contrato da API](docs/API.md)
+- [Deploy e segurança](docs/DEPLOY.md) e [decisão de hospedagem](docs/ADR-008-deployment.md)
 - [Engenharia e validação](docs/ENGINEERING-AND-DELIVERY.md)
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
 - [Colaboração entre agentes](docs/COLLABORATION.md), [quadro de trabalho](docs/WORKBOARD.md) e [plano de design e motion](docs/DESIGN-QUALITY.md)
