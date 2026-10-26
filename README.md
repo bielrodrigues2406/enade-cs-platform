@@ -116,5 +116,6 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Contrato da API](docs/API.md)
 - [Engenharia e validação](docs/ENGINEERING-AND-DELIVERY.md)
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
+- [Colaboração entre agentes](docs/COLLABORATION.md), [quadro de trabalho](docs/WORKBOARD.md) e [plano de design e motion](docs/DESIGN-QUALITY.md)
 
 Próxima entrega: transcrição e revisão humana do lote oficial inicial, incluindo imagens e itens anulados quando necessário. O registro de documentos e o fluxo de publicação oficial estão disponíveis; nenhum item oficial foi publicado automaticamente. Repetição espaçada, plano de estudos e tendências ainda não estão implementados. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
