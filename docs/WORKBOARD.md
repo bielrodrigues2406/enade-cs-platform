@@ -53,7 +53,7 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | --- | --- | --- |
 | D1 | Onde hospedar R1 (provedor, domínio, PostgreSQL gerenciado) e quem opera backups | Bloqueia DEP-1 |
 | D2 | Provedor de e-mail para confirmação/recuperação de conta, ou lançar R1 sem recuperação (limitação já informada no cadastro) | Escopo de contas em R1 |
-| D3 | Adotar as skills de design-taste recomendadas em DESIGN-QUALITY.md como guia de revisão | DS-1/DS-2 |
+| D3 | ~~Adotar as skills de design-taste~~ — aprovado em 26/10; copiadas para `.claude/skills/` | DS-1/DS-2 |
 | D4 | Agentes podem fazer merge após revisão cruzada, ou o merge é sempre seu | Fluxo de integração |
 | D5 | Quem será a segunda conta de curadoria para conferência independente | Bloqueia CNT-1 |
 

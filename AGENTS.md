@@ -4,6 +4,8 @@
 
 Siga docs/COLLABORATION.md e mantenha docs/WORKBOARD.md atualizado: pegue apenas tarefas da sua trilha, reserve número de migration antes de criar, registre handoff no diário e faça push antes de encerrar a sessão.
 
+Antes de trabalho de interface, leia .claude/skills/README.md e as skills de design listadas ali.
+
 ## Antes de trabalhar
 
 1. Leia README e os documentos relevantes em docs/. Confira o estado atual do código; o planejamento não comprova implementação.
