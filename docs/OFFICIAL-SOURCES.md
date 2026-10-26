@@ -55,6 +55,68 @@ npm run import:sources -- --directory enade-pdfs
 
 O comando usa os metadados do catálogo, revalida PDF/páginas/hash e importa como LOCAL. Caminhos que escapam da pasta, inclusive por symlink, são rejeitados. Arquivos ausentes ou divergentes são reportados; o processo não marca a fila como completa. `--years` permite selecionar edições explicitamente; a omissão inclui todas. Importações idênticas preservam o registro e sua forma de obtenção original.
 
+## Análise do conteúdo obtido (26/10/2026)
+
+Os 27 PDFs históricos foram baixados de novo com `download-sources.mjs --source mirror` e todos conferiram com o SHA-256 do catálogo. Análise automática com `pdftotext`/`pdfimages`; serve para planejar a transcrição, não substitui a conferência humana.
+
+- **Todos os documentos têm camada de texto** (são PDFs digitais, não digitalizações), mas isso não garante texto utilizável: em 2014/2017 há mapeamentos de fonte incorretos que exigem OCR ou transcrição manual. A conferência deve usar a página renderizada.
+- **Imagens em bitmap são poucas**: 3 a 6 por prova recente. Diagramas vetoriais podem existir e só aparecem na revisão.
+- **Gabaritos**: 2014, 2017 e 2021 se declaram *definitivos*; 2005, 2008 e 2011 não trazem essa palavra e exigem confirmação antes de uso como gabarito definitivo.
+
+| Edição | Gabarito | Objetivas no gabarito | Anuladas |
+| --- | --- | ---: | --- |
+| 2005 (comum) | sem "definitivo" | 54 itens de vários cursos | — |
+| 2008 (comum) | sem "definitivo" | discursivas misturadas na numeração | — |
+| 2011 (comum) | sem "definitivo" | 50 | 13, 44 |
+| 2014 Bacharelado | definitivo | 35 | nenhuma |
+| 2017 Bacharelado | definitivo | 35 | nenhuma |
+| 2021 Bacharelado | definitivo | 35 | 29, 33 |
+
+Estrutura das provas recentes: 8 objetivas e 2 discursivas de Formação Geral, 27 objetivas e 3 discursivas do componente específico. Para Bacharelado, 2014, 2017 e 2021 somam **103 objetivas utilizáveis** (105 menos 2 anuladas) e 15 discursivas; os cadernos de 2005–2011 acrescentam os blocos de Computação após separar os de outros cursos.
+
+### Bacharelado × Licenciatura
+
+A Formação Geral é a mesma para todos os cursos da edição. No componente específico, a comparação de trechos de texto mostrou que boa parte das questões é idêntica: em 2021, as objetivas 9 a 26 e as discursivas 3 e 4 aparecem nas duas provas; só as objetivas 27 a 35 e a discursiva 5 são exclusivas do Bacharelado. As exclusivas da Licenciatura tratam de tecnologia na educação, EaD, AVA e objetos de aprendizagem. Em 2014 e 2017 a extração por colunas foi menos limpa, mas também mostrou itens comuns.
+
+Consequências: as provas de Licenciatura não devem ser contadas integralmente como novas questões de Bacharelado. Os itens comuns podem servir como segunda procedência, sem duplicar a questão, e os exclusivos precisam de avaliação de pertinência. ENADE das Licenciaturas 2024 e PND 2025/2026 são provas docentes, identificadas separadamente. Seus **34 PDFs continuam pendentes de aquisição**; o pedido de obter todos os anos permanece no escopo. Priorizar somente Bacharelado no conteúdo de R1 é a proposta D6 do quadro, ainda pendente de Gabriel.
+
+## Extração assistida (CNT-0, etapa 1)
+
+`npm run extract:questions -- --id enade-2021-bacharelado-exam --directory enade-pdfs` lê PDFs já baixados, confere o SHA-256 com o catálogo e grava em `.local/question-drafts/` um JSON e um relatório por prova. **Não grava no banco nem publica.** Cada questão recebe uma situação:
+
+| Situação | Significado |
+| --- | --- |
+| `rascunho` | Objetiva com enunciado e cinco alternativas não vazios, A–E reconhecidas, gabarito definitivo, sem nenhum alerta. Ainda exige conferência com a página original |
+| `revisao-manual` | Objetiva com algum alerta; transcrever a partir do PDF |
+| `discursiva` | Fila própria; o sistema ainda não publica discursivas |
+| `anulada` | Não vira questão de estudo |
+| `sem-gabarito-definitivo` | Gabarito ausente ou não declarado definitivo |
+
+Alertas e por que existem:
+
+- `figura`: tinta fora das caixas de texto na página renderizada (desenhos vetoriais, tabelas com borda, imagens). Contar só imagens bitmap não basta: a maioria das figuras das provas é vetorial.
+- `mencao-a-figura`: o texto cita figura, gráfico, tabela, diagrama, mapa, charge etc.
+- `fonte-de-simbolos` e `caracteres-suspeitos`: símbolos lógicos e matemáticos saem trocados em silêncio (→ vira `®`, ∧ vira `Ù`, ¬ vira `Ø`).
+- `texto-ilegivel`: o PDF entrega números de glifo no lugar de letras ("ĂƉĞŶĂƐ" = "apenas").
+- `enunciado-ausente` e `alternativa-vazia`: marcadores A–E não bastam quando parte do texto não foi extraída.
+- `codigo`, `tabela`, `alternativas`, `versalete`, `referencia-versalete`, `hifenizacao`, `numero-repetido`, `prova-incompleta`.
+
+Respostas diferentes para o mesmo número no gabarito interrompem a extração desse documento, em vez de selecionar silenciosamente a primeira. A detecção de figuras é heurística; a ausência de alertas não representa aprovação editorial.
+
+Ligaduras (fi, fl, ti) extraídas como palavras separadas ("afi rma") são juntadas e listadas em `ligatureJoins` para conferência. A extração termina no questionário de percepção e confere a numeração contra o gabarito: prova incompleta não gera rascunho.
+
+Resultado em 26/10/2026:
+
+| Prova | Itens | Rascunho | Revisão manual | Discursivas | Anuladas | Observação |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 2021 Bacharelado | 40 | 13 | 20 | 5 | 2 | Texto limpo |
+| 2021 Licenciatura | 40 | 18 | 17 | 5 | 0 | Itens comuns ao Bacharelado repetidos |
+| 2017 Bacharelado/Licenciatura | 30 de 40 | 0 | 27 | 3 | 0 | Cabeçalhos de 8 questões e quase todo o texto ilegíveis |
+| 2014 Bacharelado/Licenciatura | 40 | 0 | 35 | 5 | 0 | Texto ilegível |
+| 2005–2011 | — | — | — | — | — | Cadernos de vários cursos: recusados, transcrição manual |
+
+Para 2014 e 2017, o caminho seguinte é OCR da página renderizada, com revisão humana. Na revisão Codex de 26/10/2026, o ambiente tinha Tesseract 5.5.0 com `eng`/`osd`. Um ensaio da página 4 de 2014 Bacharelado, renderizada a 180 DPI, recuperou texto legível com o modelo português [`tesseract-ocr/tessdata_fast`, commit `87416418657359cb625c412a48b6e1d6d41c29bd`](https://github.com/tesseract-ocr/tessdata_fast/tree/87416418657359cb625c412a48b6e1d6d41c29bd), licença Apache-2.0; SHA-256 de `por.traineddata`: `c4932b937207a9514b7514d518b931a99938c02a28a5a5a553f8599ed58b7deb`. O ensaio ainda trocou marcadores romanos e espaçamento. OCR não foi integrado ao extrator e não gera automaticamente candidatos aprovados; cada item continua exigindo confronto com o PDF.
+
 ## Revisão editorial ainda necessária
 
 Os cadernos antigos são compartilhados: em 2005/2008 incluem blocos de Ciência da Computação, Engenharia e Sistemas de Informação; 2011 também inclui Licenciatura. O rótulo COMUM preserva esse fato. Não transcrever automaticamente todos os blocos como questões de Ciência da Computação.
