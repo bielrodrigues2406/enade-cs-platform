@@ -4,7 +4,7 @@ Status: avaliação e plano para DS-1/DS-2/DS-3 (ver [WORKBOARD.md](WORKBOARD.md
 
 ## 1. Diagnóstico da interface atual
 
-Leitura de `apps/web/src/styles.css` (1257 linhas) e do shell em `apps/web/src/main.ts`. A UI renderizada ainda não foi inspecionada nesta análise; a captura de referência é o primeiro passo de DS-1.
+Leitura de `apps/web/src/styles.css` (1257 linhas) e do shell em `apps/web/src/main.ts`. Capturas de referência feitas em 26/10/2026 (390 e 1440 px) antes de DS-1.
 
 - Tipografia: `Arial, Helvetica` em tudo e `monospace` genérico para código. Não há escala tipográfica definida; tamanhos estão espalhados pelos seletores.
 - Tokens: 8 variáveis de cor (`--paper`, `--ink`, `--primary`…), mas cerca de 10 cores hexadecimais soltas e nenhum token de espaçamento, raio, sombra, tamanho de fonte ou movimento.
@@ -52,6 +52,25 @@ Resultado: um sistema de tokens que todas as telas usam, sem mudar fluxos nem te
 11. Estados de botão e campo: hover, pressionado, desabilitado, carregando e foco como tokens, não `filter`.
 12. Movimento: tokens de mola e duração da seção 4, com versão reduzida para `prefers-reduced-motion`.
 13. Validação: E2E existentes passam; inspeção manual por teclado e em 320/390/768/1440 px; capturas depois comparadas com as de referência.
+
+## 3.1 Padrões de interface gerada por IA que não usamos
+
+Pedido de Gabriel em 26/10/2026. Lista de revisão para todo PR de interface; a pesquisa está nas fontes ao final. Os guias são opinião de design da comunidade, não estudo controlado.
+
+| Padrão | Regra no projeto |
+| --- | --- |
+| Cartão arredondado com borda colorida de um lado (menu ativo, alerta, feedback) | Proibido. Estado ativo por peso, cor e marcador tipográfico; separação por espaço, mudança de fundo ou fio completo |
+| Rótulo em caixa alta acima de todo título ("eyebrow" + H1 + subtítulo) | Só quando informa algo (ex.: "QUESTÃO OFICIAL · VERSÃO 2", "RESPOSTA SALVA"); nunca como slogan |
+| Frases motivacionais no lugar de orientação | Proibido (UX-DESIGN-SPEC §3) |
+| Gradiente roxo/azul, índigo padrão, glassmorphism, blobs | Proibido; acento único petróleo |
+| Grade de cartões iguais, cartão dentro de cartão | Listas e linhas editoriais para conteúdo repetido |
+| Emoji como ícone | Ícones SVG de traço único com `currentColor`, só quando têm função |
+| Métricas e números inventados | Proibido; contagens sempre com numerador, denominador e período |
+| Inter/Arial como fonte única | Figtree (interface) + Source Serif 4 (leitura) + JetBrains Mono (código e índices) |
+| Acento usado em tudo | No máximo uma ação primária por região |
+| Sombra em toda superfície | Sombra só para camada sobreposta (`--shadow-raised`) |
+
+Escolhas próprias do produto (os ~20% de identidade): enunciado e explicação em serifa de leitura; navegação como índice numerado do caderno; marcador da alternativa que vira o próprio indicador de seleção; feedback como seção editorial abaixo de um fio, não como cartão.
 
 ## 4. Motion: molas e transições com padrão alto
 
@@ -135,6 +154,10 @@ Curadoria de 18 URLs primárias trazida por Gabriel em 26/10/2026. As referênci
 Separação espaço × efeito (Material): molas com acomodação para movimento espacial (posição, escala); curvas sem overshoot para efeitos (opacidade, cor).
 
 ## Fontes consultadas
+
+- [open-design: anti-AI-slop rules](https://github.com/nexu-io/open-design/blob/main/craft/anti-ai-slop.md)
+- [Impeccable: anti-patterns](https://mintlify.wiki/pbakaus/impeccable/concepts/anti-patterns) (lido pelo resumo da busca; o acesso direto foi bloqueado pela rede do ambiente)
+- [Apple WWDC23 — Animate with springs](https://developer.apple.com/videos/play/wwdc2023/10158/) e [WWDC18 — Designing Fluid Interfaces](https://developer.apple.com/videos/play/wwdc2018/803/) (transcrições lidas)
 
 - [Angular: migração de @angular/animations para CSS nativo](https://angular.dev/guide/animations/migration)
 - [Chrome for Developers: função de easing `linear()`](https://developer.chrome.com/docs/css-ui/css-linear-easing-function)

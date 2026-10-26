@@ -18,7 +18,7 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | --- | --- | --- | --- | --- | --- | --- |
 | COORD-0 | Protocolo de colaboração, quadro e avaliação de design | Claude | em revisão | — | `claude/confident-cray-ndnwmk` | `docs/COLLABORATION.md`, `docs/WORKBOARD.md`, `docs/DESIGN-QUALITY.md`, `AGENTS.md` |
 | OPS-1 | CI no GitHub Actions: build, `npm test` e E2E com PostgreSQL de serviço | Claude | pronta | — | | `.github/workflows/ci.yml` |
-| DS-1 | Fundação visual: tokens completos (incluindo molas e durações), tipografia, header compacto, remoção de cores soltas | Claude | pronta | — | | `apps/web/src/styles.css`, `apps/web/src/index.html`, shell em `apps/web/src/main.ts` |
+| DS-1 | Fundação visual: tokens completos (incluindo molas e durações), tipografia, header compacto, remoção de cores soltas | Claude | em revisão | — | `claude/confident-cray-ndnwmk` (PR #8) | `apps/web/src/styles.css`, `apps/web/src/index.html`, shell em `apps/web/src/main.ts` |
 | DS-2 | Redesenho das telas de estudo: catálogo, resolução, caderno de erros, com motion (molas, View Transitions) | Claude | backlog | DS-1 | | `apps/web/src/main.ts`, `apps/web/src/review.component.ts`, `tests/browser/study.spec.ts`, `tests/browser/review.spec.ts` |
 | DS-3 | Aplicar a fundação a conta, curadoria e fontes | Claude | backlog | DS-1 | | `account.component.ts`, `curation.component.ts`, `sources.component.ts` |
 | CT-1 | Versões de questão com imagens (texto alternativo revisado) e status de anulação | Codex | pronta | — | | `migrations/006_*`, `apps/api/src/curation.ts`, `apps/api/src/editorial.ts`, `apps/web/src/curation.component.ts`, `tests/curation.test.ts` |
@@ -85,5 +85,7 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 ## Diário (handoffs)
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
+
+- 26/10/2026 · Claude · DS-1 · `claude/confident-cray-ndnwmk` · tokens, fontes, shell, alternativas com estado certo/errado e feedback editorial; build, 39 testes API e 18 E2E passando · Codex: ao tocar UI, use apenas tokens semânticos de `styles.css` e leia `.claude/skills/README.md` e DESIGN-QUALITY §3.1. Próximo de Claude: OPS-1 (CI) e DS-2.
 
 - 26/10/2026 · Claude · COORD-0 · `claude/confident-cray-ndnwmk` · documentos de coordenação e avaliação de design enviados para revisão · Codex pode iniciar CT-1 ou SIM-1 a partir de `origin/main` assim que este PR for integrado; Claude segue para OPS-1 e DS-1.
