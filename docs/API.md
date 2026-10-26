@@ -67,7 +67,7 @@ Todas as rotas exigem papel de curadoria. A importação local usa `npm run impo
 | PUT /curation/sources/:id | `{baseRevision,title,kind,year,area,modality}` | edita IMPORTED/REJECTED, retorna IMPORTED e exige nova conferência; VERIFIED retorna 409 |
 | POST /curation/sources/:id/review | `{baseRevision,decision,note,checklist?}` | VERIFY → VERIFIED ou REJECT → REJECTED; revisão própria 403, estado/revisão divergente 409 |
 
-Metadados: `{id,title,officialUrl,kind,year,area,modality,sha256,byteSize,pageCount,status,revision,canReview,note,isFinal}`. Tipos EXAM/ANSWER_KEY/RESPONSE_STANDARD; modalidades BACHARELADO/LICENCIATURA/CST; título até 200 e área até 120 caracteres; edição de 2004 até o ano atual. URL, hash, tamanho, páginas e identidade do importador são imutáveis. VERIFIED congela também os metadados editoriais. Parecer tem 10–2000 caracteres. Identidades privadas de importação/revisão não são retornadas.
+Metadados: `{id,title,officialUrl,kind,year,area,modality,sha256,byteSize,pageCount,status,revision,canReview,note,isFinal,acquisitionMethod,retrievalUrl}`. Tipos EXAM/ANSWER_KEY/RESPONSE_STANDARD/EXAM_MAP; modalidades BACHARELADO/LICENCIATURA/CST/COMUM; título até 200 e área até 120 caracteres; edição de 2004 até o ano atual. URL, hash, tamanho, páginas e identidade do importador são imutáveis. VERIFIED congela também os metadados editoriais. Parecer tem 10–2000 caracteres. Identidades privadas de importação/revisão não são retornadas.
 
 VERIFY exige checklist `{origin:true,edition:true,integrity:true}` e, para ANSWER_KEY, `final:true`. A pessoa importadora e a última editora não podem conferir a própria fonte; importação administrativa sem ator não simula revisão. As escritas serializam sessão, papel e fonte, registrando eventos. Arquivo faltante ou alterado bloqueia conferência e download (409). Reimportação idêntica recupera o arquivo sem alterar o estado de uma fonte existente. Consulte ADR 004 para limites de armazenamento e operação.
 
@@ -95,3 +95,10 @@ Os números são inteiros e representam questões lógicas distintas, consideran
 Resumo e assuntos incluem todo o histórico elegível da pessoa. `total` e `items` incluem apenas respostas incorretas no assunto filtrado, ordenadas por horário crescente e ID. Contagens e página usam o mesmo snapshot de consulta; mudanças de respostas podem alterar a paginação em leituras seguintes. Não depende do limite de 50 itens do catálogo público.
 
 `id` identifica a versão respondida; `questionId`, a questão lógica. `currentVersionId` permite informar uma publicação mais recente sem substituir o gabarito histórico. O DTO não inclui alternativas, explicação ou alternativa correta; a resolução e a alteração usam as rotas de estudo existentes. Corrigir uma resposta só retira o item após PUT confirmado. Veja ADR 005 para limites de interpretação e concorrência.
+
+
+## Obtenção de documentos
+
+A migration 006 mantém o contrato de revisão e acrescenta, somente no DTO de curadoria, `acquisitionMethod:DIRECT|MIRROR|LOCAL` e `retrievalUrl:string|null`. MIRROR identifica uma cópia HTTPS em raw.githubusercontent.com fixada em commit completo. LOCAL identifica arquivo recebido localmente, sem afirmar download direto. Esses campos são imutáveis, assim como URL oficial e hash; não são alteráveis pelo PUT de metadados. Os DTOs públicos de estudo continuam limitados à referência da fonte, sem novas informações de gabarito antes da resposta.
+
+COMUM representa caderno compartilhado e exige a mesma modalidade entre prova/gabarito. EXAM_MAP pode ser conferido como documento, mas não substitui EXAM ou ANSWER_KEY no vínculo da questão. Publicação e conferência independente continuam exigidas. O arquivo local passa por `pdfinfo` e hash no CLI; não há endpoint de upload ou de importação pública. Veja ADR 006.

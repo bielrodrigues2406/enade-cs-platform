@@ -13,7 +13,8 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Curadoria de questões autorais: rascunho, revisão por outra pessoa, devolução, publicação e nova versão.
 - Versões publicadas e feedback histórico preservados; conflitos não sobrescrevem alterações.
 - Caderno de erros com filtro por assunto, paginação e nova resolução; resumo por questão distinta, sem multiplicar contagens por edições ou versões.
-- Registro de PDFs oficiais por ferramenta local, arquivo com SHA-256 e conferência independente na seção Fontes.
+- Registro de PDFs por download oficial, cópia pública fixada em commit ou arquivo local, com SHA-256 e conferência independente na seção Fontes.
+- Catálogo de todos os anos localizados: 61 referências; 27 PDFs históricos obtidos/cadastrados e 34 documentos recentes ainda pendentes. Cadernos compartilhados, Licenciatura e PND têm identificação própria.
 - Curadoria de questões oficiais com prova, página, número original e gabarito definitivo conferidos; procedência pública e comentário editorial com crédito próprio.
 - Três questões iniciais **autorais demonstrativas**; nenhuma questão oficial publicada nesta entrega. Conteúdo pendente não é acessível pela API de estudo.
 
@@ -61,7 +62,7 @@ A curadoria aceita questões autorais e oficiais. Questões oficiais exigem font
 
 ## Fontes oficiais
 
-O importador administrativo registra e arquiva o PDF; não extrai nem publica questões. Exemplo para a prova de Computação de 2021:
+O importador administrativo registra e arquiva o PDF; não extrai nem publica questões. Os 27 documentos históricos da cópia catalogada estão em IMPORTED, aguardando conferência. O [inventário de todos os anos](docs/OFFICIAL-SOURCES.md) descreve cobertura, hashes e os 34 arquivos ainda pendentes. Exemplo para a prova de Computação de 2021:
 
 ```sh
 npm run import:source -- \
@@ -70,9 +71,19 @@ npm run import:source -- \
   --modality BACHARELADO --title 'ENADE 2021 · Ciência da Computação · Prova'
 ```
 
+`--mirror-url <url-fixada-em-commit>` obtém uma cópia pública preservando a referência oficial. `--file <caminho>` recebe arquivo local; `--sha256 <hash>` exige correspondência. Não combine mirror e file. A forma de obtenção fica registrada e não é aprovação de procedência. `COMUM` identifica os cadernos compartilhados; `EXAM_MAP`, mapas que não são gabaritos.
+
 `--actor <identity-uuid>` atribui a importação a uma conta de curadoria existente. Sem ele, o evento é administrativo, sem identidade de revisão humana. O registro nasce IMPORTED; outro curador confere origem, edição e integridade na seção Fontes. Para gabarito, também confirma que é definitivo. Fontes conferidas são imutáveis; uma correção documental recebe novo arquivo/hash. Reimportar o mesmo PDF preserva o registro e restaura um arquivo ausente/corrompido.
 
 Arquivos ficam em `.local/sources/<sha256>.pdf`, ignorados pelo Git. `SOURCE_ARCHIVE_DIR` permite configurar armazenamento persistente fora do checkout. Preserve o arquivo junto ao banco em backups; a publicação verifica novamente seu hash. O download arquivado exige papel de curadoria. A fonte oficial pública permanece identificada pela URL do Inep. Veja [procedência e limites](docs/ADR-004-official-sources.md) e o [inventário](docs/OFFICIAL-SOURCES.md).
+
+Para baixar todos os documentos no PC (sem banco ou npm install):
+
+```sh
+node scripts/download-sources.mjs
+```
+
+Requer Node 24 e curl. O padrão inclui todos os anos/famílias do catálogo, cria pastas por ano e um recibo; não substitui arquivos existentes. Após transportar os arquivos para o ambiente, `npm run import:sources -- --directory enade-pdfs` importa os PDFs locais e reporta ausências/falhas. Veja o inventário para retomada, cópias históricas, quarentena e limites.
 
 ## Validação
 
@@ -88,7 +99,7 @@ Neste ambiente, execute as suítes API e E2E em sequência: a execução simult�
 
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build e testes foram executados no ambiente de onboarding: 39 testes API/PostgreSQL e 18 testes Chromium, incluindo caderno de erros, contagem por questão/versão, ordenação de gravações concorrentes, paginação, fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build e testes foram executados no ambiente de onboarding: 47 testes API/PostgreSQL/utilitários e 18 testes Chromium, incluindo downloads com TLS, redirecionamentos, cópias locais/compartilhadas, quarentena e caminhos de pacotes, caderno de erros, contagem por questão/versão, ordenação de gravações concorrentes, paginação, fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
 Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web podem ser encerradas com Ctrl+C. O build da API pode ser iniciado na raiz com `node dist/api/serve.js`; o build web fica em `dist/web/browser`. Servir esse build em produção exige HTTPS, proxy, gestão e recuperação de contas, limites operacionais e demais medidas descritas nos documentos.
 
@@ -101,6 +112,7 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Curadoria e versões](docs/ADR-003-editorial-versions.md)
 - [Fontes oficiais e procedência](docs/ADR-004-official-sources.md) e [inventário inicial](docs/OFFICIAL-SOURCES.md)
 - [Caderno de erros e contagens](docs/ADR-005-error-notebook.md)
+- [Cópias, arquivos locais e cadernos compartilhados](docs/ADR-006-source-acquisition.md)
 - [Contrato da API](docs/API.md)
 - [Engenharia e validação](docs/ENGINEERING-AND-DELIVERY.md)
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
