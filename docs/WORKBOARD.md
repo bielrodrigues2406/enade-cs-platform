@@ -17,7 +17,7 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | ID | Tarefa | Dono | Status | Depende de | Branch / PR | Arquivos principais |
 | --- | --- | --- | --- | --- | --- | --- |
 | COORD-0 | Protocolo de colaboração, quadro e avaliação de design | Claude | entregue | — | [#7](https://github.com/bielrodrigues2406/enade-cs-platform/pull/7), `59425c0` | `docs/COLLABORATION.md`, `docs/WORKBOARD.md`, `docs/DESIGN-QUALITY.md`, `AGENTS.md` |
-| SRC-1 | Aquisição dos PDFs de todos os anos, cópias fixadas, catálogo e importação offline (pedido direto de Gabriel, iniciado antes deste quadro) | Codex | em andamento | — | `codex/feat-source-bundles` | `migrations/006_source_acquisition.sql`, `data/official-sources.json`, importadores, fontes e testes |
+| SRC-1 | Aquisição dos PDFs de todos os anos, cópias fixadas, catálogo e importação offline (pedido direto de Gabriel, iniciado antes deste quadro) | Codex | em revisão | — | [#9](https://github.com/bielrodrigues2406/enade-cs-platform/pull/9), `codex/feat-source-bundles` | `migrations/006_source_acquisition.sql`, `data/official-sources.json`, importadores, fontes e testes |
 | OPS-1 | CI no GitHub Actions: build, `npm test` e E2E com PostgreSQL de serviço | Claude | pronta | — | | `.github/workflows/ci.yml` |
 | DS-1 | Fundação visual: tokens completos (incluindo molas e durações), tipografia, header compacto, remoção de cores soltas | Claude | pronta | — | | `apps/web/src/styles.css`, `apps/web/src/index.html`, shell em `apps/web/src/main.ts` |
 | DS-2 | Redesenho das telas de estudo: catálogo, resolução, caderno de erros, com motion (molas, View Transitions) | Claude | backlog | DS-1 | | `apps/web/src/main.ts`, `apps/web/src/review.component.ts`, `tests/browser/study.spec.ts`, `tests/browser/review.spec.ts` |
@@ -33,6 +33,8 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | REV-1 | Repetição espaçada no caderno de erros | — | backlog | PRG-1 | | |
 
 ### Notas de coordenação
+
+- **Integração SRC-1:** Gabriel já autorizou nesta sessão abrir PR e fazer merge preservando commits, após validação/revisão. D4 permanece como decisão geral das demais trilhas. A revisão independente solicitada aqui é de agente Codex; não será apresentada como revisão da trilha Claude nem como revisão editorial humana.
 
 - **SRC-1 × CT-1/SIM-1:** a aquisição solicitada por Gabriel já tinha a migration 006 criada/aplicada antes do protocolo. CT-1 e SIM-1 continuam prontas, com reservas ajustadas para 007/008; SIM-1 usa ADR-007. Nenhuma migration aplicada foi renomeada. SRC-1 não transcreve nem aprova questões; CNT-1 e D5 permanecem humanos. A branch foi ajustada ao prefixo `codex/`; as únicas mudanças do shell são o rótulo de edição e o nome de caderno compartilhado.
 
@@ -63,6 +65,6 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
 
-- 26/10/2026 · Codex · SRC-1 · `codex/feat-source-bundles@e4fd969` (conteúdo, antes da atualização de base) · 27 PDFs históricos arquivados/importados, 34 links recentes pendentes; build, 47 testes e 18 E2E passaram · atualização da main somente documental incorporada; publicando PR e solicitando revisão independente. Nenhuma revisão humana/editorial foi simulada.
+- 26/10/2026 · Codex · SRC-1 · `codex/feat-source-bundles@e4fd969` (conteúdo, antes da atualização de base) · 27 PDFs históricos arquivados/importados, 34 links recentes pendentes; build, 47 testes e 18 E2E passaram · atualização da main somente documental incorporada; PR [#9](https://github.com/bielrodrigues2406/enade-cs-platform/pull/9) aberto, revisão independente solicitada; os cinco commits de implementação foram preservados e as atualizações de coordenação foram separadas. Nenhuma revisão humana/editorial foi simulada.
 
 - 26/10/2026 · Claude · COORD-0 · `claude/confident-cray-ndnwmk` · documentos de coordenação e avaliação de design enviados para revisão · Codex pode iniciar CT-1 ou SIM-1 a partir de `origin/main` assim que este PR for integrado; Claude segue para OPS-1 e DS-1.
