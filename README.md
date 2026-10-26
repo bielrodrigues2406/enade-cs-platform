@@ -18,9 +18,10 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Registro de PDFs por download oficial, cópia pública fixada em commit ou arquivo local, com SHA-256 e conferência independente na seção Fontes.
 - Catálogo de todos os anos localizados: 61 referências; 27 PDFs históricos obtidos/cadastrados e 34 documentos recentes ainda pendentes. Cadernos compartilhados, Licenciatura e PND têm identificação própria.
 - Curadoria de questões oficiais com prova, página, número original e gabarito definitivo conferidos; procedência pública e comentário editorial com crédito próprio.
+- Extração assistida de PDFs catalogados em relatórios locais, com alertas, conferência de numeração e bloqueio de conteúdo ausente/gabarito contraditório; sem gravar ou publicar questões.
 - Três questões iniciais **autorais demonstrativas**; nenhuma questão oficial publicada nesta entrega. Conteúdo pendente não é acessível pela API de estudo.
 
-Esta entrega cobre partes dos incrementos A/B e o início de C, não a conclusão deles. Não inclui lote oficial revisado, extração automática de questões de PDF, simulados, IA nem infraestrutura de produção. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
+Esta entrega cobre partes dos incrementos A/B e o início de C, não a conclusão deles. Não inclui lote oficial revisado, OCR integrado, simulados nem IA. A extração assistida descrita no inventário gera relatórios; não substitui a curadoria. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
 
 ## Preparação local
 
