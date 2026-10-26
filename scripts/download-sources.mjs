@@ -6,10 +6,13 @@ import {
   rm,
   mkdtemp,
   rename,
+  lstat,
+  realpath,
+  open,
 } from "node:fs/promises";
 import { constants } from "node:fs";
 import { createHash } from "node:crypto";
-import { resolve, join, dirname } from "node:path";
+import { resolve, join, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { downloadPdf, MAX_PDF_BYTES } from "./lib/source-download.mjs";
 
@@ -60,6 +63,75 @@ export function inspectDownloadedBytes(bytes, expected = {}) {
   }
   return { sha256, byteSize: bytes.length };
 }
+async function confinedDirectory(root, name) {
+  const candidate = join(root, name);
+  try {
+    await mkdir(candidate);
+  } catch (error) {
+    if (error.code !== "EEXIST") throw error;
+  }
+  const info = await lstat(candidate);
+  const actual = await realpath(candidate);
+  const prefix = root.endsWith(sep) ? root : root + sep;
+  if (info.isSymbolicLink() || !info.isDirectory() || !actual.startsWith(prefix))
+    throw new Error("Diretório fora da pasta de saída ou definido por symlink.");
+  return actual;
+}
+async function readRegularFile(file, limit = MAX_PDF_BYTES) {
+  const entry = await lstat(file);
+  if (entry.isSymbolicLink())
+    throw new Error("Arquivo definido por symlink não é aceito.");
+  if (!entry.isFile() || entry.size > limit)
+    throw new Error("Arquivo inválido ou acima do limite de tamanho.");
+  const handle = await open(
+    file,
+    constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0),
+  );
+  try {
+    const info = await handle.stat();
+    if (!info.isFile() || info.size > limit)
+      throw new Error("Arquivo inválido ou acima do limite de tamanho.");
+    const bytes = await handle.readFile();
+    if (bytes.length > limit)
+      throw new Error("Arquivo acima do limite de tamanho.");
+    return bytes;
+  } finally {
+    await handle.close();
+  }
+}
+function successfulReceipt(record) {
+  return (
+    [
+      "DOWNLOADED_MATCHED_COPY",
+      "DOWNLOADED_UNREVIEWED",
+      "CACHED_MATCHED_COPY",
+      "CACHED_UNREVIEWED",
+    ].includes(record?.status) && /^[a-f0-9]{64}$/.test(record?.sha256 ?? "")
+  );
+}
+async function storeReceipt(root, receipt, saved) {
+  const temporary = await mkdtemp(join(root, ".receipt-"));
+  try {
+    const file = join(temporary, "report.json");
+    await writeFile(
+      file,
+      JSON.stringify(
+        {
+          schemaVersion: 1,
+          createdAt: new Date().toISOString(),
+          results: [...saved.values()],
+        },
+        null,
+        2,
+      ) + "\n",
+      { flag: "wx", mode: 0o600 },
+    );
+    // Renaming replaces the receipt entry itself, never follows a symlink target.
+    await rename(file, receipt);
+  } finally {
+    await rm(temporary, { recursive: true, force: true });
+  }
+}
 function parse(args) {
   const options = {
     output: resolve("enade-pdfs"),
@@ -90,16 +162,19 @@ export async function downloadCatalog(
   { download = downloadPdf } = {},
 ) {
   const results = [];
-  const receipt = join(options.output, "download-report.json");
+  await mkdir(options.output, { recursive: true });
+  const output = await realpath(options.output);
+  const receipt = join(output, "download-report.json");
   let prior = [];
   try {
-    prior = JSON.parse(await readFile(receipt, "utf8")).results;
+    prior = JSON.parse(
+      (await readRegularFile(receipt, 2 * 1024 * 1024)).toString("utf8"),
+    ).results;
     if (!Array.isArray(prior)) throw new Error("Recibo de download inválido.");
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
   }
   const saved = new Map(prior.map((row) => [row.id, row]));
-  await mkdir(options.output, { recursive: true });
   for (const document of documents) {
     if (options.years && !options.years.has(document.year)) continue;
     if (
@@ -107,8 +182,7 @@ export async function downloadCatalog(
       !/^20\d\d$/.test(String(document.year))
     )
       throw new Error("Identificador ou ano inválido no catálogo.");
-    const relative = `${document.year}/${document.id}.pdf`,
-      destination = join(options.output, relative);
+    const relative = `${document.year}/${document.id}.pdf`;
     const url =
       options.source === "mirror" ? document.mirrorUrl : document.officialUrl;
     const result = {
@@ -125,13 +199,15 @@ export async function downloadCatalog(
           "Não há cópia alternativa catalogada para este documento.",
         );
       validateDownloadUrl(url);
+      const directory = await confinedDirectory(output, String(document.year));
+      const destination = join(directory, document.id + ".pdf");
       try {
-        const existing = await readFile(destination);
+        const existing = await readRegularFile(destination);
         const old = saved.get(document.id);
         const expected = document.sha256
           ? document
-          : old?.requestedUrl === url &&
-              /^[a-f0-9]{64}$/.test(old?.sha256 ?? "") &&
+          : successfulReceipt(old) &&
+              old.requestedUrl === url &&
               old.file === relative
             ? old
             : null;
@@ -141,31 +217,36 @@ export async function downloadCatalog(
           );
         Object.assign(result, inspectDownloadedBytes(existing, expected), {
           status: document.sha256 ? "CACHED_MATCHED_COPY" : "CACHED_UNREVIEWED",
+          ...(old?.downloadUrl ? { downloadUrl: old.downloadUrl } : {}),
         });
       } catch (error) {
         if (error.code !== "ENOENT") throw error;
-        temporary = await mkdtemp(join(options.output, ".download-"));
+        temporary = await mkdtemp(join(output, ".download-"));
         const file = join(temporary, "document.pdf");
         const actualUrl = await download(url, file, validateDownloadUrl);
-        const bytes = await readFile(file);
+        const bytes = await readRegularFile(file);
         try {
           Object.assign(result, inspectDownloadedBytes(bytes, document));
         } catch (error) {
           if (error.sha256) {
-            const quarantine = join(options.output, "quarantine");
-            await mkdir(quarantine, { recursive: true });
+            const quarantine = await confinedDirectory(output, "quarantine");
             const kept = join(quarantine, error.sha256 + ".pdf");
             try {
               await copyFile(file, kept, constants.COPYFILE_EXCL);
             } catch (e) {
               if (e.code !== "EEXIST") throw e;
+              const previous = await readRegularFile(kept);
+              if (
+                createHash("sha256").update(previous).digest("hex") !==
+                error.sha256
+              )
+                throw new Error("Arquivo existente de quarentena divergente.");
             }
             result.quarantineFile = "quarantine/" + error.sha256 + ".pdf";
             result.sha256 = error.sha256;
           }
           throw error;
         }
-        await mkdir(dirname(destination), { recursive: true });
         await copyFile(file, destination, constants.COPYFILE_EXCL);
         result.downloadUrl = actualUrl;
         result.status = document.sha256
@@ -182,20 +263,14 @@ export async function downloadCatalog(
     console.log(
       `${result.status}: ${document.id}${result.message ? " — " + result.message : ""}`,
     );
-    saved.set(result.id, result);
-    await writeFile(
-      receipt + ".tmp",
-      JSON.stringify(
-        {
-          schemaVersion: 1,
-          createdAt: new Date().toISOString(),
-          results: [...saved.values()],
-        },
-        null,
-        2,
-      ) + "\n",
+    const previous = saved.get(result.id);
+    saved.set(
+      result.id,
+      result.status === "FAILED" && successfulReceipt(previous)
+        ? { ...previous, lastAttempt: result }
+        : result,
     );
-    await rename(receipt + ".tmp", receipt);
+    await storeReceipt(output, receipt, saved);
   }
   if (!results.length)
     throw new Error("Nenhum documento catalogado para os anos selecionados.");

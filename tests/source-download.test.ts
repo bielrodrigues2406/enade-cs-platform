@@ -1,7 +1,15 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdtemp, readFile, writeFile, readdir, rm } from "node:fs/promises";
+import {
+  mkdtemp,
+  readFile,
+  writeFile,
+  readdir,
+  rm,
+  mkdir,
+  symlink,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { downloadPdf } from "../scripts/lib/source-download.mjs";
@@ -154,6 +162,107 @@ test("a mismatched downloaded hash is quarantined and never replaces the expecte
       (await readdir(output)).some((name) => name.startsWith(".download-")),
       false,
     );
+  } finally {
+    await rm(output, { recursive: true, force: true });
+  }
+});
+
+test("downloads reject symlink escapes and never follow predictable receipt temporary paths", async () => {
+  const root = await mkdtemp(join(tmpdir(), "source-path-test-"));
+  const output = join(root, "downloads");
+  const outside = join(root, "outside");
+  const document = { id: "path-fixture", year: 2021, officialUrl: url, sha256 };
+  let calls = 0;
+  const download = async (_url, file) => {
+    calls++;
+    await writeFile(file, bytes);
+    return _url;
+  };
+  try {
+    await mkdir(output);
+    await mkdir(outside);
+    const sentinel = join(outside, "preserve.txt");
+    await writeFile(sentinel, "external user data");
+    await symlink(sentinel, join(output, "download-report.json.tmp"));
+    await symlink(outside, join(output, "2021"), "dir");
+    const options = { output, source: "official" };
+    let result = await downloadCatalog(options, [document], { download });
+    assert.equal(result[0].status, "FAILED");
+    assert.equal(calls, 0);
+    assert.deepEqual(await readdir(outside), ["preserve.txt"]);
+    assert.equal(await readFile(sentinel, "utf8"), "external user data");
+
+    await rm(join(output, "2021"));
+    await mkdir(join(output, "2021"));
+    await symlink(sentinel, join(output, "2021/path-fixture.pdf"));
+    result = await downloadCatalog(options, [document], { download });
+    assert.equal(result[0].status, "FAILED");
+    assert.equal(calls, 0);
+    await rm(join(output, "2021/path-fixture.pdf"));
+    await symlink(outside, join(output, "quarantine"), "dir");
+    result = await downloadCatalog(
+      options,
+      [{ ...document, sha256: "0".repeat(64) }],
+      { download },
+    );
+    assert.equal(result[0].status, "FAILED");
+    assert.deepEqual(await readdir(outside), ["preserve.txt"]);
+
+    await rm(join(output, "download-report.json"));
+    await symlink(sentinel, join(output, "download-report.json"));
+    await assert.rejects(
+      downloadCatalog(options, [document], { download }), /symlink/,
+    );
+    assert.equal(await readFile(sentinel, "utf8"), "external user data");
+    assert.equal(
+      (await readdir(output)).some((name) => /^\.(download|receipt)-/.test(name)),
+      false,
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("failed attempts preserve successful receipts so unreviewed downloads can resume after restoration", async () => {
+  const output = await mkdtemp(join(tmpdir(), "source-receipt-test-"));
+  const document = {
+    id: "unreviewed-fixture", year: 2024, officialUrl: url, sha256: null,
+  };
+  const options = { output, source: "official" };
+  let calls = 0;
+  const download = async (_url, file) => {
+    calls++;
+    await writeFile(file, bytes);
+    return _url;
+  };
+  try {
+    const first = await downloadCatalog(options, [document], { download });
+    assert.equal(first[0].status, "DOWNLOADED_UNREVIEWED");
+    const receiptFile = join(output, "download-report.json");
+    const successful = JSON.parse(await readFile(receiptFile, "utf8")).results[0];
+    const failed = await downloadCatalog(
+      { ...options, source: "mirror" }, [document], { download },
+    );
+    assert.equal(failed[0].status, "FAILED");
+    let saved = JSON.parse(await readFile(receiptFile, "utf8")).results[0];
+    const { lastAttempt, ...preserved } = saved;
+    assert.deepEqual(preserved, successful);
+    assert.equal(lastAttempt.status, "FAILED");
+    assert.equal(lastAttempt.message, failed[0].message);
+
+    const file = join(output, "2024/unreviewed-fixture.pdf");
+    await writeFile(file, "%PDF-1.7\nchanged user bytes\n");
+    const corrupt = await downloadCatalog(options, [document], { download });
+    assert.equal(corrupt[0].status, "FAILED");
+    saved = JSON.parse(await readFile(receiptFile, "utf8")).results[0];
+    assert.equal(saved.sha256, sha256);
+    assert.equal(saved.status, "DOWNLOADED_UNREVIEWED");
+    assert.equal(saved.lastAttempt.status, "FAILED");
+    await writeFile(file, bytes);
+    const resumed = await downloadCatalog(options, [document], { download });
+    assert.equal(resumed[0].status, "CACHED_UNREVIEWED");
+    assert.equal(resumed[0].downloadUrl, url);
+    assert.equal(calls, 1);
   } finally {
     await rm(output, { recursive: true, force: true });
   }
