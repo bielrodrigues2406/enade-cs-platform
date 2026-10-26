@@ -345,3 +345,39 @@ test("a late review response cannot reveal account history after logout in anoth
     await tab.close();
   }
 });
+
+test("the topic table filters the notebook to one topic with honest counts", async ({
+  page,
+  context,
+}) => {
+  await page.goto("/");
+  await expect(
+    page.getByRole("heading", { name: "Banco de questões", exact: true }),
+  ).toBeVisible();
+  await track(context);
+  for (const [question, option] of [
+    ["demo-network-v1", "demo-network-v1-1"],
+    ["demo-search-v1", "demo-search-v1-1"],
+  ])
+    expect(
+      (
+        await context.request.put(`/api/questions/${question}/answer`, {
+          data: { optionId: option, baseRevision: 0 },
+        })
+      ).status(),
+    ).toBe(200);
+  await review(page);
+  const table = page.getByRole("table", { name: /por assunto/ });
+  await expect(table.getByRole("row", { name: /Redes/ })).toContainText("1");
+  await table
+    .getByRole("button", { name: "Retomar assunto: Redes", exact: true })
+    .click();
+  await expect(page.getByLabel("Assunto para retomar")).toHaveValue("Redes");
+  await expect(page.locator(".review-list > li")).toHaveCount(1);
+  await expect(
+    page.getByRole("button", {
+      name: "Tentar novamente: Entrega confiável de um fluxo",
+      exact: true,
+    }),
+  ).toBeVisible();
+});

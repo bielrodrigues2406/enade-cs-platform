@@ -70,6 +70,50 @@ export type ReviewPosition = { topic: string; offset: number };
         </p>
       </section>
     }
+    @if (notebook(); as data) {
+      @if (data.topics.length > 1) {
+        <section class="review-topics" aria-labelledby="review-topics-title">
+          <h2 id="review-topics-title">Por assunto</h2>
+          <table>
+            <caption class="visually-hidden">
+              Questões a retomar e respondidas por assunto, pela última resposta
+              salva
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Assunto</th>
+                <th scope="col">A retomar</th>
+                <th scope="col">Respondidas</th>
+                <th scope="col"><span class="visually-hidden">Ação</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of data.topics; track row.topic) {
+                <tr [class.is-current]="row.topic === topic">
+                  <th scope="row">{{ row.topic }}</th>
+                  <td>{{ row.incorrect }}</td>
+                  <td>{{ row.answered }}</td>
+                  <td>
+                    @if (row.incorrect) {
+                      <button
+                        class="text-button"
+                        (click)="focusTopic(row.topic)"
+                        [disabled]="loading() || opening"
+                        [attr.aria-label]="'Retomar assunto: ' + row.topic"
+                      >
+                        Retomar
+                      </button>
+                    } @else {
+                      <span class="muted">Sem erros</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </section>
+      }
+    }
     <form class="review-filters" (ngSubmit)="load(0)">
       <div>
         <label for="review-topic">Assunto para retomar</label>
@@ -253,6 +297,10 @@ export class ReviewComponent {
       dateStyle: "short",
       timeStyle: "short",
     }).format(new Date(value));
+  }
+  focusTopic(topic: string) {
+    this.topic = topic;
+    void this.load(0);
   }
   clearTopic() {
     this.topic = "";

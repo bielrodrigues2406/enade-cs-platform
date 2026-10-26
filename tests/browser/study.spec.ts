@@ -86,3 +86,31 @@ for (const width of [320, 390, 768, 1440]) {
     });
   });
 }
+
+test("feedback leads to the next question of the current selection", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const titles = await page.locator(".question-list h3").allTextContents();
+  expect(titles.length).toBeGreaterThan(1);
+  const [first, second] = titles.map((title) => title.trim());
+  await page
+    .getByRole("button", { name: `Resolver: ${first}`, exact: true })
+    .click();
+  await expect(
+    page.getByText(`Questão 1 de ${titles.length} nesta seleção`),
+  ).toBeVisible();
+  await page.getByRole("radio").first().check();
+  await page.getByRole("button", { name: "Confirmar resposta" }).click();
+  await expect(page.locator(".feedback")).toContainText("RESPOSTA SALVA");
+  await page
+    .getByRole("button", { name: `Próxima questão: ${second}`, exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: second, exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(`Questão 2 de ${titles.length} nesta seleção`),
+  ).toBeVisible();
+  await expect(page.getByRole("radio", { checked: true })).toHaveCount(0);
+});

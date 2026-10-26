@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { ApplicationRef, Component, inject, signal } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
@@ -230,20 +230,31 @@ type Question = Summary & {
               <p class="notice" role="alert">{{ error() }}</p>
             }
           } @else if (!question()) {
-            <section class="page-intro">
-              <h1>Banco de questões</h1>
-              <p>
-                Escolha um assunto. Entenda o raciocínio.<br class="desktop" />
-                Continue a construir sua base.
-              </p>
+            <section class="page-intro catalog-intro">
+              <div>
+                <h1>Banco de questões</h1>
+                <p>
+                  Escolha um assunto. Entenda o raciocínio.<br
+                    class="desktop"
+                  />
+                  Continue a construir sua base.
+                </p>
+              </div>
+              @if (rows().length) {
+                <p class="catalog-progress">
+                  <strong>{{ answeredCount() }}</strong>
+                  <span
+                    >de {{ rows().length }}
+                    {{ rows().length === 1 ? "questão" : "questões" }}
+                    desta seleção com resposta salva</span
+                  >
+                </p>
+              }
             </section>
-            <div class="source-note">
-              <span class="dot" aria-hidden="true"></span>
-              <p>
-                <strong>Origem do conteúdo</strong> · Questões oficiais indicam
-                prova e edição. As questões iniciais autorais são demonstrações.
-              </p>
-            </div>
+            <p class="source-note">
+              <strong>Origem do conteúdo.</strong> Questões oficiais indicam
+              prova e edição. As questões iniciais autorais são demonstrações.
+            </p>
             <form class="filters" (ngSubmit)="loadCatalog()">
               <div>
                 <label for="search">Buscar no caderno</label
@@ -281,8 +292,12 @@ type Question = Summary & {
               }
             </form>
             <div class="list-heading">
-              <h2>Explore o caderno</h2>
-              <span>{{ rows().length }} questões nesta seleção</span>
+              <h2>Questões</h2>
+              <span
+                >{{ rows().length }}
+                {{ rows().length === 1 ? "questão" : "questões" }} nesta
+                seleção</span
+              >
             </div>
             @if (loading()) {
               <p role="status">Buscando questões…</p>
@@ -301,7 +316,7 @@ type Question = Summary & {
             } @else {
               <ol class="question-list">
                 @for (row of rows(); track row.id; let i = $index) {
-                  <li>
+                  <li [class.is-answered]="row.answered">
                     <span class="question-number" aria-hidden="true">{{
                       (i + 1).toString().padStart(2, "0")
                     }}</span>
@@ -312,11 +327,48 @@ type Question = Summary & {
                       </p>
                       <h3>{{ row.title }}</h3>
                       <p class="state">
-                        {{
-                          row.answered
-                            ? "Resposta salva · você pode revisar"
-                            : "Disponível para praticar"
-                        }}
+                        @if (row.answered) {
+                          <svg
+                            class="status-icon"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                          >
+                            <circle
+                              cx="8"
+                              cy="8"
+                              r="6.25"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                            />
+                            <path
+                              d="M5.2 8.3l1.9 1.9 3.7-4.2"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                          Resposta salva · você pode revisar
+                        } @else {
+                          <svg
+                            class="status-icon"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                          >
+                            <circle
+                              cx="8"
+                              cy="8"
+                              r="6.25"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-dasharray="2.5 2.2"
+                            />
+                          </svg>
+                          Disponível para praticar
+                        }
                       </p>
                     </div>
                     <button
@@ -351,17 +403,24 @@ type Question = Summary & {
               }
             </footer>
           } @else {
-            <button
-              class="back text-button"
-              (click)="reviewReturn() ? openReview() : back()"
-              [disabled]="saving() || authBusy()"
-            >
-              {{
-                reviewReturn()
-                  ? "← Voltar ao caderno de erros"
-                  : "← Voltar ao banco"
-              }}
-            </button>
+            <div class="resolution-bar">
+              <button
+                class="back text-button"
+                (click)="reviewReturn() ? openReview() : back()"
+                [disabled]="saving() || authBusy()"
+              >
+                {{
+                  reviewReturn()
+                    ? "← Voltar ao caderno de erros"
+                    : "← Voltar ao banco"
+                }}
+              </button>
+              @if (position(); as at) {
+                <p class="resolution-position">
+                  Questão {{ at.index + 1 }} de {{ at.total }} nesta seleção
+                </p>
+              }
+            </div>
             @if (reviewReturn()) {
               <p class="review-context">
                 {{
@@ -427,7 +486,9 @@ type Question = Summary & {
                   ) {
                     <div
                       class="option-row"
-                      [class.is-correct]="optionOutcome(option.id) === 'correct'"
+                      [class.is-correct]="
+                        optionOutcome(option.id) === 'correct'
+                      "
                       [class.is-wrong]="optionOutcome(option.id) === 'wrong'"
                     >
                       <label
@@ -519,7 +580,11 @@ type Question = Summary & {
                 >
                   <p class="feedback-result">
                     @if (question()!.answer!.correct) {
-                      <svg class="status-icon" viewBox="0 0 16 16" aria-hidden="true">
+                      <svg
+                        class="status-icon"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                      >
                         <path
                           d="M3.5 8.5l3 3 6-7"
                           fill="none"
@@ -531,7 +596,11 @@ type Question = Summary & {
                       </svg>
                       Resposta correta
                     } @else {
-                      <svg class="status-icon" viewBox="0 0 16 16" aria-hidden="true">
+                      <svg
+                        class="status-icon"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                      >
                         <path
                           d="M4.5 4.5l7 7m0-7l-7 7"
                           fill="none"
@@ -575,9 +644,20 @@ type Question = Summary & {
                       · página {{ question()!.answer!.answerKey!.page }}
                     </p>
                   }
-                  <button class="text-button" (click)="editing.set(true)">
-                    Alterar resposta
-                  </button>
+                  <div class="feedback-actions">
+                    @if (nextQuestion(); as next) {
+                      <button
+                        (click)="open(next.id)"
+                        [disabled]="loading()"
+                        [attr.aria-label]="'Próxima questão: ' + next.title"
+                      >
+                        Próxima questão <span aria-hidden="true">→</span>
+                      </button>
+                    }
+                    <button class="text-button" (click)="editing.set(true)">
+                      Alterar resposta
+                    </button>
+                  </div>
                 </section>
               }
             </article>
@@ -612,6 +692,7 @@ class App {
   reviewReturn = signal(false);
   reviewCurrentVersion = signal<string | null>(null);
   reviewPosition: ReviewPosition = { topic: "", offset: 0 };
+  private appRef = inject(ApplicationRef);
   private identityGeneration = 0;
   private identityTransition = 0;
   private requestNumber = 0;
@@ -713,15 +794,17 @@ class App {
   openReview() {
     if (this.saving() || this.authBusy() || this.curationBusy()) return;
     this.requestNumber++;
-    this.loading.set(false);
-    this.question.set(null);
-    this.accountView.set(null);
-    this.curationView.set(false);
-    this.reviewReturn.set(false);
-    this.reviewCurrentVersion.set(null);
-    this.accountNotice.set("");
-    this.error.set("");
-    this.reviewView.set(true);
+    this.swapView(() => {
+      this.loading.set(false);
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewReturn.set(false);
+      this.reviewCurrentVersion.set(null);
+      this.accountNotice.set("");
+      this.error.set("");
+      this.reviewView.set(true);
+    });
     this.focusMain();
   }
   async openReviewQuestion(item: ReviewItem) {
@@ -762,10 +845,15 @@ class App {
     try {
       const q = await this.api<Question>("questions/" + encodeURIComponent(id));
       if (request !== this.requestNumber) return;
-      this.reviewView.set(false);
-      this.question.set(q);
-      this.selected = retry ? "" : q.answer?.optionId || "";
-      this.editing.set(retry);
+      this.swapView(
+        () => {
+          this.reviewView.set(false);
+          this.question.set(q);
+          this.selected = retry ? "" : q.answer?.optionId || "";
+          this.editing.set(retry);
+        },
+        () => request === this.requestNumber,
+      );
       this.focusMain();
     } catch (err) {
       if (request === this.requestNumber) this.error.set(this.message(err));
@@ -803,15 +891,17 @@ class App {
   }
   back() {
     if (this.saving() || this.authBusy() || this.curationBusy()) return;
-    this.curationView.set(false);
-    this.reviewView.set(false);
-    this.reviewReturn.set(false);
-    this.reviewCurrentVersion.set(null);
-    this.accountView.set(null);
-    this.authError.set("");
-    this.accountNotice.set("");
-    this.question.set(null);
-    this.error.set("");
+    this.swapView(() => {
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.reviewCurrentVersion.set(null);
+      this.accountView.set(null);
+      this.authError.set("");
+      this.accountNotice.set("");
+      this.question.set(null);
+      this.error.set("");
+    });
     void this.loadCatalog();
     this.focusMain();
   }
@@ -1012,6 +1102,20 @@ class App {
       q?.options.find((o) => o.id === q.answer?.correctOptionId)?.text || ""
     );
   }
+  answeredCount() {
+    return this.rows().filter((row) => row.answered).length;
+  }
+  // Posição só faz sentido quando a questão veio do catálogo atual.
+  position() {
+    const q = this.question();
+    if (!q || this.reviewReturn()) return null;
+    const index = this.rows().findIndex((row) => row.id === q.id);
+    return index < 0 ? null : { index, total: this.rows().length };
+  }
+  nextQuestion() {
+    const at = this.position();
+    return at ? (this.rows()[at.index + 1] ?? null) : null;
+  }
   optionOutcome(optionId: string): "correct" | "wrong" | null {
     const answer = this.question()?.answer;
     if (!answer || this.editing()) return null;
@@ -1022,6 +1126,30 @@ class App {
     return err instanceof Error
       ? err.message
       : "Falha de conexão. Tente novamente.";
+  }
+  // Troca de tela com View Transition quando disponível. O estado muda dentro
+  // do callback e é renderizado na hora, para o navegador capturar o "depois".
+  // O callback roda um quadro depois: se a identidade ou a requisição mudaram
+  // nesse intervalo, o estado antigo não é aplicado.
+  private swapView(update: () => void, stillCurrent = () => true) {
+    const generation = this.identityGeneration;
+    const apply = () => {
+      if (generation === this.identityGeneration && stillCurrent()) update();
+    };
+    const doc = document as Document & {
+      startViewTransition?: (callback: () => void) => unknown;
+    };
+    if (
+      !doc.startViewTransition ||
+      matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      apply();
+      return;
+    }
+    doc.startViewTransition(() => {
+      apply();
+      this.appRef.tick();
+    });
   }
   private focusMain() {
     setTimeout(() => document.getElementById("content")?.focus(), 0);
