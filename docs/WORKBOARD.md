@@ -19,9 +19,9 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | COORD-0 | Protocolo de colaboração, quadro e avaliação de design | Claude | entregue | — | [#7](https://github.com/bielrodrigues2406/enade-cs-platform/pull/7), `59425c0` | `docs/COLLABORATION.md`, `docs/WORKBOARD.md`, `docs/DESIGN-QUALITY.md`, `AGENTS.md` |
 | SRC-1 | Aquisição dos PDFs de todos os anos, cópias fixadas, catálogo e importação offline (pedido direto de Gabriel, iniciado antes deste quadro) | Codex | entregue | — | [#9](https://github.com/bielrodrigues2406/enade-cs-platform/pull/9), `7a4049c` | `migrations/006_source_acquisition.sql`, `data/official-sources.json`, importadores, fontes e testes |
 | SRC-2 | Confinar caminhos do downloader e preservar recibos válidos após falhas | Codex | entregue | SRC-1 | [#10](https://github.com/bielrodrigues2406/enade-cs-platform/pull/10), `e46c54a` | `scripts/download-sources.mjs`, `tests/source-download.test.ts`, `docs/OFFICIAL-SOURCES.md` |
-| OPS-1 | CI no GitHub Actions: build, `npm test` e E2E com PostgreSQL de serviço | Claude | pronta | — | | `.github/workflows/ci.yml` |
-| DS-1 | Fundação visual: tokens completos (incluindo molas e durações), tipografia, header compacto, remoção de cores soltas | Claude | em revisão | — | `claude/confident-cray-ndnwmk` (PR #8) | `apps/web/src/styles.css`, `apps/web/src/index.html`, shell em `apps/web/src/main.ts` |
-| DS-2 | Redesenho das telas de estudo: catálogo, resolução, caderno de erros, com motion (molas, View Transitions) | Claude | backlog | DS-1 | | `apps/web/src/main.ts`, `apps/web/src/review.component.ts`, `tests/browser/study.spec.ts`, `tests/browser/review.spec.ts` |
+| OPS-1 | CI no GitHub Actions: build, `npm test` e E2E com PostgreSQL de serviço | Claude | em revisão | — | [#11](https://github.com/bielrodrigues2406/enade-cs-platform/pull/11) | `.github/workflows/ci.yml` |
+| DS-1 | Fundação visual: tokens completos (incluindo molas e durações), tipografia, header compacto, remoção de cores soltas | Claude | entregue | — | [#8](https://github.com/bielrodrigues2406/enade-cs-platform/pull/8), `d193493` | `apps/web/src/styles.css`, `apps/web/src/index.html`, shell em `apps/web/src/main.ts` |
+| DS-2 | Redesenho das telas de estudo: catálogo, resolução, caderno de erros, com motion (molas, View Transitions) | Claude | em revisão | DS-1 | [#11](https://github.com/bielrodrigues2406/enade-cs-platform/pull/11) | `apps/web/src/main.ts`, `apps/web/src/review.component.ts`, `tests/browser/study.spec.ts`, `tests/browser/review.spec.ts` |
 | DS-3 | Aplicar a fundação a conta, curadoria e fontes | Claude | backlog | DS-1 | | `account.component.ts`, `curation.component.ts`, `sources.component.ts` |
 | CT-1 | Versões de questão com imagens (texto alternativo revisado) e status de anulação | Codex | pronta | — | | `migrations/007_*`, `apps/api/src/curation.ts`, `apps/api/src/editorial.ts`, `apps/web/src/curation.component.ts`, `tests/curation.test.ts` |
 | SIM-1 | Simulados — banco e API. Dois modos: **completo** no formato da edição (Formação Geral + componente específico, objetivas e discursivas, tempo total da prova; para 2026, 15 objetivas de FG + 30 objetivas e 1 discursiva específicas em 4 h, conforme MASTER-SPEC §2, revalidar antes de publicar) e **por área/assunto** (tamanho e tempo configuráveis). Configuração de formato por edição em dados, não fixa no código; deadline no servidor, autosave com revisão, finalização idempotente, nada de gabarito antes de finalizar (P03, P06–P09) | Codex | pronta | — | | `migrations/008_*`, `apps/api/src/exam.ts`, `tests/exam.test.ts`, `docs/API.md` (seção simulados), ADR-007 |
@@ -30,7 +30,7 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | DIAG-1 | Teste rápido de diagnóstico: poucas questões de assuntos diversos, feedback só no final, resultado aponta os assuntos a priorizar com amostra (acertos/total) explícita e sem prometer proficiência; leva ao caderno/estudo do assunto | Claude | backlog | SIM-1 (modelo de tentativa sem gabarito antecipado), PRG-1, conteúdo cobrindo vários assuntos | | `apps/api/src/diagnostic.ts` ou extensão de `exam.ts` combinada com Codex, `apps/web/src/diagnostic.component.ts`, `tests/diagnostic.test.ts` |
 | ACC-1 | Troca de senha autenticada e encerramento das demais sessões | Codex | backlog | — | | `apps/api/src/auth.ts`, `apps/web/src/account.component.ts`, `tests/accounts.test.ts` |
 | CNT-1 | Lote oficial inicial (ENADE 2021 CC): importar PDFs, conferir com segunda conta, transcrever e revisar até 20 itens | Gabriel | bloqueada | CT-1 para itens com imagem/anulação | | conteúdo no banco, `docs/OFFICIAL-SOURCES.md` |
-| DEP-1 | Deploy de R1: hospedagem, HTTPS, banco gerenciado, backups com restauração ensaiada, variáveis por ambiente | Claude + Gabriel | bloqueada | D1, OPS-1 | | a definir |
+| DEP-1 | Deploy de R1: imagem de produção independente de provedor, API servindo a web, cabeçalhos de segurança, proxy confiável, migrations no deploy, guia de deploy e segurança; conta, banco e domínio no provedor ficam com Gabriel | Claude + Gabriel | em revisão (código); conta no provedor com Gabriel | OPS-1 | [#11](https://github.com/bielrodrigues2406/enade-cs-platform/pull/11) | `Dockerfile`, `apps/api/src/serve.ts`, `apps/api/src/main.ts`, `docs/DEPLOY.md`, ADR-008 |
 | PLN-1 | Plano de estudos inicial com prioridades explicadas | — | backlog | PRG-1 | | |
 | REV-1 | Repetição espaçada no caderno de erros | — | backlog | PRG-1 | | |
 
@@ -61,7 +61,7 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | CNT-2 | Lote de Formação Geral (provas oficiais anteriores, qualquer curso, revisadas) | FG está em todas as provas e é necessária para o simulado completo | CT-1, curadoria humana | R1 |
 | UX-1 | Atalhos de teclado na resolução (A–E seleciona, Enter confirma, N próxima) | Ritmo de estudo mais rápido | DS-2 | R1 |
 | UX-2 | Modo foco: esconde navegação e deixa só enunciado e alternativas | Leitura e concentração em sessões longas | DS-2 | R1 |
-| UX-3 | "Próxima questão" após o feedback, seguindo o filtro atual | Menos cliques entre questões | DS-2 | R1 |
+| UX-3 | "Próxima questão" após o feedback, seguindo o filtro atual — **incluído em DS-2** | Menos cliques entre questões | DS-2 | R1 |
 | PLN-2 | Contagem regressiva até a prova com plano semanal sugerido a partir do diagnóstico | Organização até 29/11 | DIAG-1, PRG-1 | depois de R1 se não couber |
 | REV-2 | Revisão de véspera: lista curta dos conceitos errados com as explicações, para leitura rápida | Revisão final eficiente | caderno de erros | R1 (leve) |
 | SIM-3 | Relatório do simulado com tempo gasto por questão e questões marcadas para revisar | Gestão do tempo na prova real | SIM-1/SIM-2 | junto de SIM-2 |
@@ -83,7 +83,7 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 
 | ID | Decisão | Impacto |
 | --- | --- | --- |
-| D1 | Onde hospedar R1 (provedor, domínio, PostgreSQL gerenciado) e quem opera backups | Bloqueia DEP-1 |
+| D1 | Onde hospedar R1. 26/10: Gabriel escolheu Railway e em seguida apontou o incidente de segredos do Railway (21/10/2026); escolha final pendente após o guia de segurança de DEP-1. O código de deploy fica independente de provedor | Bloqueia publicação de DEP-1 |
 | D2 | Provedor de e-mail para confirmação/recuperação de conta, ou lançar R1 sem recuperação (limitação já informada no cadastro) | Escopo de contas em R1 |
 | D3 | ~~Adotar as skills de design-taste~~ — aprovado em 26/10; copiadas para `.claude/skills/` | DS-1/DS-2 |
 | D4 | Agentes podem fazer merge após revisão cruzada, ou o merge é sempre seu | Fluxo de integração |
@@ -92,6 +92,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 ## Diário (handoffs)
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
+
+- 26/10/2026 · Claude · OPS-1, DEP-1 (código), DS-2 · `claude/confident-cray-ndnwmk` (#11) · CI, imagem de produção com cabeçalhos de segurança, guia `docs/DEPLOY.md` e ADR-008; catálogo com progresso honesto, posição na seleção e "Próxima questão", tabela por assunto no caderno, View Transitions. 51 testes API e 20 E2E · Codex: o CI passa a rodar nos PRs; `multer` fixado em 2.5.0 por `overrides`; telas novas devem trocar de tela por `swapView`. D1 aguarda Gabriel após o incidente do Railway.
 
 - 26/10/2026 · Codex · SRC-2 · `main@e46c54a` · PR [#10](https://github.com/bielrodrigues2406/enade-cs-platform/pull/10) integrado preservando os três commits; revisão independente Codex sem bloqueadores; build, 49 testes API/PostgreSQL/utilitários e 18 Chromium passaram (`npm run test:e2e -- --timeout=60000`, com cache e acesso local configurados). O pacote do PC foi atualizado e executado extraído, sem banco/npm install; 27 PDFs históricos reconferidos por SHA-256 e mantidos MIRROR/IMPORTED, 34 links recentes ainda pendentes. Outra trilha: atualizar a base antes de iniciar CT-1/SIM-1 e respeitar reservas 007/008/ADR-007. Revisão editorial humana permanece pendente.
 

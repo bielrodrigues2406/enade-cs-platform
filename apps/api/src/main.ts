@@ -21,6 +21,8 @@ import { CurationController } from "./curation.js";
 import { SourcesController } from "./sources.js";
 import { ReviewController } from "./review.js";
 import { sourceById, publicExam } from "./source-store.js";
+import { existsSync } from "node:fs";
+import { join, resolve } from "node:path";
 
 async function published(id: string) {
   if (id.length > 100) fail("Questão não encontrada.", 404);
@@ -197,14 +199,75 @@ class StudyController {
   ],
 })
 class AppModule {}
+// Política para a aplicação web servida em produção: nenhum script, estilo
+// ou fonte de terceiros e nenhum conteúdo inline (o build não gera inline).
+const WEB_CSP = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self'",
+  "font-src 'self'",
+  "img-src 'self' data:",
+  "connect-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+].join("; ");
+const API_CSP = "default-src 'none'; frame-ancestors 'none'";
+
+// Erro de configuração cuja mensagem é segura para exibir ao iniciar.
+export class ConfigError extends Error {}
+
+// Número de proxies reversos confiáveis à frente da API. Sem isso, atrás de
+// um proxy todos os acessos teriam o mesmo IP e o limite de login seria global.
+function trustedProxyHops() {
+  const raw = process.env.TRUST_PROXY;
+  if (raw === undefined || raw === "") return 0;
+  const hops = Number(raw);
+  if (!Number.isInteger(hops) || hops < 0 || hops > 3)
+    throw new ConfigError("TRUST_PROXY deve ser um inteiro de 0 a 3.");
+  return hops;
+}
+function webRoot() {
+  const dir = process.env.WEB_DIST;
+  if (!dir) return null;
+  const root = resolve(dir);
+  if (!existsSync(join(root, "index.html")))
+    throw new ConfigError("WEB_DIST não contém index.html.");
+  return root;
+}
 export async function createApp() {
+  const production = process.env.NODE_ENV === "production";
+  if (production && !/^https:\/\/[^/]+$/.test(process.env.APP_ORIGIN || ""))
+    throw new ConfigError(
+      "APP_ORIGIN deve ser a origem HTTPS pública em produção.",
+    );
+  const hops = trustedProxyHops();
+  const web = webRoot();
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger: ["error", "warn"],
     bodyParser: false,
   });
+  if (hops) app.set("trust proxy", hops);
+  app.disable("x-powered-by");
   app.use((req: any, res: any, next: any) => {
+    const api = req.path === "/api" || req.path.startsWith("/api/");
     res.setHeader("X-Content-Type-Options", "nosniff");
-    res.setHeader("Cache-Control", "no-store");
+    res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+    res.setHeader("X-Frame-Options", "DENY");
+    res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+    res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+    res.setHeader(
+      "Permissions-Policy",
+      "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+    );
+    res.setHeader("Content-Security-Policy", api ? API_CSP : WEB_CSP);
+    if (production)
+      res.setHeader(
+        "Strict-Transport-Security",
+        "max-age=31536000; includeSubDomains",
+      );
+    if (api) res.setHeader("Cache-Control", "no-store");
     if (
       !["GET", "HEAD", "OPTIONS"].includes(req.method) &&
       req.headers.origin &&
@@ -228,6 +291,31 @@ export async function createApp() {
       !!req.is("application/json"),
   });
   app.useBodyParser("json", { limit: "16kb" });
+  if (web) {
+    app.useStaticAssets(web, {
+      index: false,
+      setHeaders: (res: any, path: string) =>
+        res.setHeader(
+          "Cache-Control",
+          /-[A-Z0-9]{8}\.(?:js|css|woff2)$/.test(path)
+            ? "public, max-age=31536000, immutable"
+            : "no-cache",
+        ),
+    });
+    // Rotas da aplicação web caem no index.html; arquivos inexistentes e a API
+    // seguem para o 404 normal.
+    app.use((req: any, res: any, next: any) => {
+      if (
+        !["GET", "HEAD"].includes(req.method) ||
+        req.path === "/api" ||
+        req.path.startsWith("/api/") ||
+        /\.[a-z0-9]+$/i.test(req.path)
+      )
+        return next();
+      res.setHeader("Cache-Control", "no-cache");
+      res.sendFile(join(web, "index.html"));
+    });
+  }
   await app.init();
   return app;
 }

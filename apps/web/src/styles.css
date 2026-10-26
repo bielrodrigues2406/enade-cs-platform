@@ -60,11 +60,9 @@
   /* Tipografia: interface, leitura e código */
   --font-ui:
     "Figtree Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --font-reading:
-    "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
+  --font-reading: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
   --font-mono:
-    "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo,
-    monospace;
+    "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --text-xs: 0.75rem;
   --text-sm: 0.8125rem;
   --text-md: 0.875rem;
@@ -108,19 +106,91 @@
    * efeitos (opacidade, cor).
    */
   --spring-snappy: linear(
-    0, 0.0186, 0.0661, 0.1326, 0.2099, 0.2924, 0.3755, 0.4561, 0.5322,
-    0.6024, 0.666, 0.7226, 0.7724, 0.8156, 0.8525, 0.8839, 0.9101, 0.9317,
-    0.9495, 0.9637, 0.9751, 0.984, 0.9909, 0.9961, 0.9999, 1.0025, 1.0043,
-    1.0055, 1.0061, 1.0063, 1.0062, 1.0059, 1.0055, 1.0051, 1.0046, 1.004,
-    1.0035, 1.003, 1.0026, 1.0022, 1
+    0,
+    0.0186,
+    0.0661,
+    0.1326,
+    0.2099,
+    0.2924,
+    0.3755,
+    0.4561,
+    0.5322,
+    0.6024,
+    0.666,
+    0.7226,
+    0.7724,
+    0.8156,
+    0.8525,
+    0.8839,
+    0.9101,
+    0.9317,
+    0.9495,
+    0.9637,
+    0.9751,
+    0.984,
+    0.9909,
+    0.9961,
+    0.9999,
+    1.0025,
+    1.0043,
+    1.0055,
+    1.0061,
+    1.0063,
+    1.0062,
+    1.0059,
+    1.0055,
+    1.0051,
+    1.0046,
+    1.004,
+    1.0035,
+    1.003,
+    1.0026,
+    1.0022,
+    1
   );
   --spring-snappy-duration: 390ms;
   --spring-gentle: linear(
-    0, 0.0197, 0.0686, 0.1348, 0.2099, 0.288, 0.3652, 0.439, 0.5078, 0.5709,
-    0.6279, 0.6788, 0.7238, 0.7634, 0.798, 0.828, 0.8539, 0.8762, 0.8954,
-    0.9117, 0.9256, 0.9375, 0.9475, 0.956, 0.9631, 0.9692, 0.9742, 0.9785,
-    0.9821, 0.9851, 0.9876, 0.9897, 0.9914, 0.9929, 0.9941, 0.9951, 0.9959,
-    0.9966, 0.9972, 0.9977, 1
+    0,
+    0.0197,
+    0.0686,
+    0.1348,
+    0.2099,
+    0.288,
+    0.3652,
+    0.439,
+    0.5078,
+    0.5709,
+    0.6279,
+    0.6788,
+    0.7238,
+    0.7634,
+    0.798,
+    0.828,
+    0.8539,
+    0.8762,
+    0.8954,
+    0.9117,
+    0.9256,
+    0.9375,
+    0.9475,
+    0.956,
+    0.9631,
+    0.9692,
+    0.9742,
+    0.9785,
+    0.9821,
+    0.9851,
+    0.9876,
+    0.9897,
+    0.9914,
+    0.9929,
+    0.9941,
+    0.9951,
+    0.9959,
+    0.9966,
+    0.9972,
+    0.9977,
+    1
   );
   --spring-gentle-duration: 610ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -392,6 +462,11 @@ main {
 }
 main:focus {
   outline: none;
+}
+/* Ao focar o conteúdo depois de trocar de tela, não escondê-lo sob o cabeçalho. */
+main,
+#content {
+  scroll-margin-top: var(--header-height);
 }
 .breadcrumb {
   font-family: var(--font-mono);
@@ -1652,5 +1727,290 @@ textarea {
   }
   .review-pagination button {
     padding-inline: 12px;
+  }
+}
+
+/* DS-2: telas de estudo */
+.catalog-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6) var(--space-10);
+  flex-wrap: wrap;
+}
+.catalog-intro > div > p {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+.catalog-progress {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-1);
+  max-width: 22ch;
+  font-size: var(--text-sm);
+  line-height: 1.35;
+  color: var(--color-text-muted);
+}
+.catalog-progress strong {
+  font-family: var(--font-mono);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+p.source-note {
+  display: block;
+  border-block: 0;
+  padding: 0;
+  margin: 0;
+  max-width: 72ch;
+}
+p.source-note strong {
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
+}
+.filters {
+  margin-top: var(--space-6);
+}
+.question-list li {
+  position: relative;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.question-list li::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(-1 * var(--space-4));
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+.question-list li:hover::before {
+  opacity: 1;
+}
+.question-list {
+  position: relative;
+  z-index: 0;
+}
+.question-list li:hover .question-number {
+  color: var(--color-accent);
+}
+.question-number {
+  transition: color var(--duration-fast) var(--ease-out);
+}
+.state {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.is-answered .state {
+  color: var(--color-success-text);
+}
+
+.resolution-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  flex-wrap: wrap;
+  margin: calc(-1 * var(--space-4)) 0 var(--space-5);
+  max-width: 760px;
+}
+.resolution-bar .back {
+  margin: 0 0 0 calc(-1 * var(--space-2));
+}
+.resolution-position {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.feedback-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-6);
+}
+.feedback-actions .text-button {
+  margin-left: calc(-1 * var(--space-2));
+}
+.feedback-actions button:not(.text-button) span {
+  display: inline-block;
+  margin-left: var(--space-2);
+  transition: transform var(--spring-snappy-duration) var(--spring-snappy);
+}
+.feedback-actions button:not(.text-button):hover:not(:disabled) span {
+  transform: translateX(3px);
+}
+
+.review-summary {
+  padding-block: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+.review-summary strong {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.review-topics {
+  margin-bottom: var(--space-8);
+}
+.review-topics h2 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  margin: 0 0 var(--space-3);
+}
+.review-topics table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-md);
+}
+.review-topics th,
+.review-topics td {
+  text-align: left;
+  padding: var(--space-2) var(--space-3) var(--space-2) 0;
+  border-bottom: var(--border-thin) solid var(--color-border);
+  font-weight: var(--weight-regular);
+}
+.review-topics thead th {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  border-bottom-color: var(--color-border-strong);
+  padding-block: 0 var(--space-2);
+}
+.review-topics tbody th {
+  font-weight: var(--weight-medium);
+}
+.review-topics td:nth-child(2),
+.review-topics td:nth-child(3),
+.review-topics thead th:nth-child(2),
+.review-topics thead th:nth-child(3) {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  width: 7.5rem;
+}
+.review-topics td:nth-child(2),
+.review-topics td:nth-child(3) {
+  font-size: var(--text-sm);
+}
+.review-topics td:last-child {
+  text-align: right;
+  padding-right: 0;
+  width: 1%;
+  white-space: nowrap;
+}
+.review-topics tr.is-current th {
+  font-weight: var(--weight-semibold);
+}
+.review-topics tr.is-current th::after {
+  content: " · filtrando";
+  font-weight: var(--weight-regular);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+.review-topics .text-button {
+  min-height: 36px;
+  padding-block: var(--space-1);
+}
+.results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  border-bottom: var(--border-thin) solid var(--color-border-strong);
+  padding-bottom: var(--space-3);
+}
+.results-heading h2 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  margin: 0;
+}
+.results-heading p {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/*
+ * Troca de tela com View Transitions: cabeçalho e lateral ficam parados;
+ * só o conteúdo principal desliza levemente e cruza a opacidade.
+ */
+header {
+  view-transition-name: app-header;
+}
+aside {
+  view-transition-name: app-aside;
+}
+main {
+  view-transition-name: app-main;
+}
+::view-transition-group(app-main) {
+  animation-duration: var(--spring-gentle-duration);
+}
+::view-transition-old(app-main) {
+  animation: 120ms var(--ease-out) both vt-fade-out;
+}
+::view-transition-new(app-main) {
+  animation:
+    var(--duration-base) var(--ease-out) both vt-fade-in,
+    var(--spring-gentle-duration) var(--spring-gentle) both vt-rise;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-rise {
+  from {
+    transform: translateY(8px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+.review-order {
+  margin: var(--space-2) 0 0;
+}
+@media (max-width: 700px) {
+  .question-list.review-list .outline {
+    margin-left: 0;
+  }
+  .catalog-intro {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .catalog-intro > div > p {
+    font-size: var(--text-base);
+  }
+  .question-list li::before {
+    inset: 0 calc(-1 * var(--space-2));
+  }
+  .resolution-bar {
+    margin-top: calc(-1 * var(--space-3));
+  }
+  .review-topics td:nth-child(2),
+  .review-topics td:nth-child(3),
+  .review-topics thead th:nth-child(2),
+  .review-topics thead th:nth-child(3) {
+    width: auto;
   }
 }
