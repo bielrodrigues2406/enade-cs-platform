@@ -39,7 +39,7 @@ O download não depende de banco nem de `npm install`. Precisa de Node 24 e `cur
 node scripts/download-sources.mjs
 ```
 
-Por padrão tenta os **61 documentos** de todas as edições/famílias catalogadas. Organiza `enade-pdfs/<ano>` e grava `download-report.json`. Não apaga nem substitui arquivos existentes. Reexecutar retoma os downloads usando os hashes conhecidos ou o recibo anterior. Falhas são registradas e o processo retorna código 1, sem anunciar conclusão integral.
+Por padrão tenta os **61 documentos** de todas as edições/famílias catalogadas. Organiza `enade-pdfs/<ano>` e grava `download-report.json`. Não apaga nem substitui arquivos existentes. Reexecutar retoma os downloads usando os hashes conhecidos ou o recibo anterior. Uma nova falha preserva o último recibo válido e fica registrada em `lastAttempt`; o processo retorna código 1, sem anunciar conclusão integral. Diretórios, PDFs e recibos definidos por symlink dentro da pasta de saída são rejeitados; o recibo é gravado com temporário exclusivo e substituição atômica.
 
 ```sh
 node scripts/download-sources.mjs --source mirror --years 2005,2008,2011,2014,2017,2021 --output enade-pdfs
