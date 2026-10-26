@@ -18,7 +18,7 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | --- | --- | --- | --- | --- | --- | --- |
 | COORD-0 | Protocolo de colaboração, quadro e avaliação de design | Claude | entregue | — | [#7](https://github.com/bielrodrigues2406/enade-cs-platform/pull/7), `59425c0` | `docs/COLLABORATION.md`, `docs/WORKBOARD.md`, `docs/DESIGN-QUALITY.md`, `AGENTS.md` |
 | SRC-1 | Aquisição dos PDFs de todos os anos, cópias fixadas, catálogo e importação offline (pedido direto de Gabriel, iniciado antes deste quadro) | Codex | entregue | — | [#9](https://github.com/bielrodrigues2406/enade-cs-platform/pull/9), `7a4049c` | `migrations/006_source_acquisition.sql`, `data/official-sources.json`, importadores, fontes e testes |
-| SRC-2 | Confinar caminhos do downloader e preservar recibos válidos após falhas | Codex | em revisão | SRC-1 | [#10](https://github.com/bielrodrigues2406/enade-cs-platform/pull/10), `codex/fix-source-downloads` | `scripts/download-sources.mjs`, `tests/source-download.test.ts`, `docs/OFFICIAL-SOURCES.md` |
+| SRC-2 | Confinar caminhos do downloader e preservar recibos válidos após falhas | Codex | entregue | SRC-1 | [#10](https://github.com/bielrodrigues2406/enade-cs-platform/pull/10), `e46c54a` | `scripts/download-sources.mjs`, `tests/source-download.test.ts`, `docs/OFFICIAL-SOURCES.md` |
 | OPS-1 | CI no GitHub Actions: build, `npm test` e E2E com PostgreSQL de serviço | Claude | pronta | — | | `.github/workflows/ci.yml` |
 | DS-1 | Fundação visual: tokens completos (incluindo molas e durações), tipografia, header compacto, remoção de cores soltas | Claude | em revisão | — | `claude/confident-cray-ndnwmk` (PR #8) | `apps/web/src/styles.css`, `apps/web/src/index.html`, shell em `apps/web/src/main.ts` |
 | DS-2 | Redesenho das telas de estudo: catálogo, resolução, caderno de erros, com motion (molas, View Transitions) | Claude | backlog | DS-1 | | `apps/web/src/main.ts`, `apps/web/src/review.component.ts`, `tests/browser/study.spec.ts`, `tests/browser/review.spec.ts` |
@@ -92,6 +92,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 ## Diário (handoffs)
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
+
+- 26/10/2026 · Codex · SRC-2 · `main@e46c54a` · PR [#10](https://github.com/bielrodrigues2406/enade-cs-platform/pull/10) integrado preservando os três commits; revisão independente Codex sem bloqueadores; build, 49 testes API/PostgreSQL/utilitários e 18 Chromium passaram (`npm run test:e2e -- --timeout=60000`, com cache e acesso local configurados). O pacote do PC foi atualizado e executado extraído, sem banco/npm install; 27 PDFs históricos reconferidos por SHA-256 e mantidos MIRROR/IMPORTED, 34 links recentes ainda pendentes. Outra trilha: atualizar a base antes de iniciar CT-1/SIM-1 e respeitar reservas 007/008/ADR-007. Revisão editorial humana permanece pendente.
 
 - 26/10/2026 · Codex · SRC-1/SRC-2 · SRC-1 integrado por Gabriel em `7a4049c`; 27 PDFs históricos arquivados/importados e 34 links recentes ainda pendentes. SRC-2 em `codex/fix-source-downloads@70f3e04` corrige dois achados do revisor independente Codex: escape por symlink e perda do último recibo válido. O revisor confirmou as correções sem novos bloqueadores; 49 testes API/PostgreSQL/utilitários passaram. Revalidando build/E2E sobre `c7e45cb` (inclui DS-1), antes do novo PR e merge. Revisão de código não representa revisão editorial humana nem revisão da trilha Claude.
 

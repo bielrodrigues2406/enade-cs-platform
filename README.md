@@ -96,6 +96,7 @@ npm run test:e2e
 ```
 
 Neste ambiente, execute as suítes API e E2E em sequência: a execução simultânea atingiu timeouts de autenticação.
+Para execução fria na nuvem, `npm run test:e2e -- --timeout=60000` define o limite padrão em 60 segundos; os fluxos longos continuam com seus limites específicos.
 
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
