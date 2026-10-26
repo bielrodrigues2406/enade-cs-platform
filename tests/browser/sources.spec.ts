@@ -24,12 +24,14 @@ type FixtureSource = {
   file: string;
   bytes: Buffer;
   pageCount: number;
+  retrievalUrl: string | null;
 };
 type Fixtures = {
   provision: (context: BrowserContext) => Promise<string>;
   source: (
     importer: string,
     kind?: "EXAM" | "ANSWER_KEY",
+    acquisition?: { mirror?: boolean; shared?: boolean },
   ) => Promise<FixtureSource>;
   questions: Set<string>;
 };
@@ -123,7 +125,7 @@ const test = base.extend<Fixtures>({
   source: async ({ provision, questions }, use) => {
     void provision; // Account teardown runs only after source/question teardown.
     const sources: FixtureSource[] = [];
-    await use(async (importer, kind = "EXAM") => {
+    await use(async (importer, kind = "EXAM", acquisition = {}) => {
       const id = randomUUID();
       const pageCount = kind === "EXAM" ? 3 : 2;
       const bytes = syntheticPdf(id, pageCount);
@@ -131,12 +133,24 @@ const test = base.extend<Fixtures>({
       const file = path.join(archiveDirectory, sha256 + ".pdf");
       const title = `${kind === "EXAM" ? "Prova" : "Gabarito"} sintético de teste ${id.slice(0, 8)}`;
       const officialUrl = `https://download.inep.gov.br/enade/test-fixtures/${id}.pdf`;
+      const retrievalUrl = acquisition.mirror
+        ? `https://raw.githubusercontent.com/test/synthetic/${"a".repeat(40)}/${id}.pdf`
+        : null;
       await mkdir(archiveDirectory, { recursive: true });
       await writeFile(file, bytes, { flag: "wx", mode: 0o600 });
-      const result = { id, title, officialUrl, sha256, file, bytes, pageCount };
+      const result = {
+        id,
+        title,
+        officialUrl,
+        sha256,
+        file,
+        bytes,
+        pageCount,
+        retrievalUrl,
+      };
       sources.push(result);
       await pool.query(
-        "INSERT INTO source_document(id,title,official_url,kind,year,area,modality,sha256,byte_size,page_count,imported_by,last_editor_id) VALUES($1,$2,$3,$4,2021,'Ciência da Computação (fixture)','BACHARELADO',$5,$6,$7,$8,$8)",
+        "INSERT INTO source_document(id,title,official_url,kind,year,area,modality,sha256,byte_size,page_count,imported_by,last_editor_id,acquisition_method,retrieval_url) VALUES($1,$2,$3,$4,2021,'Ciência da Computação (fixture)',$9,$5,$6,$7,$8,$8,$10,$11)",
         [
           id,
           title,
@@ -146,6 +160,9 @@ const test = base.extend<Fixtures>({
           bytes.length,
           pageCount,
           importer,
+          acquisition.shared ? "COMUM" : "BACHARELADO",
+          acquisition.mirror ? "MIRROR" : "DIRECT",
+          retrievalUrl,
         ],
       );
       return result;
@@ -233,10 +250,10 @@ test("source verification enables official provenance while the definitive key r
   source,
   questions,
 }) => {
-  test.setTimeout(60000);
+  test.setTimeout(120000);
   const importer = await provision(context);
-  const exam = await source(importer);
-  const key = await source(importer, "ANSWER_KEY");
+  const exam = await source(importer, "EXAM", { mirror: true, shared: true });
+  const key = await source(importer, "ANSWER_KEY", { shared: true });
   const reviewerContext = await browser.newContext({
     baseURL: "http://localhost:4200",
   });
@@ -254,6 +271,22 @@ test("source verification enables official provenance while the definitive key r
         exact: true,
       })
       .click();
+    await expect(
+      page.getByText("Arquivo obtido como cópia em repositório público.", {
+        exact: false,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", {
+        name: "Consultar a cópia identificada pelo commit",
+      }),
+    ).toHaveAttribute("href", exam.retrievalUrl!);
+    await expect(
+      page.getByText(
+        "Caderno compartilhado: contém blocos de cursos diferentes.",
+        { exact: false },
+      ),
+    ).toBeVisible();
     await expect(
       page.getByText(/Quem importou ou editou os metadados não pode verificar/),
     ).toBeVisible();
@@ -499,7 +532,10 @@ test("source verification enables official provenance while the definitive key r
       student.locator(".resolution .metadata").first(),
     ).toContainText("Oficial · Inep");
     await expect(student.locator(".question-provenance")).toContainText(
-      "ENADE 2021",
+      "Edição 2021",
+    );
+    await expect(student.locator(".question-provenance")).toContainText(
+      "Caderno compartilhado",
     );
     await expect(
       student.getByRole("link", {

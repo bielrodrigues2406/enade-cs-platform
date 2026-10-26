@@ -400,7 +400,7 @@ type Question = Summary & {
                   aria-label="Fonte da questão"
                 >
                   <p>
-                    ENADE {{ question()!.provenance!.exam.year }} ·
+                    Edição {{ question()!.provenance!.exam.year }} ·
                     {{ question()!.provenance!.exam.area }} ·
                     {{ modalityLabel(question()!.provenance!.exam.modality) }}
                   </p>
@@ -926,6 +926,7 @@ class App {
           BACHARELADO: "Bacharelado",
           LICENCIATURA: "Licenciatura",
           CST: "Curso superior de tecnologia",
+          COMUM: "Caderno compartilhado",
         } as Record<string, string>
       )[modality] || modality
     );
