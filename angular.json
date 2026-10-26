@@ -12,6 +12,7 @@
             "browser": "apps/web/src/main.ts",
             "index": "apps/web/src/index.html",
             "tsConfig": "apps/web/tsconfig.json",
+            "assets": [{ "glob": "**/*", "input": "apps/web/public" }],
             "styles": [
               "node_modules/@fontsource-variable/figtree/index.css",
               "node_modules/@fontsource-variable/source-serif-4/index.css",
@@ -22,7 +23,11 @@
           },
           "configurations": {
             "production": {
-              "optimization": true,
+              "optimization": {
+                "scripts": true,
+                "styles": { "minify": true, "inlineCritical": false },
+                "fonts": false
+              },
               "outputHashing": "all",
               "budgets": [
                 {

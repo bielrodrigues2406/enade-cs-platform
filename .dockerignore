@@ -1,0 +1,13 @@
+.git
+.github
+.angular
+.claude
+.env
+.env.*
+.local
+node_modules
+dist
+playwright-report
+test-results
+enade-pdfs
+*.log
