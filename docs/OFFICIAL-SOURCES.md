@@ -80,6 +80,40 @@ A Formação Geral é a mesma para todos os cursos da edição. No componente es
 
 Consequências: para estudantes de Bacharelado, as provas de Licenciatura **não acrescentam questões técnicas novas relevantes**; servem como segunda procedência de itens comuns (registrar as duas fontes na mesma questão, sem duplicar) e como material próprio se o produto atender Licenciatura no futuro. ENADE das Licenciaturas 2024 e PND 2025/2026 são provas docentes; não são prioridade para R1.
 
+## Extração assistida (CNT-0, etapa 1)
+
+`npm run extract:questions -- --id enade-2021-bacharelado-exam --directory enade-pdfs` lê PDFs já baixados, confere o SHA-256 com o catálogo e grava em `.local/question-drafts/` um JSON e um relatório por prova. **Não grava no banco nem publica.** Cada questão recebe uma situação:
+
+| Situação | Significado |
+| --- | --- |
+| `rascunho` | Objetiva com A–E reconhecidas, gabarito definitivo, sem nenhum alerta. Ainda exige conferência com a página original |
+| `revisao-manual` | Objetiva com algum alerta; transcrever a partir do PDF |
+| `discursiva` | Fila própria; o sistema ainda não publica discursivas |
+| `anulada` | Não vira questão de estudo |
+| `sem-gabarito-definitivo` | Gabarito ausente ou não declarado definitivo |
+
+Alertas e por que existem:
+
+- `figura`: tinta fora das caixas de texto na página renderizada (desenhos vetoriais, tabelas com borda, imagens). Contar só imagens bitmap não basta: a maioria das figuras das provas é vetorial.
+- `mencao-a-figura`: o texto cita figura, gráfico, tabela, diagrama, mapa, charge etc.
+- `fonte-de-simbolos` e `caracteres-suspeitos`: símbolos lógicos e matemáticos saem trocados em silêncio (→ vira `®`, ∧ vira `Ù`, ¬ vira `Ø`).
+- `texto-ilegivel`: o PDF entrega números de glifo no lugar de letras ("ĂƉĞŶĂƐ" = "apenas").
+- `codigo`, `tabela`, `alternativas`, `versalete`, `referencia-versalete`, `hifenizacao`, `numero-repetido`, `prova-incompleta`.
+
+Ligaduras (fi, fl, ti) extraídas como palavras separadas ("afi rma") são juntadas e listadas em `ligatureJoins` para conferência. A extração termina no questionário de percepção e confere a numeração contra o gabarito: prova incompleta não gera rascunho.
+
+Resultado em 26/10/2026:
+
+| Prova | Itens | Rascunho | Revisão manual | Discursivas | Anuladas | Observação |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 2021 Bacharelado | 40 | 13 | 20 | 5 | 2 | Texto limpo |
+| 2021 Licenciatura | 40 | 18 | 17 | 5 | 0 | Itens comuns ao Bacharelado repetidos |
+| 2017 Bacharelado/Licenciatura | 30 de 40 | 0 | 27 | 3 | 0 | Cabeçalhos de 8 questões e quase todo o texto ilegíveis |
+| 2014 Bacharelado/Licenciatura | 40 | 0 | 35 | 5 | 0 | Texto ilegível |
+| 2005–2011 | — | — | — | — | — | Cadernos de vários cursos: recusados, transcrição manual |
+
+Para 2014 e 2017, um caminho seria OCR da página renderizada, também com revisão humana; não há OCR instalado no ambiente atual.
+
 ## Revisão editorial ainda necessária
 
 Os cadernos antigos são compartilhados: em 2005/2008 incluem blocos de Ciência da Computação, Engenharia e Sistemas de Informação; 2011 também inclui Licenciatura. O rótulo COMUM preserva esse fato. Não transcrever automaticamente todos os blocos como questões de Ciência da Computação.
