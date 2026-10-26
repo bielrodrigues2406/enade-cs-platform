@@ -415,7 +415,10 @@ export function parseAnswerKey(text) {
     /(?:QUEST[ÃA]O\s+)?(DISCURSIVA\s+)?\b(\d{1,2})\s*-?\s+([A-E]|ANULADA|\*{3})(?=\s|$)/gi;
   for (const [, discursive, number, value] of text.matchAll(re)) {
     const key = `${discursive ? "D" : "Q"}${Number(number)}`;
-    if (!answers.has(key)) answers.set(key, value.toUpperCase());
+    const answer = value.toUpperCase();
+    if (answers.has(key) && answers.get(key) !== answer)
+      throw new Error(`Gabarito contraditório para ${key}.`);
+    answers.set(key, answer);
   }
   return { answers, definitive: /DEFINITIV/i.test(text) };
 }
@@ -570,6 +573,9 @@ export function classify(
       letter: o.letter,
       text: joinParagraphs(o.lines),
     }));
+    if (!promptText.trim()) flags.add("enunciado-ausente");
+    if (options && optionTexts.some((option) => !option.text.trim()))
+      flags.add("alternativa-vazia");
     for (const f of textFlags(
       [promptText, ...optionTexts.map((o) => o.text)].join("\n"),
     ))
