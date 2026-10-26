@@ -12,7 +12,12 @@
             "browser": "apps/web/src/main.ts",
             "index": "apps/web/src/index.html",
             "tsConfig": "apps/web/tsconfig.json",
-            "styles": ["apps/web/src/styles.css"],
+            "styles": [
+              "node_modules/@fontsource-variable/figtree/index.css",
+              "node_modules/@fontsource-variable/source-serif-4/index.css",
+              "node_modules/@fontsource-variable/jetbrains-mono/index.css",
+              "apps/web/src/styles.css"
+            ],
             "outputPath": "dist/web"
           },
           "configurations": {
