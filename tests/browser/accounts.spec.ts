@@ -132,6 +132,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   accountEmail,
   trackIdentity,
 }) => {
+  test.setTimeout(120000);
   await page.goto("/");
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
@@ -142,8 +143,17 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   await expect(page.getByText(/não há recuperação de senha/)).toBeVisible();
   await form.getByLabel("E-mail", { exact: true }).fill(accountEmail);
   await form.getByLabel("Senha", { exact: true }).fill(password);
+  const registration = page.waitForResponse(
+    (response) =>
+      response.url().endsWith("/api/auth/register") &&
+      response.request().method() === "POST",
+    { timeout: 15000 },
+  );
   await form.getByRole("button", { name: "Criar conta", exact: true }).click();
-  await expect(page.getByRole("status")).toContainText("Conta criada.");
+  expect((await registration).status()).toBe(201);
+  await expect(
+    page.getByRole("status").filter({ hasText: "Conta criada." }),
+  ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Revisar: Quando uma transação falha" }),
   ).toBeVisible();
@@ -195,7 +205,14 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
     ).toBeVisible();
     await login.getByLabel("E-mail", { exact: true }).fill(accountEmail);
     await login.getByLabel("Senha", { exact: true }).fill("Senha errada 2026!");
+    const rejectedLogin = other.waitForResponse(
+      (response) =>
+        response.url().endsWith("/api/auth/login") &&
+        response.request().method() === "POST",
+      { timeout: 15000 },
+    );
     await login.getByRole("button", { name: "Entrar", exact: true }).click();
+    expect((await rejectedLogin).status()).toBe(401);
     await expect(other.getByRole("alert")).toContainText(
       "E-mail ou senha incorretos.",
     );
@@ -219,7 +236,14 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
     await expect(
       login.getByRole("button", { name: "Entrar", exact: true }),
     ).toBeFocused();
+    const acceptedLogin = other.waitForResponse(
+      (response) =>
+        response.url().endsWith("/api/auth/login") &&
+        response.request().method() === "POST",
+      { timeout: 15000 },
+    );
     await other.keyboard.press("Enter");
+    expect((await acceptedLogin).status()).toBe(200);
     await expect(
       other.getByRole("button", {
         name: "Revisar: Quando uma transação falha",

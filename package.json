@@ -15,7 +15,9 @@
     "test": "node --import tsx --test tests/*.test.ts",
     "test:e2e": "playwright test",
     "curator:role": "tsx scripts/curator-role.ts",
-    "import:source": "tsx scripts/import-source.ts"
+    "import:source": "tsx scripts/import-source.ts",
+    "download:sources": "node scripts/download-sources.mjs",
+    "import:sources": "node scripts/import-sources.mjs"
   },
   "dependencies": {
     "@angular/common": "22.2.3",

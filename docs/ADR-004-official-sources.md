@@ -10,7 +10,7 @@ O fluxo registra PDFs oficiais, permite conferência independente e vincula ques
 
 ## Importação e arquivo
 
-A ferramenta local aceita somente HTTPS em `download.inep.gov.br/enade/` e `www.gov.br/inep/`, com caminho terminado em `.pdf`, sem porta, credenciais, query ou fragmento. Valida cada destino de até três redirecionamentos antes de acessá-lo. Mantém verificação TLS, limita download a 10 MiB e 30 segundos, e confere assinatura PDF e páginas via `pdfinfo` com limite de execução. Não há download arbitrário, upload ou concessão de papel via API.
+A ferramenta local aceita somente HTTPS em `download.inep.gov.br/enade/` e `www.gov.br/inep/`, com caminho terminado em `.pdf`, sem porta, credenciais, query ou fragmento. Valida cada destino de até três redirecionamentos antes de acessá-lo. Mantém verificação TLS, limita download a 10 MiB e 30 segundos, e confere assinatura PDF e páginas via `pdfinfo` com limite de execução. Não há download arbitrário, upload ou concessão de papel via API. A [ADR 006](ADR-006-source-acquisition.md) amplia os caminhos oficiais históricos/PND e acrescenta cópias fixadas e arquivos locais, mantendo TLS e os limites.
 
 O arquivo é armazenado como `<sha256>.pdf` em `.local/sources`, ou `SOURCE_ARCHIVE_DIR`. Importar novamente o mesmo arquivo/metadados é idempotente; bytes ausentes/corrompidos são restaurados por rename atômico. Arquivos válidos são preservados. O banco e o arquivo não compartilham uma transação: uma falha de banco pode deixar arquivo órfão; a limpeza administrativa deve conferir referências antes de removê-lo. Não há limpeza automática nem suporte a armazenamento de objetos nesta base.
 
