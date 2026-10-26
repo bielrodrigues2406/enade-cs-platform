@@ -20,7 +20,6 @@ export type Credentials = { email: string; password: string };
       >
         ← Voltar ao estudo
       </button>
-      <p class="eyebrow">SEU HISTÓRICO, COM VOCÊ</p>
       <h1 id="account-title">
         {{ mode === "register" ? "Criar conta" : "Entrar" }}
       </h1>

@@ -134,7 +134,6 @@ type Question = Summary & {
     }
     <div class="layout">
       <aside aria-label="Sobre este caderno">
-        <p class="eyebrow">SEU ESPAÇO DE ESTUDO</p>
         <button
           class="nav"
           (click)="back()"
@@ -148,7 +147,8 @@ type Question = Summary & {
               : null
           "
         >
-          Banco de questões <span aria-hidden="true">→</span>
+          <span class="nav-index" aria-hidden="true">01</span>
+          Banco de questões
         </button>
         <button
           class="nav secondary-nav"
@@ -156,7 +156,8 @@ type Question = Summary & {
           [disabled]="saving() || authBusy() || curationBusy()"
           [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
         >
-          Caderno de erros <span aria-hidden="true">→</span>
+          <span class="nav-index" aria-hidden="true">02</span>
+          Caderno de erros
         </button>
         @if (canCurate()) {
           <button
@@ -165,13 +166,11 @@ type Question = Summary & {
             [disabled]="saving() || authBusy() || curationBusy()"
             [attr.aria-current]="curationView() ? 'page' : null"
           >
-            Curadoria <span aria-hidden="true">→</span>
+            <span class="nav-index" aria-hidden="true">03</span>
+            Curadoria
           </button>
         }
         <div class="sidebar-note">
-          <span class="small-rule"></span>
-          <h2>Uma questão.<br />Um conceito mais claro.</h2>
-          <p>Leia com atenção, confirme sua resposta e retome de onde parou.</p>
           <p class="muted">
             O catálogo identifica a origem de cada questão. Conteúdo oficial
             informa a prova e a edição; as questões iniciais autorais são
@@ -181,17 +180,17 @@ type Question = Summary & {
       </aside>
       <main id="content" tabindex="-1">
         <div class="breadcrumb">
-          ESTUDAR <span>/</span>
+          Estudar <span>/</span>
           {{
             accountView()
-              ? "CONTA"
+              ? "Conta"
               : curationView()
-                ? "CURADORIA"
+                ? "Curadoria"
                 : reviewView()
-                  ? "CADERNO DE ERROS"
+                  ? "Caderno de erros"
                   : question()
-                    ? "RESOLUÇÃO"
-                    : "BANCO DE QUESTÕES"
+                    ? "Resolução"
+                    : "Banco de questões"
           }}
         </div>
         @if (booting()) {
@@ -232,7 +231,6 @@ type Question = Summary & {
             }
           } @else if (!question()) {
             <section class="page-intro">
-              <p class="eyebrow">PRÁTICA COM CONTEXTO</p>
               <h1>Banco de questões</h1>
               <p>
                 Escolha um assunto. Entenda o raciocínio.<br class="desktop" />
@@ -427,19 +425,66 @@ type Question = Summary & {
                     track option.id;
                     let i = $index
                   ) {
-                    <label
-                      class="option"
-                      [class.selected]="selected === option.id"
-                      ><input
-                        type="radio"
-                        name="answer"
-                        [value]="option.id"
-                        [(ngModel)]="selected"
-                      /><span class="letter" aria-hidden="true">{{
-                        "ABCDE"[i]
-                      }}</span
-                      ><span>{{ option.text }}</span></label
+                    <div
+                      class="option-row"
+                      [class.is-correct]="optionOutcome(option.id) === 'correct'"
+                      [class.is-wrong]="optionOutcome(option.id) === 'wrong'"
                     >
+                      <label
+                        class="option"
+                        [class.selected]="selected === option.id"
+                        ><input
+                          type="radio"
+                          name="answer"
+                          [value]="option.id"
+                          [(ngModel)]="selected"
+                          [attr.aria-describedby]="
+                            optionOutcome(option.id)
+                              ? 'outcome-' + option.id
+                              : null
+                          "
+                        /><span class="letter" aria-hidden="true">{{
+                          "ABCDE"[i]
+                        }}</span
+                        ><span>{{ option.text }}</span></label
+                      >
+                      @if (optionOutcome(option.id); as outcome) {
+                        <span class="option-tag" [id]="'outcome-' + option.id">
+                          @if (outcome === "correct") {
+                            <svg
+                              class="status-icon"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M3.5 8.5l3 3 6-7"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                            Alternativa correta
+                          } @else {
+                            <svg
+                              class="status-icon"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M4.5 4.5l7 7m0-7l-7 7"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                              />
+                            </svg>
+                            Sua resposta
+                          }
+                        </span>
+                      }
+                    </div>
                   }
                 </fieldset>
                 @if (!question()!.answer || editing()) {
@@ -467,9 +512,37 @@ type Question = Summary & {
               @if (question()!.answer && !editing()) {
                 <section
                   class="feedback"
+                  [class.is-correct]="question()!.answer!.correct"
+                  [class.is-wrong]="!question()!.answer!.correct"
                   aria-label="Resultado da resposta"
                   role="status"
                 >
+                  <p class="feedback-result">
+                    @if (question()!.answer!.correct) {
+                      <svg class="status-icon" viewBox="0 0 16 16" aria-hidden="true">
+                        <path
+                          d="M3.5 8.5l3 3 6-7"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      Resposta correta
+                    } @else {
+                      <svg class="status-icon" viewBox="0 0 16 16" aria-hidden="true">
+                        <path
+                          d="M4.5 4.5l7 7m0-7l-7 7"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                      Resposta incorreta
+                    }
+                  </p>
                   <p class="eyebrow">RESPOSTA SALVA</p>
                   <h2>
                     {{
@@ -481,7 +554,9 @@ type Question = Summary & {
                   <p>
                     <strong>Alternativa correta:</strong> {{ correctText() }}
                   </p>
-                  <p>{{ question()!.answer!.explanation }}</p>
+                  <p class="feedback-explanation">
+                    {{ question()!.answer!.explanation }}
+                  </p>
                   @if (question()!.answer!.explanationCredit) {
                     <p class="metadata">
                       Explicação editorial:
@@ -935,6 +1010,12 @@ class App {
     return (
       q?.options.find((o) => o.id === q.answer?.correctOptionId)?.text || ""
     );
+  }
+  optionOutcome(optionId: string): "correct" | "wrong" | null {
+    const answer = this.question()?.answer;
+    if (!answer || this.editing()) return null;
+    if (optionId === answer.correctOptionId) return "correct";
+    return optionId === answer.optionId ? "wrong" : null;
   }
   private message(err: unknown) {
     return err instanceof Error

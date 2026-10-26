@@ -98,7 +98,6 @@ const emptyDraft = (
     } @else if (!editing()) {
       <section class="curation-intro">
         <div>
-          <p class="eyebrow">CONTEÚDO E REVISÃO</p>
           <h1>Curadoria</h1>
           <p>Prepare questões e confira fontes e versões antes de publicar.</p>
         </div>

@@ -32,7 +32,6 @@ export type ReviewPosition = { topic: string; offset: number };
   imports: [FormsModule],
   template: `
     <section class="page-intro">
-      <p class="eyebrow">RETOMAR O RACIOCÍNIO</p>
       <h1>Caderno de erros</h1>
       <p>Volte às questões cuja última resposta salva está incorreta.</p>
     </section>

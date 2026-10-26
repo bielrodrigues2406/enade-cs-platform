@@ -25,7 +25,6 @@ export type OfficialSource = {
   template: `
     @if (!selected()) {
       <section class="page-intro">
-        <p class="eyebrow">PROCEDÊNCIA DO CONTEÚDO</p>
         <h1>Fontes oficiais</h1>
         <p>
           Confira a origem, a edição e o arquivo de cada documento antes de
