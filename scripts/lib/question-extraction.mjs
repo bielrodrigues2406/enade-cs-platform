@@ -50,7 +50,44 @@ export function parseBboxHtml(html) {
 // quadrada; um "A" de texto comum (como em "A partir") é bem mais estreito.
 export const isOptionMarker = (word) =>
   /^[A-E]$/.test(word.text) &&
-  word.xMax - word.xMin >= 0.8 * (word.yMax - word.yMin);
+  (word.ocrConfidence !== undefined ? word.pdfOptionMarker === true :
+    word.xMax - word.xMin >= 0.7 * (word.yMax - word.yMin));
+
+/** Preserva A–E da camada PDF quando OCR lê os marcadores circulares como O.
+ * Não infere letras pela ordem: usa somente glifos A–E e coordenadas do PDF. */
+export function restorePdfOptionMarkers(ocrPage, nativePage) {
+  const markers = nativePage.words.filter(isOptionMarker);
+  const words = ocrPage.words.filter((word) => !markers.some((marker) => {
+    const x = (word.xMin + word.xMax) / 2, y = (word.yMin + word.yMax) / 2;
+    return word.xMin >= marker.xMin - 1 && word.xMax <= marker.xMax + 1 &&
+      x >= marker.xMin - 1 && x <= marker.xMax + 1 &&
+      y >= marker.yMin - 1 && y <= marker.yMax + 1;
+  }));
+  for (const marker of markers)
+    words.push({ ...marker, ocrConfidence: 0, pdfOptionMarker: true });
+  return { ...ocrPage, words };
+}
+
+/** TSV do Tesseract, convertido de pixels para pontos PDF, sem corrigir texto. */
+export function parseOcrTsv(tsv, width, height, dpi) {
+  if (!(width > 0 && height > 0 && dpi >= 72 && dpi <= 600))
+    throw new Error("Dimensões de OCR inválidas.");
+  const scale = 72 / dpi;
+  const words = [];
+  for (const line of tsv.split(/\r?\n/).slice(1)) {
+    const cells = line.split("\t");
+    if (cells.length < 12 || cells[0] !== "5") continue;
+    const [left, top, w, h, confidence] = cells.slice(6, 11).map(Number);
+    const text = cells.slice(11).join("\t").trim();
+    if (!text || ![left, top, w, h, confidence].every(Number.isFinite) ||
+      left < 0 || top < 0 || w <= 0 || h <= 0 || confidence < 0 || confidence > 100)
+      continue;
+    words.push({ text, xMin: left * scale, yMin: top * scale,
+      xMax: (left + w) * scale, yMax: (top + h) * scale,
+      ocrConfidence: confidence });
+  }
+  return { width, height, words };
+}
 
 // Cabeçalho e rodapé variam entre edições; são localizados pelos elementos que
 // sempre os compõem: código de barras "*R03201412*", título do curso no rodapé,
@@ -67,6 +104,7 @@ const isHeaderNoise = (w) =>
 // altura; uma palavra isolada em caixa alta no texto não basta.
 const isFooterNoise = (w, words) =>
   BARCODE.test(w.text) ||
+  (w.text === "COMPUTAÇÃO" && words.some((o) => /^Área:$/i.test(o.text) && Math.abs(o.yMin - w.yMin) < 2)) ||
   (w.text === "CIÊNCIA" &&
     words.some(
       (o) => o.text === "COMPUTAÇÃO" && Math.abs(o.yMin - w.yMin) < 2,
@@ -75,7 +113,9 @@ export function pageBands(page) {
   const H = page.height;
   const top = page.words.filter((w) => w.yMax <= H * BAND && isHeaderNoise(w));
   const bottom = page.words.filter(
-    (w) => w.yMin >= H * (1 - BAND) && isFooterNoise(w, page.words),
+    (w) => w.yMin >= H * (1 - BAND) &&
+      (isFooterNoise(w, page.words) ||
+        (w.text === "COMPUTAÇÃO" && w.yMin > H * 0.94)),
   );
   let footer = bottom.length ? Math.min(...bottom.map((w) => w.yMin)) : H;
   // Número de página na mesma faixa do rodapé.
@@ -85,12 +125,17 @@ export function pageBands(page) {
       bottom.some((b) => Math.abs(b.yMin - w.yMin) < H * 0.02)
     )
       footer = Math.min(footer, w.yMin);
-  const header = top.length ? Math.max(...top.map((w) => w.yMax)) : 0;
+  let header = top.length ? Math.max(...top.map((w) => w.yMax)) : 0;
+  // 2011 imprime o nome do exame no cabeçalho, sem o barcode no topo.
+  for (const line of groupLines(page.words.filter((w) => w.yMax <= H * BAND)))
+    if (/^EXAME NACIONAL DE DESEMPENHO DOS ESTUDANTES$/i.test(lineText(line.words)))
+      header = Math.max(header, line.yMax);
   return { top: header + 0.5, bottom: footer - 0.5 };
 }
 export function contentWords(page, bands = pageBands(page)) {
   return page.words.filter(
-    (w) => w.yMin >= bands.top && w.yMax <= bands.bottom,
+    (w) => w.yMin >= bands.top && w.yMax <= bands.bottom &&
+      !(/^(?:PND|PMD)\d{4}/.test(w.text) && w.text.length > 30),
   );
 }
 
@@ -166,13 +211,28 @@ export function lineText(words) {
 
 /** Cabeçalho "QUESTÃO 12" ou "QUESTÃO DISCURSIVA 03" no início da linha. */
 export function lineHeader(line) {
-  const [first, second, third] = line.words.map((w) => w.text);
-  if (!first || !/^quest[ãa]o$/i.test(first)) return null;
-  if (/^\d{1,2}$/.test(second ?? ""))
-    return { kind: "Q", number: Number(second), size: 2 };
-  if (/^discursiva$/i.test(second ?? "") && /^\d{1,2}$/.test(third ?? ""))
-    return { kind: "D", number: Number(third), size: 3 };
-  return null;
+  const ws = line.words;
+  // 2005: "Q U ES T Ã O 1 1" e "D IS C U R S IV A" são glifos separados.
+  let joined = "", i = 0;
+  while (i < ws.length && joined.length < 7) joined += ws[i++].text;
+  if (!/^quest[ãa]o$/i.test(joined)) return null;
+  if (/^discursiva$/i.test(ws[i]?.text ?? "") && /^\d{1,3}$/.test(ws[i + 1]?.text ?? ""))
+    return { kind: "D", number: Number(ws[i + 1].text), size: i + 2 };
+  if (!/^\d{1,3}$/.test(ws[i]?.text ?? "")) return null;
+  let number = ws[i++].text;
+  // Só juntar os dígitos que fazem parte do cabeçalho em fonte espaçada.
+  while (number.length < 3 && /^\d$/.test(ws[i]?.text ?? "") &&
+    ws[i].xMin - ws[i - 1].xMax < (ws[i].yMax - ws[i].yMin) * 0.4)
+    number += ws[i++].text;
+  const tail = ws.slice(i).map((w) => w.text).join("").replace(/^[–—-]/, "");
+  const discursive = /^discursiva/i.test(tail);
+  // A chave continua Qn nos anos em que discursivas usam a numeração comum.
+  if (discursive) {
+    if (/^[–—-]$/.test(ws[i]?.text ?? "")) i++;
+    let label = "";
+    while (i < ws.length && label.length < 10) label += ws[i++].text;
+  }
+  return { kind: "Q", number: Number(number), size: i, discursive };
 }
 
 /**
@@ -180,14 +240,26 @@ export function lineHeader(line) {
  * atravessa o meio da página.
  */
 export function splitColumns(page, words) {
-  const middle = page.width / 2;
+  let middle = page.width / 2;
+  // Algumas edições deslocam o cabeçalho da coluna direita à esquerda do
+  // centro geométrico. Localize-o antes de cortar as palavras "Q U EST Ã O".
+  const anchors = words.filter((word) => {
+    if (!/^(?:quest[ãa]o|q)$/i.test(word.text) || word.xMin < page.width * 0.43)
+      return false;
+    const line = { words: words.filter((w) => w.xMin >= word.xMin &&
+      Math.abs((w.yMin + w.yMax - word.yMin - word.yMax) / 2) < (word.yMax - word.yMin) * 0.45)
+      .sort((a, b) => a.xMin - b.xMin) };
+    return !!lineHeader(line);
+  });
+  if (anchors.length) middle = Math.min(middle, ...anchors.map((w) => w.xMin - 1));
   const left = words.filter((w) => w.xMax <= middle);
   const right = words.filter((w) => w.xMin >= middle);
   const crossing = words.length - left.length - right.length;
-  if (left.length && right.length && crossing === 0)
+  const rightHeader = groupLines(right).some((line) => lineHeader(line));
+  if (left.length && right.length && (crossing === 0 || rightHeader))
     return [
-      { x0: 0, x1: middle, words: left },
-      { x0: middle, x1: page.width, words: right },
+      { x0: 0, x1: middle, words: words.filter((w) => w.xMin < middle) },
+      { x0: middle, x1: page.width, words: words.filter((w) => w.xMin >= middle) },
     ];
   return [{ x0: 0, x1: page.width, words }];
 }
@@ -195,17 +267,19 @@ export function splitColumns(page, words) {
 const NOISE = /^(área livre|rascunho|formação geral|componente específico)$/i;
 // Depois das questões vem o questionário de percepção, com itens também
 // chamados "QUESTÃO 1..9"; a extração termina ali.
-const END_OF_EXAM = /question[áa]rio de percep/i;
+const END_OF_EXAM = /^question[áa]rio de percep[çc][aã]o(?: (?:da|sobre a) prova)?$/i;
 
 /**
  * Percorre páginas → colunas → linhas e distribui as linhas pelas questões.
  * Cada questão guarda as regiões (página, coluna, faixa vertical) que ocupa,
  * usadas depois para atribuir figuras.
  */
-export function segmentQuestions(pages) {
+export function segmentQuestions(pages, { unnumberedDiscursive = false } = {}) {
   const questions = [];
   let current = null;
   let ended = false;
+  let shared = null;
+  const contexts = new Map();
   pages.forEach((page, pageIndex) => {
     if (ended) return;
     const bands = pageBands(page);
@@ -226,7 +300,30 @@ export function segmentQuestions(pages) {
         current.regions.push(region);
       };
       openRegion(bands.top);
-      for (const line of groupLines(column.words)) {
+      const lines = groupLines(column.words).flatMap((line) => {
+        const start = line.words.findIndex((w, i) => i > 0 &&
+          /^QUEST[ÃA]O$/.test(w.text) && lineHeader({ words: line.words.slice(i) }));
+        if (start < 0) return [line];
+        // Diagramas e referências da questão anterior podem compartilhar a
+        // altura do próximo cabeçalho (2008 Q38). Preserve os dois trechos.
+        return [line.words.slice(0, start), line.words.slice(start)].map((words) => ({
+          ...line, words, xMin: words[0].xMin,
+          xMax: Math.max(...words.map((w) => w.xMax)),
+        }));
+      });
+      for (const line of lines) {
+        const rawText = lineText(line.words);
+        const sharedLabel = /^Texto para (?:as )?quest[õo]es\s+(?:de\s+)?([\d\s,ea–-]+)/i.exec(rawText);
+        if (sharedLabel) {
+          const numbers = sharedLabel[1].match(/\d+/g)?.map(Number) ?? [];
+          const targets = /\s+a\s+|[–-]/.test(sharedLabel[1]) && numbers.length === 2 ?
+            Array.from({ length: Math.min(1000, numbers[1] - numbers[0] + 1) }, (_, i) => numbers[0] + i) : numbers;
+          shared = { lines: [], regions: [], joins: [] };
+          for (const number of targets) contexts.set(number, shared);
+          if (region) region.y1 = line.yMin;
+          current = null;
+          region = null;
+        }
         // A capa também cita o questionário; só vale depois das questões.
         if (
           questions.length >= 10 &&
@@ -235,7 +332,18 @@ export function segmentQuestions(pages) {
           ended = true;
           break;
         }
-        const header = lineHeader(line);
+        const header = lineHeader(line) ?? (unnumberedDiscursive &&
+          /^QUEST[ÃA]O DISCURSIVA\s*$/i.test(rawText) ?
+          { kind: "D", number: 1, size: line.words.length, unnumbered: true } : null);
+        if (shared && !header) {
+          shared.lines.push({ text: rawText, yMin: line.yMin, yMax: line.yMax,
+            xMax: line.xMax, marker: null, page: pageIndex + 1,
+            ...(line.words.some((w) => w.ocrConfidence !== undefined) ? { ocr: true } : {}) });
+          shared.regions.push({ page: pageIndex + 1, x0: column.x0, x1: column.x1,
+            y0: line.yMin, y1: line.yMax, lines: 1 });
+          shared.joins.push(...line.joins);
+          continue;
+        }
         // O questionário de percepção recomeça a numeração em 1: a prova acabou.
         const lastObjective = [...questions]
           .reverse()
@@ -250,14 +358,18 @@ export function segmentQuestions(pages) {
           break;
         }
         if (header) {
+          shared = null;
           if (region) region.y1 = line.yMin;
+          const context = header.kind === "Q" ? contexts.get(header.number) : null;
           current = {
             key: `${header.kind}${header.number}`,
-            kind: header.kind === "D" ? "DISCURSIVE" : "OBJECTIVE",
+            kind: header.kind === "D" || header.discursive ? "DISCURSIVE" : "OBJECTIVE",
             number: header.number,
-            lines: [],
-            regions: [],
-            joins: [],
+            lines: context ? [...context.lines] : [],
+            regions: context ? [...context.regions] : [],
+            joins: context ? [...context.joins] : [],
+            ...(context ? { sharedContext: true } : {}),
+            ...(header.unnumbered ? { unnumbered: true } : {}),
           };
           questions.push(current);
           openRegion(line.yMin);
@@ -275,6 +387,8 @@ export function segmentQuestions(pages) {
           xMax: line.xMax,
           marker: isOptionMarker(line.words[0]) ? line.words[0].text : null,
           page: pageIndex + 1,
+          ...(line.words.some((w) => w.ocrConfidence !== undefined) ? { ocr: true } : {}),
+          ...(line.words.some((w) => w.pdfOptionMarker) ? { pdfOptionMarker: true } : {}),
         });
         current.joins.push(...line.joins);
         if (region) {
@@ -341,12 +455,12 @@ export function joinParagraphs(lines) {
 }
 
 /** Separa enunciado e alternativas; exige exatamente A–E nesta ordem. */
-export function splitOptions(lines) {
+export function splitOptions(lines, expectedLetters = "ABCDE") {
   const markers = lines
     .map((line, index) => ({ letter: line.marker, index }))
     .filter((m) => m.letter);
   const letters = markers.map((m) => m.letter).join("");
-  if (letters !== "ABCDE") return { prompt: lines, options: null, letters };
+  if (letters !== expectedLetters) return { prompt: lines, options: null, letters };
   const options = markers.map((m, i) => {
     const end = i + 1 < markers.length ? markers[i + 1].index : lines.length;
     const own = lines
@@ -412,7 +526,7 @@ export function looksTabular(lines) {
 export function parseAnswerKey(text) {
   const answers = new Map();
   const re =
-    /(?:QUEST[ÃA]O\s+)?(DISCURSIVA\s+)?\b(\d{1,2})\s*-?\s+([A-E]|ANULADA|\*{3})(?=\s|$)/gi;
+    /(?:QUEST[ÃA]O[^\S\r\n]+)?(DISCURSIVA[^\S\r\n]+)?\b(\d{1,3})[^\S\r\n]*-?[^\S\r\n]+([A-E]|ANULADA|DISCURSIVA|\*{3})(?=[^\S\r\n]|$)/gim;
   for (const [, discursive, number, value] of text.matchAll(re)) {
     const key = `${discursive ? "D" : "Q"}${Number(number)}`;
     const answer = value.toUpperCase();
@@ -421,6 +535,19 @@ export function parseAnswerKey(text) {
     answers.set(key, answer);
   }
   return { answers, definitive: /DEFINITIV/i.test(text) };
+}
+
+/** PND tem gabarito próprio por tipo; nunca substituir pela primeira variante. */
+export function selectAnswerKey(documents, exam) {
+  let candidates = documents.filter((d) => d.kind === "ANSWER_KEY" &&
+    d.year === exam.year && d.modality === exam.modality && d.family === exam.family);
+  if (exam.family === "PND") {
+    const variant = /tipo\s+(\d+)\s*$/i.exec(exam.variant ?? "")?.[1];
+    if (!variant) return null;
+    candidates = candidates.filter((d) => /tipo\s+(\d+)\s*$/i.exec(d.variant ?? "")?.[1] === variant);
+  }
+  if (candidates.length > 1) throw new Error(`${exam.id}: mais de um gabarito compatível; conferir variante.`);
+  return candidates[0] ?? null;
 }
 
 /**
@@ -516,7 +643,8 @@ export function completeness(items, answers) {
       (k) => k.startsWith("Q") && !keys.includes(k),
     ),
     unexpected: keys.filter(
-      (k, i) => keys.indexOf(k) !== i || (k.startsWith("Q") && !answers.has(k)),
+      (k, i) => keys.indexOf(k) !== i ||
+        (k.startsWith("Q") && items[i].kind !== "DISCURSIVE" && !answers.has(k)),
     ),
   };
 }
@@ -527,14 +655,25 @@ export function completeness(items, answers) {
  */
 export function classify(
   questions,
-  { answers, definitive, graphicsByPage, symbolPages },
+  { answers, definitive, graphicsByPage, symbolPages, generalObjectiveThrough = 8,
+    generalDiscursiveThrough = 2, sharedBooklet = false, courseScopeFor,
+    expectedOptionLetters = "ABCDE", keyAvailable = true },
 ) {
   const seen = new Map();
   for (const q of questions) seen.set(q.key, (seen.get(q.key) ?? 0) + 1);
   return questions.map((q) => {
     const flags = new Set();
+    if (!keyAvailable) flags.add("gabarito-ausente");
+    if (q.sharedContext) flags.add("texto-compartilhado");
+    if (q.unnumbered) flags.add("discursiva-sem-numero");
+    if (sharedBooklet) flags.add("caderno-compartilhado");
+    const courseScope = courseScopeFor?.(q) ?? [];
+    if (courseScope.length && !courseScope.includes("Ciência da Computação"))
+      flags.add("fora-escopo-ciencia-computacao");
     if (seen.get(q.key) > 1) flags.add("numero-repetido");
     const pages = [...new Set(q.lines.map((l) => l.page))];
+    if (q.lines.some((l) => l.ocr)) flags.add("revisao-ocr");
+    if (q.lines.some((l) => l.pdfOptionMarker)) flags.add("marcador-recuperado-pdf");
     for (const region of q.regions)
       if (
         (graphicsByPage.get(region.page) ?? []).some((b) => overlaps(b, region))
@@ -542,8 +681,8 @@ export function classify(
         flags.add("figura");
     if (pages.some((p) => symbolPages.has(p))) flags.add("fonte-de-simbolos");
     const block =
-      (q.kind === "DISCURSIVE" && q.number <= 2) ||
-      (q.kind === "OBJECTIVE" && q.number <= 8)
+      (q.kind === "DISCURSIVE" && q.number <= generalDiscursiveThrough) ||
+      (q.kind === "OBJECTIVE" && q.number <= generalObjectiveThrough)
         ? "FORMACAO_GERAL"
         : "COMPONENTE_ESPECIFICO";
     const base = {
@@ -553,6 +692,7 @@ export function classify(
       block,
       pages,
       ligatureJoins: q.joins ?? [],
+      ...(courseScope.length ? { courseScope } : {}),
     };
     if (q.kind === "DISCURSIVE") {
       for (const f of textFlags(q.lines.map((l) => l.text).join("\n")))
@@ -565,7 +705,7 @@ export function classify(
       };
     }
     const answer = answers.get(q.key) ?? null;
-    const { prompt, options, letters } = splitOptions(q.lines);
+    const { prompt, options, letters } = splitOptions(q.lines, expectedOptionLetters);
     if (!options) flags.add("alternativas");
     if (looksTabular(q.lines)) flags.add("tabela");
     const promptText = joinParagraphs(prompt);
