@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "origin": "ASSISTED",
+  "author": "Codex",
+  "humanReviewed": false,
+  "items": [
+    {
+      "examId": "enade-2014-bacharelado-exam",
+      "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+      "key": "Q1",
+      "topic": "Cultura digital e democratização da produção artística",
+      "explanation": "A alternativa A é compatível com o texto: as duas asserções são verdadeiras e a segunda explica a primeira. Ferramentas digitais permitem produzir e divulgar obras com maior independência dos centros tradicionais de exposição, o que contribui para democratizar a circulação da produção artística.",
+      "notes": [
+        "Análise assistida da página 4 renderizada, comparada à extração; não constitui aprovação editorial humana.",
+        "O gabarito catalogado indica A. O raciocínio foi analisado sem alterar a resposta oficial."
+      ],
+      "issues": [
+        {
+          "code": "FIDELIDADE_OCR_PENDENTE",
+          "note": "Conferir e corrigir os marcadores I e II, inclusive nas alternativas: OCR confundiu numerais com l, Il e |. Corrigir também junções como Otrecho e produçãoe a partir da página original. As letras A–E foram recuperadas da camada PDF, sem inferência pela ordem."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2014-bacharelado-exam",
+      "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+      "key": "Q2",
+      "topic": "Terceiro setor e responsabilidade social",
+      "explanation": "A alternativa C corresponde às afirmações I e III, segundo a abordagem da questão: o terceiro setor reúne iniciativa privada e finalidade pública/social, e a responsabilidade social pode alterar cultura e estratégia das empresas. A afirmação II atribui ao terceiro setor, de forma geral e exclusiva, a viabilização do acesso à educação e do desenvolvimento nas áreas enumeradas; esse papel também envolve Estado e outros agentes sociais.",
+      "notes": [
+        "Análise assistida da página 4 renderizada, comparada à extração; não constitui aprovação editorial humana.",
+        "O gabarito catalogado indica C. A formulação de I foi interpretada no contexto do enunciado, sem transformá-la em definição jurídica exaustiva de terceiro setor."
+      ],
+      "issues": [
+        {
+          "code": "FIDELIDADE_OCR_PENDENTE",
+          "note": "Conferir e corrigir I, II e III no enunciado e nas alternativas: OCR confundiu esses numerais com Il, Ill e |. Na alternativa E, recuperar fielmente I, II e III. As letras A–E foram recuperadas da camada PDF, sem inferência pela ordem."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    }
+  ]
+}

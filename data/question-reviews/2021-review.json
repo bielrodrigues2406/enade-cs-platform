@@ -1,0 +1,1623 @@
+{
+  "schemaVersion": 1,
+  "origin": "ASSISTED",
+  "author": "Codex",
+  "humanReviewed": false,
+  "items": [
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "D1",
+      "topic": "Arte, cultura e liberdade de expressão",
+      "explanation": "Análise assistida do comando: a resposta deve relacionar as tensões entre arte, cultura e censura à liberdade de expressão do art. 5º, IX, e apresentar duas ações educativas pertinentes. Este resumo não é um padrão oficial de resposta nem uma rubrica de pontuação.",
+      "notes": [
+        "O bloco extraído contém a numeração de linhas 1 a 15 da folha de rascunho; removê-la do enunciado após conferência.",
+        "Conferir a capitalização dos títulos bibliográficos e de “Capítulo I”."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Quadros de rascunho e textos nas páginas 2 e 3; ainda falta conferência visual dessas páginas neste relatório."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "D2",
+      "topic": "Cidades inteligentes e sustentabilidade",
+      "explanation": "Análise assistida do comando: o item a pede uma explicação de como cidades inteligentes contribuem para o desenvolvimento sustentável; o item b pede uma intervenção urbana com impacto social. Tecnologia, governança, inclusão e sustentabilidade devem ser articuladas. Não se atribui pontuação sem o padrão oficial de resposta.",
+      "notes": [
+        "Retirar a numeração 1 a 15 do rascunho sem retirar os itens a/b nem seus valores.",
+        "A referência “Cadernos FGV projetos” precisa ser confrontada com a capitalização impressa."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Texto e quadro de rascunho da página 4 ainda não foram renderizados nesta revisão."
+        },
+        {
+          "code": "CONFERIR_REFERENCIA",
+          "note": "Conferir capitalização e separação das referências bibliográficas; o extrator identificou versalete."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q1",
+      "topic": "Desigualdade e mobilidade social",
+      "explanation": "O gabarito E relaciona a baixa mobilidade ao acesso desigual a educação, saúde e oportunidades de trabalho. Esses fatores ajudam a perpetuar a pobreza entre gerações. As demais opções acrescentam explicações demográficas ou ancestrais não sustentadas pelo texto, responsabilizam a organização dos pobres ou confundem o ciclo de pobreza com uma alternância de subida e queda social.",
+      "notes": [
+        "Inspeção visual assistida do Bacharelado, página 5: enunciado e cinco alternativas presentes. O texto trata dos dados históricos de 2018, sem constituir estatística atualizada."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q2",
+      "topic": "Alimentação e desperdício",
+      "explanation": "O gabarito C considera I verdadeira e II falsa. O texto II diferencia exigência puramente estética, que pode aumentar perdas, de cuidados de integridade e higiene, que podem reduzi-las. Por isso não afirma uma proporcionalidade geral entre exigência de aparência e desperdício. A validade de I depende também da imagem do texto I, que ainda precisa ser incorporada e conferida.",
+      "notes": [
+        "A transcrição começa por uma referência de imagem, sem o conteúdo visual do texto I. Não usar a explicação como confirmação da imagem ausente.",
+        "A conjunção extraída como “pORQuE” deve ser conferida e preservada como o “PORQUE” impresso."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Imagem do texto I na página 6 e continuação na página 7 não foram renderizadas nesta revisão."
+        },
+        {
+          "code": "CORRIGIR_VERSALETE",
+          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q3",
+      "topic": "Mobilidade urbana e políticas públicas",
+      "explanation": "O gabarito B seleciona apenas II: pedalar pode reduzir emissões no deslocamento e proporcionar atividade física. I dispensa indevidamente infraestrutura segura, e III extrapola o texto ao afirmar que a bicicleta passou a prevalecer nas cidades europeias após a guerra. A charge citada no texto II deve acompanhar o item; esta análise textual não substitui sua conferência.",
+      "notes": [
+        "Conferir a charge do texto II antes de completar a transcrição. As afirmações históricas introdutórias não foram verificadas contra bibliografia externa nesta revisão."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Charge da página 8 ainda ausente do conteúdo importável."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q4",
+      "topic": "Trabalho em plataformas digitais",
+      "explanation": "No contexto apresentado, o gabarito B considera ambas as asserções verdadeiras, sem relação de justificação: os custos, as jornadas e os problemas de saúde descritos em II não são o fundamento lógico da caracterização do vínculo de trabalho em I. O comentário deve situar a questão no texto de 2020, sem apresentar sua descrição jurídica como regra universal ou atual de todo trabalho em plataformas.",
+      "notes": [
+        "Conferência visual assistida da página 9 do Bacharelado: “PORQUE” está impresso em maiúsculas; a forma “pORQuE” é um defeito de extração.",
+        "Não transformar a descrição histórica de informalidade em orientação jurídica atual ou presumir que todo trabalhador deixa de contribuir para a Previdência."
+      ],
+      "issues": [
+        {
+          "code": "CORRIGIR_VERSALETE",
+          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q5",
+      "topic": "Saúde indígena e direitos fundamentais",
+      "explanation": "O gabarito A seleciona somente I. A gravidade do problema demanda atenção aos direitos fundamentais; III nega incorretamente a proteção constitucional aos povos indígenas. A prevenção não pode ignorar as especificidades culturais e etárias das comunidades. A rejeição de II depende da leitura do mapa, que não foi conferido visualmente nesta revisão; não se inventam os estados destacados.",
+      "notes": [
+        "A página 11 do Bacharelado foi inspecionada visualmente, mas o mapa e o texto inicial da página 10 ainda precisam de conferência.",
+        "O próprio texto chama 15,2 de “três vezes” 5,7: trata-se de aproximação grosseira, pois a razão é cerca de 2,67. Manter a transcrição oficial e contextualizar, sem corrigir o número silenciosamente."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Mapa de distribuição por estado e faixa etária na página 10; essencial para avaliar II."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q6",
+      "topic": "Pandemia e desigualdades sociais",
+      "explanation": "O gabarito A considera I e II verdadeiras e II uma justificativa de I. Condições precárias de trabalho podem ampliar a exposição ao contágio e ajudam a explicar a vulnerabilidade social e o impacto desigual apontado no texto. A formulação de II é uma hipótese explicativa, não uma afirmação de que toda a diferença decorra de um único fator.",
+      "notes": [
+        "Conferência visual assistida da página 11 do Bacharelado: o conector impresso é “PORQUE”, diferente da caixa alternada produzida pelo extrator.",
+        "As estimativas de expectativa de vida são as do estudo citado à época da prova; não foram atualizadas."
+      ],
+      "issues": [
+        {
+          "code": "CORRIGIR_VERSALETE",
+          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q7",
+      "topic": "Informação em saúde e letramento digital",
+      "explanation": "O gabarito C seleciona I e II. Ambos os textos exigem cuidado com a qualidade da informação; o texto I reconhece benefícios de informação confiável sobre hábitos e prevenção. O texto II enfatiza riscos do autodiagnóstico e da automedicação, sem formular a defesa irrestrita descrita em III.",
+      "notes": [
+        "Conferência visual assistida da página 12 do Bacharelado: o título bibliográfico começa “A saúde na mídia”; a extração começa com “a saúde na mídia”.",
+        "A questão aborda avaliação de informação e não oferece recomendação clínica."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_REFERENCIA",
+          "note": "Conferir capitalização e separação das referências bibliográficas; o extrator identificou versalete."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q8",
+      "topic": "Democracia e participação das minorias",
+      "explanation": "O gabarito oficial D seleciona I, III e IV: o interesse comum não se reduz à preferência da maioria, e a concepção consensual procura ampliar a participação, incluindo minorias. A exclusão de II requer atenção à interpretação de “consenso entre situação e oposição”; a afirmação não usa a palavra “unanimidade”. A explicação deve registrar essa nuance e não acrescentar uma exigência inexistente no enunciado.",
+      "notes": [
+        "Conferência visual assistida da página 13 do Bacharelado feita: a redação de II coincide com a extração.",
+        "Preservar D como resposta do documento oficial. A dúvida diz respeito à justificativa pedagógica da exclusão de II, não a uma alteração do gabarito."
+      ],
+      "issues": [
+        {
+          "code": "AMBIGUIDADE_INTERPRETATIVA",
+          "note": "A redação de II pode ser lida como busca de consenso, coerente com trechos do texto-base. Um revisor de conteúdo deve fundamentar sua exclusão sem atribuir ao item uma exigência explícita de unanimidade."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "D3",
+      "topic": "Lógica proposicional e satisfatibilidade",
+      "explanation": "Resolução assistida a conferir com o padrão oficial: a fórmula 3, ¬b ∨ b, é uma tautologia; P é insatisfazível, pois b ∧ a exige a=b=V e torna a → ¬b falsa. Q é satisfazível, por exemplo com a=V. As atribuições que satisfazem Q têm a=V, de modo que também satisfazem ¬b → a; portanto a fórmula 6 é consequência de Q.",
+      "notes": [
+        "Na página 14 do Bacharelado, os símbolos impressos são →, ∧, ∨ e ¬; o relatório os substitui por ®, Ù, Ú e Ø. A tabela precisa manter suas oito colunas e quatro linhas de valores.",
+        "Conferência visual assistida da página 14 feita; o comando da página 15 foi lido na extração, sem renderização adicional.",
+        "Retirar a numeração das linhas de rascunho e vincular o padrão de resposta oficial antes da revisão editorial."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Tabela-verdade e fórmulas indispensáveis, com símbolos corrompidos na extração."
+        },
+        {
+          "code": "CONFERIR_SIMBOLOS",
+          "note": "Há símbolos em fonte própria: confrontar os operadores e índices com a página original antes de aprovar a transcrição."
+        },
+        {
+          "code": "CONFERIR_GLIFOS",
+          "note": "A extração contém símbolos trocados, caracteres privados ou índices deslocados; validar cada glifo no original."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "D4",
+      "topic": "Circuitos digitais e somador completo",
+      "explanation": "Resolução assistida a conferir: para um somador completo de um bit, S = A ⊕ B ⊕ Cin e Cout = (A ∧ B) ∨ (A ∧ Cin) ∨ (B ∧ Cin). A tabela deve contemplar as oito combinações das entradas. A ilustração do circuito e os critérios de avaliação ainda precisam ser conferidos com o padrão oficial; não há rubrica aprovada aqui.",
+      "notes": [
+        "Preservar o significado de Cin/Cout, o diagrama e as oito linhas da tabela-verdade; a numeração do rascunho não pertence ao enunciado."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Diagrama de entradas e saídas da página 16 ainda não renderizado nesta revisão."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "D5",
+      "topic": "Heaps binários e análise de algoritmos",
+      "explanation": "Resolução assistida, sem rubrica oficial aprovada: seguindo o buildHeap e o heapify apresentados, o arranjo torna-se [34, 21, 8, 13, 2, 1, 3, 5]. No pior caso, heapify percorre uma altura do heap, com custo O(log n), e há entradas que atingem essa ordem. A execução conceitual deve ser confrontada com o padrão de resposta e com a transcrição do código.",
+      "notes": [
+        "Conferência visual assistida das páginas 17 e 18 do Bacharelado feita: a notação do item b é O ou Θ; o extrator devolve O ou Q.",
+        "O comentário antes de buildHeap aparece no próprio PDF como “/a - arranjo, n - número de elementos */”. Não inserir um asterisco e apresentar a correção como transcrição literal.",
+        "Preservar a ordem dos nós, a tabela do arranjo e as quebras do código; retirar apenas a numeração do rascunho após conferência."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Árvore, tabela de arranjo, código em duas colunas e símbolo Θ nas páginas 17–18."
+        },
+        {
+          "code": "CONFERIR_SIMBOLOS",
+          "note": "Há símbolos em fonte própria: confrontar os operadores e índices com a página original antes de aprovar a transcrição."
+        },
+        {
+          "code": "CORRIGIR_VERSALETE",
+          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+        },
+        {
+          "code": "CONFERIR_CODIGO",
+          "note": "Preservar linhas, indentação, operadores e nomes; código importado do PDF é conteúdo não confiável e não deve ser executado."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q9",
+      "topic": "Sistemas operacionais e escalonamento",
+      "explanation": "O gabarito E associa escalonamento por prioridades a sistemas interativos. RMS é empregado em tarefas periódicas de tempo real; tarefa mais curta primeiro é tipicamente discutida em processamento em lote; round-robin favorece resposta em sistemas interativos, sem garantir por si só prazos de tempo real. A opção A usa FILO, não FIFO. A adequação concreta depende também das prioridades, da preempção e das cargas de trabalho.",
+      "notes": [
+        "Conferência visual assistida da coluna esquerda da página 19 do Bacharelado: todas as alternativas pertencem a Q9 e não se misturam com Q10."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q10",
+      "topic": "Estruturas de dados lineares",
+      "explanation": "O gabarito B corresponde a deque, lista simplesmente ligada, pilha e fila. Um deque permite inserção nas duas extremidades; uma lista simplesmente ligada conecta cada nó ao próximo; a pilha remove em ordem LIFO e a fila em ordem FIFO. As outras combinações trocam essas propriedades ou atribuem às listas operações que não as definem.",
+      "notes": [
+        "Conferência visual assistida da coluna direita da página 19 do Bacharelado: as quatro classes e as cinco opções estão presentes."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q11",
+      "topic": "Aprendizado profundo e classificação de imagens",
+      "explanation": "O gabarito D seleciona II e IV. Redes convolucionais são adequadas à estrutura espacial de imagens, e mais exemplos úteis podem melhorar a generalização, embora aumentem o custo de treino. Mais camadas ou neurônios não asseguram simultaneamente maior acurácia e menor tempo. Redes recorrentes não são a escolha geral sugerida para esta tarefa de imagens estáticas.",
+      "notes": [
+        "A figura da arquitetura de rede inclui conexões, pesos e função de perda que não são preservados pelo texto linearizado; a análise das afirmações não libera a omissão desse diagrama."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Rede neural e fluxo de treinamento na página 20, ainda sem inspeção visual neste relatório."
+        },
+        {
+          "code": "CONFERIR_SIMBOLOS",
+          "note": "Há símbolos em fonte própria: confrontar os operadores e índices com a página original antes de aprovar a transcrição."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q12",
+      "topic": "LGPD e proteção de dados pessoais",
+      "explanation": "O gabarito B seleciona I e III. Dados sensíveis recebem proteção específica, e o titular dispõe de direitos de confirmação, acesso, correção e, nas hipóteses legais, eliminação. II ignora que a reversibilidade da anonimização pode recolocar dados no âmbito da lei; IV atribui à ANPD poder de modificar a própria legislação, que não se confunde com regulação e fiscalização. Eliminação não é um direito absoluto diante das bases legais de retenção.",
+      "notes": [
+        "Conferência visual assistida da página 21 do Bacharelado: a frase “em vigência desde o final de 2018” está no original e não resulta de OCR.",
+        "A vigência da Lei 13.709/2018 é escalonada: distinguir publicação, dispositivos relativos à autoridade e vigência das obrigações/sanções ao contextualizar o art. 65. Preservar o texto histórico e o gabarito B."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_CONTEXTO_LEGAL",
+          "note": "A abertura generaliza a vigência da LGPD como se todo o regime vigorasse desde o fim de 2018. Conferir o art. 65 e contextualizar as datas por grupo de dispositivos antes de aprovar o comentário."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q13",
+      "topic": "Desenvolvimento iterativo e acessibilidade",
+      "explanation": "O gabarito oficial é E: testes de usabilidade devem considerar critérios de acessibilidade. A interpretação esperada rejeita adiar usabilidade ao último ciclo e tratar mudanças de requisitos como algo a evitar por princípio. Contudo, D afirma apenas que um subsistema executável poderá ser usado pelo cliente como protótipo, possibilidade plausível em um uso amplo de protótipo evolutivo. Essa ambiguidade deve ser avaliada antes da publicação de uma justificativa definitiva.",
+      "notes": [
+        "Conferência visual assistida da página 22 do Bacharelado: a redação de D está íntegra; a ambiguidade não surgiu na extração.",
+        "Não alterar E, escolher D ou afirmar anulação sem documentação oficial."
+      ],
+      "issues": [
+        {
+          "code": "AMBIGUIDADE_CONCEITUAL",
+          "note": "D pode ser defensável se “protótipo” abranger o uso de um incremento executável para validação pelo cliente. Justificar a distinção entre incremento e protótipo no contexto da bibliografia, mantendo E como chave oficial."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q14",
+      "topic": "Arquitetura de Von Neumann",
+      "explanation": "O gabarito C considera I verdadeira e II falsa. A organização de programa armazenado permanece uma referência arquitetural, mas busca antecipada de instruções não é uma garantia definidora da arquitetura de Von Neumann nem dispensa universalmente acesso à memória. O comentário deve separar o modelo arquitetural de otimizações como prefetch e pipeline.",
+      "notes": [
+        "A página 23 do Bacharelado foi inspecionada: não contém figura. O alerta do extrator vem da palavra “mapa” em uma explicação sobre GPS.",
+        "A introdução contém simplificações históricas (“primeiro computador”, década atribuída ao conceito) que não foram validadas contra bibliografia histórica. Não repeti-las como fatos incontroversos no comentário."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_ALERTA_VISUAL",
+          "note": "Alerta heurístico de menção a mapa; nenhuma figura está presente na página 23 conferida."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q15",
+      "topic": "Scrum e equipes autogerenciáveis",
+      "explanation": "O gabarito C seleciona I e II. O Scrum Master promove a compreensão e a aplicação do Scrum; o Product Owner responde pelo valor e pelo foco do produto. III descreve uma autoridade hierárquica direta incompatível com a autogestão da equipe. Planejamento incremental continua sendo planejamento: não se deve concluir do texto que métodos ágeis eliminam toda forma de planejar ou documentar.",
+      "notes": [
+        "Conferência visual assistida da página 24 do Bacharelado feita. A abertura diz substituir o gerenciamento baseado em planos pelo planejamento incremental; não diz eliminar todo planejamento."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q16",
+      "topic": "Álgebra booleana e circuitos lógicos",
+      "explanation": "",
+      "notes": [
+        "O documento oficial aponta B. A correspondência entre o circuito e a expressão deve ser reconstruída a partir das portas e bolhas de negação da figura; não se pode validar B somente pelos rótulos X¹, X² e X³ disponíveis no texto.",
+        "Preservar índices de variáveis, parênteses e negações das alternativas; o texto linearizado não descreve a topologia do circuito."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Circuito combinacional e símbolos de portas na página 25 do Bacharelado, ainda não renderizados nesta revisão."
+        },
+        {
+          "code": "CONFERIR_GLIFOS",
+          "note": "A extração contém símbolos trocados, caracteres privados ou índices deslocados; validar cada glifo no original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q17",
+      "topic": "Concorrência e exclusão mútua",
+      "explanation": "O gabarito C considera I verdadeira e II falsa. Em um contexto apropriado de núcleo e um único processador, desabilitar interrupções pode impedir preempção durante uma região crítica. Isso não protege automaticamente contra outro processador: desabilitar interrupções locais não bloqueia todos os núcleos. Logo, a alegação de maior eficiência geral em multiprocessadores não justifica a técnica.",
+      "notes": [
+        "Conferência visual assistida da página 27 do Bacharelado, que contém as asserções e opções; o diagrama temporal da página 26 ainda precisa ser conferido e integrado.",
+        "Há glifo privado e índices T1–T4 separados no texto do diagrama. Não reproduzir esse texto como descrição acessível completa."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Cronograma de entrada/saída de regiões críticas na página 26 e continuação na página 27."
+        },
+        {
+          "code": "CONFERIR_SIMBOLOS",
+          "note": "Há símbolos em fonte própria: confrontar os operadores e índices com a página original antes de aprovar a transcrição."
+        },
+        {
+          "code": "CONFERIR_GLIFOS",
+          "note": "A extração contém símbolos trocados, caracteres privados ou índices deslocados; validar cada glifo no original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q18",
+      "topic": "Aprendizado supervisionado e não supervisionado",
+      "explanation": "O gabarito E seleciona I, III e IV. Regressão linear usa alvos conhecidos, enquanto aprendizado não supervisionado procura estruturas e padrões sem esses rótulos. II descreve um erro calculado contra saída desejada, típico do aprendizado supervisionado. IV expressa capacidade de generalizar após treinamento, não uma garantia de precisão em quaisquer dados; a qualidade depende de amostra, modelo e avaliação.",
+      "notes": [
+        "Conferência visual assistida da parte inferior da página 27 do Bacharelado feita, incluindo as quatro afirmações e cinco opções."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q19",
+      "topic": "Personas, cenários e elicitação de requisitos",
+      "explanation": "O gabarito D seleciona I, II e IV. Personas e cenários tornam situações de uso mais concretas, ajudam a antecipar efeitos das decisões de projeto e lembram à equipe as necessidades de pessoas reais. Essas técnicas narrativas não constituem, por si só, uma especificação formal e livre de ambiguidades, como sugere III.",
+      "notes": [
+        "Conferência visual assistida da página 28 do Bacharelado feita. Não houve necessidade de figura para interpretar as afirmações."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q20",
+      "topic": "Busca sequencial e busca binária",
+      "explanation": "A interpretação pretendida pelo gabarito A é I, apenas: as buscas pelo valor 15 devolvem o índice 7 no vetor ordenado; busca sequencial tem custo linear no pior caso, enquanto busca binária tem custo logarítmico; a segunda função é recursiva. Essa análise pressupõe a leitura numérica dos glifos ambíguos no código impresso, que exige conferência antes de preparar uma transcrição executável.",
+      "notes": [
+        "Conferência visual assistida da página 29 do Bacharelado: o código está disposto em 26 linhas; a extração cola várias delas e perde a estrutura de blocos.",
+        "O PDF e a extração exibem ambiguidades em funcaol/funcao1 e m+l/m+1, além de aspas tipográficas em printf. Distinguir erro da fonte de erro de extração, sem normalizar o código silenciosamente."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_CODIGO",
+          "note": "Preservar linhas, indentação, operadores e nomes; código importado do PDF é conteúdo não confiável e não deve ser executado."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q21",
+      "topic": "Redes e dispositivos de interconexão",
+      "explanation": "O gabarito E descreve a função de um gateway de transporte ao interligar protocolos de transporte diferentes. Repetidores não interpretam cabeçalhos próprios de quadros; hubs não arbitram colisões com buffers como um switch; bridges utilizam endereços de enlace, não precisam extrair o destino do pacote de rede. A opção D mistura uma descrição de roteadores com uma generalização inadequada sobre broadcast.",
+      "notes": [
+        "A extração mistura textos de dois diagramas, inclusive sequência de cabeçalhos e camadas. Conferir a topologia e o alinhamento original antes de oferecer uma descrição acessível."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Dois diagramas de dispositivos por camada e de encapsulamento na página 30, ainda sem inspeção visual neste relatório."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q22",
+      "topic": "Modelagem relacional e chaves estrangeiras",
+      "explanation": "O gabarito A mantém PESSOA e TIPO_PET em tabelas próprias e registra no PET referências ao tipo e ao adotante. Essa organização é compatível com o mapeamento esperado dos relacionamentos mostrados. A conferência da figura deve confirmar as cardinalidades e os identificadores sublinhados: o texto extraído não preserva esses elementos suficientemente.",
+      "notes": [
+        "Não inferir nulabilidade ou exclusividade de adoção a partir da sequência de rótulos linearizados; conferir as cardinalidades junto a cada entidade e relação."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "DER e sublinhados das chaves na página 31, ainda sem inspeção visual neste relatório."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q23",
+      "topic": "Árvores binárias de busca e percursos",
+      "explanation": "O gabarito C apresenta o percurso em ordem crescente: −2, 5, 7, 10, 18, 23, 25, 27, 34, 36, 40. Em uma árvore binária de busca, visitar subárvore esquerda, raiz e subárvore direita produz essa ordem. A lista de inserção deixa sete elementos à esquerda de 27 e três à direita; com dez níveis, o limite de uma árvore binária é 2^10−1 = 1023 nós, não 1024.",
+      "notes": [
+        "A solução do percurso pode ser derivada da lista numérica, mas o exemplo ilustrativo de árvore faz parte do enunciado e continua pendente de integração."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Árvore com rótulos J, D, O, A, L, R, K e M na página 32 do Bacharelado, ainda não renderizada nesta revisão."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q24",
+      "topic": "Criptografia, integridade e proteção contra replay",
+      "explanation": "O documento oficial marca E, isto é, I, II e IV. III descreve incorretamente a criptografia simétrica como um par de chaves distintas. Há, porém, uma ressalva técnica em II: um IV normalmente modifica o estado de cifração, não constitui por si uma chave nova, e sua variabilidade não basta para rejeitar a repetição de um ciphertext válido. Proteção contra replay depende também do protocolo e de estado autenticado, como contadores e rejeição de duplicatas. Preservar E com essa ressalva até revisão especializada.",
+      "notes": [
+        "Conferência visual assistida da página 33 do Bacharelado: a redação problemática de II existe no original.",
+        "Verificação de assinatura exige uma chave pública cuja autenticidade seja confiável; um hash simples detecta diferenças, mas sozinho não autentica o remetente. Não concluir que o protocolo real do WhatsApp seja exatamente o esquema hipotético das afirmações."
+      ],
+      "issues": [
+        {
+          "code": "INCONSISTENCIA_CRIPTOGRAFICA",
+          "note": "II vincula IV variável à composição de chaves distintas e à prevenção de reprodução sem especificar mecanismos adicionais. O comentário deve distinguir IV/nonce, derivação de chaves e antirreplay, mantendo a chave oficial E sem apresentar a afirmação como regra geral."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q25",
+      "topic": "Computação em nuvem e modelos de serviço",
+      "explanation": "O gabarito B seleciona I e IV. Em SaaS, a administração da aplicação e da infraestrutura subjacente cabe ao provedor; em IaaS, o consumidor controla sistemas operacionais, armazenamento e aplicações, sem administrar a infraestrutura física da nuvem. II confunde elasticidade de capacidade com tempo de disponibilidade. III não exprime a definição geral de nuvem comunitária: ela atende uma comunidade com preocupações compartilhadas e não exige que cada organização forneça recursos próprios.",
+      "notes": [
+        "Conferência visual assistida da página 34 do Bacharelado feita.",
+        "A definição comunitária da questão deve ser explicada pelo seu escopo e pela ausência de obrigação de propriedade individual; não afirmar que organizações nunca possam compartilhar recursos que lhes pertençam."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q26",
+      "topic": "Interfaces adaptativas e interação humano-computador",
+      "explanation": "O gabarito A seleciona apenas I. Fragmentos condicionais e variantes de páginas alteram o conteúdo apresentado. Layouts e guias de estilo pertencem à apresentação, e técnicas de anotar, ocultar, ordenar ou orientar links pertencem à navegação. II e III trocam esses níveis de adaptação.",
+      "notes": [
+        "Conferência visual assistida do Bacharelado, página 35, e da coluna esquerda da página 33 da Licenciatura feita. A diferença de quebra de linha entre os relatórios não muda o conteúdo."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q27",
+      "topic": "Estatística e distribuição normal",
+      "explanation": "O gabarito D corresponde ao intervalo [151, 191], que é 171 ± 2×10. Sob a aproximação normal sugerida pelo histograma, cerca de 95,44% dos valores estão a até dois desvios-padrão da média. Média e desvio-padrão isolados não garantem essa porcentagem para qualquer distribuição; a forma do histograma e a natureza aproximada da pergunta precisam ser explicitadas.",
+      "notes": [
+        "A conta de dois desvios-padrão foi refeita; a distribuição empírica do histograma ainda não foi inspecionada visualmente nesta revisão."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Histograma com média e desvio-padrão na página 36, indispensável para justificar a aproximação normal."
+        },
+        {
+          "code": "CONFERIR_ESTRUTURA_TABULAR",
+          "note": "Conferir linhas, colunas, alinhamento e associação de valores; a sequência textual não preserva a tabela."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q28",
+      "topic": "Arquitetura de computadores e pipeline",
+      "explanation": "O gabarito B seleciona I e IV no modelo ideal descrito. Uma bolha avança pelos estágios, e a previsão de destino pode permitir a busca de instruções após um desvio. II propõe pular um estágio, o que não corresponde ao pipeline fixo apresentado; III atribui a S1 a busca de dados, quando essa é a função de outro estágio. BTB e previsão não garantem a ausência de bolhas diante de erros de previsão.",
+      "notes": [
+        "A explicação de IV deve manter a possibilidade do caso ideal e não prometer que toda instrução de desvio terá penalidade zero."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Diagrama dos cinco estágios e cronograma de nove ciclos nas páginas 36–37, ainda sem inspeção visual neste relatório."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q29",
+      "topic": "Processamento de imagens e morfologia matemática",
+      "explanation": "O documento de respostas classifica a questão como ANULADA. Não atribuir uma alternativa correta nem usá-la como item pontuável. Os exemplos visuais e as formulações sobre mínimos e máximos devem ser preservados para consulta, sem inventar o motivo oficial da anulação.",
+      "notes": [
+        "Anulação conferida visualmente no gabarito definitivo do Bacharelado, página 1.",
+        "As operações de mínimo/máximo e as imagens precisam ser revistas em conjunto; a ausência de figura impede uma transcrição fiel apenas em texto."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Exemplos de erosão e dilatação na página 38, ainda sem inspeção visual neste relatório."
+        },
+        {
+          "code": "ANULADA_OFICIAL",
+          "note": "Manter anulada, sem alternativa correta nem pontuação. Não inferir ou inventar o motivo da anulação."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q30",
+      "topic": "Compiladores e etapas de análise",
+      "explanation": "O gabarito E seleciona I, III e IV. A análise sintática verifica a estrutura da sequência de tokens; a semântica verifica coerência de significado, e a otimização pode melhorar o código intermediário visando execução mais eficiente. II é falsa porque categorias e regras léxicas dependem da linguagem, não são uma classificação idêntica para Java, Pascal e qualquer outra linguagem.",
+      "notes": [
+        "Conferência visual assistida da página 39 do Bacharelado feita. A referência bibliográfica foi preservada como está no documento; não foi validada externamente.",
+        "A introdução descreve uma cadeia típica de compilação; não tratá-la como definição de todo compilador ou de todo alvo de código."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q31",
+      "topic": "Máquinas de Turing e linguagens livres de contexto",
+      "explanation": "O documento oficial seleciona E, isto é, II, III e IV. 110011 é um palíndromo de comprimento par, e essa linguagem pode ser reconhecida por um autômato com pilha não determinístico. A conferência das afirmações sobre quatro e oito movimentos exige rastrear a máquina do diagrama, que ainda não foi inspecionado nesta revisão. Não se registra uma simulação confirmada sem esse rastreio.",
+      "notes": [
+        "A linguagem de palíndromos pares é livre de contexto; isso não significa que um autômato com pilha determinístico sem separador reconheça automaticamente a mesma linguagem.",
+        "Conferir rótulos de leitura/escrita, direção e estados, pois a extração mistura transições de ramos diferentes."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Máquina de Turing na página 40, essencial para validar a contagem de movimentos em I e II."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q32",
+      "topic": "Quicksort e complexidade",
+      "explanation": "O gabarito A seleciona I e III. O algoritmo é uma variante de quicksort, com O(n log n) comparações em média e possibilidade de O(n) de pilha no pior caso de partições desequilibradas. A troca de elementos na partição não preserva estabilidade em geral. Escolher sempre o primeiro pivô em vez do último não oferece uma melhoria universal.",
+      "notes": [
+        "Conferência visual assistida da página 41 do Bacharelado feita. A indentação diferencia os comandos dentro do laço da troca final do pivô; o texto extraído a perde.",
+        "I se sustenta como limite de pior caso para a pilha, não como espaço auxiliar necessariamente linear em todas as entradas."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_CODIGO",
+          "note": "Preservar linhas, indentação, operadores e nomes; código importado do PDF é conteúdo não confiável e não deve ser executado."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q33",
+      "topic": "Programação lógica e relações de parentesco",
+      "explanation": "O documento de respostas classifica a questão como ANULADA. Preservar essa situação, sem selecionar D ou outra regra por conta própria e sem atribuir um motivo de anulação não documentado. A base de fatos e a direção dos argumentos precisam ser transcritas literalmente para estudo e eventual comentário especializado.",
+      "notes": [
+        "Anulação conferida visualmente no gabarito definitivo do Bacharelado, página 1.",
+        "Embora o extrator não tenha marcado “codigo”, o item contém regras Prolog; conferir pontuação, nomes e aridade dos predicados, inclusive o terminador de mulher(luiza)."
+      ],
+      "issues": [
+        {
+          "code": "ANULADA_OFICIAL",
+          "note": "Manter anulada, sem alternativa correta nem pontuação. Não inferir ou inventar o motivo da anulação."
+        },
+        {
+          "code": "CONFERIR_CODIGO",
+          "note": "As regras Prolog são código, embora o extrator não tenha detectado esse formato; preservar pontuação, aridade e direção dos predicados."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q34",
+      "topic": "Grafos e algoritmo de Dijkstra",
+      "explanation": "O gabarito C corresponde a A=5, B=9, C=∞, D=0, E=4, F=1 e G=2. Na primeira iteração, D relaxa seus arcos de saída; na segunda, F é o vértice de menor estimativa e melhora E para 4 e descobre G com 2. C ainda não foi alcançado. O −1 das opções é apenas a convenção do enunciado para infinito, não um peso negativo.",
+      "notes": [
+        "Conferência visual assistida da página 43 do Bacharelado feita. Verificados os arcos dirigidos D→A/B/E/F e F→E/G utilizados nas duas iterações.",
+        "A tabela linearizada de alternativas deve manter a associação entre cada vértice e seu custo."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Dígrafo dirigido com pesos e alternativas tabulares na página 43, ainda sem recurso de figura integrado à questão."
+        },
+        {
+          "code": "CONFERIR_ESTRUTURA_TABULAR",
+          "note": "Conferir linhas, colunas, alinhamento e associação de valores; a sequência textual não preserva a tabela."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-bacharelado-exam",
+      "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "key": "Q35",
+      "topic": "Sistemas distribuídos e escalabilidade",
+      "explanation": "O gabarito D associa a adição de capacidade à escalabilidade. Sistemas distribuídos não exigem um relógio físico global perfeito nem dispositivos homogêneos; uma falha individual não implica, por definição, paralisação total. Transparência descreve a ocultação de aspectos da distribuição, não explica sozinha o controle de acessos concorrentes a um recurso.",
+      "notes": [
+        "Conferência visual assistida da página 43 do Bacharelado feita. A referência impressa usa “Sistemas distribuídos”; o texto extraído começa o título em minúsculas."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_REFERENCIA",
+          "note": "Conferir capitalização e separação das referências bibliográficas; o extrator identificou versalete."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "D1",
+      "topic": "Arte, cultura e liberdade de expressão",
+      "explanation": "Análise assistida do comando: a resposta deve relacionar as tensões entre arte, cultura e censura à liberdade de expressão do art. 5º, IX, e apresentar duas ações educativas pertinentes. Este resumo não é um padrão oficial de resposta nem uma rubrica de pontuação.",
+      "notes": [
+        "O bloco extraído contém a numeração de linhas 1 a 15 da folha de rascunho; removê-la do enunciado após conferência.",
+        "Conferir a capitalização dos títulos bibliográficos e de “Capítulo I”.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/D1 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Quadros de rascunho e textos nas páginas 2 e 3; ainda falta conferência visual dessas páginas neste relatório."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "D1"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "D2",
+      "topic": "Cidades inteligentes e sustentabilidade",
+      "explanation": "Análise assistida do comando: o item a pede uma explicação de como cidades inteligentes contribuem para o desenvolvimento sustentável; o item b pede uma intervenção urbana com impacto social. Tecnologia, governança, inclusão e sustentabilidade devem ser articuladas. Não se atribui pontuação sem o padrão oficial de resposta.",
+      "notes": [
+        "Retirar a numeração 1 a 15 do rascunho sem retirar os itens a/b nem seus valores.",
+        "A referência “Cadernos FGV projetos” precisa ser confrontada com a capitalização impressa.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/D2 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Texto e quadro de rascunho da página 4 ainda não foram renderizados nesta revisão."
+        },
+        {
+          "code": "CONFERIR_REFERENCIA",
+          "note": "Conferir capitalização e separação das referências bibliográficas; o extrator identificou versalete."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "D2"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q1",
+      "topic": "Desigualdade e mobilidade social",
+      "explanation": "O gabarito E relaciona a baixa mobilidade ao acesso desigual a educação, saúde e oportunidades de trabalho. Esses fatores ajudam a perpetuar a pobreza entre gerações. As demais opções acrescentam explicações demográficas ou ancestrais não sustentadas pelo texto, responsabilizam a organização dos pobres ou confundem o ciclo de pobreza com uma alternância de subida e queda social.",
+      "notes": [
+        "Inspeção visual assistida do Bacharelado, página 5: enunciado e cinco alternativas presentes. O texto trata dos dados históricos de 2018, sem constituir estatística atualizada.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q1 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q1"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q2",
+      "topic": "Alimentação e desperdício",
+      "explanation": "O gabarito C considera I verdadeira e II falsa. O texto II diferencia exigência puramente estética, que pode aumentar perdas, de cuidados de integridade e higiene, que podem reduzi-las. Por isso não afirma uma proporcionalidade geral entre exigência de aparência e desperdício. A validade de I depende também da imagem do texto I, que ainda precisa ser incorporada e conferida.",
+      "notes": [
+        "A transcrição começa por uma referência de imagem, sem o conteúdo visual do texto I. Não usar a explicação como confirmação da imagem ausente.",
+        "A conjunção extraída como “pORQuE” deve ser conferida e preservada como o “PORQUE” impresso.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q2 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Imagem do texto I na página 6 e continuação na página 7 não foram renderizadas nesta revisão."
+        },
+        {
+          "code": "CORRIGIR_VERSALETE",
+          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q2"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q3",
+      "topic": "Mobilidade urbana e políticas públicas",
+      "explanation": "O gabarito B seleciona apenas II: pedalar pode reduzir emissões no deslocamento e proporcionar atividade física. I dispensa indevidamente infraestrutura segura, e III extrapola o texto ao afirmar que a bicicleta passou a prevalecer nas cidades europeias após a guerra. A charge citada no texto II deve acompanhar o item; esta análise textual não substitui sua conferência.",
+      "notes": [
+        "Conferir a charge do texto II antes de completar a transcrição. As afirmações históricas introdutórias não foram verificadas contra bibliografia externa nesta revisão.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q3 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Charge da página 8 ainda ausente do conteúdo importável."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q3"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q4",
+      "topic": "Trabalho em plataformas digitais",
+      "explanation": "No contexto apresentado, o gabarito B considera ambas as asserções verdadeiras, sem relação de justificação: os custos, as jornadas e os problemas de saúde descritos em II não são o fundamento lógico da caracterização do vínculo de trabalho em I. O comentário deve situar a questão no texto de 2020, sem apresentar sua descrição jurídica como regra universal ou atual de todo trabalho em plataformas.",
+      "notes": [
+        "Conferência visual assistida da página 9 do Bacharelado: “PORQUE” está impresso em maiúsculas; a forma “pORQuE” é um defeito de extração.",
+        "Não transformar a descrição histórica de informalidade em orientação jurídica atual ou presumir que todo trabalhador deixa de contribuir para a Previdência.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q4 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CORRIGIR_VERSALETE",
+          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q4"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q5",
+      "topic": "Saúde indígena e direitos fundamentais",
+      "explanation": "O gabarito A seleciona somente I. A gravidade do problema demanda atenção aos direitos fundamentais; III nega incorretamente a proteção constitucional aos povos indígenas. A prevenção não pode ignorar as especificidades culturais e etárias das comunidades. A rejeição de II depende da leitura do mapa, que não foi conferido visualmente nesta revisão; não se inventam os estados destacados.",
+      "notes": [
+        "A página 11 do Bacharelado foi inspecionada visualmente, mas o mapa e o texto inicial da página 10 ainda precisam de conferência.",
+        "O próprio texto chama 15,2 de “três vezes” 5,7: trata-se de aproximação grosseira, pois a razão é cerca de 2,67. Manter a transcrição oficial e contextualizar, sem corrigir o número silenciosamente.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q5 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Mapa de distribuição por estado e faixa etária na página 10; essencial para avaliar II."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q5"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q6",
+      "topic": "Pandemia e desigualdades sociais",
+      "explanation": "O gabarito A considera I e II verdadeiras e II uma justificativa de I. Condições precárias de trabalho podem ampliar a exposição ao contágio e ajudam a explicar a vulnerabilidade social e o impacto desigual apontado no texto. A formulação de II é uma hipótese explicativa, não uma afirmação de que toda a diferença decorra de um único fator.",
+      "notes": [
+        "Conferência visual assistida da página 11 do Bacharelado: o conector impresso é “PORQUE”, diferente da caixa alternada produzida pelo extrator.",
+        "As estimativas de expectativa de vida são as do estudo citado à época da prova; não foram atualizadas.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q6 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CORRIGIR_VERSALETE",
+          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q6"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q7",
+      "topic": "Informação em saúde e letramento digital",
+      "explanation": "O gabarito C seleciona I e II. Ambos os textos exigem cuidado com a qualidade da informação; o texto I reconhece benefícios de informação confiável sobre hábitos e prevenção. O texto II enfatiza riscos do autodiagnóstico e da automedicação, sem formular a defesa irrestrita descrita em III.",
+      "notes": [
+        "Conferência visual assistida da página 12 do Bacharelado: o título bibliográfico começa “A saúde na mídia”; a extração começa com “a saúde na mídia”.",
+        "A questão aborda avaliação de informação e não oferece recomendação clínica.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q7 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_REFERENCIA",
+          "note": "Conferir capitalização e separação das referências bibliográficas; o extrator identificou versalete."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q7"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q8",
+      "topic": "Democracia e participação das minorias",
+      "explanation": "O gabarito oficial D seleciona I, III e IV: o interesse comum não se reduz à preferência da maioria, e a concepção consensual procura ampliar a participação, incluindo minorias. A exclusão de II requer atenção à interpretação de “consenso entre situação e oposição”; a afirmação não usa a palavra “unanimidade”. A explicação deve registrar essa nuance e não acrescentar uma exigência inexistente no enunciado.",
+      "notes": [
+        "Conferência visual assistida da página 13 do Bacharelado feita: a redação de II coincide com a extração.",
+        "Preservar D como resposta do documento oficial. A dúvida diz respeito à justificativa pedagógica da exclusão de II, não a uma alteração do gabarito.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q8 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "AMBIGUIDADE_INTERPRETATIVA",
+          "note": "A redação de II pode ser lida como busca de consenso, coerente com trechos do texto-base. Um revisor de conteúdo deve fundamentar sua exclusão sem atribuir ao item uma exigência explícita de unanimidade."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q8"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "D3",
+      "topic": "Lógica proposicional e satisfatibilidade",
+      "explanation": "Resolução assistida a conferir com o padrão oficial: a fórmula 3, ¬b ∨ b, é uma tautologia; P é insatisfazível, pois b ∧ a exige a=b=V e torna a → ¬b falsa. Q é satisfazível, por exemplo com a=V. As atribuições que satisfazem Q têm a=V, de modo que também satisfazem ¬b → a; portanto a fórmula 6 é consequência de Q.",
+      "notes": [
+        "Na página 14 do Bacharelado, os símbolos impressos são →, ∧, ∨ e ¬; o relatório os substitui por ®, Ù, Ú e Ø. A tabela precisa manter suas oito colunas e quatro linhas de valores.",
+        "Conferência visual assistida da página 14 feita; o comando da página 15 foi lido na extração, sem renderização adicional.",
+        "Retirar a numeração das linhas de rascunho e vincular o padrão de resposta oficial antes da revisão editorial.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/D3 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Tabela-verdade e fórmulas indispensáveis, com símbolos corrompidos na extração."
+        },
+        {
+          "code": "CONFERIR_SIMBOLOS",
+          "note": "Há símbolos em fonte própria: confrontar os operadores e índices com a página original antes de aprovar a transcrição."
+        },
+        {
+          "code": "CONFERIR_GLIFOS",
+          "note": "A extração contém símbolos trocados, caracteres privados ou índices deslocados; validar cada glifo no original."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "D3"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "D4",
+      "topic": "Circuitos digitais e somador completo",
+      "explanation": "Resolução assistida a conferir: para um somador completo de um bit, S = A ⊕ B ⊕ Cin e Cout = (A ∧ B) ∨ (A ∧ Cin) ∨ (B ∧ Cin). A tabela deve contemplar as oito combinações das entradas. A ilustração do circuito e os critérios de avaliação ainda precisam ser conferidos com o padrão oficial; não há rubrica aprovada aqui.",
+      "notes": [
+        "Preservar o significado de Cin/Cout, o diagrama e as oito linhas da tabela-verdade; a numeração do rascunho não pertence ao enunciado.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/D4 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Diagrama de entradas e saídas da página 16 ainda não renderizado nesta revisão."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "D4"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "D5",
+      "topic": "Objetos de aprendizagem e educação remota",
+      "explanation": "Análise assistida do comando: são exigidas três características técnicas e três características pedagógicas, cada uma descrita e relacionada ao planejamento para suspensão de aulas presenciais. Não basta enumerar seis termos sem explicar sua função. A seleção e a pontuação de características ainda dependem do padrão oficial de resposta; nenhum conjunto é registrado aqui como rubrica aprovada.",
+      "notes": [
+        "Conferência visual assistida da página 17 da Licenciatura feita: o alerta gráfico corresponde ao quadro de rascunho, sem imagem de conteúdo indispensável.",
+        "Retirar os números 1 a 15 da área de rascunho e manter separados os dois textos e o comando."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Quadro de rascunho da página 17; nenhuma figura de conteúdo identificada na inspeção assistida."
+        },
+        {
+          "code": "CONFERIR_PADRAO_DISCURSIVO",
+          "note": "Vincular e conferir o padrão oficial de resposta e sua rubrica; o resumo assistido não constitui correção aprovada."
+        },
+        {
+          "code": "REMOVER_LINHAS_RASCUNHO",
+          "note": "O texto extraído inclui números 1 a 15 da área de resposta; retirá-los do enunciado após conferência, mantendo itens e valores."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q9",
+      "topic": "Sistemas operacionais e escalonamento",
+      "explanation": "O gabarito E associa escalonamento por prioridades a sistemas interativos. RMS é empregado em tarefas periódicas de tempo real; tarefa mais curta primeiro é tipicamente discutida em processamento em lote; round-robin favorece resposta em sistemas interativos, sem garantir por si só prazos de tempo real. A opção A usa FILO, não FIFO. A adequação concreta depende também das prioridades, da preempção e das cargas de trabalho.",
+      "notes": [
+        "Conferência visual assistida da coluna esquerda da página 19 do Bacharelado: todas as alternativas pertencem a Q9 e não se misturam com Q10.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q9 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q9"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q10",
+      "topic": "Estruturas de dados lineares",
+      "explanation": "O gabarito B corresponde a deque, lista simplesmente ligada, pilha e fila. Um deque permite inserção nas duas extremidades; uma lista simplesmente ligada conecta cada nó ao próximo; a pilha remove em ordem LIFO e a fila em ordem FIFO. As outras combinações trocam essas propriedades ou atribuem às listas operações que não as definem.",
+      "notes": [
+        "Conferência visual assistida da coluna direita da página 19 do Bacharelado: as quatro classes e as cinco opções estão presentes.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q10 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q10"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q11",
+      "topic": "Aprendizado profundo e classificação de imagens",
+      "explanation": "O gabarito D seleciona II e IV. Redes convolucionais são adequadas à estrutura espacial de imagens, e mais exemplos úteis podem melhorar a generalização, embora aumentem o custo de treino. Mais camadas ou neurônios não asseguram simultaneamente maior acurácia e menor tempo. Redes recorrentes não são a escolha geral sugerida para esta tarefa de imagens estáticas.",
+      "notes": [
+        "A figura da arquitetura de rede inclui conexões, pesos e função de perda que não são preservados pelo texto linearizado; a análise das afirmações não libera a omissão desse diagrama.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q11 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Rede neural e fluxo de treinamento na página 20, ainda sem inspeção visual neste relatório."
+        },
+        {
+          "code": "CONFERIR_SIMBOLOS",
+          "note": "Há símbolos em fonte própria: confrontar os operadores e índices com a página original antes de aprovar a transcrição."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q11"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q12",
+      "topic": "LGPD e proteção de dados pessoais",
+      "explanation": "O gabarito B seleciona I e III. Dados sensíveis recebem proteção específica, e o titular dispõe de direitos de confirmação, acesso, correção e, nas hipóteses legais, eliminação. II ignora que a reversibilidade da anonimização pode recolocar dados no âmbito da lei; IV atribui à ANPD poder de modificar a própria legislação, que não se confunde com regulação e fiscalização. Eliminação não é um direito absoluto diante das bases legais de retenção.",
+      "notes": [
+        "Conferência visual assistida da página 21 do Bacharelado: a frase “em vigência desde o final de 2018” está no original e não resulta de OCR.",
+        "A vigência da Lei 13.709/2018 é escalonada: distinguir publicação, dispositivos relativos à autoridade e vigência das obrigações/sanções ao contextualizar o art. 65. Preservar o texto histórico e o gabarito B.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q12 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_CONTEXTO_LEGAL",
+          "note": "A abertura generaliza a vigência da LGPD como se todo o regime vigorasse desde o fim de 2018. Conferir o art. 65 e contextualizar as datas por grupo de dispositivos antes de aprovar o comentário."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q12"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q13",
+      "topic": "Desenvolvimento iterativo e acessibilidade",
+      "explanation": "O gabarito oficial é E: testes de usabilidade devem considerar critérios de acessibilidade. A interpretação esperada rejeita adiar usabilidade ao último ciclo e tratar mudanças de requisitos como algo a evitar por princípio. Contudo, D afirma apenas que um subsistema executável poderá ser usado pelo cliente como protótipo, possibilidade plausível em um uso amplo de protótipo evolutivo. Essa ambiguidade deve ser avaliada antes da publicação de uma justificativa definitiva.",
+      "notes": [
+        "Conferência visual assistida da página 22 do Bacharelado: a redação de D está íntegra; a ambiguidade não surgiu na extração.",
+        "Não alterar E, escolher D ou afirmar anulação sem documentação oficial.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q13 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "AMBIGUIDADE_CONCEITUAL",
+          "note": "D pode ser defensável se “protótipo” abranger o uso de um incremento executável para validação pelo cliente. Justificar a distinção entre incremento e protótipo no contexto da bibliografia, mantendo E como chave oficial."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q13"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q14",
+      "topic": "Arquitetura de Von Neumann",
+      "explanation": "O gabarito C considera I verdadeira e II falsa. A organização de programa armazenado permanece uma referência arquitetural, mas busca antecipada de instruções não é uma garantia definidora da arquitetura de Von Neumann nem dispensa universalmente acesso à memória. O comentário deve separar o modelo arquitetural de otimizações como prefetch e pipeline.",
+      "notes": [
+        "A página 23 do Bacharelado foi inspecionada: não contém figura. O alerta do extrator vem da palavra “mapa” em uma explicação sobre GPS.",
+        "A introdução contém simplificações históricas (“primeiro computador”, década atribuída ao conceito) que não foram validadas contra bibliografia histórica. Não repeti-las como fatos incontroversos no comentário.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q14 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_ALERTA_VISUAL",
+          "note": "Alerta heurístico de menção a mapa; nenhuma figura está presente na página 23 conferida."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q14"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q15",
+      "topic": "Scrum e equipes autogerenciáveis",
+      "explanation": "O gabarito C seleciona I e II. O Scrum Master promove a compreensão e a aplicação do Scrum; o Product Owner responde pelo valor e pelo foco do produto. III descreve uma autoridade hierárquica direta incompatível com a autogestão da equipe. Planejamento incremental continua sendo planejamento: não se deve concluir do texto que métodos ágeis eliminam toda forma de planejar ou documentar.",
+      "notes": [
+        "Conferência visual assistida da página 24 do Bacharelado feita. A abertura diz substituir o gerenciamento baseado em planos pelo planejamento incremental; não diz eliminar todo planejamento.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q15 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q15"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q16",
+      "topic": "Álgebra booleana e circuitos lógicos",
+      "explanation": "",
+      "notes": [
+        "O documento oficial aponta B. A correspondência entre o circuito e a expressão deve ser reconstruída a partir das portas e bolhas de negação da figura; não se pode validar B somente pelos rótulos X¹, X² e X³ disponíveis no texto.",
+        "Preservar índices de variáveis, parênteses e negações das alternativas; o texto linearizado não descreve a topologia do circuito.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q16 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Circuito combinacional e símbolos de portas na página 25 do Bacharelado, ainda não renderizados nesta revisão."
+        },
+        {
+          "code": "CONFERIR_GLIFOS",
+          "note": "A extração contém símbolos trocados, caracteres privados ou índices deslocados; validar cada glifo no original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q16"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q17",
+      "topic": "Concorrência e exclusão mútua",
+      "explanation": "O gabarito C considera I verdadeira e II falsa. Em um contexto apropriado de núcleo e um único processador, desabilitar interrupções pode impedir preempção durante uma região crítica. Isso não protege automaticamente contra outro processador: desabilitar interrupções locais não bloqueia todos os núcleos. Logo, a alegação de maior eficiência geral em multiprocessadores não justifica a técnica.",
+      "notes": [
+        "Conferência visual assistida da página 27 do Bacharelado, que contém as asserções e opções; o diagrama temporal da página 26 ainda precisa ser conferido e integrado.",
+        "Há glifo privado e índices T1–T4 separados no texto do diagrama. Não reproduzir esse texto como descrição acessível completa.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q17 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Cronograma de entrada/saída de regiões críticas na página 26 e continuação na página 27."
+        },
+        {
+          "code": "CONFERIR_SIMBOLOS",
+          "note": "Há símbolos em fonte própria: confrontar os operadores e índices com a página original antes de aprovar a transcrição."
+        },
+        {
+          "code": "CONFERIR_GLIFOS",
+          "note": "A extração contém símbolos trocados, caracteres privados ou índices deslocados; validar cada glifo no original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q17"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q18",
+      "topic": "Aprendizado supervisionado e não supervisionado",
+      "explanation": "O gabarito E seleciona I, III e IV. Regressão linear usa alvos conhecidos, enquanto aprendizado não supervisionado procura estruturas e padrões sem esses rótulos. II descreve um erro calculado contra saída desejada, típico do aprendizado supervisionado. IV expressa capacidade de generalizar após treinamento, não uma garantia de precisão em quaisquer dados; a qualidade depende de amostra, modelo e avaliação.",
+      "notes": [
+        "Conferência visual assistida da parte inferior da página 27 do Bacharelado feita, incluindo as quatro afirmações e cinco opções.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q18 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q18"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q19",
+      "topic": "Personas, cenários e elicitação de requisitos",
+      "explanation": "O gabarito D seleciona I, II e IV. Personas e cenários tornam situações de uso mais concretas, ajudam a antecipar efeitos das decisões de projeto e lembram à equipe as necessidades de pessoas reais. Essas técnicas narrativas não constituem, por si só, uma especificação formal e livre de ambiguidades, como sugere III.",
+      "notes": [
+        "Conferência visual assistida da página 28 do Bacharelado feita. Não houve necessidade de figura para interpretar as afirmações.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q19 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q19"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q20",
+      "topic": "Busca sequencial e busca binária",
+      "explanation": "A interpretação pretendida pelo gabarito A é I, apenas: as buscas pelo valor 15 devolvem o índice 7 no vetor ordenado; busca sequencial tem custo linear no pior caso, enquanto busca binária tem custo logarítmico; a segunda função é recursiva. Essa análise pressupõe a leitura numérica dos glifos ambíguos no código impresso, que exige conferência antes de preparar uma transcrição executável.",
+      "notes": [
+        "Conferência visual assistida da página 29 do Bacharelado: o código está disposto em 26 linhas; a extração cola várias delas e perde a estrutura de blocos.",
+        "O PDF e a extração exibem ambiguidades em funcaol/funcao1 e m+l/m+1, além de aspas tipográficas em printf. Distinguir erro da fonte de erro de extração, sem normalizar o código silenciosamente.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q20 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_CODIGO",
+          "note": "Preservar linhas, indentação, operadores e nomes; código importado do PDF é conteúdo não confiável e não deve ser executado."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q20"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q21",
+      "topic": "Redes e dispositivos de interconexão",
+      "explanation": "O gabarito E descreve a função de um gateway de transporte ao interligar protocolos de transporte diferentes. Repetidores não interpretam cabeçalhos próprios de quadros; hubs não arbitram colisões com buffers como um switch; bridges utilizam endereços de enlace, não precisam extrair o destino do pacote de rede. A opção D mistura uma descrição de roteadores com uma generalização inadequada sobre broadcast.",
+      "notes": [
+        "A extração mistura textos de dois diagramas, inclusive sequência de cabeçalhos e camadas. Conferir a topologia e o alinhamento original antes de oferecer uma descrição acessível.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q21 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Dois diagramas de dispositivos por camada e de encapsulamento na página 30, ainda sem inspeção visual neste relatório."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q21"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q22",
+      "topic": "Modelagem relacional e chaves estrangeiras",
+      "explanation": "O gabarito A mantém PESSOA e TIPO_PET em tabelas próprias e registra no PET referências ao tipo e ao adotante. Essa organização é compatível com o mapeamento esperado dos relacionamentos mostrados. A conferência da figura deve confirmar as cardinalidades e os identificadores sublinhados: o texto extraído não preserva esses elementos suficientemente.",
+      "notes": [
+        "Não inferir nulabilidade ou exclusividade de adoção a partir da sequência de rótulos linearizados; conferir as cardinalidades junto a cada entidade e relação.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q22 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "DER e sublinhados das chaves na página 31, ainda sem inspeção visual neste relatório."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q22"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q23",
+      "topic": "Árvores binárias de busca e percursos",
+      "explanation": "O gabarito C apresenta o percurso em ordem crescente: −2, 5, 7, 10, 18, 23, 25, 27, 34, 36, 40. Em uma árvore binária de busca, visitar subárvore esquerda, raiz e subárvore direita produz essa ordem. A lista de inserção deixa sete elementos à esquerda de 27 e três à direita; com dez níveis, o limite de uma árvore binária é 2^10−1 = 1023 nós, não 1024.",
+      "notes": [
+        "A solução do percurso pode ser derivada da lista numérica, mas o exemplo ilustrativo de árvore faz parte do enunciado e continua pendente de integração.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q23 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_RECURSO_VISUAL",
+          "note": "Árvore com rótulos J, D, O, A, L, R, K e M na página 32 do Bacharelado, ainda não renderizada nesta revisão."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q23"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q24",
+      "topic": "Criptografia, integridade e proteção contra replay",
+      "explanation": "O documento oficial marca E, isto é, I, II e IV. III descreve incorretamente a criptografia simétrica como um par de chaves distintas. Há, porém, uma ressalva técnica em II: um IV normalmente modifica o estado de cifração, não constitui por si uma chave nova, e sua variabilidade não basta para rejeitar a repetição de um ciphertext válido. Proteção contra replay depende também do protocolo e de estado autenticado, como contadores e rejeição de duplicatas. Preservar E com essa ressalva até revisão especializada.",
+      "notes": [
+        "Conferência visual assistida da página 33 do Bacharelado: a redação problemática de II existe no original.",
+        "Verificação de assinatura exige uma chave pública cuja autenticidade seja confiável; um hash simples detecta diferenças, mas sozinho não autentica o remetente. Não concluir que o protocolo real do WhatsApp seja exatamente o esquema hipotético das afirmações.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q24 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [
+        {
+          "code": "INCONSISTENCIA_CRIPTOGRAFICA",
+          "note": "II vincula IV variável à composição de chaves distintas e à prevenção de reprodução sem especificar mecanismos adicionais. O comentário deve distinguir IV/nonce, derivação de chaves e antirreplay, mantendo a chave oficial E sem apresentar a afirmação como regra geral."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q24"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q25",
+      "topic": "Computação em nuvem e modelos de serviço",
+      "explanation": "O gabarito B seleciona I e IV. Em SaaS, a administração da aplicação e da infraestrutura subjacente cabe ao provedor; em IaaS, o consumidor controla sistemas operacionais, armazenamento e aplicações, sem administrar a infraestrutura física da nuvem. II confunde elasticidade de capacidade com tempo de disponibilidade. III não exprime a definição geral de nuvem comunitária: ela atende uma comunidade com preocupações compartilhadas e não exige que cada organização forneça recursos próprios.",
+      "notes": [
+        "Conferência visual assistida da página 34 do Bacharelado feita.",
+        "A definição comunitária da questão deve ser explicada pelo seu escopo e pela ausência de obrigação de propriedade individual; não afirmar que organizações nunca possam compartilhar recursos que lhes pertençam.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q25 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q25"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q26",
+      "topic": "Interfaces adaptativas e interação humano-computador",
+      "explanation": "O gabarito A seleciona apenas I. Fragmentos condicionais e variantes de páginas alteram o conteúdo apresentado. Layouts e guias de estilo pertencem à apresentação, e técnicas de anotar, ocultar, ordenar ou orientar links pertencem à navegação. II e III trocam esses níveis de adaptação.",
+      "notes": [
+        "Conferência visual assistida do Bacharelado, página 35, e da coluna esquerda da página 33 da Licenciatura feita. A diferença de quebra de linha entre os relatórios não muda o conteúdo.",
+        "Texto, alternativas e chave coincidem com enade-2021-bacharelado-exam/Q26 após normalizar espaços; a análise é compartilhada, mas os documentos e as páginas de origem permanecem distintos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED",
+      "duplicateOf": {
+        "examId": "enade-2021-bacharelado-exam",
+        "key": "Q26"
+      }
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q27",
+      "topic": "Avaliação digital e aprendizagem",
+      "explanation": "O gabarito D integra ensino, aprendizagem e avaliação em função dos objetivos pedagógicos. O texto favorece avaliação formativa e reflexão do professor sobre sua prática. Não exige restringir os recursos a uma finalidade isolada, usar somente avaliação somativa, padronizar toda atividade ou impor fiscalização como condição universal de credibilidade.",
+      "notes": [
+        "Conferência visual assistida da coluna direita da página 33 da Licenciatura feita.",
+        "A redação “de forma concomitantemente” aparece no original da opção D. Preservar a transcrição e separar eventual ajuste gramatical editorial do texto oficial."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q28",
+      "topic": "Educação a distância e mediação no AVA",
+      "explanation": "O gabarito D seleciona II, III e IV. O tutor participa da mediação e pode colaborar na avaliação; o professor planeja e elabora materiais alinhados aos objetivos e à metodologia. Acompanhar participação não se reduz a chamadas virtuais periódicas, e a atuação ativa do estudante não transfere a ele a responsabilidade institucional de definir os recursos da disciplina.",
+      "notes": [
+        "Conferência visual assistida da página 34 da Licenciatura feita. As responsabilidades são as da situação didática apresentada, não uma descrição de todos os arranjos possíveis de tutoria."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q29",
+      "topic": "Objetos de aprendizagem e reusabilidade",
+      "explanation": "O gabarito A considera ambas as asserções verdadeiras, com II justificando I. Um recurso maior, que incorpora mais contexto e dependências, tende a ser mais difícil de reaproveitar em outro contexto do que um componente menor. Essa é uma tendência de granularidade e contextualização, não a garantia de que qualquer imagem será reutilizável ou de que o menor objeto será sempre pedagogicamente melhor.",
+      "notes": [
+        "Conferência visual assistida da coluna esquerda da página 35 da Licenciatura feita. Não há figura: a palavra “imagem” é um exemplo conceitual, responsável pelo alerta heurístico."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_ALERTA_VISUAL",
+          "note": "Alerta por palavra “imagem”; nenhuma figura está presente na coluna conferida."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q30",
+      "topic": "MOOCs e avaliação automatizada",
+      "explanation": "O gabarito A trata I e II como verdadeiras e II como justificativa de I. A escala de participação pode fornecer dados para desenvolver métodos automáticos de avaliação, inclusive para respostas discursivas. Isso expressa uma possibilidade de pesquisa e aplicação, não garante correção confiável, justa ou apropriada a qualquer tarefa; são necessárias validação, rubricas e supervisão.",
+      "notes": [
+        "Conferência visual assistida da coluna direita da página 35 da Licenciatura feita.",
+        "As formas “O Massive ... são” e “que poder ser adotada” existem no texto impresso. Não tratá-las como erro do extrator nem alterar a fonte sem registrar intervenção editorial. O acesso aberto não significa que toda certificação seja gratuita."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q31",
+      "topic": "Educação escolar quilombola",
+      "explanation": "O gabarito D seleciona II e III. As diretrizes apresentadas valorizam memória, território, ancestralidade e conhecimentos tradicionais e exigem participação da comunidade nas decisões. I inverte essa relação ao propor adequar a organização cultural ao sistema educacional, em vez de construir a educação respeitando as características e os direitos da comunidade.",
+      "notes": [
+        "Conferência visual assistida da coluna esquerda da página 36 da Licenciatura feita. A consulta prévia e a participação comunitária estão explícitas no texto-base."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q32",
+      "topic": "Paulo Freire e educação emancipadora",
+      "explanation": "O gabarito A considera as duas asserções verdadeiras e II uma justificativa de I. Compreender a educação como ato político e como reflexão e ação para a libertação fundamenta a crítica à opressão e a defesa da participação coletiva na educação e na cidadania.",
+      "notes": [
+        "Conferência visual assistida da coluna direita da página 36 da Licenciatura feita: o conector é “PORQUE” e a referência começa “Paulo Freire”; a extração altera a caixa desses trechos."
+      ],
+      "issues": [
+        {
+          "code": "CORRIGIR_VERSALETE",
+          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q33",
+      "topic": "Educação inclusiva e Libras",
+      "explanation": "O gabarito C seleciona I, II e IV: inclusão e desenvolvimento integral, educação bilíngue com Libras e português escrito e parceria com as famílias. III transfere à família a falta de condições da escola, e V reduz a avaliação a dificuldades e subjetividade em vez de assegurar condições acessíveis e critérios pertinentes.",
+      "notes": [
+        "Conferência visual assistida da página 37 da Licenciatura feita. Não há figura: o alerta decorre da expressão “imagem positiva” em IV.",
+        "A grafia “entres as crianças” aparece no original; eventual correção deve ser identificada como intervenção editorial. A explicação não substitui a leitura contextualizada do Decreto 5.626/2005."
+      ],
+      "issues": [
+        {
+          "code": "CONFERIR_ALERTA_VISUAL",
+          "note": "Alerta por “imagem positiva”; nenhuma figura está presente na página conferida."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q34",
+      "topic": "Gestão escolar e liderança",
+      "explanation": "O gabarito C seleciona III e IV. Carisma e convencimento são aspectos interpessoais, mas a gestão escolar também tem dimensões pedagógicas, administrativas e institucionais. As falas não demonstram o caráter inato de uma competência exigida para o cargo nem sustentam reduzir as pesquisas contemporâneas a qualidades naturais ou empreendedoras.",
+      "notes": [
+        "Conferência visual assistida da página 38 da Licenciatura feita. Distinguir a leitura crítica das concepções das participantes de uma afirmação de que habilidades interpessoais seriam irrelevantes."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2021-licenciatura-exam",
+      "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+      "key": "Q35",
+      "topic": "Ciberativismo e cidadania digital",
+      "explanation": "O gabarito E seleciona II, IV e V. A virtualidade dá origem a formas de participação, altera relações de tempo e espaço e demanda formação para atuação crítica e responsável. I e III contrariam o potencial de mobilização e a ampla exploração de redes já descritos no texto-base. Não se infere que toda mobilização virtual seja automaticamente democrática ou eficaz.",
+      "notes": [
+        "Conferência visual assistida da página 39 da Licenciatura feita. A questão exige leitura de afirmações, sem dependência de figura."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    }
+  ]
+}
