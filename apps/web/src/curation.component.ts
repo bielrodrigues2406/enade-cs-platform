@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, signal } from "@angular/core";
 import { FormsModule, type NgForm } from "@angular/forms";
 import { SourcesComponent, type OfficialSource } from "./sources.component";
+import { QuestionImportsComponent } from "./question-imports.component";
 type OfficialProvenance = {
   examSourceId: string;
   keySourceId: string;
@@ -72,14 +73,14 @@ const emptyDraft = (
 
 @Component({
   selector: "app-curation",
-  imports: [FormsModule, SourcesComponent],
+  imports: [FormsModule, SourcesComponent, QuestionImportsComponent],
   template: `
     @if (!editing()) {
       <nav class="curation-sections" aria-label="Área da curadoria">
         <button
           class="text-button"
           (click)="showQuestions()"
-          [attr.aria-current]="!sourceView() ? 'page' : null"
+          [attr.aria-current]="!sourceView() && !importView() ? 'page' : null"
           [disabled]="busy() || sourceBusy()"
         >
           Questões</button
@@ -91,9 +92,12 @@ const emptyDraft = (
         >
           Fontes
         </button>
+        <button class="text-button" (click)="showImports()" [attr.aria-current]="importView() ? 'page' : null" [disabled]="busy() || sourceBusy()">Importação</button>
       </nav>
     }
-    @if (sourceView()) {
+    @if (importView()) {
+      <app-question-imports (busyChange)="setSourceBusy($event)" />
+    } @else if (sourceView()) {
       <app-sources (busyChange)="setSourceBusy($event)" />
     } @else if (!editing()) {
       <section class="curation-intro">
@@ -746,6 +750,7 @@ export class CurationComponent {
   @Output() busyChange = new EventEmitter<boolean>();
   rows = signal<EditorialRow[]>([]);
   sourceView = signal(false);
+  importView = signal(false);
   sourceBusy = signal(false);
   sourceLoading = signal(false);
   sources = signal<OfficialSource[]>([]);
@@ -822,11 +827,20 @@ export class CurationComponent {
     if (this.busy() || this.sourceBusy()) return;
     this.sequence++;
     this.loading.set(false);
+    this.importView.set(false);
     this.sourceView.set(true);
+  }
+  showImports() {
+    if (this.busy() || this.sourceBusy()) return;
+    this.sequence++;
+    this.loading.set(false);
+    this.sourceView.set(false);
+    this.importView.set(true);
   }
   showQuestions() {
     if (this.busy() || this.sourceBusy()) return;
     this.sourceView.set(false);
+    this.importView.set(false);
     void this.loadQueue();
   }
   setSourceBusy(value: boolean) {

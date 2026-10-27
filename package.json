@@ -19,7 +19,8 @@
     "download:sources": "node scripts/download-sources.mjs",
     "import:sources": "node scripts/import-sources.mjs",
     "build:admin": "esbuild scripts/curator-role.ts scripts/seed.ts --bundle --platform=node --format=esm --packages=external --outdir=dist/admin --out-extension:.js=.mjs",
-    "extract:questions": "node scripts/extract-questions.mjs"
+    "extract:questions": "node scripts/extract-questions.mjs",
+    "import:questions": "tsx scripts/import-questions.ts"
   },
   "dependencies": {
     "@angular/common": "22.2.3",

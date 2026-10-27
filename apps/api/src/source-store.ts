@@ -5,6 +5,7 @@ import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { text } from "./editorial.js";
+import { sourceCatalog } from "./source-catalog.js";
 export type Source = {
   id: string;
   title: string;
@@ -323,6 +324,10 @@ export async function verifyProvenance(
       "Confira prova, gabarito definitivo, edição, modalidade, área e páginas da questão.",
       400,
     );
+  const catalog = await sourceCatalog(true);
+  if (catalog.some((document) => document.auxiliary === true &&
+      (document.sha256 === exam.sha256 || document.sha256 === key.sha256)))
+    fail("Trechos derivados de compilações ficam na fila auxiliar. Obtenha e confira os documentos originais antes de criar ou publicar uma questão oficial.", 400);
   if (checkFiles) await Promise.all([readArchive(exam), readArchive(key)]);
   return { exam, key };
 }

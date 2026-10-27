@@ -213,6 +213,27 @@ async function insertVersion(
   return id;
 }
 
+// Shared by manual creation and the private import queue. The caller owns the
+// authenticated transaction; provenance and editorial validation stay identical.
+export async function createEditorialDraft(
+  client: PoolClient,
+  actor: string,
+  body: Record<string, unknown>,
+) {
+  const input = content(body);
+  const questionId = randomUUID();
+  if (input.provenance)
+    await verifyProvenance(input.provenance, client, true);
+  await client.query(
+    "INSERT INTO editorial_question(id,origin,official_exam_id,official_question_number) VALUES($1,$2,$3,$4)",
+    [questionId, input.origin, input.provenance?.examSourceId ?? null,
+      input.provenance?.questionNumber ?? null],
+  );
+  const id = await insertVersion(client, questionId, actor, input);
+  await event(client, questionId, id, actor, "CREATED");
+  return detail(id, actor, client);
+}
+
 @Controller("api/curation")
 export class CurationController {
   @Get("access") async access(@Req() req: any) {
@@ -237,24 +258,8 @@ export class CurationController {
     return detail(id, user.id);
   }
   @Post("questions") async create(@Req() req: any, @Body() body: unknown) {
-    const input = content(object(body));
-    return transaction(req, async (client, actor) => {
-      const questionId = randomUUID();
-      if (input.provenance)
-        await verifyProvenance(input.provenance, client, true);
-      await client.query(
-        "INSERT INTO editorial_question(id,origin,official_exam_id,official_question_number) VALUES($1,$2,$3,$4)",
-        [
-          questionId,
-          input.origin,
-          input.provenance?.examSourceId ?? null,
-          input.provenance?.questionNumber ?? null,
-        ],
-      );
-      const id = await insertVersion(client, questionId, actor, input);
-      await event(client, questionId, id, actor, "CREATED");
-      return detail(id, actor, client);
-    });
+    const input = object(body);
+    return transaction(req, (client, actor) => createEditorialDraft(client, actor, input));
   }
   @Put("versions/:id") async edit(
     @Req() req: any,

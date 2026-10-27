@@ -102,3 +102,22 @@ Resumo e assuntos incluem todo o histórico elegível da pessoa. `total` e `item
 A migration 006 mantém o contrato de revisão e acrescenta, somente no DTO de curadoria, `acquisitionMethod:DIRECT|MIRROR|LOCAL` e `retrievalUrl:string|null`. MIRROR identifica uma cópia HTTPS em raw.githubusercontent.com fixada em commit completo. LOCAL identifica arquivo recebido localmente, sem afirmar download direto. Esses campos são imutáveis, assim como URL oficial e hash; não são alteráveis pelo PUT de metadados. Os DTOs públicos de estudo continuam limitados à referência da fonte, sem novas informações de gabarito antes da resposta.
 
 COMUM representa caderno compartilhado e exige a mesma modalidade entre prova/gabarito. EXAM_MAP pode ser conferido como documento, mas não substitui EXAM ou ANSWER_KEY no vínculo da questão. Publicação e conferência independente continuam exigidas. O arquivo local passa por `pdfinfo` e hash no CLI; não há endpoint de upload ou de importação pública. Veja ADR 006.
+
+## Questões importadas para conferência
+
+Todas as rotas abaixo exigem uma conta com papel de curadoria. A fila é privada e separada das versões editoriais e das questões de estudo. Importar não confere fontes nem publica conteúdo. Veja [ADR 009](ADR-009-question-intake.md).
+
+| Método e caminho (prefixo /api/curation/imports) | Entrada | Retorno / regra |
+| --- | --- | --- |
+| GET / | `offset=0&limit=25&state=HOLD` opcionais | `{items,total,offset,limit,counts:{PENDING,HOLD,DRAFTED}}`; limite 1–50, offset 0–1.000.000; contagens globais independem do filtro |
+| GET /:id | UUID do item | conteúdo editável, evidência original, extração mais recente, análise assistida, pendências, fontes e histórico |
+| PUT /:id | `{baseRevision,content,resolvedFlags,note,keySourceId?,pages?}` | atualiza a conferência com nota e retorna detalhe; revisão divergente ou item encaminhado retorna 409 |
+| POST /:id/draft | `{baseRevision,fidelityConfirmed:true}` | `{versionId,questionId}`; cria apenas DRAFT, com os mesmos requisitos oficiais da criação manual; retry da promoção já concluída recupera o resultado |
+
+Estados: PENDING = para conferir; HOLD = pendências registradas; DRAFTED = rascunho editorial criado. Uma análise `CONTENT_CHECKED` continua assistida e não representa aprovação humana. `NOT_REVIEWED` e `MANUAL_REQUIRED` conservam a necessidade de análise/conferência.
+
+`content` contém `{title,topic,prompt,options:[{id,text}],correctOptionId,explanation,explanationCredit,keyPage}`. A fila aceita texto incompleto para correção, com até cinco alternativas A–E. Limites: título/crédito 160, assunto 80, enunciado 24.000, alternativa/explicação 4.000 e nota 8–2.000 caracteres. A promoção aplica os limites e requisitos mais estritos do editor oficial. Não se alteram a prova nem a identidade numérica do item.
+
+`flags` preserva alertas originais; `resolvedFlags` registra os resolvidos com justificativa. A extração original e o gabarito extraído continuam disponíveis para comparação. `unresolvedCount` na lista exclui alertas já resolvidos. A associação posterior de gabarito e a correção das páginas preservam o texto editado, validam o documento e registram a nota de conferência. Sem prova/gabarito definitivo conferidos, páginas válidas, fidelidade confirmada e conteúdo elegível, a promoção é bloqueada. Discursivas, anuladas e itens exclusivamente de outros cursos não viram questões de Ciência da Computação por resolver um alerta.
+
+O CLI `npm run import:questions -- --file RELATORIO.questions.json [--review ANALISE.json] [--actor UUID]` é a única entrada de relatórios. Hashes devem corresponder às fontes catalogadas e arquivadas. Reimportar o mesmo conteúdo não duplica itens; conteúdo já editado ou encaminhado é protegido de sobrescrita. IDs de pessoas, cookies e detalhes privados de contas não aparecem no DTO.

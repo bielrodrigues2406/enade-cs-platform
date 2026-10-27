@@ -16,12 +16,13 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Tabela por assunto no caderno de erros (a retomar e respondidas) com ação de retomar cada assunto; no catálogo, quantas questões da seleção têm resposta salva; na resolução, posição na seleção e "Próxima questão" após o feedback.
 - Interface com tokens, fontes auto-hospedadas e transições de tela que respeitam movimento reduzido ([design](docs/DESIGN-QUALITY.md)).
 - Registro de PDFs por download oficial, cópia pública fixada em commit ou arquivo local, com SHA-256 e conferência independente na seção Fontes.
-- Catálogo de todos os anos localizados: 61 referências; 27 PDFs históricos obtidos/cadastrados e 34 documentos recentes ainda pendentes. Cadernos compartilhados, Licenciatura e PND têm identificação própria.
+- Catálogo de todos os anos localizados: 61 referências; 28 PDFs individuais obtidos/cadastrados e 33 documentos recentes ainda pendentes. Cadernos compartilhados, Licenciatura e PND têm identificação própria.
 - Curadoria de questões oficiais com prova, página, número original e gabarito definitivo conferidos; procedência pública e comentário editorial com crédito próprio.
-- Extração assistida de PDFs catalogados em relatórios locais, com alertas, conferência de numeração e bloqueio de conteúdo ausente/gabarito contraditório; sem gravar ou publicar questões.
+- Extração assistida de PDFs catalogados, incluindo OCR com modelo local e formatos históricos compartilhados; relatórios identificam alertas e lacunas de numeração.
+- Fila privada de questões importadas, com análise assistida identificada, correção auditada, proteção contra sobrescrita e encaminhamento para rascunho editorial após conferir as fontes.
 - Três questões iniciais **autorais demonstrativas**; nenhuma questão oficial publicada nesta entrega. Conteúdo pendente não é acessível pela API de estudo.
 
-Esta entrega cobre partes dos incrementos A/B e o início de C, não a conclusão deles. Não inclui lote oficial revisado, OCR integrado, simulados nem IA. A extração assistida descrita no inventário gera relatórios; não substitui a curadoria. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
+Esta entrega cobre partes dos incrementos A/B e o início de C, não a conclusão deles. Não inclui lote oficial aprovado, simulados nem tutor de IA. OCR e análise assistida exigem conferência; os itens importados permanecem privados até cumprir a revisão editorial. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
 
 ## Preparação local
 
@@ -65,7 +66,7 @@ A curadoria aceita questões autorais e oficiais. Questões oficiais exigem font
 
 ## Fontes oficiais
 
-O importador administrativo registra e arquiva o PDF; não extrai nem publica questões. Os 27 documentos históricos da cópia catalogada estão em IMPORTED, aguardando conferência. O [inventário de todos os anos](docs/OFFICIAL-SOURCES.md) descreve cobertura, hashes e os 34 arquivos ainda pendentes. Exemplo para a prova de Computação de 2021:
+O importador administrativo registra e arquiva o PDF; não extrai nem publica questões. Os 27 documentos históricos da cópia catalogada estão em IMPORTED, aguardando conferência. O [inventário de todos os anos](docs/OFFICIAL-SOURCES.md) descreve cobertura, hashes e os 33 arquivos ainda pendentes. Exemplo para a prova de Computação de 2021:
 
 ```sh
 npm run import:source -- \
@@ -103,7 +104,7 @@ Para execução fria na nuvem, `npm run test:e2e -- --timeout=60000` define o li
 
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build e testes foram validados localmente: 67 testes API/PostgreSQL/utilitários e 20 fluxos Chromium, incluindo extração assistida, rejeição de texto ausente e gabaritos contraditórios, downloads com TLS, redirecionamentos, cópias locais/compartilhadas, quarentena, rejeição de symlinks, preservação de recibos após falhas e caminhos de pacotes, caderno de erros, contagem por questão/versão, ordenação de gravações concorrentes, paginação, fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build e testes foram validados localmente: 86 testes API/PostgreSQL/utilitários e 22 fluxos Chromium, incluindo extração assistida, rejeição de texto ausente e gabaritos contraditórios, downloads com TLS, redirecionamentos, cópias locais/compartilhadas, quarentena, rejeição de symlinks, preservação de recibos após falhas e caminhos de pacotes, caderno de erros, contagem por questão/versão, ordenação de gravações concorrentes, paginação, fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
 O [CI do PR #13](https://github.com/bielrodrigues2406/enade-cs-platform/actions/runs/40387694387) também aprovou build, testes com PostgreSQL, E2E e imagem de produção em 26/10/2026. Localmente, o fluxo de conta foi repetido após reiniciar o Vite, cujo overlay de erro havia interceptado o primeiro clique durante a atualização das dependências.
 
@@ -126,3 +127,15 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Colaboração entre agentes](docs/COLLABORATION.md), [quadro de trabalho](docs/WORKBOARD.md) e [plano de design e motion](docs/DESIGN-QUALITY.md)
 
 Próxima entrega: transcrição e revisão humana do lote oficial inicial, incluindo imagens e itens anulados quando necessário. O registro de documentos e o fluxo de publicação oficial estão disponíveis; nenhum item oficial foi publicado automaticamente. Repetição espaçada, plano de estudos e tendências ainda não estão implementados. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
+
+## Importação de questões
+
+Depois de cadastrar os PDFs e gerar os relatórios, importe os itens para a fila privada:
+
+```sh
+npm run import:questions -- --file .local/import-review/historical/enade-2021-bacharelado-exam.questions.json --review data/question-reviews/2021-review.json
+```
+
+Abra **Curadoria → Importação** com uma conta autorizada. Corrija texto e páginas, associe o gabarito e justifique a resolução das pendências. Reimportações idênticas não duplicam itens nem sobrescrevem edições da curadoria. Importar não concede papéis, confere fontes ou publica questões. Veja [ADR 009](docs/ADR-009-question-intake.md) e o [inventário e revisão do conteúdo](docs/OFFICIAL-SOURCES.md).
+
+Neste incremento, a importação administrativa carregou 605 ocorrências na fila privada deste ambiente, incluindo repetições e fontes auxiliares; a revisão assistida não é aprovação editorial. Build e 86 testes API/PostgreSQL/utilitários passaram. Os 22 fluxos de navegador passaram, incluindo a fila, conflitos de edição, procedência, privacidade e encaminhamento para rascunho.
