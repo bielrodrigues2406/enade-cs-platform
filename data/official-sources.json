@@ -1045,13 +1045,14 @@
       "officialPageUrl": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/prova-nacional-docente/provas-e-gabaritos/2025-1",
       "listedOfficialUrl": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_4.pdf",
       "officialUrl": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_4.pdf",
-      "mirrorUrl": null,
-      "sha256": null,
-      "byteSize": null,
-      "pageCount": null,
-      "status": "LINK_LOCATED_NOT_DOWNLOADED",
+      "mirrorUrl": "https://raw.githubusercontent.com/guiyti/enade_ti/61dfe08aa8a184ad5568dd92b9b147127aab98df/provas/2024_CCP.pdf",
+      "sha256": "b9c3368a98500666baff9fb0c045f24bae83b0cac4237c58faf9e433f1c4223a",
+      "byteSize": 6305713,
+      "pageCount": 40,
+      "status": "DOWNLOADED_MIRROR",
       "variant": "Prova tipo 4",
-      "reviewed": false
+      "reviewed": false,
+      "gitBlob": "9c3fadcbf992e29cd4b1573dce7daec489cbd058"
     },
     {
       "id": "pnd-2025-computacao-pv-5",

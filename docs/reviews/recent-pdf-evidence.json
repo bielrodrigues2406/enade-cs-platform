@@ -1,0 +1,666 @@
+{
+  "schemaVersion": 1,
+  "reviewOrigin": "ASSISTED_CODEX",
+  "humanReviewPending": true,
+  "directDownloadAudit": {
+    "checkedAt": "2026-10-26T20:08:11.530833+00:00",
+    "results": [
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-1",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_1.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-2",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_2.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 98,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-3",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_3.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 98,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-4",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_4.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-5",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_5.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-6",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_6.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-7",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_7.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-8",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_8.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-9",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_9.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-10",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_10.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-pv-ledor",
+        "year": 2024,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_ledor.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-mp",
+        "year": 2024,
+        "kind": "EXAM_MAP",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_MP.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "enade-licenciaturas-2024-computacao-gb-1-a-10",
+        "year": 2024,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_GB_1_a_10.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-pv-1",
+        "year": 2025,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_1.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-pv-2",
+        "year": 2025,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_2.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-pv-3",
+        "year": 2025,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_3.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-pv-4",
+        "year": 2025,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_4.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-pv-5",
+        "year": 2025,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_5.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-gb-1",
+        "year": 2025,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_GB_1.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-gb-2",
+        "year": 2025,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_GB_2.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-gb-3",
+        "year": 2025,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_GB_3.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-gb-4",
+        "year": 2025,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_GB_4.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2025-computacao-gb-5",
+        "year": 2025,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_GB_5.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-pv-1",
+        "year": 2026,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_PV_1.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-pv-2",
+        "year": 2026,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_PV_2.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-pv-3",
+        "year": 2026,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_PV_3.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-pv-4",
+        "year": 2026,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_PV_4.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-pv-5",
+        "year": 2026,
+        "kind": "EXAM",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_PV_5.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-gb-1",
+        "year": 2026,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_GB_1.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-gb-nvda",
+        "year": 2026,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_GB_NVDA.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-gb-2",
+        "year": 2026,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_GB_2.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-gb-3",
+        "year": 2026,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_GB_3.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-gb-4",
+        "year": 2026,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_GB_4.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      },
+      {
+        "id": "pnd-2026-computacao-gb-5",
+        "year": 2026,
+        "kind": "ANSWER_KEY",
+        "url": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2026_computacao_GB_5.pdf",
+        "httpStatus": "503",
+        "curlExitCode": 0,
+        "validPdfSignature": false,
+        "responseBytes": 216,
+        "proxyStatus": null
+      }
+    ]
+  },
+  "officialPages": [
+    {
+      "year": 2024,
+      "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade-das-licenciaturas/provas-e-gabaritos/2024",
+      "httpStatus": "200",
+      "exitCode": 0,
+      "sha256": "4fd1597dfe84d539493fa37e0d074e9a7ce499c8b367522cd4078e9a3fc785f9"
+    },
+    {
+      "year": 2025,
+      "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/prova-nacional-docente/provas-e-gabaritos/2025-1",
+      "httpStatus": "200",
+      "exitCode": 0,
+      "sha256": "d4814dcebd9866051d2596bab4bba4259feb008f1586d4bb6999c0761a588f41"
+    },
+    {
+      "year": 2026,
+      "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/prova-nacional-docente/provas-e-gabaritos/2026",
+      "httpStatus": "200",
+      "exitCode": 0,
+      "sha256": "a4904da367e398a5d09d5885c976dc6a69a4e72d2934cd6d98cd09db21c6dc32"
+    }
+  ],
+  "standaloneMirror": {
+    "schemaVersion": 1,
+    "catalogId": "pnd-2025-computacao-pv-4",
+    "originalFileName": "2024_CCP.pdf",
+    "identityEstablishedFrom": "Capa renderizada e texto do próprio PDF, não nome no espelho.",
+    "year": 2025,
+    "family": "PND",
+    "modality": "LICENCIATURA",
+    "area": "Computação",
+    "booklet": "0404",
+    "variant": 4,
+    "coverMonth": "Outubro/2025",
+    "objectiveQuestions": 80,
+    "generalFormation": [
+      1,
+      30
+    ],
+    "specificFormation": [
+      31,
+      80
+    ],
+    "discursiveQuestions": 1,
+    "perceptionQuestionnaireExcluded": true,
+    "pages": 40,
+    "mirrorUrl": "https://raw.githubusercontent.com/guiyti/enade_ti/61dfe08aa8a184ad5568dd92b9b147127aab98df/provas/2024_CCP.pdf",
+    "sha256": "b9c3368a98500666baff9fb0c045f24bae83b0cac4237c58faf9e433f1c4223a",
+    "gitBlob": "9c3fadcbf992e29cd4b1573dce7daec489cbd058",
+    "byteSize": 6305713,
+    "reviewed": false,
+    "humanReviewPending": true,
+    "finalAnswerKeyAvailable": false,
+    "notes": [
+      "O nome2024_CCP.pdf no espelho contém ano incorreto; não reutilizar metadata2024_CCP ou statusAPROVADA do terceiro.",
+      "Identidade conferida por análise assistida; isto não equivale à verificação editorial humana da fonte."
+    ]
+  },
+  "auxiliaryEvidence": {
+    "schemaVersion": 1,
+    "evidenceClass": "AUXILIARY_COMPILATION",
+    "reviewOrigin": "ASSISTED_CODEX",
+    "reviewed": false,
+    "humanReviewPending": true,
+    "file": "Clara-enade-compilacao.pdf",
+    "mirrorUrl": "https://raw.githubusercontent.com/ClaraFontenele/ENADE/0776b146a714f2e9537bccb5a521dfc5d8c16a97/Enade_ProvasAntigas_24_21_17_14.pdf",
+    "repositoryCommit": "0776b146a714f2e9537bccb5a521dfc5d8c16a97",
+    "gitBlob": "0e61fae7ca50a7f3fb65346737366a327c42677e",
+    "sha256": "5eb5a42a38c332b2a35c147cc9a3e17e1c940b465f217f135d84672ce8b0d4e8",
+    "byteSize": 14637580,
+    "pageCount": 185,
+    "originalBytesAvailable": false,
+    "exam2024": {
+      "family": "ENADE_LICENCIATURAS",
+      "year": 2024,
+      "area": "Computação",
+      "modality": "LICENCIATURA",
+      "bookletCode": "0401",
+      "variant": 1,
+      "compilationPages": [
+        1,
+        44
+      ],
+      "printedCode": "R04012024",
+      "objectiveQuestionCount": 63,
+      "generalFormationObjectives": [
+        1,
+        27
+      ],
+      "specificFormationObjectives": [
+        28,
+        63
+      ],
+      "discursiveQuestionCount": 1,
+      "discursiveQuestionPage": 20,
+      "draftPage": 21,
+      "questionnairePage": 43,
+      "questionnaireExcluded": true,
+      "blankBackCoverPage": 44,
+      "questionStartPages": [
+        2,
+        2,
+        3,
+        4,
+        4,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9,
+        10,
+        10,
+        11,
+        11,
+        12,
+        13,
+        13,
+        14,
+        14,
+        15,
+        15,
+        16,
+        16,
+        17,
+        18,
+        19,
+        22,
+        22,
+        23,
+        24,
+        24,
+        25,
+        25,
+        26,
+        27,
+        27,
+        28,
+        28,
+        29,
+        29,
+        30,
+        30,
+        31,
+        31,
+        32,
+        32,
+        33,
+        34,
+        35,
+        35,
+        36,
+        36,
+        37,
+        37,
+        38,
+        38,
+        39,
+        39,
+        40,
+        41,
+        41,
+        42
+      ],
+      "discursiveComponent": "CE",
+      "discursiveComponentEvidence": "A capa agrupa Discursiva*** e Objetivas28–63 em Componente Específico."
+    },
+    "answerKeys2024": [
+      {
+        "bookletCode": "0401",
+        "variant": 1,
+        "compilationPage": 45,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [
+          15
+        ],
+        "answerPositions": "CBDBAADCDBAACC*DDBCDDBBCDAABCBBDDACAADACCAADBDCACBBDCBCBCADBAAB"
+      },
+      {
+        "bookletCode": "0402",
+        "variant": 2,
+        "compilationPage": 46,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [
+          24
+        ],
+        "answerPositions": "CBDBAADCDCDDABBBACBAACC*DDBBCBBDDACAADABCCDACBACADDCCAADBDCACBB"
+      },
+      {
+        "bookletCode": "0403",
+        "variant": 3,
+        "compilationPage": 47,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [
+          6
+        ],
+        "answerPositions": "BAACC*DDBCDDBBCDAACDDABBBACCCAADBDCACBBDCBCBCADBAABBCCDACBACADD"
+      },
+      {
+        "bookletCode": "0404",
+        "variant": 4,
+        "compilationPage": 48,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [
+          6
+        ],
+        "answerPositions": "BAACC*DDBDDACBACBCCBDBAADCDCCAADBDCACBBCDBDCBBCABDABCBBDDACAADA"
+      },
+      {
+        "bookletCode": "0405",
+        "variant": 5,
+        "compilationPage": 49,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [
+          24
+        ],
+        "answerPositions": "CDDBBCDAADDACBACBCBAACC*DDBDCBCBCADBAABCDBDCBBCABDACCAADBDCACBB"
+      },
+      {
+        "bookletCode": "0406",
+        "variant": 6,
+        "compilationPage": 50,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [],
+        "answerPositions": "CDDBBCDAACDDABBBACCBDBAADCDDCBCBCADBAABBCCDACBACADDBCBBDDACAADA"
+      },
+      {
+        "bookletCode": "0407",
+        "variant": 7,
+        "compilationPage": 51,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [],
+        "answerPositions": "CDDABBBACCBDBAADCDDDACBACBCBCCDACBACADDBCBBDDACAADACDBDCBBCABDA"
+      },
+      {
+        "bookletCode": "0408",
+        "variant": 8,
+        "compilationPage": 52,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [],
+        "answerPositions": "CDDABBBACCDDBBCDAADDACBACBCBCCDACBACADDDCBCBCADBAABCDBDCBBCABDA"
+      },
+      {
+        "bookletCode": "0409",
+        "variant": 9,
+        "compilationPage": 53,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [],
+        "answerPositions": "DDACBACBCCBDBAADCDCDDBBCDAACDBDCBBCABDABCBBDDACAADADCBCBCADBAAB"
+      },
+      {
+        "bookletCode": "0410",
+        "variant": 10,
+        "compilationPage": 54,
+        "headerIdentification": "Renderização do cabeçalho conferida por Codex (análise assistida), sem aprovação humana.",
+        "definitiveLabelPresent": true,
+        "annulledNumbers": [
+          15
+        ],
+        "answerPositions": "DDACBACBCBAACC*DDBCDDABBBACCDBDCBBCABDACCAADBDCACBBBCCDACBACADD"
+      }
+    ],
+    "limitations": [
+      "A compilação é um PDF modificado por terceiro (Producer iLovePDF); não comprova bytes dos originais do Inep.",
+      "Não substitui PDFs catalogados de prova, mapa ou gabarito; não desdobrar em11aquisiçõesoriginais.",
+      "Cabeçalhos0401–0410 conferidos visualmente por análise assistida; chaves extraídas das tabelas textuais e sequência1–63 validada, revisão humana pendente.",
+      "Somente caderno0401 encontrado nesta compilação; as demais páginas45–54 são gabaritos, não outroscadernos.",
+      "A classificação da discursiva2024 deve seguir a tabela da capa, não o formatoPND2025.",
+      "Somente6dos10gabaritoscontêm*; não presumir que os10cadernos são apenas permutações do mesmo conjunto sem consultar mapaMP."
+    ],
+    "answerKeyEncoding": "answerPositions: 63caracteres, posição1=questão1, valoresA–D ou*=anulado. Somente evidência auxiliar, revisão humana pendente."
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "scope": "Fontes auxiliares derivadas: fora do inventário de PDFs originais; não substituem aquisições ou revisão humana.",
+  "documents": [
+    {
+      "id": "aux-enade-2024-computacao-pv-1",
+      "family": "ENADE_LICENCIATURAS",
+      "year": 2024,
+      "area": "Computação",
+      "modality": "LICENCIATURA",
+      "kind": "EXAM",
+      "title": "Compilação auxiliar · trecho da prova de 2024 · caderno 0401",
+      "officialPageUrl": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade-das-licenciaturas/provas-e-gabaritos/2024",
+      "officialUrl": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_PV_1.pdf",
+      "sha256": "fea2f3584fc998067a75f45c9f2a936d1dd72b88fe7c3dc8d1d6f389608ec4c5",
+      "byteSize": 7565551,
+      "pageCount": 44,
+      "variant": "Prova tipo 1",
+      "acquisitionMethod": "LOCAL",
+      "status": "DERIVED_AUXILIARY",
+      "auxiliary": true,
+      "reviewed": false,
+      "originalBytesAvailable": false,
+      "derivation": {
+        "upstreamUrl": "https://raw.githubusercontent.com/ClaraFontenele/ENADE/0776b146a714f2e9537bccb5a521dfc5d8c16a97/Enade_ProvasAntigas_24_21_17_14.pdf",
+        "upstreamSha256": "5eb5a42a38c332b2a35c147cc9a3e17e1c940b465f217f135d84672ce8b0d4e8",
+        "upstreamGitBlob": "0e61fae7ca50a7f3fb65346737366a327c42677e",
+        "upstreamByteSize": 14637580,
+        "upstreamPageCount": 185,
+        "upstreamPages": [
+          1,
+          44
+        ],
+        "tools": {
+          "pdfseparate": "pdfseparate version 25.03.0",
+          "pdfunite": "pdfunite version 25.03.0"
+        },
+        "stableTrailerId": "SHA-256(upstreamSha256 + ':' + primeiraPagina + '-' + ultimaPagina), primeiros 32 hex; somente /ID do trailer do derivado."
+      }
+    },
+    {
+      "id": "aux-enade-2024-computacao-gb-1",
+      "family": "ENADE_LICENCIATURAS",
+      "year": 2024,
+      "area": "Computação",
+      "modality": "LICENCIATURA",
+      "kind": "ANSWER_KEY",
+      "title": "Compilação auxiliar · trecho do gabarito de 2024 · caderno 0401",
+      "officialPageUrl": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade-das-licenciaturas/provas-e-gabaritos/2024",
+      "officialUrl": "https://download.inep.gov.br/enade/provas_e_gabaritos/2024_Computacao_GB_1_a_10.pdf",
+      "sha256": "3b10f3184daee5dd9bc8f2be3a0a129d8428b7ae06dd1411d5a05fe7c8b974b0",
+      "byteSize": 138003,
+      "pageCount": 1,
+      "variant": "Prova tipo 1",
+      "acquisitionMethod": "LOCAL",
+      "status": "DERIVED_AUXILIARY",
+      "auxiliary": true,
+      "reviewed": false,
+      "originalBytesAvailable": false,
+      "derivation": {
+        "upstreamUrl": "https://raw.githubusercontent.com/ClaraFontenele/ENADE/0776b146a714f2e9537bccb5a521dfc5d8c16a97/Enade_ProvasAntigas_24_21_17_14.pdf",
+        "upstreamSha256": "5eb5a42a38c332b2a35c147cc9a3e17e1c940b465f217f135d84672ce8b0d4e8",
+        "upstreamGitBlob": "0e61fae7ca50a7f3fb65346737366a327c42677e",
+        "upstreamByteSize": 14637580,
+        "upstreamPageCount": 185,
+        "upstreamPages": [
+          45,
+          45
+        ],
+        "tools": {
+          "pdfseparate": "pdfseparate version 25.03.0",
+          "pdfunite": "pdfunite version 25.03.0"
+        },
+        "stableTrailerId": "SHA-256(upstreamSha256 + ':' + primeiraPagina + '-' + ultimaPagina), primeiros 32 hex; somente /ID do trailer do derivado."
+      }
+    }
+  ]
+}
