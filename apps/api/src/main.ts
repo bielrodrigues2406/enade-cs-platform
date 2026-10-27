@@ -18,6 +18,7 @@ import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
 import { AuthController } from "./auth.js";
 import { CurationController } from "./curation.js";
+import { QuestionImportsController } from "./question-imports.js";
 import { SourcesController } from "./sources.js";
 import { ReviewController } from "./review.js";
 import { sourceById, publicExam } from "./source-store.js";
@@ -194,6 +195,7 @@ class StudyController {
     AuthController,
     StudyController,
     CurationController,
+    QuestionImportsController,
     SourcesController,
     ReviewController,
   ],

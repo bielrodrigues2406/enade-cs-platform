@@ -17,6 +17,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 COPY --from=build /app/dist ./dist
 COPY migrations ./migrations
+COPY data ./data
 COPY scripts/migrate.mjs ./scripts/migrate.mjs
 RUN mkdir -p /data/sources && chown node:node /data/sources
 USER node
