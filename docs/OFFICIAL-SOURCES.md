@@ -13,11 +13,11 @@ Consulta: 23/10/2026. O catálogo completo, com URLs oficiais, cópias, SHA-256,
 | 2017 | Ciência da Computação: Bacharelado e Licenciatura separados | 6 | 0 |
 | 2021 | Ciência da Computação: Bacharelado e Licenciatura separados | 6 | 0 |
 | 2024 | ENADE das Licenciaturas: cadernos 1–10, ledor, mapa e gabarito | 0 | 13 |
-| 2025 | PND: Computação, cadernos e gabaritos tipos 1–5 | 0 | 10 |
+| 2025 | PND: Computação, cadernos e gabaritos tipos 1–5 | 1 | 9 |
 | 2026 | PND: Computação, tipos 1–5 e gabarito NVDA listados no portal | 0 | 11 |
-| **Total** | **Famílias e modalidades identificadas separadamente** | **27** | **34** |
+| **Total** | **Famílias e modalidades identificadas separadamente** | **28** | **33** |
 
-Os 27 arquivos incluem prova, gabarito e padrão de resposta. Foram arquivados e registrados como **IMPORTED**, com revisão independente pendente. Nenhuma fonte foi marcada automaticamente como definitiva/conferida e nenhuma questão oficial foi publicada.
+Os 27 arquivos históricos incluem prova, gabarito e padrão de resposta. O 28º arquivo é o caderno PND 2025 tipo 4, localizado em cópia com nome incorreto; a identidade foi conferida pela capa e registrada no catálogo. Veja a [auditoria recente](reviews/recent-pdf-audit.md). Foram arquivados e registrados como **IMPORTED**, com revisão independente pendente. Nenhuma fonte foi marcada automaticamente como definitiva/conferida e nenhuma questão oficial foi publicada.
 
 Foram consultadas todas as páginas anuais expostas no [índice tradicional do Inep](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade/provas-e-gabaritos), de 2004 a 2025. As seis edições históricas de Computação encontradas foram 2005, 2008, 2011, 2014, 2017 e 2021. Anos sem documento de Ciência da Computação listado não foram preenchidos com arquivos de Engenharia ou de outros cursos. As páginas e seus hashes também constam no catálogo.
 
@@ -29,7 +29,7 @@ Os PDFs históricos vieram do [acervo geacc/enade, fixado no commit a657632](htt
 
 A referência oficial de cada PDF foi cruzada com a respectiva página do Inep. Endereços históricos publicados como HTTP foram preservados em `listedOfficialUrl`; o endereço usado para transporte/referência segura usa HTTPS no mesmo host/caminho. O registro guarda separadamente URL oficial e URL de obtenção da cópia. Essas informações e o arquivo não podem ser trocados após importar.
 
-O acesso direto a `download.inep.gov.br` continuou retornando HTTP 503 com `CERTIFICATE_VERIFY_FAILED` no proxy, inclusive em uma tentativa de PDF da PND 2025. A validação TLS foi mantida. Nova tentativa em 26/10/2026 retornou HTTP 503 com falha de conexão remota, sem PDF válido. Também foram pesquisados outros repositórios, buscadores e uma captura específica no Wayback. Uma compilação de 185 páginas com material de 2024/2021/2017/2014 foi encontrada no repositório ClaraFontenele/ENADE; não foi usada como se fosse um PDF original individual nem incluída na contagem de 27 documentos.
+O acesso direto a `download.inep.gov.br` continuou retornando HTTP 503 com `CERTIFICATE_VERIFY_FAILED` no proxy, inclusive em uma tentativa de PDF da PND 2025. A validação TLS foi mantida. Nova tentativa em 26/10/2026 retornou HTTP 503 com falha de conexão remota, sem PDF válido. Também foram pesquisados outros repositórios, buscadores e uma captura específica no Wayback. Uma compilação de 185 páginas com material de 2024/2021/2017/2014 foi encontrada no repositório ClaraFontenele/ENADE; não foi usada como se fosse um PDF original individual nem incluída na contagem de PDFs individuais. Dois trechos dessa compilação são mantidos em catálogo auxiliar separado, com procedência e bloqueio editorial explícitos.
 
 ## Baixar todos os anos no PC
 
@@ -45,7 +45,7 @@ Por padrão tenta os **61 documentos** de todas as edições/famílias catalogad
 node scripts/download-sources.mjs --source mirror --years 2005,2008,2011,2014,2017,2021 --output enade-pdfs
 ```
 
-Esse segundo comando usa somente as 27 cópias históricas catalogadas. Não existe cópia individual alternativa confirmada para os 34 documentos recentes. Divergência do hash esperado vai para `quarantine`, sem substituir a versão catalogada nem ajustar seu checksum. Arquivos sem hash anterior recebem hash calculado e continuam não revisados. O downloader confere assinatura/tamanho; `pdfinfo` é exigido posteriormente na importação.
+Esse segundo comando usa somente as 27 cópias históricas catalogadas. Para os recentes, há cópia individual confirmada do caderno PND 2025 tipo 4; os outros 33 documentos continuam pendentes. Divergência do hash esperado vai para `quarantine`, sem substituir a versão catalogada nem ajustar seu checksum. Arquivos sem hash anterior recebem hash calculado e continuam não revisados. O downloader confere assinatura/tamanho; `pdfinfo` é exigido posteriormente na importação.
 
 Para transportar: compacte as pastas por ano junto ao recibo. Divida arquivos maiores que 32 MiB em pacotes menores. Após receber e extrair com conferência dos caminhos, um administrador pode importar os arquivos locais:
 
@@ -65,8 +65,8 @@ Os 27 PDFs históricos foram baixados de novo com `download-sources.mjs --source
 
 | Edição | Gabarito | Objetivas no gabarito | Anuladas |
 | --- | --- | ---: | --- |
-| 2005 (comum) | sem "definitivo" | 54 itens de vários cursos | — |
-| 2008 (comum) | sem "definitivo" | discursivas misturadas na numeração | — |
+| 2005 (comum) | sem "definitivo" | 77 itens de vários cursos | — |
+| 2008 (comum) | sem "definitivo" | 71, com 9 discursivas na numeração | — |
 | 2011 (comum) | sem "definitivo" | 50 | 13, 44 |
 | 2014 Bacharelado | definitivo | 35 | nenhuma |
 | 2017 Bacharelado | definitivo | 35 | nenhuma |
@@ -78,7 +78,7 @@ Estrutura das provas recentes: 8 objetivas e 2 discursivas de Formação Geral, 
 
 A Formação Geral é a mesma para todos os cursos da edição. No componente específico, a comparação de trechos de texto mostrou que boa parte das questões é idêntica: em 2021, as objetivas 9 a 26 e as discursivas 3 e 4 aparecem nas duas provas; só as objetivas 27 a 35 e a discursiva 5 são exclusivas do Bacharelado. As exclusivas da Licenciatura tratam de tecnologia na educação, EaD, AVA e objetos de aprendizagem. Em 2014 e 2017 a extração por colunas foi menos limpa, mas também mostrou itens comuns.
 
-Consequências: as provas de Licenciatura não devem ser contadas integralmente como novas questões de Bacharelado. Os itens comuns podem servir como segunda procedência, sem duplicar a questão, e os exclusivos precisam de avaliação de pertinência. ENADE das Licenciaturas 2024 e PND 2025/2026 são provas docentes, identificadas separadamente. Seus **34 PDFs continuam pendentes de aquisição**; o pedido de obter todos os anos permanece no escopo. Priorizar somente Bacharelado no conteúdo de R1 é a proposta D6 do quadro, ainda pendente de Gabriel.
+Consequências: as provas de Licenciatura não devem ser contadas integralmente como novas questões de Bacharelado. Os itens comuns podem servir como segunda procedência, sem duplicar a questão, e os exclusivos precisam de avaliação de pertinência. ENADE das Licenciaturas 2024 e PND 2025/2026 são provas docentes, identificadas separadamente. Dos 34 PDFs recentes, **33 continuam pendentes de aquisição**; o pedido de obter todos os anos permanece no escopo. Priorizar somente Bacharelado no conteúdo de R1 é a proposta D6 do quadro, ainda pendente de Gabriel.
 
 ## Extração assistida (CNT-0, etapa 1)
 
@@ -115,10 +115,44 @@ Resultado em 26/10/2026:
 | 2014 Bacharelado/Licenciatura | 40 | 0 | 35 | 5 | 0 | Texto ilegível |
 | 2005–2011 | — | — | — | — | — | Cadernos de vários cursos: recusados, transcrição manual |
 
-Para 2014 e 2017, o caminho seguinte é OCR da página renderizada, com revisão humana. Na revisão Codex de 26/10/2026, o ambiente tinha Tesseract 5.5.0 com `eng`/`osd`. Um ensaio da página 4 de 2014 Bacharelado, renderizada a 180 DPI, recuperou texto legível com o modelo português [`tesseract-ocr/tessdata_fast`, commit `87416418657359cb625c412a48b6e1d6d41c29bd`](https://github.com/tesseract-ocr/tessdata_fast/tree/87416418657359cb625c412a48b6e1d6d41c29bd), licença Apache-2.0; SHA-256 de `por.traineddata`: `c4932b937207a9514b7514d518b931a99938c02a28a5a5a553f8599ed58b7deb`. O ensaio ainda trocou marcadores romanos e espaçamento. OCR não foi integrado ao extrator e não gera automaticamente candidatos aprovados; cada item continua exigindo confronto com o PDF.
+Para 2014 e 2017, o caminho seguinte é OCR da página renderizada, com revisão humana. Na revisão Codex de 26/10/2026, o ambiente tinha Tesseract 5.5.0 com `eng`/`osd`. Um ensaio da página 4 de 2014 Bacharelado, renderizada a 180 DPI, recuperou texto legível com o modelo português [`tesseract-ocr/tessdata_fast`, commit `87416418657359cb625c412a48b6e1d6d41c29bd`](https://github.com/tesseract-ocr/tessdata_fast/tree/87416418657359cb625c412a48b6e1d6d41c29bd), licença Apache-2.0; SHA-256 de `por.traineddata`: `c4932b937207a9514b7514d518b931a99938c02a28a5a5a553f8599ed58b7deb`. O ensaio ainda trocou marcadores romanos e espaçamento. O OCR agora está integrado como opção explícita (`--ocr --tessdata-dir PASTA`), com hash do modelo e versão registrados. Marcadores de alternativas só são recuperados da camada PDF quando suas coordenadas e letras estão disponíveis; não se inferem respostas pela posição. Todos os itens OCR conservam alertas e exigem confronto com o PDF.
 
 ## Revisão editorial ainda necessária
 
 Os cadernos antigos são compartilhados: em 2005/2008 incluem blocos de Ciência da Computação, Engenharia e Sistemas de Informação; 2011 também inclui Licenciatura. O rótulo COMUM preserva esse fato. Não transcrever automaticamente todos os blocos como questões de Ciência da Computação.
 
 Nos documentos recentes, conferir tipo de caderno, mapa de prova e gabarito correspondente. Mapa de prova não é gabarito. Variantes e sua deduplicação ainda exigem conferência editorial; o fluxo não resolve essa equivalência automaticamente. Imagens, anulações e discursivas continuam fora da publicação implementada. A meta de 20 questões oficiais revisadas permanece pendente; os três itens do seed continuam autorais demonstrativos.
+
+## Entrada no banco e revisão assistida (27/10/2026)
+
+Foram carregadas **605 ocorrências** em `question_intake` neste ambiente: 460 nos nove cadernos históricos, 81 na PND 2025 tipo 4 e 64 no caderno 0401 de 2024 derivado de compilação. Não são 605 questões únicas ou aprovadas. Todos os relatórios identificam a numeração esperada sem lacunas; isso não garante fidelidade integral do texto. Reimportar os 11 relatórios retornou 605 itens inalterados, sem duplicação.
+
+| Edição | Ocorrências na fila | Limite principal |
+| --- | ---: | --- |
+| 2005 | 85 | Caderno compartilhado; 35 das 77 objetivas com alternativas estruturadas |
+| 2008 | 80 | Caderno compartilhado; alternativas ainda no texto bruto |
+| 2011 | 55 | Caderno compartilhado; 47 das 50 objetivas com alternativas estruturadas |
+| 2014 | 80 | OCR em ambos os cadernos; conferir texto e numerais romanos |
+| 2017 | 80 | OCR em ambos os cadernos; conferir texto, código e figuras |
+| 2021 | 80 | Análise assistida por item, incluindo 30 pares compartilhados |
+| 2024 | 64 | Trechos auxiliares derivados; não substituem os originais |
+| 2025 | 81 | Somente tipo 4, sem gabarito; discursiva sem número usa D1 técnico |
+
+A fila contém 551 objetivas e 54 discursivas, incluindo anuladas e blocos de outros cursos. São 582 itens em HOLD e 23 para conferência. Nenhuma fonte foi automaticamente conferida, nenhuma revisão humana foi atribuída e nenhuma questão oficial foi publicada. O banco de produção não é preenchido automaticamente por esta entrega.
+
+A [análise de 2021](reviews/2021-question-review.md) registra os 80 itens, com 23 sem nova pendência conceitual e 57 exigindo revisão manual. Há também dois pareceres de 2014 em `data/question-reviews/2014-review.json`, ambos pendentes de fidelidade OCR. As respostas oficiais permanecem preservadas.
+
+### Reproduzir a extração e a importação
+
+Com os PDFs individuais organizados por ano/ID conforme o catálogo:
+
+```sh
+npm run extract:questions -- --id enade-2005-comum-exam,enade-2008-comum-exam,enade-2011-comum-exam,enade-2021-bacharelado-exam,enade-2021-licenciatura-exam --directory enade-pdfs --output .local/import-review/historical
+npm run extract:questions -- --id enade-2014-bacharelado-exam,enade-2014-licenciatura-exam,enade-2017-bacharelado-exam,enade-2017-licenciatura-exam --directory enade-pdfs --output .local/import-review/historical --ocr --tessdata-dir CAMINHO_DOS_MODELOS
+npm run extract:questions -- --id pnd-2025-computacao-pv-4 --directory enade-pdfs --output .local/import-review/recent
+npm run import:questions -- --file .local/import-review/historical/enade-2021-bacharelado-exam.questions.json --review data/question-reviews/2021-review.json
+```
+
+O OCR usa `por.traineddata` com hash e origem descritos acima; o modelo precisa existir localmente. Cada relatório é importado individualmente. Fontes precisam estar previamente cadastradas e íntegras. A ausência de gabarito, conteúdo ou imagem produz pendências; não é preenchida por suposição.
+
+O script `node scripts/prepare-2024-auxiliary.mjs --file COMPILACAO.pdf --output .local/import-review/auxiliary` aceita somente a compilação identificada pelo SHA-256 fixado, prepara os trechos conhecidos e registra suas ferramentas e páginas em `data/auxiliary-sources.json`. A normalização do identificador do trailer permite repetir os bytes com as mesmas versões de Poppler registradas; não promete hashes idênticos entre versões diferentes. O original é somente lido. Os derivados são cadastrados como LOCAL, com títulos explícitos, e importados para HOLD; criação manual, promoção e publicação oficiais também rejeitam seus hashes enquanto forem fontes auxiliares.
