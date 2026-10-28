@@ -16,7 +16,10 @@ O CI (`.github/workflows/ci.yml`) roda auditoria de dependências de produção,
 | `APP_ORIGIN` | Origem HTTPS pública, ex.: `https://caderno.exemplo.com.br`. A API não inicia em produção sem uma origem `https://` | Não |
 | `TRUST_PROXY` | `1` quando há um proxy reverso do provedor à frente (caso de Railway, Render e similares). Sem isso, o limite de tentativas de login trataria todos os acessos como um único IP | Não |
 | `PORT` | Normalmente definido pelo provedor; padrão 3000 | Não |
-| `SOURCE_ARCHIVE_DIR` | Padrão `/data/sources`; monte um volume persistente nesse caminho para os PDFs arquivados | Não |
+| `SOURCE_ARCHIVE_DIR` | Padrão `/data/sources`: PDFs oficiais arquivados | Não |
+| `QUESTION_ASSET_DIR` | Padrão `/data/question-assets`: recortes WebP das questões em imagem, nomeados pelo SHA-256 | Não |
+
+Os dois caminhos ficam em `/data`: monte **um** volume persistente em `/data`, gravável pelo uid 1000 (alguns provedores montam volumes como root e pedem uma opção para isso). Sem o volume, PDFs e imagens somem a cada deploy e as questões oficiais passam a responder 404 nas imagens.
 
 `NODE_ENV=production`, `HOST=0.0.0.0` e `WEB_DIST` já vêm da imagem. Não há chave de IA, e-mail, pagamento ou outra integração externa em R1; não cadastre variáveis que o código não usa.
 
@@ -53,11 +56,13 @@ Com as regras da seção 3, o risco residual de um novo vazamento de variáveis 
 1. Criar projeto no provedor a partir do repositório GitHub, usando o `Dockerfile`.
 2. Adicionar PostgreSQL 17 na rede privada; **desativar acesso público**.
 3. Definir `DATABASE_URL` (referência interna do provedor), `APP_ORIGIN` e `TRUST_PROXY=1`.
-4. Montar volume persistente em `/data/sources`.
+4. Montar volume persistente em `/data` (PDFs e imagens das questões).
 5. Configurar health check em `/api/health` e domínio com HTTPS.
 6. Publicar. As migrations rodam no início; conferir o log `Migration aplicada: …` e `/api/health`.
 7. Opcional: conteúdo autoral demonstrativo com `node dist/admin/seed.mjs` no shell do serviço.
 8. Curadoria: após a pessoa criar a conta pelo site e a identidade ser conferida, `node dist/admin/curator-role.mjs grant <identity-uuid>` no shell do serviço.
+
+Questões oficiais conferidas por agentes (ADR-011) entram com `node dist/admin/publish-assisted.mjs --review data/agent-reviews/<prova>.json --drafts <pasta> --crops <pasta>`; a ferramenta grava as imagens em `QUESTION_ASSET_DIR` e os registros no banco numa transação. Ela exige que prova e gabarito já estejam importados e arquivados no servidor. Levar relatório, recortes e fontes ao servidor é a tarefa DEP-2 do quadro.
 
 Importação de PDFs oficiais em produção ainda não está empacotada na imagem (depende de `curl`/`pdfinfo`, trilha de fontes do Codex). Até lá, não importe fontes direto no banco de produção a partir de máquinas pessoais; isso exigiria abrir o banco publicamente.
 
