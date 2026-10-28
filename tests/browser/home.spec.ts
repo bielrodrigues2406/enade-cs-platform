@@ -4,21 +4,30 @@ const noHorizontalScroll = (page: Page) =>
   page.evaluate(
     () => document.documentElement.scrollWidth <= window.innerWidth,
   );
+const goHome = (page: Page) =>
+  page.getByRole("link", { name: "Caderno de Computação, início" }).click();
 
-test("home explains the notebook and leads to study and back", async ({
+test("home shows the study board and leads to study and back", async ({
   page,
 }) => {
+  // Data fixa: a contagem e as semanas até a prova dependem do dia.
+  await page.clock.setFixedTime(new Date(2026, 9, 28, 20, 0));
   await page.goto("/");
-  await expect(
-    page.getByRole("heading", { level: 1, name: /Estude para o ENADE/ }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Boa noite. Faltam 32 dias para o ENADE.",
+  );
   for (const name of [
+    "Para você estudar",
     "A prova de 2026",
-    "Como o caderno funciona",
     "De onde vêm as questões",
+    "Como o caderno funciona",
     "Em construção",
   ])
     await expect(page.getByRole("heading", { name })).toBeVisible();
+  const weeks = page.getByRole("list", { name: "Semanas até a prova" });
+  await expect(weeks.getByRole("listitem")).toHaveCount(5);
+  await expect(weeks).toContainText("HOJE · QUA 28");
+  await expect(weeks).toContainText("DOM 29 · PROVA");
   await expect(
     page.getByRole("img", { name: /Mapa da prova: 15 questões/ }),
   ).toBeVisible();
@@ -31,12 +40,8 @@ test("home explains the notebook and leads to study and back", async ({
   await expect(page.locator(".prompt")).toBeVisible();
   await expect(page).toHaveURL(/\/questoes$/);
 
-  await page
-    .getByRole("link", { name: "Caderno de Computação, início" })
-    .click();
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Estude para o ENADE",
-  );
+  await goHome(page);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("ENADE");
   await expect(page).toHaveURL(/\/$/);
 
   await page
@@ -53,7 +58,7 @@ test("home explains the notebook and leads to study and back", async ({
   ).toBeVisible();
 });
 
-test("home is reachable by keyboard and shows progress to a returning student", async ({
+test("home is reachable by keyboard and shows saved progress", async ({
   page,
 }) => {
   await page.goto("/");
@@ -72,14 +77,47 @@ test("home is reachable by keyboard and shows progress to a returning student", 
   await page.getByRole("button", { name: "Confirmar resposta" }).click();
   await expect(page.locator(".feedback")).toBeVisible();
 
-  await page
-    .getByRole("link", { name: "Caderno de Computação, início" })
-    .click();
-  const progress = page.getByRole("region", { name: "Seu estudo até agora" });
-  await expect(progress).toContainText("1 questão respondida");
+  await goHome(page);
+  await expect(
+    page.getByRole("region", { name: "Seu andamento" }),
+  ).toContainText(/1 de \d+/);
+  await expect(page.locator(".cover-summary")).toContainText(
+    /Você respondeu 1 de \d+/,
+  );
   await expect(
     page.getByRole("button", { name: /^Continuar com: / }),
   ).toBeVisible();
+});
+
+test("a wrong answer appears first on the home page and can be retried", async ({
+  page,
+}) => {
+  await page.goto("/questoes");
+  await page
+    .getByRole("button", { name: "Resolver: Entrega confiável de um fluxo" })
+    .click();
+  await page.getByRole("radio", { name: "UDP", exact: true }).check();
+  await page.getByRole("button", { name: "Confirmar resposta" }).click();
+  await expect(page.locator(".feedback")).toBeVisible();
+
+  await goHome(page);
+  await expect(
+    page.getByRole("heading", { name: "Para retomar" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Seu andamento" }),
+  ).toContainText("espera no caderno de erros");
+  await page
+    .getByRole("button", {
+      name: "Tentar novamente: Entrega confiável de um fluxo",
+    })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Entrega confiável de um fluxo" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("radio", { name: "UDP", exact: true }),
+  ).not.toBeChecked();
 });
 
 test("home shows everything at once with reduced motion", async ({

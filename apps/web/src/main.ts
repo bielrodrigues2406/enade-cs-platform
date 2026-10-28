@@ -267,6 +267,7 @@ type Question = Summary & {
               (review)="openReview()"
               (register)="openAccount('register')"
               (openQuestion)="open($event)"
+              (retry)="openReviewQuestion($event)"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
