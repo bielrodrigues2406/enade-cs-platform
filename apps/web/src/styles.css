@@ -1757,14 +1757,14 @@ textarea {
   line-height: 1.6;
   margin: 0;
 }
-/* Mais específico que .page-intro > p:last-child, que é texto de abertura. */
-.catalog-intro > .catalog-progress {
+/* Supera .page-intro > p:last-child (texto de abertura) por especificidade e ordem. */
+.catalog-intro > p.catalog-progress {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   margin: 0 0 var(--space-1);
-  max-width: 24ch;
-  font-size: var(--text-sm);
+  max-width: 26ch;
+  font-size: var(--text-md);
   line-height: 1.4;
   color: var(--color-text-muted);
 }
