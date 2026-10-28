@@ -21,6 +21,11 @@ import { CurationController } from "./curation.js";
 import { QuestionImportsController } from "./question-imports.js";
 import { SourcesController } from "./sources.js";
 import { ReviewController } from "./review.js";
+import {
+  QuestionImagesController,
+  imageView,
+  versionImages,
+} from "./question-images.js";
 import { sourceById, publicExam } from "./source-store.js";
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -29,7 +34,7 @@ async function published(id: string) {
   if (id.length > 100) fail("Questão não encontrada.", 404);
   const q = (
     await db.query<Question>(
-      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,explanation_credit AS "explanationCredit",exam_source_id AS "examSourceId",key_source_id AS "keySourceId",source_page AS "sourcePage",source_question_number AS "sourceQuestionNumber",key_page AS "keyPage",correct_option_id AS "correctOptionId" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
+      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,explanation_credit AS "explanationCredit",exam_source_id AS "examSourceId",key_source_id AS "keySourceId",source_page AS "sourcePage",source_question_number AS "sourceQuestionNumber",key_page AS "keyPage",correct_option_id AS "correctOptionId",presentation,review_origin AS "reviewOrigin" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
       [id],
     )
   ).rows[0];
@@ -47,6 +52,15 @@ async function feedback(
   q: Question,
 ) {
   const key = q.keySourceId ? await sourceById(q.keySourceId) : null;
+  // D10: diz se o gabarito se declara definitivo ou é o único publicado.
+  const finality = key
+    ? (
+        await db.query<{ finality: string | null }>(
+          "SELECT key_finality AS finality FROM source_document WHERE id=$1",
+          [key.id],
+        )
+      ).rows[0].finality
+    : null;
   return {
     explanationCredit: q.explanationCredit || q.authorCredit,
     ...(key
@@ -57,6 +71,7 @@ async function feedback(
             officialUrl: key.officialUrl,
             sha256: key.sha256,
             page: q.keyPage,
+            finality,
           },
         }
       : {}),
@@ -117,6 +132,9 @@ class StudyController {
       demonstration: q.demonstration,
       versionNumber: q.versionNumber,
       options: q.options.map(({ id, text }) => ({ id, text })),
+      presentation: q.presentation,
+      images: (await versionImages(q.id)).map(imageView),
+      reviewOrigin: q.reviewOrigin,
       provenance: q.examSourceId
         ? {
             exam: publicExam(await sourceById(q.examSourceId)),
@@ -198,6 +216,7 @@ class StudyController {
     QuestionImportsController,
     SourcesController,
     ReviewController,
+    QuestionImagesController,
   ],
 })
 class AppModule {}
