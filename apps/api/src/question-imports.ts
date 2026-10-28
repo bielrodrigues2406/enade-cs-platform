@@ -72,6 +72,41 @@ function catalogBinding(exam: CatalogDocument, key: CatalogDocument) {
   }
 }
 
+/** This receipt records a declared text derivation, not a signature or a source
+ * verification. The temporary copy is not an official source or retained here. */
+function textCopyEvidence(value: unknown, document: CatalogDocument): boolean {
+  if (value === undefined) return false;
+  const metadata = object(value);
+  if (metadata.textCopy === undefined) return false;
+  const format = /^enade-(2014|2017)-(bacharelado|licenciatura)-exam$/.exec(document.id);
+  if (!format || document.kind !== "EXAM" || document.year !== Number(format[1]) ||
+      document.modality !== (format[2] === "bacharelado" ? "BACHARELADO" : "LICENCIATURA") ||
+      document.auxiliary === true || document.originalBytesAvailable === false || metadata.method !== "PDF_TEXT")
+    fail("A cópia de texto Calibri não corresponde ao caderno permitido.", 400);
+  const receipt = closed(metadata.textCopy, ["schemaVersion", "algorithm", "generatorSha256", "pypdfVersion", "derivedFrom", "map", "output", "fixedFonts", "tool", "purpose"]);
+  if (receipt.schemaVersion !== 1 || receipt.algorithm !== "CALIBRI_TOUNICODE_V1" ||
+      receipt.pypdfVersion !== "6.10.0" ||
+      typeof receipt.generatorSha256 !== "string" || !SHA.test(receipt.generatorSha256) ||
+      receipt.tool !== "scripts/repair-calibri-text.py com pypdf 6.10.0" ||
+      receipt.purpose !== "Somente extração de texto; imagem e procedência vêm do PDF original.")
+    fail("Recibo da cópia de texto inválido.", 400);
+  const original = closed(receipt.derivedFrom, ["file", "sha256"]);
+  const output = closed(receipt.output, ["file", "sha256"]);
+  const map = closed(receipt.map, ["file", "sha256"]);
+  const filename = `${document.id}.pdf`;
+  if (original.file !== filename || original.sha256 !== document.sha256 ||
+      output.file !== filename || typeof output.sha256 !== "string" || !SHA.test(output.sha256) ||
+      output.sha256 === document.sha256 || map.file !== "calibri-cid-unicode.json" ||
+      map.sha256 !== "f20d49d5a2c2f9a768d8139f7b37d36a13118744158433c3afce42a1bb5f8f05")
+    fail("O recibo de texto não está vinculado ao PDF original e ao mapa fixado.", 400);
+  if (!Array.isArray(receipt.fixedFonts) || !receipt.fixedFonts.length || receipt.fixedFonts.length > 12 ||
+      receipt.fixedFonts.some((font) => typeof font !== "string" ||
+        !/^(?:[A-Z]{6}\+)?Calibri(?:-(?:Bold|Italic|BoldItalic))?(?:-Identity-H)?$/.test(font)) ||
+      new Set(receipt.fixedFonts).size !== receipt.fixedFonts.length)
+    fail("Fontes corrigidas inválidas no recibo de texto.", 400);
+  return true;
+}
+
 function editable(value: unknown): Content {
   const input = closed(value, ["title", "topic", "prompt", "options", "correctOptionId", "explanation", "explanationCredit", "keyPage"]);
   if (!Array.isArray(input.options) || input.options.length > 5)
@@ -270,7 +305,7 @@ export async function importQuestionReport(report: unknown, options: {
   strings(completeness.missing, "Questões ausentes", 1000, 100);
   strings(completeness.unexpected, "Questões inesperadas", 1000, 100);
   if (input.warnings !== undefined) strings(input.warnings, "Avisos", 100, 2000);
-  if (input.extraction !== undefined) object(input.extraction);
+  const hasDerivedText = textCopyEvidence(input.extraction, document);
   if (!Array.isArray(input.items) || input.items.length < 1 || input.items.length > 1000)
     fail("O relatório deve conter de uma a mil questões identificadas.", 400);
   if (options.actorId !== undefined && !UUID.test(options.actorId)) fail("Identidade administrativa inválida.", 400);
@@ -311,6 +346,7 @@ export async function importQuestionReport(report: unknown, options: {
       if (!Array.isArray(item.pages) || item.pages.length > 1000) fail("Páginas inválidas.", 400);
       const pages = [...new Set((item.pages as unknown[]).map((n) => integer(n, exam.pageCount, "Página da questão")))].sort((a, b) => a - b);
       const flags = strings(item.flags ?? [], "Pendências da extração", 100, 160);
+      if (hasDerivedText) flags.push("TEXTO_DERIVADO_CALIBRI");
       const status = text(item.status, "Estado da extração", 100);
       optionalText(item.block, "Bloco", 100);
       const courseScope = item.courseScope === undefined ? [] : strings(item.courseScope, "Cursos", 10, 200);
