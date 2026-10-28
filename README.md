@@ -4,6 +4,7 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 
 ## O que funciona
 
+- Página inicial em `/` com a situação do estudante: semanas até a prova, questões para retomar e para resolver, andamento salvo, formato da prova de 2026 e origem das questões com contagens reais; o banco fica em `/questoes`.
 - Catálogo com busca, filtro por assunto e indicação de resposta salva.
 - Resolução com alternativas identificadas, feedback após confirmação, alteração e retomada da resposta.
 - Persistência PostgreSQL com prática anônima ou conta por e-mail/senha.
@@ -14,7 +15,7 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Versões publicadas e feedback histórico preservados; conflitos não sobrescrevem alterações.
 - Caderno de erros com filtro por assunto, paginação e nova resolução; resumo por questão distinta, sem multiplicar contagens por edições ou versões.
 - Tabela por assunto no caderno de erros (a retomar e respondidas) com ação de retomar cada assunto; no catálogo, quantas questões da seleção têm resposta salva; na resolução, posição na seleção e "Próxima questão" após o feedback.
-- Interface com tokens, fontes auto-hospedadas e transições de tela que respeitam movimento reduzido ([design](docs/DESIGN-QUALITY.md)).
+- Interface com paleta "caderno" em tokens (contraste conferido), fontes auto-hospedadas e transições de tela que respeitam movimento reduzido ([design](docs/DESIGN-QUALITY.md)).
 - Registro de PDFs por download oficial, cópia pública fixada em commit ou arquivo local, com SHA-256 e conferência independente na seção Fontes.
 - Catálogo de todos os anos localizados: 61 referências; 28 PDFs individuais obtidos/cadastrados e 33 documentos recentes ainda pendentes. Cadernos compartilhados, Licenciatura e PND têm identificação própria.
 - Curadoria de questões oficiais com prova, página, número original e gabarito definitivo conferidos; procedência pública e comentário editorial com crédito próprio.

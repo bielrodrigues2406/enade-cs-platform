@@ -732,6 +732,7 @@ test("official publication requires verified provenance and reveals only the exa
     officialUrl: key.officialUrl,
     sha256: key.sha256,
     page: 1,
+    finality: null,
   });
 });
 

@@ -11,7 +11,8 @@ ENV NODE_ENV=production \
     HOST=0.0.0.0 \
     PORT=3000 \
     WEB_DIST=/app/dist/web/browser \
-    SOURCE_ARCHIVE_DIR=/data/sources
+    SOURCE_ARCHIVE_DIR=/data/sources \
+    QUESTION_ASSET_DIR=/data/question-assets
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
@@ -19,7 +20,7 @@ COPY --from=build /app/dist ./dist
 COPY migrations ./migrations
 COPY data ./data
 COPY scripts/migrate.mjs ./scripts/migrate.mjs
-RUN mkdir -p /data/sources && chown node:node /data/sources
+RUN mkdir -p /data/sources /data/question-assets && chown -R node:node /data
 USER node
 EXPOSE 3000
 # Migrations são transacionais e serializadas por advisory lock; depois a API

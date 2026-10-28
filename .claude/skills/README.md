@@ -10,8 +10,8 @@ Claude Code as carrega a partir deste diretório. Codex e outros agentes devem l
 
 As skills foram escritas sobretudo para landing pages em inglês. Neste produto, em conflito, valem AGENTS.md, docs/UX-DESIGN-SPEC.md e docs/DESIGN-QUALITY.md:
 
-- Produto de estudo, não página de marketing: usar a escala tipográfica de UI; não usar títulos de herói gigantes, seções de 96–160 px ou regras de conversão.
+- Produto de estudo, não página de marketing: usar a escala tipográfica de UI; não usar títulos de herói gigantes, seções de 96–160 px ou regras de conversão. Exceção: a página inicial (`/`) usa escala editorial, pedida por Gabriel em 28/10/2026 (DESIGN-QUALITY §5); as telas de estudo não.
 - Interface e textos em português brasileiro; aplicar as regras de `taste-ux-copy` ao português.
-- Identidade atual (papel claro, tinta escura, petróleo como acento) é a base; as skills orientam disciplina, não trocam a marca.
+- Identidade atual (paleta "caderno" desde 28/10/2026: papel claro, tinta escura, azul de caneta como acento, caneta de correção para certo/errado e marca-texto raro) é a base; as skills orientam disciplina, não trocam a marca.
 - Motion segue docs/DESIGN-QUALITY.md §4 (molas por duração e bounce em `linear()`, transições interrompíveis), que prevalece sobre as curvas fixas de `taste-motion`.
 - Nenhuma métrica, depoimento ou contagem fictícia para "parecer completo".

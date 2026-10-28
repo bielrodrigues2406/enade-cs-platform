@@ -1,7 +1,9 @@
 import { ApplicationRef, Component, inject, signal } from "@angular/core";
+import { IMAGE_CONFIG } from "@angular/common";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
+import { HomeComponent } from "./home.component";
 import {
   ReviewComponent,
   type ReviewItem,
@@ -45,13 +47,20 @@ type Answer = {
     officialUrl: string;
     sha256: string;
     page: number;
+    // D10: só o gabarito publicado, sem se declarar definitivo.
+    finality?: "DECLARED" | "ONLY_PUBLISHED" | null;
   };
 };
+type QuestionImage = { url: string; width: number; height: number; page: number };
 type Question = Summary & {
   authorCredit: string;
   prompt: string;
   options: { id: string; text: string }[];
   answer: Answer | null;
+  // IMAGE: o recorte da prova é a questão; o texto é transcrição de apoio.
+  presentation?: "TEXT" | "IMAGE";
+  images?: QuestionImage[];
+  reviewOrigin?: "HUMAN" | "ASSISTED";
   provenance: {
     exam: PublicDocument;
     page: number;
@@ -61,11 +70,21 @@ type Question = Summary & {
 
 @Component({
   selector: "app-root",
-  imports: [FormsModule, AccountComponent, CurationComponent, ReviewComponent],
+  imports: [
+    FormsModule,
+    AccountComponent,
+    CurationComponent,
+    HomeComponent,
+    ReviewComponent,
+  ],
   template: `
     <a class="skip" href="#content">Ir para o conteúdo</a>
     <header>
-      <a href="/" class="brand" aria-label="Caderno de Computação, início"
+      <a
+        href="/"
+        class="brand"
+        aria-label="Caderno de Computação, início"
+        (click)="openHome($event)"
         ><span class="brand-symbol" aria-hidden="true">cc.</span
         ><span
           >Caderno<span class="brand-sub">CIÊNCIA DA COMPUTAÇÃO</span></span
@@ -117,6 +136,14 @@ type Question = Summary & {
       <nav class="mobile-study-nav" aria-label="Navegação de estudo">
         <button
           class="text-button"
+          (click)="openHome()"
+          [disabled]="saving() || authBusy() || curationBusy()"
+          [attr.aria-current]="onHome() ? 'page' : null"
+        >
+          Início
+        </button>
+        <button
+          class="text-button"
           (click)="back()"
           [disabled]="saving() || authBusy() || curationBusy()"
         >
@@ -136,9 +163,19 @@ type Question = Summary & {
       <aside aria-label="Sobre este caderno">
         <button
           class="nav"
+          (click)="openHome()"
+          [disabled]="saving() || authBusy() || curationBusy()"
+          [attr.aria-current]="onHome() ? 'page' : null"
+        >
+          <span class="nav-index" aria-hidden="true">01</span>
+          Início
+        </button>
+        <button
+          class="nav secondary-nav"
           (click)="back()"
           [disabled]="saving() || authBusy() || curationBusy()"
           [attr.aria-current]="
+            !homeView() &&
             !curationView() &&
             !reviewView() &&
             !reviewReturn() &&
@@ -147,7 +184,7 @@ type Question = Summary & {
               : null
           "
         >
-          <span class="nav-index" aria-hidden="true">01</span>
+          <span class="nav-index" aria-hidden="true">02</span>
           Banco de questões
         </button>
         <button
@@ -156,7 +193,7 @@ type Question = Summary & {
           [disabled]="saving() || authBusy() || curationBusy()"
           [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
         >
-          <span class="nav-index" aria-hidden="true">02</span>
+          <span class="nav-index" aria-hidden="true">03</span>
           Caderno de erros
         </button>
         @if (canCurate()) {
@@ -166,7 +203,7 @@ type Question = Summary & {
             [disabled]="saving() || authBusy() || curationBusy()"
             [attr.aria-current]="curationView() ? 'page' : null"
           >
-            <span class="nav-index" aria-hidden="true">03</span>
+            <span class="nav-index" aria-hidden="true">04</span>
             Curadoria
           </button>
         }
@@ -188,9 +225,11 @@ type Question = Summary & {
                 ? "Curadoria"
                 : reviewView()
                   ? "Caderno de erros"
-                  : question()
-                    ? "Resolução"
-                    : "Banco de questões"
+                  : homeView()
+                    ? "Início"
+                    : question()
+                      ? "Resolução"
+                      : "Banco de questões"
           }}
         </div>
         @if (booting()) {
@@ -225,6 +264,18 @@ type Question = Summary & {
               (positionChange)="reviewPosition = $event"
               (resolve)="openReviewQuestion($event)"
               (browse)="back()"
+            />
+            @if (error()) {
+              <p class="notice" role="alert">{{ error() }}</p>
+            }
+          } @else if (homeView()) {
+            <app-home
+              [sessionMode]="session().mode"
+              (browse)="back()"
+              (review)="openReview()"
+              (register)="openAccount('register')"
+              (openQuestion)="open($event)"
+              (retry)="openReviewQuestion($event)"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
@@ -473,12 +524,102 @@ type Question = Summary & {
                   >
                 </section>
               }
-              <p class="prompt">{{ question()!.prompt }}</p>
+              @if (isImage()) {
+                <figure class="question-sheet">
+                  <div class="question-images">
+                    @for (
+                      image of question()!.images!;
+                      track image.url;
+                      let i = $index
+                    ) {
+                      <!-- Escala de impressão: 200 dpi ≈ 1,9 px por px CSS. -->
+                      <img
+                        [src]="image.url"
+                        [width]="image.width"
+                        [height]="image.height"
+                        [style.width.px]="image.width / 1.9"
+                        [attr.loading]="i ? 'lazy' : null"
+                        decoding="async"
+                        [alt]="imageAlt(i)"
+                        (click)="zoom.showModal()"
+                      />
+                    }
+                  </div>
+                  <figcaption>
+                    <span
+                      >Recorte da prova original{{
+                        question()!.images!.length > 1
+                          ? ", em " + question()!.images!.length + " partes"
+                          : ""
+                      }}.</span
+                    >
+                    <button
+                      type="button"
+                      class="text-button"
+                      (click)="zoom.showModal()"
+                    >
+                      Ampliar
+                    </button>
+                  </figcaption>
+                </figure>
+                <dialog
+                  #zoom
+                  class="zoom"
+                  aria-label="Questão ampliada"
+                  (click)="$event.target === zoom && zoom.close()"
+                >
+                  <div class="zoom-bar">
+                    <span>{{ question()!.title }}</span>
+                    <button type="button" class="outline" (click)="zoom.close()">
+                      Fechar
+                    </button>
+                  </div>
+                  <div
+                    class="zoom-body"
+                    (click)="$event.target === $event.currentTarget && zoom.close()"
+                  >
+                    @for (image of question()!.images!; track image.url) {
+                      <img
+                        [src]="image.url"
+                        [width]="image.width"
+                        [height]="image.height"
+                        [style.--image-width]="image.width"
+                        alt=""
+                      />
+                    }
+                  </div>
+                </dialog>
+                @if (question()!.reviewOrigin === "ASSISTED") {
+                  <p class="assisted-label">
+                    Transcrição automatizada do PDF oficial, conferida por
+                    agentes; sem revisão humana. Em caso de diferença, vale a
+                    imagem.
+                  </p>
+                }
+                <details class="transcription">
+                  <summary>Transcrição automática do enunciado</summary>
+                  <p>{{ question()!.prompt || "Sem transcrição." }}</p>
+                  @for (option of question()!.options; track option.id) {
+                    @if (option.text) {
+                      <p><strong>{{ option.id }}</strong> {{ option.text }}</p>
+                    }
+                  }
+                </details>
+              } @else {
+                <p class="prompt">{{ question()!.prompt }}</p>
+              }
               <form (ngSubmit)="save()">
                 <fieldset
+                  [class.answer-sheet]="isImage()"
                   [disabled]="saving() || (!!question()!.answer && !editing())"
                 >
-                  <legend>Selecione uma alternativa</legend>
+                  <legend>
+                    {{
+                      isImage()
+                        ? "Marque a alternativa da imagem"
+                        : "Selecione uma alternativa"
+                    }}
+                  </legend>
                   @for (
                     option of question()!.options;
                     track option.id;
@@ -499,6 +640,9 @@ type Question = Summary & {
                           name="answer"
                           [value]="option.id"
                           [(ngModel)]="selected"
+                          [attr.aria-label]="
+                            isImage() ? 'Alternativa ' + option.id : null
+                          "
                           [attr.aria-describedby]="
                             optionOutcome(option.id)
                               ? 'outcome-' + option.id
@@ -507,7 +651,9 @@ type Question = Summary & {
                         /><span class="letter" aria-hidden="true">{{
                           "ABCDE"[i]
                         }}</span
-                        ><span>{{ option.text }}</span></label
+                        >@if (!isImage()) {
+                          <span>{{ option.text }}</span>
+                        }</label
                       >
                       @if (optionOutcome(option.id); as outcome) {
                         <span class="option-tag" [id]="'outcome-' + option.id">
@@ -526,7 +672,7 @@ type Question = Summary & {
                                 stroke-linejoin="round"
                               />
                             </svg>
-                            Alternativa correta
+                            {{ isImage() ? "Correta" : "Alternativa correta" }}
                           } @else {
                             <svg
                               class="status-icon"
@@ -623,13 +769,22 @@ type Question = Summary & {
                   <p>
                     <strong>Alternativa correta:</strong> {{ correctText() }}
                   </p>
-                  <p class="feedback-explanation">
-                    {{ question()!.answer!.explanation }}
-                  </p>
-                  @if (question()!.answer!.explanationCredit) {
+                  @if (question()!.answer!.explanation) {
+                    <p class="feedback-explanation">
+                      {{ question()!.answer!.explanation }}
+                    </p>
+                    @if (question()!.answer!.explanationCredit) {
+                      <p class="metadata">
+                        @if (question()!.reviewOrigin !== "ASSISTED") {
+                          Explicação editorial:
+                        }
+                        {{ question()!.answer!.explanationCredit }}
+                      </p>
+                    }
+                  } @else {
                     <p class="metadata">
-                      Explicação editorial:
-                      {{ question()!.answer!.explanationCredit }}
+                      Ainda não há explicação para esta questão. Confira o
+                      raciocínio na prova original.
                     </p>
                   }
                   @if (question()!.answer!.answerKey) {
@@ -638,11 +793,25 @@ type Question = Summary & {
                         [href]="question()!.answer!.answerKey!.officialUrl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        >Gabarito definitivo:
+                        >{{
+                          question()!.answer!.answerKey!.finality ===
+                          "ONLY_PUBLISHED"
+                            ? "Gabarito publicado pelo Inep"
+                            : "Gabarito definitivo"
+                        }}:
                         {{ question()!.answer!.answerKey!.title }}</a
                       >
                       · página {{ question()!.answer!.answerKey!.page }}
                     </p>
+                    @if (
+                      question()!.answer!.answerKey!.finality ===
+                      "ONLY_PUBLISHED"
+                    ) {
+                      <p class="metadata">
+                        O Inep não indicou este gabarito como definitivo; é o
+                        único publicado para a edição.
+                      </p>
+                    }
                   }
                   <div class="feedback-actions">
                     @if (nextQuestion(); as next) {
@@ -689,6 +858,8 @@ class App {
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
+  // A página inicial fica em "/" e o banco de questões em "/questoes".
+  homeView = signal(location.pathname === "/");
   reviewReturn = signal(false);
   reviewCurrentVersion = signal<string | null>(null);
   reviewPosition: ReviewPosition = { topic: "", offset: 0 };
@@ -781,6 +952,7 @@ class App {
     )
       return;
     this.requestNumber++;
+    this.homeView.set(false);
     this.reviewView.set(false);
     this.reviewReturn.set(false);
     this.loading.set(false);
@@ -789,7 +961,31 @@ class App {
     this.accountNotice.set("");
     this.error.set("");
     this.curationView.set(true);
+    this.leaveHomePath();
     this.focusMain();
+  }
+  openHome(event?: Event) {
+    event?.preventDefault();
+    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    this.requestNumber++;
+    this.swapView(() => {
+      this.loading.set(false);
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.reviewCurrentVersion.set(null);
+      this.authError.set("");
+      this.accountNotice.set("");
+      this.error.set("");
+      this.homeView.set(true);
+    });
+    this.setPath("/");
+    this.focusMain();
+  }
+  onHome() {
+    return this.homeView() && !this.accountView();
   }
   openReview() {
     if (this.saving() || this.authBusy() || this.curationBusy()) return;
@@ -799,12 +995,14 @@ class App {
       this.question.set(null);
       this.accountView.set(null);
       this.curationView.set(false);
+      this.homeView.set(false);
       this.reviewReturn.set(false);
       this.reviewCurrentVersion.set(null);
       this.accountNotice.set("");
       this.error.set("");
       this.reviewView.set(true);
     });
+    this.leaveHomePath();
     this.focusMain();
   }
   async openReviewQuestion(item: ReviewItem) {
@@ -848,12 +1046,14 @@ class App {
       this.swapView(
         () => {
           this.reviewView.set(false);
+          this.homeView.set(false);
           this.question.set(q);
           this.selected = retry ? "" : q.answer?.optionId || "";
           this.editing.set(retry);
         },
         () => request === this.requestNumber,
       );
+      this.leaveHomePath();
       this.focusMain();
     } catch (err) {
       if (request === this.requestNumber) this.error.set(this.message(err));
@@ -892,6 +1092,7 @@ class App {
   back() {
     if (this.saving() || this.authBusy() || this.curationBusy()) return;
     this.swapView(() => {
+      this.homeView.set(false);
       this.curationView.set(false);
       this.reviewView.set(false);
       this.reviewReturn.set(false);
@@ -902,8 +1103,17 @@ class App {
       this.question.set(null);
       this.error.set("");
     });
+    this.setPath("/questoes");
     void this.loadCatalog();
     this.focusMain();
+  }
+  // Só o início e o banco têm endereço próprio. As demais telas usam o do
+  // banco, para que recarregar fora do início não volte à página inicial.
+  private setPath(path: string) {
+    if (location.pathname !== path) history.replaceState(null, "", path);
+  }
+  private leaveHomePath() {
+    if (location.pathname === "/") this.setPath("/questoes");
   }
   clearFilters() {
     if (this.authBusy()) return;
@@ -1098,8 +1308,22 @@ class App {
   }
   correctText() {
     const q = this.question();
+    if (this.isImage()) return q?.answer?.correctOptionId ?? "";
     return (
       q?.options.find((o) => o.id === q.answer?.correctOptionId)?.text || ""
+    );
+  }
+  isImage() {
+    const q = this.question();
+    return q?.presentation === "IMAGE" && !!q.images?.length;
+  }
+  imageAlt(index: number) {
+    const q = this.question()!;
+    const parts = q.images!.length;
+    return (
+      `Questão ${q.provenance?.questionNumber ?? ""} da prova ENADE ${q.provenance?.exam.year ?? ""}` +
+      (parts > 1 ? `, parte ${index + 1} de ${parts}` : "") +
+      ". O texto está na transcrição automática abaixo."
     );
   }
   answeredCount() {
@@ -1155,4 +1379,11 @@ class App {
     setTimeout(() => document.getElementById("content")?.focus(), 0);
   }
 }
-bootstrapApplication(App).catch(console.error);
+bootstrapApplication(App, {
+  // Os recortes das questões vêm em 200 dpi de propósito: a mesma imagem
+  // serve à leitura e à ampliação. O aviso de imagem maior que a exibida
+  // não se aplica a eles.
+  providers: [
+    { provide: IMAGE_CONFIG, useValue: { disableImageSizeWarning: true } },
+  ],
+}).catch(console.error);

@@ -263,7 +263,7 @@ test("source verification enables official provenance while the definitive key r
   try {
     await provision(reviewerContext);
     const reviewer = await reviewerContext.newPage();
-    await page.goto("/");
+    await page.goto("/questoes");
     await sourceQueue(page);
     await page
       .getByRole("button", {
@@ -302,7 +302,7 @@ test("source verification enables official provenance while the definitive key r
       .click();
     await expect(page.getByRole("status")).toContainText("Metadados salvos.");
 
-    await reviewer.goto("/");
+    await reviewer.goto("/questoes");
     await sourceQueue(reviewer);
     for (const width of [320, 390, 768, 1440]) {
       await reviewer.setViewportSize({ width, height: 900 });
@@ -524,7 +524,7 @@ test("source verification enables official provenance while the definitive key r
     expect(JSON.stringify(payload)).not.toContain(key.sha256);
     const student = await studentContext.newPage();
     await student.setViewportSize({ width: 320, height: 900 });
-    await student.goto("/");
+    await student.goto("/questoes");
     await student
       .getByRole("button", { name: `Resolver: ${title}`, exact: true })
       .click();
@@ -598,7 +598,7 @@ test("a missing archived source keeps the review pending and allows retry after 
   try {
     await provision(reviewerContext);
     const reviewer = await reviewerContext.newPage();
-    await reviewer.goto("/");
+    await reviewer.goto("/questoes");
     await sourceQueue(reviewer);
     await reviewer
       .getByRole("button", {
@@ -643,7 +643,7 @@ test("source metadata conflicts preserve edits until explicit reopen", async ({
 }) => {
   const importer = await provision(context);
   const fixture = await source(importer);
-  await page.goto("/");
+  await page.goto("/questoes");
   await sourceQueue(page);
   await page
     .getByRole("button", {
