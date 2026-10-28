@@ -1,4 +1,5 @@
 import { ApplicationRef, Component, inject, signal } from "@angular/core";
+import { IMAGE_CONFIG } from "@angular/common";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
@@ -46,13 +47,20 @@ type Answer = {
     officialUrl: string;
     sha256: string;
     page: number;
+    // D10: só o gabarito publicado, sem se declarar definitivo.
+    finality?: "DECLARED" | "ONLY_PUBLISHED" | null;
   };
 };
+type QuestionImage = { url: string; width: number; height: number; page: number };
 type Question = Summary & {
   authorCredit: string;
   prompt: string;
   options: { id: string; text: string }[];
   answer: Answer | null;
+  // IMAGE: o recorte da prova é a questão; o texto é transcrição de apoio.
+  presentation?: "TEXT" | "IMAGE";
+  images?: QuestionImage[];
+  reviewOrigin?: "HUMAN" | "ASSISTED";
   provenance: {
     exam: PublicDocument;
     page: number;
@@ -516,12 +524,102 @@ type Question = Summary & {
                   >
                 </section>
               }
-              <p class="prompt">{{ question()!.prompt }}</p>
+              @if (isImage()) {
+                <figure class="question-sheet">
+                  <div class="question-images">
+                    @for (
+                      image of question()!.images!;
+                      track image.url;
+                      let i = $index
+                    ) {
+                      <!-- Escala de impressão: 200 dpi ≈ 1,9 px por px CSS. -->
+                      <img
+                        [src]="image.url"
+                        [width]="image.width"
+                        [height]="image.height"
+                        [style.width.px]="image.width / 1.9"
+                        [attr.loading]="i ? 'lazy' : null"
+                        decoding="async"
+                        [alt]="imageAlt(i)"
+                        (click)="zoom.showModal()"
+                      />
+                    }
+                  </div>
+                  <figcaption>
+                    <span
+                      >Recorte da prova original{{
+                        question()!.images!.length > 1
+                          ? ", em " + question()!.images!.length + " partes"
+                          : ""
+                      }}.</span
+                    >
+                    <button
+                      type="button"
+                      class="text-button"
+                      (click)="zoom.showModal()"
+                    >
+                      Ampliar
+                    </button>
+                  </figcaption>
+                </figure>
+                <dialog
+                  #zoom
+                  class="zoom"
+                  aria-label="Questão ampliada"
+                  (click)="$event.target === zoom && zoom.close()"
+                >
+                  <div class="zoom-bar">
+                    <span>{{ question()!.title }}</span>
+                    <button type="button" class="outline" (click)="zoom.close()">
+                      Fechar
+                    </button>
+                  </div>
+                  <div
+                    class="zoom-body"
+                    (click)="$event.target === $event.currentTarget && zoom.close()"
+                  >
+                    @for (image of question()!.images!; track image.url) {
+                      <img
+                        [src]="image.url"
+                        [width]="image.width"
+                        [height]="image.height"
+                        [style.--image-width]="image.width"
+                        alt=""
+                      />
+                    }
+                  </div>
+                </dialog>
+                @if (question()!.reviewOrigin === "ASSISTED") {
+                  <p class="assisted-label">
+                    Transcrição automatizada do PDF oficial, conferida por
+                    agentes; sem revisão humana. Em caso de diferença, vale a
+                    imagem.
+                  </p>
+                }
+                <details class="transcription">
+                  <summary>Transcrição automática do enunciado</summary>
+                  <p>{{ question()!.prompt || "Sem transcrição." }}</p>
+                  @for (option of question()!.options; track option.id) {
+                    @if (option.text) {
+                      <p><strong>{{ option.id }}</strong> {{ option.text }}</p>
+                    }
+                  }
+                </details>
+              } @else {
+                <p class="prompt">{{ question()!.prompt }}</p>
+              }
               <form (ngSubmit)="save()">
                 <fieldset
+                  [class.answer-sheet]="isImage()"
                   [disabled]="saving() || (!!question()!.answer && !editing())"
                 >
-                  <legend>Selecione uma alternativa</legend>
+                  <legend>
+                    {{
+                      isImage()
+                        ? "Marque a alternativa da imagem"
+                        : "Selecione uma alternativa"
+                    }}
+                  </legend>
                   @for (
                     option of question()!.options;
                     track option.id;
@@ -542,6 +640,9 @@ type Question = Summary & {
                           name="answer"
                           [value]="option.id"
                           [(ngModel)]="selected"
+                          [attr.aria-label]="
+                            isImage() ? 'Alternativa ' + option.id : null
+                          "
                           [attr.aria-describedby]="
                             optionOutcome(option.id)
                               ? 'outcome-' + option.id
@@ -550,7 +651,9 @@ type Question = Summary & {
                         /><span class="letter" aria-hidden="true">{{
                           "ABCDE"[i]
                         }}</span
-                        ><span>{{ option.text }}</span></label
+                        >@if (!isImage()) {
+                          <span>{{ option.text }}</span>
+                        }</label
                       >
                       @if (optionOutcome(option.id); as outcome) {
                         <span class="option-tag" [id]="'outcome-' + option.id">
@@ -569,7 +672,7 @@ type Question = Summary & {
                                 stroke-linejoin="round"
                               />
                             </svg>
-                            Alternativa correta
+                            {{ isImage() ? "Correta" : "Alternativa correta" }}
                           } @else {
                             <svg
                               class="status-icon"
@@ -666,13 +769,22 @@ type Question = Summary & {
                   <p>
                     <strong>Alternativa correta:</strong> {{ correctText() }}
                   </p>
-                  <p class="feedback-explanation">
-                    {{ question()!.answer!.explanation }}
-                  </p>
-                  @if (question()!.answer!.explanationCredit) {
+                  @if (question()!.answer!.explanation) {
+                    <p class="feedback-explanation">
+                      {{ question()!.answer!.explanation }}
+                    </p>
+                    @if (question()!.answer!.explanationCredit) {
+                      <p class="metadata">
+                        @if (question()!.reviewOrigin !== "ASSISTED") {
+                          Explicação editorial:
+                        }
+                        {{ question()!.answer!.explanationCredit }}
+                      </p>
+                    }
+                  } @else {
                     <p class="metadata">
-                      Explicação editorial:
-                      {{ question()!.answer!.explanationCredit }}
+                      Ainda não há explicação para esta questão. Confira o
+                      raciocínio na prova original.
                     </p>
                   }
                   @if (question()!.answer!.answerKey) {
@@ -681,11 +793,25 @@ type Question = Summary & {
                         [href]="question()!.answer!.answerKey!.officialUrl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        >Gabarito definitivo:
+                        >{{
+                          question()!.answer!.answerKey!.finality ===
+                          "ONLY_PUBLISHED"
+                            ? "Gabarito publicado pelo Inep"
+                            : "Gabarito definitivo"
+                        }}:
                         {{ question()!.answer!.answerKey!.title }}</a
                       >
                       · página {{ question()!.answer!.answerKey!.page }}
                     </p>
+                    @if (
+                      question()!.answer!.answerKey!.finality ===
+                      "ONLY_PUBLISHED"
+                    ) {
+                      <p class="metadata">
+                        O Inep não indicou este gabarito como definitivo; é o
+                        único publicado para a edição.
+                      </p>
+                    }
                   }
                   <div class="feedback-actions">
                     @if (nextQuestion(); as next) {
@@ -1182,8 +1308,22 @@ class App {
   }
   correctText() {
     const q = this.question();
+    if (this.isImage()) return q?.answer?.correctOptionId ?? "";
     return (
       q?.options.find((o) => o.id === q.answer?.correctOptionId)?.text || ""
+    );
+  }
+  isImage() {
+    const q = this.question();
+    return q?.presentation === "IMAGE" && !!q.images?.length;
+  }
+  imageAlt(index: number) {
+    const q = this.question()!;
+    const parts = q.images!.length;
+    return (
+      `Questão ${q.provenance?.questionNumber ?? ""} da prova ENADE ${q.provenance?.exam.year ?? ""}` +
+      (parts > 1 ? `, parte ${index + 1} de ${parts}` : "") +
+      ". O texto está na transcrição automática abaixo."
     );
   }
   answeredCount() {
@@ -1239,4 +1379,11 @@ class App {
     setTimeout(() => document.getElementById("content")?.focus(), 0);
   }
 }
-bootstrapApplication(App).catch(console.error);
+bootstrapApplication(App, {
+  // Os recortes das questões vêm em 200 dpi de propósito: a mesma imagem
+  // serve à leitura e à ampliação. O aviso de imagem maior que a exibida
+  // não se aplica a eles.
+  providers: [
+    { provide: IMAGE_CONFIG, useValue: { disableImageSizeWarning: true } },
+  ],
+}).catch(console.error);

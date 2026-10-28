@@ -2921,3 +2921,184 @@ app-home.motion-ready .home-steps li:not(.is-visible)::before {
     align-items: flex-start;
   }
 }
+
+/*
+ * Questão em imagem (CT-1b, ADR-010). O recorte da prova é a questão: fica
+ * numa folha, na escala de impressão, e amplia num diálogo de tela cheia. As
+ * alternativas viram uma folha de respostas por letra; a transcrição fica
+ * recolhida como apoio.
+ */
+.question-sheet {
+  margin: var(--space-2) 0 var(--space-4);
+}
+.question-images {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.question-images img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  cursor: zoom-in;
+}
+.question-sheet figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.question-sheet figcaption .text-button {
+  font-size: var(--text-sm);
+}
+dialog.zoom {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+dialog.zoom[open] {
+  display: flex;
+  flex-direction: column;
+}
+/* A barra fica parada; só a área da imagem rola, nos dois sentidos. */
+.zoom-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding-bottom: var(--space-8);
+}
+dialog.zoom::backdrop {
+  background: color-mix(in srgb, var(--color-text) 40%, transparent);
+}
+dialog.zoom[open] {
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+@starting-style {
+  dialog.zoom[open] {
+    opacity: 0;
+  }
+}
+.zoom-bar {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: var(--border-thin) solid var(--color-border);
+  background: var(--color-bg);
+  font-weight: var(--weight-semibold);
+}
+/* 200 dpi ÷ 1,4 deixa o texto da prova perto de 20 px; no celular, ÷ 2,1
+   fica perto de 13 px e a imagem rola na horizontal. */
+dialog.zoom img {
+  display: block;
+  width: calc(var(--image-width) * 1px / 1.4);
+  max-width: none;
+  height: auto;
+  margin: var(--space-5) auto 0;
+  padding: var(--space-4);
+  border: var(--border-thin) solid var(--color-border);
+  background: var(--color-surface);
+}
+.assisted-label {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+details.transcription {
+  margin: var(--space-3) 0 var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-sunken);
+}
+details.transcription summary {
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-accent);
+}
+details.transcription p {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-reading);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+/* Folha de respostas: uma letra por alternativa, em linha. */
+fieldset.answer-sheet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+fieldset.answer-sheet legend {
+  width: 100%;
+}
+.answer-sheet .option-row {
+  flex: 1 1 0;
+  min-width: 3.5rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-1);
+}
+.answer-sheet .option {
+  justify-content: center;
+  padding: var(--space-3);
+}
+.answer-sheet .option input {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.answer-sheet .letter {
+  flex-basis: 40px;
+  width: 40px;
+  height: 40px;
+  font-size: var(--text-lg);
+}
+.answer-sheet .option-row.is-correct .option,
+.answer-sheet .option-row.is-wrong .option {
+  padding-bottom: var(--space-3);
+}
+.answer-sheet .option-tag {
+  position: static;
+  display: block;
+  text-align: center;
+  text-wrap: balance;
+}
+.answer-sheet .option-tag .status-icon {
+  display: inline-block;
+  margin-right: 2px;
+  vertical-align: -3px;
+}
+@media (max-width: 700px) {
+  .question-images {
+    padding: var(--space-3);
+  }
+  .answer-sheet .letter {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+  }
+  dialog.zoom img {
+    width: calc(var(--image-width) * 1px / 2.1);
+    margin-inline: var(--space-3);
+  }
+}
