@@ -51,7 +51,7 @@ test("the error notebook supports retry, confirmed correction, filters, reload a
   page,
   context,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões", exact: true }),
   ).toBeVisible();
@@ -189,7 +189,7 @@ test("a shrinking last page returns to an existing page after a confirmed correc
   page,
   context,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões", exact: true }),
   ).toBeVisible();
@@ -277,7 +277,7 @@ test("a late review response cannot reveal account history after logout in anoth
   page,
   context,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões", exact: true }),
   ).toBeVisible();
@@ -301,7 +301,7 @@ test("a late review response cannot reveal account history after logout in anoth
   ).toBe(200);
   await page.reload();
   const tab = await context.newPage();
-  await tab.goto("/");
+  await tab.goto("/questoes");
   let entered!: () => void, release!: () => void;
   const captured = new Promise<void>((resolve) => {
     entered = resolve;
@@ -350,7 +350,7 @@ test("the topic table filters the notebook to one topic with honest counts", asy
   page,
   context,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões", exact: true }),
   ).toBeVisible();

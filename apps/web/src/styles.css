@@ -2071,3 +2071,881 @@ main {
   .intake-pagination { gap: var(--space-2); font-size: var(--text-md); }
   .intake-table td { overflow-wrap: anywhere; }
 }
+
+
+/*
+ * Início (HOME-1, DS-3). Única tela com escala editorial: título grande na
+ * serifa, seções com ritmos diferentes (split, linha do tempo, mapa da prova,
+ * faixa escura). Movimento: entrada do título por mola, marca-texto que corre
+ * sob a última linha, correção desenhada na demonstração e revelação ao rolar.
+ */
+app-home {
+  display: block;
+  container-type: inline-size;
+}
+app-home h2 {
+  font-family: var(--font-reading);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 1.1rem + 2.2cqi, 2.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 var(--space-6);
+}
+
+/* Herói */
+.home-hero {
+  padding: 0 0 var(--space-16);
+}
+.home-title {
+  font-family: var(--font-reading);
+  font-weight: 470;
+  font-size: clamp(2.25rem, 5.5cqi, 3.75rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--space-10);
+  text-wrap: initial;
+}
+.home-line {
+  display: block;
+  animation:
+    home-fade var(--duration-base) var(--ease-out) both,
+    home-rise var(--spring-gentle-duration) var(--spring-gentle) both;
+}
+.home-line:nth-child(2) {
+  animation-delay: 90ms;
+}
+/* Marca-texto: corre sob a frase depois que o título assenta. */
+.home-mark {
+  background-image: linear-gradient(
+    var(--color-highlight),
+    var(--color-highlight)
+  );
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 0% 0.34em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 0.08em;
+  margin: 0 -0.08em;
+  animation: home-mark 950ms var(--ease-out) 620ms forwards;
+}
+@keyframes home-mark {
+  to {
+    background-size: 100% 0.34em;
+  }
+}
+.home-hero-body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: var(--space-12);
+  align-items: start;
+}
+.home-rise {
+  animation:
+    home-fade var(--duration-base) var(--ease-out) 240ms both,
+    home-rise var(--spring-gentle-duration) var(--spring-gentle) 240ms both;
+}
+.home-actions.home-rise {
+  animation-delay: 310ms;
+}
+.home-date.home-rise {
+  animation-delay: 380ms;
+}
+@keyframes home-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes home-rise {
+  from {
+    transform: translateY(16px);
+  }
+}
+.home-lead {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 32rem;
+  margin: 0 0 var(--space-8);
+}
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+.home-actions button,
+.home-closing-actions button {
+  min-height: 48px;
+  padding-inline: 22px;
+  font-size: var(--text-base);
+}
+.home-actions button span,
+.home-closing-actions button span {
+  display: inline-block;
+  margin-left: var(--space-2);
+  transition: transform var(--spring-snappy-duration) var(--spring-snappy);
+}
+.home-actions button:hover:not(:disabled) span,
+.home-closing-actions button:hover:not(:disabled) span {
+  transform: translateX(4px);
+}
+.home-date {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.home-date-label {
+  color: var(--color-text);
+  font-weight: 600;
+}
+.home-date-sep {
+  width: 24px;
+  height: 1px;
+  background: var(--color-border-control);
+}
+.home-date strong {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* Demonstração: uma questão respondida em poucos segundos, numa folha. */
+.home-demo {
+  margin: 0;
+  animation:
+    home-fade var(--duration-base) var(--ease-out) 200ms both,
+    home-rise var(--spring-gentle-duration) var(--spring-gentle) 200ms both;
+}
+.demo-sheet {
+  position: relative;
+  background: var(--color-surface);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised);
+  padding: var(--space-6) var(--space-8) var(--space-6) var(--space-12);
+}
+/* Margem de caderno: o único ornamento, ligado à identidade. */
+.demo-sheet::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--space-8);
+  width: 1px;
+  background: var(--color-accent-tint);
+}
+.demo-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-3);
+}
+.demo-prompt {
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  margin: 0 0 var(--space-5);
+}
+.demo-options {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+}
+.demo-options li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  padding: 10px var(--space-3);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: var(--text-md);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--spring-snappy-duration) var(--spring-snappy);
+}
+.demo-letter {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border-control);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--spring-snappy-duration) var(--spring-snappy);
+}
+.demo-options li.is-hover {
+  border-color: var(--color-border-control);
+  transform: translateX(3px);
+}
+.demo-options li.is-selected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+.demo-options li.is-selected .demo-letter {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+  transform: scale(1.12);
+}
+/* A volta de caneta faz o contorno; a borda some para não dobrar a linha. */
+.demo-options li.is-correct {
+  border-color: transparent;
+  background: var(--color-success-bg);
+  box-shadow: none;
+}
+.demo-options li.is-correct .demo-letter {
+  background: var(--color-success-text);
+  border-color: var(--color-success-text);
+}
+.demo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-success-text);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--spring-snappy-duration) var(--spring-snappy);
+}
+@starting-style {
+  .demo-tag {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+/* Traços de caneta: visto e volta em torno da alternativa correta. */
+.demo-check {
+  width: 14px;
+  height: 14px;
+  overflow: visible;
+}
+.demo-check path,
+.demo-circle path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.demo-check path {
+  stroke-width: 2.6;
+  transition: stroke-dashoffset 420ms var(--ease-out) 220ms;
+}
+.demo-circle {
+  position: absolute;
+  inset: -9px -12px;
+  width: calc(100% + 24px);
+  height: calc(100% + 18px);
+  overflow: visible;
+  pointer-events: none;
+  color: var(--color-success-border);
+}
+.demo-circle path {
+  stroke-width: 2;
+  transition: stroke-dashoffset 820ms var(--ease-out) 120ms;
+}
+@starting-style {
+  .demo-check path,
+  .demo-circle path {
+    stroke-dashoffset: 1;
+  }
+}
+.demo-confirm {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  transition:
+    transform var(--spring-snappy-duration) var(--spring-snappy),
+    background-color var(--duration-fast) var(--ease-out);
+}
+.demo-confirm.is-pressed {
+  transform: scale(0.96);
+  background: var(--color-accent-pressed);
+  transition-duration: 90ms;
+}
+.demo-feedback {
+  padding-top: var(--space-4);
+  border-top: var(--border-thin) solid var(--color-border-strong);
+  font-family: var(--font-reading);
+  font-size: var(--text-md);
+  line-height: 1.55;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--spring-gentle-duration) var(--spring-gentle);
+}
+@starting-style {
+  .demo-feedback {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.demo-feedback strong {
+  font-family: var(--font-ui);
+  color: var(--color-success-text);
+}
+.home-demo figcaption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding-left: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.home-demo figcaption .text-button {
+  flex-shrink: 0;
+  font-size: var(--text-sm);
+}
+
+/* Progresso de quem volta */
+.home-progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3) var(--space-8);
+  padding: var(--space-5) 0;
+  margin-bottom: var(--space-12);
+  border-block: var(--border-thin) solid var(--color-border);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--spring-gentle-duration) var(--spring-gentle);
+}
+@starting-style {
+  .home-progress {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.home-progress p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+.home-progress strong {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  color: var(--color-text);
+  margin-right: var(--space-1);
+  font-variant-numeric: tabular-nums;
+}
+.home-progress button {
+  margin-left: auto;
+}
+
+/* A prova de 2026: contagem, formato e mapa das questões */
+.home-exam {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--space-12);
+  align-items: start;
+  padding: var(--space-12) 0 var(--space-8);
+  border-top: var(--border-thin) solid var(--color-border-strong);
+}
+.home-exam h2 {
+  margin-bottom: var(--space-4);
+}
+.home-countdown {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-6);
+}
+.home-countdown strong {
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: clamp(4rem, 10cqi, 7rem);
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+  color: var(--color-accent);
+  font-variant-numeric: lining-nums;
+}
+.home-countdown span {
+  font-size: var(--text-lg);
+  line-height: 1.3;
+  color: var(--color-text-muted);
+  max-width: 11ch;
+}
+.home-facts {
+  margin: 0 0 var(--space-4);
+}
+.home-facts div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: var(--border-thin) solid var(--color-border);
+}
+.home-facts dt {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+.home-facts dd {
+  margin: 0;
+  font-weight: var(--weight-semibold);
+  text-align: right;
+  text-wrap: balance;
+}
+.home-source {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+.home-map {
+  margin: 0;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.map-parts {
+  display: grid;
+  gap: var(--space-5);
+}
+.map-label {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+.map-label span:first-child {
+  color: var(--color-text);
+  font-weight: 600;
+}
+.map-cells {
+  display: grid;
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+  gap: 5px;
+}
+.map-cell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  border: 1.5px solid var(--color-border-control);
+  transition:
+    opacity 260ms var(--ease-out) var(--cell-delay, 0ms),
+    transform var(--spring-snappy-duration) var(--spring-snappy)
+      var(--cell-delay, 0ms);
+}
+.map-part[data-kind="specific"] .map-cell {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+/* A discursiva é uma folha pautada: resposta escrita, ainda fora do caderno. */
+.map-part[data-kind="essay"] .map-cells {
+  grid-template-columns: minmax(0, 1fr);
+}
+.map-part[data-kind="essay"] .map-cell {
+  aspect-ratio: auto;
+  height: 44px;
+  border-style: dashed;
+  background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 10px,
+      var(--color-border) 10px 11px
+    )
+    content-box;
+  padding: 6px 10px;
+  transform-origin: left;
+}
+.home-map figcaption {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: var(--border-thin) solid var(--color-border);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Seções */
+.home-section {
+  padding: var(--space-16) 0 var(--space-4);
+}
+.home-section-lead {
+  color: var(--color-text-muted);
+  max-width: 34rem;
+  margin: calc(-1 * var(--space-2)) 0 var(--space-6);
+}
+
+/* Como funciona: linha do tempo com um nó por passo. */
+.home-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+.home-steps li {
+  position: relative;
+  padding-top: var(--space-8);
+}
+.home-steps li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: calc(-1 * var(--space-8));
+  height: 1px;
+  background: var(--color-border-strong);
+  transform-origin: left;
+  transition: transform 700ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+.home-steps li:last-child::before {
+  right: 0;
+}
+.home-steps li::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-bg);
+  transition: transform var(--spring-snappy-duration) var(--spring-snappy)
+    calc(var(--reveal-delay, 0ms) + 250ms);
+}
+.home-step-number {
+  display: block;
+  font-family: var(--font-reading);
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+.home-steps h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  margin: 0 0 var(--space-2);
+}
+.home-steps p,
+.home-roadmap p,
+.home-origins dd {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+/* Origem: título fixo à esquerda, definições à direita. */
+.home-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: var(--space-12);
+  align-items: start;
+}
+.home-split-intro {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-8));
+}
+.home-origins {
+  margin: 0;
+}
+.home-origins > div,
+.home-roadmap li {
+  position: relative;
+  padding: var(--space-5) 0 var(--space-6);
+}
+/* Fio superior que se desenha da esquerda para a direita ao aparecer. */
+.home-origins > div::before,
+.home-roadmap li::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--color-border-strong);
+  transform-origin: left;
+  transition: transform 700ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+.home-origins dt {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+.home-origin-label {
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-lg);
+}
+.home-origin-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.home-note {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-sunken);
+  font-size: var(--text-md);
+  color: var(--color-text);
+}
+
+/* Em construção: grade de dois, estado em etiqueta. */
+.home-roadmap {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--space-10);
+}
+.home-roadmap h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  margin: 0 0 var(--space-1);
+}
+.home-status {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  border: var(--border-thin) dashed var(--color-border-control);
+  border-radius: 999px;
+  padding: 2px var(--space-3);
+}
+.home-status.is-active {
+  border-style: solid;
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+/* Fechamento: faixa em tinta, a única superfície escura do produto. */
+.home-closing {
+  --color-focus: var(--color-highlight);
+  margin-top: var(--space-16);
+  padding: clamp(var(--space-8), 6cqi, var(--space-16));
+  border-radius: var(--radius-md);
+  background: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+}
+.home-closing h2 {
+  font-size: clamp(1.9rem, 1rem + 3.4cqi, 3rem);
+  max-width: 16ch;
+  margin-bottom: var(--space-4);
+}
+.home-closing p {
+  color: var(--color-text-inverse-muted);
+  max-width: 34rem;
+  margin-bottom: var(--space-8);
+}
+.home-closing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+.home-closing-actions button:not(.text-button) {
+  background: var(--color-text-inverse);
+  border-color: var(--color-text-inverse);
+  color: var(--color-text);
+}
+.home-closing-actions button:not(.text-button):hover:not(:disabled) {
+  background: var(--color-highlight);
+  border-color: var(--color-highlight);
+}
+.home-closing-actions button:not(.text-button):active:not(:disabled) {
+  background: var(--color-highlight);
+}
+.home-closing-actions .text-button {
+  color: var(--color-text-inverse);
+}
+.home-footer {
+  margin-top: var(--space-10);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.home-footer p {
+  max-width: 44rem;
+  margin: 0;
+}
+
+/*
+ * Revelação ao rolar: só depois que o componente confirma que vai animar
+ * (classe motion-ready). Sem JavaScript ou com movimento reduzido, tudo
+ * aparece imediatamente.
+ */
+app-home.motion-ready [data-reveal] {
+  transition:
+    opacity 500ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--spring-gentle-duration) var(--spring-gentle)
+      var(--reveal-delay, 0ms);
+}
+app-home.motion-ready [data-reveal]:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+app-home.motion-ready .home-steps li:not(.is-visible)::before,
+app-home.motion-ready .home-roadmap li:not(.is-visible)::before,
+app-home.motion-ready .home-origins > div:not(.is-visible)::before {
+  transform: scaleX(0);
+}
+app-home.motion-ready .home-steps li:not(.is-visible)::after {
+  transform: scale(0);
+}
+app-home.motion-ready .home-exam:not(.is-visible) .map-cell {
+  opacity: 0;
+  transform: scale(0.3);
+}
+app-home.motion-ready
+  .home-exam:not(.is-visible)
+  [data-kind="essay"]
+  .map-cell {
+  transform: scaleX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-mark {
+    animation: none;
+    background-size: 100% 0.34em;
+  }
+}
+
+@media (max-width: 1100px) {
+  .home-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--space-12);
+  }
+  .home-steps li:nth-child(2)::before {
+    right: 0;
+  }
+}
+@media (max-width: 1000px) {
+  .home-hero-body,
+  .home-exam,
+  .home-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-10);
+  }
+  .home-demo,
+  .home-map {
+    max-width: 36rem;
+  }
+  .home-split-intro {
+    position: static;
+  }
+}
+@media (max-width: 700px) {
+  .home-hero {
+    padding-bottom: var(--space-12);
+  }
+  .home-title {
+    margin-bottom: var(--space-6);
+  }
+  .home-title .home-line {
+    display: inline;
+  }
+  .home-lead {
+    font-size: var(--text-base);
+  }
+  .home-actions button {
+    flex: 1 1 100%;
+  }
+  .demo-sheet {
+    padding: var(--space-5) var(--space-5) var(--space-5) var(--space-10);
+  }
+  .demo-sheet::before {
+    left: var(--space-6);
+  }
+  .demo-prompt {
+    font-size: var(--text-base);
+  }
+  .home-map {
+    padding: var(--space-4);
+  }
+  .map-cells {
+    gap: 3px;
+  }
+  .home-section {
+    padding-top: var(--space-12);
+  }
+  /* Linha do tempo vertical: o fio desce pela esquerda. */
+  .home-steps {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-8);
+  }
+  .home-steps li {
+    padding: 0 0 0 var(--space-10);
+  }
+  .home-steps li::before,
+  .home-steps li:nth-child(2)::before,
+  .home-steps li:last-child::before {
+    top: 6px;
+    bottom: calc(-1 * var(--space-8) - 6px);
+    left: 5px;
+    right: auto;
+    width: 1px;
+    height: auto;
+    transform-origin: top;
+  }
+  .home-steps li:last-child::before {
+    display: none;
+  }
+  .home-steps li::after {
+    top: 6px;
+  }
+  app-home.motion-ready .home-steps li:not(.is-visible)::before {
+    transform: scaleY(0);
+  }
+  .home-step-number {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-2);
+  }
+  .home-roadmap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .home-origins dt {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+  .home-progress button,
+  .home-closing-actions button {
+    margin-left: 0;
+    flex: 1 1 100%;
+  }
+  .home-demo figcaption {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .home-countdown {
+    flex-wrap: wrap;
+  }
+}

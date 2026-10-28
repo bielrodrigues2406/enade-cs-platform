@@ -133,7 +133,7 @@ const test = base.extend<Fixtures>({
 test.afterAll(() => pool.end());
 
 async function openQueue(page: Page) {
-  await page.goto("/");
+  await page.goto("/questoes");
   await page.getByRole("button", { name: "Curadoria", exact: true }).click();
   await page.getByRole("button", { name: "Importação", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Questões importadas", exact: true })).toBeVisible();

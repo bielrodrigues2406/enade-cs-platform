@@ -2,6 +2,7 @@ import { ApplicationRef, Component, inject, signal } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
+import { HomeComponent } from "./home.component";
 import {
   ReviewComponent,
   type ReviewItem,
@@ -61,11 +62,21 @@ type Question = Summary & {
 
 @Component({
   selector: "app-root",
-  imports: [FormsModule, AccountComponent, CurationComponent, ReviewComponent],
+  imports: [
+    FormsModule,
+    AccountComponent,
+    CurationComponent,
+    HomeComponent,
+    ReviewComponent,
+  ],
   template: `
     <a class="skip" href="#content">Ir para o conteúdo</a>
     <header>
-      <a href="/" class="brand" aria-label="Caderno de Computação, início"
+      <a
+        href="/"
+        class="brand"
+        aria-label="Caderno de Computação, início"
+        (click)="openHome($event)"
         ><span class="brand-symbol" aria-hidden="true">cc.</span
         ><span
           >Caderno<span class="brand-sub">CIÊNCIA DA COMPUTAÇÃO</span></span
@@ -117,6 +128,14 @@ type Question = Summary & {
       <nav class="mobile-study-nav" aria-label="Navegação de estudo">
         <button
           class="text-button"
+          (click)="openHome()"
+          [disabled]="saving() || authBusy() || curationBusy()"
+          [attr.aria-current]="onHome() ? 'page' : null"
+        >
+          Início
+        </button>
+        <button
+          class="text-button"
           (click)="back()"
           [disabled]="saving() || authBusy() || curationBusy()"
         >
@@ -136,9 +155,19 @@ type Question = Summary & {
       <aside aria-label="Sobre este caderno">
         <button
           class="nav"
+          (click)="openHome()"
+          [disabled]="saving() || authBusy() || curationBusy()"
+          [attr.aria-current]="onHome() ? 'page' : null"
+        >
+          <span class="nav-index" aria-hidden="true">01</span>
+          Início
+        </button>
+        <button
+          class="nav secondary-nav"
           (click)="back()"
           [disabled]="saving() || authBusy() || curationBusy()"
           [attr.aria-current]="
+            !homeView() &&
             !curationView() &&
             !reviewView() &&
             !reviewReturn() &&
@@ -147,7 +176,7 @@ type Question = Summary & {
               : null
           "
         >
-          <span class="nav-index" aria-hidden="true">01</span>
+          <span class="nav-index" aria-hidden="true">02</span>
           Banco de questões
         </button>
         <button
@@ -156,7 +185,7 @@ type Question = Summary & {
           [disabled]="saving() || authBusy() || curationBusy()"
           [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
         >
-          <span class="nav-index" aria-hidden="true">02</span>
+          <span class="nav-index" aria-hidden="true">03</span>
           Caderno de erros
         </button>
         @if (canCurate()) {
@@ -166,7 +195,7 @@ type Question = Summary & {
             [disabled]="saving() || authBusy() || curationBusy()"
             [attr.aria-current]="curationView() ? 'page' : null"
           >
-            <span class="nav-index" aria-hidden="true">03</span>
+            <span class="nav-index" aria-hidden="true">04</span>
             Curadoria
           </button>
         }
@@ -188,9 +217,11 @@ type Question = Summary & {
                 ? "Curadoria"
                 : reviewView()
                   ? "Caderno de erros"
-                  : question()
-                    ? "Resolução"
-                    : "Banco de questões"
+                  : homeView()
+                    ? "Início"
+                    : question()
+                      ? "Resolução"
+                      : "Banco de questões"
           }}
         </div>
         @if (booting()) {
@@ -225,6 +256,17 @@ type Question = Summary & {
               (positionChange)="reviewPosition = $event"
               (resolve)="openReviewQuestion($event)"
               (browse)="back()"
+            />
+            @if (error()) {
+              <p class="notice" role="alert">{{ error() }}</p>
+            }
+          } @else if (homeView()) {
+            <app-home
+              [sessionMode]="session().mode"
+              (browse)="back()"
+              (review)="openReview()"
+              (register)="openAccount('register')"
+              (openQuestion)="open($event)"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
@@ -689,6 +731,8 @@ class App {
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
+  // A página inicial fica em "/" e o banco de questões em "/questoes".
+  homeView = signal(location.pathname === "/");
   reviewReturn = signal(false);
   reviewCurrentVersion = signal<string | null>(null);
   reviewPosition: ReviewPosition = { topic: "", offset: 0 };
@@ -781,6 +825,7 @@ class App {
     )
       return;
     this.requestNumber++;
+    this.homeView.set(false);
     this.reviewView.set(false);
     this.reviewReturn.set(false);
     this.loading.set(false);
@@ -789,7 +834,31 @@ class App {
     this.accountNotice.set("");
     this.error.set("");
     this.curationView.set(true);
+    this.leaveHomePath();
     this.focusMain();
+  }
+  openHome(event?: Event) {
+    event?.preventDefault();
+    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    this.requestNumber++;
+    this.swapView(() => {
+      this.loading.set(false);
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.reviewCurrentVersion.set(null);
+      this.authError.set("");
+      this.accountNotice.set("");
+      this.error.set("");
+      this.homeView.set(true);
+    });
+    this.setPath("/");
+    this.focusMain();
+  }
+  onHome() {
+    return this.homeView() && !this.accountView();
   }
   openReview() {
     if (this.saving() || this.authBusy() || this.curationBusy()) return;
@@ -799,12 +868,14 @@ class App {
       this.question.set(null);
       this.accountView.set(null);
       this.curationView.set(false);
+      this.homeView.set(false);
       this.reviewReturn.set(false);
       this.reviewCurrentVersion.set(null);
       this.accountNotice.set("");
       this.error.set("");
       this.reviewView.set(true);
     });
+    this.leaveHomePath();
     this.focusMain();
   }
   async openReviewQuestion(item: ReviewItem) {
@@ -848,12 +919,14 @@ class App {
       this.swapView(
         () => {
           this.reviewView.set(false);
+          this.homeView.set(false);
           this.question.set(q);
           this.selected = retry ? "" : q.answer?.optionId || "";
           this.editing.set(retry);
         },
         () => request === this.requestNumber,
       );
+      this.leaveHomePath();
       this.focusMain();
     } catch (err) {
       if (request === this.requestNumber) this.error.set(this.message(err));
@@ -892,6 +965,7 @@ class App {
   back() {
     if (this.saving() || this.authBusy() || this.curationBusy()) return;
     this.swapView(() => {
+      this.homeView.set(false);
       this.curationView.set(false);
       this.reviewView.set(false);
       this.reviewReturn.set(false);
@@ -902,8 +976,17 @@ class App {
       this.question.set(null);
       this.error.set("");
     });
+    this.setPath("/questoes");
     void this.loadCatalog();
     this.focusMain();
+  }
+  // Só o início e o banco têm endereço próprio. As demais telas usam o do
+  // banco, para que recarregar fora do início não volte à página inicial.
+  private setPath(path: string) {
+    if (location.pathname !== path) history.replaceState(null, "", path);
+  }
+  private leaveHomePath() {
+    if (location.pathname === "/") this.setPath("/questoes");
   }
   clearFilters() {
     if (this.authBusy()) return;
