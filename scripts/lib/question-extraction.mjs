@@ -46,12 +46,93 @@ export function parseBboxHtml(html) {
   return pages;
 }
 
+/** Confere fontes exclusivas dos marcadores a partir do XML do próprio PDF.
+ * A forma da caixa não distingue todos os glifos circulares antigos de um A
+ * de prosa. Não confiar no nome da fonte: exigir só letras, o alfabeto completo,
+ * ocorrências repetidas e tamanho compatível com o texto do documento. */
+export function annotatePdfOptionFonts(pages, xml, expectedLetters = "ABCDE") {
+  const attrs = (text) => Object.fromEntries(
+    [...text.matchAll(/([A-Za-z]+)="([^"]*)"/g)].map((m) => [m[1], decode(m[2])]),
+  );
+  const fonts = new Map();
+  for (const [, raw] of xml.matchAll(/<fontspec\s+([^>]+)\/>/g)) {
+    const item = attrs(raw), size = Number(item.size);
+    if (!item.id || !item.family || !Number.isFinite(size) || size <= 0) continue;
+    const old = fonts.get(item.id);
+    if (old && (old.family !== item.family || old.size !== size))
+      throw new Error("Identificador de fonte PDF contraditório.");
+    fonts.set(item.id, { id: item.id, family: item.family, size, texts: [] });
+  }
+  const xmlPages = [];
+  const weightedSizes = new Map();
+  for (const [, rawAttrs, body] of xml.matchAll(/<page\s+([^>]+)>([\s\S]*?)<\/page>/g)) {
+    const item = attrs(rawAttrs), number = Number(item.number);
+    const width = Number(item.width), height = Number(item.height);
+    if (!Number.isInteger(number) || number < 1 || !pages[number - 1] ||
+      !(width > 0 && height > 0)) throw new Error("Página XML incompatível com o PDF.");
+    const texts = [];
+    for (const [, raw, bodyText] of body.matchAll(/<text\s+([^>]+)>([\s\S]*?)<\/text>/g)) {
+      const a = attrs(raw), font = fonts.get(a.font);
+      const text = decode(bodyText.replace(/<[^>]+>/g, "")).trim();
+      if (!text || !font) continue;
+      font.texts.push(text);
+      weightedSizes.set(font.size, (weightedSizes.get(font.size) ?? 0) + text.length);
+      const [left, top, w, h] = [a.left, a.top, a.width, a.height].map(Number);
+      if (![left, top, w, h].every(Number.isFinite) || left < 0 || top < 0 || w <= 0 || h <= 0)
+        continue;
+      texts.push({ text, font: a.font, xMin: left * pages[number - 1].width / width,
+        yMin: top * pages[number - 1].height / height,
+        xMax: (left + w) * pages[number - 1].width / width,
+        yMax: (top + h) * pages[number - 1].height / height });
+    }
+    xmlPages.push({ number, texts });
+  }
+  if (xmlPages.length !== pages.length || new Set(xmlPages.map((p) => p.number)).size !== pages.length)
+    throw new Error("A cobertura de páginas XML não corresponde ao PDF.");
+  const weights = [...weightedSizes].sort((a, b) => a[0] - b[0]);
+  const totalWeight = weights.reduce((sum, [, count]) => sum + count, 0);
+  let accumulated = 0, bodySize = weights[0]?.[0] ?? 0;
+  for (const [size, weight] of weights) {
+    accumulated += weight;
+    if (accumulated >= totalWeight / 2) { bodySize = size; break; }
+  }
+  const dedicated = [...fonts.values()].filter((font) =>
+    font.size >= bodySize * 0.8 && font.texts.length >= expectedLetters.length * 3 &&
+    font.texts.every((text) => text.length === 1 && expectedLetters.includes(text)) &&
+    [...expectedLetters].every((letter) => font.texts.filter((text) => text === letter).length >= 3),
+  );
+  const fontIds = new Set(dedicated.map((font) => font.id));
+  if (!fontIds.size) return { pages: pages.map((page) => ({ ...page,
+    words: page.words.map((word) => ({ ...word, pdfOptionFontChecked: true, pdfOptionFontMarker: false })),
+  })), fonts: [], markers: 0, unmatched: 0 };
+  const xmlByPage = new Map(xmlPages.map((p) => [p.number, p.texts.filter((t) => fontIds.has(t.font))]));
+  let markers = 0, unmatched = 0;
+  const annotated = pages.map((page, index) => {
+    const candidates = xmlByPage.get(index + 1) ?? [], used = new Set();
+    const words = page.words.map((word) => {
+      const matches = candidates.map((candidate, i) => ({ candidate, i })).filter(({ candidate }) =>
+        candidate.text === word.text && Math.abs(candidate.xMin - word.xMin) <= 1.5 &&
+        Math.abs(candidate.yMin - word.yMin) <= 2 && candidate.xMax >= word.xMax - 1.5,
+      );
+      const verified = matches.length === 1;
+      if (verified) { markers++; used.add(matches[0].i); }
+      return { ...word, pdfOptionFontChecked: true, pdfOptionFontMarker: verified };
+    });
+    unmatched += candidates.length - used.size;
+    return { ...page, words };
+  });
+  if (!markers) throw new Error("Fonte de alternativas identificada, mas nenhuma posição foi confirmada.");
+  return { pages: annotated, fonts: dedicated.map(({ id, family, size, texts }) =>
+    ({ id, family, size, occurrences: texts.length })), markers, unmatched };
+}
+
 // As letras das alternativas usam uma fonte de símbolos com caixa quase
 // quadrada; um "A" de texto comum (como em "A partir") é bem mais estreito.
 export const isOptionMarker = (word) =>
   /^[A-E]$/.test(word.text) &&
   (word.ocrConfidence !== undefined ? word.pdfOptionMarker === true :
-    word.xMax - word.xMin >= 0.7 * (word.yMax - word.yMin));
+    word.pdfOptionFontChecked ? word.pdfOptionFontMarker === true :
+      word.xMax - word.xMin >= 0.7 * (word.yMax - word.yMin));
 
 /** Preserva A–E da camada PDF quando OCR lê os marcadores circulares como O.
  * Não infere letras pela ordem: usa somente glifos A–E e coordenadas do PDF. */
@@ -256,10 +337,57 @@ export function splitColumns(page, words) {
   const right = words.filter((w) => w.xMin >= middle);
   const crossing = words.length - left.length - right.length;
   const rightHeader = groupLines(right).some((line) => lineHeader(line));
-  if (left.length && right.length && (crossing === 0 || rightHeader))
+  let columns = left.length && right.length && (crossing === 0 || rightHeader);
+  const initialColumns = !!columns;
+  const initialMiddle = middle;
+  if (words.some((word) => word.pdfOptionFontChecked)) {
+    // Os cabeçalhos antigos são indentados em relação ao corpo: não cortar
+    // a primeira letra da coluna direita só porque ela precede "QUESTÃO".
+    // Procure o corredor de menor cruzamento no miolo, sem instruções que
+    // antecedem os cabeçalhos da página. Letras provadas pela fonte ajudam
+    // a distinguir uma continuação em duas colunas de um texto corrido.
+    const headerTops = words.filter((w) => /^(?:quest[ãa]o|q)$/i.test(w.text)).filter((w) =>
+      lineHeader({ words: words.filter((o) => o.xMin >= w.xMin &&
+        Math.abs((o.yMin + o.yMax - w.yMin - w.yMax) / 2) < (w.yMax - w.yMin) * 0.45)
+        .sort((a, b) => a.xMin - b.xMin) }),
+    ).map((w) => w.yMin);
+    const floor = headerTops.length ? Math.min(...headerTops) - 1 : -Infinity;
+    const body = words.filter((w) => w.yMin >= floor);
+    const low = page.width * 0.43;
+    const high = anchors.length ? Math.min(page.width * 0.57, ...anchors.map((w) => w.xMin)) : page.width * 0.57;
+    const edges = [...new Set([low, high, ...body.flatMap((w) => [w.xMin, w.xMax])
+      .filter((x) => x > low && x < high)])].sort((a, b) => a - b);
+    const intervals = edges.slice(1).map((end, index) => {
+      const start = edges[index], x = (start + end) / 2;
+      return { start, end, crossing: body.filter((w) => w.xMin < x && w.xMax > x).length };
+    });
+    const least = Math.min(...intervals.map((i) => i.crossing));
+    const gaps = [];
+    for (const interval of intervals.filter((i) => i.crossing === least)) {
+      const last = gaps.at(-1);
+      if (last && Math.abs(last.end - interval.start) < 0.01) last.end = interval.end;
+      else gaps.push({ ...interval });
+    }
+    gaps.sort((a, b) => (b.end - b.start) - (a.end - a.start) ||
+      Math.abs((a.start + a.end) / 2 - middle) - Math.abs((b.start + b.end) / 2 - middle));
+    const gap = gaps[0];
+    const vertical = new Map();
+    for (const w of words.filter((w) => w.pdfOptionFontMarker && w.xMin >= low && w.xMin <= high)) {
+      const key = [...vertical.keys()].find((x) => Math.abs(x - w.xMin) <= 1.5) ?? w.xMin;
+      if (!vertical.has(key)) vertical.set(key, new Set());
+      vertical.get(key).add(w.text);
+    }
+    const rightMarkers = [...vertical.values()].some((letters) => letters.has("A") && letters.size >= 3);
+    if (gap && (columns || (gap.crossing === 0 && gap.end - gap.start >= 6 && rightMarkers))) {
+      middle = (gap.start + gap.end) / 2;
+      columns = words.filter((w) => w.xMax <= middle).length >= 2 &&
+        words.filter((w) => w.xMin >= middle).length >= 2;
+    }
+  }
+  if (columns)
     return [
-      { x0: 0, x1: middle, words: words.filter((w) => w.xMin < middle) },
-      { x0: middle, x1: page.width, words: words.filter((w) => w.xMin >= middle) },
+      { x0: 0, x1: middle, words: words.filter((w) => w.xMin < middle), adjusted: !initialColumns || Math.abs(middle - initialMiddle) > 0.1 },
+      { x0: middle, x1: page.width, words: words.filter((w) => w.xMin >= middle), adjusted: !initialColumns || Math.abs(middle - initialMiddle) > 0.1 },
     ];
   return [{ x0: 0, x1: page.width, words }];
 }
@@ -389,6 +517,13 @@ export function segmentQuestions(pages, { unnumberedDiscursive = false } = {}) {
           page: pageIndex + 1,
           ...(line.words.some((w) => w.ocrConfidence !== undefined) ? { ocr: true } : {}),
           ...(line.words.some((w) => w.pdfOptionMarker) ? { pdfOptionMarker: true } : {}),
+          ...(line.words.some((w) => w.pdfOptionFontChecked) ? {
+            words: line.words,
+            columnXMin: column.x0,
+            columnXMax: column.x1,
+            pdfOptionFontMarker: line.words.some((w) => w.pdfOptionFontMarker),
+          } : {}),
+          ...(column.adjusted ? { columnAdjusted: true } : {}),
         });
         current.joins.push(...line.joins);
         if (region) {
@@ -454,13 +589,79 @@ export function joinParagraphs(lines) {
   return out.join("\n");
 }
 
-/** Separa enunciado e alternativas; exige exatamente A–E nesta ordem. */
+// Alternativas horizontais e grades A/B/C + D/E são comuns nas provas antigas.
+// Só reorganizar quando as letras vêm de uma fonte dedicada conferida no XML,
+// cada letra ocorre uma vez e as colunas mantêm a ordem impressa do alfabeto.
+// Nem letras de prosa, nem OCR sem marcador PDF, nem grupos repetidos servem.
+function splitGeometricOptions(lines, expectedLetters) {
+  const markers = [];
+  lines.forEach((line, index) => (line.words ?? []).forEach((word, wordIndex) => {
+    if (word.pdfOptionFontMarker && word.ocrConfidence === undefined && expectedLetters.includes(word.text))
+      markers.push({ word, line, index, wordIndex, letter: word.text });
+  }));
+  if (markers.length !== expectedLetters.length ||
+    new Set(markers.map((m) => m.letter)).size !== expectedLetters.length ||
+    [...expectedLetters].some((letter) => !markers.some((m) => m.letter === letter))) return null;
+  const first = markers[0];
+  const region = (line) => `${line.page}/${line.columnXMin}/${line.columnXMax}`;
+  if (new Set(markers.map((m) => region(m.line))).size !== 1 ||
+    lines.slice(first.index).some((line) => !line.words || line.ocr || region(line) !== region(first.line)))
+    return null;
+  const columns = [];
+  for (const marker of [...markers].sort((a, b) => a.word.xMin - b.word.xMin || a.index - b.index)) {
+    let column = columns.find((c) => Math.abs(c.x - marker.word.xMin) <= 1.5);
+    if (!column) { column = { x: marker.word.xMin, markers: [] }; columns.push(column); }
+    column.markers.push(marker);
+  }
+  columns.sort((a, b) => a.x - b.x);
+  for (const column of columns) column.markers.sort((a, b) => a.index - b.index || a.wordIndex - b.wordIndex);
+  if (columns.flatMap((c) => c.markers).map((m) => m.letter).join("") !== expectedLetters &&
+    markers.map((m) => m.letter).join("") !== expectedLetters)
+    return null;
+  const byLetter = new Map(markers.map((marker) => [marker.letter, new Map()]));
+  let invalid = false;
+  for (let index = first.index; index < lines.length; index++) {
+    const line = lines[index];
+    line.words.forEach((word, wordIndex) => {
+      if (index === first.index && wordIndex < first.wordIndex) return;
+      const columnIndex = columns.findLastIndex((column) => word.xMin >= column.x - 1.5);
+      if (columnIndex < 0 || (columns[columnIndex + 1] && word.xMax > columns[columnIndex + 1].x - 0.5)) {
+        invalid = true; return;
+      }
+      const column = columns[columnIndex];
+      const marker = column.markers.findLast((candidate) => candidate.index < index ||
+        (candidate.index === index && candidate.wordIndex <= wordIndex));
+      if (!marker) { invalid = true; return; }
+      if (word === marker.word) return;
+      const own = byLetter.get(marker.letter);
+      if (!own.has(index)) own.set(index, []);
+      own.get(index).push(word);
+    });
+  }
+  if (invalid) return null;
+  const prompt = lines.slice(0, first.index);
+  const prefix = first.line.words.slice(0, first.wordIndex);
+  const fromWords = (line, words) => ({ ...line, words, marker: null,
+    text: fixSmallCapsLabels(lineText(words)), xMax: Math.max(...words.map((w) => w.xMax)),
+    yMin: Math.min(...words.map((w) => w.yMin)), yMax: Math.max(...words.map((w) => w.yMax)) });
+  if (prefix.length) prompt.push(fromWords(first.line, prefix));
+  return { prompt, options: [...expectedLetters].map((letter) => ({ letter,
+    lines: [...byLetter.get(letter)].map(([index, words]) => fromWords(lines[index], words)),
+  })), letters: expectedLetters, reconstructed: true };
+}
+
+/** Separa enunciado e alternativas; exige o alfabeto explícito da edição. */
 export function splitOptions(lines, expectedLetters = "ABCDE") {
   const markers = lines
     .map((line, index) => ({ letter: line.marker, index }))
     .filter((m) => m.letter);
   const letters = markers.map((m) => m.letter).join("");
-  if (letters !== expectedLetters) return { prompt: lines, options: null, letters };
+  const fontMarkers = lines.flatMap((line) => (line.words ?? []).filter((word) => word.pdfOptionFontMarker));
+  if (fontMarkers.length && (fontMarkers.length !== expectedLetters.length ||
+    new Set(fontMarkers.map((word) => word.text)).size !== expectedLetters.length))
+    return { prompt: lines, options: null, letters: fontMarkers.map((word) => word.text).join("") };
+  if (letters !== expectedLetters)
+    return splitGeometricOptions(lines, expectedLetters) ?? { prompt: lines, options: null, letters };
   const options = markers.map((m, i) => {
     const end = i + 1 < markers.length ? markers[i + 1].index : lines.length;
     const own = lines
@@ -674,6 +875,8 @@ export function classify(
     const pages = [...new Set(q.lines.map((l) => l.page))];
     if (q.lines.some((l) => l.ocr)) flags.add("revisao-ocr");
     if (q.lines.some((l) => l.pdfOptionMarker)) flags.add("marcador-recuperado-pdf");
+    if (q.lines.some((l) => l.pdfOptionFontMarker)) flags.add("marcador-fonte-pdf");
+    if (q.lines.some((l) => l.columnAdjusted)) flags.add("revisao-colunas-pdf");
     for (const region of q.regions)
       if (
         (graphicsByPage.get(region.page) ?? []).some((b) => overlaps(b, region))
@@ -705,7 +908,8 @@ export function classify(
       };
     }
     const answer = answers.get(q.key) ?? null;
-    const { prompt, options, letters } = splitOptions(q.lines, expectedOptionLetters);
+    const { prompt, options, letters, reconstructed } = splitOptions(q.lines, expectedOptionLetters);
+    if (reconstructed) flags.add("alternativas-reconstruidas-layout");
     if (!options) flags.add("alternativas");
     if (looksTabular(q.lines)) flags.add("tabela");
     const promptText = joinParagraphs(prompt);

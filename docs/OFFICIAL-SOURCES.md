@@ -100,6 +100,7 @@ Alertas e por que existem:
 - `texto-ilegivel`: o PDF entrega números de glifo no lugar de letras ("ĂƉĞŶĂƐ" = "apenas").
 - `enunciado-ausente` e `alternativa-vazia`: marcadores A–E não bastam quando parte do texto não foi extraída.
 - `codigo`, `tabela`, `alternativas`, `versalete`, `referencia-versalete`, `hifenizacao`, `numero-repetido`, `prova-incompleta`.
+- `marcador-fonte-pdf`, `revisao-colunas-pdf` e `alternativas-reconstruidas-layout`: nas extrações nativas de 2005/2008/2011, os marcadores são confrontados com as fontes e coordenadas do XML do próprio PDF. Grades e alternativas horizontais exigem todas as letras explícitas e distribuição geométrica não ambígua; continuam sujeitas à conferência visual.
 
 Respostas diferentes para o mesmo número no gabarito interrompem a extração desse documento, em vez de selecionar silenciosamente a primeira. A detecção de figuras é heurística; a ausência de alertas não representa aprovação editorial.
 
@@ -123,15 +124,15 @@ Os cadernos antigos são compartilhados: em 2005/2008 incluem blocos de Ciência
 
 Nos documentos recentes, conferir tipo de caderno, mapa de prova e gabarito correspondente. Mapa de prova não é gabarito. Variantes e sua deduplicação ainda exigem conferência editorial; o fluxo não resolve essa equivalência automaticamente. Imagens, anulações e discursivas continuam fora da publicação implementada. A meta de 20 questões oficiais revisadas permanece pendente; os três itens do seed continuam autorais demonstrativos.
 
-## Entrada no banco e revisão assistida (27/10/2026)
+## Entrada no banco e revisão assistida (28/10/2026)
 
-Foram carregadas **605 ocorrências** em `question_intake` neste ambiente: 460 nos nove cadernos históricos, 81 na PND 2025 tipo 4 e 64 no caderno 0401 de 2024 derivado de compilação. Não são 605 questões únicas ou aprovadas. Todos os relatórios identificam a numeração esperada sem lacunas; isso não garante fidelidade integral do texto. Reimportar os 11 relatórios retornou 605 itens inalterados, sem duplicação.
+Foram carregadas **605 ocorrências** em `question_intake` neste ambiente: 460 nos nove cadernos históricos, 81 na PND 2025 tipo 4 e 64 no caderno 0401 de 2024 derivado de compilação. Não são 605 questões únicas ou aprovadas. Todos os relatórios identificam a numeração esperada sem lacunas; isso não garante fidelidade integral do texto. A reextração de 2005/2008/2011 atualizou os mesmos 220 registros, recuperando 115 grupos de alternativas e preservando os IDs, a evidência original, as páginas, o escopo e os gabaritos. Repetir os três relatórios retornou 220 inalterados; veja a [validação histórica](reviews/legacy-options-validation.md).
 
 | Edição | Ocorrências na fila | Limite principal |
 | --- | ---: | --- |
-| 2005 | 85 | Caderno compartilhado; 35 das 77 objetivas com alternativas estruturadas |
-| 2008 | 80 | Caderno compartilhado; alternativas ainda no texto bruto |
-| 2011 | 55 | Caderno compartilhado; 47 das 50 objetivas com alternativas estruturadas |
+| 2005 | 85 | Caderno compartilhado; 77 das 77 objetivas com alternativas estruturadas |
+| 2008 | 80 | Caderno compartilhado; 70 das 71 objetivas estruturadas; Q8 tem alternativas visuais |
+| 2011 | 55 | Caderno compartilhado; 50 das 50 objetivas com alternativas estruturadas |
 | 2014 | 80 | OCR em ambos os cadernos; conferir texto e numerais romanos |
 | 2017 | 80 | OCR em ambos os cadernos; conferir texto, código e figuras |
 | 2021 | 80 | Análise assistida por item, incluindo 30 pares compartilhados |
@@ -140,7 +141,9 @@ Foram carregadas **605 ocorrências** em `question_intake` neste ambiente: 460 n
 
 A fila contém 551 objetivas e 54 discursivas, incluindo anuladas e blocos de outros cursos. São 582 itens em HOLD e 23 para conferência. Nenhuma fonte foi automaticamente conferida, nenhuma revisão humana foi atribuída e nenhuma questão oficial foi publicada. O banco de produção não é preenchido automaticamente por esta entrega.
 
-A [análise de 2021](reviews/2021-question-review.md) registra os 80 itens, com 23 sem nova pendência conceitual e 57 exigindo revisão manual. Há também dois pareceres de 2014 em `data/question-reviews/2014-review.json`, ambos pendentes de fidelidade OCR. As respostas oficiais permanecem preservadas.
+Agora 547 das 551 objetivas possuem grupos de alternativas. Essa contagem inclui cinco itens com algum texto de alternativa vazio: Q26/Q59 de 2005, Q38/Q55 de 2008 e Q27 de 2014 Bacharelado. Os alertas `alternativa-vazia` permanecem. Há ainda figuras, símbolos, código, cabeçalhos intrusos e gabaritos pendentes; nenhuma edição está integralmente pronta para publicação.
+
+A [análise de 2008](reviews/2008-question-review.md) registra 80 entradas, com análise conceitual concentrada nas 40 pertinentes ao percurso de CC: 13 sem nova pendência e 27 com revisão manual necessária. Os outros 40 itens permanecem identificados como blocos de Engenharia/Sistemas de Informação, sem aprovação conceitual. A [análise de 2021](reviews/2021-question-review.md) registra os 80 itens, com 23 sem nova pendência conceitual e 57 exigindo revisão manual. Há também dois pareceres de 2014 em `data/question-reviews/2014-review.json`, ambos pendentes de fidelidade OCR. As respostas oficiais permanecem preservadas.
 
 ### Reproduzir a extração e a importação
 
@@ -150,9 +153,10 @@ Com os PDFs individuais organizados por ano/ID conforme o catálogo:
 npm run extract:questions -- --id enade-2005-comum-exam,enade-2008-comum-exam,enade-2011-comum-exam,enade-2021-bacharelado-exam,enade-2021-licenciatura-exam --directory enade-pdfs --output .local/import-review/historical
 npm run extract:questions -- --id enade-2014-bacharelado-exam,enade-2014-licenciatura-exam,enade-2017-bacharelado-exam,enade-2017-licenciatura-exam --directory enade-pdfs --output .local/import-review/historical --ocr --tessdata-dir CAMINHO_DOS_MODELOS
 npm run extract:questions -- --id pnd-2025-computacao-pv-4 --directory enade-pdfs --output .local/import-review/recent
+npm run import:questions -- --file .local/import-review/historical/enade-2008-comum-exam.questions.json --review data/question-reviews/2008-review.json
 npm run import:questions -- --file .local/import-review/historical/enade-2021-bacharelado-exam.questions.json --review data/question-reviews/2021-review.json
 ```
 
-O OCR usa `por.traineddata` com hash e origem descritos acima; o modelo precisa existir localmente. Cada relatório é importado individualmente. Fontes precisam estar previamente cadastradas e íntegras. A ausência de gabarito, conteúdo ou imagem produz pendências; não é preenchida por suposição.
+O extrator usa Poppler (`pdftotext`, `pdftohtml`, `pdffonts`, `pdftoppm` e `pdfimages`, do pacote `poppler-utils`). Em 2005/2008/2011 sem OCR, a prova das letras exige fonte exclusiva A–E, ocorrências repetidas e correspondência de coordenadas; nomes de fontes e ordem das respostas não bastam. Ambiguidades conservam o texto bruto e os alertas. O OCR usa `por.traineddata` com hash e origem descritos acima; o modelo precisa existir localmente. Cada relatório é importado individualmente. Fontes precisam estar previamente cadastradas e íntegras. A ausência de gabarito, conteúdo ou imagem produz pendências; não é preenchida por suposição.
 
 O script `node scripts/prepare-2024-auxiliary.mjs --file COMPILACAO.pdf --output .local/import-review/auxiliary` aceita somente a compilação identificada pelo SHA-256 fixado, prepara os trechos conhecidos e registra suas ferramentas e páginas em `data/auxiliary-sources.json`. A normalização do identificador do trailer permite repetir os bytes com as mesmas versões de Poppler registradas; não promete hashes idênticos entre versões diferentes. O original é somente lido. Os derivados são cadastrados como LOCAL, com títulos explícitos, e importados para HOLD; criação manual, promoção e publicação oficiais também rejeitam seus hashes enquanto forem fontes auxiliares.

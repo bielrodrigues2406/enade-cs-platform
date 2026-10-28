@@ -9,6 +9,7 @@ import { join, resolve } from "node:path";
 import { promisify } from "node:util";
 import {
   classify,
+  annotatePdfOptionFonts,
   completeness,
   detectGraphics,
   parseAnswerKey,
@@ -227,9 +228,18 @@ async function extract(catalog, id, opts) {
     const { stdout: html } = await run("pdftotext", ["-bbox", examPath, "-"], {
       maxBuffer: 64 * 1024 * 1024,
     });
-    const nativePages = parseBboxHtml(html);
+    let nativePages = parseBboxHtml(html);
+    let optionFonts = null;
+    if (doc.year <= 2011 && !opts.ocr) {
+      const { stdout: xml } = await run("pdftohtml", ["-xml", "-i", "-hidden", "-stdout", examPath], {
+        timeout: 30000, maxBuffer: 64 * 1024 * 1024,
+      });
+      const annotated = annotatePdfOptionFonts(nativePages, xml, format.expectedOptionLetters ?? "ABCDE");
+      nativePages = annotated.pages;
+      optionFonts = { fonts: annotated.fonts, markers: annotated.markers, unmatched: annotated.unmatched };
+    }
     const { pages, extraction } = opts.ocr ? await ocrPages(examPath, nativePages, work, opts) :
-      { pages: nativePages, extraction: { method: "PDF_TEXT" } };
+      { pages: nativePages, extraction: { method: "PDF_TEXT", ...(optionFonts ? { optionFonts } : {}) } };
     const keyText = keyPath ? (await run("pdftotext", ["-layout", keyPath, "-"])).stdout : "";
     const { answers, definitive } = parseAnswerKey(keyText);
     const keyPages = new Map();
@@ -274,6 +284,7 @@ async function extract(catalog, id, opts) {
       if (item.kind === "DISCURSIVE" && !format.expectedDiscursive.includes(item.key) &&
         !check.unexpected.includes(item.key)) check.unexpected.push(item.key);
     const warnings = [
+      ...(optionFonts ? ["Marcadores das edições antigas foram comparados ao XML de fontes do próprio PDF; alternativas e reconstruções de layout continuam exigindo conferência visual."] : []),
       ...(opts.ocr ? ["OCR exige confronto de cada item com a página renderizada, inclusive alternativas, símbolos e figuras."] : []),
       ...(doc.year < 2014 ? ["Caderno compartilhado: os blocos de outros cursos foram preservados com courseScope e não são automaticamente questões de Ciência da Computação."] : []),
       ...(!definitive ? ["O gabarito não se declara definitivo; confirmação documental pendente."] : []),

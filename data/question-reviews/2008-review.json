@@ -1,0 +1,1614 @@
+{
+  "schemaVersion": 1,
+  "origin": "ASSISTED",
+  "author": "Codex",
+  "humanReviewed": false,
+  "items": [
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q1",
+      "topic": "História da República e leitura de imagens",
+      "explanation": "A alternativa C associa as imagens II e III aos personagens históricos referidos pelo trecho: Deodoro da Fonseca e o imperador D. Pedro II. O diálogo contrapõe a adesão ao movimento republicano e a defesa da monarquia deposta. A resposta depende de relacionar texto, retratos e numeração; uma lista de nomes ou de algarismos sem os retratos não reproduz integralmente a questão.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Retratos, numeração I–V, legendas e alternativas foram examinados na página PDF 2. Preservar a relação entre cada retrato e seu algarismo."
+      ],
+      "issues": [
+        {
+          "code": "IMAGENS_NAO_INTEGRADAS",
+          "note": "Os cinco retratos fazem parte do enunciado e não acompanham a representação textual atual. Integrar as imagens e conferir legendas e ordem antes de uso editorial."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q2",
+      "topic": "Biodiversidade e responsabilidade ambiental",
+      "explanation": "A alternativa E é coerente com a composição visual: diferentes seres vivos formam uma cabeça humana, articulando a existência humana à biodiversidade. A frase inicial responsabiliza a ação humana pela preservação desse conjunto. A imagem não descreve clonagem, criação em cativeiro nem uma demonstração de mutação biológica.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A imagem e as cinco alternativas foram conferidas na página PDF 3. A leitura é interpretativa e ligada à composição concreta apresentada."
+      ],
+      "issues": [
+        {
+          "code": "IMAGEM_NAO_INTEGRADA",
+          "note": "A interpretação depende da composição formada por animais e vegetais; ela precisa acompanhar o enunciado. O comentário assistido não substitui esse recurso visual."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q3",
+      "topic": "Matemática · proporcionalidade e FPS",
+      "explanation": "A alternativa D corresponde a FPS 20. No modelo explicitado no enunciado, reter 95% significa deixar passar 5%, isto é, 0,05=1/20. Como o FPS representa o inverso dessa fração transmitida, FPS=1/0,05=20. Não se deve confundir a porcentagem retida, 95, com o valor do fator.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Texto, frações e alternativas conferidos na página PDF 3. O cálculo usa a relação simplificada de UVB fornecida pela própria questão, sem extrapolá-la a outros tipos de radiação ou condições de exposição.",
+        "O alerta automático tabela não corresponde a uma tabela de conteúdo nessa questão: a página apresenta texto e alternativas numéricas. O alerta original permanece disponível para resolução documentada pela curadoria."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q4",
+      "topic": "Direitos das mulheres e inclusão social",
+      "explanation": "A resposta esperada é A: aborto e violência doméstica. No enquadramento proposto, esses temas se relacionam diretamente a direitos reprodutivos e ao enfrentamento da violência de gênero. As demais opções combinam assuntos mais gerais ou não formam o par mais específico para a legislação discutida.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Texto e alternativas foram examinados na página PDF 3. O contexto é histórico, de 2008: a questão não comprova a existência atual de uma legislação única, uniforme e vigente em todos os países da União Europeia."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q5",
+      "topic": "Leitura crítica de fotografia e desigualdade",
+      "explanation": "A alternativa D decorre do contraste entre o anúncio de prosperidade e alto padrão de vida e as pessoas desempregadas na fila de alimentos. Essa justaposição evidencia contradições sociais e econômicas durante a Grande Depressão; não sustenta uma ascensão social universal nem demonstra, por si, organização sindical ou esperança individual.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A fotografia, seu cartaz e as alternativas foram examinados na página PDF 3. A explicação considera o contraste que efetivamente aparece na imagem."
+      ],
+      "issues": [
+        {
+          "code": "FOTOGRAFIA_NAO_INTEGRADA",
+          "note": "A fotografia é essencial ao contraste solicitado. Preservar sua legibilidade, o texto do anúncio e o crédito impresso na versão editorial."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q6",
+      "topic": "Redes urbanas e sustentabilidade",
+      "explanation": "A alternativa B sintetiza a atuação estratégica em rede. O enunciado destaca trocas horizontais e conexão entre territórios para compartilhar práticas e evitar desperdícios energéticos. Essa cooperação não equivale a centralizar decisões, hierarquizar autonomias locais, fragmentar iniciativas ou unificar tributos.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Mapa, legenda e alternativas examinados na página PDF 4. Os dados e limites geográficos pertencem ao material histórico citado no caderno."
+      ],
+      "issues": [
+        {
+          "code": "MAPA_NAO_INTEGRADO",
+          "note": "O mapa do grupo Energia-Cidades e sua legenda precisam acompanhar a questão; não substituí-los por uma conclusão textual que revele a resposta."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q7",
+      "topic": "Estatística · curva de Lorenz",
+      "explanation": "A alternativa D corresponde a aproximadamente 60%. No gráfico, os 80% de menor renda acumulam cerca de 40% da renda total. Os 20% de maior renda detêm o complemento: 100%−40%=60%. O valor de 20% mencionado no texto para os 60% de menor renda não deve ser usado como se correspondesse aos 80% da população.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Curva e eixos examinados na página PDF 4. O resultado é aproximado e depende da leitura do ponto de abscissa 80. A figura é histórica, referente a 2004."
+      ],
+      "issues": [
+        {
+          "code": "GRAFICO_NAO_INTEGRADO",
+          "note": "Sem os eixos e a curva, não se pode obter o percentual solicitado somente a partir do exemplo numérico do texto. Integrar o gráfico com escala legível."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q8",
+      "topic": "Arte · expressão de angústia",
+      "explanation": "A alternativa C apresenta O grito, de Edvard Munch. A figura central, o gesto e as linhas e cores intensas traduzem angústia e instabilidade, de acordo com o enfoque artístico apresentado no texto. A escolha exige comparar as cinco obras, e não apenas reconhecer um título isolado.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "As cinco obras, os respectivos marcadores A–E e as legendas foram examinados na página PDF 5. A explicação segue o enquadramento didático do enunciado."
+      ],
+      "issues": [
+        {
+          "code": "ALTERNATIVAS_VISUAIS_NAO_INTEGRADAS",
+          "note": "As alternativas são obras visuais. Preservar somente seus nomes e referências no campo de texto não equivale a apresentar as cinco opções originais; cada imagem precisa ser integrada e vinculada à letra correta."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q9",
+      "topic": "Direitos humanos · integralidade e cidadania",
+      "explanation": "Uma resposta possível escolhe a moradia digna e explica que ela envolve condições de saúde, saneamento, segurança, privacidade e acesso a serviços, permitindo o exercício articulado de outros direitos. O avanço está em superar a ideia de mero abrigo e tratar a pessoa como titular de direitos interdependentes. O texto deve selecionar uma das três concepções e desenvolver a relação com cidadania e integralidade, conforme o comando. Esta elaboração assistida não é uma rubrica oficial de pontuação.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Página PDF 6 examinada. O comando pede entre oito e dez linhas e a escolha de uma das concepções, não a enumeração obrigatória das três.",
+        "O padrão específico de Computação catalogado não contém um padrão de resposta para as discursivas de Formação Geral Q9 e Q10. Não foi buscada nem atribuída uma rubrica externa."
+      ],
+      "issues": [
+        {
+          "code": "RASCUNHO_NO_ENUNCIADO",
+          "note": "Rótulo de rascunho e números das linhas 1–10 foram incorporados ao texto extraído. Separá-los do enunciado após conferência, preservando o limite de linhas e o valor impresso."
+        },
+        {
+          "code": "PADRAO_FG_NAO_CATALOGADO",
+          "note": "A resolução assistida não pode ser apresentada como critério oficial de correção de Q9. Localizar e conferir o padrão correspondente antes de oferecer pontuação ou autoavaliação por rubrica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q10",
+      "topic": "Avaliação educacional e argumentação",
+      "explanation": "Uma análise possível distingue satisfação e percepção dos participantes de indicadores padronizados de aprendizagem. Dois argumentos pertinentes seriam: expectativas locais e ausência de referenciais comparativos podem favorecer avaliações subjetivas positivas; avaliações externas procuram medir competências e comparar resultados por critérios que não se confundem com satisfação. Essas são hipóteses argumentativas, não causas demonstradas pelos fragmentos. O texto deve articular ao menos dois argumentos e respeitar o recorte histórico, sem apresentar notas de escalas diferentes como medidas diretamente equivalentes.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Página PDF 7 examinada. O infográfico registra 90% dos professores se considerando bem preparados e 89% dos pais avaliando positivamente o serviço das escolas; esses dados não aparecem no texto linearizado.",
+        "A comparação proposta pertence aos dados de 2006–2008 apresentados; não foi feita atualização dos indicadores nem atribuição de nota a uma resposta."
+      ],
+      "issues": [
+        {
+          "code": "INFOGRAFICO_OMITIDO",
+          "note": "Preservar o infográfico com os percentuais 90%/89%, suas populações e a referência. O dado é parte dos textos motivadores e não deve ser substituído por uma afirmação genérica."
+        },
+        {
+          "code": "RASCUNHO_E_CABECALHO_INTRUSOS",
+          "note": "A extração de referência inclui a numeração do rascunho e o início do cabeçalho do Componente Específico da página PDF 8. Conferir os limites e a ordem das observações em duas colunas."
+        },
+        {
+          "code": "PADRAO_FG_NAO_CATALOGADO",
+          "note": "O padrão de Computação catalogado não inclui Q10 de Formação Geral. O comentário assistido não é um padrão oficial de correção nem autoriza atribuição automática de pontos."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q11",
+      "topic": "Arquitetura de computadores · hierarquia de memória",
+      "explanation": "A alternativa C reúne II e III. Registradores têm, no modelo usual, acesso mais rápido que a RAM, e cache tem acesso mais rápido que disco magnético. I é falsa porque ROM é não volátil; IV inverte a relação usual entre cache e memória principal. A justificativa trata da hierarquia típica considerada pela questão, sem prometer uma comparação universal de qualquer dispositivo e qualquer acesso.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Texto, itens I–IV e alternativas conferidos na página PDF 8."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q12",
+      "topic": "Engenharia de software · caminhos básicos",
+      "explanation": "A chave C corresponde a quatro caminhos básicos. No grafo observado há sete nós, nove arestas e três pontos de decisão binários. O número ciclomático do grafo subjacente conexo, entendido como cycle rank, é E−N+1=3; somando um, obtém-se quatro, como pede a redação. Já a complexidade ciclomática de McCabe usada em testes de caminhos básicos é V(G)=E−N+2=4. É necessário explicitar a convenção adotada: não somar um novamente a V(G) e afirmar que seriam cinco caminhos.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Grafo, rótulos 1–7 e comando examinados na página PDF 8. O enunciado realmente imprime que a quantidade é igual à complexidade ciclomática mais um.",
+        "O cycle rank do grafo subjacente não é uma contagem de laços de repetição executáveis. A chave C foi preservada; a ressalva é terminológica, não uma anulação automática."
+      ],
+      "issues": [
+        {
+          "code": "CONVENCAO_CICLOMATICA",
+          "note": "Contextualizar a distinção entre E−N+1 do grafo conexo e a convenção de McCabe E−N+2. A expressão mais um pode ser coerente com a primeira definição, mas seria aplicada duas vezes se a segunda já fosse usada."
+        },
+        {
+          "code": "GRAFO_NAO_INTEGRADO",
+          "note": "A figura é necessária para identificar nós e arestas e precisa acompanhar o enunciado."
+        },
+        {
+          "code": "ROTULOS_DO_GRAFO_INTERCALADOS",
+          "note": "Os números dos nós foram intercalados na prosa extraída, como em software, 1 devem. Conferir a retirada desses rótulos do texto sem apagá-los do próprio grafo."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q13",
+      "topic": "Matemática discreta · partições de conjuntos",
+      "explanation": "A alternativa A é uma partição: seus seis subconjuntos unitários são não vazios, dois a dois disjuntos e sua união é o conjunto original. Em B há sobreposição do elemento 1; C contém o conjunto vazio; D não cobre o elemento 4; E contém sobreposições entre os pares. Esses são os três requisitos relevantes: não vazio, disjunção e cobertura.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Enunciado e alternativas foram examinados na página PDF 8. A opção E aparece no topo da coluna direita, antes de Q14, mas pertence a Q13."
+      ],
+      "issues": [
+        {
+          "code": "CABECALHO_INTERCALADO",
+          "note": "A extração de referência colocou texto do cabeçalho Componente Específico entre as opções D e E. Conferir a retirada desse conteúdo intruso e a reunião das cinco alternativas na ordem correta."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q14",
+      "topic": "Estruturas de dados · percurso em preordem",
+      "explanation": "A alternativa E corresponde aos quatro itens corretos no algoritmo proposto. A raiz é visitada antes dos filhos; empilhar primeiro o filho direito e depois o esquerdo faz o esquerdo sair primeiro da pilha, produzindo preordem. Cada nó de uma árvore binária válida é visitado uma vez. Ao final, pop precisa devolver o ponteiro nulo quando a pilha estiver vazia, como especifica II. Push e pop podem ser implementados em O(1), e cada nó provoca um número constante dessas operações, resultando em O(n).",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Pseudocódigo da página PDF 8 e alternativa E, que continua na página PDF 9, foram examinados. O retorno nulo de pop em pilha vazia é requisito deste pseudocódigo, não uma garantia de qualquer biblioteca."
+      ],
+      "issues": [
+        {
+          "code": "PSEUDOCODIGO_CORROMPIDO",
+          "note": "O original usa λ para ponteiro nulo, ≠ nas comparações e ↑ na desreferenciação. A extração de referência os representa por 8 e … e achata as linhas do código. Restaurar símbolos e estrutura após comparação, sem executar o pseudocódigo retirado do documento."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q15",
+      "topic": "Direitos autorais e compartilhamento de arquivos",
+      "explanation": "A alternativa B identifica os usuários como responsáveis por verificar e cumprir as restrições de uso dos arquivos que escolhem copiar ou compartilhar. Um programa, sistema operacional ou roteador não substitui essa obrigação de conduta. Isso não implica que produtores e plataformas nunca tenham deveres próprios em outras situações; a resposta é relativa à utilização descrita no enunciado.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Texto e alternativas examinados na página PDF 9. O comentário é educacional e não constitui análise de um caso jurídico concreto ou de legislação atualizada."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q16",
+      "topic": "Engenharia de software · gestão de configuração",
+      "explanation": "A alternativa B considera verdadeiras as duas asserções, sem estabelecer a relação de justificativa proposta. O fluxo de controle de mudanças envolve pedido, decisão e atualização controlada; check-in e check-out são mecanismos de acesso e registro de versões. Esses mecanismos apoiam a operação do repositório, mas não explicam, por si, todo o processo de governança, análise e aprovação das mudanças.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Texto e duas asserções examinados na página PDF 9. O enunciado usa uma descrição clássica de check-in/check-out; não equiparar literalmente essa retirada de itens ao comportamento de todo comando checkout em ferramentas modernas."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q17",
+      "topic": "Lógica de predicados · validade e quantificadores",
+      "explanation": "A alternativa D distingue uma primeira asserção falsa de uma segunda verdadeira, no domínio não vazio usual. A fórmula impressa é (∃x)P(x)⇒(∀x)P(x), que não é válida: em um universo com dois elementos, P pode valer para um e não para o outro. Já a segunda asserção expressa o sentido contrário, de que todos terem P implica existir algum elemento com P. A hipótese de domínio não vazio é importante para essa última conclusão.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Fórmula, quantificadores e seta foram examinados na página PDF 9. Não se trocou a chave D nem se supôs que a primeira fórmula fosse o sentido universal para existencial."
+      ],
+      "issues": [
+        {
+          "code": "QUANTIFICADORES_E_SETA_CORROMPIDOS",
+          "note": "A extração de referência representa ∃, ∀ e ⇒ por ›, œ e Y. Preservar os símbolos e a ordem dos quantificadores; uma troca de sentido alteraria a avaliação lógica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q18",
+      "topic": "Algoritmos · recursão e Fibonacci",
+      "explanation": "A alternativa C corresponde a quinze chamadas, contando a chamada inicial fib(5). Se C(0)=C(1)=1 e C(n)=1+C(n−1)+C(n−2), obtêm-se C(2)=3, C(3)=5, C(4)=9 e C(5)=15. O resultado devolvido por fib(5), que é cinco, não é o número de chamadas. A contagem pressupõe ausência de memoização ou reaproveitamento de resultados, como estabelece o enunciado.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Recorrência, código e alternativas examinados na página PDF 9. O cálculo foi feito por recorrência; nenhum código do PDF foi executado.",
+        "Sem contar a invocação inicial seriam quatorze chamadas descendentes. A convenção que inclui a chamada inicial corresponde à alternativa impressa de valor quinze."
+      ],
+      "issues": [
+        {
+          "code": "OPERADORES_E_CODIGO_NAO_PRESERVADOS",
+          "note": "A extração substitui sinais de menos por ! nas recorrências e no código e lineariza a apresentação. Conferir os casos base, os operadores e as linhas antes de disponibilizar a versão editorial."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q19",
+      "topic": "Sistemas operacionais · paralelismo em multicores",
+      "explanation": "A alternativa A reúne duas asserções verdadeiras com relação explicativa. A divisão de trabalho em threads permite ao sistema operacional escalonar sequências de execução simultaneamente em núcleos diferentes, o que pode melhorar o aproveitamento do processador e reduzir o tempo de resposta de aplicações paralelizáveis. A redação é condicional: dependências, parte serial, sincronização e outros custos podem limitar ou eliminar o ganho.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Texto e alternativas examinados na página PDF 10. A explicação preserva podem se beneficiar e normalmente, sem prometer aceleração proporcional à quantidade de núcleos."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q20",
+      "topic": "Estruturas de dados · tabelas de dispersão",
+      "explanation": "Aplicando h(x)=x mod 23, as chaves mapeiam para: 44→21, 46→0, 49→3, 70→1, 27→4, 71→2, 90→21, 97→5 e 95→3. Portanto, as chaves envolvidas nas colisões são {44,49,90,95}. Com encadeamento exterior e mantendo a ordem de inserção, a tabela contém 0:[46], 1:[70], 2:[71], 3:[49,95], 4:[27], 5:[97] e 21:[44,90]; as demais entradas ficam vazias. Esse conjunto e essa configuração coincidem com o padrão de resposta catalogado, página 1. A elaboração é assistida e não atribui nota a uma resposta.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A questão está na página PDF 10; a página 11 já apresenta a distribuição e o início do bloco específico. O padrão enade-2008-comum-response-standard, SHA-256 7021d115731ddcbad3c227da50f6d8c9c2c7f8a5a4b4d7dabce4b3726d0d35ef, página PDF 1, foi examinado visualmente.",
+        "Envolvidas inclui as chaves que já estavam nas posições ocupadas e as novas chaves conflitantes. Apenas 90 e 95 são as inserções que encontram uma posição previamente ocupada. A configuração indicada segue o desenho do padrão."
+      ],
+      "issues": [
+        {
+          "code": "COLUNAS_E_SUBITENS_INTERCALADOS",
+          "note": "A coluna de contexto foi misturada aos comandos A/B e às áreas de rascunho na extração de referência. Recompor a ordem de leitura com o original, preservando a função, a sequência de chaves e os valores de cada subitem."
+        },
+        {
+          "code": "CABECALHO_DO_PROXIMO_BLOCO",
+          "note": "O texto de referência anexa à discursiva instruções e a distribuição de cursos da página PDF 11. Esses elementos não fazem parte do comando de Q20."
+        },
+        {
+          "code": "DISCURSIVA_REQUER_FLUXO_PROPRIO",
+          "note": "O item solicita conjunto e desenho de uma tabela. O comentário assistido não transforma a questão em objetiva nem em correção automática aprovada."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q21",
+      "topic": "Bancos de dados · índices",
+      "explanation": "A alternativa D reúne I, II e III. Um índice em árvore B+ mantém as chaves ordenadas: serve à busca por igualdade de sobrenome e pode fornecer a ordenação crescente de sobrenomes. Um índice hash é apropriado à busca por igualdade, mas sua função de dispersão não fornece a ordem lexicográfica necessária à consulta 2. Portanto, IV é falso. A melhora concreta depende de seletividade, custo e escolha do otimizador; adequação do índice não garante que todo plano o utilizará.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Na página PDF 11, NumeroEmp é o atributo sublinhado da relação EMPREGADO."
+      ],
+      "issues": [
+        {
+          "code": "GRIFO_DE_CHAVE_NAO_PRESERVADO",
+          "note": "O texto de referência fala em atributo grifado, mas não preserva o sublinhado de NumeroEmp. Manter essa informação acessível na versão editorial, sem inferir o grifo a partir do nome do atributo."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q22",
+      "topic": "Compiladores · tradução",
+      "explanation": "A resposta esperada é A, compiladores. No modelo didático da questão, a tradução prévia permite executar o programa traduzido sem interpretar cada instrução-fonte durante toda a execução, favorecendo desempenho. Interpretadores e macroprocessadores não oferecem essa mesma característica geral. A comparação não é uma garantia universal: otimizações, compilação JIT, implementação e carga de trabalho podem mudar o desempenho de sistemas concretos.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "O enunciado e as cinco alternativas terminam na coluna esquerda da página PDF 11."
+      ],
+      "issues": [
+        {
+          "code": "TEXTO_INTRUSO_DE_INSTRUCOES",
+          "note": "A extração de referência anexou à alternativa E instruções e a tabela de distribuição entre cursos que ficam no topo da página. Conferir a retirada desse conteúdo na versão reextraída, preservando as instruções somente como contexto do caderno."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q23",
+      "topic": "Bancos de dados · integridade referencial",
+      "explanation": "A alternativa E respeita as chaves e referências apresentadas: IdPessoa=1 existe em Pessoa, o telefone referencia essa pessoa e IdRep pode ser nulo, pois o estudante pode não morar em república. A e B usam IdPessoa=10 no telefone, sem a correspondente Pessoa. Em C, DDD nulo viola a chave primária composta de FonePessoa. Em D, IdRep=50 não existe em Republica. Na figura original, os atributos sublinhados de FonePessoa são IdPessoa, DDD, Prefixo e Nro; a nulidade de um componente dessa chave não é permitida.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Os sublinhados do esquema foram conferidos visualmente na página PDF 11. Não foram inferidos apenas pelos nomes dos atributos."
+      ],
+      "issues": [
+        {
+          "code": "CHAVES_COMPOSTAS_SEM_GRIFO",
+          "note": "A extração em texto simples perde quais atributos estão sublinhados, informação essencial para julgar C. A versão editorial precisa preservar ou explicitar a chave composta de FonePessoa e as demais chaves do esquema."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q24",
+      "topic": "Organização digital · decodificadores",
+      "explanation": "A alternativa E é compatível com os três circuitos observados. Para o decodificador de duas entradas, as saídas 0, 1, 2 e 3 são, respectivamente, ¬A¬B, ¬AB, A¬B e AB. Em I, o OU das saídas 1 e 2 dá ¬AB+A¬B. Em II, o NOR das saídas 0, 1 e 2 resulta em AB. Em III, o XOR das saídas 1, 2 e 3 equivale ao OU dessas saídas porque o decodificador as torna mutuamente exclusivas; o resultado é A+B. Essa justificativa depende das portas e conexões efetivamente desenhadas.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Tabela, fios, portas OR/NOR/XOR e expressões impressas foram examinados na página PDF 12."
+      ],
+      "issues": [
+        {
+          "code": "FIGURA_LOGICA_NAO_INTEGRADA",
+          "note": "Circuitos e tabela fazem parte do enunciado, mas estão desmontados no texto de referência. Integrar a representação visual e conferir as conexões antes de disponibilizar o item."
+        },
+        {
+          "code": "SIMBOLOS_LOGICOS_AUSENTES",
+          "note": "As barras de negação e as expressões junto aos circuitos não estão preservadas no texto extraído. Não transformar as descrições desta análise em suposta transcrição literal."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q25",
+      "topic": "Processamento de imagens · transformada de Hough",
+      "explanation": "A alternativa E descreve a transformada de Hough para detecção de retas: cada pixel de borda vota em parâmetros de retas possíveis, e picos no acumulador identificam retas sustentadas por vários pixels colineares. Esses picos são pontos no espaço de parâmetros, não uma simples lista de intensidades. Fourier produz conteúdo em frequências e não o histograma dos níveis de cinza; Hadamard não equivale genericamente a um filtro passa-baixas; a transformada de distância não mede apenas a distância ao centro; e a DCT não devolve diretamente coeficientes das equações das retas.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A imagem binária com três retas foi examinada na página PDF 12. A explicação interpreta os picos no espaço de parâmetros para evitar confundi-los com pixels no plano original."
+      ],
+      "issues": [
+        {
+          "code": "IMAGEM_DO_ENUNCIADO_NAO_INTEGRADA",
+          "note": "O enunciado depende da imagem binária apresentada acima. Ela foi examinada nesta análise, mas ainda precisa acompanhar a questão e receber descrição editorial adequada."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q26",
+      "topic": "Processamento de imagens · quantização",
+      "explanation": "A resposta B identifica a quantização: a quantidade de níveis possíveis de intensidade foi reduzida de 256 para 4. As duas imagens mantêm 246×300 pixels, logo não houve mudança da amostragem espacial ou das dimensões da malha. A diferença entre níveis de cinza corresponde a precisão de intensidade, não a uma nova escala geométrica nem, por si, a uma simples alteração de iluminação.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "As duas imagens e os rótulos Figura I/II foram conferidos na página PDF 13. A comparação 256→4 níveis está expressa no próprio enunciado."
+      ],
+      "issues": [
+        {
+          "code": "IMAGENS_E_ROTULOS_PENDENTES",
+          "note": "As imagens comparadas precisam estar integradas. O texto de referência também omite o I após uma ocorrência de “figura”; conferir os rótulos com o original para não trocar a imagem de 256 níveis pela de 4 níveis."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q27",
+      "topic": "Redes · acesso ao meio",
+      "explanation": "A alternativa D corresponde a contenção com detecção de colisão, o mecanismo CSMA/CD usado pela Ethernet no cenário indicado: meio compartilhado por um hub e operação half-duplex. Os dispositivos disputam o meio e detectam colisões, usando recuo e retransmissão. A conclusão deve permanecer vinculada a esse cenário; enlaces Ethernet comutados full-duplex não usam detecção de colisões da mesma forma.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "O contexto impresso especifica conexão física a um concentrador (hub); não generalizar a resposta para toda Ethernet atual. Texto e alternativas foram examinados na página PDF 13."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q28",
+      "topic": "Inteligência artificial · árvores de decisão",
+      "explanation": "A alternativa A fornece 1, 1 e 2. Para O1, X1=a leva ao teste X3≤35; como X3=20, a classe é 1. Para O2, X1=b leva diretamente à classe 1. Para O3, X1=c leva ao teste X2, e o valor M encerra a classificação na classe 2. X4 não é consultado para O3: esse teste só aparece no ramo X2=G.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Árvore, rótulos dos ramos e tabela dos três objetos foram conferidos visualmente na página PDF 13."
+      ],
+      "issues": [
+        {
+          "code": "ARVORE_E_TABELA_NAO_INTEGRADAS",
+          "note": "O texto linearizado não preserva a topologia da árvore nem a associação dos ramos. Integrar árvore e tabela; não deduzir o caminho de O3 pela proximidade textual do valor X4=sim."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q29",
+      "topic": "Linguagens formais · gramáticas e regularidade",
+      "explanation": "A alternativa D é sustentada pela linguagem gerada. Partindo de S→AB, cada aplicação de AB→AAB acrescenta um A e preserva um único B. Ao terminar com A→a e B→b, obtêm-se precisamente cadeias a^n b, com n≥1. Essa linguagem é regular; uma gramática regular equivalente pode usar S→aS | aT e T→b. A gramática apresentada, porém, não é livre de contexto na sua forma sintática, pois possui AB no lado esquerdo de uma produção. Ela não gera aabbb, que contém três b, nem a cadeia vazia.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "As quatro produções foram lidas no quadro da página PDF 13. A distinção entre a forma da gramática dada e a classe da linguagem é central para evitar uma justificativa incorreta de B."
+      ],
+      "issues": [
+        {
+          "code": "PRODUCOES_GRAMATICAIS_CORROMPIDAS",
+          "note": "A seta → aparece como ÷ na extração de referência e há texto estranho anexado ao quadro. Preservar exatamente S→AB, AB→AAB, A→a e B→b, incluindo o lado esquerdo com dois símbolos."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q30",
+      "topic": "Redes sem fio · múltiplo acesso",
+      "explanation": "A alternativa D lista três técnicas de múltiplo acesso: CDMA separa usuários por códigos, FDMA por faixas de frequência e TDMA por intervalos de tempo. As outras alternativas misturam padrões e famílias de sistemas, serviços ou mecanismos de segurança com técnicas de acesso. Um sistema como GSM pode empregar técnicas de múltiplo acesso, mas seu nome não é, nesse contexto, uma técnica equivalente a CDMA, FDMA ou TDMA.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Texto e alternativas foram conferidos na página PDF 13."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q31",
+      "topic": "Inteligência artificial · estratégias de busca",
+      "explanation": "A alternativa B reúne I e III. Com custos de ação iguais, a busca em largura encontra primeiro uma solução de menor profundidade e, portanto, de menor custo. A busca em profundidade pode encontrar uma solução mais longa antes de explorar uma curta. Heurísticas úteis podem orientar a expansão e melhorar a eficiência; isso não torna qualquer busca heurística automaticamente ótima. A busca gulosa também pode explorar estados que não integram a solução, de modo que IV não é uma garantia válida.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "As hipóteses de custo uniforme, ramificação finita e ausência de retorno a estados visitados foram preservadas. Página PDF 14 examinada."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q32",
+      "topic": "Estatística · intervalos de confiança",
+      "explanation": "A alternativa C reúne I e III. Ao incorporar novas observações, a média e o desvio padrão amostrais podem mudar para cima ou para baixo, como afirma I. Para a mesma amostra de dez consultas, um nível de confiança de 99% exige um valor crítico maior que 95%, alargando o intervalo. II não é uma conclusão necessária: aumentar n tende a reduzir o erro padrão quando a variabilidade é comparável, mas os novos dados podem alterar essa variabilidade. Não se deve justificar a resposta dizendo que mais observações tornam qualquer intervalo necessariamente menor.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A expressão usual, com desvio padrão populacional desconhecido e normalidade, é média amostral ± t crítico·s/√n. A afirmação III compara níveis de confiança na mesma amostra. Página PDF 14 examinada."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q33",
+      "topic": "Compiladores · análise sintática",
+      "explanation": "A alternativa C reúne II e IV. O analisador sintático trabalha com os tokens produzidos pela análise léxica, e a análise bottom-up normalmente usa deslocamentos e reduções para construir a estrutura da sentença. A recursão à esquerda inviabiliza diretamente os procedimentos top-down preditivos usuais, exigindo transformação ou outra técnica; logo I não caracteriza a abordagem introdutória pretendida. A existência de análises top-down e bottom-up para uma linguagem não implica ambiguidade da gramática, afastando III.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A ressalva sobre recursão à esquerda é relativa aos métodos top-down usuais do contexto didático; não afirmar que nenhuma técnica moderna consegue tratá-la. Texto e opções examinados na página PDF 14."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q34",
+      "topic": "Comunicações · modulação digital",
+      "explanation": "A chave A seleciona I, II e IV. No modelo didático comparável, ASK é sensível a perturbações de amplitude; FSK oferece maior imunidade a esse tipo de perturbação; e técnicas híbridas como QAM variam amplitude e fase. V é falsa porque modulações M-árias podem transportar mais de dois bits por símbolo. Para interpretar a exclusão de III, é necessário distinguir o deslocamento de fase associado ao símbolo da fase instantânea da onda: na descrição elementar de PSK, o deslocamento identifica o símbolo e sua mudança é tratada na transição entre símbolos.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A página PDF 14 realmente imprime “a fase da portadora é modificada durante o intervalo de sinalização”. A redação não foi criada pelo extrator; preservar a chave A e contextualizar o significado de fase e de intervalo."
+      ],
+      "issues": [
+        {
+          "code": "REDACAO_PSK_INTERVALO",
+          "note": "A exclusão de III depende da leitura de “durante o intervalo” e da distinção entre fase instantânea e deslocamento de fase de cada símbolo. Revisão especializada deve contextualizar a justificativa, incluindo limites do modelo simplificado, sem alterar a chave por decisão automática."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q35",
+      "topic": "Redes · arquitetura TCP/IP",
+      "explanation": "A alternativa B descreve funções da camada de rede/inter-rede: endereçamento IP e, no contexto IPv4 considerado, fragmentação e remontagem de datagramas. Portas de transporte não identificam interfaces físicas como propõe A; o roteamento não é função da camada de transporte como diz C; um protocolo de aplicação não precisa especificar uma interface de usuário como exige D; e TCP/IP não possui necessariamente as sete camadas da arquitetura OSI. Para estudo atual, destacar que roteadores IPv6 não fragmentam datagramas como roteadores IPv4.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "O original da página PDF 15 está organizado em duas colunas independentes. A redação completa de Q35 foi lida visualmente, inclusive as palavras ausentes do texto linearizado.",
+        "A reextração CNT-I2 separou corretamente as colunas da página PDF 15. O texto e as alternativas foram comparados novamente ao render; a mistura de colunas da referência CNT-I1 foi resolvida. Isso não recupera as fórmulas gráficas nem integra o circuito de Q38."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q36",
+      "topic": "Redes · IEEE 802.11",
+      "explanation": "A alternativa A reúne I, II e IV: redes IEEE 802.11 podem operar nos modos básicos de infraestrutura e ad hoc; uma estação realiza associação ao ponto de acesso; e RTS/CTS pode reduzir colisões, sobretudo as associadas a terminais ocultos. III confunde prevenção com detecção de colisões: o funcionamento usual utiliza CSMA/CA e confirmações de recepção. V é falsa porque criptografia não impede a recepção física do sinal de rádio por uma interface não autorizada. WEP é hoje inseguro e não deve ser recomendado para proteger redes atuais.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A sigla padronizada é SSID. O original da página PDF 15 imprime “service set identifier — SSI”; não atribuir a ausência de D ao extrator. RTS/CTS reduz riscos de colisão, mas não garante eliminá-los em qualquer cenário.",
+        "A reextração CNT-I2 separou corretamente as colunas da página PDF 15. O texto e as alternativas foram comparados novamente ao render; a mistura de colunas da referência CNT-I1 foi resolvida. Isso não recupera as fórmulas gráficas nem integra o circuito de Q38."
+      ],
+      "issues": [
+        {
+          "code": "SIGLA_SSI_NO_ORIGINAL",
+          "note": "O original usa SSI onde normalmente se usa SSID. Qualquer esclarecimento ou correção deve ser identificado como comentário editorial, sem alteração silenciosa da transcrição."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q37",
+      "topic": "Estatística · regressão linear",
+      "explanation": "A alternativa C corresponde a 0,17. O coeficiente angular da regressão é a=ρ·σY/σX=0,7·0,1/5=0,014. Isso também é coerente com o intercepto fornecido: 0,1−0,014·15=−0,11. Para x=20, E(Y|X=20)=0,014·20−0,11=0,17. Trata-se de um valor esperado segundo o modelo, que pode ser fracionário; não é uma afirmação de que uma contagem observada de erros tenha uma fração de erro.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Os valores 0,7; 0,1; 15; 5 e −0,11 foram conferidos na coluna direita da página PDF 15.",
+        "A reextração CNT-I2 separou corretamente as colunas da página PDF 15. O texto e as alternativas foram comparados novamente ao render; a mistura de colunas da referência CNT-I1 foi resolvida. Isso não recupera as fórmulas gráficas nem integra o circuito de Q38."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q38",
+      "topic": "Organização digital · circuitos lógicos",
+      "explanation": "A alternativa E é coerente com o circuito visualizado: f=AB+CD+¬D¬E. As duas primeiras portas são NAND, produzindo ¬(AB) e ¬(CD); a terceira NAND produz, por De Morgan, AB+CD. A porta inferior é NOR com entradas D e E, produzindo ¬(D+E)=¬D¬E. A porta final faz o OU desses dois resultados. A ligação de D à porta inferior e as pequenas bolhas de inversão são essenciais para obter essa função.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Circuito, junção do fio D, bolhas de inversão e cinco alternativas foram examinados na página PDF 15. A expressão de E foi identificada visualmente; não foi reconstruída pela letra da chave.",
+        "A reextração CNT-I2 separou corretamente as colunas da página PDF 15. O texto e as alternativas foram comparados novamente ao render; a mistura de colunas da referência CNT-I1 foi resolvida. Isso não recupera as fórmulas gráficas nem integra o circuito de Q38."
+      ],
+      "issues": [
+        {
+          "code": "FORMULAS_DAS_ALTERNATIVAS_AUSENTES",
+          "note": "A extração de referência contém as letras, mas não preserva as expressões lógicas completas das cinco alternativas. É necessário recuperar todas, incluindo barras de negação."
+        },
+        {
+          "code": "FIGURA_LOGICA_NAO_INTEGRADA",
+          "note": "O circuito precisa acompanhar o enunciado com conexões e portas legíveis; esta análise assistida não supre uma imagem ausente."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q39",
+      "topic": "Linguagens formais · árvores sintáticas",
+      "explanation": "Para (a * (b / c)), a raiz E expande para (S O S); o S esquerdo deriva L→a, O deriva *, e o S direito deriva uma nova expressão E→(S O S), com folhas b, / e c. A ambiguidade não decorre de existirem várias ordens possíveis para aplicar produções em ramos independentes. Ela exigiria duas árvores de análise distintas para a mesma cadeia. A parentização completa fixa a estrutura da expressão considerada. Essa distinção e a árvore descrita são compatíveis com o padrão de resposta registrado, página 1.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Foram examinadas a página PDF 16 da prova e a página 1 do padrão de resposta enade-2008-comum-response-standard, SHA-256 7021d115731ddcbad3c227da50f6d8c9c2c7f8a5a4b4d7dabce4b3726d0d35ef. A elaboração deste comentário é assistida; não atribui nota nem valida a fonte como conferida."
+      ],
+      "issues": [
+        {
+          "code": "SIMBOLOS_DE_GRAMATICA",
+          "note": "A extração troca setas de produção por 6 e o símbolo genérico de operador por q. Preservar a gramática E→(S O S), S→L|E, O→+|-|*|/ e L→a|b|c|d|e conforme o original."
+        },
+        {
+          "code": "RASCUNHO_NO_ENUNCIADO",
+          "note": "Rótulos de rascunho e números de linhas foram incorporados ao texto. Conferir sua retirada sem perder os dois subitens ou os valores impressos."
+        },
+        {
+          "code": "DISCURSIVA_REQUER_FLUXO_PROPRIO",
+          "note": "O item pede desenho e justificativa; a análise não transforma a discursiva em uma questão objetiva nem em rubrica automática."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q40",
+      "topic": "Bancos de dados · otimização de consultas",
+      "explanation": "O padrão de resposta registrado espera dois SELECT de nome e endereço, filtrados respectivamente por idade<40 e renda>30000, unidos por UNION. A árvore pode unir os ramos de seleção e depois projetar nome/endereço; o padrão também aceita projeção em cada ramo antes da união, com ou sem indicação dos índices. No formalismo didático da álgebra relacional de conjuntos, a união dos resultados das duas seleções representa a alternativa ao predicado OR. Há duas ressalvas. Primeiro, o diagrama inicial da prova imprime renda<30000, enquanto a prosa, o SQL e o padrão usam renda>30000. Segundo, em SQL com multiconjuntos, UNION apenas de nome/endereço remove também duplicatas de clientes distintos que compartilhem esses valores. Para preservar a semântica da consulta original sem supor unicidade desses campos, uma reescrita assistida é: SELECT nome,endereco FROM (SELECT nroCliente,nome,endereco FROM Cliente WHERE idade<40 UNION SELECT nroCliente,nome,endereco FROM Cliente WHERE renda>30000) AS candidatos. O nroCliente permite eliminar a sobreposição do mesmo cliente sem fundir clientes distintos. Essa ressalva e essa variante são comentário técnico assistido, não requisitos adicionais atribuídos ao Inep. Reescrever a consulta também não garante que todo otimizador escolherá índices: a escolha depende dos custos e da seletividade.",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "A questão está integralmente na página PDF 17; a página 18 já inicia Engenharia de Computação. Foram examinadas visualmente as páginas 1–3 do padrão registrado, SHA-256 7021d115731ddcbad3c227da50f6d8c9c2c7f8a5a4b4d7dabce4b3726d0d35ef; o SQL esperado e os quatro planos usam renda>30000. Nenhum código SQL do documento foi executado."
+      ],
+      "issues": [
+        {
+          "code": "INCONSISTENCIA_FONTE_RENDA",
+          "note": "O diagrama original usa renda<30000, divergindo de prosa/SQL/padrão com renda>30000. A divergência precisa aparecer como ressalva editorial identificada, sem ser ocultada como erro de OCR."
+        },
+        {
+          "code": "SEMANTICA_SQL_UNION",
+          "note": "A solução esperada usa UNION sobre nome/endereço. Antes de ensinar equivalência SQL irrestrita, contextualizar semântica de conjuntos versus multiconjuntos e a possível existência de clientes diferentes com os mesmos valores projetados."
+        },
+        {
+          "code": "LIMITE_E_SIMBOLOS_DA_QUESTAO",
+          "note": "A extração de referência troca π e σ por B/F e anexa o cabeçalho de Engenharia da página 18. Conferir os símbolos, as comparações e o limite da questão."
+        },
+        {
+          "code": "DISCURSIVA_REQUER_FLUXO_PROPRIO",
+          "note": "O item pede SQL e árvore de consulta. A análise não atribui pontuação nem cria correção automática para respostas discursivas."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q41",
+      "topic": "Automação industrial e modelagem de sistemas",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q42",
+      "topic": "Segurança de redes · HTTPS",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q43",
+      "topic": "Sistemas embarcados · leitura de teclado",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q44",
+      "topic": "Bancos de dados · otimização de consultas",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação.",
+        "O arquivo de gabarito informa ANULADA para Q44. A anulação foi preservada sem inferir ou inventar seu motivo."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        },
+        {
+          "code": "ANULACAO_PRESERVADA",
+          "note": "A questão Q44 aparece como anulada no gabarito catalogado; não criar uma resposta pontuável nem escolher uma alternativa para substituí-la."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q45",
+      "topic": "Cálculo · sólidos de revolução",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q46",
+      "topic": "Cálculo · análise de gráficos",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q47",
+      "topic": "Redes · fibras ópticas",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q48",
+      "topic": "Cálculo numérico · bissecção",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q49",
+      "topic": "Processamento de imagens · detecção de bordas",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q50",
+      "topic": "Organização digital · conversão analógico-digital",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q51",
+      "topic": "Inteligência artificial · busca heurística",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q52",
+      "topic": "Compiladores · análise semântica",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q53",
+      "topic": "Probabilidade · eventos em sequências",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q54",
+      "topic": "Redes · encaminhamento IP",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q55",
+      "topic": "Probabilidade · confiabilidade",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q56",
+      "topic": "Comunicações · transmissão de sinais",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q57",
+      "topic": "Organização digital · tabelas lógicas",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q58",
+      "topic": "Redes · tradução de endereços e portas",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q59",
+      "topic": "Sistemas de tempo real · inversão de prioridade",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q60",
+      "topic": "Comunicações · limites de transmissão",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Engenharia de Computação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Engenharia de Computação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q61",
+      "topic": "Gestão de serviços de TI · ITIL",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q62",
+      "topic": "Auditoria · ética profissional",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q63",
+      "topic": "Bancos de dados · generalização e especialização",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q64",
+      "topic": "Sistemas de informação · apoio à decisão",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q65",
+      "topic": "Engenharia de software · níveis de processo",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q66",
+      "topic": "Governança e auditoria · COBIT",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q67",
+      "topic": "Redes · transporte TCP/IP",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q68",
+      "topic": "Bancos de dados · consultas agregadas",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q69",
+      "topic": "Engenharia de software · sistemas legados",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q70",
+      "topic": "Redes · Ethernet e comutação",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q71",
+      "topic": "Engenharia de software · coesão e acoplamento",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q72",
+      "topic": "Sistemas de informação · simulação de cenários",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q73",
+      "topic": "Projetos de software · caminho crítico",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q74",
+      "topic": "Engenharia de software · análise e projeto",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q75",
+      "topic": "Redes · tradução de endereços e portas",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q76",
+      "topic": "Bancos de dados · chaves e formas normais",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q77",
+      "topic": "Engenharia de software · modelo espiral",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q78",
+      "topic": "Sistemas de informação · saúde e segurança",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q79",
+      "topic": "Sistemas de informação · melhoria e riscos",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2008-comum-exam",
+      "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "key": "Q80",
+      "topic": "Modelagem de sistemas · diagramas UML",
+      "explanation": "",
+      "notes": [
+        "O gabarito de múltipla escolha catalogado não se declara definitivo. A análise é assistida e não aprova fontes nem substitui revisão humana.",
+        "Ocorrência do bloco impresso de Sistemas de Informação, conforme distribuição da capa e metadados do caderno. Houve leitura para identificar assunto, escopo e preservação; não foi feita análise conceitual completa deste item nesta revisão de Ciência da Computação."
+      ],
+      "issues": [
+        {
+          "code": "FORA_ESCOPO_CC",
+          "note": "Preservar esta ocorrência como Sistemas de Informação; não reclassificá-la como questão do bloco de Ciência da Computação por ter assunto técnico semelhante."
+        },
+        {
+          "code": "REVISAO_CONCEITUAL_NAO_REALIZADA",
+          "note": "A identificação do assunto e da chave catalogada não equivale a uma revisão pedagógica do item. O conteúdo permanece pendente de análise específica."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    }
+  ]
+}
