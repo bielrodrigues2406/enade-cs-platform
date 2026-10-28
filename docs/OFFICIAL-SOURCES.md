@@ -131,6 +131,18 @@ Resultado medido com o extrator da `main@3d215eb` sobre as cópias de Bacharelad
 
 Restam ilegíveis: comentários de código numa fonte com letras deslocadas ("HQTXDQWR" = "enquanto") e símbolos lógicos/de conjuntos (`ĺ` = →, `ŀ` = ∪). O extrator já manda essas questões para revisão; elas dependem da imagem da questão (ADR-010). O extrator ainda não aceita a cópia derivada diretamente: ver CNT-T1 no quadro.
 
+## Gabaritos de 2005, 2008 e 2011 (28/10/2026)
+
+Busca pedida por Gabriel antes de aplicar D10. Conferido no próprio arquivo arquivado (SHA-256 do catálogo); as páginas do Inep não puderam ser abertas daqui porque o ambiente bloqueia `www.gov.br`, e a busca na web não encontrou outra versão.
+
+| Edição | Evidência | Tratamento |
+| --- | --- | --- |
+| 2011 | URL oficial `.../gabaritos/2011/Enade2011_Gab_Def_Computacao.pdf`, título interno `Enade2011_Gab_Def_Planilhas Separadas.xls`, itens 13 e 44 marcados como ANULADA | Definitivo |
+| 2008 | Documento único "Gabarito das questões de múltipla escolha", gerado em 09/04/2009, cinco meses após a prova; sem menção a preliminar ou definitivo | Entra com aviso (D10) |
+| 2005 | Planilha consolidada de todas as áreas, gerada em 12/12/2006, treze meses após a prova; sem menção a preliminar ou definitivo | Entra com aviso (D10) |
+
+Aviso exibido na questão: "Gabarito publicado pelo Inep, sem indicação de definitivo". Se um gabarito definitivo for encontrado, ele substitui este registro por nova versão, preservando o histórico.
+
 ## Revisão editorial ainda necessária
 
 Os cadernos antigos são compartilhados: em 2005/2008 incluem blocos de Ciência da Computação, Engenharia e Sistemas de Informação; 2011 também inclui Licenciatura. O rótulo COMUM preserva esse fato. Não transcrever automaticamente todos os blocos como questões de Ciência da Computação.
