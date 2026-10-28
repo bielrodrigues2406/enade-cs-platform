@@ -118,6 +118,31 @@ Resultado em 26/10/2026:
 
 Para 2014 e 2017, o caminho seguinte é OCR da página renderizada, com revisão humana. Na revisão Codex de 26/10/2026, o ambiente tinha Tesseract 5.5.0 com `eng`/`osd`. Um ensaio da página 4 de 2014 Bacharelado, renderizada a 180 DPI, recuperou texto legível com o modelo português [`tesseract-ocr/tessdata_fast`, commit `87416418657359cb625c412a48b6e1d6d41c29bd`](https://github.com/tesseract-ocr/tessdata_fast/tree/87416418657359cb625c412a48b6e1d6d41c29bd), licença Apache-2.0; SHA-256 de `por.traineddata`: `c4932b937207a9514b7514d518b931a99938c02a28a5a5a553f8599ed58b7deb`. O ensaio ainda trocou marcadores romanos e espaçamento. O OCR agora está integrado como opção explícita (`--ocr --tessdata-dir PASTA`), com hash do modelo e versão registrados. Marcadores de alternativas só são recuperados da camada PDF quando suas coordenadas e letras estão disponíveis; não se inferem respostas pela posição. Todos os itens OCR conservam alertas e exigem confronto com o PDF.
 
+## Texto de 2014 e 2017 recuperado pela fonte (28/10/2026)
+
+Nessas provas a Calibri está embutida como fonte CID sem `/ToUnicode`, e a extração devolvia números de glifo ("ĂƉĞŶĂƐ" = "apenas"). Os PDFs de 2021 trazem a mesma Calibri com mapa correto e a mesma numeração de glifos (258 = "a", 393 = "p", sem conflito entre regular, negrito e itálico). `scripts/repair-calibri-text.py` monta o mapa (`data/calibri-cid-unicode.json`, 116 glifos, com os SHA-256 das quatro fontes de 2021) e grava uma **cópia derivada** de cada prova com o mapa nas fontes sem `/ToUnicode`, mais um recibo JSON. O original não é alterado; a cópia serve só para texto.
+
+Resultado medido com o extrator da `main@3d215eb` sobre as cópias de Bacharelado:
+
+| Prova | Antes | Depois |
+| --- | --- | --- |
+| 2014 | 44.909 caracteres ilegíveis; 0 rascunhos | 57 ilegíveis (quebras de página, código em fonte própria, símbolos); 40 itens, 11 rascunhos, 24 revisão, 5 discursivas |
+| 2017 | 30 de 40 itens (cabeçalhos ilegíveis); 0 rascunhos | 40 de 40 itens, 9 rascunhos, 26 revisão, 5 discursivas |
+
+Restam ilegíveis: comentários de código numa fonte com letras deslocadas ("HQTXDQWR" = "enquanto") e símbolos lógicos/de conjuntos (`ĺ` = →, `ŀ` = ∪). O extrator já manda essas questões para revisão; elas dependem da imagem da questão (ADR-010). O extrator ainda não aceita a cópia derivada diretamente: ver CNT-T1 no quadro.
+
+## Gabaritos de 2005, 2008 e 2011 (28/10/2026)
+
+Busca pedida por Gabriel antes de aplicar D10. Conferido no próprio arquivo arquivado (SHA-256 do catálogo); as páginas do Inep não puderam ser abertas daqui porque o ambiente bloqueia `www.gov.br`, e a busca na web não encontrou outra versão.
+
+| Edição | Evidência | Tratamento |
+| --- | --- | --- |
+| 2011 | URL oficial `.../gabaritos/2011/Enade2011_Gab_Def_Computacao.pdf`, título interno `Enade2011_Gab_Def_Planilhas Separadas.xls`, itens 13 e 44 marcados como ANULADA | Definitivo |
+| 2008 | Documento único "Gabarito das questões de múltipla escolha", gerado em 09/04/2009, cinco meses após a prova; sem menção a preliminar ou definitivo | Entra com aviso (D10) |
+| 2005 | Planilha consolidada de todas as áreas, gerada em 12/12/2006, treze meses após a prova; sem menção a preliminar ou definitivo | Entra com aviso (D10) |
+
+Aviso exibido na questão: "Gabarito publicado pelo Inep, sem indicação de definitivo". Se um gabarito definitivo for encontrado, ele substitui este registro por nova versão, preservando o histórico.
+
 ## Revisão editorial ainda necessária
 
 Os cadernos antigos são compartilhados: em 2005/2008 incluem blocos de Ciência da Computação, Engenharia e Sistemas de Informação; 2011 também inclui Licenciatura. O rótulo COMUM preserva esse fato. Não transcrever automaticamente todos os blocos como questões de Ciência da Computação.

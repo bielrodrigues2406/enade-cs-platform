@@ -1,6 +1,6 @@
 # Melhoria de design: avaliação de referências e plano
 
-Status: avaliação e plano para DS-1/DS-2/DS-3 (ver [WORKBOARD.md](WORKBOARD.md)). Referência: 26/10/2026. A direção de produto continua em [UX-DESIGN-SPEC.md](UX-DESIGN-SPEC.md); este documento não a substitui.
+Status: avaliação e plano para DS-1/DS-2/DS-3; paleta e página inicial em §5 (DS-4/HOME-1, 28/10/2026). Ver [WORKBOARD.md](WORKBOARD.md). Referência: 26/10/2026. A direção de produto continua em [UX-DESIGN-SPEC.md](UX-DESIGN-SPEC.md); este documento não a substitui.
 
 ## 1. Diagnóstico da interface atual
 
@@ -62,7 +62,7 @@ Pedido de Gabriel em 26/10/2026. Lista de revisão para todo PR de interface; a 
 | Cartão arredondado com borda colorida de um lado (menu ativo, alerta, feedback) | Proibido. Estado ativo por peso, cor e marcador tipográfico; separação por espaço, mudança de fundo ou fio completo |
 | Rótulo em caixa alta acima de todo título ("eyebrow" + H1 + subtítulo) | Só quando informa algo (ex.: "QUESTÃO OFICIAL · VERSÃO 2", "RESPOSTA SALVA"); nunca como slogan |
 | Frases motivacionais no lugar de orientação | Proibido (UX-DESIGN-SPEC §3) |
-| Gradiente roxo/azul, índigo padrão, glassmorphism, blobs | Proibido; acento único petróleo |
+| Gradiente roxo/azul, índigo padrão, glassmorphism, blobs | Proibido; acento único azul de caneta (OKLCH h 262, cobalto, não índigo), sempre chapado |
 | Grade de cartões iguais, cartão dentro de cartão | Listas e linhas editoriais para conteúdo repetido |
 | Emoji como ícone | Ícones SVG de traço único com `currentColor`, só quando têm função |
 | Métricas e números inventados | Proibido; contagens sempre com numerador, denominador e período |
@@ -164,3 +164,55 @@ Separação espaço × efeito (Material): molas com acomodação para movimento 
 - [Chrome for Developers: View Transitions em 2025](https://developer.chrome.com/blog/view-transitions-in-2025)
 - [Motion: índice oficial](https://motion.dev/llms.txt)
 - Repositórios da seção 2, lidos em clone local somente leitura.
+
+## 5. Paleta "caderno" e página inicial (DS-4, HOME-1)
+
+Pedido de Gabriel em 28/10/2026: melhoria geral do design e das cores e uma página inicial de alto nível com motion, tendo como referência o design do Portal FSA. O repositório do portal (organização Fábrica de Software Acadêmica IFSP-PEP) não é acessível a esta sessão; a referência lida foi o artefato "Portal FSA — redesenho" da conversa Portal-FSA de Gabriel (telas "Início · aluno", "Início · professora" e as abas de edição).
+
+### O que veio do Portal FSA
+
+- Fundo de papel `#f4f3ef` com painéis brancos de fio fino (`#e3e0d8`) e raio de 10 px; um acento escuro; cores de estado sempre com texto.
+- Início orientado a tarefa: capa em cor profunda com data em mono, saudação, situação real e ação principal; faixa de tempo com os dias (lá) ou as semanas até a prova (aqui); "Para você resolver" em grupos por prioridade; coluna lateral com andamento em barras e a próxima data em bloco "29 NOV".
+- Metadados em mono acima do título de cada cartão; listas em painel branco com fios entre as linhas.
+
+Ficou de fora: Public Sans/IBM Plex Mono (o produto mantém Figtree, Source Serif 4 e JetBrains Mono, já auto-hospedadas) e o verde institucional do IFSP, que é marca do portal e não deste caderno.
+
+### Paleta
+
+A marca é um caderno. A paleta usa os objetos dele, cada um com uma única função:
+
+| Papel | Token semântico | Valor | Uso |
+| --- | --- | --- | --- |
+| Papel | `--color-bg`, `--color-surface`, `--color-surface-sunken` | `#f4f3ef`, `#ffffff`, `#ecebe6` | Fundo, painéis, notas |
+| Tinta | `--color-text`, `--color-text-muted` | `#151e2f` (15,0:1), `#505868` (6,4:1) | Texto |
+| Caneta azul | `--color-accent` e variações | `#1649ae` (7,3:1; texto sobre ela 8,1:1) | Ação primária, seleção, links |
+| Capa | `--color-cover`, `--color-on-cover`, `--color-on-cover-muted` | `#0f285a` / `#ffffff` (14,3:1), `#bccfef` (9,1:1) | Capa da página inicial; única superfície escura |
+| Caneta de correção | `--color-success-*`, `--color-danger-*` | verde `#106c3e`, vermelho `#aa2a27` sobre fundos claros (≥ 5,8:1) | Só certo/errado e "para retomar", sempre com texto |
+| Marca-texto | `--color-highlight` | `#f9e77b` | Destaque raro: sublinhado da contagem, seleção de texto, hover da ação na capa; nunca estado |
+| Foco | `--color-focus` | `#c44c00` (4,3:1); marca-texto sobre a capa | Anel de foco distinto da seleção azul |
+
+Valores calculados em OKLCH e convertidos para sRGB; contraste pela fórmula WCAG. Componentes usam apenas tokens semânticos; a troca de paleta não exigiu mudar componentes.
+
+### Tipografia
+
+Títulos de página (`h1`) na serifa de leitura (Source Serif 4 com eixo de tamanho óptico, `opsz.css`); interface em Figtree; índices, datas e metadados em JetBrains Mono. Contadores grandes (banco, caderno de erros) usam numerais da serifa.
+
+### Página inicial
+
+1. **Capa**: data, "Boa noite. Faltam 32 dias para o ENADE.", situação real ("Você respondeu 1 de 3 questões do banco · 1 para retomar no caderno de erros"), "Continuar estudando" e semanas até a prova (hoje e a semana da prova marcadas).
+2. **Para você estudar**: "Para retomar" (erradas na última resposta, as mais antigas primeiro, até 3) e "Ainda não respondidas" (até 3); cada cartão com assunto e origem, título, situação e ação.
+3. **Lateral**: "Seu andamento" (respondidas e acertos em barras, com frase), "A prova de 2026" (bloco 29 NOV, mapa das 46 questões, fonte Inep) e "De onde vêm as questões" com contagens do catálogo.
+4. **Como o caderno funciona** (passos e demonstração animada) e **Em construção**.
+
+Motion, com os tokens da seção 4 e desligado por `prefers-reduced-motion` (estado final imediato):
+
+| Elemento | Movimento |
+| --- | --- |
+| Capa | Entra por mola (`--spring-gentle`); semanas em sequência, 60 ms entre elas |
+| Contagem | Sublinhado de marca-texto corre sob "32 dias" (900 ms, `--ease-out`) |
+| Cartões | Sobem em sequência quando os dados chegam |
+| Barras e mapa | Barras crescem de zero; quadrados do mapa entram em sequência (`@starting-style`) |
+| Demonstração | Hesita em B, escolhe D, confirma; visto e volta de caneta desenhados por `stroke-dashoffset` |
+| Seções de baixo | Revelação ao rolar por `IntersectionObserver`, uma vez, sem loop |
+
+Nenhuma métrica é inventada: contagens vêm do catálogo e das respostas salvas; o formato da prova vem de MASTER-SPEC §2 com link para o Inep.

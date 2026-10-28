@@ -133,7 +133,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   trackIdentity,
 }) => {
   test.setTimeout(120000);
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
   ).toBeVisible();
@@ -188,7 +188,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   });
   try {
     const other = await otherContext.newPage();
-    await other.goto("http://localhost:4200/");
+    await other.goto("http://localhost:4200/questoes");
     await expect(
       other.getByRole("heading", { name: "Banco de questões" }),
     ).toBeVisible();
@@ -275,7 +275,7 @@ test("account forms validate and reflow at 320/390/768/1440 CSS pixels", async (
   context,
   trackIdentity,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
   ).toBeVisible();
@@ -324,7 +324,7 @@ test("logout in another tab clears a pending save and rejects its late UI respon
   accountEmail,
   trackIdentity,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
   ).toBeVisible();
@@ -336,7 +336,7 @@ test("logout in another tab clears a pending save and rejects its late UI respon
   await page.reload();
   await expect(page.locator("header")).toContainText(accountEmail);
   const tab = await context.newPage();
-  await tab.goto("/");
+  await tab.goto("/questoes");
   await tab
     .getByRole("button", { name: "Resolver: Quando uma transação falha" })
     .click();
@@ -397,7 +397,7 @@ test("a delayed logout blocks study actions until the guest catalog replaces acc
   accountEmail,
   trackIdentity,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
   ).toBeVisible();

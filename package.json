@@ -18,9 +18,10 @@
     "import:source": "tsx scripts/import-source.ts",
     "download:sources": "node scripts/download-sources.mjs",
     "import:sources": "node scripts/import-sources.mjs",
-    "build:admin": "esbuild scripts/curator-role.ts scripts/seed.ts --bundle --platform=node --format=esm --packages=external --outdir=dist/admin --out-extension:.js=.mjs",
+    "build:admin": "esbuild scripts/curator-role.ts scripts/seed.ts scripts/publish-assisted.ts --bundle --platform=node --format=esm --packages=external --outdir=dist/admin --out-extension:.js=.mjs",
     "extract:questions": "node scripts/extract-questions.mjs",
-    "import:questions": "tsx scripts/import-questions.ts"
+    "import:questions": "tsx scripts/import-questions.ts",
+    "publish:assisted": "tsx scripts/publish-assisted.ts"
   },
   "dependencies": {
     "@angular/common": "22.2.3",

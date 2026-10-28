@@ -15,7 +15,7 @@
             "assets": [{ "glob": "**/*", "input": "apps/web/public" }],
             "styles": [
               "node_modules/@fontsource-variable/figtree/index.css",
-              "node_modules/@fontsource-variable/source-serif-4/index.css",
+              "node_modules/@fontsource-variable/source-serif-4/opsz.css",
               "node_modules/@fontsource-variable/jetbrains-mono/index.css",
               "apps/web/src/styles.css"
             ],

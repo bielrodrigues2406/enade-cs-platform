@@ -184,7 +184,7 @@ test("authoring, independent rejection/publication, version replacement and hist
   try {
     await provision(reviewerContext);
     const reviewer = await reviewerContext.newPage();
-    await page.goto("/");
+    await page.goto("/questoes");
     await openCuration(page);
     await page
       .getByRole("button", { name: "Nova questão autoral", exact: true })
@@ -244,7 +244,7 @@ test("authoring, independent rejection/publication, version replacement and hist
       page.getByRole("heading", { name: title, exact: true }),
     ).toHaveCount(0);
 
-    await reviewer.goto("/");
+    await reviewer.goto("/questoes");
     await openCuration(reviewer);
     await reviewer
       .getByRole("button", { name: `Abrir: ${title}`, exact: true })
@@ -421,7 +421,7 @@ test("editing conflicts preserve local content and explicit reopen reconciles th
   expect(created.status()).toBe(201);
   const detail = await created.json();
   questions.add(detail.questionId);
-  await page.goto("/");
+  await page.goto("/questoes");
   await openCuration(page);
   await page
     .getByRole("button", { name: `Abrir: ${detail.title}`, exact: true })
@@ -460,7 +460,7 @@ test("curation navigation stays unavailable to an account without the local cura
   provision,
 }) => {
   await provision(context, false);
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões", exact: true }),
   ).toBeVisible();

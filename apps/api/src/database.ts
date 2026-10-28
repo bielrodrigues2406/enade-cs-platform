@@ -22,6 +22,8 @@ export type Question = {
   sourceQuestionNumber: number | null;
   keyPage: number | null;
   correctOptionId: string;
+  presentation: "TEXT" | "IMAGE";
+  reviewOrigin: "HUMAN" | "ASSISTED";
   options: { id: string; text: string }[];
 };
 export type Answer = { optionId: string; revision: number };

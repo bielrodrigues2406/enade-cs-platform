@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 test("filter, keyboard response, persistence, failure and retry", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
   ).toBeVisible();
@@ -51,7 +51,7 @@ test("filter, keyboard response, persistence, failure and retry", async ({
 for (const width of [320, 390, 768, 1440]) {
   test(`catalog and resolution reflow at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/");
+    await page.goto("/questoes");
     await expect(
       page.getByRole("button", {
         name: "Resolver: Entrega confiável de um fluxo",
@@ -90,7 +90,7 @@ for (const width of [320, 390, 768, 1440]) {
 test("feedback leads to the next question of the current selection", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/questoes");
   const titles = await page.locator(".question-list h3").allTextContents();
   expect(titles.length).toBeGreaterThan(1);
   const [first, second] = titles.map((title) => title.trim());

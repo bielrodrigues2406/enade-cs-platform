@@ -1,0 +1,17 @@
+{
+  "description": "Base de cada gabarito tratado como final na publicação assistida (D10, OFFICIAL-SOURCES § Gabaritos de 2005, 2008 e 2011). Gabaritos cujo texto se declara definitivo não precisam estar aqui. ONLY_PUBLISHED exibe na questão: \"Gabarito publicado pelo Inep, sem indicação de definitivo\".",
+  "documents": {
+    "enade-2005-comum-answer-key": {
+      "finality": "ONLY_PUBLISHED",
+      "evidence": "Planilha consolidada de todas as áreas, gerada em 12/12/2006; sem menção a preliminar ou definitivo."
+    },
+    "enade-2008-comum-answer-key": {
+      "finality": "ONLY_PUBLISHED",
+      "evidence": "Documento único gerado em 09/04/2009; sem menção a preliminar ou definitivo."
+    },
+    "enade-2011-comum-answer-key": {
+      "finality": "DECLARED",
+      "evidence": "URL oficial e título interno Enade2011_Gab_Def; itens 13 e 44 anulados."
+    }
+  }
+}
