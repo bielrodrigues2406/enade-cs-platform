@@ -4,7 +4,7 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 
 ## O que funciona
 
-- Página inicial em `/` que explica o estudo, o formato da prova de 2026 e a origem das questões com contagens reais, mostra o progresso salvo e leva à próxima questão; o banco fica em `/questoes`.
+- Página inicial em `/` com a situação do estudante: semanas até a prova, questões para retomar e para resolver, andamento salvo, formato da prova de 2026 e origem das questões com contagens reais; o banco fica em `/questoes`.
 - Catálogo com busca, filtro por assunto e indicação de resposta salva.
 - Resolução com alternativas identificadas, feedback após confirmação, alteração e retomada da resposta.
 - Persistência PostgreSQL com prática anônima ou conta por e-mail/senha.

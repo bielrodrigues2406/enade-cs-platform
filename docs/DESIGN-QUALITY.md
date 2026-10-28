@@ -167,7 +167,15 @@ Separação espaço × efeito (Material): molas com acomodação para movimento 
 
 ## 5. Paleta "caderno" e página inicial (DS-4, HOME-1)
 
-Pedido de Gabriel em 28/10/2026: melhoria geral do design e das cores e uma página inicial de alto nível com motion, tendo como referência o repositório portal-fsa. Esse repositório não estava acessível à sessão (não aparece entre os repositórios conectados nem na busca pública). A direção abaixo vem das skills `design-taste`, `taste-color` e `taste-motion` aplicadas ao produto, não de uma cópia de referência.
+Pedido de Gabriel em 28/10/2026: melhoria geral do design e das cores e uma página inicial de alto nível com motion, tendo como referência o design do Portal FSA. O repositório do portal (organização Fábrica de Software Acadêmica IFSP-PEP) não é acessível a esta sessão; a referência lida foi o artefato "Portal FSA — redesenho" da conversa Portal-FSA de Gabriel (telas "Início · aluno", "Início · professora" e as abas de edição).
+
+### O que veio do Portal FSA
+
+- Fundo de papel `#f4f3ef` com painéis brancos de fio fino (`#e3e0d8`) e raio de 10 px; um acento escuro; cores de estado sempre com texto.
+- Início orientado a tarefa: capa em cor profunda com data em mono, saudação, situação real e ação principal; faixa de tempo com os dias (lá) ou as semanas até a prova (aqui); "Para você resolver" em grupos por prioridade; coluna lateral com andamento em barras e a próxima data em bloco "29 NOV".
+- Metadados em mono acima do título de cada cartão; listas em painel branco com fios entre as linhas.
+
+Ficou de fora: Public Sans/IBM Plex Mono (o produto mantém Figtree, Source Serif 4 e JetBrains Mono, já auto-hospedadas) e o verde institucional do IFSP, que é marca do portal e não deste caderno.
 
 ### Paleta
 
@@ -175,41 +183,36 @@ A marca é um caderno. A paleta usa os objetos dele, cada um com uma única fun�
 
 | Papel | Token semântico | Valor | Uso |
 | --- | --- | --- | --- |
-| Papel | `--color-bg`, `--color-surface`, `--color-surface-sunken` | `#faf7f1`, `#fefdfb`, `#f3f0e8` | Fundo, superfícies, notas |
-| Tinta | `--color-text`, `--color-text-muted` | `#151e2f` (15,6:1), `#505868` (6,7:1) | Texto |
-| Caneta azul | `--color-accent` e variações | `#1b53c4` (6,4:1; texto sobre ela 6,7:1) | Ação primária, seleção, links |
-| Caneta de correção | `--color-success-*`, `--color-danger-*` | verde `#106c3e`, vermelho `#aa2a27` sobre fundos claros (≥ 5,8:1) | Só certo/errado, sempre com texto e ícone |
-| Marca-texto | `--color-highlight` | `#f8eb89` | Destaque raro (título da página inicial, seleção de texto, hover da faixa escura); nunca estado |
-| Capa | `--color-surface-inverse`, `--color-text-inverse*` | `#151e2f` / `#faf7f1`, `#98b8f2` (8,3:1) | Única superfície escura: fechamento da página inicial |
-| Foco | `--color-focus` | `#c44c00` (4,5:1); marca-texto sobre a capa | Anel de foco distinto da seleção azul |
+| Papel | `--color-bg`, `--color-surface`, `--color-surface-sunken` | `#f4f3ef`, `#ffffff`, `#ecebe6` | Fundo, painéis, notas |
+| Tinta | `--color-text`, `--color-text-muted` | `#151e2f` (15,0:1), `#505868` (6,4:1) | Texto |
+| Caneta azul | `--color-accent` e variações | `#1649ae` (7,3:1; texto sobre ela 8,1:1) | Ação primária, seleção, links |
+| Capa | `--color-cover`, `--color-on-cover`, `--color-on-cover-muted` | `#0f285a` / `#ffffff` (14,3:1), `#bccfef` (9,1:1) | Capa da página inicial; única superfície escura |
+| Caneta de correção | `--color-success-*`, `--color-danger-*` | verde `#106c3e`, vermelho `#aa2a27` sobre fundos claros (≥ 5,8:1) | Só certo/errado e "para retomar", sempre com texto |
+| Marca-texto | `--color-highlight` | `#f9e77b` | Destaque raro: sublinhado da contagem, seleção de texto, hover da ação na capa; nunca estado |
+| Foco | `--color-focus` | `#c44c00` (4,3:1); marca-texto sobre a capa | Anel de foco distinto da seleção azul |
 
-Valores calculados em OKLCH e convertidos para sRGB; contraste pela fórmula WCAG sobre o papel. Componentes continuam usando apenas tokens semânticos; trocar a paleta não exigiu mudar nenhum componente.
+Valores calculados em OKLCH e convertidos para sRGB; contraste pela fórmula WCAG. Componentes usam apenas tokens semânticos; a troca de paleta não exigiu mudar componentes.
 
 ### Tipografia
 
-Títulos de página (`h1`) passam à serifa de leitura (Source Serif 4 com eixo de tamanho óptico, `opsz.css`), mantendo Figtree na interface e JetBrains Mono em índices e metadados. Contadores grandes (banco, caderno de erros, contagem regressiva) usam numerais da serifa.
+Títulos de página (`h1`) na serifa de leitura (Source Serif 4 com eixo de tamanho óptico, `opsz.css`); interface em Figtree; índices, datas e metadados em JetBrains Mono. Contadores grandes (banco, caderno de erros) usam numerais da serifa.
 
 ### Página inicial
 
-Escala editorial só nesta página. Composição com ritmos diferentes, para não repetir a mesma grade:
+1. **Capa**: data, "Boa noite. Faltam 32 dias para o ENADE.", situação real ("Você respondeu 1 de 3 questões do banco · 1 para retomar no caderno de erros"), "Continuar estudando" e semanas até a prova (hoje e a semana da prova marcadas).
+2. **Para você estudar**: "Para retomar" (erradas na última resposta, as mais antigas primeiro, até 3) e "Ainda não respondidas" (até 3); cada cartão com assunto e origem, título, situação e ação.
+3. **Lateral**: "Seu andamento" (respondidas e acertos em barras, com frase), "A prova de 2026" (bloco 29 NOV, mapa das 46 questões, fonte Inep) e "De onde vêm as questões" com contagens do catálogo.
+4. **Como o caderno funciona** (passos e demonstração animada) e **Em construção**.
 
-1. Título em duas linhas sobre a largura toda; corpo em duas colunas assimétricas (texto e ações à esquerda, demonstração à direita).
-2. "A prova de 2026": contagem regressiva, formato oficial (MASTER-SPEC §2, com fonte) e mapa das 46 questões, em que cada quadrado é uma questão e o azul marca o que o caderno já treina.
-3. "Como o caderno funciona": linha do tempo de quatro passos (vertical no celular).
-4. "De onde vêm as questões": título fixo à esquerda e definições com contagem real do catálogo à direita.
-5. "Em construção": grade de dois com estado em etiqueta.
-6. Fechamento em faixa escura com a próxima ação; rodapé com aviso de independência do Inep.
-
-Motion, todo com tokens da seção 4 e desligado por `prefers-reduced-motion` (estado final imediato):
+Motion, com os tokens da seção 4 e desligado por `prefers-reduced-motion` (estado final imediato):
 
 | Elemento | Movimento |
 | --- | --- |
-| Título | Linhas entram por mola (`--spring-gentle`) com 90 ms de defasagem |
-| Marca-texto | Corre sob "uma questão de cada vez." depois que o título assenta (950 ms, `--ease-out`) |
-| Demonstração | Hesita em B, escolhe D, confirma, mostra a correção; visto e volta de caneta desenhados por `stroke-dashoffset` |
-| Mapa da prova | Quadrados entram em sequência (14 ms por questão) ao aparecer |
-| Linha do tempo | Fio se desenha e cada nó entra por mola |
-| Seções | Revelação ao rolar por `IntersectionObserver`, uma vez, sem loop |
+| Capa | Entra por mola (`--spring-gentle`); semanas em sequência, 60 ms entre elas |
+| Contagem | Sublinhado de marca-texto corre sob "32 dias" (900 ms, `--ease-out`) |
+| Cartões | Sobem em sequência quando os dados chegam |
+| Barras e mapa | Barras crescem de zero; quadrados do mapa entram em sequência (`@starting-style`) |
+| Demonstração | Hesita em B, escolhe D, confirma; visto e volta de caneta desenhados por `stroke-dashoffset` |
+| Seções de baixo | Revelação ao rolar por `IntersectionObserver`, uma vez, sem loop |
 
-A demonstração é marcada como exemplo autoral e fica fora da árvore de acessibilidade; a legenda descreve o que ela mostra. Nenhuma métrica é inventada: contagens vêm do catálogo e das respostas salvas.
-
+Nenhuma métrica é inventada: contagens vêm do catálogo e das respostas salvas; o formato da prova vem de MASTER-SPEC §2 com link para o Inep.
