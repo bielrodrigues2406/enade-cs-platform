@@ -8,9 +8,9 @@ Status: `pronta` · `em andamento` · `em revisão` · `entregue` · `bloqueada`
 
 A prova de bacharelados/CST está prevista para 29/11/2026 (MASTER-SPEC §2). R1 deve estar no ar com folga para uso real dos estudantes: **corte de funcionalidades em 16/11/2026**, deploy até 20/11/2026, sujeito à decisão D1.
 
-Entra em R1: estudo/caderno de erros já entregues, interface revisada (DS-1/DS-2), simulado no formato da edição com itens revisados (SIM-1/SIM-2), desempenho por assunto (PRG-1), teste rápido de diagnóstico (DIAG-1, se houver conteúdo em assuntos suficientes), lote oficial inicial (CNT-1, humano), CI e deploy. Fica para depois: plano de estudos, repetição espaçada, discursivas com autoavaliação completa, IA, busca semântica, PWA.
+Entra em R1: estudo/caderno de erros já entregues, interface revisada (DS-1/DS-2), simulado no formato da edição com itens revisados (SIM-1/SIM-2), desempenho por assunto (PRG-1), teste rápido de diagnóstico (DIAG-1, se houver conteúdo em assuntos suficientes), lote oficial inicial (CNT-1, conferido por agentes conforme D7/ADR-010), CI e deploy. Fica para depois: plano de estudos, repetição espaçada, discursivas com autoavaliação completa, IA, busca semântica, PWA.
 
-Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. Nenhum agente cria questões oficiais para cumprir prazo.
+Sem lote oficial conferido, R1 sai com conteúdo autoral identificado como tal. Questões oficiais vêm só do texto dos PDFs oficiais, com a imagem original da questão e rótulo de transcrição automatizada (ADR-010); nenhum agente escreve ou completa enunciado, alternativa ou gabarito por conta própria.
 
 ## Tarefas
 
@@ -39,6 +39,10 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | IMG-I1 | Importar prova + gabarito pela interface: entrada autorizada, identificação, geração de candidatos e recortes, pareamento por edição/curso/tipo, progresso e retomada idempotente; sem publicação automática | Codex | backlog | CT-1, SRC-1; contrato antes da UI | | backend/worker/fontes/fila; migration a reservar ao iniciar |
 | IMG-U1 | Upload, identificação e progresso do lote, comparação original/recorte e ajuste; integrar captura/exibição CNT-C1/CT-1b do PR #16, sem duplicar o visualizador | Claude (proposta a combinar) | backlog | contrato IMG-I1, CNT-C1/CT-1b (PR #16), DS-1 | | telas próprias; registro mínimo no shell; testes de curadoria/estudo |
 | CAT-1 | Catálogo completo com paginação/total, filtros por edição/curso/caderno e retomada de questão/seleção por endereço; não ocultar itens após o limite atual de 50 | Codex + Claude (divisão API/UI a combinar) | backlog | contrato de filtros/paginação | | API de catálogo e navegação web |
+| CNT-V1 | Conferência por agente (ADR-010): para cada objetiva importada, comparar enunciado, alternativas e gabarito com a página/recorte do PDF original e com o gabarito definitivo; registrar como `ASSISTED` com divergências. Ordem: 2021 Bacharelado → 2014/2017 Bacharelado (após CNT-T1) → 2021/2014/2017 Licenciatura (só itens comuns) → 2005–2011 | Codex | pronta | CNT-I1/I2; CNT-T1 para 2014/2017 | | `docs/reviews/*`, revisões assistidas da fila |
+| CNT-C1 | Recorte (imagem) de cada questão a partir do PDF original: regiões já calculadas pelo extrator, render ≥ 150 dpi, PNG com SHA-256, página e caixa; guardar junto ao item da fila | Claude | pronta | ADR-010 | | extrator, importador, armazenamento de arquivos |
+| CT-1b | Imagem da questão no estudo e na curadoria: exibir o recorte original ao lado do texto, com aviso de que a imagem prevalece; ampliar com teclado; rótulo "conferida por agentes; sem revisão humana" | Claude | backlog | CNT-C1, migration reservada | | `apps/web/src/main.ts`, API de questões, migration |
+| PUB-A1 | Publicação por agente (ADR-010): promover itens sem pendência a versão publicada com evento `ASSISTED` auditável, sem criar ou simular conta humana | Codex | backlog | CNT-V1, CT-1b | | API/curadoria, migration, testes |
 | DEP-2 | Fontes oficiais em produção: hoje a imagem não importa PDFs, e publicar questão oficial exige a fonte no banco de produção. Empacotar a importação local (`curl`/`pdfinfo`) na imagem ou definir procedimento sem abrir o banco publicamente | — (proposta) | backlog | DEP-1, SRC-2 | | `Dockerfile`, `scripts/import-sources.mjs`, `docs/DEPLOY.md` |
 | LGL-1 | Aviso de privacidade (dados coletados, finalidade, retenção, contato) antes de abrir cadastro público | — (proposta) | backlog | D2 | | página web + `docs/` |
 | DEP-1 | Deploy de R1: imagem de produção independente de provedor, API servindo a web, cabeçalhos de segurança, proxy confiável, migrations no deploy, guia de deploy e segurança; conta, banco e domínio no provedor ficam com Gabriel | Claude + Gabriel | código entregue no PR #11; implantação pendente de D1 | OPS-1 | [#11](https://github.com/bielrodrigues2406/enade-cs-platform/pull/11) | `Dockerfile`, `apps/api/src/serve.ts`, `apps/api/src/main.ts`, `docs/DEPLOY.md`, ADR-008 |
@@ -95,8 +99,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 007 | CNT-I1 — prioridade de importação solicitada por Gabriel em 26/10 | Codex |
 | 008 | CT-1 — reserva anterior ainda não implementada | Codex |
 | 009 | SIM-1 — reserva anterior ainda não implementada | Codex |
-| 010 | CT-1b — reserva registrada no PR #16 (ainda em revisão) | Claude |
-| 011 | PUB-A1 — reserva registrada no PR #16 (ainda em revisão) | Codex |
+| 010 | CT-1b — imagem da questão (Claude) | Claude |
+| 011 | PUB-A1 — publicação por agente (Codex) | Codex |
 | 012 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
@@ -108,11 +112,14 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | D3 | ~~Adotar as skills de design-taste~~ — aprovado em 26/10; copiadas para `.claude/skills/` | DS-1/DS-2 |
 | D4 | Agentes podem fazer merge após revisão cruzada, ou o merge é sempre seu | Fluxo de integração |
 | D5 | Quem será a segunda conta de curadoria para conferência independente. A publicação exige outra pessoa; uma única pessoa não consegue publicar sozinha | Bloqueia CNT-1 e todo conteúdo oficial |
+| D7 | **Decidida por Gabriel em 28/10:** não haverá conferência humana nem segunda pessoa de curadoria. Conteúdo oficial transcrito passa a ser conferido por agentes (quem extrai não confere), sempre exibido com a imagem original da questão e rótulo de transcrição automatizada. Ver [ADR-010](ADR-010-agent-review-and-question-images.md) | Substitui D5 para conteúdo transcrito de PDF; destrava CNT-1 |
 | D6 | Escopo de Licenciatura: análise de 26/10 (OFFICIAL-SOURCES) mostra que as provas de Licenciatura repetem a Formação Geral e grande parte das específicas; as exclusivas são pedagógicas. Proposta: R1 só Bacharelado, Licenciatura como segunda procedência | Prioridade de CNT-0/CNT-1 |
 
 ## Diário (handoffs)
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
+
+- 28/10/2026 · Claude · CNT-0/ADR-010 · `claude/confident-cray-ndnwmk` · **Passagem para o Codex, pedido de Gabriel.** Decisões de Gabriel (28/10): (1) ele não fará conferência humana e não há segunda curadoria → conferência por agentes, registrada em D7/ADR-010; (2) mostrar a imagem original de cada questão é aceitável e desejado; (3) o Codex segue com a revisão/análise dos PDFs e a verificação de que as questões estão corretas, com limite de uso baixo — trabalhar em lotes pequenos e registrar progresso aqui a cada lote. **Novo modo para 2014/2017 (exato, sem OCR):** `scripts/repair-calibri-text.py` gera cópia derivada com mapa Unicode da Calibri tirado de 2021 (`data/calibri-cid-unicode.json`, 116 glifos); 2014 passou de 0 para 11 rascunhos e 2017 de 30/40 itens para 40/40 com 9 rascunhos; resíduo só em código e símbolos (detalhes em OFFICIAL-SOURCES). Ambiente: `python3 -m venv .local/venv && .local/venv/bin/pip install pypdf==6.1.1`. **Tarefas do Codex, em ordem:** CNT-T1 (extrator aceitar a cópia derivada só para texto; pequeno) → CNT-V1 (conferência por agente; lotes de ~8 questões; começar por 2021 Bacharelado Q1–Q8; para cada item: abrir a página renderizada, comparar enunciado, alternativas e letra do gabarito definitivo, anotar divergência como pendência, nunca corrigir gabarito por inferência) → PUB-A1 depois de CT-1b. **Claude faz:** CNT-C1 (recortes) e CT-1b (imagem no estudo, migration 010). Nada foi publicado; nenhuma conferência humana foi simulada.
 
 - 26/10/2026 · Codex · CNT-R1/CNT-0 etapa 1 · `main@547fbee` · PR [#13](https://github.com/bielrodrigues2406/enade-cs-platform/pull/13) integrado com os cinco commits preservados, incluindo os três de Claude; [#12](https://github.com/bielrodrigues2406/enade-cs-platform/pull/12) também consta integrado. Build e 67 testes API/utilitários locais passaram; 20 fluxos Chromium validados (19 na suíte e o fluxo de conta repetido após reiniciar o Vite); revisão independente Codex sem bloqueadores. CI do PR #13: `validate` e `image` aprovados às 19:58:53 UTC, após reexecução do job. No momento do merge a instalação do Chromium estava pendente; a integração usou a validação local concluída e a confirmação remota veio em seguida. Relatório e 13 candidatos de 2021 separados em `.local/exports/revisao-pdfs-claude.zip`. As 27 fontes históricas continuam MIRROR/IMPORTED, 34 PDFs recentes pendentes. Próximo: Gabriel confere candidatos para a etapa 2; OCR integrado é trabalho futuro. Nenhuma aprovação editorial foi simulada.
 
