@@ -1,51 +1,59 @@
 /*
- * Fundação visual (DS-1). Ver docs/DESIGN-QUALITY.md.
+ * Fundação visual (DS-1, paleta "caderno" de DS-3). Ver docs/DESIGN-QUALITY.md.
  * Primitivos → semânticos. Telas usam apenas tokens semânticos.
- * Contraste conferido: texto 13,5:1; texto secundário 6,0:1; ação 8,0:1;
- * borda de controle 3,0:1; foco 5,2:1 sobre o fundo.
+ * Metáfora: papel, tinta de caneta azul (ação), caneta de correção
+ * (erro/acerto) e marca-texto (destaque raro). Valores calculados em OKLCH.
+ * Contraste conferido sobre o papel: texto 15,6:1; secundário 6,7:1; ação
+ * 6,4:1 (texto sobre ação 6,7:1); borda de controle 3,4:1; foco 4,5:1.
  */
 :root {
   /* Primitivos */
-  --neutral-0: #ffffff;
-  --neutral-50: #f7f7f2;
-  --neutral-100: #eef1ec;
-  --neutral-150: #e4ebe6;
-  --neutral-200: #d9dfdb;
-  --neutral-400: #7f9294;
-  --neutral-600: #4f6167;
-  --neutral-900: #172c33;
-  --petrol-50: #eef5f2;
-  --petrol-100: #e1ece7;
-  --petrol-600: #14545a;
-  --petrol-700: #0f4348;
-  --petrol-800: #0b3337;
-  --green-50: #e9f4ed;
-  --green-500: #3f8a63;
-  --green-700: #1b6440;
-  --red-50: #fbefea;
-  --red-500: #c0573c;
-  --red-700: #9a2d17;
-  --amber-50: #fdf3e6;
-  --amber-500: #b9946a;
-  --amber-800: #6f4510;
-  --rust-600: #b0461b;
+  --paper-0: #fefdfb;
+  --paper-50: #faf7f1;
+  --paper-100: #f3f0e8;
+  --paper-150: #ece7de;
+  --paper-200: #dfdad1;
+  --ink-400: #7f8794;
+  --ink-600: #505868;
+  --ink-900: #151e2f;
+  --blue-50: #edf4ff;
+  --blue-100: #d8e7ff;
+  --blue-300: #98b8f2;
+  --blue-600: #1b53c4;
+  --blue-700: #1043a8;
+  --blue-800: #0b3587;
+  --green-50: #e4f9ea;
+  --green-500: #3f9b65;
+  --green-700: #106c3e;
+  --red-50: #ffedeb;
+  --red-500: #d24d45;
+  --red-700: #aa2a27;
+  --amber-50: #fef2d9;
+  --amber-500: #b77b29;
+  --amber-800: #7f4e15;
+  --orange-600: #c44c00;
+  --marker-300: #f8eb89;
 
   /* Semânticos: cor */
-  --color-bg: var(--neutral-50);
-  --color-surface: var(--neutral-0);
-  --color-surface-sunken: var(--neutral-100);
-  --color-surface-selected: var(--neutral-150);
-  --color-text: var(--neutral-900);
-  --color-text-muted: var(--neutral-600);
-  --color-border: var(--neutral-200);
-  --color-border-control: var(--neutral-400);
-  --color-border-strong: var(--neutral-900);
-  --color-accent: var(--petrol-600);
-  --color-accent-hover: var(--petrol-700);
-  --color-accent-pressed: var(--petrol-800);
-  --color-accent-soft: var(--petrol-50);
-  --color-accent-tint: var(--petrol-100);
-  --color-on-accent: var(--neutral-0);
+  --color-bg: var(--paper-50);
+  --color-surface: var(--paper-0);
+  --color-surface-sunken: var(--paper-100);
+  --color-surface-selected: var(--paper-150);
+  --color-surface-inverse: var(--ink-900);
+  --color-text: var(--ink-900);
+  --color-text-muted: var(--ink-600);
+  --color-text-inverse: var(--paper-50);
+  --color-text-inverse-muted: var(--blue-300);
+  --color-border: var(--paper-200);
+  --color-border-control: var(--ink-400);
+  --color-border-strong: var(--ink-900);
+  --color-accent: var(--blue-600);
+  --color-accent-hover: var(--blue-700);
+  --color-accent-pressed: var(--blue-800);
+  --color-accent-soft: var(--blue-50);
+  --color-accent-tint: var(--blue-100);
+  --color-on-accent: var(--paper-0);
+  --color-highlight: var(--marker-300);
   --color-success-bg: var(--green-50);
   --color-success-border: var(--green-500);
   --color-success-text: var(--green-700);
@@ -55,7 +63,7 @@
   --color-warning-bg: var(--amber-50);
   --color-warning-border: var(--amber-500);
   --color-warning-text: var(--amber-800);
-  --color-focus: var(--rust-600);
+  --color-focus: var(--orange-600);
 
   /* Tipografia: interface, leitura e código */
   --font-ui:
@@ -95,7 +103,7 @@
   --radius-md: 10px;
   --border-thin: 1px;
   --shadow-raised:
-    0 1px 2px rgb(23 44 51 / 0.06), 0 8px 24px rgb(23 44 51 / 0.08);
+    0 1px 2px rgb(21 30 47 / 0.05), 0 12px 32px rgb(21 30 47 / 0.08);
   --header-height: 64px;
   --measure-reading: 68ch;
 
@@ -227,7 +235,8 @@ textarea {
   font: inherit;
 }
 ::selection {
-  background: var(--color-accent-tint);
+  background: var(--color-highlight);
+  color: var(--color-text);
 }
 
 /* Ações */
@@ -323,7 +332,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--space-8);
-  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  background: color-mix(in srgb, var(--color-bg) 90%, transparent);
   backdrop-filter: saturate(1.4) blur(10px);
   gap: var(--space-5);
 }
@@ -383,7 +392,7 @@ aside {
   flex-direction: column;
   border-right: var(--border-thin) solid var(--color-border);
   padding: var(--space-8) var(--space-4) var(--space-6);
-  background: var(--color-surface-sunken);
+  background: var(--color-bg);
   overflow-y: auto;
 }
 .eyebrow {
@@ -479,12 +488,14 @@ main,
   margin: 0 var(--space-2);
   color: var(--color-border-control);
 }
+/* Títulos de página na serifa de leitura: o caderno fala com voz editorial. */
 h1 {
-  font-size: var(--text-3xl);
-  letter-spacing: -0.022em;
-  line-height: var(--leading-tight);
+  font-family: var(--font-reading);
+  font-size: clamp(1.875rem, 1.45rem + 1.1vw, 2.375rem);
+  letter-spacing: -0.018em;
+  line-height: 1.12;
   margin: var(--space-2) 0 var(--space-4);
-  font-weight: 650;
+  font-weight: 560;
   text-wrap: balance;
 }
 h2,
@@ -913,7 +924,9 @@ fieldset:disabled .option:active {
   *::before,
   *::after {
     transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
     animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
   }
   button:active:not(:disabled),
@@ -1744,23 +1757,25 @@ textarea {
   line-height: 1.6;
   margin: 0;
 }
-.catalog-progress {
+/* Mais específico que .page-intro > p:last-child, que é texto de abertura. */
+.catalog-intro > .catalog-progress {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
+  align-items: center;
+  gap: var(--space-3);
   margin: 0 0 var(--space-1);
-  max-width: 22ch;
+  max-width: 24ch;
   font-size: var(--text-sm);
-  line-height: 1.35;
+  line-height: 1.4;
   color: var(--color-text-muted);
 }
 .catalog-progress strong {
-  font-family: var(--font-mono);
-  font-size: var(--text-3xl);
-  font-weight: 500;
+  font-family: var(--font-reading);
+  font-size: 2.75rem;
+  font-weight: 400;
   line-height: 1;
+  letter-spacing: -0.03em;
   color: var(--color-text);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 p.source-note {
   display: block;
@@ -1855,9 +1870,13 @@ p.source-note strong {
   margin-bottom: var(--space-8);
 }
 .review-summary strong {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-reading);
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-right: var(--space-2);
+  font-variant-numeric: lining-nums tabular-nums;
 }
 .review-topics {
   margin-bottom: var(--space-8);
