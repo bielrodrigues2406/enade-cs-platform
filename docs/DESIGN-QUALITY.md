@@ -1,6 +1,6 @@
 # Melhoria de design: avaliação de referências e plano
 
-Status: avaliação e plano para DS-1/DS-2/DS-3 (ver [WORKBOARD.md](WORKBOARD.md)). Referência: 26/10/2026. A direção de produto continua em [UX-DESIGN-SPEC.md](UX-DESIGN-SPEC.md); este documento não a substitui.
+Status: avaliação e plano para DS-1/DS-2/DS-3; paleta e página inicial em §5 (DS-4/HOME-1, 28/10/2026). Ver [WORKBOARD.md](WORKBOARD.md). Referência: 26/10/2026. A direção de produto continua em [UX-DESIGN-SPEC.md](UX-DESIGN-SPEC.md); este documento não a substitui.
 
 ## 1. Diagnóstico da interface atual
 
@@ -62,7 +62,7 @@ Pedido de Gabriel em 26/10/2026. Lista de revisão para todo PR de interface; a 
 | Cartão arredondado com borda colorida de um lado (menu ativo, alerta, feedback) | Proibido. Estado ativo por peso, cor e marcador tipográfico; separação por espaço, mudança de fundo ou fio completo |
 | Rótulo em caixa alta acima de todo título ("eyebrow" + H1 + subtítulo) | Só quando informa algo (ex.: "QUESTÃO OFICIAL · VERSÃO 2", "RESPOSTA SALVA"); nunca como slogan |
 | Frases motivacionais no lugar de orientação | Proibido (UX-DESIGN-SPEC §3) |
-| Gradiente roxo/azul, índigo padrão, glassmorphism, blobs | Proibido; acento único petróleo |
+| Gradiente roxo/azul, índigo padrão, glassmorphism, blobs | Proibido; acento único azul de caneta (OKLCH h 262, cobalto, não índigo), sempre chapado |
 | Grade de cartões iguais, cartão dentro de cartão | Listas e linhas editoriais para conteúdo repetido |
 | Emoji como ícone | Ícones SVG de traço único com `currentColor`, só quando têm função |
 | Métricas e números inventados | Proibido; contagens sempre com numerador, denominador e período |
@@ -164,3 +164,52 @@ Separação espaço × efeito (Material): molas com acomodação para movimento 
 - [Chrome for Developers: View Transitions em 2025](https://developer.chrome.com/blog/view-transitions-in-2025)
 - [Motion: índice oficial](https://motion.dev/llms.txt)
 - Repositórios da seção 2, lidos em clone local somente leitura.
+
+## 5. Paleta "caderno" e página inicial (DS-4, HOME-1)
+
+Pedido de Gabriel em 28/10/2026: melhoria geral do design e das cores e uma página inicial de alto nível com motion, tendo como referência o repositório portal-fsa. Esse repositório não estava acessível à sessão (não aparece entre os repositórios conectados nem na busca pública). A direção abaixo vem das skills `design-taste`, `taste-color` e `taste-motion` aplicadas ao produto, não de uma cópia de referência.
+
+### Paleta
+
+A marca é um caderno. A paleta usa os objetos dele, cada um com uma única função:
+
+| Papel | Token semântico | Valor | Uso |
+| --- | --- | --- | --- |
+| Papel | `--color-bg`, `--color-surface`, `--color-surface-sunken` | `#faf7f1`, `#fefdfb`, `#f3f0e8` | Fundo, superfícies, notas |
+| Tinta | `--color-text`, `--color-text-muted` | `#151e2f` (15,6:1), `#505868` (6,7:1) | Texto |
+| Caneta azul | `--color-accent` e variações | `#1b53c4` (6,4:1; texto sobre ela 6,7:1) | Ação primária, seleção, links |
+| Caneta de correção | `--color-success-*`, `--color-danger-*` | verde `#106c3e`, vermelho `#aa2a27` sobre fundos claros (≥ 5,8:1) | Só certo/errado, sempre com texto e ícone |
+| Marca-texto | `--color-highlight` | `#f8eb89` | Destaque raro (título da página inicial, seleção de texto, hover da faixa escura); nunca estado |
+| Capa | `--color-surface-inverse`, `--color-text-inverse*` | `#151e2f` / `#faf7f1`, `#98b8f2` (8,3:1) | Única superfície escura: fechamento da página inicial |
+| Foco | `--color-focus` | `#c44c00` (4,5:1); marca-texto sobre a capa | Anel de foco distinto da seleção azul |
+
+Valores calculados em OKLCH e convertidos para sRGB; contraste pela fórmula WCAG sobre o papel. Componentes continuam usando apenas tokens semânticos; trocar a paleta não exigiu mudar nenhum componente.
+
+### Tipografia
+
+Títulos de página (`h1`) passam à serifa de leitura (Source Serif 4 com eixo de tamanho óptico, `opsz.css`), mantendo Figtree na interface e JetBrains Mono em índices e metadados. Contadores grandes (banco, caderno de erros, contagem regressiva) usam numerais da serifa.
+
+### Página inicial
+
+Escala editorial só nesta página. Composição com ritmos diferentes, para não repetir a mesma grade:
+
+1. Título em duas linhas sobre a largura toda; corpo em duas colunas assimétricas (texto e ações à esquerda, demonstração à direita).
+2. "A prova de 2026": contagem regressiva, formato oficial (MASTER-SPEC §2, com fonte) e mapa das 46 questões, em que cada quadrado é uma questão e o azul marca o que o caderno já treina.
+3. "Como o caderno funciona": linha do tempo de quatro passos (vertical no celular).
+4. "De onde vêm as questões": título fixo à esquerda e definições com contagem real do catálogo à direita.
+5. "Em construção": grade de dois com estado em etiqueta.
+6. Fechamento em faixa escura com a próxima ação; rodapé com aviso de independência do Inep.
+
+Motion, todo com tokens da seção 4 e desligado por `prefers-reduced-motion` (estado final imediato):
+
+| Elemento | Movimento |
+| --- | --- |
+| Título | Linhas entram por mola (`--spring-gentle`) com 90 ms de defasagem |
+| Marca-texto | Corre sob "uma questão de cada vez." depois que o título assenta (950 ms, `--ease-out`) |
+| Demonstração | Hesita em B, escolhe D, confirma, mostra a correção; visto e volta de caneta desenhados por `stroke-dashoffset` |
+| Mapa da prova | Quadrados entram em sequência (14 ms por questão) ao aparecer |
+| Linha do tempo | Fio se desenha e cada nó entra por mola |
+| Seções | Revelação ao rolar por `IntersectionObserver`, uma vez, sem loop |
+
+A demonstração é marcada como exemplo autoral e fica fora da árvore de acessibilidade; a legenda descreve o que ela mostra. Nenhuma métrica é inventada: contagens vêm do catálogo e das respostas salvas.
+
