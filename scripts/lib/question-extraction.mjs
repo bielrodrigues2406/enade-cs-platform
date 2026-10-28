@@ -813,6 +813,102 @@ export function detectGraphics(
   return found;
 }
 
+/**
+ * Faixas verticais com texto de largura total numa página de duas colunas:
+ * linhas com alguma palavra atravessando o corte entre as colunas. Faixas com
+ * a instrução de um bloco de curso ("As questões de 11 a 40, a seguir, são
+ * específicas para...") separam questões; as demais (tabela ou figura larga)
+ * pertencem à questão daquela altura.
+ */
+const BLOCK_INTRO = /as quest[õo]es de \d+ a \d+|espec[íi]fic[ao]s? para os estudantes|^pare$|perfil do curso|n[úu]mero das quest[õo]es|quest[õo]es objetivas e discursivas distribu[íi]das/i;
+function spanningBands(page, split, column) {
+  const bands = [];
+  for (const line of groupLines(contentWords(page))) {
+    const text = line.words.map((w) => w.text).join(" ");
+    const crosses = line.words.some((w) => w.xMin < split - 1 && w.xMax > split + 1);
+    // Instrução de bloco só numa coluna (2008) também separa questões.
+    const intro = BLOCK_INTRO.test(text) && line.words.some((w) =>
+      w.xMin >= column.x0 - 2 && w.xMax <= column.x1 + 2);
+    if (!crosses && !intro) continue;
+    const last = bands.at(-1);
+    if (last && line.yMin - last.bottom < 20) {
+      last.bottom = Math.max(last.bottom, line.yMax + 4);
+      last.intro ||= BLOCK_INTRO.test(text);
+    } else bands.push({ top: line.yMin - 4, bottom: line.yMax + 4, intro: BLOCK_INTRO.test(text) });
+  }
+  return bands;
+}
+
+/**
+ * Caixas de recorte de uma questão (CNT-C1, ADR-010), em pontos do PDF.
+ * Junta regiões vizinhas da mesma coluna (texto compartilhado vem linha a
+ * linha) e aperta cada uma à extensão das palavras e figuras que ela contém,
+ * sem margens, códigos de barras, a coluna ao lado ou instruções de bloco.
+ */
+export function cropBoxes(question, pages, graphicsByPage = new Map(), pad = 6) {
+  const merged = [];
+  for (const r of question.regions) {
+    const last = merged.at(-1);
+    if (last && last.page === r.page && last.x0 === r.x0 && last.x1 === r.x1 &&
+      r.y0 - last.y1 < 24) {
+      last.y1 = Math.max(last.y1, r.y1);
+      continue;
+    }
+    merged.push({ page: r.page, x0: r.x0, x1: r.x1, y0: r.y0, y1: r.y1 });
+  }
+  return merged.flatMap((region) => {
+    const page = pages[region.page - 1];
+    const column = region.x1 - region.x0 < page.width * 0.75;
+    const bands = column ? spanningBands(page, region.x0 > 0 ? region.x0 : region.x1, region) : [];
+    const bandOf = (box) => bands.find((b) => (box.y0 + box.y1) / 2 >= b.top && (box.y0 + box.y1) / 2 <= b.bottom);
+    const all = contentWords(page).map((w) => ({ x0: w.xMin, y0: w.yMin, x1: w.xMax, y1: w.yMax, text: w.text }));
+    // "Área livre" e "Rascunho" fecham a questão na coluna; o fio ao lado
+    // deles é decoração da prova, não figura da questão.
+    const inColumn = all.filter((w) => overlaps(w, region));
+    // Só fecha a questão quando começa a linha; a caixa "RASCUNHO" ao lado
+    // do enunciado (2008) fica fora do recorte, mas não o encerra.
+    const scratch = inColumn.filter((w) => /^rascunho$/i.test(w.text));
+    const opensLine = (w) => w.x0 < region.x0 + (region.x1 - region.x0) * 0.4;
+    let start = region.y0;
+    let end = Math.min(region.y1, ...inColumn.filter((w) => opensLine(w) && (/^rascunho$/i.test(w.text) ||
+      (/^área$/i.test(w.text) && inColumn.some((o) => /^livre$/i.test(o.text) &&
+        Math.abs(o.y0 - w.y0) < 2)))).map((w) => w.y0 - 1));
+    // Instrução de bloco seguida de texto da questão abre a coluna (o que
+    // vem antes é cabeçalho de página); sem texto depois, ela fecha a questão.
+    for (const band of bands.filter((b) => b.intro)) {
+      if (band.bottom < start || band.top > end) continue;
+      const after = inColumn.some((w) => w.y0 > band.bottom && (w.y0 + w.y1) / 2 <= end &&
+        !bandOf(w) && !/^rascunho$/i.test(w.text));
+      if (after) start = Math.max(start, band.bottom);
+      else end = Math.min(end, band.top);
+    }
+    const vertical = (box) => (box.y0 + box.y1) / 2 >= start && (box.y0 + box.y1) / 2 <= end;
+    const belongs = (box, figure) => {
+      if (!vertical(box)) return false;
+      // Figura da questão fica dentro da faixa dela; moldura da página, não.
+      if (figure && (box.y0 < start - 8 || box.y1 > end + 8)) return false;
+      if (!column) return overlaps(box, { ...region, y0: start, y1: end });
+      const band = bandOf(box);
+      if (band) return !band.intro;
+      return box.x0 >= region.x0 - 2 && box.x1 <= region.x1 + 2;
+    };
+    const words = all.filter((w) => belongs(w, false) && !scratch.includes(w));
+    const parts = [...words, ...(graphicsByPage.get(region.page) ?? []).filter((g) => belongs(g, true) &&
+      !scratch.some((w) => overlaps(w, g)))];
+    if (!parts.length) return [];
+    const box = {
+      page: region.page,
+      x0: Math.max(0, Math.min(...parts.map((b) => b.x0)) - pad),
+      y0: Math.max(0, Math.min(...parts.map((b) => b.y0)) - pad),
+      x1: Math.min(page.width, Math.max(...parts.map((b) => b.x1)) + pad),
+      y1: Math.min(page.height, Math.max(...parts.map((b) => b.y1)) + pad),
+    };
+    // Fragmento pequeno sem texto: logotipo ou fio de página, não questão.
+    if (!words.length && box.y1 - box.y0 < 80) return [];
+    return [box];
+  });
+}
+
 /** Lê um PGM binário (P5) gerado por `pdftoppm -gray`. */
 export function parsePgm(buffer) {
   const header = buffer.subarray(0, 64).toString("latin1");

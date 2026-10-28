@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   classify,
   completeness,
+  cropBoxes,
   detectGraphics,
   isOptionMarker,
   joinParagraphs,
@@ -353,3 +354,38 @@ test("only a clean objective item with a definitive key becomes a draft", () => 
     { missing: ["Q9", "Q10", "Q11"], unexpected: ["Q1"] },
   );
 });
+
+test("crop boxes skip block instructions, page frames and the scratch area", () => {
+  const intro = sentence(
+    "As questões de 11 a 40, a seguir, são específicas para os estudantes de Sistemas",
+    40,
+    60,
+  );
+  const sheet = page([
+    ...chrome(1),
+    ...intro,
+    w("QUESTÃO", 30, 120),
+    w("11", 85, 120, 12),
+    ...sentence("Primeira parte do enunciado.", 30, 140),
+    ...sentence("Continua na coluna da direita.", 300, 120),
+    marker("A", 300, 150),
+    ...sentence("certa", 316, 150),
+    w("Área", 300, 200, 24),
+    w("livre", 327, 200, 30),
+    w("QUESTÃO", 300, 320),
+    w("12", 355, 320, 12),
+    ...sentence("Outra questão.", 300, 340),
+  ]);
+  const [q11] = segmentQuestions([sheet]);
+  const figure = { x0: 40, y0: 170, x1: 200, y1: 260 };
+  const frame = { x0: 10, y0: 30, x1: 550, y1: 750 };
+  const boxes = cropBoxes(q11, [sheet], new Map([[1, [figure, frame]]]));
+  assert.equal(boxes.length, 2);
+  const [left, right] = boxes;
+  // Coluna esquerda: do cabeçalho à figura, sem a moldura da página.
+  assert.ok(left.y0 >= 114 && left.y1 <= 266 && left.x1 < 290, JSON.stringify(left));
+  // Coluna direita: começa depois da instrução do bloco e para em "Área livre".
+  assert.ok(right.y0 >= 72 && right.y0 <= 120, JSON.stringify(right));
+  assert.ok(right.y1 < 200 && right.x0 >= 280, JSON.stringify(right));
+});
+

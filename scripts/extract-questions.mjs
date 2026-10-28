@@ -9,6 +9,7 @@ import { join, resolve } from "node:path";
 import { promisify } from "node:util";
 import {
   classify,
+  cropBoxes,
   annotatePdfOptionFonts,
   completeness,
   detectGraphics,
@@ -24,6 +25,9 @@ import {
 
 const run = promisify(execFile);
 const RENDER_DPI = 100;
+// Recortes para o estudante (CNT-C1): 200 dpi e WebP sem perda, segundo a
+// medição de IMG-P1 em docs/QUESTION-IMAGES-AND-IMPORT.md.
+const CROP_DPI = 200;
 // Fontes de símbolos matemáticos/lógicos cujo texto extraído não é confiável.
 // BundesbahnPi desenha as letras das alternativas; C39 é o código de barras.
 const SYMBOL_FONT =
@@ -38,6 +42,8 @@ function options(argv) {
     ocr: false,
     ocrDpi: 200,
     tessdata: null,
+    crops: null,
+    textCopy: null,
   };
   for (let i = 0; i < argv.length; i++) {
     const [name, value] = [argv[i], argv[i + 1]];
@@ -48,12 +54,14 @@ function options(argv) {
     else if (name === "--id") out.ids.push(...value.split(","));
     else if (name === "--tessdata-dir") out.tessdata = resolve(value);
     else if (name === "--ocr-dpi") out.ocrDpi = Number(value);
+    else if (name === "--crops") out.crops = resolve(value);
+    else if (name === "--text-copy") out.textCopy = resolve(value);
     else throw new Error(`Opção desconhecida: ${name}`);
     i++;
   }
   if (!out.ids.length)
     throw new Error(
-      "Uso: node scripts/extract-questions.mjs --id enade-2021-bacharelado-exam [--directory enade-pdfs] [--output .local/question-drafts]",
+      "Uso: node scripts/extract-questions.mjs --id enade-2021-bacharelado-exam [--directory enade-pdfs] [--output .local/question-drafts] [--crops .local/question-crops] [--text-copy .local/repaired]",
     );
   if (!Number.isInteger(out.ocrDpi) || out.ocrDpi < 150 || out.ocrDpi > 400)
     throw new Error("--ocr-dpi deve ser inteiro de 150 a 400.");
@@ -136,6 +144,25 @@ async function verified(doc, directory) {
   if (sha !== doc.sha256)
     throw new Error(`${doc.id}: SHA-256 diferente do catálogo; nada extraído.`);
   return path;
+}
+
+// Cópia derivada só para texto (CNT-T1, ADR-010 §6): usada apenas se o recibo
+// aponta para o mesmo SHA-256 do original catalogado. Páginas, figuras e
+// recortes continuam vindo do original.
+async function textCopy(doc, opts) {
+  if (!opts.textCopy) return null;
+  const path = join(opts.textCopy, `${doc.id}.pdf`);
+  let receipt;
+  try {
+    receipt = JSON.parse(await readFile(path + ".json", "utf8"));
+  } catch {
+    return null;
+  }
+  const bytes = await readFile(path);
+  const sha = createHash("sha256").update(bytes).digest("hex");
+  if (receipt?.derivedFrom?.sha256 !== doc.sha256 || receipt?.output?.sha256 !== sha)
+    throw new Error(`${doc.id}: recibo da cópia de texto não corresponde ao original catalogado.`);
+  return { path, receipt };
 }
 
 async function symbolPages(path, pageCount) {
@@ -225,7 +252,8 @@ async function extract(catalog, id, opts) {
   const keyPath = keyAvailable ? await verified(keyDoc, opts.directory) : null;
   const work = await mkdtemp(join(tmpdir(), "enade-extract-"));
   try {
-    const { stdout: html } = await run("pdftotext", ["-bbox", examPath, "-"], {
+    const copy = await textCopy(doc, opts);
+    const { stdout: html } = await run("pdftotext", ["-bbox", copy?.path ?? examPath, "-"], {
       maxBuffer: 64 * 1024 * 1024,
     });
     let nativePages = parseBboxHtml(html);
@@ -239,7 +267,8 @@ async function extract(catalog, id, opts) {
       optionFonts = { fonts: annotated.fonts, markers: annotated.markers, unmatched: annotated.unmatched };
     }
     const { pages, extraction } = opts.ocr ? await ocrPages(examPath, nativePages, work, opts) :
-      { pages: nativePages, extraction: { method: "PDF_TEXT", ...(optionFonts ? { optionFonts } : {}) } };
+      { pages: nativePages, extraction: { method: "PDF_TEXT", ...(optionFonts ? { optionFonts } : {}),
+        ...(copy ? { textCopy: copy.receipt } : {}) } };
     const keyText = keyPath ? (await run("pdftotext", ["-layout", keyPath, "-"])).stdout : "";
     const { answers, definitive } = parseAnswerKey(keyText);
     const keyPages = new Map();
@@ -251,10 +280,11 @@ async function extract(catalog, id, opts) {
     // Gabaritos de 2008 explicitam "Discursiva" na mesma numeração Qn.
     for (const question of questions)
       if (answers.get(question.key) === "DISCURSIVA") question.kind = "DISCURSIVE";
+    const graphicsByPage = await graphics(examPath, nativePages, work);
     const items = classify(questions, {
       answers,
       definitive,
-      graphicsByPage: await graphics(examPath, nativePages, work),
+      graphicsByPage,
       symbolPages: await symbolPages(examPath, pages.length),
       keyAvailable,
       ...format,
@@ -311,10 +341,104 @@ async function extract(catalog, id, opts) {
       join(opts.output, `${id}.report.md`),
       markdown(doc, items, check),
     );
+    if (opts.crops)
+      await renderCrops(doc, examPath, questions, items, nativePages, graphicsByPage, opts.crops, work);
     return { items, check };
   } finally {
     await rm(work, { recursive: true, force: true });
   }
+}
+
+const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (c) =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+/**
+ * Recortes de cada questão a partir do PDF original (CNT-C1): WebP sem perda,
+ * sem metadados, com manifesto (página, caixa em pontos, SHA-256, dimensões) e
+ * uma folha de conferência para o agente revisor (CNT-V1).
+ */
+async function renderCrops(doc, examPath, questions, items, pages, graphicsByPage, root, work) {
+  const directory = join(root, doc.id);
+  await rm(directory, { recursive: true, force: true });
+  await mkdir(directory, { recursive: true });
+  const scale = CROP_DPI / 72;
+  const tool = async (cmd, args) => {
+    const { stdout, stderr } = await run(cmd, args);
+    return (stdout || stderr).split("\n")[0].trim();
+  };
+  const renderer = {
+    dpi: CROP_DPI,
+    format: "image/webp",
+    lossless: true,
+    pdftoppm: await tool("pdftoppm", ["-v"]),
+    imagemagick: await tool("convert", ["-version"]),
+  };
+  const byKey = new Map(items.map((item) => [item.key, item]));
+  const overrides = JSON.parse(await readFile(new URL("../data/question-crop-overrides.json",
+    import.meta.url), "utf8")).documents[doc.id] ?? {};
+  const entries = [];
+  for (const question of questions) {
+    const fragments = [];
+    const override = overrides[question.key];
+    for (const box of override?.boxes ?? cropBoxes(question, pages, graphicsByPage)) {
+      if (!pages[box.page - 1] || box.x0 < 0 || box.y0 < 0 || box.x1 <= box.x0 || box.y1 <= box.y0 ||
+        box.x1 > pages[box.page - 1].width + 1 || box.y1 > pages[box.page - 1].height + 1)
+        throw new Error(`${doc.id} ${question.key}: caixa de recorte manual fora da página.`);
+      const name = `${question.key}-${fragments.length + 1}`;
+      const png = join(work, name);
+      const px = (v) => Math.round(v * scale);
+      await run("pdftoppm", ["-r", String(CROP_DPI), "-f", String(box.page), "-l", String(box.page),
+        "-x", String(px(box.x0)), "-y", String(px(box.y0)),
+        "-W", String(px(box.x1) - px(box.x0)), "-H", String(px(box.y1) - px(box.y0)),
+        "-png", "-singlefile", examPath, png]);
+      const file = `${name}.webp`;
+      await run("convert", [png + ".png", "-strip", "-define", "webp:lossless=true",
+        "-define", "webp:method=6", join(directory, file)]);
+      await rm(png + ".png");
+      const bytes = await readFile(join(directory, file));
+      const [width, height] = (await tool("identify", ["-format", "%w %h", join(directory, file)]))
+        .split(" ").map(Number);
+      fragments.push({
+        file, page: box.page,
+        box: Object.fromEntries(Object.entries(box).filter(([k]) => k !== "page")
+          .map(([k, v]) => [k, Math.round(v * 100) / 100])),
+        width, height, byteSize: bytes.length,
+        sha256: createHash("sha256").update(bytes).digest("hex"),
+      });
+    }
+    const item = byKey.get(question.key);
+    // Linha atribuída à questão que não cabe em nenhum recorte: o agente
+    // revisor confere o item com atenção (pode ser instrução de outro bloco).
+    const outside = question.lines.filter((line) => !fragments.some((f) =>
+      f.page === line.page && (line.yMin + line.yMax) / 2 >= f.box.y0 &&
+      (line.yMin + line.yMax) / 2 <= f.box.y1 && (line.xMax ?? 0) <= f.box.x1 + 2)).length;
+    entries.push({ key: question.key, number: question.number, kind: question.kind,
+      status: item?.status ?? null, answer: item?.answer ?? null,
+      ...(override ? { override: override.note } : {}),
+      ...(outside ? { warnings: [`${outside} linha(s) da transcrição fora do recorte`] } : {}),
+      ...(fragments.length ? {} : { warnings: ["sem recorte"] }),
+      fragments });
+  }
+  const manifest = { document: doc.id, examSha256: doc.sha256, renderer, items: entries };
+  await writeFile(join(root, `${doc.id}.crops.json`), JSON.stringify(manifest, null, 1) + "\n");
+  // Folha de conferência: recorte, número, gabarito e transcrição lado a lado.
+  const sheet = entries.map((entry) => {
+    const item = byKey.get(entry.key);
+    const options = (item?.options ?? []).map((o) =>
+      `<li><b>${o.letter}</b> ${escapeHtml(o.text)}</li>`).join("");
+    return `<section id="${entry.key}"><h2>${entry.key} · páginas ${[...new Set(entry.fragments.map((f) => f.page))].join(", ")} · gabarito ${escapeHtml(entry.answer ?? "—")} · ${escapeHtml(entry.status ?? "")}</h2>
+<div class="crops">${entry.fragments.map((f) => `<img src="${doc.id}/${f.file}" width="${f.width / 2}" alt="${entry.key}, fragmento da página ${f.page}">`).join("")}</div>
+${entry.override ? `<p><b>Recorte manual:</b> ${escapeHtml(entry.override)}</p>` : ""}
+${entry.warnings ? `<p class="flags"><b>${entry.warnings.map(escapeHtml).join(" · ")}</b></p>` : ""}
+${item?.flags?.length ? `<p class="flags">${item.flags.map(escapeHtml).join(" · ")}</p>` : ""}
+<details><summary>Transcrição automática</summary><p>${escapeHtml(item?.prompt ?? "")}</p><ol>${options}</ol></details></section>`;
+  }).join("\n");
+  await writeFile(join(root, `${doc.id}.review.html`), `<!doctype html><meta charset="utf-8"><title>${escapeHtml(doc.title)} · conferência dos recortes</title>
+<style>body{font:15px system-ui;margin:24px;max-width:1100px}section{border-top:1px solid #ccc;padding:12px 0}h2{font-size:15px}.crops{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}img{border:1px solid #ddd}.flags{color:#9a2d17}</style>
+<h1>${escapeHtml(doc.title)}</h1><p>SHA-256 ${doc.sha256} · ${CROP_DPI} dpi · ${entries.length} itens. Conferir em cada item: a questão inteira está no recorte (enunciado, figuras, todas as alternativas), número e gabarito corretos.</p>
+${sheet}\n`);
+  const total = entries.reduce((sum, e) => sum + e.fragments.reduce((s, f) => s + f.byteSize, 0), 0);
+  console.error(`${doc.id}: ${entries.length} questões, ${entries.reduce((n, e) => n + e.fragments.length, 0)} recortes, ${(total / 1e6).toFixed(1)} MB.`);
 }
 
 const opts = options(process.argv.slice(2));
