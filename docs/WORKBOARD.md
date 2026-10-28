@@ -1,6 +1,6 @@
 # Quadro de trabalho — Claude Code × Codex
 
-Atualizado em 26/10/2026. Regras de uso em [COLLABORATION.md](COLLABORATION.md). Edite linha a linha; não reordene a tabela inteira.
+Atualizado em 28/10/2026. Regras de uso em [COLLABORATION.md](COLLABORATION.md). Edite linha a linha; não reordene a tabela inteira.
 
 Status: `pronta` · `em andamento` · `em revisão` · `entregue` · `bloqueada` · `backlog`
 
@@ -34,6 +34,7 @@ Sem lote oficial revisado, R1 sai com conteúdo autoral identificado como tal. N
 | CNT-R1 | Revisão do extrator do PR #12: bloquear texto ausente e gabarito contraditório; conferir resultados e caminho de OCR | Codex | entregue | CNT-0 etapa 1 | [#13](https://github.com/bielrodrigues2406/enade-cs-platform/pull/13), `547fbee` | `scripts/lib/question-extraction.mjs`, `tests/question-extraction-boundaries.test.ts`, `docs/OFFICIAL-SOURCES.md` |
 | CNT-I1 | Importar questões arquivadas em fila privada, com revisão assistida e pendências por item; preservar conferência de fontes/publicação | Codex | entregue no PR #14 | SRC-1, CNT-0 etapa 1 | [#14](https://github.com/bielrodrigues2406/enade-cs-platform/pull/14) | `migrations/007_question_intake.sql`, importador, API/fila de importação, revisão e testes |
 | CNT-I2 | Recuperar alternativas dos cadernos históricos e ampliar revisão assistida, preservando evidência e edições humanas | Codex | entregue no merge do [PR #15](https://github.com/bielrodrigues2406/enade-cs-platform/pull/15) | CNT-I1 | `codex/fix-legacy-question-options` | extrator, testes, revisão de 2008, relatórios e reimportação privada |
+| IMG-P1 | Medir peso dos recortes de questões, registrar importação prova+gabarito e avaliar jornadas simuladas de alunos/professores | Codex | em andamento | CNT-I2 | `codex/docs-image-question-import` | proposta compartilhada, benchmark e análise de produto; sem implementar o novo fluxo |
 | DEP-2 | Fontes oficiais em produção: hoje a imagem não importa PDFs, e publicar questão oficial exige a fonte no banco de produção. Empacotar a importação local (`curl`/`pdfinfo`) na imagem ou definir procedimento sem abrir o banco publicamente | — (proposta) | backlog | DEP-1, SRC-2 | | `Dockerfile`, `scripts/import-sources.mjs`, `docs/DEPLOY.md` |
 | LGL-1 | Aviso de privacidade (dados coletados, finalidade, retenção, contato) antes de abrir cadastro público | — (proposta) | backlog | D2 | | página web + `docs/` |
 | DEP-1 | Deploy de R1: imagem de produção independente de provedor, API servindo a web, cabeçalhos de segurança, proxy confiável, migrations no deploy, guia de deploy e segurança; conta, banco e domínio no provedor ficam com Gabriel | Claude + Gabriel | em revisão (código); conta no provedor com Gabriel | OPS-1 | [#11](https://github.com/bielrodrigues2406/enade-cs-platform/pull/11) | `Dockerfile`, `apps/api/src/serve.ts`, `apps/api/src/main.ts`, `docs/DEPLOY.md`, ADR-008 |
