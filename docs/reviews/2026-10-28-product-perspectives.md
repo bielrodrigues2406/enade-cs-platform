@@ -1,6 +1,6 @@
 # Produto: perspectivas de alunos e professores
 
-Análise de 28/10/2026, após o PR #15. Três subagentes Codex trabalharam separadamente: perspectivas de alunos, perspectivas de professores/curadores e auditoria do estado real. **São simulações por agentes, não entrevistas ou validação com pessoas.** Nada nesta análise comprova satisfação, aprendizagem ou preferência dos usuários. Não houve participação da trilha Claude; este registro fica compartilhado para orientar seu trabalho.
+Análise de 28/10/2026, após o PR #15. Três subagentes Codex trabalharam separadamente: perspectivas de alunos, perspectivas de professores/curadores e auditoria do estado real. **São simulações por agentes, não entrevistas ou validação com pessoas.** Nada nesta análise comprova satisfação, aprendizagem ou preferência dos usuários. As simulações foram feitas por subagentes Codex, não por Claude. O PR #16 da trilha Claude foi localizado depois e seu handoff foi considerado para conciliar o plano.
 
 ## Estado conferido
 
@@ -19,6 +19,14 @@ Nova consulta ao banco local confirmou 605 ocorrências privadas, 551 objetivas 
 | Operação | Docker, CI e guia de implantação | Hospedagem final, importadores/worker em produção, persistência dos arquivos, restauração ensaiada e aviso de privacidade antes de cadastro público |
 
 Evidências principais: catálogo em `apps/api/src/main.ts:77` (`LIMIT 50`, sem total/paginação); contratos textuais em `apps/api/src/curation.ts:74`; promoção da fila em `apps/api/src/question-imports.ts:213` (usa a primeira página); importador administrativo em `:256`; middleware somente JSON em `apps/api/src/main.ts:279`; estudo em `apps/web/src/main.ts:476`; caderno em `apps/api/src/review.ts:24`; contas em `apps/api/src/auth.ts`; operação em `Dockerfile` e `docs/DEPLOY.md`. O planejamento do quadro não foi usado como prova de implementação.
+
+## Trabalho concorrente encontrado
+
+O [PR #16 do Claude](https://github.com/bielrodrigues2406/enade-cs-platform/pull/16), aberto na consulta, propõe recuperação Unicode para texto de 2014/2017 e registra na ADR-010 conferência por agentes com imagem original. O código dessa proposta ainda não está em main e a via de publicação assistida exige implementação própria. Portanto, não se apresenta revisão humana como a única direção futura: o requisito do plano é conferência independente e auditável, com origem ASSISTED quando feita por agente. Nenhuma aprovação humana será inventada.
+
+A divisão CNT-C1/CT-1b (Claude) e CNT-T1/CNT-V1/PUB-A1 (Codex) precisa ser preservada ao integrar os PRs. As reservas 010/011 desse handoff foram consideradas no quadro para evitar colisões; não foi criada migration neste estudo. A melhoria Unicode anunciada no PR não altera retroativamente os 605 registros já importados: consumo da cópia derivada e reimportação ainda precisam ser entregues.
+
+O caminho assistido precisa abranger fontes e versões: `source_document.reviewed_by` referencia conta (`migrations/005_official_sources.sql`), e `verifyProvenance` exige fontes VERIFIED (`apps/api/src/source-store.ts`). A revisão por agente deve ter representação/eventos próprios, sem simular uma pessoa. Os formatos A–D/A–E e a relação entre PNG técnico/WebP de entrega também precisam ser conciliados nos contratos do PR #16.
 
 ## Perspectivas simuladas de alunos
 
@@ -66,3 +74,5 @@ Curadoria não concede acesso global ao histórico dos estudantes. Importação 
 Para validar as hipóteses, manter o piloto humano já previsto na especificação: estudantes e docentes reais executando tarefas, com observação de dificuldades e erros. Não converter os achados dos agentes em depoimentos ou métricas de usuários.
 
 Os relatórios detalhados, roteiro, capturas, resultado do walkthrough e consulta agregada ficam em `.local/planning-image-questions/`. O estudo não mudou o código da aplicação nem aprovou conteúdo oficial.
+
+Nesta entrega também passaram `npm run build`, `npm test` (94 testes API/PostgreSQL/utilitários) e `npm run test:e2e -- --timeout=60000` (22 fluxos Chromium), executados em sequência. Essas verificações validam a base existente; não testam o uploader ou o visualizador propostos. Os 294 arquivos do benchmark tiveram bytes/SHA-256 e estatísticas conferidos contra o recibo.

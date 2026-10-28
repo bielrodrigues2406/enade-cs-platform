@@ -124,9 +124,11 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Deploy e segurança](docs/DEPLOY.md) e [decisão de hospedagem](docs/ADR-008-deployment.md)
 - [Engenharia e validação](docs/ENGINEERING-AND-DELIVERY.md)
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
+- [Questões por imagem e importação de prova + gabarito — proposta e medições](docs/QUESTION-IMAGES-AND-IMPORT.md)
+- [Análise por perspectivas simuladas de alunos/professores e pendências](docs/reviews/2026-10-28-product-perspectives.md)
 - [Colaboração entre agentes](docs/COLLABORATION.md), [quadro de trabalho](docs/WORKBOARD.md) e [plano de design e motion](docs/DESIGN-QUALITY.md)
 
-Próxima entrega: transcrição e revisão humana do lote oficial inicial, incluindo imagens e itens anulados quando necessário. O registro de documentos e o fluxo de publicação oficial estão disponíveis; nenhum item oficial foi publicado automaticamente. Repetição espaçada, plano de estudos e tendências ainda não estão implementados. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
+Próxima entrega proposta: preparação e conferência independente do lote oficial inicial, com piloto de capturas fiéis, conteúdo assistivo e tratamento dos itens anulados. A proposta de caminho por agentes está no PR #16 e ainda precisa de implementação auditável; nenhuma conferência assistida será rotulada como humana. O registro de documentos e o fluxo de publicação oficial estão disponíveis; nenhum item oficial foi publicado automaticamente. Repetição espaçada, plano de estudos e tendências ainda não estão implementados. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
 
 ## Importação de questões
 

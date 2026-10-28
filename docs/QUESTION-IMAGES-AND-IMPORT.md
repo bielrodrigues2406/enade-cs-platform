@@ -2,6 +2,14 @@
 
 Pedido de Gabriel em 28/10/2026. Documento compartilhado entre Claude Code e Codex. **Estado: proposta e estudo de viabilidade; o visualizador, os recortes versionados e o upload descritos aqui ainda não foram implementados.** Tarefas e donos ficam em [WORKBOARD.md](WORKBOARD.md).
 
+## Coordenação com o trabalho do Claude
+
+Durante este estudo foi localizado o [PR #16 da trilha Claude](https://github.com/bielrodrigues2406/enade-cs-platform/pull/16), ainda aberto na consulta: ele registra a ADR-010, a recuperação Unicode de 2014/2017 e um caminho de conferência por agente independente de quem extraiu. O código atual em main ainda usa a curadoria existente; esse caminho assistido de publicação não está implementado. Este documento complementa o PR com medição e jornadas, sem declarar seu conteúdo integrado.
+
+O handoff do PR #16 propõe Claude em CNT-C1 (recortes) e CT-1b (exibição), e Codex em CNT-T1 (consumo da cópia de texto), CNT-V1 (conferência) e PUB-A1 (publicação assistida auditável). IMG-I1/IMG-U1 devem reutilizar esses trabalhos para o upload e o editor, sem criar outro renderizador/visualizador. Conferência por agente continua identificada como `ASSISTED`; nunca será registrada como revisão humana. A implementação da política precisa acompanhar modelo, eventos e testes próprios antes de liberar conteúdo.
+
+Conciliações de contrato: a lista de alternativas depende do caderno (A–D ou A–E); o PNG previsto em CNT-C1 pode ser um derivado técnico e o WebP sem perda uma variante de entrega, com hashes próprios e vínculo ao mesmo original. Isso ainda deve ser combinado antes de implementar. A publicação assistida também precisa contemplar a conferência das **fontes**: hoje documentos VERIFIED e versões editoriais registram revisores vinculados a contas. Não basta mudar a última transição de publicação nem criar contas fictícias para agentes.
+
 ## Direção recomendada
 
 Usar a captura fiel da questão no PDF como apresentação visual principal. O estudante vê o enunciado, as figuras e as alternativas impressas na imagem, seguido de controles de resposta A–E, ou A–D conforme o caderno. Não precisa reconstruir tipografia, código, fórmulas ou diagramas em HTML para que apareçam corretamente.
@@ -19,7 +27,7 @@ Texto auxiliar pode apoiar busca, leitura assistiva e seleção; OCR não é pr�
 1. Edição, curso/modalidade, caderno e número original, com situação da coleção explícita.
 2. Captura(s) nítida(s), na ordem de leitura; ajuste à largura, ampliar/reduzir e abrir detalhe. A tela indica continuações e não exige arrastar para alcançar os controles.
 3. Seleção A–E/A–D e confirmação por teclado ou toque, com estado de salvamento e recuperação de falha. Alternativas visuais continuam legíveis dentro dos recortes; não são substituídas por nomes de obras ou descrição que revele a resposta.
-4. Após responder no estudo, feedback, comentário editorial e procedência. No simulado, gabarito e explicação só aparecem após a finalização.
+4. Após responder no estudo, feedback, comentário editorial e procedência. No simulado, gabarito e explicação só aparecem após a finalização. Quando aplicado o caminho da ADR-010, rótulo visível: “Transcrição automatizada do PDF oficial, conferida por agentes; sem revisão humana”.
 5. Acesso à representação textual/assistiva equivalente, sem afirmar que o OCR bruto foi conferido. Erro no carregamento da imagem oferece retry e não conta como tentativa respondida.
 
 Carregar a questão atual, com pré-carregamento limitado da próxima. Não baixar centenas de imagens ao abrir o catálogo. Mostrar dimensões antes do download evita deslocar os controles; versões de imagem por largura/resolução evitam servir o maior arquivo a todo celular. A nitidez das letras pequenas, negações, índices e ponteiros precisa de conferência visual.
@@ -40,6 +48,8 @@ Valores por questão, somando todos os fragmentos. KB/MB/GB decimais; projeçõe
 Recomendação: **WebP sem perda a 200 DPI como ponto de partida do piloto**, ajustando resolução após testar celular/zoom. Foi menor que a versão com perda em 32 dos 42 itens; fotografias puxam sua média para cima. Nos três exemplos de código, circuito/fórmulas e fotografias, em duas resoluções, a comparação PNG → WebP sem perda teve diferença de pixels zero. Isso comprova a codificação desses exemplos, não a correção dos limites nem a fidelidade integral da renderização do PDF.
 
 Armazenamento nessa escala é viável. Para os 605 itens, cerca de **90 MB é uma projeção**, não o tamanho de capturas finais já aprovadas. Originais, outra resolução, histórico e backups são adicionais; preços dependem do provedor. Mil sessões baixando 40 questões novas a 200 DPI, sem cache, projetam aproximadamente 5,93 GB de transferência só das imagens.
+
+Se o contrato preservar PNG a 200 DPI além do WebP a 200 DPI, a soma projetada das duas variantes é cerca de **323 MB para 605 itens**, antes de originais, histórico e backups. O número de 90 MB representa só uma variante de entrega.
 
 O arquivo comprimido não é a memória no navegador: a média de pixels dos fragmentos de uma questão a 200 DPI equivale a **8,53 MB em RGBA**, P95 15,62 MB e máximo 29,92 MB. Quarenta questões decodificadas juntas corresponderiam a cerca de 341 MB só em pixels, além de buffers e interface. Esses números são cálculos por dimensão, não medição de heap real. Carregamento sob demanda e liberação de imagens antigas são requisitos.
 
@@ -65,7 +75,7 @@ flowchart LR
 | Captura | Renderizar o PDF e gerar sequência de recortes, mantendo origem e coordenadas | Ajustar margens, incluir/remover/reordenar regiões e comparar com o original lado a lado |
 | Gabarito | Ler número, letra, página, anulação e indicação de versão/definitivo | Chaves contraditórias, ausentes, preliminares ou de outro caderno bloqueiam a associação aprovada; não preencher por posição presumida |
 | Entrada privada | Criar/retomar lote idempotente e classificar exceções | Reenvio dos mesmos bytes não duplica questões nem sobrescreve ajustes do curador |
-| Publicação | Aplicar o fluxo editorial versionado existente | Sucesso do processamento não aprova fontes, recortes, acessibilidade ou conteúdo; outro curador revisa |
+| Publicação | Aplicar o fluxo editorial versionado e o caminho de revisão habilitado | Sucesso do processamento não aprova fontes, recortes, acessibilidade ou conteúdo. A proposta do PR #16 usa outro agente, com evento ASSISTED; não simular conta/aprovação humana |
 
 Discursivas preservam seus recortes e padrão correspondente em fila própria. Anuladas permanecem identificadas e não ganham uma letra substituta. A interface deve distinguir quantidade esperada, localizada, conferida e publicada; caderno parcial não recebe rótulo de prova completa.
 
@@ -91,10 +101,10 @@ Critérios para ampliar: nenhum item do piloto com contexto/alternativa cortados
 
 | Trabalho | Trilha proposta | Entrega |
 | --- | --- | --- |
-| CT-1 ampliado | Codex | Contrato/modelo de apresentação visual versionada, ativos, múltiplos recortes e controles por letra; reserva 008 existente |
-| IMG-I1 | Codex | Entrada de prova/gabarito, processamento acompanhado e candidatos idempotentes; reservar migration somente ao iniciar implementação |
-| IMG-U1 | Claude, a combinar no quadro | Upload, identificação, comparação/ajuste de recortes e visualizador; começar pelo contrato acordado com Codex |
+| CT-1 e integração com CT-1b/CNT-C1 do PR #16 | Codex + Claude, contratos por domínio | Modelo/versionamento e captura/exibição precisam compartilhar o mesmo contrato de ativos; alinhar escopo das reservas 008/010 antes de implementar |
+| IMG-I1 | Codex | Entrada de prova/gabarito e processamento acompanhado, reutilizando extrator/recortes e candidatos idempotentes; nova migration somente após conferir as reservas do quadro |
+| IMG-U1 | Claude, a combinar no quadro | Upload, identificação e comparação/ajuste de recortes, integrados à exibição CT-1b; começar pelo contrato acordado com Codex |
 | CAT-1 | Codex + Claude, divisão por API/UI | Paginação/total e filtros por edição/curso/caderno; o limite atual de 50 não atende ao lote maior |
-| Lote piloto e publicação | Curadores humanos + apoio dos agentes | Conferência de origem, captura, gabarito e acessibilidade; aprovação independente real |
+| Lote piloto e publicação | Extrator e revisor independente, com registro do caminho aplicado | Conferência de origem, captura, gabarito e acessibilidade; implementar o caminho assistido da ADR-010 antes de usá-lo. Não atribuir revisão humana a agentes |
 
 Os agentes não iniciam a tarefa da outra trilha nem editam migrations aplicadas. Esta proposta não entrega os fluxos acima e não atribui aprovação editorial a simulações de alunos/professores. A avaliação do produto e as pendências estão em [análise por perspectivas](reviews/2026-10-28-product-perspectives.md).

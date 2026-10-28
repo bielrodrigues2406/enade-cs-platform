@@ -4,6 +4,8 @@ Status: protocolo operacional. Referência: 26/10/2026. Complementa AGENTS.md e 
 
 Dois agentes trabalham em paralelo no mesmo repositório. Este documento define quem faz o quê, como evitar conflitos e como uma entrega passa de um agente para outro. O quadro vivo de tarefas está em [WORKBOARD.md](WORKBOARD.md).
 
+Pedido de Gabriel em 28/10/2026: estudar questões como imagens e importação de prova + gabarito. A [proposta compartilhada](QUESTION-IMAGES-AND-IMPORT.md) reúne medição de peso, apresentação ao aluno, fluxo de revisão e divisão proposta CT-1/IMG-I1/IMG-U1/CAT-1. A [análise de produto](reviews/2026-10-28-product-perspectives.md) distingue perspectivas simuladas de agentes e validação humana. O handoff do PR #16 da trilha Claude (ADR-010, CNT-C1/CT-1b e CNT-T1/CNT-V1/PUB-A1) foi considerado, incluindo suas reservas 010/011; seu conteúdo ainda não está integrado. Consulte o quadro antes de iniciar implementação; este estudo não entrega o uploader/visualizador nem altera o caminho de publicação do código atual.
+
 ## 1. Papéis
 
 | Papel | Responsável | Decide |
