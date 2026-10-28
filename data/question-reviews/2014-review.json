@@ -8,19 +8,15 @@
       "examId": "enade-2014-bacharelado-exam",
       "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
       "key": "Q1",
-      "topic": "Cultura digital e democratização da produção artística",
-      "explanation": "A alternativa A é compatível com o texto: as duas asserções são verdadeiras e a segunda explica a primeira. Ferramentas digitais permitem produzir e divulgar obras com maior independência dos centros tradicionais de exposição, o que contribui para democratizar a circulação da produção artística.",
+      "topic": "Formação Geral · tecnologia e produção cultural",
+      "explanation": "A alternativa A é coerente com o argumento apresentado: I e II são verdadeiras no contexto do texto, e II explica I. O acesso a meios digitais de produção e distribuição permite divulgar trabalhos sem passar necessariamente pelos antigos centros de exposição e seus intermediários. Isso amplia o acesso de artistas e ajuda a explicar a redução da dependência desses centros. A questão não afirma que todo conteúdo digital tem qualidade assegurada, que intermediários deixaram de existir ou que a democratização elimina todas as desigualdades de acesso.",
       "notes": [
-        "Análise assistida da página 4 renderizada, comparada à extração; não constitui aprovação editorial humana.",
-        "O gabarito catalogado indica A. O raciocínio foi analisado sem alterar a resposta oficial."
+        "Análise assistida Codex; não é revisão humana, conferência de fonte ou autorização de publicação. Os alertas do extrator e a pendência de texto derivado permanecem.",
+        "Prova original, página PDF 4, e gabarito definitivo de Bacharelado, página PDF 1, examinados visualmente. A chave A e as cinco alternativas A–E correspondem ao original.",
+        "O novo Unicode preserva o enunciado, as duas asserções, PORQUE e as cinco opções. A referência bibliográfica perde somente formatação/espaçamento e os delimitadores tipográficos do endereço eletrônico; não foi identificada alteração conceitual nesse item."
       ],
-      "issues": [
-        {
-          "code": "FIDELIDADE_OCR_PENDENTE",
-          "note": "Conferir e corrigir os marcadores I e II, inclusive nas alternativas: OCR confundiu numerais com l, Il e |. Corrigir também junções como Otrecho e produçãoe a partir da página original. As letras A–E foram recuperadas da camada PDF, sem inferência pela ordem."
-        }
-      ],
-      "disposition": "MANUAL_REQUIRED"
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
     },
     {
       "examId": "enade-2014-bacharelado-exam",
@@ -30,12 +26,74 @@
       "explanation": "A alternativa C corresponde às afirmações I e III, segundo a abordagem da questão: o terceiro setor reúne iniciativa privada e finalidade pública/social, e a responsabilidade social pode alterar cultura e estratégia das empresas. A afirmação II atribui ao terceiro setor, de forma geral e exclusiva, a viabilização do acesso à educação e do desenvolvimento nas áreas enumeradas; esse papel também envolve Estado e outros agentes sociais.",
       "notes": [
         "Análise assistida da página 4 renderizada, comparada à extração; não constitui aprovação editorial humana.",
-        "O gabarito catalogado indica C. A formulação de I foi interpretada no contexto do enunciado, sem transformá-la em definição jurídica exaustiva de terceiro setor."
+        "O gabarito catalogado indica C. A formulação de I foi interpretada no contexto do enunciado, sem transformá-la em definição jurídica exaustiva de terceiro setor.",
+        "Este parecer foi produzido sobre a referência OCR anterior. A nova extração Unicode de CNT-T1 ainda exige confronto específico de Q2, que não integra o lote visual atual; os achados anteriores não foram reavaliados nesta passagem."
       ],
       "issues": [
         {
           "code": "FIDELIDADE_OCR_PENDENTE",
           "note": "Conferir e corrigir I, II e III no enunciado e nas alternativas: OCR confundiu esses numerais com Il, Ill e |. Na alternativa E, recuperar fielmente I, II e III. As letras A–E foram recuperadas da camada PDF, sem inferência pela ordem."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2014-bacharelado-exam",
+      "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+      "key": "Q16",
+      "topic": "Estruturas de dados · pilhas e alocação dinâmica",
+      "explanation": "A chave oficial C seleciona I e II. Na intenção didática de uma pilha implementada corretamente, push e pop executam um número constante de operações, e a sequência descrita leva a a=5 antes da última soma; retirar o 5 recém-empilhado soma 5, assim como a+=a, produzindo o mesmo valor exibido 10. III confunde tamanho fixo do membro elementos[100] com duração de armazenamento: malloc aloca o objeto pilha e seu vetor integrante dinamicamente, portanto o argumento apresentado não justifica dispensar a liberação. Há, porém, um defeito literal no código publicado: cria_pilha retorna pilha, que é o nome do tipo, em vez de p. A leitura algorítmica acima não significa que o programa original seja C compilável, nem autoriza corrigir silenciosamente a fonte.",
+      "notes": [
+        "Análise assistida Codex; não é revisão humana, conferência de fonte ou autorização de publicação. Os alertas do extrator e a pendência de texto derivado permanecem.",
+        "Prova original, página PDF 16, e chave definitiva C, página PDF 1, examinadas. Todos os comandos, as três afirmações e as cinco opções foram comparados ao novo texto; nenhum código do PDF foi executado.",
+        "O original realmente imprime return pilha; e usa aspas tipográficas no printf. Esses pontos não foram introduzidos pela recuperação Unicode. Se houver apresentação de uma variante corrigida para ensinar C, identificá-la como comentário editorial, preservando separadamente o original."
+      ],
+      "issues": [
+        {
+          "code": "DEFEITO_NO_CODIGO_ORIGINAL",
+          "note": "A função cria_pilha imprime return pilha;, utilizando o identificador de tipo onde seria necessário o ponteiro p. O printf também usa aspas tipográficas na página. Explicar a intenção didática e os defeitos literais, sem anunciar que o código original executa ou trocar a chave C por inferência."
+        },
+        {
+          "code": "CODIGO_REQUER_APRESENTACAO",
+          "note": "A extração conserva linhas e chaves, mas achata a indentação e não fornece apresentação editorial do código. Preservar o código visual original e preparar representação acessível antes de disponibilizar o item."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2014-bacharelado-exam",
+      "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+      "key": "Q27",
+      "topic": "Lógica proposicional · regras de inferência",
+      "explanation": "A alternativa B é modus tollens: de P→Q e ¬Q conclui-se ¬P. Tomando P como existência de fogo e Q como existência de oxigênio, as duas premissas dadas têm exatamente essa forma. A nega o antecedente e C afirma o consequente, ambas formas inválidas em geral. D apresenta ¬¬P como conclusão, que não corresponde à conclusão ¬P pedida. E é a forma válida de modus ponens, mas parte de P e não das premissas impressas no argumento. Essa explicação foi elaborada a partir das cinco fórmulas vistas no original, não inferida somente da letra B.",
+      "notes": [
+        "Análise assistida Codex; não é revisão humana, conferência de fonte ou autorização de publicação. Os alertas do extrator e a pendência de texto derivado permanecem.",
+        "Prova original, página PDF 22, inspecionada integralmente; a região de Q27 também foi ampliada a 220 DPI para distinguir as negações, incluindo o duplo ¬¬P da alternativa D. Chave definitiva B conferida na página PDF 1.",
+        "As cinco opções visuais são regras escritas acima e abaixo de barras de inferência. O novo texto ainda apresenta seta como ĺ e caractere de controle U+0003, além de deslocar fórmulas entre o enunciado e as opções. A melhoria Unicode da prosa não resolveu esse conteúdo lógico."
+      ],
+      "issues": [
+        {
+          "code": "FORMULAS_DE_INFERENCIA_NAO_PRESERVADAS",
+          "note": "As setas, barras e associações premissa/conclusão das cinco alternativas não estão fiéis na versão textual; há fragmentos deslocados e caractere de controle. Integrar o recorte original e preparar cada fórmula acessível, preservando a diferença entre ¬P e ¬¬P. Não corrigir somente a alternativa da chave."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2014-bacharelado-exam",
+      "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+      "key": "Q35",
+      "topic": "Organização digital · multiplexadores",
+      "explanation": "A alternativa E indica que as duas asserções são falsas. Pela figura, as entradas do multiplexador para seleções AB=00, 01, 10 e 11 correspondem respectivamente a 0, C∧D, C∧D e C∨D. Se A e B somam zero pedidos, não é possível haver mais de dois pedidos com apenas C e D; a saída deve ser 0. Se somam um, é necessário C=D=1. Se somam dois, basta C ou D. Assim, o circuito realiza o acionamento para pelo menos três dos quatro sinais ativos e atende à especificação, tornando I falsa. A constante zero determina a saída somente quando sua entrada é selecionada, e não para todos os valores de A e B; por isso II também é falsa.",
+      "notes": [
+        "Análise assistida Codex; não é revisão humana, conferência de fonte ou autorização de publicação. Os alertas do extrator e a pendência de texto derivado permanecem.",
+        "Prova original, página PDF 27, e chave definitiva E, página PDF 1, examinadas visualmente. Foram conferidos os fios das portas AND/OR, as quatro entradas do multiplexador e todas as alternativas.",
+        "O texto recuperado mantém o comando e as opções, mas o subíndice que indica AB=10 em base 2 aparece isolado como (2). A figura precisa acompanhar a questão para revelar as conexões; esta explicação não substitui o circuito original."
+      ],
+      "issues": [
+        {
+          "code": "CIRCUITO_NAO_INTEGRADO",
+          "note": "O novo texto não inclui a topologia do circuito multiplexador e das portas lógicas. Preservar a figura e a correspondência das quatro entradas selecionadas por AB; preparar descrição acessível e a notação de base binária."
         }
       ],
       "disposition": "MANUAL_REQUIRED"
