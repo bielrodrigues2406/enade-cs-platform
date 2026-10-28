@@ -12,7 +12,7 @@ O pedido é avançar o máximo possível com alta qualidade. O limite de cada en
 
 - A referência oficial consultada informa aplicação de bacharelados/CST em 29/11/2026, duração de quatro horas, 15 questões objetivas de Formação Geral e 30 objetivas mais uma discursiva do componente específico.
 - Formato e cronograma pertencem à edição e à modalidade. Não hardcodar a estrutura histórica de 40 questões como regra global.
-- Existem provas, gabaritos e padrões de resposta anteriores no Inep, incluindo Ciência da Computação (bacharelado) de 2021. O inventário completo ainda deve ser levantado e conferido.
+- Existem provas, gabaritos e padrões de resposta anteriores no Inep, incluindo Ciência da Computação (bacharelado) de 2021. O inventário registra 61 referências, 28 PDFs individuais obtidos e 33 pendentes; aquisição não significa conferência editorial.
 - Conteúdo de 2026 não está disponível para estudo antes da aplicação. Não cadastrar previsão de documento como conteúdo importado.
 - Questão oficial, explicação autoral e resposta de IA têm procedências diferentes, identificadas na UI.
 - O prazo até a prova não é promessa de entrega de toda a visão. Manter escopo e estado real de cada incremento visíveis.
@@ -50,7 +50,7 @@ Os incrementos são dependências, não uma obrigação de terminar toda uma cam
 
 ## 5. Regras de conteúdo e aprendizagem
 
-- Questões publicadas passam por conferência de enunciado, alternativas, gabarito definitivo, imagens, código, tipo, fonte e status de anulação.
+- Questões publicadas passam por conferência de enunciado, alternativas, gabarito definitivo, imagens, código, tipo, fonte e status de anulação. Gabriel propôs em 28/10 usar capturas fiéis como apresentação visual principal, com IDs de resposta e conteúdo assistivo revisado; a [proposta de imagens e importação](QUESTION-IMAGES-AND-IMPORT.md) registra o estudo, sem declarar o recurso implementado.
 - Classificar assuntos usando as diretrizes oficiais; manter mapeamento auditável. Não inferir pesos exatos da prova a partir de uma lista de conteúdos.
 - Importar um lote inicial de 20 itens diversos para medir esforço e taxa de erro. O número serve para calibrar operação, não para prometer tamanho final do banco.
 - Formação Geral compartilhada entre cadernos exige deduplicação e rastreabilidade. Licenciatura e bacharelado não são intercambiáveis silenciosamente.
@@ -76,4 +76,4 @@ Para alegar ganho de aprendizagem, planejar avaliação com itens inéditos e cr
 
 Catálogo → questão → resposta → feedback → persistência → retomada estão implementados com prática anônima/contas e curadoria versionada. O registro de PDFs, a conferência independente e a procedência por versão também estão disponíveis. Foram obtidos 27 arquivos históricos e um caderno PND 2025 por cópia pública; 33 links de Licenciatura/PND ainda aguardam PDF. A fila privada conserva questões extraídas e análise assistida, sem confundir importação com aprovação editorial. O inventário registra todos os anos localizados. A aquisição não comprova revisão pedagógica de um lote de questões. O caderno de erros inclui filtro por assunto, paginação, nova resolução e contagens por questão lógica, derivadas das respostas salvas. Repetição espaçada, plano de estudos e tendências permanecem pendentes. O README registra os testes executados.
 
-Próximo incremento: transcrever e revisar o lote oficial inicial a partir dos documentos conferidos, medindo erros e esforço antes de ampliar. Imagens, discursivas, anulações, taxonomia avançada, simulados e IA continuam pendentes.
+Próximo incremento de conteúdo proposto: piloto de questões com capturas fiéis e controles de resposta, apoiado por CT-1, preservando fontes conferidas e revisão independente. Medir limites, gabaritos, acessibilidade, bytes e esforço antes de ampliar ou construir o upload de prova + gabarito. Imagens, discursivas, anulações, taxonomia avançada, simulados e IA continuam pendentes.

@@ -1,0 +1,515 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-28T14:37:02.927Z",
+  "scope": "Empirical file-size benchmark of 42 unapproved crop candidates, not automatic import or editorial verification.",
+  "assumptions": {
+    "sampleSelection": "Six purposively selected candidates per edition; not a random sample or a confidence interval. Pages match the current extracted report, boundaries are not fully reviewed.",
+    "cropCoordinates": "PDF points, 72pt/in; top-left origin. Native segmentQuestions regions retained in printed reading order, no visual reconstruction, no OCR.",
+    "render": "Poppler direct pixel crop at150/200DPI; white opaque sRGB8bit; metadata removed via ImageMagick. PNG24 compression6; WebP losslessquality100/method4; lossyquality82/method4.",
+    "scopeLimit": "Original exams and answer keys are unchanged. Crops may include neighboring/header content or omit required shared context and must not be published from this benchmark.",
+    "projection": "Sample mean multiplied by question count, includes all candidate fragments. One delivery variant, no cache or transfer overhead. Storage variants/backups/PDFs are additional.",
+    "memory": "RGBA estimate=width*height*4, RGB=width*height*3. Not a browser heap, decoding time, mobile readability or network latency measurement."
+  },
+  "tools": {
+    "node": "v24.19.0",
+    "poppler": "pdftoppm version 26.05.0",
+    "imageMagick": "Version: ImageMagick 7.1.1-43 Q16 x86_64 22550 https://imagemagick.org",
+    "scriptSha256": "36e9f070aebfd67a2be50724d143d95f82607dd3f23ce1f1312daad808129700",
+    "helperSha256": "e5b5b7a65316f7caf1899db7673265832216c62f60c16fb8c894e6295ced846b"
+  },
+  "sourceDocuments": [
+    {
+      "id": "enade-2005-comum-exam",
+      "year": 2005,
+      "sha256": "ba95b66e95b6a4071a970f794e0b0c71aeebf18740b95b6ca02dfcb72d0be76c",
+      "pdfBytes": 6893560,
+      "officialUrl": "https://download.inep.gov.br/download/enade/2005/provas/COMPUTACAO.pdf"
+    },
+    {
+      "id": "enade-2008-comum-exam",
+      "year": 2008,
+      "sha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+      "pdfBytes": 1564836,
+      "officialUrl": "https://download.inep.gov.br/download/Enade2008_RNP/COMPUTACAO.pdf"
+    },
+    {
+      "id": "enade-2011-comum-exam",
+      "year": 2011,
+      "sha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+      "pdfBytes": 1886812,
+      "officialUrl": "https://download.inep.gov.br/educacao_superior/enade/provas/2011/COMPUTACAO.pdf"
+    },
+    {
+      "id": "enade-2014-bacharelado-exam",
+      "year": 2014,
+      "sha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+      "pdfBytes": 1235065,
+      "officialUrl": "https://download.inep.gov.br/educacao_superior/enade/provas/2014/03_computacao_bacharelado.pdf"
+    },
+    {
+      "id": "enade-2017-bacharelado-exam",
+      "year": 2017,
+      "sha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+      "pdfBytes": 1303897,
+      "officialUrl": "https://download.inep.gov.br/educacao_superior/enade/provas/2017/03_CIE_COM_BACHAREL_BAIXA.pdf"
+    },
+    {
+      "id": "enade-2021-bacharelado-exam",
+      "year": 2021,
+      "sha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+      "pdfBytes": 8169650,
+      "officialUrl": "https://download.inep.gov.br/enade/provas_e_gabaritos/2021_PV_bacharelado_ciencia_computacao.pdf"
+    },
+    {
+      "id": "pnd-2025-computacao-pv-4",
+      "year": 2025,
+      "sha256": "b9c3368a98500666baff9fb0c045f24bae83b0cac4237c58faf9e433f1c4223a",
+      "pdfBytes": 6305713,
+      "officialUrl": "https://download.inep.gov.br/pnd/provas_e_gabaritos/2025_computacao_PV_4.pdf"
+    }
+  ],
+  "sampleSize": 42,
+  "fragmentCount": 49,
+  "elapsedSeconds": 167.424,
+  "summaries": [
+    {
+      "dpi": 150,
+      "format": "png",
+      "itemBytes": {
+        "n": 42,
+        "total": 11106854,
+        "mean": 264448.90476190473,
+        "median": 209611,
+        "p95": 785310,
+        "min": 51479,
+        "max": 849468
+      },
+      "fragmentBytes": {
+        "n": 49,
+        "total": 11106854,
+        "mean": 226670.48979591837,
+        "median": 172418,
+        "p95": 665138,
+        "min": 5409,
+        "max": 800584
+      },
+      "projectedBytes": {
+        "40": 10577957,
+        "605": 159991588,
+        "1000": 264448905,
+        "10000": 2644489048
+      }
+    },
+    {
+      "dpi": 150,
+      "format": "webpLossless",
+      "itemBytes": {
+        "n": 42,
+        "total": 4256446,
+        "mean": 101343.95238095238,
+        "median": 44617,
+        "p95": 391072,
+        "min": 13720,
+        "max": 472202
+      },
+      "fragmentBytes": {
+        "n": 49,
+        "total": 4256446,
+        "mean": 86866.24489795919,
+        "median": 41936,
+        "p95": 388100,
+        "min": 1830,
+        "max": 468826
+      },
+      "projectedBytes": {
+        "40": 4053759,
+        "605": 61313092,
+        "1000": 101343953,
+        "10000": 1013439524
+      }
+    },
+    {
+      "dpi": 150,
+      "format": "webpQ82",
+      "itemBytes": {
+        "n": 42,
+        "total": 3895766,
+        "mean": 92756.33333333333,
+        "median": 89720,
+        "p95": 173778,
+        "min": 23152,
+        "max": 245548
+      },
+      "fragmentBytes": {
+        "n": 49,
+        "total": 3895766,
+        "mean": 79505.42857142857,
+        "median": 81342,
+        "p95": 157068,
+        "min": 2720,
+        "max": 189912
+      },
+      "projectedBytes": {
+        "40": 3710254,
+        "605": 56117582,
+        "1000": 92756334,
+        "10000": 927563334
+      }
+    },
+    {
+      "dpi": 200,
+      "format": "png",
+      "itemBytes": {
+        "n": 42,
+        "total": 16212282,
+        "mean": 386006.71428571426,
+        "median": 289930,
+        "p95": 1135593,
+        "min": 73542,
+        "max": 1299742
+      },
+      "fragmentBytes": {
+        "n": 49,
+        "total": 16212282,
+        "mean": 330862.89795918367,
+        "median": 243871,
+        "p95": 1009225,
+        "min": 7275,
+        "max": 1188039
+      },
+      "projectedBytes": {
+        "40": 15440269,
+        "605": 233534063,
+        "1000": 386006715,
+        "10000": 3860067143
+      }
+    },
+    {
+      "dpi": 200,
+      "format": "webpLossless",
+      "itemBytes": {
+        "n": 42,
+        "total": 6221562,
+        "mean": 148132.42857142858,
+        "median": 60476,
+        "p95": 569306,
+        "min": 19748,
+        "max": 707996
+      },
+      "fragmentBytes": {
+        "n": 49,
+        "total": 6221562,
+        "mean": 126970.6530612245,
+        "median": 56846,
+        "p95": 566274,
+        "min": 2398,
+        "max": 666830
+      },
+      "projectedBytes": {
+        "40": 5925298,
+        "605": 89620120,
+        "1000": 148132429,
+        "10000": 1481324286
+      }
+    },
+    {
+      "dpi": 200,
+      "format": "webpQ82",
+      "itemBytes": {
+        "n": 42,
+        "total": 5524204,
+        "mean": 131528.66666666666,
+        "median": 125608,
+        "p95": 256624,
+        "min": 32254,
+        "max": 338822
+      },
+      "fragmentBytes": {
+        "n": 49,
+        "total": 5524204,
+        "mean": 112738.85714285714,
+        "median": 118730,
+        "p95": 225024,
+        "min": 3846,
+        "max": 262216
+      },
+      "projectedBytes": {
+        "40": 5261147,
+        "605": 79574844,
+        "1000": 131528667,
+        "10000": 1315286667
+      }
+    }
+  ],
+  "memory": {
+    "150": {
+      "itemRgbBytes": {
+        "n": 42,
+        "total": 151296429,
+        "mean": 3602295.9285714286,
+        "median": 2819775,
+        "p95": 6596289,
+        "min": 833040,
+        "max": 12635694
+      },
+      "itemRgbaBytes": {
+        "n": 42,
+        "total": 201728572,
+        "mean": 4803061.238095238,
+        "median": 3759700,
+        "p95": 8795052,
+        "min": 1110720,
+        "max": 16847592
+      },
+      "fragmentRgbaBytes": {
+        "n": 49,
+        "total": 201728572,
+        "mean": 4116909.6326530613,
+        "median": 3759700,
+        "p95": 7513660,
+        "min": 460768,
+        "max": 8492800
+      }
+    },
+    "200": {
+      "itemRgbBytes": {
+        "n": 42,
+        "total": 268796796,
+        "mean": 6399923.714285715,
+        "median": 5010147,
+        "p95": 11711883,
+        "min": 1480128,
+        "max": 22443303
+      },
+      "itemRgbaBytes": {
+        "n": 42,
+        "total": 358395728,
+        "mean": 8533231.61904762,
+        "median": 6680196,
+        "p95": 15615844,
+        "min": 1973504,
+        "max": 29924404
+      },
+      "fragmentRgbaBytes": {
+        "n": 49,
+        "total": 358395728,
+        "mean": 7314198.530612245,
+        "median": 6680196,
+        "p95": 13352740,
+        "min": 821376,
+        "max": 15086032
+      }
+    }
+  },
+  "formatComparison": {
+    "150": {
+      "losslessSmallerThanQ82Items": 32,
+      "totalItems": 42
+    },
+    "200": {
+      "losslessSmallerThanQ82Items": 32,
+      "totalItems": 42
+    }
+  },
+  "qualityCheck": {
+    "scope": "Six raster comparisons, three candidates at150/200DPI; only200DPI variants visually viewed. Numeric equality checks encoding, not PDF source fidelity or boundary correctness.",
+    "examples": [
+      {
+        "document": "enade-2008-comum-exam",
+        "key": "Q1",
+        "kind": "photographs",
+        "dpi": 150,
+        "fragment": 1,
+        "width": 1240,
+        "height": 1446,
+        "pngBytes": 800584,
+        "webpLosslessBytes": 468826,
+        "webpQ82Bytes": 147806,
+        "losslessAbsoluteError": {
+          "value": "0",
+          "exitCode": 0
+        },
+        "lossyAbsoluteError": {
+          "value": "674461",
+          "exitCode": 1
+        },
+        "lossyPsnr": {
+          "value": "42.0317 (0.420317)",
+          "exitCode": 1
+        },
+        "visualInspection": "Not visually inspected in this resolution; automated raster metrics only."
+      },
+      {
+        "document": "enade-2008-comum-exam",
+        "key": "Q1",
+        "kind": "photographs",
+        "dpi": 200,
+        "fragment": 1,
+        "width": 1653,
+        "height": 1928,
+        "pngBytes": 1188039,
+        "webpLosslessBytes": 666830,
+        "webpQ82Bytes": 215716,
+        "losslessAbsoluteError": {
+          "value": "0",
+          "exitCode": 0
+        },
+        "lossyAbsoluteError": {
+          "value": "1.15435e+06",
+          "exitCode": 1
+        },
+        "lossyPsnr": {
+          "value": "43.0922 (0.430922)",
+          "exitCode": 1
+        },
+        "visualInspection": "PNG and WebP82 viewed side-by-side in separate view_image calls; no gross content omission seen in this subset. Not a human review or a mobile/zoom usability test."
+      },
+      {
+        "document": "enade-2008-comum-exam",
+        "key": "Q18",
+        "kind": "code-and-recurrence",
+        "dpi": 150,
+        "fragment": 1,
+        "width": 620,
+        "height": 815,
+        "pngBytes": 103648,
+        "webpLosslessBytes": 25038,
+        "webpQ82Bytes": 53700,
+        "losslessAbsoluteError": {
+          "value": "0",
+          "exitCode": 0
+        },
+        "lossyAbsoluteError": {
+          "value": "75742",
+          "exitCode": 1
+        },
+        "lossyPsnr": {
+          "value": "44.7475 (0.447475)",
+          "exitCode": 1
+        },
+        "visualInspection": "Not visually inspected in this resolution; automated raster metrics only."
+      },
+      {
+        "document": "enade-2008-comum-exam",
+        "key": "Q18",
+        "kind": "code-and-recurrence",
+        "dpi": 200,
+        "fragment": 1,
+        "width": 826,
+        "height": 1085,
+        "pngBytes": 140119,
+        "webpLosslessBytes": 33160,
+        "webpQ82Bytes": 76906,
+        "losslessAbsoluteError": {
+          "value": "0",
+          "exitCode": 0
+        },
+        "lossyAbsoluteError": {
+          "value": "110394",
+          "exitCode": 1
+        },
+        "lossyPsnr": {
+          "value": "45.7151 (0.457151)",
+          "exitCode": 1
+        },
+        "visualInspection": "PNG and WebP82 viewed side-by-side in separate view_image calls; no gross content omission seen in this subset. Not a human review or a mobile/zoom usability test."
+      },
+      {
+        "document": "enade-2008-comum-exam",
+        "key": "Q38",
+        "kind": "formula-and-circuit",
+        "dpi": 150,
+        "fragment": 1,
+        "width": 554,
+        "height": 1015,
+        "pngBytes": 51479,
+        "webpLosslessBytes": 15460,
+        "webpQ82Bytes": 23596,
+        "losslessAbsoluteError": {
+          "value": "0",
+          "exitCode": 0
+        },
+        "lossyAbsoluteError": {
+          "value": "36853",
+          "exitCode": 1
+        },
+        "lossyPsnr": {
+          "value": "48.5976 (0.485976)",
+          "exitCode": 1
+        },
+        "visualInspection": "Not visually inspected in this resolution; automated raster metrics only."
+      },
+      {
+        "document": "enade-2008-comum-exam",
+        "key": "Q38",
+        "kind": "formula-and-circuit",
+        "dpi": 200,
+        "fragment": 1,
+        "width": 738,
+        "height": 1352,
+        "pngBytes": 73542,
+        "webpLosslessBytes": 20074,
+        "webpQ82Bytes": 32982,
+        "losslessAbsoluteError": {
+          "value": "0",
+          "exitCode": 0
+        },
+        "lossyAbsoluteError": {
+          "value": "53246",
+          "exitCode": 1
+        },
+        "lossyPsnr": {
+          "value": "49.2486 (0.492486)",
+          "exitCode": 1
+        },
+        "visualInspection": "PNG and WebP82 viewed side-by-side in separate view_image calls; no gross content omission seen in this subset. Not a human review or a mobile/zoom usability test."
+      }
+    ],
+    "recommendation": "Use WebP lossless as the default technical candidate, subject to renderer/crop review. Q82 is optional after visual review and measurement; it is not always smaller for text/line-art and changes pixels. Original PDF remains the preserved source."
+  },
+  "fullLocalReceiptSha256": "382a2e1211869f2d640b04f2503c88e3f3cb5bc46862c648b138b4dc2d717c37",
+  "items": [
+    {"document":"enade-2005-comum-exam","key":"Q1","kind":"OBJECTIVE","pages":[2],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":2,"regionPt":{"x0":0,"y0":68.6,"x1":299.0685,"y1":403.88},"pagePt":{"width":596,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":142,"width":624,"height":700},"width":624,"height":700,"bytes":{"png":108849,"webpLossless":24940,"webpQ82":53720}},{"dpi":200,"cropPx":{"x":0,"y":190,"width":831,"height":932},"width":831,"height":932,"bytes":{"png":148248,"webpLossless":34808,"webpQ82":79088}}]}],"totals":{"150":{"png":108849,"webpLossless":24940,"webpQ82":53720,"decodedRgbBytes":1310400,"decodedRgbaBytes":1747200},"200":{"png":148248,"webpLossless":34808,"webpQ82":79088,"decodedRgbBytes":2323476,"decodedRgbaBytes":3097968}}},
+    {"document":"enade-2005-comum-exam","key":"Q4","kind":"OBJECTIVE","pages":[3],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":3,"regionPt":{"x0":0,"y0":43.64,"x1":596,"y1":470.66},"pagePt":{"width":596,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":90,"width":1242,"height":891},"width":1242,"height":891,"bytes":{"png":427819,"webpLossless":203268,"webpQ82":90426}},{"dpi":200,"cropPx":{"x":0,"y":121,"width":1656,"height":1187},"width":1656,"height":1187,"bytes":{"png":621431,"webpLossless":305726,"webpQ82":124962}}]}],"totals":{"150":{"png":427819,"webpLossless":203268,"webpQ82":90426,"decodedRgbBytes":3319866,"decodedRgbaBytes":4426488},"200":{"png":621431,"webpLossless":305726,"webpQ82":124962,"decodedRgbBytes":5897016,"decodedRgbaBytes":7862688}}},
+    {"document":"enade-2005-comum-exam","key":"Q26","kind":"OBJECTIVE","pages":[11],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":11,"regionPt":{"x0":0,"y0":267.2,"x1":290.103,"y1":580.58},"pagePt":{"width":596,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":556,"width":605,"height":654},"width":605,"height":654,"bytes":{"png":114648,"webpLossless":19212,"webpQ82":30718}},{"dpi":200,"cropPx":{"x":0,"y":742,"width":806,"height":871},"width":806,"height":871,"bytes":{"png":167933,"webpLossless":28550,"webpQ82":42388}}]}],"totals":{"150":{"png":114648,"webpLossless":19212,"webpQ82":30718,"decodedRgbBytes":1187010,"decodedRgbaBytes":1582680},"200":{"png":167933,"webpLossless":28550,"webpQ82":42388,"decodedRgbBytes":2106078,"decodedRgbaBytes":2808104}}},
+    {"document":"enade-2005-comum-exam","key":"Q44","kind":"OBJECTIVE","pages":[17],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":17,"regionPt":{"x0":0,"y0":199.76,"x1":285.5715,"y1":795.552},"pagePt":{"width":596,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":416,"width":595,"height":1242},"width":595,"height":1242,"bytes":{"png":174979,"webpLossless":41936,"webpQ82":84708}},{"dpi":200,"cropPx":{"x":0,"y":554,"width":794,"height":1656},"width":794,"height":1656,"bytes":{"png":243456,"webpLossless":58854,"webpQ82":124964}}]}],"totals":{"150":{"png":174979,"webpLossless":41936,"webpQ82":84708,"decodedRgbBytes":2216970,"decodedRgbaBytes":2955960},"200":{"png":243456,"webpLossless":58854,"webpQ82":124964,"decodedRgbBytes":3944592,"decodedRgbaBytes":5259456}}},
+    {"document":"enade-2005-comum-exam","key":"Q63","kind":"OBJECTIVE","pages":[24],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":24,"regionPt":{"x0":0,"y0":48.92,"x1":303.603,"y1":486.5},"pagePt":{"width":596,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":101,"width":633,"height":913},"width":633,"height":913,"bytes":{"png":121274,"webpLossless":27214,"webpQ82":59748}},{"dpi":200,"cropPx":{"x":0,"y":135,"width":844,"height":1217},"width":844,"height":1217,"bytes":{"png":169751,"webpLossless":37274,"webpQ82":85358}}]}],"totals":{"150":{"png":121274,"webpLossless":27214,"webpQ82":59748,"decodedRgbBytes":1733787,"decodedRgbaBytes":2311716},"200":{"png":169751,"webpLossless":37274,"webpQ82":85358,"decodedRgbBytes":3081444,"decodedRgbaBytes":4108592}}},
+    {"document":"enade-2005-comum-exam","key":"Q66","kind":"OBJECTIVE","pages":[24,25],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":24,"regionPt":{"x0":303.603,"y0":350.6,"x1":596,"y1":795.552},"pagePt":{"width":596,"height":842},"variants":[{"dpi":150,"cropPx":{"x":632,"y":730,"width":610,"height":928},"width":610,"height":928,"bytes":{"png":168108,"webpLossless":36884,"webpQ82":81342}},{"dpi":200,"cropPx":{"x":843,"y":973,"width":813,"height":1237},"width":813,"height":1237,"bytes":{"png":233437,"webpLossless":51454,"webpQ82":119566}}]},{"index":2,"page":25,"regionPt":{"x0":0,"y0":0.5,"x1":596,"y1":466.94},"pagePt":{"width":596,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":1,"width":1242,"height":972},"width":1242,"height":972,"bytes":{"png":681360,"webpLossless":435318,"webpQ82":103976}},{"dpi":200,"cropPx":{"x":0,"y":1,"width":1656,"height":1297},"width":1656,"height":1297,"bytes":{"png":1066305,"webpLossless":656542,"webpQ82":143332}}]}],"totals":{"150":{"png":849468,"webpLossless":472202,"webpQ82":185318,"decodedRgbBytes":5319912,"decodedRgbaBytes":7093216},"200":{"png":1299742,"webpLossless":707996,"webpQ82":262898,"decodedRgbBytes":9460539,"decodedRgbaBytes":12614052}}},
+    {"document":"enade-2008-comum-exam","key":"Q1","kind":"OBJECTIVE","pages":[2],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":2,"regionPt":{"x0":0,"y0":88.8708,"x1":595,"y1":782.62758},"pagePt":{"width":595,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":185,"width":1240,"height":1446},"width":1240,"height":1446,"bytes":{"png":800584,"webpLossless":468826,"webpQ82":147806}},{"dpi":200,"cropPx":{"x":0,"y":246,"width":1653,"height":1928},"width":1653,"height":1928,"bytes":{"png":1188039,"webpLossless":666830,"webpQ82":215716}}]}],"totals":{"150":{"png":800584,"webpLossless":468826,"webpQ82":147806,"decodedRgbBytes":5379120,"decodedRgbaBytes":7172160},"200":{"png":1188039,"webpLossless":666830,"webpQ82":215716,"decodedRgbBytes":9560952,"decodedRgbaBytes":12747936}}},
+    {"document":"enade-2008-comum-exam","key":"Q3","kind":"OBJECTIVE","pages":[3],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":3,"regionPt":{"x0":0,"y0":569.3507,"x1":299.204698,"y1":782.62758},"pagePt":{"width":595,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":1186,"width":624,"height":445},"width":624,"height":445,"bytes":{"png":68082,"webpLossless":18806,"webpQ82":34058}},{"dpi":200,"cropPx":{"x":0,"y":1581,"width":832,"height":593},"width":832,"height":593,"bytes":{"png":91328,"webpLossless":25094,"webpQ82":49092}}]}],"totals":{"150":{"png":68082,"webpLossless":18806,"webpQ82":34058,"decodedRgbBytes":833040,"decodedRgbaBytes":1110720},"200":{"png":91328,"webpLossless":25094,"webpQ82":49092,"decodedRgbBytes":1480128,"decodedRgbaBytes":1973504}}},
+    {"document":"enade-2008-comum-exam","key":"Q12","kind":"OBJECTIVE","pages":[8],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":8,"regionPt":{"x0":0,"y0":404.7107,"x1":298.006624,"y1":652.1507},"pagePt":{"width":595,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":843,"width":621,"height":516},"width":621,"height":516,"bytes":{"png":107772,"webpLossless":26718,"webpQ82":59456}},{"dpi":200,"cropPx":{"x":0,"y":1124,"width":828,"height":688},"width":828,"height":688,"bytes":{"png":151476,"webpLossless":36952,"webpQ82":83898}}]}],"totals":{"150":{"png":107772,"webpLossless":26718,"webpQ82":59456,"decodedRgbBytes":961308,"decodedRgbaBytes":1281744},"200":{"png":151476,"webpLossless":36952,"webpQ82":83898,"decodedRgbBytes":1708992,"decodedRgbaBytes":2278656}}},
+    {"document":"enade-2008-comum-exam","key":"Q14","kind":"OBJECTIVE","pages":[8,9],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":8,"regionPt":{"x0":298.006624,"y0":157.7507,"x1":595,"y1":782.62758},"pagePt":{"width":595,"height":842},"variants":[{"dpi":150,"cropPx":{"x":620,"y":328,"width":620,"height":1303},"width":620,"height":1303,"bytes":{"png":214593,"webpLossless":42570,"webpQ82":107862}},{"dpi":200,"cropPx":{"x":827,"y":438,"width":826,"height":1736},"width":826,"height":1736,"bytes":{"png":281178,"webpLossless":57506,"webpQ82":155938}}]},{"index":2,"page":9,"regionPt":{"x0":0,"y0":0.5,"x1":298.013098,"y1":89.4707},"pagePt":{"width":595,"height":842},"variants":[{"dpi":150,"cropPx":{"x":0,"y":1,"width":621,"height":186},"width":621,"height":186,"bytes":{"png":5409,"webpLossless":1830,"webpQ82":2720}},{"dpi":200,"cropPx":{"x":0,"y":1,"width":828,"height":248},"width":828,"height":248,"bytes":{"png":7275,"webpLossless":2398,"webpQ82":3846}}]}],"totals":{"150":{"png":220002,"webpLossless":44400,"webpQ82":110582,"decodedRgbBytes":2770098,"decodedRgbaBytes":3693464},"200":{"png":288453,"webpLossless":59904,"webpQ82":159784,"decodedRgbBytes":4917840,"decodedRgbaBytes":6557120}}},
+    {"document":"enade-2008-comum-exam","key":"Q18","kind":"OBJECTIVE","pages":[9],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":9,"regionPt":{"x0":298.013098,"y0":392.1107,"x1":595,"y1":782.62758},"pagePt":{"width":595,"height":842},"variants":[{"dpi":150,"cropPx":{"x":620,"y":816,"width":620,"height":815},"width":620,"height":815,"bytes":{"png":103648,"webpLossless":25038,"webpQ82":53700}},{"dpi":200,"cropPx":{"x":827,"y":1089,"width":826,"height":1085},"width":826,"height":1085,"bytes":{"png":140119,"webpLossless":33160,"webpQ82":76906}}]}],"totals":{"150":{"png":103648,"webpLossless":25038,"webpQ82":53700,"decodedRgbBytes":1515900,"decodedRgbaBytes":2021200},"200":{"png":140119,"webpLossless":33160,"webpQ82":76906,"decodedRgbBytes":2688630,"decodedRgbaBytes":3584840}}},
+    {"document":"enade-2008-comum-exam","key":"Q38","kind":"OBJECTIVE","pages":[15],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":15,"regionPt":{"x0":329.450938,"y0":295.9907,"x1":595,"y1":782.62758},"pagePt":{"width":595,"height":842},"variants":[{"dpi":150,"cropPx":{"x":686,"y":616,"width":554,"height":1015},"width":554,"height":1015,"bytes":{"png":51479,"webpLossless":15460,"webpQ82":23596}},{"dpi":200,"cropPx":{"x":915,"y":822,"width":738,"height":1352},"width":738,"height":1352,"bytes":{"png":73542,"webpLossless":20074,"webpQ82":32982}}]}],"totals":{"150":{"png":51479,"webpLossless":15460,"webpQ82":23596,"decodedRgbBytes":1686930,"decodedRgbaBytes":2249240},"200":{"png":73542,"webpLossless":20074,"webpQ82":32982,"decodedRgbBytes":2993328,"decodedRgbaBytes":3991104}}},
+    {"document":"enade-2011-comum-exam","key":"Q1","kind":"OBJECTIVE","pages":[2],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":2,"regionPt":{"x0":0,"y0":91.5499,"x1":628.11,"y1":411.3538},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":190,"width":1309,"height":667},"width":1309,"height":667,"bytes":{"png":160282,"webpLossless":32294,"webpQ82":67094}},{"dpi":200,"cropPx":{"x":0,"y":254,"width":1745,"height":889},"width":1745,"height":889,"bytes":{"png":228484,"webpLossless":43234,"webpQ82":97730}}]}],"totals":{"150":{"png":160282,"webpLossless":32294,"webpQ82":67094,"decodedRgbBytes":2619309,"decodedRgbaBytes":3492412},"200":{"png":228484,"webpLossless":43234,"webpQ82":97730,"decodedRgbBytes":4653915,"decodedRgbaBytes":6205220}}},
+    {"document":"enade-2011-comum-exam","key":"Q17","kind":"OBJECTIVE","pages":[12],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":12,"regionPt":{"x0":0,"y0":91.5499,"x1":628.11,"y1":754.1085},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":190,"width":1309,"height":1382},"width":1309,"height":1382,"bytes":{"png":322711,"webpLossless":132944,"webpQ82":64824}},{"dpi":200,"cropPx":{"x":0,"y":254,"width":1745,"height":1841},"width":1745,"height":1841,"bytes":{"png":490314,"webpLossless":226154,"webpQ82":87656}}]}],"totals":{"150":{"png":322711,"webpLossless":132944,"webpQ82":64824,"decodedRgbBytes":5427114,"decodedRgbaBytes":7236152},"200":{"png":490314,"webpLossless":226154,"webpQ82":87656,"decodedRgbBytes":9637635,"decodedRgbaBytes":12850180}}},
+    {"document":"enade-2011-comum-exam","key":"Q27","kind":"OBJECTIVE","pages":[16],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":16,"regionPt":{"x0":0,"y0":91.5499,"x1":314.05705,"y1":754.1085},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":190,"width":655,"height":1382},"width":655,"height":1382,"bytes":{"png":234275,"webpLossless":42922,"webpQ82":94900}},{"dpi":200,"cropPx":{"x":0,"y":254,"width":873,"height":1841},"width":873,"height":1841,"bytes":{"png":334965,"webpLossless":56846,"webpQ82":139172}}]}],"totals":{"150":{"png":234275,"webpLossless":42922,"webpQ82":94900,"decodedRgbBytes":2715630,"decodedRgbaBytes":3620840},"200":{"png":334965,"webpLossless":56846,"webpQ82":139172,"decodedRgbBytes":4821579,"decodedRgbaBytes":6428772}}},
+    {"document":"enade-2011-comum-exam","key":"Q35","kind":"OBJECTIVE","pages":[23],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":23,"regionPt":{"x0":0,"y0":304.7799,"x1":628.11,"y1":754.3585},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":634,"width":1309,"height":938},"width":1309,"height":938,"bytes":{"png":665138,"webpLossless":296854,"webpQ82":162882}},{"dpi":200,"cropPx":{"x":0,"y":846,"width":1745,"height":1250},"width":1745,"height":1250,"bytes":{"png":1009225,"webpLossless":497680,"webpQ82":232242}}]}],"totals":{"150":{"png":665138,"webpLossless":296854,"webpQ82":162882,"decodedRgbBytes":3683526,"decodedRgbaBytes":4911368},"200":{"png":1009225,"webpLossless":497680,"webpQ82":232242,"decodedRgbBytes":6543750,"decodedRgbaBytes":8725000}}},
+    {"document":"enade-2011-comum-exam","key":"Q39","kind":"OBJECTIVE","pages":[25],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":25,"regionPt":{"x0":314.0584,"y0":91.5499,"x1":628.11,"y1":365.9499},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":654,"y":190,"width":655,"height":573},"width":655,"height":573,"bytes":{"png":113378,"webpLossless":24944,"webpQ82":49392}},{"dpi":200,"cropPx":{"x":872,"y":254,"width":873,"height":763},"width":873,"height":763,"bytes":{"png":164347,"webpLossless":33146,"webpQ82":70170}}]}],"totals":{"150":{"png":113378,"webpLossless":24944,"webpQ82":49392,"decodedRgbBytes":1125945,"decodedRgbaBytes":1501260},"200":{"png":164347,"webpLossless":33146,"webpQ82":70170,"decodedRgbBytes":1998297,"decodedRgbaBytes":2664396}}},
+    {"document":"enade-2011-comum-exam","key":"D5","kind":"DISCURSIVE","pages":[20,21],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":20,"regionPt":{"x0":0,"y0":91.5499,"x1":628.11,"y1":754.1085},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":190,"width":1309,"height":1382},"width":1309,"height":1382,"bytes":{"png":170895,"webpLossless":40390,"webpQ82":83182}},{"dpi":200,"cropPx":{"x":0,"y":254,"width":1745,"height":1841},"width":1745,"height":1841,"bytes":{"png":243871,"webpLossless":54438,"webpQ82":118730}}]},{"index":2,"page":21,"regionPt":{"x0":0,"y0":87.1358,"x1":314.05705,"y1":372.0381},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":181,"width":655,"height":595},"width":655,"height":595,"bytes":{"png":74416,"webpLossless":18932,"webpQ82":29814}},{"dpi":200,"cropPx":{"x":0,"y":242,"width":873,"height":792},"width":873,"height":792,"bytes":{"png":106569,"webpLossless":26204,"webpQ82":43536}}]}],"totals":{"150":{"png":245311,"webpLossless":59322,"webpQ82":112996,"decodedRgbBytes":6596289,"decodedRgbaBytes":8795052},"200":{"png":350440,"webpLossless":80642,"webpQ82":162266,"decodedRgbBytes":11711883,"decodedRgbaBytes":15615844}}},
+    {"document":"enade-2014-bacharelado-exam","key":"Q1","kind":"OBJECTIVE","pages":[4],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":4,"regionPt":{"x0":0,"y0":108.5429,"x1":628.11,"y1":473.299},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":226,"width":1309,"height":761},"width":1309,"height":761,"bytes":{"png":278252,"webpLossless":63146,"webpQ82":157068}},{"dpi":200,"cropPx":{"x":0,"y":301,"width":1745,"height":1014},"width":1745,"height":1014,"bytes":{"png":400625,"webpLossless":82794,"webpQ82":223342}}]}],"totals":{"150":{"png":278252,"webpLossless":63146,"webpQ82":157068,"decodedRgbBytes":2988447,"decodedRgbaBytes":3984596},"200":{"png":400625,"webpLossless":82794,"webpQ82":223342,"decodedRgbBytes":5308290,"decodedRgbaBytes":7077720}}},
+    {"document":"enade-2014-bacharelado-exam","key":"Q5","kind":"OBJECTIVE","pages":[6],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":6,"regionPt":{"x0":314.055,"y0":108.5429,"x1":628.11,"y1":751.9681},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":654,"y":226,"width":655,"height":1341},"width":655,"height":1341,"bytes":{"png":304301,"webpLossless":64346,"webpQ82":139586}},{"dpi":200,"cropPx":{"x":872,"y":301,"width":873,"height":1788},"width":873,"height":1788,"bytes":{"png":449251,"webpLossless":86620,"webpQ82":196714}}]}],"totals":{"150":{"png":304301,"webpLossless":64346,"webpQ82":139586,"decodedRgbBytes":2635065,"decodedRgbaBytes":3513420},"200":{"png":449251,"webpLossless":86620,"webpQ82":196714,"decodedRgbBytes":4682772,"decodedRgbaBytes":6243696}}},
+    {"document":"enade-2014-bacharelado-exam","key":"Q12","kind":"OBJECTIVE","pages":[14],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":14,"regionPt":{"x0":0,"y0":108.5429,"x1":628.11,"y1":751.9681},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":226,"width":1309,"height":1341},"width":1309,"height":1341,"bytes":{"png":206291,"webpLossless":43878,"webpQ82":96316}},{"dpi":200,"cropPx":{"x":0,"y":301,"width":1745,"height":1788},"width":1745,"height":1788,"bytes":{"png":291407,"webpLossless":60670,"webpQ82":137856}}]}],"totals":{"150":{"png":206291,"webpLossless":43878,"webpQ82":96316,"decodedRgbBytes":5266107,"decodedRgbaBytes":7021476},"200":{"png":291407,"webpLossless":60670,"webpQ82":137856,"decodedRgbBytes":9360180,"decodedRgbaBytes":12480240}}},
+    {"document":"enade-2014-bacharelado-exam","key":"Q16","kind":"OBJECTIVE","pages":[16],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":16,"regionPt":{"x0":0,"y0":108.5429,"x1":314.055,"y1":751.9681},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":226,"width":655,"height":1341},"width":655,"height":1341,"bytes":{"png":139851,"webpLossless":31670,"webpQ82":57620}},{"dpi":200,"cropPx":{"x":0,"y":301,"width":873,"height":1788},"width":873,"height":1788,"bytes":{"png":200134,"webpLossless":42298,"webpQ82":82004}}]},{"index":2,"page":16,"regionPt":{"x0":314.055,"y0":0.5,"x1":628.11,"y1":751.9681},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":654,"y":1,"width":655,"height":1566},"width":655,"height":1566,"bytes":{"png":123320,"webpLossless":28118,"webpQ82":45866}},{"dpi":200,"cropPx":{"x":872,"y":1,"width":873,"height":2088},"width":873,"height":2088,"bytes":{"png":176600,"webpLossless":38530,"webpQ82":64852}}]}],"totals":{"150":{"png":263171,"webpLossless":59788,"webpQ82":103486,"decodedRgbBytes":5712255,"decodedRgbaBytes":7616340},"200":{"png":376734,"webpLossless":80828,"webpQ82":146856,"decodedRgbBytes":10151244,"decodedRgbaBytes":13534992}}},
+    {"document":"enade-2014-bacharelado-exam","key":"Q27","kind":"OBJECTIVE","pages":[22],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":22,"regionPt":{"x0":314.055,"y0":108.5429,"x1":628.11,"y1":751.9681},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":654,"y":226,"width":655,"height":1341},"width":655,"height":1341,"bytes":{"png":57359,"webpLossless":13720,"webpQ82":23152}},{"dpi":200,"cropPx":{"x":872,"y":301,"width":873,"height":1788},"width":873,"height":1788,"bytes":{"png":84407,"webpLossless":19748,"webpQ82":32254}}]}],"totals":{"150":{"png":57359,"webpLossless":13720,"webpQ82":23152,"decodedRgbBytes":2635065,"decodedRgbaBytes":3513420},"200":{"png":84407,"webpLossless":19748,"webpQ82":32254,"decodedRgbBytes":4682772,"decodedRgbaBytes":6243696}}},
+    {"document":"enade-2014-bacharelado-exam","key":"D3","kind":"DISCURSIVE","pages":[9],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":9,"regionPt":{"x0":0,"y0":108.5429,"x1":628.11,"y1":751.9681},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":226,"width":1309,"height":1341},"width":1309,"height":1341,"bytes":{"png":221283,"webpLossless":67850,"webpQ82":102512}},{"dpi":200,"cropPx":{"x":0,"y":301,"width":1745,"height":1788},"width":1745,"height":1788,"bytes":{"png":312352,"webpLossless":93132,"webpQ82":140598}}]}],"totals":{"150":{"png":221283,"webpLossless":67850,"webpQ82":102512,"decodedRgbBytes":5266107,"decodedRgbaBytes":7021476},"200":{"png":312352,"webpLossless":93132,"webpQ82":140598,"decodedRgbBytes":9360180,"decodedRgbaBytes":12480240}}},
+    {"document":"enade-2017-bacharelado-exam","key":"Q8","kind":"OBJECTIVE","pages":[12,13],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":12,"regionPt":{"x0":0,"y0":88.7,"x1":628.11,"y1":777.0193},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":184,"width":1309,"height":1435},"width":1309,"height":1435,"bytes":{"png":602054,"webpLossless":388100,"webpQ82":129856}},{"dpi":200,"cropPx":{"x":0,"y":246,"width":1745,"height":1913},"width":1745,"height":1913,"bytes":{"png":925520,"webpLossless":566274,"webpQ82":182070}}]},{"index":2,"page":13,"regionPt":{"x0":0,"y0":73.0101,"x1":628.11,"y1":115.0891},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":152,"width":1309,"height":88},"width":1309,"height":88,"bytes":{"png":8855,"webpLossless":2972,"webpQ82":3372}},{"dpi":200,"cropPx":{"x":0,"y":202,"width":1745,"height":118},"width":1745,"height":118,"bytes":{"png":9292,"webpLossless":3032,"webpQ82":4858}}]}],"totals":{"150":{"png":610909,"webpLossless":391072,"webpQ82":133228,"decodedRgbBytes":5980821,"decodedRgbaBytes":7974428},"200":{"png":934812,"webpLossless":569306,"webpQ82":186928,"decodedRgbBytes":10632285,"decodedRgbaBytes":14176380}}},
+    {"document":"enade-2017-bacharelado-exam","key":"Q10","kind":"OBJECTIVE","pages":[17],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":17,"regionPt":{"x0":0,"y0":88.7,"x1":314.055,"y1":777.0193},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":184,"width":655,"height":1435},"width":655,"height":1435,"bytes":{"png":225439,"webpLossless":44834,"webpQ82":97756}},{"dpi":200,"cropPx":{"x":0,"y":246,"width":873,"height":1913},"width":873,"height":1913,"bytes":{"png":319016,"webpLossless":60282,"webpQ82":137244}}]}],"totals":{"150":{"png":225439,"webpLossless":44834,"webpQ82":97756,"decodedRgbBytes":2819775,"decodedRgbaBytes":3759700},"200":{"png":319016,"webpLossless":60282,"webpQ82":137244,"decodedRgbBytes":5010147,"decodedRgbaBytes":6680196}}},
+    {"document":"enade-2017-bacharelado-exam","key":"Q20","kind":"OBJECTIVE","pages":[23],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":23,"regionPt":{"x0":0,"y0":88.7,"x1":628.11,"y1":326.768},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":184,"width":1309,"height":497},"width":1309,"height":497,"bytes":{"png":109295,"webpLossless":28026,"webpQ82":50832}},{"dpi":200,"cropPx":{"x":0,"y":246,"width":1745,"height":662},"width":1745,"height":662,"bytes":{"png":158171,"webpLossless":38500,"webpQ82":73670}}]}],"totals":{"150":{"png":109295,"webpLossless":28026,"webpQ82":50832,"decodedRgbBytes":1951719,"decodedRgbaBytes":2602292},"200":{"png":158171,"webpLossless":38500,"webpQ82":73670,"decodedRgbBytes":3465570,"decodedRgbaBytes":4620760}}},
+    {"document":"enade-2017-bacharelado-exam","key":"Q22","kind":"OBJECTIVE","pages":[24],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":24,"regionPt":{"x0":0,"y0":88.7,"x1":314.055,"y1":777.0193},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":184,"width":655,"height":1435},"width":655,"height":1435,"bytes":{"png":221553,"webpLossless":43362,"webpQ82":94124}},{"dpi":200,"cropPx":{"x":0,"y":246,"width":873,"height":1913},"width":873,"height":1913,"bytes":{"png":312951,"webpLossless":57116,"webpQ82":129578}}]}],"totals":{"150":{"png":221553,"webpLossless":43362,"webpQ82":94124,"decodedRgbBytes":2819775,"decodedRgbaBytes":3759700},"200":{"png":312951,"webpLossless":57116,"webpQ82":129578,"decodedRgbBytes":5010147,"decodedRgbaBytes":6680196}}},
+    {"document":"enade-2017-bacharelado-exam","key":"Q26","kind":"OBJECTIVE","pages":[26],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":26,"regionPt":{"x0":0,"y0":88.7,"x1":314.055,"y1":777.0193},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":184,"width":655,"height":1435},"width":655,"height":1435,"bytes":{"png":459732,"webpLossless":271996,"webpQ82":70394}},{"dpi":200,"cropPx":{"x":0,"y":246,"width":873,"height":1913},"width":873,"height":1913,"bytes":{"png":692404,"webpLossless":412606,"webpQ82":98084}}]}],"totals":{"150":{"png":459732,"webpLossless":271996,"webpQ82":70394,"decodedRgbBytes":2819775,"decodedRgbaBytes":3759700},"200":{"png":692404,"webpLossless":412606,"webpQ82":98084,"decodedRgbBytes":5010147,"decodedRgbaBytes":6680196}}},
+    {"document":"enade-2017-bacharelado-exam","key":"Q28","kind":"OBJECTIVE","pages":[27],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":27,"regionPt":{"x0":0,"y0":88.7,"x1":314.055,"y1":777.0193},"pagePt":{"width":628.11,"height":826.535},"variants":[{"dpi":150,"cropPx":{"x":0,"y":184,"width":655,"height":1435},"width":655,"height":1435,"bytes":{"png":158628,"webpLossless":32454,"webpQ82":64292}},{"dpi":200,"cropPx":{"x":0,"y":246,"width":873,"height":1913},"width":873,"height":1913,"bytes":{"png":222124,"webpLossless":41522,"webpQ82":86924}}]}],"totals":{"150":{"png":158628,"webpLossless":32454,"webpQ82":64292,"decodedRgbBytes":2819775,"decodedRgbaBytes":3759700},"200":{"png":222124,"webpLossless":41522,"webpQ82":86924,"decodedRgbBytes":5010147,"decodedRgbaBytes":6680196}}},
+    {"document":"enade-2021-bacharelado-exam","key":"Q2","kind":"OBJECTIVE","pages":[6,7],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":6,"regionPt":{"x0":0,"y0":76.9465,"x1":566.929,"y1":747.0902},"pagePt":{"width":566.929,"height":779.528},"variants":[{"dpi":150,"cropPx":{"x":0,"y":160,"width":1182,"height":1397},"width":1182,"height":1397,"bytes":{"png":439017,"webpLossless":256350,"webpQ82":55636}},{"dpi":200,"cropPx":{"x":0,"y":213,"width":1575,"height":1863},"width":1575,"height":1863,"bytes":{"png":640718,"webpLossless":358488,"webpQ82":76606}}]},{"index":2,"page":7,"regionPt":{"x0":0,"y0":49.5066,"x1":566.929,"y1":747.0902},"pagePt":{"width":566.929,"height":779.528},"variants":[{"dpi":150,"cropPx":{"x":0,"y":103,"width":1182,"height":1454},"width":1182,"height":1454,"bytes":{"png":346293,"webpLossless":73166,"webpQ82":189912}},{"dpi":200,"cropPx":{"x":0,"y":137,"width":1575,"height":1939},"width":1575,"height":1939,"bytes":{"png":494875,"webpLossless":100416,"webpQ82":262216}}]}],"totals":{"150":{"png":785310,"webpLossless":329516,"webpQ82":245548,"decodedRgbBytes":10109646,"decodedRgbaBytes":13479528},"200":{"png":1135593,"webpLossless":458904,"webpQ82":338822,"decodedRgbBytes":17964450,"decodedRgbaBytes":23952600}}},
+    {"document":"enade-2021-bacharelado-exam","key":"Q9","kind":"OBJECTIVE","pages":[19],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":19,"regionPt":{"x0":0,"y0":76.9465,"x1":283.4645,"y1":747.0902},"pagePt":{"width":566.929,"height":779.528},"variants":[{"dpi":150,"cropPx":{"x":0,"y":160,"width":591,"height":1397},"width":591,"height":1397,"bytes":{"png":212931,"webpLossless":46382,"webpQ82":92564}},{"dpi":200,"cropPx":{"x":0,"y":213,"width":788,"height":1863},"width":788,"height":1863,"bytes":{"png":304050,"webpLossless":64592,"webpQ82":126252}}]}],"totals":{"150":{"png":212931,"webpLossless":46382,"webpQ82":92564,"decodedRgbBytes":2476881,"decodedRgbaBytes":3302508},"200":{"png":304050,"webpLossless":64592,"webpQ82":126252,"decodedRgbBytes":4404132,"decodedRgbaBytes":5872176}}},
+    {"document":"enade-2021-bacharelado-exam","key":"Q16","kind":"OBJECTIVE","pages":[25],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":25,"regionPt":{"x0":0,"y0":76.9465,"x1":566.929,"y1":747.0902},"pagePt":{"width":566.929,"height":779.528},"variants":[{"dpi":150,"cropPx":{"x":0,"y":160,"width":1182,"height":1397},"width":1182,"height":1397,"bytes":{"png":172418,"webpLossless":44954,"webpQ82":97748}},{"dpi":200,"cropPx":{"x":0,"y":213,"width":1575,"height":1863},"width":1575,"height":1863,"bytes":{"png":244701,"webpLossless":64452,"webpQ82":132354}}]}],"totals":{"150":{"png":172418,"webpLossless":44954,"webpQ82":97748,"decodedRgbBytes":4953762,"decodedRgbaBytes":6605016},"200":{"png":244701,"webpLossless":64452,"webpQ82":132354,"decodedRgbBytes":8802675,"decodedRgbaBytes":11736900}}},
+    {"document":"enade-2021-bacharelado-exam","key":"Q20","kind":"OBJECTIVE","pages":[29],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":29,"regionPt":{"x0":0,"y0":76.9465,"x1":566.929,"y1":747.0902},"pagePt":{"width":566.929,"height":779.528},"variants":[{"dpi":150,"cropPx":{"x":0,"y":160,"width":1182,"height":1397},"width":1182,"height":1397,"bytes":{"png":168728,"webpLossless":39028,"webpQ82":65260}},{"dpi":200,"cropPx":{"x":0,"y":213,"width":1575,"height":1863},"width":1575,"height":1863,"bytes":{"png":226732,"webpLossless":46400,"webpQ82":93706}}]}],"totals":{"150":{"png":168728,"webpLossless":39028,"webpQ82":65260,"decodedRgbBytes":4953762,"decodedRgbaBytes":6605016},"200":{"png":226732,"webpLossless":46400,"webpQ82":93706,"decodedRgbBytes":8802675,"decodedRgbaBytes":11736900}}},
+    {"document":"enade-2021-bacharelado-exam","key":"Q32","kind":"OBJECTIVE","pages":[41],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":41,"regionPt":{"x0":0,"y0":76.9465,"x1":566.929,"y1":747.0902},"pagePt":{"width":566.929,"height":779.528},"variants":[{"dpi":150,"cropPx":{"x":0,"y":160,"width":1182,"height":1397},"width":1182,"height":1397,"bytes":{"png":181299,"webpLossless":39272,"webpQ82":88370}},{"dpi":200,"cropPx":{"x":0,"y":213,"width":1575,"height":1863},"width":1575,"height":1863,"bytes":{"png":260588,"webpLossless":56464,"webpQ82":121796}}]}],"totals":{"150":{"png":181299,"webpLossless":39272,"webpQ82":88370,"decodedRgbBytes":4953762,"decodedRgbaBytes":6605016},"200":{"png":260588,"webpLossless":56464,"webpQ82":121796,"decodedRgbBytes":8802675,"decodedRgbaBytes":11736900}}},
+    {"document":"enade-2021-bacharelado-exam","key":"Q35","kind":"OBJECTIVE","pages":[43],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":43,"regionPt":{"x0":0,"y0":479.4343,"x1":566.929,"y1":747.0902},"pagePt":{"width":566.929,"height":779.528},"variants":[{"dpi":150,"cropPx":{"x":0,"y":998,"width":1182,"height":559},"width":1182,"height":559,"bytes":{"png":164246,"webpLossless":39666,"webpQ82":89014}},{"dpi":200,"cropPx":{"x":0,"y":1331,"width":1575,"height":745},"width":1575,"height":745,"bytes":{"png":235328,"webpLossless":53326,"webpQ82":124810}}]}],"totals":{"150":{"png":164246,"webpLossless":39666,"webpQ82":89014,"decodedRgbBytes":1982214,"decodedRgbaBytes":2642952},"200":{"png":235328,"webpLossless":53326,"webpQ82":124810,"decodedRgbBytes":3520125,"decodedRgbaBytes":4693500}}},
+    {"document":"pnd-2025-computacao-pv-4","key":"Q1","kind":"OBJECTIVE","pages":[2],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":2,"regionPt":{"x0":0,"y0":94.0261,"x1":636.614,"y1":554.0209},"pagePt":{"width":636.614,"height":849.213},"variants":[{"dpi":150,"cropPx":{"x":0,"y":195,"width":1327,"height":960},"width":1327,"height":960,"bytes":{"png":239228,"webpLossless":156000,"webpQ82":80002}},{"dpi":200,"cropPx":{"x":0,"y":261,"width":1769,"height":1278},"width":1769,"height":1278,"bytes":{"png":377646,"webpLossless":247900,"webpQ82":115408}}]}],"totals":{"150":{"png":239228,"webpLossless":156000,"webpQ82":80002,"decodedRgbBytes":3821760,"decodedRgbaBytes":5095680},"200":{"png":377646,"webpLossless":247900,"webpQ82":115408,"decodedRgbBytes":6782346,"decodedRgbaBytes":9043128}}},
+    {"document":"pnd-2025-computacao-pv-4","key":"Q6","kind":"OBJECTIVE","pages":[5],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":5,"regionPt":{"x0":0,"y0":94.0261,"x1":636.614,"y1":319.1631},"pagePt":{"width":636.614,"height":849.213},"variants":[{"dpi":150,"cropPx":{"x":0,"y":195,"width":1327,"height":470},"width":1327,"height":470,"bytes":{"png":153379,"webpLossless":46014,"webpQ82":88112}},{"dpi":200,"cropPx":{"x":0,"y":261,"width":1769,"height":626},"width":1769,"height":626,"bytes":{"png":214688,"webpLossless":63120,"webpQ82":126810}}]}],"totals":{"150":{"png":153379,"webpLossless":46014,"webpQ82":88112,"decodedRgbBytes":1871070,"decodedRgbaBytes":2494760},"200":{"png":214688,"webpLossless":63120,"webpQ82":126810,"decodedRgbBytes":3322182,"decodedRgbaBytes":4429576}}},
+    {"document":"pnd-2025-computacao-pv-4","key":"Q27","kind":"OBJECTIVE","pages":[16],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":16,"regionPt":{"x0":0,"y0":94.0261,"x1":318.307,"y1":848.713},"pagePt":{"width":636.614,"height":849.213},"variants":[{"dpi":150,"cropPx":{"x":0,"y":195,"width":664,"height":1574},"width":664,"height":1574,"bytes":{"png":371060,"webpLossless":213802,"webpQ82":99480}},{"dpi":200,"cropPx":{"x":0,"y":261,"width":885,"height":2097},"width":885,"height":2097,"bytes":{"png":567053,"webpLossless":325852,"webpQ82":143340}}]}],"totals":{"150":{"png":371060,"webpLossless":213802,"webpQ82":99480,"decodedRgbBytes":3135408,"decodedRgbaBytes":4180544},"200":{"png":567053,"webpLossless":325852,"webpQ82":143340,"decodedRgbBytes":5567535,"decodedRgbaBytes":7423380}}},
+    {"document":"pnd-2025-computacao-pv-4","key":"Q30","kind":"OBJECTIVE","pages":[17],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":17,"regionPt":{"x0":0,"y0":350.9111,"x1":636.614,"y1":848.713},"pagePt":{"width":636.614,"height":849.213},"variants":[{"dpi":150,"cropPx":{"x":0,"y":731,"width":1327,"height":1038},"width":1327,"height":1038,"bytes":{"png":124309,"webpLossless":33902,"webpQ82":66486}},{"dpi":200,"cropPx":{"x":0,"y":974,"width":1769,"height":1384},"width":1769,"height":1384,"bytes":{"png":177079,"webpLossless":47148,"webpQ82":98206}}]}],"totals":{"150":{"png":124309,"webpLossless":33902,"webpQ82":66486,"decodedRgbBytes":4132278,"decodedRgbaBytes":5509704},"200":{"png":177079,"webpLossless":47148,"webpQ82":98206,"decodedRgbBytes":7344888,"decodedRgbaBytes":9793184}}},
+    {"document":"pnd-2025-computacao-pv-4","key":"Q64","kind":"OBJECTIVE","pages":[31],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":31,"regionPt":{"x0":318.307,"y0":330.4073,"x1":636.614,"y1":848.713},"pagePt":{"width":636.614,"height":849.213},"variants":[{"dpi":150,"cropPx":{"x":663,"y":688,"width":664,"height":1081},"width":664,"height":1081,"bytes":{"png":195165,"webpLossless":61162,"webpQ82":90734}},{"dpi":200,"cropPx":{"x":884,"y":917,"width":885,"height":1441},"width":885,"height":1441,"bytes":{"png":278471,"webpLossless":86274,"webpQ82":128756}}]}],"totals":{"150":{"png":195165,"webpLossless":61162,"webpQ82":90734,"decodedRgbBytes":2153352,"decodedRgbaBytes":2871136},"200":{"png":278471,"webpLossless":86274,"webpQ82":128756,"decodedRgbBytes":3825855,"decodedRgbaBytes":5101140}}},
+    {"document":"pnd-2025-computacao-pv-4","key":"D1","kind":"DISCURSIVE","pages":[18,19],"reviewStatus":"CROP_BOUNDARIES_NOT_APPROVED","fragments":[{"index":1,"page":18,"regionPt":{"x0":0,"y0":94.0261,"x1":636.614,"y1":848.713},"pagePt":{"width":636.614,"height":849.213},"variants":[{"dpi":150,"cropPx":{"x":0,"y":195,"width":1327,"height":1574},"width":1327,"height":1574,"bytes":{"png":286772,"webpLossless":94050,"webpQ82":152542}},{"dpi":200,"cropPx":{"x":0,"y":261,"width":1769,"height":2097},"width":1769,"height":2097,"bytes":{"png":410189,"webpLossless":134778,"webpQ82":225024}}]},{"index":2,"page":19,"regionPt":{"x0":0,"y0":81.5145,"x1":636.614,"y1":848.713},"pagePt":{"width":636.614,"height":849.213},"variants":[{"dpi":150,"cropPx":{"x":0,"y":169,"width":1327,"height":1600},"width":1327,"height":1600,"bytes":{"png":46097,"webpLossless":10926,"webpQ82":21236}},{"dpi":200,"cropPx":{"x":0,"y":226,"width":1769,"height":2132},"width":1769,"height":2132,"bytes":{"png":64617,"webpLossless":16304,"webpQ82":31600}}]}],"totals":{"150":{"png":332869,"webpLossless":104976,"webpQ82":173778,"decodedRgbBytes":12635694,"decodedRgbaBytes":16847592},"200":{"png":474806,"webpLossless":151082,"webpQ82":256624,"decodedRgbBytes":22443303,"decodedRgbaBytes":29924404}}}
+  ]
+}
