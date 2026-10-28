@@ -21,6 +21,8 @@ import {
   restorePdfOptionMarkers,
   segmentQuestions,
 } from "./lib/question-extraction.mjs";
+import { assertCalibriTextDocument, assertTextCopyGeometry,
+  createDerivedQuestionText } from "./lib/derived-question-text.mjs";
 
 const run = promisify(execFile);
 const RENDER_DPI = 100;
@@ -31,6 +33,7 @@ const SYMBOL_FONT =
 const IGNORED_FONT = /bundesbahn|c39/i;
 
 function options(argv) {
+  let pythonSpecified = false;
   const out = {
     directory: "enade-pdfs",
     output: ".local/question-drafts",
@@ -38,27 +41,35 @@ function options(argv) {
     ocr: false,
     ocrDpi: 200,
     tessdata: null,
+    repairCalibri: false,
+    python: "python3",
   };
   for (let i = 0; i < argv.length; i++) {
     const [name, value] = [argv[i], argv[i + 1]];
     if (name === "--ocr") { out.ocr = true; continue; }
+    if (name === "--repair-calibri") { out.repairCalibri = true; continue; }
     if (!value || value.startsWith("--")) throw new Error(`${name}: valor ausente.`);
     if (name === "--directory") out.directory = value;
     else if (name === "--output") out.output = value;
     else if (name === "--id") out.ids.push(...value.split(","));
     else if (name === "--tessdata-dir") out.tessdata = resolve(value);
     else if (name === "--ocr-dpi") out.ocrDpi = Number(value);
+    else if (name === "--python") { out.python = value; pythonSpecified = true; }
     else throw new Error(`Opção desconhecida: ${name}`);
     i++;
   }
   if (!out.ids.length)
     throw new Error(
-      "Uso: node scripts/extract-questions.mjs --id enade-2021-bacharelado-exam [--directory enade-pdfs] [--output .local/question-drafts]",
+      "Uso: node scripts/extract-questions.mjs --id enade-2021-bacharelado-exam [--directory enade-pdfs] [--output .local/question-drafts] [--repair-calibri --python python3]",
     );
   if (!Number.isInteger(out.ocrDpi) || out.ocrDpi < 150 || out.ocrDpi > 400)
     throw new Error("--ocr-dpi deve ser inteiro de 150 a 400.");
+  if (out.ocr && out.repairCalibri)
+    throw new Error("--repair-calibri não pode ser combinado com --ocr.");
   if (out.ocr && !out.tessdata)
     throw new Error("--ocr exige --tessdata-dir com por.traineddata local.");
+  if (pythonSpecified && !out.repairCalibri)
+    throw new Error("--python exige --repair-calibri.");
   return out;
 }
 
@@ -219,6 +230,7 @@ async function extract(catalog, id, opts) {
   if (!doc || doc.kind !== "EXAM")
     throw new Error(`${id}: prova não encontrada no catálogo.`);
   const format = historicalFormat(doc);
+  if (opts.repairCalibri) assertCalibriTextDocument(doc);
   const keyDoc = selectAnswerKey(catalog.documents, doc);
   const examPath = await verified(doc, opts.directory);
   const keyAvailable = !!keyDoc?.sha256;
@@ -229,6 +241,18 @@ async function extract(catalog, id, opts) {
       maxBuffer: 64 * 1024 * 1024,
     });
     let nativePages = parseBboxHtml(html);
+    let textPages = nativePages;
+    let textCopy = null;
+    if (opts.repairCalibri) {
+      const derived = await createDerivedQuestionText({ document: doc, originalPath: examPath,
+        workDirectory: work, python: opts.python });
+      const { stdout: textHtml } = await run("pdftotext", ["-bbox", derived.path, "-"], {
+        timeout: 30000, maxBuffer: 64 * 1024 * 1024,
+      });
+      textPages = parseBboxHtml(textHtml);
+      assertTextCopyGeometry(nativePages, textPages);
+      textCopy = derived.receipt;
+    }
     let optionFonts = null;
     if (doc.year <= 2011 && !opts.ocr) {
       const { stdout: xml } = await run("pdftohtml", ["-xml", "-i", "-hidden", "-stdout", examPath], {
@@ -236,10 +260,12 @@ async function extract(catalog, id, opts) {
       });
       const annotated = annotatePdfOptionFonts(nativePages, xml, format.expectedOptionLetters ?? "ABCDE");
       nativePages = annotated.pages;
+      textPages = nativePages;
       optionFonts = { fonts: annotated.fonts, markers: annotated.markers, unmatched: annotated.unmatched };
     }
     const { pages, extraction } = opts.ocr ? await ocrPages(examPath, nativePages, work, opts) :
-      { pages: nativePages, extraction: { method: "PDF_TEXT", ...(optionFonts ? { optionFonts } : {}) } };
+      { pages: textPages, extraction: { method: "PDF_TEXT", ...(optionFonts ? { optionFonts } : {}),
+        ...(textCopy ? { textCopy } : {}) } };
     const keyText = keyPath ? (await run("pdftotext", ["-layout", keyPath, "-"])).stdout : "";
     const { answers, definitive } = parseAnswerKey(keyText);
     const keyPages = new Map();
@@ -260,6 +286,8 @@ async function extract(catalog, id, opts) {
       ...format,
     }).map((item) => ({
       ...item,
+      ...(textCopy ? { flags: [...item.flags, "texto-derivado-calibri"],
+        status: item.status === "rascunho" ? "revisao-manual" : item.status } : {}),
       source: {
         examId: doc.id,
         examSha256: doc.sha256,
@@ -284,6 +312,7 @@ async function extract(catalog, id, opts) {
       if (item.kind === "DISCURSIVE" && !format.expectedDiscursive.includes(item.key) &&
         !check.unexpected.includes(item.key)) check.unexpected.push(item.key);
     const warnings = [
+      ...(textCopy ? ["Texto extraído de cópia Unicode gerada localmente; imagem, páginas e procedência pertencem ao PDF original. A cópia e seu recibo não aprovam a fidelidade do item."] : []),
       ...(optionFonts ? ["Marcadores das edições antigas foram comparados ao XML de fontes do próprio PDF; alternativas e reconstruções de layout continuam exigindo conferência visual."] : []),
       ...(opts.ocr ? ["OCR exige confronto de cada item com a página renderizada, inclusive alternativas, símbolos e figuras."] : []),
       ...(doc.year < 2014 ? ["Caderno compartilhado: os blocos de outros cursos foram preservados com courseScope e não são automaticamente questões de Ciência da Computação."] : []),
