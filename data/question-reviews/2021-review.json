@@ -321,7 +321,8 @@
       "topic": "Sistemas operacionais e escalonamento",
       "explanation": "O gabarito E associa escalonamento por prioridades a sistemas interativos. RMS é empregado em tarefas periódicas de tempo real; tarefa mais curta primeiro é tipicamente discutida em processamento em lote; round-robin favorece resposta em sistemas interativos, sem garantir por si só prazos de tempo real. A opção A usa FILO, não FIFO. A adequação concreta depende também das prioridades, da preempção e das cargas de trabalho.",
       "notes": [
-        "Conferência visual assistida da coluna esquerda da página 19 do Bacharelado: todas as alternativas pertencem a Q9 e não se misturam com Q10."
+        "CNT-V1 lote 2: conferência independente por codex-review-2021-b2 da página PDF 19, do recorte exato e da página 1 do gabarito definitivo; chave E e todas as alternativas A–E preservadas.",
+        "Q9 permanece somente na coluna esquerda; nenhuma linha de Q10 foi incorporada. FILO aparece no original em A, não deve ser corrigido para FIFO."
       ],
       "issues": [],
       "disposition": "CONTENT_CHECKED"
@@ -333,7 +334,8 @@
       "topic": "Estruturas de dados lineares",
       "explanation": "O gabarito B corresponde a deque, lista simplesmente ligada, pilha e fila. Um deque permite inserção nas duas extremidades; uma lista simplesmente ligada conecta cada nó ao próximo; a pilha remove em ordem LIFO e a fila em ordem FIFO. As outras combinações trocam essas propriedades ou atribuem às listas operações que não as definem.",
       "notes": [
-        "Conferência visual assistida da coluna direita da página 19 do Bacharelado: as quatro classes e as cinco opções estão presentes."
+        "CNT-V1 lote 2: conferência independente por codex-review-2021-b2 da página PDF 19, do recorte exato e da página 1 do gabarito definitivo; chave B e todas as alternativas A–E preservadas.",
+        "As quatro classes e as cinco opções estão completas na coluna direita; A–D identificam as classes do enunciado, sem confusão com os marcadores das alternativas."
       ],
       "issues": [],
       "disposition": "CONTENT_CHECKED"
@@ -343,18 +345,15 @@
       "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
       "key": "Q11",
       "topic": "Aprendizado profundo e classificação de imagens",
-      "explanation": "O gabarito D seleciona II e IV. Redes convolucionais são adequadas à estrutura espacial de imagens, e mais exemplos úteis podem melhorar a generalização, embora aumentem o custo de treino. Mais camadas ou neurônios não asseguram simultaneamente maior acurácia e menor tempo. Redes recorrentes não são a escolha geral sugerida para esta tarefa de imagens estáticas.",
+      "explanation": "O gabarito D seleciona II e IV no contexto didático da classificação de imagens. Redes convolucionais exploram a estrutura espacial, e mais exemplos úteis podem melhorar a generalização, embora elevem o custo de treino. Acrescentar camadas ou neurônios não fundamenta, por si só, a simultânea redução do tempo de treino indicada em I e III. A afirmação V não descreve a recomendação geral esperada para imagens estáticas; isso não prova impossibilidade de empregar recorrência em aplicações de visão computacional.",
       "notes": [
-        "A figura da arquitetura de rede inclui conexões, pesos e função de perda que não são preservados pelo texto linearizado; a análise das afirmações não libera a omissão desse diagrama."
+        "CNT-V1 lote 2: conferência independente por codex-review-2021-b2 da página PDF 20, do recorte exato e da página 1 do gabarito definitivo; chave D e todas as alternativas A–E preservadas.",
+        "A arquitetura foi efetivamente examinada: Σ agrega o retorno da função de perda ao otimizador; o caminho de ajuste de pesos e as saídas Y′/Y estão completos. Aprovação do recorte não aprova a linearização como descrição acessível do diagrama."
       ],
       "issues": [
         {
-          "code": "CONFERIR_RECURSO_VISUAL",
-          "note": "Rede neural e fluxo de treinamento na página 20, ainda sem inspeção visual neste relatório."
-        },
-        {
           "code": "CONFERIR_SIMBOLOS",
-          "note": "Há símbolos em fonte própria: confrontar os operadores e índices com a página original antes de aprovar a transcrição."
+          "note": "A imagem foi conferida e preserva Σ, setas e Y′/Y, mas a transcrição auxiliar contém S no lugar do somatório e lineariza a topologia. Manter essa pendência textual explícita; não apresentar o texto como diagrama completo."
         }
       ],
       "disposition": "MANUAL_REQUIRED"
@@ -366,13 +365,15 @@
       "topic": "LGPD e proteção de dados pessoais",
       "explanation": "O gabarito B seleciona I e III. Dados sensíveis recebem proteção específica, e o titular dispõe de direitos de confirmação, acesso, correção e, nas hipóteses legais, eliminação. II ignora que a reversibilidade da anonimização pode recolocar dados no âmbito da lei; IV atribui à ANPD poder de modificar a própria legislação, que não se confunde com regulação e fiscalização. Eliminação não é um direito absoluto diante das bases legais de retenção.",
       "notes": [
-        "Conferência visual assistida da página 21 do Bacharelado: a frase “em vigência desde o final de 2018” está no original e não resulta de OCR.",
-        "A vigência da Lei 13.709/2018 é escalonada: distinguir publicação, dispositivos relativos à autoridade e vigência das obrigações/sanções ao contextualizar o art. 65. Preservar o texto histórico e o gabarito B."
+        "CNT-V1 lote 2: conferência independente por codex-review-2021-b2 da página PDF 21, do recorte exato e da página 1 do gabarito definitivo; chave B e todas as alternativas A–E preservadas.",
+        "A frase “em vigência desde o final de 2018” foi novamente constatada no original; a ressalva pertence à fonte, não ao extrator.",
+        "A conferência independente do recorte manteve a ressalva de vigência escalonada e de alcance dos direitos. A análise não trata eliminação como direito absoluto diante das hipóteses legais de retenção.",
+        "Consulta complementar por codex-root: tradução inglesa atualizada da LGPD divulgada pela ANPD, art. 65 na página PDF 37, distingue dispositivos com vigência em 28/12/2018, sanções em 01/08/2021 e outro prazo para os demais artigos. Isso confirma que não cabe generalizar todo o regime como vigente no fim de 2018. A consulta é parcial e não substitui o texto normativo português nem valida todas as alterações legislativas. Fonte: https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/lei-lgpd-em-ingles-atualizada-pos-lei-no-15-352-2026.pdf/@@display-file/file (SHA-256 afe3e850bb670a347470a058247019fed7b4a4dfe4bfca11eef887dc037b56e4)."
       ],
       "issues": [
         {
           "code": "CONFERIR_CONTEXTO_LEGAL",
-          "note": "A abertura generaliza a vigência da LGPD como se todo o regime vigorasse desde o fim de 2018. Conferir o art. 65 e contextualizar as datas por grupo de dispositivos antes de aprovar o comentário."
+          "note": "O original generaliza a vigência de todo o regime como sendo desde o fim de 2018. Consulta parcial ao art. 65 em tradução inglesa divulgada pela ANPD confirma grupos com marcos diferentes; ainda falta contextualização completa no texto normativo em português e no comentário. Preservar a imagem histórica e B."
         }
       ],
       "disposition": "MANUAL_REQUIRED"
@@ -384,8 +385,9 @@
       "topic": "Desenvolvimento iterativo e acessibilidade",
       "explanation": "O gabarito oficial é E: testes de usabilidade devem considerar critérios de acessibilidade. A interpretação esperada rejeita adiar usabilidade ao último ciclo e tratar mudanças de requisitos como algo a evitar por princípio. Contudo, D afirma apenas que um subsistema executável poderá ser usado pelo cliente como protótipo, possibilidade plausível em um uso amplo de protótipo evolutivo. Essa ambiguidade deve ser avaliada antes da publicação de uma justificativa definitiva.",
       "notes": [
-        "Conferência visual assistida da página 22 do Bacharelado: a redação de D está íntegra; a ambiguidade não surgiu na extração.",
-        "Não alterar E, escolher D ou afirmar anulação sem documentação oficial."
+        "CNT-V1 lote 2: conferência independente por codex-review-2021-b2 da página PDF 22, do recorte exato e da página 1 do gabarito definitivo; chave E e todas as alternativas A–E preservadas.",
+        "A redação literal de D é “poderá ser utilizado pelo cliente como protótipo”; essa possibilidade não foi introduzida pela extração.",
+        "A bibliografia citada não foi consultada externamente nesta passagem. O parecer não troca E por D nem declara anulação."
       ],
       "issues": [
         {
@@ -402,13 +404,15 @@
       "topic": "Arquitetura de Von Neumann",
       "explanation": "O gabarito C considera I verdadeira e II falsa. A organização de programa armazenado permanece uma referência arquitetural, mas busca antecipada de instruções não é uma garantia definidora da arquitetura de Von Neumann nem dispensa universalmente acesso à memória. O comentário deve separar o modelo arquitetural de otimizações como prefetch e pipeline.",
       "notes": [
-        "A página 23 do Bacharelado foi inspecionada: não contém figura. O alerta do extrator vem da palavra “mapa” em uma explicação sobre GPS.",
-        "A introdução contém simplificações históricas (“primeiro computador”, década atribuída ao conceito) que não foram validadas contra bibliografia histórica. Não repeti-las como fatos incontroversos no comentário."
+        "CNT-V1 lote 2: conferência independente por codex-review-2021-b2 da página PDF 23, do recorte exato e da página 1 do gabarito definitivo; chave C e todas as alternativas A–E preservadas.",
+        "Não há figura na página: “mapa” aparece somente na analogia com GPS. O recorte não tem pendência visual.",
+        "A asserção I data explicitamente o conceito nos anos 1950; a divergência com a formulação de programa armazenado associada ao First Draft de 1945 precisa ser conferida em bibliografia histórica. O documento de 1945 não foi obtido nem verificado nesta passagem.",
+        "A afirmação introdutória de que ENIAC foi o primeiro computador também carece de qualificação. Não converter essas generalizações em fatos incontroversos nem alterar a resposta oficial C."
       ],
       "issues": [
         {
-          "code": "CONFERIR_ALERTA_VISUAL",
-          "note": "Alerta heurístico de menção a mapa; nenhuma figura está presente na página 23 conferida."
+          "code": "INCONSISTENCIA_HISTORICA_NA_FONTE",
+          "note": "A asserção I contém a datação “conceito da década de 1950”, em tensão com a formulação de programa armazenado associada ao First Draft de 1945. A cronologia afeta a afirmação considerada verdadeira pela chave C e exige conferência bibliográfica; a introdução “primeiro computador” precisa de qualificação. A imagem está fiel ao original."
         }
       ],
       "disposition": "MANUAL_REQUIRED"
@@ -420,7 +424,9 @@
       "topic": "Scrum e equipes autogerenciáveis",
       "explanation": "O gabarito C seleciona I e II. O Scrum Master promove a compreensão e a aplicação do Scrum; o Product Owner responde pelo valor e pelo foco do produto. III descreve uma autoridade hierárquica direta incompatível com a autogestão da equipe. Planejamento incremental continua sendo planejamento: não se deve concluir do texto que métodos ágeis eliminam toda forma de planejar ou documentar.",
       "notes": [
-        "Conferência visual assistida da página 24 do Bacharelado feita. A abertura diz substituir o gerenciamento baseado em planos pelo planejamento incremental; não diz eliminar todo planejamento."
+        "CNT-V1 lote 2: conferência independente por codex-review-2021-b2 da página PDF 24, do recorte exato e da página 1 do gabarito definitivo; chave C e todas as alternativas A–E preservadas.",
+        "A introdução fala em substituir o gerenciamento baseado em planos pelo planejamento incremental. Não diz eliminar todo planejamento ou documentação.",
+        "Na explicação, distinguir responsabilidades de produto e facilitação de uma autoridade hierárquica direta sobre a equipe."
       ],
       "issues": [],
       "disposition": "CONTENT_CHECKED"
@@ -430,19 +436,16 @@
       "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
       "key": "Q16",
       "topic": "Álgebra booleana e circuitos lógicos",
-      "explanation": "",
+      "explanation": "A chave oficial B corresponde ao circuito efetivamente conferido: X₁ passa por um inversor; X₂ passa por outro inversor e se combina com X₃ em uma porta AND; os dois resultados entram em uma porta OR, seguida de inversor. Assim, a saída é ¬(¬X₁ ∨ (¬X₂ ∧ X₃)), equivalente à expressão da alternativa B e, pela lei de De Morgan, a X₁ ∧ (X₂ ∨ ¬X₃). As outras alternativas mudam a posição de ao menos uma negação.",
       "notes": [
-        "O documento oficial aponta B. A correspondência entre o circuito e a expressão deve ser reconstruída a partir das portas e bolhas de negação da figura; não se pode validar B somente pelos rótulos X¹, X² e X³ disponíveis no texto.",
-        "Preservar índices de variáveis, parênteses e negações das alternativas; o texto linearizado não descreve a topologia do circuito."
+        "CNT-V1 lote 2: conferência independente por codex-review-2021-b2 da página PDF 25, do recorte exato e da página 1 do gabarito definitivo; chave B e todas as alternativas A–E preservadas.",
+        "As portas de referência, os fios e as três bolhas de inversão do circuito foram efetivamente inspecionados, tanto na página original como no WebP. Não foi inferido o circuito somente dos rótulos textuais.",
+        "Todos os parênteses e sinais de negação das cinco alternativas foram confrontados; a chave B foi lida diretamente no gabarito. A linearização auxiliar continua sem descrever a topologia e usa sobrescritos para os índices das entradas."
       ],
       "issues": [
         {
-          "code": "CONFERIR_RECURSO_VISUAL",
-          "note": "Circuito combinacional e símbolos de portas na página 25 do Bacharelado, ainda não renderizados nesta revisão."
-        },
-        {
           "code": "CONFERIR_GLIFOS",
-          "note": "A extração contém símbolos trocados, caracteres privados ou índices deslocados; validar cada glifo no original."
+          "note": "O recorte preserva o circuito, os índices e todas as negações, mas o texto auxiliar do diagrama registra X¹/X²/X³ em vez de X₁/X₂/X₃ e não representa as conexões. A conferência da imagem não equivale a aprovar essa descrição textual."
         }
       ],
       "disposition": "MANUAL_REQUIRED"
