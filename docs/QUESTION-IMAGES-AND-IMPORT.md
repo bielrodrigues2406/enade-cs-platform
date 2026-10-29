@@ -1,12 +1,12 @@
 # Questões como imagens e importação de prova + gabarito
 
-Pedido de Gabriel em 28/10/2026. Documento compartilhado entre Claude Code e Codex. **Estado: proposta e estudo de viabilidade; o visualizador, os recortes versionados e o upload descritos aqui ainda não foram implementados.** Tarefas e donos ficam em [WORKBOARD.md](WORKBOARD.md).
+Pedido de Gabriel em 28/10/2026. Documento compartilhado entre Claude Code e Codex. **Estado atualizado: recortes versionados, visualizador e publicação assistida entregues pelo Claude na main `42a45d6`; upload, editor acompanhado e variantes por largura ainda são proposta.** Tarefas e donos ficam em [WORKBOARD.md](WORKBOARD.md).
 
 ## Coordenação com o trabalho do Claude
 
-Durante este estudo foi localizado o [PR #16 da trilha Claude](https://github.com/bielrodrigues2406/enade-cs-platform/pull/16), ainda aberto na consulta: ele registra a ADR-010, a recuperação Unicode de 2014/2017 e um caminho de conferência por agente independente de quem extraiu. O código atual em main ainda usa a curadoria existente; esse caminho assistido de publicação não está implementado. Este documento complementa o PR com medição e jornadas, sem declarar seu conteúdo integrado.
+Durante este estudo foi localizado o [PR #16 da trilha Claude](https://github.com/bielrodrigues2406/enade-cs-platform/pull/16), posteriormente integrado na main `42a45d6`: ele registra a ADR-010, a recuperação Unicode de 2014/2017 e um caminho de conferência por agente independente de quem extraiu. A entrega final inclui recortes, exibição por imagem e publicação ASSISTED (ADR-011), além da curadoria existente. O upload e o editor acompanhados deste documento continuam propostos. A conferência de conteúdo e os achados posteriores estão em [CNT-T1/CNT-V1](reviews/derived-text-quality.md).
 
-O handoff do PR #16 propõe Claude em CNT-C1 (recortes) e CT-1b (exibição), e Codex em CNT-T1 (consumo da cópia de texto), CNT-V1 (conferência) e PUB-A1 (publicação assistida auditável). IMG-I1/IMG-U1 devem reutilizar esses trabalhos para o upload e o editor, sem criar outro renderizador/visualizador. Conferência por agente continua identificada como `ASSISTED`; nunca será registrada como revisão humana. A implementação da política precisa acompanhar modelo, eventos e testes próprios antes de liberar conteúdo.
+O handoff inicial do PR #16 propôs Claude em CNT-C1 (recortes) e CT-1b (exibição), e Codex em CNT-T1, CNT-V1 e PUB-A1. A decisão posterior D8 deixou imagens, publicação e catálogo com Claude; Codex segue na conferência e nos achados de integridade. IMG-I1/IMG-U1 devem reutilizar esses trabalhos para o upload e o editor, sem criar outro renderizador/visualizador. Conferência por agente continua identificada como `ASSISTED`; nunca será registrada como revisão humana.
 
 Conciliações de contrato: a lista de alternativas depende do caderno (A–D ou A–E); o PNG previsto em CNT-C1 pode ser um derivado técnico e o WebP sem perda uma variante de entrega, com hashes próprios e vínculo ao mesmo original. Isso ainda deve ser combinado antes de implementar. A publicação assistida também precisa contemplar a conferência das **fontes**: hoje documentos VERIFIED e versões editoriais registram revisores vinculados a contas. Não basta mudar a última transição de publicação nem criar contas fictícias para agentes.
 
@@ -101,10 +101,10 @@ Critérios para ampliar: nenhum item do piloto com contexto/alternativa cortados
 
 | Trabalho | Trilha proposta | Entrega |
 | --- | --- | --- |
-| CT-1 e integração com CT-1b/CNT-C1 do PR #16 | Codex + Claude, contratos por domínio | Modelo/versionamento e captura/exibição precisam compartilhar o mesmo contrato de ativos; alinhar escopo das reservas 008/010 antes de implementar |
+| CT-1 e integração com CT-1b/CNT-C1 do PR #16 | Codex + Claude, contratos por domínio | Modelo/versionamento e captura/exibição entregues pelo Claude na migration 008; 010 não utilizada. Codex confere os itens e os achados de integridade |
 | IMG-I1 | Codex | Entrada de prova/gabarito e processamento acompanhado, reutilizando extrator/recortes e candidatos idempotentes; nova migration somente após conferir as reservas do quadro |
 | IMG-U1 | Claude, a combinar no quadro | Upload, identificação e comparação/ajuste de recortes, integrados à exibição CT-1b; começar pelo contrato acordado com Codex |
-| CAT-1 | Codex + Claude, divisão por API/UI | Paginação/total e filtros por edição/curso/caderno; o limite atual de 50 não atende ao lote maior |
-| Lote piloto e publicação | Extrator e revisor independente, com registro do caminho aplicado | Conferência de origem, captura, gabarito e acessibilidade; implementar o caminho assistido da ADR-010 antes de usá-lo. Não atribuir revisão humana a agentes |
+| CAT-1 | Claude, API e interface (D8) | Paginação/total e filtros por edição/curso/caderno; o limite atual de 50 não atende ao lote maior |
+| Lote piloto e publicação | Extrator e revisor independente, com registro do caminho aplicado | Conferência de origem, captura, gabarito e acessibilidade; usar o caminho assistido das ADR-010/011 após conferir os bytes exatos. Não atribuir revisão humana a agentes |
 
-Os agentes não iniciam a tarefa da outra trilha nem editam migrations aplicadas. Esta proposta não entrega os fluxos acima e não atribui aprovação editorial a simulações de alunos/professores. A avaliação do produto e as pendências estão em [análise por perspectivas](reviews/2026-10-28-product-perspectives.md).
+Os agentes não iniciam a tarefa da outra trilha nem editam migrations aplicadas. A entrega de imagens/publicação veio do PR #16; o fluxo de upload/editor continua pendente. Não se atribui aprovação editorial a simulações de alunos/professores. A avaliação do produto e as pendências estão em [análise por perspectivas](reviews/2026-10-28-product-perspectives.md).

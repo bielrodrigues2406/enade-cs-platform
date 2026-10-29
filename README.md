@@ -20,6 +20,8 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Catálogo de todos os anos localizados: 61 referências; 28 PDFs individuais obtidos/cadastrados e 33 documentos recentes ainda pendentes. Cadernos compartilhados, Licenciatura e PND têm identificação própria.
 - Curadoria de questões oficiais com prova, página, número original e gabarito definitivo conferidos; procedência pública e comentário editorial com crédito próprio.
 - Extração assistida de PDFs catalogados, incluindo OCR com modelo local e formatos históricos compartilhados; relatórios identificam alertas e lacunas de numeração.
+- Recuperação Unicode de 2014/2017 em cópia temporária, preservando o PDF original, com mapa e dependência Python fixados.
+- Recortes WebP do original, apresentação por imagem com ampliação e alternativas por letra; publicação assistida exige conferência independente vinculada aos hashes exatos.
 - Fila privada de questões importadas, com análise assistida identificada, correção auditada, proteção contra sobrescrita e encaminhamento para rascunho editorial após conferir as fontes.
 - Três questões iniciais **autorais demonstrativas**; nenhuma questão oficial publicada nesta entrega. Conteúdo pendente não é acessível pela API de estudo.
 
@@ -105,7 +107,7 @@ Para execução fria na nuvem, `npm run test:e2e -- --timeout=60000` define o li
 
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build e testes foram validados localmente: 94 testes API/PostgreSQL/utilitários e 22 fluxos Chromium, incluindo extração assistida, rejeição de texto ausente e gabaritos contraditórios, downloads com TLS, redirecionamentos, cópias locais/compartilhadas, quarentena, rejeição de symlinks, preservação de recibos após falhas e caminhos de pacotes, caderno de erros, contagem por questão/versão, ordenação de gravações concorrentes, paginação, fontes oficiais sintéticas, procedência e integridade de arquivos, curadoria, revisão independente, publicação concorrente, imutabilidade/histórico, cadastro/login/logout, histórico entre navegadores, concorrência com logout, sincronização entre abas, teclado, falha de rede, retry, reload e larguras 320/390/768/1440. Capturas desktop/mobile foram inspecionadas. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build, 122 testes API/PostgreSQL/utilitários e 29 fluxos Chromium passaram localmente, em sequência, na base atual. Além dos contratos de conta, estudo, curadoria e fontes, a suíte cobre preservação dos PDFs, recibos Unicode, quarentena auxiliar, vínculos de prova/gabarito, geometria dos recortes, bloqueios materiais e finalidade do gabarito. Os fluxos Chromium verificam também a página inicial e a apresentação por imagem, teclado e larguras 320/390/768/1440. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
 O [CI do PR #13](https://github.com/bielrodrigues2406/enade-cs-platform/actions/runs/40387694387) também aprovou build, testes com PostgreSQL, E2E e imagem de produção em 26/10/2026. Localmente, o fluxo de conta foi repetido após reiniciar o Vite, cujo overlay de erro havia interceptado o primeiro clique durante a atualização das dependências.
 
@@ -127,9 +129,10 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
 - [Questões por imagem e importação de prova + gabarito — proposta e medições](docs/QUESTION-IMAGES-AND-IMPORT.md)
 - [Análise por perspectivas simuladas de alunos/professores e pendências](docs/reviews/2026-10-28-product-perspectives.md)
+- [Continuidade do Claude: recuperação de texto e qualidade das questões](docs/reviews/derived-text-quality.md)
 - [Colaboração entre agentes](docs/COLLABORATION.md), [quadro de trabalho](docs/WORKBOARD.md) e [plano de design e motion](docs/DESIGN-QUALITY.md)
 
-Próxima entrega proposta: preparação e conferência independente do lote oficial inicial, com piloto de capturas fiéis, conteúdo assistivo e tratamento dos itens anulados. A proposta de caminho por agentes está no PR #16 e ainda precisa de implementação auditável; nenhuma conferência assistida será rotulada como humana. O registro de documentos e o fluxo de publicação oficial estão disponíveis; nenhum item oficial foi publicado automaticamente. Repetição espaçada, plano de estudos e tendências ainda não estão implementados. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção. As nove skills candidatas dos documentos não foram carregadas; a skill usada nesta tarefa foi `cloud-environment-onboarding:setup`.
+Próxima entrega: ampliar a conferência independente do lote oficial e publicar somente os recortes aprovados. Imagens, visualizador e publicação assistida do PR #16 já foram integrados; upload de prova + gabarito e editor de recortes continuam pendentes. Nenhuma conferência assistida é rotulada como humana. Repetição espaçada, plano de estudos e tendências ainda não estão implementados. Recuperação/verificação de contas e requisitos operacionais são necessários antes de produção.
 
 ## Importação de questões
 
@@ -141,4 +144,16 @@ npm run import:questions -- --file .local/import-review/historical/enade-2021-ba
 
 Abra **Curadoria → Importação** com uma conta autorizada. Corrija texto e páginas, associe o gabarito e justifique a resolução das pendências. Reimportações idênticas não duplicam itens nem sobrescrevem edições da curadoria. Importar não concede papéis, confere fontes ou publica questões. Veja [ADR 009](docs/ADR-009-question-intake.md) e o [inventário e revisão do conteúdo](docs/OFFICIAL-SOURCES.md).
 
-Neste incremento, a importação administrativa carregou 605 ocorrências na fila privada deste ambiente, incluindo repetições e fontes auxiliares; a revisão assistida não é aprovação editorial. Build e 94 testes API/PostgreSQL/utilitários passaram. Os 22 fluxos de navegador passaram, incluindo a fila, conflitos de edição, procedência, privacidade e encaminhamento para rascunho. A reextração histórica recuperou 115 grupos de alternativas em 2005/2008/2011, preservando os mesmos registros e sua evidência original; 547 das 551 objetivas possuem grupos estruturados, ainda com pendências de texto, imagens e revisão. A revisão assistida de 2008 registra 13 entradas sem nova pendência e 67 com revisão manual necessária; os blocos fora do percurso de CC não foram aprovados conceitualmente. Veja a [validação da extração histórica](docs/reviews/legacy-options-validation.md).
+Há 605 ocorrências na fila privada deste ambiente, incluindo repetições e fontes auxiliares. A recuperação de 2014/2017 preservou todos os IDs e evidências iniciais; 548 das 551 objetivas possuem grupos estruturados, quatro ainda com algum texto de alternativa vazio. Essa contagem não certifica a qualidade. Nesta passagem foram rechecados 16 itens; a conferência dos recortes exatos de 2021 Q1–Q8 aprovou seis e bloqueou Q5/Q8 por ressalvas materiais. Nenhum item oficial foi publicado nesta passagem. Veja os [achados e limites](docs/reviews/derived-text-quality.md) e a [validação histórica](docs/reviews/legacy-options-validation.md).
+
+Para recuperar o texto das quatro provas de 2014/2017 (opcional, exige Python 3.9+, Poppler e os originais catalogados):
+
+```sh
+python3 -m venv .local/pdf-venv
+.local/pdf-venv/bin/pip install --require-hashes -r scripts/requirements-pdf.txt
+npm run extract:questions -- --id enade-2014-bacharelado-exam \
+  --directory enade-pdfs --output .local/question-drafts \
+  --repair-calibri --python .local/pdf-venv/bin/python
+```
+
+`--crops .local/question-crops` acrescenta os recortes do original e requer ImageMagick. O antigo `--text-copy` foi substituído por geração interna; as imagens nunca vêm da cópia de texto. Os comandos administrativos de publicação e o lote conferido estão em [data/agent-reviews](data/agent-reviews/README.md).

@@ -1,10 +1,10 @@
 # Continuidade do Claude: texto derivado e qualidade
 
-28/10/2026 · Codex. Integração de CNT-T1 e conferência assistida de 16 objetivas. **Não é aprovação humana, conferência de fontes como VERIFIED ou autorização de publicação.** O caminho de publicação por agentes da ADR-010 permanece pendente de implementação.
+28/10/2026 · Codex. Integração de CNT-T1 e conferência assistida de 16 objetivas. **Não é aprovação humana, conferência de fontes como VERIFIED ou autorização de publicação.** A main atual já inclui o caminho de publicação por agentes da ADR-011; esta passagem não publicou conteúdo e a conferência de recortes é registrada separadamente.
 
 ## Onde o Claude parou
 
-O PR #16 entregou o mapa Unicode de 116 glifos, o gerador de cópia de texto de 2014/2017 e a ADR-010. O extrator e o importador ainda não consumiam essa cópia; os recortes e sua exibição ficaram em CNT-C1/CT-1b, e a conferência em CNT-V1.
+O primeiro handoff do PR #16 entregou o mapa Unicode de 116 glifos, o gerador de cópia de texto de 2014/2017 e a ADR-010. Durante esta continuidade, o Claude concluiu também a leitura da cópia, os recortes, sua exibição e a publicação assistida, integrados na main `42a45d6`. A conferência independente dos itens ficou em CNT-V1 com Codex.
 
 Esta continuidade integra os commits do PR #16 e implementa `--repair-calibri [--python EXEC]`. A cópia é gerada em diretório temporário privado a partir do original catalogado e do mapa fixado. Não se aceita um PDF derivado arbitrário acompanhado de recibo como prova de procedência.
 
@@ -19,7 +19,7 @@ O original continua sendo usado para imagens, detecção de figuras, fontes, gab
 - Doze comparações de raster, três páginas por caderno a 100 DPI em escala de cinza, foram idênticas entre original e derivado. Isso é uma verificação amostral, não inspeção visual de todas as páginas. Duas gerações independentes de 2014 Bacharelado produziram o mesmo SHA-256 do derivado.
 - A nova segmentação removeu páginas adicionais antes anexadas a 30 itens de 2017 Bacharelado e 28 de Licenciatura. Os limites ainda exigem conferência; Q9 de 2017 Bacharelado foi visualmente confirmado na página 16, sem a página 17 intrusa.
 
-O processamento continua administrativo via CLI. Não entrega upload pelo navegador, armazenamento/exibição dos recortes ou publicação assistida.
+O processamento continua administrativo via CLI. Durante a execução, a main recebeu `42a45d6`, com armazenamento/exibição dos recortes e publicador assistido entregues pelo Claude. Essa base foi incorporada preservando as funcionalidades; o upload pelo navegador permanece pendente. A revisão do publicador identificou falhas de integridade, corrigidas no PR #18 antes do uso real.
 
 ## Lote visual de 2014/2017
 
@@ -40,7 +40,7 @@ Resultados registrados em [2014-review.json](../../data/question-reviews/2014-re
 
 ## Lote visual de 2021
 
-Conferidas Q1–Q8 de 2021 Bacharelado nas páginas PDF 5–13 e gabarito definitivo na página 1: **E, C, B, B, A, A, C, D**. As 40 alternativas foram confrontadas. Q2/Q3/Q5 tiveram infográfico, charge e mapa efetivamente examinados; continuam pendentes de integração visual.
+Conferidas Q1–Q8 de 2021 Bacharelado nas páginas PDF 5–13 e gabarito definitivo na página 1: **E, C, B, B, A, A, C, D**. As 40 alternativas foram confrontadas. Q2/Q3/Q5 tiveram infográfico, charge e mapa efetivamente examinados. A conferência posterior dos recortes está registrada ao fim deste documento.
 
 Q1 ficou sem nova pendência específica. Q2/Q4/Q6 conservam ajuste de caixa de “PORQUE”, Q7 tem ajuste de referência e Q8 mantém ressalva interpretativa sobre “consenso”, sem inventar “unanimidade” no enunciado. Q5 exige contextualizar a aproximação 15,2/5,7 e a unidade usada no próprio texto; não se altera a chave nem se trata a ressalva como erro criado pelo extrator.
 
@@ -54,6 +54,14 @@ Atualizados os mesmos 160 itens de 2014/2017 e os oito pareceres de 2021 Bachare
 
 Há **548 das 551 objetivas com grupos estruturados**. Três ainda não têm grupo: Q8/2008 e Q9 dos dois cadernos de 2017. Quatro têm algum texto de alternativa vazio: Q26/Q59 de 2005 e Q38/Q55 de 2008. Texto não vazio pode continuar corrompido, como nas fórmulas de Q27/2014; a contagem não certifica qualidade. A fila mantém 582 HOLD e 23 PENDING, zero oficiais publicadas, 28 PDFs individuais obtidos e 33 pendentes.
 
-Passaram, em sequência, `npm run build`, `npm test` (**106 testes**) e `npm run test:e2e -- --timeout=60000` (**22 Chromium**). Revisão cruzada de agente Codex sem bloqueadores. Os testes cobrem sobrescrita/aliases, CMaps contraditórios, recibos/edições incompatíveis, idempotência e proteção das edições; não certificam o visualizador futuro nem a qualidade de todos os itens.
+Na base inicial desta passagem passaram, em sequência, `npm run build`, `npm test` (**106 testes**) e `npm run test:e2e -- --timeout=60000` (**22 Chromium**). Depois da incorporação da nova main, as suítes foram repetidas; passaram build, **122 testes** API/PostgreSQL/utilitários e **29 fluxos Chromium**. A execução final iniciou API/web novas, pois a primeira havia reutilizado uma API antiga e falhado nos dois casos de imagem. A revisão cruzada inicial de agente Codex não encontrou bloqueadores; os achados posteriores no publicador foram corrigidos com dez testes adicionais. Os testes cobrem sobrescrita/aliases, CMaps contraditórios, recibos/edições incompatíveis, idempotência e proteção das edições; não certificam a qualidade de todos os itens.
 
-Relatórios, recibos, snapshots, comparações raster, renders e registros completos das duas revisões ficam em `.local/cnt-t1/`, ignorados pelo Git. O passo seguinte é ampliar a conferência em lotes pequenos e integrar os recortes de CNT-C1/CT-1b antes de implementar PUB-A1.
+Relatórios, recibos, snapshots, comparações raster, renders e registros completos das duas revisões ficam em `.local/cnt-t1/`, ignorados pelo Git. O passo seguinte é ampliar a conferência em lotes pequenos e publicar pelo caminho do Claude somente os itens cujo manifesto e recortes exatos foram aprovados, após integrar as correções do PR #18.
+
+## Conferência dos recortes exatos de 2021
+
+Após incorporar a entrega de imagens do Claude, foram gerados os 40 itens de 2021 Bacharelado em 47 WebP (cerca de 4,3 MB) a partir do original. Um agente independente examinou os **dez arquivos exatos de Q1–Q8**, novamente confrontando os limites, imagens, 40 alternativas e o gabarito já conferido. Q1/Q2/Q3/Q4/Q6/Q7 ficaram APPROVED; Q5 e Q8 ficaram BLOCKED pelas ressalvas materiais descritas acima. Os ajustes de caixa do texto auxiliar não foram confundidos com defeitos da imagem principal (D8).
+
+O arquivo [de conferência](../../data/agent-reviews/enade-2021-bacharelado-exam.json) vincula as decisões ao [manifesto exato](../../data/question-crop-manifests/enade-2021-bacharelado-exam.json). Operador real: `codex-root`; conferente independente real: `codex-review-cnt-v1`. Não se atribuiu ao Claude a execução deste lote apenas porque ele criou o renderizador. Nenhuma conta ou aprovação humana foi simulada.
+
+Os assets ficam no pacote `.local/exports/conferencia-2021-bacharelado.zip`. Claude pode transportar esses bytes ou regenerá-los e comparar os hashes antes de publicar. Alterar imagem ou manifesto invalida o veredito anterior; a conferência não é uma assinatura criptográfica nem aprovação das outras 32 questões.

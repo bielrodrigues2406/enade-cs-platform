@@ -62,3 +62,7 @@ As cópias locais usadas foram comparadas por SHA-256 com o catálogo:
 | Gabarito Licenciatura | `92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5` |
 
 Os gabaritos preservam a identificação “GABARITO DEFINITIVO”. A igualdade de hash estabelece quais bytes foram analisados; não substitui conferência independente de autenticidade e correspondência da fonte. Não houve consulta externa às obras citadas nem validação jurídica/histórica integral dos textos-base. Os comentários e resoluções de discursivas são elaboração assistida identificada, não explicações produzidas pelo Inep. Nenhuma identidade humana, assinatura de curador ou decisão de publicação foi inventada.
+
+## Continuidade de Q1–Q8 (28/10)
+
+As oito entradas do Bacharelado foram rechecadas no original, incluindo todas as 40 alternativas e os recursos visuais. A conferência independente dos dez recortes exatos aprovou Q1/Q2/Q3/Q4/Q6/Q7 e bloqueou Q5/Q8 por ressalvas materiais da fonte. As demais entradas e as chaves oficiais foram preservadas. Veja a [revisão atual e seus limites](derived-text-quality.md) e o [lote vinculado aos hashes](../../data/agent-reviews/enade-2021-bacharelado-exam.json). Os alertas textuais acima permanecem históricos e não substituem esse registro de fidelidade da imagem.
