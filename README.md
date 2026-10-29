@@ -146,6 +146,8 @@ Abra **Curadoria → Importação** com uma conta autorizada. Corrija texto e p�
 
 Há 605 ocorrências na fila privada deste ambiente, incluindo repetições e fontes auxiliares. A recuperação de 2014/2017 preservou todos os IDs e evidências iniciais; 548 das 551 objetivas possuem grupos estruturados, quatro ainda com algum texto de alternativa vazio. Essa contagem não certifica a qualidade. Nesta passagem foram rechecados 16 itens; a conferência dos recortes exatos de 2021 Q1–Q8 aprovou seis e bloqueou Q5/Q8 por ressalvas materiais. Nenhum item oficial foi publicado nesta passagem. Veja os [achados e limites](docs/reviews/derived-text-quality.md) e a [validação histórica](docs/reviews/legacy-options-validation.md).
 
+A conferência posterior de [2021 Q9–Q16](docs/reviews/2021-crop-batch-2.md) aprovou Q9/Q10/Q11/Q15/Q16 e reteve Q12/Q13/Q14. O acumulado de recortes conferidos de Q1–Q16 é 11 APPROVED e cinco BLOCKED. Os diagramas de Q11/Q16 estão completos na imagem; a transcrição auxiliar conserva pendências. Não houve publicação nesta etapa.
+
 Para recuperar o texto das quatro provas de 2014/2017 (opcional, exige Python 3.9+, Poppler e os originais catalogados):
 
 ```sh

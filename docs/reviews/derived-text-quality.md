@@ -65,3 +65,5 @@ Após incorporar a entrega de imagens do Claude, foram gerados os 40 itens de 20
 O arquivo [de conferência](../../data/agent-reviews/enade-2021-bacharelado-exam.json) vincula as decisões ao [manifesto exato](../../data/question-crop-manifests/enade-2021-bacharelado-exam.json). Operador real: `codex-root`; conferente independente real: `codex-review-cnt-v1`. Não se atribuiu ao Claude a execução deste lote apenas porque ele criou o renderizador. Nenhuma conta ou aprovação humana foi simulada.
 
 Os assets ficam no pacote `.local/exports/conferencia-2021-bacharelado.zip`. Claude pode transportar esses bytes ou regenerá-los e comparar os hashes antes de publicar. Alterar imagem ou manifesto invalida o veredito anterior; a conferência não é uma assinatura criptográfica nem aprovação das outras 32 questões.
+
+Continuidade de 29/10: o [lote Q9–Q16](2021-crop-batch-2.md) acrescentou cinco aprovações e três bloqueios, em arquivo separado por conferente. O acumulado de Q1–Q16 é 11 APPROVED e cinco BLOCKED, preservando os vereditos e os bytes deste primeiro lote.

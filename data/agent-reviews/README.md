@@ -28,7 +28,7 @@ Discursivas, anuladas e itens fora da primeira leva (D9) ficam fora.
 
 ## Formato do arquivo
 
-`data/agent-reviews/<prova>.json`, por exemplo `enade-2021-bacharelado-exam.json`:
+`data/agent-reviews/<prova>.json`, por exemplo `enade-2021-bacharelado-exam.json`. Para novos lotes ou conferentes da mesma prova, use arquivos separados, como `<prova>-q9-q16.json`, preservando o campo `document` com o ID da prova. O CLI recebe o caminho em `--review`; o nome do arquivo não muda a identidade documental:
 
 ```json
 {
@@ -68,3 +68,9 @@ O lote `enade-2021-bacharelado-exam.json` contém somente Q1–Q8: seis APPROVED
 O manifesto exato está em `data/question-crop-manifests/enade-2021-bacharelado-exam.json`; seu SHA deve coincidir com o arquivo de conferência. Os 47 arquivos WebP e o manifesto estão também no pacote local `.local/exports/conferencia-2021-bacharelado.zip`, sem PDFs. Para publicar em outro ambiente, transportar esse pacote ou regenerar com as mesmas fontes/ferramentas e comparar **todos os hashes**. Manifesto ou imagens diferentes exigem nova conferência; não reaproveitar APPROVED por número apenas.
 
 O manifesto atual contém `renderer.pages` com dimensões de todas as páginas originais. Manifestos anteriores sem esse campo precisam ser regenerados e novamente conferidos. Para 2014/2017, substituir o antigo `--text-copy PASTA` por `--repair-calibri [--python EXEC]`, que gera a cópia internamente a partir do original; o recebimento de uma cópia arbitrária foi removido. O reparo exige a versão/hashes de `scripts/requirements-pdf.txt`.
+
+## Lote 2 de 29/10 — Q9–Q16
+
+`enade-2021-bacharelado-exam-q9-q16.json` registra a conferência por `codex-review-2021-b2` da extração existente de `codex-root`: Q9/Q10/Q11/Q15/Q16 APPROVED e Q12/Q13/Q14 BLOCKED. As 40 alternativas e o gabarito foram confrontados com os oito WebP e as páginas originais. O manifesto e as imagens não mudaram. O arquivo Q1–Q8 mantém o conferente anterior.
+
+O [relatório do lote](../../docs/reviews/2021-crop-batch-2.md) explica os bloqueios e os problemas textuais de Q11/Q16. São 11 aprovações e cinco bloqueios entre Q1–Q16; nenhuma publicação nesta etapa. O pacote adicional `.local/exports/conferencia-2021-bacharelado-q9-q16.zip` transporta os dois lotes e os mesmos assets. Passar cada arquivo separadamente ao publicador; não trocar o `reviewer` de um lote para consolidar identidades.
