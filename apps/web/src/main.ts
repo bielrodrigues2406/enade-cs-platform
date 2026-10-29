@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, inject, signal } from "@angular/core";
+import { ApplicationRef, Component, HostListener, inject, signal } from "@angular/core";
 import { IMAGE_CONFIG } from "@angular/common";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
@@ -23,7 +23,26 @@ type Summary = {
   answered: boolean;
   demonstration: boolean;
   versionNumber: number;
+  area?: string | null;
+  year?: number | null;
+  modality?: string | null;
+  questionNumber?: number | null;
 };
+type CatalogFilters = { q: string; topic: string; area: string; year: string };
+type Catalog = {
+  items: Summary[];
+  total: number;
+  answeredTotal: number;
+  offset: number;
+  limit: number;
+  facets: {
+    areas: { name: string; count: number }[];
+    unclassified: number;
+    topics: string[];
+    years: number[];
+  };
+};
+const CATALOG_PAGE_SIZE = 20;
 type PublicDocument = {
   id: string;
   title: string;
@@ -291,12 +310,12 @@ type Question = Summary & {
                   Continue a construir sua base.
                 </p>
               </div>
-              @if (rows().length) {
+              @if (catalogTotal()) {
                 <p class="catalog-progress">
-                  <strong>{{ answeredCount() }}</strong>
+                  <strong>{{ catalogAnswered() }}</strong>
                   <span
-                    >de {{ rows().length }}
-                    {{ rows().length === 1 ? "questão" : "questões" }}
+                    >de {{ catalogTotal() }}
+                    {{ catalogTotal() === 1 ? "questão" : "questões" }}
                     desta seleção com resposta salva</span
                   >
                 </p>
@@ -306,11 +325,12 @@ type Question = Summary & {
               <strong>Origem do conteúdo.</strong> Questões oficiais indicam
               prova e edição. As questões iniciais autorais são demonstrações.
             </p>
-            <form class="filters" (ngSubmit)="loadCatalog()">
+            <form class="filters catalog-filters" (ngSubmit)="loadCatalog()">
               <div>
                 <label for="search">Buscar no caderno</label
                 ><input
                   id="search"
+                  type="search"
                   name="search"
                   [(ngModel)]="search"
                   maxlength="120"
@@ -318,9 +338,29 @@ type Question = Summary & {
                 />
               </div>
               <div>
+                <label for="area">Área</label>
+                <select id="area" name="area" [(ngModel)]="area">
+                  <option value="">Todas as áreas</option>
+                  @for (availableArea of catalogAreas(); track availableArea.name) {
+                    <option [value]="availableArea.name" [disabled]="availableArea.count === 0 && area !== availableArea.name">
+                      {{ availableArea.name }} ({{ availableArea.count }})
+                    </option>
+                  }
+                  @if (area && area !== 'unclassified' && !hasCatalogArea(area)) {
+                    <option [value]="area">{{ area }} (indisponível)</option>
+                  }
+                  @if (catalogUnclassified() || area === 'unclassified') {
+                    <option value="unclassified">Sem área classificada ({{ catalogUnclassified() }})</option>
+                  }
+                </select>
+              </div>
+              <div>
                 <label for="topic">Assunto</label
                 ><select id="topic" name="topic" [(ngModel)]="topic">
                   <option value="">Todos os assuntos</option>
+                  @if (topic && !catalogTopics().includes(topic)) {
+                    <option [value]="topic">{{ topic }} (indisponível)</option>
+                  }
                   @for (
                     availableTopic of catalogTopics();
                     track availableTopic
@@ -331,8 +371,21 @@ type Question = Summary & {
                   }
                 </select>
               </div>
+              <div>
+                <label for="year">Ano da prova</label>
+                <select id="year" name="year" [(ngModel)]="year">
+                  <option value="">Todos os anos</option>
+                  @if (year && !hasCatalogYear(year)) {
+                    <option [value]="year">{{ year }} (indisponível)</option>
+                  }
+                  @for (availableYear of catalogYears(); track availableYear) {
+                    <option [value]="availableYear">{{ availableYear }}</option>
+                  }
+                </select>
+              </div>
+              <div class="catalog-filter-actions">
               <button type="submit" [disabled]="loading()">Filtrar</button>
-              @if (search || topic) {
+              @if (search || topic || area || year) {
                 <button
                   type="button"
                   class="text-button"
@@ -341,14 +394,16 @@ type Question = Summary & {
                   Limpar
                 </button>
               }
+              </div>
             </form>
             <div class="list-heading">
-              <h2>Questões</h2>
-              <span
-                >{{ rows().length }}
-                {{ rows().length === 1 ? "questão" : "questões" }} nesta
-                seleção</span
-              >
+              <h2 id="catalog-results" tabindex="-1">Questões</h2>
+              <span aria-live="polite" aria-atomic="true">
+                {{ catalogTotal() }} {{ catalogTotal() === 1 ? "questão" : "questões" }} nesta seleção
+                @if (catalogTotal() > rows().length) {
+                  · {{ catalogOffset() + 1 }}–{{ catalogOffset() + rows().length }} nesta página
+                }
+              </span>
             </div>
             @if (loading()) {
               <p role="status">Buscando questões…</p>
@@ -356,7 +411,7 @@ type Question = Summary & {
             @if (error()) {
               <div class="notice" role="alert">
                 <p>{{ error() }}</p>
-                <button (click)="loadCatalog()">Tentar novamente</button>
+                <button (click)="retryCatalog()">Tentar novamente</button>
               </div>
             } @else if (!loading() && rows().length === 0) {
               <div class="empty">
@@ -369,12 +424,16 @@ type Question = Summary & {
                 @for (row of rows(); track row.id; let i = $index) {
                   <li [class.is-answered]="row.answered">
                     <span class="question-number" aria-hidden="true">{{
-                      (i + 1).toString().padStart(2, "0")
+                      (catalogOffset() + i + 1).toString().padStart(2, "0")
                     }}</span>
                     <div class="question-summary">
                       <p class="metadata">
                         {{ row.topic }} <span>·</span>
                         {{ originLabel(row.origin, row.demonstration) }}
+                        @if (row.year) {
+                          <span>·</span> {{ row.year }} · {{ modalityLabel(row.modality || '') }}
+                          @if (row.questionNumber) { · Q{{ row.questionNumber }} }
+                        }
                       </p>
                       <h3>{{ row.title }}</h3>
                       <p class="state">
@@ -436,6 +495,13 @@ type Question = Summary & {
                   </li>
                 }
               </ol>
+            }
+            @if (catalogTotal() > catalogPageSize) {
+              <nav class="catalog-pagination" aria-label="Paginação do banco de questões">
+                <button class="outline" (click)="changeCatalogPage(-1)" [disabled]="loading() || catalogOffset() === 0">Anterior</button>
+                <p>Página {{ catalogPage() }} de {{ catalogPages() }}</p>
+                <button class="outline" (click)="changeCatalogPage(1)" [disabled]="loading() || catalogOffset() + rows().length >= catalogTotal()">Próxima</button>
+              </nav>
             }
             <footer>
               @if (session().mode === "account") {
@@ -816,7 +882,7 @@ type Question = Summary & {
                   <div class="feedback-actions">
                     @if (nextQuestion(); as next) {
                       <button
-                        (click)="open(next.id)"
+                        (click)="openNext()"
                         [disabled]="loading()"
                         [attr.aria-label]="'Próxima questão: ' + next.title"
                       >
@@ -839,6 +905,16 @@ type Question = Summary & {
 class App {
   rows = signal<Summary[]>([]);
   catalogTopics = signal<string[]>([]);
+  catalogAreas = signal<{ name: string; count: number }[]>([]);
+  catalogYears = signal<number[]>([]);
+  catalogUnclassified = signal(0);
+  catalogTotal = signal(0);
+  catalogAnswered = signal(0);
+  catalogOffset = signal(0);
+  readonly catalogPageSize = CATALOG_PAGE_SIZE;
+  private appliedFilters: CatalogFilters = { q: "", topic: "", area: "", year: "" };
+  private currentAddress = location.pathname + location.search;
+  private lastCatalogRequest: { filters: CatalogFilters; offset: number; navigation: "push" | "replace" | "none" } | null = null;
   question = signal<Question | null>(null);
   booting = signal(true);
   bootError = signal("");
@@ -848,6 +924,8 @@ class App {
   editing = signal(false);
   search = "";
   topic = "";
+  area = "";
+  year = "";
   selected = "";
   session = signal<SessionStatus>({ mode: "guest" });
   accountView = signal<AccountMode | null>(null);
@@ -872,6 +950,7 @@ class App {
       ? null
       : new BroadcastChannel("enade-identity");
   constructor() {
+    this.readCatalogAddress();
     if (this.identityChannel) {
       this.identityChannel.onmessage = (event) => {
         if (event.data?.type === "identity-changed")
@@ -917,7 +996,7 @@ class App {
       this.session.set(session);
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
-      await this.loadCatalog(true);
+      await this.loadCatalog(true, this.catalogOffset(), "replace", this.appliedFilters);
       if (fromOtherTab && transition === this.identityTransition)
         this.accountNotice.set("Sua sessão foi atualizada em outra aba.");
     } catch (err) {
@@ -1011,29 +1090,111 @@ class App {
     this.reviewCurrentVersion.set(item.currentVersionId);
     await this.open(item.id, true);
   }
-  async loadCatalog(duringTransition = false) {
-    if (this.authBusy() && !duringTransition) return;
+  async loadCatalog(
+    duringTransition = false,
+    offset = 0,
+    navigation: "push" | "replace" | "none" = "push",
+    filters: CatalogFilters = this.filterValues(),
+  ): Promise<Catalog | null> {
+    if (this.authBusy() && !duringTransition) return null;
     const request = ++this.requestNumber;
+    this.lastCatalogRequest = { filters: { ...filters }, offset, navigation };
     this.loading.set(true);
     this.error.set("");
     try {
-      const rows = await this.api<Summary[]>(
-        "questions?" +
-          new URLSearchParams({ q: this.search, topic: this.topic }),
+      const catalog = await this.api<Catalog>(
+        "catalog?" + new URLSearchParams({ ...filters, limit: String(CATALOG_PAGE_SIZE), offset: String(offset) }),
       );
-      if (request === this.requestNumber) {
-        this.rows.set(rows);
-        this.catalogTopics.update((previous) =>
-          [...new Set([...previous, ...rows.map((row) => row.topic)])].sort(
-            (a, b) => a.localeCompare(b, "pt-BR"),
-          ),
-        );
+      if (request !== this.requestNumber) return null;
+      this.applyCatalog(catalog, filters, navigation);
+      return catalog;
+    } catch (err) {
+      if (request === this.requestNumber) this.error.set(this.message(err));
+      return null;
+    } finally {
+      if (request === this.requestNumber) this.loading.set(false);
+    }
+  }
+  private applyCatalog(catalog: Catalog, filters: CatalogFilters, navigation: "push" | "replace" | "none") {
+    this.rows.set(catalog.items);
+    this.catalogTopics.set(catalog.facets.topics);
+    this.catalogAreas.set(catalog.facets.areas);
+    this.catalogYears.set(catalog.facets.years);
+    this.catalogUnclassified.set(catalog.facets.unclassified);
+    this.catalogTotal.set(catalog.total);
+    this.catalogAnswered.set(catalog.answeredTotal);
+    this.catalogOffset.set(catalog.offset);
+    this.appliedFilters = { ...filters };
+    if (location.pathname === "/questoes") this.writeCatalogAddress(navigation);
+  }
+  private filterValues(): CatalogFilters {
+    return { q: this.search, topic: this.topic, area: this.area, year: this.year };
+  }
+  async retryCatalog() {
+    const pending = this.lastCatalogRequest;
+    if (await this.loadCatalog(false, pending?.offset ?? this.catalogOffset(), pending?.navigation ?? "replace", pending?.filters ?? this.appliedFilters)) {
+      this.restoreFilterFields();
+    }
+  }
+  hasCatalogArea(area: string) {
+    return this.catalogAreas().some((entry) => entry.name === area);
+  }
+  hasCatalogYear(year: string) {
+    return this.catalogYears().includes(Number(year));
+  }
+  catalogPage() {
+    return Math.floor(this.catalogOffset() / CATALOG_PAGE_SIZE) + 1;
+  }
+  catalogPages() {
+    return Math.max(1, Math.ceil(this.catalogTotal() / CATALOG_PAGE_SIZE));
+  }
+  async changeCatalogPage(direction: number) {
+    if (this.loading() || this.authBusy()) return;
+    const offset = Math.max(0, this.catalogOffset() + direction * CATALOG_PAGE_SIZE);
+    if (await this.loadCatalog(false, offset, "push", this.appliedFilters)) {
+      this.restoreFilterFields();
+      setTimeout(() => document.getElementById("catalog-results")?.focus(), 0);
+    }
+  }
+  async openNext() {
+    if (this.loading() || this.saving() || this.authBusy()) return;
+    const next = this.nextQuestion();
+    if (!next) return;
+    if (next.id) { await this.open(next.id); return; }
+    const request = ++this.requestNumber;
+    const filters = { ...this.appliedFilters };
+    const offset = this.catalogOffset() + CATALOG_PAGE_SIZE;
+    this.loading.set(true);
+    this.error.set("");
+    try {
+      const catalog = await this.api<Catalog>("catalog?" + new URLSearchParams({ ...filters, limit: String(CATALOG_PAGE_SIZE), offset: String(offset) }));
+      if (request !== this.requestNumber) return;
+      if (!catalog.items[0] || catalog.offset < offset) {
+        this.error.set("Esta seleção foi atualizada. Volte ao banco para conferir as questões disponíveis.");
+        return;
       }
+      const question = await this.api<Question>("questions/" + encodeURIComponent(catalog.items[0].id));
+      if (request !== this.requestNumber) return;
+      // Commit the new page only after its question is available. A network
+      // failure keeps the answered question and its original position intact.
+      this.applyCatalog(catalog, filters, "push");
+      this.showQuestion(question, false, request);
     } catch (err) {
       if (request === this.requestNumber) this.error.set(this.message(err));
     } finally {
       if (request === this.requestNumber) this.loading.set(false);
     }
+  }
+  private showQuestion(q: Question, retry: boolean, request: number) {
+    this.swapView(() => {
+      this.reviewView.set(false);
+      this.homeView.set(false);
+      this.question.set(q);
+      this.selected = retry ? "" : q.answer?.optionId || "";
+      this.editing.set(retry);
+    }, () => request === this.requestNumber);
+    this.leaveHomePath();
+    this.focusMain();
   }
   async open(id: string, retry = false) {
     if (this.authBusy()) return;
@@ -1043,18 +1204,7 @@ class App {
     try {
       const q = await this.api<Question>("questions/" + encodeURIComponent(id));
       if (request !== this.requestNumber) return;
-      this.swapView(
-        () => {
-          this.reviewView.set(false);
-          this.homeView.set(false);
-          this.question.set(q);
-          this.selected = retry ? "" : q.answer?.optionId || "";
-          this.editing.set(retry);
-        },
-        () => request === this.requestNumber,
-      );
-      this.leaveHomePath();
-      this.focusMain();
+      this.showQuestion(q, retry, request);
     } catch (err) {
       if (request === this.requestNumber) this.error.set(this.message(err));
     } finally {
@@ -1103,22 +1253,83 @@ class App {
       this.question.set(null);
       this.error.set("");
     });
+    this.restoreFilterFields();
     this.setPath("/questoes");
-    void this.loadCatalog();
+    this.writeCatalogAddress("replace");
+    void this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
     this.focusMain();
   }
-  // Só o início e o banco têm endereço próprio. As demais telas usam o do
-  // banco, para que recarregar fora do início não volte à página inicial.
+  // As outras telas continuam sobre o endereço da seleção do banco.
+  // O endereço contém filtros e página, nunca respostas ou dados da conta.
   private setPath(path: string) {
     if (location.pathname !== path) history.replaceState(null, "", path);
+    this.currentAddress = location.pathname + location.search;
   }
   private leaveHomePath() {
-    if (location.pathname === "/") this.setPath("/questoes");
+    if (location.pathname === "/") {
+      this.setPath("/questoes");
+      this.writeCatalogAddress("replace");
+    }
+  }
+  private restoreFilterFields() {
+    this.search = this.appliedFilters.q;
+    this.topic = this.appliedFilters.topic;
+    this.area = this.appliedFilters.area;
+    this.year = this.appliedFilters.year;
+  }
+  private readCatalogAddress() {
+    const params = new URLSearchParams(location.search);
+    const value = (key: string, max: number) => {
+      const entry = params.get(key) ?? "";
+      return params.getAll(key).length === 1 && entry.length <= max ? entry : "";
+    };
+    const year = value("year", 4);
+    this.appliedFilters = location.pathname === "/questoes"
+      ? { q: value("q", 120), topic: value("topic", 80), area: value("area", 80), year: /^(20[0-9]{2}|2100)$/.test(year) ? year : "" }
+      : { q: "", topic: "", area: "", year: "" };
+    this.restoreFilterFields();
+    const page = value("page", 6);
+    const number = /^[1-9][0-9]{0,5}$/.test(page) ? Number(page) : 1;
+    this.catalogOffset.set(number <= 50001 ? (number - 1) * CATALOG_PAGE_SIZE : 0);
+  }
+  private writeCatalogAddress(mode: "push" | "replace" | "none") {
+    if (mode === "none") return;
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(this.appliedFilters)) if (value) params.set(key, value);
+    if (this.catalogPage() > 1) params.set("page", String(this.catalogPage()));
+    const address = "/questoes" + (params.size ? "?" + params.toString() : "");
+    if (location.pathname + location.search !== address) {
+      if (mode === "push") history.pushState(null, "", address);
+      else history.replaceState(null, "", address);
+    }
+    this.currentAddress = address;
+  }
+  @HostListener("window:popstate")
+  async restoreCatalogNavigation() {
+    if (this.saving() || this.authBusy() || this.curationBusy()) {
+      history.pushState(null, "", this.currentAddress);
+      return;
+    }
+    this.question.set(null);
+    this.selected = "";
+    this.editing.set(false);
+    this.reviewView.set(false);
+    this.reviewReturn.set(false);
+    this.reviewCurrentVersion.set(null);
+    this.curationView.set(false);
+    this.accountView.set(null);
+    this.homeView.set(location.pathname === "/");
+    this.readCatalogAddress();
+    this.currentAddress = location.pathname + location.search;
+    await this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
+    this.focusMain();
   }
   clearFilters() {
     if (this.authBusy()) return;
     this.search = "";
     this.topic = "";
+    this.area = "";
+    this.year = "";
     void this.loadCatalog();
   }
   accountEmail() {
@@ -1143,7 +1354,7 @@ class App {
     if (this.authBusy()) return;
     this.accountView.set(null);
     this.authError.set("");
-    if (!this.question() && !this.reviewView()) void this.loadCatalog();
+    if (!this.question() && !this.reviewView()) void this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
     this.focusMain();
   }
   private clearStudyState() {
@@ -1158,10 +1369,15 @@ class App {
     this.requestNumber++;
     this.rows.set([]);
     this.catalogTopics.set([]);
+    this.catalogAreas.set([]);
+    this.catalogYears.set([]);
+    this.catalogUnclassified.set(0);
+    this.catalogTotal.set(0);
+    this.catalogAnswered.set(0);
+    this.lastCatalogRequest = null;
     this.question.set(null);
     this.selected = "";
-    this.search = "";
-    this.topic = "";
+    this.restoreFilterFields();
     this.error.set("");
     this.editing.set(false);
     this.loading.set(false);
@@ -1195,7 +1411,7 @@ class App {
           ? "Conta criada. Suas respostas confirmadas foram mantidas."
           : "Você entrou na sua conta. Seu histórico está disponível.",
       );
-      await this.loadCatalog(true);
+      await this.loadCatalog(true, this.catalogOffset(), "replace", this.appliedFilters);
       this.focusMain();
     } catch (err) {
       if (transition !== this.identityTransition) {
@@ -1234,7 +1450,7 @@ class App {
       this.accountNotice.set(
         "Você saiu da conta. Seu histórico continua guardado para o próximo acesso.",
       );
-      await this.loadCatalog(true);
+      await this.loadCatalog(true, this.catalogOffset(), "replace", this.appliedFilters);
       this.focusMain();
     } catch (err) {
       if (transition !== this.identityTransition) {
@@ -1278,7 +1494,7 @@ class App {
         this.accountView.set(null);
         this.authError.set("");
       }
-      if (!this.accountView()) await this.loadCatalog(true);
+      if (!this.accountView()) await this.loadCatalog(true, this.catalogOffset(), "replace", this.appliedFilters);
     } catch {
       if (transition !== this.identityTransition) return;
       this.session.set({ mode: "guest" });
@@ -1326,19 +1542,19 @@ class App {
       ". O texto está na transcrição automática abaixo."
     );
   }
-  answeredCount() {
-    return this.rows().filter((row) => row.answered).length;
-  }
   // Posição só faz sentido quando a questão veio do catálogo atual.
   position() {
     const q = this.question();
     if (!q || this.reviewReturn()) return null;
     const index = this.rows().findIndex((row) => row.id === q.id);
-    return index < 0 ? null : { index, total: this.rows().length };
+    return index < 0 ? null : { index: this.catalogOffset() + index, total: this.catalogTotal() };
   }
   nextQuestion() {
-    const at = this.position();
-    return at ? (this.rows()[at.index + 1] ?? null) : null;
+    const q = this.question();
+    if (!q || this.reviewReturn()) return null;
+    const index = this.rows().findIndex((row) => row.id === q.id);
+    if (index < 0) return null;
+    return this.rows()[index + 1] ?? (this.catalogOffset() + index + 1 < this.catalogTotal() ? { id: "", title: "da próxima página" } : null);
   }
   optionOutcome(optionId: string): "correct" | "wrong" | null {
     const answer = this.question()?.answer;
