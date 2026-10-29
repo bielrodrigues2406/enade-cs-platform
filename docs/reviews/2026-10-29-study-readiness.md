@@ -1,5 +1,7 @@
 # Prontidão para estudo — auditoria de 29/10/2026
 
+**Atualização posterior:** Gabriel pediu concluir CAT-1 e ampliar o treino parcial; D12 no quadro transfere o catálogo ao Codex e substitui a proposta de cinco por 10/20/30 (padrão 20), condicionado ao acervo. O texto abaixo preserva o estado e a proposta no momento desta auditoria.
+
 Pedido de Gabriel: testar o sistema com agentes, conferir simulado parcial e organização por áreas e melhorar o uso sem ampliar funcionalidades sem necessidade. Base `11fbb43`, após o PR #19.
 
 Três agentes atuaram separadamente: aluno (`audit_student`), professor/curador (`audit_curator`) e capacidades/dados (`audit_capabilities`). Aluno e curador executaram jornadas reais em Chromium, em slots separados; o terceiro consultou código e PostgreSQL em transação somente leitura. São perspectivas simuladas por agentes, sem entrevistas ou comprovação de aprendizagem.

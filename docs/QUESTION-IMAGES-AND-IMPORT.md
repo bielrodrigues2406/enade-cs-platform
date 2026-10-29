@@ -104,7 +104,7 @@ Critérios para ampliar: nenhum item do piloto com contexto/alternativa cortados
 | CT-1 e integração com CT-1b/CNT-C1 do PR #16 | Codex + Claude, contratos por domínio | Modelo/versionamento e captura/exibição entregues pelo Claude na migration 008; 010 não utilizada. Codex confere os itens e os achados de integridade |
 | IMG-I1 | Codex | Entrada de prova/gabarito e processamento acompanhado, reutilizando extrator/recortes e candidatos idempotentes; nova migration somente após conferir as reservas do quadro |
 | IMG-U1 | Claude, a combinar no quadro | Upload, identificação e comparação/ajuste de recortes, integrados à exibição CT-1b; começar pelo contrato acordado com Codex |
-| CAT-1 | Claude, API e interface (D8) | Paginação/total e filtros por edição/curso/caderno; o limite atual de 50 não atende ao lote maior |
+| CAT-1 | Codex, API e interface (D12, pedido de Gabriel em 29/10) | Catálogo paginado com total, área canônica/assunto/ano e seleção por endereço. Curso/modalidade permanecem metadados da origem; filtros específicos por curso/caderno poderão ser avaliados quando houver acervo publicado diverso |
 | Lote piloto e publicação | Extrator e revisor independente, com registro do caminho aplicado | Conferência de origem, captura, gabarito e acessibilidade; usar o caminho assistido das ADR-010/011 após conferir os bytes exatos. Não atribuir revisão humana a agentes |
 
 Os agentes não iniciam a tarefa da outra trilha nem editam migrations aplicadas. A entrega de imagens/publicação veio do PR #16; o fluxo de upload/editor continua pendente. Não se atribui aprovação editorial a simulações de alunos/professores. A avaliação do produto e as pendências estão em [análise por perspectivas](reviews/2026-10-28-product-perspectives.md).

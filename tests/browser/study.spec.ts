@@ -9,6 +9,14 @@ for (const width of [390, 1440]) {
     await page.getByRole("button", { name: "Filtrar", exact: true }).click();
     const question = page.getByRole("button", { name: "Resolver: Quando uma transação falha" });
     await expect(question).toBeVisible();
+    // The SQL question is visible in both the full and filtered catalog.
+    // Wait for the applied selection before capturing its address.
+    await expect(page).toHaveURL((address) =>
+      address.searchParams.get("q") === "transação" &&
+      address.searchParams.get("topic") === "Banco de dados",
+    );
+    await expect(page.locator(".question-list > li")).toHaveCount(1);
+    await expect(question).toBeEnabled();
     const url = page.url();
     const skip = page.getByRole("link", { name: "Ir para o conteúdo" });
     await skip.focus();

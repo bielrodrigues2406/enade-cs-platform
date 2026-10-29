@@ -5,7 +5,7 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 ## O que funciona
 
 - Página inicial em `/` com a situação do estudante: semanas até a prova, questões para retomar e para resolver, andamento salvo, formato da prova de 2026 e origem das questões com contagens reais; o banco fica em `/questoes`.
-- Catálogo com busca, filtro por assunto e indicação de resposta salva.
+- Catálogo com busca, filtros por área/assunto/ano, total real e páginas de 20 sem truncar o acervo em 50. Seleção retomável pelo endereço, histórico do navegador e retorno após resolver; contagens do início também consideram todo o acervo publicado.
 - Resolução com alternativas identificadas, feedback após confirmação, alteração e retomada da resposta.
 - Persistência PostgreSQL com prática anônima ou conta por e-mail/senha.
 - Cadastro preserva as respostas da sessão atual; login em outro navegador recupera o histórico da conta.
@@ -107,7 +107,7 @@ Para execução fria na nuvem, `npm run test:e2e -- --timeout=60000` define o li
 
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build, 122 testes API/PostgreSQL/utilitários e 33 fluxos Chromium passaram localmente, em sequência, na base atual. Além dos contratos de conta, estudo, curadoria e fontes, a suíte cobre preservação dos PDFs, recibos Unicode, quarentena auxiliar, vínculos de prova/gabarito, geometria dos recortes, bloqueios materiais e finalidade do gabarito. Os fluxos Chromium verificam também a página inicial e a apresentação por imagem, teclado e larguras 320/390/768/1440. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build, 127 testes API/PostgreSQL/utilitários e 39 fluxos Chromium passaram localmente na base atual. Além dos contratos de conta, estudo, curadoria e fontes, a suíte cobre preservação dos PDFs, recibos Unicode, quarentena auxiliar, vínculos de prova/gabarito, geometria dos recortes, bloqueios materiais e finalidade do gabarito. Os fluxos Chromium verificam também mais de 50 questões no catálogo, filtros/URL/histórico, falhas na troca de página, totais e sugestões globais do início, apresentação por imagem, teclado e larguras 320/390/768/1440. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
 O [CI do PR #13](https://github.com/bielrodrigues2406/enade-cs-platform/actions/runs/40387694387) também aprovou build, testes com PostgreSQL, E2E e imagem de produção em 26/10/2026. Localmente, o fluxo de conta foi repetido após reiniciar o Vite, cujo overlay de erro havia interceptado o primeiro clique durante a atualização das dependências.
 

@@ -7,6 +7,8 @@ import { fail } from "./api-error.js";
 import { sourceCatalog, type CatalogDocument } from "./source-catalog.js";
 import { readArchive, sourceFields, type Source } from "./source-store.js";
 import { MAX_IMAGE_BYTES, storeAsset, versionImages, webpSize } from "./question-images.js";
+import { AREAS } from "./question-areas.js";
+export { AREAS } from "./question-areas.js";
 
 /**
  * Publicação assistida (PUB-A1, ADR-010, ADR-011). Entrada administrativa,
@@ -14,26 +16,6 @@ import { MAX_IMAGE_BYTES, storeAsset, versionImages, webpSize } from "./question
  * imagem, com o agente extrator e o conferente registrados. Nenhuma conta de
  * pessoa é criada ou usada.
  */
-export const AREAS = [
-  "Formação Geral",
-  "Algoritmos",
-  "Programação",
-  "Teoria da computação",
-  "Compiladores",
-  "Matemática",
-  "Arquitetura de computadores",
-  "Sistemas operacionais",
-  "Redes",
-  "Sistemas distribuídos",
-  "Banco de dados",
-  "Engenharia de software",
-  "Interação humano-computador",
-  "Inteligência artificial",
-  "Computação gráfica",
-  "Segurança",
-  "Sistemas de informação",
-  "Sociedade e ética",
-] as const;
 
 const SHA = /^[a-f0-9]{64}$/;
 const AGENT = /^[a-z][a-z0-9-]{1,39}$/;
