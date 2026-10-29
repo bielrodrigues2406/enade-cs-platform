@@ -136,3 +136,23 @@ Estados: PENDING = para conferir; HOLD = pendências registradas; DRAFTED = rasc
 `flags` preserva alertas originais; `resolvedFlags` registra os resolvidos com justificativa. A extração original e o gabarito extraído continuam disponíveis para comparação. `unresolvedCount` na lista exclui alertas já resolvidos. A associação posterior de gabarito e a correção das páginas preservam o texto editado, validam o documento e registram a nota de conferência. Sem prova/gabarito definitivo conferidos, páginas válidas, fidelidade confirmada e conteúdo elegível, a promoção é bloqueada. Discursivas, anuladas e itens exclusivamente de outros cursos não viram questões de Ciência da Computação por resolver um alerta.
 
 O CLI `npm run import:questions -- --file RELATORIO.questions.json [--review ANALISE.json] [--actor UUID]` é a única entrada de relatórios. Hashes devem corresponder às fontes catalogadas e arquivadas. Reimportar o mesmo conteúdo não duplica itens; conteúdo já editado ou encaminhado é protegido de sobrescrita. IDs de pessoas, cookies e detalhes privados de contas não aparecem no DTO.
+
+## Treino parcial — contrato SIM-P1 (em implementação)
+
+Todos os endpoints exigem cookie válido; escritas JSON e validação fechada de campos. Nenhum aceita ownerId. IDs de tentativa/requestId são UUID; position inteiro1–30. Outro proprietário recebe404, sem revelar a existência da tentativa.
+
+| Método | Entrada | Resposta |
+| --- | --- | --- |
+| GET /practice | sem query | `{sizes:[10,20,30],defaultSize:20,total,areas:[{name,count}],active:AttemptSummary|null,recent:AttemptSummary[]}`; áreas18fixas e recent até5 concluídas |
+| POST /practice | `{requestId,size,area:null|string}` |201 `PracticeView`; mesma chave/configuração é retry; chave divergente ou outra ativa409; conteúdo insuficiente409 sem criar tentativa |
+| GET /practice/:id | UUID |200 `PracticeView` somente da sessão |
+| PUT /practice/:id/items/:position | `{optionId:string|null,marked:boolean,baseRevision:number}` |200 `{position,optionId,marked,revision}`; base inicial0; retry idêntico retorna revisão já aplicada; conflito/finalizada409 |
+| POST /practice/:id/finish | `{}` |200 `PracticeView` finalizado; repetição/concorrência devolvem o mesmo resultado |
+
+`AttemptSummary` = `{id,state,size,area,createdAt,finishedAt,answered}`. `PracticeView` acrescenta `{items,summary}`. Datas ISO; state IN_PROGRESS ou COMPLETED. Cada item = `{position,question:PracticeQuestion,answer:{optionId,marked,revision},result?:PracticeFeedback}`.
+
+`PracticeQuestion` = `{id,title,topic,origin,authorCredit,demonstration,versionNumber,prompt,options:[{id,text}],presentation,images,reviewOrigin,provenance}`. Presentation/images/provenance usam o contrato de estudo existente. Nunca inclui answer do estudo livre, correctOptionId ou explanation.
+
+Somente após finalizar, `summary` contém `{total,correct,incorrect,unanswered,official,author,demonstration,byTopic:[{topic,total,correct,incorrect,unanswered}]}` e cada `result` = `{correct:boolean|null,correctOptionId,explanation,explanationCredit,answerKey?}`. `correct=null` indica não respondida. `answerKey` usa o contrato de estudo, inclusive finality e o aviso D10. Antes do final, summary=null e result ausente. Respostas do treino não alteram /review ou /questions/:id/answer.
+
+Seleção: uma versão atual por questão lógica, somente PUBLISHED, ao menos duas alternativas e gabarito pertencente à versão; tamanho exato sem repetição. area=null mistura assuntos; área deve pertencer à lista canônica18, por correspondência exata de topic. A disponibilidade e a seleção usam a mesma regra. Ordem escolhida aleatoriamente no início e preservada no banco. Uma tentativa ativa por proprietário e requestId por criação permitem retomada/retry sem duplicação. Ver ADR-007 para estado, locks e limites.
