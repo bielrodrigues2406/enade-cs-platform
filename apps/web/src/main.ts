@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
 import { HomeComponent } from "./home.component";
 import { QuestionContentComponent } from "./question-content.component";
+import { ExamComponent } from "./exam.component";
 import {
   ReviewComponent,
   type ReviewItem,
@@ -96,6 +97,7 @@ type Question = Summary & {
     CurationComponent,
     HomeComponent,
     QuestionContentComponent,
+    ExamComponent,
     ReviewComponent,
   ],
   template: `
@@ -118,7 +120,7 @@ type Question = Summary & {
             <button
               class="text-button mobile-curation"
               (click)="openCuration()"
-              [disabled]="saving() || authBusy() || curationBusy()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
               Curadoria
             </button>
@@ -130,7 +132,7 @@ type Question = Summary & {
             <button
               class="text-button"
               (click)="logout()"
-              [disabled]="saving() || authBusy() || curationBusy()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
               Sair da conta
             </button>
@@ -138,14 +140,14 @@ type Question = Summary & {
             <button
               class="text-button"
               (click)="openAccount('login')"
-              [disabled]="saving() || authBusy() || curationBusy()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
               Entrar
             </button>
             <button
               class="outline"
               (click)="openAccount('register')"
-              [disabled]="saving() || authBusy() || curationBusy()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
               Criar conta
             </button>
@@ -158,7 +160,7 @@ type Question = Summary & {
         <button
           class="text-button"
           (click)="openHome()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="onHome() ? 'page' : null"
         >
           Início
@@ -166,18 +168,24 @@ type Question = Summary & {
         <button
           class="text-button"
           (click)="back()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
         >
           Banco de questões
         </button>
         <button
           class="text-button"
           (click)="openReview()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
         >
           Caderno de erros
         </button>
+        <button
+          class="text-button"
+          (click)="openPractice()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
+        >Treino parcial</button>
       </nav>
     }
     <div class="layout">
@@ -185,7 +193,7 @@ type Question = Summary & {
         <button
           class="nav"
           (click)="openHome()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="onHome() ? 'page' : null"
         >
           <span class="nav-index" aria-hidden="true">01</span>
@@ -194,9 +202,10 @@ type Question = Summary & {
         <button
           class="nav secondary-nav"
           (click)="back()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="
             !homeView() &&
+            !practiceView() &&
             !curationView() &&
             !reviewView() &&
             !reviewReturn() &&
@@ -211,20 +220,26 @@ type Question = Summary & {
         <button
           class="nav secondary-nav"
           (click)="openReview()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
         >
           <span class="nav-index" aria-hidden="true">03</span>
           Caderno de erros
         </button>
+        <button
+          class="nav secondary-nav"
+          (click)="openPractice()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
+        ><span class="nav-index" aria-hidden="true">04</span>Treino parcial</button>
         @if (canCurate()) {
           <button
             class="nav secondary-nav"
             (click)="openCuration()"
-            [disabled]="saving() || authBusy() || curationBusy()"
+            [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             [attr.aria-current]="curationView() ? 'page' : null"
           >
-            <span class="nav-index" aria-hidden="true">04</span>
+            <span class="nav-index" aria-hidden="true">05</span>
             Curadoria
           </button>
         }
@@ -244,7 +259,9 @@ type Question = Summary & {
               ? "Conta"
               : curationView()
                 ? "Curadoria"
-                : reviewView()
+                : practiceView()
+                  ? "Treino parcial"
+                  : reviewView()
                   ? "Caderno de erros"
                   : homeView()
                     ? "Início"
@@ -278,6 +295,14 @@ type Question = Summary & {
             <p role="status">Atualizando sua sessão…</p>
           } @else if (curationView()) {
             <app-curation (busyChange)="curationBusy.set($event)" />
+          } @else if (practiceView()) {
+            <app-exam
+              [attemptId]="practiceAttemptId()"
+              [itemPosition]="practiceItemPosition()"
+              (locationChange)="practiceLocationChanged($event)"
+              (busyChange)="practiceBusy.set($event)"
+              (browse)="back()"
+            />
           } @else if (reviewView()) {
             <app-review
               [position]="reviewPosition"
@@ -823,6 +848,10 @@ class App {
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
+  practiceView = signal(location.pathname === "/treino");
+  practiceAttemptId = signal<string | null>(null);
+  practiceItemPosition = signal(1);
+  practiceBusy = signal(false);
   // A página inicial fica em "/" e o banco de questões em "/questoes".
   homeView = signal(location.pathname === "/");
   reviewReturn = signal(false);
@@ -838,6 +867,7 @@ class App {
       : new BroadcastChannel("enade-identity");
   constructor() {
     this.readCatalogAddress();
+    this.readPracticeAddress();
     if (this.identityChannel) {
       this.identityChannel.onmessage = (event) => {
         if (event.data?.type === "identity-changed")
@@ -914,7 +944,7 @@ class App {
       !this.canCurate() ||
       this.saving() ||
       this.authBusy() ||
-      this.curationBusy()
+      this.curationBusy() || this.practiceBusy()
     )
       return;
     this.requestNumber++;
@@ -926,13 +956,14 @@ class App {
     this.accountView.set(null);
     this.accountNotice.set("");
     this.error.set("");
+    this.practiceView.set(false);
     this.curationView.set(true);
     this.leaveHomePath();
     this.focusMain();
   }
   openHome(event?: Event) {
     event?.preventDefault();
-    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
     this.requestNumber++;
     this.swapView(() => {
       this.loading.set(false);
@@ -945,6 +976,7 @@ class App {
       this.authError.set("");
       this.accountNotice.set("");
       this.error.set("");
+      this.practiceView.set(false);
       this.homeView.set(true);
     });
     this.setPath("/");
@@ -954,7 +986,7 @@ class App {
     return this.homeView() && !this.accountView();
   }
   openReview() {
-    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
     this.requestNumber++;
     this.swapView(() => {
       this.loading.set(false);
@@ -966,10 +998,56 @@ class App {
       this.reviewCurrentVersion.set(null);
       this.accountNotice.set("");
       this.error.set("");
+      this.practiceView.set(false);
       this.reviewView.set(true);
     });
     this.leaveHomePath();
     this.focusMain();
+  }
+  openPractice() {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    this.requestNumber++;
+    this.loading.set(false);
+    this.question.set(null);
+    this.accountView.set(null);
+    this.curationView.set(false);
+    this.reviewView.set(false);
+    this.reviewReturn.set(false);
+    this.reviewCurrentVersion.set(null);
+    this.homeView.set(false);
+    this.error.set("");
+    this.practiceAttemptId.set(null);
+    this.practiceItemPosition.set(1);
+    this.practiceView.set(true);
+    this.writePracticeAddress("push");
+    this.focusMain();
+  }
+  practiceLocationChanged(location_: { attemptId: string | null; position: number }) {
+    if (!this.practiceView() || this.authBusy() || location.pathname !== "/treino") return;
+    this.practiceAttemptId.set(location_.attemptId);
+    this.practiceItemPosition.set(location_.position);
+    this.writePracticeAddress("replace");
+  }
+  private readPracticeAddress() {
+    const params = new URLSearchParams(location.search);
+    const id = params.getAll("attempt").length === 1 ? params.get("attempt") : null;
+    const valid = location.pathname === "/treino" && id && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id);
+    this.practiceAttemptId.set(valid ? id.toLowerCase() : null);
+    const position = params.getAll("item").length === 1 ? params.get("item") ?? "1" : "1";
+    this.practiceItemPosition.set(valid && /^([1-9]|[12][0-9]|30)$/.test(position) ? Number(position) : 1);
+  }
+  private writePracticeAddress(mode: "push" | "replace") {
+    const params = new URLSearchParams();
+    if (this.practiceAttemptId()) {
+      params.set("attempt", this.practiceAttemptId()!);
+      if (this.practiceItemPosition() > 1) params.set("item", String(this.practiceItemPosition()));
+    }
+    const address = "/treino" + (params.size ? "?" + params.toString() : "");
+    if (location.pathname + location.search !== address) {
+      if (mode === "push") history.pushState(null, "", address);
+      else history.replaceState(null, "", address);
+    }
+    this.currentAddress = address;
   }
   async openReviewQuestion(item: ReviewItem) {
     if (this.loading() || this.authBusy()) return;
@@ -1076,6 +1154,7 @@ class App {
     this.swapView(() => {
       this.reviewView.set(false);
       this.homeView.set(false);
+      this.practiceView.set(false);
       this.question.set(q);
       this.selected = retry ? "" : q.answer?.optionId || "";
       this.editing.set(retry);
@@ -1127,9 +1206,10 @@ class App {
     }
   }
   back() {
-    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
     this.swapView(() => {
       this.homeView.set(false);
+      this.practiceView.set(false);
       this.curationView.set(false);
       this.reviewView.set(false);
       this.reviewReturn.set(false);
@@ -1153,7 +1233,7 @@ class App {
     this.currentAddress = location.pathname + location.search;
   }
   private leaveHomePath() {
-    if (location.pathname === "/") {
+    if (location.pathname === "/" || location.pathname === "/treino") {
       this.setPath("/questoes");
       this.writeCatalogAddress("replace");
     }
@@ -1193,7 +1273,7 @@ class App {
   }
   @HostListener("window:popstate")
   async restoreCatalogNavigation() {
-    if (this.saving() || this.authBusy() || this.curationBusy()) {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) {
       history.pushState(null, "", this.currentAddress);
       return;
     }
@@ -1206,6 +1286,16 @@ class App {
     this.curationView.set(false);
     this.accountView.set(null);
     this.homeView.set(location.pathname === "/");
+    this.practiceView.set(location.pathname === "/treino");
+    if (this.practiceView()) {
+      this.requestNumber++;
+      this.loading.set(false);
+      this.error.set("");
+      this.readPracticeAddress();
+      this.currentAddress = location.pathname + location.search;
+      this.focusMain();
+      return;
+    }
     this.readCatalogAddress();
     this.currentAddress = location.pathname + location.search;
     await this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
@@ -1224,7 +1314,7 @@ class App {
     return session.mode === "account" ? session.email : "";
   }
   openAccount(mode: AccountMode) {
-    if (this.saving() || this.authBusy() || this.session().mode === "account")
+    if (this.saving() || this.authBusy() || this.practiceBusy() || this.session().mode === "account")
       return;
     this.accountView.set(mode);
     this.authError.set("");
@@ -1241,10 +1331,16 @@ class App {
     if (this.authBusy()) return;
     this.accountView.set(null);
     this.authError.set("");
-    if (!this.question() && !this.reviewView()) void this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
+    if (!this.question() && !this.reviewView() && !this.practiceView()) void this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
     this.focusMain();
   }
   private clearStudyState() {
+    if (this.identityGeneration > 0 && this.practiceView()) {
+      this.practiceAttemptId.set(null);
+      this.practiceItemPosition.set(1);
+      this.writePracticeAddress("replace");
+    }
+    this.practiceBusy.set(false);
     this.reviewView.set(false);
     this.reviewReturn.set(false);
     this.reviewCurrentVersion.set(null);
@@ -1314,7 +1410,7 @@ class App {
     }
   }
   async logout() {
-    if (this.authBusy() || this.saving() || this.curationBusy()) return;
+    if (this.authBusy() || this.saving() || this.curationBusy() || this.practiceBusy()) return;
     const transition = ++this.identityTransition;
     this.authBusy.set(true);
     this.authError.set("");

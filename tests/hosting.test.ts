@@ -26,7 +26,7 @@ after(async () => {
 });
 
 test("web routes fall back to the shell with a strict policy and no cache", async () => {
-  for (const path of ["/", "/questoes/qualquer"]) {
+  for (const path of ["/", "/questoes/qualquer", "/treino?attempt=00000000-0000-4000-8000-000000000001&item=2"]) {
     const res = await fetch(base + path);
     assert.equal(res.status, 200);
     assert.match(await res.text(), /<title>shell<\/title>/);
