@@ -135,6 +135,13 @@ async function saveDraft(page: Page) {
   await expect(page.getByRole("status")).toContainText("Rascunho salvo.");
   return detail;
 }
+async function hasUnloadGuard(page: Page) {
+  return page.evaluate(() => {
+    const event = new Event("beforeunload", { cancelable: true });
+    window.dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+}
 async function publish(page: Page) {
   await page
     .getByRole("checkbox", {
@@ -142,6 +149,8 @@ async function publish(page: Page) {
       exact: true,
     })
     .check();
+  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeDisabled();
+  expect(await hasUnloadGuard(page)).toBe(true);
   await page
     .getByRole("checkbox", {
       name: "Conferi o gabarito e a explicação.",
@@ -167,6 +176,68 @@ async function publish(page: Page) {
     .getByRole("button", { name: "Confirmar publicação", exact: true })
     .click();
   await expect(page.getByRole("status")).toContainText("Versão publicada.");
+  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeEnabled();
+  expect(await hasUnloadGuard(page)).toBe(false);
+}
+
+for (const width of [390, 1440]) {
+  test(`unsaved authoring is protected until cancelled, discarded or saved at ${width}px`, async ({
+    page, context, provision, questions,
+  }) => {
+    await provision(context);
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/questoes");
+    await openCuration(page);
+    const newDraft = page.getByRole("button", { name: "Nova questão autoral", exact: true });
+    const back = page.getByRole("button", { name: "Voltar à fila" });
+    const bank = page.getByRole("button", { name: "Banco de questões", exact: true });
+    const warning = page.getByRole("region", { name: "Alterações locais", exact: true });
+
+    // A fresh form is clean; changing only the options also needs protection.
+    await newDraft.click();
+    await expect(bank).toBeEnabled();
+    expect(await hasUnloadGuard(page)).toBe(false);
+    await back.click();
+    await expect(page.getByRole("heading", { name: "Curadoria", exact: true })).toBeFocused();
+    await expect(warning).toHaveCount(0);
+    await newDraft.click();
+    await page.getByRole("button", { name: "Adicionar alternativa", exact: true }).click();
+    await expect(bank).toBeDisabled();
+    await page.getByRole("button", { name: "Remover alternativa E", exact: true }).click();
+    await expect(bank).toBeEnabled();
+
+    const input = content(`TEST ONLY edição protegida ${randomUUID().slice(0, 8)}`);
+    await fillDraft(page, input);
+    await expect(bank).toBeDisabled();
+    expect(await hasUnloadGuard(page)).toBe(true);
+    await back.click();
+    await expect(warning).toBeVisible();
+    await expect(page.locator("#editorial-discard-message")).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(warning.getByRole("button", { name: "Continuar editando", exact: true })).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(warning).toHaveCount(0);
+    await expect(back).toBeFocused();
+    await expect(page.getByLabel("Título", { exact: true })).toHaveValue(input.title);
+    await expect(bank).toBeDisabled();
+
+    await back.click();
+    await warning.getByRole("button", { name: "Descartar alterações", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Curadoria", exact: true })).toBeFocused();
+    await expect(bank).toBeEnabled();
+    expect(await hasUnloadGuard(page)).toBe(false);
+    await newDraft.click();
+    await expect(page.getByLabel("Título", { exact: true })).toHaveValue("");
+    await fillDraft(page, input);
+    const saved = await saveDraft(page);
+    questions.add(saved.questionId);
+    await expect(bank).toBeEnabled();
+    expect(await hasUnloadGuard(page)).toBe(false);
+    await bank.click();
+    await expect(page.getByRole("heading", { name: "Banco de questões", exact: true })).toBeVisible();
+    await page.reload();
+    await expect(page.getByRole("heading", { name: "Banco de questões", exact: true })).toBeVisible();
+  });
 }
 
 test("authoring, independent rejection/publication, version replacement and historical answers form a complete workflow", async ({
@@ -260,12 +331,16 @@ test("authoring, independent rejection/publication, version replacement and hist
       .fill(
         "Acrescente uma explicação mais detalhada para o raciocínio apresentado.",
       );
+    await expect(reviewer.getByRole("button", { name: "Banco de questões", exact: true })).toBeDisabled();
+    expect(await hasUnloadGuard(reviewer)).toBe(true);
     await reviewer
       .getByRole("button", { name: "Devolver para ajustes", exact: true })
       .click();
     await expect(reviewer.getByRole("status")).toContainText(
       "Versão devolvida para ajustes.",
     );
+    await expect(reviewer.getByRole("button", { name: "Banco de questões", exact: true })).toBeEnabled();
+    expect(await hasUnloadGuard(reviewer)).toBe(false);
     await openCuration(page);
     await page
       .getByRole("button", { name: `Abrir: ${title}`, exact: true })
@@ -446,12 +521,16 @@ test("editing conflicts preserve local content and explicit reopen reconciles th
   await expect(page.getByLabel("Título", { exact: true })).toHaveValue(
     "Meu texto local ainda não salvo",
   );
+  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeDisabled();
+  expect(await hasUnloadGuard(page)).toBe(true);
   await page
     .getByRole("button", { name: "Reabrir versão", exact: true })
     .click();
   await expect(page.getByLabel("Título", { exact: true })).toHaveValue(
     "Edição confirmada por outra aba",
   );
+  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeEnabled();
+  expect(await hasUnloadGuard(page)).toBe(false);
 });
 
 test("curation navigation stays unavailable to an account without the local curator role", async ({

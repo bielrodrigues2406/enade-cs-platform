@@ -12,7 +12,7 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Sessões de 30 dias, rotação de tokens ao autenticar e saída com revogação no servidor.
 - Revisões de resposta: retry idempotente e rejeição de gravações antigas/conflitantes.
 - Curadoria de questões autorais: rascunho, revisão por outra pessoa, devolução, publicação e nova versão.
-- Versões publicadas e feedback histórico preservados; conflitos não sobrescrevem alterações.
+- Versões publicadas e feedback histórico preservados; conflitos não sobrescrevem alterações. Edições não salvas da curadoria são protegidas ao sair ou recarregar.
 - Caderno de erros com filtro por assunto, paginação e nova resolução; resumo por questão distinta, sem multiplicar contagens por edições ou versões.
 - Tabela por assunto no caderno de erros (a retomar e respondidas) com ação de retomar cada assunto; no catálogo, quantas questões da seleção têm resposta salva; na resolução, posição na seleção e "Próxima questão" após o feedback.
 - Interface com paleta "caderno" em tokens (contraste conferido), fontes auto-hospedadas e transições de tela que respeitam movimento reduzido ([design](docs/DESIGN-QUALITY.md)).
@@ -107,7 +107,7 @@ Para execução fria na nuvem, `npm run test:e2e -- --timeout=60000` define o li
 
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build, 122 testes API/PostgreSQL/utilitários e 29 fluxos Chromium passaram localmente, em sequência, na base atual. Além dos contratos de conta, estudo, curadoria e fontes, a suíte cobre preservação dos PDFs, recibos Unicode, quarentena auxiliar, vínculos de prova/gabarito, geometria dos recortes, bloqueios materiais e finalidade do gabarito. Os fluxos Chromium verificam também a página inicial e a apresentação por imagem, teclado e larguras 320/390/768/1440. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build, 122 testes API/PostgreSQL/utilitários e 33 fluxos Chromium passaram localmente, em sequência, na base atual. Além dos contratos de conta, estudo, curadoria e fontes, a suíte cobre preservação dos PDFs, recibos Unicode, quarentena auxiliar, vínculos de prova/gabarito, geometria dos recortes, bloqueios materiais e finalidade do gabarito. Os fluxos Chromium verificam também a página inicial e a apresentação por imagem, teclado e larguras 320/390/768/1440. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
 O [CI do PR #13](https://github.com/bielrodrigues2406/enade-cs-platform/actions/runs/40387694387) também aprovou build, testes com PostgreSQL, E2E e imagem de produção em 26/10/2026. Localmente, o fluxo de conta foi repetido após reiniciar o Vite, cujo overlay de erro havia interceptado o primeiro clique durante a atualização das dependências.
 
@@ -129,6 +129,7 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Avaliação das skills candidatas](docs/SKILLS-ASSESSMENT.md)
 - [Questões por imagem e importação de prova + gabarito — proposta e medições](docs/QUESTION-IMAGES-AND-IMPORT.md)
 - [Análise por perspectivas simuladas de alunos/professores e pendências](docs/reviews/2026-10-28-product-perspectives.md)
+- [Auditoria atual com agentes: simulados, áreas e prontidão das telas](docs/reviews/2026-10-29-study-readiness.md)
 - [Continuidade do Claude: recuperação de texto e qualidade das questões](docs/reviews/derived-text-quality.md)
 - [Colaboração entre agentes](docs/COLLABORATION.md), [quadro de trabalho](docs/WORKBOARD.md) e [plano de design e motion](docs/DESIGN-QUALITY.md)
 

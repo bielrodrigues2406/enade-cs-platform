@@ -78,7 +78,7 @@ type Question = Summary & {
     ReviewComponent,
   ],
   template: `
-    <a class="skip" href="#content">Ir para o conteúdo</a>
+    <a class="skip" href="#content" (click)="skipToContent($event)">Ir para o conteúdo</a>
     <header>
       <a
         href="/"
@@ -1377,6 +1377,10 @@ class App {
   }
   private focusMain() {
     setTimeout(() => document.getElementById("content")?.focus(), 0);
+  }
+  skipToContent(event: Event) {
+    event.preventDefault();
+    this.focusMain();
   }
 }
 bootstrapApplication(App, {
