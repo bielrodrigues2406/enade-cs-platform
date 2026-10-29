@@ -17,6 +17,10 @@ type CatalogRow = {
   answered: boolean;
   demonstration: boolean;
 };
+type HomeCatalog = {
+  summary: { total: number; answered: number; official: number; author: number; demonstration: number };
+  suggestions: CatalogRow[];
+};
 type Notebook = {
   summary: { answered: number; correct: number; incorrect: number };
   items: ReviewItem[];
@@ -29,8 +33,6 @@ type Week = { label: string; now: boolean; exam: boolean };
 const EXAM_DATE = new Date(2026, 10, 29);
 const EXAM_SOURCE =
   "https://www.gov.br/inep/pt-br/acesso-a-informacao/perguntas-frequentes/exame-nacional-de-desempenho-dos-estudantes-enade";
-// O catálogo devolve no máximo esta quantidade de itens por consulta.
-const CATALOG_LIMIT = 50;
 const DAY = 86400000;
 const MONTHS = "jan fev mar abr mai jun jul ago set out nov dez".split(" ");
 
@@ -216,19 +218,18 @@ const monday = (date: Date) => {
         <section class="panel" aria-label="Seu andamento">
           <span class="panel-eyebrow">SEU ANDAMENTO</span>
           <h2>Banco de questões</h2>
-          @if (catalog(); as rows) {
+          @if (catalog(); as data) {
             <div class="bars">
               <div class="bar-row">
                 <span>Respondidas</span>
                 <span class="bar-track"
                   ><span
                     class="bar-fill"
-                    [style.--value]="ratio(answeredCount(), rows.length)"
+                    [style.--value]="ratio(answeredCount(), data.summary.total)"
                   ></span
                 ></span>
                 <span class="bar-value"
-                  >{{ answeredCount() }} de {{ rows.length
-                  }}{{ capped() ? "+" : "" }}</span
+                  >{{ answeredCount() }} de {{ data.summary.total }}</span
                 >
               </div>
               <div class="bar-row">
@@ -557,7 +558,7 @@ export class HomeComponent {
     },
   ];
 
-  catalog = signal<CatalogRow[] | null>(null);
+  catalog = signal<HomeCatalog | null>(null);
   notebook = signal<Notebook | null>(null);
   demoStep = signal(0);
   private host = inject(ElementRef<HTMLElement>);
@@ -602,33 +603,30 @@ export class HomeComponent {
   }
 
   answeredCount() {
-    return this.catalog()?.filter((row) => row.answered).length ?? 0;
+    return this.catalog()?.summary.answered ?? 0;
   }
   unansweredCount() {
-    return (this.catalog()?.length ?? 0) - this.answeredCount();
+    return (this.catalog()?.summary.total ?? 0) - this.answeredCount();
   }
   incorrectCount() {
     return this.notebook()?.summary.incorrect ?? 0;
   }
-  capped() {
-    return (this.catalog()?.length ?? 0) >= CATALOG_LIMIT;
-  }
   nextQuestion() {
-    return this.catalog()?.find((row) => !row.answered) ?? null;
+    return this.catalog()?.suggestions[0] ?? null;
   }
   // Erradas primeiro (as mais antigas, como no caderno), depois as novas.
   retryItems() {
     return this.notebook()?.items.slice(0, 3) ?? [];
   }
   pending() {
-    return (this.catalog() ?? []).filter((row) => !row.answered).slice(0, 3);
+    return this.catalog()?.suggestions ?? [];
   }
   coverSummary() {
     if (!this.catalog()) return "";
     const answered = this.answeredCount();
     if (!answered)
       return "Resolva por assunto, veja por que cada alternativa está certa ou errada e volte ao que errou. Suas respostas ficam salvas neste navegador ou na sua conta.";
-    const total = `${this.catalog()!.length}${this.capped() ? "+" : ""}`;
+    const total = this.catalog()!.summary.total;
     const incorrect = this.incorrectCount();
     return (
       `Você respondeu ${answered} de ${total} questões do banco · ` +
@@ -663,22 +661,18 @@ export class HomeComponent {
     return `${String(date.getDate()).padStart(2, "0")}/${String(date.getMonth() + 1).padStart(2, "0")}`;
   }
   officialCount() {
-    return this.catalog()?.filter((r) => r.origin === "OFFICIAL").length ?? 0;
+    return this.catalog()?.summary.official ?? 0;
   }
   authorCount() {
-    return (
-      this.catalog()?.filter((r) => r.origin !== "OFFICIAL" && !r.demonstration)
-        .length ?? 0
-    );
+    return this.catalog()?.summary.author ?? 0;
   }
   demoCount() {
-    return this.catalog()?.filter((r) => r.demonstration).length ?? 0;
+    return this.catalog()?.summary.demonstration ?? 0;
   }
   countLabel(count: number) {
     if (!this.catalog()) return "";
     if (!count) return "nenhuma publicada ainda";
-    const n = this.capped() ? `${count}+` : String(count);
-    return `${n} ${count === 1 ? "questão" : "questões"}`;
+    return `${count} ${count === 1 ? "questão" : "questões"}`;
   }
   daysLeft() {
     const days = Math.round(
@@ -753,11 +747,11 @@ export class HomeComponent {
         return null;
       }
     };
-    const [rows, notebook] = await Promise.all([
-      get<CatalogRow[]>("questions?q=&topic="),
+    const [catalog, notebook] = await Promise.all([
+      get<HomeCatalog>("catalog?limit=1"),
       get<Notebook>("review?topic=&offset=0"),
     ]);
     if (notebook) this.notebook.set(notebook);
-    if (rows) this.catalog.set(rows);
+    if (catalog) this.catalog.set(catalog);
   }
 }

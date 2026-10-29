@@ -136,6 +136,11 @@ test("catalog reaches past 50 current versions with global facets, real counts a
   for (const offset of [0, 20, 40]) {
     const data = await catalog(user, { ...params, offset: String(offset) });
     assert.equal(data.total, 57); assert.equal(data.answeredTotal, 0); assert.equal(data.offset, offset);
+    assert.ok(data.summary.total >= 57);
+    assert.equal(data.summary.answered, 0);
+    assert.equal(data.summary.official + data.summary.author + data.summary.demonstration, data.summary.total);
+    assert.equal(data.suggestions.length, 3);
+    assert.ok(data.suggestions.every((q: any) => q.answered === false));
     assert.equal(data.items.length, offset === 40 ? 17 : 20);
     assert.ok(data.facets.topics.includes(custom), "facet from beyond the first page remains available");
     assert.ok(data.facets.areas.find((a: any) => a.name === "Algoritmos").count >= 56);
@@ -151,6 +156,8 @@ test("catalog reaches past 50 current versions with global facets, real counts a
   const empty = await catalog(user, { q: randomUUID(), offset: "1000000" });
   assert.equal(empty.total, 0); assert.equal(empty.offset, 0); assert.deepEqual(empty.items, []);
   assert.ok(empty.facets.topics.includes(custom));
+  assert.ok(empty.summary.total >= 57, "home counts are global even with no selected results");
+  assert.equal(empty.suggestions.length, 3, "home suggestions do not inherit catalog filters");
   const classified = await catalog(user, { q: batch, area: "Algoritmos", limit: "50" });
   assert.equal(classified.total, 56); assert.ok(classified.items.every((q: any) => q.area === "Algoritmos"));
   const detail = await catalog(user, { topic: custom });
@@ -189,8 +196,11 @@ test("catalog answer totals cover the selection beyond a page and isolate identi
   }
   const page = await catalog(user, { topic, limit: "1" });
   assert.equal(page.items.length, 1); assert.equal(page.total, 4); assert.equal(page.answeredTotal, 3);
+  assert.equal(page.summary.answered, 3);
+  assert.ok(page.suggestions.every((q: any) => !ids.slice(0, 3).includes(q.id)), "suggestions exclude this owner's answered versions");
   const isolated = await catalog(other, { topic, limit: "1" });
   assert.equal(isolated.answeredTotal, 0); assert.equal(isolated.items[0].answered, false);
+  assert.equal(isolated.summary.answered, 0);
 });
 
 test("catalog year and provenance come only from current public exam versions", async () => {

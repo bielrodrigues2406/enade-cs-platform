@@ -72,6 +72,18 @@ export class CatalogController {
         'total',(SELECT total FROM counts),
         'answeredTotal',(SELECT answered FROM counts),
         'limit',$6::integer,'offset',(SELECT effective_offset FROM page_bounds),
+        'summary',(SELECT json_build_object(
+          'total',count(*)::integer,
+          'answered',count(*) FILTER (WHERE answered)::integer,
+          'official',count(*) FILTER (WHERE origin='OFFICIAL')::integer,
+          'author',count(*) FILTER (WHERE origin<>'OFFICIAL' AND NOT demonstration)::integer,
+          'demonstration',count(*) FILTER (WHERE demonstration)::integer
+        ) FROM published),
+        'suggestions',COALESCE((SELECT json_agg(i ORDER BY i.id) FROM (
+          SELECT id,title,topic,origin,demonstration,"versionNumber",answered,
+            area,year,modality,"questionNumber"
+          FROM published WHERE NOT answered ORDER BY id LIMIT 3
+        ) i),'[]'::json),
         'facets',json_build_object(
           'areas',(SELECT json_agg(json_build_object(
             'name',u.name,'count',(SELECT count(*)::integer FROM published p WHERE p.area=u.name)
