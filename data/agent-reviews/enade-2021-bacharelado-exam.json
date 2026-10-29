@@ -1,0 +1,87 @@
+{
+  "document": "enade-2021-bacharelado-exam",
+  "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+  "cropsManifestSha256": "38ce43e9f782c050d7670c4e954ac79c5a0d7f5a8db78ecabd5d6be4a1746255",
+  "reviewer": "codex-review-cnt-v1",
+  "extractor": "codex-root",
+  "reviewedAt": "2026-10-28T21:33:31.763Z",
+  "items": [
+    {
+      "key": "Q1",
+      "verdict": "APPROVED",
+      "fragments": [
+        "5ecad8a944f2c6151b8cff269b1b0013d27491160531a6e6f8ea529c7bf05dc7"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "notes": "Recorte da página PDF5 contém número01, enunciado, referência, comando e todas as alternativas A–E legíveis, sem conteúdo vizinho. Letra E confirmada na página1 do gabarito definitivo. Os dados de mobilidade social são os históricos de2018 citados na fonte."
+    },
+    {
+      "key": "Q2",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f8dcd5dc81e52c81ca886aaf96b4ae8c6e03b65fa01bf6e8b4dba933871ea242",
+        "ea7650a74a56677fe514367d7854e98c67af40dedca047c877ca4ea146f9da9d"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "notes": "Dois recortes, em ordem, das páginas PDF6–7: infográfico Embrapa integral e continuação com textoII, asserções e todas as alternativas A–E. Número02 e chave C conferidos. O PORQUE está correto na imagem; a caixa alternada e a quebra da URL no texto auxiliar não constituem falha do recorte, conforme apresentação principal por imagem (D8)."
+    },
+    {
+      "key": "Q3",
+      "verdict": "APPROVED",
+      "fragments": [
+        "337b81da88479016993e88ec2c6c13ec83dc06160978aae98dcabe75308f7119"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "notes": "Recorte da página PDF8 contém número03, textosI/II, charge completa com crédito, asserçõesI–III e todas as alternativas A–E. Sem questão vizinha. Letra B confirmada no gabarito definitivo. Não foi feita verificação bibliográfica externa da narrativa histórica introdutória; a qualificação “talvez” do original está preservada."
+    },
+    {
+      "key": "Q4",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c70fdf88c70d63948839279afcee9f791c02cd53ba1cff94544056b944b5ef3b"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "notes": "Recorte da página PDF9 contém número04, enunciado, referência, asserções e todas as alternativas A–E. PORQUE está correto na imagem; a caixa do texto auxiliar não é falha visual. Letra B confirmada. A descrição jurídica é a do texto histórico citado em2020, sem ser apresentada como orientação universal atual."
+    },
+    {
+      "key": "Q5",
+      "verdict": "BLOCKED",
+      "reason": "DADOS_E_UNIDADES_NA_FONTE: os dois recortes são completos e a chave A foi confirmada, mas o próprio textoI chama15,2 de “três vezes”5,7 (razão aproximada2,67) e apresenta6,8 derivado de uma taxa como “óbitos”, sem unidade. A ressalva material da fonte continua aberta; preservar os valores e o gabarito, sem correção silenciosa."
+    },
+    {
+      "key": "Q6",
+      "verdict": "APPROVED",
+      "fragments": [
+        "ade06f9e73e1a04ae4ec84716e6dba54a8bfea08d6b2c58142f5af37775d2fc4"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "notes": "Recorte da página PDF11 contém somente número06 e sua questão completa, sem alternativas deQ5. Enunciado, referência, asserções e A–E legíveis; PORQUE correto na imagem. Letra A confirmada na chave definitiva. A estimativa de expectativa de vida é histórica e II se apresenta como hipótese explicativa."
+    },
+    {
+      "key": "Q7",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c6cf26e6ced8cf64ad172cde445860244def7afb28814be5b6491d61ebba2f9d"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "notes": "Recorte da página PDF12 contém número07, os dois textos e suas referências, afirmaçõesI–III e todas as alternativas A–E. Título “A saúde na mídia” está correto na imagem. Letra C confirmada. A capitalização do texto auxiliar não bloqueia a fidelidade visual; não foi feita avaliação por leitor de tela."
+    },
+    {
+      "key": "Q8",
+      "verdict": "BLOCKED",
+      "reason": "AMBIGUIDADE_INTERPRETATIVA: recorte completo e chave D confirmada, mas a afirmaçãoII fala em consenso entre situação e oposição sem exigir explicitamente unanimidade. A fundamentação de sua exclusão continua com ressalva aberta; não inventar uma palavra ausente nem trocar a letra oficial."
+    }
+  ]
+}
