@@ -2,6 +2,7 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/browser",
   workers: 1,
+  reporter: process.env.CI ? [["dot"], ["github"]] : [["list"]],
   use: { baseURL: "http://localhost:4200", trace: "retain-on-failure" },
   projects: [
     {
