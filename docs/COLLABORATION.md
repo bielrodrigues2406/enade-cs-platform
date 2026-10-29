@@ -4,7 +4,7 @@ Status: protocolo operacional. Referência: 26/10/2026. Complementa AGENTS.md e 
 
 Dois agentes trabalham em paralelo no mesmo repositório. Este documento define quem faz o quê, como evitar conflitos e como uma entrega passa de um agente para outro. O quadro vivo de tarefas está em [WORKBOARD.md](WORKBOARD.md).
 
-Pedido de Gabriel em 28/10/2026: estudar questões como imagens e importação de prova + gabarito. A [proposta compartilhada](QUESTION-IMAGES-AND-IMPORT.md) reúne medição de peso, apresentação ao aluno, fluxo de revisão e divisão proposta CT-1/IMG-I1/IMG-U1/CAT-1. A [análise de produto](reviews/2026-10-28-product-perspectives.md) distingue perspectivas simuladas de agentes e validação humana. O handoff do PR #16 da trilha Claude (ADR-010, CNT-C1/CT-1b e CNT-T1/CNT-V1/PUB-A1) foi considerado, incluindo suas reservas 010/011; seu conteúdo ainda não está integrado. Consulte o quadro antes de iniciar implementação; este estudo não entrega o uploader/visualizador nem altera o caminho de publicação do código atual.
+Pedido de Gabriel em 28/10/2026: estudar questões como imagens e importação de prova + gabarito. A [proposta compartilhada](QUESTION-IMAGES-AND-IMPORT.md) reúne medição de peso, apresentação ao aluno, fluxo de revisão e divisão proposta CT-1/IMG-I1/IMG-U1/CAT-1. A [análise de produto](reviews/2026-10-28-product-perspectives.md) distingue perspectivas simuladas de agentes e validação humana. O handoff do PR #16 da trilha Claude (ADR-010, CNT-C1/CT-1b e CNT-T1/CNT-V1/PUB-A1) foi considerado, incluindo suas reservas 010/011; a entrega final foi integrada na main `42a45d6`. D8 transferiu imagens/publicação/catálogo ao Claude; Codex continua na conferência e corrige os achados de integridade no PR #18. Consulte o quadro antes de iniciar trabalho; upload/editor em lote continuam pendentes.
 
 ## 1. Papéis
 
@@ -15,7 +15,7 @@ Pedido de Gabriel em 28/10/2026: estudar questões como imagens e importação d
 | Trilha Codex | Codex | Tarefas marcadas `Codex` no quadro |
 | Revisor cruzado | O outro agente | Revisa o PR antes do merge (seção 6) |
 
-Nenhum agente transcreve questões oficiais, gabaritos ou comentários editoriais por conta própria. Conteúdo oficial exige fonte conferida e revisão humana (MASTER-SPEC §5, ADR-004).
+Nenhum agente transcreve questões oficiais, gabaritos ou comentários editoriais por conta própria. Conteúdo oficial exige fonte conferida e revisão independente; o caminho humano permanece e as ADR-010/011 acrescentam conferência ASSISTED por agentes distintos, sem simular contas humanas.
 
 ## 2. Uma tarefa, uma branch, um dono
 

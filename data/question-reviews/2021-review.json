@@ -67,7 +67,9 @@
       "topic": "Desigualdade e mobilidade social",
       "explanation": "O gabarito E relaciona a baixa mobilidade ao acesso desigual a educação, saúde e oportunidades de trabalho. Esses fatores ajudam a perpetuar a pobreza entre gerações. As demais opções acrescentam explicações demográficas ou ancestrais não sustentadas pelo texto, responsabilizam a organização dos pobres ou confundem o ciclo de pobreza com uma alternância de subida e queda social.",
       "notes": [
-        "Inspeção visual assistida do Bacharelado, página 5: enunciado e cinco alternativas presentes. O texto trata dos dados históricos de 2018, sem constituir estatística atualizada."
+        "Conferência visual assistida desta passagem: página(s) PDF 5 da prova e página 1 do gabarito definitivo de Ciência da Computação — Bacharelado, código 02, ENADE 2021. Enunciado e todas as alternativas A–E foram confrontados; a chave E foi preservada. Não é aprovação de publicação nem revisão humana.",
+        "Inspeção visual assistida do Bacharelado, página 5: enunciado e cinco alternativas presentes. O texto trata dos dados históricos de 2018, sem constituir estatística atualizada.",
+        "Nova passagem confirmou a correspondência do corpo textual e das cinco alternativas. Não houve consulta externa às estatísticas ou à reportagem citada."
       ],
       "issues": [],
       "disposition": "CONTENT_CHECKED"
@@ -77,19 +79,20 @@
       "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
       "key": "Q2",
       "topic": "Alimentação e desperdício",
-      "explanation": "O gabarito C considera I verdadeira e II falsa. O texto II diferencia exigência puramente estética, que pode aumentar perdas, de cuidados de integridade e higiene, que podem reduzi-las. Por isso não afirma uma proporcionalidade geral entre exigência de aparência e desperdício. A validade de I depende também da imagem do texto I, que ainda precisa ser incorporada e conferida.",
+      "explanation": "O gabarito C considera I verdadeira e II falsa. O infográfico do texto I foi examinado: ele distingue alterações de formato/cicatrizes superficiais dos danos que comprometem a qualidade. O texto II diferencia exigência puramente estética, que pode aumentar perdas, de cuidados de integridade e higiene, que podem reduzi-las. Por isso não afirma uma proporcionalidade geral entre qualquer exigência de aparência e desperdício. A explicação acompanha a interpretação do material histórico e não substitui o infográfico que ainda precisa ser integrado.",
       "notes": [
-        "A transcrição começa por uma referência de imagem, sem o conteúdo visual do texto I. Não usar a explicação como confirmação da imagem ausente.",
-        "A conjunção extraída como “pORQuE” deve ser conferida e preservada como o “PORQUE” impresso."
+        "Conferência visual assistida desta passagem: página(s) PDF 6 e 7 da prova e página 1 do gabarito definitivo de Ciência da Computação — Bacharelado, código 02, ENADE 2021. Enunciado e todas as alternativas A–E foram confrontados; a chave C foi preservada. Não é aprovação de publicação nem revisão humana.",
+        "A conjunção extraída como “pORQuE” deve ser conferida e preservada como o “PORQUE” impresso.",
+        "O texto I foi agora examinado na página6, com continuação e alternativas na7. Preservar as duas regiões na ordem. O infográfico ainda precisa acompanhar a questão; o recurso foi conferido visualmente nesta passagem."
       ],
       "issues": [
         {
-          "code": "CONFERIR_RECURSO_VISUAL",
-          "note": "Imagem do texto I na página 6 e continuação na página 7 não foram renderizadas nesta revisão."
+          "code": "IMAGEM_TEXTO_I_NAO_INTEGRADA",
+          "note": "Infográfico da página6 visualmente conferido nesta passagem; ainda não integra a apresentação da questão importada. Preservar título, dois grupos de critérios, imagem e crédito."
         },
         {
           "code": "CORRIGIR_VERSALETE",
-          "note": "A extração alterou a caixa de rótulos ou conectores; confrontar com a página impressa, sem alterar a redação original."
+          "note": "Página7 imprime PORQUE; corrigir a caixa alternada do baseline após conferência, mantendo evidência original."
         }
       ],
       "disposition": "MANUAL_REQUIRED"
@@ -99,14 +102,16 @@
       "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
       "key": "Q3",
       "topic": "Mobilidade urbana e políticas públicas",
-      "explanation": "O gabarito B seleciona apenas II: pedalar pode reduzir emissões no deslocamento e proporcionar atividade física. I dispensa indevidamente infraestrutura segura, e III extrapola o texto ao afirmar que a bicicleta passou a prevalecer nas cidades europeias após a guerra. A charge citada no texto II deve acompanhar o item; esta análise textual não substitui sua conferência.",
+      "explanation": "O gabarito B seleciona apenas II: o uso da bicicleta no deslocamento pode reduzir a emissão direta de poluentes e proporcionar atividade física. I dispensa indevidamente investimento em infraestrutura segura, e III extrapola o texto ao afirmar prevalência da bicicleta nas cidades europeias após a guerra. A charge do texto II foi examinada nesta passagem e deve acompanhar a questão; não se trata de dispensar a captura por a conclusão textual parecer suficiente.",
       "notes": [
-        "Conferir a charge do texto II antes de completar a transcrição. As afirmações históricas introdutórias não foram verificadas contra bibliografia externa nesta revisão."
+        "Conferência visual assistida desta passagem: página(s) PDF 8 da prova e página 1 do gabarito definitivo de Ciência da Computação — Bacharelado, código 02, ENADE 2021. Enunciado e todas as alternativas A–E foram confrontados; a chave B foi preservada. Não é aprovação de publicação nem revisão humana.",
+        "Preservar a charge do texto II, conferida visualmente nesta passagem. As afirmações históricas introdutórias não foram verificadas contra bibliografia externa nesta revisão.",
+        "Charge do texto II e cinco alternativas conferidas na página8. Não foi feita checagem bibliográfica externa da narrativa histórica introdutória; preservar a qualificação “talvez” do próprio texto."
       ],
       "issues": [
         {
-          "code": "CONFERIR_RECURSO_VISUAL",
-          "note": "Charge da página 8 ainda ausente do conteúdo importável."
+          "code": "CHARGE_NAO_INTEGRADA",
+          "note": "Charge da página8 visualmente conferida nesta passagem, mas ainda ausente do conteúdo importado. A referência e a explicação não a substituem."
         }
       ],
       "disposition": "MANUAL_REQUIRED"
@@ -118,6 +123,7 @@
       "topic": "Trabalho em plataformas digitais",
       "explanation": "No contexto apresentado, o gabarito B considera ambas as asserções verdadeiras, sem relação de justificação: os custos, as jornadas e os problemas de saúde descritos em II não são o fundamento lógico da caracterização do vínculo de trabalho em I. O comentário deve situar a questão no texto de 2020, sem apresentar sua descrição jurídica como regra universal ou atual de todo trabalho em plataformas.",
       "notes": [
+        "Conferência visual assistida desta passagem: página(s) PDF 9 da prova e página 1 do gabarito definitivo de Ciência da Computação — Bacharelado, código 02, ENADE 2021. Enunciado e todas as alternativas A–E foram confrontados; a chave B foi preservada. Não é aprovação de publicação nem revisão humana.",
         "Conferência visual assistida da página 9 do Bacharelado: “PORQUE” está impresso em maiúsculas; a forma “pORQuE” é um defeito de extração.",
         "Não transformar a descrição histórica de informalidade em orientação jurídica atual ou presumir que todo trabalhador deixa de contribuir para a Previdência."
       ],
@@ -134,15 +140,20 @@
       "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
       "key": "Q5",
       "topic": "Saúde indígena e direitos fundamentais",
-      "explanation": "O gabarito A seleciona somente I. A gravidade do problema demanda atenção aos direitos fundamentais; III nega incorretamente a proteção constitucional aos povos indígenas. A prevenção não pode ignorar as especificidades culturais e etárias das comunidades. A rejeição de II depende da leitura do mapa, que não foi conferido visualmente nesta revisão; não se inventam os estados destacados.",
+      "explanation": "O gabarito A seleciona somente I. O problema demanda atenção aos direitos fundamentais da população indígena; III nega indevidamente sua proteção constitucional. A leitura visual do mapa da página10 não sustenta II: PA e TO não apresentam os maiores símbolos/concentrações; o desenho destaca eventos em categorias1–6 e não taxas estaduais ajustadas pela população. Quanto a IV, o recorte geral de15–20 anos não substitui as especificidades culturais e etárias do grupo indígena examinado (texto10–19; mapa10–14). Isso não implica que fatores gerais sejam irrelevantes, nem autoriza acrescentar uma exclusividade ausente da redação. Os números históricos do textoI têm ressalvas de aproximação e unidade, sem alteração silenciosa do original ou da chave.",
       "notes": [
-        "A página 11 do Bacharelado foi inspecionada visualmente, mas o mapa e o texto inicial da página 10 ainda precisam de conferência.",
-        "O próprio texto chama 15,2 de “três vezes” 5,7: trata-se de aproximação grosseira, pois a razão é cerca de 2,67. Manter a transcrição oficial e contextualizar, sem corrigir o número silenciosamente."
+        "Conferência visual assistida desta passagem: página(s) PDF 10 e 11 da prova e página 1 do gabarito definitivo de Ciência da Computação — Bacharelado, código 02, ENADE 2021. Enunciado e todas as alternativas A–E foram confrontados; a chave A foi preservada. Não é aprovação de publicação nem revisão humana.",
+        "O próprio texto chama 15,2 de “três vezes” 5,7: trata-se de aproximação grosseira, pois a razão é cerca de 2,67. Manter a transcrição oficial e contextualizar, sem corrigir o número silenciosamente.",
+        "Mapa e texto inicial da página10 foram agora examinados, assim como comando e alternativas da11. O mapa precisa ser integrado e não deve ser transformado em ranking de taxas estaduais apenas pelo tamanho dos símbolos."
       ],
       "issues": [
         {
-          "code": "CONFERIR_RECURSO_VISUAL",
-          "note": "Mapa de distribuição por estado e faixa etária na página 10; essencial para avaliar II."
+          "code": "MAPA_NAO_INTEGRADO",
+          "note": "Mapa da página10 visualmente conferido nesta passagem; deve acompanhar o texto e a continuação da11. Preservar legenda, limites e contexto dos eventos10–14 anos."
+        },
+        {
+          "code": "DADOS_E_UNIDADES_NA_FONTE",
+          "note": "A formulação do textoI aproxima15,2/5,7 como “três vezes” e omite a unidade ao chamar6,8 de óbitos. Tratar como ressalva da fonte, não erro de OCR nem contagem absoluta; preservar os valores e a chaveA."
         }
       ],
       "disposition": "MANUAL_REQUIRED"
@@ -154,6 +165,7 @@
       "topic": "Pandemia e desigualdades sociais",
       "explanation": "O gabarito A considera I e II verdadeiras e II uma justificativa de I. Condições precárias de trabalho podem ampliar a exposição ao contágio e ajudam a explicar a vulnerabilidade social e o impacto desigual apontado no texto. A formulação de II é uma hipótese explicativa, não uma afirmação de que toda a diferença decorra de um único fator.",
       "notes": [
+        "Conferência visual assistida desta passagem: página(s) PDF 11 da prova e página 1 do gabarito definitivo de Ciência da Computação — Bacharelado, código 02, ENADE 2021. Enunciado e todas as alternativas A–E foram confrontados; a chave A foi preservada. Não é aprovação de publicação nem revisão humana.",
         "Conferência visual assistida da página 11 do Bacharelado: o conector impresso é “PORQUE”, diferente da caixa alternada produzida pelo extrator.",
         "As estimativas de expectativa de vida são as do estudo citado à época da prova; não foram atualizadas."
       ],
@@ -172,6 +184,7 @@
       "topic": "Informação em saúde e letramento digital",
       "explanation": "O gabarito C seleciona I e II. Ambos os textos exigem cuidado com a qualidade da informação; o texto I reconhece benefícios de informação confiável sobre hábitos e prevenção. O texto II enfatiza riscos do autodiagnóstico e da automedicação, sem formular a defesa irrestrita descrita em III.",
       "notes": [
+        "Conferência visual assistida desta passagem: página(s) PDF 12 da prova e página 1 do gabarito definitivo de Ciência da Computação — Bacharelado, código 02, ENADE 2021. Enunciado e todas as alternativas A–E foram confrontados; a chave C foi preservada. Não é aprovação de publicação nem revisão humana.",
         "Conferência visual assistida da página 12 do Bacharelado: o título bibliográfico começa “A saúde na mídia”; a extração começa com “a saúde na mídia”.",
         "A questão aborda avaliação de informação e não oferece recomendação clínica."
       ],
@@ -190,6 +203,7 @@
       "topic": "Democracia e participação das minorias",
       "explanation": "O gabarito oficial D seleciona I, III e IV: o interesse comum não se reduz à preferência da maioria, e a concepção consensual procura ampliar a participação, incluindo minorias. A exclusão de II requer atenção à interpretação de “consenso entre situação e oposição”; a afirmação não usa a palavra “unanimidade”. A explicação deve registrar essa nuance e não acrescentar uma exigência inexistente no enunciado.",
       "notes": [
+        "Conferência visual assistida desta passagem: página(s) PDF 13 da prova e página 1 do gabarito definitivo de Ciência da Computação — Bacharelado, código 02, ENADE 2021. Enunciado e todas as alternativas A–E foram confrontados; a chave D foi preservada. Não é aprovação de publicação nem revisão humana.",
         "Conferência visual assistida da página 13 do Bacharelado feita: a redação de II coincide com a extração.",
         "Preservar D como resposta do documento oficial. A dúvida diz respeito à justificativa pedagógica da exclusão de II, não a uma alteração do gabarito."
       ],

@@ -124,12 +124,14 @@ Nessas provas a Calibri está embutida como fonte CID sem `/ToUnicode`, e a extr
 
 Resultado medido com o extrator da `main@3d215eb` sobre as cópias de Bacharelado:
 
+Resultados históricos do protótipo anterior a CNT-T1; o caminho atual mantém os itens para conferência, sem promover rascunhos automaticamente.
+
 | Prova | Antes | Depois |
 | --- | --- | --- |
 | 2014 | 44.909 caracteres ilegíveis; 0 rascunhos | 57 ilegíveis (quebras de página, código em fonte própria, símbolos); 40 itens, 11 rascunhos, 24 revisão, 5 discursivas |
 | 2017 | 30 de 40 itens (cabeçalhos ilegíveis); 0 rascunhos | 40 de 40 itens, 9 rascunhos, 26 revisão, 5 discursivas |
 
-Restam ilegíveis: comentários de código numa fonte com letras deslocadas ("HQTXDQWR" = "enquanto") e símbolos lógicos/de conjuntos (`ĺ` = →, `ŀ` = ∪). O extrator já manda essas questões para revisão; elas dependem da imagem da questão (ADR-010). O extrator ainda não aceita a cópia derivada diretamente: ver CNT-T1 no quadro.
+Restam ilegíveis: comentários de código numa fonte com letras deslocadas ("HQTXDQWR" = "enquanto") e símbolos lógicos/de conjuntos (`ĺ` = →, `ŀ` = ∪). O extrator já manda essas questões para revisão; elas dependem da imagem da questão (ADR-010). CNT-T1 agora gera a cópia internamente com `--repair-calibri [--python EXEC]`, valida mapa/ferramenta/hashes e mantém os itens em conferência. O antigo `--text-copy PASTA` foi substituído; não se aceita um recibo externo como prova de derivação.
 
 ## Gabaritos de 2005, 2008 e 2011 (28/10/2026)
 
@@ -158,17 +160,17 @@ Foram carregadas **605 ocorrências** em `question_intake` neste ambiente: 460 n
 | 2005 | 85 | Caderno compartilhado; 77 das 77 objetivas com alternativas estruturadas |
 | 2008 | 80 | Caderno compartilhado; 70 das 71 objetivas estruturadas; Q8 tem alternativas visuais |
 | 2011 | 55 | Caderno compartilhado; 50 das 50 objetivas com alternativas estruturadas |
-| 2014 | 80 | OCR em ambos os cadernos; conferir texto e numerais romanos |
-| 2017 | 80 | OCR em ambos os cadernos; conferir texto, código e figuras |
+| 2014 | 80 | Texto Unicode derivado do original; conferir código, fórmulas e notas do próprio PDF |
+| 2017 | 80 | Texto Unicode derivado; alternativas AVL de Q9 precisam das imagens |
 | 2021 | 80 | Análise assistida por item, incluindo 30 pares compartilhados |
 | 2024 | 64 | Trechos auxiliares derivados; não substituem os originais |
 | 2025 | 81 | Somente tipo 4, sem gabarito; discursiva sem número usa D1 técnico |
 
 A fila contém 551 objetivas e 54 discursivas, incluindo anuladas e blocos de outros cursos. São 582 itens em HOLD e 23 para conferência. Nenhuma fonte foi automaticamente conferida, nenhuma revisão humana foi atribuída e nenhuma questão oficial foi publicada. O banco de produção não é preenchido automaticamente por esta entrega.
 
-Agora 547 das 551 objetivas possuem grupos de alternativas. Essa contagem inclui cinco itens com algum texto de alternativa vazio: Q26/Q59 de 2005, Q38/Q55 de 2008 e Q27 de 2014 Bacharelado. Os alertas `alternativa-vazia` permanecem. Há ainda figuras, símbolos, código, cabeçalhos intrusos e gabaritos pendentes; nenhuma edição está integralmente pronta para publicação.
+Agora 548 das 551 objetivas possuem grupos de alternativas. Essa contagem inclui quatro itens com algum texto de alternativa vazio: Q26/Q59 de 2005 e Q38/Q55 de 2008. Texto não vazio também pode estar corrompido, como nas fórmulas de Q27/2014. Os alertas `alternativa-vazia` permanecem. Há ainda figuras, símbolos, código, cabeçalhos intrusos e gabaritos pendentes; nenhuma edição está integralmente pronta para publicação.
 
-A [análise de 2008](reviews/2008-question-review.md) registra 80 entradas, com análise conceitual concentrada nas 40 pertinentes ao percurso de CC: 13 sem nova pendência e 27 com revisão manual necessária. Os outros 40 itens permanecem identificados como blocos de Engenharia/Sistemas de Informação, sem aprovação conceitual. A [análise de 2021](reviews/2021-question-review.md) registra os 80 itens, com 23 sem nova pendência conceitual e 57 exigindo revisão manual. Há também dois pareceres de 2014 em `data/question-reviews/2014-review.json`, ambos pendentes de fidelidade OCR. As respostas oficiais permanecem preservadas.
+A [análise de 2008](reviews/2008-question-review.md) registra 80 entradas, com análise conceitual concentrada nas 40 pertinentes ao percurso de CC: 13 sem nova pendência e 27 com revisão manual necessária. Os outros 40 itens permanecem identificados como blocos de Engenharia/Sistemas de Informação, sem aprovação conceitual. A [análise de 2021](reviews/2021-question-review.md) registra os 80 itens, com 23 sem nova pendência conceitual e 57 exigindo revisão manual. A continuidade [CNT-T1/CNT-V1](reviews/derived-text-quality.md) rechecou 16 itens: oito de 2014/2017 e Q1–Q8 de 2021 Bacharelado. Os pareceres de 2014 foram ampliados para cinco entradas e os de 2017 têm quatro; a revisão de Q2/2014 baseada no OCR anterior foi preservada como histórica e ainda precisa de novo confronto. As respostas oficiais permanecem preservadas.
 
 ### Reproduzir a extração e a importação
 
@@ -176,7 +178,7 @@ Com os PDFs individuais organizados por ano/ID conforme o catálogo:
 
 ```sh
 npm run extract:questions -- --id enade-2005-comum-exam,enade-2008-comum-exam,enade-2011-comum-exam,enade-2021-bacharelado-exam,enade-2021-licenciatura-exam --directory enade-pdfs --output .local/import-review/historical
-npm run extract:questions -- --id enade-2014-bacharelado-exam,enade-2014-licenciatura-exam,enade-2017-bacharelado-exam,enade-2017-licenciatura-exam --directory enade-pdfs --output .local/import-review/historical --ocr --tessdata-dir CAMINHO_DOS_MODELOS
+npm run extract:questions -- --id enade-2014-bacharelado-exam,enade-2014-licenciatura-exam,enade-2017-bacharelado-exam,enade-2017-licenciatura-exam --directory enade-pdfs --output .local/import-review/historical --repair-calibri --python .local/venv/bin/python
 npm run extract:questions -- --id pnd-2025-computacao-pv-4 --directory enade-pdfs --output .local/import-review/recent
 npm run import:questions -- --file .local/import-review/historical/enade-2008-comum-exam.questions.json --review data/question-reviews/2008-review.json
 npm run import:questions -- --file .local/import-review/historical/enade-2021-bacharelado-exam.questions.json --review data/question-reviews/2021-review.json
@@ -185,3 +187,9 @@ npm run import:questions -- --file .local/import-review/historical/enade-2021-ba
 O extrator usa Poppler (`pdftotext`, `pdftohtml`, `pdffonts`, `pdftoppm` e `pdfimages`, do pacote `poppler-utils`). Em 2005/2008/2011 sem OCR, a prova das letras exige fonte exclusiva A–E, ocorrências repetidas e correspondência de coordenadas; nomes de fontes e ordem das respostas não bastam. Ambiguidades conservam o texto bruto e os alertas. O OCR usa `por.traineddata` com hash e origem descritos acima; o modelo precisa existir localmente. Cada relatório é importado individualmente. Fontes precisam estar previamente cadastradas e íntegras. A ausência de gabarito, conteúdo ou imagem produz pendências; não é preenchida por suposição.
 
 O script `node scripts/prepare-2024-auxiliary.mjs --file COMPILACAO.pdf --output .local/import-review/auxiliary` aceita somente a compilação identificada pelo SHA-256 fixado, prepara os trechos conhecidos e registra suas ferramentas e páginas em `data/auxiliary-sources.json`. A normalização do identificador do trailer permite repetir os bytes com as mesmas versões de Poppler registradas; não promete hashes idênticos entre versões diferentes. O original é somente lido. Os derivados são cadastrados como LOCAL, com títulos explícitos, e importados para HOLD; criação manual, promoção e publicação oficiais também rejeitam seus hashes enquanto forem fontes auxiliares.
+
+### Cópia Unicode integrada (CNT-T1)
+
+Para as quatro provas de 2014/2017, preparar Python isolado com `python3 -m venv .local/venv` e `.local/venv/bin/pip install --require-hashes -r scripts/requirements-pdf.txt` (pypdf 6.10.0, BSD-3-Clause). A API não executa Python. `--repair-calibri` usa somente arquivos originais do catálogo e o mapa fixado; `--ocr` é um modo separado, incompatível com essa opção. Adicionar `--crops PASTA` produz recortes do original e manifesto com geometria de todas as páginas; não da cópia de texto.
+
+Os mesmos 160 itens foram atualizados, junto com oito pareceres de 2021; repetir os cinco relatórios retornou 200 inalterados. Os 605 IDs e evidências iniciais foram preservados, sem publicação nesta passagem. A conferência visual de recortes 2021 Q1–Q8 aprovou Q1/Q2/Q3/Q4/Q6/Q7 e bloqueou Q5/Q8; o [arquivo](../data/agent-reviews/enade-2021-bacharelado-exam.json) está ligado ao manifesto exato. Alterar os bytes exige nova conferência.

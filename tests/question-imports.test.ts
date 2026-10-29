@@ -263,3 +263,100 @@ test("repeated option-letter diagnostics preserve incomplete extraction without 
   assert.ok(view.flags.includes("ALTERNATIVAS_INCOMPLETAS"));
   await assert.rejects(importQuestionReport({ ...extracted, items: [{ ...extracted.items[0], optionLetters: "A<script>" }] }, { catalog: [exam, key] }), invalid);
 });
+
+function textCopyReceipt(exam: Fixture) {
+  return {
+    schemaVersion: 1, algorithm: "CALIBRI_TOUNICODE_V1", generatorSha256: "b".repeat(64), pypdfVersion: "6.10.0",
+    derivedFrom: { file: `${exam.id}.pdf`, sha256: exam.sha256 },
+    map: { file: "calibri-cid-unicode.json", sha256: "f20d49d5a2c2f9a768d8139f7b37d36a13118744158433c3afce42a1bb5f8f05" },
+    output: { file: `${exam.id}.pdf`, sha256: createHash("sha256").update(`TEST ONLY text copy ${exam.sha256}`).digest("hex") },
+    fixedFonts: ["Calibri-Identity-H", "Calibri-Bold-Identity-H"],
+    tool: "scripts/repair-calibri-text.py com pypdf 6.10.0",
+    purpose: "Somente extração de texto; imagem e procedência vêm do PDF original.",
+  };
+}
+
+test("text-copy evidence rejects unbound or unsupported receipts before inserting any item", async () => {
+  const exam = await source("EXAM", { id: "enade-2014-bacharelado-exam", year: 2014 });
+  const key = await source("ANSWER_KEY", { year: 2014 });
+  const receipt = textCopyReceipt(exam);
+  const metadata = { method: "PDF_TEXT", textCopy: receipt };
+  const badReceipts = [
+    { ...receipt, schemaVersion: 2 },
+    { ...receipt, algorithm: "OTHER" },
+    { ...receipt, generatorSha256: "not-a-hash" },
+    { ...receipt, pypdfVersion: "6.1.1" },
+    { ...receipt, tool: "unreviewed-generator" },
+    { ...receipt, purpose: "Publicação automaticamente aprovada." },
+    { ...receipt, derivedFrom: { ...receipt.derivedFrom, sha256: key.sha256 } },
+    { ...receipt, derivedFrom: { ...receipt.derivedFrom, file: `../${exam.id}.pdf` } },
+    { ...receipt, derivedFrom: { ...receipt.derivedFrom, approved: true } },
+    { ...receipt, output: { ...receipt.output, sha256: exam.sha256 } },
+    { ...receipt, output: { ...receipt.output, sha256: "xyz" } },
+    { ...receipt, output: { ...receipt.output, file: `/tmp/${exam.id}.pdf` } },
+    { ...receipt, map: { ...receipt.map, sha256: "0".repeat(64) } },
+    { ...receipt, map: { ...receipt.map, file: "../calibri-cid-unicode.json" } },
+    { ...receipt, fixedFonts: [] },
+    { ...receipt, fixedFonts: ["OtherFont"] },
+    { ...receipt, fixedFonts: ["Calibri-Identity-H", "Calibri-Identity-H"] },
+    { ...receipt, humanReviewed: true },
+    null,
+  ];
+  for (const textCopy of badReceipts) {
+    const raw = { ...report(exam, key), extraction: { ...metadata, textCopy } };
+    await assert.rejects(importQuestionReport(raw, { catalog: [exam, key] }), invalid);
+  }
+  await assert.rejects(importQuestionReport({ ...report(exam, key), extraction: { ...metadata, method: "OCR" } }, { catalog: [exam, key] }), invalid);
+  for (const changed of [
+    { ...exam, year: 2017 }, { ...exam, modality: "LICENCIATURA" }, { ...exam, auxiliary: true },
+    { ...exam, originalBytesAvailable: false },
+  ]) await assert.rejects(importQuestionReport({ ...report(exam, key), extraction: metadata }, { catalog: [changed, key] }), invalid);
+  const other = await source("EXAM", { year: 2014 });
+  await assert.rejects(importQuestionReport({ ...report(other, key), extraction: { method: "PDF_TEXT", textCopy: textCopyReceipt(other) } }, { catalog: [other, key] }), invalid);
+  assert.equal((await db.query("SELECT count(*)::int AS n FROM question_intake WHERE exam_source_id=ANY($1::uuid[])", [[exam.sourceId, other.sourceId]])).rows[0].n, 0);
+});
+
+test("text derivation stays private and idempotent while preserving original evidence and curator edits", async () => {
+  const exam = await source("EXAM", { id: "enade-2017-licenciatura-exam", year: 2017, modality: "LICENCIATURA" });
+  const key = await source("ANSWER_KEY", { year: 2017, modality: "LICENCIATURA" });
+  const original = report(exam, key);
+  const first = await importQuestionReport(original, { catalog: [exam, key], review: review(exam) });
+  const id = first.items[0].id;
+  const evidence = textCopyReceipt(exam);
+  const derived = { ...report(exam, key), extraction: { method: "PDF_TEXT", textCopy: evidence } };
+  derived.items[0].prompt += " Texto sintético recuperado por cópia Unicode.";
+  const updated = await importQuestionReport(derived, { catalog: [exam, key], review: review(exam) });
+  assert.equal(updated.updated, 1); assert.equal(updated.inserted, 0); assert.equal(updated.items[0].id, id);
+  assert.equal((await importQuestionReport(derived, { catalog: [exam, key], review: review(exam) })).unchanged, 1);
+  let view = await get(id);
+  assert.equal(view.state, "HOLD"); assert.ok(view.flags.includes("TEXTO_DERIVADO_CALIBRI"));
+  assert.deepEqual(view.extraction.metadata.textCopy, evidence);
+  assert.equal(view.raw.prompt, original.items[0].prompt);
+  assert.equal(view.extraction.latestRaw.prompt, derived.items[0].prompt);
+  assert.equal(view.content.prompt, derived.items[0].prompt);
+  assert.equal(view.assistedReview.humanReviewed, false);
+  assert.equal(view.source.status, "IMPORTED"); assert.equal(view.answerKey.status, "IMPORTED");
+  assert.ok(view.events.every((event: { byCurator: boolean }) => event.byCurator === false));
+  assert.equal((await db.query("SELECT count(*)::int AS n FROM editorial_question WHERE official_exam_id=$1", [exam.sourceId])).rows[0].n, 0);
+  const publicCatalog = await request("questions", student.cookie);
+  assert.ok(!(await publicCatalog.text()).includes(derived.items[0].prompt));
+  const localPrompt = `${view.content.prompt} Ajuste manual sintético.`;
+  const edit = await request(`curation/imports/${id}`, author.cookie, "PUT", {
+    baseRevision: view.revision, content: { ...view.content, prompt: localPrompt }, resolvedFlags: [], note: "Conferência sintética sem aprovação de fonte.",
+  });
+  assert.equal(edit.status, 200);
+  const newer = structuredClone(derived); newer.items[0].prompt += " Outra tentativa automática.";
+  assert.equal((await importQuestionReport(newer, { catalog: [exam, key], review: review(exam) })).protected, 1);
+  view = await get(id); assert.equal(view.content.prompt, localPrompt); assert.equal(view.raw.prompt, original.items[0].prompt);
+});
+
+test("existing OCR metadata without a text copy remains compatible", async () => {
+  const { exam, key } = await pair();
+  const raw = report(exam, key);
+  const extracted = { ...raw, extraction: { method: "OCR", dpi: 200, engine: "TEST ONLY" } };
+  const imported = await importQuestionReport(extracted, { catalog: [exam, key], review: review(exam) });
+  const view = await get(imported.items[0].id);
+  assert.deepEqual(view.extraction.metadata, extracted.extraction);
+  assert.ok(!view.flags.includes("TEXTO_DERIVADO_CALIBRI"));
+  assert.equal((await importQuestionReport(extracted, { catalog: [exam, key], review: review(exam) })).unchanged, 1);
+});

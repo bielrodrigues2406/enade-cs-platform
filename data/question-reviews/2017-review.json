@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "origin": "ASSISTED",
+  "author": "Codex",
+  "humanReviewed": false,
+  "items": [
+    {
+      "examId": "enade-2017-bacharelado-exam",
+      "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+      "key": "Q9",
+      "topic": "Estruturas de dados · balanceamento AVL",
+      "explanation": "A chave A é coerente com a regra de corrigir o nó desbalanceado mais baixo após a inserção. Inserir 3 segue o caminho 13→10→5→4 e o coloca à esquerda de 4. O primeiro ancestral que fica desbalanceado é 10, com caso esquerda-esquerda; uma rotação simples à direita em 10 promove 5 na subárvore esquerda de 13. O nó 10 passa a ter 8 à esquerda e 11 à direita; 4 continua com filho esquerdo 3. A raiz global permanece 13, e a subárvore direita com 15 e 16 não muda. Essa configuração corresponde à árvore A vista na prova. Não basta balancear uma raiz arbitrária ou apenas preservar a lista de valores: os vínculos entre nós são parte das alternativas.",
+      "notes": [
+        "Análise assistida Codex; não é revisão humana, conferência de fonte ou autorização de publicação. Os alertas do extrator e a pendência de texto derivado permanecem.",
+        "Prova original, página PDF 16, e gabarito definitivo A, página PDF 1, examinados. A árvore inicial e todas as cinco árvores A–E foram comparadas visualmente, sem executar programa de árvore.",
+        "A nova extração associa corretamente a questão apenas à página 16; a referência OCR anterior anexava a página 17. Porém, continua com options vazio e diagnóstico ABC, porque as árvores estão em grade A/D, B/E, C. A imagem é essencial e a correção do limite não equivale à recuperação das alternativas."
+      ],
+      "issues": [
+        {
+          "code": "ALTERNATIVAS_VISUAIS_NAO_INTEGRADAS",
+          "note": "As cinco alternativas são árvores AVL com ramos distintos. O texto linearizado reúne números e letras, mas não fornece seus vínculos nem forma os cinco grupos. Integrar as cinco imagens associadas às letras corretas e à árvore do enunciado, com representação acessível."
+        }
+      ],
+      "disposition": "MANUAL_REQUIRED"
+    },
+    {
+      "examId": "enade-2017-bacharelado-exam",
+      "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+      "key": "Q10",
+      "topic": "Engenharia de software · padrão Observer",
+      "explanation": "A alternativa C é coerente: I é verdadeira e II é falsa. Observer representa uma dependência de um para muitos, permitindo notificar observadores interessados quando o estado do objeto observado muda; isso se ajusta ao requisito de atualização dos vários interessados e inclusão de novos observadores. O padrão não é definido como realização obrigatória do estilo arquitetural cliente-servidor: pode ser utilizado em objetos locais ou combinado com mecanismos de comunicação distribuída. A comunicação entre dispositivos ainda exige uma implementação apropriada, e a escolha do padrão não oferece por si só garantia de entrega em rede.",
+      "notes": [
+        "Análise assistida Codex; não é revisão humana, conferência de fonte ou autorização de publicação. Os alertas do extrator e a pendência de texto derivado permanecem.",
+        "Prova original, coluna esquerda da página PDF 17, e chave definitiva C, página PDF 1, examinadas. O enunciado, I/II, PORQUE e todas as opções A–E correspondem ao novo texto Unicode.",
+        "A coluna direita contém Q11 e foi mantida separada de Q10 no novo relatório. Não foi identificada pendência específica de fidelidade ou conteúdo em Q10 nesta análise."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2017-bacharelado-exam",
+      "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+      "key": "Q20",
+      "topic": "Redes · protocolos TCP e UDP",
+      "explanation": "A alternativa D seleciona I e III no contexto didático tradicional da comparação. UDP tem menor estrutura de controle e não impõe conexão, retransmissões ou ordenação de fluxo, sendo adequado a aplicações sensíveis ao tempo que podem tolerar alguma perda. TCP fornece mecanismos de confiabilidade e ordenação que atendem mais diretamente a aplicações para as quais esses requisitos predominam. Isso não garante que UDP sempre seja mais rápido ou que uma conexão TCP jamais falhe; protocolos sobre UDP também podem implementar confiabilidade. II não descreve o cenário usual de atualizações de ação sensíveis à latência considerado pela questão. A afirmação de uso não foi tratada como medição contemporânea de todos os jogos.",
+      "notes": [
+        "Análise assistida Codex; não é revisão humana, conferência de fonte ou autorização de publicação. Os alertas do extrator e a pendência de texto derivado permanecem.",
+        "Prova original, parte superior da página PDF 23, e chave definitiva D, página PDF 1, examinadas. As afirmações I–III e as cinco alternativas correspondem ao novo Unicode.",
+        "O alerta automático fonte-de-simbolos permanece no relatório, mas a página também contém Q21, com fórmulas lógicas. Não foi constatada corrupção simbólica no texto de Q20; um alerta por página não equivale a erro confirmado em cada item."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    },
+    {
+      "examId": "enade-2017-bacharelado-exam",
+      "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+      "key": "Q28",
+      "topic": "Engenharia de software · Scrum e métodos ágeis",
+      "explanation": "A alternativa D seleciona I e III. Sprints organizam a produção de incrementos, e a definição/priorização dos requisitos com participação dos responsáveis pelo produto sustenta o envolvimento do cliente no contexto descrito. II é falsa porque programação em pares é uma prática associada a métodos como Extreme Programming e não uma prescrição do Scrum para realizar a simplicidade. Uma equipe Scrum pode adotar programação em pares; isso não transforma a técnica em elemento obrigatório do framework nem valida a afirmação tal como impressa. A explicação segue o contexto histórico de 2017 e não pretende substituir as definições normativas mais recentes do Scrum.",
+      "notes": [
+        "Análise assistida Codex; não é revisão humana, conferência de fonte ou autorização de publicação. Os alertas do extrator e a pendência de texto derivado permanecem.",
+        "Prova original, coluna esquerda da página PDF 27, e chave definitiva D, página PDF 1, examinadas. Foram comparados os cinco princípios listados, as afirmações I–III e todas as alternativas A–E.",
+        "O texto de Q29 na coluna direita não foi anexado a Q28 no novo relatório. Não foi identificada nova pendência específica de fidelidade ou conteúdo nesse item."
+      ],
+      "issues": [],
+      "disposition": "CONTENT_CHECKED"
+    }
+  ]
+}

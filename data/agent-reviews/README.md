@@ -1,15 +1,15 @@
 # Conferência por agente (CNT-V1, ADR-010)
 
-Cada arquivo desta pasta registra a conferência de **uma prova** por um agente que **não** fez a extração (hoje: extração e recortes pelo Claude, conferência pelo Codex). Só os itens aprovados aqui podem ser publicados pelo caminho `ASSISTED` (PUB-A1). Nada aqui é revisão humana.
+Cada arquivo desta pasta registra a conferência de **uma prova** por um agente que **não** fez a extração. Identifique os operadores reais de cada lote; a autoria do utilitário não determina quem executou a extração. Só os itens aprovados aqui podem ser publicados pelo caminho `ASSISTED` (PUB-A1). Nada aqui é revisão humana.
 
 ## Como gerar o material para conferir
 
-Com os PDFs do catálogo em `enade-pdfs/` e, para 2014/2017, as cópias de texto de `scripts/repair-calibri-text.py` em `.local/repaired/`:
+Com os PDFs do catálogo em `enade-pdfs/`:
 
 ```sh
 node scripts/extract-questions.mjs --id enade-2021-bacharelado-exam \
   --directory enade-pdfs --output .local/question-drafts \
-  --crops .local/question-crops --text-copy .local/repaired
+  --crops .local/question-crops
 ```
 
 Abra `.local/question-crops/<prova>.review.html`: cada item mostra os recortes, o número, a letra do gabarito lida do PDF, os alertas e a transcrição automática. O manifesto `.local/question-crops/<prova>.crops.json` guarda página, caixa, dimensões e SHA-256 de cada recorte. Caixas definidas à mão ficam em `data/question-crop-overrides.json`.
@@ -60,3 +60,11 @@ Discursivas, anuladas e itens fora da primeira leva (D9) ficam fora.
 ## Áreas
 
 `Formação Geral` · `Algoritmos` · `Programação` · `Teoria da computação` · `Compiladores` · `Matemática` · `Arquitetura de computadores` · `Sistemas operacionais` · `Redes` · `Sistemas distribuídos` · `Banco de dados` · `Engenharia de software` · `Interação humano-computador` · `Inteligência artificial` · `Computação gráfica` · `Segurança` · `Sistemas de informação` · `Sociedade e ética`
+
+## Continuidade CNT-V1 de 28/10
+
+O lote `enade-2021-bacharelado-exam.json` contém somente Q1–Q8: seis APPROVED e duas BLOCKED. O operador desta geração foi `codex-root`; a conferência dos dez WebP foi feita pelo agente independente `codex-review-cnt-v1`. A autoria do utilitário pelo Claude não foi usada para atribuir a ele esta execução. Nada neste arquivo é revisão humana.
+
+O manifesto exato está em `data/question-crop-manifests/enade-2021-bacharelado-exam.json`; seu SHA deve coincidir com o arquivo de conferência. Os 47 arquivos WebP e o manifesto estão também no pacote local `.local/exports/conferencia-2021-bacharelado.zip`, sem PDFs. Para publicar em outro ambiente, transportar esse pacote ou regenerar com as mesmas fontes/ferramentas e comparar **todos os hashes**. Manifesto ou imagens diferentes exigem nova conferência; não reaproveitar APPROVED por número apenas.
+
+O manifesto atual contém `renderer.pages` com dimensões de todas as páginas originais. Manifestos anteriores sem esse campo precisam ser regenerados e novamente conferidos. Para 2014/2017, substituir o antigo `--text-copy PASTA` por `--repair-calibri [--python EXEC]`, que gera a cópia internamente a partir do original; o recebimento de uma cópia arbitrária foi removido. O reparo exige a versão/hashes de `scripts/requirements-pdf.txt`.

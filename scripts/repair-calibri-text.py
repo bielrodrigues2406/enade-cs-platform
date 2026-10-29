@@ -13,11 +13,12 @@ A cópia derivada serve só para extrair texto. Imagem, página e procedência
 continuam vindo do PDF original arquivado. Glifos ausentes do mapa (código em
 fonte própria, símbolos) continuam ilegíveis e o extrator os sinaliza.
 
-Requer pypdf==6.1.1 (ambiente isolado):
-  python3 -m venv .local/venv && .local/venv/bin/pip install pypdf==6.1.1
+Requer pypdf==6.10.0 (ambiente isolado):
+  python3 -m venv .local/venv
+  .local/venv/bin/pip install --require-hashes -r scripts/requirements-pdf.txt
 Uso:
   .local/venv/bin/python -I scripts/repair-calibri-text.py build-map \
-      --output data/calibri-cid-unicode.json enade-pdfs/2021/*-exam.pdf
+      --output .local/new-calibri-map.json enade-pdfs/2021/*-exam.pdf
   .local/venv/bin/python -I scripts/repair-calibri-text.py repair \
       --map data/calibri-cid-unicode.json \
       enade-pdfs/2014/enade-2014-bacharelado-exam.pdf .local/repaired/enade-2014-bacharelado-exam.pdf
@@ -25,6 +26,7 @@ Uso:
 
 import argparse
 import hashlib
+import io
 import json
 import re
 import sys
@@ -34,14 +36,45 @@ import pypdf
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import DecodedStreamObject, NameObject
 
+ROOT = Path(__file__).resolve().parent.parent
+MAP_SHA256 = "f20d49d5a2c2f9a768d8139f7b37d36a13118744158433c3afce42a1bb5f8f05"
+MAX_PDF_BYTES = 10 * 1024 * 1024
+
+
+def new_output(path):
+    path = Path(path)
+    if path.exists() or path.is_symlink():
+        raise ValueError("A saída já existe; escolha um caminho novo. Nenhum arquivo foi sobrescrito.")
+    return path
+
+
+def catalog_pdf(path, years, kinds):
+    if not Path(path).is_file() or Path(path).stat().st_size > MAX_PDF_BYTES:
+        raise ValueError("PDF ausente, irregular ou acima de 10 MiB.")
+    data = Path(path).read_bytes()
+    if not 5 <= len(data) <= MAX_PDF_BYTES or not data.startswith(b"%PDF-"):
+        raise ValueError("PDF ausente, inválido ou acima de 10 MiB.")
+    sha = hashlib.sha256(data).hexdigest()
+    catalog = json.loads((ROOT / "data/official-sources.json").read_text())
+    document = next((d for d in catalog["documents"] if d.get("sha256") == sha
+                     and d["year"] in years and d["kind"] in kinds
+                     and d.get("family", "ENADE") == "ENADE"), None)
+    if document is None:
+        raise ValueError("O PDF não corresponde às edições catalogadas permitidas.")
+    return data, sha
+
 
 def sha256(path):
+    if not Path(path).is_file() or Path(path).stat().st_size > MAX_PDF_BYTES:
+        raise ValueError("Arquivo ausente, irregular ou acima do limite.")
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 def is_calibri_cid(font):
     name = str(font.get("/BaseFont", "")).lstrip("/").split("+")[-1]
-    return font.get("/Subtype") == "/Type0" and name.startswith("Calibri")
+    return (font.get("/Subtype") == "/Type0"
+            and str(font.get("/Encoding")) == "/Identity-H"
+            and re.fullmatch(r"Calibri(?:-(?:Bold|Italic|BoldItalic))?(?:-Identity-H)?", name))
 
 
 def fonts_in(resources, seen):
@@ -70,30 +103,42 @@ def expand(text):
 
 def parse_to_unicode(data):
     mapping = {}
+    def put(code, text):
+        if not 0 <= code <= 65535 or not text or len(text) > 16:
+            raise ValueError("Entrada CMap inválida.")
+        if code in mapping and expand(mapping[code]) != expand(text):
+            raise ValueError("Mapeamentos contraditórios no CMap.")
+        mapping[code] = text
     for block in re.findall(rb"beginbfchar(.*?)endbfchar", data, re.S):
         for code, text in re.findall(rb"<([0-9A-Fa-f]+)>\s*<([0-9A-Fa-f]+)>", block):
-            mapping[int(code, 16)] = bytes.fromhex(text.decode()).decode("utf-16-be")
+            put(int(code, 16), bytes.fromhex(text.decode()).decode("utf-16-be"))
     for block in re.findall(rb"beginbfrange(.*?)endbfrange", data, re.S):
         for start, end, target in re.findall(
             rb"<([0-9A-Fa-f]+)>\s*<([0-9A-Fa-f]+)>\s*(<[0-9A-Fa-f]+>|\[[^\]]*\])", block
         ):
             first, last = int(start, 16), int(end, 16)
+            if not 0 <= first <= last <= 65535:
+                raise ValueError("Intervalo CMap inválido.")
             if target.startswith(b"<"):
                 base = int(target[1:-1], 16)
                 for code in range(first, last + 1):
-                    mapping[code] = chr(base + code - first)
+                    put(code, chr(base + code - first))
             else:
                 values = re.findall(rb"<([0-9A-Fa-f]+)>", target)
+                if len(values) != last - first + 1:
+                    raise ValueError("Array CMap incompleto.")
                 for code, value in zip(range(first, last + 1), values):
-                    mapping[code] = bytes.fromhex(value.decode()).decode("utf-16-be")
+                    put(code, bytes.fromhex(value.decode()).decode("utf-16-be"))
     return mapping
 
 
 def build_map(args):
+    output = new_output(args.output)
     mapping, sources = {}, []
     for path in args.pdfs:
+        data, original_sha = catalog_pdf(path, [2021], ["EXAM", "RESPONSE_STANDARD"])
         seen = set()
-        for page in PdfReader(path).pages:
+        for page in PdfReader(io.BytesIO(data)).pages:
             for font in fonts_in(page.get("/Resources"), seen):
                 if not is_calibri_cid(font) or "/ToUnicode" not in font:
                     continue
@@ -102,8 +147,11 @@ def build_map(args):
                     if code in mapping and mapping[code] != text:
                         sys.exit(f"Conflito no CID {code}: {mapping[code]!r} x {text!r} ({path}).")
                     mapping[code] = text
-        sources.append({"file": Path(path).name, "sha256": sha256(path)})
-    Path(args.output).write_text(
+        sources.append({"file": Path(path).name, "sha256": original_sha})
+    if not mapping:
+        raise ValueError("Nenhum glifo encontrado nas referências.")
+    with output.open("x") as stream:
+        stream.write(
         json.dumps(
             {
                 "description": "CID da Calibri -> Unicode, extraído do /ToUnicode de PDFs de referência",
@@ -114,7 +162,7 @@ def build_map(args):
             indent=1,
         )
         + "\n"
-    )
+        )
     print(f"{len(mapping)} glifos mapeados a partir de {len(sources)} PDFs.")
 
 
@@ -138,9 +186,15 @@ def to_unicode_stream(mapping):
 
 
 def repair(args):
+    output, receipt_path = new_output(args.output), new_output(args.output + ".json")
+    if output.resolve() == receipt_path.resolve():
+        raise ValueError("Saída e recibo precisam de caminhos distintos.")
+    if sha256(args.map) != MAP_SHA256:
+        raise ValueError("O mapa Unicode não corresponde à versão fixada.")
+    original, original_sha = catalog_pdf(args.input, [2014, 2017], ["EXAM"])
     data = json.loads(Path(args.map).read_text())
     mapping = {int(code): text for code, text in data["map"].items()}
-    writer = PdfWriter(clone_from=PdfReader(args.input))
+    writer = PdfWriter(clone_from=PdfReader(io.BytesIO(original)))
     stream = writer._add_object(to_unicode_stream(mapping))
     fixed, seen = set(), set()
     for page in writer.pages:
@@ -150,30 +204,56 @@ def repair(args):
                 fixed.add(str(font.get("/BaseFont")).lstrip("/"))
     if not fixed:
         sys.exit("Nenhuma fonte Calibri sem mapa encontrada; cópia não gerada.")
-    Path(args.output).parent.mkdir(parents=True, exist_ok=True)
-    writer.write(args.output)
+    buffer = io.BytesIO()
+    writer.write(buffer)
+    generated = buffer.getvalue()
+    if sha256(args.input) != original_sha:
+        raise ValueError("O original mudou durante a geração; cópia descartada.")
     receipt = {
-        "derivedFrom": {"file": Path(args.input).name, "sha256": sha256(args.input)},
+        "schemaVersion": 1,
+        "algorithm": "CALIBRI_TOUNICODE_V1",
+        "generatorSha256": sha256(__file__),
+        "pypdfVersion": pypdf.__version__,
+        "derivedFrom": {"file": Path(args.input).name, "sha256": original_sha},
         "map": {"file": Path(args.map).name, "sha256": sha256(args.map)},
         "fixedFonts": sorted(fixed),
-        "output": {"file": Path(args.output).name, "sha256": sha256(args.output)},
+        "output": {"file": output.name, "sha256": hashlib.sha256(generated).hexdigest()},
         "tool": f"scripts/repair-calibri-text.py com pypdf {pypdf.__version__}",
         "purpose": "Somente extração de texto; imagem e procedência vêm do PDF original.",
     }
-    Path(args.output + ".json").write_text(json.dumps(receipt, ensure_ascii=False, indent=1) + "\n")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    # Exclusive creation also rejects paths occupied after the preliminary check.
+    with output.open("xb") as stream:
+        stream.write(generated)
+    try:
+        with receipt_path.open("x") as stream:
+            stream.write(json.dumps(receipt, ensure_ascii=False, indent=1) + "\n")
+    except Exception:
+        output.unlink()
+        raise
     print(f"Cópia derivada: {args.output} ({', '.join(sorted(fixed))}).")
 
 
-parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-commands = parser.add_subparsers(dest="command", required=True)
-build = commands.add_parser("build-map")
-build.add_argument("--output", required=True)
-build.add_argument("pdfs", nargs="+")
-build.set_defaults(run=build_map)
-fix = commands.add_parser("repair")
-fix.add_argument("--map", required=True)
-fix.add_argument("input")
-fix.add_argument("output")
-fix.set_defaults(run=repair)
-args = parser.parse_args()
-args.run(args)
+def main():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    commands = parser.add_subparsers(dest="command", required=True)
+    build = commands.add_parser("build-map")
+    build.add_argument("--output", required=True)
+    build.add_argument("pdfs", nargs="+")
+    build.set_defaults(run=build_map)
+    fix = commands.add_parser("repair")
+    fix.add_argument("--map", required=True)
+    fix.add_argument("input")
+    fix.add_argument("output")
+    fix.set_defaults(run=repair)
+    args = parser.parse_args()
+    try:
+        if pypdf.__version__ != "6.10.0":
+            raise ValueError("Exige pypdf==6.10.0; use scripts/requirements-pdf.txt.")
+        args.run(args)
+    except (ValueError, OSError) as error:
+        parser.exit(1, f"{error}\n")
+
+
+if __name__ == "__main__":
+    main()
