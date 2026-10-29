@@ -1,0 +1,80 @@
+{
+  "document": "enade-2021-bacharelado-exam",
+  "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+  "cropsManifestSha256": "38ce43e9f782c050d7670c4e954ac79c5a0d7f5a8db78ecabd5d6be4a1746255",
+  "reviewer": "codex-review-2021-b2",
+  "extractor": "codex-root",
+  "reviewedAt": "2026-10-29T04:31:01.475107Z",
+  "items": [
+    {
+      "key": "Q9",
+      "verdict": "APPROVED",
+      "fragments": [
+        "74198f2c0aa0458b5a8a316a04265d5a5081afb55a1bdcb26e0ff269d5ce0675"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "notes": "Recorte da coluna esquerda da página PDF 19 contém número 09, enunciado, referência e todas as alternativas A–E, sem qualquer trecho de Q10. Letra E conferida na página 1 do gabarito definitivo. A associação de prioridades com sistemas interativos é a interpretação didática da questão; não estabelece superioridade universal do algoritmo para qualquer carga."
+    },
+    {
+      "key": "Q10",
+      "verdict": "APPROVED",
+      "fragments": [
+        "eefc0380339549a46e3dc3fb1605362d59f729e7ac367f683f1e891bbeb187be"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "notes": "Recorte da coluna direita da página PDF 19 contém número 10, as quatro definições e todas as alternativas A–E, sem conteúdo de Q9. Letra B conferida no gabarito definitivo. As definições correspondem, na ordem, a deque, lista simplesmente ligada, pilha LIFO e fila FIFO."
+    },
+    {
+      "key": "Q11",
+      "verdict": "APPROVED",
+      "fragments": [
+        "5b75d4364e499d15fe80e936965daa63ab0cfe6cfdf00cfb054b51f71101ce55"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "notes": "Recorte da página PDF 20 contém número 11, diagrama completo com entradas X, pesos, camadas, saídas Y′/Y, função de perda, somatório Σ e realimentação do otimizador, além das cinco afirmações e A–E. Letra D conferida. O Σ aparece como S no texto auxiliar; essa transcrição não foi aprovada como descrição completa do diagrama. A explicação segue o contexto didático, sem afirmar impossibilidade geral de usar recorrência em visão computacional."
+    },
+    {
+      "key": "Q12",
+      "verdict": "BLOCKED",
+      "reason": "CONFERIR_CONTEXTO_LEGAL: o recorte da página PDF 21 está completo, as cinco alternativas são legíveis e a chave B foi confirmada, mas o próprio original generaliza a vigência da LGPD como sendo desde o fim de 2018. A vigência escalonada e o alcance dos direitos do titular ainda exigem contextualização jurídica; manter a fonte e a chave sem correção silenciosa."
+    },
+    {
+      "key": "Q13",
+      "verdict": "BLOCKED",
+      "reason": "AMBIGUIDADE_CONCEITUAL: o recorte da página PDF 22 está completo e a chave E foi confirmada, mas D diz que um subsistema executável poderá ser usado pelo cliente como protótipo. Essa possibilidade permanece defensável numa acepção ampla de protótipo evolutivo e precisa ser confrontada com o contexto bibliográfico antes de uma justificativa definitiva. Não substituir E por inferência nem alegar anulação."
+    },
+    {
+      "key": "Q14",
+      "verdict": "BLOCKED",
+      "reason": "INCONSISTENCIA_HISTORICA_NA_FONTE: o recorte da página PDF 23 está completo e a chave C foi confirmada. A asserção I chama Von Neumann de conceito da década de 1950, em tensão com a formulação de programa armazenado usualmente associada ao First Draft de 1945; essa cronologia interfere na avaliação de I, considerada verdadeira pela chave. A introdução também chama ENIAC de primeiro computador sem qualificar a categoria. A crítica histórica precisa de conferência bibliográfica; nenhum documento histórico externo foi obtido nesta passagem. Preservar C e não corrigir a imagem."
+    },
+    {
+      "key": "Q15",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f5cabd69a83564a5ba3ee691134689a53b9f5745dbd9a3b270d27c2ecec32aeb"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "notes": "Recorte da página PDF 24 contém número 15, enunciado, referência, I–III e todas as alternativas A–E. Letra C conferida no gabarito definitivo. O texto substitui gerenciamento baseado em planos por planejamento incremental; não elimina todo planejamento. A explicação não transforma Product Owner ou Scrum Master em chefia hierárquica direta da equipe."
+    },
+    {
+      "key": "Q16",
+      "verdict": "APPROVED",
+      "fragments": [
+        "ccb9597e3f3bdd3c813617e61057e9d930ff115edce3674cf587785fe366597d"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "notes": "Recorte da página PDF 25 contém número 16, as três portas básicas, o circuito inteiro e todas as alternativas A–E, com fios, índices e bolhas de negação legíveis. Letra B conferida no gabarito definitivo. Percorrendo o circuito: ¬X₁ e (¬X₂ ∧ X₃) alimentam o OR, cuja saída é invertida; resulta ¬(¬X₁ ∨ (¬X₂ ∧ X₃)), equivalente à opção B. Os índices X₁/X₂/X₃ continuam incorretamente representados como sobrescritos na transcrição auxiliar do diagrama."
+    }
+  ]
+}

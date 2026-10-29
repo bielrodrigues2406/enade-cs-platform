@@ -66,3 +66,7 @@ Os gabaritos preservam a identificação “GABARITO DEFINITIVO”. A igualdade 
 ## Continuidade de Q1–Q8 (28/10)
 
 As oito entradas do Bacharelado foram rechecadas no original, incluindo todas as 40 alternativas e os recursos visuais. A conferência independente dos dez recortes exatos aprovou Q1/Q2/Q3/Q4/Q6/Q7 e bloqueou Q5/Q8 por ressalvas materiais da fonte. As demais entradas e as chaves oficiais foram preservadas. Veja a [revisão atual e seus limites](derived-text-quality.md) e o [lote vinculado aos hashes](../../data/agent-reviews/enade-2021-bacharelado-exam.json). Os alertas textuais acima permanecem históricos e não substituem esse registro de fidelidade da imagem.
+
+## Continuidade de Q9–Q16 (29/10)
+
+O [segundo lote](2021-crop-batch-2.md) confrontou mais oito recortes completos, 40 alternativas e a chave original. Q9/Q10/Q11/Q15/Q16 ficaram APPROVED; Q12/Q13/Q14, BLOCKED. Os diagramas de Q11/Q16 foram efetivamente examinados; a explicação de Q16 agora deriva o circuito, mantendo pendentes os problemas do texto auxiliar. Q14 recebeu ressalva histórica material e Q12 inclui consulta parcial ao art. 65 na tradução inglesa divulgada pela ANPD. Somente oito pareceres do Bacharelado mudaram; as outras 72 entradas foram preservadas. As figuras de outros itens listadas acima continuam pendentes conforme cada registro.
