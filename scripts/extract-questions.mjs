@@ -378,6 +378,7 @@ async function renderCrops(doc, examPath, questions, items, pages, graphicsByPag
     dpi: CROP_DPI,
     format: "image/webp",
     lossless: true,
+    pages: pages.map((page, index) => ({ page: index + 1, width: page.width, height: page.height })),
     pdftoppm: await tool("pdftoppm", ["-v"]),
     imagemagick: await tool("convert", ["-version"]),
   };

@@ -130,7 +130,15 @@ test("CLI rejects incompatible modes and unsupported exams before opening PDFs",
   for (const options of [
     ["--id", "enade-2014-bacharelado-exam", "--repair-calibri", "--ocr"],
     ["--id", "enade-2021-bacharelado-exam", "--repair-calibri"],
+    ["--id", "enade-2021-bacharelado-exam", "--repair-calibri", "--crops", "/unused-test-only-crops"],
     ["--id", "enade-2014-bacharelado-exam", "--python", "python3"],
   ]) await assert.rejects(cli(process.execPath, ["scripts/extract-questions.mjs", ...options]),
     (error) => /não pode ser combinado|quatro provas|exige --repair-calibri/.test(error.stderr));
+});
+
+test("CLI rejects externally supplied text copies instead of accepting a self-signed receipt or falling back silently", async () => {
+  await assert.rejects(promisify(execFile)(process.execPath, ["scripts/extract-questions.mjs",
+    "--id", "enade-2014-bacharelado-exam", "--text-copy", "/untrusted-test-only-copy",
+    "--crops", "/unused-test-only-crops"]), (error) =>
+    /--text-copy com recibo externo não é aceito.*Use --repair-calibri/.test(error.stderr));
 });
