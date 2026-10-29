@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from "@angular/core";
+import { Component, EventEmitter, HostListener, Output, signal } from "@angular/core";
 import { FormsModule, type NgForm } from "@angular/forms";
 import { SourcesComponent, type OfficialSource } from "./sources.component";
 import { QuestionImportsComponent } from "./question-imports.component";
@@ -102,7 +102,7 @@ const emptyDraft = (
     } @else if (!editing()) {
       <section class="curation-intro">
         <div>
-          <h1>Curadoria</h1>
+          <h1 id="curation-heading" tabindex="-1">Curadoria</h1>
           <p>Prepare questões e confira fontes e versões antes de publicar.</p>
         </div>
         <div class="curation-create-actions">
@@ -202,12 +202,22 @@ const emptyDraft = (
       }
     } @else {
       <button
+        id="editorial-back"
         class="back text-button"
         (click)="backToQueue()"
         [disabled]="busy()"
       >
         ← Voltar à fila
       </button>
+      @if (discard()) {
+        <section class="notice" aria-label="Alterações locais">
+          <p id="editorial-discard-message" tabindex="-1">
+            Há alterações que ainda não foram salvas. Voltar à fila descarta essas alterações.
+          </p>
+          <button class="outline" (click)="continueEditing()">Continuar editando</button>
+          <button (click)="discardAndBack()">Descartar alterações</button>
+        </section>
+      }
       <section class="editorial-document">
         <p class="eyebrow">
           {{
@@ -760,6 +770,7 @@ export class CurationComponent {
   busy = signal(false);
   error = signal("");
   notice = signal("");
+  discard = signal(false);
   confirmPublication = signal(false);
   draft = emptyDraft();
   reviewNote = "";
@@ -777,6 +788,23 @@ export class CurationComponent {
     this.sequence++;
     this.abort.abort();
     this.busyChange.emit(false);
+  }
+  @HostListener("input")
+  @HostListener("change")
+  changed() {
+    this.emitBusy();
+  }
+  @HostListener("window:beforeunload", ["$event"])
+  beforeUnload(event: BeforeUnloadEvent) {
+    if (this.busy() || this.sourceBusy() || this.hasUnsavedChanges()) event.preventDefault();
+  }
+  private hasUnsavedChanges() {
+    return this.editing() && (
+      this.hasChanges() || this.reviewNote !== "" || Object.values(this.checks).some(Boolean)
+    );
+  }
+  private emitBusy() {
+    this.busyChange.emit(this.busy() || this.sourceBusy() || this.hasUnsavedChanges());
   }
   private async api<T>(path: string, init?: RequestInit): Promise<T> {
     const response = await fetch("/api/curation/" + path, {
@@ -845,7 +873,7 @@ export class CurationComponent {
   }
   setSourceBusy(value: boolean) {
     this.sourceBusy.set(value);
-    this.busyChange.emit(value);
+    this.emitBusy();
   }
   verifiedExams() {
     return this.sources().filter(
@@ -881,6 +909,7 @@ export class CurationComponent {
       this.draft.provenance.page = 1;
       this.draft.provenance.keyPage = 1;
     }
+    this.emitBusy();
   }
   async loadSources() {
     if (this.sourceLoading()) return;
@@ -915,10 +944,15 @@ export class CurationComponent {
     this.loading.set(false);
     this.detail.set(null);
     this.draft = emptyDraft(origin);
-    this.savedDraft = "";
+    this.savedDraft = JSON.stringify(this.draft);
+    this.reviewNote = "";
+    this.checks = { content: false, answer: false, credit: false, source: false };
+    this.discard.set(false);
+    this.confirmPublication.set(false);
     this.error.set("");
     this.notice.set("");
     this.editing.set(true);
+    this.emitBusy();
     if (origin === "OFFICIAL") void this.loadSources();
     this.focusHeading();
   }
@@ -945,16 +979,37 @@ export class CurationComponent {
   }
   backToQueue() {
     if (this.busy()) return;
+    if (this.hasUnsavedChanges()) {
+      this.discard.set(true);
+      this.focusHeading("editorial-discard-message");
+      return;
+    }
+    this.exitToQueue();
+  }
+  continueEditing() {
+    this.discard.set(false);
+    this.focusHeading("editorial-back");
+  }
+  discardAndBack() {
+    if (this.busy()) return;
+    this.exitToQueue();
+  }
+  private exitToQueue() {
+    this.discard.set(false);
     this.editing.set(false);
     this.notice.set("");
+    this.emitBusy();
     void this.loadQueue();
+    this.focusHeading("curation-heading");
   }
   addOption() {
-    if (!this.busy() && this.draft.options.length < 5)
+    if (!this.busy() && this.draft.options.length < 5) {
       this.draft.options.push({
         id: "option-" + crypto.randomUUID(),
         text: "",
       });
+      this.emitBusy();
+    }
   }
   removeOption(id: string) {
     if (this.busy() || this.draft.options.length <= 2) return;
@@ -963,6 +1018,7 @@ export class CurationComponent {
     );
     if (this.draft.correctOptionId === id)
       this.draft.correctOptionId = this.draft.options[0].id;
+    this.emitBusy();
   }
   async save(form: NgForm) {
     if (this.busy()) return;
@@ -1059,7 +1115,7 @@ export class CurationComponent {
     if (this.busy()) return;
     const sequence = ++this.sequence;
     this.busy.set(true);
-    this.busyChange.emit(true);
+    this.emitBusy();
     this.error.set("");
     this.notice.set("");
     try {
@@ -1078,7 +1134,7 @@ export class CurationComponent {
     } finally {
       if (this.active && sequence === this.sequence) {
         this.busy.set(false);
-        this.busyChange.emit(false);
+        this.emitBusy();
       }
     }
   }
@@ -1106,11 +1162,13 @@ export class CurationComponent {
       source: false,
     };
     this.confirmPublication.set(false);
+    this.discard.set(false);
+    this.emitBusy();
     if (detail.origin === "OFFICIAL") void this.loadSources();
   }
-  private focusHeading() {
+  private focusHeading(id = "editorial-heading") {
     setTimeout(() => {
-      if (this.active) document.getElementById("editorial-heading")?.focus();
+      if (this.active) document.getElementById(id)?.focus();
     }, 0);
   }
   private message(err: unknown) {
