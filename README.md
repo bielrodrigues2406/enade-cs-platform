@@ -15,6 +15,8 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Versões publicadas e feedback histórico preservados; conflitos não sobrescrevem alterações. Edições não salvas da curadoria são protegidas ao sair ou recarregar.
 - Caderno de erros com filtro por assunto, paginação e nova resolução; resumo por questão distinta, sem multiplicar contagens por edições ou versões.
 - Tabela por assunto no caderno de erros (a retomar e respondidas) com ação de retomar cada assunto; no catálogo, quantas questões da seleção têm resposta salva; na resolução, posição na seleção e "Próxima questão" após o feedback.
+- Treino parcial em `/treino`: 10, 20 ou 30 questões (padrão 20), misto ou por área, sem cronômetro. Mantém versões e ordem, salva respostas e marcações, permite retomar e mostra resultado/revisão somente ao finalizar.
+- Tamanhos de treino só são habilitados com questões publicadas distintas suficientes; itens privados e não elegíveis ficam fora. Respostas do treino são separadas do estudo livre e do caderno de erros.
 - Interface com paleta "caderno" em tokens (contraste conferido), fontes auto-hospedadas e transições de tela que respeitam movimento reduzido ([design](docs/DESIGN-QUALITY.md)).
 - Registro de PDFs por download oficial, cópia pública fixada em commit ou arquivo local, com SHA-256 e conferência independente na seção Fontes.
 - Catálogo de todos os anos localizados: 61 referências; 28 PDFs individuais obtidos/cadastrados e 33 documentos recentes ainda pendentes. Cadernos compartilhados, Licenciatura e PND têm identificação própria.
@@ -25,7 +27,7 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 - Fila privada de questões importadas, com análise assistida identificada, correção auditada, proteção contra sobrescrita e encaminhamento para rascunho editorial após conferir as fontes.
 - Três questões iniciais **autorais demonstrativas**; nenhuma questão oficial publicada nesta entrega. Conteúdo pendente não é acessível pela API de estudo.
 
-Esta entrega cobre partes dos incrementos A/B e o início de C, não a conclusão deles. Não inclui lote oficial aprovado, simulados nem tutor de IA. OCR e análise assistida exigem conferência; os itens importados permanecem privados até cumprir a revisão editorial. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
+Esta entrega cobre partes dos incrementos A/B e o início de C, não a conclusão deles. Não inclui lote oficial publicado, simulado completo no formato de prova nem tutor de IA. Há apenas três demos públicas neste ambiente: os tamanhos do treino permanecem indisponíveis até ampliar o acervo revisado, sem repetir questões para completá-los. OCR e análise assistida exigem conferência; os itens importados permanecem privados até cumprir a revisão editorial. Contas ainda não possuem confirmação de e-mail nem recuperação/troca de senha; essas limitações são informadas ao cadastrar. Entrar em conta existente não mescla respostas anônimas. Apagar um cookie anônimo continua perdendo o acesso àquele histórico.
 
 ## Preparação local
 
@@ -107,7 +109,7 @@ Para execução fria na nuvem, `npm run test:e2e -- --timeout=60000` define o li
 
 Os E2E iniciam API e web, ou reutilizam servidores locais já iniciados fora de CI. Por padrão usam `/usr/bin/chromium`; `CHROMIUM_PATH` permite indicar outro Chromium instalado. Não é necessário baixar um navegador via Playwright no ambiente da nuvem. `npm test` cria e remove apenas seus próprios visitantes e conteúdo temporário. Os testes de contas removem somente seus próprios registros temporários. Os E2E de estudo usam sessões novas e deixam dados anônimos de demonstração no banco de desenvolvimento. Nunca executar contra produção.
 
-Build, 127 testes API/PostgreSQL/utilitários e 39 fluxos Chromium passaram localmente na base atual. Além dos contratos de conta, estudo, curadoria e fontes, a suíte cobre preservação dos PDFs, recibos Unicode, quarentena auxiliar, vínculos de prova/gabarito, geometria dos recortes, bloqueios materiais e finalidade do gabarito. Os fluxos Chromium verificam também mais de 50 questões no catálogo, filtros/URL/histórico, falhas na troca de página, totais e sugestões globais do início, apresentação por imagem, teclado e larguras 320/390/768/1440. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
+Build, 139 testes API/PostgreSQL/utilitários e 48 fluxos Chromium passaram localmente, em sequência, na base atual. Além dos contratos de conta, estudo, curadoria e fontes, a suíte cobre tentativas com versões fixas, revisão de resposta, concorrência e finalização idempotente, além da preservação dos PDFs, recibos Unicode, quarentena auxiliar, vínculos de prova/gabarito, geometria dos recortes, bloqueios materiais e finalidade do gabarito. Os fluxos Chromium verificam treino parcial (10/20/30), retomada, ACK perdido, conflito entre abas, resultado com brancas, imagens e o catálogo com mais de 50 questões no catálogo, filtros/URL/histórico, falhas na troca de página, totais e sugestões globais do início, apresentação por imagem, teclado e larguras 320/390/768/1440. Isso não certifica conformidade WCAG nem compatibilidade com WebKit/Firefox.
 
 O [CI do PR #13](https://github.com/bielrodrigues2406/enade-cs-platform/actions/runs/40387694387) também aprovou build, testes com PostgreSQL, E2E e imagem de produção em 26/10/2026. Localmente, o fluxo de conta foi repetido após reiniciar o Vite, cujo overlay de erro havia interceptado o primeiro clique durante a atualização das dependências.
 
@@ -123,6 +125,7 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Fontes oficiais e procedência](docs/ADR-004-official-sources.md) e [inventário inicial](docs/OFFICIAL-SOURCES.md)
 - [Caderno de erros e contagens](docs/ADR-005-error-notebook.md)
 - [Cópias, arquivos locais e cadernos compartilhados](docs/ADR-006-source-acquisition.md)
+- [Treino parcial e integridade das tentativas](docs/ADR-007-partial-practice.md)
 - [Contrato da API](docs/API.md)
 - [Deploy e segurança](docs/DEPLOY.md) e [decisão de hospedagem](docs/ADR-008-deployment.md)
 - [Engenharia e validação](docs/ENGINEERING-AND-DELIVERY.md)

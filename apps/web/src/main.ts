@@ -4,6 +4,8 @@ import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
 import { HomeComponent } from "./home.component";
+import { QuestionContentComponent } from "./question-content.component";
+import { ExamComponent } from "./exam.component";
 import {
   ReviewComponent,
   type ReviewItem,
@@ -94,6 +96,8 @@ type Question = Summary & {
     AccountComponent,
     CurationComponent,
     HomeComponent,
+    QuestionContentComponent,
+    ExamComponent,
     ReviewComponent,
   ],
   template: `
@@ -116,7 +120,7 @@ type Question = Summary & {
             <button
               class="text-button mobile-curation"
               (click)="openCuration()"
-              [disabled]="saving() || authBusy() || curationBusy()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
               Curadoria
             </button>
@@ -128,7 +132,7 @@ type Question = Summary & {
             <button
               class="text-button"
               (click)="logout()"
-              [disabled]="saving() || authBusy() || curationBusy()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
               Sair da conta
             </button>
@@ -136,14 +140,14 @@ type Question = Summary & {
             <button
               class="text-button"
               (click)="openAccount('login')"
-              [disabled]="saving() || authBusy() || curationBusy()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
               Entrar
             </button>
             <button
               class="outline"
               (click)="openAccount('register')"
-              [disabled]="saving() || authBusy() || curationBusy()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
               Criar conta
             </button>
@@ -156,7 +160,7 @@ type Question = Summary & {
         <button
           class="text-button"
           (click)="openHome()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="onHome() ? 'page' : null"
         >
           Início
@@ -164,18 +168,24 @@ type Question = Summary & {
         <button
           class="text-button"
           (click)="back()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
         >
           Banco de questões
         </button>
         <button
           class="text-button"
           (click)="openReview()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
         >
           Caderno de erros
         </button>
+        <button
+          class="text-button"
+          (click)="openPractice()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
+        >Treino parcial</button>
       </nav>
     }
     <div class="layout">
@@ -183,7 +193,7 @@ type Question = Summary & {
         <button
           class="nav"
           (click)="openHome()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="onHome() ? 'page' : null"
         >
           <span class="nav-index" aria-hidden="true">01</span>
@@ -192,9 +202,10 @@ type Question = Summary & {
         <button
           class="nav secondary-nav"
           (click)="back()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="
             !homeView() &&
+            !practiceView() &&
             !curationView() &&
             !reviewView() &&
             !reviewReturn() &&
@@ -209,20 +220,26 @@ type Question = Summary & {
         <button
           class="nav secondary-nav"
           (click)="openReview()"
-          [disabled]="saving() || authBusy() || curationBusy()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
         >
           <span class="nav-index" aria-hidden="true">03</span>
           Caderno de erros
         </button>
+        <button
+          class="nav secondary-nav"
+          (click)="openPractice()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
+        ><span class="nav-index" aria-hidden="true">04</span>Treino parcial</button>
         @if (canCurate()) {
           <button
             class="nav secondary-nav"
             (click)="openCuration()"
-            [disabled]="saving() || authBusy() || curationBusy()"
+            [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             [attr.aria-current]="curationView() ? 'page' : null"
           >
-            <span class="nav-index" aria-hidden="true">04</span>
+            <span class="nav-index" aria-hidden="true">05</span>
             Curadoria
           </button>
         }
@@ -242,7 +259,9 @@ type Question = Summary & {
               ? "Conta"
               : curationView()
                 ? "Curadoria"
-                : reviewView()
+                : practiceView()
+                  ? "Treino parcial"
+                  : reviewView()
                   ? "Caderno de erros"
                   : homeView()
                     ? "Início"
@@ -276,6 +295,14 @@ type Question = Summary & {
             <p role="status">Atualizando sua sessão…</p>
           } @else if (curationView()) {
             <app-curation (busyChange)="curationBusy.set($event)" />
+          } @else if (practiceView()) {
+            <app-exam
+              [attemptId]="practiceAttemptId()"
+              [itemPosition]="practiceItemPosition()"
+              (locationChange)="practiceLocationChanged($event)"
+              (busyChange)="practiceBusy.set($event)"
+              (browse)="back()"
+            />
           } @else if (reviewView()) {
             <app-review
               [position]="reviewPosition"
@@ -558,122 +585,7 @@ type Question = Summary & {
               }
             }
             <article class="resolution">
-              <p class="metadata">
-                {{ question()!.topic }} <span>·</span>
-                {{ originLabel(question()!.origin, question()!.demonstration) }}
-                <span>·</span> Versão {{ question()!.versionNumber }}
-              </p>
-              <p class="metadata question-credit">
-                {{ question()!.origin === "OFFICIAL" ? "Fonte" : "Autoria" }}:
-                {{ question()!.authorCredit }}
-              </p>
-              <h1>{{ question()!.title }}</h1>
-              @if (question()!.provenance) {
-                <section
-                  class="question-provenance"
-                  aria-label="Fonte da questão"
-                >
-                  <p>
-                    Edição {{ question()!.provenance!.exam.year }} ·
-                    {{ question()!.provenance!.exam.area }} ·
-                    {{ modalityLabel(question()!.provenance!.exam.modality) }}
-                  </p>
-                  <p>
-                    Questão {{ question()!.provenance!.questionNumber }} ·
-                    página {{ question()!.provenance!.page }}
-                  </p>
-                  <a
-                    [href]="question()!.provenance!.exam.officialUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Prova oficial: {{ question()!.provenance!.exam.title }}</a
-                  >
-                </section>
-              }
-              @if (isImage()) {
-                <figure class="question-sheet">
-                  <div class="question-images">
-                    @for (
-                      image of question()!.images!;
-                      track image.url;
-                      let i = $index
-                    ) {
-                      <!-- Escala de impressão: 200 dpi ≈ 1,9 px por px CSS. -->
-                      <img
-                        [src]="image.url"
-                        [width]="image.width"
-                        [height]="image.height"
-                        [style.width.px]="image.width / 1.9"
-                        [attr.loading]="i ? 'lazy' : null"
-                        decoding="async"
-                        [alt]="imageAlt(i)"
-                        (click)="zoom.showModal()"
-                      />
-                    }
-                  </div>
-                  <figcaption>
-                    <span
-                      >Recorte da prova original{{
-                        question()!.images!.length > 1
-                          ? ", em " + question()!.images!.length + " partes"
-                          : ""
-                      }}.</span
-                    >
-                    <button
-                      type="button"
-                      class="text-button"
-                      (click)="zoom.showModal()"
-                    >
-                      Ampliar
-                    </button>
-                  </figcaption>
-                </figure>
-                <dialog
-                  #zoom
-                  class="zoom"
-                  aria-label="Questão ampliada"
-                  (click)="$event.target === zoom && zoom.close()"
-                >
-                  <div class="zoom-bar">
-                    <span>{{ question()!.title }}</span>
-                    <button type="button" class="outline" (click)="zoom.close()">
-                      Fechar
-                    </button>
-                  </div>
-                  <div
-                    class="zoom-body"
-                    (click)="$event.target === $event.currentTarget && zoom.close()"
-                  >
-                    @for (image of question()!.images!; track image.url) {
-                      <img
-                        [src]="image.url"
-                        [width]="image.width"
-                        [height]="image.height"
-                        [style.--image-width]="image.width"
-                        alt=""
-                      />
-                    }
-                  </div>
-                </dialog>
-                @if (question()!.reviewOrigin === "ASSISTED") {
-                  <p class="assisted-label">
-                    Transcrição automatizada do PDF oficial, conferida por
-                    agentes; sem revisão humana. Em caso de diferença, vale a
-                    imagem.
-                  </p>
-                }
-                <details class="transcription">
-                  <summary>Transcrição automática do enunciado</summary>
-                  <p>{{ question()!.prompt || "Sem transcrição." }}</p>
-                  @for (option of question()!.options; track option.id) {
-                    @if (option.text) {
-                      <p><strong>{{ option.id }}</strong> {{ option.text }}</p>
-                    }
-                  }
-                </details>
-              } @else {
-                <p class="prompt">{{ question()!.prompt }}</p>
-              }
+              <app-question-content [question]="question()!" />
               <form (ngSubmit)="save()">
                 <fieldset
                   [class.answer-sheet]="isImage()"
@@ -936,6 +848,10 @@ class App {
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
+  practiceView = signal(location.pathname === "/treino");
+  practiceAttemptId = signal<string | null>(null);
+  practiceItemPosition = signal(1);
+  practiceBusy = signal(false);
   // A página inicial fica em "/" e o banco de questões em "/questoes".
   homeView = signal(location.pathname === "/");
   reviewReturn = signal(false);
@@ -951,6 +867,7 @@ class App {
       : new BroadcastChannel("enade-identity");
   constructor() {
     this.readCatalogAddress();
+    this.readPracticeAddress();
     if (this.identityChannel) {
       this.identityChannel.onmessage = (event) => {
         if (event.data?.type === "identity-changed")
@@ -1027,7 +944,7 @@ class App {
       !this.canCurate() ||
       this.saving() ||
       this.authBusy() ||
-      this.curationBusy()
+      this.curationBusy() || this.practiceBusy()
     )
       return;
     this.requestNumber++;
@@ -1039,13 +956,14 @@ class App {
     this.accountView.set(null);
     this.accountNotice.set("");
     this.error.set("");
+    this.practiceView.set(false);
     this.curationView.set(true);
     this.leaveHomePath();
     this.focusMain();
   }
   openHome(event?: Event) {
     event?.preventDefault();
-    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
     this.requestNumber++;
     this.swapView(() => {
       this.loading.set(false);
@@ -1058,6 +976,7 @@ class App {
       this.authError.set("");
       this.accountNotice.set("");
       this.error.set("");
+      this.practiceView.set(false);
       this.homeView.set(true);
     });
     this.setPath("/");
@@ -1067,7 +986,7 @@ class App {
     return this.homeView() && !this.accountView();
   }
   openReview() {
-    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
     this.requestNumber++;
     this.swapView(() => {
       this.loading.set(false);
@@ -1079,10 +998,56 @@ class App {
       this.reviewCurrentVersion.set(null);
       this.accountNotice.set("");
       this.error.set("");
+      this.practiceView.set(false);
       this.reviewView.set(true);
     });
     this.leaveHomePath();
     this.focusMain();
+  }
+  openPractice() {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    this.requestNumber++;
+    this.loading.set(false);
+    this.question.set(null);
+    this.accountView.set(null);
+    this.curationView.set(false);
+    this.reviewView.set(false);
+    this.reviewReturn.set(false);
+    this.reviewCurrentVersion.set(null);
+    this.homeView.set(false);
+    this.error.set("");
+    this.practiceAttemptId.set(null);
+    this.practiceItemPosition.set(1);
+    this.practiceView.set(true);
+    this.writePracticeAddress("push");
+    this.focusMain();
+  }
+  practiceLocationChanged(location_: { attemptId: string | null; position: number }) {
+    if (!this.practiceView() || this.authBusy() || location.pathname !== "/treino") return;
+    this.practiceAttemptId.set(location_.attemptId);
+    this.practiceItemPosition.set(location_.position);
+    this.writePracticeAddress("replace");
+  }
+  private readPracticeAddress() {
+    const params = new URLSearchParams(location.search);
+    const id = params.getAll("attempt").length === 1 ? params.get("attempt") : null;
+    const valid = location.pathname === "/treino" && id && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id);
+    this.practiceAttemptId.set(valid ? id.toLowerCase() : null);
+    const position = params.getAll("item").length === 1 ? params.get("item") ?? "1" : "1";
+    this.practiceItemPosition.set(valid && /^([1-9]|[12][0-9]|30)$/.test(position) ? Number(position) : 1);
+  }
+  private writePracticeAddress(mode: "push" | "replace") {
+    const params = new URLSearchParams();
+    if (this.practiceAttemptId()) {
+      params.set("attempt", this.practiceAttemptId()!);
+      if (this.practiceItemPosition() > 1) params.set("item", String(this.practiceItemPosition()));
+    }
+    const address = "/treino" + (params.size ? "?" + params.toString() : "");
+    if (location.pathname + location.search !== address) {
+      if (mode === "push") history.pushState(null, "", address);
+      else history.replaceState(null, "", address);
+    }
+    this.currentAddress = address;
   }
   async openReviewQuestion(item: ReviewItem) {
     if (this.loading() || this.authBusy()) return;
@@ -1189,6 +1154,7 @@ class App {
     this.swapView(() => {
       this.reviewView.set(false);
       this.homeView.set(false);
+      this.practiceView.set(false);
       this.question.set(q);
       this.selected = retry ? "" : q.answer?.optionId || "";
       this.editing.set(retry);
@@ -1240,9 +1206,10 @@ class App {
     }
   }
   back() {
-    if (this.saving() || this.authBusy() || this.curationBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
     this.swapView(() => {
       this.homeView.set(false);
+      this.practiceView.set(false);
       this.curationView.set(false);
       this.reviewView.set(false);
       this.reviewReturn.set(false);
@@ -1266,7 +1233,7 @@ class App {
     this.currentAddress = location.pathname + location.search;
   }
   private leaveHomePath() {
-    if (location.pathname === "/") {
+    if (location.pathname === "/" || location.pathname === "/treino") {
       this.setPath("/questoes");
       this.writeCatalogAddress("replace");
     }
@@ -1306,7 +1273,7 @@ class App {
   }
   @HostListener("window:popstate")
   async restoreCatalogNavigation() {
-    if (this.saving() || this.authBusy() || this.curationBusy()) {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) {
       history.pushState(null, "", this.currentAddress);
       return;
     }
@@ -1319,6 +1286,16 @@ class App {
     this.curationView.set(false);
     this.accountView.set(null);
     this.homeView.set(location.pathname === "/");
+    this.practiceView.set(location.pathname === "/treino");
+    if (this.practiceView()) {
+      this.requestNumber++;
+      this.loading.set(false);
+      this.error.set("");
+      this.readPracticeAddress();
+      this.currentAddress = location.pathname + location.search;
+      this.focusMain();
+      return;
+    }
     this.readCatalogAddress();
     this.currentAddress = location.pathname + location.search;
     await this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
@@ -1337,7 +1314,7 @@ class App {
     return session.mode === "account" ? session.email : "";
   }
   openAccount(mode: AccountMode) {
-    if (this.saving() || this.authBusy() || this.session().mode === "account")
+    if (this.saving() || this.authBusy() || this.practiceBusy() || this.session().mode === "account")
       return;
     this.accountView.set(mode);
     this.authError.set("");
@@ -1354,10 +1331,16 @@ class App {
     if (this.authBusy()) return;
     this.accountView.set(null);
     this.authError.set("");
-    if (!this.question() && !this.reviewView()) void this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
+    if (!this.question() && !this.reviewView() && !this.practiceView()) void this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
     this.focusMain();
   }
   private clearStudyState() {
+    if (this.identityGeneration > 0 && this.practiceView()) {
+      this.practiceAttemptId.set(null);
+      this.practiceItemPosition.set(1);
+      this.writePracticeAddress("replace");
+    }
+    this.practiceBusy.set(false);
     this.reviewView.set(false);
     this.reviewReturn.set(false);
     this.reviewCurrentVersion.set(null);
@@ -1427,7 +1410,7 @@ class App {
     }
   }
   async logout() {
-    if (this.authBusy() || this.saving() || this.curationBusy()) return;
+    if (this.authBusy() || this.saving() || this.curationBusy() || this.practiceBusy()) return;
     const transition = ++this.identityTransition;
     this.authBusy.set(true);
     this.authError.set("");
@@ -1532,15 +1515,6 @@ class App {
   isImage() {
     const q = this.question();
     return q?.presentation === "IMAGE" && !!q.images?.length;
-  }
-  imageAlt(index: number) {
-    const q = this.question()!;
-    const parts = q.images!.length;
-    return (
-      `Questão ${q.provenance?.questionNumber ?? ""} da prova ENADE ${q.provenance?.exam.year ?? ""}` +
-      (parts > 1 ? `, parte ${index + 1} de ${parts}` : "") +
-      ". O texto está na transcrição automática abaixo."
-    );
   }
   // Posição só faz sentido quando a questão veio do catálogo atual.
   position() {

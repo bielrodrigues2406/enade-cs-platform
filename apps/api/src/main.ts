@@ -22,6 +22,7 @@ import { QuestionImportsController } from "./question-imports.js";
 import { SourcesController } from "./sources.js";
 import { ReviewController } from "./review.js";
 import { CatalogController } from "./catalog.js";
+import { PracticeController } from "./exam.js";
 import {
   QuestionImagesController,
   imageView,
@@ -218,6 +219,7 @@ class StudyController {
     SourcesController,
     ReviewController,
     CatalogController,
+    PracticeController,
     QuestionImagesController,
   ],
 })
