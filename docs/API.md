@@ -10,6 +10,7 @@ REST JSON, prefixo `/api`, sem CORS entre origens; a web usa proxy na mesma orig
 | POST /auth/register | cookie anônimo; JSON `{email,password}` | 201 conta; preserva respostas da identidade atual e rotaciona token; duplicata 409 |
 | POST /auth/login | cookie anônimo; JSON `{email,password}` | 200 conta e novo token; não mescla respostas anônimas; credenciais incorretas 401 genérico |
 | POST /auth/logout | JSON; cookie opcional | 200 `{mode:"guest"}`; revoga token corrente e emite nova identidade anônima vazia |
+| GET /catalog | cookie; `q` até 120, `topic` até 80, `area` canônica ou `unclassified`, `year` 2000–2100; `limit` 1–50 (padrão 20), `offset` 0–1.000.000 | 200 catálogo paginado com totais, filtros globais, resumo e sugestões; contrato abaixo |
 | GET /questions | cookie; `q` até 120 caracteres, `topic` até 80 | 200 lista de `{id,title,topic,origin,demonstration,versionNumber,answered}`; somente ponteiros publicados atuais, ordenados por id, máximo 50; substring literal sem distinção de maiúsculas |
 | GET /questions/:id | cookie | 200 `{id,title,topic,prompt,origin,authorCredit,demonstration,versionNumber,options:[{id,text}],presentation,images,reviewOrigin,provenance,answer}`; gabarito/explicação ausentes até haver resposta desta sessão |
 | GET /question-images/:sha256.webp | cookie | 200 `image/webp` do recorte; só se a imagem pertence a uma versão publicada (ou a sessão é de curadoria); `Cache-Control: private, max-age=31536000, immutable`, pois o nome é o hash. Bytes conferidos pelo SHA-256 a cada leitura (409 se divergirem) |
@@ -23,8 +24,19 @@ E-mail é normalizado por trim/lowercase, limitado a 254 caracteres e validado n
 
 Erros esperados têm `{message:string}`: 400 entrada inválida, 401 sessão ausente/expirada, 403 origem de navegador não autorizada, 404 versão inexistente/não publicada, 409 conflito de revisão/cadastro ou sessão já autenticada, 415 escrita sem JSON, 429 excesso de tentativas (Retry-After), 503 capacidade de autenticação ocupada. Erros inesperados usam 500 genérico do Nest. A UI preserva a seleção após erro; não anuncia salvamento antes do 200. Escritas exigem Content-Type application/json; corpo limitado a 16 KiB (64 KiB em /api/curation). Requisições de escrita que declarem Origin devem corresponder a APP_ORIGIN. Clientes fora do navegador precisam proteger seus próprios tokens.
 
-Este contrato documenta a fatia entregue. OpenAPI gerado, paginação, extração automática de questões e contratos de tentativa/finalização ainda não foram implementados. Limite de autenticação é por processo (10/e-mail, 50/IP em 15 min), não compartilhado entre réplicas. Veja ADR 002 para concorrência e limitações operacionais.
+Este contrato documenta a fatia entregue. OpenAPI gerado, upload/processamento de PDFs acompanhado pela interface e contratos de tentativa/finalização ainda não foram implementados. Extração assistida via CLI e fila privada já existem. Limite de autenticação é por processo (10/e-mail, 50/IP em 15 min), não compartilhado entre réplicas. Veja ADR 002 para concorrência e limitações operacionais.
 
+### Catálogo paginado
+
+`GET /catalog` devolve `{items,total,answeredTotal,limit,offset,facets,summary,suggestions}`. Cada item contém `{id,title,topic,origin,demonstration,versionNumber,answered,area,year,modality,questionNumber}`. Ano/modalidade/número vêm da prova associada; sem prova, são nulos. Área só é preenchida quando `topic` corresponde exatamente à lista canônica de 18 áreas de `question-areas.ts`; assuntos livres continuam preservados e entram em `area=unclassified`, sem classificação automática.
+
+`facets` contém `{areas:[{name,count}],unclassified,topics:[string],years:[number]}`. Considera todo o acervo publicado atual, independentemente dos filtros ou da página. Áreas têm ordem fixa e incluem contagem zero; anos vêm em ordem decrescente. `summary:{total,answered,official,author,demonstration}` também é global; `author` exclui demonstrações. `suggestions` traz até três itens globais ainda não respondidos, na mesma ordem do catálogo, para a página inicial.
+
+`total` e `answeredTotal` referem-se à seleção filtrada inteira, não à página. Respostas/contagens/sugestões pertencem somente à identidade da sessão. Todas as listas e agregados excluem versões privadas e versões publicadas anteriores que já não são o ponteiro atual. A consulta usa um único snapshot PostgreSQL e não devolve enunciado, gabarito ou explicação. Busca usa substring literal em título/enunciado, sem distinguir maiúsculas; `%` e `_` não são curingas. Paginação ordenada por ID da versão; offset além do fim recua à última página, ou zero na seleção vazia. O catálogo é vivo: publicações entre consultas podem mudar a seleção, ao contrário de uma futura tentativa de simulado fixada.
+
+Filtros desconhecidos, parâmetros repetidos/estruturados, áreas fora da lista e números ambíguos retornam 400. Strings vazias de busca/assunto/área/ano removem o filtro. `/questions` mantém seu contrato legado de lista com limite 50; a interface do banco e o início usam `/catalog`.
+
+A web usa páginas de 20 e registra a seleção em `/questoes?q=...&topic=...&area=...&year=...&page=2`, omitindo valores vazios e a primeira página. Aplicar filtros volta à página 1; voltar/avançar no navegador e recarregar restauram a seleção. Abrir questão mantém esse endereço; respostas continuam no servidor. O endereço não guarda alternativa ainda não confirmada nem abre automaticamente uma questão após reload.
 
 ## Curadoria de questões
 
