@@ -1,6 +1,6 @@
 # Produto, escopo e sequência de entregas
 
-Status: especificação de produto. A base inicial de catálogo/resolução foi implementada; critérios A/B ainda estão parcialmente atendidos; C começou pelo caderno de erros. Consulte o README para evidências e pendências. Referência: 22/10/2026.
+Status: especificação de produto. Catálogo/resolução, caderno de erros, recortes e publicação assistida foram implementados; conteúdo oficial utilizável, cobertura por áreas e critérios A/B ainda estão pendentes. Simulados não estão implementados. Consulte o README e a [auditoria de prontidão](reviews/2026-10-29-study-readiness.md). Referência atualizada: 29/10/2026.
 
 ## 1. Objetivo
 
@@ -50,7 +50,7 @@ Os incrementos são dependências, não uma obrigação de terminar toda uma cam
 
 ## 5. Regras de conteúdo e aprendizagem
 
-- Questões publicadas passam por conferência de enunciado, alternativas, gabarito definitivo, imagens, código, tipo, fonte e status de anulação. Gabriel propôs em 28/10 usar capturas fiéis como apresentação visual principal, com IDs de resposta e conteúdo assistivo revisado; a [proposta de imagens e importação](QUESTION-IMAGES-AND-IMPORT.md) registra o estudo, sem declarar o recurso implementado.
+- Questões publicadas passam por conferência de enunciado, alternativas, gabarito, imagens, código, tipo, fonte e status de anulação. Recortes originais, IDs de resposta e publicação ASSISTED por agentes distintos foram entregues nas ADR-010/011. O gabarito registra se é definitivo ou único publicado com aviso (D10). A representação assistiva e a revisão de cada item continuam necessárias; o [plano de imagens e importação](QUESTION-IMAGES-AND-IMPORT.md) distingue o que foi entregue do upload/editor ainda pendentes.
 - Classificar assuntos usando as diretrizes oficiais; manter mapeamento auditável. Não inferir pesos exatos da prova a partir de uma lista de conteúdos.
 - Importar um lote inicial de 20 itens diversos para medir esforço e taxa de erro. O número serve para calibrar operação, não para prometer tamanho final do banco.
 - Formação Geral compartilhada entre cadernos exige deduplicação e rastreabilidade. Licenciatura e bacharelado não são intercambiáveis silenciosamente.
@@ -76,4 +76,4 @@ Para alegar ganho de aprendizagem, planejar avaliação com itens inéditos e cr
 
 Catálogo → questão → resposta → feedback → persistência → retomada estão implementados com prática anônima/contas e curadoria versionada. O registro de PDFs, a conferência independente e a procedência por versão também estão disponíveis. Foram obtidos 27 arquivos históricos e um caderno PND 2025 por cópia pública; 33 links de Licenciatura/PND ainda aguardam PDF. A fila privada conserva questões extraídas e análise assistida, sem confundir importação com aprovação editorial. O inventário registra todos os anos localizados. A aquisição não comprova revisão pedagógica de um lote de questões. O caderno de erros inclui filtro por assunto, paginação, nova resolução e contagens por questão lógica, derivadas das respostas salvas. Repetição espaçada, plano de estudos e tendências permanecem pendentes. O README registra os testes executados.
 
-Próximo incremento de conteúdo proposto: piloto de questões com capturas fiéis e controles de resposta, apoiado por CT-1, preservando fontes conferidas e revisão independente. Medir limites, gabaritos, acessibilidade, bytes e esforço antes de ampliar ou construir o upload de prova + gabarito. Imagens, discursivas, anulações, taxonomia avançada, simulados e IA continuam pendentes.
+Próximo incremento de conteúdo: disponibilizar somente os itens com recortes aprovados e ampliar cobertura por áreas, preservando fontes e revisão independente. A conferência de 2021 Q1–Q16 tem 11 APPROVED e cinco BLOCKED; nenhuma oficial está publicada no ambiente auditado. Recortes, visualizador e caminho ASSISTED já existem. Upload/editor, discursivas, taxonomia integral, simulados e IA permanecem pendentes. A [auditoria atual](reviews/2026-10-29-study-readiness.md) prioriza conteúdo utilizável, navegação e um futuro treino parcial pequeno, condicionado a questões publicadas suficientes.
