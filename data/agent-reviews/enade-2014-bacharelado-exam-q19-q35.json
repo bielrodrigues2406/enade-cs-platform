@@ -1,0 +1,283 @@
+{
+  "document": "enade-2014-bacharelado-exam",
+  "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+  "cropsManifestSha256": "59440cdc19b00868d0f750ba980136d9c0d1913836cc99daa15bcafef3b27dfb",
+  "extractor": "claude",
+  "explainer": "claude-explain-06",
+  "reviewer": "claude-review-06",
+  "reviewedAt": "2026-10-30T17:28:01Z",
+  "items": [
+    {
+      "key": "Q19",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7350a4cac74a0ba631bc3584e8f677843a7152156d2d8ed02206e95928485cde"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Computação gráfica",
+      "subject": "Traçado de raios (ray tracing) e realismo de imagens",
+      "notes": "Recorte da página PDF 18 (coluna esquerda) com número 19, enunciado, as três imagens com créditos, comando e alternativas A–E legíveis, sem conteúdo de Q20. Letra A conferida no gabarito definitivo, sem anulação. Nota ao estudante sobre a inferência apenas visual apontada pelo explicador.",
+      "studentNote": "O enunciado não informa como cada imagem foi produzida. A questão pede que o uso do traçado de raios seja reconhecido apenas pelos efeitos visíveis em cada imagem, como reflexos, refração, transparência e sombras.",
+      "explanation": "A questão cobra o reconhecimento dos efeitos que o traçado de raios (ray tracing) produz. Nessa técnica, raios de luz são seguidos a partir da câmera até os objetos da cena, e se calculam reflexões, refrações e sombras, o que dá realismo especialmente a superfícies brilhantes e transparentes.\n\nA imagem 1 mostra copos e uma garrafa de vidro com transparência, refração da luz, reflexos e sombras, efeitos típicos desse método. Por isso a alternativa A, que atribui a técnica apenas à imagem 1, é a do gabarito oficial.\n\nNa imagem 2, o raio sobre fundo escuro é um efeito luminoso ramificado, sem objetos cujas superfícies reflitam ou refratem a luz de uma cena. Na imagem 3, o realismo está na pelagem e na textura do animal, sem evidência dos efeitos de reflexão e refração característicos do traçado de raios. Assim, B atribui a técnica à imagem errada, C e D incluem uma imagem que não a evidencia, e E inclui as três.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q20",
+      "verdict": "APPROVED",
+      "fragments": [
+        "23f94dbd41691ac3990fb50fb23f6d617ccdbf5649c1e5eb09d6c2e9461fabfb"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Threads, processos e espaço de endereçamento",
+      "notes": "Recorte da página PDF 18 (coluna direita) com número 20, figuras 1 e 2 com rótulos, referência, afirmativas I–V e alternativas A–E. Letra E conferida no gabarito definitivo. Explicação coerente com as figuras.",
+      "studentNote": "",
+      "explanation": "A questão cobra a diferença entre processos tradicionais e threads quanto ao espaço de endereçamento. Cada processo tem um espaço de endereçamento próprio; as threads de um mesmo processo compartilham esse espaço, mas cada uma tem seu próprio fluxo de controle.\n\nNa figura 1 há três processos, cada um com uma única thread e com seu próprio espaço de endereçamento: é o modelo de processo tradicional, o que confirma a afirmativa IV. Na figura 2 há um único processo com três threads de controle dentro de um mesmo espaço de endereçamento, o que confirma a III. A V descreve o propósito das threads, várias execuções no mesmo ambiente de processo e independentes entre si, e está correta.\n\nA I falha porque só na figura 2 as três threads compartilham um espaço de endereçamento; na figura 1 cada thread pertence a um processo diferente, com espaço próprio. A II falha porque, na figura 2, as três threads usam um mesmo espaço, e não três distintos. Só III, IV e V são corretas: alternativa E.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q21",
+      "verdict": "APPROVED",
+      "fragments": [
+        "e6a7873d402f301230a5abdbf7e471b72063651d59ee0c3e9a1ba4537f6da16d"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Locks: exclusão mútua e progresso",
+      "notes": "Recorte da página PDF 19 com número 21, código de LockA e LockB, as cinco condições, afirmativas I–IV e A–E. Na borda inferior aparece só o topo do número da página, sem conteúdo de outra questão. Letra B conferida. O original omite ';' em 'private int turn = 0', sem efeito na análise.",
+      "studentNote": "",
+      "explanation": "A questão cobra as propriedades de exclusão mútua e de progresso em implementações de lock. Exclusão mútua exige que no máximo uma thread esteja na seção crítica; progresso exige que uma thread fora da seção crítica não impeça outra de entrar.\n\nLockA usa a variável turn em alternância estrita: a thread de identificador tid só passa quando turn é igual a tid, e ao sair entrega a vez à outra thread. Com no máximo duas threads, isso garante exclusão mútua, então a III é verdadeira. Mas não garante progresso: se a outra thread não voltar a entrar, a primeira não consegue entrar de novo mesmo com a seção crítica livre, ficando presa no laço de espera. Logo, a I é falsa.\n\nLockB desabilita as interrupções ao adquirir e as habilita ao liberar. O acquire nunca bloqueia a thread, então ninguém é impedido por quem está fora da seção crítica: há progresso, e a II é verdadeira. Porém, desabilitar interrupções afeta somente o processador local; o enunciado admite máquina com dois processadores, e nesse caso duas threads em processadores diferentes podem estar juntas na seção crítica. A IV é falsa. Só II e III valem: alternativa B.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q22",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f0d93666eef50dcbc2c81f359e8d7c495d248f5e88e29e2b2784a4ef72141339"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Sequenciamento de etapas e caixeiro viajante",
+      "notes": "Recorte da página PDF 20 (coluna esquerda) com número 22, enunciado e A–E completos. Na borda inferior restam cerca de 4 linhas de pixels com o til de 'QUESTÃO 23', sem texto legível nem conteúdo da questão seguinte; não bloqueia, mas o recorte pode ser ajustado. Letra E conferida.",
+      "studentNote": "",
+      "explanation": "A questão trata da complexidade de ordenar etapas com custo de transição. Cada etapa é feita exatamente uma vez, o custo total depende da ordem escolhida e o processo começa e termina com a caldeira limpa. Procura-se, portanto, a permutação das n etapas de menor custo total, o que lembra o problema do caixeiro viajante: as etapas fazem o papel das cidades, e o custo de transição, o das distâncias. Como o caixeiro viajante se reduz a esse problema, ele é pelo menos tão difícil quanto o caixeiro viajante e não se conhece algoritmo polinomial para ele; os algoritmos conhecidos têm tempo não polinomial. Isso corresponde à alternativa E, do gabarito oficial.\n\nAs outras falham. A trata o caso como ordenação, mas ordenar custos não produz a melhor sequência de etapas. B menciona heurística de coloração de grafos, que é outro problema e não daria a sequência ótima. C propõe árvore geradora mínima, que liga todos os vértices com custo mínimo, mas não define um percurso que passe por cada etapa uma só vez. D usa Dijkstra, que encontra o caminho mínimo entre dois vértices de um grafo dado, e aqui o caminho precisa visitar todas as etapas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q23",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8e3e84bfa0861ba62a29e03088554923ff25d52eede2421af2ad2994aa7681cd"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Rastreamento de função recursiva",
+      "notes": "Recorte da página PDF 20 com número 23, código de recursao e A–E. Topo do número da página na borda, sem conteúdo alheio. Letra D conferida; rastreamento recursao(27) = 16 refeito.",
+      "studentNote": "",
+      "explanation": "A questão cobra o rastreamento manual de uma função recursiva com chamada aninhada, recursao(recursao(n/3)). Para n menor ou igual a 10, a função devolve o dobro de n; caso contrário, divide n por 3 (divisão inteira) e aplica a função duas vezes.\n\nPara n = 27, como 27 é maior que 10, calcula-se recursao(recursao(9)). Primeiro, recursao(9): 9 é no máximo 10, logo o resultado é 18. Falta calcular recursao(18). Como 18 é maior que 10, tem-se recursao(recursao(6)). Aqui recursao(6) vale 12, e é preciso recursao(12). Como 12 é maior que 10, tem-se recursao(recursao(4)): recursao(4) vale 8 e recursao(8) vale 16. Assim, recursao(12) = 16, recursao(18) = 16 e recursao(27) = 16. A alternativa correta é a D.\n\nAs demais são valores intermediários ou resultado de aplicar a função só uma vez: 8 é recursao(4), 12 é recursao(6), 18 é recursao(9), e 9 é o valor de 27 dividido por 3, que ignora a função.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q24",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8e6abefabafe1ed7ea561314324527aa48dcb7092567cbd613db12f9d0358a9c"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Banco de dados",
+      "subject": "SQL: consulta com NOT IN em subconsulta",
+      "notes": "Recorte da página PDF 20 (coluna direita) com número 24, esquemas das duas tabelas e as cinco consultas SQL A–E legíveis. Letra C conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra uma consulta SQL com subconsulta e negação. Obter os estados para os quais não há fornecedores cadastrados significa selecionar os estados cuja sigla (UF) não aparece na tabela Fornecedor. A UF liga as duas tabelas, e o resultado pedido é o nome do estado.\n\nA alternativa C faz exatamente isso: seleciona o nome do estado em Estado quando E.UF NOT IN, com subconsulta que lista as UF de Fornecedor. Entram no resultado só os estados cuja UF não consta em nenhum fornecedor.\n\nAs outras falham. A compara o nome do estado, e não a UF, com a lista de UF dos fornecedores, e ainda projeta a UF em vez do nome. B e D escrevem uma vírgula antes de um segundo FROM, o que é erro de sintaxe; mesmo que fossem corrigidas, a junção por igualdade devolveria os estados que têm fornecedores, e D ainda compara nome_estado com UF. E usa IN e, por isso, retorna os estados que têm fornecedores, o oposto do pedido.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q25",
+      "verdict": "APPROVED",
+      "fragments": [
+        "70a079cdbd4c304845e30f67561d29019e836a7d3163bfa9e64199daa824cb49"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Compiladores",
+      "subject": "Gramática BNF para declaração de classes",
+      "notes": "Recorte da página PDF 21 com número 25, texto, trechos 1–3, convenções e as cinco produções A–E. Página original ampliada a 150 DPI: o símbolo de produção entre <classdecl> e o lado direito também falta no original, não é falha do recorte. Letra D conferida.",
+      "studentNote": "As alternativas foram impressas sem o símbolo de produção (como ::= ou →) entre <classdecl> e o restante da regra. Leia cada alternativa como a regra que define <classdecl>.",
+      "explanation": "A questão cobra a escrita de uma regra BNF para a declaração de classes em Java com as restrições do enunciado: no máximo uma superclasse (sem herança múltipla, extends opcional) e zero ou mais interfaces (implements opcional). Os colchetes indicam trecho opcional, e o operador de repetição indica zero ou mais ocorrências.\n\nA alternativa D escreve: class, id, um trecho opcional formado por extends e um id, e depois um trecho opcional formado por implements, um id e zero ou mais repetições de vírgula seguida de id. Assim, aceita os três trechos do enunciado e também uma classe sem nenhuma interface.\n\nAs outras falham. A torna opcional apenas a palavra extends, deixando o segundo id obrigatório (aceitaria class A B), e não prevê implements. B repete extends e id, o que permitiria várias superclasses, e também não prevê implements. C tem o mesmo problema de A com o extends e escreve mal a lista de interfaces, com a vírgula solta e a barra. E torna implements obrigatório, exigindo ao menos uma interface e rejeitando o caso de zero interfaces, como class A extends B.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q26",
+      "verdict": "APPROVED",
+      "fragments": [
+        "73f90a83aa563b14b315502b4d7a249d1854cf28cae1e8637ebcd223b1836c23"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Conjuntos indutivos e enumerabilidade",
+      "notes": "Recorte da página PDF 22 (coluna esquerda) com número 26, definição de Prop, afirmativas I–III e A–E. Letra C conferida. Área mantida em Matemática (definições indutivas e enumerabilidade). Nota ao estudante sobre condições implícitas em I e III.",
+      "studentNote": "O enunciado não explicita condições que afetam a análise. A enumerabilidade de um conjunto indutivo depende de a base ser enumerável e de cada regra combinar um número finito de elementos, como em Prop. Disjunção e implicação também poderiam ser definidas a partir de ! e and; a afirmativa III as trata como novas formas de expressão da linguagem.",
+      "explanation": "A questão cobra a definição indutiva de conjuntos: elementos base, regras que constroem novos elementos a partir dos existentes e fecho, que diz que nada mais pertence ao conjunto. A afirmativa I é verdadeira. Todo elemento de um conjunto indutivo é obtido por um número finito de aplicações dos construtores a partir dos elementos base. Assim, é possível listar os elementos por níveis de construção (primeiro os base, depois os obtidos com um passo, e assim por diante), o que mostra que o conjunto é enumerável.\n\nA II é falsa. O próprio exemplo Prop é infinito, pois sempre se pode aplicar de novo a negação ou a conjunção, e foi definido por indução. Definições indutivas descrevem justamente conjuntos infinitos por meio de poucas regras.\n\nA III é verdadeira. Cada forma de expressão exige um construtor próprio na regra de indução; para acrescentar disjunção e implicação, são necessários dois novos construtores, um para cada operador, mantendo-se os já existentes. Portanto só I e III estão corretas: alternativa C.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q27",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f9751980b463792f1f6449373b6463a14482c9d9e1693cf551c718a59bba8259"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Regras de inferência: modus tollens",
+      "notes": "Recorte da página PDF 22 (coluna direita) com número 27, argumento e as cinco regras A–E com barras de inferência; negações, inclusive ¬¬P em D, legíveis. Letra B conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra o reconhecimento da regra de inferência que sustenta o argumento. Tomando P como existe fogo e Q como existe oxigênio, as premissas são P → Q (se existe fogo, então existe oxigênio) e ¬Q (não há oxigênio), e a conclusão é ¬P (não há fogo). Essa forma é o modus tollens: de uma condicional e da negação do consequente, conclui-se a negação do antecedente. Por isso a resposta é a alternativa B, como no gabarito oficial.\n\nAs demais falham. A (P → Q, ¬P, concluindo ¬Q) nega o antecedente, uma falácia: pode haver oxigênio sem fogo. C (P → Q, Q, concluindo P) afirma o consequente, outra falácia: a presença de oxigênio não implica fogo. D tem as mesmas premissas de B, mas conclui ¬¬P, que equivale a P e contradiz o que de fato se segue (¬P); além disso, não corresponde à conclusão do argumento. E (P → Q, P, concluindo Q) é o modus ponens, regra válida, mas parte da afirmação do antecedente, e não da negação do consequente dada no argumento.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q28",
+      "verdict": "APPROVED",
+      "fragments": [
+        "04852a2c53b720c3dcb0f31edcfbcf1ea47d1612a20b7347243d8bf829a8322e"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Redução polinomial, P e NP-completo",
+      "notes": "Recorte da página PDF 23 com número 28, asserções I e II com PORQUE e A–E. Letra A conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a relação entre redução polinomial, as classes P e NP e os problemas NP-completos. Um problema NP-completo está em NP e é tal que todo problema de NP se reduz a ele em tempo polinomial.\n\nSe um problema NP-completo X se reduz em tempo polinomial a um problema Y que está em P, então X pode ser resolvido em tempo polinomial: transforma-se a instância e a resolve-se em Y. Como todo problema de NP se reduz a X, todos passam a ter algoritmo polinomial; logo NP está contido em P e, como P já está contido em NP, P = NP. A asserção I é verdadeira.\n\nA asserção II também é verdadeira: cada problema NP-completo está em NP, portanto passa a ter algoritmo polinomial pela mesma composição de reduções. E II justifica I, pois a existência de algoritmo polinomial para os NP-completos é exatamente o que leva a P = NP: todo problema de NP se reduz a um deles. Vale, então, a alternativa A. As alternativas B, C, D e E negam a verdade de alguma asserção ou o nexo entre elas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q29",
+      "verdict": "APPROVED",
+      "fragments": [
+        "0b04cc309170af72b24d178ad22e7878b004075332c3ab2314737291b40abd15"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Prolog: negação por falha e mundo fechado",
+      "notes": "Recorte da página PDF 23 com número 29, cláusulas Prolog, afirmativas I–V e A–E. Letra C conferida. Área mantida em Programação: a questão cobra a semântica de cláusulas e da negação em programação lógica.",
+      "studentNote": "",
+      "explanation": "A questão cobra o comportamento de cláusulas Prolog com negação, sob a hipótese de mundo fechado: o que não pode ser provado é considerado falso. Aqui, somente jorge e ana são superiores. O predicado selecionados(P,Q) é verdadeiro quando ambos são superiores. O desconsiderados(P,Q) é verdadeiro quando pelo menos um deles não é superior, ou seja, é exatamente a negação de selecionados. O descartado(P) é verdadeiro quando P não é superior.\n\nA I é falsa: selecionados(jorge, ana) é verdadeiro. A II é verdadeira: como desconsiderados é a negação de selecionados, para quaisquer P e Q um é verdadeiro e o outro é falso, logo os valores são diferentes. A III é falsa: a conjunção de um predicado com sua negação nunca é verdadeira. A IV é falsa: descartado(jorge) é falso, pois jorge é superior. A V é verdadeira: a disjunção de um predicado com sua negação é sempre verdadeira.\n\nSó II e V estão corretas: alternativa C.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q30",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b86331642b6d0a38786004432ec1f20e80a3e5ddc773836d7be7890e9e7c40a2"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Árvore geradora mínima (algoritmo de Kruskal)",
+      "notes": "Recorte da página PDF 24 (coluna esquerda) com número 30, passos do algoritmo com subíndices legíveis e A–E. Topo do número da página na borda, sem conteúdo alheio. Letra A conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra o reconhecimento do problema e do algoritmo. Ligar n+1 pontos com a menor extensão total de encanamento é o problema da árvore geradora mínima. O algoritmo descrito mantém conjuntos disjuntos de pontos e, em ordem crescente de distância, aceita uma ligação apenas se ela une dois conjuntos distintos, descartando as que fechariam ciclo. Esse é o algoritmo de Kruskal, que obtém a solução ótima do problema e roda em tempo polinomial; logo, o problema está em P. É a alternativa A, do gabarito oficial.\n\nAs outras falham. B: o algoritmo não é heurística para o caixeiro viajante, que busca um ciclo passando por todos os pontos, e é exato. C: ser problema de otimização não torna um problema NP-difícil; este está em P. D: Dijkstra encontra o caminho mínimo entre dois pontos, o que não resolve ligar todos os pontos com extensão total mínima. E: o conjunto D tem um registro por par de pontos, isto é, (n+1)n/2 registros, ordem de n ao quadrado, e não O(n!).",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q31",
+      "verdict": "APPROVED",
+      "fragments": [
+        "390a92acca00c7a810b55f6ffd3a1663f766708c49e388577c0574a44dd50527"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Probabilidade binomial e bit de paridade",
+      "notes": "Recorte da página PDF 24 (coluna direita) com número 31, enunciado e A–E com expoentes legíveis. Letra C conferida; C(8,2) × 10^-12 refeito. Área corrigida de Redes para Matemática: o enunciado já informa que 2 erros passam sem detecção e cobra o cálculo binomial.",
+      "studentNote": "",
+      "explanation": "A questão cobra o funcionamento do bit de paridade e o cálculo de uma probabilidade binomial. O bit de paridade detecta erro quando o número de bits invertidos é ímpar, pois isso muda a paridade da quantidade de bits 1. Se um número par de bits é invertido, a paridade se mantém e o receptor aceita a palavra como correta. Logo, 2 bits errados passam sem detecção.\n\nSão 8 bits transmitidos: 7 de dados mais o de paridade, que também pode errar. A probabilidade de exatamente 2 erros em 8 bits, com probabilidade 10^-6 por bit e erros independentes, é C(8,2) × (10^-6)^2 × (1 − 10^-6)^6. Como C(8,2) = 28 e (1 − 10^-6)^6 é aproximadamente 1, o valor é cerca de 28 × 10^-12 = 2,8 × 10^-11: alternativa C.\n\nAs demais refletem contagens incorretas. 1,0 × 10^-12 é só (10^-6)^2, uma única combinação de dois bits; 2,0 × 10^-12 seria duas combinações. D e E usam a probabilidade de um bit sem elevá-la ao quadrado, o que não representa dois erros independentes.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q32",
+      "verdict": "APPROVED",
+      "fragments": [
+        "e7cc2f54fa171268407296432f29c49bb298ff6351e1ac5b784044ce7a55ad2a"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Validade de argumentos em lógica proposicional",
+      "notes": "Recorte da página PDF 25 (coluna esquerda) com número 32, argumento, afirmativas I–V com conectivos legíveis e A–E. Letra A conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a formalização de um argumento em lógica proposicional e a verificação de sua validade. Com P (lê a literatura técnica), Q (conhece inglês) e R (será selecionado), as premissas são P → Q, Q → R e ¬R ∨ P (equivalente a R → P), e a conclusão é P ↔ Q.\n\nA I é verdadeira: é essa a formalização. A III é verdadeira: R → P equivale a ¬R ∨ P; de Q → R e R → P obtém-se Q → P por transitividade, e juntando com P → Q chega-se a P ↔ Q. As três condicionais formam o ciclo P → Q → R → P, então P, Q e R são equivalentes e o argumento é válido.\n\nA II é falsa: ¬Q ∨ P equivale a Q → P, que não é equivalente a nenhuma premissa dada, e a conclusão apresentada seria Q ↔ R, não a pedida. A IV é falsa: ¬R ∨ P equivale a R → P, e não a ¬R → P, e a conclusão é P ↔ Q, não só P → Q. A V é falsa: o argumento é válido, e a conclusão ser diferente das premissas não mostra invalidade, pois o teste é se ela decorre delas. Só I e III: alternativa A.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q33",
+      "verdict": "APPROVED",
+      "fragments": [
+        "9cde7a5ff634e56d853cfd3f2224c1552bcbe961764a99ee748e5a8627a68e26"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Pipeline: conflitos de dados e reordenação",
+      "notes": "Recorte da página PDF 25 (coluna direita) com número 33, sequência de instruções, afirmativas I–III e A–E. Letra B conferida; distâncias entre escrita e leitura refeitas para I, II e III.",
+      "studentNote": "",
+      "explanation": "A questão cobra os conflitos de dados (leitura após escrita) em um pipeline de cinco estágios sem adiantamento de resultados. Como o registrador é escrito na primeira metade do ciclo e lido na segunda, uma instrução consegue ler o valor que outra escreve no mesmo ciclo; assim, a instrução que lê deve estar pelo menos três posições depois da que escreve. Só add R1, R2, R2 produz um valor lido em seguida: mul R3, R2, R1 (uma posição depois) e sub R1, R1, R4 (duas posições depois) leem R1. Ambos estão abaixo das três posições exigidas, então há conflito.\n\nI: trocar or e add dá and, add, or, mul, sub; o mul fica a duas posições do add, ainda insuficiente, então I é falsa. II: trocar add e and dá add, or, and, mul, sub; o mul fica a três posições do add e o sub a quatro, resolvendo o conflito, e as demais instruções não criam dependência nova, então II é verdadeira. III: um nop entre add e mul deixa o mul a duas posições do add, ainda uma a menos que o necessário; o conflito persiste e III é falsa.\n\nSomente II está correta: alternativa B.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q34",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c02b312cc0e4a743fc268773a2f6d0a2b169cea41b409ea21ac26a0bf0fbe250"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Produtor-consumidor e sincronização de processos",
+      "notes": "Recorte da página PDF 26 com número 34, pseudocódigo das linhas 01–20, asserções com PORQUE e A–E. Letra E conferida. Página original ampliada a 200 DPI: a linha 15 está impressa sem '=' no próprio original; vira nota ao estudante.",
+      "studentNote": "Na linha 15, o código foi impresso como token buffer[out]; sem o sinal de atribuição. Leia a linha com a intenção evidente, token = buffer[out];, isto é, o analisador sintático retira do buffer o próximo token.",
+      "explanation": "A questão cobra a análise de uma solução de produtor-consumidor com buffer circular: o analisador léxico produz tokens e o sintático os consome. Há duas variáveis de controle. A vez alterna a permissão de acesso (o léxico só escreve quando vez é 0 e a passa para 1; o sintático só lê quando vez é 1 e a devolve para 0). A cont conta os tokens no buffer e serve para esperar quando ele está cheio (linha 4) ou vazio (linha 13).\n\nA asserção II é falsa: o controle de acesso à seção crítica é feito por vez, que obriga os processos a se alternarem, e não por cont, que apenas conta os itens do buffer.\n\nA asserção I também é falsa: sem cont e sem as linhas 4, 7, 13 e 16, a alternância imposta por vez continua obrigando um token escrito a ser lido antes do próximo. O buffer nunca passa de uma posição ocupada, não há sobrescrita nem leitura de posição vazia, e a sincronização permanece correta; apenas a verificação por cont torna-se redundante. Como as duas asserções são falsas, a resposta é a alternativa E.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q35",
+      "verdict": "APPROVED",
+      "fragments": [
+        "952c6c05fa8d284a151eb96dc183a3a2b8306516eabeaa8b35a8f50887cad612"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Circuito lógico com multiplexador 4x1",
+      "notes": "Recorte da página PDF 27 com número 35, enunciado com AB=10(2), circuito, asserções com PORQUE e A–E. Circuito conferido no original a 300 DPI: entradas do MUX 0, AND, AND e OR. Letra E conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a análise de um circuito combinacional com multiplexador 4x1. A especificação é habilitar o elevador 2 quando houver pedidos em mais de 2 andares, isto é, em pelo menos 3 dos 4 andares. Os sinais A e B, dos andares 1 e 2, selecionam a entrada do multiplexador; C e D são os dos andares 3 e 4.\n\nPela figura, as entradas do multiplexador para AB = 00, 01, 10 e 11 são, nessa ordem, a constante 0, a saída da porta AND de C e D, a mesma saída da AND e a saída da porta OR de C e D. Com A e B iguais a 0, só C e D não chegam a 3 pedidos, então a saída 0 está correta. Com apenas um entre A e B igual a 1, são necessários C e D juntos (AND) para totalizar 3. Com A e B iguais a 1, basta C ou D (OR). O circuito cumpre a especificação, e a asserção I é falsa.\n\nA asserção II também é falsa: a constante 0 só determina a saída quando a entrada selecionada é a de AB = 00; para os demais valores de AB a saída depende de C e D. Logo, as duas são falsas: alternativa E.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ]
+}
