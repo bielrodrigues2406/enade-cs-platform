@@ -4,6 +4,8 @@ Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação.
 
 Na web, HTML fica nos arquivos `.component.html`, lógica/estado em `.ts` e estilos em `.css`. O shell usa `app.component.html` com bootstrap em `main.ts`. As [convenções de engenharia](docs/ENGINEERING-AND-DELIVERY.md#11-organização-da-interface) valem para as duas trilhas de desenvolvimento.
 
+O projeto será disponibilizado à fábrica de software. Código compreensível para mantenedores humanos é requisito obrigatório de Claude e Codex em cada entrega. Depois da estabilização dos fluxos prioritários, a [revisão integral CQ-2](docs/ENGINEERING-AND-DELIVERY.md#13-manutenção-humana-e-passagem-à-fábrica-de-software), com simplificação e reescrita onde necessárias, deve ser concluída antes da passagem institucional; essa etapa ainda não foi executada.
+
 ## O que funciona
 
 - Página inicial em `/` com a situação do estudante: semanas até a prova, questões para retomar e para resolver, andamento salvo, formato da prova de 2026 e origem das questões com contagens reais; o banco fica em `/questoes`.
