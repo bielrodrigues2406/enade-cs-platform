@@ -29,6 +29,8 @@ Nenhum agente transcreve questões oficiais, gabaritos ou comentários editoriai
 
 ## 3. Ownership de arquivos e pontos de conflito
 
+A organização de código em ENGINEERING-AND-DELIVERY §1.1 vale para as duas trilhas: HTML em `.html`, CSS em `.css`, lógica em `.ts`. Ao atualizar uma branch anterior à extração de templates, aplicar mudanças de apresentação no novo HTML e preservar `templateUrl`, sem restaurar o template inline. Conferências de conteúdo já registradas seguem a revisão proporcional de §1.2; não repetir lotes inteiros sem um achado que justifique.
+
 A divisão por domínio evita a maior parte dos conflitos. Cada tarefa do quadro lista os arquivos que pretende criar ou alterar. Os arquivos abaixo são compartilhados e seguem regras próprias:
 
 | Arquivo / área | Regra |
