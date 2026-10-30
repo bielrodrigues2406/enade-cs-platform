@@ -25,6 +25,97 @@
       "y1": 764.8
      }
     ]
+   },
+   "Q47": {
+    "note": "Começa abaixo da alternativa E da Q46.",
+    "boxes": [
+     {
+      "page": 17,
+      "x0": 286.32,
+      "y0": 417.0,
+      "x1": 564.72,
+      "y1": 773.08
+     }
+    ]
+   },
+   "Q48": {
+    "note": "Termina antes do título da Q49.",
+    "boxes": [
+     {
+      "page": 18,
+      "x0": 30.84,
+      "y0": 42.92,
+      "x1": 284.69,
+      "y1": 262.5
+     }
+    ]
+   },
+   "Q49": {
+    "note": "Começa abaixo da alternativa E da Q48.",
+    "boxes": [
+     {
+      "page": 18,
+      "x0": 30.72,
+      "y0": 263.5,
+      "x1": 284.66,
+      "y1": 544
+     }
+    ]
+   },
+   "Q60": {
+    "note": "Termina antes do título da Q61.",
+    "boxes": [
+     {
+      "page": 23,
+      "x0": 30,
+      "y0": 42.92,
+      "x1": 302.54,
+      "y1": 283.5
+     }
+    ]
+   },
+   "Q61": {
+    "note": "Começa abaixo da alternativa E da Q60.",
+    "boxes": [
+     {
+      "page": 23,
+      "x0": 30,
+      "y0": 284.5,
+      "x1": 302.73,
+      "y1": 774.76
+     }
+    ]
+   },
+   "Q66": {
+    "note": "Só a coluna da página 24; os gráficos da página 25 são da Q67.",
+    "boxes": [
+     {
+      "page": 24,
+      "x0": 304.38,
+      "y0": 344.6,
+      "x1": 563.96,
+      "y1": 771.64
+     }
+    ]
+   },
+   "Q67": {
+    "note": "Gráficos do topo da página 25 (\"para responder à questão 67\") seguidos do enunciado.",
+    "boxes": [
+     {
+      "page": 25,
+      "x0": 30,
+      "y0": 35.87,
+      "x1": 588.48,
+      "y1": 453.12
+     },
+     {
+      "page": 25,
+      "x0": 30,
+      "y0": 455.52,
+      "x1": 376.08,
+      "y1": 777.28
+     }
+    ]
    }
   },
   "enade-2008-comum-exam": {
@@ -106,6 +197,54 @@
       "y0": 70.46,
       "x1": 185.95,
       "y1": 89.45
+     }
+    ]
+   },
+   "Q1": {
+    "note": "Sem a faixa FORMAÇÃO GERAL acima do número.",
+    "boxes": [
+     {
+      "page": 2,
+      "x0": 30.84,
+      "y0": 88.6,
+      "x1": 564.16,
+      "y1": 774
+     }
+    ]
+   },
+   "Q15": {
+    "note": "Começa abaixo da alternativa E da Q14.",
+    "boxes": [
+     {
+      "page": 9,
+      "x0": 30.84,
+      "y0": 90.5,
+      "x1": 297.17,
+      "y1": 288.12
+     }
+    ]
+   },
+   "Q19": {
+    "note": "Termina antes do título da Q20.",
+    "boxes": [
+     {
+      "page": 10,
+      "x0": 30.84,
+      "y0": 68.83,
+      "x1": 565.18,
+      "y1": 328.51
+     }
+    ]
+   },
+   "Q21": {
+    "note": "Termina antes do título da Q22.",
+    "boxes": [
+     {
+      "page": 11,
+      "x0": 30.84,
+      "y0": 263.59,
+      "x1": 303,
+      "y1": 635.5
      }
     ]
    }

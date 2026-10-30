@@ -197,20 +197,21 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "C",
+   "override": "Sem a faixa FORMAÇÃO GERAL acima do número.",
    "fragments": [
     {
      "file": "Q1-1.webp",
      "page": 2,
      "box": {
       "x0": 30.84,
-      "y0": 82.87,
+      "y0": 88.6,
       "x1": 564.16,
       "y1": 774
      },
      "width": 1481,
-     "height": 1920,
-     "byteSize": 678378,
-     "sha256": "bd39fe2a91de6fc0da66859b07257db22433f3f943ed6d737afea8fe467151dd"
+     "height": 1904,
+     "byteSize": 675436,
+     "sha256": "e68621f0e6fc39afcec1721d050445ce3e813585b8b67cb226f8f4391d23de6a"
     }
    ]
   },
@@ -555,20 +556,21 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "B",
+   "override": "Começa abaixo da alternativa E da Q14.",
    "fragments": [
     {
      "file": "Q15-1.webp",
      "page": 9,
      "box": {
       "x0": 30.84,
-      "y0": 83.47,
+      "y0": 90.5,
       "x1": 297.17,
       "y1": 288.12
      },
      "width": 739,
-     "height": 568,
-     "byteSize": 24538,
-     "sha256": "7745f80bffcb64229ccc95743a5eddf0f893eb496d8fb23f9096db0cd62ec8ae"
+     "height": 549,
+     "byteSize": 23958,
+     "sha256": "4278942533ccfe095ca224fce96b511724c1b7163bd4030a94ce2087881dd488"
     }
    ]
   },
@@ -647,6 +649,7 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "A",
+   "override": "Termina antes do título da Q20.",
    "fragments": [
     {
      "file": "Q19-1.webp",
@@ -655,12 +658,12 @@
       "x0": 30.84,
       "y0": 68.83,
       "x1": 565.18,
-      "y1": 333.01
+      "y1": 328.51
      },
      "width": 1484,
-     "height": 734,
-     "byteSize": 54038,
-     "sha256": "3b7ae095784b51a414252441333c319f929044e68782b2af7842402210d14ad8"
+     "height": 722,
+     "byteSize": 53472,
+     "sha256": "eb09c116a3b40141550ff17130660c5e82fcaba8d1e5b8a72d7878d2bc6fccf9"
     }
    ]
   },
@@ -696,6 +699,7 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "D",
+   "override": "Termina antes do título da Q22.",
    "fragments": [
     {
      "file": "Q21-1.webp",
@@ -704,12 +708,12 @@
       "x0": 30.84,
       "y0": 263.59,
       "x1": 303,
-      "y1": 639.49
+      "y1": 635.5
      },
      "width": 756,
-     "height": 1044,
-     "byteSize": 36464,
-     "sha256": "114ed3acf0f6d5d0b2f05c6ef23f33c037e0a93b5ab3a8309a8096c721670ced"
+     "height": 1033,
+     "byteSize": 36438,
+     "sha256": "9002094b002f522cfc1cd3e81dd3eb6b7a22dde6b6550634535c4a148960b6a3"
     }
    ]
   },

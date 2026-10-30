@@ -1266,20 +1266,21 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "B",
+   "override": "Começa abaixo da alternativa E da Q46.",
    "fragments": [
     {
      "file": "Q47-1.webp",
      "page": 17,
      "box": {
       "x0": 286.32,
-      "y0": 413.76,
+      "y0": 417,
       "x1": 564.72,
       "y1": 773.08
      },
      "width": 774,
-     "height": 998,
-     "byteSize": 38102,
-     "sha256": "7ff9dac68e4ec6504251aa33f8f70cabc240c01a3d345ec5001f35b9a6a53c6a"
+     "height": 989,
+     "byteSize": 37990,
+     "sha256": "11347a2d7705fe528bc08579d3681f12fa664a14db608484d43c2333cb62ad23"
     }
    ]
   },
@@ -1289,6 +1290,7 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "A",
+   "override": "Termina antes do título da Q49.",
    "fragments": [
     {
      "file": "Q48-1.webp",
@@ -1297,12 +1299,12 @@
       "x0": 30.84,
       "y0": 42.92,
       "x1": 284.69,
-      "y1": 265.06
+      "y1": 262.5
      },
      "width": 705,
-     "height": 617,
-     "byteSize": 29274,
-     "sha256": "8c79c4c6ba3d2f9c1caafb5b6aa5b17ecabf7c0dcd617860b4b048dd16db920b"
+     "height": 610,
+     "byteSize": 29270,
+     "sha256": "cb02ad3c3364c23bbb25a7766f117654361769f3fa1651d12af95df86f906e80"
     }
    ]
   },
@@ -1312,20 +1314,21 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "C",
+   "override": "Começa abaixo da alternativa E da Q48.",
    "fragments": [
     {
      "file": "Q49-1.webp",
      "page": 18,
      "box": {
       "x0": 30.72,
-      "y0": 256.8,
+      "y0": 263.5,
       "x1": 284.66,
       "y1": 544
      },
      "width": 706,
-     "height": 798,
-     "byteSize": 40760,
-     "sha256": "9d018150e10ea987adec281da2149715eaca3d89c2d2d2c11ae9f095bffb8c0c"
+     "height": 779,
+     "byteSize": 40148,
+     "sha256": "8c662e2f65c807127f4be34d55c6db8a1489e16cc6db6493d564cb2812ad28cd"
     }
    ]
   },
@@ -1571,6 +1574,7 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "A",
+   "override": "Termina antes do título da Q61.",
    "fragments": [
     {
      "file": "Q60-1.webp",
@@ -1579,12 +1583,12 @@
       "x0": 30,
       "y0": 42.92,
       "x1": 302.54,
-      "y1": 284.74
+      "y1": 283.5
      },
      "width": 757,
-     "height": 672,
+     "height": 669,
      "byteSize": 28328,
-     "sha256": "30f5fa2d4c059a1a6532c6ccb5d5cbd31a10aa71ec3fd387b09850804fc48f21"
+     "sha256": "c8d701d4ed504e80f6879cccc21ba8b4ee84bbde66a2155136d1a5febde47078"
     }
    ]
   },
@@ -1594,20 +1598,21 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "B",
+   "override": "Começa abaixo da alternativa E da Q60.",
    "fragments": [
     {
      "file": "Q61-1.webp",
      "page": 23,
      "box": {
       "x0": 30,
-      "y0": 276.96,
+      "y0": 284.5,
       "x1": 302.73,
       "y1": 774.76
      },
      "width": 758,
-     "height": 1383,
-     "byteSize": 91626,
-     "sha256": "536e71adc31ab6b549c6987d54aa3bc4990ecc33b4ad9dc9757e1de75fa22aca"
+     "height": 1362,
+     "byteSize": 88626,
+     "sha256": "2dd7d7b2a308a3d42f5564b5e4c7f5f95efce9e7087fe5e05bba667696cc6aaf"
     }
    ]
   },
@@ -1709,6 +1714,10 @@
    "kind": "OBJECTIVE",
    "status": "sem-gabarito-definitivo",
    "answer": "D",
+   "override": "Só a coluna da página 24; os gráficos da página 25 são da Q67.",
+   "warnings": [
+    "4 linha(s) da transcrição fora do recorte"
+   ],
    "fragments": [
     {
      "file": "Q66-1.webp",
@@ -1723,9 +1732,19 @@
      "height": 1186,
      "byteSize": 54434,
      "sha256": "daa9fc260db013d4d56de1d1c59b1c2e00ad9fa532fb73333644cb631d6533b8"
-    },
+    }
+   ]
+  },
+  {
+   "key": "Q67",
+   "number": 67,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "override": "Gráficos do topo da página 25 (\"para responder à questão 67\") seguidos do enunciado.",
+   "fragments": [
     {
-     "file": "Q66-2.webp",
+     "file": "Q67-1.webp",
      "page": 25,
      "box": {
       "x0": 30,
@@ -1737,18 +1756,9 @@
      "height": 1159,
      "byteSize": 653614,
      "sha256": "98aa0b99b4eeb9d04ba3c63b39c71ce6cb60b1da183f8b5caf478f540db5c39d"
-    }
-   ]
-  },
-  {
-   "key": "Q67",
-   "number": 67,
-   "kind": "OBJECTIVE",
-   "status": "sem-gabarito-definitivo",
-   "answer": "C",
-   "fragments": [
+    },
     {
-     "file": "Q67-1.webp",
+     "file": "Q67-2.webp",
      "page": 25,
      "box": {
       "x0": 30,
