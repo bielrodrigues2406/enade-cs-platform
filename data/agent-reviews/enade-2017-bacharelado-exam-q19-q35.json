@@ -1,0 +1,283 @@
+{
+  "document": "enade-2017-bacharelado-exam",
+  "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+  "cropsManifestSha256": "be360acd25ba775c5a40a3f7b32b4170ea353b8dd99ec31c6dfe96409b13546b",
+  "extractor": "claude",
+  "explainer": "claude-explain-04",
+  "reviewer": "claude-review-04",
+  "reviewedAt": "2026-10-30T22:36:17Z",
+  "items": [
+    {
+      "key": "Q19",
+      "verdict": "APPROVED",
+      "fragments": [
+        "41d4fa20fca78e29fc8336fa51e6cc91b62d91805b32f24e2637d71d7e740a27"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Banco de dados",
+      "subject": "Consultas SQL com junções (JOIN)",
+      "notes": "Recorte único conferido: questão inteira (enunciado, diagrama ER e código SQL e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 19; gabarito definitivo E, não anulada; legível. Explicação conferida: joins e falhas de A–D corretos.",
+      "studentNote": "No diagrama, a chave primária de Deputado aparece impressa como idPartido, repetindo o nome da chave estrangeira; as alternativas usam Deputado.idDeputado. Trata-se de provável erro de impressão: considere idDeputado como chave primária de Deputado.",
+      "explanation": "A questão cobra a escrita de consultas SQL que combinam três tabelas ligadas por chaves estrangeiras: Deputado, Participacao (tabela associativa) e Secao. Para listar o nome dos deputados que compareceram a pelo menos uma seção, junto com a data de cada seção em que participaram, é preciso manter somente os deputados que têm linha correspondente em Participacao e somente as seções referenciadas por essas linhas. É exatamente o que faz o INNER JOIN encadeado da alternativa E: Deputado se liga a Participacao por idDeputado, e Participacao se liga a Secao por idSecao.\n\nAs demais falham. Na A, nenhuma condição liga Secao às outras tabelas, o que gera produto cartesiano com todas as seções. Na B, o OR exige apenas uma das duas ligações, devolvendo combinações sem relação real entre deputado e seção. Na C, o LEFT OUTER JOIN preserva deputados sem participação, que apareceriam com data nula, contrariando \"pelo menos uma seção\". Na D, o RIGHT OUTER JOIN preserva todas as seções, inclusive as sem participantes, com nome de deputado nulo.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q20",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a117f0eda59527e89427d978600766df6391269a78e8a90f619166153d573d1a"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Protocolos de transporte TCP e UDP",
+      "notes": "Recorte único conferido: questão inteira (enunciado, afirmações I–III e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 20; gabarito definitivo D, não anulada; legível. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão compara os protocolos da camada de transporte. O TCP é orientado à conexão e oferece entrega confiável e ordenada, com confirmações e retransmissões; o UDP não estabelece conexão nem garante entrega, mas por isso tem menos sobrecarga e menor latência.\n\nA afirmação I é verdadeira: quando o tempo de envio é o fator crítico, o UDP é mais eficiente, pois dispensa o estabelecimento de conexão e as confirmações. A III também é verdadeira: quando a confiabilidade de entrega é fundamental, o TCP é a escolha adequada, porque com o UDP a perda e a reordenação de pacotes ficariam a cargo da aplicação. A II é falsa: jogos on-line de ação precisam de baixa latência e toleram perdas ocasionais, de modo que, em geral, usam UDP, e não TCP, para a comunicação em tempo real.\n\nEstão corretas, portanto, apenas I e III, alternativa D. As alternativas A, C e E incluem a afirmação II, que é falsa, e a B omite a I, que é verdadeira.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q21",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1e99e152f1bb01a1c515f46bd74fd6f062cddee66c06bf371b96aff273933d6b"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Lógica proposicional: formalização de sentenças",
+      "notes": "Recorte único conferido: questão inteira (enunciado, fórmulas P1–P3 e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 21; gabarito definitivo A, não anulada; legível. Explicação conferida: contraexemplo de P1 e tautologia de P3 verificados.",
+      "studentNote": "A sentença usa \"pode ser\", noção de possibilidade que a lógica proposicional não expressa diretamente. Lida ao pé da letra, a frase só proíbe que um veículo elétrico não autônomo seja robô, o que não corresponde exatamente a nenhuma das fórmulas; a questão pede a formalização mais adequada entre as propostas.",
+      "explanation": "A questão pede a formalização de uma sentença em lógica proposicional. A frase diz que, se o veículo é elétrico (E), então ele é um robô (R) exatamente quando é autônomo (A): se for autônomo, pode ser robô; caso contrário, não é. Em símbolos, E → (R ↔ A), que é P2. A condição E aparece apenas como premissa, e dentro dela vale a equivalência entre R e A.\n\nP1 = (E ∧ R) ↔ A é diferente: se E é falso, E ∧ R é falso, e P1 passa a exigir A falso. Com E falso, A verdadeiro e R falso, P1 é falsa, enquanto a sentença, que nada afirma sobre veículos não elétricos, não é violada e P2 é verdadeira.\n\nP3 = E → ((A → R) ∨ ¬R) é uma tautologia: (A → R) ∨ ¬R equivale a ¬A ∨ R ∨ ¬R, sempre verdadeira, logo P3 é verdadeira em qualquer valoração. Em particular, vale com E verdadeiro, R verdadeiro e A falso, caso que a sentença proíbe (veículo elétrico, não autônomo, que seria robô). Só P2 representa a sentença: alternativa A.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q22",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b7434be69a5ecb6bf70f7c0ae44da374a8bb5205ea75ed28de70a226b590527c"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Algoritmo guloso e troco mínimo",
+      "notes": "Recorte único conferido: questão inteira (enunciado, código Java e asserções e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 22; gabarito definitivo C, não anulada; legível. Explicação conferida: contraexemplo {1,3,4} correto.",
+      "studentNote": "",
+      "explanation": "A questão trata de algoritmos gulosos: a cada passo escolhem a melhor opção local (aqui, a maior moeda possível) sem reconsiderar decisões. O método apresentado faz exatamente isso, usando divisão inteira e resto, da moeda de 50 centavos até a de 1.\n\nA asserção I é verdadeira: para o conjunto de moedas {1, 5, 10, 25, 50}, a estratégia gulosa produz o menor número de moedas, o que pode ser conferido por análise de casos ou por programação dinâmica para qualquer valor.\n\nA asserção II é falsa: métodos gulosos nem sempre encontram a solução global ótima; isso depende do problema e, no troco, do conjunto de moedas. Contraexemplo: com moedas de 1, 3 e 4 e valor 6, o guloso escolhe 4 + 1 + 1 (três moedas), enquanto o ótimo é 3 + 3 (duas). Logo a II não pode justificar a I, e a I é verdadeira por uma propriedade desse conjunto específico de moedas. Assim, I é verdadeira e II é falsa: alternativa C. As alternativas A e B tratam a II como verdadeira, D inverte os valores e E nega a I.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q23",
+      "verdict": "APPROVED",
+      "fragments": [
+        "e1694c04a4235efdd2512c23c7373dadb032d1c9e2899418147ca7b36ca306c7"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Linguagens não regulares e autômatos finitos",
+      "notes": "Recorte único conferido: questão inteira (enunciado, alfabeto, definição de L e asserções e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 23; gabarito definitivo A, não anulada; legível. Explicação segue a leitura pretendida pelo exemplo.",
+      "studentNote": "A definição formal de L, lida ao pé da letra, exige apenas que exista algum ')' quando houver '(' — nesse caso a cadeia y, que contém ')', pertenceria a L. O exemplo mostra que a intenção é que cada '(' tenha um ')' correspondente; resolva a questão com essa leitura.",
+      "explanation": "A questão trata de linguagens regulares e do poder dos autômatos finitos. Pelo exemplo dado, a linguagem L exige que cada \"(\" tenha um \")\" correspondente: x pertence a L, mas y não, pois sobra um \"(\". Verificar isso requer comparar contagens de símbolos que podem crescer sem limite.\n\nA asserção II é verdadeira: um autômato finito tem número finito de estados e nenhuma memória auxiliar, de modo que não consegue contar indefinidamente as ocorrências de um símbolo. A asserção I também é verdadeira: como o reconhecimento de L depende dessa contagem ilimitada, nenhum autômato finito reconhece L, isto é, L não é regular (o lema do bombeamento formaliza o argumento). E II é justamente a razão de I: a incapacidade de contar sem limite é o motivo pelo qual L não é regular.\n\nLogo, as duas asserções são verdadeiras e a II justifica a I: alternativa A. B nega a justificativa; C e D tratam uma das asserções como falsa; E trata ambas como falsas. Uma linguagem desse tipo exige memória adicional, como a pilha de um autômato com pilha.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q24",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c13bfc112eb7de6cd2b4cabe4c3da36a804e1d27561e67cf520a81a64f3031ec"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Caminhos mínimos (Dijkstra) e árvore geradora (Kruskal)",
+      "notes": "Recorte único conferido: questão inteira (enunciado, grafo com todos os pesos e afirmações I–III e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 24; gabarito definitivo E, não anulada; legível. Explicação conferida: caminho mínimo i→k = 7 e árvore de Kruskal recalculados.",
+      "studentNote": "",
+      "explanation": "A questão combina caminhos mínimos, árvore geradora mínima e subestrutura ótima. As três afirmações são verdadeiras. I: o algoritmo de Dijkstra calcula o menor custo de uma origem até todos os demais vértices, desde que não haja pesos negativos, o que vale aqui, pois todos os tempos são positivos.\n\nII: o menor tempo de i a k é 7: i vai ao vértice ligado a ele por peso 2, segue por um dos dois trechos de custo 3 até j e termina na aresta j-k, de peso 2. Kruskal escolhe primeiro as arestas de peso 1 e depois as de peso 2 que não formam ciclo; a aresta de peso 2 que sai de i sempre entra, assim como uma das duas ligações centrais até j e a aresta j-k. Assim, o caminho de i a k na árvore custa 7, o mínimo. Isso não vale em qualquer grafo, mas vale neste.\n\nIII: é a subestrutura ótima: todo subcaminho de um caminho mínimo é também mínimo, pois um trecho mais curto de w a k permitiria encurtar o caminho inteiro de i a k. Logo, I, II e III estão corretas: alternativa E.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q25",
+      "verdict": "APPROVED",
+      "fragments": [
+        "ec7902d8ca78a0cc6ed9da4f190ed500a5f5b72c2f9c49169e7a331da42dc1f8"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Complexidade da recursão de Fibonacci",
+      "notes": "Recorte único conferido: questão inteira (enunciado, código e afirmações I–III e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 25; gabarito definitivo C, não anulada; legível. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a análise de complexidade da função recursiva de Fibonacci. A cada chamada com n ≥ 2, a função dispara duas chamadas, para n−2 e n−1, e o número total de chamadas cresce proporcionalmente ao próprio valor de Fibonacci, isto é, exponencialmente em n (aproximadamente 1,618 elevado a n, limitado por 2 elevado a n). Por isso a afirmação I é verdadeira.\n\nA afirmação II é falsa: o espaço depende da profundidade máxima da pilha de recursão, não do número total de chamadas, pois as chamadas são feitas uma após a outra e cada registro de ativação é liberado ao retornar. A profundidade máxima é proporcional a n, logo o espaço é linear, e não exponencial.\n\nA III é verdadeira: uma versão iterativa guarda apenas os dois últimos valores da sequência em variáveis e os atualiza em um laço de cerca de n passos, com tempo linear e espaço constante. Portanto estão corretas I e III: alternativa C. As demais ou deixam de reconhecer uma afirmação verdadeira ou aceitam a II, que é falsa.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q26",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f295187730b7114114c09fbb32decf882fe2085028c7b04be2e34805dd8f5036"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Computação gráfica",
+      "subject": "Filtros de imagem: ruído sal e pimenta",
+      "notes": "Recorte único conferido: questão inteira (enunciado, imagem de ressonância e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 26; gabarito definitivo E, não anulada; legível. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão trata de filtragem espacial de imagens digitais. O ruído sal e pimenta aparece como pixels isolados muito claros ou muito escuros, valores extremos em relação à vizinhança. Para atenuá-lo preservando as bordas, o filtro adequado é o da mediana: cada pixel passa a ter o valor mediano da janela ao seu redor. Como o valor ruidoso fica nas pontas da ordenação, é descartado e não contamina o resultado, e a transição abrupta entre regiões é mantida, porque a mediana é sempre um valor realmente presente na vizinhança.\n\nAs outras falham. O filtro da média substitui o pixel pela média da janela: o ponto extremo é diluído, mas continua influenciando os vizinhos e as bordas ficam borradas. Sobel e Laplaciano são filtros de realce e detecção de bordas, baseados em derivadas: amplificam variações bruscas, logo amplificam o ruído em vez de atenuá-lo. O filtro do mínimo elimina os pontos claros (sal), mas intensifica os escuros (pimenta) e erode as estruturas claras, deformando as bordas.\n\nPortanto, a alternativa correta é a E.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q27",
+      "verdict": "APPROVED",
+      "fragments": [
+        "efed24db9bac33a820e84cc78f36118f4078ef67d2c8cff06ecd21c8d07615ba"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Computação gráfica",
+      "subject": "Modelos de sombreamento: constante e Phong",
+      "notes": "Recorte único conferido: questão inteira (enunciado, figuras, fontes e afirmações I–IV e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 27; gabarito definitivo B, não anulada; legível. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão compara o sombreamento constante, que atribui uma única cor a cada face do poliedro, com o modelo de Phong, que calcula a iluminação em cada ponto a partir de normais interpoladas e inclui o componente especular.\n\nI é verdadeira: no sombreamento constante há saltos de intensidade entre faces vizinhas, e a visão humana exagera esses contrastes nas fronteiras, efeito chamado bandas de Mach (visível na cabeça da esquerda). III é verdadeira: como cada face tem cor uniforme, a malha de polígonos fica evidente (aspecto facetado), o que impede o realismo em superfícies curvas.\n\nII é falsa: Phong é justamente o modelo que reproduz bem os brilhos especulares, como o realce visto na cabeça da direita; sua desvantagem é o custo computacional maior, não a fidelidade dos reflexos. IV é falsa: o modelo de Phong funciona com fontes de luz pontuais a distância finita; supor a luz no infinito é apenas uma simplificação opcional, que torna o vetor de luz constante. Portanto, só I e III estão corretas: alternativa B.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q28",
+      "verdict": "APPROVED",
+      "fragments": [
+        "643aaa51ac67f79e825a622b737cfb4fca85d38dbcc0f2554b40680d6f7a6354"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Scrum e princípios do manifesto ágil",
+      "notes": "Recorte único conferido: questão inteira (enunciado, princípios e afirmações I–III e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 28; gabarito definitivo D, não anulada; legível. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão relaciona o Scrum aos princípios do manifesto ágil. O Scrum organiza o trabalho em ciclos curtos, chamados Sprints, conduzidos por um time autogerenciado, com papéis definidos (Product Owner, Scrum Master e time de desenvolvimento) e reuniões regulares.\n\nA afirmação I é verdadeira: cada Sprint entrega um incremento do produto potencialmente utilizável, o que concretiza a entrega incremental. A III é verdadeira: o cliente, representado pelo Product Owner, mantém e prioriza o backlog do produto, e na concepção (planejamento) da Sprint os requisitos são priorizados e negociados com o time, o que materializa o envolvimento do cliente.\n\nA II é falsa: a programação em pares é uma prática do Extreme Programming (XP), não do Scrum, que é um arcabouço de gestão e não prescreve práticas técnicas de engenharia. Estão corretas, assim, apenas I e III: alternativa D. As alternativas A, C e E incluem a II, e a B omite a I.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q29",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8c5c8ec6ecd47f39a327d8a40d54034f6fda4df2ee176a5252e486ee99ac5806"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Substituição de páginas: FIFO e LRU",
+      "notes": "Recorte único conferido: questão inteira (enunciado, sequência de acessos e asserções e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 29; gabarito definitivo E, não anulada; legível. Simulação refeita: FIFO 10 faltas, LRU 8.",
+      "studentNote": "",
+      "explanation": "A questão pede a simulação de dois algoritmos de substituição de páginas com 4 molduras, memória inicialmente vazia e a sequência 1-2-3-4-1-2-5-1-2-3-4-5. FIFO: as quatro primeiras páginas causam faltas (1, 2, 3, 4); 1 e 2 são acertos; 5 expulsa a 1 (falta), 1 expulsa a 2 (falta), 2 expulsa a 3 (falta), 3 expulsa a 4 (falta), 4 expulsa a 5 (falta) e 5 expulsa a 1 (falta). Total: 10 faltas.\n\nLRU: as quatro primeiras páginas causam faltas; 1 e 2 são acertos; 5 expulsa a 3 (a menos recentemente usada, falta); 1 e 2 são acertos; 3 expulsa a 4 (falta); 4 expulsa a 5 (falta); 5 expulsa a 1 (falta). Total: 8 faltas.\n\nOs algoritmos têm desempenhos diferentes (10 contra 8 faltas), então a asserção I é falsa. Como a própria simulação distingue os dois, os parâmetros usados são suficientes para mostrar a diferença de funcionamento, e a asserção II também é falsa. Logo, as duas asserções são falsas: alternativa E.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q30",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d89d05a48922ad1be63306fcf4f86f62897c98c79c6e3de3cc4f597c3af88cef"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Compiladores",
+      "subject": "Análise sintática preditiva LL(1) e ambiguidade",
+      "notes": "Recorte único conferido: questão inteira (enunciado, gramática e tabela LL(1) e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 30; gabarito definitivo B, não anulada; legível. Explicação conferida: FOLLOW(Y) contém d e a cadeia aebaebcdc tem duas derivações.",
+      "studentNote": "",
+      "explanation": "A questão cobra a leitura de uma tabela de análise LL(1) e a causa de um conflito. Em um analisador preditivo, cada célula (não terminal, terminal) deve conter no máximo uma produção; duas produções na mesma célula indicam que a gramática não é LL(1).\n\nAqui, Y → dX começa com d, e Y → ε entra na coluna dos símbolos que podem seguir Y. Como Y está no fim de X → aZbXY, tudo que segue X também segue Y; e como X é seguido por Y nessa mesma regra, d também segue X. Logo, ao ver d, não se sabe se o Y consome o d (Y → dX) ou se Y desaparece e o d pertence a um Y mais externo. Isso é uma ambiguidade da gramática: a cadeia aebaebcdc, por exemplo, tem duas derivações, conforme o d seja consumido pelo Y interno ou pelo externo. Daí o não-determinismo: alternativa B.\n\nAs outras falham: o $ é apenas o marcador de fim de cadeia da tabela e não faz parte das regras (A); ε é o uso correto para produção vazia (C); Y → dX também tem o não terminal X no corpo (D); e ter duas regras com a mesma cabeça é normal, já que X também tem duas, sem conflito (E).",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q31",
+      "verdict": "APPROVED",
+      "fragments": [
+        "333768a01386aa3fd38cc71ccfc164705cc842a512980c1c10bd42f4efffdeb0"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Threads e variáveis compartilhadas sem sincronização",
+      "notes": "Recorte único conferido: questão inteira (enunciado, código C completo e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 31; gabarito definitivo E, não anulada; legível. Explicação conferida no modelo de consistência sequencial que ela declara.",
+      "studentNote": "A análise pressupõe que as instruções de cada thread executem na ordem do código (consistência sequencial). Em compiladores e processadores reais, sem variáveis atômicas ou barreiras de memória, escritas e leituras podem ser reordenadas, e o comportamento deste programa não é garantido.",
+      "explanation": "A questão trata de concorrência: duas threads acessam variáveis compartilhadas sem exclusão mútua, então o resultado depende do intercalamento das instruções. Considera-se o modelo usual, em que as instruções de cada thread executam em ordem e o intercalamento entre elas é arbitrário.\n\nCada thread primeiro escreve a sua variável (x = 1 ou y = 1) e só depois testa a variável da outra. Para que os dois valores fossem impressos, funcao1 teria de testar y antes de funcao2 escrever y, e funcao2 teria de testar x antes de funcao1 escrever x. Mas, em funcao1, a escrita de x precede o teste de y, e, em funcao2, a escrita de y precede o teste de x: as ordens exigidas formariam um ciclo, impossível. Logo, nunca se imprimem ambos (A é falsa).\n\nOs outros casos são possíveis: se funcao1 executa inteira antes, imprime \"1\"; se funcao2 executa inteira antes, imprime \"2\"; se ambas escrevem antes de qualquer teste, nada é impresso. Por isso B e C (resultado fixo) e D (que ignora o caso sem impressão) estão erradas. A alternativa E é a correta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q32",
+      "verdict": "APPROVED",
+      "fragments": [
+        "063d4fdf08f79db0d1c55ef83f45991e79057c1a03ae8e302c4e37383cef4bef"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Agentes inteligentes e Mundo do Aspirador de Pó",
+      "notes": "Recorte único conferido: questão inteira (enunciado, figura e lista de operações e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 32; gabarito definitivo B, não anulada; legível. Explicação conferida (2 × 2² = 8 estados).",
+      "studentNote": "",
+      "explanation": "A questão cobra conceitos básicos de agentes inteligentes, ilustrados pelo Mundo do Aspirador de Pó. Um agente percebe o ambiente por sensores e age sobre ele por atuadores. A sequência percebida é o histórico completo de tudo o que o agente percebeu até o momento, e o comportamento do agente é descrito pela função de agente, que mapeia sequências percebidas em ações. É o que diz a alternativa B, a correta.\n\nAs demais falham. A: o estado combina a posição do agente (2 ambientes) com a situação de sujeira de cada ambiente (2 × 2 possibilidades), o que dá 2 × 2² = 8 estados, não 2² = 4; a conta da alternativa ignora a localização do agente. C: a sequência percebida é o histórico das percepções, não dos resultados das ações. D: a percepção é a entrada recebida pelos sensores em um instante (aqui, localização e presença de sujeira), não o resultado das ações do agente. E: \"fazer nada\" é uma ação possível, não uma percepção.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q33",
+      "verdict": "APPROVED",
+      "fragments": [
+        "9cf0c7e0733272d30e3dd32001100e102e8a13aa834f9ae74339ae9b83bb5915"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Recorrências e complexidade de funções recursivas",
+      "notes": "Recorte único conferido: questão inteira (enunciado, código numerado e afirmações I–III e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 33; gabarito definitivo D, não anulada; legível. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a análise de uma função recursiva por meio de recorrências. Em F, o laço chama G n vezes (i de 0 a n−1) e depois há uma única chamada recursiva com n/2. I é falsa: a recorrência do mergesort é T(n) = 2T(n/2) + Θ(n), com duas chamadas recursivas sobre metades da entrada; F faz apenas uma chamada, então a recorrência é outra.\n\nII é verdadeira: como n é dividido por 2 a cada chamada até chegar a 0 (divisão inteira), ocorrem cerca de log₂ n + 1 chamadas recursivas, ou seja, Θ(log n).\n\nIII é verdadeira: G é chamada n + n/2 + n/4 + ... vezes, soma menor que 2n, portanto O(n). Como todo O(n) também é O(n log n), a afirmação está correta, já que a notação O indica apenas um limite superior, ainda que não seja o mais justo. Logo, só II e III estão corretas: alternativa D. As alternativas A, C e E incluem a I; B omite a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q34",
+      "verdict": "APPROVED",
+      "fragments": [
+        "0ecfd9a967aafe788bfcc5cecf37d71eb148e5ccfa687c15211e7f5a26507745"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Banco de dados",
+      "subject": "Normalização: 1FN, 2FN e 3FN",
+      "notes": "Recorte único conferido: questão inteira (enunciado, tabela e afirmações I–IV e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 34; gabarito definitivo A, não anulada; legível. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra normalização. A 1FN exige atributos atômicos, sem vários valores em uma mesma célula; a 2FN exige a 1FN e que nenhum atributo não chave dependa de parte da chave; a 3FN exige a 2FN e a ausência de dependências transitivas entre atributos não chave.\n\nI é verdadeira: FoneEleitor guarda dois telefones por eleitor na mesma linha, o que viola a 1FN. Como cada forma normal pressupõe a anterior, a tabela também não atende à 2FN nem à 3FN.\n\nII é falsa: separar Partido e Candidato não resolve o atributo multivalorado FoneEleitor, que permanece na tabela restante, a qual continua fora da 1FN e, portanto, da 2FN. III é falsa: Voto mantém dependências transitivas (Numero determina Sigla, e Sigla determina NomePartido; analogamente, NumCand determina NomeCand), o que viola a 3FN; além disso, o problema do telefone persiste em Eleitor. IV é falsa: Numero é um valor único por linha, então identifica a linha e todos os demais atributos dependem funcionalmente dele, inclusive Sigla, NomePartido, NumCand e NomeCand. Apenas I está correta: alternativa A.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q35",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3af1bcb4a512cc6377201d8a559e34b842d7c8c18dd64e7dea838ca03779e940"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Deadlock e ordem de aquisição de semáforos",
+      "notes": "Recorte único conferido: questão inteira (enunciado, tabela T1/T2 e cinco alternativas A–E), sem trecho de outra questão nem instrução de bloco; número impresso 35; gabarito definitivo E, não anulada; legível. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão trata de deadlock em threads que disputam dois recursos protegidos por semáforos. T1 pede E1 e depois E2; T2 pede E2 e depois E1. Se T1 obtiver E1 e T2 obtiver E2 antes de qualquer uma pedir o segundo recurso, T1 ficará esperando E2 (com T2) e T2 esperará E1 (com T1): há espera circular, uma das condições do deadlock, e nenhuma avança. Portanto o deadlock é possível, dependendo do escalonamento.\n\nUma forma clássica de prevenção é impor uma ordem global de aquisição: se ambas as threads pedirem E1 antes de E2, a espera circular não pode se formar. Essa é a alternativa E.\n\nAs outras falham. A afirma que a sequência impede o problema, mas são as ordens opostas que o permitem. B propõe retirar os cálculos entre os pedidos, o que só diminui a janela de tempo do problema, sem eliminá-lo. C minimiza o efeito, mas um deadlock deixa as threads bloqueadas para sempre, comprometendo o programa. D diz que usar semáforos basta, mas são justamente semáforos usados em ordem inconsistente que produzem o bloqueio.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ]
+}

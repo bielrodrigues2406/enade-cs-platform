@@ -1,0 +1,299 @@
+{
+  "document": "enade-2017-bacharelado-exam",
+  "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+  "cropsManifestSha256": "be360acd25ba775c5a40a3f7b32b4170ea353b8dd99ec31c6dfe96409b13546b",
+  "extractor": "claude",
+  "explainer": "claude-explain-03",
+  "reviewer": "claude-review-03",
+  "reviewedAt": "2026-10-30T22:37:25Z",
+  "items": [
+    {
+      "key": "Q1",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d98636266834391909de18774f8d548f7c410b2d86bee3b2a83cae51cc6c88a1"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Interpretação de gráficos e porcentagens",
+      "notes": "Recorte da p. 5 com número 01, texto, dois gráficos com rótulos e valores legíveis, fonte e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Cálculos da explicação refeitos (soma 144,9; 4,4/11,3 = 38,94%).",
+      "studentNote": "",
+      "explanation": "A questão cobra leitura de gráficos e cálculo de porcentagens. O total das contribuições à UE em 2014 é 144,9 bilhões de euros, e o segundo gráfico mostra que o Reino Unido contribuiu com 11,3 e recebeu 6,9 bilhões.\n\nA alternativa C está correta: a diferença entre o que o Reino Unido contribuiu e o que recebeu é 11,3 - 6,9 = 4,4 bilhões, e 4,4 / 11,3 é cerca de 38,94% da contribuição.\n\nAs demais falham. Em A, 25,8 + 19,5 + 14,3 = 59,6 bilhões, que dividido por 144,9 dá 41,13%; esse valor, porém, é o dos três maiores países, pois com o quarto (Reino Unido, 11,3) a soma chega a 70,9, cerca de 48,9%. Em B, 42,1 é valor em bilhões de euros, não percentual; equivale a cerca de 29% do total. Em D, os três maiores países somam 41,13%, abaixo de 50%. Em E, 11,3 / 144,9 é cerca de 7,8%, e não 17,8%.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q2",
+      "verdict": "APPROVED",
+      "fragments": [
+        "e915b2af015a6e474a17c43679e03abf0f2a1b24441807c8d7a893c14d2b8731"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Agricultura familiar e sustentabilidade",
+      "notes": "Recorte da p. 6 com número 02, texto da FAO, afirmações I–III e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível. Rótulo \"Área livre\" da página aparece no rodapé, sem conteúdo de outra questão nem instrução de bloco.",
+      "studentNote": "",
+      "explanation": "A questão pede avaliar afirmações a partir de um texto segundo o qual a agricultura familiar produz cerca de 80% dos alimentos do mundo, guarda cerca de 75% dos recursos agrícolas e é fundamental para a sustentabilidade ecológica.\n\nA afirmativa I é correta: segurança alimentar, sustentabilidade ambiental e capacidade produtiva são desafios coerentes com o papel que o texto atribui ao setor. A II também é correta: políticas públicas que fomentem a inovação, respeitando o tamanho das propriedades, as tecnologias, a integração de mercados e as configurações ecológicas, são compatíveis com a importância da agricultura familiar descrita.\n\nA III é incorreta: a agricultura familiar se caracteriza pelo trabalho predominantemente da própria família, e não pela contratação majoritária de mão de obra assalariada; afirmar o contrário contradiz o próprio conceito. Assim, apenas I e II são corretas, alternativa C. A alternativa A omite a II; B, D e E incluem a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q3",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a559074fb64219a8f229755c407a125006182b3b385ff39c749fb946f7242914"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Cálculo de consumo e tarifa de energia elétrica",
+      "notes": "Recorte da p. 7 com número 03, texto das bandeiras, tabela completa, afirmações I–III e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Cálculos refeitos (52,5 e 67,5 kWh; 10,8 kWh; 7,8 kWh).",
+      "studentNote": "Na afirmação I, a expressão \"valor mensal da tarifa\" é imprecisa: o valor de R$ 1,05 corresponde ao acréscimo da bandeira amarela sobre o consumo do chuveiro de 3 500 W, e não ao custo mensal total.",
+      "explanation": "A questão exige calcular consumo e custo mensal com a tabela, em 30 dias, com tarifa de R$ 0,50 por kWh na bandeira verde, acréscimo de R$ 0,020 por kWh na amarela e de R$ 0,035 na vermelha.\n\nIII é correta: a lâmpada incandescente consome 0,300 kWh por dia e a de LED, 0,040; a diferença de 0,260 kWh por dia, em 30 dias, dá 7,8 kWh, e 7,8 x 0,50 = R$ 3,90.\n\nI é incorreta: o chuveiro de 3 500 W consome 1,750 x 30 = 52,5 kWh por mês e o de 5 500 W, 2,250 x 30 = 67,5 kWh. O acréscimo da bandeira amarela é 52,5 x 0,020 = R$ 1,05 para o primeiro, mas 67,5 x 0,020 = R$ 1,35 para o segundo, e não R$ 1,65. II é incorreta: carregador e modem em stand-by somam 0,240 + 0,120 = 0,360 kWh por dia, ou 10,8 kWh por mês. Na bandeira verde dá R$ 5,40, correto, mas na amarela (R$ 0,52 por kWh) dá cerca de R$ 5,62, e não R$ 5,78, valor que corresponderia à bandeira vermelha. Logo, só a III é correta: alternativa B.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q4",
+      "verdict": "APPROVED",
+      "fragments": [
+        "960c76019f2cb61d3da01f48a7e70fe68a33ffc11860c6ba875a5b8d7446f6be"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Televisão, fragmentação e excesso de informação",
+      "notes": "Recorte da p. 8 com número 04, tirinha completa (quatro quadros legíveis), texto 2 e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Rótulo \"Área livre\" da página aparece no rodapé, sem conteúdo de outra questão nem instrução de bloco.",
+      "studentNote": "",
+      "explanation": "A questão cobra interpretação de texto verbal e não verbal. A tirinha ironiza o curto período de atenção da televisão (seis pensamentos por minuto), e o texto 2 descreve um contínuo de imagens em que programas diferentes se confundem, numa sequência cada vez mais vertiginosa.\n\nA alternativa B sintetiza essas ideias: o tempo de recepção típico da televisão estimula a fragmentação e o excesso de informação, em um mundo contemporâneo cada vez mais impregnado de imagens e informações superficiais.\n\nAs outras contradizem os textos. A supõe contemplação e reflexão, mas a sequência vertiginosa de imagens dificulta isso. C fala em especialização do conhecimento e valorização da diferença cultural, tema ausente dos textos. D afirma atenção concentrada em um assunto, o oposto do que a tirinha ironiza. E atribui reflexão crítica à justaposição de assuntos, quando o texto 2 destaca justamente a mistura sem distinção entre programas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q5",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7ee6df20ca8b6dd81e630768f28734e2c8f7718b45883d5f7584d71a193509f4"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Hidrogéis e uso agrícola da água",
+      "notes": "Recorte da p. 9 com número 05, texto, infográfico com legendas legíveis e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Rótulo \"Área livre\" da página aparece no rodapé, sem conteúdo de outra questão nem instrução de bloco.",
+      "studentNote": "",
+      "explanation": "A questão cobra interpretação de infográfico: extrair do texto e da figura o que se afirma sobre hidrogéis, sem extrapolar.\n\nA alternativa C está correta: o infográfico informa que, no Brasil, a tecnologia é usada principalmente em florestas de eucalipto e que estudos comprovaram sua viabilidade na cafeicultura, ou seja, em culturas florestais e agrícolas; informa também que o hidrogel permite cultivo em regiões áridas e reduz a frequência de irrigação em lavouras irrigadas, isto é, serve a diferentes condições de solo.\n\nAs demais falham. A inverte a informação: o hidrogel diminui a chance de as mudas morrerem na estiagem. B restringe o uso a solos áridos, mas o infográfico também cita lavouras irrigadas. D é contrariada pelo texto, segundo o qual os polímeros naturais são viáveis ecologicamente, mas ainda não comercialmente. E exagera: o polímero precisa ser hidratado pela chuva ou pela irrigação e apenas libera a água aos poucos, reduzindo a frequência de irrigação, sem eliminá-la.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q6",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7603809b20c964551731a163b4be5ff60f32ad26e9637a981e162b2ee921b500"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Imigração haitiana e xenofobia no Brasil",
+      "notes": "Recorte da p. 10 com número 06, texto de quatro parágrafos com fonte e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível. Rótulo \"Área livre\" da página aparece no rodapé, sem conteúdo de outra questão nem instrução de bloco.",
+      "studentNote": "",
+      "explanation": "A questão cobra interpretação de texto sobre a imigração haitiana e a xenofobia no Brasil. O texto afirma que os imigrantes sofrem ataques xenofóbicos e que quem sofre a violência, em geral, é negro e vem de países mais pobres.\n\nA alternativa E é a conclusão que decorre disso: a rejeição aos haitianos é pautada pela discriminação social (origem em países pobres) e pelo racismo (pessoas negras).\n\nAs demais não se sustentam no texto. A afirma que o acolhimento é marcado por solidariedade e respeito às diferenças, o que contraria os ataques e o discurso de ódio descritos. B atribui a xenofobia à concorrência por empregos de prestígio, causa que o texto não menciona. C supõe acolhimento semelhante a imigrantes do leste europeu por causa da democracia racial, mas o texto indica que o alvo são pessoas negras de países pobres, o que sugere tratamento diferente. D fala em nacionalismo de classes favorecidas e em perseguição a brasileiros que emigram, ideias que não aparecem no texto.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q7",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d84097bcd42b91601a9ba66f63c2ca9aa79affe1caa7105a284d81e4252d167b"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Patrimônio cultural: panela de barro capixaba",
+      "notes": "Recorte da p. 11 com número 07, três textos com fontes e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível.",
+      "studentNote": "",
+      "explanation": "A questão cobra interpretação de textos sobre a panela de barro capixaba como patrimônio cultural, examinando o que eles dizem sobre natureza, tradição, mercado e reconhecimento oficial.\n\nA alternativa A está correta: os textos dizem que as artesãs retiram a argila do Vale do Mulembá e do manguezal e a casca do mangue vermelho para a tintura impermeabilizante, ou seja, a produção depende de matéria-prima extraída da natureza local.\n\nAs outras extrapolam ou contradizem os textos. B diz que a relação com o prato típico permanece inalterada, mas o terceiro texto descreve profissionalização, concorrência e ritmo empresarial, indicando mudanças. C afirma retornos positivos para toda a comunidade, porém as paneleiras de fundo de quintal se queixam de ter ficado ofuscadas comercialmente. D diz que o mercado turístico reduz o ofício à dimensão econômica, algo que os textos não afirmam. E atribui a resistência sociocultural ao distanciamento do poder público, relação que os textos não estabelecem; ao contrário, o ofício foi registrado no Iphan e declarado patrimônio cultural do Brasil.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q8",
+      "verdict": "APPROVED",
+      "fragments": [
+        "899b38de7ae4056cf74c3b6d75835c566c35c931d7f0d6ed011e35ffa16e9407"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Objetivos de Desenvolvimento Sustentável (ODS)",
+      "notes": "Recorte único da p. 12 com número 08, figura dos ODS, afirmações I–III e alternativas A–E; página original renderizada: o título \"COMPONENTE ESPECÍFICO\" que gerou o alerta está só na transcrição, fora do recorte. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra relacionar os Objetivos de Desenvolvimento Sustentável (ODS) a ações que integram economia, sociedade e biosfera, avaliando cada afirmativa.\n\nI é correta: capacitar o capital humano para pesquisa e inovação em áreas estratégicas conecta educação de qualidade (ODS 4) e indústria, inovação e infraestrutura (ODS 9), presentes na figura. III também é correta: incentivar o empreendedorismo e atividades produtivas com geração de empregos que garantam a dignidade humana corresponde ao ODS 8, emprego digno e crescimento econômico.\n\nII é incorreta: a difusão do conhecimento científico e tecnológico entre as nações não exige padronização cultural, e a agenda enfatiza parcerias e redução das desigualdades (ODS 10 e 17), não a homogeneização de culturas. Assim, são corretas I e III, alternativa D. As alternativas A, C e E incluem a II, e B omite a I.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q9",
+      "verdict": "APPROVED",
+      "fragments": [
+        "713e2a61c583eb9932c324289bf23b9cb0d812e493dc64b47f7018b58fe8b0bc"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Árvores AVL: rotação após inserção",
+      "notes": "Recorte da p. 16 com número 09, texto, árvore inicial e as cinco árvores A–E com vínculos legíveis. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Inserção e rotação refeitas: resultado coincide com a árvore da letra oficial.",
+      "studentNote": "Mais de uma alternativa mostra uma árvore AVL válida contendo o valor 3. A questão pede a configuração obtida pelo procedimento descrito no texto, em que o rebalanceamento é feito no nó desbalanceado de nível mais baixo.",
+      "explanation": "A questão cobra a inserção em árvore AVL: após inserir, localiza-se o nó desbalanceado mais baixo e aplica-se rotação simples ou dupla.\n\nO valor 3 desce por 13, 10, 5 e 4 e vira filho esquerdo de 4. A subárvore de 5 passa a ter altura 3, e o nó 10 fica com subárvore esquerda de altura 3 e direita (apenas o 11) de altura 1, diferença 2. O caso é esquerda-esquerda, corrigido por rotação simples à direita em 10: o 5 sobe, o 10 vira seu filho direito e o antigo filho direito de 5 (o 8) passa a filho esquerdo de 10. A raiz continua 13, que segue balanceada. O resultado é a árvore da alternativa A.\n\nAs outras falham. B apenas insere o 3 sem rebalancear, e a árvore deixa de ser AVL. C e E colocam o 11 na subárvore esquerda da raiz 10, violando a ordem de busca. D é balanceada, mas põe o 10 na raiz e exigiria rotacionar o 13, que não estava desbalanceado; o procedimento do texto corrige apenas o nó 10.",
+      "explanationCheck": "REJECTED",
+      "explanationNote": "Erro técnico na análise da D: afirma que o nó 13 \"não estava desbalanceado\", mas após inserir 3 a subárvore esquerda de 13 tem altura 4 (caminho 10-5-4-3) e a direita altura 2 (15, 16), diferença 2. O motivo correto é que o procedimento corrige o nó desbalanceado mais baixo (10), o que já rebalanceia 13; D resultaria de rotacionar a raiz."
+    },
+    {
+      "key": "Q10",
+      "verdict": "APPROVED",
+      "fragments": [
+        "83e4df1b41bc3e1c475c6b41106aaba015cafd5e316f36561798091a77cd2562"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Padrão de projeto Observer",
+      "notes": "Recorte da coluna esquerda da p. 17 com número 10, requisito, asserções I/II com PORQUE e alternativas A–E; Q11 fora. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Rótulo \"Área livre\" da página aparece no rodapé, sem conteúdo de outra questão nem instrução de bloco.",
+      "studentNote": "",
+      "explanation": "A questão cobra o padrão de projeto Observer e a diferença entre padrão de projeto e estilo arquitetural. O requisito descreve vários dispositivos que devem ser notificados quando o status de um pedido muda, com a possibilidade de incluir novos sistemas no futuro, que devem se comportar da mesma forma.\n\nA asserção I é verdadeira: o Observer define uma dependência de um para muitos, em que o objeto observado (sujeito) notifica automaticamente seus observadores quando seu estado muda, e novos observadores podem ser registrados sem alterar o sujeito, o que atende ao requisito.\n\nA asserção II é falsa: o Observer é um padrão de projeto comportamental, aplicado à colaboração entre objetos, e não realiza nem equivale ao estilo arquitetural cliente-servidor, em que clientes enviam requisições a um servidor que responde. O Observer pode ser usado dentro de um único programa, sem rede nem servidor. Assim, a alternativa C está certa. A e B tomam a II como verdadeira, D inverte os valores de verdade e E nega a I.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q11",
+      "verdict": "APPROVED",
+      "fragments": [
+        "40735a7a5e8434fa72b7922fdd1ae0a289850286b41e1afd8f90207ed690e641"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Encapsulamento e modificadores de visibilidade",
+      "notes": "Recorte da coluna direita da p. 17 com número 11, texto e alternativas A–E; Q10 fora. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível. Rótulo \"Área livre\" da página aparece no rodapé, sem conteúdo de outra questão nem instrução de bloco.",
+      "studentNote": "",
+      "explanation": "A questão cobra os modificadores de visibilidade da programação orientada a objetos: privado, protegido e público. Privado limita o acesso à própria classe; protegido permite o acesso na classe e em suas classes descendentes; público permite o acesso por qualquer código.\n\nA alternativa E está correta: um membro protegido é visível na classe em que é declarado e em suas classes descendentes.\n\nAs demais falham. Em A e B, a segunda parte afirma que métodos de classes descendentes (protegidos ou públicos) acessam diretamente o atributo privado da classe-base, o que o modificador privado impede; a descendente só chega a ele por métodos públicos ou protegidos da classe-base. C erra ao dizer que o membro público não é visível nas descendentes: ele é visível em qualquer lugar, inclusive nelas. D erra ao afirmar que um método protegido não acessa atributos privados da própria classe: dentro da classe que os declara, qualquer método, seja qual for sua visibilidade, acessa seus atributos privados.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q12",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8726cc8c5e5d651ef759616d7bfb6f8fe54232792b3725ae1d63dae1d2dce73d"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Memória de acesso aleatório: endereços e células",
+      "notes": "Recorte da p. 18 com número 12, texto, figura da memória (2^N-1, N bits legíveis), afirmações I–III e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra o funcionamento da memória de acesso aleatório: endereços, células de tamanho fixo e registradores de endereços e de dados. Cada acesso busca ou grava o conteúdo completo de uma célula, então a largura do registrador de dados é a largura da célula.\n\nA afirmativa I é correta: um registrador de endereços de 8 bits distingue 2^8 = 256 endereços, logo a memória tem no máximo 256 células. A II é correta: o valor 2 024 está entre 2^10 = 1 024 e 2^11 = 2 048, portanto precisa de 11 bits. Com registrador de dados de 8 bits, cada operação transfere uma célula de 8 bits, e são necessárias pelo menos duas operações.\n\nA III é incorreta: se o registrador de dados tem 12 bits, a célula tem 12 bits, e a largura da memória não pode ser de 8 bits, pois um acesso sempre lê ou grava a célula inteira. Portanto I e II estão certas e III está errada: alternativa C. A alternativa A omite a II; B, D e E incluem a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q13",
+      "verdict": "APPROVED",
+      "fragments": [
+        "52379f595f8cddc311aae58de7460e746b436d04da8f6da0309cb68153db936b"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Circuitos lógicos e diagrama de tempo",
+      "notes": "Recorte da p. 19 com número 13, texto, diagrama de tempo t1–t8, circuito AND/OR e alternativas A–E com índices legíveis. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Níveis de Ta, Tb e Tc relidos na imagem e conferidos com a explicação.",
+      "studentNote": "",
+      "explanation": "A questão cobra a análise de um circuito lógico combinacional com diagrama de tempo. No circuito, uma porta AND recebe Ta e Tb, outra recebe Tb e Tc, e uma porta OR combina as duas saídas: S = Ta.Tb + Tb.Tc, ou S = Tb.(Ta + Tc). O sistema é acionado quando S vale 1.\n\nLendo o diagrama (1 = nível alto) em cada instante, com Ta, Tb, Tc: t1 = 0,1,1 e S = 1; t2 = 1,0,0 e S = 0; t3 = 1,0,1 e S = 0; t4 = 0,1,0 e S = 0; t5 = 0,0,1 e S = 0; t6 = 1,1,1 e S = 1; t7 = 0,0,0 e S = 0; t8 = 1,1,0 e S = 1.\n\nO sistema é acionado em t1, t6 e t8: alternativa B. A inclui t4, em que Tb vale 1, mas Ta e Tc valem 0. C e D incluem t2, em que Tb vale 0, e C ainda inclui t4. E reúne só instantes em que Tb vale 0 (t3, t5 e t7), nos quais as duas portas AND dão 0.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q14",
+      "verdict": "APPROVED",
+      "fragments": [
+        "691510e995e8e3151d8a2b9c9318a8036ffd4faa6d4e816aa7ee81ce58d2475d"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Relações de equivalência",
+      "notes": "Recorte da p. 19 com número 14, definição, R1–R4 com símbolos legíveis e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra o conceito de relação de equivalência: relação binária reflexiva, simétrica e transitiva. Basta testar as três propriedades em cada relação.\n\nR1 (a = b) é a igualdade, que é reflexiva, simétrica e transitiva; é de equivalência. R2 (a <= b) é reflexiva e transitiva, mas não é simétrica: 1 <= 2, porém 2 não é menor ou igual a 1. R3 (a = b - 1) não é reflexiva, pois a = a - 1 nunca vale, e também não é simétrica: se a = b - 1, então b = a + 1, e não b = a - 1. Logo, R2 e R3 não são de equivalência.\n\nR4 (a + b é par) é reflexiva, pois a + a = 2a é par; é simétrica, pois a + b = b + a; e é transitiva: se a + b e b + c são pares, então a, b e c têm a mesma paridade, e a + c é par. É de equivalência. Portanto, apenas R1 e R4 são equivalências: alternativa C. As demais incluem R2 ou R3, que falham em alguma propriedade.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q15",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7390a60a010fa0a117e1473769704a6854306c620239cac09e0e7ff548b04c78"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Segurança",
+      "subject": "Ataque homem no meio e segurança em Wi-Fi",
+      "notes": "Recorte da coluna esquerda da p. 20 com número 15, texto, afirmações I–IV e alternativas A–E; Q16 fora. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Ressalva de conteúdo da II registrada em studentNote.",
+      "studentNote": "A afirmação II é discutível: isolar o tráfego entre clientes no ponto de acesso é uma mitigação conhecida contra ARP spoofing, embora não corrija as deficiências de projeto do 802.11 citadas no texto.",
+      "explanation": "A questão trata da segurança de redes Wi-Fi 802.11 e das deficiências de projeto exploradas pelo ataque do homem no meio via ARP spoofing: chave compartilhada, falta de autenticação do ponto de acesso (AP) e chaves curtas.\n\nI é correta: um protocolo de chave pública, como o TLS/SSL, permite negociar chaves individuais e elimina o problema da chave compartilhada. III é correta: obrigar o AP a apresentar um certificado, verificável com uma chave pública obtida de terceiros, autentica o AP e dificulta que o intruso se passe por ele. IV é correta: chaves de 40 ou 64 bits são vulneráveis à força bruta, e um AP com chaves de 128 bits, limitado a dispositivos compatíveis, reduz esse risco.\n\nPelo gabarito oficial, a II é incorreta: um firewall no AP que filtra tráfego entre clientes não corrige as deficiências de projeto citadas (chave compartilhada, AP sem autenticação, chaves fracas). Logo, I, III e IV: alternativa D. A, C e E incluem a II, e B omite a IV.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q16",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c1721a9e8933a309f3bfca12afecb58a4af77bac6a2535a321d28d2f62f4392b"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Segurança",
+      "subject": "Segurança da informação: engenharia social e ética",
+      "notes": "Recorte da coluna direita da p. 20 com número 16, três textos, afirmações I–III e alternativas A–E; Q15 fora. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Ressalva do terceiro texto registrada em studentNote.",
+      "studentNote": "O terceiro texto menciona \"essas duas perspectivas\", mas a adaptação apresenta apenas a ética normativa. Isso não impede avaliar as afirmações.",
+      "explanation": "A questão cobra conceitos de segurança da informação, engenharia social e ética profissional. Os textos associam a engenharia social à exploração do comportamento humano e destacam o aspecto psicológico desses ataques.\n\nI é correta: como a engenharia social explora a tendência humana a ignorar os sistemas de segurança, o fator humano é considerado o elo mais fraco, o que mantém as empresas vulneráveis por mais tecnologia que adotem. II é correta: segurança da informação não é um produto que se compra e instala, mas um processo contínuo de gestão, políticas, treinamento e revisão, voltado a proteger confidencialidade, integridade, disponibilidade e autenticidade. III é correta: a ética, com seu julgamento sobre o certo e o errado, orienta a conduta de quem lida com informações sensíveis e com dilemas morais, sendo fator relevante na segurança.\n\nComo as três afirmativas são corretas, a resposta é a alternativa E. A, B, C e D falham por excluir ao menos uma afirmativa verdadeira.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q17",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7049ad8cdba096f28c2755f217165e462cd0dbcbe297a3f55b4a48b496d5ec7a"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "IA adaptativa na educação",
+      "notes": "Recorte da coluna esquerda da p. 21 com número 17, texto, asserções I/II com PORQUE e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Rótulo \"Área livre\" da página aparece no rodapé, sem conteúdo de outra questão nem instrução de bloco.",
+      "studentNote": "",
+      "explanation": "A questão cobra o conceito de algoritmos de IA adaptativos aplicados à educação e a relação entre duas asserções.\n\nA asserção I é verdadeira: sistemas adaptativos ajustam conteúdo, ritmo e atividades ao perfil de cada pessoa, auxiliando sua experiência de aprendizado. A asserção II também é verdadeira: esses algoritmos analisam respostas anteriores em busca de padrões que indiquem pontos de dificuldade ou facilidade em um assunto, o que descreve o mecanismo básico da adaptação a partir de dados de desempenho.\n\nA II justifica a I porque explica como a adaptação ao perfil é possível: sem identificar padrões de acerto e erro, o sistema não teria base para saber quais conteúdos reforçar ou antecipar. Portanto, a alternativa A está correta. B nega a relação de justificativa, que existe. C e D tratam uma das asserções como falsa, mas ambas descrevem práticas reconhecidas de IA na educação. E nega as duas, o que contraria o que se conhece de sistemas adaptativos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q18",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1f19e49f6664754bc82a89a1dd3d8e9b1bbcba037fcd28c5d3164eaa095b2532"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Ordenação por inserção: correção de erros lógicos",
+      "notes": "Recorte da coluna direita da p. 21 com número 18, código das linhas 01–15 e alternativas A–E com trechos de código legíveis. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra o algoritmo de ordenação por inserção e a identificação de erros lógicos. Para cada posição i, guarda-se o elemento em chave, desloca-se uma posição à direita cada elemento anterior maior que a chave e insere-se a chave na posição livre.\n\nHá dois erros. Na linha 08, a condição v[j] < chave faz o deslocamento enquanto os elementos anteriores são menores, o que ordenaria de forma decrescente; para ordem crescente deve ser v[j] > chave. Na linha 10, o deslocamento deve copiar v[j] para a posição à direita, v[j + 1] = v[j]; com v[j - 1] sobrescreve-se o elemento anterior e, para j igual a 0, acessa-se posição inválida do vetor. A linha 13, v[j + 1] = chave, já está correta. Isso corresponde à alternativa D.\n\nAs demais falham. A altera o limite do laço, deixando o último elemento fora, e muda a linha 13, que estava certa. B e C usam j = i + 1, que ultrapassa o vetor. E corrige a linha 10, mas altera a 13, que estava certa, e mantém o sinal errado na 08.",
+      "explanationCheck": "REJECTED",
+      "explanationNote": "Erro técnico na análise da B: afirma que j = i + 1 ultrapassa o vetor, mas em B o laço vai até i < n - 1, então j = i + 1 vale no máximo n - 1, dentro do vetor. B falha porque começa a comparação pelo elemento seguinte à chave e mantém os erros das linhas 08 e 10; só em C (laço até i < n) j = n sai do vetor."
+    }
+  ]
+}
