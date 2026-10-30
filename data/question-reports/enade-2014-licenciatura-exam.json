@@ -1,0 +1,1800 @@
+{
+  "document": "enade-2014-licenciatura-exam",
+  "completeness": {
+    "missing": [],
+    "unexpected": []
+  },
+  "extraction": {
+    "method": "PDF_TEXT",
+    "textCopy": {
+      "schemaVersion": 1,
+      "algorithm": "CALIBRI_TOUNICODE_V1",
+      "generatorSha256": "359a5565d6d229405cec9a38de68b0f9d12234a4dc625c4a8c5904435c9233ab",
+      "pypdfVersion": "6.10.0",
+      "derivedFrom": {
+        "file": "enade-2014-licenciatura-exam.pdf",
+        "sha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85"
+      },
+      "map": {
+        "file": "calibri-cid-unicode.json",
+        "sha256": "f20d49d5a2c2f9a768d8139f7b37d36a13118744158433c3afce42a1bb5f8f05"
+      },
+      "fixedFonts": [
+        "Calibri-Bold-Identity-H",
+        "Calibri-Identity-H",
+        "Calibri-Italic-Identity-H"
+      ],
+      "output": {
+        "file": "enade-2014-licenciatura-exam.pdf",
+        "sha256": "9582c50cd8abf0db4cc7bfbb3c8abd49b5d427f862b770a99fe50acc182a9609"
+      },
+      "tool": "scripts/repair-calibri-text.py com pypdf 6.10.0",
+      "purpose": "Somente extração de texto; imagem e procedência vêm do PDF original."
+    }
+  },
+  "warnings": [
+    "Texto extraído de cópia Unicode gerada localmente; imagem, páginas e procedência pertencem ao PDF original. A cópia e seu recibo não aprovam a fidelidade do item."
+  ],
+  "items": [
+    {
+      "key": "D1",
+      "kind": "DISCURSIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        2
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Os desafios da mobilidade urbana associam-se à necessidade de desenvolvimento urbano sustentável. A ONU define esse desenvolvimento como aquele que assegura qualidade de vida, incluídos os componentes ecológicos, culturais, políticos, institucionais, sociais e econômicos que não comprometam a qualidade de vida das futuras gerações.\nO espaço urbano brasileiro é marcado por inúmeros problemas cotidianos e por várias contradições. Uma das grandes questões em debate diz respeito à mobilidade urbana, uma vez que o momento é de motorização dos deslocamentos da população, por meio de transporte coletivo e individual.\nConsidere os dados do seguinte quadro.\nMobilidade urbana em cidade com mais de 500 mil habitantes Modalidade Tipologia Porcentagem (%)\nA pé 15,9 Não motorizado Bicicleta 2,7 nibus municipal 22,2 Motorizado coletivo nibus metropolitano 4,5 Metroferroviário 25,1 Automóvel 27,5 Motorizado individual Motocicleta 2,1 Tendo em vista o texto e o quadro de mobilidade urbana apresentados, redija um texto dissertativo, contemplando os seguintes aspectos:\na) consequências, para o desenvolvimento sustentável, do uso mais frequente do transporte motorizado; (valor: 5,0 pontos)\nb) duas ações de intervenção que contribuam para a consolidação de política pública de incremento ao uso de bicicleta na cidade mencionada, assegurando-se o desenvolvimento sustentável. (valor: 5,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D2",
+      "kind": "DISCURSIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        3
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Três jovens de 19 anos de idade, moradores de rua, foram presos em flagrante, nesta quarta-feira, por terem ateado fogo em um jovem de 17 anos, guardador de carros. O motivo, segundo a 14.a DP, foi uma ’briga por ponto’’. Um motorista deu ’um trocado’’ ao menor, o que irritou os três moradores de rua, que também guardavam carros no local. O menor foi levado ao Hospital das Clínicas (HC) por PMs que passavam pelo local. Segundo o HC, ele teve queimaduras leves no ombro esquerdo, foi medicado e, em seguida, liberado. Os indiciados podem pegar de 12 a 30 anos de prisão, se ficar comprovado que a intenção era matar o menor. Caso contrário, conforme a 14.a DP, os três poderão pegar de um a três anos de cadeia.\nDisponível em: http://www1.folha.uol.com.br . Acesso em: 28 jul. 2013 (adaptado).\nA partir da situação narrada, elabore um texto dissertativo sobre violência urbana, apresentando:\na) análise de duas causas do tipo de violência descrita no texto; (valor: 7,0 pontos)\nb) dois fatores que contribuiriam para se evitar o fato descrito na notícia. (valor: 3,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "Q1",
+      "kind": "OBJECTIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "O trecho da música “Nos Bailes da Vida”, de Milton Nascimento, “todo artista tem de ir aonde o povo está”, é antigo, e a música, de tão tocada, acabou por se tornar um estereótipo de tocadores de violões e de rodas de amigos em Visconde de Mauá, nos anos 1970. Em tempos digitais, porém, ela ficou mais atual do que nunca. É fácil entender o porquê: antigamente, quando a informação se concentrava em centros de exposição, veículos de comunicação, editoras, museus e gravadoras, era preciso passar por uma série de curadores, para garantir a publicação de um artigo ou livro, a gravação de um disco ou a produção de uma exposição. O mesmo funil, que poderia ser injusto e deixar grandes talentos de fora, simplesmente porque não tinham acesso às ferramentas, às pessoas ou às fontes de informação, também servia como filtro de qualidade. Tocar violão ou encenar uma peça de teatro em um grande auditório costumava ter um peso muito maior do que fazê-lo em um bar, um centro cultural ou uma calçada. Nas raras ocasiões em que esse valor se invertia, era justamente porque, para uso do espaço “alternativo”, havia mecanismos de seleção tão ou mais rígidos que os do espaço oficial.\nRADFAHRER, L. Todo artista tem de ir aonde o povo está.Disponível em: http://novo.itaucultural.org.br . Acesso em: 29 jul. 2014 (adaptado).\nA partir do texto acima, avalie as asserções a seguir e a relação proposta entre elas.\nI. O processo de evolução tecnológica da atualidade democratiza a produção e a divulgação de obras artísticas, reduzindo a importância que os centros de exposição tinham nos anos 1970.\nPORQUE\nII. As novas tecnologias possibilitam que artistas sejam independentes, montem seus próprios ambientes de produção e disponibilizem seus trabalhos, de forma simples, para um grande número de pessoas.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q2",
+      "kind": "OBJECTIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Com a globalização da economia social por meio das organizações não governamentais, surgiu uma discussão do conceito de empresa, de sua forma de concepção junto às organizações brasileiras e de suas práticas. Cada vez mais, é necessário combinar as políticas públicas que priorizam modernidade e competividade com o esforço de incorporação dos setores atrasados, mais intensivos de mão de obra.\nDisponível em: http://unpan1.un.org . Acesso em: 4 ago. 2014 (adaptado).\nA respeito dessa temática, avalie as afirmações a seguir.\nI. O terceiro setor é uma mistura dos dois setores econômicos clássicos da sociedade: o público, representado pelo Estado, e o privado, representado pelo empresariado em geral.\nII. É o terceiro setor que viabiliza o acesso da sociedade à educação e ao desenvolvimento de técnicas industriais, econômicas, financeiras, políticas e ambientais.\nIII. A responsabilidade social tem resultado na alteração do perfil corporativo e estratégico das empresas, que têm reformulado a cultura e a filosofia que orientam as ações institucionais.\nEstá correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q3",
+      "kind": "OBJECTIVE",
+      "number": 3,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        5
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "tabela",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Pegada ecológica é um indicador que estima a demanda ou a exigência humana sobre o meio ambiente, considerando-se o nível de atividade para atender ao padrão de consumo atual (com a tecnologia atual). É, de certa forma, uma maneira de medir o fluxo de ativos ambientais de que necessitamos para sustentar nosso padrão de consumo. Esse indicador é medido em hectare global, medida de área equivalente a 10 000 m . Na medida hectare global, são consideradas apenas as áreas produtivas do planeta. A biocapacidade do planeta, indicador que reflete a regeneração (natural) do meio ambiente, é medida também em hectare global. Uma razão entre pegada ecológica e biocapacidade do planeta igual a 1 indica que a exigência humana sobre os recursos do meio ambiente é reposta na sua totalidade pelo planeta, devido à capacidade natural de regeneração. Se for maior que 1, a razão indica que a demanda humana é superior à capacidade do planeta de se recuperar e, se for menor que 1, indica que o planeta se recupera mais rapidamente.\nRazão entre a pegada ecológica e a biocapacidade do planeta 1.60 1.52 1.50 1.45\n1.40\n1.30 1.30 1.27 1.25\n1.20 1.16 1.14 1.10 1.08\n1.00 1.00\n0.90\n0.85 0.80\n0.70 0.74\n0.60\n61 65 70 75 80 85 90 95 00 05 08 19 19 19 19 19 19 19 19 20 20 20\nDisponível em: http://financasfaceis.wordpress.com . Acesso em: 10 ago. 2014.\nO aumento da razão entre pegada ecológica e biocapacidade representado no gráfico evidencia",
+      "options": [
+        {
+          "letter": "A",
+          "text": "redução das áreas de plantio do planeta para valores inferiores a 10 000 m2 devido ao padrão atual de consumo de produtos agrícolas."
+        },
+        {
+          "letter": "B",
+          "text": "aumento gradual da capacidade natural de regeneração do planeta em relação às exigências humanas."
+        },
+        {
+          "letter": "C",
+          "text": "reposição dos recursos naturais pelo planeta em sua totalidade frente às exigências humanas."
+        },
+        {
+          "letter": "D",
+          "text": "incapacidade de regeneração natural do planeta ao longo do período 1961-2008."
+        },
+        {
+          "letter": "E",
+          "text": "tendência a desequilíbrio gradual e contínuo da sustentabilidade do planeta."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q4",
+      "kind": "OBJECTIVE",
+      "number": 4,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Importante website de relacionamento caminha para 700 milhões de usuários. Outro conhecido servidor de microblogging acumula 140 milhões de mensagens ao dia. É como se 75% da população brasileira postasse um comentário a cada 24 horas. Com as redes sociais cada vez mais presentes no dia a dia das pessoas, é inevitável que muita gente encontre nelas uma maneira fácil, rápida e abrangente de se manifestar.\nUma rede social de recrutamento revelou que 92% das empresas americanas já usaram ou planejam usar as redes sociais no processo de contratação. Destas, 60% assumem que bisbilhotam a vida dos candidatos em websites de rede social.\nRealizada por uma agência de recrutamento, uma pesquisa com 2 500 executivos brasileiros mostrou que 44% desclassificariam, no processo de seleção, um candidato por seu comportamento em uma rede social.\nMuitas pessoas já enfrentaram problemas por causa de informações online, tanto no campo pessoal quanto no profissional. Algumas empresas e instituições, inclusive, já adotaram cartilhas de conduta em redes sociais.\nPOLONI, G. O lado perigoso das redes sociais. Revista INFO, p. 70 - 75, julho 2011 (adaptado). De acordo com o texto,",
+      "options": [
+        {
+          "letter": "A",
+          "text": "mais da metade das empresas americanas evita acessar websites de redes sociais de candidatos a emprego."
+        },
+        {
+          "letter": "B",
+          "text": "empresas e instituições estão atentas ao comportamento de seus funcionários em websites de redes sociais."
+        },
+        {
+          "letter": "C",
+          "text": "a complexidade dos procedimentos de rastreio e monitoramento de uma rede social impede que as empresas tenham acesso ao perfil de seus funcionários."
+        },
+        {
+          "letter": "D",
+          "text": "as cartilhas de conduta adotadas nas empresas proíbem o uso de redes sociais pelos funcionários, em vez de recomendar mudanças de comportamento."
+        },
+        {
+          "letter": "E",
+          "text": "a maioria dos executivos brasileiros utilizaria informações obtidas em websites de redes sociais, para desclassificar um candidato em processo de seleção."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q5",
+      "kind": "OBJECTIVE",
+      "number": 5,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Uma ideia e um aparelho simples devem, em breve, ajudar a salvar vidas de recém-nascidos. Idealizado pelo mecânico argentino Jorge Odón, o dispositivo que leva seu sobrenome desentala um bebê preso no canal vaginal e, por mais inusitado que pareça, foi criado com base em técnica usada para remover rolhas de dentro de garrafas. O aparelho consiste em uma bolsa plástica inserida em uma proteção feita do mesmo material e que envolve a cabeça da criança. Estando o dispositivo devidamente posicionado, a bolsa é inflada para aderir à cabeça do bebê e ser puxada aos poucos, de forma a não machucá- lo. O método de Odón deve substituir outros já arcaicos, como o de fórceps e o de tubos de sucção, os quais, se usados por mãos maltreinadas, podem comprometer a vida do bebê, o que, segundo especialistas, não deve acontecer com o novo equipamento.\nSegundo o The New York Times, a ideia recebeu apoio da Organização Mundial de Saúde (OMS) e já foi até licenciada por uma empresa norte-americana de tecnologia médica. Não se sabe quando o equipamento começará a ser produzido nem o preço a ser cobrado, mas presume-se que ele não passará de 50 dólares, com redução do preço em países mais pobres.\nGUSMÃO, G. Aparelho deve facilitar partos em situações de emergência. Disponível em: http://exame.abril.com.br . Acesso em: 18 nov. 2013 (adaptado). Com relação ao texto acima, avalie as afirmações a seguir.\nI. A utilização do método de Odón poderá reduzir a taxa de mortalidade de crianças ao nascer, mesmo em países pobres.\nII. Por ser uma variante dos tubos de sucção, o aparelho desenvolvido por Odón é resultado de aperfeiçoamento de equipamentos de parto.\nIII. Por seu uso simples, o dispositivo de don tem grande potencial de ser usado em países onde o parto é usualmente realizado por parteiras.\nIV. A possibilidade de, em países mais pobres, reduzir-se o preço do aparelho idealizado por Odón evidencia preocupação com a responsabilidade social.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q6",
+      "kind": "OBJECTIVE",
+      "number": 6,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        7
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "As mulheres frequentam mais os bancos escolares que os homens, dividem seu tempo entre o trabalho e os cuidados com a casa, geram renda familiar, porém continuam ganhando menos e trabalhando mais que os homens.\nAs políticas de benefícios implementadas por empresas preocupadas em facilitar a vida das funcionárias que têm criança pequena em casa já estão chegando ao Brasil. Acordos de horários flexíveis, programas como auxílio-creche, auxílio-babá e auxílio-amamentação são alguns dos benefícios oferecidos.\nDisponível em: http://www1.folha.uol.com.br . Acesso em: 30 jul. 2013 (adaptado).\nJORNADA MÉDIA TOTAL DE TRABALHO POR SEMANA NO BRASIL - (EM HORAS)\nmãe com filhos 25,9 36,8\npai com filhos 15,5 41,4\nmulher chefe de casal 30,3 36,5 com filhos\nhomem chefe de casal 10,1 44,4 com filhos\nmulher cônjuge em 31,7 34 casal com filhos 0 10 20 30 40 50 60 70\ntempo médio por semana dedicado aos afazeres domésticos tempo médio por semana dedicado ao trabalho remunerado\nDisponível em: http://ipea.gov.br . Acesso em: 30 jul. 2013.\nConsiderando o texto e o gráfico, avalie as afirmações a seguir.\nI. O somatório do tempo dedicado pelas mulheres aos afazeres domésticos e ao trabalho remunerado é superior ao dedicado pelos homens, independentemente do formato da família.\nII. O fragmento de texto e os dados do gráfico apontam para a necessidade de criação de políticas que promovam a igualdade entre os gêneros no que concerne, por exemplo, a tempo médio dedicado ao trabalho e remuneração recebida.\nIII. No fragmento de reportagem apresentado, ressalta-se a diferença entre o tempo dedicado por mulheres e homens ao trabalho remunerado, sem alusão aos afazeres domésticos.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q7",
+      "kind": "OBJECTIVE",
+      "number": 7,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O quadro a seguir apresenta a proporção (%) de trabalhadores por faixa de tempo gasto no deslocamento casa-trabalho, no Brasil e em três cidades brasileiras.\nTempo de Rio de São Brasil Curitiba deslocamento Janeiro Paulo\nAté cinco minutos 12,70 5,80 5,10 7,80\nDe seis minutos 52,20 32,10 31,60 45,80 até meia hora Mais de meia hora 23,60 33,50 34,60 32,40 até uma hora Mais de uma hora 9,80 23,20 23,30 12,90 até duas horas Mais de duas 1,80 5,50 5,30 1,20 horas CENSO 2010/IBGE (adaptado). Com base nos dados apresentados e considerando a distribuição da população trabalhadora nas cidades e as políticas públicas direcionadas à mobilidade urbana, avalie as afirmações a seguir.\nI. A distribuição das pessoas por faixa de tempo de deslocamento casa-trabalho na região metropolitana do Rio de Janeiro é próxima à que se verifica em São Paulo, mas não em Curitiba e na média brasileira.\nII. Nas metrópoles, em geral, a maioria dos postos de trabalho está localizada nas áreas urbanas centrais, e as residências da população de baixa renda estão concentradas em áreas irregulares ou na periferia, o que aumenta o tempo gasto por esta população no deslocamento casa-trabalho e o custo do transporte.\nIII. As políticas públicas referentes a transportes urbanos, como, por exemplo, Bilhete nico e Veículo Leve sobre Trilhos (VLT), ao serem implementadas, contribuem para redução do tempo gasto no deslocamento casa-trabalho e do custo do transporte.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q8",
+      "kind": "OBJECTIVE",
+      "number": 8,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Constantes transformações ocorreram nos meios rural e urbano, a partir do século XX. Com o advento da industrialização, houve mudanças importantes no modo de vida das pessoas, em seus padrões culturais, valores e tradições. O conjunto de acontecimentos provocou, tanto na zona urbana quanto na rural, problemas como explosão demográfica, prejuízo nas atividades agrícolas e violência.\nIniciaram-se inúmeras transformações na natureza, criando-se técnicas para objetos até então sem utilidade para o homem. Isso só foi possível em decorrência dos recursos naturais existentes, que propiciaram estrutura de crescimento e busca de prosperidade, o que faz da experimentação um método de transformar os recursos em benefício próprio.\nSANTOS, M. Metamorfoses do espaço habitado. São Paulo: Hucitec, 1988 (adaptado).\nA partir das ideias expressas no texto acima, conclui-se que, no Brasil do século XX,",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a industrialização ocorreu independentemente do êxodo rural e dos recursos naturais disponíveis."
+        },
+        {
+          "letter": "B",
+          "text": "o êxodo rural para as cidades não prejudicou as atividades agrícolas nem o meio rural porque novas tecnologias haviam sido introduzidas no campo."
+        },
+        {
+          "letter": "C",
+          "text": "homens e mulheres advindos do campo deixaram sua cultura e se adaptaram a outra, citadina, totalmente diferente e oposta aos seus valores."
+        },
+        {
+          "letter": "D",
+          "text": "tanto o espaço urbano quanto o rural sofreram transformações decorrentes da aplicação de novas tecnologias às atividades industriais e agrícolas."
+        },
+        {
+          "letter": "E",
+          "text": "os migrantes chegaram às grandes cidades trazendo consigo valores e tradições, que lhes possibilitaram manter intacta sua cultura, tal como se manifestava nas pequenas cidades e no meio rural."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D3",
+      "kind": "DISCURSIVE",
+      "number": 3,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "O jogo Sudoku consiste em uma matriz 9x9 dividida em 9 sub-matrizes 3x3, como mostrado na figura a seguir.\nDisponível em http://www.en-wikipedia.org . Acesso em: 26 jul 2014 (adaptado).\nA matriz está parcialmente preenchida com números de 1 a 9, e o objetivo do jogo é completar a matriz, de forma que cada linha, coluna e sub-matriz contenham todos os números de 1 a 9.\nA partir dessas informações, escreva um algoritmo recursivo baseado em retrocesso (backtracking) para resolver o jogo. A matriz foi transformada em um vetor V de 81 posições, contendo zeros nas posições que faltam para serem preenchidas.\nConsidere que existem duas funções implementadas. A primeira função, NaoHaViolacao(x,i,V), retorna verdadeiro se a inserção do número x na posição i do vetor V não causa violação das restrições do jogo (número repetido em linha, coluna ou sub-matriz). A segunda função, Imprime(V), realiza a impressão do vetor V.\nConsidere, ainda, que o algoritmo deve imprimir o vetor V com a solução encontrada, se esta existir. (valor: 10,0 pontos)\nObservação: Qualquer notação em português estruturado, de forma imperativa ou orientada a objetos pode ser utilizada, assim como em uma linguagem de alto nível, como Pascal, C ou Java.\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D4",
+      "kind": "DISCURSIVE",
+      "number": 4,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        10
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "A educação não se caracteriza apenas pelas práticas de ensino institucionalizadas como aquelas existentes nas escolas, mas abrange todos os processos de formação dos indivíduos, de modo que toda troca de saberes se constitui como uma prática educativa e pode se desenvolver nos mais variados ambientes sociais.\nBRANDÃO, C. F. Estrutura e funcionamento do ensino. São Paulo: Avercamp, 2004 (adaptado).\nA Educação Popular, fundamentada na teoria de Paulo Freire, busca promover a integração e participação dos sujeitos na construção da sociedade por meio de uma educação comprometida com a conscientização e politização do educando com o meio em que vive como sujeito ativo capaz de refletir e agir sobre ele. Nessa proposta, o ato de educar deve estar intrinsecamente associado à realidade vivenciada pelos educandos como modo de tornar a prática educativa um ato repleto de significações para os sujeitos que nele estão envolvidos.\nFREIRE, P. Pedagogia do Oprimido. 10 ed. Rio de Janeiro: Paz e Terra, 1981 (adaptado).\nNa educação não-formal existe a intencionalidade de criar ou buscar determinadas qualidades e/ou objetivos em espaços não escolares atuando em várias dimensões que visam a formação do indivíduo no sentido de politizar os sujeitos de seus direitos enquanto cidadãos, de capacitar os indivíduos para o trabalho, por meio da aprendizagem de habilidades e/ou desenvolvimento de potencialidades, de promover a aprendizagem e exercício de práticas que capacitem os indivíduos a se organizarem com objetivos comunitários, como também, o ensino-aprendizagem diferenciado dos conteúdos da escolarização formal.\nGOHN, M. G. M. Educação não formal e cultura política: impactos do associativismo no Terceiro Setor. São Paulo: Cortez, 1999 (adaptado).\nA partir das considerações apresentadas nos textos, faça o que se pede nos itens a seguir.\na) Como a educação pode ser caracterizada, independente do ambiente onde é aplicada? (valor: 4,0 pontos)\nb) Como a educação popular e a educação não-formal podem ser aplicadas de forma conjunta? (valor: 6,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D5",
+      "kind": "DISCURSIVE",
+      "number": 5,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "hifenizacao",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "A aplicabilidade de tecnologias de informação e comunicação digital tem sido vista como uma possibilidade de modernização para o sistema escolar. A utilização das tecnologias de informação e comunicação digital pode propiciar processos de ensino/aprendizagem cada vez mais interativos, interdependentes e plurais, de forma articulada com a realidade dos sujeitos envolvidos. Nesse sentido, torna-se inevitável alguns questionamentos, tais como: as escolas estão preparadas para trabalhar junto à esfera digital?\nFERREIRA, M. H. M.; FRADE, I. C. A. S. Tecnologias Digitais = Tecnologias Educacionais? Pressupostos para uma avaliação.\nDisponível em: http://www.ufpe.br . Acesso em: 22 jul. 2014 (adaptado).\nA partir do texto apresentado, elabore um texto dissertativo sobre o tema a seguir.\nTecnologias de informação e comunicação digital em processos de ensino-aprendizagem\nEm seu texto, aborde os seguintes aspectos:\na) dificuldades a serem superadas no uso das tecnologias da informação e da comunicação digital em processos de ensino-aprendizagem; (valor: 4,0 pontos)\nb) três recursos tecnológicos, explicando como eles podem ser utilizados em processos de ensino- aprendizagem. (valor: 6,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "Q9",
+      "kind": "OBJECTIVE",
+      "number": 9,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        12
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "A figura a seguir apresenta duas telas de um sistema de venda de passagens aéreas de uma empresa. Na tela 1, o usuário selecionou sua origem, seu destino, e, logo em seguida, sua data de ida. Ao mudar o foco para o campo de preenchimento da data de retorno, a ferramenta de calendário apresentou automaticamente a data do dia da compra (01/09/2014), conforme exibido na tela 2.\nCom base nas telas apresentadas e em dimensões de qualidade, tais como facilidade de aprendizagem, prevenção de erros, eficiência, memorização e satisfação subjetiva, avalie as afirmações a seguir.\nI. O botão “Ir” apresenta uma metáfora adequada com o mundo real, facilitando a aprendizagem.\nII. Na tela 1, o uso do calendário clicável não auxilia na prevenção de erros, visto que a entrada de datas pode ser realizada manualmente pelos usuários.\nIII. Na tela 2, o fato de o calendário selecionar a data da compra prejudica a eficiência da interface, já que a data preenchida é anterior à data de ida.\nIV. A memorização é prejudicada pois a interface apresenta elementos gráficos em demasia.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q10",
+      "kind": "OBJECTIVE",
+      "number": 10,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "O gerenciamento de um projeto inclui atividades com o objetivo de garantir que todos os produtos definidos no seu escopo sejam entregues no prazo estimado. Nesse contexto, avalie as afirmações a seguir.\nI. Técnicas como PERT e CPM são utilizadas para obtenção de estimativas de esforço e como apoio para definição de atividades.\nII. Séries históricas, quando utilizadas para obter estimativas de esforço no desenvolvimento de um novo sistema, levam à obtenção de estimativas consistentes, independentemente do domínio de aplicação dos sistemas que deram origem às séries históricas.\nIII. No caso de atraso na execução do cronograma, a contratação de novos desenvolvedores assegura que o produto será entregue de acordo com o cronograma inicialmente proposto.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q11",
+      "kind": "OBJECTIVE",
+      "number": 11,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Considere um esquema de gerência de memória por paginação simples, onde a memória física é dividida em quadros (frames) de 1 Kbyte e endereçada por byte. Os espaços de endereçamento dos processos são múltiplos de 1 Kbyte. A tabela de páginas para um determinado processo P é apresentada a seguir, em que o primeiro bit (BV) mostra se a página é válida (1) ou inválida (0).\nBV Quadro (frame)\n0 1 0010 1 1 0100 2 1 0001 3 1 0111 4 1 0000 5 1 1101 6 0 1111 7 0 0110\nCom base na tabela apresentada, avalie as afirmações a seguir.\nI. O endereço físico é composto por 13 bits.\nII. O esquema de gerência de memória apresentado reduz a fragmentação externa.\nIII. A tradução do endereço lógico 0110000000110 para endereço físico causa exceção.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q12",
+      "kind": "OBJECTIVE",
+      "number": 12,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Analise o custo computacional dos algoritmos a seguir, que calculam o valor de um polinômio de grau n, da forma: P(x) = a xn + a xn 1 + . . . + a x + a , onde os coeficientes são números de ponto flutuante armazenados n n 1 1 0 no vetor a[0..n], e o valor de n é maior que zero. Todos os coeficientes podem assumir qualquer valor, exceto o coeficiente a que é diferente de zero.\nn Algoritmo 1:\nsoma = a[0]\nRepita para i = 1 até n\nSe a[i]  0.0 então\npotência = x\nRepita para j = 2 até i\npotência = potência * x\nFim repita\nsoma = soma + a[i] * potencia\nFim se\nFim repita\nImprima(soma)\nAlgoritmo 2:\nsoma = a[n]\nRepita para i = n-1 até 0 passo -1\nsoma = soma * x + a[i]\nFim repita\nImprima(soma)\nCom base nos algoritmos 1 e 2, avalie as asserções a seguir e a relação proposta entre elas.\nI. Os algoritmos possuem a mesma complexidade assintótica.\nPORQUE\nII. Para o melhor caso, ambos os algoritmos possuem complexidade O(n).\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q13",
+      "kind": "OBJECTIVE",
+      "number": 13,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "A figura a seguir apresenta uma árvore binária de pesquisa, que mantém a seguinte propriedade fundamental: o valor associado à raiz é sempre menor do que o valor de todos os nós da subárvore à direita e sempre maior do que o valor de todos os nós da subárvore à esquerda.\n15\n10 20\n7 13 17 25\n14\nEm relação à árvore apresentada na figura, avalie as afirmações a seguir.\nI. A árvore possui a vantagem de realizar a busca de elementos de forma eficiente, como a busca binária em um vetor.\nII. A árvore está desbalanceada, pois a subárvore da esquerda possui um número de nós maior do que a subárvore da direita.\nIII. Quando a árvore é percorrida utilizando o método de caminhamento pós-ordem, os valores são encontrados em ordem decrescente.\nIV. O número de comparações realizadas em função do número n de elementos na árvore em uma busca binária realizada com sucesso é O(log n).\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q14",
+      "kind": "OBJECTIVE",
+      "number": 14,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Seja o universo U = 10, 20, 30, 40 e o conjunto dos números naturais N. Com base no conhecimento sobre a lógica de predicados, avalie as afirmações a seguir.\nI. H = (׊x א N)(׌y א U)(x y) é válida.\nII. H = (׊x א N)(׌y א N)(y x) é válida.\nIII. H = (׊x א U)(׌y א U)(x y) é inválida, sendo x = 10 um contra-exemplo.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q15",
+      "kind": "OBJECTIVE",
+      "number": 15,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "texto-ilegivel",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Considere as seguintes expressões regulares cujo alfabeto é a, b .\nR1 = a(a U b)\nR2 = b(a U b)\nSe L(R) é a linguagem associada a uma expressão regular R, é correto afirmar que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "L(R1) = L(R2)."
+        },
+        {
+          "letter": "B",
+          "text": "L(R2) = w w termina com b ."
+        },
+        {
+          "letter": "C",
+          "text": "existe um autômato finito determinístico cuja linguagem é igual a L(R1) U L(R2)."
+        },
+        {
+          "letter": "D",
+          "text": "se R3 é uma expressão regular tal que L ( R 3 ) = L ( R 1 ) ŀ L ( R 2 ) , e ntã o L ( R 3 ) é u m a linguagem infinita."
+        },
+        {
+          "letter": "E",
+          "text": "um autômato finito não determinístico que reconheça L(R1) U L(R2) tem, pelo menos, quatro estados."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q16",
+      "kind": "OBJECTIVE",
+      "number": 16,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        16
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Uma pilha é uma estrutura de dados que armazena uma coleção de itens de dados relacionados e que garante o seguinte funcionamento: o último elemento a ser inserido é o primeiro a ser removido. É comum na literatura utilizar os nomes push e pop para as operações de inserção e remoção de um elemento em uma pilha, respectivamente. O seguinte trecho de código em linguagem C define uma estrutura de dados pilha utilizando um vetor de inteiros, bem como algumas funções para sua manipulação.\n#include <stdlib.h>\n#include <stdio.h>\ntypedef struct {\nint elementos[100];\nint topo;\n}pilha;\npilha * cria_pilha() {\npilha * p =malloc(sizeof(pilha));\np->topo = -1;\nreturn pilha;\n}\nvoid push(pilha *p, int elemento) {\nif (p->topo >= 99)\nreturn;\np->elementos[++p->topo] = elemento;\n}\nint pop(pilha *p) {\nint a = p->elementos[p->topo];\np->topo--;\nreturn a;\n} O programa a seguir utiliza uma pilha.\nint main() {\npilha * p = cria_pilha();\npush(p, 2);\npush(p, 3);\npush(p, 4);\npop(p);\npush(p, 2);\nint a = pop(p) + pop(p);\npush(p, a);\na += pop(p);\nprintf(“%d”, a);\nreturn 0;\n}\nA esse respeito, avalie as afirmações a seguir.\nI. A complexidade computacional de ambas\nfunções push e pop é O(1).\nII. O valor exibido pelo programa seria o mesmo\ncaso a instrução a += pop(p); fosse\ntrocada por a += a;\nIII. Em relação ao vazamento de memória\n(memory leak), é opcional chamar a função\nfree(p), pois o vetor usado pela pilha é\nalocado estaticamente.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q17",
+      "kind": "OBJECTIVE",
+      "number": 17,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Considerando que o gerente de qualidade é o responsável por definir os meios necessários para se obter um produto com a qualidade desejada, bem como por estabelecer técnicas para aferir a qualidade do produto, avalie as afirmações a seguir.\nI. O uso de processos de desenvolvimento padronizados, sem adaptações, independente do tipo de software a ser desenvolvido, assegura que o produto terá a qualidade desejada.\nII. O controle de qualidade pode ser realizado por meio de revisões, incluindo inspeções de programas e de artefatos de projeto.\nIII. Fatores de qualidade de software estão diretamente relacionados a um único atributo interno de software.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q18",
+      "kind": "OBJECTIVE",
+      "number": 18,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Em relação à aplicação adequada das técnicas de Inteligência Artificial, avalie as afirmações a seguir.\nI. Indução em Árvore de Decisão é utilizada para identificação de fraudes em cartões de crédito.\nII. Redes Neurais Artificiais são utilizadas no desenvolvimento de sistemas de análise de risco em aplicações financeiras.\nIII. Sistemas Especialistas baseados em regras são utilizados no desenvolvimento de sistemas de diagnóstico de falhas em hardware.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q19",
+      "kind": "OBJECTIVE",
+      "number": 19,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "O desenvolvimento de tecnologias educacionais na Computação deve ser bem planejado, pois além das questões técnicas, que são fundamentais em qualquer tipo de desenvolvimento tecnológico computacional, existe a peculiaridade de se abarcar requisitos pedagógicos e didáticos de ensino-aprendizagem. Assim, no planejamento do desenvolvimento e elaboração de tais tecnologias é importante a inclusão desses requisitos, que norteiam",
+      "options": [
+        {
+          "letter": "A",
+          "text": "os documentos usados pela equipe de desenvolvimento do sistema no qual estão definidos detalhes, em um nível mais técnico, acerca da implementação do sistema e sua arquitetura."
+        },
+        {
+          "letter": "B",
+          "text": "a escolha e o modo de aplicação de uma tecnologia considerando, por um lado, a natureza do conteúdo a ser desenvolvido e, por outro, os recursos disponíveis na mesma."
+        },
+        {
+          "letter": "C",
+          "text": "os gastos para o usuário utilizar a tecnologia, a relação custo benefício e os tipos de contratos de uso."
+        },
+        {
+          "letter": "D",
+          "text": "as tendências sociais, aceitabilidade, métodos de interação social e sociabilidade."
+        },
+        {
+          "letter": "E",
+          "text": "a interface do usuário, adaptação, confiabilidade, conectividade e segurança."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q20",
+      "kind": "OBJECTIVE",
+      "number": 20,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O computador pode ser considerado um grande aliado no desenvolvimento cognitivo dos alunos, em especial através da utilização de softwares educacionais. Por isso, mais importante que o software em si, é o modo como ele será utilizado. Assim, o papel do professor é fundamental e indispensável na escolha do software educacional.\nDANIELLE, C.; S NIA, M. S. B. Critérios para Avaliação de Softwares Educacionais. IX ANPEDSUL – Seminário de Pesquisa em Educação da Região Sul, 2012. Disponível em: http://www.ucs.br . Acesso em: 25 jul. 2014.\nCom base no texto apresentado e nos critérios de qualidade de software para aplicações educacionais, avalie as afirmações a seguir.\nI. A escolha do software educacional deve considerar o público-alvo e a adequação da interface do software em relação à disciplina em que será utilizado.\nII. A proposta pedagógica da disciplina deve ser elaborada ou alterada com o objetivo de atender os requisitos e características do software educacional escolhido.\nIII. A escolha do software educacional deve considerar a aplicabilidade deste como ferramenta no processo de ensino- aprendizagem e não apenas como um instrumento para realização de tarefas.\nIV. A escolha do software educacional deve considerar a existência de diferentes caminhos para apresentação do conteúdo e resolução de problemas, principalmente quanto aos critérios de usabilidade e acessibilidade.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "II e III."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "I, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q21",
+      "kind": "OBJECTIVE",
+      "number": 21,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O processo de desenvolvimento de um software educacional é uma atividade complexa, em que diversos problemas podem ocorrer, como, por exemplo, a insatisfação dos usuários em relação aos problemas de usabilidade, que estão relacionados à facilidade do usuário utilizar o sistema. Há diversos princípios consolidados que fornecem as características básicas que todo produto precisa possuir para conseguir uma boa usabilidade.\nNesse contexto, avalie as afirmações a seguir.\nI. Design centrado no usuário é o processo de projetar produtos interativos que satisfaçam as necessidades do usuário.\nII. As avaliações de interface baseiam-se em objetivos de usabilidade como eficácia, eficiência, segurança, utilidade, facilidade de aprender e lembrar.\nIII. Os critérios de usabilidade podem oferecer indicadores quantitativos que possibilitam melhorar a produtividade, porém eles não cobrem a qualidade da experiência do usuário, que é melhor analisada pelas metas da experiência do usuário.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q22",
+      "kind": "OBJECTIVE",
+      "number": 22,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "As novas tecnologias de informação e comunicação possibilitam novos recursos e metodologias de ensino e aprendizagem. Os objetos de aprendizagem são elementos importantes que podem fazer parte e enriquecer um projeto de educação a distância.\nNesse contexto, avalie as afirmações a seguir.\nI. Os objetos de aprendizagem podem ser utilizados em diferentes contextos e em diferentes ambientes virtuais de aprendizagem.\nII. Os objetos de aprendizagem podem ser recursos digitais interativos, permitindo que os usuários dialoguem com os mesmos.\nIII. Os objetos de aprendizagem são itens a serem utilizados em contextos específicos, já que é difícil sua reutilização em outras situações.\nIV. Os objetos de aprendizagem são unidades, instâncias ou recursos digitais que podem ser utilizados no ensino presencial, a distância ou híbrido.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q23",
+      "kind": "OBJECTIVE",
+      "number": 23,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "A figura a seguir apresenta o processo de ensino-aprendizagem usando os métodos Ensino sob Medida (EsM) e Instrução pelos Colegas (IpC), descrevendo o fluxo de atividades realizadas pelo professor e pelos alunos antes e durante a aula.\nARAUJO, I. S.; MAZUR, E. Instrução pelos colegas e ensino sob medida: uma proposta para o engajamento dos alunos no processo de ensino- aprendizagem de Física. Caderno Brasileiro de Ensino de Física. Florianópolis. v. 30, n. 2, 2013, p. 362-384 (adaptado).\nEm relação ao processo descrito na figura, avalie as afirmações a seguir.\nI. Os ambientes virtuais de aprendizagem podem ser utilizados como suporte aos métodos Ensino sob Medida (EsM) e Instrução pelos Colegas (IpC).\nII. Os métodos descritos consideram o conhecimento prévio do aluno e favorecem interações sociais voltadas para a construção do conhecimento.\nIII. O professor deve limitar as interações sociais em sala de aula, pois elas trazem prejuízo aos alunos já que estimulam a cópia de trabalhos.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q24",
+      "kind": "OBJECTIVE",
+      "number": 24,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O ensino de algoritmos é um processo delicado e complexo, e seu sucesso depende de diversos fatores, tais como: habilidade do aluno em matemática e lógica, metodologia de ensino do professor, uso de ferramentas de simulação, realização eficiente de exercícios de fixação e práticas laboratoriais, apoio extra-classe na solução de dúvidas, trabalhos em grupo, dedicação do aluno entre outros. A escolha da linguagem de programação também merece atenção. Uns defendem o uso de linguagens orientadas a objetos, que possuem facilidades de programação de alto nível e facilitam a vida do desenvolvedor. Outros defendem o uso de linguagens mais básicas, que forçam o desenvolvedor a implementar muitas das estruturas e funções que necessita.\nNesse contexto, avalie as afirmações a seguir.\nI. O uso da linguagem de programação Pascal é adequado ao processo de ensino- aprendizagem de algoritmos porque, entre outros motivos, permite ao aluno entender melhor os diferentes tipos de dados, pois ela verifica os tipos das variáveis no momento da compilação, sendo considerada uma linguagem fortemente tipificada.\nII. O uso da linguagem de programação C padrão é adequado ao processo de ensino- aprendizagem de algoritmos porque, entre outros motivos, permite ao aluno entender melhor sobre alocação e endereçamento de memória para as variáveis, pois esse aprendizado necessita do uso de ponteiros.\nIII. O uso da linguagem de programação Python é adequado ao processo de ensino-aprendizagem de algoritmos porque, entre outros motivos, permite ao aluno conhecer as estruturas de dados e as formas de manipulação, sem precisar implementá-las, permitindo o desenvolvimento de programas mais elaborados, mesmo por alunos com pouco conhecimento de algoritmos.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q25",
+      "kind": "OBJECTIVE",
+      "number": 25,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Em relação ao projeto e implementação de espaços de ensino, assinale a alternativa correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A utilização de realidade aumentada deve ser restrita, visto que tal ferramenta não apresenta fatos reais e concretos, apenas uma simulação virtual da realidade."
+        },
+        {
+          "letter": "B",
+          "text": "As normas de administração de laboratórios devem permitir a instalação irrestrita de software pelos alunos, permitindo o exercício da curiosidade e da busca pelo conhecimento."
+        },
+        {
+          "letter": "C",
+          "text": "Os aspectos de inclusão digital devem ser considerados, buscando a democratização do acesso às tecnologias da informação e o atendimento às restrições dos alunos do ponto de vista físico."
+        },
+        {
+          "letter": "D",
+          "text": "A utilização de ferramentas de ensino a distância (EAD) deve ser limitada, para não colocar em risco a segurança das informações utilizadas nos cursos oferecidos pelas instituições de ensino."
+        },
+        {
+          "letter": "E",
+          "text": "Os espaços não escolares, fora dos limites físicos dos campi das instituições de ensino, não fazem parte do escopo a ser considerado pelo professor para atender o processo de ensino-aprendizagem."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q26",
+      "kind": "OBJECTIVE",
+      "number": 26,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "A elaboração e a disponibilização de material didático interativo é importante para a motivação do estudante. O material pode ter a função de apresentar os objetivos do conteúdo a ser abordado em formato de tópicos ou aulas. Entre os materiais que podem ser elaborados, têm-se: as áudio-aulas, captura de tela, vídeo-aulas e o quadro digital.\nNesse contexto e em relação aos requisitos a serem adotados para a elaboração de uma vídeo-aula, o professor deve",
+      "options": [
+        {
+          "letter": "A",
+          "text": "utilizar vídeos com conteúdos temáticos diversificados e disponíveis em diferentes formatos como, por exemplo, a apresentação de uma atividade no laboratório ou no campo, um depoimento do professor ou uma conversa de um grupo."
+        },
+        {
+          "letter": "B",
+          "text": "usar uma lousa com sensor de localização que amplia a capacidade de controle de softwares e que permite usar uma espécie de tinta eletrônica para interagir com o material exibido por uma projeção."
+        },
+        {
+          "letter": "C",
+          "text": "usar um software para capturar em formato de vídeo tudo o que é feito na tela do computador, enquanto é gravada a sua voz ao realizar uma tarefa específica."
+        },
+        {
+          "letter": "D",
+          "text": "preparar uma apresentação em ferramentas para criação de slides, a qual receberá uma narração e, finalmente, exportar para um formato compatível."
+        },
+        {
+          "letter": "E",
+          "text": "preparar uma simulação de um processo ou sistema que exija a intervenção do estudante."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q27",
+      "kind": "OBJECTIVE",
+      "number": 27,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Objetos de aprendizagem podem ser definidos por uma unidade de conteúdo organizado em forma digital ou não digital, que possa ser utilizada e reutilizada durante o processo de aprendizagem por meio de tecnologias. Tais objetos podem ser desenvolvidos nas diversas áreas de conhecimento, diferenciando-se apenas os conteúdos didáticos.\nConsiderando essas informações e com base nos conceitos sobre objetos de aprendizagem, avalie as afirmações a seguir.\nI. Autores não podem combinar objetos antigos e novos para satisfazer às necessidades de suas demandas, visto que não são permitidas alterações em um objeto de aprendizagem já desenvolvido.\nII. Objetos de aprendizagem são um importante instrumento de ensino-aprendizagem e podem ser utilizados de diferentes formas, inclusive na educação a distância.\nIII. O desenvolvimento de um objeto de aprendizagem, por si só, pode ser considerado construção do conhecimento.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q28",
+      "kind": "OBJECTIVE",
+      "number": 28,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Cursos online Abertos e Massivos (Massive Online Open Courses - MOOC) possibilitam a educação de nível universitário livre em grande escala. Uma preocupação frequentemente levantada sobre MOOCs é que, embora milhares possam se inscrever para os cursos, uma proporção muito pequena realmente o conclui, como é possível observar na figura a seguir, que representa os tipos de estudantes e a taxa de retenção a cada semana em MOOCs.\nHILL, P. Emerging student patterns in moocs: a (revised) graphical view, 2013. Disponível em: http://mfeldstein.com . Acesso em: 26 ago.2014 (adaptado).\nA partir das informações apresentadas, avalie as afirmações a seguir.\nI. A evasão de alunos nos MOOCs aumenta a cada semana.\nII. A maior parte dos estudantes que concluem os cursos participam ativa ou passivamente.\nIII. Os observadores, pessoas que apenas assistem sem participar de discussões, nunca concluem os cursos.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas"
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q29",
+      "kind": "OBJECTIVE",
+      "number": 29,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "As pesquisas mostram que dos milhares de inscritos nos MOOCs (Massive Online Open Courses) apenas uma pequena parcela conclui o curso. Dados recentes indicam que a quantidade de matrículas está crescendo, entretanto a quantidade de estudantes que terminam os cursos não é proporcional a tal crescimento. Uma análise desses dados indica que a evasão se deve, entre outros fatores, às dificuldades na utilização das tecnologias empregadas.\nNesse sentido, avalie as asserções a seguir e a relação proposta entre elas.\nI. É necessário aprimorar o ferramental tecnológico utilizado pelos MOOCs para possibilitar o aumento na taxa de retenção dos estudantes.\nPORQUE\nII. Os estudantes nem sempre conhecem os pré- requisitos dos conteúdos disponibilizados.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q30",
+      "kind": "OBJECTIVE",
+      "number": 30,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "O desenvolvimento de um projeto na modalidade de educação a distância (EAD) exige profissionais capacitados e planejamento minucioso das diversas atividades envolvidas em cursos, disciplinas ou unidades a serem ofertadas. Algumas particularidades encontradas em um projeto de EAD, e especialmente os recursos e critérios utilizados para a avaliação, estão marcadas por algumas características fundamentais, como a distância, a virtualidade e o assincronismo.\nNesse contexto e em relação as atividades de avaliação na EAD, avalie as afirmações a seguir.\nI. A elaboração de textos ou projetos colaborativos é uma possibilidade de avaliação na EAD.\nII. O recurso conhecido como fórum de discussão não deve ser considerado como instrumento ou critério de avaliação na EAD.\nIII. Atividades de avaliação que permitam construir conhecimento ou consolidar conceitos em diferentes etapas são adequadas em um contexto de EAD.\nIV. As atividades de avaliação na EAD devem ser planejadas para acontecer em instantes ou períodos que permitam a participação simultânea de professores e alunos.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e III."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q31",
+      "kind": "OBJECTIVE",
+      "number": 31,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "WATERSON, C. Haroldo e seus amigos, 1988 (adaptado).\nA gestão democrática pode ser definida como um processo político no qual as pessoas que atuam na e sobre a escola identificam problemas, discutem, deliberam, planejam, encaminham, acompanham, controlam e avaliam o conjunto das ações voltadas ao desenvolvimento da própria escola, na busca da solução daqueles problemas. Esse processo, sustentado no diálogo, na alteridade e no reconhecimento das especificidades técnicas das diversas funções presentes na escola, tem como base a participação efetiva de todos os segmentos da comunidade escolar, o respeito às normas coletivamente construídas para os processos de tomada de decisões e a garantia de amplo acesso às informações aos sujeitos da escola.\nSOUZA, A. R. Explorando e construindo um conceito de gestão escolar democrática. Educação em Revista, Belo Horizonte, v.25, n.03, dez. 2009, p. 125-126 (adaptado).\nCom base nos textos apresentados, conclui-se que a gestão democrática da educação\nI. implica colocar as instituições a serviço da formação qualificada dos estudantes, tendo a participação como prática cotidiana de todos os envolvidos.\nII. propicia a criação de uma cultura institucional crítico-reflexiva, cujos envolvidos tenham discernimento em relação aos conteúdos que necessitam ou não para tomarem decisões sempre coletivas.\nIII. pressupõe a existência de líderes capazes de orientar pessoas para o desenvolvimento de ações que visem ao cumprimento de objetivos definidos por eles.\nIV. efetiva-se pelo processo de construção coletiva do projeto pedagógico e de seu acompanhamento e avaliação.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q32",
+      "kind": "OBJECTIVE",
+      "number": 32,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O Plano Nacional de Educação (PNE) inclui 20 metas e estratégias traçadas para o setor nos próximos 10 anos. Entre as metas, está a aplicação de valor equivalente a 10% do Produto Interno Bruto (PIB) na educação pública, promovendo a universalização do acesso à educação infantil para crianças de quatro a cinco anos, do ensino fundamental e do ensino médio. Esse plano também prevê a abertura de mais vagas no ensino superior, investimentos maiores em educação básica em tempo integral e em educação profissional, além da valorização do magistério.\nBRASIL. Conheça as 20 metas definidas pelo PNE. Disponível em: http://www.brasil.gov.br . Acesso em: 4 jul. 2014 (adaptado). A Lei n. 13.005, de 25 de junho de 2014, que aprova o PNE, prevê importantes dispositivos, tais como:\nArt. 5o A execução do PNE e o cumprimento de suas metas serão objeto de monitoramento contínuo e de avaliações periódicas.\nArt. 10 O plano plurianual, as diretrizes orçamentárias e os orçamentos anuais da União, dos Estados, do Distrito Federal e dos Municípios serão formulados de maneira a assegurar a consignação de dotações orçamentárias compatíveis com as diretrizes, metas e estratégias deste PNE e com os respectivos planos de educação, a fim de viabilizar sua plena execução.\nArt. 11 O Sistema Nacional de Avaliação da Educação Básica, coordenado pela União, em colaboração com os Estados, o Distrito Federal e os Municípios, constituirá fonte de informação para a avaliação da qualidade da educação básica e para a orientação das políticas públicas desse nível de ensino.\nArt. 13 O poder público deverá instituir, em lei específica, contados 2 (dois) anos da publicação desta Lei, o Sistema Nacional de Educação, responsável pela articulação entre os sistemas de ensino, em regime de colaboração, para efetivação das diretrizes, metas e estratégias do Plano Nacional de Educação.\nConsiderando as informações acima, conclui-se que o PNE",
+      "options": [
+        {
+          "letter": "A",
+          "text": "possibilita ao país iniciar seu processo de desenvolvimento, pois prevê aumento anual de 10% nos patamares de aplicação do PIB em educação e sistema de monitoramento da aplicação de investimentos, o Sistema de Avaliação da Educação Básica, a ser instituído nos próximos dois anos."
+        },
+        {
+          "letter": "B",
+          "text": "prevê meta de aplicação de 10% do PIB em educação, sinalizando que os gestores escolares terão 10 vezes mais possibilidades de atingir patamares mais elevados de educação nos próximos 10 anos, pois vincula os investimentos com a educação aos níveis de desenvolvimento do país, aferidos pelo PIB."
+        },
+        {
+          "letter": "C",
+          "text": "estabelece que a melhoria da educação básica — universalização do acesso à educação infantil, aumento de vagas no ensino superior, maior investimento em educação em tempo integral e em educação profissional — evidencia a base para o desenvolvimento, pois o crescimento econômico é o indicador do percentual de recursos do PIB a ser aplicado em educação."
+        },
+        {
+          "letter": "D",
+          "text": "disponibiliza para os gestores escolares o crescimento de 10% dos investimentos do PIB em educação, ao ano, durante os próximos 10 anos e um Sistema Nacional de Avaliação para verificar a efetivação das diretrizes e metas dispostas no referido Plano."
+        },
+        {
+          "letter": "E",
+          "text": "permite planejar a educação para os próximos 10 anos e institui mecanismos de monitoramento e avaliação, tanto da execução do Plano como da qualidade da educação, por meio do estabelecimento de metas educacionais e definição dos investimentos a serem disponibilizados para o alcance dessas metas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q33",
+      "kind": "OBJECTIVE",
+      "number": 33,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Os currículos organizam conhecimentos, culturas, valores e artes a que todo ser humano tem direito. Assim, o currículo deve ser analisado conforme as experiências vividas pelos estudantes, nas quais se articulam os saberes, aprendidos por eles na vivência e na convivência em suas comunidades, com os conhecimentos sistematizados que a escola deve lhes tornar acessíveis.\nARROYO, M. G. Educandos e educadores: seus direitos e o currículo. In: ARROYO, M. G. Indagações sobre o currículo: educandos e educadores: seus direitos e o currículo. Brasília: Ministério da Educação, Secretaria de Educação Básica, 2007, p. 67 (adaptado).\nA partir da definição de currículo abordada pelo autor, avalie as afirmações a seguir.\nI. A construção do currículo constitui um processo de seleção cultural, o que pode colocar em desvantagem determinados grupos sociais e culturais.\nII. O sistema educativo confere ao currículo efetividade que envolve uma multiplicidade de relações, razão pela qual este deve ser considerado práxis e sua materialização corresponder à forma como foi idealizado.\nIII. As teorias críticas reconhecem a existência de poderes diversos diluídos nas relações sociais, conferindo ao currículo a função de atuar em processos para a inclusão escolar.\nIV. É desafio da escola incluir no currículo experiências culturais diversificadas, que não reproduzam estruturas da vida social em suas assimetrias e desigualdades.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q34",
+      "kind": "OBJECTIVE",
+      "number": 34,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "O Projeto Político-Pedagógico (PPP) relaciona-se à organização do trabalho pedagógico da escola, indicando uma direção, explicitando os fundamentos teórico-metodológicos, os objetivos, o tipo de organização e as formas de implementação e avaliação da escola.\nVEIGA, I. P. A.; RESENDE, L.M.G. (Org.). Escola: espaço do Projeto Político-Pedagógico. 4. ed. Campinas-SP: Papirus, 1998 (adaptado).\nConsiderando a elaboração do PPP, avalie as seguintes afirmações.\nI. O PPP constitui-se em processo participativo de decisões para instaurar uma forma de organização do trabalho pedagógico que desvele os conflitos e as contradições no interior da escola.\nII. A discussão do PPP exige uma reflexão acerca da concepção de educação e sua relação com a sociedade e a escola, o que implica refletir sobre o homem a ser formado.\nIII. A construção do PPP requer o convencimento dos professores, da equipe escolar e dos funcionários para trabalharem em prol do plano estabelecido pela gestão educacional.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q35",
+      "kind": "OBJECTIVE",
+      "number": 35,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Da visão dos direitos humanos e do conceito de cidadania fundamentado no reconhecimento das diferenças e na participação dos sujeitos, decorre uma identificação dos mecanismos e processos de hierarquização que operam na regulação e produção de desigualdades. Essa problematização explicita os processos normativos de distinção dos alunos em razão de características intelectuais, físicas, culturais, sociais e linguísticas, estruturantes do modelo tradicional de educação escolar.\nBRASIL, MEC. Política Nacional de Educação Especial na Perspectiva da Educação Inclusiva, 2008, p. 6 (adaptado).\nAs questões suscitadas no texto ratificam a necessidade de novas posturas docentes, de modo a atender a diversidade humana presente na escola. Nesse sentido, no que diz respeito a seu fazer docente frente aos alunos, o professor deve\nI. desenvolver atividades que valorizem o conhecimento historicamente elaborado pela humanidade e aplicar avaliações criteriosas com o fim de aferir, em conceitos ou notas, o desempenho dos alunos.\nII. instigar ou compartilhar as informações e a busca pelo conhecimento de forma coletiva, por meio de relações respeitosas acerca dos diversos posicionamentos dos alunos, promovendo o acesso às inovações tecnológicas.\nIII. planejar ações pedagógicas extraescolares, visando ao convívio com a diversidade; selecionar e organizar os grupos, a fim de evitar conflitos.\nIV. realizar práticas avaliativas que evidenciem as habilidades e competências dos alunos, instigando esforços individuais para que cada um possa melhorar o desempenho escolar.\nV. utilizar recursos didáticos diversificados, que busquem atender a necessidade de todos e de cada um dos alunos, valorizando o respeito individual e coletivo.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "II e V."
+        },
+        {
+          "letter": "C",
+          "text": "II, III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II, IV e V."
+        },
+        {
+          "letter": "E",
+          "text": "I, III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-licenciatura-exam",
+        "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+        "answerKeyId": "enade-2014-licenciatura-answer-key",
+        "answerKeySha256": "94f64f4fcad153a931575ad702646426c74b261a009f602dbb9886c7a58158b1",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    }
+  ]
+}

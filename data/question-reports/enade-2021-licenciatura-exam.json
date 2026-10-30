@@ -1,0 +1,2005 @@
+{
+  "document": "enade-2021-licenciatura-exam",
+  "completeness": {
+    "missing": [],
+    "unexpected": []
+  },
+  "extraction": {
+    "method": "PDF_TEXT"
+  },
+  "warnings": [],
+  "items": [
+    {
+      "key": "D1",
+      "kind": "DISCURSIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        2,
+        3
+      ],
+      "ligatureJoins": [
+        "questi|onada.",
+        "discuti|r",
+        "justi|fi",
+        "justifi|car",
+        "questi|ona,",
+        "Guatt|ari",
+        "ati|vidades",
+        "semióti|cas",
+        "remeti|dos.",
+        "ati|vidades,",
+        "semioti|zação",
+        "questi|ona",
+        "debati|dos.",
+        "Coleti|vos",
+        "disti|nção",
+        "garanti|ndo-se",
+        "ati|vidade",
+        "sti|ca,",
+        "fi|ca",
+        "Consti|tuição",
+        "htt|ps://www.senado.leg.br/ati",
+        "https://www.senado.leg.br/ati|vidade/const/con1988/con1988_15.12.2016/art_5_.asp.",
+        "sti|ca",
+        "garanti|da",
+        "Consti|tuição",
+        "educati|vas",
+        "garanti|r",
+        "sti|ca"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "figura"
+      ],
+      "prompt": "TEXTO I\nEm época de censura, a própria existência da arte passa a ser questionada. Surgem debates em jornais, na rua, em casa, para discutir sua relevância. Não podemos deixar de nos perguntar como chegamos a essa estranha situação em que precisamos justificar a própria existência da arte. Ela pode ser julgada apressadamente como boa ou ruim, mas nem por isso deixa de ser arte.\nO cineasta franco-suíço Jean-Luc Godard aponta para o fato de que “a cultura é a regra; a arte é a exceção”. A arte é, dentro da cultura, o que tensiona a própria cultura para assim levá-la para outros lugares. Enquanto a cultura regula, a arte destoa e movimenta. A arte questiona, incomoda e transforma. Arte e cultura se contradizem, mas andam de mãos dadas.\nOs psicanalistas Suely Rolnik e Félix Guattari consideram que o conceito de cultura é profundamente reacionário. É uma maneira de separar atividades semióticas em esferas, às quais os homens são remetidos. Tais atividades, assim isoladas, são padronizadas para o modo de semiotização dominante. A arte, por sua vez, existe plenamente quando junta o que é separado, questiona o que é geralmente aceito, grita onde há silêncio, desorganizando e reorganizando a cultura. Quando se discutem os limites da arte, são, na verdade, os limites da nossa tolerância que estão sendo debatidos.\nSEROUSSI, B. O que faz a arte? In: OLIVIERE, C.; NATALE, E. (org.). direito, arte e liberdade. São Paulo: Edições Sesc SP, 2018. p. 26-42 (adaptado).\nTEXTO II\nCapítulo i\nDos Direitos e Deveres Individuais e Coletivos\nArt. 5º Todos são iguais perante a lei, sem distinção de qualquer natureza, garantindo-se aos brasileiros e aos estrangeiros residentes no País a inviolabilidade do direito à vida, à liberdade, à igualdade, à segurança e à propriedade, nos termos seguintes:\n[...]\nIX - é livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença.\nBRASIL. Constituição Federal do Brasil. Disponível em: https://www.senado.leg.br/atividade/const/con1988/con1988_15.12.2016/art_5_.asp. Acesso em: 2 maio 2020.\nConsiderando as informações e os argumentos presentes nos textos I e II, discorra a respeito da relação entre arte, cultura e censura, à luz da ideia de liberdade artística garantida pela Constituição Federal de 1988. Apresente, em seu texto, duas ações educativas que podem contribuir para minimizar essas tensões e garantir a liberdade artística prevista pela lei. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D2",
+      "kind": "DISCURSIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [
+        "uti|liza",
+        "efi|cientes,",
+        "benefi|ciando",
+        "comprometi|da",
+        "Educati|on",
+        "holísti|ca",
+        "efeti|va",
+        "investi|mentos",
+        "políti|cas",
+        "parti|r"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "referencia-versalete"
+      ],
+      "prompt": "TEXTO I\nUma cidade é considerada inteligente quando: i) nela se utiliza a tecnologia para melhorar a sua infraestrutura e seus serviços, tornando os setores de administração, educação, saúde, segurança pública, moradia e transporte mais inteligentes, interconectados e eficientes, beneficiando toda a população; e ii) está comprometida com o meio ambiente e com sua herança histórica e cultural.\nAQUINO, A. L. L. et al. Cidades inteligentes, um novo paradigma da sociedade do conhecimento. Blucher Education Proceedings, v. 1, n. 1, p. 165-178, 2015 (adaptado).\nTEXTO II\nA evolução para uma cidade mais inteligente, mais integrada, mais inovadora pressupõe uma visão holística e sistêmica do espaço urbano e a integração efetiva dos vários atores e setores. Para tal, é necessário ir além dos investimentos em inovação tecnológica e inovar também na gestão, no planejamento, no modelo de governança e no desenvolvimento de políticas públicas.\nCAMPOS, C. C. et al. Cidades inteligentes e mobilidade urbana. Cadernos FGV projetos, n. 24, 2014 (adaptado). A partir do conceito de cidade inteligente exposto nos textos, faça o que se pede nos itens a seguir.\na) Explique de que modo as cidades inteligentes podem contribuir para a melhoria das questões relacionadas ao desenvolvimento sustentável. (valor: 5,0 pontos)\nb) Apresente uma proposta de intervenção urbana que pode gerar impacto social e contribuir para a melhoria da vida em comunidade. (valor: 5,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q1",
+      "kind": "OBJECTIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        5
+      ],
+      "ligatureJoins": [
+        "ati|ngissem",
+        "esti|mati",
+        "estimati|va",
+        "difi|culdade",
+        "qualifi|cação",
+        "parti|r",
+        "afi|rmar",
+        "demográfi|co",
+        "efi|cácia",
+        "políti|cas",
+        "repeti|ndo-se",
+        "confl|itos"
+      ],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "E",
+      "prompt": "A chance de uma criança de baixa renda ter um futuro melhor que a realidade em que nasceu está, em maior ou menor grau, relacionada à escolaridade e ao nível de renda de seus pais. Nos países ricos, o \"elevador social\" anda mais rápido. Nos emergentes, mais devagar. No Brasil, ainda mais lentamente. O país ocupa a segunda pior posição em um estudo sobre mobilidade social feito pela Organização para a Cooperação e Desenvolvimento Econômico (OCDE), em 2018, com dados de 30 países. Segundo os resultados, seriam necessárias nove gerações para que os descendentes de um brasileiro entre os 10% mais pobres atingissem o nível médio de rendimento do país. A estimativa é a mesma para a África do Sul e só perde para a Colômbia, onde o período de ascensão levaria 11 gerações. Mais de 1/3 daqueles que nascem entre os 20% mais pobres no Brasil permanece na base da pirâmide, enquanto apenas 7% consegue chegar aos 20% mais ricos. Filhos de pais na base da pirâmide têm dificuldade de acesso à saúde e maior probabilidade de frequentar uma escola com ensino de baixa qualidade. A educação precária, em geral, limita as opções para esses jovens no mercado de trabalho. Sobram-lhes empregos de baixa remuneração, em que a possibilidade de crescimento salarial para quem tem pouca qualificação é pequena – e a chance de perpetuação do ciclo de pobreza, grande.\nLEMOS, V. Brasil é o segundo pior em mobilidade social em ranking de 30 países. BBC News Brasil, 15 jun. 2018 (adaptado).\nA partir das informações apresentadas, é correto afirmar que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "o fator ambiental e o fator demográfico afetam a mobilidade social observada, sendo ela menor nos países que apresentam as maiores taxas de natalidade."
+        },
+        {
+          "letter": "B",
+          "text": "a baixa organização social dos economicamente menos favorecidos determina a baixa mobilidade social da base para o topo da pirâmide."
+        },
+        {
+          "letter": "C",
+          "text": "a mobilidade social é caracterizada por um fator ancestral que se revela ao longo das gerações, sendo um limitador da eficácia de políticas públicas de redução das desigualdades sociais."
+        },
+        {
+          "letter": "D",
+          "text": "a análise de mobilidade social permite a observação de um ciclo vicioso, que se caracteriza por uma subida nas camadas sociais seguida de uma queda, repetindo-se esse ciclo de modo sucessivo."
+        },
+        {
+          "letter": "E",
+          "text": "a ascensão social depende de fatores viabilizadores que estão fora do alcance das camadas pobres, o que ocasiona conflitos sociais em busca do acesso a tais fatores."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q2",
+      "kind": "OBJECTIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6,
+        7
+      ],
+      "ligatureJoins": [
+        "htt|ps://www.facebook.com/embrapa/photos/a.609357055926350/733391400189581/?type=1&theater.",
+        "estéti|co",
+        "alternati|vas",
+        "esteti|camente",
+        "conscienti|zar",
+        "produti|va,",
+        "htt|ps://www.embrapa.br/busca-de-noti",
+        "https://www.embrapa.br/busca-de-noti|cias/-/noti",
+        "https://www.embrapa.br/busca-de-noticias/-/noti|cia/29626389/manuseio-correto-preserva-a-qualidade-e",
+        "-a-vida-uti|l-das-hortalicas.",
+        "sinteti|za",
+        "disti|nti",
+        "distinti|vos",
+        "estéti|cos",
+        "produti|va",
+        "justi|fi",
+        "justifi|cati",
+        "justificati|va",
+        "justi|fi",
+        "justifi|cati",
+        "justificati|va"
+      ],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "versalete"
+      ],
+      "answer": "C",
+      "prompt": "TEXTO I\nDisponível em: https://www.facebook.com/embrapa/photos/a.609357055926350/733391400189581/?type=1&theater. Acesso em: 27 maio 2020.\nTEXTO II\nEm alguns países da Europa, permite-se que um produto de menor valor estético seja comercializado. Estamos falando de um pepino deformado ou de uma cebola pequena, mas não de um produto contaminado com resíduos químicos ou agentes biológicos. No caso do Brasil, o problema vai além da aparência, porque há hortaliças ruins – contaminadas, murchas, machucadas – que chegam às bancas para ser comercializadas.\nMas, se nos dois contextos há perda de alimentos e preconceito em relação às hortaliças fora do padrão visual, mas boas para o consumo, quais seriam as alternativas para evitar o desperdício e melhorar a qualidade dos produtos? Para os pesquisadores do assunto, não adianta replicar a experiência europeia no Brasil, de exigir hortaliças esteticamente perfeitas, porque também teríamos produtos sendo desprezados ainda na etapa de produção. Não devemos passar de um mercado pouco exigente, que gera desperdício no varejo e nas residências, para um mercado exigente que gera perda no campo.\nA solução do problema é conscientizar os diversos elos da cadeia produtiva, especialmente varejistas e consumidores, para que sejam esclarecidos sobre quais aspectos da aparência das hortaliças comprometem a qualidade. Quanto maior a exigência do mercado por hortaliças de aparência perfeita, maior o desperdício de alimentos. Por sua vez, quanto maior a exigência por hortaliças sem danos, causados pela falta de cuidado e pela falta de higiene, menor será a perda de alimentos e maior a qualidade da alimentação da população brasileira.\nDisponível em: https://www.embrapa.br/busca-de-noticias/-/noticia/29626389/manuseio-correto-preserva-a-qualidade-e -a-vida-util-das-hortalicas. Acesso em: 27 maio 2020 (adaptado).\nConsiderando as informações apresentadas nos textos, avalie as asserções a seguir e a relação proposta entre elas.\nI. O texto I sintetiza uma informação principal do texto II, ao apresentar critérios distintivos de alterações visuais que têm efeitos puramente estéticos em produtos alimentícios daquelas que têm implicações na qualidade desses produtos.\npORQuE\nII. O texto II divulga que o aumento das perdas na cadeia produtiva de hortaliças no Brasil é proporcional à elevação de exigências dos consumidores pela aparência de produtos agropecuários.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q3",
+      "kind": "OBJECTIVE",
+      "number": 3,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [
+        "automoti|vos.",
+        "alternati|vas",
+        "políti|cas",
+        "incenti|vam",
+        "htt|p://dopedal.blogspot.com/2012/05/charge-do-silverio-voz-da-serra.html.",
+        "alternati|va",
+        "afi|rmações",
+        "investi|mentos",
+        "conscienti|zação",
+        "práti|ca",
+        "ati|vidade",
+        "parti|r",
+        "efi|caz",
+        "afi|rma"
+      ],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "TEXTO I\nNa Alemanha nazista, no auge da Segunda Guerra Mundial, surgiu a necessidade de abrir mais espaço para os veículos automotivos. Com muitos ciclistas, as bicicletas viraram um empecilho, forçando a criação de um espaço exclusivo para elas – talvez as primeiras ciclovias do mundo. Mas, se na década de 1940 os veículos eram prioridade, hoje, o uso de bicicletas – e das ciclovias – surge como uma das principais alternativas para melhorar a qualidade de vida nas grandes metrópoles. Quando políticas públicas incentivam o uso de bicicletas como meio de transporte para curtas e médias distâncias, um novo panorama se abre.\nCOSTA, J. Ciclovias ajudam a humanizar o espaço urbano. Ciência e Cultura. v. 68, n. 2, São Paulo, 2016 (adaptado).\nTEXTO II\nDisponível em: http://dopedal.blogspot.com/2012/05/charge-do-silverio-voz-da-serra.html. Acesso em: 29 de abr. 2020.\nConsiderando as informações apresentadas e o uso de bicicletas como alternativa para melhorar a qualidade de vida nas cidades, avalie as afirmações a seguir.\nI. Dado que as bicicletas são veículos que ocupam pouco espaço na malha viária, prescinde-se de investimentos públicos em construção de ciclovias, sendo prioritárias campanhas de conscientização de motoristas a respeito dos benefícios do uso da bicicleta como meio de transporte.\nII. O uso das bicicletas como meio de transporte contribui para a melhoria da qualidade de vida nas grandes metrópoles, pois elas não emitem poluentes, além de esse uso proporcionar a prática de atividade física.\nIII. A partir da Segunda Guerra Mundial, durante o governo da Alemanha nazista, o uso da bicicleta como meio de transporte tornou-se eficaz e passou a prevalecer nas cidades europeias.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q4",
+      "kind": "OBJECTIVE",
+      "number": 4,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [
+        "aplicati|vos",
+        "aplicati|vos,",
+        "profi|ssionais",
+        "ti|po",
+        "Garanti|a",
+        "ati|vidade",
+        "afi|rmaram",
+        "moti|vos,",
+        "fi|cam",
+        "htt|ps://exame.abril.com.br/carreira/quais-sao-as-consequencia-do-trabalho-informal-no-pais/.",
+        "parti|r",
+        "justi|fi",
+        "justifi|cati",
+        "justificati|va",
+        "justi|fi",
+        "justifi|cati",
+        "justificati|va"
+      ],
+      "status": "revisao-manual",
+      "flags": [
+        "versalete"
+      ],
+      "answer": "B",
+      "prompt": "Além do contexto econômico, o avanço da tecnologia também é um dos responsáveis pelo aumento dos trabalhadores informais. E a tendência de contratação de freelancers por meio de plataformas digitais, como aplicativos de delivery e de mobilidade urbana, ganhou até um nome: Gig Economy, ou economia dos bicos. Para os gigantes de tecnologia detentores desses aplicativos, os motoristas são trabalhadores autônomos, que não possuem vínculo empregatício. Além de não estarem sujeitos a nenhuma regulamentação e proteção legal, os profissionais que desenvolvem esse tipo de trabalho deixam de contribuir para a Previdência Social e de possuir benefícios como Fundo de Garantia por Tempo de Serviço (FGTS), férias e décimo terceiro salário. Não obstante, ainda arcam com todo o custo da atividade que exercem. Em uma reportagem que ouviu alguns desses trabalhadores, motoristas afirmaram sofrer com problemas de coluna e com o estresse no trânsito, além das longas jornadas de trabalho. Por esses motivos, a Gig Economy está no centro de uma discussão mundial acerca da responsabilidade dessas companhias milionárias sobre as condições de trabalho da mão de obra que contratam. No meio do limbo jurídico, quem sofre são os trabalhadores dessas plataformas, que ficam duplamente desprotegidos ― pelas empresas e pelo Estado.\nDisponível em: https://exame.abril.com.br/carreira/quais-sao-as-consequencia-do-trabalho-informal-no-pais/. Acesso em: 18 abr. 2020 (adaptado).\nA partir das informações apresentadas, avalie as asserções a seguir e a relação proposta entre elas.\nI. Trabalhadores autônomos informais que atuam em plataformas digitais sem qualquer vínculo empregatício, desprotegidos de regulamentação ou lei trabalhista, compõem a Gig Economy.\npORQuE\nII. Os trabalhadores, na Gig Economy, arcam com todos os custos necessários para desempenhar o seu trabalho, ganham por produção e enfrentam longas jornadas diárias, o que os deixa mais desgastados e com problemas de saúde.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q5",
+      "kind": "OBJECTIVE",
+      "number": 5,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        10,
+        11
+      ],
+      "ligatureJoins": [
+        "htt|ps://www.cvv.org.br/blog/o-suicidio-do-povo-indigena/.",
+        "nati|vas),",
+        "uti|lizado",
+        "afi|rmações",
+        "Tocanti|ns",
+        "preventi|vas",
+        "afi|rma"
+      ],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "TEXTO I\nSegundo o Ministério da Saúde, em 2017 o Brasil registrou uma média nacional de 5,7 óbitos para 100 mil habitantes. Na população indígena, foi registrado um número de óbitos três vezes maior que a média nacional – 15,2. Destes registros, 44,8% (aproximadamente, 6,8 óbitos), são suicídios de crianças e adolescentes entre 10 e 19 anos. Esses dados contrastam com o panorama nacional, em que o maior índice é entre adolescentes e adultos de 15 a 20 anos.\nDisponível em: https://www.cvv.org.br/blog/o-suicidio-do-povo-indigena/. Acesso em: 30 de abr. 2020 (adaptado).\nTEXTO II\nEvidências apontam que, em determinadas minorias étnico-raciais, como os indígenas (aborígines ou populações nativas), o suicídio entre crianças apresenta taxas bem mais elevadas do que as observadas na população geral. No Brasil, o enforcamento foi utilizado mais frequentemente entre indígenas do que entre não indígenas, não se observando, no primeiro grupo, suicídios por intoxicação ou por armas de fogo. O mapa a seguir apresenta a distribuição dos óbitos por suicídio entre crianças e adolescentes indígenas no Brasil, entre os anos de 2010 e 2014.\nSOUZA, M. Mortalidade por suicídio entre crianças indígenas no Brasil. Caderno de Saúde pública, v.35, Rio de Janeiro, 2019 (adaptado). Considerando as informações apresentadas e o alto índice de suicídio da população indígena, avalie as afirmações a seguir.\nI. O elevado índice de suicídios entre crianças e adolescentes indígenas no país evidencia a necessidade de ações com foco nos direitos fundamentais desses indivíduos.\nII. Os estados do Pará e de Tocantins são os que possuem os maiores índices de suicídio de indígenas na faixa etária de 10 a 14 anos.\nIII. Os povos das tribos originárias do Brasil, no que tange a sua história e preservação cultural, não estão amparados por direitos e garantias constitucionais.\nIV. O estabelecimento de ações preventivas ao suicídio nas comunidades indígenas deve considerar os elementos globais que afetam a população em geral, na faixa etária entre 15 e 20 anos.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "II."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q6",
+      "kind": "OBJECTIVE",
+      "number": 6,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [
+        "negati|vos",
+        "intensifi|cando",
+        "verifi|cou",
+        "expectati|va",
+        "expectati|va",
+        "expectati|va",
+        "últi|mos",
+        "expectati|va",
+        "lati|na,",
+        "expectati|va",
+        "lati|nos",
+        "signifi|cati",
+        "significati|vo,",
+        "expectati|va",
+        "lati|no-americana",
+        "expectati|va",
+        "lati|no-americanos",
+        "justi|fi",
+        "justifi|cati",
+        "justificati|va",
+        "justi|fi",
+        "justifi|cati",
+        "justificati|va"
+      ],
+      "status": "revisao-manual",
+      "flags": [
+        "versalete"
+      ],
+      "answer": "A",
+      "prompt": "A pandemia ocasionada pelo novo Coronavírus gerou impactos negativos na economia e nos negócios, intensificando problemas sociais no mundo todo. Nos Estados Unidos, um estudo realizado com a parceria de duas importantes universidades verificou que a expectativa de vida dos norte-americanos caiu 1,1 ano em 2020. A nova expectativa é de 77,4 anos. De acordo com o estudo, esta foi a maior queda anual da expectativa de vida já registrada nos últimos 40 anos. O declínio é ainda maior se considerada a expectativa de vida para negros que moram no país, cuja queda foi de 2,1 anos. Para a população latina, essa queda foi de 3 anos. O declínio na expectativa de vida dos latinos é significativo, uma vez que eles apresentam menor incidência de condições crônicas que são fatores de risco para a Covid-19 em relação às populações de brancos e negros.\nLOUREIRO, R. Covid-19 reduz gravemente expectativa de vida de negros e latinos nos EUA. Revista Exame, 2021 (adaptado). Considerando as informações apresentadas no texto, avalie as asserções a seguir e a relação proposta entre elas.\nI. O efeito desproporcional da pandemia da Covid-19 na expectativa de vida da população negra e latino-americana estabelece relação com sua situação de vulnerabilidade social.\npORQuE\nII. Uma hipótese que pode ser levantada quanto à diminuição da expectativa de vida de negros e latino-americanos está relacionada às suas precárias condições de trabalho, levando-os a maior possibilidade de exposição ao contágio pelo novo Coronavírus.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q7",
+      "kind": "OBJECTIVE",
+      "number": 7,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        12
+      ],
+      "ligatureJoins": [
+        "Esti|ma-se",
+        "positi|va",
+        "diagnósti|cos",
+        "preventi|vos",
+        "decodifi|cada",
+        "desafi|o",
+        "últi|ma",
+        "objeti|vo",
+        "uti|lizam",
+        "signifi|cati",
+        "significati|vo",
+        "amplifi|cando",
+        "refl|exos",
+        "autodiagnósti|co",
+        "htt|ps://agencia.fi",
+        "https://agencia.fi|ocruz.br/conteudos-sobre-saude-na-web-alteram-relacao-medico-paciente.",
+        "afi|rmações",
+        "profi|laxias.",
+        "afi|rma",
+        "relati|vas",
+        "proati|vo",
+        "afi|rma"
+      ],
+      "status": "revisao-manual",
+      "flags": [
+        "referencia-versalete"
+      ],
+      "answer": "C",
+      "prompt": "TEXTO I\nO estudo Internet and American Life Project, do Pew Research Center, demonstrou que, em 2009, metade das buscas de temas relacionados à saúde na internet era feita para terceiros, e quase seis em cada dez pessoas que usaram meios digitais para se informar sobre saúde mudaram o enfoque com que cuidavam da própria saúde ou da de algum parente. Estima-se que exista uma correlação positiva entre o grau de conhecimento das doenças (seus fatores de risco, formas de prevenção e tratamento) e a taxa de adoção de hábitos saudáveis pela sociedade. O aumento nos diagnósticos precoces do câncer de mama e a diminuição do tabagismo são dois exemplos clássicos a favor dessa ideia. Acredita-se que indivíduos mais bem informados aderem a comportamentos preventivos e reagem melhor a uma enfermidade.\nInfelizmente, a divulgação de temas médicos é uma faca de dois gumes: quem não sabe nada está mais perto da verdade do que a pessoa cuja mente está cheia de informações equivocadas. Conseguir que a mensagem seja bem decodificada pelos receptores é o grande desafio que preocupa (ou deveria preocupar) tanto médicos quanto jornalistas.\nTABAKMAN, R. a saúde na mídia: medicina para jornalistas, jornalismo para médicos. Trad. Lizandra Magon de Almeida. São Paulo: Summus Editorial, 2013 (adaptado).\nTEXTO II\nDe acordo com os dados da última TIC Domicílios — pesquisa realizada anualmente com o objetivo de mapear formas de uso das tecnologias de informação e comunicação no país —, aproximadamente 46% dos usuários de Internet no Brasil utilizam a rede à procura de informações médicas sobre saúde em geral e serviços de saúde. Para uma médica e pesquisadora da Fiocruz, os indivíduos sempre procuraram informações sobre seu estado de saúde, mas é inegável que o surgimento da Internet trouxe um aumento significativo do acesso a informações amplificando assim os reflexos deste processo e alterando a relação entre os indivíduos. A pesquisadora chama a atenção para o perigo do autodiagnóstico e da automedicação, que podem gerar consequências nefastas tanto para os indivíduos quanto para a saúde pública, uma vez que boa parte dos estudos mostra que não são adotados critérios durante as buscas na Internet.\nDisponível em: https://agencia.fiocruz.br/conteudos-sobre-saude-na-web-alteram-relacao-medico-paciente. Acesso em: 16 abr. 2020 (adaptado).\nConsiderando a abordagem dos textos, avalie as afirmações a seguir.\nI. Os textos I e II evidenciam a importância de critérios nas buscas realizadas pelos usuários da Internet por informações sobre patologias, pois algumas informações podem trazer riscos à saúde por fomentarem a compreensão equivocada de sintomas e profilaxias.\nII. O texto I afirma que a disponibilização de informações sobre temas de saúde nos meios de comunicação tem contribuído para o esclarecimento da população acerca de hábitos saudáveis.\nIII. No texto II, defende-se o acesso a informações relativas a pesquisas da área da saúde nos veículos de comunicação, pois elas permitem que o indivíduo seja proativo na prevenção de patologias.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q8",
+      "kind": "OBJECTIVE",
+      "number": 8,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [
+        "Gett|ysburg,",
+        "defi|nição",
+        "esti|ver",
+        "ti|ver",
+        "alternati|va,",
+        "desafi|o",
+        "políti|cas",
+        "htt|ps://g1.globo.com/politi",
+        "https://g1.globo.com/politi|ca/blog/matheus-leitao/post/2020/02/25/democracia-consensual-contra-a-ti",
+        "https://g1.globo.com/politica/blog/matheus-leitao/post/2020/02/25/democracia-consensual-contra-a-ti|rania-da-maioria.ghtml.",
+        "parti|r",
+        "afi|rmações",
+        "democráti|co,",
+        "políti|cas",
+        "competi|ti",
+        "competiti|vidade",
+        "combati|vidade",
+        "políti|ca",
+        "senti|do",
+        "afi|rma"
+      ],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "D",
+      "prompt": "Que é democracia? Em seu famoso discurso em Gettysburg, Abraham Lincoln disse que “a democracia é o governo do povo, feito para o povo e pelo povo, e responsável perante o povo”. O crédito desta definição é, na verdade, de Daniel Webster, que a elaborou 33 anos antes de Lincoln em outro discurso. Nesta ideia de “governo pelo povo e para o povo” surge uma questão essencial: e quando o povo estiver em desacordo? E quando o povo tiver preferências divergentes? O politólogo Arend Lijphart ressalta que há duas respostas principais: a resposta da “democracia majoritária” e a resposta da “democracia consensual”. Na democracia majoritária, a resposta é simples e direta: deve-se governar para a maioria do povo. A resposta alternativa, no modelo da democracia consensual é: deve-se governar para o máximo possível de pessoas.\nA virtude da democracia consensual é buscar consensos mais amplos no que é interesse de todos; o desafio da democracia consensual pressupõe lideranças políticas mais maduras, tanto no governo quanto na oposição. Democratas genuínos têm aversão à ideia do totalitarismo e combatem os delírios daqueles que desejam poder sem limites.\nDisponível em: https://g1.globo.com/politica/blog/matheus-leitao/post/2020/02/25/democracia-consensual-contra-a-tirania-da-maioria.ghtml. Acesso em: 2 maio 2020 (adaptado).\nA partir dos argumentos expostos no texto, avalie as afirmações a seguir.\nI. O bem comum, a ser estabelecido por um governo democrático, nem sempre está associado às opiniões da maioria do povo.\nII. A democracia consensual é caracterizada pelo consenso a ser alcançado entre situação e oposição, nas decisões governamentais.\nIII. Circunstâncias políticas de polarização, marcadas pela alta competitividade e combatividade entre posições divergentes, caracterizam um modelo de democracia majoritária.\nIV. Democracia consensual pressupõe que a situação política no poder considere em suas decisões as necessidades das minorias, no sentido de governar para todo o povo.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D3",
+      "kind": "DISCURSIVE",
+      "number": 3,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14,
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "caracteres-suspeitos"
+      ],
+      "prompt": "Um corpo de conhecimento representado na lógica proposicional utiliza os conectivos lógicos de implicação ( ® ) que representa o condicional, conjunção ( Ù ) que representa o operador lógico AND, a disjunção ( Ú ) que representa o operador lógico OR e a negação ( Ø ) que representa o operador lógico NOT. Seja P o seguinte conjunto de fórmulas da lógica proposicional:\n1.a ® Ø b 2.b Ù a 3.Ø b Ú b\nseja Q o seguinte conjunto de fórmulas da lógica proposicional:\n4.a Ú b 5.b ® a\ne seja R a fórmula\n6.Ø b ® a Veja a tabela-verdade para estas fórmulas.\n1 2 3 4 5 6\na b a ® Ø b b Ù a Ø b Ú b a Ú b b ® a Ø b ® a\nF F V F V F V F\nF V V F V V F V\nV F V F V V V V\nV V F V V V V V\nSabe-se que cada linha da tabela-verdade corresponde a uma atribuição de valores-verdade para os símbolos proposicionais (a e b) e cada coluna corresponde à avaliação da fórmula para esta atribuição. Algumas definições:\n(i) Uma fórmula é uma tautologia se e somente se, para toda atribuição de valores-verdade, sua avaliação é verdadeira.\n(ii) Uma atribuição de valores-verdade satisfaz a um conjunto de fórmulas se e somente se, para toda fórmula no conjunto, a avaliação é verdadeira.\n(iii) Um conjunto de fórmulas é satisfazível se e somente se existe uma atribuição de valores-verdade que satisfaz o conjunto. Em caso contrário, ele é insatisfazível.\n(iv) Uma fórmula é uma consequência lógica de um conjunto de fórmulas se e somente se, para toda atribuição de valores-verdade, se a atribuição satisfaz o conjunto então satisfaz a fórmula.\nCom base nas informações apresentadas, responda os itens a seguir.\na) Há alguma tautologia nas fórmulas 1 a 6? Justifique sua resposta. (valor: 2,5 pontos)\nb) Há algum conjunto (P ou Q) satisfazível? Justifique sua resposta. (valor: 2,5 pontos)\nc) Há algum conjunto (P ou Q) insatisfazível? Justifique sua resposta. (valor: 2,5 pontos)\nd) A fórmula 6 é consequência lógica de Q? Justifique sua resposta. (valor: 2,5 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D4",
+      "kind": "DISCURSIVE",
+      "number": 4,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        16
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "mencao-a-figura"
+      ],
+      "prompt": "A soma de dois números binários é feita bit a bit, começando da direita (menos significativo) para a esquerda (mais significativo), passando o transporte, vai um (do inglês, carry out, representado na figura como Cout), para o bit seguinte como vem um (do inglês, carry in, representado na figura como Cin). Uma forma simples de implementar um somador de N bits é implementar N somadores elementares de 1 bit. Cada somador de um bit tem as entradas A, B e carry in (Cin) e as saídas Soma (S) e carry out (Cout).\nDELGADO, J.; RIBEIRO, C. Arquitetura de Computadores. Rio de Janeiro: LTC, 2009 (adaptado).\nNesse contexto, considere a figura a seguir.\nEntradas Saídas A S B Somador Completo de 1-bit Cout Cin\nCom base no somador completo de 1-bit apresentado na figura, descreva sua tabela verdade e o diagrama do seu circuito lógico. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D5",
+      "kind": "DISCURSIVE",
+      "number": 5,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura"
+      ],
+      "prompt": "TEXTO I\nA maioria dos governos de todo o mundo fecharam temporariamente as instituições educacionais na tentativa de conter a pandemia da Covid-19. Esses fechamentos estão provocando impacto em mais de 70% da população estudantil do mundo. A UNESCO está fornecendo apoio aos países em seus esforços para minimizar as consequências das suspensões das aulas e facilitar a continuidade da educação para todos por meio da educação remota, especialmente para os mais vulneráveis.\nDisponível em: https://pt.unesco.org/. Acesso em: 24 maio 2020 (adaptado).\nTEXTO II\nRecursos Educacionais Abertos são materiais de ensino, aprendizado e pesquisa em qualquer suporte ou mídia, que estão sob domínio público, ou estão licenciados de maneira aberta, permitindo que sejam utilizados ou adaptados por terceiros. Recursos Educacionais Abertos podem incluir cursos completos, partes de cursos, módulos, livros didáticos, artigos de pesquisa, vídeos, testes, software e qualquer outra ferramenta, material ou técnica, que possa apoiar o acesso ao conhecimento.\nDisponível em: http://www.aberta.org.br/. Acesso em: 10 maio 2020 (adaptado).\nConsiderando os textos apresentados, cite e descreva três características técnicas e três características pedagógicas recomendáveis dos objetos de aprendizagem a serem consideradas no planejamento de atividades pedagógicas para o enfrentamento de situações adversas que demandem a suspensão das aulas presenciais. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q9",
+      "kind": "OBJECTIVE",
+      "number": 9,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "E",
+      "prompt": "Quando um computador é multiprogramado, ele geralmente tem múltiplos processos ou threads que competem pela CPU ao mesmo tempo. Essa situação ocorre sempre que dois ou mais processos estão simultaneamente no estado pronto. Se somente uma CPU se encontrar disponível, deverá ser feita uma escolha de qual processo executar em seguida. A parte do sistema operacional que faz a escolha é chamada de escalonador, e o algoritmo que ele usa é o algoritmo de escalonamento.\nTANENBAUM, A. S. Sistemas Operacionais Modernos.\n3. ed., São Paulo: Pearson, 2010 (adaptado).\nConsiderando que em ambientes diferentes são necessários algoritmos diferentes de escalonamento, garantindo assim que seja maximizado o uso de seus recursos, assinale a opção que apresenta um algoritmo de escalonamento seguido do tipo de ambiente no qual deva ser implementado.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Primeiro a chegar, último a sair (first in, last out - FILO); propício para sistemas de tempo real."
+        },
+        {
+          "letter": "B",
+          "text": "Escalonamento por taxas monotônicas (rate monotonic scheduling - RMS); propício para sistemas em lote."
+        },
+        {
+          "letter": "C",
+          "text": "Tarefa mais curta primeiro; propício para sistemas interativos."
+        },
+        {
+          "letter": "D",
+          "text": "Escalonamento por chave circular (round-robin); propício para sistemas de tempo real."
+        },
+        {
+          "letter": "E",
+          "text": "Escalonamento por prioridades; propício para sistemas interativos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q10",
+      "kind": "OBJECTIVE",
+      "number": 10,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "B",
+      "prompt": "A biblioteca de coleções da linguagem Java disponibiliza implementações de propósito geral para estruturas de dados elementares, como listas, filas e pilhas. Considere as seguintes definições de classes que representam implementações de estruturas de dados disponíveis na biblioteca da linguagem:\n• Classe A: os objetos são organizados em uma ordem linear e podem ser inseridos somente no início ou no final dessa sequência;\n• Classe B: os objetos são organizados em uma ordem linear determinada por uma referência ao próximo objeto;\n• Classe C: os objetos são removidos na ordem oposta em que foram inseridos;\n• Classe D: os objetos são inseridos e removidos respeitando a seguinte regra: o elemento a ser removido é sempre aquele que foi inserido primeiro.\nNesse contexto, assinale a alternativa que representa, respectivamente, as estruturas de dados implementadas pelas classes A, B, C e D.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Lista circular, lista simplesmente ligada, pilha e fila."
+        },
+        {
+          "letter": "B",
+          "text": "Deque, lista simplesmente ligada, pilha e fila."
+        },
+        {
+          "letter": "C",
+          "text": "Lista duplamente ligada, lista simplesmente ligada, fila e pilha."
+        },
+        {
+          "letter": "D",
+          "text": "Pilha, fila, deque e lista simplesmente encadeada."
+        },
+        {
+          "letter": "E",
+          "text": "Deque, pilha, lista ligada e fila."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q11",
+      "kind": "OBJECTIVE",
+      "number": 11,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura"
+      ],
+      "answer": "D",
+      "prompt": "Uma equipe de cientistas da computação de uma determinada empresa de animação foi designada para desenvolver um sistema capaz de varrer a web no intuito de detectar sites que possam estar usando imagens de seus personagens de animação sem o devido consentimento. Portanto, o sistema deverá receber imagens como entrada, classificá-las entre imagens da empresa e imagens não produzidas pela empresa.\nA figura abaixo esboça uma arquitetura de rede neural profunda e o processo de treinamento que os cientistas pretendem usar.\nEntrada (X)\nPesos 1 Camada de Entrada\nPesos ...\nPesos n Camada Intermediária n Ajuste dos pesos Camada de Saída\nOtimizador Saídas Previstas (Y’) Saídas Reais (Y)\nS Função de Perda\nCHOLLET, F. Deep Learning with Python. New York: Manning Publications, 2017 (adaptado). Após uma tentativa, notaram-se duas dificuldades: 1) o tempo de treinamento da rede estava muito longo e 2) a acurácia da rede treinada não estava no patamar aceito pela empresa.\nDiante deste contexto, avalie as afirmações a seguir.\nI. Aumentar o número de camadas é uma alternativa que pode levar a uma melhora na acurácia, além de diminuir o tempo de treinamento da rede.\nII. Fazer uso de redes convolucionais é uma alternativa que pode levar a uma melhora na acurácia, no entanto, pode exigir uso de máquinas com maior poder de processamento.\nIII. Aumentar o número de unidades de processamento (neurônios) nas camadas pode levar a uma piora na acurácia, além de diminuir o tempo de treinamento da rede.\nIV. Aumentar o número de amostras de treinamento é uma alternativa que pode levar a uma melhora na acurácia, apesar de aumentar o tempo de treinamento da rede.\nV. Fazer uso de redes recorrentes é uma alternativa que pode levar a uma melhora na acurácia, no entanto, pode exigir uso de máquinas com maior poder de processamento.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e IV."
+        },
+        {
+          "letter": "B",
+          "text": "I e V."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q12",
+      "kind": "OBJECTIVE",
+      "number": 12,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "B",
+      "prompt": "A Lei Geral de Proteção de Dados Pessoais (LGPD) está em vigência desde o final de 2018 e tem por objetivo regulamentar o tratamento de dados pessoais de clientes e usuários de empresas públicas e privadas.\nSobre a LGPD, avalie as afirmações a seguir.\nI. A lei reprime o uso indiscriminado de dados pessoais considerados sensíveis, como origem racial ou étnica, convicção religiosa e opinião política, informados em cadastros pelos cidadãos.\nII. Os dados anonimizados não serão considerados pessoais, mesmo que, utilizando-se de recursos próprios ou tecnológicos avançados, o processo de anonimização possa ser revertido.\nIII. O indivíduo poderá exigir que uma empresa informe se possui dados pessoais dele bem como solicitar formalmente que eles sejam corrigidos, atualizados ou eliminados.\nIV. A Autoridade Nacional de Proteção de Dados (ANPD) é responsável pela fiscalização e regulação da LGPD, prestando esclarecimentos, averiguando possíveis denúncias e modificando a legislação pertinente quando necessário.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q13",
+      "kind": "OBJECTIVE",
+      "number": 13,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "E",
+      "prompt": "O desenvolvimento de sistemas iterativo e evolutivo é uma abordagem que estabelece ciclos de desenvolvimento, com duração fixa, chamados iterações. O produto de cada iteração é um sistema parcial, executável, testável e integrável. Cada iteração inclui suas próprias atividades de análises de requisitos, projeto, implementação e teste. O ciclo de vida iterativo é baseado em refinamentos e incrementos sucessivos de um sistema por meio de múltiplas iterações, com realimentação e adaptação cíclicas como principais propulsores para convergir para um sistema adequado.\nCRAIG, L. Utilizando UML e Padrões: Uma Introdução à Análise e ao Projeto Orientados a Objetos. 3. ed. Porto Alegre: Bookman, 2007 (adaptado).\nConsiderando o texto apresentado, assinale a opção correta sobre o desenvolvimento iterativo e evolutivo.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A mudança nos requisitos do sistema é algo que gera atraso no desenvolvimento, por isso é aconselhável evitá-la."
+        },
+        {
+          "letter": "B",
+          "text": "O ciclo de desenvolvimento possui duração fixa, porém, durante o desenvolvimento, poderá ser alterado no caso de sistemas críticos."
+        },
+        {
+          "letter": "C",
+          "text": "O teste de usabilidade deve ser realizado no último ciclo, pois será o momento em que o usuário consegue testar todas as funcionalidades."
+        },
+        {
+          "letter": "D",
+          "text": "O subsistema gerado pela implementação dos requisitos no fim de uma iteração poderá ser utilizado pelo cliente como protótipo."
+        },
+        {
+          "letter": "E",
+          "text": "O documento de teste de usabilidade deve contemplar os critérios de acessibilidade para atender a todos os usuários do sistema."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q14",
+      "kind": "OBJECTIVE",
+      "number": 14,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "O primeiro computador criado foi o ENIAC (Electronic Numerical Integrator And Computer), desenvolvido por Eckert e Mauchly na Universidade da Pennsylvania, Estados Unidos. O projeto iniciou-se em 1943, financiado pelo governo americano. O período era da Segunda Guerra Mundial e o objetivo era poder calcular de forma mais ágil as melhores trajetórias para transporte de armas e mantimentos em meio aos exércitos inimigos. Esse é o tipo de cálculo que pequenos aparelhos celulares fazem hoje para encontrar rotas nas cidades por meio de GPS (Global Positioning System) e análise de mapa. O projeto só foi concluído em 1946, tarde demais para ser utilizado para a Segunda Guerra, mas foi bastante utilizado até 1955.\nMuitos projetos surgiram depois do ENIAC, mas eles eram barrados por algumas dificuldades e limitações, como por exemplo, o fato de não serem programados e trabalharem com números decimais. O problema de trabalhar com decimais é que cada algarismo armazenado possui 10 estados possíveis, representando os números de 0 a 9. Dentro de um sistema eletrônico, isso é complicado por que a carga de cada dispositivo, seja transistor, seja válvula, deveria ser medida para se verificar que número ela estava representando. Os erros eram muito frequentes. Bastava que uma válvula estivesse fora da temperatura ideal para que os resultados das operações começassem a sair errado. Von Neumann recomendou, então, que, em sua arquitetura, os dados e instruções passasem a ser armazenados em código binário, facilitando a análise dos mesmos e reduzindo a quantidade de erros.\nBRITO, A. V. Introdução a Arquitetura de Computadores. UFPB Virtual, 2020. Disponível em: http://producao.virtual.ufpb.br/. Acesso em: 05 maio 2020 (adaptado).\nAcerca da arquitetura de Von Neumann, avalie as asserções a seguir e a relação proposta entre elas.\nI. Embora as arquiteturas de computadores tenham evoluído muito do ENIAC aos modernos notebooks de hoje, a arquitetura de Von Neumann, conceito da década de 1950, tem se mantido até os dias atuais.\nPORQUE\nII. A arquitetura de Von Neumann permite que a CPU realize a busca de uma ou mais instruções além da próxima a ser executada; essa técnica é utilizada para acelerar a velocidade de operação da CPU, uma vez que a próxima instrução a ser executada está normalmente armazenada nos registradores da CPU e não precisa ser buscada da memória principal, que é muito mais lenta.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q15",
+      "kind": "OBJECTIVE",
+      "number": 15,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "C",
+      "prompt": "O surgimento das metodologias ágeis eliminou o gerenciamento baseado em planos, substituindo-o pelo planejamento incremental. A documentação de projeto foi reduzida ao mínimo e deixou de ser previsto um gerente de projeto. Infelizmente, esse tipo de abordagem não atende as necessidades das organizações, em que gerentes de negócio necessitam acompanhar o andamento dos projetos, controlar orçamento, estabelecer prioridades e atualizar seus planos de negócio. Nesse contexto, foi desenvolvido o SCRUM, um framework para a organização de projetos ágeis. O SCRUM prevê dois indivíduos: o Scrum Master e o Product Owner, que são responsáveis por atuar como interface entre a equipe de desenvolvimento e a organização.\nSOMMERVILLE, I. Engineering Software Products: An Introduction to Modern Software Engineering. Boston: Pearson, 2019 (adaptado). Em relação à metodologia SCRUM, avalie as afirmações a seguir.\nI. O papel do Scrum Master é guiar a equipe no uso efetivo da metodologia SCRUM.\nII. O papel do Product Owner é garantir o foco no produto, evitando que o mesmo se perca em questões técnicas menos relevantes.\nIII. Tanto o Scrum Master como o Product Owner têm autoridade direta sobre a equipe.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q16",
+      "kind": "OBJECTIVE",
+      "number": 16,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "caracteres-suspeitos"
+      ],
+      "answer": "B",
+      "prompt": "Em 1938, o matemático americano Claude Shannon notou o paralelismo entre a lógica proposicional e a lógica dos circuitos e percebeu que a álgebra booleana teria um papel importante na sistematização deste ramo da eletrônica. Cada um dos conetivos básicos da lógica são instâncias das operações básicas da álgebra booleana (“+”, “.” e ” ’ ”). Expressões booleanas combinando operações e variáveis podem ser usadas para representar circuitos combinacionais formados por portas lógicas.\nGERSTING, J. L. Mathematical Structures for Computer Science. New York: W. H. Freeman and Company, 2002. A figura a seguir apresenta as portas básicas.\nPorta “e” (and) Porta “ou” (or) Porta “não” (not)\nA partir das informações apresentadas, considere o circuito combinacional da figura a seguir.\nX¹\nX²\nX³\nQual das alternativas apresenta a expressão booleana correspondente?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "(X3 . X2’) + X1’"
+        },
+        {
+          "letter": "B",
+          "text": "(X3 . (X2’) + (X1’))’"
+        },
+        {
+          "letter": "C",
+          "text": "((X3 . X2)’ + X1’)’"
+        },
+        {
+          "letter": "D",
+          "text": "(X3 . X2)’ + X1’"
+        },
+        {
+          "letter": "E",
+          "text": "((X3 . X2’)’ + X1’)’"
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q17",
+      "kind": "OBJECTIVE",
+      "number": 17,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24,
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "caracteres-suspeitos"
+      ],
+      "answer": "C",
+      "prompt": "Durante parte do tempo, um processo está ocupado realizando computações internas e outras coisas que não levam a condições de corrida. No entanto, às vezes, um processo tem de acessar uma memória compartilhada ou arquivos, ou realizar outras tarefas críticas que podem levar a corridas. Essa parte do programa onde a memória compartilhada é acessada é chamada de região crítica ou seção crítica. Se conseguíssemos arranjar as coisas de maneira que dois processos jamais estivessem em suas regiões críticas ao mesmo tempo, poderíamos evitar as corridas. Embora essa exigência evite as condições de corrida, ela não é suficiente para garantir que processos em paralelo cooperem de modo correto e eficiente usando dados compartilhados. Precisamos que quatro condições se mantenham para chegar a uma boa solução.\n1. Dois processos jamais podem simultaneamente estar dentro de suas regiões críticas.\n2. Nenhuma suposição pode ser feita a respeito de velocidades ou de número de CPUs.\n3. Nenhum processo executando fora de sua região crítica pode bloquear qualquer processo.\n4. Nenhum processo deve ser obrigado a esperar eternamente para entrar em sua região crítica.\nEm um sentido abstrato, o comportamento que queremos é mostrado na figura a seguir.\nA entra na região crítica A deixa a região crítica\nProcesso A\nB tenta entrar B entra na B deixa a na região região crítica região crítica crítica\nProcesso B  B bloqueado T T T T 1 2 3 4\nTempo\nFigura - Exclusão mútua usando regiões críticas\nTANENBAUM, A. S. Sistemas Operacionais Modernos. 4. ed. Versão para Biblioteca Virtual Pearson. São Paulo: Pearson Education do Brasil, p. 83, 2016 (adaptado). Considerando o texto e a figura apresentados, avalie as asserções a seguir e a relação proposta entre elas.\nI. Em algumas situações, a exclusão mútua pode ser obtida por meio da desabilitação da interrupção controlada pelo Sistema Operacional, não sendo permitido que o seu controle seja feito pelo usuário.\nPORQUE\nII. A desabilitação da interrupção é uma técnica que pode impedir que o processador que está executando um processo em sua região crítica seja interrompido para executar outro código, sendo mais eficiente em sistemas de multiprocessadores devido a quantidade de processos concorrentes.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q18",
+      "kind": "OBJECTIVE",
+      "number": 18,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "E",
+      "prompt": "As técnicas de aprendizado de máquinas empregam um princípio de inferência denominado indução, no qual é possível obter conclusões genéricas a partir de um conjunto particular de exemplos. Estas técnicas de aprendizados indutivos podem ser divididas em dois principais tipos: os supervisionados e os não supervisionados. No aprendizado supervisionado é fornecida uma referência do objetivo a ser alcançado, isto é, um treinamento com o conhecimento do ambiente. Diferentemente do aprendizado supervisionado, o não supervisionado não utiliza referências, ou seja, não ocorre um treinamento com o conhecimento do ambiente.\nPELLUCCI P. R. S. et al. Utilização de técnicas de aprendizado de máquina no reconhecimento de entidades nomeadas no português. Belo Horizonte. E-xacta, v. 4, n. 1, p. 73-81, 2011 (adaptado).\nConsiderando as informações do texto, avalie as afirmações a seguir.\nI. A regressão linear é um exemplo de modelo baseado no aprendizado supervisionado.\nII. A diferença entre a saída desejada e a saída gerada é o valor do erro de um aprendizado não supervisionado.\nIII. O aprendizado não supervisionado é mais utilizado quando o entendimento dos dados é feito por meio de reconhecimento de padrões.\nIV. O aprendizado supervisionado é capaz de tomar decisões precisas ao receber novos dados a partir de um treinamento com dados conhecidos.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "II e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "I, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q19",
+      "kind": "OBJECTIVE",
+      "number": 19,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "D",
+      "prompt": "Duas técnicas comumente utilizadas para ampliar as informações básicas sobre requisitos são personas e cenários. Frequentemente usadas juntas, essas técnicas se complementam de forma a trazer detalhes realísticos que possibilitam ao desenvolvedor explorar as atividades atuais do usuário, uso futuro de novos produtos e visões futuristas de novas tecnologias. Elas também podem guiar o desenvolvimento ao longo do ciclo de vida do produto.\nROGERS, Y.; PREECE, J.; SHARP, H. Interaction Design: beyond human-computer interaction.\n5. ed. Indianapolis, IN, USA: John Wiley & Sons, Inc., 2019 (adaptado).\nCom base no texto apresentado e sobre os objetivos do uso de personas e cenários em um processo de elicitação de requisitos, avalie as afirmações a seguir.\nI. O uso de personas e cenários, em um processo de elicitação, explicita algumas situações que aparecem implícitas nos requisitos.\nII. O uso de personas e cenários, em um processo de elicitação, ajuda o projetista a entender melhor o impacto das decisões de projeto.\nIII. O uso de personas e cenários, em um processo de elicitação, facilita a especificação formal e não-ambígua dos requisitos de interação.\nIV. O uso de personas e cenários, em um processo de elicitação, lembra à equipe de desenvolvimento que pessoas reais usarão o produto.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q20",
+      "kind": "OBJECTIVE",
+      "number": 20,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "codigo"
+      ],
+      "answer": "A",
+      "prompt": "Observe o código abaixo escrito na linguagem C.\n1 #include <stdio.h> 2 #define TAM 10 3 int funcaol(int vetor[], int v){ 4\t\t int i; 5 for (i = 0; i < TAM; i++){ 6 \t\t\t if (vetor[i] == v)\n7\t\t\t\treturn i; 8 \t\t } 9 \t\t return -1; 10 } 11 int funcao2(int vetor[], int v, int i, int f){ 12 int m = (i + f) / 2; 13\t\t if (v == vetor[m])\n14 \t\t\t return m; 15 \t\t if (i >= f)\n16 \t\t\t return -1; 17 \t\t if (v > vetor[m])\n18 return funcao2(vetor, v, m+l, f); 19 \t\t else 20 return funcao2(vetor, v, i, m-1); 21 } 22 int main(){ 23 int vetor[TAM] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19}; 24 printf(“%d - %d”, funcao1(vetor, 15), funcao2(vetor, 15, 0, TAM-1)); 25 return 0; 26 } A respeito das funções implementadas, avalie as afirmações a seguir.\nI. O resultado da impressão na linha 24 é: 7 - 7.\nII. A função funcao1, no pior caso, é uma estratégia mais rápida do que a funcao2.\nIII. A função funcao2 implementa uma estratégia iterativa na concepção do algoritmo.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q21",
+      "kind": "OBJECTIVE",
+      "number": 21,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "E",
+      "prompt": "No projeto de redes de computadores, a escolha racional do dispositivo de conexão a ser utilizado é fundamental para o correto funcionamento da rede, bem como para a sua segurança e eficiência. Dispositivos como repetidores, hubs, bridges, switches, roteadores e gateways são muito comuns, mas diferem entre si em detalhes sutis e não muito sutis. Por existir uma grande quantidade desses dispositivos, vale a pena conhecer suas características principais, entender o seu funcionamento e saber quando e como são utilizados. A chave para entender esses dispositivos é observar que eles operam em camadas diferentes, como ilustra a figura 1. A camada é importante, porque diferentes dispositivos utilizam fragmentos de informações diferentes para decidir como realizar a comutação. Em um cenário típico, o usuário gera alguns dados a ser enviados para uma máquina remota. Esses dados são repassados à camada de transporte, que então acrescenta um cabeçalho (por exemplo, um cabeçalho TCP) e repassa o pacote resultante à camada de rede situada abaixo dela. Essa camada adiciona seu próprio cabeçalho para formar um pacote da camada de rede (por exemplo, um pacote IP). Na figura 2, vemos o pacote IP sombreado. Em seguida, o pacote vai para a camada de enlace de dados, que adiciona seu próprio cabeçalho e seu checksum (CRC) e entrega o quadro resultante à camada física para transmissão, digamos, por uma LAN.\nCamada de aplicação Gateway de aplicação\nCamada de transporte Gateway de transporte Pacote (fornecido pela camada de rede) Cabeçalho Cabeçalho Cabeçalho Dados do CRC Camada de rede Roteador de quadro de pacote TCP usuário Camada de enlance de dados Bridge, switch Quadro (feito pela camada de enlance de dados)\nCamada física Repetidor, hub\nFigura 1 - Dispositivos presentes em cada camada. Figura 2 - Quadros, pacotes e cabeçalhos.\nTANENBAUM, A. S.; Wetherall, D. Redes de computadores. 5. ed. São Paulo: Pearson Prentice Hall, p. 213 e 214, 2011 (adaptado).\nConsiderando o contexto das informações e da figura apresentadas, assinale a alternativa correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Os repetidores não reconhecem quadros ou pacotes, apenas o seu próprio cabeçalho."
+        },
+        {
+          "letter": "B",
+          "text": "Um hub tem várias interfaces de entrada/saída conectadas eletricamente; os quadros que chegam a qualquer uma dessas interfaces são enviados a todas as outras e, se dois quadros chegarem ao mesmo tempo, eles serão colocados em buffer de espera e arbitragem de enlace."
+        },
+        {
+          "letter": "C",
+          "text": "Uma bridge conecta duas ou mais redes, diferentemente de um hub, cada porta é isolada das demais para criar um domínio próprio de colisão; ela só envia o quadro à porta onde ele é necessário, e pode encaminhar vários quadros ao mesmo tempo, além de examinar o campo de carga útil (pacotes de rede) dos quadros que encaminha, para obter o endereço do destinatário."
+        },
+        {
+          "letter": "D",
+          "text": "Os roteadores examinam os endereços em pacotes e efetuam o roteamento com base nesses endereços, de modo que eles só trabalham com os protocolos para os quais foram projetados para lidar; nas redes de broadcast, o problema de roteamento é mais complicado e cabe à camada de rede operar com algoritmos de roteamento apropriados."
+        },
+        {
+          "letter": "E",
+          "text": "Os gateways de transporte conectam dois computadores que utilizam diferentes protocolos de transporte orientados a conexões, por exemplo, um computador que utiliza o protocolo TCP/IP orientado a conexões pode se comunicar com um computador que utiliza um protocolo de transporte orientado a conexões diferentes, chamado SCTP."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q22",
+      "kind": "OBJECTIVE",
+      "number": 22,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        29
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "Uma Organização Não Governamental (ONG), relacionada à causa animal, registra os pets (animais de estimação) amparados por ela, de acordo com o seguinte Diagrama Entidade Relacionamento (DER).\ncodigo TIPO_PET descricao (1,1)\npertencer\n(1,n)\ncpf adotar nome nome PESSOA PET data_nascimento (1,1) (0,n)\ncodigo\nA partir das regras de mapeamento do Modelo Conceitual para o Modelo Lógico Relacional, assinale o Esquema Relacional mais adequado a ser gerado. Considere que as chaves primárias estão sublinhadas.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "PESSOA(cpf: texto, nome: texto)\nTIPO_PET(codigo: inteiro, descricao: texto)\nPET(codigo: inteiro, nome: texto, data_nascimento: data, codigo_tipo_pet: inteiro, adotante: texto) codigo_tipo_pet referencia TIPO_PET(codigo)\nadotante referencia PESSOA(cpf)"
+        },
+        {
+          "letter": "B",
+          "text": "PET(codigo: inteiro, nome: texto, data_nascimento: data) PESSOA(cpf: texto, nome: texto, codigo_pet: inteiro)\ncodigo_pet referencia PET(codigo)\nTIPO_PET(codigo: inteiro, descricao: texto, codigo_pet: inteiro) codigo_pet referencia PET(codigo)"
+        },
+        {
+          "letter": "C",
+          "text": "TIPO_PET(codigo: inteiro, descricao: texto)\nPET(codigo: inteiro, nome: texto, data_nascimento: data, codigo_tipo_pet: inteiro) codigo_tipo_pet referencia TIPO_PET(codigo)\nPESSOA(cpf: texto, nome: texto, codigo_pet: inteiro)\ncodigo_pet referencia PET(codigo)"
+        },
+        {
+          "letter": "D",
+          "text": "PET_PESSOA(codigo_pet: inteiro, nome_pet: texto, data_nascimento: data, cpf: texto, nome_pessoa: texto, codigo_tipo_pet: inteiro, descricao_tipo_pet: texto)"
+        },
+        {
+          "letter": "E",
+          "text": "PESSOA(cpf: texto, nome: texto)\nPET(codigo: inteiro, nome: texto, data_nascimento: data, codigo_tipo_pet: inteiro, descricao_tipo_pet, adotante: texto)\nadotante referencia PESSOA(cpf)"
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q23",
+      "kind": "OBJECTIVE",
+      "number": 23,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "O uso da estrutura de dados tipo Árvore Binária de Busca é uma técnica fundamental de programação. Uma árvore binária é um conjunto finito de elementos que está vazio ou é particionado em três subconjuntos, a saber: 1) raiz da árvore - elemento inicial (único), 2) subárvore da esquerda - se vista isoladamente compõe outra árvore e 3) subárvore da direita - se vista isoladamente compõe outra árvore. A árvore pode não ter qualquer elemento (árvore vazia). A definição de árvore é recursiva e, devido a isso, muitas operações sobre árvores binárias utilizam recursão. Sendo “A” a raiz de uma árvore binária e “B” a raiz de sua subárvore esquerda ou direita, é dito que “A” é pai de “B” e que “B” é filho de “A”. Um elemento sem filhos é chamado de folha. A altura da árvore é o número de elementos encontrados no caminho descendente mais longo que liga a sua raiz até uma folha.\nUma Árvore de Busca Binária é uma árvore binária especializada, na qual a informação que o elemento filho esquerdo possui é numericamente menor que a informação do elemento pai. De forma análoga, a informação que o elemento filho direito possui é numericamente maior ou igual à informação do elemento pai. O objetivo de organizar dados em Árvores Binárias de Busca é facilitar a tarefa de encontrar um determinado elemento. O percurso completo de uma árvore binária consiste em visitar todos os elementos desta árvore, segundo algum critério, a fim de processá-los. Três formas são bem conhecidas para a realização deste percurso: 1) pré-ordem, 2) em-ordem e 3) pós-ordem. A figura a seguir mostra um exemplo de árvore binária.\nJ\nD O\nA L R\nK M\nFigura – Exemplo de Árvore Binária\nLAUREANO, M. A. P. Estrutura de Dados com Algoritmos. São Paulo: Brasport, 2008. p. 126, 129, 136 (adaptado). Considerando o texto e a figura apresentados e que a seguinte lista de elementos numéricos: (27, 34, 40, 18, 23, 5, 25, 36, 10, 7, -2) seja totalmente transferida para uma estrutura de Árvore Binária de Busca, inicialmente vazia, elemento a elemento, da esquerda para a direita, assinale a alternativa correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A árvore resultante terá 5 níveis de altura, com 6 elementos à esquerda da raiz principal (inicial) e 4 elementos à direita."
+        },
+        {
+          "letter": "B",
+          "text": "O percurso da árvore em Pré-ordem irá processar os elementos na seguinte ordem (do primeiro ao último): -2, 7, 10, 5, 25, 23, 18, 36, 40, 34, 27."
+        },
+        {
+          "letter": "C",
+          "text": "O percurso da árvore em Em-ordem irá processar os elementos na seguinte ordem (do primeiro ao último): -2, 5, 7, 10, 18, 23, 25, 27, 34, 36, 40."
+        },
+        {
+          "letter": "D",
+          "text": "O percurso da árvore em Pós-ordem irá processar os elementos na seguinte ordem (do primeiro ao último): 27, 18, 5, -2, 10, 7, 23, 25, 34, 40, 36."
+        },
+        {
+          "letter": "E",
+          "text": "O número máximo de elementos que essa árvore poderá ter com 10 níveis será de 1 024 elementos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q24",
+      "kind": "OBJECTIVE",
+      "number": 24,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "E",
+      "prompt": "A criptografia de ponta a ponta do WhatsApp garante que somente você e a pessoa com quem você está se comunicando podem ler o que é enviado. Ninguém mais terá acesso a elas, nem mesmo o WhatsApp. As suas mensagens estão seguras com cadeados e somente você e a pessoa que as recebe possuem as chaves especiais necessárias para abri-los e ler as mensagens. E, para uma proteção ainda maior, cada mensagem que você envia tem um cadeado e uma chave únicos.\nDisponível em: https://faq.whatsapp.com/pt_br/general/28030015. Acesso em: 05 mai. 2020.\nCom base no texto acima e considerando os conceitos de segurança e criptografia, avalie as afirmações a seguir.\nI. Se um par de chaves é gerado durante a instalação do aplicativo e a chave pública do usuário é armazenada no servidor, é possível verificar a autenticidade de uma mensagem recebida usando a chave pública do remetente obtida do servidor.\nII. A estratégia de utilizar um vetor de inicialização (IV) variável para compor chaves criptográficas diferentes para cada mensagem enviada oculta padrões de dados, além de dificultar os chamados ataques de reprodução.\nIII. O uso do algoritmo AES nas comunicações entre dois usuários indica o emprego de criptografia simétrica, isto é, aquela que utiliza um par de chaves, uma usada pelo remetente, para encriptar a mensagem, e outra para o destinatário decriptá-la.\nIV. A presença do algoritmo SHA-256, no protocolo de comunicação entre cliente e servidor, sugere a verificação de integridade das mensagens, visto que é possível detectar se ocorreu alguma modificação comparando-se os valores de hash da mensagem enviada e recebida.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e IV."
+        },
+        {
+          "letter": "B",
+          "text": "II e III."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e III."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q25",
+      "kind": "OBJECTIVE",
+      "number": 25,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        32
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "B",
+      "prompt": "A computação em nuvem (cloud computing) pode ser definida como a infraestrutura de comunicação representada por vários servidores web, responsáveis por armazenar dados e aplicações, em que cada parte desta infraestrutura é provida como um serviço e estes são normalmente alocados em centros de dados, utilizando hardware compartilhado para computação e armazenamento. Segundo o Instituto Nacional de Padrões e Tecnologia (NIST), um modelo de Computação em Nuvem deve apresentar 5 características essenciais, 3 modelos de serviço e 4 modelos de implantação. As características essenciais são: self-service sob demanda, acesso à rede ampla, pooling de recursos, elasticidade rápida e serviço medido. Os modelos de serviços são: Software como um Serviço (SaaS), Plataforma como um Serviço (PaaS) e Infraestrutura como um Serviço (IaaS) e os modelos de implantação são: Nuvem Privada, Nuvem Pública, Nuvem Comunidade e Nuvem Híbrida.\nConsiderando as informações apresentadas, avalie as afirmações a seguir.\nI. No modelo SaaS, o usuário não precisa adquirir ou realizar upgrade de hardware para rodar as aplicações, não administra ou controla a infraestrutura subjacente e as atualizações de software são de responsabilidade do provedor do serviço em nuvem.\nII. A elasticidade é a capacidade de aumentar ou diminuir de forma automática o tempo de disponibilidade dos recursos computacionais que foram provisionados contratualmente para cada usuário.\nIII. A Nuvem Comunidade tem como objetivo gerenciar os recursos computacionais pertencentes a cada uma das organizações participantes de uma comunidade de organizações para compartilhar a infraestrutura de software e hardware entre todos.\nIV. No modelo IaaS, o usuário não administra ou controla a infraestrutura da nuvem, mas tem controle sobre os sistemas operacionais, armazenamento e aplicativos implantados.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q26",
+      "kind": "OBJECTIVE",
+      "number": 26,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        33
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "A",
+      "prompt": "As interfaces adaptativas realizam as adaptações e personalizações de forma automática e dinâmica durante o processo de navegação, com base na aprendizagem da navegação e da interação do usuário. Técnicas de interfaces adaptativas podem ser utilizadas para adaptar interfaces às preferências do usuário, à sua capacidade cognitiva e ao seu estilo de navegação, tornando as interações mais naturais e atrativas. Essas técnicas de adaptação podem ser empregadas tanto para a reorganização dos objetos no ambiente, como para alterar a forma de apresentar informações. As adaptações podem ocorrer em diferentes níveis ou de diferentes formas: adaptação de conteúdo, adaptação da navegação e adaptação da apresentação do conteúdo. Cada um desses níveis de adaptação possui métodos e técnicas de adaptação próprios.\nNIENOW, A. L. Interfaces adaptativas no comércio eletrônico como facilitadoras da inclusão digital de idosos. Revista Tecnologia e Tendências, v. 9, n. 2, p. 116-136, 2017 (adaptado). Considerando a construção de interfaces adaptativas na interação homem-computador, avalie as afirmações a seguir quanto aos níveis e técnicas de adaptação.\nI. No nível de conteúdo, podem-se considerar as técnicas de fragmentos de texto, fragmentos condicionais, páginas variantes e abordagem baseada em frames.\nII. No nível de navegação, podem-se considerar as técnicas de layouts de página e guias de estilos.\nIII. No nível de apresentação, podem-se considerar as técnicas de orientação direta, anotação de links, apresentação e ocultação e ordenação de links.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q27",
+      "kind": "OBJECTIVE",
+      "number": 27,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        33
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "D",
+      "prompt": "A integração das tecnologias de informação e comunicação (TIC) em contexto pedagógico acontece quando a tecnologia é utilizada para se cumprirem os objetivos pedagógicos e simultaneamente para motivar uma aprendizagem significativa. As TIC poderão desempenhar um papel importante, uma vez que permitem trazer/reproduzir contextos do mundo real para o ensino e aprendizagem. Nos vários formatos de ensino e de aprendizagem digital, é cada vez mais importante repensar as estratégias de ensino-aprendizagem e de avaliação, tendo em conta as competências prévias dos intervenientes (tecnológicas), em especial se ocorrer em ambiente online. No entanto, se destes resultados o docente também puder refletir sobre as estratégias de ensino que utilizou e sobre a sua própria atuação como agente de ensino, este será necessariamente um processo mais rico, uma vez que assim terá a oportunidade de ajustar a sua atividade futura às necessidades dos alunos, detectadas no próprio processo de avaliação.\nBALULA, A. J. Avaliação digital como aprendizagem. Revista Educação, Formação & Tecnologias. v. 7, n. 1, p. 80-88, jan./jun. 2014 (adaptado). Com base no texto apresentado, assinale a opção correta a respeito da avaliação digital.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Os recursos digitais disponíveis devem ser segmentados de acordo com sua finalidade: ensino, aprendizagem ou de avaliação."
+        },
+        {
+          "letter": "B",
+          "text": "Os processos avaliativos devem ser somativos, para melhor retratar o perfil dos alunos de uma turma e permitir traçar novas estratégias pedagógicas."
+        },
+        {
+          "letter": "C",
+          "text": "As avaliações devem ser padronizadas em relação ao período de tempo de aplicação das atividades e ao valor de pontos atribuídos em cada uma delas."
+        },
+        {
+          "letter": "D",
+          "text": "As estratégias pedagógicas de ensino, aprendizagem e avaliação devem ocorrer de forma concomitantemente, em função dos objetivos pedagógicos."
+        },
+        {
+          "letter": "E",
+          "text": "As atividades avaliativas propostas devem ser acompanhadas por um fiscal, de modo a garantir maior credibilidade no processo avaliativo."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q28",
+      "kind": "OBJECTIVE",
+      "number": 28,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        34
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "D",
+      "prompt": "No contexto da Educação a Distância (EaD), o Ambiente Virtual de Aprendizagem (AVA) tornou-se uma ferramenta quase dominante no que diz respeito aos recursos utilizados com fins a essa modalidade de ensino, podendo ser designado como um espaço virtual micro pertencente ao ciberespaço e utilizado como ferramenta no processo ensino e aprendizado. O uso do AVA já se consolidou como uma realidade para a EaD, sendo imprescindível quando se pretende discutir os métodos da educação na atualidade. Sua estrutura consiste na utilização de novas metodologias, desenvolvidas a partir do agrupamento combinado de mídias e que são escolhidas de acordo com a necessidade da instituição, do público envolvido e da abrangência do curso. Assim, professores, tutores e alunos se interagem no processo de ensino e aprendizagem.\nNASCIMENTO, F. E. M.; SILVA, D. G. Educação mediada por tecnologia: inovações no processo de ensino e aprendizagem - uma revisão integrativa. Abakos, Belo Horizonte, v. 6, n. 2, p. 72-91, maio 2018 (adaptado). Em relação aos agentes envolvidos na EAD e as ações na plataforma AVA, avalie as afirmações a seguir.\nI. O professor tem a função de acompanhar a frequência dos alunos por meio de chamadas virtuais de presença em intervalos regulares de tempo na plataforma AVA.\nII. O tutor tem a função de mediação e comunicação entre professores e alunos, além de mediar discussões entre alunos no AVA.\nIII. O professor tem a função de elaborar o material didático de acordo com os objetivos e conteúdos propostos no programa da disciplina, adequado às orientações metodológicas.\nIV. O tutor tem a atribuição de contribuir com o professor e participar do processo avaliativo dos alunos, como avaliar a participação em um fórum.\nV. O aluno tem função ativa no processo de ensino e aprendizagem, sendo responsável por elencar os recursos pedagógicos adequados para cumprir os objetivos da disciplina.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "B",
+          "text": "I, II e V."
+        },
+        {
+          "letter": "C",
+          "text": "I, III e V."
+        },
+        {
+          "letter": "D",
+          "text": "II, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q29",
+      "kind": "OBJECTIVE",
+      "number": 29,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        35
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "Os objetos de aprendizagem ganharam ampla aceitação e importância no contexto do desenvolvimento de material educacional digital em função de seu potencial de reusabilidade. Muitos benefícios são esperados da abordagem de reusabilidade tais como economia e eficiência do tempo para o desenvolvimento de recursos, além de melhorias nas estratégias de ensino aprendizagem.\nTAROUCO, L. M. R.; DA SILVA, C. C. G.; GRANDO, A. Fatores que afetam o reuso de objetos de aprendizagem. RENOTE-Revista Novas Tecnologias na Educação, v. 9, n. 1, 2011 (adaptado).\nSabe-se que uma característica fundamental para avaliação de um objeto de aprendizagem é seu nível de reuso. Neste contexto, avalie as asserções a seguir e a relação proposta entre elas.\nI. A reutilização de um objeto de aprendizagem de granularidade grossa, ou seja, contendo múltiplos itens (imagens, texto, áudio – uma simulação, por exemplo) é mais difícil do que a reutilização de um objeto composto somente de uma imagem.\nPORQUE\nII. A questão de reuso está ligada a operações intercontextuais, ou seja, a habilidade de reutilizar um recurso dentro de diferentes contextos, assim, quanto mais contexto há dentro de um recurso, maior a dificuldade de reuso, já que quanto menor a granularidade, maior a reusabilidade.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q30",
+      "kind": "OBJECTIVE",
+      "number": 30,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        35
+      ],
+      "ligatureJoins": [],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "A",
+      "prompt": "O Massive Open Online Course (MOOC) são plataformas virtuais de aprendizagem que têm como objetivo disponibilizar, para um grande número de alunos, a oportunidade de ampliar os seus conhecimentos de forma gratuita. Uma definição que poder ser adotada para MOOCs é de que estes representam experiências de aprendizagem inovadoras com base nas TICs, em plataformas web 2.0 e em redes sociais. A participação em um MOOC é aberta para qualquer interessado e envolve grande quantidade de material didático.\nCORDEIRO, R. F.; AGUIAR, Y. P. C.; SARAIVA, J. A. G. Perspectivas da Avaliação de Usabilidade em MOOCs. Nuevas Ideas en Informática Educativa, v. 12, p. 465 - 470. Santiago de Chile (adaptado).\nAcerca da avaliação em plataformas MOOCs, avalie as asserções a seguir e a relação proposta entre elas.\nI. O poder de massificação das plataformas MOOCs gera um grande potencial no sentido de automatização de avaliação nestes ambientes.\nPORQUE\nII. O grande número de estudantes que podem ser submetidos à avaliação nos MOOCs permite que, com o decorrer do tempo e o uso de Inteligência Artificial, sejam coletados dados suficientes para criar um sistema capaz de corrigir avaliações automaticamente, mesmo que essas contenham questões discursivas.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q31",
+      "kind": "OBJECTIVE",
+      "number": 31,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        36
+      ],
+      "ligatureJoins": [
+        "políti|cas",
+        "desti|nadas",
+        "políti|cas,",
+        "consti|tuição",
+        "normati|vos,",
+        "burocráti|cos",
+        "insti|tucionais",
+        "confi|guração",
+        "políti|cas",
+        "políti|cas",
+        "arti|culação",
+        "afi|rmações",
+        "objeti|va",
+        "garanti|a",
+        "afi|rma"
+      ],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "D",
+      "prompt": "Os quilombolas, compreendidos também como povos ou comunidades tradicionais, exigem que as políticas públicas a eles destinadas considerem a sua inter-relação com as dimensões históricas, políticas, econômicas, sociais, culturais e educacionais que acompanham a constituição dos quilombos no Brasil. Consequentemente, a Educação Escolar Quilombola não pode ser pensada somente se levando em conta os aspectos normativos, burocráticos e institucionais relacionados à configuração das políticas educacionais. A sua implementação deverá ser sempre acompanhada de consulta prévia e realizada pelo poder público junto às comunidades quilombolas e suas organizações.\nBRASIL/CNE. parecer CNE/CEB n. 16/2012. Diretrizes Curriculares Nacionais para a Educação Escolar Quilombola, 2012 (adaptado).\nConsiderando o texto e as discussões sobre políticas de articulação escola/comunidade quilombola, avalie as afirmações a seguir.\nI. A relação entre educação e movimentos sociais na educação quilombola objetiva adequar essa organização cultural ao sistema educacional.\nII. A história, a memória, o território, a ancestralidade e os conhecimentos tradicionais da comunidade quilombola são aspectos considerados na garantia do direito à educação quilombola.\nIII. O papel da comunidade quilombola é determinante nos processos decisórios acerca da educação escolar a ser nela implementada.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q32",
+      "kind": "OBJECTIVE",
+      "number": 32,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        36
+      ],
+      "ligatureJoins": [
+        "parti|cipação",
+        "desti|no",
+        "bibliografi|a.",
+        "coleti|va.",
+        "políti|co,",
+        "incenti|var",
+        "refl|exão",
+        "criati|va",
+        "justi|fi",
+        "justifi|cati",
+        "justificati|va",
+        "justi|fi",
+        "justifi|cati",
+        "justificati|va"
+      ],
+      "status": "revisao-manual",
+      "flags": [
+        "versalete"
+      ],
+      "answer": "A",
+      "prompt": "O pensamento de Paulo Freire – a sua teoria do conhecimento – deve ser entendido no contexto em que surgiu o Nordeste brasileiro, onde, no início da década de 1960, metade de seus 30 milhões de habitantes vivia na “cultura do silêncio”, como ele dizia, isto é, eram analfabetos. Era preciso “dar-lhes a palavra” para que transitassem para a participação na construção de um Brasil que fosse dono de seu próprio destino e que superasse o colonialismo.\nGADOTTI, Moacir. paulo Freire: uma bibliografia. São Paulo: Cortez, 1996.\nCom base no texto e nas ideias freireanas, avalie as asserções a seguir e a relação proposta entre elas.\nI. Paulo Freire denunciou a opressão e a exclusão gerada pela supressão do direito à educação e à cidadania, defendendo a educação como uma empreitada coletiva. pORQuE\nII. A educação deve ser compreendida como um ato político, pois deve incentivar a reflexão e a ação consciente e criativa do sujeito em seu processo de libertação.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q33",
+      "kind": "OBJECTIVE",
+      "number": 33,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        37
+      ],
+      "ligatureJoins": [
+        "auditi|va,",
+        "defi|ciência",
+        "auditi|va",
+        "práti|cas",
+        "garanti|r",
+        "htt|p://www.planalto.gov.br/ccivil_03/_Ato2004-2006/2005/Decreto/D5626.htm.",
+        "garanti|r",
+        "afi|rmações",
+        "esti|mule",
+        "afeti|vo,",
+        "cogniti|vo,",
+        "linguísti|co",
+        "objeti|vo",
+        "consti|tuir",
+        "positi|va",
+        "fi|lho",
+        "subjeti|vos",
+        "difi|culdades",
+        "afi|rma"
+      ],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "O Decreto n. 5.626/2005, que dispõe sobre a Língua Brasileira de Sinais (Libras) considera a pessoa surda como aquela que, por ter perda auditiva, compreende e interage com o mundo por meio de experiências visuais. Em consonância com o decreto, nas escolas públicas em que há crianças surdas ou com deficiência auditiva matriculadas, faz-se necessário o desenvolvimento de práticas capazes de garantir o seu direito à educação.\nDisponível em: http://www.planalto.gov.br/ccivil_03/_Ato2004-2006/2005/Decreto/D5626.htm. Acesso em 20 abr. 2020 (adaptado).\nConsiderando as ações necessárias para a escola garantir o direito à educação das crianças surdas, avalie as afirmações a seguir.\nI. É necessário criar situações em sala de aula que promovam o convívio social entres as crianças, que estimule o respeito às diferenças, promovendo o reconhecimento das suas potencialidades e o desenvolvimento afetivo, cognitivo, linguístico e sociocultural.\nII. A Libras deve ser assegurada como a primeira língua da criança surda, considerando-se a Língua Portuguesa, na modalidade escrita, como a segunda.\nIII. É fundamental disponibilizar intérpretes de Libras para as crianças surdas, e caso não seja possível, é preciso solicitar aos familiares que procurem outra escola mais preparada.\nIV. A escola deve fomentar parcerias com os pais com o objetivo de acolhê-los e ajudá-los a constituir uma imagem positiva de seu filho surdo, auxiliando-o na compreensão da sua realidade.\nV. Os professores precisam desenvolver, em relação aos alunos surdos, processos de avaliação mais subjetivos com foco nas dificuldades de aprendizagem desses alunos.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e V."
+        },
+        {
+          "letter": "B",
+          "text": "II e III."
+        },
+        {
+          "letter": "C",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, III, IV e V."
+        },
+        {
+          "letter": "E",
+          "text": "II, III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q34",
+      "kind": "OBJECTIVE",
+      "number": 34,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        38
+      ],
+      "ligatureJoins": [
+        "confi|guração",
+        "signifi|cati",
+        "significati|va",
+        "efi|cazes,",
+        "explicati|vos",
+        "Coti|dianos",
+        "identi|fi",
+        "identifi|car,",
+        "ti|po",
+        "(Cínti|a,",
+        "Coti|diano",
+        "sistemati|zação",
+        "parti|cipantes",
+        "afi|rmações",
+        "investi|gações",
+        "fi|cas",
+        "afi|rmam",
+        "Cínti|a",
+        "práti|ca",
+        "enfati|zam",
+        "esti|lo",
+        "administrati|vo",
+        "objeti|vos",
+        "Cínti|a",
+        "parti|r",
+        "interfi|ram",
+        "administrati|vo",
+        "afi|rmações",
+        "parti|cipantes",
+        "investi|gações",
+        "afi|rma"
+      ],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "C",
+      "prompt": "As percepções sobre o termo liderança revelam uma configuração ainda precária da realidade brasileira no campo da gestão escolar. As pesquisas internacionais apresentam uma gama significativa de resultados sobre o tema há, pelo menos, mais de duas décadas. Vale lembrar que os estudos sobre escolas eficazes, na sua maioria, apontam o efeito da liderança do gestor como um dos principais fatores explicativos dessa equação. Um sobrevoo nos dados da pesquisa Olhares Cotidianos sobre a Gestão Escolar (OCGE), realizada com gestores e professores de seis escolas de um município brasileiro, permite identificar, de forma geral, noções sobre o termo, ao se solicitar ao grupo algum tipo de caracterização mais precisa de liderança:\n\"Isso aí é uma coisa que se tem ou não se tem.\" (Ana, Grupo Liderança).\n\"O dom da palavra, do convencimento...\" (Andrea, Grupo Liderança).\n\"Carisma\" (Cíntia, Grupo Liderança).\n\"A pessoa nasce com isso ou não.\" (Adriana, Grupo Liderança).\nCOELHO, F. M. O Cotidiano da Gestão Escolar: o método de caso na sistematização de problemas. Educação & Realidade, Porto Alegre, v. 40, n. 4, out./dez. 2015, p. 1.261-1.276 (adaptado). Relacionando as ideias de liderança expostas pelas participantes da pesquisa sobre o exercício da gestão escolar, avalie as afirmações a seguir.\nI. As respostas de Ana e Adriana reforçam as concepções defendidas pelas investigações científicas do campo educacional contemporâneo sobre liderança, que afirmam que nem todos podem ser gestores escolares e que é preciso ter a qualidade de empreendedor para ocupar esse cargo.\nII. Ana e Cíntia expõem ideias que são coerentes com os estudos atuais sobre a prática da gestão escolar, pois enfatizam o estilo administrativo do gestor, que é um fator fundamental para se compreender a liderança e as suas relações com os objetivos educacionais das escolas.\nIII. Em suas respostas, Andrea e Cíntia expressam a ideia de liderança a partir de um de seus aspectos, o interpessoal, embora outros fatores relevantes interfiram na gestão escolar, como o administrativo e/ou o pedagógico.\nIV. As afirmações das participantes relacionam a liderança a uma capacidade de convencimento e a uma habilidade inata do líder – concepções já ultrapassadas pelas investigações educacionais sobre o tema no cenário contemporâneo.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e IV."
+        },
+        {
+          "letter": "B",
+          "text": "II e III."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e III."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q35",
+      "kind": "OBJECTIVE",
+      "number": 35,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        39
+      ],
+      "ligatureJoins": [
+        "identi|dades",
+        "comparti|lhados.",
+        "práti|ca",
+        "ciberati|vismo”.",
+        "parti|r",
+        "afi|rmações",
+        "ciberati|vismo",
+        "classifi|cados",
+        "ati|vismo",
+        "parti|r",
+        "críti|ca",
+        "afi|rma"
+      ],
+      "status": "rascunho",
+      "flags": [],
+      "answer": "E",
+      "prompt": "As redes sociais promovem formas de interação entre indivíduos agrupados por interesses mútuos, identidades semelhantes e também por valores compartilhados. Nesse contexto, a Internet vem se tornando um importante espaço para movimentos sociais por possibilitar uma acelerada e ampla difusão de ideias e absorção de novos elementos em busca de algo em comum. Assim, os movimentos sociais se fazem valer cada vez mais da “democracia informacional”, da “ciberdemocracia” e da prática do “ciberativismo”.\nA partir das ideias sobre comunicação e interação virtual, avalie as afirmações a seguir.\nI. Os movimentos sociais tendem a perder força, prestígio e visibilidade com o crescimento da virtualidade junto à nova geração de jovens e adultos.\nII. Ciberdemocracia, democracia informacional e ciberativismo podem ser classificados como movimentos advindos da virtualidade.\nIII. As redes sociais potencializam o ativismo fazendo uso da virtualidade, no entanto, ainda são pouco exploradas pelos movimentos sociais da atualidade.\nIV. Tempo e espaço são conceitos a serem repensados a partir da inserção cada vez maior da virtualidade na vida social.\nV. É papel do educador formar e preparar os alunos para uma atuação responsável e crítica frente à virtualidade, explorando suas potencialidades.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, II, e III."
+        },
+        {
+          "letter": "B",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "C",
+          "text": "I, IV e V."
+        },
+        {
+          "letter": "D",
+          "text": "II, III e V."
+        },
+        {
+          "letter": "E",
+          "text": "II, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2021-licenciatura-exam",
+        "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+        "answerKeyId": "enade-2021-licenciatura-answer-key",
+        "answerKeySha256": "92874d01d2cfc5f622abc3523ab91f7c6c60ba9eed18fb550479d4f391d6eae5",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    }
+  ]
+}

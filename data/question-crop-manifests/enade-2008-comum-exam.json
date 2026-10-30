@@ -1,0 +1,2176 @@
+{
+ "document": "enade-2008-comum-exam",
+ "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+ "renderer": {
+  "dpi": 200,
+  "format": "image/webp",
+  "lossless": true,
+  "pages": [
+   {
+    "page": 1,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 2,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 3,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 4,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 5,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 6,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 7,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 8,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 9,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 10,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 11,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 12,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 13,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 14,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 15,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 16,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 17,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 18,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 19,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 20,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 21,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 22,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 23,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 24,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 25,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 26,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 27,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 28,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 29,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 30,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 31,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 32,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 33,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 34,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 35,
+    "width": 595,
+    "height": 842
+   },
+   {
+    "page": 36,
+    "width": 595,
+    "height": 842
+   }
+  ],
+  "pdftoppm": "pdftoppm version 24.02.0",
+  "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+ },
+ "items": [
+  {
+   "key": "Q1",
+   "number": 1,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q1-1.webp",
+     "page": 2,
+     "box": {
+      "x0": 30.84,
+      "y0": 82.87,
+      "x1": 564.16,
+      "y1": 774
+     },
+     "width": 1481,
+     "height": 1920,
+     "byteSize": 678378,
+     "sha256": "bd39fe2a91de6fc0da66859b07257db22433f3f943ed6d737afea8fe467151dd"
+    }
+   ]
+  },
+  {
+   "key": "Q2",
+   "number": 2,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q2-1.webp",
+     "page": 3,
+     "box": {
+      "x0": 30.84,
+      "y0": 70.87,
+      "x1": 298.41,
+      "y1": 562.91
+     },
+     "width": 743,
+     "height": 1367,
+     "byteSize": 274404,
+     "sha256": "7e4ae6b2597bfd7264c0497f581b730df96b030cfc327b311f98c356311fe91f"
+    }
+   ]
+  },
+  {
+   "key": "Q3",
+   "number": 3,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q3-1.webp",
+     "page": 3,
+     "box": {
+      "x0": 30.84,
+      "y0": 563.35,
+      "x1": 298.38,
+      "y1": 767.05
+     },
+     "width": 743,
+     "height": 566,
+     "byteSize": 24790,
+     "sha256": "1e1811776ad35ab286e747bb0909647458c62dfa6493d4f7eba064141af81402"
+    }
+   ]
+  },
+  {
+   "key": "Q4",
+   "number": 4,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q4-1.webp",
+     "page": 3,
+     "box": {
+      "x0": 300,
+      "y0": 70.87,
+      "x1": 564.68,
+      "y1": 363.36
+     },
+     "width": 736,
+     "height": 812,
+     "byteSize": 28458,
+     "sha256": "410052544f0d8be1fbcfbb2c20c114151d6d633539b0feb15a1255c61f9e4389"
+    }
+   ]
+  },
+  {
+   "key": "Q5",
+   "number": 5,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q5-1.webp",
+     "page": 3,
+     "box": {
+      "x0": 300,
+      "y0": 368.23,
+      "x1": 564.7,
+      "y1": 771.72
+     },
+     "width": 736,
+     "height": 1121,
+     "byteSize": 200180,
+     "sha256": "c91ad02e891248685c2964ba743ce11139c4c3d9463eccad98a80ffac0f36bbc"
+    }
+   ]
+  },
+  {
+   "key": "Q6",
+   "number": 6,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q6-1.webp",
+     "page": 4,
+     "box": {
+      "x0": 30.84,
+      "y0": 68.83,
+      "x1": 564.98,
+      "y1": 523.44
+     },
+     "width": 1483,
+     "height": 1263,
+     "byteSize": 425676,
+     "sha256": "fad53715be20ee8040ed28ddb4bae1c2354f125465e74cdb6a28be3a2fbbe057"
+    }
+   ]
+  },
+  {
+   "key": "Q7",
+   "number": 7,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q7-1.webp",
+     "page": 4,
+     "box": {
+      "x0": 30.84,
+      "y0": 518.83,
+      "x1": 565.2,
+      "y1": 765.12
+     },
+     "width": 1484,
+     "height": 684,
+     "byteSize": 147484,
+     "sha256": "55a927f7be3d4dfd5e711e786d73352842022f5f757dce9efcf0c4c8c6ba234c"
+    }
+   ]
+  },
+  {
+   "key": "Q8",
+   "number": 8,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q8-1.webp",
+     "page": 5,
+     "box": {
+      "x0": 30.84,
+      "y0": 68.83,
+      "x1": 565.44,
+      "y1": 757.8
+     },
+     "width": 1485,
+     "height": 1914,
+     "byteSize": 763130,
+     "sha256": "23ceea60d078044ae8360a9b9d247cfeec380bad6f7a89e8a43c80a9c9bd1c54"
+    }
+   ]
+  },
+  {
+   "key": "Q9",
+   "number": 9,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "fragments": [
+    {
+     "file": "Q9-1.webp",
+     "page": 6,
+     "box": {
+      "x0": 30.72,
+      "y0": 68.83,
+      "x1": 565.44,
+      "y1": 766.32
+     },
+     "width": 1486,
+     "height": 1938,
+     "byteSize": 318138,
+     "sha256": "e27f7f38e053423780fa680a9261018cee1fa57d70128a41fd2824ede59d212f"
+    }
+   ]
+  },
+  {
+   "key": "Q10",
+   "number": 10,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "4 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q10-1.webp",
+     "page": 7,
+     "box": {
+      "x0": 30,
+      "y0": 68.83,
+      "x1": 565.44,
+      "y1": 772.08
+     },
+     "width": 1488,
+     "height": 1954,
+     "byteSize": 332144,
+     "sha256": "7ae951263eeee01cac89d366d6cbc8f3bc8aa623c900ba26724cc2c957f9db35"
+    }
+   ]
+  },
+  {
+   "key": "Q11",
+   "number": 11,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q11-1.webp",
+     "page": 8,
+     "box": {
+      "x0": 30.84,
+      "y0": 138.55,
+      "x1": 297.21,
+      "y1": 397.2
+     },
+     "width": 740,
+     "height": 718,
+     "byteSize": 26206,
+     "sha256": "3d4595dd53009ef54929235eae4ed97df634ae84ffcbd0d7fc020c6570d6380c"
+    }
+   ]
+  },
+  {
+   "key": "Q12",
+   "number": 12,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q12-1.webp",
+     "page": 8,
+     "box": {
+      "x0": 30.84,
+      "y0": 398.71,
+      "x1": 297.14,
+      "y1": 645.37
+     },
+     "width": 739,
+     "height": 685,
+     "byteSize": 38012,
+     "sha256": "1a4ec2728c58cdcba2cb6c85a2184eec6d108279cdce7e31bee862c32ae7abba"
+    }
+   ]
+  },
+  {
+   "key": "Q13",
+   "number": 13,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "override": "Alternativa E no topo da coluna direita, sem o título da Q14.",
+   "warnings": [
+    "4 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q13-1.webp",
+     "page": 8,
+     "box": {
+      "x0": 30.84,
+      "y0": 646.15,
+      "x1": 297.12,
+      "y1": 763.44
+     },
+     "width": 739,
+     "height": 326,
+     "byteSize": 13618,
+     "sha256": "7f40f361fc624b458219b894a6d1511dd4405fee21db98972c226dc05b1129cc"
+    },
+    {
+     "file": "Q13-2.webp",
+     "page": 8,
+     "box": {
+      "x0": 298.8,
+      "y0": 135.38,
+      "x1": 474.35,
+      "y1": 156.5
+     },
+     "width": 488,
+     "height": 59,
+     "byteSize": 2514,
+     "sha256": "826c5b5f9b95000d8210200700008dd9c234d41311c907b76e3579ecbd102328"
+    }
+   ]
+  },
+  {
+   "key": "Q14",
+   "number": 14,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "override": "Começa abaixo da alternativa E da Q13; continuação sem o título da Q15.",
+   "fragments": [
+    {
+     "file": "Q14-1.webp",
+     "page": 8,
+     "box": {
+      "x0": 298.8,
+      "y0": 156,
+      "x1": 565.32,
+      "y1": 770.29
+     },
+     "width": 740,
+     "height": 1707,
+     "byteSize": 64722,
+     "sha256": "b1be20e0e2794fb9eaba1b36c2a42421eb939aa485958a700e6bcf5cd41a9aec"
+    },
+    {
+     "file": "Q14-2.webp",
+     "page": 9,
+     "box": {
+      "x0": 30.84,
+      "y0": 70.46,
+      "x1": 185.95,
+      "y1": 89.45
+     },
+     "width": 431,
+     "height": 52,
+     "byteSize": 2242,
+     "sha256": "8b2bebd2e56cae1258e26a53e9ca2f8a9ab716d2a4dd6bda9f83b9ab7439dedc"
+    }
+   ]
+  },
+  {
+   "key": "Q15",
+   "number": 15,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q15-1.webp",
+     "page": 9,
+     "box": {
+      "x0": 30.84,
+      "y0": 83.47,
+      "x1": 297.17,
+      "y1": 288.12
+     },
+     "width": 739,
+     "height": 568,
+     "byteSize": 24538,
+     "sha256": "7745f80bffcb64229ccc95743a5eddf0f893eb496d8fb23f9096db0cd62ec8ae"
+    }
+   ]
+  },
+  {
+   "key": "Q16",
+   "number": 16,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q16-1.webp",
+     "page": 9,
+     "box": {
+      "x0": 30.84,
+      "y0": 289.15,
+      "x1": 297.23,
+      "y1": 772.21
+     },
+     "width": 740,
+     "height": 1342,
+     "byteSize": 59226,
+     "sha256": "ba22f425e27009571d89b4564010e6f31951b02dd3a76b0653a23a849e1ef1d2"
+    }
+   ]
+  },
+  {
+   "key": "Q17",
+   "number": 17,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q17-1.webp",
+     "page": 9,
+     "box": {
+      "x0": 298.8,
+      "y0": 70.87,
+      "x1": 565.15,
+      "y1": 385.57
+     },
+     "width": 740,
+     "height": 874,
+     "byteSize": 34726,
+     "sha256": "559618a6b56327e265b7631323276bf5de67bb5e264852afb987cdf2e953dc7a"
+    }
+   ]
+  },
+  {
+   "key": "Q18",
+   "number": 18,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q18-1.webp",
+     "page": 9,
+     "box": {
+      "x0": 298.8,
+      "y0": 386.11,
+      "x1": 565.12,
+      "y1": 768.61
+     },
+     "width": 740,
+     "height": 1062,
+     "byteSize": 35274,
+     "sha256": "0c846120d7491a2bc8e397f6062d274610b83c385770577238a58bfe870c3c5a"
+    }
+   ]
+  },
+  {
+   "key": "Q19",
+   "number": 19,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q19-1.webp",
+     "page": 10,
+     "box": {
+      "x0": 30.84,
+      "y0": 68.83,
+      "x1": 565.18,
+      "y1": 333.01
+     },
+     "width": 1484,
+     "height": 734,
+     "byteSize": 54038,
+     "sha256": "3b7ae095784b51a414252441333c319f929044e68782b2af7842402210d14ad8"
+    }
+   ]
+  },
+  {
+   "key": "Q20",
+   "number": 20,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "12 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q20-1.webp",
+     "page": 10,
+     "box": {
+      "x0": 30.84,
+      "y0": 320.88,
+      "x1": 565.44,
+      "y1": 764.99
+     },
+     "width": 1485,
+     "height": 1234,
+     "byteSize": 60092,
+     "sha256": "56096aef759ccea397411aba1ccfcba32a98b9be3f874c530e658e00366abdcb"
+    }
+   ]
+  },
+  {
+   "key": "Q21",
+   "number": 21,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q21-1.webp",
+     "page": 11,
+     "box": {
+      "x0": 30.84,
+      "y0": 263.59,
+      "x1": 303,
+      "y1": 639.49
+     },
+     "width": 756,
+     "height": 1044,
+     "byteSize": 36464,
+     "sha256": "114ed3acf0f6d5d0b2f05c6ef23f33c037e0a93b5ab3a8309a8096c721670ced"
+    }
+   ]
+  },
+  {
+   "key": "Q22",
+   "number": 22,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "warnings": [
+    "12 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q22-1.webp",
+     "page": 11,
+     "box": {
+      "x0": 30.84,
+      "y0": 631.99,
+      "x1": 302.94,
+      "y1": 771.25
+     },
+     "width": 755,
+     "height": 386,
+     "byteSize": 15126,
+     "sha256": "40e1e0073fc0b41be426def581fad1f03c9ec26b577fedf94b037040db8d4300"
+    }
+   ]
+  },
+  {
+   "key": "Q23",
+   "number": 23,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q23-1.webp",
+     "page": 11,
+     "box": {
+      "x0": 304.44,
+      "y0": 263.59,
+      "x1": 565.2,
+      "y1": 765.35
+     },
+     "width": 724,
+     "height": 1394,
+     "byteSize": 54958,
+     "sha256": "eead5061372ae329f706e98e87cb407a90772f5b2bb537d1eaf7ad96280ee518"
+    }
+   ]
+  },
+  {
+   "key": "Q24",
+   "number": 24,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q24-1.webp",
+     "page": 12,
+     "box": {
+      "x0": 30.84,
+      "y0": 70.87,
+      "x1": 302.91,
+      "y1": 636.24
+     },
+     "width": 755,
+     "height": 1570,
+     "byteSize": 33656,
+     "sha256": "185390322f6439b1fd370cb8a67477ba8cfe6d207f3f8074f4451fc773e72d38"
+    }
+   ]
+  },
+  {
+   "key": "Q25",
+   "number": 25,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q25-1.webp",
+     "page": 12,
+     "box": {
+      "x0": 304.44,
+      "y0": 70.87,
+      "x1": 565.2,
+      "y1": 634.91
+     },
+     "width": 724,
+     "height": 1567,
+     "byteSize": 55304,
+     "sha256": "397d5312656b5b2013dd8534f0a6cc2f1c57a25ce0349d58766eae7476671d22"
+    }
+   ]
+  },
+  {
+   "key": "Q26",
+   "number": 26,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q26-1.webp",
+     "page": 13,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 311.95,
+      "y1": 608.4
+     },
+     "width": 784,
+     "height": 1493,
+     "byteSize": 142152,
+     "sha256": "9145116f15c68e19f470a06c475cf9b6557d9f61fdc617d54663a0dfe617cfb7"
+    }
+   ]
+  },
+  {
+   "key": "Q27",
+   "number": 27,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q27-1.webp",
+     "page": 13,
+     "box": {
+      "x0": 30,
+      "y0": 605.23,
+      "x1": 311.98,
+      "y1": 771
+     },
+     "width": 784,
+     "height": 461,
+     "byteSize": 22376,
+     "sha256": "2775dcfd42c9e94dc6db8801e544f60b511483b78dd155e83f08a211e6979679"
+    }
+   ]
+  },
+  {
+   "key": "Q28",
+   "number": 28,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q28-1.webp",
+     "page": 13,
+     "box": {
+      "x0": 313.44,
+      "y0": 70.87,
+      "x1": 565.13,
+      "y1": 418.44
+     },
+     "width": 699,
+     "height": 965,
+     "byteSize": 37392,
+     "sha256": "16de3798aa1d5cf4676283fe8794d3ddfbbc0ce8555f2bd50a37d19e34ba31dd"
+    }
+   ]
+  },
+  {
+   "key": "Q29",
+   "number": 29,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q29-1.webp",
+     "page": 13,
+     "box": {
+      "x0": 313.44,
+      "y0": 414.79,
+      "x1": 565.44,
+      "y1": 583.93
+     },
+     "width": 700,
+     "height": 470,
+     "byteSize": 20162,
+     "sha256": "7e996ac39755812f16f1900a34d351eb9d9372e47bfa6ba90b43fb9ae580cba0"
+    }
+   ]
+  },
+  {
+   "key": "Q30",
+   "number": 30,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q30-1.webp",
+     "page": 13,
+     "box": {
+      "x0": 313.44,
+      "y0": 581.35,
+      "x1": 565.19,
+      "y1": 771.01
+     },
+     "width": 699,
+     "height": 527,
+     "byteSize": 25956,
+     "sha256": "d84181f5ff4b1b5728462eb0ec8fb11769c6716c93cc4b23e3bf530470ee6835"
+    }
+   ]
+  },
+  {
+   "key": "Q31",
+   "number": 31,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q31-1.webp",
+     "page": 14,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 293.93,
+      "y1": 367.81
+     },
+     "width": 733,
+     "height": 825,
+     "byteSize": 29734,
+     "sha256": "4168399d5bfe3ef59323ad240c314eab85c41707dcbbdb5933820e6f14e9e388"
+    }
+   ]
+  },
+  {
+   "key": "Q32",
+   "number": 32,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q32-1.webp",
+     "page": 14,
+     "box": {
+      "x0": 30,
+      "y0": 366.19,
+      "x1": 293.96,
+      "y1": 770.05
+     },
+     "width": 734,
+     "height": 1122,
+     "byteSize": 46320,
+     "sha256": "53bd1ab41b2450278c31a9a1017de7b5913b99091462a54dafbf37bfbd4a0995"
+    }
+   ]
+  },
+  {
+   "key": "Q33",
+   "number": 33,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q33-1.webp",
+     "page": 14,
+     "box": {
+      "x0": 295.44,
+      "y0": 70.87,
+      "x1": 565.18,
+      "y1": 437.88
+     },
+     "width": 749,
+     "height": 1019,
+     "byteSize": 45358,
+     "sha256": "375cbf2f054fbcf63f0aaa7823a1cee89df80ef10135cee33844bf500c15360c"
+    }
+   ]
+  },
+  {
+   "key": "Q34",
+   "number": 34,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q34-1.webp",
+     "page": 14,
+     "box": {
+      "x0": 295.44,
+      "y0": 435.79,
+      "x1": 565.19,
+      "y1": 770.04
+     },
+     "width": 749,
+     "height": 928,
+     "byteSize": 41058,
+     "sha256": "48942ee2687c826edb24354a874212f2c018a1d4b44d0fe31ef13afb760d37e3"
+    }
+   ]
+  },
+  {
+   "key": "Q35",
+   "number": 35,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q35-1.webp",
+     "page": 15,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 328.66,
+      "y1": 459.83
+     },
+     "width": 830,
+     "height": 1080,
+     "byteSize": 64694,
+     "sha256": "94d9aaf4a68ca7773e3dd1482c1912b9c14ec12d9d219632b333b39d9fec3332"
+    }
+   ]
+  },
+  {
+   "key": "Q36",
+   "number": 36,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q36-1.webp",
+     "page": 15,
+     "box": {
+      "x0": 30,
+      "y0": 457.99,
+      "x1": 328.66,
+      "y1": 763.08
+     },
+     "width": 830,
+     "height": 848,
+     "byteSize": 49024,
+     "sha256": "df3517403c8659978c87a0a4d5d2ce0986af89702998c1fcddf3da49ced48719"
+    }
+   ]
+  },
+  {
+   "key": "Q37",
+   "number": 37,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q37-1.webp",
+     "page": 15,
+     "box": {
+      "x0": 330.24,
+      "y0": 70.87,
+      "x1": 565.19,
+      "y1": 294.12
+     },
+     "width": 653,
+     "height": 620,
+     "byteSize": 32642,
+     "sha256": "b67f7548a19dabaa62108e15f7b1beb9294b44065faf39e95c21ed926ce15e80"
+    }
+   ]
+  },
+  {
+   "key": "Q38",
+   "number": 38,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q38-1.webp",
+     "page": 15,
+     "box": {
+      "x0": 330.24,
+      "y0": 289.99,
+      "x1": 565.2,
+      "y1": 540.96
+     },
+     "width": 653,
+     "height": 697,
+     "byteSize": 19154,
+     "sha256": "2d6aef3d84484f8aca02f436b393c4affe6450f21cf3cf29f2c8aea4c490e7a2"
+    }
+   ]
+  },
+  {
+   "key": "Q39",
+   "number": 39,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "fragments": [
+    {
+     "file": "Q39-1.webp",
+     "page": 16,
+     "box": {
+      "x0": 30,
+      "y0": 68.83,
+      "x1": 565.44,
+      "y1": 764.88
+     },
+     "width": 1488,
+     "height": 1934,
+     "byteSize": 55282,
+     "sha256": "9a02954d437226c26bc02e573fc41c7670f7c37bdc0ceaa9a0fd938d8fd9acde"
+    }
+   ]
+  },
+  {
+   "key": "Q40",
+   "number": 40,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "2 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q40-1.webp",
+     "page": 17,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 296.77,
+      "y1": 759.71
+     },
+     "width": 741,
+     "height": 1913,
+     "byteSize": 69422,
+     "sha256": "53318b435c11458096142badda422aa7520b2e0cc440ab39c1b66393ef4a2824"
+    },
+    {
+     "file": "Q40-2.webp",
+     "page": 17,
+     "box": {
+      "x0": 298.44,
+      "y0": 32.16,
+      "x1": 565.44,
+      "y1": 769.2
+     },
+     "width": 742,
+     "height": 2048,
+     "byteSize": 25088,
+     "sha256": "cea9043ce1a88f4879836a63c15477f74d6144afa9b96ffecb0dde379a43f7a8"
+    }
+   ]
+  },
+  {
+   "key": "Q41",
+   "number": 41,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "override": "Sem o aviso PARE e a instrução do bloco de Engenharia de Computação.",
+   "warnings": [
+    "2 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q41-1.webp",
+     "page": 18,
+     "box": {
+      "x0": 30,
+      "y0": 160.63,
+      "x1": 253.43,
+      "y1": 768.01
+     },
+     "width": 621,
+     "height": 1687,
+     "byteSize": 67600,
+     "sha256": "b97326110a3babcfd44de3db40a2602598e51a6d04d0e15a5b7d32d6359406df"
+    }
+   ]
+  },
+  {
+   "key": "Q42",
+   "number": 42,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q42-1.webp",
+     "page": 18,
+     "box": {
+      "x0": 255,
+      "y0": 160.63,
+      "x1": 565.1,
+      "y1": 339.13
+     },
+     "width": 862,
+     "height": 496,
+     "byteSize": 26410,
+     "sha256": "c41408dd8a7892a72ebcb798cc09cc135237583e77172d86b9aa97df6a341a64"
+    }
+   ]
+  },
+  {
+   "key": "Q43",
+   "number": 43,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q43-1.webp",
+     "page": 18,
+     "box": {
+      "x0": 255,
+      "y0": 337.99,
+      "x1": 565.17,
+      "y1": 768.85
+     },
+     "width": 862,
+     "height": 1197,
+     "byteSize": 59920,
+     "sha256": "6c62c41944c55654d0211ff24da57e287de64d887221ca37d46a1a0145a7b613"
+    }
+   ]
+  },
+  {
+   "key": "Q44",
+   "number": 44,
+   "kind": "OBJECTIVE",
+   "status": "anulada",
+   "answer": "ANULADA",
+   "fragments": [
+    {
+     "file": "Q44-1.webp",
+     "page": 19,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 296.76,
+      "y1": 762.35
+     },
+     "width": 741,
+     "height": 1921,
+     "byteSize": 67586,
+     "sha256": "0599b93637429bf97b87f441ea6ad8a4a8d7147748ff72957a2ac4494740e0ec"
+    }
+   ]
+  },
+  {
+   "key": "Q45",
+   "number": 45,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q45-1.webp",
+     "page": 19,
+     "box": {
+      "x0": 298.44,
+      "y0": 70.87,
+      "x1": 565.2,
+      "y1": 603.36
+     },
+     "width": 741,
+     "height": 1479,
+     "byteSize": 102228,
+     "sha256": "e8a5d5e93ab4d313515adf96e07060ece7dc66f5ceb08433f264e60712dbf793"
+    }
+   ]
+  },
+  {
+   "key": "Q46",
+   "number": 46,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q46-1.webp",
+     "page": 20,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 296.74,
+      "y1": 451.91
+     },
+     "width": 741,
+     "height": 1058,
+     "byteSize": 33760,
+     "sha256": "574244b9a17140320ac0a40aa1408e8c42c6a473b30bbd21801eec0dcc403000"
+    }
+   ]
+  },
+  {
+   "key": "Q47",
+   "number": 47,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q47-1.webp",
+     "page": 20,
+     "box": {
+      "x0": 30,
+      "y0": 461.71,
+      "x1": 296.75,
+      "y1": 772.2
+     },
+     "width": 741,
+     "height": 862,
+     "byteSize": 32162,
+     "sha256": "40720c5f751b8d2c0dd72d8d40be97c43191f713e4fa141a20e5df843f20e930"
+    }
+   ]
+  },
+  {
+   "key": "Q48",
+   "number": 48,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q48-1.webp",
+     "page": 20,
+     "box": {
+      "x0": 298.44,
+      "y0": 70.87,
+      "x1": 565.2,
+      "y1": 399.18
+     },
+     "width": 741,
+     "height": 912,
+     "byteSize": 34696,
+     "sha256": "b0f29cd9f02e72558405daf4d5ce2eac1b16bf53c01b5217206c7714dbaaa91c"
+    }
+   ]
+  },
+  {
+   "key": "Q49",
+   "number": 49,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q49-1.webp",
+     "page": 20,
+     "box": {
+      "x0": 298.44,
+      "y0": 402.55,
+      "x1": 565.18,
+      "y1": 764.39
+     },
+     "width": 741,
+     "height": 1005,
+     "byteSize": 44536,
+     "sha256": "d1439cee02f41334dfd1bddcab9ea76d6e6ea4c6c091843b671d365b7d7ca34e"
+    }
+   ]
+  },
+  {
+   "key": "Q50",
+   "number": 50,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q50-1.webp",
+     "page": 21,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 296.69,
+      "y1": 753.64
+     },
+     "width": 741,
+     "height": 1896,
+     "byteSize": 63998,
+     "sha256": "b47a093b89bce815f9e2a149709dbd27afbddaee61985e645d541cfb092bb0de"
+    },
+    {
+     "file": "Q50-2.webp",
+     "page": 21,
+     "box": {
+      "x0": 298.44,
+      "y0": 32.16,
+      "x1": 565.19,
+      "y1": 407.39
+     },
+     "width": 741,
+     "height": 1043,
+     "byteSize": 39402,
+     "sha256": "e42847e4e3951f81e907156771ce9693d12bb11dd5cec7e8feb1cd495d2d6eee"
+    }
+   ]
+  },
+  {
+   "key": "Q51",
+   "number": 51,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q51-1.webp",
+     "page": 22,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 296.74,
+      "y1": 766.57
+     },
+     "width": 741,
+     "height": 1932,
+     "byteSize": 64754,
+     "sha256": "82d9bdae53277116f198d20c221704f7ee159ccd365d2c310e5752a837c97465"
+    }
+   ]
+  },
+  {
+   "key": "Q52",
+   "number": 52,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q52-1.webp",
+     "page": 22,
+     "box": {
+      "x0": 298.44,
+      "y0": 70.87,
+      "x1": 565.18,
+      "y1": 562.43
+     },
+     "width": 741,
+     "height": 1365,
+     "byteSize": 53832,
+     "sha256": "3cc880634044907a430f55cb72261b0923f1ac5a7962f0308fd6a0f30c02c330"
+    }
+   ]
+  },
+  {
+   "key": "Q53",
+   "number": 53,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q53-1.webp",
+     "page": 23,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 324.57,
+      "y1": 428.16
+     },
+     "width": 819,
+     "height": 992,
+     "byteSize": 39782,
+     "sha256": "94fd97ea2a119e18d223d4906b3dd2d8bbfd313efd25ff6ce53232fb8c6b066d"
+    }
+   ]
+  },
+  {
+   "key": "Q54",
+   "number": 54,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q54-1.webp",
+     "page": 23,
+     "box": {
+      "x0": 30,
+      "y0": 427.63,
+      "x1": 324.55,
+      "y1": 767.87
+     },
+     "width": 819,
+     "height": 945,
+     "byteSize": 48324,
+     "sha256": "e873d8932313f0c7cef4c67fa42d205f6aa214ebcb6de1950a49af6b5a8ebb5a"
+    }
+   ]
+  },
+  {
+   "key": "Q55",
+   "number": 55,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q55-1.webp",
+     "page": 23,
+     "box": {
+      "x0": 326.16,
+      "y0": 70.87,
+      "x1": 564.31,
+      "y1": 312.84
+     },
+     "width": 662,
+     "height": 672,
+     "byteSize": 26238,
+     "sha256": "7c1fd3332e8275533266007fcb76bbadec25c737400557fe1384bf4a4a1622df"
+    }
+   ]
+  },
+  {
+   "key": "Q56",
+   "number": 56,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q56-1.webp",
+     "page": 24,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 324.58,
+      "y1": 434.17
+     },
+     "width": 819,
+     "height": 1009,
+     "byteSize": 35572,
+     "sha256": "a1f1fffcc866b935a7bfcf991103c19a0947aab0865a6032ec3476d7f3f3bde7"
+    }
+   ]
+  },
+  {
+   "key": "Q57",
+   "number": 57,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q57-1.webp",
+     "page": 24,
+     "box": {
+      "x0": 30,
+      "y0": 436.03,
+      "x1": 324.6,
+      "y1": 769.44
+     },
+     "width": 819,
+     "height": 926,
+     "byteSize": 31362,
+     "sha256": "464d695209f798652d4231093bef5f1412398876d94b89969d83612aa9ff6508"
+    }
+   ]
+  },
+  {
+   "key": "Q58",
+   "number": 58,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q58-1.webp",
+     "page": 24,
+     "box": {
+      "x0": 326.16,
+      "y0": 70.87,
+      "x1": 564.34,
+      "y1": 508.68
+     },
+     "width": 662,
+     "height": 1216,
+     "byteSize": 44050,
+     "sha256": "6a59eda067999ec1b589bf9562bda8eea10987c98376233648a05862c5c364fa"
+    }
+   ]
+  },
+  {
+   "key": "Q59",
+   "number": 59,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "fragments": [
+    {
+     "file": "Q59-1.webp",
+     "page": 25,
+     "box": {
+      "x0": 30,
+      "y0": 68.83,
+      "x1": 565.44,
+      "y1": 769.92
+     },
+     "width": 1488,
+     "height": 1948,
+     "byteSize": 64406,
+     "sha256": "84eb4ddfa50cd78b102b171de4dfc42944bb5d45128e89dcd448603cb4dfac98"
+    }
+   ]
+  },
+  {
+   "key": "Q60",
+   "number": 60,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "2 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q60-1.webp",
+     "page": 26,
+     "box": {
+      "x0": 30,
+      "y0": 68.83,
+      "x1": 565.44,
+      "y1": 755.52
+     },
+     "width": 1488,
+     "height": 1908,
+     "byteSize": 85282,
+     "sha256": "02efb6883aa807afd1ea0341ca80d8564326ea4c852899d920f6ada576c4ed42"
+    },
+    {
+     "file": "Q60-2.webp",
+     "page": 27,
+     "box": {
+      "x0": 30,
+      "y0": 160.21,
+      "x1": 459.1,
+      "y1": 396.36
+     },
+     "width": 1192,
+     "height": 656,
+     "byteSize": 119258,
+     "sha256": "1c279c6c28d06d1cc703267402bb4333e6463180e97692870a5ce09c028e513d"
+    }
+   ]
+  },
+  {
+   "key": "Q61",
+   "number": 61,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "override": "A \"Figura para a questão 61\" fica acima da questão, depois da instrução do bloco; a segmentação a atribuía à Q62.",
+   "fragments": [
+    {
+     "file": "Q61-1.webp",
+     "page": 27,
+     "box": {
+      "x0": 30,
+      "y0": 164,
+      "x1": 565,
+      "y1": 401
+     },
+     "width": 1486,
+     "height": 658,
+     "byteSize": 123830,
+     "sha256": "cb47dbd85015364f8c00f7cb522b3611406fef2e9743c2244b06a1c16c5338f6"
+    },
+    {
+     "file": "Q61-2.webp",
+     "page": 27,
+     "box": {
+      "x0": 30,
+      "y0": 405.91,
+      "x1": 342.59,
+      "y1": 586
+     },
+     "width": 869,
+     "height": 500,
+     "byteSize": 27568,
+     "sha256": "5ba812c31d4367900a13be3f099ad1de3e762c4ef45cd784ad252678633414c0"
+    }
+   ]
+  },
+  {
+   "key": "Q62",
+   "number": 62,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "override": "Sem a figura da Q61.",
+   "warnings": [
+    "12 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q62-1.webp",
+     "page": 27,
+     "box": {
+      "x0": 30,
+      "y0": 583.51,
+      "x1": 342.5,
+      "y1": 769.08
+     },
+     "width": 868,
+     "height": 515,
+     "byteSize": 23954,
+     "sha256": "74fa74cbda6fa3b24876124de0b5c2822f1c2f409b642add5af94786101bf9e3"
+    }
+   ]
+  },
+  {
+   "key": "Q63",
+   "number": 63,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q63-1.webp",
+     "page": 27,
+     "box": {
+      "x0": 344.16,
+      "y0": 405.91,
+      "x1": 564.36,
+      "y1": 770.04
+     },
+     "width": 612,
+     "height": 1011,
+     "byteSize": 38614,
+     "sha256": "98e42d766141e352f138b1d5be9e715c855fe85c81f7838d09783894a042e45d"
+    }
+   ]
+  },
+  {
+   "key": "Q64",
+   "number": 64,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q64-1.webp",
+     "page": 28,
+     "box": {
+      "x0": 30,
+      "y0": 72.79,
+      "x1": 296.76,
+      "y1": 553.08
+     },
+     "width": 741,
+     "height": 1334,
+     "byteSize": 146716,
+     "sha256": "46361ac305023cefb348adc6e18c4b9bfce6953de7511b7b5fbd97856b8639d8"
+    }
+   ]
+  },
+  {
+   "key": "Q65",
+   "number": 65,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q65-1.webp",
+     "page": 28,
+     "box": {
+      "x0": 30,
+      "y0": 552.19,
+      "x1": 296.71,
+      "y1": 761.03
+     },
+     "width": 741,
+     "height": 580,
+     "byteSize": 21614,
+     "sha256": "b6389226b6a1cc34d5feb766ba737459603239da337568160520e17568d9a16a"
+    }
+   ]
+  },
+  {
+   "key": "Q66",
+   "number": 66,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q66-1.webp",
+     "page": 28,
+     "box": {
+      "x0": 298.44,
+      "y0": 72.79,
+      "x1": 565.19,
+      "y1": 579.23
+     },
+     "width": 741,
+     "height": 1407,
+     "byteSize": 72050,
+     "sha256": "e06238fb107e4e4cb5eaf547bed39517cfbab8b33711c5fb422ad4589e786f84"
+    }
+   ]
+  },
+  {
+   "key": "Q67",
+   "number": 67,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q67-1.webp",
+     "page": 28,
+     "box": {
+      "x0": 298.44,
+      "y0": 585.67,
+      "x1": 565.1,
+      "y1": 765.84
+     },
+     "width": 741,
+     "height": 500,
+     "byteSize": 18278,
+     "sha256": "9c5eba1f8a33bbd519ce788db6a1d53c9988600fe796f924bd7a684fd3b0ce2f"
+    }
+   ]
+  },
+  {
+   "key": "Q68",
+   "number": 68,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q68-1.webp",
+     "page": 29,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 565.19,
+      "y1": 764.27
+     },
+     "width": 1487,
+     "height": 1926,
+     "byteSize": 59770,
+     "sha256": "ed54193377aa9fbd7e7f5b855d2dfcd918473f62ee3792b2deb2607fa0f29ea8"
+    }
+   ]
+  },
+  {
+   "key": "Q69",
+   "number": 69,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q69-1.webp",
+     "page": 30,
+     "box": {
+      "x0": 30,
+      "y0": 72.79,
+      "x1": 311.13,
+      "y1": 435.36
+     },
+     "width": 781,
+     "height": 1007,
+     "byteSize": 47318,
+     "sha256": "9a6ee575b522c7d897b5ebd6ccf1fae3697d801416922cd5ff172c16f4d39552"
+    }
+   ]
+  },
+  {
+   "key": "Q70",
+   "number": 70,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q70-1.webp",
+     "page": 30,
+     "box": {
+      "x0": 30,
+      "y0": 440.23,
+      "x1": 311.14,
+      "y1": 766.43
+     },
+     "width": 781,
+     "height": 906,
+     "byteSize": 47424,
+     "sha256": "b11713e25b3ad7e68dde5ec3e53c2dc34a7fb138a997b9a31c74ce3d66ce2e3b"
+    }
+   ]
+  },
+  {
+   "key": "Q71",
+   "number": 71,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q71-1.webp",
+     "page": 30,
+     "box": {
+      "x0": 313.44,
+      "y0": 72.79,
+      "x1": 559.89,
+      "y1": 562.55
+     },
+     "width": 684,
+     "height": 1361,
+     "byteSize": 49178,
+     "sha256": "012d8fe8fcd96d562cee32a16001315a415c18b5acf71244f744e349f7bbe272"
+    }
+   ]
+  },
+  {
+   "key": "Q72",
+   "number": 72,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q72-1.webp",
+     "page": 30,
+     "box": {
+      "x0": 313.44,
+      "y0": 568.39,
+      "x1": 559.86,
+      "y1": 770.04
+     },
+     "width": 684,
+     "height": 560,
+     "byteSize": 19066,
+     "sha256": "92562cd1d845861b5aab91c30a3a97e86d3437d1cd06952ce5a8a15d3db29588"
+    }
+   ]
+  },
+  {
+   "key": "Q73",
+   "number": 73,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q73-1.webp",
+     "page": 31,
+     "box": {
+      "x0": 30,
+      "y0": 72.79,
+      "x1": 312,
+      "y1": 613.92
+     },
+     "width": 784,
+     "height": 1503,
+     "byteSize": 77462,
+     "sha256": "3de4e38875906d2e4bbdb6da9ff9c03bcea6251b27f3f99c57d4f6ae687bdf79"
+    }
+   ]
+  },
+  {
+   "key": "Q74",
+   "number": 74,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q74-1.webp",
+     "page": 31,
+     "box": {
+      "x0": 313.44,
+      "y0": 72.79,
+      "x1": 559.92,
+      "y1": 611.27
+     },
+     "width": 684,
+     "height": 1496,
+     "byteSize": 46724,
+     "sha256": "584a9704905ff4685b8a8b00bc709a6586d7888155b568fa97cd9512d7791ee5"
+    }
+   ]
+  },
+  {
+   "key": "Q75",
+   "number": 75,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q75-1.webp",
+     "page": 32,
+     "box": {
+      "x0": 30,
+      "y0": 70.87,
+      "x1": 557.15,
+      "y1": 250.33
+     },
+     "width": 1465,
+     "height": 498,
+     "byteSize": 37804,
+     "sha256": "d06f9d1ac2563a9c65139f468142bfab4cbf81a9721b7a4fcec832c656094c08"
+    }
+   ]
+  },
+  {
+   "key": "Q76",
+   "number": 76,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q76-1.webp",
+     "page": 32,
+     "box": {
+      "x0": 30,
+      "y0": 252.79,
+      "x1": 338.14,
+      "y1": 533.75
+     },
+     "width": 856,
+     "height": 781,
+     "byteSize": 32954,
+     "sha256": "852314a0aabbca04262f2132efb3a377e9475d890a3019b9b2468337196bfb4a"
+    }
+   ]
+  },
+  {
+   "key": "Q77",
+   "number": 77,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q77-1.webp",
+     "page": 32,
+     "box": {
+      "x0": 30,
+      "y0": 537.07,
+      "x1": 338.14,
+      "y1": 766.32
+     },
+     "width": 856,
+     "height": 637,
+     "byteSize": 35268,
+     "sha256": "8a2b0385af6f92f286fc94c7234883f4eaadb3243c4425867869a0f66b2b1e7b"
+    }
+   ]
+  },
+  {
+   "key": "Q78",
+   "number": 78,
+   "kind": "OBJECTIVE",
+   "status": "sem-gabarito-definitivo",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q78-1.webp",
+     "page": 33,
+     "box": {
+      "x0": 30,
+      "y0": 72.79,
+      "x1": 324.58,
+      "y1": 760.56
+     },
+     "width": 819,
+     "height": 1911,
+     "byteSize": 94356,
+     "sha256": "4097f3018f1e9e98487e74a0f4cd4ed08a6a148db938fc0e8620422a95180572"
+    }
+   ]
+  },
+  {
+   "key": "Q79",
+   "number": 79,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "fragments": [
+    {
+     "file": "Q79-1.webp",
+     "page": 33,
+     "box": {
+      "x0": 30,
+      "y0": 72.79,
+      "x1": 324.58,
+      "y1": 489.58
+     },
+     "width": 819,
+     "height": 1158,
+     "byteSize": 64246,
+     "sha256": "923e812af306c1ac9c0bb6a6c0c401213808aa9a718acba6b829e9b9cf9de89e"
+    },
+    {
+     "file": "Q79-2.webp",
+     "page": 33,
+     "box": {
+      "x0": 325.92,
+      "y0": 72.79,
+      "x1": 564.37,
+      "y1": 756.24
+     },
+     "width": 663,
+     "height": 1899,
+     "byteSize": 47936,
+     "sha256": "73ab3a549ad4d35261761ba306a94720d66515fcc0d37e9f6f02150510f5faf1"
+    }
+   ]
+  },
+  {
+   "key": "Q80",
+   "number": 80,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "fragments": [
+    {
+     "file": "Q80-1.webp",
+     "page": 34,
+     "box": {
+      "x0": 30,
+      "y0": 68.83,
+      "x1": 522.56,
+      "y1": 770.64
+     },
+     "width": 1369,
+     "height": 1950,
+     "byteSize": 142010,
+     "sha256": "4c18eaecf170f4b4cc10d5d755cb62333e90bc6482b1f7d80caf5a099fc8bc3b"
+    },
+    {
+     "file": "Q80-2.webp",
+     "page": 35,
+     "box": {
+      "x0": 30,
+      "y0": 32.16,
+      "x1": 565.44,
+      "y1": 708
+     },
+     "width": 1488,
+     "height": 1878,
+     "byteSize": 44764,
+     "sha256": "05d4bc95d4ec200570190a06e61874e9a83681c9024ff9e7bd9d2b5d9757ec4c"
+    }
+   ]
+  }
+ ]
+}
