@@ -62,6 +62,7 @@ type Answer = {
   correctOptionId: string;
   explanation: string;
   explanationCredit?: string;
+  reviewNote?: string | null;
   answerKey?: {
     id: string;
     title: string;
@@ -747,6 +748,12 @@ type Question = Summary & {
                   <p>
                     <strong>Alternativa correta:</strong> {{ correctText() }}
                   </p>
+                  @if (question()!.answer!.reviewNote) {
+                    <p class="review-note">
+                      <strong>Nota da conferência:</strong>
+                      {{ question()!.answer!.reviewNote }}
+                    </p>
+                  }
                   @if (question()!.answer!.explanation) {
                     <p class="feedback-explanation">
                       {{ question()!.answer!.explanation }}

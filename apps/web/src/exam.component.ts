@@ -81,6 +81,9 @@ class PracticeError extends Error {
                 <section class="feedback" [class.is-correct]="result.correct === true" [class.is-wrong]="result.correct === false" aria-label="Correção da questão">
                   <h2>{{ result.correct === null ? 'Não respondida' : result.correct ? 'Resposta correta' : 'Resposta incorreta' }}</h2>
                   <p><strong>Alternativa correta:</strong> {{ correctText(item) }}</p>
+                  @if (result.reviewNote) {
+                    <p class="review-note"><strong>Nota da conferência:</strong> {{ result.reviewNote }}</p>
+                  }
                   @if (result.explanation) {
                     <p class="feedback-explanation">{{ result.explanation }}</p>
                     @if (result.explanationCredit) { <p class="metadata">{{ result.explanationCredit }}</p> }

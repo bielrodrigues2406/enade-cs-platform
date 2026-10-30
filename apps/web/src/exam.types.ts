@@ -23,6 +23,7 @@ export type PracticeFeedback = {
   correctOptionId: string;
   explanation: string;
   explanationCredit: string | null;
+  reviewNote?: string | null;
   answerKey?: { title: string; officialUrl: string; page: number; finality?: string | null };
 };
 export type PracticeItem = {

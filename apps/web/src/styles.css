@@ -896,6 +896,7 @@ fieldset:disabled .option:active {
   font-size: var(--text-sm);
 }
 .feedback-explanation {
+  white-space: pre-line; /* parágrafos separados por linha em branco */
   font-family: var(--font-reading);
   font-size: var(--text-lg) !important;
   line-height: var(--leading-reading);
@@ -3337,4 +3338,16 @@ app-question-content { display: block; }
   .practice-map { padding: var(--space-3); }
   .practice-layout { gap: var(--space-6); }
   .practice-toolbar { align-items: flex-start; }
+}
+
+/* conferência (D15): ressalva de conteúdo do próprio enunciado oficial */
+.review-note {
+  max-width: var(--measure-reading);
+  margin: var(--space-3) 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-warning-border);
+  background: var(--color-warning-bg);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  line-height: 1.55;
 }

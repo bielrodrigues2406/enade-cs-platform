@@ -4,6 +4,7 @@ export type QuestionContent = {
   id: string;
   title: string;
   topic: string;
+  subject?: string | null;
   origin: string;
   authorCredit: string;
   demonstration: boolean;
@@ -25,7 +26,11 @@ export type QuestionContent = {
   selector: "app-question-content",
   template: `
     <p class="metadata">
-      {{ question.topic }} <span>·</span>
+      {{ question.topic }}
+      @if (question.subject && question.subject !== question.topic) {
+        <span>·</span> {{ question.subject }}
+      }
+      <span>·</span>
       {{ originLabel(question.origin, question.demonstration) }}
       <span>·</span> Versão {{ question.versionNumber }}
     </p>
