@@ -6,6 +6,12 @@ Siga docs/COLLABORATION.md e mantenha docs/WORKBOARD.md atualizado: pegue apenas
 
 Antes de trabalho de interface, leia .claude/skills/README.md e as skills de design listadas ali.
 
+## Manutenção humana — requisito obrigatório
+
+Pedido explícito de Gabriel em 30/10/2026: o projeto será disponibilizado à fábrica de software e deve ser compreensível e modificável por mantenedores humanos. **Claude Code e Codex devem aplicar esse requisito em cada entrega**, além de fazer a revisão integral de código prevista em CQ-2 antes da passagem institucional. Funcionar e passar nos testes não bastam para considerar o código pronto para essa passagem.
+
+Organize módulos por responsabilidade, separe apresentação, regras e persistência, use nomes claros, funções pequenas e retornos tipados e previsíveis. Elimine redundâncias, funções que acumulam tarefas e fluxos difíceis de acompanhar. Reescreva trechos quando isso os tornar mais simples e legíveis, preservando o comportamento validado. Não adie problemas novos para a revisão final. Os critérios e o procedimento estão em [ENGINEERING-AND-DELIVERY §1.3](docs/ENGINEERING-AND-DELIVERY.md#13-manutenção-humana-e-passagem-à-fábrica-de-software).
+
 ## Antes de trabalhar
 
 1. Leia README e os documentos relevantes em docs/. Confira o estado atual do código; o planejamento não comprova implementação.
