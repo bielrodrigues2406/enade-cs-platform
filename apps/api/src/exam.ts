@@ -36,6 +36,7 @@ type Item = {
   examSourceId: string | null; keySourceId: string | null;
   sourcePage: number | null; sourceQuestionNumber: number | null; keyPage: number | null;
   correctOptionId: string; explanation: string; explanationCredit: string | null;
+  subject: string | null; reviewNote: string | null;
 };
 const ATTEMPT_FIELDS = `p.id,p.size,p.area,p.state,p.created_at AS "createdAt",p.finished_at AS "finishedAt",p.summary,
   (SELECT count(*)::integer FROM practice_item i WHERE i.attempt_id=p.id AND i.option_id IS NOT NULL) AS answered`;
@@ -73,7 +74,8 @@ async function items(client: PoolClient, id: string): Promise<Item[]> {
       q.version_number AS "versionNumber",q.presentation,q.review_origin AS "reviewOrigin",
       q.exam_source_id AS "examSourceId",q.key_source_id AS "keySourceId",
       q.source_page AS "sourcePage",q.source_question_number AS "sourceQuestionNumber",q.key_page AS "keyPage",
-      q.correct_option_id AS "correctOptionId",q.explanation,q.explanation_credit AS "explanationCredit"
+      q.correct_option_id AS "correctOptionId",q.explanation,q.explanation_credit AS "explanationCredit",
+      q.subject,q.review_note AS "reviewNote"
     FROM practice_item i JOIN question_version q ON q.id=i.version_id
     WHERE i.attempt_id=$1 ORDER BY i.position`, [id],
   )).rows;
@@ -125,7 +127,7 @@ async function view(client: PoolClient, attempt: Attempt) {
         // Explicit projection prevents study answers and editorial keys from
         // leaking into an in-progress attempt, even when already studied.
         question: {
-          id: row.id, title: row.title, topic: row.topic, prompt: row.prompt,
+          id: row.id, title: row.title, topic: row.topic, subject: row.subject, prompt: row.prompt,
           origin: row.origin, authorCredit: row.authorCredit, demonstration: row.demonstration,
           versionNumber: row.versionNumber,
           options: options.filter((option) => option.questionId === row.id).map(({ id, text }) => ({ id, text })),
@@ -137,7 +139,7 @@ async function view(client: PoolClient, attempt: Attempt) {
         answer: { optionId: row.optionId, marked: row.marked, revision: row.revision },
         ...(complete ? { result: {
           correct: row.optionId === null ? null : row.optionId === row.correctOptionId,
-          correctOptionId: row.correctOptionId, explanation: row.explanation,
+          correctOptionId: row.correctOptionId, explanation: row.explanation, reviewNote: row.reviewNote,
           explanationCredit: row.explanationCredit || row.authorCredit,
           ...(key ? { answerKey: {
             id: key.id, title: key.title, officialUrl: key.officialUrl, sha256: key.sha256,

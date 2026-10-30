@@ -36,7 +36,7 @@ async function published(id: string) {
   if (id.length > 100) fail("Questão não encontrada.", 404);
   const q = (
     await db.query<Question>(
-      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,explanation_credit AS "explanationCredit",exam_source_id AS "examSourceId",key_source_id AS "keySourceId",source_page AS "sourcePage",source_question_number AS "sourceQuestionNumber",key_page AS "keyPage",correct_option_id AS "correctOptionId",presentation,review_origin AS "reviewOrigin" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
+      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,explanation_credit AS "explanationCredit",exam_source_id AS "examSourceId",key_source_id AS "keySourceId",source_page AS "sourcePage",source_question_number AS "sourceQuestionNumber",key_page AS "keyPage",correct_option_id AS "correctOptionId",presentation,review_origin AS "reviewOrigin",subject,review_note AS "reviewNote" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
       [id],
     )
   ).rows[0];
@@ -77,6 +77,8 @@ async function feedback(
           },
         }
       : {}),
+    // D15: ressalva de conteúdo da conferência, só depois da resposta.
+    reviewNote: q.reviewNote,
     optionId: answer.optionId,
     revision: answer.revision,
     correct: answer.optionId === q.correctOptionId,
@@ -128,6 +130,7 @@ class StudyController {
       id: q.id,
       title: q.title,
       topic: q.topic,
+      subject: q.subject,
       prompt: q.prompt,
       origin: q.origin,
       authorCredit: q.authorCredit,

@@ -43,7 +43,10 @@ type Verdict = {
   answer: string;
   optionCount: number;
   area: string;
+  subject: string | null;
   notes: string;
+  studentNote: string | null;
+  explanation: string | null;
   reason: string;
 };
 type Fragment = {
@@ -68,15 +71,18 @@ export type PublicationSummary = {
 function parseReview(value: unknown) {
   const input = closed(
     value,
-    ["document", "examSha256", "cropsManifestSha256", "reviewer", "extractor", "reviewedAt", "items"],
+    ["document", "examSha256", "cropsManifestSha256", "reviewer", "extractor", "explainer", "reviewedAt", "items"],
     "Conferência",
   );
   const reviewer = str(input.reviewer, "Agente conferente", 40);
   const extractor = str(input.extractor, "Agente extrator", 40);
-  if (!AGENT.test(reviewer) || !AGENT.test(extractor))
+  const explainer = input.explainer === undefined ? null : str(input.explainer, "Agente explicador", 40);
+  if (!AGENT.test(reviewer) || !AGENT.test(extractor) || (explainer !== null && !AGENT.test(explainer)))
     fail("Identifique os agentes por nome simples (ex.: codex, claude).", 400);
   if (reviewer === extractor)
     fail("Quem extraiu não pode conferir a própria extração (ADR-010).", 400);
+  if (explainer !== null && (explainer === reviewer || explainer === extractor))
+    fail("Quem explica não pode conferir a própria explicação nem ser o extrator (D11).", 400);
   const reviewedAt = str(input.reviewedAt, "Data da conferência", 40);
   if (Number.isNaN(Date.parse(reviewedAt))) fail("Data da conferência inválida.", 400);
   if (!Array.isArray(input.items) || !input.items.length || input.items.length > 1000)
@@ -85,7 +91,8 @@ function parseReview(value: unknown) {
   const items = (input.items as unknown[]).map((raw) => {
     const item = closed(
       raw,
-      ["key", "verdict", "fragments", "answer", "optionCount", "area", "notes", "reason"],
+      ["key", "verdict", "fragments", "answer", "optionCount", "area", "subject", "notes", "studentNote",
+        "explanation", "explanationCheck", "explanationNote", "reason"],
       "Item da conferência",
     );
     const key = str(item.key, "Questão", 6);
@@ -105,32 +112,42 @@ function parseReview(value: unknown) {
       fail(`Gabarito de ${key} fora das alternativas.`, 400);
     const area = str(item.area, `Área de ${key}`, 80);
     if (!(AREAS as readonly string[]).includes(area)) fail(`Área de ${key} fora da lista.`, 400);
+    const optional = (field: string, label: string, max: number) => {
+      if (item[field] === undefined) return null;
+      const text = str(item[field], `${label} de ${key}`, max).trim();
+      return text || null;
+    };
+    // D11: a explicação só entra se outro agente a conferiu (OK); recusada,
+    // a questão sai sem explicação e volta para nova rodada.
+    const check = item.explanationCheck;
+    if (check !== undefined && check !== "OK" && check !== "REJECTED")
+      fail(`Conferência da explicação de ${key} inválida.`, 400);
+    const explanation = optional("explanation", "Explicação", 4000);
+    if (explanation && (!explainer || check === undefined))
+      fail(`A explicação de ${key} precisa de agente explicador e de conferência.`, 400);
+    optional("explanationNote", "Nota sobre a explicação", 2000);
     return {
       key, verdict: "APPROVED", fragments: item.fragments as string[], answer,
       optionCount: optionCount as number, area,
+      subject: optional("subject", "Assunto", 60),
       notes: item.notes === undefined ? "" : str(item.notes, `Notas de ${key}`, 2000),
+      studentNote: optional("studentNote", "Nota ao estudante", 400),
+      explanation: check === "OK" ? explanation : null,
     } as Verdict;
   });
   return {
     document: str(input.document, "Prova da conferência", 150),
     examSha256: str(input.examSha256, "SHA-256 da prova", 64),
     manifestSha256: str(input.cropsManifestSha256, "SHA-256 do manifesto", 64),
-    reviewer, extractor, reviewedAt, items,
+    reviewer, extractor, explainer, reviewedAt, items,
   };
 }
 
-// These findings concern meaning or a defect in the source. An image approval
-// cannot resolve them. Visual/OCR-only warnings may be satisfied by checked crops.
-const imageResolvableIssues = new Set([
-  "IMAGEM_TEXTO_I_NAO_INTEGRADA", "CHARGE_NAO_INTEGRADA", "MAPA_NAO_INTEGRADO", "CORRIGIR_VERSALETE", "CONFERIR_REFERENCIA",
-  "IMAGENS_NAO_INTEGRADAS", "IMAGEM_NAO_INTEGRADA", "FOTOGRAFIA_NAO_INTEGRADA", "GRAFICO_NAO_INTEGRADO",
-  "GRAFO_NAO_INTEGRADO", "CIRCUITO_NAO_INTEGRADO", "INFOGRAFICO_OMITIDO", "CONFERIR_RECURSO_VISUAL", "CONFERIR_ALERTA_VISUAL",
-  "ALTERNATIVAS_VISUAIS_NAO_INTEGRADAS", "ARVORE_E_TABELA_NAO_INTEGRADAS", "FIGURA_LOGICA_NAO_INTEGRADA",
-  "IMAGEM_DO_ENUNCIADO_NAO_INTEGRADA", "IMAGENS_E_ROTULOS_PENDENTES", "FIDELIDADE_OCR_PENDENTE",
-  "FORMULAS_DAS_ALTERNATIVAS_AUSENTES", "FORMULAS_DE_INFERENCIA_NAO_PRESERVADAS", "CONFERIR_SIMBOLOS", "CONFERIR_GLIFOS",
-]);
-const unresolvedIssue = (code: string) => !imageResolvableIssues.has(code);
-const materialIssue = (code: string) => /^(?:DEFEITO_|DADOS_E_UNIDADES_|AMBIGUIDADE_|INCONSISTENCIA_|CONVENCAO_|SEMANTICA_SQL_|REDACAO_PSK_|REVISAO_CONCEITUAL_|FORA_ESCOPO|fora-escopo-ciencia-computacao|ANULADA_OFICIAL$|ANULACAO_PRESERVADA$|CONFERIR_CONTEXTO_LEGAL$)/.test(code);
+// D15: ressalvas de conteúdo e erros da transcrição auxiliar não bloqueiam; o
+// conferente as transforma em nota ao estudante (`studentNote`). Bloqueiam só
+// fidelidade (veredito BLOCKED) e o que não é questão pontuável do curso.
+const outOfScope = (code: string) =>
+  /^(?:FORA_ESCOPO|fora-escopo-ciencia-computacao$|ANULADA_OFICIAL$|ANULACAO_PRESERVADA$)/.test(code);
 function originalDocument(doc: CatalogDocument) {
   if (doc.auxiliary === true || doc.originalBytesAvailable === false)
     fail("Fontes auxiliares ou sem os bytes originais não podem ser publicadas como oficiais.", 400);
@@ -188,22 +205,26 @@ function cropFragments(crop: Record_, key: string, pages: { width: number; heigh
     return f as unknown as Fragment;
   });
 }
-function analysisIssues(value: unknown, exam: CatalogDocument, explanations?: Map<string, { explanation: string; author: string }>) {
-  const blocked = new Map<string, string[]>();
-  if (!value || typeof value !== "object" || Array.isArray(value)) return blocked;
+// Análises anteriores (ex.: data/question-reviews/<ano>-review.json): delas vêm
+// explicações já escritas e os achados de escopo (anulada, fora do curso), os
+// únicos que ainda impedem publicar depois da D15.
+function readAnalysis(value: unknown, exam: CatalogDocument) {
+  const explanations = new Map<string, { explanation: string; author: string }>();
+  const scope = new Map<string, string[]>();
+  if (!value || typeof value !== "object" || Array.isArray(value)) return { explanations, scope };
   const data = value as { author?: string; items?: Record_[] };
-  if (!Array.isArray(data.items)) return blocked;
+  if (!Array.isArray(data.items)) return { explanations, scope };
   for (const item of data.items) {
     if (item.examId !== exam.id) continue;
     if (item.examSha256 !== exam.sha256) fail("A análise pertence a outra versão da prova.", 400);
     const key = String(item.key);
-    const codes = Array.isArray(item.issues) ? item.issues.map((issue) =>
-      String((issue as Record_)?.code ?? "")).filter(unresolvedIssue) : [];
-    if (codes.length) blocked.set(key, codes);
-    if (explanations && typeof item.explanation === "string" && item.explanation.trim())
+    const codes = Array.isArray(item.issues)
+      ? item.issues.map((issue) => String((issue as Record_)?.code ?? "")).filter(outOfScope) : [];
+    if (codes.length) scope.set(key, codes);
+    if (typeof item.explanation === "string" && item.explanation.trim())
       explanations.set(key, { explanation: item.explanation, author: String(data.author ?? "IA") });
   }
-  return blocked;
+  return { explanations, scope };
 }
 
 function finalityOf(keyDoc: CatalogDocument, declared: boolean, finality: unknown) {
@@ -286,13 +307,12 @@ export async function publishAssisted(input: {
     fail("A numeração da prova está incompleta; nada é publicado.", 409);
   const reportItems = itemIndex(report.items, "Itens do relatório");
   const crops = itemIndex(manifest.items, "Itens do manifesto");
-  const analysis = new Map<string, { explanation: string; author: string }>();
-  const issues = analysisIssues(input.analysis, exam, analysis);
-  // Omitting --analysis cannot hide known findings already in the repository.
-  const reviewedFile = await readFile(path.resolve("data", "question-reviews", `${exam.year}-review.json`), "utf8")
+  const { explanations: analysis, scope } = readAnalysis(input.analysis, exam);
+  // Omitir --analysis não esconde achados de escopo já registrados no repositório.
+  const stored = await readFile(path.resolve("data", "question-reviews", `${exam.year}-review.json`), "utf8")
     .catch((error) => { if (error.code === "ENOENT") return ""; throw error; });
-  if (reviewedFile) for (const [key, codes] of analysisIssues(JSON.parse(reviewedFile), exam))
-    issues.set(key, [...(issues.get(key) ?? []), ...codes]);
+  if (stored) for (const [key, codes] of readAnalysis(JSON.parse(stored), exam).scope)
+    scope.set(key, [...(scope.get(key) ?? []), ...codes]);
   const summary: PublicationSummary = {
     document: exam.id, reviewer: review.reviewer, extractor: review.extractor,
     published: [], unchanged: [], blocked: [], rejected: [],
@@ -322,16 +342,14 @@ export async function publishAssisted(input: {
           (crop.answer !== undefined && crop.answer !== item.answer)) {
         await reject("identidade do recorte difere da questão"); continue;
       }
-      const staged = (await client.query<{ flags: string[]; resolved: string[]; review: { issues?: { code?: string }[] } }>(
-        `SELECT flags,resolved_flags AS resolved,assisted_review AS review FROM question_intake
+      const staged = (await client.query<{ flags: string[]; resolved: string[] }>(
+        `SELECT flags,resolved_flags AS resolved FROM question_intake
          WHERE exam_source_id=$1 AND source_key=$2 FOR SHARE`, [examSource.id, verdict.key],
       )).rows[0];
-      const pending = [...(issues.get(verdict.key) ?? []),
-        ...(Array.isArray(item.flags) ? item.flags.filter((flag) => typeof flag === "string" && materialIssue(flag)) : []),
-        ...(staged ? [...staged.flags.filter(materialIssue),
-          ...(staged.review.issues ?? []).map((issue) => issue.code ?? "").filter(unresolvedIssue)]
-          .filter((code) => !staged.resolved.includes(code)) : [])];
-      if (pending.length) { await reject(`pendência material não resolvida: ${[...new Set(pending)].join(", ")}`); continue; }
+      const outside = [...(scope.get(verdict.key) ?? []), ...(Array.isArray(item.flags) ? item.flags : []),
+        ...(staged ? staged.flags.filter((flag) => !staged.resolved.includes(flag)) : [])]
+        .filter((flag): flag is string => typeof flag === "string" && outOfScope(flag));
+      if (outside.length) { await reject(`fora das questões pontuáveis do curso: ${[...new Set(outside)].join(", ")}`); continue; }
       if (item.kind !== "OBJECTIVE" || ["anulada", "discursiva"].includes(item.status as string)) {
         await reject("só objetivas válidas são publicadas"); continue;
       }
@@ -385,18 +403,27 @@ export async function publishAssisted(input: {
       const options = LETTERS.slice(0, verdict.optionCount).split("").map((letter, position) => ({
         id: letter, text: transcription.get(letter) ?? "", position,
       }));
-      const explained = analysis.get(verdict.key);
+      // Explicação conferida na própria conferência (D11) tem precedência.
+      const explained = verdict.explanation
+        ? { explanation: verdict.explanation,
+            credit: `Explicação gerada por IA (${review.explainer}) e conferida por agente (${review.reviewer}); sem revisão humana` }
+        : analysis.has(verdict.key)
+          ? { explanation: analysis.get(verdict.key)!.explanation,
+              credit: `Explicação gerada por IA (${analysis.get(verdict.key)!.author}), sem revisão humana` }
+          : null;
       const number = item.number as number;
       const content = {
-        title: `ENADE ${exam.year} · Questão ${number}`,
+        title: exam.modality === "LICENCIATURA"
+          ? `ENADE ${exam.year} · Licenciatura · Questão ${number}`
+          : `ENADE ${exam.year} · Questão ${number}`,
         topic: verdict.area,
+        subject: verdict.subject,
+        reviewNote: verdict.studentNote,
         prompt: typeof item.prompt === "string" ? item.prompt : "",
         options,
         correctOptionId: verdict.answer,
         explanation: explained?.explanation ?? "",
-        explanationCredit: explained
-          ? `Explicação gerada por IA (${explained.author}), sem revisão humana`
-          : "Sem explicação ainda",
+        explanationCredit: explained?.credit ?? "Sem explicação ainda",
         images: images.map((i) => [i.sha256, i.page, i.box]),
         keySource: keySource.id,
         keyPage,
@@ -439,10 +466,11 @@ export async function publishAssisted(input: {
       await client.query(
         `INSERT INTO question_version(id,question_id,version_number,title,topic,prompt,origin,editorial_status,explanation,correct_option_id,
            author_credit,explanation_credit,exam_source_id,key_source_id,source_page,source_question_number,key_page,
-           presentation,review_origin,assisted_extractor,assisted_reviewer)
-         VALUES($1,$2,$3,$4,$5,$6,'OFFICIAL','DRAFT',$7,$8,'Inep',$9,$10,$11,$12,$13,$14,'IMAGE','ASSISTED',$15,$16)`,
+           presentation,review_origin,assisted_extractor,assisted_reviewer,subject,review_note)
+         VALUES($1,$2,$3,$4,$5,$6,'OFFICIAL','DRAFT',$7,$8,'Inep',$9,$10,$11,$12,$13,$14,'IMAGE','ASSISTED',$15,$16,$17,$18)`,
         [versionId, questionId, sequence, content.title, content.topic, content.prompt, content.explanation, content.correctOptionId,
-          content.explanationCredit, examSource.id, keySource.id, images[0].page, number, keyPage, review.extractor, review.reviewer],
+          content.explanationCredit, examSource.id, keySource.id, images[0].page, number, keyPage, review.extractor, review.reviewer,
+          content.subject, content.reviewNote],
       );
       for (const option of options)
         await client.query("INSERT INTO question_option(question_id,id,text,position) VALUES($1,$2,$3,$4)",
