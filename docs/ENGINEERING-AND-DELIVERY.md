@@ -10,6 +10,20 @@ Revisar a solução por funcionalidade, correção, complexidade, segurança, op
 
 O projeto usa princípios de TigerStyle — invariantes, limites, estados e falhas explícitas — adaptados a TypeScript e aplicações web. Não importar mecanicamente regras de alocação, quotas de assertions, zero dependências ou encerramento de processo para entradas inválidas.
 
+### 1.1 Organização da interface
+
+Pedido de Gabriel em 30/10/2026, válido para Claude e Codex:
+
+- HTML em arquivos `.html` ao lado do componente, referenciados por `templateUrl`; TypeScript contém tipos, estado, eventos e coordenação. O Angular aceita templates inline, mas a convenção deste projeto é usar arquivos separados.
+- CSS em arquivos `.css`. Tokens e regras compartilhadas permanecem no stylesheet global; regras exclusivas de um componente podem usar `styleUrl`. Não criar arquivos CSS vazios nem mover regras globais para estilos encapsulados sem conferir seus consumidores.
+- Não usar strings de HTML/CSS em TypeScript, atributos `style` com regras estáticas ou manipulação de estilo para compor telas. Usar classes para estados e CSS para layout, cores, espaçamento e animação. Bindings de propriedades CSS podem fornecer valores dinâmicos necessários (dimensão original de imagem, índice ou proporção); cálculos de apresentação e regras ficam no CSS.
+- Nomes devem explicar a responsabilidade; funções pequenas quando a divisão ajudar a leitura. Extrair componentes e contratos quando houver responsabilidade própria ou reutilização real, sem criar camadas por antecipação.
+- Refatorações de organização preservam contratos e comportamento. Não misturar extração de templates com redesenho, mudança de regras ou troca do roteamento. Validar build e fluxos existentes; criar teste novo somente para risco ou comportamento novo.
+
+### 1.2 Revisão proporcional de conteúdo
+
+Não repetir integralmente a conferência já registrada por agentes independentes para os mesmos arquivos e hashes. Verificar automaticamente integridade, vínculos, cobertura, anulações e elegibilidade; concentrar a inspeção manual nos recortes alterados, divergências, ressalvas e amostras dos demais lotes. Se houver erro sistemático, ampliar a revisão do grupo afetado. Amostragem não cria aprovação para itens ainda sem conferência independente, nem transforma registro de aprovação em comprovação de publicação em outro ambiente.
+
 ## 2. Propriedades de domínio e critérios de aceitação
 
 | ID | Propriedade | Evidência/teste apropriado |

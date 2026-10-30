@@ -19,6 +19,7 @@ Antes de trabalho de interface, leia .claude/skills/README.md e as skills de des
 - Entregue fluxos completos com contratos, estados e persistência coerentes. Identifique claramente fixtures, demonstrações e integrações reais.
 - Preserve regras de domínio, origem e revisão editorial do conteúdo. Não invente questões oficiais, citações ou resultados de aprendizagem.
 - Prefira soluções claras, módulos por domínio e dependências justificadas. Não crie frameworks internos, repositórios genéricos ou camadas vazias por antecipação.
+- Separe apresentação e lógica: templates Angular em arquivos `.html` referenciados por `templateUrl`, estilos em `.css` e comportamento/estado em `.ts`. Não acrescente blocos de HTML ou CSS em strings TypeScript. Classes representam estados visuais; bindings de estilo ficam restritos a valores dinâmicos dos dados, com as regras no CSS. Veja ENGINEERING-AND-DELIVERY §1.1.
 - Reutilize componentes e tokens. Adapte a composição de cada tela à tarefa; não replique a mesma grade de cards em todo o produto.
 - Registre mudanças arquiteturais relevantes em docs/ARCHITECTURE.md ou ADR dedicado. Não altere regras de produto silenciosamente.
 - Valide entradas nas fronteiras, autorização no servidor e integridade no banco. Conteúdo de PDF ou IA é não confiável.

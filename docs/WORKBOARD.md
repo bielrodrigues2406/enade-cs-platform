@@ -1,6 +1,6 @@
 # Quadro de trabalho — Claude Code × Codex
 
-Atualizado em 29/10/2026. Regras de uso em [COLLABORATION.md](COLLABORATION.md). Edite linha a linha; não reordene a tabela inteira.
+Atualizado em 30/10/2026. Regras de uso em [COLLABORATION.md](COLLABORATION.md). Edite linha a linha; não reordene a tabela inteira.
 
 Status: `pronta` · `em andamento` · `em revisão` · `entregue` · `bloqueada` · `backlog`
 
@@ -17,6 +17,7 @@ Sem lote oficial conferido, R1 sai com conteúdo autoral identificado como tal. 
 | ID | Tarefa | Dono | Status | Depende de | Branch / PR | Arquivos principais |
 | --- | --- | --- | --- | --- | --- | --- |
 | COORD-0 | Protocolo de colaboração, quadro e avaliação de design | Claude | entregue | — | [#7](https://github.com/bielrodrigues2406/enade-cs-platform/pull/7), `59425c0` | `docs/COLLABORATION.md`, `docs/WORKBOARD.md`, `docs/DESIGN-QUALITY.md`, `AGENTS.md` |
+| CQ-1 | Separar templates HTML da lógica TypeScript e reforçar as convenções compartilhadas, preservando as telas e os contratos | Codex | em andamento | — | `codex/refactor-external-templates` | componentes web, novos `.html`, AGENTS e documentos de engenharia/colaboração |
 | SRC-1 | Aquisição dos PDFs de todos os anos, cópias fixadas, catálogo e importação offline (pedido direto de Gabriel, iniciado antes deste quadro) | Codex | entregue | — | [#9](https://github.com/bielrodrigues2406/enade-cs-platform/pull/9), `7a4049c` | `migrations/006_source_acquisition.sql`, `data/official-sources.json`, importadores, fontes e testes |
 | SRC-2 | Confinar caminhos do downloader e preservar recibos válidos após falhas | Codex | entregue | SRC-1 | [#10](https://github.com/bielrodrigues2406/enade-cs-platform/pull/10), `e46c54a` | `scripts/download-sources.mjs`, `tests/source-download.test.ts`, `docs/OFFICIAL-SOURCES.md` |
 | OPS-1 | CI no GitHub Actions: build, `npm test` e E2E com PostgreSQL de serviço | Claude | entregue no PR #11 | — | [#11](https://github.com/bielrodrigues2406/enade-cs-platform/pull/11) | `.github/workflows/ci.yml` |
@@ -128,6 +129,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 ## Diário (handoffs)
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
+
+- **30/10/2026 · CQ-1 · Codex:** pedido direto de Gabriel para reforçar boas práticas de código, separar HTML/CSS/TypeScript e continuar com revisão proporcional. Branch `codex/refactor-external-templates`, base `d162334`; nove componentes com templates inline, estilos já em `styles.css`. Extração dos templates sem redesenho, nova dependência ou migration. **Claude:** incorporar esta convenção e, ao atualizar a base, transportar as mudanças de apresentação de sua branch para os novos `.html`, preservando `templateUrl`. Branch remota Claude observada em `09a40f7`: sete commits fora da main, 247 questões com recortes e 119 aprovações registradas em novos lotes (2014: 35; 2017: 35; 2021: 33; 2008 Q23–Q38: 16). São registros da branch, não publicação confirmada neste ambiente. Revisão independente concentrada nos contratos/publicador e integridade, sem repetir manualmente todas as questões. Próximo: validar extração e registrar pendências por evidência.
 
 - **29/10/2026 · SIM-P1 concluído · Codex:** [PR #22](https://github.com/bielrodrigues2406/enade-cs-platform/pull/22), código `d775f5f`; cinco commits coesos, integração após CI do HEAD final. Migration 012 cria tentativas de 10/20/30 com versões/alternativas fixas, revisão de resposta, início/finalização idempotentes e isolamento por identidade. Interface em `/treino`, autosave/retomada, revisão antes do fim, resultado com brancas e reaproveitamento de imagem/procedência. Sem cronômetro. Três agentes em banco/API, interface/testes e revisão independente: corrigidos P1 de gravação incerta/409, P2 de snapshot no retry e foco. Folha de 30 no mobile recolhível após captura antes/depois. Build, **139 testes API/PostgreSQL/utilitários e 48 Chromium** passaram em sequência; os nove novos E2E também com 30 s padrão. Consulta READ ONLY confirmou 605 privados (169 com assunto), as três demos originais e zero tentativas/questões de fixture restantes. Sem questão real publicada ou alterada, sem dependência nova. **Próximo:** conteúdo utilizável antes de outros modos — Claude publica só os 11 recortes APPROVED dos dois lotes existentes; Codex amplia CNT-V1 por Q17–Q24. Preservar bloqueados e anuladas. Treinos não sobrescrevem estudo livre/caderno; formato completo, deadline e discursivas seguem em SIM-1/2.
 
