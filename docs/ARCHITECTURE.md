@@ -21,6 +21,8 @@ PostgreSQL, Prisma, GraphQL e pgvector não são alternativas entre si. PostgreS
 
 Um repositório com apps/web, apps/api e packages/ apenas para contratos ou lógica efetivamente compartilhados. Não criar pacotes vazios. API organizada em módulos de identidade, catálogo editorial, estudo, simulados, revisões, desempenho e integração com IA, conforme forem implementados.
 
+Na web, os nove componentes atuais usam templates externos `.html` via `templateUrl`; o template do shell fica em `app.component.html`, ao lado do bootstrap/estado em `main.ts`. Comportamento e tipos ficam no TypeScript. Tokens e regras compartilhadas estão em `styles.css`; estilos exclusivos futuros podem usar `styleUrl`, respeitando ENGINEERING-AND-DELIVERY §1.1. Bindings de propriedades CSS fornecem apenas valores dinâmicos necessários; a regra de escala da imagem fica no CSS.
+
 A primeira entrega deve atravessar frontend, API e banco. O catálogo de conteúdo não depende de IA. O fluxo de responder e salvar continua disponível quando o provedor de IA falhar.
 
 Clientes acessam a API, nunca o PostgreSQL diretamente. A API deriva a identidade da sessão autenticada e autoriza cada recurso. Um identificador de usuário enviado pelo cliente não concede acesso a tentativas.
