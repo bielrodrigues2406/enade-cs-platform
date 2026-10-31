@@ -82,7 +82,7 @@ test("a student takes the full edition exam with a countdown, pauses, leaves saf
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: "test-results/edition-setup-1280.png", fullPage: true });
   await row.getByRole("button", { name: "Fazer esta prova" }).click();
-  await expect(page.getByRole("group", { name: "Começar a prova de 2096?" })).toContainText("não para se você sair");
+  await expect(page.getByRole("group", { name: "Começar a prova de 2096?" })).toContainText("Você pode pausar quando precisar");
   await page.getByRole("button", { name: "Começar agora" }).click();
 
   await expect(page.getByText("Questão 1 de 20")).toBeVisible();

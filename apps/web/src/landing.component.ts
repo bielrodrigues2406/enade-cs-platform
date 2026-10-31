@@ -55,7 +55,7 @@ export class LandingComponent {
     },
     {
       title: "Treino com resultado",
-      text: "Blocos de 10, 20 ou 30 questões, salvos a cada resposta, com correção e resultado por área no final.",
+      text: "Blocos de 10, 20 ou 30 questões ou a prova completa de uma edição, com tempo, pausa e resultado por área no final.",
       icon: "M5 4v16l14-8z",
       soon: false,
     },
@@ -69,7 +69,7 @@ export class LandingComponent {
       title: "Aulas e presença",
       text: "Agenda das aulas de preparação, com professor, matéria e sala, e chamada pelo próprio sistema.",
       icon: "M4 6h16v14H4zM4 10h16M9 3v4M15 3v4",
-      soon: true,
+      soon: false,
     },
   ];
 

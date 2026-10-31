@@ -216,7 +216,7 @@
           <div
             class="map-parts"
             role="img"
-            aria-label="Mapa da prova: 15 questões de Formação Geral, 30 objetivas e 1 discursiva de Computação. O caderno treina hoje as objetivas de Computação."
+            aria-label="Mapa da prova: 15 questões de Formação Geral, 30 objetivas e 1 discursiva de Computação. A plataforma treina as objetivas de Formação Geral e de Computação."
           >
             @for (part of examParts; track part.count) {
               <div class="map-part" [attr.data-kind]="part.kind">
@@ -236,7 +236,9 @@
             }
           </div>
           <p class="panel-note">
-            Em azul, o que o caderno já treina. Formato informado pelo
+            Em azul, o que você já treina aqui com questões oficiais; a
+            discursiva entra quando os padrões de resposta forem importados.
+            Formato informado pelo
             <a [href]="examSource" target="_blank" rel="noopener noreferrer"
               >Inep</a
             >
@@ -263,7 +265,7 @@
           <p class="panel-note">
             Oficiais vêm de provas anteriores, com edição, página e gabarito
             definitivo. Autorais têm autoria identificada e não são do Inep; as
-            demonstrativas servem para conhecer o caderno.
+            demonstrativas servem para conhecer a plataforma.
             @if (catalog() && !officialCount()) {
               As provas de 2005 a 2021 estão em transcrição e conferência.
             }

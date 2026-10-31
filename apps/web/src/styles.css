@@ -2624,11 +2624,12 @@ app-home .panel h2 {
     transform: scale(0.3);
   }
 }
+.map-part[data-kind="general"] .map-cell,
 .map-part[data-kind="specific"] .map-cell {
   background: var(--color-accent);
   border-color: var(--color-accent);
 }
-/* A discursiva é uma folha pautada: resposta escrita, ainda fora do caderno. */
+/* A discursiva é uma folha pautada: resposta escrita com autoavaliação. */
 .map-part[data-kind="essay"] .map-cells {
   grid-template-columns: minmax(0, 1fr);
 }

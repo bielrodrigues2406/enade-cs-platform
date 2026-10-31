@@ -6,7 +6,7 @@
       @if (data.state === 'COMPLETED' && !reviewing()) {
         <section class="page-intro">
           @if (data.edition; as edition) {
-            <p class="metadata">Prova completa · {{ edition.title }}</p>
+            <p class="metadata">Prova completa · ENADE {{ edition.year }} · {{ modalityLabel(edition.modality) }}</p>
             <h1 id="practice-result-title" tabindex="-1">Resultado da prova</h1>
           } @else {
             <p class="metadata">Treino parcial · {{ data.area || 'Assuntos mistos' }}</p>
@@ -15,7 +15,7 @@
           @if (data.summary; as result) {
             <p class="practice-score"><strong>{{ result.correct }} de {{ result.total }}</strong> acertos</p>
             <p>{{ result.incorrect }} {{ result.incorrect === 1 ? 'errada' : 'erradas' }} · {{ result.unanswered }} {{ result.unanswered === 1 ? 'não respondida' : 'não respondidas' }}.</p>
-            <p class="muted">Resultado deste treino, sem previsão de nota ENADE. As respostas ficam separadas do estudo livre.</p>
+            <p class="muted">Resultado {{ data.edition ? 'desta prova' : 'deste treino' }}, sem previsão de nota ENADE. As respostas ficam separadas do estudo livre.</p>
             @if (data.edition && result.byBlock; as blocks) {
               <dl class="practice-blocks">
                 <div><dt>Formação Geral</dt><dd><strong>{{ blocks.general.correct }}</strong> de {{ blocks.general.total }}</dd></div>
@@ -50,7 +50,7 @@
         <div class="practice-toolbar">
           <button class="text-button" (click)="data.state === 'COMPLETED' ? showResult() : showSelection()" [disabled]="protectedState()">{{ data.state === 'COMPLETED' ? '← Voltar ao resultado' : '← Voltar aos treinos' }}</button>
           @if (data.edition; as edition) {
-            <p class="metadata">Prova completa · {{ edition.title }}</p>
+            <p class="metadata">Prova completa · ENADE {{ edition.year }} · {{ modalityLabel(edition.modality) }}</p>
             @if (remaining() !== null) {
               <div class="practice-clock-row">
                 <p class="practice-clock" [class.is-warning]="timeWarning()" [class.is-over]="timeUp()">
@@ -200,7 +200,7 @@
             <h2 id="practice-editions-title">Prova completa da edição</h2>
             <p class="muted">
               As objetivas publicadas da prova, na ordem original, com {{ editions()!.minutes / 60 }} horas de prova.
-              O tempo corre no servidor, mesmo se você sair.
+              Você pode pausar; ao sair, a prova pausa e as respostas ficam salvas.
             </p>
             <ol>
               @for (edition of editions()!.editions; track edition.id) {
@@ -208,7 +208,7 @@
                   <div>
                     <strong>ENADE {{ edition.year }} · {{ modalityLabel(edition.modality) }}</strong>
                     <p class="muted">
-                      {{ edition.objectives }} objetivas ({{ edition.general }} de Formação Geral)
+                      {{ edition.objectives }} objetivas@if (edition.general) { ({{ edition.general }} de Formação Geral) }
                       @if (edition.discursive) { · {{ edition.discursive }} {{ edition.discursive === 1 ? 'discursiva' : 'discursivas' }} }
                       @if (edition.missing.length) { · {{ missingLabel(edition) }}, anuladas ou ainda não publicadas }
                     </p>
@@ -222,7 +222,7 @@
             @if (chosenEdition(); as edition) {
               <div class="practice-edition-confirm" role="group" aria-labelledby="practice-edition-confirm-title">
                 <h3 id="practice-edition-confirm-title">Começar a prova de {{ edition.year }}?</h3>
-                <p>O cronômetro de {{ editions()!.minutes / 60 }} horas começa agora e não para se você sair. Ao terminar o tempo, a prova é finalizada com o que estiver salvo.</p>
+                <p>O cronômetro de {{ editions()!.minutes / 60 }} horas começa agora. Você pode pausar quando precisar; ao terminar o tempo, a prova é finalizada com o que estiver salvo.</p>
                 <div class="practice-actions">
                   <button (click)="startEdition()" [disabled]="saving()">{{ saving() ? 'Preparando a prova…' : 'Começar agora' }}</button>
                   <button class="outline" (click)="chosenEdition.set(null)" [disabled]="saving()">Cancelar</button>
