@@ -140,7 +140,7 @@ test("practice validates all boundaries and excludes pending or incomplete conte
   assert.deepEqual(available.areas.map((a: any) => a.name), [...AREAS]);
   assert.equal(available.areas.find((a: any) => a.name === noContentArea).count, 0);
   assert.equal(available.active, null); assert.deepEqual(available.recent, []);
-  for (const body of [null, [], {}, {requestId:randomUUID(),size:5,area},
+  for (const body of [null, [], {}, {requestId:randomUUID(),size:15,area}, {requestId:randomUUID(),size:5,area:null},
     {requestId:randomUUID(),size:"10",area}, {requestId:randomUUID(),size:10,area:"unknown"},
     {requestId:"invalid",size:10,area}, {requestId:randomUUID(),size:10},
     {requestId:randomUUID(),size:10,area,ownerId:user.id}])
@@ -399,12 +399,12 @@ test("an edition exam applies the published objectives in order, pauses, expires
   assert.equal((await json(`editions/${exam}/attempts`, user, "POST", { requestId }, 201)).id, started.id); // repetição
   assert.equal((await request(`editions/${exam}/attempts`, user, "POST", { requestId: randomUUID() })).status, 409); // já há uma ativa
   // Pausada: não aceita resposta e o tempo restante não corre.
-  const paused = await json(`editions/attempts/${started.id}/pause`, user, "POST", {});
+  const paused = await json(`practice/${started.id}/pause`, user, "POST", {});
   assert.ok(paused.pausedAt);
   assert.equal((await request(`practice/${started.id}/items/1`, user, "PUT", { optionId: null, marked: true, baseRevision: 0 })).status, 409);
   await new Promise((resolve) => setTimeout(resolve, 1100));
   assert.equal((await json(`practice/${started.id}`, user)).remainingMs, paused.remainingMs);
-  const resumed = await json(`editions/attempts/${started.id}/resume`, user, "POST", {});
+  const resumed = await json(`practice/${started.id}/resume`, user, "POST", {});
   assert.equal(resumed.pausedAt, null);
   assert.ok(new Date(resumed.deadlineAt).getTime() - new Date(started.deadlineAt).getTime() >= 1000, "o prazo anda com a pausa");
   await save(user, started.id, 1, `${started.items[0].question.id}-A`);
@@ -435,4 +435,36 @@ test("an edition exam applies the published objectives in order, pauses, expires
   const after = await json(`practice/${expired}`, late);
   assert.equal(after.state, "COMPLETED");
   assert.equal(after.summary.unanswered, 22);
+});
+
+test("area practice offers all of a small area, prefers unseen questions and can run on a timer with pause", async () => {
+  const topic = "Segurança";
+  const created = [];
+  for (let n = 0; n < 7; n++) created.push(await fixture(700 + n, { topic }));
+  const user = await actor();
+  const before = (await json("practice", user)).areas.find((a: any) => a.name === topic);
+  assert.ok(before.count >= 7);
+  assert.equal(before.unseen, before.count);
+  // Duas já respondidas no estudo livre ficam para o fim do sorteio.
+  for (const { id } of created.slice(0, 2))
+    await json(`questions/${id}/answer`, user, "PUT", { optionId: `${id}-A`, baseRevision: 0 });
+  assert.equal((await json("practice", user)).areas.find((a: any) => a.name === topic).unseen, before.count - 2);
+  assert.equal((await request("practice", user, "POST", { requestId: randomUUID(), size: before.count - 1, area: topic })).status, 400);
+  const all = await json("practice", user, "POST", { requestId: randomUUID(), size: before.count, area: topic, timed: true }, 201);
+  assert.equal(all.size, before.count);
+  const seen = new Set(created.slice(0, 2).map((c) => c.id));
+  const positions = all.items.map((item: any) => seen.has(item.question.id));
+  assert.deepEqual(positions.slice(-2), [true, true], "as já vistas vêm por último");
+  const minutes = (new Date(all.deadlineAt).getTime() - Date.now()) / 60000;
+  assert.ok(minutes > before.count * 4 - 1 && minutes <= before.count * 4, `prazo ${minutes}`);
+  const paused = await json(`practice/${all.id}/pause`, user, "POST", {});
+  assert.ok(paused.pausedAt);
+  assert.equal((await request(`practice/${all.id}/items/1`, user, "PUT", { optionId: null, marked: true, baseRevision: 0 })).status, 409);
+  await json(`practice/${all.id}/resume`, user, "POST", {});
+  await json(`practice/${all.id}/finish`, user, "POST", {});
+  // Treino sem cronômetro não pausa.
+  const untimed = await json("practice", user, "POST", { requestId: randomUUID(), size: 5, area: topic }, 201);
+  assert.equal(untimed.deadlineAt, null);
+  assert.equal((await request(`practice/${untimed.id}/pause`, user, "PUT", {})).status, 404);
+  assert.equal((await request(`practice/${untimed.id}/pause`, user, "POST", {})).status, 400);
 });

@@ -10,6 +10,15 @@ import { publicExam, sourceFields, type Source } from "./source-store.js";
 
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
 const SIZES = [10, 20, 30];
+/** Treino de uma área: também 5 questões ou todas as publicadas dela (até 30). */
+const AREA_SIZES = [5, 10, 20, 30];
+/** Treino cronometrado: tempo médio por objetiva numa prova de 4 h. */
+const MINUTES_PER_QUESTION = 4;
+// Questão já vista pela pessoa: respondida no estudo ou aplicada em treino/prova.
+const SEEN = `(EXISTS(SELECT 1 FROM answer a JOIN question_version av ON av.id=a.question_id
+    WHERE a.owner_id=$OWNER AND av.question_id=e.question_id)
+  OR EXISTS(SELECT 1 FROM practice_item pi JOIN practice_attempt pa ON pa.id=pi.attempt_id
+    WHERE pa.owner_id=$OWNER AND pi.question_id=e.question_id))`;
 // Disponibilidade e criação usam exatamente a mesma elegibilidade. Publicação
 // e revisão pertencem à curadoria; este módulo não promove conteúdo privado.
 export const ELIGIBLE = `SELECT q.id,q.question_id,q.topic,q.origin,q.exam_source_id,q.source_question_number
@@ -204,6 +213,31 @@ export async function view(client: PoolClient, attempt: Attempt) {
   };
 }
 
+/** Pausa ou retoma o cronômetro (prova completa ou treino cronometrado). Pausado, não vence e não aceita respostas. */
+async function setPaused(req: any, rawId: string, paused: boolean) {
+  const id = attemptId(rawId);
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+    const user = await requireIdentity(req, client, true);
+    const attempt = await owned(client, id, user.id, true);
+    if (!attempt.deadlineAt) fail("Este treino não tem cronômetro.", 400);
+    if (!(await expire(client, attempt, user.id)) && attempt.state === "IN_PROGRESS")
+      await client.query(paused
+        ? "UPDATE practice_attempt SET paused_at=COALESCE(paused_at,clock_timestamp()) WHERE id=$1"
+        : `UPDATE practice_attempt SET paused_ms=paused_ms+(extract(epoch FROM clock_timestamp()-paused_at)*1000)::bigint,
+             paused_at=NULL WHERE id=$1 AND paused_at IS NOT NULL`, [id]);
+    const dto = await view(client, await owned(client, id, user.id));
+    await client.query("COMMIT");
+    return dto;
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
 @Controller("api/practice")
 export class PracticeController {
   @Get()
@@ -214,10 +248,14 @@ export class PracticeController {
         SELECT ${ATTEMPT_FIELDS} FROM practice_attempt p WHERE p.owner_id=$1
       )
       SELECT json_build_object(
-        'sizes',json_build_array(10,20,30),'defaultSize',20,
+        'sizes',json_build_array(10,20,30),'areaSizes',json_build_array(5,10,20,30),'defaultSize',20,
+        'minutesPerQuestion',${MINUTES_PER_QUESTION},
         'total',(SELECT count(*)::integer FROM eligible),
+        'unseen',(SELECT count(*)::integer FROM eligible e WHERE NOT ${SEEN.replaceAll("$OWNER", "$1")}),
         'areas',(SELECT json_agg(json_build_object('name',a.name,'count',
-          (SELECT count(*)::integer FROM eligible e WHERE e.topic=a.name)) ORDER BY a.ordinality)
+          (SELECT count(*)::integer FROM eligible e WHERE e.topic=a.name),'unseen',
+          (SELECT count(*)::integer FROM eligible e WHERE e.topic=a.name AND NOT ${SEEN.replaceAll("$OWNER", "$1")}))
+          ORDER BY a.ordinality)
           FROM unnest($2::text[]) WITH ORDINALITY a(name,ordinality)),
         'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,kind,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
         'recent',COALESCE((SELECT json_agg(a ORDER BY a."finishedAt" DESC,a.id DESC) FROM (
@@ -232,11 +270,14 @@ export class PracticeController {
   @Post()
   async start(@Req() req: any, @Body() body: unknown) {
     await requireIdentity(req); noQuery(req);
-    const data = closed(body, ["requestId", "size", "area"]);
+    const data = closed(body, ["requestId", "size", "area", "timed"]);
+    const timed = data.timed === true;
     if (typeof data.requestId !== "string" || !UUID.test(data.requestId)
-      || typeof data.size !== "number" || !SIZES.includes(data.size)
-      || !(data.area === null || typeof data.area === "string" && (AREAS as readonly string[]).includes(data.area)))
-      fail("Escolha 10, 20 ou 30 questões e uma área disponível.", 400);
+      || typeof data.size !== "number" || !Number.isInteger(data.size) || data.size < 1 || data.size > 30
+      || !(data.timed === undefined || typeof data.timed === "boolean")
+      || !(data.area === null || typeof data.area === "string" && (AREAS as readonly string[]).includes(data.area))
+      || (data.area === null && !SIZES.includes(data.size)))
+      fail("Escolha 10, 20 ou 30 questões, ou uma área com a quantidade disponível.", 400);
     const client = await db.connect();
     try {
       await client.query("BEGIN");
@@ -246,7 +287,7 @@ export class PracticeController {
         `SELECT ${ATTEMPT_FIELDS} FROM practice_attempt p WHERE p.owner_id=$1 AND p.request_id=$2 FOR UPDATE OF p`, [user.id, data.requestId],
       )).rows[0];
       if (previous) {
-        if (previous.size !== data.size || previous.area !== data.area)
+        if (previous.size !== data.size || previous.area !== data.area || Boolean(previous.deadlineAt) !== timed)
           fail("Esta solicitação já iniciou um treino com outra configuração.", 409);
         const dto = await view(client, previous);
         await client.query("COMMIT");
@@ -254,14 +295,26 @@ export class PracticeController {
       }
       if ((await client.query("SELECT 1 FROM practice_attempt WHERE owner_id=$1 AND state='IN_PROGRESS'", [user.id])).rowCount)
         fail("Você já tem um treino em andamento. Retome-o antes de iniciar outro.", 409);
+      const size = data.size as number;
+      if (data.area !== null && !AREA_SIZES.includes(size)) {
+        // Fora de 5/10/20/30, só vale "todas da área": o tamanho é o total publicado dela.
+        const available = (await client.query(`WITH eligible AS (${ELIGIBLE}) SELECT count(*)::integer AS n FROM eligible WHERE topic=$1`,
+          [data.area])).rows[0].n;
+        if (size !== available) fail("Escolha 5, 10, 20, 30 ou todas as questões da área.", 400);
+      }
+      // Inéditas para a pessoa primeiro; depois as já vistas, em ordem aleatória.
       const selected = (await client.query<{ id: string; question_id: string }>(
-        `WITH eligible AS (${ELIGIBLE}) SELECT id,question_id FROM eligible
-          WHERE ($1::text IS NULL OR topic=$1) ORDER BY random() LIMIT $2`, [data.area, data.size],
+        `WITH eligible AS (${ELIGIBLE}) SELECT e.id,e.question_id FROM eligible e
+          WHERE ($1::text IS NULL OR e.topic=$1) ORDER BY ${SEEN.replaceAll("$OWNER", "$3")},random() LIMIT $2`,
+        [data.area, data.size, user.id],
       )).rows;
       if (selected.length !== data.size)
         fail("Ainda não há questões publicadas suficientes para esse tamanho. Escolha outra quantidade ou área.", 409);
       const id = randomUUID();
-      await client.query("INSERT INTO practice_attempt(id,owner_id,request_id,size,area) VALUES($1,$2,$3,$4,$5)", [id, user.id, data.requestId, data.size, data.area]);
+      await client.query(
+        `INSERT INTO practice_attempt(id,owner_id,request_id,size,area,deadline_at)
+         VALUES($1,$2,$3,$4,$5,CASE WHEN $6::boolean THEN clock_timestamp() + make_interval(mins => $4::integer * $7::integer) END)`,
+        [id, user.id, data.requestId, data.size, data.area, timed, MINUTES_PER_QUESTION]);
       for (const [index, row] of selected.entries()) {
         await client.query("INSERT INTO practice_item(attempt_id,position,question_id,version_id) VALUES($1,$2,$3,$4)", [id, index + 1, row.question_id, row.id]);
       }
@@ -329,6 +382,12 @@ export class PracticeController {
       await client.query("ROLLBACK"); throw error;
     } finally { client.release(); }
   }
+
+  @Post(":id/pause") @HttpCode(200)
+  pause(@Req() req: any, @Param("id") id: string) { return setPaused(req, id, true); }
+
+  @Post(":id/resume") @HttpCode(200)
+  resume(@Req() req: any, @Param("id") id: string) { return setPaused(req, id, false); }
 
   @Post(":id/finish") @HttpCode(200)
   async finish(@Req() req: any, @Param("id") rawId: string, @Body() body: unknown) {
