@@ -69,10 +69,11 @@ export class LessonsComponent {
   async loadMine() {
     await this.attempt(async () => this.mine.set((await this.request<{ lessons: MyLesson[] }>("my/lessons")).lessons));
   }
-  async createClass() {
+  async createClass(dialog: HTMLDialogElement) {
     await this.attempt(async () => {
       const { id } = await this.request<{ id: string }>("classes", this.newClass);
       this.newClass.name = "";
+      dialog.close();
       await this.openClass(id);
     });
   }
@@ -85,11 +86,12 @@ export class LessonsComponent {
       if (!this.newLesson.teacherId && detail.teachers.length) this.newLesson.teacherId = detail.teachers[0].id;
     });
   }
-  async importRoster() {
+  async importRoster(dialog: HTMLDialogElement) {
     const detail = this.detail();
     if (!detail || !this.rosterText.trim()) return;
     await this.attempt(async () => {
       const result = await this.request<{ added: number; updated: number; skipped: number }>(`classes/${detail.id}/members`, { text: this.rosterText });
+      dialog.close();
       this.notice.set(`${result.added} adicionadas, ${result.updated} atualizadas` + (result.skipped ? `, ${result.skipped} linhas ignoradas (sem nome ou prontuário).` : "."));
       this.rosterText = "";
       await this.openClass(detail.id);
@@ -103,7 +105,7 @@ export class LessonsComponent {
       await this.openClass(detail.id);
     });
   }
-  async createLesson() {
+  async createLesson(dialog: HTMLDialogElement) {
     const detail = this.detail();
     const l = this.newLesson;
     if (!detail || !l.date) return;
@@ -113,6 +115,7 @@ export class LessonsComponent {
         startsAt: at(l.start), endsAt: at(l.end), room: l.room, subject: l.subject, topic: l.topic || undefined, teacherId: l.teacherId,
       });
       this.notice.set("Aula marcada.");
+      dialog.close();
       this.newLesson = { ...l, date: "", topic: "" };
       await this.openClass(detail.id);
     });

@@ -4262,3 +4262,198 @@ app-landing [data-reveal] {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Modal: formulários curtos e confirmações sem poluir a tela. A base é o
+   <dialog> (foco preso, Esc, leitor de tela); o visual é todo próprio. No
+   celular vira uma folha que sobe do rodapé. Entrada e saída animadas com
+   @starting-style; com movimento reduzido, só aparece. */
+dialog.sheet-dialog {
+  --sheet-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  width: min(36rem, calc(100% - var(--space-8)));
+  max-height: min(44rem, calc(100dvh - var(--space-12)));
+  padding: 0;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 0;
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--color-text) 8%, transparent),
+    0 12px 32px -8px color-mix(in srgb, var(--color-text) 22%, transparent),
+    0 32px 64px -24px color-mix(in srgb, var(--color-text) 28%, transparent);
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  transition:
+    opacity 200ms ease-out,
+    transform 320ms var(--sheet-ease),
+    overlay 320ms allow-discrete,
+    display 320ms allow-discrete;
+}
+dialog.sheet-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transform: none;
+}
+@starting-style {
+  dialog.sheet-dialog[open] {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+}
+dialog.sheet-dialog::backdrop {
+  background: color-mix(in srgb, var(--blue-900, #0f1f3d) 38%, transparent);
+  backdrop-filter: blur(6px) saturate(1.1);
+  opacity: 0;
+  transition:
+    opacity 240ms ease-out,
+    overlay 320ms allow-discrete,
+    display 320ms allow-discrete;
+}
+dialog.sheet-dialog[open]::backdrop {
+  opacity: 1;
+}
+@starting-style {
+  dialog.sheet-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+.sheet-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-6) var(--space-2);
+}
+.sheet-dialog-eyebrow {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.sheet-dialog-head h2 {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.15;
+}
+.sheet-close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+  transition: background 160ms ease-out, color 160ms ease-out;
+}
+.sheet-close:hover {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+.sheet-close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.sheet-dialog-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+.sheet-dialog-content {
+  padding: var(--space-3) var(--space-6) var(--space-6);
+  overflow-y: auto;
+}
+.sheet-dialog-content > p:first-child {
+  margin-top: 0;
+  color: var(--color-text-muted);
+}
+.sheet-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-top: var(--border-thin) solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface-sunken) 55%, var(--color-surface));
+  border-radius: 0 0 18px 18px;
+}
+/* Resumo em números (ex.: o que a prova tem antes de começar). */
+.sheet-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  margin: var(--space-2) 0 var(--space-5);
+  border-block: var(--border-thin) solid var(--color-border);
+}
+.sheet-stats > div {
+  padding: var(--space-4) var(--space-3) var(--space-4) 0;
+}
+.sheet-stats > div + div {
+  padding-left: var(--space-4);
+  border-left: var(--border-thin) solid var(--color-border);
+}
+.sheet-stats dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.sheet-stats dd {
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-reading);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  line-height: 1;
+}
+@media (max-width: 640px) {
+  dialog.sheet-dialog {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - var(--space-8));
+    margin: auto 0 0;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+  }
+  @starting-style {
+    dialog.sheet-dialog[open] {
+      transform: translateY(100%);
+    }
+  }
+  /* Alça da folha. */
+  dialog.sheet-dialog::before {
+    content: "";
+    align-self: center;
+    width: 40px;
+    height: 4px;
+    margin-top: var(--space-3);
+    border-radius: 2px;
+    background: var(--color-border-strong);
+  }
+  .sheet-dialog-head {
+    padding-top: var(--space-3);
+  }
+  .sheet-dialog-actions {
+    border-radius: 0;
+    padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  }
+  .sheet-dialog-actions button {
+    flex: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog.sheet-dialog,
+  dialog.sheet-dialog::backdrop {
+    transition: none;
+  }
+}

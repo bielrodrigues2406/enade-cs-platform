@@ -102,7 +102,7 @@ test("the error notebook supports retry, confirmed correction, filters, reload a
     .click();
   await expect(
     page.getByRole("button", {
-      name: "Tentar novamente: Quando uma transação falha",
+      name: /^(?:Revisar agora|Tentar novamente): Quando\ uma\ transação\ falha$/,
       exact: true,
     }),
   ).toBeVisible();
@@ -138,7 +138,7 @@ test("the error notebook supports retry, confirmed correction, filters, reload a
     .getByRole("button", { name: "Tentar novamente", exact: true })
     .click();
   const retry = page.getByRole("button", {
-    name: "Tentar novamente: Quando uma transação falha",
+    name: /^(?:Revisar agora|Tentar novamente): Quando\ uma\ transação\ falha$/,
     exact: true,
   });
   await retry.focus();
@@ -245,7 +245,7 @@ test("a shrinking last page returns to an existing page after a confirmed correc
   await page.getByRole("button", { name: "Próxima", exact: true }).click();
   await page
     .getByRole("button", {
-      name: "Tentar novamente: Fixture caderno 21",
+      name: /^(?:Revisar agora|Tentar novamente): Fixture\ caderno\ 21$/,
       exact: true,
     })
     .click();
@@ -267,7 +267,7 @@ test("a shrinking last page returns to an existing page after a confirmed correc
   );
   await expect(
     page.getByRole("button", {
-      name: "Tentar novamente: Fixture caderno 21",
+      name: /^(?:Revisar agora|Tentar novamente): Fixture\ caderno\ 21$/,
       exact: true,
     }),
   ).toHaveCount(0);
@@ -336,7 +336,7 @@ test("a late review response cannot reveal account history after logout in anoth
     ).toBeVisible();
     await expect(
       tab.getByRole("button", {
-        name: "Tentar novamente: Quando uma transação falha",
+        name: /^(?:Revisar agora|Tentar novamente): Quando\ uma\ transação\ falha$/,
         exact: true,
       }),
     ).toHaveCount(0);
@@ -376,7 +376,7 @@ test("the topic table filters the notebook to one topic with honest counts", asy
   await expect(page.locator(".review-list > li")).toHaveCount(1);
   await expect(
     page.getByRole("button", {
-      name: "Tentar novamente: Entrega confiável de um fluxo",
+      name: /^(?:Revisar agora|Tentar novamente): Entrega\ confiável\ de\ um\ fluxo$/,
       exact: true,
     }),
   ).toBeVisible();

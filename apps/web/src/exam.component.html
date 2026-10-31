@@ -215,21 +215,35 @@
                     </p>
                   </div>
                   @if (chosenEdition()?.id !== edition.id) {
-                    <button class="outline" (click)="chosenEdition.set(edition)" [disabled]="saving()">Fazer esta prova</button>
+                    <button class="outline" (click)="chosenEdition.set(edition); editionDialog.showModal()" [disabled]="saving()">Fazer esta prova</button>
                   }
                 </li>
               }
             </ol>
-            @if (chosenEdition(); as edition) {
-              <div class="practice-edition-confirm" role="group" aria-labelledby="practice-edition-confirm-title">
-                <h3 id="practice-edition-confirm-title">Começar a prova de {{ edition.year }}?</h3>
-                <p>O cronômetro de {{ editions()!.minutes / 60 }} horas começa agora. Você pode pausar quando precisar; ao terminar o tempo, a prova é finalizada com o que estiver salvo.</p>
-                <div class="practice-actions">
-                  <button (click)="startEdition()" [disabled]="saving()">{{ saving() ? 'Preparando a prova…' : 'Começar agora' }}</button>
-                  <button class="outline" (click)="chosenEdition.set(null)" [disabled]="saving()">Cancelar</button>
+            <dialog #editionDialog class="sheet-dialog" aria-labelledby="practice-edition-confirm-title" (close)="chosenEdition.set(null)">
+              @if (chosenEdition(); as edition) {
+                <div class="sheet-dialog-head"><div><p class="sheet-dialog-eyebrow">Prova completa · {{ modalityLabel(edition.modality) }}</p><h2 id="practice-edition-confirm-title">Começar a prova de {{ edition.year }}?</h2></div><button type="button" class="sheet-close" (click)="editionDialog.close()" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button></div>
+                <div class="sheet-dialog-body">
+                  <div class="sheet-dialog-content">
+                    <dl class="sheet-stats">
+                      <div><dt>Objetivas</dt><dd>{{ edition.objectives }}</dd></div>
+                      @if (edition.discursive) {
+                        <div><dt>Discursivas</dt><dd>{{ edition.discursive }}</dd></div>
+                      }
+                      <div><dt>Tempo</dt><dd>{{ editions()!.minutes / 60 }} h</dd></div>
+                    </dl>
+                    <p>As questões vêm na ordem da prova original. O cronômetro começa agora e você pode pausar quando precisar. Ao terminar o tempo, a prova é finalizada com o que estiver salvo.</p>
+                    @if (edition.missing.length) {
+                      <p class="muted">Desta edição, {{ missingLabel(edition) }}: anuladas pelo Inep ou ainda não publicadas aqui.</p>
+                    }
+                  </div>
+                  <div class="sheet-dialog-actions">
+                    <button class="outline" (click)="editionDialog.close()" [disabled]="saving()">Cancelar</button>
+                    <button (click)="startEdition(); editionDialog.close()" [disabled]="saving()">{{ saving() ? 'Preparando a prova…' : 'Começar agora' }}</button>
+                  </div>
                 </div>
-              </div>
-            }
+              }
+            </dialog>
           </section>
         }
         <div class="practice-actions"><button class="text-button" (click)="browse.emit()" [disabled]="saving()">Abrir banco de questões</button><button class="text-button" (click)="loadAvailability()" [disabled]="saving()">Atualizar disponibilidade</button></div>

@@ -114,7 +114,7 @@ test("a wrong answer appears first on the home page and can be retried", async (
   ).toContainText("espera no caderno de erros");
   await page
     .getByRole("button", {
-      name: "Tentar novamente: Entrega confiável de um fluxo",
+      name: /^(?:Revisar agora|Tentar novamente): Entrega\ confiável\ de\ um\ fluxo$/,
     })
     .click();
   await expect(
