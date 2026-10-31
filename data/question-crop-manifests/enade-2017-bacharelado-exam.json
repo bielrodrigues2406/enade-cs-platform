@@ -1,0 +1,1168 @@
+{
+ "document": "enade-2017-bacharelado-exam",
+ "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+ "renderer": {
+  "dpi": 200,
+  "format": "image/webp",
+  "lossless": true,
+  "pages": [
+   {
+    "page": 1,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 2,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 3,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 4,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 5,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 6,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 7,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 8,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 9,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 10,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 11,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 12,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 13,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 14,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 15,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 16,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 17,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 18,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 19,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 20,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 21,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 22,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 23,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 24,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 25,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 26,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 27,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 28,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 29,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 30,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 31,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 32,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 33,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 34,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 35,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 36,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 37,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 38,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 39,
+    "width": 628.11,
+    "height": 826.535
+   },
+   {
+    "page": 40,
+    "width": 628.11,
+    "height": 826.535
+   }
+  ],
+  "pdftoppm": "pdftoppm version 24.02.0",
+  "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+ },
+ "items": [
+  {
+   "key": "D1",
+   "number": 1,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D1-1.webp",
+     "page": 2,
+     "box": {
+      "x0": 54.6,
+      "y0": 112.29,
+      "x1": 576.5,
+      "y1": 754.54
+     },
+     "width": 1449,
+     "height": 1784,
+     "byteSize": 149840,
+     "sha256": "2b2c47587493d19661ddd69f2a6f65f8b7cf856c06ae207522e919563f263e71"
+    },
+    {
+     "file": "D1-2.webp",
+     "page": 3,
+     "box": {
+      "x0": 54.35,
+      "y0": 107.18,
+      "x1": 577.15,
+      "y1": 275.38
+     },
+     "width": 1452,
+     "height": 467,
+     "byteSize": 25904,
+     "sha256": "6f58a593fb71dfe9a5972ceb324645bda0b4a469d5ebf09cd197628dfff63ca6"
+    }
+   ]
+  },
+  {
+   "key": "D2",
+   "number": 2,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D2-1.webp",
+     "page": 4,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.45,
+      "y1": 476.83
+     },
+     "width": 1450,
+     "height": 1095,
+     "byteSize": 71944,
+     "sha256": "ed6c09a7da833b9f5808047736057640996a210137bd64a0f9162a2bc9691b63"
+    }
+   ]
+  },
+  {
+   "key": "Q1",
+   "number": 1,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q1-1.webp",
+     "page": 5,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.46,
+      "y1": 766.31
+     },
+     "width": 1450,
+     "height": 1899,
+     "byteSize": 83708,
+     "sha256": "d98636266834391909de18774f8d548f7c410b2d86bee3b2a83cae51cc6c88a1"
+    }
+   ]
+  },
+  {
+   "key": "Q2",
+   "number": 2,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q2-1.webp",
+     "page": 6,
+     "box": {
+      "x0": 54.34,
+      "y0": 82.7,
+      "x1": 576.47,
+      "y1": 476.6
+     },
+     "width": 1450,
+     "height": 1094,
+     "byteSize": 57308,
+     "sha256": "e915b2af015a6e474a17c43679e03abf0f2a1b24441807c8d7a893c14d2b8731"
+    }
+   ]
+  },
+  {
+   "key": "Q3",
+   "number": 3,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q3-1.webp",
+     "page": 7,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.47,
+      "y1": 765.08
+     },
+     "width": 1450,
+     "height": 1895,
+     "byteSize": 116822,
+     "sha256": "a559074fb64219a8f229755c407a125006182b3b385ff39c749fb946f7242914"
+    }
+   ]
+  },
+  {
+   "key": "Q4",
+   "number": 4,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q4-1.webp",
+     "page": 8,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.68,
+      "x1": 576.43,
+      "y1": 681.84
+     },
+     "width": 1450,
+     "height": 1664,
+     "byteSize": 574364,
+     "sha256": "960c76019f2cb61d3da01f48a7e70fe68a33ffc11860c6ba875a5b8d7446f6be"
+    }
+   ]
+  },
+  {
+   "key": "Q5",
+   "number": 5,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q5-1.webp",
+     "page": 9,
+     "box": {
+      "x0": 51.6,
+      "y0": 82.68,
+      "x1": 581.28,
+      "y1": 679.32
+     },
+     "width": 1472,
+     "height": 1657,
+     "byteSize": 498586,
+     "sha256": "7ee6df20ca8b6dd81e630768f28734e2c8f7718b45883d5f7584d71a193509f4"
+    }
+   ]
+  },
+  {
+   "key": "Q6",
+   "number": 6,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q6-1.webp",
+     "page": 10,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.47,
+      "y1": 634.46
+     },
+     "width": 1450,
+     "height": 1532,
+     "byteSize": 108724,
+     "sha256": "7603809b20c964551731a163b4be5ff60f32ad26e9637a981e162b2ee921b500"
+    }
+   ]
+  },
+  {
+   "key": "Q7",
+   "number": 7,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q7-1.webp",
+     "page": 11,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.44,
+      "y1": 767.69
+     },
+     "width": 1450,
+     "height": 1902,
+     "byteSize": 146866,
+     "sha256": "d84097bcd42b91601a9ba66f63c2ca9aa79affe1caa7105a284d81e4252d167b"
+    }
+   ]
+  },
+  {
+   "key": "Q8",
+   "number": 8,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "D",
+   "override": "Sem o título COMPONENTE ESPECÍFICO da página seguinte.",
+   "warnings": [
+    "1 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "Q8-1.webp",
+     "page": 12,
+     "box": {
+      "x0": 54.59,
+      "y0": 82.7,
+      "x1": 576.7,
+      "y1": 770.03
+     },
+     "width": 1450,
+     "height": 1909,
+     "byteSize": 582874,
+     "sha256": "899b38de7ae4056cf74c3b6d75835c566c35c931d7f0d6ed011e35ffa16e9407"
+    }
+   ]
+  },
+  {
+   "key": "D3",
+   "number": 3,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D3-1.webp",
+     "page": 13,
+     "box": {
+      "x0": 54.35,
+      "y0": 109.09,
+      "x1": 576.43,
+      "y1": 484.38
+     },
+     "width": 1450,
+     "height": 1042,
+     "byteSize": 55234,
+     "sha256": "cf0a4ab0a0ec1cca54c7ac0838306cd9a7efe51345a8fc7881f3a60e1b7b5659"
+    }
+   ]
+  },
+  {
+   "key": "D4",
+   "number": 4,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D4-1.webp",
+     "page": 14,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.68,
+      "x1": 576.46,
+      "y1": 450.13
+     },
+     "width": 1450,
+     "height": 1020,
+     "byteSize": 70518,
+     "sha256": "0a28db183b63898c8a164a05c225e7fd53b6457791d7dcd6a397ced908f72f97"
+    }
+   ]
+  },
+  {
+   "key": "D5",
+   "number": 5,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D5-1.webp",
+     "page": 15,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.68,
+      "x1": 576.47,
+      "y1": 470.19
+     },
+     "width": 1450,
+     "height": 1076,
+     "byteSize": 68876,
+     "sha256": "103a4ede7a94f38652a381fe9eca2177292b4839ca10134e94c790d08323c55a"
+    }
+   ]
+  },
+  {
+   "key": "Q9",
+   "number": 9,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q9-1.webp",
+     "page": 16,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.65,
+      "y1": 759.12
+     },
+     "width": 1451,
+     "height": 1879,
+     "byteSize": 77614,
+     "sha256": "713e2a61c583eb9932c324289bf23b9cb0d812e493dc64b47f7018b58fe8b0bc"
+    }
+   ]
+  },
+  {
+   "key": "Q10",
+   "number": 10,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q10-1.webp",
+     "page": 17,
+     "box": {
+      "x0": 54.32,
+      "y0": 82.7,
+      "x1": 316.77,
+      "y1": 693.68
+     },
+     "width": 729,
+     "height": 1697,
+     "byteSize": 65502,
+     "sha256": "83e4df1b41bc3e1c475c6b41106aaba015cafd5e316f36561798091a77cd2562"
+    }
+   ]
+  },
+  {
+   "key": "Q11",
+   "number": 11,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q11-1.webp",
+     "page": 17,
+     "box": {
+      "x0": 314.05,
+      "y0": 82.7,
+      "x1": 576.48,
+      "y1": 548.18
+     },
+     "width": 729,
+     "height": 1293,
+     "byteSize": 45012,
+     "sha256": "40735a7a5e8434fa72b7922fdd1ae0a289850286b41e1afd8f90207ed690e641"
+    }
+   ]
+  },
+  {
+   "key": "Q12",
+   "number": 12,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q12-1.webp",
+     "page": 18,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.49,
+      "y1": 768.05
+     },
+     "width": 1450,
+     "height": 1903,
+     "byteSize": 82382,
+     "sha256": "8726cc8c5e5d651ef759616d7bfb6f8fe54232792b3725ae1d63dae1d2dce73d"
+    }
+   ]
+  },
+  {
+   "key": "Q13",
+   "number": 13,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q13-1.webp",
+     "page": 19,
+     "box": {
+      "x0": 54.65,
+      "y0": 82.7,
+      "x1": 576.72,
+      "y1": 512.3
+     },
+     "width": 1450,
+     "height": 1193,
+     "byteSize": 45988,
+     "sha256": "52379f595f8cddc311aae58de7460e746b436d04da8f6da0309cb68153db936b"
+    }
+   ]
+  },
+  {
+   "key": "Q14",
+   "number": 14,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q14-1.webp",
+     "page": 19,
+     "box": {
+      "x0": 54.65,
+      "y0": 507.78,
+      "x1": 576.77,
+      "y1": 770.33
+     },
+     "width": 1450,
+     "height": 730,
+     "byteSize": 30582,
+     "sha256": "691510e995e8e3151d8a2b9c9318a8036ffd4faa6d4e816aa7ee81ce58d2475d"
+    }
+   ]
+  },
+  {
+   "key": "Q15",
+   "number": 15,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q15-1.webp",
+     "page": 20,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.68,
+      "x1": 316.78,
+      "y1": 764.11
+     },
+     "width": 729,
+     "height": 1893,
+     "byteSize": 96754,
+     "sha256": "7390a60a010fa0a117e1473769704a6854306c620239cac09e0e7ff548b04c78"
+    }
+   ]
+  },
+  {
+   "key": "Q16",
+   "number": 16,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q16-1.webp",
+     "page": 20,
+     "box": {
+      "x0": 314.04,
+      "y0": 82.7,
+      "x1": 576.49,
+      "y1": 765.65
+     },
+     "width": 729,
+     "height": 1897,
+     "byteSize": 82008,
+     "sha256": "c1721a9e8933a309f3bfca12afecb58a4af77bac6a2535a321d28d2f62f4392b"
+    }
+   ]
+  },
+  {
+   "key": "Q17",
+   "number": 17,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q17-1.webp",
+     "page": 21,
+     "box": {
+      "x0": 54.33,
+      "y0": 82.7,
+      "x1": 316.78,
+      "y1": 637.29
+     },
+     "width": 729,
+     "height": 1540,
+     "byteSize": 64662,
+     "sha256": "7049ad8cdba096f28c2755f217165e462cd0dbcbe297a3f55b4a48b496d5ec7a"
+    }
+   ]
+  },
+  {
+   "key": "Q18",
+   "number": 18,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q18-1.webp",
+     "page": 21,
+     "box": {
+      "x0": 314.05,
+      "y0": 82.7,
+      "x1": 576.48,
+      "y1": 764.89
+     },
+     "width": 729,
+     "height": 1895,
+     "byteSize": 60756,
+     "sha256": "1f19e49f6664754bc82a89a1dd3d8e9b1bbcba037fcd28c5d3164eaa095b2532"
+    }
+   ]
+  },
+  {
+   "key": "Q19",
+   "number": 19,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q19-1.webp",
+     "page": 22,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.45,
+      "y1": 585.55
+     },
+     "width": 1450,
+     "height": 1397,
+     "byteSize": 67348,
+     "sha256": "41d4fa20fca78e29fc8336fa51e6cc91b62d91805b32f24e2637d71d7e740a27"
+    }
+   ]
+  },
+  {
+   "key": "Q20",
+   "number": 20,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q20-1.webp",
+     "page": 23,
+     "box": {
+      "x0": 54.34,
+      "y0": 82.7,
+      "x1": 576.46,
+      "y1": 323.06
+     },
+     "width": 1450,
+     "height": 667,
+     "byteSize": 38488,
+     "sha256": "a117f0eda59527e89427d978600766df6391269a78e8a90f619166153d573d1a"
+    }
+   ]
+  },
+  {
+   "key": "Q21",
+   "number": 21,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q21-1.webp",
+     "page": 23,
+     "box": {
+      "x0": 54.33,
+      "y0": 320.77,
+      "x1": 576.42,
+      "y1": 614.09
+     },
+     "width": 1450,
+     "height": 815,
+     "byteSize": 37094,
+     "sha256": "1e99e152f1bb01a1c515f46bd74fd6f062cddee66c06bf371b96aff273933d6b"
+    }
+   ]
+  },
+  {
+   "key": "Q22",
+   "number": 22,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q22-1.webp",
+     "page": 24,
+     "box": {
+      "x0": 54.33,
+      "y0": 82.7,
+      "x1": 316.78,
+      "y1": 769.51
+     },
+     "width": 729,
+     "height": 1908,
+     "byteSize": 64042,
+     "sha256": "b7434be69a5ecb6bf70f7c0ae44da374a8bb5205ea75ed28de70a226b590527c"
+    }
+   ]
+  },
+  {
+   "key": "Q23",
+   "number": 23,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q23-1.webp",
+     "page": 24,
+     "box": {
+      "x0": 314.05,
+      "y0": 82.7,
+      "x1": 576.49,
+      "y1": 607.88
+     },
+     "width": 729,
+     "height": 1459,
+     "byteSize": 53490,
+     "sha256": "e1694c04a4235efdd2512c23c7373dadb032d1c9e2899418147ca7b36ca306c7"
+    }
+   ]
+  },
+  {
+   "key": "Q24",
+   "number": 24,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q24-1.webp",
+     "page": 25,
+     "box": {
+      "x0": 54.34,
+      "y0": 82.68,
+      "x1": 316.77,
+      "y1": 705.81
+     },
+     "width": 729,
+     "height": 1731,
+     "byteSize": 57508,
+     "sha256": "c13bfc112eb7de6cd2b4cabe4c3da36a804e1d27561e67cf520a81a64f3031ec"
+    }
+   ]
+  },
+  {
+   "key": "Q25",
+   "number": 25,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q25-1.webp",
+     "page": 25,
+     "box": {
+      "x0": 314.04,
+      "y0": 82.68,
+      "x1": 576.49,
+      "y1": 615.2
+     },
+     "width": 729,
+     "height": 1479,
+     "byteSize": 43604,
+     "sha256": "ec7902d8ca78a0cc6ed9da4f190ed500a5f5b72c2f9c49169e7a331da42dc1f8"
+    }
+   ]
+  },
+  {
+   "key": "Q26",
+   "number": 26,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q26-1.webp",
+     "page": 26,
+     "box": {
+      "x0": 53.76,
+      "y0": 82.7,
+      "x1": 316.76,
+      "y1": 577.05
+     },
+     "width": 731,
+     "height": 1373,
+     "byteSize": 419626,
+     "sha256": "f295187730b7114114c09fbb32decf882fe2085028c7b04be2e34805dd8f5036"
+    }
+   ]
+  },
+  {
+   "key": "Q27",
+   "number": 27,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q27-1.webp",
+     "page": 26,
+     "box": {
+      "x0": 314.04,
+      "y0": 82.7,
+      "x1": 576.48,
+      "y1": 770.68
+     },
+     "width": 729,
+     "height": 1911,
+     "byteSize": 224592,
+     "sha256": "efed24db9bac33a820e84cc78f36118f4078ef67d2c8cff06ecd21c8d07615ba"
+    }
+   ]
+  },
+  {
+   "key": "Q28",
+   "number": 28,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q28-1.webp",
+     "page": 27,
+     "box": {
+      "x0": 54.33,
+      "y0": 82.7,
+      "x1": 316.76,
+      "y1": 608.24
+     },
+     "width": 729,
+     "height": 1460,
+     "byteSize": 46334,
+     "sha256": "643aaa51ac67f79e825a622b737cfb4fca85d38dbcc0f2554b40680d6f7a6354"
+    }
+   ]
+  },
+  {
+   "key": "Q29",
+   "number": 29,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q29-1.webp",
+     "page": 27,
+     "box": {
+      "x0": 314.03,
+      "y0": 82.7,
+      "x1": 576.48,
+      "y1": 610.01
+     },
+     "width": 729,
+     "height": 1464,
+     "byteSize": 61778,
+     "sha256": "8c5c8ec6ecd47f39a327d8a40d54034f6fda4df2ee176a5252e486ee99ac5806"
+    }
+   ]
+  },
+  {
+   "key": "Q30",
+   "number": 30,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q30-1.webp",
+     "page": 28,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.5,
+      "y1": 565.76
+     },
+     "width": 1450,
+     "height": 1342,
+     "byteSize": 79492,
+     "sha256": "d89d05a48922ad1be63306fcf4f86f62897c98c79c6e3de3cc4f597c3af88cef"
+    }
+   ]
+  },
+  {
+   "key": "Q31",
+   "number": 31,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q31-1.webp",
+     "page": 29,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 527.93,
+      "y1": 768.2
+     },
+     "width": 1315,
+     "height": 1904,
+     "byteSize": 54426,
+     "sha256": "333768a01386aa3fd38cc71ccfc164705cc842a512980c1c10bd42f4efffdeb0"
+    }
+   ]
+  },
+  {
+   "key": "Q32",
+   "number": 32,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q32-1.webp",
+     "page": 30,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.7,
+      "x1": 576.46,
+      "y1": 767.25
+     },
+     "width": 1450,
+     "height": 1901,
+     "byteSize": 176650,
+     "sha256": "063d4fdf08f79db0d1c55ef83f45991e79057c1a03ae8e302c4e37383cef4bef"
+    }
+   ]
+  },
+  {
+   "key": "Q33",
+   "number": 33,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q33-1.webp",
+     "page": 31,
+     "box": {
+      "x0": 54.34,
+      "y0": 82.7,
+      "x1": 576.46,
+      "y1": 506.59
+     },
+     "width": 1450,
+     "height": 1177,
+     "byteSize": 41036,
+     "sha256": "9cf0c7e0733272d30e3dd32001100e102e8a13aa834f9ae74339ae9b83bb5915"
+    }
+   ]
+  },
+  {
+   "key": "Q34",
+   "number": 34,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q34-1.webp",
+     "page": 32,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.68,
+      "x1": 576.47,
+      "y1": 581.92
+     },
+     "width": 1450,
+     "height": 1386,
+     "byteSize": 78270,
+     "sha256": "0ecfd9a967aafe788bfcc5cecf37d71eb148e5ccfa687c15211e7f5a26507745"
+    }
+   ]
+  },
+  {
+   "key": "Q35",
+   "number": 35,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q35-1.webp",
+     "page": 33,
+     "box": {
+      "x0": 54.35,
+      "y0": 82.68,
+      "x1": 576.51,
+      "y1": 516.34
+     },
+     "width": 1450,
+     "height": 1204,
+     "byteSize": 70298,
+     "sha256": "3af1bcb4a512cc6377201d8a559e34b842d7c8c18dd64e7dea838ca03779e940"
+    }
+   ]
+  }
+ ]
+}

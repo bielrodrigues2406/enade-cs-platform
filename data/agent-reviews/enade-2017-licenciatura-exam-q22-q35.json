@@ -1,0 +1,192 @@
+{
+  "document": "enade-2017-licenciatura-exam",
+  "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+  "cropsManifestSha256": "23708ec1779da6e041aeaff6ffc80f6fbc4e27f487e2d1fed52da607a556fd74",
+  "extractor": "claude",
+  "reviewer": "claude-autoconferencia",
+  "reviewedAt": "2026-10-31T16:55:23Z",
+  "items": [
+    {
+      "key": "Q22",
+      "verdict": "APPROVED",
+      "fragments": [
+        "df2d6b9735896f6e4c692c5a595f0e64ec5ef3504e8b2c82c613aa8835c41028"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: ferramentas de EaD com acesso restrito",
+      "notes": "Questão 22 completa: cenário, lista de ferramentas e A–E. Letra E. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q23",
+      "verdict": "APPROVED",
+      "fragments": [
+        "537bf90fa1f4b054ad8925ed901a0e190c0d5972a6933a6e1255026af84f029a"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: canais de interação na EaD",
+      "notes": "Questão 23 completa: enunciado e A–E; o rótulo 'Área livre' é elemento da página. Letra B. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q24",
+      "verdict": "APPROVED",
+      "fragments": [
+        "29b336987c2062bb05f6a7c7c47fb7cfee0315513ba3c5bbe3a6ea7bc9dc9dd8"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Requisitos funcionais e não funcionais",
+      "notes": "Questão 24 completa: texto, referência, requisitos I–IV e A–E. Letra B. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q25",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d9671ff14550b390ff8078df0634a1e06c14863d0b98e545ecb1c61e015dedb3"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: classes de software educativo",
+      "notes": "Questão 25 completa: texto, referência, afirmações I–III e A–E. Letra C. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q26",
+      "verdict": "APPROVED",
+      "fragments": [
+        "fb4be14953e36cbda58f71001b1a8936e859d092f5d5bfa87599a2696f130c88"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Interação humano-computador",
+      "subject": "Comunicabilidade da interface",
+      "notes": "Questão 26 completa: captura de tela do Word com a dica do Pincel de Formatação legível e A–E. Letra B. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q27",
+      "verdict": "APPROVED",
+      "fragments": [
+        "67d0b0768754bd3529a4a91121b530374960514729ef3ddaf9dc5afcef7e03f5"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Sistemas de informação",
+      "subject": "Governança de TI: COBIT",
+      "notes": "Questão 27 completa: enunciado com a lista de problemas e A–E. Letra B. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q28",
+      "verdict": "APPROVED",
+      "fragments": [
+        "34ed70092522b4e4fca8fbfa5beffccff17b1101d782a44745e029c876266b4a"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Herança e polimorfismo",
+      "notes": "Questão 28 completa: texto, referência, afirmações I–III e A–E. Letra C. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q29",
+      "verdict": "APPROVED",
+      "fragments": [
+        "350ee8f6fb44ac9f41b5e67e28fa31e35320f8e87f1738adbe29fe9e9afedc7e"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: comunicação síncrona e assíncrona",
+      "notes": "Questão 29 completa: texto, afirmações I–III e A–E. Letra A. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q30",
+      "verdict": "APPROVED",
+      "fragments": [
+        "6ae741a44558f855e11bbe4a757be9579f839fa46cb41d3db0aa24d933016c55"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: MOOCs e interação entre estudantes",
+      "notes": "Questão 30 completa: texto, referência e A–E. Letra C. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q31",
+      "verdict": "APPROVED",
+      "fragments": [
+        "799bbe4582fe049c5c0caeae94d9c08f5431bedb9c45aed15a3cc824d32edcd6"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: didática e práxis pedagógica",
+      "notes": "Questão 31 completa: texto, referência, afirmações I–III e A–E. Letra E. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q32",
+      "verdict": "APPROVED",
+      "fragments": [
+        "470a8303945de9e63402d1ed88dcb364b11c7da075613ea7cc7e2c5c8f35dd78"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: educação bilíngue de surdos",
+      "notes": "Questão 32 completa: caso do aluno, fonte e A–E. Letra A. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q33",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f0d4ae9d0d0a02f76c7127bd0500cb8f787364f3533fd140820c2f820f4f005b"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: gênero no currículo",
+      "notes": "Questão 33 completa: texto, fonte e A–E. Letra A. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q34",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3c80ef2aba2ff0827bf1b604bcec20caa8bb24de2c9bf0f289d5c2aaacdbc722"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: teoria histórico-cultural de Vygotsky",
+      "notes": "Questão 34 completa: texto, afirmações I–V e A–E. Letra D. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    },
+    {
+      "key": "Q35",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a71a512581f84ff2eb18054e2744214eb450c07c921c36924aa463d4f72aab73"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: abordagem construtivista de Piaget",
+      "notes": "Questão 35 completa: enunciado e A–E. Letra D. Letra conferida no gabarito da Licenciatura em Computação de 2017. Sem explicação nesta rodada. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": ""
+    }
+  ]
+}

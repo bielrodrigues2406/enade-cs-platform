@@ -1,0 +1,317 @@
+{
+  "document": "enade-2008-comum-exam",
+  "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+  "cropsManifestSha256": "9f2de020cc10421e667b28629ba1da206812f74839325e6d5b50790002bd7002",
+  "extractor": "claude",
+  "reviewer": "claude-autoconferencia",
+  "reviewedAt": "2026-10-31T16:49:47Z",
+  "items": [
+    {
+      "key": "Q1",
+      "verdict": "APPROVED",
+      "fragments": [
+        "e68621f0e6fc39afcec1721d050445ce3e813585b8b67cb226f8f4391d23de6a"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Machado de Assis e personagens da Proclamação da República",
+      "notes": "Questão 1 completa: texto de Esaú e Jacó, os cinco retratos com algarismos e créditos, comando e A–E. Letra C. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a leitura de um texto literário e a associação de seus personagens históricos a imagens. O fragmento de Esaú e Jacó trata da Proclamação da República: \"Deodoro é uma bela figura\" refere-se ao marechal Deodoro da Fonseca, e a fala de Pedro, para quem o imperador deveria ter mandado executar os cabeças do movimento, refere-se ao imperador deposto, D. Pedro II.\n\nO retrato II mostra um militar fardado e condecorado, com crédito à crônica fotográfica do Rio de Janeiro entre 1840 e 1900, e corresponde a Deodoro. O retrato III, da mesma obra, mostra um homem de barba, sentado e em trajes civis, e corresponde a D. Pedro II. Por isso a alternativa C, II e III, está certa.\n\nAs demais falham porque incluem I, imagem tradicional de Tiradentes, ligada ao século XVIII, ou IV e V, pinturas de Debret do período 1816-1831, anteriores ao Segundo Reinado e à República, associadas a D. João VI e D. Pedro I.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q2",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7e4ae6b2597bfd7264c0497f581b730df96b030cfc327b311f98c356311fe91f"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Biodiversidade e responsabilidade humana",
+      "notes": "Questão 2 completa: frase, imagem da cabeça formada por animais e plantas, fonte e A–E. Letra E. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a interpretação de uma imagem em conjunto com a frase que a introduz. A frase afirma que, quando o homem não trata bem a natureza, a natureza não trata bem o homem, reiterando a interação entre as espécies. Na imagem, uma cabeça humana é formada por vários animais e plantas, o que mostra o ser humano como parte do conjunto de seres vivos e, portanto, responsável por sua manutenção. Isso corresponde à alternativa E, responsabilidade do homem na manutenção da biodiversidade.\n\nAs outras alternativas atribuem à imagem ideias que ela não representa. A clonagem de animais pré-históricos (A) não aparece; a exclusão do homem da ameaça ao planeta (B) contraria a frase, que o coloca como agente; a reprodução em cativeiro (C) e a mutação por ação predatória (D) são processos específicos que a composição não mostra.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q3",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1e1811776ad35ab286e747bb0909647458c62dfa6493d4f7eba064141af81402"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Proporção e inverso: fator de proteção solar",
+      "notes": "Questão 3 completa: enunciado e A–E. Letra D; 1/(5/100) = 20 conferido. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a leitura de uma definição matemática e sua aplicação. O texto informa que um protetor com FPS igual a 10 deixa passar 1/10 dos raios UVB, ou seja, retém 90%. Logo, o FPS é o inverso da fração que passa.\n\nUm protetor que retém 95% deixa passar 100% - 95% = 5% dos raios, isto é, 5/100 = 1/20. Pelo mesmo modelo do exemplo, FPS = 1 / (1/20) = 20. A alternativa D está correta.\n\nAs demais resultam de erros de leitura. A alternativa A (95) e a B (90) tomam a porcentagem retida como se fosse o FPS, quando o exemplo mostra que 90% retidos correspondem a FPS 10 e não a 90. A alternativa C (50) não decorre de nenhuma relação do enunciado. A alternativa E (5) usa a porcentagem que passa, 5%, em vez de seu inverso.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q4",
+      "verdict": "APPROVED",
+      "fragments": [
+        "410052544f0d8be1fbcfbb2c20c114151d6d633539b0feb15a1255c61f9e4389"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Direitos das mulheres e inclusão social",
+      "notes": "Questão 4 completa: texto e A–E. Letra A. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "Questão interpretativa de 2008: estupro e divórcio também se ligam aos direitos das mulheres; o gabarito considera aborto e violência doméstica o par mais específico.",
+      "explanation": "A questão cobra a leitura de um texto sobre uma legislação europeia a favor das mulheres, que já cita contracepção, equidade salarial, prostituição e aposentadoria, e pede dois outros temas mais específicos para essa legislação, isto é, ligados diretamente à condição feminina.\n\nA alternativa A, aborto e violência doméstica, atende ao pedido: o aborto se relaciona a direitos reprodutivos e a violência doméstica atinge as mulheres de modo particular, sendo ambos temas centrais de uma legislação de inclusão social das cidadãs.\n\nAs outras combinações misturam temas gerais. Em B, cotas raciais e assédio moral não são específicos das mulheres. Em C, educação moral e trabalho são amplos demais. Em D, o estupro se liga ao tema, mas a imigração clandestina não é específica de gênero. Em E, liberdade de expressão e divórcio são questões que dizem respeito a todos os cidadãos, e não formam o par mais específico.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q5",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c91ad02e891248685c2964ba743ce11139c4c3d9463eccad98a80ffac0f36bbc"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Fotografia social e Grande Depressão",
+      "notes": "Questão 5 completa: foto com o cartaz legível, crédito e A–E. Letra D. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a leitura de uma imagem como documento social. A fotografia de Margaret Bourke-White, feita durante a Grande Depressão, mostra um cartaz que proclama o mais alto padrão de vida do mundo e o American Way, com uma família sorridente em um automóvel. Logo abaixo, uma fila de desempregados espera por alimentos. O contraste entre o ideal de prosperidade e a pobreza real revela as contradições da sociedade capitalista. A alternativa D está certa.\n\nAs demais não se sustentam na imagem. Em A, não há sinal de organização operária, apenas pessoas em fila. Em B, a cena não expressa esperança, e sim carência. Em C, a ascensão social universal é desmentida pelo próprio contraste. Em E, o cartaz sugere consumo, mas a intenção da artista não é destacar o consumismo de certas classes, e sim denunciar a distância entre a propaganda e a vida de quem está na fila.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q6",
+      "verdict": "APPROVED",
+      "fragments": [
+        "fad53715be20ee8040ed28ddb4bae1c2354f125465e74cdb6a28be3a2fbbe057"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Sustentabilidade urbana e atuação em rede",
+      "notes": "Questão 6 completa: mapa Energia-Cidades com legenda, fonte, texto e A–E. Letra B. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a relação entre uma prática descrita no enunciado e o modo de organização que a sustenta. O mapa mostra cidades de vários países europeus reunidas no grupo Energia-Cidades, e o texto diz que a prática favorece as trocas horizontais, associando e conectando territórios para evitar desperdício de energia. Isso caracteriza a atuação estratégica em rede, em que os participantes cooperam e compartilham experiências sem subordinação entre si. A alternativa B está correta.\n\nAs outras contradizem a ideia de horizontalidade e conexão. A centralização de decisões políticas (A) concentra o poder em um ponto, a fragmentação de iniciativas (C) isola os territórios, e a hierarquização de autonomias locais (D) cria níveis de subordinação. A unificação regional de impostos (E) é uma medida fiscal que não aparece no texto nem no mapa.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q7",
+      "verdict": "APPROVED",
+      "fragments": [
+        "55a927f7be3d4dfd5e711e786d73352842022f5f757dce9efcf0c4c8c6ba234c"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Curva de Lorenz e desigualdade de renda",
+      "notes": "Questão 7 completa: curva de Lorenz com eixos e grade legíveis, texto e A–E. Letra D; ponto (80, 40) conferido na curva. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a leitura de uma curva de Lorenz, em que cada ponto relaciona a porcentagem acumulada da população, do menor para o maior rendimento, à porcentagem acumulada da renda. O enunciado dá o exemplo de que os 60% de menor renda ficaram com cerca de 20% da renda total, o que confere com a curva.\n\nPara os 20% de maior renda, localiza-se o ponto de abscissa 80 no eixo da população. A curva passa nesse ponto em cerca de 40% no eixo da renda. Assim, os 80% de menor renda detêm aproximadamente 40% da renda, e os 20% restantes ficam com o complemento: 100% - 40% = 60%. A alternativa D está certa.\n\nAs outras vêm de leituras equivocadas. A alternativa A (20%) usa o valor do exemplo dos 60% mais pobres. A B (40%) é a parcela dos 80% mais pobres, e não dos 20% mais ricos. As alternativas C (50%) e E (80%) não correspondem a nenhum ponto da curva nesse cálculo.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q8",
+      "verdict": "APPROVED",
+      "fragments": [
+        "23ceea60d078044ae8360a9b9d247cfeec380bad6f7a89e8a43c80a9c9bd1c54"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Expressionismo e arte moderna",
+      "notes": "Questão 8 completa: texto e as cinco obras A–E com legendas. Letra C. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o reconhecimento de uma corrente artística a partir de sua descrição. O texto afirma que o Expressionismo, influenciado por Nietzsche, rejeita o padrão de beleza tradicional e destaca a instabilidade da vida, marcada por angústia, dor e inadequação diante da realidade.\n\nA obra C, O grito, de Edvard Munch, traduz isso: a figura central leva as mãos ao rosto, o corpo é deformado e o céu e a paisagem têm linhas onduladas e cores intensas, expressando sofrimento interior em vez de buscar a representação harmoniosa do real. A alternativa C está certa.\n\nAs outras obras não refletem esse enfoque. Homem idoso na poltrona, de Rembrandt (A), e Menino mordido por um lagarto, de Caravaggio (D), são pinturas barrocas, de representação realista e tradicional. Figura e borboleta, de Milton Dacosta (B), e Abaporu, de Tarsila do Amaral (E), são obras modernistas de formas estilizadas e tom contemplativo, sem a carga de angústia pedida.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q11",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3d4595dd53009ef54929235eae4ed97df634ae84ffcbd0d7fc020c6570d6380c"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Hierarquia de memória e tempos de acesso",
+      "notes": "Questão 11 completa: itens I–IV e A–E em duas linhas. Letra C. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a hierarquia de memória: quanto mais próxima da unidade central de processamento, menor o tempo de acesso e, em geral, menor a capacidade. A ordem usual, do mais rápido ao mais lento, é registradores, memória cache, memória RAM e armazenamento em disco magnético.\n\nO item II está certo: o acesso à RAM é mais lento que o acesso a um registrador. O item III também está certo: a cache é bem mais rápida que um disco magnético. Logo, a alternativa C, apenas II e III, é a correta.\n\nO item I é falso porque a ROM é memória não volátil, que mantém os dados sem alimentação; volátil é a RAM. O item IV é falso porque inverte a relação: a cache existe justamente para ser mais rápida que a RAM, e não mais lenta. As alternativas A, B, D e E combinam pelo menos um desses itens falsos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q12",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1a4ec2728c58cdcba2cb6c85a2184eec6d108279cdce7e31bee862c32ae7abba"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Complexidade ciclomática e caminhos básicos",
+      "notes": "Questão 12 completa: texto, grafo de 7 nós e 9 arestas nítido e A–E. Letra C; arestas contadas na figura. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "Pela fórmula de McCabe (arestas − nós + 2), a complexidade ciclomática deste grafo já é 4, o número de caminhos básicos; somar um daria 5, que não é alternativa. O gabarito oficial é 4.",
+      "explanation": "A questão cobra o critério de teste dos caminhos básicos, cujo número se obtém a partir da complexidade ciclomática do grafo de fluxo de controle. No grafo da figura há 7 nós e 9 arestas: 1-2, 1-3, 2-3, 3-4, 3-5, 4-5, 5-6, 5-7 e 6-7. Os nós 1, 3 e 5 são pontos de decisão, e cada um abre dois caminhos que depois se reúnem.\n\nSeguindo o raciocínio oficial, o número de ciclos independentes é E - N + 1 = 9 - 7 + 1 = 3, e a quantidade de caminhos básicos, conforme o enunciado, é esse valor mais um, ou seja, 4. Esse número também é o de decisões mais um, 3 + 1 = 4. Os quatro caminhos independentes são, por exemplo, 1-2-3-4-5-6-7, 1-3-4-5-6-7, 1-2-3-5-6-7 e 1-2-3-4-5-7. A alternativa C está correta.\n\nAs demais não correspondem ao grafo: 1 ignoraria as decisões, 3 omite o acréscimo do enunciado, 7 é apenas o número de nós, e 8 não tem base no cálculo.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q13",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7f40f361fc624b458219b894a6d1511dd4405fee21db98972c226dc05b1129cc",
+        "826c5b5f9b95000d8210200700008dd9c234d41311c907b76e3579ecbd102328"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Partição de conjuntos",
+      "notes": "Questão 13 em dois recortes da mesma página: enunciado e A–D no primeiro, E no segundo; nada de outra questão. Letra A. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a definição de partição de um conjunto: uma coleção de subconjuntos não vazios, dois a dois disjuntos, cuja união é o conjunto inteiro. Cada elemento de A = {1, 2, 3, 4, 5, 6} deve estar em exatamente um dos blocos.\n\nA alternativa A, {{1}, {2}, {3}, {4}, {5}, {6}}, cumpre as três condições: os seis blocos são unitários e não vazios, não se repetem elementos entre eles e a união dá A. Ela é a resposta correta.\n\nAs outras violam alguma condição. Na B, o elemento 1 aparece nos blocos {1} e {1, 2}, o que gera sobreposição. Na C, aparece o conjunto vazio, que não pode ser bloco de uma partição. Na D, o elemento 4 não pertence a nenhum bloco, de modo que a união não recompõe A. Na E, os blocos vizinhos compartilham elementos, como 2 em {1, 2} e {2, 3}, e portanto não são disjuntos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q14",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b1be20e0e2794fb9eaba1b36c2a42421eb939aa485958a700e6bcf5cd41a9aec",
+        "8b2bebd2e56cae1258e26a53e9ca2f8a9ab716d2a4dd6bda9f83b9ab7439dedc"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Percurso em preordem com pilha",
+      "notes": "Questão 14 em dois recortes (páginas 8 e 9): texto, pseudocódigo legível, itens I–IV e A–D; E no segundo recorte. Letra E. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o funcionamento de um percurso em preordem não recursivo, com pilha explícita. A cada passo o algoritmo escreve a chave do nó atual, empilha o filho direito e depois o esquerdo, e desempilha o próximo nó. Como o esquerdo é empilhado por último, é desempilhado primeiro, o que dá a ordem raiz, esquerda, direita.\n\nOs quatro itens estão certos. I: cada nó é empilhado no máximo uma vez, desempilhado e escrito uma única vez. II: o laço só termina quando ptr se torna nulo, o que exige que pop retorne nulo com a pilha vazia; sem isso, o procedimento falharia ou não pararia. III: empilhar e desempilhar ponteiros custa tempo constante, por exemplo com um vetor ou uma lista encadeada. IV: sendo n nós, cada um é tratado com trabalho constante, e o custo é O(n).\n\nLogo a alternativa E, todos os itens certos, é a correta, e as alternativas A, B, C e D excluem indevidamente algum item verdadeiro.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q15",
+      "verdict": "APPROVED",
+      "fragments": [
+        "4278942533ccfe095ca224fce96b511724c1b7163bd4030a94ce2087881dd488"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Direitos autorais e redes ponto a ponto",
+      "notes": "Questão 15 completa: enunciado e A–E; o recorte atual não traz mais a faixa da Q14 citada pelo explicador. Letra B. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a noção de responsabilidade no uso de redes ponto a ponto para trocar arquivos protegidos por direitos autorais. Nessas redes, quem decide copiar, publicar ou compartilhar cada arquivo é o usuário, e é a ele que cabe identificar e cumprir as restrições de uso associadas. A alternativa B está correta.\n\nAs demais atribuem a obrigação a elementos que não decidem o que é trocado. Os programas de troca de arquivos (A) são ferramentas genéricas que apenas transportam dados. O sistema operacional (C) administra recursos da máquina e não verifica o conteúdo das cópias. Os equipamentos roteadores (E) só encaminham pacotes, sem distinguir o tipo de arquivo. Os produtores dos arquivos (D) são os titulares dos direitos e definem as restrições, mas a questão pergunta a quem cabe identificá-las e cumpri-las ao usar a rede, o que recai sobre quem copia e compartilha.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q16",
+      "verdict": "APPROVED",
+      "fragments": [
+        "ba22f425e27009571d89b4564010e6f31951b02dd3a76b0653a23a849e1ef1d2"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Gerenciamento de configuração de software",
+      "notes": "Questão 16 completa: texto, asserções e A–E. Letra B. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o gerenciamento de configuração de software e o controle de mudanças, com duas asserções ligadas por porque. O gabarito oficial é a alternativa B: as duas são verdadeiras, mas a segunda não justifica a primeira.\n\nA primeira asserção descreve corretamente o fluxo de controle de mudanças: um pedido de modificação de um item de configuração, a decisão de aceitá-lo ou não e, se aceito, a atualização controlada do item no repositório. A segunda também é verdadeira: check-in e check-out são os mecanismos que inserem itens no repositório e os retiram para modificação.\n\nPorém check-in e check-out apenas operam o acesso e o registro de versões. Eles não explicam por que o fluxo tem as etapas de pedido, avaliação e aceitação, que decorrem da necessidade de governança e análise das mudanças. A segunda asserção, portanto, é um mecanismo de apoio e não a razão do fluxo. A alternativa A exigiria essa relação; C, D e E tratam como falsa alguma asserção que é verdadeira.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q17",
+      "verdict": "APPROVED",
+      "fragments": [
+        "559618a6b56327e265b7631323276bf5de67bb5e264852afb987cdf2e953dc7a"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Lógica de predicados e validade de fórmulas",
+      "notes": "Questão 17 completa e legível (o alerta automático de texto ilegível não se confirma na imagem): fórmula com quantificadores, asserções e A–E. Letra D. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o conceito de fórmula válida na lógica de predicados: verdadeira em todas as interpretações. A primeira asserção diz que (∃x)P(x) ⇒ (∀x)P(x) é válida. Isso é falso. Em um universo com dois elementos, a e b, se P vale só para a, o antecedente é verdadeiro (existe um elemento com P) e o consequente é falso (nem todos têm P). Basta essa interpretação para a fórmula não ser válida.\n\nA segunda asserção diz que, se todo elemento do universo tem a propriedade P, então existe um elemento com essa propriedade. Isso é verdadeiro, pois, na convenção usual, o universo é não vazio, e um elemento qualquer serve como exemplo. É a direção que de fato vale: (∀x)P(x) ⇒ (∃x)P(x).\n\nAssim, a primeira é falsa e a segunda é verdadeira, alternativa D. As alternativas A e B tratam a primeira como verdadeira, a C trata a segunda como falsa, e a E considera as duas falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q18",
+      "verdict": "APPROVED",
+      "fragments": [
+        "0c846120d7491a2bc8e397f6062d274610b83c385770577238a58bfe870c3c5a"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Recursão e contagem de chamadas (Fibonacci)",
+      "notes": "Questão 18 completa: recorrência, código funcional e A–E. Letra C; C(5) = 15 conferido. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a análise de uma função recursiva sem reaproveitamento de resultados: cada chamada com n maior que 1 gera outras duas. Seja C(n) o número de chamadas a fib para calcular fib n, contando a chamada inicial. Os casos base fib 0 e fib 1 fazem uma chamada cada, e os demais casos fazem uma chamada mais as de n - 1 e n - 2.\n\nAssim, C(0) = C(1) = 1; C(2) = 1 + C(1) + C(0) = 3; C(3) = 1 + C(2) + C(1) = 5; C(4) = 1 + C(3) + C(2) = 9; e C(5) = 1 + C(4) + C(3) = 15. Portanto, a alternativa C, 15 chamadas, está correta, contando a invocação inicial fib 5.\n\nAs outras alternativas não decorrem dessa recorrência. Os valores 11 e 12 ficam abaixo do total, por contagem incompleta das chamadas dos subproblemas repetidos. Os valores 24 e 25 ficam acima, o que ocorreria se algum ramo fosse contado em duplicidade.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q19",
+      "verdict": "APPROVED",
+      "fragments": [
+        "eb09c116a3b40141550ff17130660c5e82fcaba8d1e5b8a72d7878d2bc6fccf9"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Threads e processadores multicore",
+      "notes": "Questão 19 completa: texto, asserções e A–E; na borda inferior só um filete da página, sem texto legível de outra questão. Letra A. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a relação entre threads e processadores multicore. Threads são sequências de execução de um mesmo processo, que compartilham código e dados, mas têm contextos independentes. Por isso o sistema operacional pode escalonar threads distintas em núcleos diferentes ao mesmo tempo.\n\nA primeira asserção é verdadeira: ao dividir o trabalho em múltiplas threads executáveis em paralelo, a aplicação pode aproveitar melhor os vários núcleos. A segunda também é verdadeira: o sistema operacional pode alocar os núcleos para executar simultaneamente diversas sequências de código, sobrepondo suas execuções e, normalmente, reduzindo o tempo de resposta. E ela explica a primeira, pois é essa capacidade de execução simultânea que gera o benefício para aplicações multithread. A alternativa A está certa.\n\nA alternativa B negaria a relação de explicação, que existe. As alternativas C e D tratam como falsa uma asserção verdadeira, e a E considera ambas falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q21",
+      "verdict": "APPROVED",
+      "fragments": [
+        "9002094b002f522cfc1cd3e81dd3eb6b7a22dde6b6550634535c4a148960b6a3"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Banco de dados",
+      "subject": "Índices B+ e hash em consultas",
+      "notes": "Questão 21 completa: relação com chave grifada, consultas, itens I–IV e A–E; sem resíduo legível de outra questão. Letra D. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a escolha entre índices em árvore B+ e índices hash. A árvore B+ mantém as chaves ordenadas, o que atende tanto a buscas por igualdade quanto a percursos em ordem. O índice hash usa uma função de dispersão que espalha as chaves, boa para igualdade, mas sem preservar ordem.\n\nA consulta 1 busca empregados com sobrenome Silva, uma busca por igualdade: tanto a árvore B+ (item I) quanto o hash (item III) são adequados. A consulta 2 pede os nomes em ordem crescente de sobrenome: a árvore B+ fornece a ordenação percorrendo as folhas em sequência (item II, certo), enquanto o hash não oferece ordem, e o item IV é falso.\n\nEstão certos I, II e III, alternativa D. A alternativa A seria verdadeira só se houvesse um item correto. B exclui o item III, que é válido. C inclui o item IV, falso. E também o inclui.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q22",
+      "verdict": "APPROVED",
+      "fragments": [
+        "40e1e0073fc0b41be426def581fad1f03c9ec26b577fedf94b037040db8d4300"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Compiladores",
+      "subject": "Compiladores, interpretadores e tradutores",
+      "notes": "Questão 22 completa: enunciado e A–E. Letra A. Letra conferida no gabarito do caderno de Computação de 2008 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a diferença de desempenho entre as formas de tradução de programas. Um compilador traduz o programa-fonte inteiro para código de máquina antes da execução. Depois disso o programa executa diretamente no processador, sem reinterpretar o texto-fonte a cada instrução, e as otimizações feitas na tradução favorecem a velocidade. Quando a velocidade de execução é prioridade, o compilador é o tradutor indicado. A alternativa A está certa.\n\nOs interpretadores (B) analisam e executam as instruções durante a execução, o que costuma ser mais lento. Os tradutores híbridos (C) combinam tradução para uma forma intermediária com interpretação, o que mantém algum custo em tempo de execução. Os macroprocessadores (D) apenas expandem macros em texto e não geram código executável por si. Os interpretadores de macroinstruções (E) também são interpretados e não resolvem a exigência de alta velocidade.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ],
+  "explainer": "claude-explain-09"
+}

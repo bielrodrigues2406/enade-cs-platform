@@ -1,0 +1,1811 @@
+{
+  "document": "enade-2014-bacharelado-exam",
+  "completeness": {
+    "missing": [],
+    "unexpected": []
+  },
+  "extraction": {
+    "method": "PDF_TEXT",
+    "textCopy": {
+      "schemaVersion": 1,
+      "algorithm": "CALIBRI_TOUNICODE_V1",
+      "generatorSha256": "359a5565d6d229405cec9a38de68b0f9d12234a4dc625c4a8c5904435c9233ab",
+      "pypdfVersion": "6.10.0",
+      "derivedFrom": {
+        "file": "enade-2014-bacharelado-exam.pdf",
+        "sha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42"
+      },
+      "map": {
+        "file": "calibri-cid-unicode.json",
+        "sha256": "f20d49d5a2c2f9a768d8139f7b37d36a13118744158433c3afce42a1bb5f8f05"
+      },
+      "fixedFonts": [
+        "Calibri-Bold-Identity-H",
+        "Calibri-Identity-H",
+        "Calibri-Italic-Identity-H"
+      ],
+      "output": {
+        "file": "enade-2014-bacharelado-exam.pdf",
+        "sha256": "587d8f1b953f01010db6b9897d7530d73cfc3a6ba1fc5b2bfc1df6f92131860e"
+      },
+      "tool": "scripts/repair-calibri-text.py com pypdf 6.10.0",
+      "purpose": "Somente extração de texto; imagem e procedência vêm do PDF original."
+    }
+  },
+  "warnings": [
+    "Texto extraído de cópia Unicode gerada localmente; imagem, páginas e procedência pertencem ao PDF original. A cópia e seu recibo não aprovam a fidelidade do item."
+  ],
+  "items": [
+    {
+      "key": "D1",
+      "kind": "DISCURSIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        2
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Os desafios da mobilidade urbana associam-se à necessidade de desenvolvimento urbano sustentável. A ONU define esse desenvolvimento como aquele que assegura qualidade de vida, incluídos os componentes ecológicos, culturais, políticos, institucionais, sociais e econômicos que não comprometam a qualidade de vida das futuras gerações.\nO espaço urbano brasileiro é marcado por inúmeros problemas cotidianos e por várias contradições. Uma das grandes questões em debate diz respeito à mobilidade urbana, uma vez que o momento é de motorização dos deslocamentos da população, por meio de transporte coletivo e individual.\nConsidere os dados do seguinte quadro.\nMobilidade urbana em cidade com mais de 500 mil habitantes Modalidade Tipologia Porcentagem (%)\nA pé 15,9 Não motorizado Bicicleta 2,7 nibus municipal 22,2 Motorizado coletivo nibus metropolitano 4,5 Metroferroviário 25,1 Automóvel 27,5 Motorizado individual Motocicleta 2,1 Tendo em vista o texto e o quadro de mobilidade urbana apresentados, redija um texto dissertativo, contemplando os seguintes aspectos:\na) consequências, para o desenvolvimento sustentável, do uso mais frequente do transporte motorizado; (valor: 5,0 pontos)\nb) duas ações de intervenção que contribuam para a consolidação de política pública de incremento ao uso de bicicleta na cidade mencionada, assegurando-se o desenvolvimento sustentável. (valor: 5,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D2",
+      "kind": "DISCURSIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        3
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Três jovens de 19 anos de idade, moradores de rua, foram presos em flagrante, nesta quarta-feira, por terem ateado fogo em um jovem de 17 anos, guardador de carros. O motivo, segundo a 14.a DP, foi uma ’briga por ponto’’. Um motorista deu ’um trocado’’ ao menor, o que irritou os três moradores de rua, que também guardavam carros no local. O menor foi levado ao Hospital das Clínicas (HC) por PMs que passavam pelo local. Segundo o HC, ele teve queimaduras leves no ombro esquerdo, foi medicado e, em seguida, liberado. Os indiciados podem pegar de 12 a 30 anos de prisão, se ficar comprovado que a intenção era matar o menor. Caso contrário, conforme a 14.a DP, os três poderão pegar de um a três anos de cadeia.\nDisponível em: http://www1.folha.uol.com.br . Acesso em: 28 jul. 2013 (adaptado).\nA partir da situação narrada, elabore um texto dissertativo sobre violência urbana, apresentando:\na) análise de duas causas do tipo de violência descrita no texto; (valor: 7,0 pontos)\nb) dois fatores que contribuiriam para se evitar o fato descrito na notícia. (valor: 3,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "Q1",
+      "kind": "OBJECTIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "O trecho da música “Nos Bailes da Vida”, de Milton Nascimento, “todo artista tem de ir aonde o povo está”, é antigo, e a música, de tão tocada, acabou por se tornar um estereótipo de tocadores de violões e de rodas de amigos em Visconde de Mauá, nos anos 1970. Em tempos digitais, porém, ela ficou mais atual do que nunca. É fácil entender o porquê: antigamente, quando a informação se concentrava em centros de exposição, veículos de comunicação, editoras, museus e gravadoras, era preciso passar por uma série de curadores, para garantir a publicação de um artigo ou livro, a gravação de um disco ou a produção de uma exposição. O mesmo funil, que poderia ser injusto e deixar grandes talentos de fora, simplesmente porque não tinham acesso às ferramentas, às pessoas ou às fontes de informação, também servia como filtro de qualidade. Tocar violão ou encenar uma peça de teatro em um grande auditório costumava ter um peso muito maior do que fazê-lo em um bar, um centro cultural ou uma calçada. Nas raras ocasiões em que esse valor se invertia, era justamente porque, para uso do espaço “alternativo”, havia mecanismos de seleção tão ou mais rígidos que os do espaço oficial.\nRADFAHRER, L. Todo artista tem de ir aonde o povo está.Disponível em: http://novo.itaucultural.org.br . Acesso em: 29 jul. 2014 (adaptado).\nA partir do texto acima, avalie as asserções a seguir e a relação proposta entre elas.\nI. O processo de evolução tecnológica da atualidade democratiza a produção e a divulgação de obras artísticas, reduzindo a importância que os centros de exposição tinham nos anos 1970.\nPORQUE\nII. As novas tecnologias possibilitam que artistas sejam independentes, montem seus próprios ambientes de produção e disponibilizem seus trabalhos, de forma simples, para um grande número de pessoas.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q2",
+      "kind": "OBJECTIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Com a globalização da economia social por meio das organizações não governamentais, surgiu uma discussão do conceito de empresa, de sua forma de concepção junto às organizações brasileiras e de suas práticas. Cada vez mais, é necessário combinar as políticas públicas que priorizam modernidade e competividade com o esforço de incorporação dos setores atrasados, mais intensivos de mão de obra.\nDisponível em: http://unpan1.un.org . Acesso em: 4 ago. 2014 (adaptado).\nA respeito dessa temática, avalie as afirmações a seguir.\nI. O terceiro setor é uma mistura dos dois setores econômicos clássicos da sociedade: o público, representado pelo Estado, e o privado, representado pelo empresariado em geral.\nII. É o terceiro setor que viabiliza o acesso da sociedade à educação e ao desenvolvimento de técnicas industriais, econômicas, financeiras, políticas e ambientais.\nIII. A responsabilidade social tem resultado na alteração do perfil corporativo e estratégico das empresas, que têm reformulado a cultura e a filosofia que orientam as ações institucionais.\nEstá correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q3",
+      "kind": "OBJECTIVE",
+      "number": 3,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        5
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "tabela",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Pegada ecológica é um indicador que estima a demanda ou a exigência humana sobre o meio ambiente, considerando-se o nível de atividade para atender ao padrão de consumo atual (com a tecnologia atual). É, de certa forma, uma maneira de medir o fluxo de ativos ambientais de que necessitamos para sustentar nosso padrão de consumo. Esse indicador é medido em hectare global, medida de área equivalente a 10 000 m . Na medida hectare global, são consideradas apenas as áreas produtivas do planeta. A biocapacidade do planeta, indicador que reflete a regeneração (natural) do meio ambiente, é medida também em hectare global. Uma razão entre pegada ecológica e biocapacidade do planeta igual a 1 indica que a exigência humana sobre os recursos do meio ambiente é reposta na sua totalidade pelo planeta, devido à capacidade natural de regeneração. Se for maior que 1, a razão indica que a demanda humana é superior à capacidade do planeta de se recuperar e, se for menor que 1, indica que o planeta se recupera mais rapidamente.\nRazão entre a pegada ecológica e a biocapacidade do planeta 1.60 1.52 1.50 1.45\n1.40\n1.30 1.30 1.27 1.25\n1.20 1.16 1.14 1.10 1.08\n1.00 1.00\n0.90\n0.85 0.80\n0.70 0.74\n0.60\n61 65 70 75 80 85 90 95 00 05 08 19 19 19 19 19 19 19 19 20 20 20\nDisponível em: http://financasfaceis.wordpress.com . Acesso em: 10 ago. 2014.\nO aumento da razão entre pegada ecológica e biocapacidade representado no gráfico evidencia",
+      "options": [
+        {
+          "letter": "A",
+          "text": "redução das áreas de plantio do planeta para valores inferiores a 10 000 m2 devido ao padrão atual de consumo de produtos agrícolas."
+        },
+        {
+          "letter": "B",
+          "text": "aumento gradual da capacidade natural de regeneração do planeta em relação às exigências humanas."
+        },
+        {
+          "letter": "C",
+          "text": "reposição dos recursos naturais pelo planeta em sua totalidade frente às exigências humanas."
+        },
+        {
+          "letter": "D",
+          "text": "incapacidade de regeneração natural do planeta ao longo do período 1961-2008."
+        },
+        {
+          "letter": "E",
+          "text": "tendência a desequilíbrio gradual e contínuo da sustentabilidade do planeta."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q4",
+      "kind": "OBJECTIVE",
+      "number": 4,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Importante website de relacionamento caminha para 700 milhões de usuários. Outro conhecido servidor de microblogging acumula 140 milhões de mensagens ao dia. É como se 75% da população brasileira postasse um comentário a cada 24 horas. Com as redes sociais cada vez mais presentes no dia a dia das pessoas, é inevitável que muita gente encontre nelas uma maneira fácil, rápida e abrangente de se manifestar.\nUma rede social de recrutamento revelou que 92% das empresas americanas já usaram ou planejam usar as redes sociais no processo de contratação. Destas, 60% assumem que bisbilhotam a vida dos candidatos em websites de rede social.\nRealizada por uma agência de recrutamento, uma pesquisa com 2 500 executivos brasileiros mostrou que 44% desclassificariam, no processo de seleção, um candidato por seu comportamento em uma rede social.\nMuitas pessoas já enfrentaram problemas por causa de informações online, tanto no campo pessoal quanto no profissional. Algumas empresas e instituições, inclusive, já adotaram cartilhas de conduta em redes sociais.\nPOLONI, G. O lado perigoso das redes sociais. Revista INFO, p. 70 - 75, julho 2011 (adaptado). De acordo com o texto,",
+      "options": [
+        {
+          "letter": "A",
+          "text": "mais da metade das empresas americanas evita acessar websites de redes sociais de candidatos a emprego."
+        },
+        {
+          "letter": "B",
+          "text": "empresas e instituições estão atentas ao comportamento de seus funcionários em websites de redes sociais."
+        },
+        {
+          "letter": "C",
+          "text": "a complexidade dos procedimentos de rastreio e monitoramento de uma rede social impede que as empresas tenham acesso ao perfil de seus funcionários."
+        },
+        {
+          "letter": "D",
+          "text": "as cartilhas de conduta adotadas nas empresas proíbem o uso de redes sociais pelos funcionários, em vez de recomendar mudanças de comportamento."
+        },
+        {
+          "letter": "E",
+          "text": "a maioria dos executivos brasileiros utilizaria informações obtidas em websites de redes sociais, para desclassificar um candidato em processo de seleção."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q5",
+      "kind": "OBJECTIVE",
+      "number": 5,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Uma ideia e um aparelho simples devem, em breve, ajudar a salvar vidas de recém-nascidos. Idealizado pelo mecânico argentino Jorge Odón, o dispositivo que leva seu sobrenome desentala um bebê preso no canal vaginal e, por mais inusitado que pareça, foi criado com base em técnica usada para remover rolhas de dentro de garrafas. O aparelho consiste em uma bolsa plástica inserida em uma proteção feita do mesmo material e que envolve a cabeça da criança. Estando o dispositivo devidamente posicionado, a bolsa é inflada para aderir à cabeça do bebê e ser puxada aos poucos, de forma a não machucá- lo. O método de Odón deve substituir outros já arcaicos, como o de fórceps e o de tubos de sucção, os quais, se usados por mãos maltreinadas, podem comprometer a vida do bebê, o que, segundo especialistas, não deve acontecer com o novo equipamento.\nSegundo o The New York Times, a ideia recebeu apoio da Organização Mundial de Saúde (OMS) e já foi até licenciada por uma empresa norte-americana de tecnologia médica. Não se sabe quando o equipamento começará a ser produzido nem o preço a ser cobrado, mas presume-se que ele não passará de 50 dólares, com redução do preço em países mais pobres.\nGUSMÃO, G. Aparelho deve facilitar partos em situações de emergência. Disponível em: http://exame.abril.com.br . Acesso em: 18 nov. 2013 (adaptado). Com relação ao texto acima, avalie as afirmações a seguir.\nI. A utilização do método de Odón poderá reduzir a taxa de mortalidade de crianças ao nascer, mesmo em países pobres.\nII. Por ser uma variante dos tubos de sucção, o aparelho desenvolvido por Odón é resultado de aperfeiçoamento de equipamentos de parto.\nIII. Por seu uso simples, o dispositivo de don tem grande potencial de ser usado em países onde o parto é usualmente realizado por parteiras.\nIV. A possibilidade de, em países mais pobres, reduzir-se o preço do aparelho idealizado por Odón evidencia preocupação com a responsabilidade social.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q6",
+      "kind": "OBJECTIVE",
+      "number": 6,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        7
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "As mulheres frequentam mais os bancos escolares que os homens, dividem seu tempo entre o trabalho e os cuidados com a casa, geram renda familiar, porém continuam ganhando menos e trabalhando mais que os homens.\nAs políticas de benefícios implementadas por empresas preocupadas em facilitar a vida das funcionárias que têm criança pequena em casa já estão chegando ao Brasil. Acordos de horários flexíveis, programas como auxílio-creche, auxílio-babá e auxílio-amamentação são alguns dos benefícios oferecidos.\nDisponível em: http://www1.folha.uol.com.br . Acesso em: 30 jul. 2013 (adaptado).\nJORNADA MÉDIA TOTAL DE TRABALHO POR SEMANA NO BRASIL - (EM HORAS)\nmãe com filhos 25,9 36,8\npai com filhos 15,5 41,4\nmulher chefe de casal 30,3 36,5 com filhos\nhomem chefe de casal 10,1 44,4 com filhos\nmulher cônjuge em 31,7 34 casal com filhos 0 10 20 30 40 50 60 70\ntempo médio por semana dedicado aos afazeres domésticos tempo médio por semana dedicado ao trabalho remunerado\nDisponível em: http://ipea.gov.br . Acesso em: 30 jul. 2013.\nConsiderando o texto e o gráfico, avalie as afirmações a seguir.\nI. O somatório do tempo dedicado pelas mulheres aos afazeres domésticos e ao trabalho remunerado é superior ao dedicado pelos homens, independentemente do formato da família.\nII. O fragmento de texto e os dados do gráfico apontam para a necessidade de criação de políticas que promovam a igualdade entre os gêneros no que concerne, por exemplo, a tempo médio dedicado ao trabalho e remuneração recebida.\nIII. No fragmento de reportagem apresentado, ressalta-se a diferença entre o tempo dedicado por mulheres e homens ao trabalho remunerado, sem alusão aos afazeres domésticos.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q7",
+      "kind": "OBJECTIVE",
+      "number": 7,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O quadro a seguir apresenta a proporção (%) de trabalhadores por faixa de tempo gasto no deslocamento casa-trabalho, no Brasil e em três cidades brasileiras.\nTempo de Rio de São Brasil Curitiba deslocamento Janeiro Paulo\nAté cinco minutos 12,70 5,80 5,10 7,80\nDe seis minutos 52,20 32,10 31,60 45,80 até meia hora Mais de meia hora 23,60 33,50 34,60 32,40 até uma hora Mais de uma hora 9,80 23,20 23,30 12,90 até duas horas Mais de duas 1,80 5,50 5,30 1,20 horas CENSO 2010/IBGE (adaptado). Com base nos dados apresentados e considerando a distribuição da população trabalhadora nas cidades e as políticas públicas direcionadas à mobilidade urbana, avalie as afirmações a seguir.\nI. A distribuição das pessoas por faixa de tempo de deslocamento casa-trabalho na região metropolitana do Rio de Janeiro é próxima à que se verifica em São Paulo, mas não em Curitiba e na média brasileira.\nII. Nas metrópoles, em geral, a maioria dos postos de trabalho está localizada nas áreas urbanas centrais, e as residências da população de baixa renda estão concentradas em áreas irregulares ou na periferia, o que aumenta o tempo gasto por esta população no deslocamento casa-trabalho e o custo do transporte.\nIII. As políticas públicas referentes a transportes urbanos, como, por exemplo, Bilhete nico e Veículo Leve sobre Trilhos (VLT), ao serem implementadas, contribuem para redução do tempo gasto no deslocamento casa-trabalho e do custo do transporte.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q8",
+      "kind": "OBJECTIVE",
+      "number": 8,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Constantes transformações ocorreram nos meios rural e urbano, a partir do século XX. Com o advento da industrialização, houve mudanças importantes no modo de vida das pessoas, em seus padrões culturais, valores e tradições. O conjunto de acontecimentos provocou, tanto na zona urbana quanto na rural, problemas como explosão demográfica, prejuízo nas atividades agrícolas e violência.\nIniciaram-se inúmeras transformações na natureza, criando-se técnicas para objetos até então sem utilidade para o homem. Isso só foi possível em decorrência dos recursos naturais existentes, que propiciaram estrutura de crescimento e busca de prosperidade, o que faz da experimentação um método de transformar os recursos em benefício próprio.\nSANTOS, M. Metamorfoses do espaço habitado. São Paulo: Hucitec, 1988 (adaptado).\nA partir das ideias expressas no texto acima, conclui-se que, no Brasil do século XX,",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a industrialização ocorreu independentemente do êxodo rural e dos recursos naturais disponíveis."
+        },
+        {
+          "letter": "B",
+          "text": "o êxodo rural para as cidades não prejudicou as atividades agrícolas nem o meio rural porque novas tecnologias haviam sido introduzidas no campo."
+        },
+        {
+          "letter": "C",
+          "text": "homens e mulheres advindos do campo deixaram sua cultura e se adaptaram a outra, citadina, totalmente diferente e oposta aos seus valores."
+        },
+        {
+          "letter": "D",
+          "text": "tanto o espaço urbano quanto o rural sofreram transformações decorrentes da aplicação de novas tecnologias às atividades industriais e agrícolas."
+        },
+        {
+          "letter": "E",
+          "text": "os migrantes chegaram às grandes cidades trazendo consigo valores e tradições, que lhes possibilitaram manter intacta sua cultura, tal como se manifestava nas pequenas cidades e no meio rural."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D3",
+      "kind": "DISCURSIVE",
+      "number": 3,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "O jogo Sudoku consiste em uma matriz 9x9 dividida em 9 sub-matrizes 3x3, como mostrado na figura a seguir.\nDisponível em http://www.en-wikipedia.org . Acesso em: 26 jul 2014 (adaptado).\nA matriz está parcialmente preenchida com números de 1 a 9, e o objetivo do jogo é completar a matriz, de forma que cada linha, coluna e sub-matriz contenham todos os números de 1 a 9.\nA partir dessas informações, escreva um algoritmo recursivo baseado em retrocesso (backtracking) para resolver o jogo. A matriz foi transformada em um vetor V de 81 posições, contendo zeros nas posições que faltam para serem preenchidas.\nConsidere que existem duas funções implementadas. A primeira função, NaoHaViolacao(x,i,V), retorna verdadeiro se a inserção do número x na posição i do vetor V não causa violação das restrições do jogo (número repetido em linha, coluna ou sub-matriz). A segunda função, Imprime(V), realiza a impressão do vetor V.\nConsidere, ainda, que o algoritmo deve imprimir o vetor V com a solução encontrada, se esta existir. (valor: 10,0 pontos)\nObservação: Qualquer notação em português estruturado, de forma imperativa ou orientada a objetos pode ser utilizada, assim como em uma linguagem de alto nível, como Pascal, C ou Java.\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D4",
+      "kind": "DISCURSIVE",
+      "number": 4,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        10
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "hifenizacao",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Muitas aplicações utilizam o sistema de localização (GPS) do dispositivo móvel do usuário para descobrir qual o melhor caminho a seguir. Algumas aplicações também permitem que o usuário notifique a ocorrência de eventos que ele presencia durante seu percurso, tais como acidentes ou trânsito lento. Em um possível cenário, esta notificação é enviada para um servidor centralizado, o qual é responsável por disseminar a notificação para os demais usuários do aplicativo. Uma equipe de desenvolvimento criou uma aplicação desse tipo utilizando uma base de dados relacional para o armazenamento de dados referentes aos usuários, eventos e notificações enviadas. A modelagem conceitual foi feita utilizando o diagrama entidade- relacionamento conforme apresentado na figura a seguir.\ncpf nome id descrição\nlatitude longitude\nUsuário notificação Evento 0,N 0,N\nA equipe de desenvolvimento deseja adicionar as seguintes características ao modelo:\n• Cada notificação deve ter data e hora;\n• O grupo de usuários para o qual uma notificação é enviada deve ser restrito. Cada usuário deve ter um grupo com um número arbitrário de amigos, que também são usuários da aplicação, e as notificações enviadas por um usuário devem ser enviadas somente a seus amigos. Também se deseja armazenar informações sobre quais notificações foram enviadas para quais usuários.\nNessa situação, adapte o diagrama ER da figura para atender os novos requisitos.(valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D5",
+      "kind": "DISCURSIVE",
+      "number": 5,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "As técnicas de projeto de algoritmos são essenciais para que os desenvolvedores possam implementar software de qualidade. Essas técnicas descrevem os princípios que devem ser adotados para se projetar soluções algorítmicas para um dado problema. Entre as principais técnicas, destacam-se os projetos de algoritmos por tentativa e erro, divisão e conquista, programação dinâmica e algoritmos gulosos.\nNesse contexto, faça o que se pede nos itens a seguir.\na) Descreva o que caracteriza o projeto de algoritmos por divisão e conquista. (valor: 6,0 pontos)\nb) Apresente uma situação de uso da técnica de projeto de algoritmos por divisão e conquista. (valor: 4,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "Q9",
+      "kind": "OBJECTIVE",
+      "number": 9,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        12
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "A figura a seguir apresenta duas telas de um sistema de venda de passagens aéreas de uma empresa. Na tela 1, o usuário selecionou sua origem, seu destino, e, logo em seguida, sua data de ida. Ao mudar o foco para o campo de preenchimento da data de retorno, a ferramenta de calendário apresentou automaticamente a data do dia da compra (01/09/2014), conforme exibido na tela 2.\nCom base nas telas apresentadas e em dimensões de qualidade, tais como facilidade de aprendizagem, prevenção de erros, eficiência, memorização e satisfação subjetiva, avalie as afirmações a seguir.\nI. O botão “Ir” apresenta uma metáfora adequada com o mundo real, facilitando a aprendizagem.\nII. Na tela 1, o uso do calendário clicável não auxilia na prevenção de erros, visto que a entrada de datas pode ser realizada manualmente pelos usuários.\nIII. Na tela 2, o fato de o calendário selecionar a data da compra prejudica a eficiência da interface, já que a data preenchida é anterior à data de ida.\nIV. A memorização é prejudicada pois a interface apresenta elementos gráficos em demasia.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q10",
+      "kind": "OBJECTIVE",
+      "number": 10,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "O gerenciamento de um projeto inclui atividades com o objetivo de garantir que todos os produtos definidos no seu escopo sejam entregues no prazo estimado. Nesse contexto, avalie as afirmações a seguir.\nI. Técnicas como PERT e CPM são utilizadas para obtenção de estimativas de esforço e como apoio para definição de atividades.\nII. Séries históricas, quando utilizadas para obter estimativas de esforço no desenvolvimento de um novo sistema, levam à obtenção de estimativas consistentes, independentemente do domínio de aplicação dos sistemas que deram origem às séries históricas.\nIII. No caso de atraso na execução do cronograma, a contratação de novos desenvolvedores assegura que o produto será entregue de acordo com o cronograma inicialmente proposto.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q11",
+      "kind": "OBJECTIVE",
+      "number": 11,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Considere um esquema de gerência de memória por paginação simples, onde a memória física é dividida em quadros (frames) de 1 Kbyte e endereçada por byte. Os espaços de endereçamento dos processos são múltiplos de 1 Kbyte. A tabela de páginas para um determinado processo P é apresentada a seguir, em que o primeiro bit (BV) mostra se a página é válida (1) ou inválida (0).\nBV Quadro (frame)\n0 1 0010 1 1 0100 2 1 0001 3 1 0111 4 1 0000 5 1 1101 6 0 1111 7 0 0110\nCom base na tabela apresentada, avalie as afirmações a seguir.\nI. O endereço físico é composto por 13 bits.\nII. O esquema de gerência de memória apresentado reduz a fragmentação externa.\nIII. A tradução do endereço lógico 0110000000110 para endereço físico causa exceção.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q12",
+      "kind": "OBJECTIVE",
+      "number": 12,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Analise o custo computacional dos algoritmos a seguir, que calculam o valor de um polinômio de grau n, da forma: P(x) = a xn + a xn 1 + . . . + a x + a , onde os coeficientes são números de ponto flutuante armazenados n n 1 1 0 no vetor a[0..n], e o valor de n é maior que zero. Todos os coeficientes podem assumir qualquer valor, exceto o coeficiente a que é diferente de zero.\nn Algoritmo 1:\nsoma = a[0]\nRepita para i = 1 até n\nSe a[i]  0.0 então\npotência = x\nRepita para j = 2 até i\npotência = potência * x\nFim repita\nsoma = soma + a[i] * potencia\nFim se\nFim repita\nImprima(soma)\nAlgoritmo 2:\nsoma = a[n]\nRepita para i = n-1 até 0 passo -1\nsoma = soma * x + a[i]\nFim repita\nImprima(soma)\nCom base nos algoritmos 1 e 2, avalie as asserções a seguir e a relação proposta entre elas.\nI. Os algoritmos possuem a mesma complexidade assintótica.\nPORQUE\nII. Para o melhor caso, ambos os algoritmos possuem complexidade O(n).\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q13",
+      "kind": "OBJECTIVE",
+      "number": 13,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "A figura a seguir apresenta uma árvore binária de pesquisa, que mantém a seguinte propriedade fundamental: o valor associado à raiz é sempre menor do que o valor de todos os nós da subárvore à direita e sempre maior do que o valor de todos os nós da subárvore à esquerda.\n15\n10 20\n7 13 17 25\n14\nEm relação à árvore apresentada na figura, avalie as afirmações a seguir.\nI. A árvore possui a vantagem de realizar a busca de elementos de forma eficiente, como a busca binária em um vetor.\nII. A árvore está desbalanceada, pois a subárvore da esquerda possui um número de nós maior do que a subárvore da direita.\nIII. Quando a árvore é percorrida utilizando o método de caminhamento pós-ordem, os valores são encontrados em ordem decrescente.\nIV. O número de comparações realizadas em função do número n de elementos na árvore em uma busca binária realizada com sucesso é O(log n).\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q14",
+      "kind": "OBJECTIVE",
+      "number": 14,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Seja o universo U = 10, 20, 30, 40 e o conjunto dos números naturais N. Com base no conhecimento sobre a lógica de predicados, avalie as afirmações a seguir.\nI. H = (׊x א N)(׌y א U)(x y) é válida.\nII. H = (׊x א N)(׌y א N)(y x) é válida.\nIII. H = (׊x א U)(׌y א U)(x y) é inválida, sendo x = 10 um contra-exemplo.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q15",
+      "kind": "OBJECTIVE",
+      "number": 15,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "texto-ilegivel",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Considere as seguintes expressões regulares cujo alfabeto é a, b .\nR1 = a(a U b)\nR2 = b(a U b)\nSe L(R) é a linguagem associada a uma expressão regular R, é correto afirmar que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "L(R1) = L(R2)."
+        },
+        {
+          "letter": "B",
+          "text": "L(R2) = w w termina com b ."
+        },
+        {
+          "letter": "C",
+          "text": "existe um autômato finito determinístico cuja linguagem é igual a L(R1) U L(R2)."
+        },
+        {
+          "letter": "D",
+          "text": "se R3 é uma expressão regular tal que L ( R 3 ) = L ( R 1 ) ŀ L ( R 2 ) , e ntã o L ( R 3 ) é u m a linguagem infinita."
+        },
+        {
+          "letter": "E",
+          "text": "um autômato finito não determinístico que reconheça L(R1) U L(R2) tem, pelo menos, quatro estados."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q16",
+      "kind": "OBJECTIVE",
+      "number": 16,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        16
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Uma pilha é uma estrutura de dados que armazena uma coleção de itens de dados relacionados e que garante o seguinte funcionamento: o último elemento a ser inserido é o primeiro a ser removido. É comum na literatura utilizar os nomes push e pop para as operações de inserção e remoção de um elemento em uma pilha, respectivamente. O seguinte trecho de código em linguagem C define uma estrutura de dados pilha utilizando um vetor de inteiros, bem como algumas funções para sua manipulação.\n#include <stdlib.h>\n#include <stdio.h>\ntypedef struct {\nint elementos[100];\nint topo;\n}pilha;\npilha * cria_pilha() {\npilha * p =malloc(sizeof(pilha));\np->topo = -1;\nreturn pilha;\n}\nvoid push(pilha *p, int elemento) {\nif (p->topo >= 99)\nreturn;\np->elementos[++p->topo] = elemento;\n}\nint pop(pilha *p) {\nint a = p->elementos[p->topo];\np->topo--;\nreturn a;\n} O programa a seguir utiliza uma pilha.\nint main() {\npilha * p = cria_pilha();\npush(p, 2);\npush(p, 3);\npush(p, 4);\npop(p);\npush(p, 2);\nint a = pop(p) + pop(p);\npush(p, a);\na += pop(p);\nprintf(“%d”, a);\nreturn 0;\n}\nA esse respeito, avalie as afirmações a seguir.\nI. A complexidade computacional de ambas\nfunções push e pop é O(1).\nII. O valor exibido pelo programa seria o mesmo\ncaso a instrução a += pop(p); fosse\ntrocada por a += a;\nIII. Em relação ao vazamento de memória\n(memory leak), é opcional chamar a função\nfree(p), pois o vetor usado pela pilha é\nalocado estaticamente.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q17",
+      "kind": "OBJECTIVE",
+      "number": 17,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Considerando que o gerente de qualidade é o responsável por definir os meios necessários para se obter um produto com a qualidade desejada, bem como por estabelecer técnicas para aferir a qualidade do produto, avalie as afirmações a seguir.\nI. O uso de processos de desenvolvimento padronizados, sem adaptações, independente do tipo de software a ser desenvolvido, assegura que o produto terá a qualidade desejada.\nII. O controle de qualidade pode ser realizado por meio de revisões, incluindo inspeções de programas e de artefatos de projeto.\nIII. Fatores de qualidade de software estão diretamente relacionados a um único atributo interno de software.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q18",
+      "kind": "OBJECTIVE",
+      "number": 18,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Em relação à aplicação adequada das técnicas de Inteligência Artificial, avalie as afirmações a seguir.\nI. Indução em Árvore de Decisão é utilizada para identificação de fraudes em cartões de crédito.\nII. Redes Neurais Artificiais são utilizadas no desenvolvimento de sistemas de análise de risco em aplicações financeiras.\nIII. Sistemas Especialistas baseados em regras são utilizados no desenvolvimento de sistemas de diagnóstico de falhas em hardware.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q19",
+      "kind": "OBJECTIVE",
+      "number": 19,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "O algoritmo de traçado de raios (ray-tracing) é considerado um marco no desenvolvimento de técnicas de computação gráfica para a geração de imagens realistas.\nImagem 1\nDisponível em: http://www.wikipedia.org . Acesso em: 18 jun. 2014.\nImagem 2 Disponívelem: http://www.colegioweb.com.br .Acessoem:18jun.2014.\nImagem 3\nDisponível em: http://www.cgw.com . Acesso em: 18 jun. 2014.\nA partir da análise das imagens apresentadas, conclui-se que a técnica de traçado de raios foi utilizada para a geração",
+      "options": [
+        {
+          "letter": "A",
+          "text": "apenas da imagem 1."
+        },
+        {
+          "letter": "B",
+          "text": "apenas da imagem 2."
+        },
+        {
+          "letter": "C",
+          "text": "apenas das imagens 1 e 3."
+        },
+        {
+          "letter": "D",
+          "text": "apenas das imagens 2 e 3."
+        },
+        {
+          "letter": "E",
+          "text": "das imagens 1, 2 e 3."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q20",
+      "kind": "OBJECTIVE",
+      "number": 20,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Um processo tem um ou mais fluxos de execução, normalmente denominados apenas por threads.\nProcesso 1 Processo 2 Processo 3 Processo\nEspaço do usuário\nThread Thread\nEspaço Kernel Kernel do kernel\nFigura 1 Figura 2\nTANENBAUM, A. D. Sistemas operacionais modernos. 3. ed. São Paulo: Pearson Prentice Hall, 2010 (adaptado).\nA partir das figuras 1 e 2 apresentadas, avalie as afirmações a seguir.\nI. Tanto na figura 1 quanto na figura 2, existem três threads que utilizam o mesmo espaço de endereçamento.\nII. Tanto na figura 1 quanto na figura 2, existem três threads que utilizam três espaços de endereçamento distintos.\nIII. Na figura 2, existe um processo com um único espaço de endereçamento e três threads de controle.\nIV. Na figura 1, existem três processos tradicionais, cada qual tem seu espaço de endereçamento e uma única thread de controle.\nV. As threads permitem que várias execuções ocorram no mesmo ambiente de processo de forma independente uma das outras.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, II e III."
+        },
+        {
+          "letter": "B",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "C",
+          "text": "I, III e V."
+        },
+        {
+          "letter": "D",
+          "text": "II, IV e V."
+        },
+        {
+          "letter": "E",
+          "text": "III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q21",
+      "kind": "OBJECTIVE",
+      "number": 21,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "versalete",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "O fragmento de código a seguir, escrito em Java, descreve duas implementações diferentes para um lock. Ambas possuem um método denominado acquire e um método denominado release.\nclass LockA { class LockB {\nprivate int turn = 0 public void acquire() {\npublic void acquire(int tid) { disableInterrupts();\nwhile (turn == (1 - tid)); }\n} public void release() {\npublic void release(int tid) { enableInterrupts();\nturn = (1 - tid); }\n} }\n}\nConsidera-se que:\n• as duas implementações de lock são utilizadas por aplicações com, no máximo, duas threads;\n• uma aplicação que utilizar qualquer uma destas implementações invocará o método acquire antes de entrar em sua seção crítica e o método release após deixar a seção crítica;\n• tanto o método acquire quanto o método release são operações atômicas nas duas implementações de lock;\n• para a implementação que requer um tid (thread id), assume-se que ele sempre será 0 ou 1;\n• os métodos disableInterrupts e enableInterrupts são utilizados para desabilitar e habilitar respectivamente as interrupções do processador onde o código for executado. O código desses dois métodos foi desenvolvido para ser utilizado em uma máquina com um ou dois processadores.\nA partir das informações apresentadas, avalie as afirmações a seguir.\nI. A implementação de LockA garante progresso.\nII. A implementação de LockB garante progresso.\nIII. A implementação de LockA garante exclusão mútua.\nIV. A implementação de LockB garante exclusão mútua.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "II e III."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "I, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q22",
+      "kind": "OBJECTIVE",
+      "number": 22,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Considere o processo de fabricação de um produto siderúrgico que necessita passar por n tratamentos térmicos e químicos para ficar pronto. Cada uma das n etapas de tratamento é realizada uma única vez na mesma caldeira. Além do custo próprio de cada etapa do tratamento, existe o custo de se passar de uma etapa para outra, uma vez que, dependendo da sequência escolhida, pode ser necessário alterar a temperatura da caldeira e limpá-la para evitar a reação entre os produtos químicos utilizados. Assuma que o processo de fabricação inicia e termina com a caldeira limpa. Deseja-se projetar um algoritmo para indicar a sequência de tratamentos que possibilite fabricar o produto com o menor custo total. Nessa situação, conclui-se que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a solução do problema é obtida em tempo de ordem O(nlogn), utilizando-se um algoritmo ótimo de ordenação."
+        },
+        {
+          "letter": "B",
+          "text": "uma heurística para a solução do problema de coloração de grafos solucionará o problema em tempo polinomial."
+        },
+        {
+          "letter": "C",
+          "text": "o problema se reduz a encontrar a árvore geradora mínima para o conjunto de etapas do processo, requerendo tempo de ordem polinomial para ser solucionado."
+        },
+        {
+          "letter": "D",
+          "text": "a utilização do algoritmo de Dijkstra para se determinar o caminho de custo mínimo entre o estado inicial e o final soluciona o problema em tempo polinomial."
+        },
+        {
+          "letter": "E",
+          "text": "qualquer algoritmo conhecido para a solução do problema descrito possui ordem de complexidade de tempo não-polinomial, uma vez que o problema do caixeiro viajante se reduz a ele."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q23",
+      "kind": "OBJECTIVE",
+      "number": 23,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "tabela",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Qual o valor de retorno da função a seguir, caso n = 27?\nint recursao (int n) { if (n <= 10) { return n * 2; } else { return recursao(recursao(n/3)); } }",
+      "options": [
+        {
+          "letter": "A",
+          "text": "8."
+        },
+        {
+          "letter": "B",
+          "text": "9."
+        },
+        {
+          "letter": "C",
+          "text": "12."
+        },
+        {
+          "letter": "D",
+          "text": "16."
+        },
+        {
+          "letter": "E",
+          "text": "18."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q24",
+      "kind": "OBJECTIVE",
+      "number": 24,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Considere as seguintes tabelas de um banco de dados:\n1. Fornecedor (cod_fornec, nome_fornec, telefone, cidade, UF)\n2. Estado (UF, nome_estado)\nA expressão SQL que obtém os nomes dos estados para os quais não há fornecedores cadastrados é\nSELECT E.UF\nFROM Estado AS E",
+      "options": [
+        {
+          "letter": "A",
+          "text": "WHERE E.nome_estado NOT IN ( SELECT F.UF\nFROM Fornecedor AS F);\nSELECT E.nome_estado\nFROM Estado AS E, FROM"
+        },
+        {
+          "letter": "B",
+          "text": " Fornecedor AS F\nWHERE E.UF = F.UF;\nSELECT E.nome_estado\nFROM Estado AS E\nWHERE E.UF NOT IN ("
+        },
+        {
+          "letter": "C",
+          "text": " SELECT F.UF\nFROM Fornecedor AS F);\nSELECT E.nome_estado\nFROM Estado AS E, FROM"
+        },
+        {
+          "letter": "D",
+          "text": " Fornecedor AS F\nWHERE E.nome_estado = F.UF;\nSELECT E.nome_estado\nFROM Estado AS E"
+        },
+        {
+          "letter": "E",
+          "text": "WHERE E.UF IN ( SELECT F.UF\nFROM Fornecedor AS F);"
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q25",
+      "kind": "OBJECTIVE",
+      "number": 25,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Uma gramática livre do contexto (GLC) é um modelo computacional geralmente utilizado para definir linguagens de programação e, quando está de acordo com a Forma de Backus-Naur (BNF), permite que alguns operadores sejam utilizados no lado direito de suas produções, como o operador (pipe) que indica seleção, o operador [ ] que indica que o operando em questão é opcional, e o operador que indica repetição de 0 ou mais vezes.\nProjetar um compilador para uma determinada linguagem envolve, entre outras coisas, especificar quais são os símbolos válidos nesta linguagem, bem como quais são as regras sintáticas que a definem.\nA linguagem de programação Java é uma linguagem com suporte à orientação a objetos que não permite herança múltipla e que permite que uma classe implemente múltiplas interfaces. A seguir, exibem-se trechos de código sintaticamente válidos na linguagem Java.\nTrecho 1:\nclass A extends B { }\nTrecho 2:\nclass F implements C { }\nTrecho 3:\nclass J extends A implements C, D { }\nNo trecho 1, cria-se uma classe chamada A que herda de uma classe chamada B. No trecho 2, cria-se uma classe chamada F que implementa uma interface chamada C. No trecho 3, cria-se uma classe chamada J que herda de uma classe chamada A e implementa duas interfaces, chamadas C e D.\nConsidere que:\n• classdecl é um não terminal cujo intuito é dar origem a declarações de classes;\n• classbody é um não terminal cujo intuito é dar origem ao corpo de classes;\n• os terminais aparecem entre aspas duplas;\n• “id” é um símbolo que representa qualquer identificador válido, como nomes de classes ou variáveis.\nA gramática que especifica uma linguagem que não permita herança múltipla e que implemente zero ou mais interfaces é",
+      "options": [
+        {
+          "letter": "A",
+          "text": "classdecl “class” “id” [ “extends “ ] “id” classbody"
+        },
+        {
+          "letter": "B",
+          "text": "classdecl “class” “id” (“extends “ “id”) classbody"
+        },
+        {
+          "letter": "C",
+          "text": "classdecl “class” “id” [ “extends “ ] “id” [“implements” ( , “id”) ] classbody"
+        },
+        {
+          "letter": "D",
+          "text": "classdecl “class” “id” [ “extends “ “id”] [“implements” “id” (“,” “id”) ] classbody"
+        },
+        {
+          "letter": "E",
+          "text": "classdecl “class” “id” [“extends “ “id”] “implements” “id” (“,” “id”) classbody"
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q26",
+      "kind": "OBJECTIVE",
+      "number": 26,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Um conjunto indutivo S é definido de acordo com os seguintes passos:\n[Base] Declaração dos elementos iniciais, atômicos. [Indução] Definição de regras que constroem expressões a partir de elementos já existentes em S. [Fecho] Uma declaração de que nada mais está em S a não ser os elementos construídos pelos passos Base e Indução.\nOs operadores que constroem as expressões nos passos Base e Indução são chamados de construtores do conjunto S. Como um exemplo, a definição abaixo especifica um conjunto indutivo Prop, das proposições booleanas formadas pelos construtores V (valor verdadeiro), F (valor falso), ! (para negação de expressões) e and (para conjunção de expressões).\n1. [Base] V, F estão em Prop.\n2. [Indução] Se B está em Prop, então (! B) está em Prop.\n3. [Indução] Se B1 e B2 estão em Prop, então (and B1 B2) está em Prop.\n4. [Fecho] Nada mais está em Prop, a não ser o especificado em Base e Indução.\nExpressões (termos) em Prop incluem V, F, ! F, ! V, (and V F), (and (! V) (! F)) e assim por diante. De forma análoga, linguagens funcionais permitem a declaração de tipos indutivos com seus respectivos construtores.\nNeste contexto, avalie as seguintes afirmações.\nI. Conjuntos indutivos são conjuntos enumeráveis.\nII. Conjuntos infinitos não podem ser especificados por meio de definições indutivas.\nIII. Para estender a linguagem Prop de tal forma a considerar expressões para disjunção e implicação de proposição, é necessário acrescentar mais dois construtores à definição de Prop anterior.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q27",
+      "kind": "OBJECTIVE",
+      "number": 27,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-ilegivel",
+        "caracteres-suspeitos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Considere o seguinte argumento:\n1 - Se existe fogo, então existe oxigênio.\n2 - Não há oxigênio.\n3 - Então não há fogo.\nA regra de inferência que justifica a validade do argumento acima é\nP ĺ\u0003Q, ¬P",
+      "options": [
+        {
+          "letter": "A",
+          "text": " ¬Q\nP ĺ\u0003Q, ¬Q"
+        },
+        {
+          "letter": "B",
+          "text": " ¬P\nP ĺ\u0003Q, Q"
+        },
+        {
+          "letter": "C",
+          "text": " P\nP ĺ\u0003Q, ¬Q"
+        },
+        {
+          "letter": "D",
+          "text": " ¬¬P P ĺ\u0003Q, P"
+        },
+        {
+          "letter": "E",
+          "text": " Q"
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q28",
+      "kind": "OBJECTIVE",
+      "number": 28,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Um cientista afirma ter encontrado uma redução polinomial de um problema NP-Completo para um problema pertencente à classe P. Considerando que esta afirmação tem implicações importantes no que diz respeito à complexidade computacional, avalie as seguintes asserções e a relação proposta entre elas.\nI. A descoberta do cientista implica P = NP.\nPORQUE\nII. A descoberta do cientista implica na existência de algoritmos polinomiais para todos os problemas NP-Completos.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q29",
+      "kind": "OBJECTIVE",
+      "number": 29,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Diferentes implementações da linguagem de programação PROLOG permitem predicados com parâmetros, aceitam as operações de conjunção e disjunção lógica, utilizando os símbolos vírgula (conjunção) e ponto e vírgula (disjunção), e a negação lógica com o predicado not.\nConsidere que um programador propoz as cláusulas mostradas a seguir, definidas em uma linguagem de programação como PROLOG, como parte da verificação de critérios para seleção de candidatos a uma chapa de presidente e vice-presidente de uma empresa. Estas cláusulas apresentam as premissas para chegar às conclusões selecionados, desconsiderados e descartado, a partir da possibilidade da existência de fatos ou regras com o identificador superior.\nsuperior(jorge).\nsuperior(ana).\nselecionados(P,Q) :- superior(P), superior(Q).\ndesconsiderados(P,Q) :- not(superior(P)); not(superior(Q)).\ndescartado(P) :- not(superior(P)).\nConsiderando apenas as colocações e cláusulas acima e a hipótese de mundo fechado (closed world assumption), avalie as afirmações a seguir.\nI. Para todos valores dos parâmetros P e Q, o predicado selecionados retornará um valor lógico falso.\nII. Para todos valores de P e Q, os predicados selecionados e desconsiderados retornarão valores lógicos diferentes.\nIII. A conjunção dos predicados selecionados e desconsiderados, para quaisquer valores de P e Q, retornará um valor lógico verdadeiro.\nIV. Para qualquer valor do parâmetro P, o predicado descartado retornará um valor verdadeiro.\nV. A disjunção dos predicados selecionados e desconsiderados, para quaisquer valores de P e Q, retornará um valor lógico verdadeiro.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e V."
+        },
+        {
+          "letter": "D",
+          "text": "III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q30",
+      "kind": "OBJECTIVE",
+      "number": 30,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Uma fazenda possui um único poço artesiano que deve abastecer n bebedouros para o gado. Deseja-se determinar um projeto de ligação entre esses n+1 pontos através de encanamentos com a menor extensão total. Um algoritmo proposto para a solução do problema executa os seguintes passos:\n1. Crie n+1 conjuntos unitários, cada um contendo um dos pontos a serem ligados entre si e insira esses conjuntos em um conjunto C.\n2. Crie um conjunto D contendo um registro para cada combinação possível de dois pontos distintos a serem ligados. Cada registro deve conter os campos ci , cj e d, em que ci e cj são os dois pontos a serem ligados e d é a distância entre eles.\n3. Enquanto D não estiver vazio faça:\n3.1.Remova o registro de D com o menor valor de distância d.\n3.2.Se os valores de c e c do registro removido i j pertencerem a conjuntos distintos de C, então:\n3.2.1.Substitua estes dois conjuntos pela união entre eles.\n3.2.2.Guarde o registro removido em um conjunto-solução.\nCom base na descrição do problema e do algoritmo proposto, conclui-se que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "o problema exemplifica a obtenção de uma árvore geradora mínima, portanto está no conjunto P."
+        },
+        {
+          "letter": "B",
+          "text": "o algoritmo é uma heurística para o Problema do Caixeiro Viajante, logo apresenta complexidade polinomial."
+        },
+        {
+          "letter": "C",
+          "text": "o problema descrito é de otimização, logo pertence ao conjunto NP–difícil, mas não ao conjunto NP–completo."
+        },
+        {
+          "letter": "D",
+          "text": "uma alternativa para a solução do problema é usar o algoritmo de Dijkstra para obtenção do caminho mínimo entre dois pontos."
+        },
+        {
+          "letter": "E",
+          "text": "o passo de maior custo do algoritmo é a criação do conjunto D com as combinações de pontos, apresentando complexidade computacional O(n!)."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q31",
+      "kind": "OBJECTIVE",
+      "number": 31,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Na transmissão de dados em sistemas computacionais, o dispositivo de verificação de erros conhecido como bit de paridade consiste da adição de um bit extra durante a transmissão. O valor associado a esse bit é uma função da quantidade de bits de dados iguais a 1 a serem transmitidos.\nNesse contexto, considere a transmissão de 7 bits de dados, com um bit extra de paridade, em um sistema de comunicação no qual a probabilidade de transmitir um bit de forma incorreta é igual a 10-6 e independe de outros erros ocorridos. O bit de paridade também pode sofrer erros.\nA probabilidade da ocorrência de transmissão de 2 bits errados, que seria erroneamente detectada como uma transmissão sem erros, é",
+      "options": [
+        {
+          "letter": "A",
+          "text": "1,0 u10-12."
+        },
+        {
+          "letter": "B",
+          "text": "2,0 u10-12."
+        },
+        {
+          "letter": "C",
+          "text": "2,8 u10-11."
+        },
+        {
+          "letter": "D",
+          "text": "2,0 u10-6."
+        },
+        {
+          "letter": "E",
+          "text": "2,8 u10-5."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q32",
+      "kind": "OBJECTIVE",
+      "number": 32,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Considere as proposições lógicas simples P, Q, R: P: o programador lê a literatura técnica Q: o programador conhece o idioma inglês R: o programador será selecionado Pretende-se demonstrar a validade ou invalidade do seguinte argumento:\nSe o programador lê a literatura técnica, então ele conhece inglês.\nSe o programador conhece o idioma inglês, então ele será selecionado.\nO programador não será selecionado ou ele lê a literatura técnica.\nLogo, o programador lê a literatura técnica se e somente se conhece o idioma inglês.\nConsiderando as colocações acima, avalie as afirmações a seguir.\nI. As premissas do argumento podem ser expressas na forma: P Q, Q R e R v P.\nA conclusão do argumento pode ser expressa na forma: P Q.\nII. A validade do argumento se demostra com os passos: Q v P (equivalente de uma premissa), P R (transitividade da implicação a partir das premissas) e conclusão Q R (conjunção de duas proposições condicionais e transformação em bicondicional).\nIII. A validade do argumento se demostra com os passos: R P (equivalente de uma premissa), Q P (transitividade da implicação), chegamos à conclusão P Q (conjunção de duas proposições condicionais e transformação em bicondicional).\nIV. As premissas do argumento podem ser expressas na forma: P Q, Q R e R P e a conclusão do argumento acima pode ser expressa na forma: P Q.\nV. A invalidade do argumento acima se demonstra desta forma: a proposição lógica P Q é diferente das premissas P Q, Q R e R v P.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "II e IV."
+        },
+        {
+          "letter": "C",
+          "text": "I, III e V."
+        },
+        {
+          "letter": "D",
+          "text": "I, II, IV e V."
+        },
+        {
+          "letter": "E",
+          "text": "II, III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q33",
+      "kind": "OBJECTIVE",
+      "number": 33,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "A seguinte sequência de instruções lógicas e aritméticas será executada por um processador em pipeline de 5 estágios: busca da instrução, leitura de registradores, execução, acesso à memória e escrita de registradores. A sequência, no entanto, apresenta conflito de dados.\nand R5, R4, R3\nor R6, R4, R2\nadd R1, R2, R2\nmul R3, R2, R1\nsub R1, R1, R4\nO pipeline foi implementado sem hardware adicional para a resolução de conflitos, mas os valores dos registradores podem ser escritos na primeira metade do ciclo e lidos na segunda metade. Sabendo-se que o primeiro operando das instruções é o registrador destino, avalie as afirmações a seguir.\nI. A troca de posição entre as instruções or e add soluciona o conflito de dados.\nII. A troca de posição entre as instruções add e and soluciona o conflito de dados.\nIII. A inserção de uma operação nop (sem operação) entre add e mul soluciona o conflito de dados.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q34",
+      "kind": "OBJECTIVE",
+      "number": 34,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-ilegivel",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Considere a implementação de um compilador em que as etapas de análise léxica e sintática possam compartilhar o mesmo processador de forma concorrente. Considere, ainda, uma solução para o problema, cujo pseudocódigo é mostrado abaixo. O analisador léxico lê os lexemas e identifica os respectivos tokens do arquivo-fonte por meio da chamada ao procedimento Leia. O analisador sintático verifica a sequência dos tokens por meio da chamada ao procedimento Case. Os dois processos compartilham a constante N e as variáveis buffer, vez e cont.\nconstante N = 10;\ninteiro buffer[N], vez = 0, cont = 0;\nAnalisador_Lexico:\n01 inteiro token, in = 0;\n02 enquanto verdadeiro faça\n03 Leia(token);\n04 enquanto cont = N - 1 aguarde;\n05 enquanto vez = 1 aguarde;\n06 buffer[in] = token;\n07 cont = cont + 1;\n08 vez = 1;\n09 in = (in + 1) mod N; \u0014\u0013\u0003\u0003\u0003\u0003¿P\u0003HQTXDQWR\nAnalisador_Sintatico:\n11 inteiro token, out = 0;\n12 enquanto verdadeiro faça\n13 enquanto cont = 0 aguarde;\n14 enquanto vez = 0 aguarde;\n15 token buffer[out];\n16 cont = cont - 1;\n17 vez = 0;\n18 out = (out + 1) mod N;\n19 Case(token); \u0015\u0013\u0003\u0003\u0003\u0003¿P\u0003HQTXDQWR\nA partir da análise da solução, avalie as asserções a seguir e a relação proposta entre elas.\nI. A eliminação da variável cont e das linhas 4, 7,13 e 16 causa erro de sincronismo entre os processos.\nPORQUE\nII. A variável cont é responsável pelo controle do acesso à seção crítica do código.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q35",
+      "kind": "OBJECTIVE",
+      "number": 35,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Um prédio de 4 andares, sendo o primeiro o andar térreo, é servido por 2 elevadores. Por motivo de economia de energia, o elevador 2 só é acionado se for solicitado em mais de 2 andares. Considere um circuito proposto para habilitar o acionamento do elevador 2 conforme é mostrado a seguir. Ele utiliza um multiplexador 4x1, cuja saída é selecionada através da composição dos sinais A e B, que indicam se os andares 1 e 2 solicitaram o serviço do elevador. Assim, o valor AB=10 indica que o primeiro andar solicitou elevador, mas não o (2)\nsegundo. Os sinais C e D indicam se os andares 3 e 4 solicitaram o serviço, respectivamente.\nCom base na análise do circuito proposto para o problema, avalie as seguintes asserções e a relação proposta entre elas.\nI. O circuito não atende às especificações do projeto.\nPORQUE\nII. A entrada superior do multiplexador com valor constante 0 indica que a saída será 0 independentemente dos valores dos sinais A, B, C e D.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "A asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2014-bacharelado-exam",
+        "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+        "answerKeyId": "enade-2014-bacharelado-answer-key",
+        "answerKeySha256": "fbd23a3e9e5da2d5f305e4ab6cf705eda42bb2a2bf3f43cb041a752b8a194659",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    }
+  ]
+}

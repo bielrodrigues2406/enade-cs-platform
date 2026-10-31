@@ -46,8 +46,8 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
-      - name: Ferramentas de PDF usadas pelos importadores
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+      - name: Ferramentas de PDF e imagem usadas pelos importadores (as mesmas da imagem de produção)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils imagemagick
       - name: Dependência fixada da cópia Unicode de PDFs
         run: |
           python3 -m venv .local/pdf-venv

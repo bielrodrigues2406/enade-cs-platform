@@ -1,0 +1,42 @@
+# Blueprint do Render (D16, docs/DEPLOY.md §5.1). Um serviço web com o
+# Dockerfile da raiz, disco persistente em /data e PostgreSQL só na rede
+# privada. Preços de 31/10/2026: web starter ~US$ 7, banco basic-256mb ~US$ 6,
+# disco US$ 0,25/GB por mês — conferir em render.com/pricing.
+services:
+  - type: web
+    name: enade-cs
+    runtime: docker
+    plan: starter
+    # Mais perto do Brasil entre as regiões do Render.
+    region: virginia
+    branch: main
+    # Publica só depois do CI verde em main (DEPLOY.md §3, item 6).
+    autoDeployTrigger: checksPass
+    healthCheckPath: /api/health
+    # PDFs oficiais e recortes das questões; sem o disco, somem a cada deploy.
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: enade-cs-db
+          property: connectionString
+      # Endereço público HTTPS do site, ex.: https://enade-cs.onrender.com
+      - key: APP_ORIGIN
+        sync: false
+      - key: TRUST_PROXY
+        value: "1"
+      # Seu e-mail (e de outros administradores, separados por vírgula):
+      # vira administrador ao criar a conta no site.
+      - key: ADMIN_EMAILS
+        sync: false
+
+databases:
+  - name: enade-cs-db
+    plan: basic-256mb
+    region: virginia
+    postgresMajorVersion: "17"
+    # Sem acesso pela internet: só o serviço, pela rede privada.
+    ipAllowList: []

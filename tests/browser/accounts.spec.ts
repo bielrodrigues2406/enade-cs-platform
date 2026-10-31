@@ -232,6 +232,9 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
     await login.getByLabel("E-mail", { exact: true }).fill(accountEmail);
     await login.getByLabel("Senha", { exact: true }).fill(password);
     await login.getByLabel("Senha", { exact: true }).focus();
+    // Depois da senha vem o botão de mostrar a senha e, em seguida, o envio.
+    await other.keyboard.press("Tab");
+    await expect(login.getByRole("button", { name: "Mostrar" })).toBeFocused();
     await other.keyboard.press("Tab");
     await expect(
       login.getByRole("button", { name: "Entrar", exact: true }),

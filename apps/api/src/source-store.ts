@@ -4,7 +4,7 @@ import path from "node:path";
 import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
-import { text } from "./editorial.js";
+import { canCurate, text } from "./editorial.js";
 import { sourceCatalog } from "./source-catalog.js";
 export type Source = {
   id: string;
@@ -226,11 +226,7 @@ export async function importDocument(input: {
     if (input.actorId) {
       if (!/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i.test(input.actorId))
         fail("UUID de curadoria inválido.", 400);
-      const role = await client.query(
-        "SELECT 1 FROM curator_role WHERE identity_id=$1 FOR SHARE",
-        [input.actorId],
-      );
-      if (!role.rowCount)
+      if (!(await canCurate(client, input.actorId, true)))
         fail("A conta informada não possui papel de curadoria.", 403);
     }
     const id = randomUUID();

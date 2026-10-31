@@ -1,0 +1,4057 @@
+{
+  "document": "enade-2008-comum-exam",
+  "completeness": {
+    "missing": [],
+    "unexpected": []
+  },
+  "extraction": {
+    "method": "PDF_TEXT",
+    "optionFonts": {
+      "fonts": [
+        {
+          "id": "12",
+          "family": "PKFODD+TT2ECBo00",
+          "size": 15,
+          "occurrences": 195
+        },
+        {
+          "id": "78",
+          "family": "PKHIFH+TT2F3Eo00",
+          "size": 15,
+          "occurrences": 205
+        }
+      ],
+      "markers": 400,
+      "unmatched": 0
+    }
+  },
+  "warnings": [
+    "Marcadores das edições antigas foram comparados ao XML de fontes do próprio PDF; alternativas e reconstruções de layout continuam exigindo conferência visual.",
+    "Caderno compartilhado: os blocos de outros cursos foram preservados com courseScope e não são automaticamente questões de Ciência da Computação.",
+    "O gabarito não se declara definitivo; confirmação documental pendente."
+  ],
+  "items": [
+    {
+      "key": "Q1",
+      "kind": "OBJECTIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        2
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "alternativas-reconstruidas-layout",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "O escritor Machado de Assis (1839-1908), cujo centenário de morte está sendo celebrado no presente ano, retratou na sua obra de ficção as grandes transformações políticas que aconteceram no Brasil nas últimas décadas do século XIX. O fragmento do romance Esaú e Jacó, a seguir transcrito, reflete o clima político-social vivido naquela época.\nPodia ter sido mais turbulento. Conspiração houve, decerto, mas uma barricada não faria mal. Seja como for, venceu-se a campanha. (...) Deodoro é uma bela figura. (...)\nEnquanto a cabeça de Paulo ia formulando essas idéias, a de Pedro ia pensando o contrário; chamava o movimento um crime.\n— Um crime e um disparate, além de ingratidão; o imperador devia ter pegado os principais cabeças e mandá-los executar.\nASSIS, Machado de. Esaú e Jacó. In : Obra completa. Rio de Janeiro: Nova Aguilar, 1979. v. 1, cap. LXVII (Fragmento).\nOs personagens a seguir estão presentes no imaginário brasileiro, como símbolos da Pátria.\nI II III\nERMAKOFF, George. Rio de Janeiro, 1840-1900: Uma crônica ERMAKOFF, George. Rio de Janeiro,\nDisponível em: www.morcegolivre.vet.br fotográfica. Rio de Janeiro: G. Ermakoff Casa Editorial, 2006, 1840-1900: Uma crônica fotográfica. Rio de p. 189. Janeiro: G. Ermakoff Casa Editorial, 2006, p. 38.\nIV V\nLAGO, Pedro Corrêa do; BANDEIRA, LAGO, Pedro Corrêa do; BANDEIRA, Júlio. Debret Júlio. Debret e o Brasil: Obra completa e o Brasil: Obra completa 1816-1831. Rio de 1816-1831. Rio de Janeiro: Capivara, Janeiro: Capivara, 2007, p. 78.\n2007, p. 93.\nDas imagens acima, as figuras referidas no fragmento do romance Esaú e Jacó são",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "I e V."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q2",
+      "kind": "OBJECTIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        3
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "E",
+      "prompt": "Quando o homem não trata bem a natureza, a natureza não trata bem o homem.\nEssa afirmativa reitera a necessária interação das diferentes espécies, representadas na imagem a seguir.\nDisponível em http://curiosidades.spaceblog.com.br. Acesso em 10 out. 2008.\nDepreende-se dessa imagem a",
+      "options": [
+        {
+          "letter": "A",
+          "text": "atuação do homem na clonagem de animais pré-históricos."
+        },
+        {
+          "letter": "B",
+          "text": "exclusão do homem na ameaça efetiva à sobrevivência do planeta."
+        },
+        {
+          "letter": "C",
+          "text": "ingerência do homem na reprodução de espécies em cativeiro."
+        },
+        {
+          "letter": "D",
+          "text": "mutação das espécies pela ação predatória do homem."
+        },
+        {
+          "letter": "E",
+          "text": "responsabilidade do homem na manutenção da biodiversidade."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q3",
+      "kind": "OBJECTIVE",
+      "number": 3,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        3
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "tabela"
+      ],
+      "answer": "D",
+      "prompt": "A exposição aos raios ultravioleta tipo B (UVB) causa queimaduras na pele, que podem ocasionar lesões graves ao longo do tempo. Por essa razão, recomenda-se a utilização de filtros solares, que deixam passar apenas certa fração desses raios, indicada pelo Fator de Proteção Solar (FPS). Por exemplo, um protetor com FPS igual a 10 deixa passar apenas 1/10 (ou seja, retém 90%) dos raios UVB. Um protetor que retenha 95% dos raios UVB possui um FPS igual a",
+      "options": [
+        {
+          "letter": "A",
+          "text": "95."
+        },
+        {
+          "letter": "B",
+          "text": "90."
+        },
+        {
+          "letter": "C",
+          "text": "50."
+        },
+        {
+          "letter": "D",
+          "text": "20."
+        },
+        {
+          "letter": "E",
+          "text": "5."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q4",
+      "kind": "OBJECTIVE",
+      "number": 4,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        3
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "A",
+      "prompt": "CIDADÃS DE SEGUNDA CLASSE?\nAs melhores leis a favor das mulheres de cada\npaís-membro da União Européia estão sendo reunidas por\nespecialistas. O objetivo é compor uma legislação\ncontinental capaz de contemplar temas que vão da\ncontracepção à eqüidade salarial, da prostituição à\naposentadoria. Contudo, uma legislação que assegure a\ninclusão social das cidadãs deve contemplar outros temas,\nalém dos citados.\nSão dois os temas mais específicos para essa legislação:",
+      "options": [
+        {
+          "letter": "A",
+          "text": "aborto e violência doméstica."
+        },
+        {
+          "letter": "B",
+          "text": "cotas raciais e assédio moral."
+        },
+        {
+          "letter": "C",
+          "text": "educação moral e trabalho."
+        },
+        {
+          "letter": "D",
+          "text": "estupro e imigração clandestina."
+        },
+        {
+          "letter": "E",
+          "text": "liberdade de expressão e divórcio."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q5",
+      "kind": "OBJECTIVE",
+      "number": 5,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        3
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "answer": "D",
+      "prompt": "A foto a seguir, da americana Margaret Bourke-White\n(1904-71), apresenta desempregados na fila de alimentos\ndurante a Grande Depressão, que se iniciou em 1929.\nSTRICKLAND, Carol; BOSWELL, John. Arte Comentada: da pré-história ao pós-moderno. Rio de Janeiro: Ediouro [s.d.].\nAlém da preocupação com a perfeita composição, a\nartista, nessa foto, revela",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a capacidade de organização do operariado."
+        },
+        {
+          "letter": "B",
+          "text": "a esperança de um futuro melhor para negros."
+        },
+        {
+          "letter": "C",
+          "text": "a possibilidade de ascensão social universal."
+        },
+        {
+          "letter": "D",
+          "text": "as contradições da sociedade capitalista."
+        },
+        {
+          "letter": "E",
+          "text": "o consumismo de determinadas classes sociais."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q6",
+      "kind": "OBJECTIVE",
+      "number": 6,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "CENTROS URBANOS MEMBROS DO GRUPO “ENERGIA-CIDADES”\nLE MONDE Diplomatique Brasil. Atlas do Meio Ambiente, 2008, p. 82.\nNo mapa, registra-se uma prática exemplar para que as cidades se tornem sustentáveis de fato, favorecendo as trocas horizontais, ou seja, associando e conectando territórios entre si, evitando desperdícios no uso de energia.\nEssa prática exemplar apóia-se, fundamentalmente, na",
+      "options": [
+        {
+          "letter": "A",
+          "text": "centralização de decisões políticas."
+        },
+        {
+          "letter": "B",
+          "text": "atuação estratégica em rede."
+        },
+        {
+          "letter": "C",
+          "text": "fragmentação de iniciativas institucionais."
+        },
+        {
+          "letter": "D",
+          "text": "hierarquização de autonomias locais."
+        },
+        {
+          "letter": "E",
+          "text": "unificação regional de impostos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q7",
+      "kind": "OBJECTIVE",
+      "number": 7,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "tabela",
+        "mencao-a-figura"
+      ],
+      "answer": "D",
+      "prompt": "Apesar do progresso verificado nos últimos anos, o Brasil continua sendo um país em que há uma grande desigualdade de renda entre os cidadãos. Uma forma de se constatar este fato é por meio da Curva de Lorenz, que fornece, para cada valor de x entre 0 e 100, o percentual da renda total do País auferido pelos x% de brasileiros de menor renda. Por exemplo, na Curva de Lorenz para 2004, apresentada ao lado, constata-se que a renda total dos 60% de menor renda representou apenas 20% da renda total.\nDe acordo com o mesmo gráfico, o percentual da renda total correspondente aos 20% de maior renda foi, aproximadamente, igual a",
+      "options": [
+        {
+          "letter": "A",
+          "text": "20%."
+        },
+        {
+          "letter": "B",
+          "text": "40%."
+        },
+        {
+          "letter": "C",
+          "text": "50%."
+        },
+        {
+          "letter": "D",
+          "text": "60%."
+        },
+        {
+          "letter": "E",
+          "text": "80%. Disponível em http://www.ipea.gov.br"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q8",
+      "kind": "OBJECTIVE",
+      "number": 8,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        5
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "alternativas",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "O filósofo alemão Friedrich Nietzsche (1844-1900), talvez o pensador moderno mais incômodo e provocativo, influenciou\nvárias gerações e movimentos artísticos. O Expressionismo, que teve forte influência desse filósofo, contribuiu para o\npensamento contrário ao racionalismo moderno e ao trabalho mecânico, através do embate entre a razão e a fantasia.\nAs obras desse movimento deixam de priorizar o padrão de beleza tradicional para enfocar a instabilidade da vida,\nmarcada por angústia, dor, inadequação do artista diante da realidade.\nDas obras a seguir, a que reflete esse enfoque artístico é\nA B C\nHomem idoso na poltrona Figura e borboleta O grito – Edvard Munch – Museu Munch, Oslo Rembrandt van Rijn – Louvre, Paris. Milton Dacosta Disponível em: http://members.cox.net\nDisponível em: http://www.allposters.com Disponível em: http://www.unesp.br\nD E\nMenino mordido por um lagarto Abaporu – Tarsila do Amaral Michelangelo Merisi (Caravaggio) Disponível em: http://tarsiladoamaral.com.br National Gallery, Londres\nDisponível em: http://vr.theatre.ntu.edu.tw",
+      "options": [],
+      "optionLetters": "AD",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q9",
+      "kind": "DISCURSIVE",
+      "number": 9,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "figura"
+      ],
+      "prompt": "DIREITOS HUMANOS EM QUESTÃO\nO caráter universalizante dos direitos do homem (...) não\né da ordem do saber teórico, mas do operatório ou prático: eles\nsão invocados para agir, desde o princípio, em qualquer\nsituação dada.\nFrançois JULIEN, filósofo e sociólogo.\nNeste ano, em que são comemorados os 60 anos da\nDeclaração Universal dos Direitos Humanos, novas\nperspectivas e concepções incorporam-se à agenda pública\nbrasileira. Uma das novas perspectivas em foco é a visão mais\nintegrada dos direitos econômicos, sociais, civis, políticos e,\nmais recentemente, ambientais, ou seja, trata-se da\nintegralidade ou indivisibilidade dos direitos humanos. Dentre as\nnovas concepções de direitos, destacam-se:\n< a habitação como moradia digna e não apenas como\nnecessidade de abrigo e proteção; < a segurança como bem-estar e não apenas como\nnecessidade de vigilância e punição; < o trabalho como ação para a vida e não apenas como\nnecessidade de emprego e renda.\nTendo em vista o exposto acima, selecione uma das\nconcepções destacadas e esclareça por que ela representa um\navanço para o exercício pleno da cidadania, na perspectiva da\nintegralidade dos direitos humanos.\nSeu texto deve ter entre 8 e 10 linhas.\n(valor: 10,0 pontos)\nLE MONDE Diplomatique Brasil. Ano 2, n. 7, fev. 2008, p. 31.\nRASCUNHO – QUESTÃO 9\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q10",
+      "kind": "DISCURSIVE",
+      "number": 10,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        7,
+        8
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "prompt": "Alunos dão nota 7,1 para ensino médio\nApesar das várias avaliações que mostram que o ensino médio está muito aquém do desejado, os alunos, ao analisarem a formação que receberam, têm outro diagnóstico. No questionário socioeconômico que responderam no Enem (Exame Nacional do Ensino Médio) do ano passado, eles deram para seus colégios nota média 7,1. Essa boa avaliação varia pouco conforme o desempenho do aluno. Entre os que foram mal no exame, a média é de 7,2; entre aqueles que foram bem, ela fica em 7,1.\nGOIS, Antonio. Folha de S.Paulo, 11 jun. 2008 (Fragmento).\nEntre os piores também em matemática e leitura\nO Brasil teve o quarto pior desempenho, entre 57 países e territórios, no Revista Veja, 20 ago. 2008, p. 72-3. maior teste mundial de matemática, o Programa Internacional de Avaliação de Alunos (Pisa) de 2006. Os estudantes brasileiros de escolas públicas e particulares ficaram na 54.a posição, à frente apenas de Tunísia, Qatar e Quirguistão. Na prova de leitura, que mede a compreensão de textos, o país foi o oitavo pior, entre 56 nações.\nOs resultados completos do Pisa 2006, que avalia jovens de 15 anos, foram anunciados ontem pela Organização para a Cooperação e o Desenvolvimento (OCDE), entidade que reúne países adeptos da economia de mercado, a maioria do mundo desenvolvido.\nWEBER, Demétrio. Jornal O Globo, 5 dez. 2007, p. 14 (Fragmento).\nEnsino fundamental atinge meta de 2009\nO aumento das médias dos alunos, especialmente em matemática, e a diminuição da reprovação fizeram com que, de 2005 para 2007, o país melhorasse os indicadores de qualidade da educação. O avanço foi mais visível no ensino fundamental. No ensino médio, praticamente não houve melhoria. Numa escala de zero a dez, o ensino fundamental em seus anos iniciais (da primeira à quarta série) teve nota 4,2 em 2007. Em 2005, a nota fora 3,8. Nos anos finais (quinta a oitava), a alta foi de 3,5 para 3,8. No ensino médio, de 3,4 para 3,5. Embora tenha comemorado o aumento da nota, ela ainda foi considerada “pior do que regular” pelo ministro da Educação, Fernando Haddad.\nGOIS, Antonio; PINHO, Angela. Folha de S.Paulo, 12 jun. 2008 (Fragmento).\nA partir da leitura dos fragmentos motivadores reproduzidos, redija um texto dissertativo (fundamentado em pelo menos dois argumentos), sobre o seguinte tema:\nA contradição entre os resultados de avaliações oficiais e a opinião emitida pelos professores, pais e alunos sobre a educação brasileira.\nNo desenvolvimento do tema proposto, utilize os conhecimentos adquiridos ao longo de sua formação.\nObservações\n• Seu texto deve ser de cunho dissertativo-argumentativo (não • O texto deve ter entre 8 e 10 linhas.\ndeve, portanto, ser escrito em forma de poema, de narração • O texto deve ser redigido na modalidade padrão da etc.). língua portuguesa.\n• Seu ponto de vista deve estar apoiado em pelo menos dois • Seu texto não deve conter fragmentos dos textos argumentos. motivadores.\n(valor: 10,0 pontos) RASCUNHO – QUESTÃO 10\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10 COMPONENTE As questões de 11 a 20, a seguir, são comuns BACHARELADO EM CIÊNCIA DA COMPUTAÇÃO, BACHARELADO EM",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q11",
+      "kind": "OBJECTIVE",
+      "number": 11,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "alternativas-reconstruidas-layout"
+      ],
+      "answer": "C",
+      "prompt": "Com relação às diferentes tecnologias de armazenamento de dados, julgue os itens a seguir.\nI Quando a tensão de alimentação de uma memória ROM é desligada, os dados dessa memória são apagados. Por isso, esse tipo de memória é denominado volátil.\nII O tempo de acesso à memória RAM é maior que o tempo de acesso a um registrador da unidade central de processamento (UCP).\nIII O tempo de acesso à memória cache da UCP é menor que o tempo de acesso a um disco magnético. IV O tempo de acesso à memória cache da UCP é maior que o tempo de acesso à memória RAM.\nEstão certos apenas os itens",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q12",
+      "kind": "OBJECTIVE",
+      "number": 12,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "alternativas-reconstruidas-layout",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "Ao longo de todo o desenvolvimento do software, 1 devem ser aplicadas atividades de garantia de qualidade de software (GQS), entre as quais se 2 encontra a atividade de teste. Um dos critérios de teste utilizados para gerar casos de teste é o 3 denominado critério dos caminhos básicos, cujo número de caminhos pode ser determinado com 4 base na complex idade ciclomática.\nConsiderando-se o grafo de fluxo de controle 5 apresentado na figura ao lado, no qual os nós representam os blocos de comandos e as 6 arestas representam a transferência de controle, 7 qual a quantidade de caminhos básicos que devem ser testados no programa associado a esse grafo de fluxo de controle, sabendo-se que essa quantidade é igual à complexidade ciclomática mais um?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "1."
+        },
+        {
+          "letter": "B",
+          "text": "3."
+        },
+        {
+          "letter": "C",
+          "text": "4."
+        },
+        {
+          "letter": "D",
+          "text": "7."
+        },
+        {
+          "letter": "E",
+          "text": "8."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q13",
+      "kind": "OBJECTIVE",
+      "number": 13,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "codigo"
+      ],
+      "answer": "A",
+      "prompt": "Considerando o conjunto A = {1, 2, 3, 4, 5, 6}, qual opção corresponde a uma partição desse conjunto?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "{{1}, {2}, {3}, {4}, {5}, {6}}"
+        },
+        {
+          "letter": "B",
+          "text": "{{1}, {1,2}, {3,4}, {5, 6}}"
+        },
+        {
+          "letter": "C",
+          "text": "{{ }, {1, 2, 3}, {4, 5, 6}}"
+        },
+        {
+          "letter": "D",
+          "text": "{{1, 2, 3}, {5, 6}} ESPECÍFICO para os estudantes de cursos com perfis profissionais de ENGENHARIA DE COMPUTAÇÃO e SISTEMAS DE INFORMAÇÃO."
+        },
+        {
+          "letter": "E",
+          "text": "{{1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 6}}"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q14",
+      "kind": "OBJECTIVE",
+      "number": 14,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        8,
+        9
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "answer": "E",
+      "prompt": "Um programador propôs um algoritmo não-recursivo para o percurso em preordem de uma árvore binária com as seguintes características.\n< Cada nó da árvore binária é representado por um registro com três campos: chave, que armazena seu identificador; esq e dir, ponteiros para os filhos esquerdo e direito, respectivamente.\n< O algoritmo deve ser invocado inicialmente tomando o ponteiro para o nó raiz da árvore binária como argumento.\n< O algoritmo utiliza push() e pop() como funções auxiliares de empilhamento e desempilhamento de ponteiros para nós de árvore binária, respectivamente.\nA seguir, está apresentado o algoritmo proposto, em que 8 representa o ponteiro nulo.\nProcedimento preordem (ptraiz : PtrNoArvBin) Var ptr : PtrNoArvBin; ptr := ptraiz; Enquanto (ptr … 8) Faça escreva (ptr8.chave); Se (ptr8.dir … 8) Então push(ptr8.dir); Se (ptr8.esq … 8) Então push(ptr8.esq); ptr := pop(); Fim_Enquanto Fim_Procedimento\nCom base nessas informações e supondo que a raiz de uma árvore binária com n nós seja passada ao procedimento preordem(), julgue os itens seguintes.\nI O algoritmo visita cada nó da árvore binária exatamente uma vez ao longo do percurso.\nII O algoritmo só funcionará corretamente se o procedimento pop() for projetado de forma a retornar 8 caso a pilha esteja vazia.\nIII Empilhar e desempilhar ponteiros para nós da árvore são operações que podem ser implementadas com custo constante.\nIV A complexidade do pior caso para o procedimento preordem() é O(n).\nAssinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Apenas um item está certo."
+        },
+        {
+          "letter": "B",
+          "text": "Apenas os itens I e IV estão certos."
+        },
+        {
+          "letter": "C",
+          "text": "Apenas os itens I, II e III estão certos."
+        },
+        {
+          "letter": "D",
+          "text": "Apenas os itens II, III e IV estão certos."
+        },
+        {
+          "letter": "E",
+          "text": "Todos os itens estão certos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q15",
+      "kind": "OBJECTIVE",
+      "number": 15,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "B",
+      "prompt": "Além do acesso a páginas html, a Internet tem sido usada cada vez mais para a cópia e troca de arquivos de músicas, filmes, jogos e programas. Muitos desses arquivos possuem direitos autorais e restrições de uso. Considerando o uso das redes ponto-a-ponto para a troca de arquivos de músicas, filmes, jogos e programas na Internet, a quem cabe a identificação e o cumprimento das restrições de uso associados a esses arquivos?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "aos programas de troca de arquivo"
+        },
+        {
+          "letter": "B",
+          "text": "aos usuários"
+        },
+        {
+          "letter": "C",
+          "text": "ao sistema operacional"
+        },
+        {
+          "letter": "D",
+          "text": "aos produtores dos arquivos"
+        },
+        {
+          "letter": "E",
+          "text": "aos equipamentos roteadores da Internet"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q16",
+      "kind": "OBJECTIVE",
+      "number": 16,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "B",
+      "prompt": "O gerenciamento de configuração de software (GCS) é uma atividade que deve ser realizada para identificar, controlar, auditar e relatar as modificações que ocorrem durante todo o desenvolvimento ou mesmo durante a fase de manutenção, depois que o software for entregue ao cliente. O GCS é embasado nos chamados itens de configuração, que são produzidos como resultado das atividades de engenharia de software e que ficam armazenados em um repositório. Com relação ao GCS, analise as duas asserções apresentadas a seguir.\nNo GCS, o processo de controle das modificações obedece ao seguinte fluxo: começa com um pedido de modificação de um item de configuração, que leva à aceitação ou não desse pedido e termina com a atualização controlada desse item no repositório\nporque\no controle das modificações dos itens de configuração baseia-se nos processos de check-in e check-out que fazem, respectivamente, a inserção de um item de configuração no repositório e a retirada de itens de configuração do repositório para efeito de realização das modificações.\nAcerca dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As duas asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q17",
+      "kind": "OBJECTIVE",
+      "number": 17,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "texto-ilegivel"
+      ],
+      "answer": "D",
+      "prompt": "Uma fórmula bem formada da lógica de predicados é válida se ela é verdadeira para todas as interpretações possíveis. Considerando essa informação, analise as duas asserções apresentadas a seguir.\nA fórmula bem formada (›x) P(x) Y (œx) P(x) é válida\nporque,\nem qualquer interpretação de uma fórmula da lógica de predicados, se todo elemento do conjunto universo tem a propriedade P, então existe um elemento do conjunto que tem essa propriedade.\nAssinale a opção correta com relação a essas asserções.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As duas asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q18",
+      "kind": "OBJECTIVE",
+      "number": 18,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "tabela",
+        "codigo"
+      ],
+      "answer": "C",
+      "prompt": "Os números de Fibonacci constituem uma seqüência de números na qual os dois primeiros elementos são 0 e 1 e os demais, a soma dos dois elementos imediatamente anteriores na seqüência. Como exemplo, a seqüência formada pelos 10 primeiros números de Fibonacci é: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34. Mais precisamente, é possível definir os números de Fibonacci pela seguinte relação de recorrência:\nfib (n) = 0, se n = 0 fib (n) = 1, se n = 1 fib (n) = fib (n ! 1) + fib (n ! 2), se n > 1\nAbaixo, apresenta-se uma implementação em linguagem funcional para essa relação de recorrência:\nfib :: Integer -> Integer fib 0 = 0 fib 1 = 1 fib n = fib (n ! 1) + fib (n ! 2)\nConsiderando que o programa acima não reutilize resultados previamente computados, quantas chamadas são feitas à função fib para computar fib 5?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "11"
+        },
+        {
+          "letter": "B",
+          "text": "12"
+        },
+        {
+          "letter": "C",
+          "text": "15"
+        },
+        {
+          "letter": "D",
+          "text": "24"
+        },
+        {
+          "letter": "E",
+          "text": "25"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q19",
+      "kind": "OBJECTIVE",
+      "number": 19,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        10
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf"
+      ],
+      "answer": "A",
+      "prompt": "Uma alternativa para o aumento de desempenho de sistemas computacionais é o uso de processadores com múltiplos núcleos, chamados multicores. Nesses sistemas, cada núcleo, normalmente, tem as funcionalidades completas de um processador, já sendo comuns, atualmente, configurações com 2, 4 ou mais núcleos. Com relação ao uso de processadores multicores, e sabendo que threads são estruturas de execução associadas a um processo, que compartilham suas áreas de código e dados, mas mantêm contextos independentes, analise as seguintes asserções.\nAo dividirem suas atividades em múltiplas threads que podem ser executadas paralelamente, aplicações podem se beneficiar mais efetivamente dos diversos núcleos dos processadores multicores\nporque\no sistema operacional nos processadores multicores pode alocar os núcleos existentes para executar simultaneamente diversas seqüências de código, sobrepondo suas execuções e, normalmente, reduzindo o tempo de resposta das aplicações às quais estão associadas.\nAcerca dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, mas a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda, uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda, uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q20",
+      "kind": "DISCURSIVE",
+      "number": 20,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        10,
+        11
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura",
+        "hifenizacao"
+      ],
+      "prompt": "Com relação à aplicação descrita, faça o que se pede a seguir.\nTabelas de dispersão (tabelas A Escreva, no espaço reservado, o conjunto das chaves envolvidas em colisões.\nhash) armazenam elementos com (valor: 4,0 pontos) base no valor absoluto de suas RASCUNHO – QUESTÃO 20 - A\nchaves e em técnicas de tratamento\nde colisões. As funções de dispersão\ntransformam chaves em endereços-\nbase da tabela, ao passo que o\ntratamento de colisões resolve conflitos em casos em que mais de B Assuma que a tabela de dispersão trate colisões por meio de encadeamento exterior. Esboce a tabela de dispersão para mostrar uma chave é mapeada para um seu conteúdo após a seqüência de inserções referida.\nmesmo endereço-base da tabela.\n(valor: 6,0 pontos) Suponha que uma aplicação RASCUNHO – QUESTÃO 20 - B utilize uma tabela de dispersão com\n23 endereços-base (índices de 0 a 22)\ne empregue h(x) = x mod 23 como\nfunção de dispersão, em que x\nrepresenta a chave do elemento cujo\nendereço-base deseja-se computar.\nInicialmente, essa tabela de dispersão\nencontra-se vazia. Em seguida, a\naplicação solicita uma seqüência de\ninserções de elementos cujas chaves\naparecem na seguinte ordem: 44, 46,\n49, 70, 27, 71, 90, 97, 95.\n1 – A seguir serão apresentadas para as modalidades dos cursos\nPerfil do curso\nBacharelado em Ciência\nEngenharia de Computação\nBacharelado em Sistemas\n2 – Você deve responder apenas que você está inscrito, de acordo 3 – Observe atentamente os números das questões correspondentes para preencher corretamente o Caderno de Respostas.\nAs questões de 21 a 40, a seguir, são específicas para BACHARELADO EM CIÊNCIA",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q21",
+      "kind": "OBJECTIVE",
+      "number": 21,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "D",
+      "prompt": "Considere a relação EMPREGADO (NumeroEmp, RG, nome, sobrenome, salario, endereco), em que o atributo grifado corresponde à chave primária da relação. Suponha que se deseje realizar as seguintes consultas:\n1 Listar o nome dos empregados com sobrenome Silva; 2 Listar o nome dos empregados em ordem crescente de seus sobrenomes.\nEm relação à definição de um índice sobre o atributo sobrenome para melhorar o desempenho das consultas acima, julgue os itens a seguir.\nI Um índice que implemente Árvore-B+ será adequado para melhorar o desempenho da consulta 1.\nII Um índice que implemente Árvore-B+ será adequado para melhorar o desempenho da consulta 2.\nIII Um índice que implemente uma função hash será adequado para melhorar o desempenho da consulta 1. IV Um índice que implemente uma função hash será adequado para melhorar o desempenho da consulta 2.\nAssinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Apenas um item está certo."
+        },
+        {
+          "letter": "B",
+          "text": "Apenas os itens I e II estão certos."
+        },
+        {
+          "letter": "C",
+          "text": "Apenas os itens III e IV estão certos."
+        },
+        {
+          "letter": "D",
+          "text": "Apenas os itens I, II e III estão certos."
+        },
+        {
+          "letter": "E",
+          "text": "Todos os itens estão certos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q22",
+      "kind": "OBJECTIVE",
+      "number": 22,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "answer": "A",
+      "prompt": "Qual tipo de software tradutor deve ser utilizado para programas em geral, quando a velocidade de execução é uma exigência de alta prioridade?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "compiladores"
+        },
+        {
+          "letter": "B",
+          "text": "interpretadores"
+        },
+        {
+          "letter": "C",
+          "text": "tradutores híbridos"
+        },
+        {
+          "letter": "D",
+          "text": "macroprocessadores"
+        },
+        {
+          "letter": "E",
+          "text": "interpretadores de macroinstruções questões de Múltipla Escolha e Discursivas específicas de computação, assim distribuídas:\nNúmero das Questões\nMúltipla Escolha Discursivas\nda Computação 21 a 38 39 e 40\n41 a 58 59 e 60\nde Informação 61 a 78 79 e 80\nàs questões referentes ao perfil profissional do curso em com o estabelecido no cartão de informação do estudante. à modalidade do curso na qual você está inscrito\nos estudantes de cursos com perfis profissionais de DA COMPUTAÇÃO."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q23",
+      "kind": "OBJECTIVE",
+      "number": 23,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "mencao-a-figura"
+      ],
+      "answer": "E",
+      "prompt": "Considere o esquema de banco de dados relacional apresentado a seguir, formado por 4 relações, que representa o conjunto de estudantes de uma universidade que podem, ou não, morar em repúblicas (moradias compartilhadas por estudantes). A relação Estudante foi modelada como um subconjunto da relação Pessoa. Considere que os atributos grifados correspondam à chave primária da respectiva relação e os atributos que são seguidos da palavra referencia sejam chaves estrangeiras.\nPessoa(IdPessoa:integer, Nome:varchar(40),\nEndereco:varchar(40))\nFonePessoa(IdPessoa:integer referencia Pessoa,\nDDD:varchar(3), Prefixo:char(4), Nro:char(4))\nRepublica(IdRep:integer, Nome:varchar(30),\nEndereco:varchar(40))\nEstudante(RA:integer, Email:varchar(30),\nIdPessoa:integer referencia Pessoa,\nIdRep:integer referencia Republica)\nSuponha que existam as seguintes tuplas no banco de dados:\nPessoa(1, ‘José Silva’, ‘Rua 1, 20’); Republica(20, ‘Várzea’, ‘Rua Chaves, 2001’)\nQual opção apresenta apenas tuplas válidas para esse esquema de banco de dados relacional?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Estudante(10, ‘jsilva@ig.com.br’, null, 20); FonePessoa(10, ‘019’, ‘3761’, ‘1370’)"
+        },
+        {
+          "letter": "B",
+          "text": "Estudante(10, ‘jsilva@ig.com.br’, 1, null); FonePessoa(10, ‘019’, ‘3761’, ‘1370’)"
+        },
+        {
+          "letter": "C",
+          "text": "Estudante(10, ‘jsilva@ig.com.br’, 1, 20); FonePessoa(1, null, ‘3761’, ‘1370’)"
+        },
+        {
+          "letter": "D",
+          "text": "Estudante(10, ‘jsilva@ig.com.br’, 1, 50); FonePessoa(1, ‘019’, ‘3761’, ‘1370’)"
+        },
+        {
+          "letter": "E",
+          "text": "Estudante(10, ‘jsilva@ig.com.br’, 1, null); FonePessoa(1, ‘019’, ‘3761’, ‘1370’)"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q24",
+      "kind": "OBJECTIVE",
+      "number": 24,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        12
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "tabela",
+        "mencao-a-figura"
+      ],
+      "answer": "E",
+      "prompt": "0 entradas saídas S S S 0 1 2 3 1 1 0 S 1 0 0 1 0 0 0 0 2 0 1 0 1 0 0 3 1 0 0 0 1 0 DEC 1 1 0 0 0 1\nConsidere o bloco decodificador ilustrado acima, o qual opera segundo a tabela apresentada. Em cada item a seguir, julgue se a função lógica mostrada corresponde ao circuito lógico a ela associado.\nI A S 0 1 B S 1 0 2 DEC 3\nII A S 0 1 B S 1 0 2 DEC 3\nIII A S 0 1 B S 1 0 2 DEC 3\nAssinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Apenas um item está certo."
+        },
+        {
+          "letter": "B",
+          "text": "Apenas os itens I e II estão certos."
+        },
+        {
+          "letter": "C",
+          "text": "Apenas os itens I e III estão certos."
+        },
+        {
+          "letter": "D",
+          "text": "Apenas os itens II e III estão certos."
+        },
+        {
+          "letter": "E",
+          "text": "Todos os itens estão certos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q25",
+      "kind": "OBJECTIVE",
+      "number": 25,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        12
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "E",
+      "prompt": "A figura acima ilustra uma imagem binária com pixels\nbrancos formando retas sobre um fundo preto. Com\nrelação à aplicação de transformadas sobre essa\nimagem, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A transformada de Fourier, quando aplicada à imagem descrita, produz como resultado um mapa de\nfreqüências que equivale ao histograma dos níveis de\ncinza das retas presentes."
+        },
+        {
+          "letter": "B",
+          "text": "A transformada de Hadamard da imagem apresentada tem resultado equivalente à aplicação\nde um filtro passa-baixas, o que destaca as retas\nexistentes."
+        },
+        {
+          "letter": "C",
+          "text": "Ao se aplicar a transformada da distância à imagem binária, considerando pixels brancos como objetos,\nsão geradas as distâncias entre as retas presentes e\no centro da imagem, o que permite identificar as\nequações das retas formadas na imagem."
+        },
+        {
+          "letter": "D",
+          "text": "O uso da transformada dos cossenos produz uma lista dos coeficientes lineares e angulares das\ndiversas retas existentes nessa imagem binária."
+        },
+        {
+          "letter": "E",
+          "text": "O resultado da aplicação da transformada de Hough usando parametrização de retas é um mapa cujos\npicos indicam os pixels colineares, permitindo que\nsejam identificados coeficientes que descrevem as\ndiversas retas formadas na imagem."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q26",
+      "kind": "OBJECTIVE",
+      "number": 26,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura",
+        "caracteres-suspeitos"
+      ],
+      "answer": "B",
+      "prompt": "Figura I\nFigura II\nAs figuras I e II apresentam duas imagens, ambas com resolução de 246 pixels × 300 pixels, sendo que a figura I apresenta 256 níveis de cinza e a figura II, 4 níveis de cinza. Considere que a imagem da figura I seja a original, tendo sido manipulada em um único atributo para gerar a imagem da figura II. Nessa situação, em qual atributo se diferenciam as imagens I e II acima?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "resolução"
+        },
+        {
+          "letter": "B",
+          "text": "quantização"
+        },
+        {
+          "letter": "C",
+          "text": "iluminação"
+        },
+        {
+          "letter": "D",
+          "text": "escala"
+        },
+        {
+          "letter": "E",
+          "text": "amostragem espacial"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q27",
+      "kind": "OBJECTIVE",
+      "number": 27,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "D",
+      "prompt": "Em redes locais de computadores, o protocolo de controle de acesso ao meio define um conjunto de regras que devem ser adotadas pelos múltiplos dispositivos para compartilhar o meio físico de transmissão. No caso de uma rede Ethernet IEEE 802.3 conectada fisicamente a um concentrador (hub), em que abordagem se baseia o protocolo de controle de acesso ao meio?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "na passagem de permissão em anel"
+        },
+        {
+          "letter": "B",
+          "text": "na ordenação com contenção"
+        },
+        {
+          "letter": "C",
+          "text": "na ordenação sem contenção"
+        },
+        {
+          "letter": "D",
+          "text": "na contenção com detecção de colisão"
+        },
+        {
+          "letter": "E",
+          "text": "na arbitragem centralizada"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q28",
+      "kind": "OBJECTIVE",
+      "number": 28,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "alternativas-reconstruidas-layout",
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "X1 a c b X3 1 X2 <=35 >35 G P M 1 2 1 2 X4 não sim\n2 1\nA figura acima mostra uma árvore de decisão construída por um algoritmo de aprendizado indutivo a partir de um conjunto de dados em que os objetos são descritos por 4 atributos: X1, X2, X3 e X4. Dado um objeto de classe desconhecida, essa árvore classifica o objeto na classe 1 ou na classe 2. A tabela a seguir apresenta três objetos a serem classificados: O1, O2 e O3.\nObjeto X1 X2 X3 X4 O1 a P 20 não O2 b M 21 não O3 c M 10 sim\nA que classes corresponderiam, respectivamente, os objetos O1, O2 e O3?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "1, 1 e 2"
+        },
+        {
+          "letter": "B",
+          "text": "1, 2 e 1"
+        },
+        {
+          "letter": "C",
+          "text": "2, 1 e 2"
+        },
+        {
+          "letter": "D",
+          "text": "2, 2 e 1"
+        },
+        {
+          "letter": "E",
+          "text": "1, 1 e 1"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q29",
+      "kind": "OBJECTIVE",
+      "number": 29,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "caracteres-suspeitos"
+      ],
+      "answer": "D",
+      "prompt": "Considere a gramática G definida pelas S ÷ AB regras de produção ao lado, em que os AB ÷ AAB símbolos não-terminais são S, A e B, e os A ÷ a símbolos terminais são a e b. B ÷ b\nCom relação a essa gramática, é correto afirmar que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a gramática G é ambígua."
+        },
+        {
+          "letter": "B",
+          "text": "a gramática G é uma gramática livre de contexto."
+        },
+        {
+          "letter": "C",
+          "text": "a cadeia aabbb é gerada por essa gramática."
+        },
+        {
+          "letter": "D",
+          "text": "é possível encontrar uma gramática regular equivalente a G."
+        },
+        {
+          "letter": "E",
+          "text": "a gramática G gera a cadeia nula."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q30",
+      "kind": "OBJECTIVE",
+      "number": 30,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "D",
+      "prompt": "Na comunicação sem fio, o espectro de radiofreqüência adotado é um recurso finito e apenas determinada banda de freqüência está disponível para cada serviço. Dessa forma, torna-se crítico explorar técnicas de múltiplo acesso que permitam o compartilhamento da banda de freqüência do serviço entre os usuários. Qual opção apresenta apenas técnicas de múltiplo acesso para o compartilhamento da banda de freqüência alocada a um serviço?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Bluetooth, WiFi e WiMax"
+        },
+        {
+          "letter": "B",
+          "text": "CDMA, GSM, TDMA"
+        },
+        {
+          "letter": "C",
+          "text": "3G, WAP e ZigBee"
+        },
+        {
+          "letter": "D",
+          "text": "CDMA, FDMA e TDMA"
+        },
+        {
+          "letter": "E",
+          "text": "CCMP, TKIP e WEP"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q31",
+      "kind": "OBJECTIVE",
+      "number": 31,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "B",
+      "prompt": "Julgue os itens a seguir, relativos a métodos de busca com informação (busca heurística) e sem informação (busca cega), aplicados a problemas em que todas as ações têm o mesmo custo, o grafo de busca tem fator de ramificação finito e as ações não retornam a estados já visitados.\nI A primeira solução encontrada pela estratégia de busca em largura é a solução ótima.\nII A primeira solução encontrada pela estratégia de busca em profundidade é a solução ótima.\nIII As estratégias de busca com informação usam funções heurísticas que, quando bem definidas, permitem melhorar a eficiência da busca.\nIV A estratégia de busca gulosa é eficiente porque expande apenas os nós que estão no caminho da solução.\nEstão certos apenas os itens",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "I e IV."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q32",
+      "kind": "OBJECTIVE",
+      "number": 32,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "C",
+      "prompt": "Uma empresa realizou uma avaliação de desempenho de um sistema web. Nessa avaliação, foram determinados o desvio padrão e a média do tempo de resposta do referido sistema, tendo como base 10 consultas realizadas. Constatou-se que o tempo de resposta do sistema web possui distribuição normal. Para um nível de confiança de 95%, identificou-se o intervalo de confiança para a média do tempo de resposta das consultas.\nCom relação a essa avaliação de desempenho, julgue os itens abaixo.\nI Com a medição do tempo de resposta do sistema para 10 consultas adicionais, é possível que a média e o desvio padrão do tempo de resposta para o conjunto das 20 consultas aumente ou diminua.\nII Com a medição do tempo de resposta do sistema para 15 consultas adicionais, com nível de confiança de 95%, o intervalo de confiança para o conjunto das 25 consultas é maior que o intervalo de confiança para o conjunto das 10 consultas iniciais.\nIII Na medição do tempo de resposta das 10 consultas iniciais, o intervalo de confiança com nível de confiança de 99% é maior que o intervalo de confiança com nível de confiança de 95%.\nAssinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Apenas um item está certo."
+        },
+        {
+          "letter": "B",
+          "text": "Apenas os itens I e II estão certos."
+        },
+        {
+          "letter": "C",
+          "text": "Apenas os itens I e III estão certos."
+        },
+        {
+          "letter": "D",
+          "text": "Apenas os itens II e III estão certos."
+        },
+        {
+          "letter": "E",
+          "text": "Todos os itens estão certos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q33",
+      "kind": "OBJECTIVE",
+      "number": 33,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "C",
+      "prompt": "Compiladores de linguagens de programação traduzem programas-fonte, em uma linguagem de entrada, para programas-objeto, em uma linguagem de saída. Durante o processo de tradução, o compilador deve verificar se as sentenças do programa-fonte estão sintaticamente corretas. Esse processo de análise sintática pode ser realizado construindo-se uma árvore de análise segundo duas principais abordagens: top-down, quando a árvore é investigada da raiz às folhas; ou bottom-up, das folhas à raiz. Acerca desse assunto, julgue os itens seguintes.\nI A análise top-down é adequada quando a linguagem de entrada é definida por uma gramática recursiva à esquerda.\nII Independentemente da abordagem adotada, top-down ou bottom-up, o analisador sintático utiliza informações resultantes da análise léxica.\nIII Se os programas em uma linguagem podem ser analisados tanto em abordagem top-down como em bottom-up, a gramática dessa linguagem é ambígua. IV A análise bottom-up utiliza ações comumente conhecidas como deslocamentos e reduções sobre as sentenças do programa-fonte.\nEstão certos apenas os itens",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q34",
+      "kind": "OBJECTIVE",
+      "number": 34,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "A",
+      "prompt": "Modems são dispositivos capazes de converter um sinal digital em um sinal analógico e vice-versa. No processo de modulação, para representar o sinal digital, o modem pode manipular as características de uma onda portadora (amplitude, freqüência e fase), derivando diferentes técnicas de modulação, por exemplo: chaveamento da amplitude (ASK), chaveamento da freqüência (FSK) e chaveamento da fase (PSK). Com relação a técnicas de modulação, julgue os itens a seguir.\nI A modulação ASK é suscetível a ruídos.\nII A modulação FSK possui maior imunidade a ruídos quando comparada à modulação ASK.\nIII Na modulação PSK, a fase da portadora é modificada durante o intervalo de sinalização.\nIV Existem técnicas híbridas de modulação digital que modificam tanto a amplitude quanto a fase da portadora. V As diversas técnicas de modulação transmitem, no mínimo, um único bit e, no máximo, 2 bits, por intervalo de sinalização.\nEstão certos apenas os itens",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "B",
+          "text": "I, II e V."
+        },
+        {
+          "letter": "C",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "II, III e V."
+        },
+        {
+          "letter": "E",
+          "text": "III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q35",
+      "kind": "OBJECTIVE",
+      "number": 35,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "B",
+      "prompt": "Uma arquitetura de rede é usualmente organizada em um conjunto de camadas e protocolos com o propósito de estruturar o hardware e o software de comunicação. Como exemplos, têm-se as arquiteturas OSI e TCP/IP. A arquitetura TCP/IP, adotada na Internet, é um exemplo concreto de tecnologia de interconexão de redes e sistemas heterogêneos usada em escala global. Com relação à arquitetura TCP/IP, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A camada de interface de rede, também denominada intra- rede, adota o conceito de portas para identificar os dispositivos da rede física. Cada porta é associada à interface de rede do dispositivo e os quadros enviados transportam o número das portas para identificar os dispositivos de origem e de destino."
+        },
+        {
+          "letter": "B",
+          "text": "A camada de rede, também denominada inter-rede, adota endereços IP para identificar as redes e seus dispositivos. Para interconectar redes físicas que adotam diferentes tamanhos máximos de quadros, a camada de rede adota os conceitos de fragmentação e remontagem de datagramas."
+        },
+        {
+          "letter": "C",
+          "text": "A camada de transporte é responsável pelo processo de roteamento de datagramas. Nesse processo, a camada de transporte deve selecionar os caminhos ou rotas que os datagramas devem seguir entre os dispositivos de origem e de destino, passando assim através das várias redes interconectadas."
+        },
+        {
+          "letter": "D",
+          "text": "A camada de aplicação é composta por um conjunto de protocolos, que são implementados pelos processos executados nos dispositivos. Cada protocolo de aplicação deve especificar a interface gráfica ou textual oferecida pelo respectivo processo para permitir a interação com os usuários da aplicação."
+        },
+        {
+          "letter": "E",
+          "text": "A arquitetura TCP/IP é uma implementação concreta da arquitetura conceitual OSI. Portanto, a arquitetura TCP/IP é também estruturada em 7 camadas, que são as camadas: física, de enlace, de rede, de transporte, de sessão, de apresentação e de aplicação."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q36",
+      "kind": "OBJECTIVE",
+      "number": 36,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "alternativas-reconstruidas-layout"
+      ],
+      "answer": "A",
+      "prompt": "Redes locais sem fio que utilizam tecnologia IEEE 802.11, comumente referenciada como Wi-Fi, estão se tornando cada vez mais populares. Julgue os itens abaixo, relativos a essa tecnologia.\nI Computadores em redes IEEE 802.11 podem-se comunicar por dois modos básicos: usando uma infra-estrutura coordenada por pontos de acesso à rede (access points — AP), ou no modo ad hoc, em que cada computador troca informações diretamente com os demais.\nII Para poder transmitir por meio de um ponto de acesso, uma interface de rede deve realizar um procedimento de associação, que inclui o conhecimento de um campo identificador (service set identifier — SSI).\nIII Um mecanismo de detecção de colisão durante a transmissão indica a necessidade de retransmissão e evita o envio de mensagens de confirmação.\nIV Um mecanismo de requisição para transmissão (request to send — RTS) e de liberação para transmissão (clear to send — CTS) pode ser usado para evitar colisões.\nV O protocolo WEP (wired equivalent privacy) impede que interfaces não-autorizadas recebam sinais propagados pelo meio.\nEstão certos apenas os itens",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "B",
+          "text": "I, III e V."
+        },
+        {
+          "letter": "C",
+          "text": "I, IV e V."
+        },
+        {
+          "letter": "D",
+          "text": "II, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q37",
+      "kind": "OBJECTIVE",
+      "number": 37,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "alternativas-reconstruidas-layout"
+      ],
+      "answer": "C",
+      "prompt": "Considere que a correlação linear entre o número de erros de código de programação (Y) e o respectivo tamanho de um programa (X), em número de linhas de código, seja igual a 0,7. A variável aleatória Y segue uma distribuição Normal com média e desvio padrão iguais a 0,1 erro de código, enquanto que a variável X segue uma distribuição Normal com média 15 e desvio padrão 5 linhas de código. A reta de regressão linear é uma esperança condicional na forma E(Y|X = x) = ax – 0,11, em que x > 10 é um dado valor para o tamanho do programa e a é o coeficiente angular da reta de regressão. Nessa situação, para um programa cujo tamanho é x = 20, pela reta de regressão linear, qual é o número esperado de erros de código de programação?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "0,10"
+        },
+        {
+          "letter": "B",
+          "text": "0,12"
+        },
+        {
+          "letter": "C",
+          "text": "0,17"
+        },
+        {
+          "letter": "D",
+          "text": "0,20"
+        },
+        {
+          "letter": "E",
+          "text": "0,22"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q38",
+      "kind": "OBJECTIVE",
+      "number": 38,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "tabela",
+        "alternativa-vazia"
+      ],
+      "answer": "E",
+      "prompt": "A B\nf (A, B, C, D, E) C D\nE\nNo circuito acima, que possui cinco entradas — A, B, C, D e E — e uma saída f (A, B, C, D, E), qual opção apresenta uma expressão lógica equivalente à função f (A, B, C, D, E)?",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q39",
+      "kind": "DISCURSIVE",
+      "number": 39,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        16
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "figura"
+      ],
+      "prompt": "Qualquer expressão aritmética binária pode ser convertida em uma expressão totalmente parentizada, bastando reescrever cada subexpressão binária a q b como (a q b), em que q denota um operador binário. Expressões nesse formato podem ser definidas por regras de uma gramática livre de contexto, conforme apresentado a seguir. Nessa gramática, os símbolos não-terminais E, S, O e L representam expressões, subexpressões, operadores e literais, respectivamente, e os demais símbolos das regras são terminais.\n6 E ( S O S )\n6 S L | E 6 O + | - | * | / 6 L a | b | c | d | e\nTendo como referência as informações acima, faça o que se pede a seguir.\nA Mostre que a expressão (a * (b / c)) pode ser obtida por derivações das regras acima. Para isso, desenhe a árvore de análise sintática correspondente.\n(valor: 5,0 pontos) RASCUNHO – QUESTÃO 39 - A\nB Existem diferentes derivações para a expressão (((a + b) * c) + (d * e)). É correto, então, afirmar que a gramática acima é ambígua? Justifique sua resposta.\n(valor: 5,0 pontos) RASCUNHO – QUESTÃO 39 - B\n1\n2\n3\n4\n5\n6\n7\n8",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q40",
+      "kind": "DISCURSIVE",
+      "number": 40,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17,
+        18
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "revisao-colunas-pdf",
+        "figura",
+        "versalete"
+      ],
+      "prompt": "O banco de dados de um sistema de controle\nbancário implementado por meio de um SGBD relacional\npossui a relação Cliente, com as informações\napresentadas a seguir, em que a chave primária da\nrelação é grifada.\nCliente(nroCliente, nome, endereco,\ndata_nascimento, renda, idade)\nPara essa relação, foram criados dois índices\nsecundários: IndiceIdade, para o atributo idade, e\nIndiceRenda, para o atributo renda. Existe um tipo de\nserviço nesse banco cujo alvo são tanto os clientes que\npossuem menos de 40 anos de idade quanto aqueles que\npossuem renda mensal superior a 30.000 reais. Para\nrecuperar esses clientes, a seguinte expressão de\nconsulta em SQL foi utilizada:\nSELECT nome, endereco\nFROM Cliente\nWHERE idade < 40 OR renda > 30000;\nCom o aumento do número de clientes desse\nbanco, essa consulta passou a apresentar problemas de\ndesempenho. Verificou-se, então, que o otimizador de\nconsultas não considerava os índices existentes para\nidade e renda, e a consulta era realizada mediante\nvarredura seqüencial na relação Cliente, tornando essa\nconsulta onerosa. O plano de execução da consulta,\nusado pelo otimizador, é apresentado na árvore de consulta abaixo, na qual B e F representam as operações\nde projeção e de seleção, respectivamente.\nB nome,endereco\nF < < idade 40 OR renda 30000\nCliente\nPara que o otimizador de consultas passasse a\nutilizar os índices, a solução encontrada foi elaborar a\nconsulta em dois blocos separados — um que recupera os\nclientes com idade inferior a 40 anos, e outro que\nrecupera os clientes com renda mensal superior a 30.000\nreais — para, então, juntar as tuplas das duas relações\ngeradas.\nConsiderando a situação apresentada, faça o que se pede\na seguir.\nA Escreva o código de uma consulta em SQL que\ncorresponda à solução proposta.\n(valor: 5,0 pontos) RASCUNHO – QUESTÃO 40 - A\nB Desenhe a árvore de consulta para essa solução.\n(valor: 5,0 pontos) RASCUNHO – QUESTÃO 40 - B As questões de 41 a 60, a seguir, são específicas ENGENHARIA",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q41",
+      "kind": "OBJECTIVE",
+      "number": 41,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "caracteres-suspeitos"
+      ],
+      "answer": "C",
+      "prompt": "Em ambientes de manufatura integrada, utilizam- se computadores para conectar processos concorrentes separados fisicamente, isto é, um sistema integrado requer dois ou mais computadores conectados para trocar informações. Quando integrados, os processos podem compartilhar informações e iniciar ações, permitindo decisões mais rápidas com menos erros. A automação também permite a execução de processos de manufatura sem necessidade de intervenções. Um exemplo simples pode ser um controlador de um robô e um controlador lógico programável trabalhando juntos em uma única máquina. Um exemplo complexo é uma planta inteira de manufatura envolvendo centenas de estações conectadas a bancos de dados com instruções e planejamento de operações e tarefas em tempo real, envolvendo sensores, atuadores, transdutores, conversores etc. Entender, projetar e construir esses sistemas é um grande desafio que impõe uma abordagem sistemática pelo uso de ferramentas e conhecimento conceitual de modelagem lógica, manipulação matemática, abstração, decomposição, concorrência etc. Nesse contexto, julgue os seguintes itens.\nI Controladores lógicos programáveis são computadores para processamento de entradas e saídas, sendo que a maioria permite múltiplos programas que podem ser utilizados como sub-rotinas.\nII Para leituras de um sinal analógico que varia entre ± 10 volts, com precisão de ± 0,05 volts, é necessário um conversor AD com, no mínimo, 9 bits.\nIII O principal objetivo das redes de Petri Coloridas é a redução do tamanho do modelo, permitindo que tokens individualizados (coloridos) representem diferentes processos ou recursos em uma mesma sub-rede.\nAssinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Apenas um item está certo."
+        },
+        {
+          "letter": "B",
+          "text": "Apenas os itens I e II estão certos."
+        },
+        {
+          "letter": "C",
+          "text": "Apenas os itens I e III estão certos."
+        },
+        {
+          "letter": "D",
+          "text": "Apenas os itens II e III estão certos."
+        },
+        {
+          "letter": "E",
+          "text": "Todos os itens estão certos.\npara os estudantes de cursos com perfis profissionais de DE COMPUTAÇÃO."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q42",
+      "kind": "OBJECTIVE",
+      "number": 42,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "D",
+      "prompt": "Ao se realizar o acesso a um servidor WWW usando o protocolo HTTPS, uma sessão SSL é estabelecida sobre a conexão TCP, entre o programa navegador do usuário e o processo servidor. Para tanto, usam-se mecanismos baseados em criptografia simétrica e assimétrica para prover serviços de segurança. Em relação ao acesso HTTP, sem SSL, que serviços de segurança são providos para o usuário?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "autenticação do servidor e controle de acesso do cliente"
+        },
+        {
+          "letter": "B",
+          "text": "autenticação do cliente e controle da velocidade de transmissão"
+        },
+        {
+          "letter": "C",
+          "text": "autenticação da rede e proteção contra vírus"
+        },
+        {
+          "letter": "D",
+          "text": "autenticação do servidor e confidencialidade das transmissões"
+        },
+        {
+          "letter": "E",
+          "text": "autenticação do cliente e temporização das ações executadas"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q43",
+      "kind": "OBJECTIVE",
+      "number": 43,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "alternativas-reconstruidas-layout"
+      ],
+      "answer": "B",
+      "prompt": "Considere que seja necessário escrever um código para um microcontrolador capaz de identificar teclas acionadas em um teclado conectado como mostrado abaixo. O microcontrolador atribui valores lógicos às linhas X , X , X e X de uma porta de saída do tipo coletor 3 2 1 0 aberto, e lê os valores lógicos das linhas Y , Y , Y e Y em uma porta 3 2 1 0 de entrada.\n+5 V +5 V +5 V +5 V\nteclado\nmicrocontrolador\nporta de saída\nporta de entrada\nCaso apenas a tecla 9 do teclado esteja pressionada e o microcontrolador esteja atribuindo os valores lógicos 1011 às linhas X , X , X e X , respectivamente, qual o padrão binário que deverá ser 3 2 1 0 lido nas linhas Y , Y , Y e Y , respectivamente?\n3 2 1 0",
+      "options": [
+        {
+          "letter": "A",
+          "text": "0111"
+        },
+        {
+          "letter": "B",
+          "text": "1011"
+        },
+        {
+          "letter": "C",
+          "text": "1101"
+        },
+        {
+          "letter": "D",
+          "text": "1110"
+        },
+        {
+          "letter": "E",
+          "text": "1111"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q44",
+      "kind": "OBJECTIVE",
+      "number": 44,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "anulada",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "mencao-a-figura",
+        "versalete"
+      ],
+      "answer": "ANULADA",
+      "prompt": "Considere um banco de dados relacional que contém as seguintes tabelas, em que o grifo representa a chave primeira da tabela\nProdutos (idProduto, descricao, valorUnitario) Estoque (idFilial, idProduto, quantidade)\nA tabela Produtos é populada com aproximadamente 10.000 registros, enquanto a tabela Estoque é populada com aproximadamente 100.000 registros. Para escrever uma consulta em SQL que determine o valor total das mercadorias em estoque de uma filial cujo identificador é igual a 132, pode-se usar uma das duas codificações apresentadas a seguir.\nConsulta 1 SELECT SUM(valorUnitario * quantidade)\nFROM Estoque, Produtos WHERE Estoque.idFilial = 132 AND Produtos.idProduto = Estoque.idProduto\nConsulta 2 SELECT SUM(valorUnitario * quantidade)\nFROM Produtos, Estoque WHERE Estoque.idFilial = 132 AND Produtos.idProduto = Estoque.idProduto\nA partir dessas informações e considerando que a tabela Estoque possua um índice sobre a coluna idFilial, analise as seguintes asserções.\nO processamento da Consulta 1 tem melhor desempenho que o da Consulta 2\nporque\na quantidade de registros processados na consulta 1 é, no pior caso, igual a 10.000, enquanto o pior caso na consulta 2 terá (10.000)2 registros.\nAssinale a opção correta a respeito dessas asserções.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, mas a segunda não é justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda, uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda, uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q45",
+      "kind": "OBJECTIVE",
+      "number": 45,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura",
+        "versalete",
+        "codigo"
+      ],
+      "answer": "E",
+      "prompt": "Considere y = f(x) uma função contínua e não-negativa (f $ 0), definida em um intervalo [a, b], e R a região delimitada pelo eixo x, o gráfico de f e as retas x = a e x = b. Considere S o sólido obtido pela rotação do conjunto R em torno do eixo das abscissas, conforme ilustram as figuras a seguir. O volume V do sólido S pode ser obtido\ncomo resultado da integral .\ny y\nR a b x O x S z\nCom base nessas informações, julgue os itens a seguir.\nI Cada seção transversal do sólido S obtida quando este é interceptado em x = c por um plano paralelo ao plano yOz é um círculo centrado no ponto (c, 0, 0) e de raio medindo f(x) e, portanto, de área igual a B(f(x))2. II Se P é uma partição uniforme do intervalo [a, b], sendo P = {a = x < x < x < ... < xn = b}, tal que )x = xi !x i-1, 0 1 2\nentão para ci 0 [ xi, xi ! ], 1< i < n. 1\nIII É igual a 2B o volume do sólido gerado pela rotação em torno do eixo x da região do plano delimitada pelo\neixo x, o gráfico de e as retas x = 0 e x = 2.\nAssinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Apenas o item I está certo."
+        },
+        {
+          "letter": "B",
+          "text": "Apenas o item III está certo."
+        },
+        {
+          "letter": "C",
+          "text": "Apenas os itens I e II estão certos."
+        },
+        {
+          "letter": "D",
+          "text": "Apenas os itens II e III estão certos."
+        },
+        {
+          "letter": "E",
+          "text": "Todos os itens estão certos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q46",
+      "kind": "OBJECTIVE",
+      "number": 46,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura",
+        "versalete"
+      ],
+      "answer": "D",
+      "prompt": "y\n0 x\nNo plano de coordenadas cartesianas xOy acima, está\nrepresentado o gráfico de uma função contínua e derivável\ny = f(x). A partir dessas informações, qual opção apresenta\ncaracterísticas corretas acerca da função y?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A função y possui derivada de primeira ordem positiva\nem todo o seu domínio."
+        },
+        {
+          "letter": "B",
+          "text": "A função y possui derivada de segunda ordem positiva\nem todo o seu domínio."
+        },
+        {
+          "letter": "C",
+          "text": "A função y possui exatamente dois pontos críticos de\nprimeira ordem em todo o seu domínio."
+        },
+        {
+          "letter": "D",
+          "text": "A função y possui exatamente dois pontos de inflexão\nem todo o seu domínio."
+        },
+        {
+          "letter": "E",
+          "text": "A função y tem exatamente dois zeros em todo o seu\ndomínio."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q47",
+      "kind": "OBJECTIVE",
+      "number": 47,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf"
+      ],
+      "answer": "C",
+      "prompt": "A transmissão em fibra óptica é realizada pelo envio de\nfeixes de luz através de um cabo óptico que consiste em\num filamento de sílica ou plástico. A fibra óptica funciona\ncom base nos princípios de refração e reflexão dos feixes\nde luz no interior do filamento condutor. Para controlar a\ndireção da propagação dos feixes de luz, o núcleo e a\ncasca do filamento condutor são produzidos com diferentes\níndices de refração. Variando-se os índices de refração do\nnúcleo e da casca, diferentes categorias de fibras ópticas\nsão produzidas. Qual opção apresenta três categorias de\nfibras ópticas?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "monomodo, bimodo e multimodo"
+        },
+        {
+          "letter": "B",
+          "text": "monomodo refratário, monomodo reflexivo e\nmultimodo"
+        },
+        {
+          "letter": "C",
+          "text": "monomodo, multimodo degrau e multimodo gradual"
+        },
+        {
+          "letter": "D",
+          "text": "monomodo, multimodo sílico e multimodo plástico"
+        },
+        {
+          "letter": "E",
+          "text": "monomodo digital, monomodo analógico e multimodo"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q48",
+      "kind": "OBJECTIVE",
+      "number": 48,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "versalete",
+        "caracteres-suspeitos"
+      ],
+      "answer": "D",
+      "prompt": "Considere f(x) = x3 + 3x ! 1, em que x 0 ú. A fim de que sejam obtidas as raízes da função f, vários métodos de\ncálculo numérico podem ser aplicados, sendo a maioria\ndeles embasada em processos iterativos, o que exige uma\nprimeira aproximação para cada raiz que se deseje\ndeterminar e para o intervalo em que ela deva ser\nencontrada. Suponha que se esteja aplicando o princípio da\nbissecção para a determinação de uma raiz aproximada\npara a função f descrita acima e que, para isso, seja\nnecessária a definição de um intervalo de busca inicial I, bem como uma primeira aproximação para a raiz xN de f que se encontra em I. Nesse sentido, qual das opções a\nseguir apresenta uma definição correta de I e a aproximação xN associada, de acordo com o método da bissecção?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I = [!1, !½], xN = !61/16"
+        },
+        {
+          "letter": "B",
+          "text": "I = [!½, 0], xN = !1/4"
+        },
+        {
+          "letter": "C",
+          "text": "I = [!1, 0], xN = !1/2"
+        },
+        {
+          "letter": "D",
+          "text": "I = [0, ½], xN = 1/4"
+        },
+        {
+          "letter": "E",
+          "text": "I = [!1, 1], xN = 1/4"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q49",
+      "kind": "OBJECTIVE",
+      "number": 49,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "mencao-a-figura"
+      ],
+      "answer": "D",
+      "prompt": "A segmentação de imagens é uma das partes essenciais\nna área de processamento de imagens. Assinale a opção\nincorreta em relação à detecção de bordas no contexto da\nsegmentação de imagens.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A detecção de bordas é a determinação dos limites de um objeto em uma imagem, envolvendo a avaliação da\nvariação nos níveis de cinza dos pixels em uma\nvizinhança, sendo uma das formas de segmentação de\nimagens."
+        },
+        {
+          "letter": "B",
+          "text": "Sobel, Prewitt e Roberts são operadores usados para detecção de bordas, todos embasados em gradientes\ncalculados sobre os níveis de cinza de uma imagem."
+        },
+        {
+          "letter": "C",
+          "text": "A detecção de bordas é um processo de segmentação de imagens, mas com princípio diferente das técnicas\nque agrupam pixels vizinhos que compartilham\ndeterminado atributo."
+        },
+        {
+          "letter": "D",
+          "text": "Crescimento de regiões é um método de detecção de bordas embasado em gradientes, usando como critério\na disparidade de valores entre pixels vizinhos."
+        },
+        {
+          "letter": "E",
+          "text": "O operador LoG (laplacian of gaussian) é empregado para detecção de bordas, usando os cruzamentos de\nzero na determinação dos pixels que formam o limiar\nentre um objeto e outro em uma imagem."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q50",
+      "kind": "OBJECTIVE",
+      "number": 50,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura",
+        "versalete"
+      ],
+      "answer": "A",
+      "prompt": "Considere, a seguir, o circuito combinatório, a tensão\nanalógica VA definida pela tabela I, e a tabela lógica\ndefinida pela tabela II.\ncircuito de comparação circuito combinatório\nvA\nTabela I vA (em volts) S S S 2 1 0 vA < 1 0 0 0 1 < vA < 2 0 0 1 2 < vA < 3 0 1 0 3 < vA < 4 0 1 1 4 < vA < 5 1 0 0 5 < vA < 6 1 0 1 6 < vA < 7 1 1 0 vA > 7 1 1 1\nTabela II X X X X X X X S S S a b c d e f g 2 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 1 0 1 1 1 0 0 0 0 0 1 1 1 1 1 1 0 0 0 1 0 0 1 1 1 1 1 0 0 1 0 1 1 1 1 1 1 1 0 1 1 0 1 1 1 1 1 1 1 1 1 1 Analise o circuito, os dados das tabelas I e II e as seguintes asserções.\nO circuito apresentado converte a tensão analógica vA em uma palavra de três bits cujo valor binário é uma representação quantizada da tensão vA, conforme apresentado na tabela I\nporque\no circuito combinatório formado pelas portas lógicas apresenta o comportamento dado pela tabela lógica II quando o circuito de comparação é excitado com uma tensão vA adequada.\nAssinale a opção correta, com relação às asserções acima.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, mas a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda, uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda, uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q51",
+      "kind": "OBJECTIVE",
+      "number": 51,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "Considere um jogo do tipo 8-puzzle, cujo objetivo é conduzir o tabuleiro esquematizado na figura abaixo para o seguinte estado final.\n1 2 3\n8 4\n7 6 5\nConsidere, ainda, que, em determinado instante do jogo, se tenha o estado E0 a seguir.\n3 4 6\n5 8\n2 1 7\nPelas regras desse jogo, sabe-se que os próximos estados possíveis são os estados E1, E2 e E3 mostrados abaixo.\n3 4 6 3 4 6 3 4\n5 8 5 8 7 5 8 6\n2 1 7 2 1 2 1 7\nE1 E2 E3\nConsidere uma função heurística h embasada na soma das distâncias das peças em relação ao estado final desejado, em que a distância d a que uma peça p está da posição final é dada pela soma do número de linhas com o número de colunas que a separam da posição final desejada. Por exemplo, em E1, d(1) = 2 + 1 = 3. A partir dessas informações analise as asserções a seguir.\nUtilizando-se um algoritmo de busca gulosa pela melhor escolha que utiliza a função h, o próximo estado no desenvolvimento do jogo a partir do estado E0 tem de ser E3\nporque,\ndos três estados E1, E2 e E3 possíveis, o estado com menor soma das distâncias entre a posição atual das peças e a posição final é o estado E3.\nAssinale a opção correta a respeito dessas asserções.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As duas asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q52",
+      "kind": "OBJECTIVE",
+      "number": 52,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "caracteres-suspeitos",
+        "codigo"
+      ],
+      "answer": "E",
+      "prompt": "A identificação e o tratamento de erros em programas de computador estão entre as tarefas dos compiladores. Os erros de um programa podem ter variados tipos e precisam ser identificados e tratados em diferentes fases da compilação. Considere uma linguagem de programação que exige que as variáveis manipuladas por seus programas sejam previamente declaradas, não podendo haver duplicidade de identificadores para variáveis em um mesmo escopo. Considere, ainda, que a sintaxe dessa linguagem tenha sido definida por meio de uma gramática livre de contexto e as produções seguintes definam a forma das declarações de variáveis em seus programas.\nD ÷ TL; | TL; D T ÷ int | real | char L ÷ id | id,L\nConsidere os exemplos de sentenças — I e II — a seguir, com a indicação — entre os delimitadores /* e */ — de diferentes tipos de erros.\nI int: a, b; /* dois pontos após a palavra int */ II int a,b; real a; /* declaração dupla da variável a */\nA partir dessas informações, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A identificação e a comunicação do erro em qualquer uma das sentenças são funções do analisador léxico."
+        },
+        {
+          "letter": "B",
+          "text": "O compilador não tem meios para identificar e relatar erros como o da sentença I."
+        },
+        {
+          "letter": "C",
+          "text": "A identificação e a comunicação do erro na sentença I são funções da geração de código intermediário."
+        },
+        {
+          "letter": "D",
+          "text": "A identificação e a comunicação do erro na sentença II são funções do analisador léxico."
+        },
+        {
+          "letter": "E",
+          "text": "A identificação e a comunicação do erro na sentença II são funções da análise semântica."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q53",
+      "kind": "OBJECTIVE",
+      "number": 53,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "codigo"
+      ],
+      "answer": "A",
+      "prompt": "Um sinal a ser registrado por um dispositivo, em intervalos regulares de tempo t = 1, 2, 3, ..., n, resultará em uma seqüência de variáveis aleatórias contínuas X , X , ..., Xn. Considere, nessa 1 2 seqüência, os eventos A e B apresentados a seguir, em que t = 2, 3, ..., n – 1.\nA = Xt ! ! Xt < 0 e Xt ! Xt > 0 1 + 1 B = Xt ! ! Xt > 0 e Xt ! Xt < 0 1 + 1\nNa hipótese de a seqüência X , X , ..., Xn ser independente e que 1 2 seja impossível que Xt = Xt (t = 2, 3, ..., n), julgue os seguintes – 1 itens.\nI A probabilidade de ocorrer o evento A em uma subseqüência {Xt , Xt, Xt } é inferior a 0,3.\n– 1 + 1 II O número esperado das ocorrências dos eventos A ou B na\nseqüência X , X , ..., Xn é igual a .\n1 2\nIII Os eventos A e B são mutuamente exclusivos e, por isso, são independentes.\nAssinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Apenas um item está certo."
+        },
+        {
+          "letter": "B",
+          "text": "Apenas os itens I e II estão certos."
+        },
+        {
+          "letter": "C",
+          "text": "Apenas os itens I e III estão certos."
+        },
+        {
+          "letter": "D",
+          "text": "Apenas os itens II e III estão certos."
+        },
+        {
+          "letter": "E",
+          "text": "Todos os itens estão certos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q54",
+      "kind": "OBJECTIVE",
+      "number": 54,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "No encaminhamento de pacotes na Internet, cabe a cada nó determinar se é possível entregar um pacote diretamente ao destino ou se é preciso encaminhá-lo a um nó intermediário. Para tanto, usa-se uma tabela de rotas. Um exemplo de tabela de rotas simplificada é apresentado a seguir e pertence a um computador com endereço IP 192.0.2.100 e máscara de rede 255.255.255.0.\nendereço de endereço do máscara gateway interface custo rede 127.0.0.0 255.0.0.0 127.0.0.1 127.0.0.1 0 192.0.2.0 255.255.255.0 192.0.2.100 192.0.2.100 0 172.16.0.0 255.255.0.0 192.0.2.254 192.0.2.100 0 0.0.0.0 0.0.0.0 192.0.2.1 192.0.2.100 1\nNa situação em que o referido computador precise enviar pacotes para os endereços 192.0.2.50 e 192.168.0.100, de acordo com a tabela de rotas apresentada, como ocorrerá a entrega desses pacotes?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Diretamente para 192.0.2.50 e diretamente para 192.168.0.100, respectivamente."
+        },
+        {
+          "letter": "B",
+          "text": "Diretamente para 192.0.2.50 e encaminhando para 192.0.2.254, respectivamente."
+        },
+        {
+          "letter": "C",
+          "text": "Diretamente para 192.0.2.50 e encaminhando para 192.0.2.1, respectivamente."
+        },
+        {
+          "letter": "D",
+          "text": "Encaminhando para 192.0.2.50 e encaminhando para 192.0.2.50, respectivamente."
+        },
+        {
+          "letter": "E",
+          "text": "Encaminhado para 192.0.2.254 e diretamente para 192.168.0.100, respectivamente."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q55",
+      "kind": "OBJECTIVE",
+      "number": 55,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "tabela",
+        "alternativa-vazia"
+      ],
+      "answer": "E",
+      "prompt": "Considere que um sistema seja constituído por três componentes montados em paralelo que funcionam independentemente. Para cada um desses componentes, a probabilidade de que uma falha ocorra até o tempo t é dada por , em que t > 0. Os componentes, após falharem, são irrecuperáveis. Como os componentes estão montados em paralelo, o sistema falha no instante em que todos os três componentes tiverem falhado. O sistema é também irrecuperável. Considerando a situação apresentada, qual é a probabilidade de que o sistema falhe até o tempo t ?",
+      "options": [
+        {
+          "letter": "A",
+          "text": ""
+        },
+        {
+          "letter": "B",
+          "text": ""
+        },
+        {
+          "letter": "C",
+          "text": ""
+        },
+        {
+          "letter": "D",
+          "text": ""
+        },
+        {
+          "letter": "E",
+          "text": ""
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q56",
+      "kind": "OBJECTIVE",
+      "number": 56,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "B",
+      "prompt": "Julgue os itens abaixo, relativos à transmissão de dados em redes de computadores que utilizam fios metálicos.\nI Diferentes níveis de tensão no fio, como !5 V e +5 V, e transições entre os níveis definidos de tensão podem ser usados para representar bits durante a transmissão. II Diferentes tipos de modulação, com mudanças de fase e de amplitude, podem ser aplicados a uma onda portadora para representar bits durante a transmissão.\nIII A taxa máxima de transmissão suportada por um canal é definida como função, entre outros parâmetros, do nível máximo de tensão suportado no canal.\nIV Largura de banda é definida como a freqüência mais alta que pode ser transmitida através de um meio de transmissão. V Informações transmitidas por meio de sinais modulados podem ser recuperadas no receptor usando-se taxa de amostragem com o dobro da freqüência máxima do sinal transmitido.\nEstão certos apenas os itens",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "B",
+          "text": "I, II e V."
+        },
+        {
+          "letter": "C",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "II, III e V."
+        },
+        {
+          "letter": "E",
+          "text": "III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q57",
+      "kind": "OBJECTIVE",
+      "number": 57,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "Deseja-se projetar um bloco lógico do tipo look-up table que fará parte de um dispositivo lógico programável. O bloco lógico, ilustrado abaixo, deve produzir em sua saída qualquer uma das diferentes funções lógicas possíveis envolvendo três entradas de dados, dependendo dos valores lógicos aplicados a n sinais binários de controle.\nn sinais de controle\nbloco 3 entradas de dados saída lógico\nPara esse bloco lógico, qual é o menor valor de n que pode ser usado para selecionar uma das diferentes funções lógicas possíveis?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "4"
+        },
+        {
+          "letter": "B",
+          "text": "8"
+        },
+        {
+          "letter": "C",
+          "text": "16"
+        },
+        {
+          "letter": "D",
+          "text": "256"
+        },
+        {
+          "letter": "E",
+          "text": "65.536"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q58",
+      "kind": "OBJECTIVE",
+      "number": 58,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "answer": "A",
+      "prompt": "Considerando o mecanismo de tradução de endereços e portas (network address port translation – NAPT), para redes que utilizam os endereços IP privados (10.0.0.0/8, 172.16.0.0/12 e 192.168.0.0/16), analise as asserções a seguir.\nAo passar por um roteador com NAPT, os endereços de origem nos pacotes originados pelas estações da rede privada são substituídos pelo endereço externo desse roteador\nporque\nnão há rotas na Internet para o encaminhamento de pacotes destinados a endereços IP privados, de forma que pacotes destinados a esses endereços são descartados ou rejeitados.\nEm relação às asserções acima, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As duas asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q59",
+      "kind": "DISCURSIVE",
+      "number": 59,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "figura"
+      ],
+      "prompt": "No projeto de sistemas de tempo real, normalmente são atribuídas prioridades às tarefas.\nEscalonadores orientados à preempção por prioridade são utilizados para ordenar a execução de tarefas de modo a atender seus requisitos temporais. Inversão de prioridade é o termo utilizado para descrever a situação na qual a execução de uma tarefa de mais alta prioridade é suspensa em benefício de uma tarefa de menor prioridade. A inversão de prioridade pode ocorrer quando tarefas com diferentes prioridades necessitam utilizar um mesmo recurso simultaneamente. A duração desta inversão pode ser longa o suficiente para causar a perda do deadline das tarefas suspensas.\nProtocolos de sincronização em tempo real auxiliam limitando e minimizando a inversão de prioridades.\nConsidere o conjunto de três tarefas com as seguintes características:\nI T1 tem prioridade 1 (mais alta), custo de execução total de 6 ut (unidades de tempo) e instante de chegada t1 = 6. A partir de seu início, após executar durante 1 ut, essa tarefa necessita do recurso compartilhado R1 durante 2 ut. Para concluir, utiliza o recurso compartilhado R2 durante 2 ut finais.\nII T2 tem prioridade 2, custo de execução total de 8 ut e instante de chegada t2 = 3. A partir de seu início, após executar durante 2 ut, a tarefa necessita do recurso compartilhado R2 durante 2 ut.\nIII T3 tem prioridade 3 (mais baixa), custo total de execução de 12 ut e instante de chegada t3 = 0. A partir de seu início, após executar durante 2 ut, essa tarefa necessita do recurso compartilhado R1 durante 2 ut.\nA partir dessas informações, desenhe a(s) linha(s) de tempo(s) para que um escalonamento dessas três tarefas em um único processador seja possível, utilizando-se o protocolo de herança de prioridade.\n(valor: 10,0 pontos) RASCUNHO – QUESTÃO 59",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q60",
+      "kind": "DISCURSIVE",
+      "number": 60,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26,
+        27
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura",
+        "versalete",
+        "caracteres-suspeitos"
+      ],
+      "prompt": "Para transmissões de sinais em banda base, a largura de banda do canal limita a taxa de transmissão máxima. Como resultado do teorema de Nyquist, na ausência de ruído, a taxa de transmissão máxima C de um canal que possui largura de banda W, em hertz, é dada pela equação a seguir.\nC = 2 × W bauds\nNo entanto, em qualquer transmissão, o ruído térmico está presente nos dispositivos eletrônicos e meios de transmissão. Esse ruído, causado pela agitação dos elétrons nos condutores, é caracterizado pela potência de ruído N. De acordo com a lei de Shannon, na presença de ruído térmico, a taxa de transmissão máxima de um canal que possui largura de banda W, em hertz, e apresenta uma relação sinal-ruído S/N, expressa em decibel (dB), é definida pela equação abaixo.\nC = W × log2 (1 + ) bps\nTendo como referência inicial as informações acima, considere que seja necessário determinar a taxa de transmissão máxima de um canal de comunicação que possui largura de banda de 3 kHz, relação sinal-ruído de 30,1 dB e adota 16 diferentes níveis de sinalização. Nessa situação, responda aos seguintes questionamentos.\nA Na ausência de ruído, de acordo com o teorema de Nyquist, qual a taxa de transmissão máxima do referido canal, em bits por segundo. Apresente os cálculos necessários.\n(valor: 3,0 pontos) RASCUNHO – QUESTÃO 60 - A\nB Na presença de ruído térmico, de acordo com a lei de Shannon, qual a taxa de transmissão máxima do canal, em bits por segundo? Apresente os cálculos necessário e considere que log (1.023) = 3,01.\n10 (valor: 3,0 pontos) RASCUNHO – QUESTÃO 60 - B\nC Na presença de ruído térmico, é possível adotar mais de 16 níveis de sinalização no referido canal? Justifique.\n(valor: 4,0 pontos) RASCUNHO – QUESTÃO 60 - C As questões de 61 a 80, a seguir, são específicas para os estudantes BACHARELADO EM SISTEMAS DE\nFigura para a questão 61\nEstágios do ciclo de vida de um\nGerenciamento de aplicações\nGerente do desenvolvimento de aplicações\nEntrega de serviços Negócios\nGerente de serviços Cliente Usuário\nEstratégias, planos e requisitos\nDefinir Estabelecer Planejar Validar Implantar políticas estratégias serviços serviços serviços\nDesenho e planejamento Implantação\nSuporte técnico\nAdministração",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q61",
+      "kind": "OBJECTIVE",
+      "number": 61,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "A figura acima, adaptada do documento que descreve o gerenciamento de serviços de tecnologia da informação do modelo ITIL (Information Technology Infra-Structure Library), apresenta as relações entre elementos que participam dos estágios do ciclo de vida de um serviço de TI. Com base no modelo acima descrito, qual elemento detém maior responsabilidade por definir as necessidades de informação da organização que utilizará um serviço de TI?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "usuário"
+        },
+        {
+          "letter": "B",
+          "text": "cliente"
+        },
+        {
+          "letter": "C",
+          "text": "operador de suporte técnico"
+        },
+        {
+          "letter": "D",
+          "text": "gerente de serviços"
+        },
+        {
+          "letter": "E",
+          "text": "gerente de desenvolvimento de aplicações"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q62",
+      "kind": "OBJECTIVE",
+      "number": 62,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "answer": "B",
+      "prompt": "O código de ética da Organização Internacional de Instituições Supremas de Auditoria (INTOSAI) define como valores e princípios básicos da atuação da auditoria a independência, a objetividade, a imparcialidade, o segredo profissional e a competência. Ao iniciar um trabalho de auditoria sem definir claramente a finalidade da auditoria e o modelo de conformidade no qual a auditoria se apóia, qual valor ou princípio um auditor estaria primariamente falhando em atender?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "independência"
+        },
+        {
+          "letter": "B",
+          "text": "objetividade"
+        },
+        {
+          "letter": "C",
+          "text": "imparcialidade"
+        },
+        {
+          "letter": "D",
+          "text": "segredo profissional"
+        },
+        {
+          "letter": "E",
+          "text": "competência de cursos com perfis profissionais de INFORMAÇÃO.\nserviço de TI\nSuporte a serviços\nOperador de suporte técnico\nSoluções de negócios Gerenciamento de infra-estrutura de TIC\nTratar Operar obsolescência serviços\nOperações"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q63",
+      "kind": "OBJECTIVE",
+      "number": 63,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "tabela",
+        "mencao-a-figura",
+        "versalete"
+      ],
+      "answer": "C",
+      "prompt": "Considere a seguinte representação de abstração de generalização/especialização, com propriedade de cobertura parcial e sobreposta, segundo notação do diagrama entidade- relacionamento estendido.\npkA A atrA\nO\nB C atrB atrC\nQual opção apresenta um esquema de banco de dados relacional que representa corretamente a referida abstração?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A(pkA, atrA) B(atrB) C(atrC)."
+        },
+        {
+          "letter": "B",
+          "text": "A(pkA, atrA, atrB, atrC, tipoBouC), em que tipoBouC é booleano."
+        },
+        {
+          "letter": "C",
+          "text": "A(pkA, atrA, atrB, atrC, tipoB, tipoC), em que tipoB e tipoC são booleanos."
+        },
+        {
+          "letter": "D",
+          "text": "B(pkA, atrA, atrB) C(pkA, atrA, atrC)."
+        },
+        {
+          "letter": "E",
+          "text": "A(pkA, atrA) B(pkB, atrB) C(pkC, atrC), em que pkB e pkC são atributos artificiais criados para ser a chave primária das relações B e C, respectivamente."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q64",
+      "kind": "OBJECTIVE",
+      "number": 64,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "A figura abaixo apresenta uma proposta de classificação de sistemas de informação, organizada tanto no que se refere ao nível hierárquico, no qual atuam os sistemas no âmbito de uma organização, quanto no que se refere às áreas funcionais nas quais esses sistemas são aplicados.\nTIPOS DE SISTEMAS GRUPOS DE INFORMAÇÃO ATENDIDOS\nNível Gerentes estratégico seniores\nNível Gerentes gerencial médios\nNível de Trabalhadores do conhecimento conhecimento e de dados\nNível de Gerentes operacional operacionais\nÁREAS Vendas e Fabricação Finanças Contabilidade Recursos FUNCIONAIS marketing humanos\nLaudon & Laudon. Sistemas de Informação Gerencial. Pearson, 2004 (com adaptações).\nConsidere a situação hipotética em que uma rede de supermercados deverá tomar uma decisão com relação à substituição do sistema de automação de “frente de loja”, que apóia as atividades dos caixas nos check-outs. A decisão envolve substituir o sistema atual, que emprega tecnologia de terminais “burros”, por um que emprega computadores pessoais e redes sem fio. Nesse sentido e considerando a proposta de classificação apresentada, qual das opções a seguir apresenta uma classificação adequada de nível hierárquico, área funcional e grupo atendido pelo sistema de informações, que oferece apoio direto à referida tomada de decisão?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "estratégico, vendas e marketing, gerentes seniores"
+        },
+        {
+          "letter": "B",
+          "text": "conhecimento, finanças, trabalhadores do conhecimento"
+        },
+        {
+          "letter": "C",
+          "text": "gerencial, contabilidade, gerentes médios"
+        },
+        {
+          "letter": "D",
+          "text": "operacional, vendas e marketing, gerentes operacionais"
+        },
+        {
+          "letter": "E",
+          "text": "estratégico, recursos humanos, gerentes médios"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q65",
+      "kind": "OBJECTIVE",
+      "number": 65,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf"
+      ],
+      "answer": "C",
+      "prompt": "Considere os seguintes itens: (i) características do produto; (ii) o modelo de maturidade e capacidade; (iii) o paradigma e os métodos de desenvolvimento. A quais níveis de abstração de processos esses itens estão, respectivamente, associados?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "processo padrão, processo especializado e processo instanciado"
+        },
+        {
+          "letter": "B",
+          "text": "processo padrão, processo instanciado e processo especializado"
+        },
+        {
+          "letter": "C",
+          "text": "processo instanciado, processo padrão e processo especializado"
+        },
+        {
+          "letter": "D",
+          "text": "processo instanciado, processo especializado e processo padrão"
+        },
+        {
+          "letter": "E",
+          "text": "processo especializado, processo padrão e processo instanciado"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q66",
+      "kind": "OBJECTIVE",
+      "number": 66,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf"
+      ],
+      "answer": "E",
+      "prompt": "Segundo o modelo COBIT (control objectives for information technology), os processos de TI devem ser auditados por meio de um processo composto pelas etapas de: (i) COMPREENSÃO dos riscos relacionados aos requisitos de negócios e das medidas de controle relevantes; (ii) avaliação da ADEQUABILIDADE (PROPRIEDADE) dos controles declarados; (iii) avaliação de CONFORMIDADE por meio do teste de funcionamento consistente e contínuo dos controles, conforme prescritos; e (iv) SUBSTANCIAÇÃO do risco dos objetivos de controle não serem alcançados por meio de técnicas analíticas e(ou) consulta a fontes alternativas. Com relação a essas etapas, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Durante a etapa de SUBSTANCIAÇÃO, são realizadas entrevistas com o gestor e os empregados que desempenham o processo de TI, visando identificar leis e regulamentos aplicáveis."
+        },
+        {
+          "letter": "B",
+          "text": "Durante a etapa de CONFORMIDADE, são documentadas as fraquezas dos controles em prática, com a indicação das ameaças e vulnerabilidades presentes."
+        },
+        {
+          "letter": "C",
+          "text": "Durante a etapa de ADEQUABILIDADE, são obtidas evidências diretas e indiretas aplicáveis a determinados artefatos e períodos de tempo diretamente relacionados ao processo de TI, visando- se garantir que os procedimentos em prática sejam compatíveis com os controles declarados."
+        },
+        {
+          "letter": "D",
+          "text": "Durante a etapa de COMPREENSÃO, são identificados e documentados impactos reais e potenciais para a organização, empregando-se análises de causa-raiz."
+        },
+        {
+          "letter": "E",
+          "text": "Durante a etapa de ADEQUABILIDADE, é avaliada a conveniência das medidas de controle adotadas para o processo de TI, por meio da consideração de critérios bem definidos, práticas padronizadas da indústria, fatores críticos de sucesso para as medidas de controle, bem como o julgamento profissional pelo auditor."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q67",
+      "kind": "OBJECTIVE",
+      "number": 67,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf"
+      ],
+      "answer": "B",
+      "prompt": "No desenvolvimento e na programação de aplicações em redes TCP/IP, qual tipo de protocolo de transporte libera o programador da responsabilidade de detectar e corrigir erros durante a transmissão, objetivando tornar a programação da aplicação mais simples?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "sem conexão"
+        },
+        {
+          "letter": "B",
+          "text": "orientado a conexão"
+        },
+        {
+          "letter": "C",
+          "text": "orientado a bit"
+        },
+        {
+          "letter": "D",
+          "text": "orientado a byte"
+        },
+        {
+          "letter": "E",
+          "text": "datagrama confirmado"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q68",
+      "kind": "OBJECTIVE",
+      "number": 68,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        29
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "mencao-a-figura",
+        "codigo"
+      ],
+      "answer": "A",
+      "prompt": "Considere as seguintes tabelas:\nCREATE TABLE Departamento\n(\nIdDep int NOT NULL,\nNomeDep varchar(15),\nCONSTRAINT Departamentopkey PRIMARY KEY (IdDep)\n);\nCREATE TABLE Empregado\n(\nIdEmpregado int NOT NULL,\nIdDep int,\nsalario float,\nCONSTRAINT Empregadopkey PRIMARY KEY (IdEmpregado),\nCONSTRAINT EmpregadoIdDepfkey FOREIGN KEY (IdDep)\nREFERENCES Departamento(IdDep)\nON UPDATE RESTRICT ON DELETE RESTRICT\n)\nConsidere as seguintes consultas SQL.\nI SELECT NomeDep, count(*)\nFROM Departamento D, Empregado E\nWHERE D.IdDep=E.IdDep and E.salario > 10000\nGROUP BY NomeDep\nHAVING count(*) > 5;\nII SELECT NomeDep, count(*)\nFROM Departamento D, Empregado E\nWHERE D.IdDep=E.IdDep and E.salario >10000 and\nE.IdDep IN (SELECT IdDep\nFROM Empregado\nGROUP BY IdDep\nHAVING count(*) > 5)\nGROUP BY NomeDep;\nQuando as consultas acima são realizadas, o que é recuperado em cada uma delas?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I: os nomes dos departamentos que possuem mais de 5 empregados que ganham mais de 10.000 reais e o número de empregados nessa condição.\nII: os nomes dos departamentos que possuem mais de 5 empregados e o número de empregados que ganham mais de 10.000 reais."
+        },
+        {
+          "letter": "B",
+          "text": "I: os nomes dos departamentos que possuem mais de 5 empregados e o número de empregados que ganham mais de 10.000 reais.\nII: os nomes dos departamentos que possuem mais de 5 empregados que ganham mais de 10.000 reais e o número de empregados nessa condição."
+        },
+        {
+          "letter": "C",
+          "text": "I: os nomes dos departamentos que possuem mais de 5 empregados que ganham mais de 10.000 reais e o número total de funcionários do departamento.\nII: os nomes dos departamentos que possuem mais de 5 empregados que ganham mais de 10.000 reais e o número de empregados nessa condição."
+        },
+        {
+          "letter": "D",
+          "text": "I: os nomes dos departamentos que possuem mais de 5 empregados que ganham mais de 10.000 reais e o número de empregados nessa condição.\nII: os nomes dos departamentos que possuem mais de 5 empregados que ganham mais de 10.000 reais e o número total de funcionários do departamento."
+        },
+        {
+          "letter": "E",
+          "text": "I: os nomes dos departamentos que possuem mais de 5 empregados que ganham mais de 10.000 reais e o número de empregados nessa condição.\nII: os nomes dos departamentos que possuem mais de 5 empregados que ganham mais de 10.000 reais e o número de empregados nessa condição."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q69",
+      "kind": "OBJECTIVE",
+      "number": 69,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "answer": "A",
+      "prompt": "Um ponto crítico para as organizações é a gerência de seus sistemas legados. Quanto a esses sistemas, é importante decidir se eles devem sofrer uma reengenharia, sendo reimplementados, ou não. Essa decisão é tomada após se avaliarem os sistemas legados com base em dois parâmetros: valor estratégico para a organização, ou seja, o valor que ele agrega para os serviços e produtos da organização; e qualidade do sistema, ou seja, o custo de manutenção uma vez que sistemas de baixa qualidade possuem alto custo de manutenção. Essa avaliação classifica esses sistemas de acordo com as situações de I a IV indicadas abaixo. estratégico alto valor estratégico alto valor estratégico baixa qualidade (I) alta qualidade (II)\nvalor baixo valor estratégico baixo valor estratégico baixa qualidade (IV) alta qualidade (III)\nqualidade do sistema\nEm qual(ais) dessas situações um sistema legado deve ser classificado para ser indicado a uma reengenharia?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Apenas na situação I."
+        },
+        {
+          "letter": "B",
+          "text": "Apenas na situação IV."
+        },
+        {
+          "letter": "C",
+          "text": "Apenas nas situações I e II."
+        },
+        {
+          "letter": "D",
+          "text": "Apenas nas situações II e III."
+        },
+        {
+          "letter": "E",
+          "text": "Apenas nas situações III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q70",
+      "kind": "OBJECTIVE",
+      "number": 70,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "C",
+      "prompt": "Ethernet e suas evoluções de 100 Mbps e 1 Gbps são tecnologias padronizadas para comunicações em redes locais com infra-estrutura de transmissão compartilhada. Acerca das transmissões que usam essas tecnologias, assinale a opção incorreta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Embora diversos segmentos de uma rede possam ser definidos com o uso de equipamentos de comutação (switches), transmissões de pacotes com endereço de broadcast (difusão) atingem todos os computadores na mesma rede."
+        },
+        {
+          "letter": "B",
+          "text": "O mecanismo de controle de acesso ao meio utilizado é distribuído e, nas redes com concentradores (hubs), cada interface de rede deve determinar quando é possível realizar uma transmissão."
+        },
+        {
+          "letter": "C",
+          "text": "Comutadores (switches) realizam o encaminhamento seletivo de quadros com base nos endereços IP de cada estação."
+        },
+        {
+          "letter": "D",
+          "text": "A escuta do meio durante as transmissões permite detectar colisões em segmentos compartilhados e a necessidade de retransmissões, mas não há envio de quadros (frames) de confirmação de recebimento."
+        },
+        {
+          "letter": "E",
+          "text": "Um mecanismo de controle de consistência é usado para verificar a integridade de cada quadro (frame) transmitido."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q71",
+      "kind": "OBJECTIVE",
+      "number": 71,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "alternativa 1 alternativa 2 A A\nB C D B C D E F\nE F G G H H\nCoesão e acoplamento são dois conceitos fundamentais para a qualidade do projeto modular de um software. A coesão diz respeito à funcionalidade dos módulos que compõem o software e é relacionada ao conceito de ocultação de informação. O acoplamento está relacionado aos dados e representa a interconexão entre os módulos. Suponha que determinado sistema possa ter a arquitetura de seus módulos projetada por meio das duas alternativas diferentes mostradas na figura acima, sendo a funcionalidade de um módulo a mesma nas duas alternativas. Nessa figura, os retângulos representam os módulos e as arestas representam chamadas a funcionalidades de outros módulos. A partir dessas informações, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A coesão e o acoplamento de todos os módulos são iguais nas duas alternativas."
+        },
+        {
+          "letter": "B",
+          "text": "Em relação à alternativa 1, na alternativa 2, a coesão do módulo A é menor, a dos módulos B e C é maior e o acoplamento do projeto é maior."
+        },
+        {
+          "letter": "C",
+          "text": "Em relação à alternativa 1, na alternativa 2, a coesão do módulo A é maior, a dos módulos B e C é menor e o acoplamento do projeto é maior."
+        },
+        {
+          "letter": "D",
+          "text": "Em relação à alternativa 1, na alternativa 2, a coesão do módulo A é maior, a dos módulos B e C é maior e o acoplamento do projeto é menor."
+        },
+        {
+          "letter": "E",
+          "text": "Em relação à alternativa 1, na alternativa 2, a coesão do módulo A é menor, a dos módulos B e C é maior e o acoplamento do projeto é menor."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q72",
+      "kind": "OBJECTIVE",
+      "number": 72,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "D",
+      "prompt": "Uma empresa de crédito e financiamento utiliza um sistema de informação para analisar simulações, com base em cenários, e determinar como as variações da taxa básica de juros do país afetam seus lucros.\nComo deve ser classificado esse sistema de informação?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "sistema de processamento de transações"
+        },
+        {
+          "letter": "B",
+          "text": "sistema de controle de processos"
+        },
+        {
+          "letter": "C",
+          "text": "sistema de informação gerencial"
+        },
+        {
+          "letter": "D",
+          "text": "sistema de apoio à decisão"
+        },
+        {
+          "letter": "E",
+          "text": "sistema de informação executivo"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q73",
+      "kind": "OBJECTIVE",
+      "number": 73,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "D",
+      "prompt": "Uma das técnicas que auxiliam na gerência de projetos de software é o gráfico de atividades, por meio do qual é possível calcular, por exemplo, a duração de um projeto, as atividades críticas e as atividades que possuem folga para sua execução. Nesse gráfico, os círculos representam os eventos iniciais e finais de cada atividade, as arestas representam as atividades, e os números associados às arestas representam a duração dessas atividades.\nTabela de custo de aceleração\nunidades de custo de aceleração por atividade aceleração unidade de tempo (R$) permitidas\nC-F 2 50\nD-E 1 300\nE-F 2 100\nE-G 1 80\nE- H 2 75\nF- H 2 85\nConsiderando-se o gráfico de atividades acima e a tabela de custo de aceleração das atividades da rede que podem ser aceleradas, qual(is) atividade(s) deve(m) ser acelerada(s) para que o tempo do projeto associado a esse gráfico seja reduzido em uma unidade de tempo e para que o custo total de aceleração seja o menor possível?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "apenas a atividade (C-F)"
+        },
+        {
+          "letter": "B",
+          "text": "apenas as atividades (D-E) e (E-G)"
+        },
+        {
+          "letter": "C",
+          "text": "apenas a atividade (E-G)"
+        },
+        {
+          "letter": "D",
+          "text": "apenas as atividades (E-G) e (F-H)"
+        },
+        {
+          "letter": "E",
+          "text": "apenas a atividade (E-H)"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q74",
+      "kind": "OBJECTIVE",
+      "number": 74,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf"
+      ],
+      "answer": "A",
+      "prompt": "No processo de desenvolvimento de software, todo\nsoftware passa pelas fases de análise e projeto,\nassociadas, respectivamente, com o que deve ser feito\ne como deve ser feito. A partir dessa informação,\navalie a opções correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Na fase de análise, três modelos que devem ser\nconsiderados são: do domínio da informação, o\nfuncional e o comportamental."
+        },
+        {
+          "letter": "B",
+          "text": "Na fase de projeto, dois níveis de projeto devem\nser considerados: o projeto detalhado, que se\npreocupa com uma transformação dos requisitos\nem um projeto de dados e arquitetural; e o projeto\npreliminar, que se preocupa em aprimorar o\nprojeto detalhado para que a implementação\npossa ser realizada em seguida."
+        },
+        {
+          "letter": "C",
+          "text": "O objetivo do projeto arquitetural é desenvolver\numa estrutura de programa e representar os\ndiversos fluxos de dados entre os módulos."
+        },
+        {
+          "letter": "D",
+          "text": "O projeto arquitetural independe do paradigma de\ndesenvolvimento."
+        },
+        {
+          "letter": "E",
+          "text": "Para lidar com a complexidade do software,\npode-se aplicar o princípio do particionamento,\nquebrando o problema em problemas menores.\nEsse princípio não é aplicado nas outras fases de\ndesenvolvimento e ele não causa impacto nos\ncustos de desenvolvimento."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q75",
+      "kind": "OBJECTIVE",
+      "number": 75,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        32
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "Considere que a figura ao lado ilustre o cenário de NAPT em uma empresa cujos equipamentos de rede interna (LAN) usam endereços IP privados.\nRoteador do Provedor Considere, ainda, que haja apenas um endereço IP válido nas redes dessa empresa, que é atribuído à interface externa do roteador. Considerando que os WAN computadores A e B façam acessos simultâneos a um servidor WWW externo 138.76.28.4 (www.inep.gov.br, por exemplo), quais deverão ser os endereços IP de origem contidos nos pacotes de A e B, respectivamente, que chegarão a esse servidor? Roteador com NAPT\nLAN 10.0.0.254",
+      "options": [
+        {
+          "letter": "A",
+          "text": "10.0.0.1 e 10.0.0.2"
+        },
+        {
+          "letter": "B",
+          "text": "10.0.0.254 e 10.0.0.254"
+        },
+        {
+          "letter": "C",
+          "text": "138.76.28.4 e 138.76.28.4"
+        },
+        {
+          "letter": "D",
+          "text": "138.76.28.1 e 138.76.28.2 10.0.0.1 10.0.0.2 10.0.0.10"
+        },
+        {
+          "letter": "E",
+          "text": "169.254.1.1 e 169.254.1.2 Computador A Computador B"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q76",
+      "kind": "OBJECTIVE",
+      "number": 76,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        32
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura",
+        "caracteres-suspeitos",
+        "codigo"
+      ],
+      "answer": "D",
+      "prompt": "Considere o esquema de relação Cliente(CPF, nome, RGemissor, RGnro, endereco, loginemail, dominioemail) e as seguintes dependências funcionais (DF) válidas sobre o esquema:\nDF1: CPF ÷ nome, RGemissor, RGnro, endereco, loginemail, dominioemail DF2: RGemissor, RGnro ÷ CPF, nome, endereco, loginemail, dominioemail DF3: loginemail, dominioemail ÷ CPF\nQual é o conjunto completo de chaves candidatas de Cliente e em que forma normal mais alta essa relação está?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "{(RGemissor, RGnro), (CPF)}, na Forma Normal de Boyce- Codd (FNBC)."
+        },
+        {
+          "letter": "B",
+          "text": "{(RGemissor, RGnro), (CPF)}, na Segunda Forma Normal (2FN)."
+        },
+        {
+          "letter": "C",
+          "text": "{(loginemail, dominioemail)}, na Forma Normal de Boyce- Codd (FNBC)."
+        },
+        {
+          "letter": "D",
+          "text": "{(RGemissor, RGnro), (loginemail, dominioemail), (CPF)}, na Forma Normal de Boyce-Codd (FNBC)."
+        },
+        {
+          "letter": "E",
+          "text": "{(RGemissor, RGnro), (loginemail, dominioemail), (CPF)}, na Segunda Forma Normal (2FN)."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q77",
+      "kind": "OBJECTIVE",
+      "number": 77,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        32
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf"
+      ],
+      "answer": "B",
+      "prompt": "Considere que você trabalhe em uma empresa de desenvolvimento de software e que a empresa tenha decidido desenvolver um novo editor de texto para colocar no mercado. Esse editor deve ser um software que forneça recursos adicionais de apoio à autoria, embasado no estilo de escrita do usuário, o que o torna um software de funcionalidade mais complexa. Considere que a empresa deseje disponibilizar o produto no mercado em versões que agreguem esse suporte de forma gradativa, fazendo análise de risco para avaliar a viabilidade de desenvolvimento de uma nova versão. Tendo de escolher um modelo de processo para desenvolver esse editor, e conhecendo as características dos modelos existentes, entre os modelos abaixo, qual é o modelo apropriado para esse caso?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "cascata"
+        },
+        {
+          "letter": "B",
+          "text": "espiral"
+        },
+        {
+          "letter": "C",
+          "text": "RAD (rapid application development)"
+        },
+        {
+          "letter": "D",
+          "text": "prototipação"
+        },
+        {
+          "letter": "E",
+          "text": "cleanroom"
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q78",
+      "kind": "OBJECTIVE",
+      "number": 78,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        33
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "texto-compartilhado",
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "alternativas-reconstruidas-layout"
+      ],
+      "answer": "B",
+      "prompt": "Texto para as questões 78 e 79\nA Secretaria de Saúde de determinado município está executando um projeto de automação do seu sistema de atendimento médico e laboratorial, atualmente manual. O objetivo do projeto é melhorar a satisfação dos usuários com relação aos serviços prestados pela Secretaria. O sistema automatizado deve contemplar os seguintes processos: marcação de consulta, manutenção de prontuário do paciente, além do pedido e do registro de resultados de exame laboratorial.\nA Secretaria possui vários postos de saúde e cada um deles atende a um ou mais bairros do município. As consultas a cada paciente são realizadas no posto de saúde mais próximo de onde ele reside. Os exames laboratoriais são realizados por laboratórios terceirizados e conveniados.\nA solução proposta pela equipe de desenvolvimento e implantação da automação contempla, entre outros, os seguintes aspectos:\n< sistema computacional do tipo cliente-servidor na web, em que cada usuário cadastrado utiliza login e senha para fazer uso do sistema; < uma aplicação, compartilhada por médicos e laboratórios, gerencia o pedido e o registro de resultados dos exames. Durante uma consulta o próprio médico registra o pedido de exames no sistema; < uma aplicação, compartilhada por médicos e pacientes, permite que ambos tenham acesso aos resultados dos exames laboratoriais; < uma aplicação, compartilhada por médicos e pacientes, que automatiza o prontuário dos pacientes, em que os registros em prontuário, efetuados por cada médico para cada paciente, estão disponíveis apenas para o paciente e o médico específicos. Além disso, cada médico pode fazer registros privados no prontuário do paciente, apenas visíveis por ele; < uma aplicação, compartilhada por pacientes e atendentes de postos de saúde, que permite a marcação de consultas por pacientes e(ou) por atendentes. Esses atendentes atendem o paciente no balcão ou por telefone.\nConsiderando o contexto acima, julgue os seguintes itens.\nI No contexto do projeto acima descrito, aquele que desempenha o papel de usuário do sistema de informação automatizado não é apenas o paciente, e aquele que desempenha o papel de cliente pode não ser um médico. II O sistema de informação manual atualmente em uso na referida secretaria de saúde não dá suporte aos processos de negócio dessa secretaria.\nIII O projeto de automação dos serviços de saúde não é uma solução de outsourcing.\nIV No sistema acima, os riscos de não-repúdio são aumentados com a automação.\nV Para o gestor do sistema de informação a ser automatizado, a acessibilidade é uma característica de menor importância jurídica frente à necessidade de ampliar a confidencialidade.\nEstão certos apenas os itens",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "III e V."
+        },
+        {
+          "letter": "E",
+          "text": "IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q79",
+      "kind": "DISCURSIVE",
+      "number": 79,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        33
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "texto-compartilhado",
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "prompt": "Texto para as questões 78 e 79\nA Secretaria de Saúde de determinado município está executando um projeto de automação do seu sistema de atendimento médico e laboratorial, atualmente manual. O objetivo do projeto é melhorar a satisfação dos usuários com relação aos serviços prestados pela Secretaria. O sistema automatizado deve contemplar os seguintes processos: marcação de consulta, manutenção de prontuário do paciente, além do pedido e do registro de resultados de exame laboratorial.\nA Secretaria possui vários postos de saúde e cada um deles atende a um ou mais bairros do município. As consultas a cada paciente são realizadas no posto de saúde mais próximo de onde ele reside. Os exames laboratoriais são realizados por laboratórios terceirizados e conveniados.\nA solução proposta pela equipe de desenvolvimento e implantação da automação contempla, entre outros, os seguintes aspectos:\n< sistema computacional do tipo cliente-servidor na web, em que cada usuário cadastrado utiliza login e senha para fazer uso do sistema; < uma aplicação, compartilhada por médicos e laboratórios, gerencia o pedido e o registro de resultados dos exames.\nDurante uma consulta o próprio médico registra o pedido de exames no sistema; < uma aplicação, compartilhada por médicos e pacientes, permite que ambos tenham acesso aos resultados dos exames laboratoriais; < uma aplicação, compartilhada por médicos e pacientes, que automatiza o prontuário dos pacientes, em que os registros em prontuário, efetuados por cada médico para cada paciente, estão disponíveis apenas para o paciente e o médico específicos. Além disso, cada médico pode fazer registros privados no prontuário do paciente, apenas visíveis por ele; < uma aplicação, compartilhada por pacientes e atendentes de postos de saúde, que permite a marcação de consultas por pacientes e(ou) por atendentes. Esses atendentes atendem o paciente no balcão ou por telefone.\nConsiderando as informações apresentadas no texto e considerando ainda que entre os principais benefícios de um projeto de melhoria de sistema de informação destacam-se o aumento da: (I) eficiência; (II) eficácia; (III) integridade; e (IV) disponibilidade, faça o que se pede a seguir.\nA Cite 4 vantagens da solução proposta, frente à\natual, para tratar a interação entre pacientes e os serviços de saúde, sendo duas delas relativas à eficiência e duas relativas à eficácia.\n(valor: 5,0 pontos) RASCUNHO – QUESTÃO 79 - A\n1\n2\n3\n4\n5\n6\n7\n8\nB Descreva 2 riscos de segurança da informação que aumentam quando se substitui o sistema atual pelo sistema proposto, e que são relativos à interação entre pacientes e os serviços da referida secretaria de saúde. Um dos riscos deve ser relativo à perda de disponibilidade e o outro, à perda de integridade.\n(valor: 5,0 pontos) RASCUNHO – QUESTÃO 79 - B\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    },
+    {
+      "key": "Q80",
+      "kind": "DISCURSIVE",
+      "number": 80,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        34,
+        35
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "prompt": "0..*\nDurante a análise de um sistema de controle de contas bancárias (SCCB), um analista elaborou o diagrama de classes acima, em que são especificados os objetos de negócio da aplicação, por meio do qual foram distribuídas as responsabilidades e colaborações entre os elementos do modelo. Foi atribuída a outro analista a tarefa de elaborar o diagrama de seqüência do caso de uso chamado DUPLA_CONTA, que apresenta o seguinte comportamento: cria um banco, cria uma agência bancária, cria um cliente e duas contas bancárias associadas ao cliente e agência bancária anteriormente criados, e, por fim, realiza uma transferência de valores entre essas duas contas bancárias. O diagrama de seqüência em UML apresentado abaixo foi elaborado com o intuito de corresponder ao caso de uso em questão.\nNo diagrama de seqüência apresentado, há problemas conceituais, relativos à especificação do diagrama de classes e à descrição textual do caso de uso DUPLA-CONTA. Com relação a essa situação, faça o que se pede a seguir.\nA Descreva, textualmente, três falhas de tipos distintos presentes no diagrama de seqüência apresentado, relativas ao\nuso da sintaxe e(ou) da semântica da UML.\n(valor: 4,0 pontos) RASCUNHO – QUESTÃO 80 - A\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\nB Descreva, textualmente, três falhas distintas presentes no diagrama de seqüência apresentado, relativas à\nespecificação das classes, responsabilidades e colaborações propostas no diagrama de classe mostrado.\n(valor: 6,0 pontos) RASCUNHO – QUESTÃO 80 - B\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12",
+      "source": {
+        "examId": "enade-2008-comum-exam",
+        "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+        "answerKeyId": "enade-2008-comum-answer-key",
+        "answerKeySha256": "707a326330c6982a9368957c6d9af1563b886d32d6c6720319faeb71803f2425",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 2
+      }
+    }
+  ]
+}

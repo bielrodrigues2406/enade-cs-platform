@@ -12,7 +12,7 @@ REST JSON, prefixo `/api`, sem CORS entre origens; a web usa proxy na mesma orig
 | POST /auth/logout | JSON; cookie opcional | 200 `{mode:"guest"}`; revoga token corrente e emite nova identidade anônima vazia |
 | GET /catalog | cookie; `q` até 120, `topic` até 80, `area` canônica ou `unclassified`, `year` 2000–2100; `limit` 1–50 (padrão 20), `offset` 0–1.000.000 | 200 catálogo paginado com totais, filtros globais, resumo e sugestões; contrato abaixo |
 | GET /questions | cookie; `q` até 120 caracteres, `topic` até 80 | 200 lista de `{id,title,topic,origin,demonstration,versionNumber,answered}`; somente ponteiros publicados atuais, ordenados por id, máximo 50; substring literal sem distinção de maiúsculas |
-| GET /questions/:id | cookie | 200 `{id,title,topic,prompt,origin,authorCredit,demonstration,versionNumber,options:[{id,text}],presentation,images,reviewOrigin,provenance,answer}`; gabarito/explicação ausentes até haver resposta desta sessão |
+| GET /questions/:id | cookie | 200 `{id,title,topic,subject,prompt,origin,authorCredit,demonstration,versionNumber,options:[{id,text}],presentation,images,reviewOrigin,provenance,answer}`; gabarito/explicação ausentes até haver resposta desta sessão |
 | GET /question-images/:sha256.webp | cookie | 200 `image/webp` do recorte; só se a imagem pertence a uma versão publicada (ou a sessão é de curadoria); `Cache-Control: private, max-age=31536000, immutable`, pois o nome é o hash. Bytes conferidos pelo SHA-256 a cada leitura (409 se divergirem) |
 | PUT /questions/:id/answer | cookie; `{optionId,baseRevision}` | 200 `{optionId,revision,correct,correctOptionId,explanation,explanationCredit,answerKey?}`; valida alternativa da versão, persiste antes de confirmar |
 
@@ -68,7 +68,7 @@ Criar, editar e publicar conferem os arquivos arquivados. Arquivo ausente/corrom
 
 Questão em imagem (ADR-010/011): `presentation` é `TEXT` ou `IMAGE`. Em `IMAGE`, `images:[{url,width,height,page}]` traz os recortes da prova na ordem de leitura (200 dpi), as alternativas são as letras A–E e `prompt`/`options[].text` são transcrição automática de apoio. `reviewOrigin` é `HUMAN` ou `ASSISTED` (conferida por agentes, sem revisão humana); a interface mostra o rótulo correspondente.
 
-No estudo, `provenance` é null para autorais ou `{exam:{id,title,officialUrl,sha256,year,area,modality,pageCount},page,questionNumber}` para oficiais. Antes de confirmar uma resposta, o DTO não inclui IDs, URLs ou hashes do gabarito nem comentário. Depois, `answerKey:{id,title,officialUrl,sha256,page,finality}` e `explanationCredit` acompanham o feedback confirmado. `finality` é `DECLARED` (o Inep declara definitivo), `ONLY_PUBLISHED` (único gabarito publicado, sem essa indicação; D10) ou `null` (conferência humana anterior a esse campo). A URL do Inep é pública; esse comportamento separa o feedback da plataforma, não impede consultar documentos externos.
+No estudo, `provenance` é null para autorais ou `{exam:{id,title,officialUrl,sha256,year,area,modality,pageCount},page,questionNumber}` para oficiais. Antes de confirmar uma resposta, o DTO não inclui IDs, URLs ou hashes do gabarito nem comentário. Depois, `answerKey:{id,title,officialUrl,sha256,page,finality}`, `explanationCredit` e `reviewNote` acompanham o feedback confirmado. `topic` é a área (lista fixa); `subject` é o assunto específico ou null. `reviewNote` é a ressalva de conteúdo escrita pelo conferente (D15), ou null; só aparece depois da resposta para não sugerir a alternativa. `finality` é `DECLARED` (o Inep declara definitivo), `ONLY_PUBLISHED` (único gabarito publicado, sem essa indicação; D10) ou `null` (conferência humana anterior a esse campo). A URL do Inep é pública; esse comportamento separa o feedback da plataforma, não impede consultar documentos externos.
 
 ## Registro de fontes
 
@@ -143,18 +143,105 @@ Todos os endpoints exigem cookie válido; escritas JSON e validação fechada de
 
 | Método | Entrada | Resposta |
 | --- | --- | --- |
-| GET /practice | sem query | `{sizes:[10,20,30],defaultSize:20,total,areas:[{name,count}],active:AttemptSummary|null,recent:AttemptSummary[]}`; 18 áreas fixas e recent até 5 concluídas |
-| POST /practice | `{requestId,size,area:null|string}` | 201 `PracticeView`; mesma chave/configuração é retry; chave divergente ou outra ativa 409; conteúdo insuficiente 409 sem criar tentativa |
+| GET /practice | sem query | `{sizes:[10,20,30],areaSizes:[5,10,20,30],minutesPerQuestion:4,defaultSize:20,total,unseen,areas:[{name,count,unseen}],errors:{total,ready},active:AttemptSummary|null,recent:AttemptSummary[]}`; 18 áreas fixas, recent até 5 concluídas; `errors` são os erros do estudo livre e os prontos para revisão (1 dia depois) |
+| POST /practice | `{requestId,size,area:null|string,timed?}` ou `{requestId,area:null,focus:"ERRORS"}` ou `{requestId,area:null,focus:"RETRY",retryOf}` | 201 `PracticeView`; mesma chave/configuração é retry; chave divergente ou outra ativa 409; conteúdo insuficiente 409 sem criar tentativa. Com área, o tamanho é 5/10/20/30 ou todas as da área; `timed` dá 4 min por questão. `ERRORS` monta o treino com os erros prontos (acertar tira a questão do caderno ao finalizar); `RETRY` com as erradas e em branco de `retryOf` finalizado; o tamanho vem da seleção (até 30) e seleção vazia é 409 |
 | GET /practice/:id | UUID | 200 `PracticeView` somente da sessão |
 | PUT /practice/:id/items/:position | `{optionId:string|null,marked:boolean,baseRevision:number}` | 200 `{position,optionId,marked,revision}`; base inicial 0; retry idêntico retorna revisão já aplicada; conflito/finalizada 409 |
 | POST /practice/:id/finish | `{}` | 200 `PracticeView` finalizado; repetição/concorrência devolvem o mesmo resultado |
 
-`AttemptSummary` = `{id,state,size,area,createdAt,finishedAt,answered}`. `PracticeView` acrescenta `{items,summary}`. Datas ISO; state IN_PROGRESS ou COMPLETED. Cada item = `{position,question:PracticeQuestion,answer:{optionId,marked,revision},result?:PracticeFeedback}`.
+`AttemptSummary` = `{id,state,size,area,kind,focus,createdAt,finishedAt,answered}` (o detalhe traz também `deadlineAt,pausedAt,remainingMs`). `PracticeView` acrescenta `{items,summary}`. Datas ISO; state IN_PROGRESS ou COMPLETED. Cada item = `{position,question:PracticeQuestion,answer:{optionId,marked,revision},result?:PracticeFeedback}`.
 
-`PracticeQuestion` = `{id,title,topic,origin,authorCredit,demonstration,versionNumber,prompt,options:[{id,text}],presentation,images,reviewOrigin,provenance}`. Presentation/images/provenance usam o contrato de estudo existente. Nunca inclui answer do estudo livre, correctOptionId ou explanation.
+`PracticeQuestion` = `{id,title,topic,subject,origin,authorCredit,demonstration,versionNumber,prompt,options:[{id,text}],presentation,images,reviewOrigin,provenance}`. Presentation/images/provenance usam o contrato de estudo existente. Nunca inclui answer do estudo livre, correctOptionId ou explanation.
 
 Somente após finalizar, `summary` contém `{total,correct,incorrect,unanswered,official,author,demonstration,byTopic:[{topic,total,correct,incorrect,unanswered}]}` e cada `result` = `{correct:boolean|null,correctOptionId,explanation,explanationCredit,answerKey?}`. `correct=null` indica não respondida. `answerKey` usa o contrato de estudo, inclusive finality e o aviso D10. Antes do final, summary=null e result ausente. Respostas do treino não alteram /review ou /questions/:id/answer.
 
 Seleção: uma versão atual por questão lógica, somente PUBLISHED de origem AUTHOR_CREATED/OFFICIAL, duas a cinco alternativas e gabarito pertencente à versão; apresentação IMAGE também exige recorte vinculado; tamanho exato sem repetição. area=null mistura assuntos; área deve pertencer à lista canônica de 18 áreas, por correspondência exata de topic. A disponibilidade e a seleção usam a mesma regra. Ordem escolhida aleatoriamente no início e preservada no banco. Uma tentativa ativa por proprietário e requestId por criação permitem retomada/retry sem duplicação. Ver ADR-007 para estado, locks e limites.
 
 A web usa `/treino?attempt=UUID&item=2`, sem resposta ou identidade na URL. Navegação por item atualiza o endereço; reload recupera a tentativa pelo servidor. O componente preserva a gravação pendente após erro/409: edição, saída e finalização só são liberadas após ACK ou reabertura com descarte confirmado da seleção local. A folha de respostas é recolhível no mobile. O conjunto atual de três demos não habilita nenhum tamanho; conteúdo revisado ainda precisa ser publicado/ampliado.
+
+
+### Desempenho e perfil da pessoa
+
+| Método | Entrada | Resposta |
+| --- | --- | --- |
+| GET /me/progress | cookie | `{areas:[{area,published,firstAttempts,firstCorrect}],errors:{total,ready},active}`. Conta a primeira resposta a cada questão (estudo livre ou treino/prova finalizados); `published` usa a mesma seleção do treino. Só áreas com questões |
+| GET /me/profile | conta | `{email,name,enrollment,createdAt}`; visitante 401 |
+| PUT /me/profile | `{name,enrollment,email?,currentPassword?}` | `{email,name,enrollment}`; e-mail novo exige a senha atual (403 se errada, limite de tentativas do login); prontuário ou e-mail de outra conta 409 |
+| POST /me/password | `{currentPassword,newPassword}` | 200 `{status:"CHANGED"}`; encerra as outras sessões da conta, mantém a atual |
+
+## Papéis e administração (ROLE-1, D14)
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /access | cookie | `{roles:("ADMIN"\|"PROFESSOR")[]}`; vazio para visitantes e contas sem papel |
+| GET /admin/users | cookie de admin; `q` até 120, `page` | `{total,page,pageSize,items:[{id,email,name,enrollment,createdAt,roles,answers}],invitations:[{email,role,createdAt,claimedAt,claimedName,claimedEnrollment}]}`; com `claimedAt`, a pessoa já se cadastrou e o papel espera a confirmação do admin |
+| POST /admin/roles | `{email,role}` | 200 `{status:"GRANTED"}` se a conta existe (também confirma um convite reivindicado); `{status:"INVITED"}` se ainda não existe: o cadastro só reivindica e o admin confirma |
+| POST /admin/accounts | `{email,password,name?,enrollment?,role?}` | 201 `{id,email,role}`; cadastro manual pelo admin, com papel opcional já concedido; e-mail ou prontuário existente 409 |
+| GET /admin/activity | cookie de admin; `category` (ACCESS, SECURITY, ACCOUNT, ROLE, CONTENT, CLASS), `q` até 120 (e-mail, assunto ou IP), `page` | `{total,page,pageSize:50,retentionDays,summary:{logins,failedLogins,blocked,suspiciousIps},items:[{id,at,category,action,actorEmail,actorName,subject,detail,ip}]}`; resumo das últimas 24 h; IP só em ACCESS e SECURITY |
+| POST /admin/roles/revoke | `{email,role}` | 200 `{status:"REVOKED"}`; remove papel e convite. Admin não remove o próprio ADMIN (409) |
+
+Sem o papel, as rotas `/admin/*` respondem 403. Professores e administração também usam `/curation/*` (cadastrar questões); publicar continua exigindo outra pessoa na revisão. Toda atribuição, convite e remoção fica em `role_event`. O primeiro administrador é criado no servidor: `npm run admin:role -- grant <e-mail>` (ou `node dist/admin/admin-role.mjs grant <e-mail>` na imagem); a conta precisa existir.
+
+O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE3012345`), opcionais. Prontuário repetido responde 409.
+
+
+## Importação de provas (IMP-1, só administração)
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| POST /imports | `multipart/form-data`: `exam` e `key` (PDF até 10 MB), `year`, `modality`, `examUrl`, `keyUrl` (links do Inep) | 201 `{id,state:"PROCESSING"}`; a extração roda em processo separado (`scripts/import-exam.mjs`) |
+| GET /imports | cookie de admin | lotes recentes com totais de questões confirmadas e excluídas |
+| GET /imports/:id | cookie de admin | lote (`state` PROCESSING, READY, FAILED ou PUBLISHED; `failure`; `issues`; `pageCount`; `pageSizes`) e itens com `boxes`, `answer`, `keyAnswer`, `answerNote`, `status`, `area`, `subject`, `warnings`, `revision` |
+| GET /imports/:id/pages/:n | cookie de admin | PNG da página em 100 dpi para o editor de caixas |
+| PUT /imports/:id/items/:key | `{boxes,status,area,subject,answer,answerNote,revision}` (`answer` A–E, ANULADA ou null; diferente da letra lida exige `answerNote` de 5–500) | 200 `{revision}`; caixas em pontos do PDF dentro da página; confirmar exige área, caixa e gabarito A–E; revisão antiga, discursiva ou anulada respondem 409 |
+| POST /imports/:id/publish | `{}` | 200 `{published,alreadyPublished}`; recorta as caixas confirmadas em 200 dpi e publica com revisão `IMPORT` registrando quem confirmou |
+
+É a única escrita aceita fora de JSON. Republicar não duplica questões; o lote fica PUBLISHED quando não resta item pendente.
+
+
+## Prova completa da edição (SIM-1, ADR-014)
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /editions | — | `{minutes, editions}`; cada edição tem `objectives`, `general`, `discursive` e `missing` (números sem objetiva publicada) |
+| POST /editions/:source/attempts | `{requestId}` (UUID) | 201 com a tentativa (`kind: "EDITION"`, `deadlineAt`, `edition`, `discursive`); repetir o `requestId` devolve a mesma; 409 se já houver treino em andamento |
+
+| POST /practice/:id/pause | `{}` | 200 com a tentativa pausada (`pausedAt`); gravação de resposta responde 409 enquanto pausada |
+| POST /practice/:id/resume | `{}` | 200 com a tentativa retomada; o prazo efetivo (`deadlineAt`) anda o tempo pausado |
+
+O tempo restante (`remainingMs`) é calculado no servidor. A tentativa usa as rotas de `/practice/:id` (itens, finalização e leitura). Depois do prazo, a leitura finaliza e a gravação responde 409. A finalização envia os rascunhos das discursivas da edição. O resumo inclui `byBlock` (`general`, `specific`).
+
+## Discursivas (DISC-1, ADR-013)
+
+Qualquer sessão de estudo (visitante ou conta):
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /discursive | — | discursivas publicadas com `status` (`NEW`, `DRAFT`, `SUBMITTED`, `ASSESSED`) e `score` da autoavaliação |
+| GET /discursive/:id | — | título, área, assunto, `criteria` (`{label,points}`), links do Inep, `promptImages`, `response`; `standardImages` só depois do envio |
+| PUT /discursive/:id/response | `{body,baseRevision}` (até 6000 caracteres) | `{revision}`; 409 se a revisão mudou ou a resposta já foi enviada |
+| POST /discursive/:id/submit | `{body,baseRevision}` (texto não vazio) | `{response,standardImages}`; o texto não muda mais |
+| PUT /discursive/:id/assessment | `{levels}`, um 0/1/2 por item | `{levels,score}`; 409 antes do envio |
+
+Na importação, `POST /imports` aceita `standard` (PDF) e `standardUrl`, sempre juntos; `GET /imports/:id/pages/:n?doc=standard` mostra o padrão; `PUT /imports/:id/items/:key` aceita `standardBoxes` e `criteria` nas discursivas.
+
+## Turmas, aulas e presença (AULA-1, D13)
+
+Professores e administração (403 para os demais):
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /classes | — | turmas com totais de pessoas e aulas e a próxima aula |
+| POST /classes | `{name,editionYear}` | 201 `{id}` |
+| GET /classes/:id | — | turma, `members` (presenças, se já tem conta pelo prontuário), `lessons` e `teachers` disponíveis |
+| POST /classes/:id/members | `{text}` colado da planilha (nome, prontuário, e-mail opcional; tab, `;` ou `,`) | `{added,updated,skipped}`; prontuário identifica a pessoa na turma |
+| POST /classes/:id/members/:member/remove | `{}` | `{removed:true}` |
+| POST /classes/:id/lessons | `{startsAt,endsAt,room,subject,topic?,teacherId}` | 201 `{id}`; fim depois do início; professor com papel |
+| GET /lessons/:id | — | aula e `roll` (lista da turma com a situação nesta aula) |
+| PUT /lessons/:id/attendance | `{entries:[{memberId,status,note?}]}` (`PRESENT`, `ABSENT`, `LATE`, `EXCUSED`) | `{saved}`; só pessoas da turma da aula |
+| GET /classes/:id/attendance.csv | — | CSV (UTF-8, `;`) no formato da planilha: P, F, A (atraso), J (justificada), total e % |
+| GET /classes/:id/dashboard | — | painel PROF-1: `students` (presença, questões, acertos na 1ª tentativa, treinos concluídos, último estudo), `areas` (alunos, 1ªs tentativas e acertos por área), `lessonsWithRoll` e `backfilled` |
+
+Aluno: `GET /my/lessons` → `{lessons}` das turmas em que o prontuário da conta está, com a própria situação de presença.
+
+O painel conta só a primeira resposta de cada aluno a cada questão editorial (`answer_event`, migration 018, somente inserção; cada `PUT /questions/:id/answer` grava um evento). Respostas anteriores ao histórico entram como `BACKFILL` com a última escolha e são contadas em `backfilled`. A tela omite o percentual com menos de 10 respostas e marca presença abaixo de 75%.

@@ -3,7 +3,7 @@ import { createHash, randomUUID } from "node:crypto";
 import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
-import { curator, object, revision, text, transaction } from "./editorial.js";
+import { canCurate, curator, object, revision, text, transaction } from "./editorial.js";
 import { createEditorialDraft } from "./curation.js";
 import { readArchive, sourceById, sourceFields, type Source } from "./source-store.js";
 import { sourceCatalog, type CatalogDocument } from "./source-catalog.js";
@@ -316,8 +316,9 @@ export async function importQuestionReport(report: unknown, options: {
     // Serialize each document's imports, including new rows not yet lockable.
     await client.query("SELECT pg_advisory_xact_lock(hashtextextended($1,0))", [`question-intake/${document.sha256}`]);
     if (options.actorId) {
-      const role = await client.query("SELECT c.identity_id FROM curator_role c JOIN account a ON a.identity_id=c.identity_id WHERE c.identity_id=$1 FOR SHARE OF c,a", [options.actorId]);
-      if (!role.rowCount) fail("A identidade informada não possui permissão de curadoria.", 403);
+      const account = await client.query("SELECT 1 FROM account WHERE identity_id=$1 FOR SHARE", [options.actorId]);
+      if (!account.rowCount || !(await canCurate(client, options.actorId, true)))
+        fail("A identidade informada não possui permissão de curadoria.", 403);
     }
     const loaded = new Map<string, Source>();
     async function sourceFor(id: string, sha: string, kind: string) {

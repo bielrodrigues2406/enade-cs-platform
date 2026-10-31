@@ -14,6 +14,7 @@ O CI (`.github/workflows/ci.yml`) roda auditoria de dependências de produção,
 | --- | --- | --- |
 | `DATABASE_URL` | URL do PostgreSQL **pela rede privada** do provedor; `?sslmode=require` se o banco exigir TLS | **Sim — o único** |
 | `APP_ORIGIN` | Origem HTTPS pública, ex.: `https://caderno.exemplo.com.br`. A API não inicia em produção sem uma origem `https://` | Não |
+| `ADMIN_EMAILS` | E-mail(s) do primeiro administrador: vira administrador ao ter conta, só enquanto não existir nenhum | Não |
 | `TRUST_PROXY` | `1` quando há um proxy reverso do provedor à frente (caso de Railway, Render e similares). Sem isso, o limite de tentativas de login trataria todos os acessos como um único IP | Não |
 | `PORT` | Normalmente definido pelo provedor; padrão 3000 | Não |
 | `SOURCE_ARCHIVE_DIR` | Padrão `/data/sources`: PDFs oficiais arquivados | Não |
@@ -47,7 +48,7 @@ O código não depende de provedor. Qualquer serviço que construa um `Dockerfil
 | Opção | A favor | Contra |
 | --- | --- | --- |
 | Railway | Setup mais rápido: GitHub, Postgres, volume e HTTPS no mesmo projeto | Incidente de segredos em 21/10/2026, relatório final pendente; volume limitado a 5 GB no plano Hobby |
-| Render | Fluxo parecido com Dockerfile, Postgres gerenciado e disco persistente | Postgres gratuito expira em 30 dias; disco só em plano pago |
+| Render (**escolhido, D16**) | Fluxo parecido com Dockerfile, Postgres gerenciado e disco persistente; `render.yaml` na raiz | Postgres gratuito expira em 30 dias; disco só em plano pago (~US$ 14/mês no total) |
 
 Com as regras da seção 3, o risco residual de um novo vazamento de variáveis é a URL do banco, que não funciona fora da rede privada. Recomendação: se escolher Railway, aplique a seção 3 inteira antes de cadastrar usuários reais e acompanhe o relatório final do incidente.
 
@@ -62,9 +63,38 @@ Com as regras da seção 3, o risco residual de um novo vazamento de variáveis 
 7. Opcional: conteúdo autoral demonstrativo com `node dist/admin/seed.mjs` no shell do serviço.
 8. Curadoria: após a pessoa criar a conta pelo site e a identidade ser conferida, `node dist/admin/curator-role.mjs grant <identity-uuid>` no shell do serviço.
 
-Questões oficiais conferidas por agentes (ADR-011) entram com `node dist/admin/publish-assisted.mjs --review data/agent-reviews/<prova>.json --drafts <pasta> --crops <pasta>`; a ferramenta grava as imagens em `QUESTION_ASSET_DIR` e os registros no banco numa transação. Ela exige que prova e gabarito já estejam importados e arquivados no servidor. Levar relatório, recortes e fontes ao servidor é a tarefa DEP-2 do quadro.
+Questões oficiais conferidas por agentes (ADR-011) entram sozinhas: ao iniciar, o contêiner roda `node dist/admin/bootstrap-content.mjs` (DEP-2), que baixa e confere as fontes de cada conferência commitada e publica. Para rodar à mão, use o Shell do serviço. Não importe fontes no banco de produção a partir de máquinas pessoais; isso exigiria abrir o banco publicamente. Provas novas entram pela tela de importação (IMP-1).
 
-Importação de PDFs oficiais em produção ainda não está empacotada na imagem (depende de `curl`/`pdfinfo`, trilha de fontes do Codex). Até lá, não importe fontes direto no banco de produção a partir de máquinas pessoais; isso exigiria abrir o banco publicamente.
+## 5.1 Render (D16): passo a passo
+
+O `render.yaml` da raiz descreve tudo: serviço web pelo `Dockerfile`, disco de 1 GB em `/data`, PostgreSQL 17 sem acesso externo e publicação só depois do CI verde em `main`. Custo de referência em 31/10/2026: ~US$ 14/mês (web starter + banco basic-256mb + disco); confira em render.com/pricing.
+
+1. **Conta:** crie a conta no Render com 2FA e conecte o GitHub dando acesso só a este repositório.
+2. **Blueprint:** New → Blueprint → escolha o repositório. O Render lê o `render.yaml` e mostra serviço, banco e disco. Ele pede `APP_ORIGIN`: use o endereço que aparece para o serviço (`https://enade-cs.onrender.com`, ou o domínio próprio se já tiver), e `ADMIN_EMAILS`: o seu e-mail. Confirme.
+3. **Primeiro deploy:** o contêiner aplica as migrations e carrega o conteúdo (`bootstrap-content`): baixa do Inep a prova e o gabarito de cada conferência em `data/agent-reviews/`, confere o SHA-256 do catálogo (se o Inep falhar, usa a cópia catalogada) e publica as questões. No log aparecem `importado` e `N publicadas`. Nas inicializações seguintes, o mesmo passo só confirma (`já importado`, `sem mudança`). Conferências novas commitadas são publicadas no próximo deploy.
+4. **Conferir:** abra `/api/health` e o site; o banco de questões deve mostrar 246 oficiais (2005, 2008, 2011, 2014, 2017 e 2021, bacharelado e licenciatura).
+5. **Administrador:** crie sua conta pelo site **logo após o primeiro deploy**, com o e-mail de `ADMIN_EMAILS`; ela já nasce administradora (a concessão fica no histórico de papéis). A variável só cria o **primeiro** administrador: depois que existe um, ela é ignorada, e os demais são autorizados pela tela de administração. Como o e-mail ainda não é confirmado, cadastre-se antes de divulgar o endereço do site; se o cadastro disser que o e-mail já existe, alguém chegou antes: não divulgue o site e revogue pelo Shell (`node dist/admin/admin-role.mjs revoke <email>`). Alternativa sem a variável: `node dist/admin/admin-role.mjs grant seu@email` no Shell do serviço. Professores são autorizados depois pela tela de administração.
+6. **Proteger `main`:** no GitHub, exija o CI verde para merge em `main`; o Render só publica depois dos checks.
+
+Se o log mostrar `EACCES` em `/data`, o disco foi montado sem permissão para o usuário `node` (uid 1000). Abra um chamado no Render ou, como contorno, remova a linha `USER node` do Dockerfile apenas para o primeiro deploy e registre a decisão no PR.
+
+`BOOTSTRAP_CONTENT=0` desliga a carga automática (por exemplo, para subir mais rápido quando o Inep estiver fora do ar).
+
+## 5.2 Força bruta e negação de serviço
+
+O que a aplicação faz sozinha (uma instância, contadores em memória):
+
+| Ameaça | Proteção | Onde |
+| --- | --- | --- |
+| Adivinhar senha | 50 tentativas por IP e 10 por e-mail a cada 15 min, antes do scrypt; o scrypt (~128 MiB) roda no máximo 2 por vez | `AuthThrottle`, `password.ts` |
+| Criar sessões de visitante em massa | 600 por IP a cada 15 min | `GuestThrottle` |
+| Um cliente disparando requisições | 1200 por minuto por IP na API em produção (`API_RATE_LIMIT` muda; fora de produção fica desligado) | `request-limit.ts` |
+| Conexões lentas de propósito | cabeçalhos em 20 s, requisição inteira em 2 min | `serve.ts` |
+| Corpos grandes | JSON até 16 kB (64 kB na curadoria); PDFs só para administradores, com tamanho máximo | `main.ts`, `exam-imports.ts` |
+
+Cada bloqueio entra uma vez por janela no registro de atividades (categoria Segurança), com o IP; a aba Atividades da administração mostra o resumo das últimas 24 horas.
+
+O que ela **não** resolve: um ataque distribuído (muitos IPs) esgota a instância antes de qualquer contador. Para isso a proteção precisa estar na borda: o Render já filtra parte do tráfego de rede, e um proxy como o Cloudflare (plano gratuito, modo "Under Attack" quando necessário) na frente do domínio próprio cobre o resto. Os limites dependem de `TRUST_PROXY` correto: com o valor errado, todos os acessos parecem vir do mesmo IP (bloqueio geral) ou o IP pode ser forjado.
 
 ## 6. Reverter
 

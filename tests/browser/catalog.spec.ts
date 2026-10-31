@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { signUp } from "./session-helpers";
 import { createHash, randomUUID } from "node:crypto";
 import { Pool } from "pg";
 import { test, expect, type Page } from "@playwright/test";
@@ -127,19 +128,19 @@ test("catalog reaches beyond 50 and restores its selection through URL and brows
   await expect(page.getByLabel("Assunto", { exact: true }).locator("option", { hasText: customTopic })).toHaveCount(1);
   await expect(page.getByLabel("Ano da prova").locator('option[value="2021"]')).toHaveCount(1);
   for (let number = 2; number <= 4; number++) {
-    if (number === 4) await page.getByLabel("Buscar no caderno").fill("TEST ONLY filtro ainda não aplicado");
+    if (number === 4) await page.getByLabel("Buscar questão").fill("TEST ONLY filtro ainda não aplicado");
     await pager(page).getByRole("button", { name: "Próxima", exact: true }).focus();
     await page.keyboard.press("Enter");
     await expect(pager(page)).toContainText(`Página ${number} de 4`);
   }
   await expectList(page, 2);
-  await expect(page.getByLabel("Buscar no caderno")).toHaveValue(marker);
+  await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   await expect(page.getByRole("heading", { name: title(62), exact: true })).toBeVisible();
   await expect(pager(page).getByRole("button", { name: "Próxima", exact: true })).toBeDisabled();
   expect(new URL(page.url()).searchParams.get("page")).toBe("4");
   await page.reload();
   await expect(pager(page)).toContainText("Página 4 de 4");
-  await expect(page.getByLabel("Buscar no caderno")).toHaveValue(marker);
+  await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   await page.goBack();
   await expect(pager(page)).toContainText("Página 3 de 4");
   await page.goForward();
@@ -232,7 +233,7 @@ test("catalog failure can retry without dropping the applied filters or page", a
   await expect(page.getByRole("alert")).toContainText("falha temporária");
   await page.getByRole("button", { name: "Tentar novamente", exact: true }).click();
   await expect(pager(page)).toContainText("Página 3 de 4");
-  await expect(page.getByLabel("Buscar no caderno")).toHaveValue(marker);
+  await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   expect(new URL(page.url()).searchParams.get("page")).toBe("3");
   await page.unroute("**/api/catalog?**");
 });
@@ -256,6 +257,7 @@ test("catalog filters and pagination reflow and remain keyboard operable", async
 });
 
 test("home counts the full collection and suggests an unanswered item beyond the first page", async ({ page, context }) => {
+  await signUp(context);
   await page.goto("/questoes");
   await expectList(page, 20);
   const response = await context.request.get("/api/catalog?limit=50");
@@ -263,7 +265,6 @@ test("home counts the full collection and suggests an unanswered item beyond the
   const before = await response.json();
   expect(before.total).toBeGreaterThan(50);
   expect(before.items.length).toBeGreaterThan(20);
-  const next = before.items[20];
   // Answers belong only to this test's anonymous identity. Source questions,
   // including the three existing demos, are never edited or republished.
   for (const row of before.items.slice(0, 20)) {
@@ -280,7 +281,12 @@ test("home counts the full collection and suggests an unanswered item beyond the
   const updated = await updatedResponse.json();
   expect(updated.summary.total).toBe(before.total);
   expect(updated.summary.answered).toBe(20);
-  expect(updated.suggestions[0].id).toBe(next.id);
+  // O início sugere não respondidas, oficiais antes das autorais, uma por área.
+  const suggested = updated.suggestions;
+  expect(suggested.every((row: any) => !row.answered)).toBe(true);
+  const official = suggested.map((row: any) => row.origin === "OFFICIAL");
+  expect(official).toEqual([...official].sort((a: boolean, b: boolean) => Number(b) - Number(a)));
+  expect(new Set(suggested.map((row: any) => row.area ?? row.topic)).size).toBe(suggested.length);
 
   await page.goto(catalogUrl({ area: "Algoritmos", page: "2" }));
   await expect(pager(page)).toContainText("Página 2 de 3");
@@ -289,8 +295,8 @@ test("home counts the full collection and suggests an unanswered item beyond the
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator(".cover-summary")).toContainText(`Você respondeu 20 de ${before.total} questões`);
   await expect(page.getByRole("region", { name: "Seu andamento" }).locator(".bar-row").first()).toContainText(`20 de ${before.total}`);
-  await expect(page.getByRole("button", { name: `Continuar com: ${next.title}`, exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: `Resolver: ${next.title}`, exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Continuar com: ${suggested[0].title}`, exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Resolver: ${suggested[0].title}`, exact: true })).toBeVisible();
 
   await page.getByRole("button", { name: "Banco de questões", exact: true }).first().click();
   await expect(page).toHaveURL(selectionUrl);
@@ -298,9 +304,9 @@ test("home counts the full collection and suggests an unanswered item beyond the
   await page.reload();
   await expect(page).toHaveURL(selectionUrl);
   await expect(page.getByLabel("Área", { exact: true })).toHaveValue("Algoritmos");
-  await expect(page.getByLabel("Buscar no caderno")).toHaveValue(marker);
+  await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   await expect(pager(page)).toContainText("Página 2 de 3");
   await page.getByRole("button", { name: "Início", exact: true }).first().click();
-  await page.getByRole("button", { name: `Continuar com: ${next.title}`, exact: true }).click();
-  await expect(page.getByRole("heading", { name: next.title, exact: true })).toBeVisible();
+  await page.getByRole("button", { name: `Continuar com: ${suggested[0].title}`, exact: true }).click();
+  await expect(page.getByRole("heading", { name: suggested[0].title, exact: true })).toBeVisible();
 });

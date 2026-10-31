@@ -5,7 +5,12 @@ export type AccountMode = "login" | "register";
 export type SessionStatus =
   | { mode: "guest" }
   | { mode: "account"; email: string };
-export type Credentials = { email: string; password: string };
+export type Credentials = {
+  email: string;
+  password: string;
+  name?: string;
+  enrollment?: string;
+};
 
 @Component({
   selector: "app-account",
@@ -21,11 +26,15 @@ export class AccountComponent {
   @Output() cancel = new EventEmitter<void>();
   email = "";
   password = "";
+  name = "";
+  enrollment = "";
+  showPassword = false;
   submitted = false;
 
   ngOnChanges() {
     // Credentials are never kept when the form changes purpose or completes.
     this.password = "";
+    this.showPassword = false;
     this.submitted = false;
   }
   passwordError() {
@@ -34,13 +43,27 @@ export class AccountComponent {
       ? "A senha deve ter de 12 a 128 caracteres."
       : "";
   }
+  // Mesmo formato que a API aceita: duas letras e 6 a 8 dígitos, X opcional.
+  enrollmentError() {
+    const value = this.enrollment.trim().toUpperCase();
+    return value && !/^[A-Z]{2}[0-9]{6,8}X?$/.test(value)
+      ? "Use o formato do prontuário IFSP, por exemplo PE3012345."
+      : "";
+  }
   submit(form: NgForm) {
     this.submitted = true;
     if (this.busy || form.invalid || this.passwordError()) return;
+    if (this.mode === "register" && this.enrollmentError()) return;
     this.submitCredentials.emit({
       email: this.email.trim(),
       password: this.password,
+      ...(this.mode === "register" ? this.profile() : {}),
     });
+  }
+  private profile() {
+    const name = this.name.trim();
+    const enrollment = this.enrollment.trim().toUpperCase();
+    return { ...(name ? { name } : {}), ...(enrollment ? { enrollment } : {}) };
   }
   switchMode() {
     this.password = "";

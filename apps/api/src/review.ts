@@ -22,6 +22,8 @@ export class ReviewController {
       fail("Filtro ou página inválidos.", 400);
 
     // One statement gives counts, filters and page the same database snapshot.
+    // Revisão espaçada: o erro volta para revisão um dia depois de a pessoa ter
+    // visto o gabarito; refazer na hora só repete a resposta da memória.
     // A changed answer replaces its earlier choice; it is not another attempt.
     const result = await db.query(
       `WITH latest AS (
@@ -42,7 +44,8 @@ export class ReviewController {
           'answered',count(*)::integer,
           'correct',count(*) FILTER (WHERE correct)::integer,
           'incorrect',count(*) FILTER (WHERE NOT correct)::integer,
-          'demonstration',count(*) FILTER (WHERE demonstration)::integer
+          'demonstration',count(*) FILTER (WHERE demonstration)::integer,
+          'ready',count(*) FILTER (WHERE NOT correct AND updated_at <= now() - interval '1 day')::integer
         ) FROM latest),
         'topics',COALESCE((SELECT json_agg(t ORDER BY t.topic) FROM (
           SELECT topic,count(*)::integer AS answered,
@@ -53,7 +56,8 @@ export class ReviewController {
         'items',COALESCE((SELECT json_agg(i ORDER BY i."answeredAt",i.id) FROM (
           SELECT id,question_id AS "questionId",title,topic,origin,demonstration,
             version_number AS "versionNumber",updated_at AS "answeredAt",
-            current_version_id AS "currentVersionId"
+            current_version_id AS "currentVersionId",
+            updated_at + interval '1 day' AS "reviewAt",updated_at <= now() - interval '1 day' AS ready
           FROM pending ORDER BY updated_at,id LIMIT 20 OFFSET $3
         ) i),'[]'::json)
       ) AS notebook`,

@@ -1,13 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  inject,
-  signal,
-} from "@angular/core";
+import { Component, EventEmitter, Input, Output, signal } from "@angular/core";
 import type { ReviewItem } from "./review.component";
+import { AREA_SIMULATION_LIMIT, areaSimulation, type PracticeRequest } from "./practice-request";
 
 type CatalogRow = {
   id: string;
@@ -26,6 +19,13 @@ type Notebook = {
   items: ReviewItem[];
   total: number;
 };
+/** Primeira resposta de cada questão da área (GET /api/me/progress). */
+type AreaProgress = { area: string; published: number; firstAttempts: number; firstCorrect: number };
+type Progress = {
+  areas: AreaProgress[];
+  errors: { total: number; ready: number };
+  active: { id: string; kind: "PARTIAL" | "EDITION"; size: number; area: string | null; pausedAt: string | null; answered: number } | null;
+};
 type Week = { label: string; now: boolean; exam: boolean };
 
 // Data de aplicação para bacharelados/CST segundo o Inep (MASTER-SPEC §2).
@@ -35,6 +35,8 @@ const EXAM_SOURCE =
   "https://www.gov.br/inep/pt-br/acesso-a-informacao/perguntas-frequentes/exame-nacional-de-desempenho-dos-estudantes-enade";
 const DAY = 86400000;
 const MONTHS = "jan fev mar abr mai jun jul ago set out nov dez".split(" ");
+/** Abaixo disso, o acerto da área é só um indício: a página avisa. */
+const SMALL_SAMPLE = 5;
 
 const range = (from: number, to: number) =>
   Array.from({ length: to - from }, (_, i) => from + i);
@@ -50,14 +52,15 @@ const monday = (date: Date) => {
 };
 
 /**
- * Página inicial no modelo de "início" do Portal FSA: capa com data, situação
- * e semanas até a prova; o que estudar agora em ordem de prioridade; andamento
- * e prova ao lado; depois, como o caderno funciona. Usa somente dados reais
- * (catálogo e respostas salvas); não exibe métricas inventadas.
+ * Painel de quem já entrou: capa com data e semanas até a prova; o que fazer
+ * agora (treino em andamento, erros prontos, questões a retomar e novas);
+ * desempenho por área com simulado de cada uma; andamento e prova ao lado.
+ * Usa somente dados reais da pessoa; não estima nota do ENADE.
  */
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
+  styleUrl: "./home.component.css",
 })
 export class HomeComponent {
   @Input() sessionMode: "guest" | "account" = "guest";
@@ -66,6 +69,12 @@ export class HomeComponent {
   @Output() register = new EventEmitter<void>();
   @Output() openQuestion = new EventEmitter<string>();
   @Output() retry = new EventEmitter<ReviewItem>();
+  /** Novo treino: simulado de uma área ou os erros prontos. */
+  @Output() practice = new EventEmitter<PracticeRequest>();
+  /** Retomar o treino ou a prova em andamento. */
+  @Output() resume = new EventEmitter<string>();
+  /** Tela de treinos (prova completa e treino montado). */
+  @Output() practiceHub = new EventEmitter<void>();
 
   readonly examSource = EXAM_SOURCE;
   private readonly now = new Date();
@@ -75,6 +84,13 @@ export class HomeComponent {
       : this.now.getHours() < 12
         ? "Bom dia"
         : "Boa tarde";
+  readonly todayChip =
+    "HOJE · " +
+    new Intl.DateTimeFormat("pt-BR", { weekday: "short", day: "numeric" })
+      .format(this.now)
+      .replace(".", "")
+      .replace(",", "")
+      .toUpperCase();
   readonly todayLabel = new Intl.DateTimeFormat("pt-BR", {
     weekday: "long",
     day: "numeric",
@@ -83,127 +99,23 @@ export class HomeComponent {
     .format(this.now)
     .replace("-feira", "")
     .toUpperCase();
-  readonly todayChip =
-    "HOJE · " +
-    new Intl.DateTimeFormat("pt-BR", { weekday: "short", day: "numeric" })
-      .format(this.now)
-      .replace(".", "")
-      .replace(",", "")
-      .toUpperCase();
   readonly weeks = this.weeksUntilExam();
   // Formato de 2026 para bacharelados (MASTER-SPEC §2). Revalidar por edição.
   readonly examParts = [
-    {
-      label: "Formação Geral",
-      count: "15 objetivas",
-      kind: "general",
-      cells: range(0, 15),
-    },
-    {
-      label: "Computação",
-      count: "30 objetivas",
-      kind: "specific",
-      cells: range(15, 45),
-    },
-    {
-      label: "Computação",
-      count: "1 discursiva",
-      kind: "essay",
-      cells: range(45, 46),
-    },
-  ];
-  readonly demoOptions = [
-    { letter: "A", text: "IP" },
-    { letter: "B", text: "UDP" },
-    { letter: "C", text: "ARP" },
-    { letter: "D", text: "TCP" },
-  ];
-  readonly steps = [
-    {
-      title: "Escolha o que estudar",
-      text: "Busque por um trecho do enunciado ou filtre por assunto. Cada questão mostra assunto e origem antes de você abrir.",
-    },
-    {
-      title: "Responda sem pistas",
-      text: "As alternativas aparecem como no papel. O gabarito só aparece depois que você confirma, e a resposta fica salva.",
-    },
-    {
-      title: "Entenda o raciocínio",
-      text: "Você vê a alternativa correta, a sua e uma explicação com autoria identificada. Pode mudar a resposta quando quiser.",
-    },
-    {
-      title: "Volte ao que errou",
-      text: "O caderno de erros reúne as questões cuja última resposta está incorreta, por assunto, das mais antigas para as mais novas.",
-    },
-  ];
-  readonly roadmap = [
-    {
-      title: "Questões oficiais com a imagem da prova",
-      text: "Cada questão transcrita acompanhada do recorte original do PDF, para conferir figuras, código e símbolos.",
-      status: "em andamento",
-      active: true,
-    },
-    {
-      title: "Simulado no formato da prova",
-      text: "Tempo de prova, folha de respostas e resultado só no final, por bloco e por assunto.",
-      status: "planejado",
-      active: false,
-    },
-    {
-      title: "Desempenho por assunto",
-      text: "Acertos e total por assunto e período, com aviso quando a amostra ainda é pequena.",
-      status: "planejado",
-      active: false,
-    },
-    {
-      title: "Teste rápido de diagnóstico",
-      text: "Poucas questões de assuntos variados para apontar por onde começar.",
-      status: "planejado",
-      active: false,
-    },
+    { label: "Formação Geral", count: "15 objetivas", kind: "general", cells: range(0, 15) },
+    { label: "Computação", count: "30 objetivas", kind: "specific", cells: range(15, 45) },
+    { label: "Computação", count: "1 discursiva", kind: "essay", cells: range(45, 46) },
   ];
 
   catalog = signal<HomeCatalog | null>(null);
   notebook = signal<Notebook | null>(null);
-  demoStep = signal(0);
-  private host = inject(ElementRef<HTMLElement>);
-  private observer: IntersectionObserver | null = null;
-  private timers: ReturnType<typeof setTimeout>[] = [];
+  progress = signal<Progress | null>(null);
   private abort = new AbortController();
-  private demoStarted = false;
 
   ngOnInit() {
     void this.load();
   }
-
-  ngAfterViewInit() {
-    const root = this.host.nativeElement as HTMLElement;
-    if (this.reducedMotion() || typeof IntersectionObserver === "undefined") {
-      this.demoStep.set(5);
-      return;
-    }
-    // Só esconde o que ainda vai aparecer quando a animação está garantida.
-    root.classList.add("motion-ready");
-    this.observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          if (el.classList.contains("home-demo")) this.startDemo();
-          else el.classList.add("is-visible");
-          this.observer?.unobserve(el);
-        }
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.15 },
-    );
-    root
-      .querySelectorAll("[data-reveal], .home-demo")
-      .forEach((el) => this.observer!.observe(el));
-  }
-
   ngOnDestroy() {
-    this.observer?.disconnect();
-    this.timers.forEach(clearTimeout);
     this.abort.abort();
   }
 
@@ -215,6 +127,12 @@ export class HomeComponent {
   }
   incorrectCount() {
     return this.notebook()?.summary.incorrect ?? 0;
+  }
+  readyErrors() {
+    return this.progress()?.errors.ready ?? 0;
+  }
+  active() {
+    return this.progress()?.active ?? null;
   }
   nextQuestion() {
     return this.catalog()?.suggestions[0] ?? null;
@@ -232,14 +150,14 @@ export class HomeComponent {
     if (!answered)
       return "Resolva por assunto, veja por que cada alternativa está certa ou errada e volte ao que errou. Suas respostas ficam salvas neste navegador ou na sua conta.";
     const total = this.catalog()!.summary.total;
-    const incorrect = this.incorrectCount();
+    const ready = this.readyErrors();
     return (
       `Você respondeu ${answered} de ${total} questões do banco · ` +
-      (incorrect === 0
-        ? "nenhuma para retomar"
-        : incorrect === 1
-          ? "1 para retomar no caderno de erros"
-          : `${incorrect} para retomar no caderno de erros`)
+      (ready === 0
+        ? "nenhum erro pronto para revisar hoje"
+        : ready === 1
+          ? "1 erro pronto para revisar hoje"
+          : `${ready} erros prontos para revisar hoje`)
     );
   }
   progressNote() {
@@ -251,6 +169,41 @@ export class HomeComponent {
       return `${summary.incorrect} questões com a última resposta errada esperam no caderno de erros.`;
     return "A última resposta de cada questão está certa.";
   }
+  activeLabel() {
+    const active = this.active();
+    if (!active) return "";
+    const kind = active.kind === "EDITION" ? "Prova completa" : active.area ? `Treino de ${active.area}` : "Treino";
+    return `${kind} · ${active.answered} de ${active.size} respondidas${active.pausedAt ? " · pausado" : ""}`;
+  }
+
+  // Desempenho por área -------------------------------------------------------
+  areas() {
+    return this.progress()?.areas ?? [];
+  }
+  accuracy(row: AreaProgress) {
+    return Math.round(100 * this.ratio(row.firstCorrect, row.firstAttempts));
+  }
+  smallSample(row: AreaProgress) {
+    return row.firstAttempts > 0 && row.firstAttempts < SMALL_SAMPLE;
+  }
+  /** Área com menor acerto entre as que já têm amostra suficiente. */
+  weakest() {
+    const measured = this.areas().filter((row) => row.firstAttempts >= SMALL_SAMPLE);
+    if (measured.length < 2) return null;
+    return measured.reduce((low, row) =>
+      row.firstCorrect / row.firstAttempts < low.firstCorrect / low.firstAttempts ? row : low,
+    );
+  }
+  simulationSize(row: AreaProgress) {
+    return Math.min(row.published, AREA_SIMULATION_LIMIT);
+  }
+  simulate(row: AreaProgress) {
+    this.practice.emit(areaSimulation(row.area, row.published));
+  }
+  practiceErrors() {
+    this.practice.emit({ area: null, focus: "ERRORS" });
+  }
+
   ratio(part: number, whole: number) {
     return whole ? Math.min(1, part / whole) : 0;
   }
@@ -265,20 +218,6 @@ export class HomeComponent {
     const date = new Date(iso);
     return `${String(date.getDate()).padStart(2, "0")}/${String(date.getMonth() + 1).padStart(2, "0")}`;
   }
-  officialCount() {
-    return this.catalog()?.summary.official ?? 0;
-  }
-  authorCount() {
-    return this.catalog()?.summary.author ?? 0;
-  }
-  demoCount() {
-    return this.catalog()?.summary.demonstration ?? 0;
-  }
-  countLabel(count: number) {
-    if (!this.catalog()) return "";
-    if (!count) return "nenhuma publicada ainda";
-    return `${count} ${count === 1 ? "questão" : "questões"}`;
-  }
   daysLeft() {
     const days = Math.round(
       (EXAM_DATE.getTime() - startOfDay(this.now).getTime()) / DAY,
@@ -291,17 +230,6 @@ export class HomeComponent {
       count: days === 1 ? "1 dia" : `${days} dias`,
       after: " para o ENADE.",
     };
-  }
-
-  replay() {
-    this.timers.forEach(clearTimeout);
-    this.timers = [];
-    if (this.reducedMotion()) {
-      this.demoStep.set(5);
-      return;
-    }
-    this.demoStep.set(0);
-    this.run();
   }
 
   // Semanas de segunda a domingo, da atual até a da prova; longe demais, nada.
@@ -323,26 +251,6 @@ export class HomeComponent {
       return { label, now: i === 0, exam: i === count - 1 };
     });
   }
-  private startDemo() {
-    if (this.demoStarted) return;
-    this.demoStarted = true;
-    this.run();
-  }
-  // Uma passagem curta: hesita em B, escolhe D, confirma e mostra a correção.
-  private run() {
-    const steps: [number, number][] = [
-      [1, 500],
-      [2, 1250],
-      [3, 2050],
-      [4, 2600],
-      [5, 3400],
-    ];
-    for (const [step, at] of steps)
-      this.timers.push(setTimeout(() => this.demoStep.set(step), at));
-  }
-  private reducedMotion() {
-    return matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }
   private async load() {
     const get = async <T>(path: string): Promise<T | null> => {
       try {
@@ -352,11 +260,13 @@ export class HomeComponent {
         return null;
       }
     };
-    const [catalog, notebook] = await Promise.all([
+    const [catalog, notebook, progress] = await Promise.all([
       get<HomeCatalog>("catalog?limit=1"),
       get<Notebook>("review?topic=&offset=0"),
+      get<Progress>("me/progress"),
     ]);
     if (notebook) this.notebook.set(notebook);
+    if (progress) this.progress.set(progress);
     if (catalog) this.catalog.set(catalog);
   }
 }

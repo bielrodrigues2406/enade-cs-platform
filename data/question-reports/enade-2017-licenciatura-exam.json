@@ -1,0 +1,1789 @@
+{
+  "document": "enade-2017-licenciatura-exam",
+  "completeness": {
+    "missing": [],
+    "unexpected": []
+  },
+  "extraction": {
+    "method": "PDF_TEXT",
+    "textCopy": {
+      "schemaVersion": 1,
+      "algorithm": "CALIBRI_TOUNICODE_V1",
+      "generatorSha256": "359a5565d6d229405cec9a38de68b0f9d12234a4dc625c4a8c5904435c9233ab",
+      "pypdfVersion": "6.10.0",
+      "derivedFrom": {
+        "file": "enade-2017-licenciatura-exam.pdf",
+        "sha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348"
+      },
+      "map": {
+        "file": "calibri-cid-unicode.json",
+        "sha256": "f20d49d5a2c2f9a768d8139f7b37d36a13118744158433c3afce42a1bb5f8f05"
+      },
+      "fixedFonts": [
+        "Calibri-Bold-Identity-H",
+        "Calibri-BoldItalic-Identity-H",
+        "Calibri-Identity-H",
+        "Calibri-Italic-Identity-H"
+      ],
+      "output": {
+        "file": "enade-2017-licenciatura-exam.pdf",
+        "sha256": "f7126238fe573de177640f6bbaa32bc99f106dc3df7a3e8175ef898691074614"
+      },
+      "tool": "scripts/repair-calibri-text.py com pypdf 6.10.0",
+      "purpose": "Somente extração de texto; imagem e procedência vêm do PDF original."
+    }
+  },
+  "warnings": [
+    "Texto extraído de cópia Unicode gerada localmente; imagem, páginas e procedência pertencem ao PDF original. A cópia e seu recibo não aprovam a fidelidade do item."
+  ],
+  "items": [
+    {
+      "key": "D1",
+      "kind": "DISCURSIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        2,
+        3
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "hifenizacao",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "TEXTO 1\nEm 2001, a incidência da sífilis congênita ― transmitida da mulher para o feto durante a gravidez ― era de um caso a cada mil bebês nascidos vivos. Havia uma meta da Organização Pan-Americana de Saúde e da Unicef de essa ocorrência diminuir no Brasil, chegando, em 2015, a 5 casos de sífilis congênita por 10 mil nascidos vivos. O país não atingiu esse objetivo, tendo se distanciado ainda mais dele, embora o tratamento para sífilis seja relativamente simples, à base de antibióticos. Trata- se de uma doença para a qual a medicina já encontrou a solução, mas a sociedade ainda não.\nDisponível em: http://www1.folha.uol.com.br . Acesso em: 23 jul. 2017 (adaptado).\nTEXTO 2\nO Ministério da Saúde anunciou que há uma epidemia de sífilis no Brasil. Nos últimos cinco anos, foram 230 mil novos casos, um aumento de 32% somente entre 2014 e 2015. Por que isso aconteceu?\nPrimeiro, ampliou-se o diagnóstico com o teste rápido para sífilis realizado na unidade básica de saúde e cujo resultado sai em 30 minutos. Aí vem o segundo ponto, um dos mais negativos, que foi o desabastecimento, no país, da matéria-prima para a penicilina. O Ministério da Saúde importou essa penicilina, mas, por um bom tempo, não esteve disponível, e isso fez com que mais pessoas se infectassem. O terceiro ponto é a prevenção. Houve, nos últimos dez anos, uma redução do uso do preservativo, o que aumentou, e muito, a transmissão.\nA incidência de casos de sífilis, que, em 2010, era maior entre homens, hoje recai sobre as mulheres. Por que a vulnerabilidade neste grupo está aumentando?\nAs mulheres ainda são as mais vulneráveis a doenças sexualmente transmissíveis (DST), de uma forma geral. Elas têm dificuldade de negociar o preservativo com o parceiro, por exemplo. Mas o acesso da mulher ao diagnóstico também é maior, por isso, é mais fácil contabilizar essa população. Quando um homem faz exame para a sífilis? Somente quando tem sintoma aparente ou outra doença. E a sífilis pode ser uma doença silenciosa. A mulher, por outro lado, vai fazer o pré-natal e, automaticamente, faz o teste para a sífilis. No Brasil, estima-se que apenas 12% dos parceiros sexuais recebam tratamento para sífilis.\nEntrevista com Ana Gabriela Travassos, presidente da regional baiana da Sociedade Brasileira de Doenças Sexualmente Transmissíveis. Disponível em: http://www.agenciapatriciagalvao.org.br . Acesso em: 25 jul. 2017 (adaptado).\nTEXTO 3\nVários estudos constatam que os homens, em geral, padecem mais de condições severas e crônicas de saúde que as mulheres e morrem mais que elas em razão de doenças que levam a óbito. Entretanto, apesar de as taxas de morbimortalidade masculinas assumirem um peso significativo, observa-se que a presença de homens nos serviços de atenção primária à saúde é muito menor que a de mulheres.\nGOMES, R.; NASCIMENTO, E.; ARAUJO, F. Por que os homens buscam menos os serviços de saúde do que as mulheres? As explicações de homens com baixa escolaridade e homens com ensino superior. Cad. Saúde Pública [online], v. 23, n. 3, 2007 (adaptado). A partir das informações apresentadas, redija um texto acerca do tema:\nEpidemia de sífilis congênita no Brasil e relações de gênero\nEm seu texto, aborde os seguintes aspectos:\n• a vulnerabilidade das mulheres às DSTs e o papel social do homem em relação à prevenção dessas doenças;\n• duas ações especificamente voltadas para o público masculino, a serem adotadas no âmbito das políticas públicas de saúde ou de educação, para reduzir o problema.\n(valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D2",
+      "kind": "DISCURSIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "A pessoa trans precisa que alguém ateste, confirme e comprove que ela pode ser reconhecida pelo nome que ela escolheu. Não aceitam que ela se autodeclare mulher ou homem. Exigem que um profissional de saúde diga quem ela é. Sua declaração é o que menos conta na hora de solicitar, judicialmente, a mudança dos documentos.\nDisponível em: http://www.ebc.com.br . Acesso em: 31 ago. 2017 (adaptado).\nNo chão, a travesti morre Ninguém jamais saberá seu nome Nos jornais, fala-se de outra morte De tal homem que ninguém conheceu\nDisponível em: http://www.aminoapps.com . Acesso em: 31 ago. 2017 (adaptado).\nUsava meu nome oficial, feminino, no currículo porque diziam que eu estava cometendo um crime, que era falsidade ideológica se eu usasse outro nome. Depois fui pesquisar e descobri que não é assim. Infelizmente, ainda existe muita desinformação sobre os direitos das pessoas trans.\nDisponível em: https://www.brasil.elpais.com . Acesso em: 31 ago. 2017 (adaptado).\nUma vez o segurança da balada achou que eu tinha, por engano, mostrado o RG do meu namorado. Isso quando insistem em não colocar meu nome social na minha ficha de consumação.\nDisponível em: https://www.brasil.elpais.com . Acesso em: 31 ago. 2017 (adaptado).\nCom base nessas falas, discorra sobre a importância do nome para as pessoas transgêneras e, nesse contexto, proponha uma medida, no âmbito das políticas públicas, que tenha como objetivo facilitar o acesso dessas pessoas à cidadania. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "Q1",
+      "kind": "OBJECTIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        5
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "tabela",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Os britânicos decidiram sair da União Europeia (UE). A decisão do referendo abalou os mercados financeiros em meio às incertezas sobre os possíveis impactos dessa saída.\nOs gráficos a seguir apresentam, respectivamente, as contribuições dos países integrantes do bloco para a UE, em 2014, que somam 144,9 bilhões de euros, e a comparação entre a contribuição do Reino Unido para a UE e a contrapartida dos gastos da UE com o Reino Unido.\nContribuições para a UE Reino Unido e UE Dados de 2014, em € bilhões Dados de 2014, em € bilhões\n50 15\n42,1 11,3\n40 10\n6,9\n30 5\n25,8\n20 19,5 0\n14,3\n11,3 9,9 10 6,3 Contribuição do Reino Unido com a UE 3,8 3,6 3,5 2,6 2,2\n0 Gasto da UE com o Reino Unido Alemanha França Itália Unido Espanha Holanda Suécia Bélgica Polônia Áustria Dinamarca países Reino Outros\nDisponível em: http://www.g1.globo.com . Acesso em: 6 set. 2017 (adaptado).\nConsiderando o texto e as informações apresentadas nos gráficos acima, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A contribuição dos quatro maiores países do bloco somou 41,13%."
+        },
+        {
+          "letter": "B",
+          "text": "O grupo “Outros países” contribuiu para esse bloco econômico com 42,1%."
+        },
+        {
+          "letter": "C",
+          "text": "A diferença da contribuição do Reino Unido em relação ao recebido do bloco econômico foi 38,94%."
+        },
+        {
+          "letter": "D",
+          "text": "A soma das participações dos três países com maior contribuição para o bloco econômico supera 50%."
+        },
+        {
+          "letter": "E",
+          "text": "O percentual de participação do Reino Unido com o bloco econômico em 2014 foi de 17,8%, o que o colocou entre os quatro maiores participantes."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q2",
+      "kind": "OBJECTIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Segundo o relatório da Organização das Nações Unidas para a Alimentação e a Agricultura de 2014, a agricultura familiar produz cerca de 80% dos alimentos no mundo e é guardiã de aproximadamente 75% de todos os recursos agrícolas do planeta. Nesse sentido, a agricultura familiar é fundamental para a melhoria da sustentabilidade ecológica.\nDisponível em: http://www.fao.org . Acesso em: 29 ago. 2017 (adaptado).\nConsiderando as informações apresentadas no texto, avalie as afirmações a seguir.\nI. Os principais desafios da agricultura familiar estão relacionados à segurança alimentar, à sustentabilidade ambiental e à capacidade produtiva.\nII. As políticas públicas para o desenvolvimento da agricultura familiar devem fomentar a inovação, respeitando o tamanho das propriedades, as tecnologias utilizadas, a integração de mercados e as configurações ecológicas.\nIII. A maioria das propriedades agrícolas no mundo tem caráter familiar, entretanto o trabalho realizado nessas propriedades é majoritariamente resultante da contratação de mão de obra assalariada.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q3",
+      "kind": "OBJECTIVE",
+      "number": 3,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        7
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura",
+        "versalete",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "O sistema de tarifação de energia elétrica funciona com base em três bandeiras. Na bandeira verde, as condições de geração de energia são favoráveis e a tarifa não sofre acréscimo. Na bandeira amarela, a tarifa sofre acréscimo de R 0,020 para cada kWh consumido, e na bandeira vermelha, condição de maior custo de geração de energia, a tarifa sofre acréscimo de R 0,035 para cada kWh consumido. Assim, para saber o quanto se gasta com o consumo de energia de cada aparelho, basta multiplicar o consumo em kWh do aparelho pela tarifa em questão.\nDisponível em: http://www.aneel.gov.br . Acesso em: 17 jul. 2017 (adaptado).\nNa tabela a seguir, são apresentadas a potência e o tempo de uso diário de alguns aparelhos eletroeletrônicos usuais em residências.\nPotência Tempo de uso Aparelho kWh (kW) diário (h)\nCarregador de celular 0,010 24 0,240 Chuveiro 3 500 W 3,500 0,5 1,750 Chuveiro 5 500 W 5,500 0,5 2,250 Lâmpada de LED 0,008 5 0,040 Lâmpada fluorescente 0,015 5 0,075 Lâmpada incandescente 0,060 5 0,300 Modem de internet em stand-by 0,005 24 0,120 Modem de internet em uso 0,012 8 0,096\nDisponível em: https://www.educandoseubolso.blog.br . Acesso em: 17 jul. 2017 (adaptado).\nConsiderando as informações do texto, os dados apresentados na tabela, uma tarifa de R 0,50 por kWh em bandeira verde e um mês de 30 dias, avalie as afirmações a seguir.\nI. Em bandeira amarela, o valor mensal da tarifa de energia elétrica para um chuveiro de 3 500 W seria de R 1,05, e de R 1,65, para um chuveiro de 5 500 W.\nII. Deixar um carregador de celular e um modem de internet em stand-by conectados na rede de energia durante 24 horas representa um gasto mensal de R 5,40 na tarifa de energia elétrica em bandeira verde, e de R 5,78, em bandeira amarela.\nIII. Em bandeira verde, o consumidor gastaria mensalmente R 3,90 a mais na tarifa de energia elétrica em relação a cada lâmpada incandescente usada no lugar de uma lâmpada LED.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q4",
+      "kind": "OBJECTIVE",
+      "number": 4,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Sobre a televisão, considere a tirinha e o texto a seguir.\nTEXTO 1\nDisponível em: https://www.coletivando.files.wordpress.com . Acesso em: 25 jul. 2015.\nTEXTO 2 A televisão é este contínuo de imagens, em que o telejornal se confunde com o anúncio de pasta de dentes, que é semelhante à novela, que se mistura com a transmissão de futebol. Os programas mal se distinguem uns dos outros. O espetáculo consiste na própria sequência, cada vez mais vertiginosa, de imagens.\nPEIXOTO, N. B. As imagens de TV têm tempo? In: NOVAES, A. Rede imaginária: televisão e democracia. São Paulo: Companhia das Letras, 1991 (adaptado).\nCom base nos textos 1 e 2, é correto afirmar que o tempo de recepção típico da televisão como veículo de comunicação estimula a",
+      "options": [
+        {
+          "letter": "A",
+          "text": "contemplação das imagens animadas como meio de reflexão acerca do estado de coisas no mundo contemporâneo, traduzido em forma de espetáculo."
+        },
+        {
+          "letter": "B",
+          "text": "fragmentação e o excesso de informação, que evidenciam a opacidade do mundo contemporâneo, cada vez mais impregnado de imagens e informações superficiais."
+        },
+        {
+          "letter": "C",
+          "text": "especialização do conhecimento, com vistas a promover uma difusão de valores e princípios amplos, com espaço garantido para a diferença cultural como capital simbólico valorizado."
+        },
+        {
+          "letter": "D",
+          "text": "atenção concentrada do telespectador em determinado assunto, uma vez que os recursos expressivos próprios do meio garantem a motivação necessária para o foco em determinado assunto."
+        },
+        {
+          "letter": "E",
+          "text": "reflexão crítica do telespectador, uma vez que permite o acesso a uma sequência de assuntos de interesse público que são apresentados de forma justaposta, o que permite o estabelecimento de comparações."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q5",
+      "kind": "OBJECTIVE",
+      "number": 5,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Hidrogéis são materiais poliméricos em forma de pó, grão ou fragmentos semelhantes a pedaços de plástico maleável. Surgiram nos anos 1950, nos Estados Unidos da América e, desde então, têm sido usados na agricultura. Os hidrogéis ou polímeros hidrorretentores podem ser criados a partir de polímeros naturais ou sintetizados em laboratório. Os estudos com polímeros naturais mostram que eles são viáveis ecologicamente, mas ainda não comercialmente.\nNo infográfico abaixo, explica-se como os polímeros naturais superabsorventes, quando misturados ao solo, podem viabilizar culturas agrícolas em regiões áridas.\nDisponível em: http://www.revistapesquisa.fapesp.br . Acesso em: 18 jul. 2017 (adaptado).\nA partir das informações apresentadas, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "O uso do hidrogel, em caso de estiagem, propicia a mortalidade dos pés de café."
+        },
+        {
+          "letter": "B",
+          "text": "O hidrogel criado a partir de polímeros naturais deve ter seu uso restrito a solos áridos."
+        },
+        {
+          "letter": "C",
+          "text": "Os hidrogéis são usados em culturas agrícolas e florestais e em diferentes tipos de solos."
+        },
+        {
+          "letter": "D",
+          "text": "O uso de hidrogéis naturais é economicamente viável em lavouras tradicionais de larga escala."
+        },
+        {
+          "letter": "E",
+          "text": "O uso dos hidrogéis permite que as plantas sobrevivam sem a água da irrigação ou das chuvas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q6",
+      "kind": "OBJECTIVE",
+      "number": 6,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        10
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "A imigração haitiana para o Brasil passou a ter grande repercussão na imprensa a partir de 2010. Devido ao pior terremoto do país, muitos haitianos redescobriram o Brasil como rota alternativa para migração. O país já havia sido uma alternativa para os haitianos desde 2004, e isso se deve à reorientação da política externa nacional para alcançar liderança regional nos assuntos humanitários.\nA descoberta e a preferência pelo Brasil também sofreram influência da presença do exército brasileiro no Haiti, que intensificou a relação de proximidade entre brasileiros e haitianos. Em meio a esse clima amistoso, os haitianos presumiram que seriam bem acolhidos em uma possível migração ao país que passara a liderar a missão da ONU.\nNo entanto, os imigrantes haitianos têm sofrido ataques xenofóbicos por parte da população brasileira. Recentemente, uma das grandes cidades brasileiras serviu como palco para uma marcha anti-imigração, com demonstrações de um crescente discurso de ódio em relação a povos imigrantes marginalizados.\nObserva-se, na maneira como esses discursos se conformam, que a reação de uma parcela dos brasileiros aos imigrantes se dá em termos bem específicos: os que sofrem com a violência dos atos de xenofobia, em geral, são negros e têm origem em países mais pobres.\nSILVA, C. A. S.; MORAES, M. T. A política migratória brasileira para refugiados e a imigração haitiana. Revista do Direito. Santa Cruz do Sul, v. 3, n. 50, p. 98-117, set./dez. 2016 (adaptado).\nA partir das informações do texto, conclui-se que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "o processo de acolhimento dos imigrantes haitianos tem sido pautado por características fortemente associadas ao povo brasileiro: a solidariedade e o respeito às diferenças."
+        },
+        {
+          "letter": "B",
+          "text": "as reações xenófobas estão relacionadas ao fato de que os imigrantes são concorrentes diretos para os postos de trabalho de maior prestígio na sociedade, aumentando a disputa por boas vagas de emprego."
+        },
+        {
+          "letter": "C",
+          "text": "o acolhimento promovido pelos brasileiros aos imigrantes oriundos de países do leste europeu tende a ser semelhante ao oferecido aos imigrantes haitianos, pois no Brasil vigora a ideia de democracia racial e do respeito às etnias."
+        },
+        {
+          "letter": "D",
+          "text": "o nacionalismo exacerbado de classes sociais mais favorecidas, no Brasil, motiva a rejeição aos imigrantes haitianos e a perseguição contra os brasileiros que pretendem morar fora do seu país em busca de melhores condições de vida."
+        },
+        {
+          "letter": "E",
+          "text": "a crescente onda de xenofobia que vem se destacando no Brasil evidencia que o preconceito e a rejeição por parte dos brasileiros em relação aos imigrantes haitianos é pautada pela discriminação social e pelo racismo."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q7",
+      "kind": "OBJECTIVE",
+      "number": 7,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "A produção artesanal de panela de barro é uma das maiores expressões da cultura popular do Espírito Santo. A técnica de produção pouco mudou em mais de 400 anos, desde quando a panela de barro era produzida em comunidades indígenas. Atualmente, apresenta-se com modelagem própria e original, adaptada às necessidades funcionais da culinária típica da região. As artesãs, vinculadas à Associação das Paneleiras de Goiabeiras, do município de Vitória-ES, trabalham em um galpão com cabines individuais preparadas para a realização de todas as etapas de produção. Para fazer as panelas, as artesãs retiram a argila do Vale do Mulembá e do manguezal que margeia a região e coletam a casca da Rhysophora mangle, popularmente chamada de mangue vermelho. Da casca dessa planta as artesãs retiram a tintura impermeabilizante com a qual açoitam as panelas ainda quentes. Por tradição, as autênticas moqueca e torta capixabas, dois pratos típicos regionais, devem ser servidas nas panelas de barro assim produzidas. Essa fusão entre as panelas de barro e os pratos preparados com frutos do mar, principalmente a moqueca, pelo menos no estado do Espírito Santo, faz parte das tradições deixadas pelas comunidades indígenas.\nDisponível em: http://www.vitoria.es.gov.br . Acesso em: 14 jul. 2017 (adaptado).\nComo principal elemento cultural na elaboração de pratos típicos da cultura capixaba, a panela de barro de Goiabeiras foi tombada, em 2002, tornando-se a primeira indicação geográfica brasileira na área do artesanato, considerada bem imaterial, registrado e protegido no Instituto do Patrimônio Histórico e Artístico Nacional (Iphan), no Livro de Registro dos Saberes e declarada patrimônio cultural do Brasil.\nSILVA, A. Comunidade tradicional, práticas coletivas e reconhecimento: narrativas contemporâneas do patrimônio cultural. 40 Encontro Anual da Anpocs. Caxambu, 2016 (adaptado).\nAtualmente, o trabalho foi profissionalizado e a concorrência para atender ao mercado ficou mais acirrada, a produção que se desenvolve no galpão ganhou um ritmo mais empresarial com maior visibilidade publicitária, enquanto as paneleiras de fundo de quintal se queixam de ficarem ofuscadas comercialmente depois que o galpão ganhou notoriedade.\nMERLO, P. Repensando a tradição: a moqueca capixaba e a construção da identidade local. Interseções. Rio de Janeiro. v. 13, n. 1, 2011 (adaptado).\nCom base nas informações apresentadas, assinale a alternativa correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A produção das panelas de barro abrange interrelações com a natureza local, de onde se extrai a matéria-prima indispensável à confecção das peças ceramistas."
+        },
+        {
+          "letter": "B",
+          "text": "A relação entre as tradições das panelas de barro e o prato típico da culinária indígena permanece inalterada, o que viabiliza a manutenção da identidade cultural capixaba."
+        },
+        {
+          "letter": "C",
+          "text": "A demanda por bens culturais produzidos por comunidades tradicionais insere o ofício das paneleiras no mercado comercial, com retornos positivos para toda a comunidade."
+        },
+        {
+          "letter": "D",
+          "text": "A inserção das panelas de barro no mercado turístico reduz a dimensão histórica, cultural e estética do ofício das paneleiras à dimensão econômica da comercialização de produtos artesanais."
+        },
+        {
+          "letter": "E",
+          "text": "O ofício das paneleiras representa uma forma de resistência sociocultural da comunidade tradicional na medida em que o estado do Espírito Santo mantém-se alheio aos modos de produção, divulgação e comercialização dos produtos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q8",
+      "kind": "OBJECTIVE",
+      "number": 8,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        12,
+        13
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Os Objetivos de Desenvolvimento Sustentável (ODS) compõem uma agenda mundial adotada durante a Cúpula das Nações Unidas sobre o Desenvolvimento Sustentável, em setembro de 2015. Nessa agenda, representada na figura a seguir, são previstas ações em diversas áreas para o estabelecimento de parcerias, grupos e redes que favoreçam o cumprimento desses objetivos.\nDisponível em: http://www.stockholmresilience.org . Acesso em: 26 set. 2017 (adaptado).\nConsiderando que os ODS devem ser implementados por meio de ações que integrem a economia, a sociedade e a biosfera, avalie as afirmações a seguir.\nI. O capital humano deve ser capacitado para atender às demandas por pesquisa e inovação em áreas estratégicas para o desenvolvimento sustentável.\nII. A padronização cultural dinamiza a difusão do conhecimento científico e tecnológico entre as nações para a promoção do desenvolvimento sustentável.\nIII. Os países devem incentivar políticas de desenvolvimento do empreendedorismo e de atividades produtivas com geração de empregos que garantam a dignidade da pessoa humana.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III. COMPONENTE ESPEC FICO"
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D3",
+      "kind": "DISCURSIVE",
+      "number": 3,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Listas lineares armazenam uma coleção de elementos. A seguir, é apresentada a declaração de uma lista simplesmente encadeada.\nstruct ListaEncadeada {\nint dado;\nstruct ListaEncadeada *proximo;\n};\nPara imprimir os seus elementos da cauda para a cabeça (do final para o início) de forma eficiente, um algoritmo pode ser escrito da seguinte forma:\nvoid mostrar(struct ListaEncadeada *lista) {\nif (lista != NULL) {\nmostrar(lista->proximo);\nprintf(\"%d \", lista->dado);\n}\n}\nCom base no algoritmo apresentado, faça o que se pede nos itens a seguir.\na) Apresente a classe de complexidade do algoritmo, usando a notação 4. (valor: 3,0 pontos)\nb) Considerando que já existe implementada uma estrutura de dados do tipo pilha de inteiros com as operações de empilhar, desempilhar e verificar pilha vazia reescreva o algoritmo de forma não recursiva, mantendo a mesma complexidade. Seu algoritmo pode ser escrito em português estruturado ou em alguma linguagem de programação, como C, Java ou Pascal. (valor: 7,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D4",
+      "kind": "DISCURSIVE",
+      "number": 4,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Uma empresa pretende desenvolver um sistema de folha de pagamento cujo processo de modelagem utilizará UML (Unified Modeling Language). Essa empresa tem três tipos de colaborador: o comissionado, o horista e o assalariado. Todos os colaboradores registram, para efeito de controle, o número de horas trabalhadas no mês. Adicionalmente, os comissionados registram o valor do percentual de comissão e o valor total de vendas acumulado no mês; os horistas registram o valor recebido por hora; e os assalariados registram o valor do salário.\nCada colaborador pertence a um departamento e cada departamento possui pelo menos um colaborador. No final de cada mês, cada departamento deve calcular o salário dos seus colaboradores da seguinte forma: os comissionados devem receber o valor total das vendas multiplicado pela percentagem, independentemente do número de horas trabalhadas; os horistas devem receber o valor da hora trabalhada multiplicado pelo número de horas trabalhadas; e os assalariados devem receber o valor nominal do salário.\nConsiderando essa situação e que o modelo que será elaborado para representá-la utilizará herança e polimorfismo, desenhe um diagrama de classe UML que contenha:\n• as classes que representam as entidades mencionadas (departamento, colaborador e seus tipos);\n• as respectivas associações, atributos e métodos, não sendo necessário tipar os atributos;\n• eventuais classes abstratas com a indicação da restrição abstract ;\n• a multiplicidade de papel das associações;\n• ao lado de cada ocorrência do método para cálculo do pagamento, sua definição na forma de uma expressão que combine os valores dos atributos da classe.\n(valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D5",
+      "kind": "DISCURSIVE",
+      "number": 5,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "TEXTO 1\nDe acordo com a perspectiva construtivista, o conhecimento e o saber não devem ser transmitidos prontos do professor para o estudante. Devem, sim, ser construídos pelo estudante por meio da exposição de situações, formulações de hipóteses e atividades interativas. A ideia é que o aprendiz seja colocado em um ambiente estimulante e criativo, para que possa desenvolver sua própria linha de raciocínio a fim de desvendar e explicar os acontecimentos do mundo. Na escola construtivista, o professor tem o papel de estimular indiretamente o desenvolvimento de habilidades dos estudantes, instigando discussões e debates acerca de situações cotidianas compatíveis com sua realidade.\nDisponível em: http://www.novosalunos.com.br . Acesso em: 16 jul. 2017 (adaptado).\nTEXTO 2\nUm software educativo é considerado aberto quando propicia fluxos variados de interação e permite a professores e alunos criarem situações diversas, e considerado fechado quando a sequência de passos é sempre a mesma, possibilitando pouca ou nenhuma variação de situações problemas apresentadas em suas interfaces. O tipo aberto é interessante quando se deseja solicitar dos alunos a exploração de uma grande quantidade de situações e alternativas, como ocorre com jogos, simuladores e micromundos.\nSILVA, A. C.; GOMES, A. S. Conheça e utilize software educativo: avaliação e planejamento para a educação básica. Recife: Pipa Comunicação, 2015 (adaptado).\nA partir das informações apresentadas nos textos, selecione dois tipos de software educativo aberto para uso em uma escola construtivista, entre os três listados ao final do texto 2. Para cada um deles, forneça dois aspectos pedagógicos que justifiquem sua escolha e um aspecto pedagógico que possa limitar sua eficácia. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "Q9",
+      "kind": "OBJECTIVE",
+      "number": 9,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        16
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "alternativas",
+        "tabela",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Uma árvore AVL é um tipo de árvore binária balanceada na qual a diferença entre as alturas de suas subárvores da esquerda e da direita não pode ser maior do que 1 para qualquer nó. Após a inserção de um nó em uma AVL, a raiz da subárvore de nível mais baixo no qual o novo nó foi inserido é marcada. Se a altura de seus filhos diferir em mais de uma unidade, é realizada uma rotação simples ou uma rotação dupla para igualar suas alturas.\nLAFORE, R. Data structures & algorithms in Java. Indianópolis: Sams Publishing, 2003 (adaptado).\nA seguir, é apresentado um exemplo de árvore AVL.\n13\n10 15\n5 11 16\n4 8\nPelo exposto no texto acima, após a inserção de um nó com valor 3 na árvore AVL exemplificada, é correto afirmar que ela ficará com a seguinte configuração:\n13 10\n5 15 5 13 A D 4 8 11 15 4 10 16\n3 8 11 3 16\n13\n10 10 15\n4 13 B 5 11 16 E 3 8 15 16 4 8\n5 11\n3\n10\n5 13 C 4 11 15 16\n3 8",
+      "options": [],
+      "optionLetters": "ABC",
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q10",
+      "kind": "OBJECTIVE",
+      "number": 10,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Considere os seguintes requisitos para desenvolvimento de uma solução para uma rede de restaurantes fast-food:\nQuando o status de um pedido é atualizado, todos os dispositivos dos envolvidos devem receber a informação. Os sistemas a ser atualizados incluem os acessados pelo entregador, pela linha de produção e pela central de atendimento. Espera-se ainda que outros sistemas possam ser incluídos futuramente (por exemplo, sistema de pedido on-line do cliente), devendo se comportar da mesma forma.\nConsiderando esse contexto, avalie as asserções a seguir e a relação proposta entre elas.\nI. O requisito apresentado pode ser implementado com a utilização do padrão de projeto Observer.\nPORQUE\nII. O padrão de projeto Observer realiza o estilo arquitetural cliente-servidor, no qual o servidor é responsável por enviar notificações aos clientes sempre que houver atualização em alguma informação de interesse.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q11",
+      "kind": "OBJECTIVE",
+      "number": 11,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O encapsulamento é um mecanismo da programação orientada a objetos no qual os membros de uma classe (atributos e métodos) constituem uma caixa preta. O nível de visibilidade dos membros pode ser definido pelos modificadores de visibilidade \"privado\", \"público\" e \"protegido\".\nCom relação ao comportamento gerado pelos modificadores de visibilidade, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Um atributo privado pode ser acessado pelos métodos privados da própria classe e pelos métodos protegidos das suas classes descendentes."
+        },
+        {
+          "letter": "B",
+          "text": "Um atributo privado pode ser acessado pelos métodos públicos da própria classe e pelos métodos públicos das suas classes descendentes."
+        },
+        {
+          "letter": "C",
+          "text": "Um membro público é visível na classe à qual ele pertence, mas não é visível nas suas classes descendentes."
+        },
+        {
+          "letter": "D",
+          "text": "Um método protegido não pode acessar os atributos privados e declarados na própria classe."
+        },
+        {
+          "letter": "E",
+          "text": "Um membro protegido é visível na classe à qual pertence e em suas classes descendentes."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q12",
+      "kind": "OBJECTIVE",
+      "number": 12,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Em um computador, a memória é a unidade funcional que armazena e recupera operações e dados. Tipicamente, a memória de um computador usa uma técnica chamada acesso aleatório, que permite o acesso a qualquer uma de suas posições (células). As memórias de acesso aleatório são divididas em células de tamanho fixo, estando cada célula associada a um identificador numérico único chamado endereço. Todos os acessos à memória referem-se a um endereço específico e deve-se sempre buscar ou armazenar o conteúdo completo de uma célula, ou seja, a célula é a unidade mínima de acesso.\nSCHNEIDER, G. M.; GERSTING, J. L. An Invitation to computer science. 6. ed. Boston: MA: Course Technology, Cengage Learning, 2009 (adaptado).\nA figura que se segue apresenta a estrutura de uma unidade de memória de acesso aleatório.\nEndereço Memória 1 bit\n0\n1 N bits\n2\n3 Registrador de endereços da memória\nRegistrador de dados da 2N-1 memória\nLargura da memória\nConsiderando o funcionamento de uma memória de acesso aleatório, avalie as afirmações a seguir.\nI. Se a largura do registrador de endereços da memória for de 8 bits, o tamanho máximo dessa unidade de memória será de 256 células.\nII. Se o registrador de dados da memória tiver 8 bits, será necessária mais que uma operação para armazenar o valor inteiro 2 024 nessa unidade de memória.\nIII. Se o registrador de dados da memória tiver 12 bits, é possível que a largura da memória seja de 8 bits.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q13",
+      "kind": "OBJECTIVE",
+      "number": 13,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "tabela",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Os sistemas de refrigeração de piscinas de combustível em usinas nucleares evitam que a temperatura desses tanques exceda o limite de segurança. O circuito representado na figura a seguir atende aos requisitos necessários para o controle da ativação do sistema de resfriamento quando a temperatura está próxima de seu ponto crítico.\nO diagrama de tempo ilustrado na figura apresenta uma amostra das temperaturas lidas desde o momento t ao t . Os sinais de entrada Ta, Tb e Tc são de termômetros que medem a temperatura da piscina em 1 8 diferentes pontos ao longo do dia e S é o terminal de acionamento do sistema.\nTa\nTa Tb S Tb\nTc Tc\nt t t t t t t t 1 2 3 4 5 6 7 8\nNesse contexto, assinale a opção em que são apresentados os momentos em que o sistema foi acionado.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "t , t e t . 1 4 8"
+        },
+        {
+          "letter": "B",
+          "text": "t , t e t . 1 6 8"
+        },
+        {
+          "letter": "C",
+          "text": "t , t e t . 2 4 6"
+        },
+        {
+          "letter": "D",
+          "text": "t , t e t . 2 6 8"
+        },
+        {
+          "letter": "E",
+          "text": "t , t e t . 3 5 7"
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q14",
+      "kind": "OBJECTIVE",
+      "number": 14,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Uma relação de equivalência é uma relação binária R em um conjunto A, tal que R é reflexiva, simétrica e transitiva.\nConsidere as relações binárias apresentadas a seguir.\nR1 = {(a,b) : a,b ∈ N e a = b};\n• R2 = {(a,b) : a,b ∈ N e a ≤ b};\n• R3 = {(a,b) : a,b ∈ N e a = b − 1};\n• R4 = {(a,b) : a,b ∈ N e a + b é um número par}.\nSão relações de equivalência apenas o que se apresenta em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "R2 e R3."
+        },
+        {
+          "letter": "B",
+          "text": "R1 e R3."
+        },
+        {
+          "letter": "C",
+          "text": "R1 e R4."
+        },
+        {
+          "letter": "D",
+          "text": "R1, R2 e R4."
+        },
+        {
+          "letter": "E",
+          "text": "R2, R3 e R4."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q15",
+      "kind": "OBJECTIVE",
+      "number": 15,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "referencia-versalete",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Uma das técnicas de ataques em ambientes virtuais é denominada \"homem no meio\" (man in the middle), cujo objetivo é associar o endereço MAC do intruso ao endereço IP de um outro nó da rede – nesse caso, o ponto de acesso (Access Point - AP) wi-fi da rede. Como o AP é o gateway padrão dessa subrede sem fio, todo o tráfego originalmente direcionado ao ponto de acesso pode ser interceptado pelo intruso. Esse ataque explora deficiências conhecidas no projeto de segurança do IEEE 802.11 wi-fi.\nCOULOURIS, G. et al. Sistemas distribuídos: conceitos e projeto. Porto Alegre: Bookman, 2013 (adaptado)\nConsiderando um ataque virtual pela técnica “homem no meio”, por meio de Address Resolution Protocol (ARP) spoofing, avalie as afirmações a seguir.\nI. O problema do compartilhamento de chave presente no projeto de segurança do AP pode ser resolvido com a utilização de um protocolo baseado em chave pública para negociar chaves individuais, como é feito no Transport Layer Security (TLS) / Secure Sockets Layer (SSL).\nII. O problema do desvio de tráfego causado pelo ataque de homem no meio pode ser evitado com a configuração de um firewall nos pontos de acesso que filtram tráfego entre clientes de uma mesma subrede.\nIII. O problema da falta de autenticação dos pontos de acesso sem fio pode ser contornado, obrigando-se o ponto de acesso a fornecer um certificado que possa ser autenticado pelo uso de uma chave pública obtida de terceiros.\nIV. A vulnerabilidade das chaves de 40 bits ou 64 bits a ataques de força bruta pode ser evitada utilizando-se um AP que permita chaves de 128 bits e limitando-se o tráfego a dispositivos compatíveis com chaves de 128 bits.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q16",
+      "kind": "OBJECTIVE",
+      "number": 16,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "A segurança da informação está diretamente relacionada com a proteção de um conjunto de informações, no sentido de preservar o valor que possuem para um indivíduo ou uma organização, tendo como propriedades básicas a confidencialidade, a integridade, a disponibilidade e a autenticidade.\nLYRA, M. R. Segurança e auditoria em sistemas de informação. Rio de Janeiro: Ciência Moderna, 2008 (adaptado).\nA engenharia social é definida como o conjunto de técnicas utilizadas para reunir informações, explorando a tendência humana a ignorar os sistemas de segurança. Os ataques de engenharia social implicam interação com outros indivíduos, o que evidencia o aspecto psicológico da engenharia social.\nMITNICK, K. D.; SIMON, W. L. The art of deception: controlling the human element of security. New York: Wiley, 2001 (adaptado).\nA ética normativa é o \"certo\" e o \"errado\" do comportamento social interpretado. A principal diferença entre essas duas perspectivas é a forma como um dilema moral é abordado, e não necessariamente as consequências disso.\nDisponível em: http://www.ethicsmorals.com . Acesso em: 18 Jul. 2017 (adaptado).\nEm relação à segurança da informação, avalie as afirmações a seguir.\nI. As empresas sempre estarão vulneráveis, pois o fator humano é o elo mais fraco da segurança da informação.\nII. A segurança da informação não é um produto e, sim, um processo.\nIII. A ética profissional é um importante fator a ser considerado na segurança da informação.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q17",
+      "kind": "OBJECTIVE",
+      "number": 17,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Grupos de cientistas e grandes corporações de todo o mundo têm buscado desenvolver sistemas computacionais inteligentes capazes de ajudar as pessoas a aprender. As possibilidades, os efeitos e as implicações éticas da aplicação da chamada Inteligência Artificial (IA) na educação são temas que vêm ganhando espaço nos debates na área de tecnologia educacional em todo o mundo.\nDisponível em: http://www.revistaeducacao.com.br . Acesso em: 26 set. 2017 (adaptado).\nA respeito da adoção de técnicas de IA no processo educacional, avalie as asserções a seguir e a relação proposta entre elas.\nI. Algoritmos de IA adaptativos podem auxiliar a experiência de aprendizado da pessoa de acordo com o seu perfil.\nPORQUE\nII. Os sistemas com algoritmos de IA adaptativos analisam respostas anteriores, buscando determinados padrões que possam indicar pontos de dificuldade ou facilidade da pessoa em relação a determinado assunto.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q18",
+      "kind": "OBJECTIVE",
+      "number": 18,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "O algoritmo a seguir recebe um vetor v de números inteiros e rearranja esse vetor de tal forma que seus elementos, ao final, estejam ordenados de forma crescente.\n01 void ordena(int *v, int n)\n02 {\n03 int i, j, chave;\n04 for(i = 1; i < n; i++)\n05 {\n06 chave = v[i];\n07 j = i - 1;\n08 while(j >= 0 && v[j] < chave)\n09 {\n10 v[j-1] = v[j];\n11 j = j - 1;\n12 }\n13 v[j+1] = chave;\n14 }\n15 }\nConsiderando que nesse algoritmo há erros de lógica que devem ser corrigidos para que os elementos sejam ordenados de forma crescente, assinale a opção correta no que se refere às correções adequadas.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A linha 04 deve ser corrigida da seguinte forma: for(i = 1; i < n - 1; i++) e a linha 13, do seguinte modo: v[j - 1] = chave;."
+        },
+        {
+          "letter": "B",
+          "text": "A linha 04 deve ser corrigida da seguinte forma: for(i = 1; i < n - 1; i++) e a linha 07, do seguinte modo: j = i + 1;."
+        },
+        {
+          "letter": "C",
+          "text": "A linha 07 deve ser corrigida da seguinte forma: j = i + 1 e a linha 08, do seguinte modo: while(j >= 0 && v[j] > chave)."
+        },
+        {
+          "letter": "D",
+          "text": "A linha 08 deve ser corrigida da seguinte forma: while(j >= 0 && v[j] > chave) e a linha 10, do seguinte modo: v[j + 1] = v[j];."
+        },
+        {
+          "letter": "E",
+          "text": "A linha 10 deve ser corrigida da seguinte forma: v[j + 1] = v[j]; e a linha 13, do seguinte modo: v[j - 1] = chave;."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q19",
+      "kind": "OBJECTIVE",
+      "number": 19,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "versalete",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Considere o diagrama Entidade-Relacionamento apresentado a seguir.\nPartido idPartido: INTEGER NOT NULL [PK]\nsiglaPartido: VARCHAR(45) NOT NULL descricaoPartido: VARCHAR(45) NOT NULL\nDeputado idPartido: INTEGER NOT NULL [PK]\nidPartido: INTEGER NOT NULL [FK] nomeDeputado: VARCHAR(60) NOT NULL\nSecao idSecao: INTEGER NOT NULL [PK] Participacao dataSecao: DATE NOT NULL idSecao: INTEGER NOT NULL [PFK] horaSecao: TIME NOT NULL idDeputado: INTEGER NOT NULL [PFK] decisao: VARCHAR(2000) NOT NULL\nQual código SQL exibe o nome de todos os deputados que compareceram a pelo menos uma seção e as datas de cada seção em que os deputados participaram?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado, Participacao, Secao WHERE Deputado.idDeputado=Participacao.idDeputado;"
+        },
+        {
+          "letter": "B",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado, Participacao, Secao WHERE Deputado.idDeputado = Participacao.\nidDeputado OR Secao.idSecao = Participacao.idSecao;"
+        },
+        {
+          "letter": "C",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado LEFT OUTER JOIN Participacao ON Deputado.idDeputado = Participacao.idDeputado\nLEFT OUTER JOIN Secao ON Secao.idSecao = Participacao.idSecao;"
+        },
+        {
+          "letter": "D",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado RIGHT OUTER JOIN Participacao ON Deputado.idDeputado = Participacao.idDeputado\nRIGHT OUTER JOIN Secao ON Secao.idSecao = Participacao.idSecao;"
+        },
+        {
+          "letter": "E",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado INNER JOIN Participacao ON Deputado.idDeputado = Participacao.idDeputado\nINNER JOIN Secao ON Participacao.idSecao=Secao.idSecao;"
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q20",
+      "kind": "OBJECTIVE",
+      "number": 20,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Em redes de computadores, a camada de transporte é responsável pela transferência de dados entre máquinas de origem e destino. Dois protocolos tradicionais para essa camada são o Transmission Control Protocol (TCP) e o User Datagram Protocol (UDP). Diferentemente do UDP, o TCP é orientado à conexão. Com relação a esses protocolos, avalie as afirmações a seguir.\nI. O UDP é mais eficiente que o TCP quando o tempo de envio de pacotes é fundamental.\nII. O TCP é o mais utilizado em jogos on-line de ação para a apresentação gráfica.\nIII. O TCP é mais eficiente que o UDP quando a confiabilidade de entrega de dados é fundamental.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q21",
+      "kind": "OBJECTIVE",
+      "number": 21,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "caracteres-suspeitos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Na lógica proposicional, definem-se regras para determinar o valor-verdade (verdadeiro ou falso) de sentenças em relação a um modelo particular. Essas regras permitem representar raciocínios lógicos comuns das linguagens naturais.\nNesse contexto, considere a sentença e as proposições lógicas a seguir.\n“Um veículo que é elétrico (E) pode ser um robô (R) se for autônomo (A), caso contrário não é um robô (R)”. P1 = (E ∧ R) ↔ A ;\nP2 = E → (R ↔ A) ; P3 = E → ((A → R) ∨ ¬R) .\nA sentença pode ser representada pela(s) expressão(ões) lógica(s)",
+      "options": [
+        {
+          "letter": "A",
+          "text": "P2, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "P3, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "P1 e P2, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "P1 e P3, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "P1, P2 e P3."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q22",
+      "kind": "OBJECTIVE",
+      "number": 22,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Uma instituição de ensino planeja usar uma plataforma de educação a distância para atender comunidades rurais dispersas em áreas remotas onde o acesso à internet é lento e instável. Essa plataforma possui as seguintes ferramentas modulares que podem ser selecionadas individualmente e acopladas no momento de sua implantação:\n• biblioteca: acervo de livros digitais que podem ser baixados e usados off-line;\n• videoteca: acervo de videoaulas que podem ser assistidas on-line, mas não baixadas para acesso off-line;\n• videoconferência: ferramenta de comunicação audiovisual síncrona (em tempo real);\n• chat: ferramenta de comunicação textual síncrona;\n• fórum: ferramenta de comunicação textual assíncrona;\n• wiki: ferramenta colaborativa para construção de conteúdos coletivos com textos e imagens.\nNessa situação, dado que a instituição pode oferecer no máximo três ferramentas em sua plataforma, a combinação que melhor atende às peculiaridades da instituição e de seu público é",
+      "options": [
+        {
+          "letter": "A",
+          "text": "videoconferência, chat e fórum, porque, juntas, oferecem o melhor nível de interação entre tutor e aluno e também dos alunos entre si."
+        },
+        {
+          "letter": "B",
+          "text": "biblioteca, videoteca e wiki, porque, juntas, oferecem maior acesso ao acervo da instituição e enriquecem o trabalho colaborativo."
+        },
+        {
+          "letter": "C",
+          "text": "chat, fórum e wiki, porque, juntas, oferecem as melhores oportunidades de interação para a construção coletiva de conhecimento."
+        },
+        {
+          "letter": "D",
+          "text": "videoteca, videoconferência e chat, porque, juntas, oferecem o melhor equilíbrio entre interação e acesso ao acervo."
+        },
+        {
+          "letter": "E",
+          "text": "biblioteca, fórum e wiki, porque, juntas, oferecem o melhor equilíbrio entre acesso ao acervo, interação e trabalho colaborativo."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q23",
+      "kind": "OBJECTIVE",
+      "number": 23,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Embora a educação a distância (EaD) seja, hoje, cada vez mais ofertada nas instituições de ensino, nem sempre são oferecidas ferramentas adequadas para se estabelecer o processo desejado de ensino- aprendizagem. Assim, na definição do software para aplicações educacionais no modelo EaD de modo a melhor atender o processo de ensino-aprendizagem, deve-se",
+      "options": [
+        {
+          "letter": "A",
+          "text": "escolher um único aspecto de aprendizagem para evitar distorções na interpretação do estudante, por exemplo, o aspecto de memorização, de reflexão crítica e autocrítica."
+        },
+        {
+          "letter": "B",
+          "text": "utilizar diversos canais de interação como chats, fóruns, e-mails, telefone e ambientes virtuais de troca de mensagens e conteúdo para maximizar a interação entre estudantes e professores."
+        },
+        {
+          "letter": "C",
+          "text": "escolher softwares baseados em tecnologias abertas (open source) para minimizar eventuais custos com licenças e manutenção de software para a instituição e o estudante."
+        },
+        {
+          "letter": "D",
+          "text": "utilizar ferramentas que priorizem o estudo individual do estudante, o que minimiza a necessidade da presença de tutores e reduz o custo de implantação desse modelo pedagógico."
+        },
+        {
+          "letter": "E",
+          "text": "apresentar conteúdos neutros, desprendidos de qualquer relação com uma cultura específica, religião, raça ou aspectos políticos, pois, assim, evita-se a regionalização do conteúdo ministrado."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q24",
+      "kind": "OBJECTIVE",
+      "number": 24,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Requisitos funcionais, também conhecidos como capacidades (capabilities) ou características (features), descrevem as funções que o sistema deve executar. Requisitos não funcionais, também conhecidos como restrições (constraints) ou requisitos de qualidade do sistema, são os que agem para restringir a solução.\nPierre, B.; Fairley, R. E. Guide to the software engineering body of knowledge (Swebok(R)). 3. ed. Los Alamitos: IEEE Computer Society Press, 2004 (adaptado).\nCom base nessa informação, avalie os seguintes requisitos referentes ao desenvolvimento de um sistema de software para uma gráfica que pretende prestar serviços de impressão pela internet.\nI. O cliente pode registrar um pedido de impressão informando um tamanho A2 ou maior e a resolução que deseja (baixa, média ou alta).\nII. O software deve ser desenvolvido na linguagem Java e utilizar, para a persistência em banco de dados, uma biblioteca padrão Java Persistence API (JPA).\nIII. O tempo médio decorrente entre o envio do pedido pelo cliente e o recebimento do e-mail com os dados de confirmação deve ser inferior a 5 minutos.\nIV. Todos os pedidos de impressão em que o custo ultrapasse 10 salários mínimos devem ser aprovados por um gerente responsável por inspecionar a impressão.\nSão classificados como não funcionais apenas os requisitos mencionados em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e IV."
+        },
+        {
+          "letter": "B",
+          "text": "II e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e III."
+        },
+        {
+          "letter": "E",
+          "text": "I, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q25",
+      "kind": "OBJECTIVE",
+      "number": 25,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Atualmente, estão disponíveis várias classes de software para um melhor aproveitamento educacional e apoio automatizado ao processo de ensino-aprendizagem. Tais softwares são classificados em categorias conforme seus objetivos pedagógicos.\nGEBRAN, M. P. Tecnologias Educacionais. Curitiba: IESDE Brasil S.A, 2009 (adaptado).\nConsiderando a classificação dos softwares educativos, avalie as afirmações a seguir.\nI. Os tutoriais, que consistem em classe de software para transmissão da informação de forma organizada, de modo similar a um livro ou apostila eletrônica, caracterizam-se, por exemplo, pelo uso de estratégias, objetivos a serem alcançados e pela apresentação de estímulos.\nII. Jogos educativos utilizam, por exemplo, desafios e competição como estímulo na aquisição de um determinado aprendizado, com instruções e regras claras.\nIII. Softwares de multimídia utilizam uma linguagem de programação e permitem desenvolver o raciocínio lógico e matemático, sendo uma de suas características principais a liberdade de criação.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas"
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q26",
+      "kind": "OBJECTIVE",
+      "number": 26,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Cada aspecto da interação humano-computador associa-se a um conceito. A figura a seguir destaca, em uma tela do software Microsoft WordTM, o botão\"Pincel de Formatação\", juntamente com o seu texto explicativo, que indica o seu significado, as teclas de atalho e como utilizá-lo.\nDo ponto de vista da interação humano-computador, qual conceito está presente na interface gráfica?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Acessibilidade"
+        },
+        {
+          "letter": "B",
+          "text": "Comunicabilidade"
+        },
+        {
+          "letter": "C",
+          "text": "Tempo de resposta"
+        },
+        {
+          "letter": "D",
+          "text": "Cognição distribuída"
+        },
+        {
+          "letter": "E",
+          "text": "Princípio da proximidade"
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q27",
+      "kind": "OBJECTIVE",
+      "number": 27,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "A diretoria de uma empresa identificou os seguintes problemas, que têm afetado os seus negócios:\n• falta de métricas para controlar seus produtos;\n• processos escassos ou inexistentes;\n• falta de foco em seus negócios;\n• descontrole dos processos.\nNessa situação, o guia de boas práticas indicado para otimizar o investimento em tecnologia da informação, de forma a melhorar o retorno sobre o investimento e fornecer métricas para a avaliação dos resultados dessa empresa é o",
+      "options": [
+        {
+          "letter": "A",
+          "text": "ITIL."
+        },
+        {
+          "letter": "B",
+          "text": "COBIT."
+        },
+        {
+          "letter": "C",
+          "text": "CMMI."
+        },
+        {
+          "letter": "D",
+          "text": "MPS-BR."
+        },
+        {
+          "letter": "E",
+          "text": "PMBOK."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q28",
+      "kind": "OBJECTIVE",
+      "number": 28,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Um dos conceitos básicos de orientação a objetos é o conceito de herança. Durante a implementação de um sistema, o mecanismo de herança suporta a definição de uma nova classe A a partir de outra B, preexistente (por exemplo, em Java, pode-se definir a classe A herdeira da classe B como \"class A extends B\"). Além disso, tal mecanismo pode implementar polimorfismo de tipos de objetos.\nDEITEL, P.; DEITEL, H. Java - como programar. 8. ed. São Paulo: Prentice Hall, 2010 (adaptado).\nA respeito de herança e sua relação com orientação a objetos, avalie as afirmações a seguir.\nI. Herança é um mecanismo que pode ser usado para implementar polimorfismo.\nII. Herança permite o reaproveitamento de código comum entre algumas classes.\nIII. Métodos herdados equivalem a métodos polimórficos.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q29",
+      "kind": "OBJECTIVE",
+      "number": 29,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "As redes de comunicação, notadamente aquelas baseadas na internet, têm sido utilizadas como base na construção de infraestrutura para plataformas de educação a distância (EaD).\nA exemplo disso, ferramentas de EaD têm sido desenvolvidas a partir do princípio da comunicação síncrona, que pressupõe a conexão simultânea entre o emissor e o receptor da mensagem, e da comunicação assíncrona, que não exige a conexão simultânea.\nConsiderando uma plataforma de EaD baseada em redes de comunicação, avalie as afirmações a seguir.\nI. A situação em que um professor tem acesso à tela do computador de cada estudante, sem intervir no que cada um estiver visualizando, caracteriza um cenário de comunicação assíncrona.\nII. Ferramentas assíncronas permitem ao estudante enviar mensagens de dúvidas ao professor durante a exibição de uma videoaula, sem a garantia de que o professor responderá a essa mensagem em tempo real.\nIII. Compete ao professor verificar, por meio de imagens em tempo real, se é realmente um estudante quem está realizando as tarefas assíncronas no ponto receptor.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q30",
+      "kind": "OBJECTIVE",
+      "number": 30,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Um Massive Open On-line Course (MOOC) é um curso destinado a grande quantidade de estudantes em um ambiente on-line e se fundamenta na teoria conectivista do aprendizado, segundo a qual as estruturas tradicionais de ensino-aprendizagem, baseadas no convívio em sala de aula com um professor apresentando conteúdos de forma expositiva, não atendem às necessidades dos indivíduos conectados à internet e às redes sociais.\nUm MOOC diferencia-se da educação a distância (EaD) tradicional por ser geralmente gratuito, aberto, livre de pré-requisito de ingresso, e pela maior quantidade de estudantes. O processo de avaliação do MOOC também é diferente da EaD tradicional porque, normalmente, utiliza crowdsourcing (correção de atividades ou questionários por especialistas), peer assessment (perguntas dissertativas avaliadas pelos pares) e avaliações de postagens em fóruns.\nSOUZA, R.; CYPRIANO, E. F. MOOC: Uma alternativa contemporânea para o ensino de astronomia. Ciência e Educação (Bauru), v. 22, n. 1, p. 65-80, 2016 (adaptado).\nCom base nas informações do texto acima, é correto afirmar que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "professores e tutores são mais importantes nos MOOCs que na EaD tradicional."
+        },
+        {
+          "letter": "B",
+          "text": "avaliações formativas são mais importantes na EaD tradicional que nos MOOCs."
+        },
+        {
+          "letter": "C",
+          "text": "interações entre estudantes são mais importantes nos MOOCs que na EaD tradicional."
+        },
+        {
+          "letter": "D",
+          "text": "ambientes virtuais de aprendizagem são mais importantes nos MOOCs que na EaD tradicional."
+        },
+        {
+          "letter": "E",
+          "text": "recursos didáticos de qualidade são mais importantes na EaD tradicional que nos MOOCs."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q31",
+      "kind": "OBJECTIVE",
+      "number": 31,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        29
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "A didática escolar cumpre funções de caráter político, educativo e científico a um só tempo. A integralização dessas funções pela didática escolar torna essa disciplina acadêmica algo mais complexo que a simples procura e implementação de procedimentos de ensino. Por meio desse processo, a unidade dialética da teoria e da prática assume as características de uma verdadeira investigação científica da realidade cotidiana da prática pedagógica.\nRAYS, O. A. A relação teoria-prática na didática escolar crítica. In: VEIGA, I. P. A. (Org.). Didática: o ensino e suas relações. 7. ed. Campinas: Papirus, 2003 (adaptado).\nA partir das informações apresentadas, avalie as afirmações a seguir.\nI. A práxis pedagógica envolve a adoção do método dialético no processo de elaboração do conhecimento em articulação com a teoria histórico-cultural.\nII. A apropriação crítica e histórica do conhecimento é um instrumento de compreensão da realidade social e de atuação crítica para a transformação da sociedade.\nIII. A Didática é uma área do conhecimento que utiliza os elementos do cotidiano escolar e das questões sociais para atualizar a prática docente.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q32",
+      "kind": "OBJECTIVE",
+      "number": 32,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Um aluno da rede pública de ensino, com 11 anos de idade, está matriculado no 5º ano do Ensino Fundamental e tem surdez profunda bilateral. Ele é bem humorado, brincalhão e bastante sociável. É fluente na língua brasileira de sinais (Libras), mas apresenta dificuldades de leitura e escrita da língua portuguesa. Tem potencial cognitivo elevado, embora necessite de constante interferência e auxílio da professora para realizar suas atividades.\nDisponível em: http://www.cepae.faced.ufu.br . Acesso em: 7 jul. 2017 (adaptado).\nConsiderando a situação apresentada e o que estabelece a Política Nacional da Educação Especial na perspectiva da Educação Inclusiva, deve-se assegurar a esse aluno",
+      "options": [
+        {
+          "letter": "A",
+          "text": "escolarização que atenda à proposta educacional bilíngue, considerando-se a língua de sinais como primeira língua."
+        },
+        {
+          "letter": "B",
+          "text": "atendimento educacional especializado, priorizando-se o ensino da língua portuguesa, de modo a garantir a educação bilíngue."
+        },
+        {
+          "letter": "C",
+          "text": "processo avaliativo que priorize o uso da língua portuguesa na modalidade escrita, dada a importância da manutenção do registro da aprendizagem."
+        },
+        {
+          "letter": "D",
+          "text": "ensino da língua brasileira de sinais (Libras) após a aquisição da língua portuguesa na modalidade escrita, em processo análogo ao da alfabetização de aluno ouvinte."
+        },
+        {
+          "letter": "E",
+          "text": "educação inclusiva, apesar de a surdez não se enquadrar no campo da deficiência física ou das limitações de mobilidade."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q33",
+      "kind": "OBJECTIVE",
+      "number": 33,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "As escolas brasileiras não têm um único jeito de ensinar sobre gênero e sexualidade; pesquisas evidenciam currículos e práticas pedagógicas e de gestão marcadas pela discriminação. Distinções sexistas nas aulas, na chamada, nas filas de meninos e de meninas, nos uniformes, no tratamento e nas expectativas sobre alunos ou alunas, tolerância da violência verbal e até física entre os meninos, representações de homens e mulheres nos materiais didáticos, abordagem quase exclusivamente biológica da sexualidade no livro didático, estigmatização referente à manifestação da sexualidade das adolescentes, perseguição sofrida por homossexuais, travestis e transexuais, evidenciam o quanto a escola (já) ensina, em diferentes momentos e espaços, sobre masculinidade, feminilidade, sexo, afeto, conjugalidade, família.\nDisponível em: http://www.spm.gov.br . Acesso em: 11 jul. 2017 (adaptado).\nNesse contexto, para construir uma prática pedagógica que promova transformações no sentido da igualdade de gênero a partir do respeito às diferenças, espera-se que a escola",
+      "options": [
+        {
+          "letter": "A",
+          "text": "incorpore o conceito de gênero nos diferentes componentes do currículo de maneira transversal."
+        },
+        {
+          "letter": "B",
+          "text": "realize atividades em seu cotidiano que definam para as crianças o que é masculino e o que é feminino."
+        },
+        {
+          "letter": "C",
+          "text": "se valha das diferenças sexuais naturais entre meninos e meninas para conduzir a classe e manter a disciplina."
+        },
+        {
+          "letter": "D",
+          "text": "se refira à questão de gênero de forma tangencial, suficiente para promover vivência menos intransigente e mais equânime entre homens e mulheres."
+        },
+        {
+          "letter": "E",
+          "text": "reforce modelos de comportamentos socialmente atribuídos a homens e mulheres que formam um conjunto de representações sobre masculinidade e feminilidade."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q34",
+      "kind": "OBJECTIVE",
+      "number": 34,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Lev Semenovitch Vygotsky, psicólogo russo, elaborou sua teoria tendo por base o desenvolvimento do indivíduo como resultado de um processo sócio-histórico, enfatizando o papel da linguagem e da aprendizagem nesse desenvolvimento. Esse pressuposto teórico, conhecido como Teoria Histórico-Cultural, apresenta como questão central a apropriação de conhecimentos pela interação do sujeito com o contexto social.\nConsiderando os pressupostos da teoria vygotskyana, avalie as afirmações a seguir.\nI. O desenvolvimento cognitivo é produzido no processo de internalização da interação social com a cultura.\nII. Ao acessar a língua escrita, o indivíduo se apropria das técnicas inerentes a este instrumento cultural, modificando suas funções mentais superiores.\nIII. A apropriação da linguagem específica do meio sociocultural transforma os rumos do desenvolvimento individual.\nIV. O desenvolvimento das funções psíquicas superiores decorre de funções existentes no indivíduo.\nV. A educação sistemática e organizada pode contribuir com o processo de aquisição dos sistemas de conceitos científicos, o que modifica a estrutura do pensamento do indivíduo.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e IV."
+        },
+        {
+          "letter": "B",
+          "text": "I e V."
+        },
+        {
+          "letter": "C",
+          "text": "II, III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II, III e V."
+        },
+        {
+          "letter": "E",
+          "text": "II, III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q35",
+      "kind": "OBJECTIVE",
+      "number": 35,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "A professora de uma escola pública tem sua prática pedagógica fundamentada na teoria de Jean Piaget. Essa professora irá desenvolver com uma turma do 5º ano do Ensino Fundamental uma aula de Ciências sobre o tema força e movimento, utilizando a abordagem construtivista.\nNesse contexto, qual deverá ser a proposta de trabalho elaborada pela professora?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Demonstrar aos estudantes, em laboratório, experimentos relacionados ao tema e realizar avaliação do conteúdo trabalhado."
+        },
+        {
+          "letter": "B",
+          "text": "Utilizar livro didático e figuras previamente selecionadas para sintetizar conceitos e informações relacionados ao conteúdo trabalhado."
+        },
+        {
+          "letter": "C",
+          "text": "Aplicar exercícios de fixação em níveis crescentes de complexidade para a internalização dos conteúdos pelos estudantes."
+        },
+        {
+          "letter": "D",
+          "text": "Partir do saber do cotidiano do estudante sobre a relação entre força e movimento para provocar o surgimento de hipóteses, criar conflitos cognitivos para desenvolvimento do conceito desejado."
+        },
+        {
+          "letter": "E",
+          "text": "Realizar leituras informativas sobre o conteúdo e, a partir da apresentação de slides ilustrativos, descrever o conceito de força e de movimento, apresentando exemplos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-licenciatura-exam",
+        "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+        "answerKeyId": "enade-2017-licenciatura-answer-key",
+        "answerKeySha256": "d9f15f88f17eb223010592c65bb99f2df5a88f159276331fb41be569f45a1549",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    }
+  ]
+}

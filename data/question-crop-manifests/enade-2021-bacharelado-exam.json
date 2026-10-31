@@ -247,8 +247,8 @@
     "height": 779.528
    }
   ],
-  "pdftoppm": "pdftoppm version 26.05.0",
-  "imagemagick": "Version: ImageMagick 7.1.1-43 Q16 x86_64 22550 https://imagemagick.org"
+  "pdftoppm": "pdftoppm version 24.02.0",
+  "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
  },
  "items": [
   {
@@ -272,8 +272,8 @@
      },
      "width": 1443,
      "height": 1765,
-     "byteSize": 117262,
-     "sha256": "daa77c209bb4fef30da8e30064147ffe5eb7b36e5132464822ff92f3b8945cae"
+     "byteSize": 117270,
+     "sha256": "c308ac62db6f7e782812efbb15b8b547a10977242c54ef8023e0621d70601bdd"
     }
    ]
   },
@@ -298,8 +298,8 @@
      },
      "width": 1443,
      "height": 903,
-     "byteSize": 71204,
-     "sha256": "86fb51b4dac6d6f7a5cb7d9e179edfa0c97c8d53a1b36b81d601144c9ba5da15"
+     "byteSize": 71212,
+     "sha256": "0e02d58b8da21cb3da137df268f3704197754baa9e268ae12bdf7ef025be4353"
     }
    ]
   },
@@ -321,8 +321,8 @@
      },
      "width": 1443,
      "height": 1430,
-     "byteSize": 100972,
-     "sha256": "5ecad8a944f2c6151b8cff269b1b0013d27491160531a6e6f8ea529c7bf05dc7"
+     "byteSize": 100966,
+     "sha256": "c365f18fd40fdaba6e8a03695c806eb462ac07308cb75810a417232610efbd94"
     }
    ]
   },
@@ -344,8 +344,8 @@
      },
      "width": 1443,
      "height": 1661,
-     "byteSize": 377528,
-     "sha256": "f8dcd5dc81e52c81ca886aaf96b4ae8c6e03b65fa01bf6e8b4dba933871ea242"
+     "byteSize": 377506,
+     "sha256": "8821ecaa98ebebd5436322a36a23ee3a9d6882555a27b3849f4be427f343cf0a"
     },
     {
      "file": "Q2-2.webp",
@@ -358,8 +358,8 @@
      },
      "width": 1443,
      "height": 1632,
-     "byteSize": 101952,
-     "sha256": "ea7650a74a56677fe514367d7854e98c67af40dedca047c877ca4ea146f9da9d"
+     "byteSize": 101964,
+     "sha256": "dd96eae85eaf01e30a69d5057937fcad62af5669ad6a3ce629e612392650d25e"
     }
    ]
   },
@@ -381,8 +381,8 @@
      },
      "width": 1443,
      "height": 1864,
-     "byteSize": 395506,
-     "sha256": "337b81da88479016993e88ec2c6c13ec83dc06160978aae98dcabe75308f7119"
+     "byteSize": 395180,
+     "sha256": "505d9588035b4a2df60fb7db1aac8d8eda6301b0c5558d2990a6cb8fb40905e2"
     }
    ]
   },
@@ -404,8 +404,8 @@
      },
      "width": 1443,
      "height": 1416,
-     "byteSize": 98994,
-     "sha256": "c70fdf88c70d63948839279afcee9f791c02cd53ba1cff94544056b944b5ef3b"
+     "byteSize": 99016,
+     "sha256": "5b82359412072f930a62a61919252105b3a40a25755dd7bf3010518e891f41b2"
     }
    ]
   },
@@ -427,8 +427,8 @@
      },
      "width": 1443,
      "height": 1872,
-     "byteSize": 321600,
-     "sha256": "0c9037b5b86131476dde9f77c0241b128fd2632ade5600aae6ec5003dea6157c"
+     "byteSize": 321686,
+     "sha256": "12c0bda6028fbaffa43e3ea31cf24e386228ca802c023f4984fdf64fb4a9db6c"
     },
     {
      "file": "Q5-2.webp",
@@ -441,8 +441,8 @@
      },
      "width": 1443,
      "height": 731,
-     "byteSize": 35532,
-     "sha256": "2638841bb4199b9a2e24b8da4d4ade3eb9fe0928aa81fe755ae3f9f74701c09d"
+     "byteSize": 35538,
+     "sha256": "153523e68a7aef204fc15a42682d9c80167ca85265b5143b498b6b289ea0e3b7"
     }
    ]
   },
@@ -464,8 +464,8 @@
      },
      "width": 1443,
      "height": 1151,
-     "byteSize": 75866,
-     "sha256": "ade06f9e73e1a04ae4ec84716e6dba54a8bfea08d6b2c58142f5af37775d2fc4"
+     "byteSize": 75868,
+     "sha256": "6f377afd5219204d695785d4eec5b0e7a0c3d7d6a1c67e777f7129ca4c6f8a1c"
     }
    ]
   },
@@ -487,8 +487,8 @@
      },
      "width": 1443,
      "height": 1870,
-     "byteSize": 132728,
-     "sha256": "c6cf26e6ced8cf64ad172cde445860244def7afb28814be5b6491d61ebba2f9d"
+     "byteSize": 132714,
+     "sha256": "0a35a553006687f8a903f1124f51a8fc60d6b195d53d983c7ebf3531ac26c69d"
     }
    ]
   },
@@ -510,8 +510,8 @@
      },
      "width": 1443,
      "height": 1441,
-     "byteSize": 85080,
-     "sha256": "9aff2ee0644207a004ed2e007d333dc1a6dd2379673bc03f7dde96341a373cb9"
+     "byteSize": 85076,
+     "sha256": "83bf385abd12774aa66c275e6a85e6985604b6ecfad0dac1c77e1d0007d32a0d"
     }
    ]
   },
@@ -537,7 +537,7 @@
      "width": 1443,
      "height": 1866,
      "byteSize": 82354,
-     "sha256": "46dc10b4f9e7d9fdbd01aee22709f5ba32b9a38b4ebd52a5437191c1516627ee"
+     "sha256": "9799a7526e5a84570fd3a68597fe2cbd1134cdb717f4ff1ded245ded46f47e8f"
     },
     {
      "file": "D3-2.webp",
@@ -550,8 +550,8 @@
      },
      "width": 1224,
      "height": 302,
-     "byteSize": 19870,
-     "sha256": "b447324cbb98fc1910fb1680ae2e257babd42e5715c32cf32f56513fdfdf9651"
+     "byteSize": 19878,
+     "sha256": "a6b5b6b274bf712ff05cd5c81dd4f0319d1bcd3f26aa978fe523568d76d12c0b"
     }
    ]
   },
@@ -576,8 +576,8 @@
      },
      "width": 1443,
      "height": 910,
-     "byteSize": 55808,
-     "sha256": "9182563add9e2c1b973fd547ed894773a67aff1e35c85055b8817833eb32ae51"
+     "byteSize": 55822,
+     "sha256": "6671be257ff38e1f1d6b927c1357cdc462944773997d5d62c9ccff56f1636f67"
     }
    ]
   },
@@ -602,8 +602,8 @@
      },
      "width": 720,
      "height": 1813,
-     "byteSize": 74828,
-     "sha256": "71d478c6a534ac5f2b977df938eae589ef6835bee8fe583d715a72cd980a9d1a"
+     "byteSize": 74768,
+     "sha256": "efd93af443e84e4fc1aa3cf2bd270bf64fa75191c859b05dcddf49f44c2a5811"
     },
     {
      "file": "D5-2.webp",
@@ -616,8 +616,8 @@
      },
      "width": 713,
      "height": 1383,
-     "byteSize": 22892,
-     "sha256": "55315d7fec2baa7a6b8db87a5b6293c646ae65609c35c356bf2162671748aafe"
+     "byteSize": 22890,
+     "sha256": "a48197dcf446d5f1368422811a40bfc2276844ee173f40b4b554dfdd1093aef5"
     },
     {
      "file": "D5-3.webp",
@@ -631,7 +631,7 @@
      "width": 1443,
      "height": 278,
      "byteSize": 19144,
-     "sha256": "9c67946f4681fa1afd42045eeb8ad81dac6d3deff626a9fec2afdade198d6994"
+     "sha256": "252e50f9f17f2a92135a55c85d72be57f1307295b8ffd2eb19266f7f040e9fc1"
     }
    ]
   },
@@ -653,8 +653,8 @@
      },
      "width": 721,
      "height": 1362,
-     "byteSize": 67116,
-     "sha256": "74198f2c0aa0458b5a8a316a04265d5a5081afb55a1bdcb26e0ff269d5ce0675"
+     "byteSize": 67118,
+     "sha256": "bb087549ad71c201e02efd6233759f3c9e6dccea103062e18bbb335429b81c6b"
     }
    ]
   },
@@ -676,8 +676,8 @@
      },
      "width": 722,
      "height": 1358,
-     "byteSize": 50750,
-     "sha256": "eefc0380339549a46e3dc3fb1605362d59f729e7ac367f683f1e891bbeb187be"
+     "byteSize": 50760,
+     "sha256": "2ec443c56483cb94e19ece692d3646ffb2a390831b0f51e66e67d1885e4f1d09"
     }
    ]
   },
@@ -699,8 +699,8 @@
      },
      "width": 1443,
      "height": 1872,
-     "byteSize": 94276,
-     "sha256": "5b75d4364e499d15fe80e936965daa63ab0cfe6cfdf00cfb054b51f71101ce55"
+     "byteSize": 94282,
+     "sha256": "7bab24df315659fdbedabbb352334d08894dd16f1f3ceb19695e5bf64d804714"
     }
    ]
   },
@@ -722,8 +722,8 @@
      },
      "width": 1443,
      "height": 963,
-     "byteSize": 50548,
-     "sha256": "809bd0768a7c16ab7f4f1fa2f4aaa6de93955b046a38fe64e2b9f1e3c3a6b552"
+     "byteSize": 50542,
+     "sha256": "b1e669b12511b2763d542207413b73fea0ec9070993610cb9d45f936c9f0e54a"
     }
    ]
   },
@@ -745,8 +745,8 @@
      },
      "width": 1443,
      "height": 911,
-     "byteSize": 64472,
-     "sha256": "9f2824475acf46bd7f11c0670d90a224d882dd7654e1771642cfb7c34b4f05f9"
+     "byteSize": 64466,
+     "sha256": "1c4a36af7da38e7d5dafaea59a20d514f7be7de3cb9f9fe90f8d1850f2bf4133"
     }
    ]
   },
@@ -769,7 +769,7 @@
      "width": 1443,
      "height": 1537,
      "byteSize": 120968,
-     "sha256": "6de74ceb7d90d0f76fc6778be8a06b8cb282fa717f14b1d650af544e32547537"
+     "sha256": "426cba6dc7781599b4679a56034003946e6b5bdf959efa5068c76215a06eaeff"
     }
    ]
   },
@@ -791,8 +791,8 @@
      },
      "width": 1443,
      "height": 1019,
-     "byteSize": 67838,
-     "sha256": "f5cabd69a83564a5ba3ee691134689a53b9f5745dbd9a3b270d27c2ecec32aeb"
+     "byteSize": 67862,
+     "sha256": "b5ce1a2747ff6232bd2af895f72602e1ac529dc441bd41050347dc48ced33b9d"
     }
    ]
   },
@@ -814,8 +814,8 @@
      },
      "width": 1443,
      "height": 1873,
-     "byteSize": 66846,
-     "sha256": "ccb9597e3f3bdd3c813617e61057e9d930ff115edce3674cf587785fe366597d"
+     "byteSize": 66836,
+     "sha256": "411304786b2c8ed48515002ee648dad01d218eaefdc22e2a4601713e523627ff"
     }
    ]
   },
@@ -837,8 +837,8 @@
      },
      "width": 1445,
      "height": 1823,
-     "byteSize": 82146,
-     "sha256": "4ffaa9421bea1ccc5f6d6d4017edd593490162e7dfdc830f4179ecb5622529f6"
+     "byteSize": 82162,
+     "sha256": "ac7dc5b5dc770594f5d50fc6e76409bde88fb690b1fce3dbaa52425d17bedabd"
     },
     {
      "file": "Q17-2.webp",
@@ -851,8 +851,8 @@
      },
      "width": 1443,
      "height": 681,
-     "byteSize": 39140,
-     "sha256": "1f6b8b48b7c17b2b3b441398096ff1948a5fcb6718f860fbcfa70ebccd427e79"
+     "byteSize": 39144,
+     "sha256": "b62e6ed7a22a915867107553861563e3cfefdb0c0130cfcdf1251d81cbaf1c04"
     }
    ]
   },
@@ -875,7 +875,7 @@
      "width": 1443,
      "height": 1188,
      "byteSize": 61584,
-     "sha256": "4270060dc58d1dee59a459dd356ee49469296a276260d58f3a740fb5029666fd"
+     "sha256": "4a621e88c902211683c212134f89e9192a25961a10c5b1fbbe86d615722e6c59"
     }
    ]
   },
@@ -898,7 +898,7 @@
      "width": 1443,
      "height": 1214,
      "byteSize": 62468,
-     "sha256": "82aee131ebad55222f263513e8dafbcf59e392e261fce2dbdc911b2251e07e95"
+     "sha256": "b6ee4a23cc55bbebd2949c620a35ce59b29d57dc0c0b9f270147b77adacd6f7c"
     }
    ]
   },
@@ -920,8 +920,8 @@
      },
      "width": 1443,
      "height": 1868,
-     "byteSize": 50242,
-     "sha256": "01cb539bd8384171c76220a59019af410ca517199e05eacc6f6cf5488ac80f59"
+     "byteSize": 50244,
+     "sha256": "3ef0b57edeccb227d5ccc1eabb10f847878e99019f046ad45b3dfda6a2be53e6"
     }
    ]
   },
@@ -943,8 +943,8 @@
      },
      "width": 1443,
      "height": 1854,
-     "byteSize": 152002,
-     "sha256": "850cd22becbd260d86ac49c79d7f5f5edc7e4ed0a316327325667bd743f4b5a2"
+     "byteSize": 152014,
+     "sha256": "67930aa9733e04573436032fa8fd1561120ff636558b77d841efa285fe9b2503"
     }
    ]
   },
@@ -966,8 +966,8 @@
      },
      "width": 1443,
      "height": 1693,
-     "byteSize": 73432,
-     "sha256": "cd3850a8fc545082c6bb2a5c26571c3a26025f29c6472d7d9d341d890c6e0810"
+     "byteSize": 73436,
+     "sha256": "29ba2c0c411cafabe79377c2650195bfbfef80363a692ff262a2c9c06d29a52d"
     }
    ]
   },
@@ -989,8 +989,8 @@
      },
      "width": 1443,
      "height": 1852,
-     "byteSize": 124788,
-     "sha256": "b0ed43d5c8312a65b33129c579b508dd9888509d18f13523043b9f68fbfc4edf"
+     "byteSize": 124814,
+     "sha256": "3a25372e3aea8af12b2dc979e669dd545d37a2ef9c6378c618a11e7072926bb5"
     }
    ]
   },
@@ -1012,8 +1012,8 @@
      },
      "width": 1443,
      "height": 1283,
-     "byteSize": 74468,
-     "sha256": "8c5004e20a72ec42593ec78b8f23053f95608226dcbd5970bc8a521269cde2f2"
+     "byteSize": 74474,
+     "sha256": "8621e5921bfd96c08a4046db7370397dc1d9750640361d1995b5991dc5681cb1"
     }
    ]
   },
@@ -1035,8 +1035,8 @@
      },
      "width": 1443,
      "height": 1341,
-     "byteSize": 87268,
-     "sha256": "9e5cef1436be11e5b3d1091626aea80d33ca6fa114a8294c43e3db46728864ec"
+     "byteSize": 87276,
+     "sha256": "a7ebf36ffd670d6f7f8353bf43270fddb9418e535d03cc69ee8b57b9b6e8d6df"
     }
    ]
   },
@@ -1058,8 +1058,8 @@
      },
      "width": 1443,
      "height": 1139,
-     "byteSize": 71190,
-     "sha256": "bfb9cb295e13b4001cc263471cfc5eacf6e357c2e21ab942c278e57814353fdd"
+     "byteSize": 71188,
+     "sha256": "3898bccacb615b1d6a15df55598754949a99cc271f2af11c1e92149c809749fa"
     }
    ]
   },
@@ -1081,8 +1081,8 @@
      },
      "width": 1443,
      "height": 1227,
-     "byteSize": 50674,
-     "sha256": "045d22c970b0042d6f09f623507f99c9fc20cdf5d15a4c8553e78e249431bc0a"
+     "byteSize": 50662,
+     "sha256": "a33f6b3395330ec39e3d873bccf3200751ffb7e8431bcc282451e3164c3ed98f"
     }
    ]
   },
@@ -1104,8 +1104,8 @@
      },
      "width": 1443,
      "height": 645,
-     "byteSize": 52924,
-     "sha256": "351160542763d2ad95948c5f328eb21eee05756a42b49334d5187a765256e218"
+     "byteSize": 52930,
+     "sha256": "89239a86c43e13f788098850f56c7a23ed2dfa241cab7a6532a6ab4aecb94be9"
     },
     {
      "file": "Q28-2.webp",
@@ -1118,8 +1118,8 @@
      },
      "width": 1443,
      "height": 1845,
-     "byteSize": 92938,
-     "sha256": "b6e18817a8962a986eaea30152b024181be4af6104a2ce83fff95a1a9735fecc"
+     "byteSize": 92940,
+     "sha256": "3a1c4573c63522c4b659c28e7e9a2476580abaa17b9be0b1efe032ba5315c2c6"
     }
    ]
   },
@@ -1141,8 +1141,8 @@
      },
      "width": 1443,
      "height": 1634,
-     "byteSize": 123826,
-     "sha256": "c53da109fa8126849a7901634660edf935b0fcd9fbc39de703157a5ef74d79db"
+     "byteSize": 123832,
+     "sha256": "b20e218f1631e2da07681f09d6de326c9e15dabd44259736f572c50065186860"
     }
    ]
   },
@@ -1164,8 +1164,8 @@
      },
      "width": 1443,
      "height": 1190,
-     "byteSize": 70832,
-     "sha256": "e49670e853a09727a992948e68af881954f19da4ee457e83c332b851db39f81b"
+     "byteSize": 70834,
+     "sha256": "fee057f08eca2996bc70a79b33b8621584485c85ff479ce1594b55a612dd05b0"
     }
    ]
   },
@@ -1187,8 +1187,8 @@
      },
      "width": 1443,
      "height": 1872,
-     "byteSize": 91204,
-     "sha256": "e0dcdae60bd3765383a6c023452c3c54c53f3227db47dcdc72165a226828ec54"
+     "byteSize": 91206,
+     "sha256": "8e664c36ec2fa6fdc2225006f3e267e56123a833b43206b00ed9921bb4acb681"
     }
    ]
   },
@@ -1210,8 +1210,8 @@
      },
      "width": 1443,
      "height": 1849,
-     "byteSize": 57716,
-     "sha256": "23a3d1f4cee170d892a2969d3977d85bd09f4733ffe712d435d2d18cf5a07fb2"
+     "byteSize": 57718,
+     "sha256": "171b110969d00f33e76c6605c337b8e845592eb449bb0807dc54487f132a7c8d"
     }
    ]
   },
@@ -1233,8 +1233,8 @@
      },
      "width": 1443,
      "height": 1410,
-     "byteSize": 44998,
-     "sha256": "b6b3b309fadfc252369e3c30b81c490450986c6ed495bd4f9a35505193279b59"
+     "byteSize": 45008,
+     "sha256": "94a1aaac481232b5cfab8a61e2827dfe2092069da108de1b1fc3aab034181c2d"
     }
    ]
   },
@@ -1256,8 +1256,8 @@
      },
      "width": 1443,
      "height": 1128,
-     "byteSize": 51882,
-     "sha256": "fb5b59b08ea79fe5c03a43bef37ac959770693114f04112483a2dddaa196a15b"
+     "byteSize": 51890,
+     "sha256": "d6e56acee6b3b4106e7626daf4a9f5eb096135158f87e63d568c902b925252e3"
     }
    ]
   },
@@ -1279,8 +1279,8 @@
      },
      "width": 1443,
      "height": 741,
-     "byteSize": 54532,
-     "sha256": "008ed76778f7a45293cc99b4f416b0d3be22b947b883cfbe28039797c0a9e6e1"
+     "byteSize": 54540,
+     "sha256": "c59402ea02e7b27693d681f14231672b1ef3c8402336a2e7400a2e3e7d999a3a"
     }
    ]
   }

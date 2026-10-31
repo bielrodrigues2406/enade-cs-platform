@@ -108,3 +108,16 @@ Critérios para ampliar: nenhum item do piloto com contexto/alternativa cortados
 | Lote piloto e publicação | Extrator e revisor independente, com registro do caminho aplicado | Conferência de origem, captura, gabarito e acessibilidade; usar o caminho assistido das ADR-010/011 após conferir os bytes exatos. Não atribuir revisão humana a agentes |
 
 Os agentes não iniciam a tarefa da outra trilha nem editam migrations aplicadas. A entrega de imagens/publicação veio do PR #16; o fluxo de upload/editor continua pendente. Não se atribui aprovação editorial a simulações de alunos/professores. A avaliação do produto e as pendências estão em [análise por perspectivas](reviews/2026-10-28-product-perspectives.md).
+
+## Completar as questões que faltam (pela tela de importação)
+
+Situação em 31/10/2026: **246 objetivas oficiais publicadas** (2005: 34, 2008: 35, 2011: 34, 2014: 35 + 17 de Licenciatura, 2017: 35 + 14, 2021: 33 + 9). A 2005 Q60 ficou bloqueada porque o circuito impresso na própria prova está ilegível. As provas de 2005, 2011, 2008 Q1–Q22 e as questões só de Licenciatura foram conferidas pelo próprio Claude, que as extraiu, **por autorização de Gabriel** (conferente `claude-autoconferencia`); não é conferência independente. Duas explicações que contrariavam o gabarito (2011 Q18 e 2005 Q69) foram recusadas e as questões saíram sem explicação, assim como as 14 de Licenciatura de 2017, que não tinham explicação.
+
+Para conferir ou corrigir questões novas pela tela, sem depender de agentes:
+
+1. **Administração → Importar prova.** Envie o PDF do caderno da edição e, se houver, o gabarito definitivo (e o padrão de resposta, para as discursivas).
+2. O lote abre com uma caixa por questão. As que **já estão publicadas aparecem marcadas** e são puladas na publicação; não é preciso apagá-las.
+3. Para cada questão nova, confira no editor: o recorte (caixa) cobre enunciado, figuras e alternativas; o texto transcrito confere com a imagem; a alternativa correta é a do gabarito; a área está certa. Explicação é opcional: sem explicação conferida, a questão sai sem texto explicativo (D11).
+4. Confirme as questões conferidas e publique o lote. Só as confirmadas entram no banco, nos treinos e na prova completa.
+
+Uma edição só vira "Prova completa" com 10 objetivas publicadas ou mais. Questões anuladas pelo Inep não são publicadas; a prova as lista como faltantes.

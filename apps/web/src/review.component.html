@@ -25,6 +25,19 @@
           Acertos na última resposta: {{ data.summary.correct }} de
           {{ data.summary.answered }}.
         </p>
+        @if (data.summary.incorrect) {
+          <p class="review-ready">
+            <strong>{{ data.summary.ready }}</strong>
+            {{ data.summary.ready === 1 ? "pronta" : "prontas" }} para revisar hoje.
+            Cada erro volta um dia depois de você ver o gabarito, para a
+            revisão testar o raciocínio e não a memória da resposta.
+          </p>
+          @if (data.summary.ready) {
+            <button type="button" (click)="practiceErrors.emit()">
+              Treinar os {{ data.summary.ready === 1 ? "1 erro pronto" : data.summary.ready + " erros prontos" }}
+            </button>
+          }
+        }
         <p class="muted">
           {{ data.summary.demonstration }}
           {{
@@ -162,7 +175,7 @@
           </p>
         </div>
         <p class="review-order">
-          As respostas incorretas mais antigas aparecem primeiro.
+          As mais antigas aparecem primeiro; as prontas para revisar vêm antes.
         </p>
         <ol class="question-list review-list" [attr.start]="data.offset + 1">
           @for (row of data.items; track row.id) {
@@ -176,6 +189,9 @@
                 <p class="state">
                   Última resposta incorreta salva em {{ date(row.answeredAt) }}.
                 </p>
+                @if (!row.ready) {
+                  <p class="review-wait">Volta para revisão em {{ date(row.reviewAt) }}. Você viu o gabarito há pouco.</p>
+                }
                 @if (row.currentVersionId && row.currentVersionId !== row.id) {
                   <p class="review-version">
                     Há uma versão publicada mais recente. Aqui você retoma a
@@ -185,12 +201,12 @@
                 }
               </div>
               <button
-                class="outline"
+                [class.outline]="!row.ready"
                 (click)="resolve.emit(row)"
                 [disabled]="opening"
-                [attr.aria-label]="'Tentar novamente: ' + row.title"
+                [attr.aria-label]="(row.ready ? 'Revisar agora: ' : 'Tentar novamente: ') + row.title"
               >
-                Tentar novamente <span aria-hidden="true">→</span>
+                {{ row.ready ? "Revisar agora" : "Tentar novamente" }} <span aria-hidden="true">→</span>
               </button>
             </li>
           }

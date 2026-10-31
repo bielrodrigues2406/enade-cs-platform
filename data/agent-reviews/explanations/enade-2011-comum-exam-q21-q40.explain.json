@@ -1,0 +1,111 @@
+{
+  "packet": "enade-2011-comum-exam-q21-q40",
+  "explainer": "claude-explain-08",
+  "items": [
+    {
+      "key": "Q21",
+      "area": "Algoritmos",
+      "subject": "Pilhas e filas: efeito de transferir elementos",
+      "explanation": "A questão cobra o comportamento de pilha (LIFO) e fila (FIFO) quando os elementos são retirados de uma estrutura e inseridos em outra, um a um. Se a estrutura de destino é uma pilha, a ordem se inverte, pois o último elemento inserido fica no topo, à esquerda. Se o destino é uma fila, a ordem se mantém, pois cada elemento novo entra no fim.\n\nNa primeira transferência, (A,G,T,C,A,G,T,T) virou (T,T,G,A,C,T,G,A), a sequência invertida; logo, a segunda estrutura é uma pilha. Na segunda transferência, a sequência permaneceu idêntica; logo, a terceira estrutura é uma fila. A primeira pode ser fila ou pilha, pois nas duas o elemento mais à esquerda é o primeiro a sair. Isso resulta em Fila - Pilha - Fila, alternativa A.\n\nAs demais falham: B e D têm fila como segunda estrutura, o que preservaria a ordem na primeira transferência; C e E têm pilha como terceira estrutura, o que inverteria de novo a sequência na segunda transferência.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q22",
+      "area": "Arquitetura de computadores",
+      "subject": "Simplificação de expressões booleanas (soma de produtos)",
+      "explanation": "A questão cobra a obtenção de uma expressão booleana mínima, em soma de produtos, a partir de uma tabela verdade. Os valores 1 de S ocorrem em ABCD = 0000, 0010, 0100, 0110, 1000, 1001, 1011, 1110 e 1111. Com A=0, S vale 1 sempre que D=0, o que dá o termo A'D'. Com A=1, o par 1000 e 1001 resulta em AB'C'; o par 1001 e 1011 resulta em AB'D; e o par 1110 e 1111 resulta em ABC. Assim, S = A'D' + AB'C' + AB'D + ABC, alternativa C, que cobre todos os uns e nenhum zero.\n\nAs outras: B contém o termo AD, que vale 1 em 1101, onde S=0. D é um produto de somas e vale 0 na linha 1000, onde S=1. A, ao distribuir AB'(D+C'), fica igual a C, mas não está escrita como soma de produtos, pois tem fatores entre parênteses. E é um produto de somas, equivalente à função, mas também não é soma de produtos. Como o enunciado pede soma de produtos, a resposta é C.",
+      "keyConcern": "As alternativas A e E representam a mesma função que C (A, ao distribuir AB'(D+C'), coincide com C; E é o produto de somas equivalente). Só a exigência de soma de produtos escrita como tal no enunciado as separa de C."
+    },
+    {
+      "key": "Q23",
+      "area": "Teoria da computação",
+      "subject": "Autômatos finitos, gramáticas e linguagens regulares",
+      "explanation": "A questão cobra a relação entre autômatos finitos, gramáticas e linguagens regulares. O autômato avança de 0 a 1 com a, a 2 com b, a 3 com a, a 4 com b e a 5 com c; os demais símbolos o fazem voltar a estados anteriores (por exemplo, a no estado 3 leva a 1), e o estado final 5 absorve qualquer símbolo. Ele aceita as cadeias que contêm ababc em qualquer posição, isto é, Σ*ababcΣ*.\n\nA gramática gera uma cadeia qualquer, depois ab, depois zero ou mais repetições de ab, depois abc e, por fim, qualquer cadeia (não terminal B). Isso é Σ*(ab)+abcΣ*. Como (ab)+abc termina em ababc, e toda ocorrência de ababc pode ser escrita assim, a linguagem é a mesma do autômato. Alternativa C.\n\nAs outras: A é falsa, pois a linguagem é regular e, portanto, tem gramática não ambígua. B apenas afirma algo genérico (toda linguagem regular também é livre de contexto) e não estabelece a relação entre gramática e autômato. D é falsa: cababc é aceita sem ter ababc como prefixo. E é falsa: com (ab)* podendo ser vazio, a expressão aceita abc, que o autômato rejeita.",
+      "keyConcern": "B é discutível: a gramática é linear à direita (regular, se aceitas cadeias de terminais nas produções) e toda linguagem regular é livre de contexto, então B não é claramente falsa. O gabarito C depende de a questão buscar a igualdade entre a linguagem do autômato e a da gramática."
+    },
+    {
+      "key": "Q24",
+      "area": "Algoritmos",
+      "subject": "Heaps (filas de prioridade) e custos de operações",
+      "explanation": "A questão cobra propriedades de heaps. I é falsa: um heap não é uma árvore binária de pesquisa, mas uma árvore binária essencialmente completa em que cada pai é maior (ou menor) que seus filhos, sem ordem entre irmãos; além disso, a construção ascendente custa O(n). II é falsa: na implementação em vetor, os filhos do elemento i ficam em 2i e 2i+1 (ou 2i+1 e 2i+2 com índice zero) e o pai fica em ⌊i/2⌋ (ou ⌊(i-1)/2⌋); 2i+1 é posição de filho, não de pai. III é verdadeira: cada extração do maior elemento custa O(log n) pelo reajuste do heap, então m extrações custam O(m log n), o que serve ao caso em que só os m primeiros documentos interessam. IV é verdadeira: o maior elemento fica na raiz e é consultado em O(1).\n\nPortanto, só III e IV estão corretas, alternativa C. As alternativas A, B, D e E falham por incluir I ou II, ou por deixar de incluir IV ou III.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q25",
+      "area": "Engenharia de software",
+      "subject": "Padrões de projeto (Prototype, Singleton, Template Method)",
+      "explanation": "A questão cobra o catálogo de padrões de projeto orientados a objetos, classificados em criacionais, estruturais e comportamentais. I é falsa: Prototype é criacional, pois cria novos objetos copiando uma instância-protótipo. II é falsa: Singleton garante que uma classe tenha apenas uma instância (e não 'ao menos uma') e fornece um ponto global de acesso a ela. III é verdadeira: Template Method define o esqueleto de um algoritmo em uma operação e deixa alguns passos para as subclasses, que os redefinem sem mudar a estrutura geral. IV é verdadeira: Iterator dá acesso sequencial aos elementos de um objeto agregado sem expor sua representação interna.\n\nPortanto, só III e IV estão corretas, alternativa E. As alternativas A, B, C e D falham porque tomam I ou II como verdadeiras e deixam de reconhecer III ou IV.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q26",
+      "area": "Matemática",
+      "subject": "Análise combinatória: contagem de full houses",
+      "explanation": "A questão cobra análise combinatória: contar as mãos de cinco cartas do tipo full house, isto é, uma trinca de um valor e um par de outro valor. A contagem se faz em etapas independentes, combinando valores e naipes.\n\nPrimeiro, escolhe-se o valor da trinca: 13 possibilidades. Depois, escolhem-se 3 dos 4 naipes desse valor: C(4,3) = 4. Em seguida, escolhe-se o valor do par, diferente do primeiro: 12 possibilidades. Por fim, escolhem-se 2 dos 4 naipes desse valor: C(4,2) = 6. Pelo princípio multiplicativo, 13 x 4 x 12 x 6 = 3744, alternativa D. Trinca e par têm papéis distintos: três K e dois 10 é uma mão diferente de três 10 e dois K, por isso os valores são escolhidos em ordem.\n\nAs outras alternativas falham por erro de contagem: 156 = 13 x 12 ignora os naipes; 624 = 13 x 4 x 12 esquece a escolha dos naipes do par; 1872 é a metade da resposta, o que ocorreria ao tratar os dois valores como não ordenados; 7488 é o dobro.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q27",
+      "area": "Programação",
+      "subject": "Paralelização de laços: multiplicação de matrizes",
+      "explanation": "A questão cobra paralelização de laços aninhados em memória compartilhada. O cálculo de cada c[i,j] usa apenas a linha i de a e a coluna j de b, e escreve somente em c[i,j]. Elementos diferentes de c não dependem uns dos outros, o que caracteriza um problema embaraçosamente paralelo, decomponível em operações independentes (I verdadeira).\n\nTrocar o for da linha 1 por co cria n processos, um por linha i; cada um executa sequencialmente os laços de j e k e escreve apenas em sua linha de c, sem conflito. O resultado é correto e o tempo diminui (II verdadeira). Trocar o for da linha 2 mantém i sequencial e, para cada i, cria n processos, um por coluna j, também independentes (III verdadeira). Trocar ambos cria n² processos, cada um calculando um c[i,j] (IV verdadeira). Em todos os casos o laço k deve permanecer sequencial, pois acumula a soma em c[i,j].\n\nComo as quatro afirmativas são verdadeiras, a resposta é E. As demais alternativas deixam de fora alguma afirmativa verdadeira.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q28",
+      "area": "Algoritmos",
+      "subject": "Paradigmas de projeto de algoritmos",
+      "explanation": "A questão cobra as técnicas de projeto de algoritmos. I é falsa: escolher o ótimo local esperando chegar ao ótimo global descreve a técnica gulosa; o backtracking constrói a solução por etapas e retrocede quando uma escolha parcial não leva a uma solução. II é verdadeira: é a descrição clássica da divisão e conquista, em três etapas: dividir, resolver recursivamente e combinar. III é tratada como falsa: a programação dinâmica decompõe o problema em subproblemas que se sobrepõem e guarda suas soluções em tabela para não recalculá-las; a exploração exaustiva de todas as possibilidades é característica da força bruta e do backtracking. IV é falsa: um procedimento que chama a si próprio, direta ou indiretamente, define a recursão; heurísticas e algoritmos aproximados buscam soluções boas, sem garantia de ótimo, em tempo viável.\n\nAssim, apenas II está correta, alternativa B. As demais alternativas incluem I, III ou IV, que são falsas.",
+      "keyConcern": "III é discutível: a programação dinâmica de fato resolve todos os subproblemas, que são em número finito; o gabarito só a trata como falsa por causa do termo 'exploradas exaustivamente'."
+    },
+    {
+      "key": "Q29",
+      "area": "Sistemas operacionais",
+      "subject": "Processos e threads: ciclo de vida, memória e migração",
+      "explanation": "A questão cobra conceitos de processos e threads em sistemas operacionais multitarefa. O gabarito oficial aceita apenas I: processos e threads passam pelos mesmos estados básicos de ciclo de vida (criado, pronto, em execução, bloqueado e terminado), de modo que os ciclos são equivalentes nesse sentido.\n\nII é falsa: threads de um mesmo processo compartilham o espaço de endereçamento, mas threads de processos diferentes não compartilham memória, pois cada processo tem espaço próprio. III é falsa: programas multithreads também rodam em processador de um só núcleo, por multiplexação no tempo; o multi-core apenas permite paralelismo real. IV é falsa: uma thread pertence ao processo que a criou, usa os recursos dele e não migra para outro processo.\n\nLogo, a alternativa correta é A. As alternativas B, C, D e E incluem II, III ou IV, todas falsas.",
+      "keyConcern": "'Idênticos' é uma afirmação forte, pois threads e processos diferem em custo de criação e em recursos; o gabarito A só se sustenta se 'ciclo de vida' significar o diagrama de estados."
+    },
+    {
+      "key": "Q30",
+      "area": "Algoritmos",
+      "subject": "Busca em árvore binária de pesquisa",
+      "explanation": "A questão cobra a busca em árvore binária de pesquisa: em cada nó, se a chave buscada é menor, segue-se pela esquerda; se é maior, pela direita. Cada decisão restringe o intervalo de valores possíveis nos nós seguintes, e uma sequência só é válida se cada chave examinada respeita todos os limites impostos pelos nós anteriores do caminho.\n\nI: 7 (vai à direita, valores maiores que 7), 342 (esquerda, entre 7 e 342), 199 (direita), 201 (direita), 310 (esquerda, menor que 310), 258 (direita, maior que 258), 287; todos dentro dos limites, logo válida. II: 110, 132, 133 e 156 (sempre à direita), 289 (esquerda, menor que 289), 288 (esquerda, menor que 288) e 287; válida. III: após 294 (esquerda, valores menores que 294), aparece 295, maior que 294; inválida. IV: após 249 (direita, valores maiores que 249) e 406 (esquerda), aparece 234, menor que 249; inválida.\n\nSó I e II são válidas, alternativa C.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q36",
+      "area": "Teoria da computação",
+      "subject": "Classes P, NP e NP-completo",
+      "explanation": "A questão cobra as classes P, NP e NP-completo. I é falsa: todo problema resolvido em tempo polinomial também tem solução verificável em tempo polinomial (basta resolvê-lo de novo), então P está contida em NP; não há problema de P fora de NP. II é verdadeira: se A se transforma eficientemente em B e B tem algoritmo polinomial, compõe-se a transformação com esse algoritmo e obtém-se um algoritmo polinomial para A. III é verdadeira: um problema NP-completo está em NP; se P = NP, ele está em P e é resolvido em tempo polinomial. IV é falsa: se P é diferente de NP, nenhum problema NP-completo está em P, pois isso o tornaria eficientemente resolvível e, como todo problema de NP se transforma nele, implicaria P = NP.\n\nPortanto, só II e III estão corretas, alternativa D. As alternativas A, B, C e E erram ao aceitar I ou IV, ou ao deixar de reconhecer II ou III.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q37",
+      "area": "Programação",
+      "subject": "Escopo dinâmico e verificação de tipos",
+      "explanation": "A questão cobra as consequências do escopo dinâmico em uma linguagem com tipagem estática. No escopo dinâmico, um nome não local é resolvido em execução, pela última vinculação feita na cadeia de chamadas. Assim, o mesmo identificador usado dentro de um subprograma pode se referir a variáveis de tipos diferentes, conforme quem o chamou.\n\nI é falsa: se o programador não declara a variável nem o tipo, o compilador não sabe o tipo de uma referência que pode vir de vários chamadores; tratá-la como parâmetro sem tipo exigiria justamente polimorfismo e impediria verificar os tipos em compilação. II é verdadeira: como subprogramas diferentes podem declarar variáveis de mesmo nome e tipos distintos, uma referência não declarada no escopo local só pode ser aceita se a linguagem suportar polimorfismo de tipos. III é verdadeira: se a variável é declarada, com marca de escopo dinâmico, tanto onde é criada quanto onde é referenciada, o compilador conhece o tipo nos dois pontos e pode checar a consistência estaticamente.\n\nPortanto, só II e III estão corretas, alternativa D.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q38",
+      "area": "Compiladores",
+      "subject": "Autômato LR(0) e conflitos shift-reduce",
+      "explanation": "A questão cobra a construção do autômato LR(0) e a condição para uma gramática ser LR(0): nenhum estado pode ter conflito que dependa do próximo símbolo, isto é, item de redução junto de item de empilhamento (shift) ou duas reduções possíveis.\n\nPrimeira asserção: na gramática M → E | N, E → Nx, N → Nd | d, o estado alcançado de e0 por N contém o item de redução M → N· e também os itens que empilham x (E → N·x) e d (N → N·d). Há conflito shift-reduce: sem olhar o próximo símbolo, não se decide entre reduzir e empilhar. A gramática não é LR(0) (seria SLR(1), pois Seguinte(M) = {$}); a asserção é falsa.\n\nSegunda asserção: o estado e1 como impresso lista M → N·x e M → N·d, itens que não existem nas produções dadas (seriam E → N·x e N → N·d). Assim, esse e1 não é estado do autômato dessa gramática, e a asserção é falsa.\n\nAmbas são falsas: alternativa E.",
+      "keyConcern": "A imagem traz e1 com M → N·x e M → N·d, quando as produções dadas levariam a E → N·x e N → N·d (provável erro de impressão). O gabarito E depende disso para tornar a segunda asserção falsa; com e1 corrigido, ela seria verdadeira e o gabarito seria C."
+    },
+    {
+      "key": "Q39",
+      "area": "Programação",
+      "subject": "Tipos de dados abstratos, subtipos e encapsulamento",
+      "explanation": "A questão cobra conceitos de Tipos de Dados Abstratos (TDA) e orientação a objetos. I é falsa: a especificação de um TDA descreve o tipo pelas operações aplicáveis e seu comportamento, ocultando a representação interna e as implementações das operações; incluí-las na especificação contraria a abstração. II é verdadeira: em programas orientados a objetos, TDAs são implementados por mecanismos como composição (um tipo usa outros como componentes) e herança (um tipo reaproveita e estende outro). III é falsa: o princípio da substituição vai no sentido inverso; se S é subtipo de T, entidades do tipo T podem ser substituídas por entidades de S sem alterar a corretude do programa, e não o contrário. IV é verdadeira: ao expor só as operações e ocultar a representação, o uso de TDA leva ao encapsulamento, efeito positivo nas linguagens orientadas a objetos.\n\nLogo, estão corretas II e IV, alternativa D. As alternativas A, B, C e E aceitam I ou III, que são falsas, ou deixam de reconhecer II ou IV.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q40",
+      "area": "Inteligência artificial",
+      "subject": "Algoritmo A*: função f(x) = g(x) + h(x)",
+      "explanation": "A questão cobra o cálculo de f(x) = g(x) + h(x) no algoritmo A*. O nó inicial é o quadrado verde, onde o custo real acumulado g é zero, pois ainda não houve movimento. A heurística h é a distância de Manhattan até o objetivo (o quadrado vermelho): soma das distâncias horizontal e vertical, ignorando os obstáculos.\n\nNa grade de 4 linhas por 6 colunas, o verde está na primeira linha e na segunda coluna; o vermelho, na terceira linha e na terceira coluna. A diferença é de 2 linhas e 1 coluna, então h = 2 + 1 = 3. Portanto f(verde) = 0 + 3 = 3, alternativa B.\n\nAs outras falham: 2 omite uma das componentes da distância. 7 é o custo real do menor caminho que contorna os quadrados pretos (sete movimentos pela coluna da esquerda), mas esse custo não entra no f do nó inicial, em que g é 0 e h é só uma estimativa. 5 e 9 não correspondem a nenhuma combinação válida de g e h para o nó verde.",
+      "keyConcern": ""
+    }
+  ]
+}
