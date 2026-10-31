@@ -12,21 +12,24 @@ const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
 const SIZES = [10, 20, 30];
 // Disponibilidade e criação usam exatamente a mesma elegibilidade. Publicação
 // e revisão pertencem à curadoria; este módulo não promove conteúdo privado.
-const ELIGIBLE = `SELECT q.id,q.question_id,q.topic
+export const ELIGIBLE = `SELECT q.id,q.question_id,q.topic,q.origin,q.exam_source_id,q.source_question_number
   FROM editorial_question c JOIN question_version q ON q.id=c.current_version_id
   WHERE q.editorial_status='PUBLISHED' AND q.origin IN ('AUTHOR_CREATED','OFFICIAL')
     AND (SELECT count(*) FROM question_option o WHERE o.question_id=q.id) BETWEEN 2 AND 5
     AND EXISTS(SELECT 1 FROM question_option o WHERE o.question_id=q.id AND o.id=q.correct_option_id)
     AND (q.presentation='TEXT' OR EXISTS(SELECT 1 FROM question_version_image i WHERE i.version_id=q.id))`;
 
-type Attempt = {
+export type Attempt = {
   id: string; size: number; area: string | null; state: "IN_PROGRESS" | "COMPLETED";
   createdAt: Date; finishedAt: Date | null; answered: number; summary: Result | null;
+  kind: "PARTIAL" | "EDITION"; examSourceId: string | null; deadlineAt: Date | null;
 };
 type Counts = { total: number; correct: number; incorrect: number; unanswered: number };
 type Result = Counts & {
   official: number; author: number; demonstration: number;
   byTopic: (Counts & { topic: string })[];
+  /** Formação Geral e componente específico, como no boletim do ENADE. */
+  byBlock: { general: Counts; specific: Counts };
 };
 type Item = {
   position: number; optionId: string | null; marked: boolean; revision: number;
@@ -38,10 +41,13 @@ type Item = {
   correctOptionId: string; explanation: string; explanationCredit: string | null;
   subject: string | null; reviewNote: string | null;
 };
-const ATTEMPT_FIELDS = `p.id,p.size,p.area,p.state,p.created_at AS "createdAt",p.finished_at AS "finishedAt",p.summary,
+// Tolerância para a última gravação feita no limite do prazo chegar ao servidor.
+const DEADLINE_GRACE = "15 seconds";
+export const ATTEMPT_FIELDS = `p.id,p.size,p.area,p.state,p.created_at AS "createdAt",p.finished_at AS "finishedAt",p.summary,
+  p.kind,p.exam_source_id AS "examSourceId",p.deadline_at AS "deadlineAt",
   (SELECT count(*)::integer FROM practice_item i WHERE i.attempt_id=p.id AND i.option_id IS NOT NULL) AS answered`;
 
-function closed(body: unknown, keys: string[]) {
+export function closed(body: unknown, keys: string[]) {
   if (!body || typeof body !== "object" || Array.isArray(body)
     || Object.keys(body).some((key) => !keys.includes(key))) fail("Dados do treino inválidos.", 400);
   return body as Record<string, unknown>;
@@ -57,9 +63,10 @@ function attemptSummary(row: Attempt) {
   return {
     id: row.id, state: row.state, size: row.size, area: row.area,
     createdAt: row.createdAt, finishedAt: row.finishedAt, answered: row.answered,
+    kind: row.kind, deadlineAt: row.deadlineAt,
   };
 }
-async function owned(client: PoolClient, id: string, owner: string, lock = false) {
+export async function owned(client: PoolClient, id: string, owner: string, lock = false) {
   const row = (await client.query<Attempt>(
     `SELECT ${ATTEMPT_FIELDS} FROM practice_attempt p WHERE p.id=$1 AND p.owner_id=$2 ${lock ? "FOR UPDATE OF p" : ""}`,
     [id, owner],
@@ -84,10 +91,12 @@ function result(rows: Item[]): Result {
   const counts = (): Counts => ({ total: 0, correct: 0, incorrect: 0, unanswered: 0 });
   const summary = { ...counts(), official: 0, author: 0, demonstration: 0 };
   const topics = new Map<string, Counts>();
+  const byBlock = { general: counts(), specific: counts() };
   for (const row of rows) {
     const topic = topics.get(row.topic) ?? counts();
+    const block = byBlock[row.topic === "Formação Geral" ? "general" : "specific"];
     const outcome = row.optionId === null ? "unanswered" : row.optionId === row.correctOptionId ? "correct" : "incorrect";
-    summary.total++; summary[outcome]++; topic.total++; topic[outcome]++;
+    summary.total++; summary[outcome]++; topic.total++; topic[outcome]++; block.total++; block[outcome]++;
     topics.set(row.topic, topic);
     if (row.origin === "OFFICIAL") summary.official++;
     else if (row.demonstration) summary.demonstration++;
@@ -95,11 +104,46 @@ function result(rows: Item[]): Result {
   }
   return {
     ...summary,
+    byBlock,
     byTopic: [...topics].sort(([a], [b]) => a.localeCompare(b, "pt-BR"))
       .map(([topic, values]) => ({ topic, ...values })),
   };
 }
-async function view(client: PoolClient, attempt: Attempt) {
+/** Discursivas publicadas da prova de uma tentativa de edição. */
+async function editionDiscursive(client: PoolClient, attempt: Attempt) {
+  if (attempt.kind !== "EDITION") return [];
+  return (await client.query<{ id: string; number: number }>(
+    "SELECT id,number FROM discursive_question WHERE exam_source_id=$1 ORDER BY number", [attempt.examSourceId],
+  )).rows;
+}
+
+/**
+ * Finaliza uma vez: resumo imutável e, na prova da edição, envio dos
+ * rascunhos das discursivas dela (o padrão de resposta aparece depois).
+ */
+async function complete(client: PoolClient, attempt: Attempt, owner: string) {
+  const summary = result(await items(client, attempt.id));
+  await client.query("UPDATE practice_attempt SET state='COMPLETED',finished_at=clock_timestamp(),summary=$2::jsonb WHERE id=$1",
+    [attempt.id, JSON.stringify(summary)]);
+  const discursive = (await editionDiscursive(client, attempt)).map((row) => row.id);
+  if (discursive.length)
+    await client.query(
+      `UPDATE discursive_response SET submitted_at=clock_timestamp(),revision=revision+1,updated_at=clock_timestamp()
+       WHERE owner_id=$1 AND question_id=ANY($2::text[]) AND submitted_at IS NULL AND btrim(body)<>''`,
+      [owner, discursive],
+    );
+}
+
+/** Prazo da prova vencido: finaliza com o que foi salvo. Devolve se finalizou. */
+async function expire(client: PoolClient, attempt: Attempt, owner: string) {
+  if (attempt.state !== "IN_PROGRESS" || !attempt.deadlineAt) return false;
+  const late = (await client.query(`SELECT $1::timestamptz + interval '${DEADLINE_GRACE}' < clock_timestamp() AS late`,
+    [attempt.deadlineAt])).rows[0].late;
+  if (late) await complete(client, attempt, owner);
+  return late as boolean;
+}
+
+export async function view(client: PoolClient, attempt: Attempt) {
   const rows = await items(client, attempt.id);
   const ids = rows.map((row) => row.id);
   const options = (await client.query<{ questionId: string; id: string; text: string }>(
@@ -116,9 +160,14 @@ async function view(client: PoolClient, attempt: Attempt) {
     `SELECT ${sourceFields},key_finality AS finality FROM source_document WHERE id=ANY($1::uuid[])`, [sourceIds],
   )).rows;
   const bySource = new Map(sources.map((source) => [source.id, source]));
+  const edition = attempt.examSourceId
+    ? (await client.query<Source>(`SELECT ${sourceFields} FROM source_document WHERE id=$1`, [attempt.examSourceId])).rows[0]
+    : null;
   return {
     ...attemptSummary(attempt), answered: rows.filter((row) => row.optionId !== null).length,
     summary: complete ? attempt.summary : null,
+    edition: edition ? publicExam(edition) : null,
+    discursive: await editionDiscursive(client, attempt),
     items: rows.map((row) => {
       const exam = row.examSourceId ? bySource.get(row.examSourceId) : null;
       const key = row.keySourceId ? bySource.get(row.keySourceId) : null;
@@ -226,8 +275,9 @@ export class PracticeController {
     const id = attemptId(rawId);
     const client = await db.connect();
     try {
-      await client.query("BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY");
-      const dto = await view(client, await owned(client, id, user.id));
+      await client.query("BEGIN");
+      const attempt = await owned(client, id, user.id, true);
+      const dto = await view(client, await expire(client, attempt, user.id) ? await owned(client, id, user.id) : attempt);
       await client.query("COMMIT"); return dto;
     } catch (error) {
       await client.query("ROLLBACK"); throw error;
@@ -239,7 +289,7 @@ export class PracticeController {
     await requireIdentity(req); noQuery(req);
     const id = attemptId(rawId);
     const data = closed(body, ["optionId", "marked", "baseRevision"]);
-    if (!/^(?:[1-9]|[12][0-9]|30)$/.test(rawPosition)
+    if (!/^(?:[1-9]|[1-5][0-9]|60)$/.test(rawPosition)
       || !(data.optionId === null || typeof data.optionId === "string" && data.optionId.length > 0 && data.optionId.length <= 100)
       || typeof data.marked !== "boolean" || !Number.isSafeInteger(data.baseRevision)
       || (data.baseRevision as number) < 0 || (data.baseRevision as number) > 1000000)
@@ -249,6 +299,10 @@ export class PracticeController {
       await client.query("BEGIN");
       const user = await requireIdentity(req, client, true);
       const attempt = await owned(client, id, user.id, true);
+      if (await expire(client, attempt, user.id)) {
+        await client.query("COMMIT");
+        return fail("O tempo da prova acabou. O resultado foi registrado com o que estava salvo.", 409);
+      }
       if (attempt.state !== "IN_PROGRESS") fail("Este treino já foi finalizado. Consulte o resultado.", 409);
       const item = (await client.query<{ versionId: string; position: number; optionId: string | null; marked: boolean; revision: number }>(
         'SELECT version_id AS "versionId",position,option_id AS "optionId",marked,revision FROM practice_item WHERE attempt_id=$1 AND position=$2', [id, Number(rawPosition)],
@@ -279,10 +333,7 @@ export class PracticeController {
       await client.query("BEGIN");
       const user = await requireIdentity(req, client, true);
       const attempt = await owned(client, id, user.id, true);
-      if (attempt.state === "IN_PROGRESS") {
-        const summary = result(await items(client, id));
-        await client.query("UPDATE practice_attempt SET state='COMPLETED',finished_at=clock_timestamp(),summary=$2::jsonb WHERE id=$1", [id, JSON.stringify(summary)]);
-      }
+      if (attempt.state === "IN_PROGRESS") await complete(client, attempt, user.id);
       const dto = await view(client, await owned(client, id, user.id));
       await client.query("COMMIT"); return dto;
     } catch (error) {

@@ -31,6 +31,8 @@ after(async () => {
     await client.query("BEGIN");
     await client.query("DELETE FROM answer WHERE owner_id=ANY($1::uuid[])", [[...owners]]);
     await client.query("DELETE FROM practice_attempt WHERE owner_id=ANY($1::uuid[])", [[...owners]]);
+    await client.query("DELETE FROM discursive_question WHERE exam_source_id=ANY($1::uuid[])", [[...sources]]);
+    await client.query("DELETE FROM account WHERE identity_id=ANY($1::uuid[])", [[...owners]]);
     await client.query("DELETE FROM editorial_question WHERE id=ANY($1::text[])", [[...parents]]);
     await client.query("DELETE FROM source_document WHERE id=ANY($1::uuid[])", [[...sources]]);
     await client.query("DELETE FROM browser_session WHERE identity_id=ANY($1::uuid[])", [[...owners]]);
@@ -68,7 +70,8 @@ async function anotherCredential(user: Actor): Promise<Actor> {
   } catch (error) { await client.query("ROLLBACK"); throw error; }
   finally { client.release(); }
 }
-async function fixture(n: number, opts: { parent?: string; version?: number; published?: boolean; topic?: string; count?: number; exam?: string; key?: string; image?: boolean } = {}) {
+async function fixture(n: number, opts: { parent?: string; version?: number; published?: boolean; topic?: string; count?: number; exam?: string; key?: string; image?: boolean; number?: number } = {}) {
+  const number = opts.number ?? n;
   const parent = opts.parent ?? `${prefix}-${n}`;
   const id = `${parent}-v${opts.version ?? 1}`;
   parents.add(parent);
@@ -77,7 +80,7 @@ async function fixture(n: number, opts: { parent?: string; version?: number; pub
     await client.query("BEGIN");
     if (!opts.parent) await client.query(
       "INSERT INTO editorial_question(id,origin,official_exam_id,official_question_number) VALUES($1,$2,$3,$4)",
-      [parent, opts.exam ? "OFFICIAL" : "AUTHOR_CREATED", opts.exam ?? null, opts.exam ? n : null],
+      [parent, opts.exam ? "OFFICIAL" : "AUTHOR_CREATED", opts.exam ?? null, opts.exam ? number : null],
     );
     const a = `${id}-A`, correct = opts.version === 2 ? `${id}-B` : a;
     await client.query(
@@ -90,7 +93,7 @@ async function fixture(n: number, opts: { parent?: string; version?: number; pub
       [id, parent, opts.version ?? 1, `TEST ONLY practice ${n}`, opts.topic ?? area,
         opts.exam ? "OFFICIAL" : "AUTHOR_CREATED", correct, !opts.exam,
         opts.exam ? "Inep" : "TEST ONLY demonstration", opts.exam ?? null, opts.key ?? null,
-        opts.exam ? 1 : null, opts.exam ? n : null, opts.exam ? "TEST ONLY synthetic editorial comment" : null,
+        opts.exam ? 1 : null, opts.exam ? number : null, opts.exam ? "TEST ONLY synthetic editorial comment" : null,
         opts.exam ? "ASSISTED" : "HUMAN", opts.exam ? "test-only-extractor" : null,
         opts.exam ? "test-only-reviewer" : null, opts.exam ? new Date() : null],
     );
@@ -217,6 +220,7 @@ test("practice finalization produces one persisted result with independently cho
   assert.deepEqual(finished.summary, {
     total:10,correct:3,incorrect:1,unanswered:6,official:0,author:0,demonstration:10,
     byTopic:[{topic:area,total:10,correct:3,incorrect:1,unanswered:6}],
+    byBlock:{general:{total:0,correct:0,incorrect:0,unanswered:0},specific:{total:10,correct:3,incorrect:1,unanswered:6}},
   });
   assert.deepEqual(finished.items.map((i: any) => i.result.correct), [true,true,true,false,null,null,null,null,null,null]);
   assert.ok(finished.items.every((i: any) => i.result.correctOptionId === `${i.question.id}-A`));
@@ -309,7 +313,7 @@ test("practice database constraints preserve the fixed selection, exact size and
   assert.equal((await db.query("SELECT count(*)::integer AS n FROM practice_item WHERE attempt_id=$1",[id])).rows[0].n,0);
 });
 
-async function source(kind: "EXAM" | "ANSWER_KEY") {
+async function source(kind: "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD") {
   const id = randomUUID(); sources.add(id);
   await db.query(
     `INSERT INTO source_document(id,title,official_url,kind,year,area,modality,sha256,byte_size,page_count,
@@ -360,4 +364,66 @@ test("practice offers only the five most recent completed results and preserves 
   assert.equal(available.active,null); assert.equal(available.recent.length,5);
   assert.deepEqual(available.recent.map((a:any)=>a.id),ids.slice(1).reverse());
   assert.equal((await json(`practice/${ids[0]}`,user)).state,"COMPLETED");
+});
+
+test("an edition exam applies the published objectives in order, expires on the server and submits discursive drafts", async () => {
+  const exam = await source("EXAM"), key = await source("ANSWER_KEY"), standard = await source("RESPONSE_STANDARD");
+  // Prova TEST ONLY com as questões 1 a 23, sem a 7; as quatro primeiras são de Formação Geral.
+  const numbers = Array.from({ length: 23 }, (_, i) => i + 1).filter((n) => n !== 7);
+  // Ordem de criação embaralhada: a prova segue o número, não a inserção.
+  for (const n of [...numbers].reverse()) await fixture(500 + n, { exam, key, number: n, topic: n <= 4 ? "Formação Geral" : area });
+  const user = await actor();
+  const listed = (await json("editions", user)).editions.find((e: any) => e.id === exam);
+  assert.deepEqual([listed.objectives, listed.general, listed.missing, listed.discursive], [22, 4, [7], 0]);
+
+  // Discursiva da mesma prova, para conferir o envio do rascunho ao finalizar.
+  const reviewer = await actor();
+  await db.query("INSERT INTO account(identity_id,email,password_hash) VALUES($1,$2,$3)",
+    [reviewer.id, `edition-${reviewer.id}@example.invalid`, `scrypt$131072$8$1$${"0".repeat(32)}$${"0".repeat(64)}`]);
+  const discursiveId = `discursive-${exam.replace(/-/g, "").slice(0, 12)}-d1`;
+  await db.query(
+    `INSERT INTO discursive_question(id,exam_source_id,standard_source_id,year,modality,number,area,criteria,reviewed_by)
+     VALUES($1,$2,$3,2098,'BACHARELADO',1,'Formação Geral','[{"label":null,"points":10}]',$4)`,
+    [discursiveId, exam, standard, reviewer.id]);
+  await json(`discursive/${discursiveId}/response`, user, "PUT", { body: "TEST ONLY rascunho da prova", baseRevision: 0 });
+
+  const requestId = randomUUID();
+  const started = await json(`editions/${exam}/attempts`, user, "POST", { requestId }, 201);
+  secretFree(started);
+  assert.equal(started.kind, "EDITION");
+  assert.equal(started.size, 22);
+  assert.deepEqual(started.discursive.map((d: any) => d.id), [discursiveId]);
+  assert.deepEqual(started.items.map((i: any) => i.question.provenance?.questionNumber), numbers);
+  const minutes = (new Date(started.deadlineAt).getTime() - Date.now()) / 60000;
+  assert.ok(minutes > 239 && minutes <= 240, `prazo ${minutes}`);
+  assert.equal((await json(`editions/${exam}/attempts`, user, "POST", { requestId }, 201)).id, started.id); // repetição
+  assert.equal((await request(`editions/${exam}/attempts`, user, "POST", { requestId: randomUUID() })).status, 409); // já há uma ativa
+  await save(user, started.id, 1, `${started.items[0].question.id}-A`);
+  const finished = await json(`practice/${started.id}/finish`, user, "POST", {});
+  assert.deepEqual(finished.summary.byBlock.general, { total: 4, correct: 1, incorrect: 0, unanswered: 3 });
+  const draft = (await db.query("SELECT submitted_at FROM discursive_response WHERE owner_id=$1 AND question_id=$2", [user.id, discursiveId])).rows[0];
+  assert.ok(draft.submitted_at, "o rascunho da discursiva é enviado com a prova");
+
+  // Prazo vencido: a próxima gravação finaliza com o que estava salvo.
+  const late = await actor();
+  const lateExam = await json(`editions/${exam}/attempts`, late, "POST", { requestId: randomUUID() }, 201);
+  const expired = randomUUID();
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+    await client.query("DELETE FROM practice_attempt WHERE id=$1", [lateExam.id]);
+    await client.query(
+      `INSERT INTO practice_attempt(id,owner_id,request_id,size,kind,exam_source_id,deadline_at)
+       VALUES($1,$2,$3,22,'EDITION',$4,clock_timestamp() - interval '1 minute')`, [expired, late.id, randomUUID(), exam]);
+    for (const [index, item] of lateExam.items.entries())
+      await client.query("INSERT INTO practice_item(attempt_id,position,question_id,version_id) SELECT $1,$2,question_id,id FROM question_version WHERE id=$3",
+        [expired, index + 1, item.question.id]);
+    await client.query("COMMIT");
+  } catch (error) { await client.query("ROLLBACK"); throw error; } finally { client.release(); }
+  const refused = await request(`practice/${expired}/items/1`, late, "PUT", { optionId: null, marked: true, baseRevision: 0 });
+  assert.equal(refused.status, 409);
+  assert.match((await refused.json()).message, /tempo da prova acabou/);
+  const after = await json(`practice/${expired}`, late);
+  assert.equal(after.state, "COMPLETED");
+  assert.equal(after.summary.unanswered, 22);
 });
