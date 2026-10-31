@@ -204,7 +204,12 @@
           } @else if (authBusy()) {
             <p role="status">Atualizando sua sessão…</p>
           } @else if (adminView()) {
-            <app-admin (back)="openHome()" />
+            <!-- Só administradores abrem: carregada sob demanda. -->
+            @defer (on immediate) {
+              <app-admin (back)="openHome()" />
+            } @placeholder {
+              <p role="status">Carregando a administração…</p>
+            }
           } @else if (curationView()) {
             <app-curation (busyChange)="curationBusy.set($event)" />
           } @else if (practiceView()) {

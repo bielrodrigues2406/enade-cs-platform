@@ -1,0 +1,188 @@
+@if (error()) {
+  <div class="notice" role="alert"><p>{{ error() }}</p></div>
+}
+@if (notice()) {
+  <p class="admin-notice" role="status">{{ notice() }}</p>
+}
+
+@if (!batch()) {
+  <form class="import-new" (ngSubmit)="create()" aria-labelledby="import-new-title">
+    <h2 id="import-new-title">Nova importação</h2>
+    <p class="admin-intro">
+      Envie a prova e o gabarito definitivo baixados do site do Inep e cole os
+      links de onde vieram. O sistema propõe a caixa de cada questão e lê a
+      letra do gabarito; você confere uma por uma antes de publicar.
+    </p>
+    <div class="import-fields">
+      <div>
+        <label for="import-year">Ano da prova</label>
+        <input id="import-year" name="year" type="number" min="2004" max="2100" [(ngModel)]="form.year" required />
+      </div>
+      <div>
+        <label for="import-modality">Curso</label>
+        <select id="import-modality" name="modality" [(ngModel)]="form.modality">
+          <option value="BACHARELADO">Bacharelado</option>
+          <option value="LICENCIATURA">Licenciatura</option>
+          <option value="COMUM">Caderno compartilhado</option>
+        </select>
+      </div>
+      <div class="import-wide">
+        <label for="import-exam">PDF da prova</label>
+        <input id="import-exam" type="file" accept="application/pdf" (change)="pickFile('exam', $event)" />
+      </div>
+      <div class="import-wide">
+        <label for="import-exam-url">Link da prova no Inep</label>
+        <input id="import-exam-url" name="examUrl" type="url" [(ngModel)]="form.examUrl"
+          placeholder="https://download.inep.gov.br/enade/…/prova.pdf" required />
+      </div>
+      <div class="import-wide">
+        <label for="import-key">PDF do gabarito</label>
+        <input id="import-key" type="file" accept="application/pdf" (change)="pickFile('key', $event)" />
+      </div>
+      <div class="import-wide">
+        <label for="import-key-url">Link do gabarito no Inep</label>
+        <input id="import-key-url" name="keyUrl" type="url" [(ngModel)]="form.keyUrl"
+          placeholder="https://download.inep.gov.br/enade/…/gabarito.pdf" required />
+      </div>
+    </div>
+    <button type="submit" [disabled]="busy()">{{ busy() ? "Enviando…" : "Enviar e propor caixas" }}</button>
+  </form>
+
+  @if (batches().length) {
+    <section aria-labelledby="import-list-title">
+      <h2 id="import-list-title">Importações</h2>
+      <ul class="admin-pending">
+        @for (item of batches(); track item.id) {
+          <li>
+            <strong>ENADE {{ item.year }} · {{ item.modality.toLowerCase() }}</strong>
+            <span class="admin-role">{{ stateLabel[item.state] }}</span>
+            <span class="muted">{{ item.confirmed }} confirmadas · {{ item.excluded }} fora · {{ item.total }} questões</span>
+            <button type="button" class="text-button" (click)="open(item.id)">Abrir</button>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+} @else {
+  @let current = batch()!;
+  <div class="import-head">
+    <button type="button" class="back text-button" (click)="close()">← Importações</button>
+    <h2>ENADE {{ current.year }} · {{ current.modality.toLowerCase() }}</h2>
+    <span class="admin-role">{{ stateLabel[current.state] }}</span>
+  </div>
+
+  @if (current.state === "PROCESSING") {
+    <p role="status" class="import-processing">Lendo o PDF e propondo as caixas de cada questão…</p>
+  } @else if (current.state === "FAILED") {
+    <div class="notice" role="alert"><p>A leitura falhou: {{ current.failure }}</p></div>
+  } @else {
+    <div class="import-progress">
+      <p>
+        <strong>{{ counts().confirmed }}</strong> confirmadas ·
+        <strong>{{ counts().pending }}</strong> objetivas a conferir ·
+        {{ counts().total }} questões
+      </p>
+      @if (current.state === "READY") {
+        <button type="button" (click)="publish()" [disabled]="busy() || !counts().confirmed">
+          Publicar {{ counts().confirmed }} confirmadas
+        </button>
+      }
+    </div>
+
+    <div class="import-editor">
+      <ol class="import-items" aria-label="Questões encontradas">
+        @for (item of current.items; track item.key) {
+          <li>
+            <button
+              type="button"
+              [class.is-active]="item.key === selectedKey()"
+              [attr.data-status]="item.status"
+              [attr.aria-current]="item.key === selectedKey() ? 'true' : null"
+              (click)="select(item.key)"
+            >
+              <span>{{ item.kind === "DISCURSIVE" ? "Discursiva" : "Questão" }} {{ item.number }}</span>
+              <span class="import-answer">{{ item.answer ?? "—" }}</span>
+              <span class="import-status">{{ statusLabel[item.status] }}</span>
+              @if (item.warnings.length) {
+                <span class="import-warn" [attr.aria-label]="item.warnings.length + ' avisos'">!</span>
+              }
+            </button>
+          </li>
+        }
+      </ol>
+
+      <div class="import-stage">
+        @if (selected(); as item) {
+          <div class="import-toolbar">
+            <button type="button" class="outline" [disabled]="page() <= 1" (click)="page.set(page() - 1)">← Página</button>
+            <span>Página {{ page() }} de {{ current.pageCount }}</span>
+            <button type="button" class="outline" [disabled]="page() >= (current.pageCount ?? 1)" (click)="page.set(page() + 1)">Página →</button>
+            <button type="button" class="text-button" (click)="addBox()" [disabled]="current.state !== 'READY'">+ Caixa nesta página</button>
+          </div>
+          <div class="import-page" (pointermove)="moveDrag($event)" (pointerup)="endDrag()" (pointercancel)="endDrag()">
+            <img [src]="pageUrl()" [alt]="'Página ' + page() + ' da prova'" draggable="false" />
+            @for (entry of pageBoxes(); track entry.index) {
+              <div
+                class="import-box"
+                [style]="boxStyle(entry.box)"
+                tabindex="0"
+                role="group"
+                [attr.aria-label]="'Caixa ' + (entry.index + 1) + ' da questão ' + item.number + '. Setas movem; Shift e setas mudam o tamanho.'"
+                (pointerdown)="startDrag($event, entry.index, 'move')"
+                (keydown)="nudge($event, entry.index)"
+              >
+                <span class="import-box-label">{{ item.key }} · {{ entry.index + 1 }}</span>
+                <button type="button" class="import-box-remove" (pointerdown)="$event.stopPropagation()"
+                  (click)="removeBox(entry.index)" [attr.aria-label]="'Remover caixa ' + (entry.index + 1)">×</button>
+                <span class="import-box-handle" (pointerdown)="startDrag($event, entry.index, 'resize')" aria-hidden="true"></span>
+              </div>
+            }
+          </div>
+
+          <div class="import-details">
+            <p>
+              <strong>{{ item.kind === "DISCURSIVE" ? "Discursiva" : "Questão" }} {{ item.number }}</strong>
+              · gabarito {{ item.answer ?? "não encontrado" }}
+              @if (item.boxes.length > 1) { · {{ item.boxes.length }} caixas, na ordem de leitura }
+            </p>
+            @for (warning of item.warnings; track warning) {
+              <p class="import-warning">{{ warning }}</p>
+            }
+            @if (item.kind === "OBJECTIVE" && item.answer !== "ANULADA") {
+              <div class="import-fields">
+                <div>
+                  <label for="import-area">Área</label>
+                  <select id="import-area" [ngModel]="item.area ?? ''" (ngModelChange)="setField('area', $event)">
+                    <option value="">Escolha a área</option>
+                    @for (area of current.areas; track area) {
+                      <option [value]="area">{{ area }}</option>
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label for="import-subject">Assunto <span class="optional">opcional</span></label>
+                  <input id="import-subject" maxlength="80" [value]="item.subject ?? ''" (change)="setField('subject', $any($event.target).value)" />
+                </div>
+              </div>
+              <div class="import-actions">
+                <button type="button" (click)="setStatus('CONFIRMED')" [disabled]="busy() || !item.area || !item.boxes.length || current.state !== 'READY'">
+                  Confirmar e seguir
+                </button>
+                <button type="button" class="outline" (click)="setStatus('EXCLUDED')" [disabled]="busy() || current.state !== 'READY'">Deixar de fora</button>
+                @if (item.status !== "PENDING") {
+                  <button type="button" class="text-button" (click)="setStatus('PENDING')" [disabled]="busy()">Voltar a conferir</button>
+                }
+              </div>
+            } @else {
+              <p class="muted">
+                {{ item.answer === "ANULADA" ? "Anulada pelo Inep: não entra no estudo." : "Discursivas ainda não entram no estudo." }}
+              </p>
+            }
+          </div>
+        } @else {
+          <p class="muted">Escolha uma questão na lista.</p>
+        }
+      </div>
+    </div>
+  }
+}

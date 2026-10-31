@@ -3,12 +3,18 @@
     ← Voltar
   </button>
   <h1 id="admin-title">Administração</h1>
-  <p class="admin-intro">
-    Contas cadastradas e papéis. Para dar acesso de professor, autorize o
-    e-mail institucional: se a pessoa ainda não tem conta, o papel vale assim
-    que ela se cadastrar com esse e-mail.
-  </p>
 
+  <div class="admin-tabs" role="tablist" aria-label="Seções da administração">
+    <button type="button" role="tab" [attr.aria-selected]="tab() === 'accounts'" (click)="tab.set('accounts')">Contas e papéis</button>
+    <button type="button" role="tab" [attr.aria-selected]="tab() === 'imports'" (click)="tab.set('imports')">Importar prova</button>
+  </div>
+  @if (tab() === "imports") {
+    <app-exam-import />
+  } @else {
+  <p class="admin-intro">
+    Para dar acesso de professor, autorize o e-mail institucional: se a pessoa
+    ainda não tem conta, o papel vale assim que ela se cadastrar com esse e-mail.
+  </p>
   <form class="admin-invite" (ngSubmit)="authorize()" aria-labelledby="admin-invite-title">
     <h2 id="admin-invite-title">Autorizar e-mail</h2>
     <div class="admin-invite-fields">
@@ -168,4 +174,5 @@
       <p class="muted">Nenhuma conta encontrada.</p>
     }
   </section>
+  }
 </section>

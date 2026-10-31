@@ -22,6 +22,14 @@ import {
 
 const run = promisify(execFile);
 const RENDER_DPI = 100; // só para detectar figuras; o recorte final é 200 dpi
+// Avisos do extrator em frases para quem confere a caixa na tela.
+const WARNINGS = {
+  figura: "Tem figura: confira se a caixa pega a figura inteira.",
+  tabela: "Tem tabela: confira se a caixa pega todas as linhas.",
+  codigo: "Tem código: confira se nenhuma linha ficou de fora.",
+  "texto-ilegivel": "Parte do texto não foi lida; confira na página.",
+  "numero-repetido": "Número repetido na prova: confira se é a questão certa.",
+};
 const archive = (sha) =>
   path.join(process.env.SOURCE_ARCHIVE_DIR || path.resolve(".local/sources"), `${sha}.pdf`);
 
@@ -64,8 +72,9 @@ export async function propose(examFile, keyFile) {
           prompt: item.prompt ?? "",
           options: item.options ?? [],
           warnings: [
-            ...(answer ? [] : ["Gabarito não encontrado para este número"]),
-            ...(item.flags ?? []).filter((flag) => ["figura", "tabela", "codigo", "texto-ilegivel", "numero-repetido"].includes(flag)),
+            ...(answer ? [] : ["Gabarito não encontrado para este número."]),
+            ...(question.lines.map((l) => l.page).some((p, _, all) => p !== all[0]) ? ["A questão continua em outra página: confira as caixas em cada uma."] : []),
+            ...(item.flags ?? []).flatMap((flag) => (WARNINGS[flag] ? [WARNINGS[flag]] : [])),
           ],
         };
       }),

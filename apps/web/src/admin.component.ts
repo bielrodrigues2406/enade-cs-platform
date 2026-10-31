@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ExamImportComponent } from "./exam-import.component";
 
 // Administração (ROLE-1, D14): contas cadastradas e papéis. O servidor
 // confere o papel em cada chamada; esta tela só organiza as ações.
@@ -20,12 +21,13 @@ export const ROLE_LABEL: Record<Role, string> = { ADMIN: "Administração", PROF
 
 @Component({
   selector: "app-admin",
-  imports: [FormsModule],
+  imports: [FormsModule, ExamImportComponent],
   templateUrl: "./admin.component.html",
 })
 export class AdminComponent {
   @Output() back = new EventEmitter<void>();
   readonly roleLabel = ROLE_LABEL;
+  tab = signal<"accounts" | "imports">("accounts");
   data = signal<UsersPage | null>(null);
   loading = signal(false);
   error = signal("");
