@@ -4,11 +4,10 @@
       <a
         href="/"
         class="brand"
-        aria-label="Caderno de Computação, início"
+        aria-label="Preparação ENADE, início"
         (click)="openHome($event)"
-        ><span class="brand-symbol" aria-hidden="true">cc.</span
-        ><span
-          >Caderno<span class="brand-sub">CIÊNCIA DA COMPUTAÇÃO</span></span
+        ><svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect width="34" height="34" rx="8" /><circle cx="9.5" cy="17" r="3.6" class="brand-bubble" /><circle cx="17" cy="17" r="3.6" class="brand-bubble is-marked" /><circle cx="24.5" cy="17" r="3.6" class="brand-bubble" /></svg><span
+          >Preparação ENADE<span class="brand-sub">CIÊNCIA DA COMPUTAÇÃO</span></span
         ></a
       >
       <div class="header-actions">
@@ -179,13 +178,6 @@
             Curadoria
           </button>
         }
-        <div class="sidebar-note">
-          <p class="muted">
-            O catálogo identifica a origem de cada questão. Conteúdo oficial
-            informa a prova e a edição; as questões iniciais autorais são
-            demonstrações.
-          </p>
-        </div>
       </aside>
       <main id="content" tabindex="-1">
         <div class="breadcrumb">
@@ -323,12 +315,12 @@
               }
             </section>
             <p class="source-note">
-              <strong>Origem do conteúdo.</strong> Questões oficiais indicam
-              prova e edição. As questões iniciais autorais são demonstrações.
+              <strong>Origem do conteúdo.</strong> Cada questão oficial mostra
+              o recorte da prova do Inep, a edição e a página de onde veio.
             </p>
             <form class="filters catalog-filters" (ngSubmit)="loadCatalog()">
               <div>
-                <label for="search">Buscar no caderno</label
+                <label for="search">Buscar questão</label
                 ><input
                   id="search"
                   type="search"

@@ -6,7 +6,7 @@ const noHorizontalScroll = (page: Page) =>
     () => document.documentElement.scrollWidth <= window.innerWidth,
   );
 const goHome = (page: Page) =>
-  page.getByRole("link", { name: "Caderno de Computação, início" }).click();
+  page.getByRole("link", { name: "Preparação ENADE, início" }).click();
 
 test.beforeEach(async ({ context }) => {
   await signUp(context);

@@ -349,18 +349,27 @@ header {
   color: var(--color-text);
   letter-spacing: -0.01em;
 }
-.brand-symbol {
-  display: grid;
-  place-items: center;
+/* Marca: uma linha da folha de respostas, com uma alternativa marcada. */
+.brand-mark {
+  flex: none;
   width: 34px;
   height: 34px;
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-  font-family: var(--font-mono);
-  font-size: var(--text-md);
-  font-weight: 700;
-  border-radius: 8px;
-  letter-spacing: -0.04em;
+}
+.brand-mark rect {
+  fill: var(--color-accent);
+}
+.brand-bubble {
+  fill: none;
+  stroke: var(--color-on-accent);
+  stroke-width: 1.8;
+}
+.brand-bubble.is-marked {
+  fill: var(--color-highlight);
+  stroke: none;
+}
+.brand-mark.is-large {
+  width: 56px;
+  height: 56px;
 }
 .brand-sub {
   display: block;
@@ -450,16 +459,6 @@ aside {
 }
 .secondary-nav {
   margin-top: 0;
-}
-.sidebar-note {
-  margin-top: auto;
-  padding: var(--space-5) var(--space-3) 0;
-  border-top: var(--border-thin) solid var(--color-border);
-}
-.sidebar-note p {
-  font-size: var(--text-sm);
-  line-height: 1.55;
-  margin: 0;
 }
 .muted {
   color: var(--color-text-muted);
@@ -975,10 +974,9 @@ fieldset:disabled .option:active {
   .brand-sub {
     display: none;
   }
-  .brand-symbol {
+  .brand-mark {
     width: 30px;
     height: 30px;
-    font-size: var(--text-sm);
   }
   .layout {
     display: block;
@@ -1084,6 +1082,13 @@ fieldset:disabled .option:active {
 }
 .account-mode .layout > aside,
 .account-mode main > .breadcrumb,
+.account-mode .mobile-study-nav {
+  display: none;
+}
+.account-mode main {
+  max-width: none;
+  padding: 0;
+}
 .account-privacy {
   margin: 0 0 var(--space-4);
   font-size: var(--text-sm);
@@ -1098,13 +1103,6 @@ fieldset:disabled .option:active {
   margin: var(--space-2) 0 0;
   padding-left: var(--space-5);
   line-height: 1.6;
-}
-.account-mode .mobile-study-nav {
-  display: none;
-}
-.account-mode main {
-  max-width: none;
-  padding: 0;
 }
 .account-page {
   display: grid;

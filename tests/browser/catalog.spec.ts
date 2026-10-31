@@ -128,19 +128,19 @@ test("catalog reaches beyond 50 and restores its selection through URL and brows
   await expect(page.getByLabel("Assunto", { exact: true }).locator("option", { hasText: customTopic })).toHaveCount(1);
   await expect(page.getByLabel("Ano da prova").locator('option[value="2021"]')).toHaveCount(1);
   for (let number = 2; number <= 4; number++) {
-    if (number === 4) await page.getByLabel("Buscar no caderno").fill("TEST ONLY filtro ainda não aplicado");
+    if (number === 4) await page.getByLabel("Buscar questão").fill("TEST ONLY filtro ainda não aplicado");
     await pager(page).getByRole("button", { name: "Próxima", exact: true }).focus();
     await page.keyboard.press("Enter");
     await expect(pager(page)).toContainText(`Página ${number} de 4`);
   }
   await expectList(page, 2);
-  await expect(page.getByLabel("Buscar no caderno")).toHaveValue(marker);
+  await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   await expect(page.getByRole("heading", { name: title(62), exact: true })).toBeVisible();
   await expect(pager(page).getByRole("button", { name: "Próxima", exact: true })).toBeDisabled();
   expect(new URL(page.url()).searchParams.get("page")).toBe("4");
   await page.reload();
   await expect(pager(page)).toContainText("Página 4 de 4");
-  await expect(page.getByLabel("Buscar no caderno")).toHaveValue(marker);
+  await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   await page.goBack();
   await expect(pager(page)).toContainText("Página 3 de 4");
   await page.goForward();
@@ -233,7 +233,7 @@ test("catalog failure can retry without dropping the applied filters or page", a
   await expect(page.getByRole("alert")).toContainText("falha temporária");
   await page.getByRole("button", { name: "Tentar novamente", exact: true }).click();
   await expect(pager(page)).toContainText("Página 3 de 4");
-  await expect(page.getByLabel("Buscar no caderno")).toHaveValue(marker);
+  await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   expect(new URL(page.url()).searchParams.get("page")).toBe("3");
   await page.unroute("**/api/catalog?**");
 });
@@ -300,7 +300,7 @@ test("home counts the full collection and suggests an unanswered item beyond the
   await page.reload();
   await expect(page).toHaveURL(selectionUrl);
   await expect(page.getByLabel("Área", { exact: true })).toHaveValue("Algoritmos");
-  await expect(page.getByLabel("Buscar no caderno")).toHaveValue(marker);
+  await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   await expect(pager(page)).toContainText("Página 2 de 3");
   await page.getByRole("button", { name: "Início", exact: true }).first().click();
   await page.getByRole("button", { name: `Continuar com: ${next.title}`, exact: true }).click();
