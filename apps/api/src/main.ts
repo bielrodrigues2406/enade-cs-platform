@@ -28,6 +28,8 @@ import { LessonsController } from "./lessons.js";
 import { ClassDashboardController } from "./class-dashboard.js";
 import { DiscursiveController } from "./discursive.js";
 import { EditionExamController } from "./edition-exam.js";
+import { ProgressController } from "./progress.js";
+import { AccountProfileController } from "./account-profile.js";
 import { PracticeController } from "./exam.js";
 import {
   QuestionImagesController,
@@ -238,6 +240,8 @@ class StudyController {
     ClassDashboardController,
     DiscursiveController,
     EditionExamController,
+    ProgressController,
+    AccountProfileController,
     PracticeController,
     QuestionImagesController,
   ],

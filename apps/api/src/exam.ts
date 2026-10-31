@@ -33,6 +33,8 @@ export type Attempt = {
   createdAt: Date; finishedAt: Date | null; answered: number; summary: Result | null;
   kind: "PARTIAL" | "EDITION"; examSourceId: string | null; deadlineAt: Date | null;
   pausedAt: Date | null; remainingMs: number | null;
+  /** ERRORS: erros do caderno prontos para revisão; RETRY: erradas de outro treino. */
+  focus: "ERRORS" | "RETRY" | null;
 };
 type Counts = { total: number; correct: number; incorrect: number; unanswered: number };
 type Result = Counts & {
@@ -54,7 +56,7 @@ type Item = {
 // Tolerância para a última gravação feita no limite do prazo chegar ao servidor.
 const DEADLINE_GRACE = "15 seconds";
 export const ATTEMPT_FIELDS = `p.id,p.size,p.area,p.state,p.created_at AS "createdAt",p.finished_at AS "finishedAt",p.summary,
-  p.kind,p.exam_source_id AS "examSourceId",p.paused_at AS "pausedAt",
+  p.kind,p.focus,p.exam_source_id AS "examSourceId",p.paused_at AS "pausedAt",
   p.deadline_at + p.paused_ms * interval '1 millisecond' AS "deadlineAt",
   CASE WHEN p.deadline_at IS NOT NULL AND p.state='IN_PROGRESS' THEN GREATEST(0, extract(epoch FROM
     p.deadline_at + p.paused_ms * interval '1 millisecond' - COALESCE(p.paused_at, clock_timestamp())) * 1000)::integer END AS "remainingMs",
@@ -76,7 +78,7 @@ function attemptSummary(row: Attempt) {
   return {
     id: row.id, state: row.state, size: row.size, area: row.area,
     createdAt: row.createdAt, finishedAt: row.finishedAt, answered: row.answered,
-    kind: row.kind, deadlineAt: row.deadlineAt, pausedAt: row.pausedAt, remainingMs: row.remainingMs,
+    kind: row.kind, focus: row.focus, deadlineAt: row.deadlineAt, pausedAt: row.pausedAt, remainingMs: row.remainingMs,
   };
 }
 export async function owned(client: PoolClient, id: string, owner: string, lock = false) {
@@ -138,6 +140,7 @@ async function complete(client: PoolClient, attempt: Attempt, owner: string) {
   const summary = result(await items(client, attempt.id));
   await client.query("UPDATE practice_attempt SET state='COMPLETED',finished_at=clock_timestamp(),summary=$2::jsonb,paused_at=NULL WHERE id=$1",
     [attempt.id, JSON.stringify(summary)]);
+  if (attempt.focus === "ERRORS") await reviewErrorsInStudy(client, attempt.id, owner);
   const discursive = (await editionDiscursive(client, attempt)).map((row) => row.id);
   if (discursive.length)
     await client.query(
@@ -145,6 +148,51 @@ async function complete(client: PoolClient, attempt: Attempt, owner: string) {
        WHERE owner_id=$1 AND question_id=ANY($2::text[]) AND submitted_at IS NULL AND btrim(body)<>''`,
       [owner, discursive],
     );
+}
+
+/**
+ * "Treinar meus erros" é a revisão do caderno: ao finalizar, cada resposta dada
+ * vira a resposta atual do estudo livre, então o acerto tira a questão do
+ * caderno e o erro reinicia o intervalo. Os outros treinos não tocam no estudo.
+ */
+async function reviewErrorsInStudy(client: PoolClient, attemptId: string, owner: string) {
+  const answered = (await client.query<{ versionId: string; optionId: string; correct: boolean }>(
+    `SELECT i.version_id AS "versionId",i.option_id AS "optionId",i.option_id=v.correct_option_id AS correct
+     FROM practice_item i JOIN question_version v ON v.id=i.version_id
+     WHERE i.attempt_id=$1 AND i.option_id IS NOT NULL`, [attemptId],
+  )).rows;
+  for (const row of answered) {
+    await client.query(
+      `INSERT INTO answer(owner_id,question_id,option_id,revision,updated_at) VALUES($1,$2,$3,1,clock_timestamp())
+       ON CONFLICT(owner_id,question_id) DO UPDATE SET option_id=EXCLUDED.option_id,revision=answer.revision+1,updated_at=clock_timestamp()`,
+      [owner, row.versionId, row.optionId]);
+    await client.query("INSERT INTO answer_event(owner_id,version_id,option_id,correct,origin) VALUES($1,$2,$3,$4,'STUDY')",
+      [owner, row.versionId, row.optionId, row.correct]);
+  }
+}
+
+/** Questões de um treino montado do histórico: erros prontos ou erradas de uma tentativa. */
+async function focusSelection(client: PoolClient, owner: string, focus: "ERRORS" | "RETRY", retryOf: string | null) {
+  if (focus === "ERRORS")
+    return (await client.query<{ id: string; question_id: string }>(
+      `WITH eligible AS (${ELIGIBLE}), latest AS (
+         SELECT DISTINCT ON (v.question_id) v.question_id,a.option_id=v.correct_option_id AS correct,a.updated_at
+         FROM answer a JOIN question_version v ON v.id=a.question_id
+         WHERE a.owner_id=$1 AND v.editorial_status='PUBLISHED'
+         ORDER BY v.question_id,a.updated_at DESC,v.version_number DESC,v.id)
+       SELECT e.id,e.question_id FROM eligible e JOIN latest l ON l.question_id=e.question_id
+       WHERE NOT l.correct AND l.updated_at <= now() - interval '1 day' ORDER BY l.updated_at,e.id LIMIT 30`, [owner],
+    )).rows;
+  return (await client.query<{ id: string; question_id: string }>(
+    `WITH eligible AS (${ELIGIBLE})
+     SELECT e.id,e.question_id FROM practice_item i
+     JOIN practice_attempt p ON p.id=i.attempt_id
+     JOIN question_version v ON v.id=i.version_id
+     JOIN eligible e ON e.question_id=i.question_id
+     WHERE p.id=$2 AND p.owner_id=$1 AND p.state='COMPLETED'
+       AND (i.option_id IS NULL OR i.option_id<>v.correct_option_id)
+     ORDER BY i.position LIMIT 30`, [owner, retryOf],
+  )).rows;
 }
 
 /** Prazo da prova vencido: finaliza com o que foi salvo. Pausada, não vence. Devolve se finalizou. */
@@ -270,13 +318,18 @@ export class PracticeController {
   @Post()
   async start(@Req() req: any, @Body() body: unknown) {
     await requireIdentity(req); noQuery(req);
-    const data = closed(body, ["requestId", "size", "area", "timed"]);
+    const data = closed(body, ["requestId", "size", "area", "timed", "focus", "retryOf"]);
     const timed = data.timed === true;
+    const focus = data.focus === "ERRORS" || data.focus === "RETRY" ? data.focus : null;
+    if (data.focus !== undefined && (!focus || data.area !== null
+      || (focus === "RETRY") !== (typeof data.retryOf === "string" && UUID.test(data.retryOf))))
+      fail("Treino de erros inválido.", 400);
+    if (focus) data.size = 1; // o tamanho vem da seleção
     if (typeof data.requestId !== "string" || !UUID.test(data.requestId)
       || typeof data.size !== "number" || !Number.isInteger(data.size) || data.size < 1 || data.size > 30
       || !(data.timed === undefined || typeof data.timed === "boolean")
       || !(data.area === null || typeof data.area === "string" && (AREAS as readonly string[]).includes(data.area))
-      || (data.area === null && !SIZES.includes(data.size)))
+      || (data.area === null && !focus && !SIZES.includes(data.size)))
       fail("Escolha 10, 20 ou 30 questões, ou uma área com a quantidade disponível.", 400);
     const client = await db.connect();
     try {
@@ -287,7 +340,8 @@ export class PracticeController {
         `SELECT ${ATTEMPT_FIELDS} FROM practice_attempt p WHERE p.owner_id=$1 AND p.request_id=$2 FOR UPDATE OF p`, [user.id, data.requestId],
       )).rows[0];
       if (previous) {
-        if (previous.size !== data.size || previous.area !== data.area || Boolean(previous.deadlineAt) !== timed)
+        if ((!focus && (previous.size !== data.size || previous.area !== data.area))
+          || previous.focus !== focus || Boolean(previous.deadlineAt) !== timed)
           fail("Esta solicitação já iniciou um treino com outra configuração.", 409);
         const dto = await view(client, previous);
         await client.query("COMMIT");
@@ -296,25 +350,28 @@ export class PracticeController {
       if ((await client.query("SELECT 1 FROM practice_attempt WHERE owner_id=$1 AND state='IN_PROGRESS'", [user.id])).rowCount)
         fail("Você já tem um treino em andamento. Retome-o antes de iniciar outro.", 409);
       const size = data.size as number;
-      if (data.area !== null && !AREA_SIZES.includes(size)) {
+      if (!focus && data.area !== null && !AREA_SIZES.includes(size)) {
         // Fora de 5/10/20/30, só vale "todas da área": o tamanho é o total publicado dela.
         const available = (await client.query(`WITH eligible AS (${ELIGIBLE}) SELECT count(*)::integer AS n FROM eligible WHERE topic=$1`,
           [data.area])).rows[0].n;
         if (size !== available) fail("Escolha 5, 10, 20, 30 ou todas as questões da área.", 400);
       }
       // Inéditas para a pessoa primeiro; depois as já vistas, em ordem aleatória.
-      const selected = (await client.query<{ id: string; question_id: string }>(
+      const selected = focus ? await focusSelection(client, user.id, focus, (data.retryOf as string) ?? null) : (await client.query<{ id: string; question_id: string }>(
         `WITH eligible AS (${ELIGIBLE}) SELECT e.id,e.question_id FROM eligible e
           WHERE ($1::text IS NULL OR e.topic=$1) ORDER BY ${SEEN.replaceAll("$OWNER", "$3")},random() LIMIT $2`,
         [data.area, data.size, user.id],
       )).rows;
+      if (focus && !selected.length)
+        fail(focus === "ERRORS" ? "Nenhum erro pronto para revisar agora." : "Nada para refazer neste treino.", 409);
+      if (focus) data.size = selected.length;
       if (selected.length !== data.size)
         fail("Ainda não há questões publicadas suficientes para esse tamanho. Escolha outra quantidade ou área.", 409);
       const id = randomUUID();
       await client.query(
-        `INSERT INTO practice_attempt(id,owner_id,request_id,size,area,deadline_at)
-         VALUES($1,$2,$3,$4,$5,CASE WHEN $6::boolean THEN clock_timestamp() + make_interval(mins => $4::integer * $7::integer) END)`,
-        [id, user.id, data.requestId, data.size, data.area, timed, MINUTES_PER_QUESTION]);
+        `INSERT INTO practice_attempt(id,owner_id,request_id,size,area,deadline_at,focus,retry_of)
+         VALUES($1,$2,$3,$4,$5,CASE WHEN $6::boolean THEN clock_timestamp() + make_interval(mins => $4::integer * $7::integer) END,$8,$9)`,
+        [id, user.id, data.requestId, data.size, data.area, timed, MINUTES_PER_QUESTION, focus, focus === "RETRY" ? data.retryOf : null]);
       for (const [index, row] of selected.entries()) {
         await client.query("INSERT INTO practice_item(attempt_id,position,question_id,version_id) VALUES($1,$2,$3,$4)", [id, index + 1, row.question_id, row.id]);
       }

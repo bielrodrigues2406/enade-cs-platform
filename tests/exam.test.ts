@@ -468,3 +468,42 @@ test("area practice offers all of a small area, prefers unseen questions and can
   assert.equal((await request(`practice/${untimed.id}/pause`, user, "PUT", {})).status, 404);
   assert.equal((await request(`practice/${untimed.id}/pause`, user, "POST", {})).status, 400);
 });
+
+test("practice from errors reviews ready mistakes in study, retry redoes wrong and blank items, progress counts first answers", async () => {
+  const topic = "Banco de dados";
+  const made = [];
+  for (let n = 0; n < 4; n++) made.push(await fixture(800 + n, { topic }));
+  const user = await actor();
+  assert.equal((await request("practice", user, "POST", { requestId: randomUUID(), focus: "ERRORS", area: null })).status, 409);
+  // Três erros no estudo livre; dois já passaram do intervalo de revisão.
+  for (const { id } of made.slice(0, 3)) await json(`questions/${id}/answer`, user, "PUT", { optionId: `${id}-B`, baseRevision: 0 });
+  await db.query("UPDATE answer SET updated_at=now()-interval '2 days' WHERE owner_id=$1 AND question_id=ANY($2)", [user.id, made.slice(0, 2).map((m) => m.id)]);
+  const progress = await json("me/progress", user);
+  assert.deepEqual(progress.errors, { total: 3, ready: 2 });
+  const area = progress.areas.find((a: any) => a.area === topic);
+  assert.deepEqual([area.firstAttempts, area.firstCorrect], [3, 0]);
+
+  const errors = await json("practice", user, "POST", { requestId: randomUUID(), focus: "ERRORS", area: null }, 201);
+  assert.equal(errors.focus, "ERRORS");
+  assert.deepEqual(errors.items.map((i: any) => i.question.id).sort(), made.slice(0, 2).map((m) => m.id).sort());
+  const right = errors.items[0];
+  await save(user, errors.id, right.position, `${right.question.id}-A`);
+  await json(`practice/${errors.id}/finish`, user, "POST", {});
+  // Acertar no treino de erros tira a questão do caderno; o primeiro erro continua contando no desempenho.
+  const after = await json("me/progress", user);
+  assert.deepEqual(after.errors, { total: 2, ready: 1 });
+  assert.deepEqual(after.areas.find((a: any) => a.area === topic).firstCorrect, 0);
+
+  // Refazer as erradas e em branco de um treino finalizado.
+  const base = await json("practice", user, "POST", { requestId: randomUUID(), size: 5, area: topic }, 201);
+  // Primeira certa (a alternativa correta é revelada só no fim; usa a dos fixtures, "-A", ou a da demo).
+  const correctOf = async (versionId: string) => (await db.query("SELECT correct_option_id FROM question_version WHERE id=$1", [versionId])).rows[0].correct_option_id;
+  const wrongOf = async (versionId: string) => (await db.query("SELECT id FROM question_option WHERE question_id=$1 AND id<>$2 LIMIT 1", [versionId, await correctOf(versionId)])).rows[0].id;
+  await save(user, base.id, 1, await correctOf(base.items[0].question.id));
+  await save(user, base.id, 2, await wrongOf(base.items[1].question.id));
+  await json(`practice/${base.id}/finish`, user, "POST", {});
+  assert.equal((await request("practice", user, "POST", { requestId: randomUUID(), focus: "RETRY", area: null })).status, 400);
+  const retry = await json("practice", user, "POST", { requestId: randomUUID(), focus: "RETRY", retryOf: base.id, area: null }, 201);
+  assert.equal(retry.size, 4);
+  assert.equal(retry.items.some((i: any) => i.question.id === base.items[0].question.id), false);
+});
