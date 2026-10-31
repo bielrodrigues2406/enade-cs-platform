@@ -94,6 +94,14 @@
           [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
         >Treino parcial</button>
+        @if (session().mode === "account") {
+          <button
+            class="text-button"
+            (click)="openLessons()"
+            [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            [attr.aria-current]="lessonsView() ? 'page' : null"
+          >Aulas</button>
+        }
       </nav>
     }
     <div class="layout">
@@ -140,6 +148,14 @@
           [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
         ><span class="nav-index" aria-hidden="true">04</span>Treino parcial</button>
+        @if (session().mode === "account") {
+          <button
+            class="nav secondary-nav"
+            (click)="openLessons()"
+            [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            [attr.aria-current]="lessonsView() ? 'page' : null"
+          ><span class="nav-index" aria-hidden="true">05</span>Aulas</button>
+        }
         @if (canCurate()) {
           <button
             class="nav secondary-nav"
@@ -167,6 +183,8 @@
               ? "Conta"
               : adminView()
                 ? "Administração"
+              : lessonsView()
+                ? "Aulas"
               : curationView()
                 ? "Curadoria"
                 : practiceView()
@@ -203,6 +221,12 @@
             />
           } @else if (authBusy()) {
             <p role="status">Atualizando sua sessão…</p>
+          } @else if (lessonsView()) {
+            @defer (on immediate) {
+              <app-lessons [staff]="isStaff()" />
+            } @placeholder {
+              <p role="status">Carregando as aulas…</p>
+            }
           } @else if (adminView()) {
             <!-- Só administradores abrem: carregada sob demanda. -->
             @defer (on immediate) {

@@ -6,6 +6,7 @@ import { CurationComponent } from "./curation.component";
 import { HomeComponent } from "./home.component";
 import { LandingComponent } from "./landing.component";
 import { AdminComponent } from "./admin.component";
+import { LessonsComponent } from "./lessons.component";
 import { QuestionContentComponent } from "./question-content.component";
 import { ExamComponent } from "./exam.component";
 import {
@@ -106,6 +107,7 @@ type Question = Summary & {
     HomeComponent,
     LandingComponent,
     AdminComponent,
+    LessonsComponent,
     QuestionContentComponent,
     ExamComponent,
     ReviewComponent,
@@ -146,6 +148,7 @@ class App {
   // Papéis da conta (ROLE-1); o servidor confere de novo em cada rota.
   roles = signal<string[]>([]);
   adminView = signal(false);
+  lessonsView = signal(false);
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
@@ -264,6 +267,7 @@ class App {
     this.error.set("");
     this.practiceView.set(false);
     this.adminView.set(false);
+    this.lessonsView.set(false);
     this.curationView.set(true);
     this.leaveHomePath();
     this.focusMain();
@@ -593,6 +597,7 @@ class App {
       return;
     }
     this.adminView.set(false);
+    this.lessonsView.set(false);
     this.question.set(null);
     this.selected = "";
     this.editing.set(false);
@@ -664,8 +669,26 @@ class App {
     this.leaveHomePath();
     this.focusMain();
   }
+  isStaff() {
+    return this.roles().includes("PROFESSOR") || this.roles().includes("ADMIN");
+  }
+  openLessons() {
+    if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy())
+      return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.lessonsView.set(true);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
   private clearStudyState() {
     this.adminView.set(false);
+    this.lessonsView.set(false);
     if (this.identityGeneration > 0 && this.practiceView()) {
       this.practiceAttemptId.set(null);
       this.practiceItemPosition.set(1);
@@ -881,6 +904,7 @@ class App {
     const apply = () => {
       if (generation !== this.identityGeneration || !stillCurrent()) return;
       this.adminView.set(false);
+    this.lessonsView.set(false);
       update();
     };
     const doc = document as Document & {
