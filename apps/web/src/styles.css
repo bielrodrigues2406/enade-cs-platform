@@ -4408,3 +4408,42 @@ app-landing [data-reveal] {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+.import-issues {
+  margin: var(--space-4) 0;
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--color-warning-border);
+  background: var(--color-warning-bg);
+}
+.import-issues h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-base);
+}
+.import-issues ul {
+  margin: 0;
+  padding-left: var(--space-5);
+  line-height: 1.6;
+}
+.import-answer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-3) 0;
+}
+.import-answer-row label,
+.import-note label {
+  font-weight: var(--weight-semibold);
+}
+.import-changed {
+  font-size: var(--text-sm);
+  color: var(--color-warning-text);
+}
+.import-note {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 560px;
+  margin-bottom: var(--space-4);
+}
+.import-note button {
+  justify-self: start;
+}

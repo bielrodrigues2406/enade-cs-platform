@@ -8,12 +8,13 @@ type Box = { page: number; x0: number; y0: number; x1: number; y1: number };
 type ItemStatus = "PENDING" | "CONFIRMED" | "EXCLUDED";
 type ImportItem = {
   key: string; number: number; kind: "OBJECTIVE" | "DISCURSIVE"; answer: string | null;
+  keyAnswer: string | null; answerNote: string | null;
   boxes: Box[]; status: ItemStatus; area: string | null; subject: string | null;
   warnings: string[]; revision: number;
 };
 type ImportBatch = {
   id: string; year: number; modality: string; state: string; failure: string | null;
-  pageCount: number | null; pageSizes: { width: number; height: number }[] | null;
+  pageCount: number | null; pageSizes: { width: number; height: number }[] | null; issues: string[];
   areas: string[]; items: ImportItem[];
 };
 type BatchSummary = { id: string; year: number; modality: string; state: string; total: number; confirmed: number; excluded: number };
@@ -41,6 +42,9 @@ export class ExamImportComponent {
   notice = signal("");
   form = { year: new Date().getFullYear(), modality: "BACHARELADO", examUrl: "", keyUrl: "" };
   files: { exam?: File; key?: File } = {};
+  // Troca de letra em edição: só é salva junto com a justificativa.
+  answerDraft = signal<string | null>(null);
+  noteDraft = "";
   private drag: Drag | null = null;
   private poll: ReturnType<typeof setTimeout> | null = null;
 
@@ -103,6 +107,8 @@ export class ExamImportComponent {
   }
   select(key: string | null) {
     this.selectedKey.set(key);
+    this.answerDraft.set(null);
+    this.noteDraft = "";
     const first = this.batch()?.items.find((i) => i.key === key)?.boxes[0];
     if (first) this.page.set(first.page);
   }
@@ -182,6 +188,20 @@ export class ExamImportComponent {
     const item = this.selected();
     if (item) this.updateItem({ ...item, [field]: value.trim() || null });
   }
+  chooseAnswer(value: string) {
+    const item = this.selected();
+    if (!item) return;
+    const answer = value || null;
+    if (answer === item.keyAnswer) {
+      this.answerDraft.set(null);
+      this.updateItem({ ...item, answer, answerNote: null });
+    } else this.answerDraft.set(answer);
+  }
+  saveAnswer() {
+    const item = this.selected(), answer = this.answerDraft();
+    if (!item || this.noteDraft.trim().length < 5) return;
+    void this.save({ ...item, answer, answerNote: this.noteDraft.trim() }).then((ok) => ok && this.answerDraft.set(null));
+  }
   async publish() {
     const batch = this.batch();
     if (!batch) return;
@@ -210,6 +230,7 @@ export class ExamImportComponent {
     return this.attempt(async () => {
       const { revision } = await this.request<{ revision: number }>(`imports/${batch.id}/items/${item.key}`, {
         boxes: item.boxes, status: item.status, area: item.area, subject: item.subject, revision: item.revision,
+        answer: item.answer, answerNote: item.answerNote,
       }, "PUT");
       this.patchLocal({ ...item, revision });
     });

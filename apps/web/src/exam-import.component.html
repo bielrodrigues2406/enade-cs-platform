@@ -76,6 +76,16 @@
   } @else if (current.state === "FAILED") {
     <div class="notice" role="alert"><p>A leitura falhou: {{ current.failure }}</p></div>
   } @else {
+    @if (current.issues.length) {
+      <section class="import-issues" aria-labelledby="import-issues-title">
+        <h3 id="import-issues-title">Confira antes de publicar</h3>
+        <ul>
+          @for (issue of current.issues; track issue) {
+            <li>{{ issue }}</li>
+          }
+        </ul>
+      </section>
+    }
     <div class="import-progress">
       <p>
         <strong>{{ counts().confirmed }}</strong> confirmadas ·
@@ -142,9 +152,32 @@
           <div class="import-details">
             <p>
               <strong>{{ item.kind === "DISCURSIVE" ? "Discursiva" : "Questão" }} {{ item.number }}</strong>
-              · gabarito {{ item.answer ?? "não encontrado" }}
+              · lida no gabarito: {{ item.keyAnswer ?? "nenhuma" }}
               @if (item.boxes.length > 1) { · {{ item.boxes.length }} caixas, na ordem de leitura }
             </p>
+            @if (item.kind === "OBJECTIVE" && current.state === "READY") {
+              <div class="import-answer-row">
+                <label for="import-answer">Gabarito</label>
+                <select id="import-answer" [ngModel]="answerDraft() ?? item.answer ?? ''" (ngModelChange)="chooseAnswer($event)">
+                  <option value="">Sem letra</option>
+                  @for (letter of ["A", "B", "C", "D", "E"]; track letter) {
+                    <option [value]="letter">{{ letter }}</option>
+                  }
+                  <option value="ANULADA">Anulada</option>
+                </select>
+                @if (item.answer !== item.keyAnswer && !answerDraft()) {
+                  <span class="import-changed">Alterado: {{ item.answerNote }}</span>
+                }
+              </div>
+              @if (answerDraft() !== null && answerDraft() !== item.keyAnswer) {
+                <div class="import-note">
+                  <label for="import-note">Por que a letra é diferente da lida no gabarito?</label>
+                  <textarea id="import-note" rows="2" maxlength="500" [(ngModel)]="noteDraft"
+                    placeholder="Ex.: gabarito definitivo republicado pelo Inep em 10/12 alterou a letra."></textarea>
+                  <button type="button" (click)="saveAnswer()" [disabled]="busy() || noteDraft.trim().length < 5">Salvar gabarito</button>
+                </div>
+              }
+            }
             @for (warning of item.warnings; track warning) {
               <p class="import-warning">{{ warning }}</p>
             }
