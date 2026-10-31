@@ -38,6 +38,9 @@ test("home shows the study board and leads to study and back", async ({
   await expect(
     page.getByRole("button", { name: /^Simular Redes: \d+ questõ?(?:es|ão)$/ }),
   ).toBeVisible();
+  await page
+    .getByRole("region", { name: "Seu desempenho por área" })
+    .screenshot({ path: "test-results/home-areas.png" });
   await expect(
     page.getByRole("button", { name: "Início" }).first(),
   ).toHaveAttribute("aria-current", "page");

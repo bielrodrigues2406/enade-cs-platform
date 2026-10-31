@@ -182,6 +182,23 @@ export class HomeComponent {
   areas() {
     return this.progress()?.areas ?? [];
   }
+  /**
+   * Áreas em ordem de atenção: primeiro as medidas (pelo menos SMALL_SAMPLE
+   * respostas), do menor para o maior acerto; depois as com poucas
+   * respostas; por fim as ainda não estudadas, por nome.
+   */
+  ranked() {
+    const rank = (row: AreaProgress) => (row.firstAttempts >= SMALL_SAMPLE ? 0 : row.firstAttempts ? 1 : 2);
+    return [...this.areas()].sort((a, b) =>
+      rank(a) - rank(b)
+      || (rank(a) < 2 ? this.ratio(a.firstCorrect, a.firstAttempts) - this.ratio(b.firstCorrect, b.firstAttempts) : 0)
+      || a.area.localeCompare(b.area, "pt-BR"),
+    );
+  }
+  /** Quanto da área a pessoa já viu, de 0 a 1. */
+  coverage(row: AreaProgress) {
+    return this.ratio(Math.min(row.firstAttempts, row.published), row.published);
+  }
   accuracy(row: AreaProgress) {
     return Math.round(100 * this.ratio(row.firstCorrect, row.firstAttempts));
   }
