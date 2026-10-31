@@ -106,19 +106,34 @@ test("profile fields are validated and an enrollment belongs to one account", as
   assert.equal((await account(email(), { enrollment })).status, 409);
 });
 
-test("ADMIN_EMAILS grants the admin role at sign-up and to existing accounts at start", async () => {
-  const { configuredAdmins, grantConfiguredAdmins } = await import("../apps/api/src/roles.js");
+test("ADMIN_EMAILS only bootstraps the first admin; with an admin in place it is ignored", async () => {
+  const { configuredAdmins, grantConfiguredAdmin, grantConfiguredAdmins } = await import("../apps/api/src/roles.js");
   assert.deepEqual(configuredAdmins(" Ana@Example.invalid , não-é-email, b@example.invalid"), ["ana@example.invalid", "b@example.invalid"]);
-  const [early, late] = [email(), email()];
+  const [first, late] = [email(), email()];
   const before = process.env.ADMIN_EMAILS;
   try {
-    const existing = await account(late);
-    process.env.ADMIN_EMAILS = `${early}, ${late}`;
-    const fresh = await account(early);
-    assert.deepEqual((await (await call("access", fresh.cookie)).json()).roles, ["ADMIN"]);
-    assert.deepEqual((await (await call("access", existing.cookie)).json()).roles, []);
-    await grantConfiguredAdmins(); // o que o servidor faz ao iniciar
-    assert.deepEqual((await (await call("access", existing.cookie)).json()).roles, ["ADMIN"]);
+    await account(first);
+    process.env.ADMIN_EMAILS = `${first}, ${late}`;
+    // Sem nenhum administrador (simulado numa transação desfeita): o e-mail configurado vira admin.
+    const client = await db.connect();
+    try {
+      await client.query("BEGIN");
+      await client.query("DELETE FROM account_role WHERE role='ADMIN'");
+      await grantConfiguredAdmin(client, first);
+      const granted = await client.query("SELECT 1 FROM account_role r JOIN account a ON a.identity_id=r.identity_id WHERE a.email=$1 AND r.role='ADMIN'", [first]);
+      assert.equal(granted.rowCount, 1);
+    } finally {
+      await client.query("ROLLBACK");
+      client.release();
+    }
+    // Com um administrador já existente, nem o cadastro nem a inicialização concedem o papel.
+    const admin = email();
+    await account(admin);
+    await makeAdmin(admin);
+    const fresh = await account(late);
+    assert.deepEqual((await (await call("access", fresh.cookie)).json()).roles, []);
+    await grantConfiguredAdmins();
+    assert.deepEqual((await (await call("access", fresh.cookie)).json()).roles, []);
   } finally {
     process.env.ADMIN_EMAILS = before ?? "";
   }

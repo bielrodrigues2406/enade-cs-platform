@@ -87,9 +87,11 @@ export async function revoke(client: PoolClient, email: string, role: Role, acto
 }
 
 /**
- * Administradores definidos na configuração do servidor (ADMIN_EMAILS, e-mails
- * separados por vírgula): recebem o papel quando a conta existe, ao iniciar o
- * servidor ou no cadastro. Facilita o primeiro acesso sem shell no provedor.
+ * Primeiro administrador pela configuração do servidor (ADMIN_EMAILS, e-mails
+ * separados por vírgula): recebe o papel quando a conta existe, ao iniciar o
+ * servidor ou no cadastro, **somente enquanto não houver nenhum administrador**.
+ * Como o e-mail não é confirmado, isso limita a janela em que outra pessoa
+ * poderia cadastrar o endereço antes do dono (auditoria de 31/10, C1).
  */
 export function configuredAdmins(value = process.env.ADMIN_EMAILS ?? "") {
   return value.split(",").map((email) => email.trim().toLowerCase())
@@ -98,8 +100,11 @@ export function configuredAdmins(value = process.env.ADMIN_EMAILS ?? "") {
 
 export async function grantConfiguredAdmin(client: PoolClient, email: string) {
   if (!configuredAdmins().includes(email)) return;
+  // Serializa com outros cadastros para dois e-mails não virarem o "primeiro" juntos.
+  await client.query("SELECT pg_advisory_xact_lock(hashtextextended('first-admin',0))");
+  const hasAdmin = (await client.query("SELECT 1 FROM account_role WHERE role='ADMIN' LIMIT 1")).rowCount;
   const exists = (await client.query("SELECT 1 FROM account WHERE email=$1", [email])).rowCount;
-  if (exists) await authorize(client, email, "ADMIN", null);
+  if (!hasAdmin && exists) await authorize(client, email, "ADMIN", null);
 }
 
 export async function grantConfiguredAdmins() {
