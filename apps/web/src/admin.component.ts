@@ -14,7 +14,11 @@ type UserRow = {
   roles: Role[];
   answers: number;
 };
-type Invitation = { email: string; role: Role; createdAt: string };
+/** Convite de papel; com `claimedAt`, a pessoa já se cadastrou e aguarda confirmação. */
+type Invitation = {
+  email: string; role: Role; createdAt: string;
+  claimedAt: string | null; claimedName: string | null; claimedEnrollment: string | null;
+};
 type UsersPage = { total: number; page: number; pageSize: number; items: UserRow[]; invitations: Invitation[] };
 
 export const ROLE_LABEL: Record<Role, string> = { ADMIN: "Administração", PROFESSOR: "Professor" };
@@ -66,7 +70,7 @@ export class AdminComponent {
     this.notice.set(
       result.status === "GRANTED"
         ? `${email} agora tem o papel ${ROLE_LABEL[this.inviteRole]}.`
-        : `${email} ainda não tem conta. O papel ${ROLE_LABEL[this.inviteRole]} vale assim que a conta for criada.`,
+        : `${email} ainda não tem conta. Quando a pessoa se cadastrar, confirme aqui para o papel ${ROLE_LABEL[this.inviteRole]} valer.`,
     );
     this.inviteEmail = "";
   }
@@ -74,6 +78,13 @@ export class AdminComponent {
     if (await this.change("admin/roles", user.email, role))
       this.notice.set(`${user.email} agora tem o papel ${ROLE_LABEL[role]}.`);
   }
+  /** Confirma o papel de quem se cadastrou com um e-mail convidado. */
+  async confirm(invitation: Invitation) {
+    if (await this.change("admin/roles", invitation.email, invitation.role))
+      this.notice.set(`${invitation.claimedName ?? invitation.email} agora tem o papel ${ROLE_LABEL[invitation.role]}.`);
+  }
+  claimed() { return (this.data()?.invitations ?? []).filter((i) => i.claimedAt); }
+  waiting() { return (this.data()?.invitations ?? []).filter((i) => !i.claimedAt); }
   async revoke(email: string, role: Role) {
     if (await this.change("admin/roles/revoke", email, role))
       this.notice.set(`Papel ${ROLE_LABEL[role]} removido de ${email}.`);

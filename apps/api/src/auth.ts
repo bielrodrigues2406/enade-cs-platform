@@ -60,6 +60,27 @@ class AuthThrottle {
     }
   }
 }
+// Sessões de visitante: limite por IP contra encher o banco com identidades
+// vazias (auditoria de 31/10, C3). Generoso porque um laboratório do câmpus
+// inteiro sai por um IP só; um navegador reaproveita a própria sessão.
+const GUEST_SESSIONS_PER_IP = 600;
+const GUEST_WINDOW_MS = 15 * 60000;
+class GuestThrottle {
+  private windows = new Map<string, { count: number; end: number }>();
+  check(req: any, res: any) {
+    const now = Date.now();
+    for (const [key, value] of this.windows) if (value.end <= now) this.windows.delete(key);
+    const key = digest(req.ip || req.socket.remoteAddress || "unknown");
+    const current = this.windows.get(key) ?? { count: 0, end: now + GUEST_WINDOW_MS };
+    if (current.count >= GUEST_SESSIONS_PER_IP) {
+      res.setHeader("Retry-After", Math.ceil((current.end - now) / 1000));
+      fail("Muitas sessões novas a partir desta rede. Aguarde alguns minutos.", 429);
+    }
+    if (!this.windows.has(key) && this.windows.size >= 10000) fail("O acesso está ocupado. Tente novamente em instantes.", 503);
+    current.count++;
+    this.windows.set(key, current);
+  }
+}
 function credentials(body: unknown) {
   if (!body || typeof body !== "object" || Array.isArray(body))
     fail("Informe e-mail e senha.", 400);
@@ -94,6 +115,7 @@ function profile(body: unknown) {
 @Controller("api")
 export class AuthController {
   private throttle = new AuthThrottle();
+  private guests = new GuestThrottle();
 
   @Post("session") async session(
     @Req() req: any,
@@ -101,6 +123,7 @@ export class AuthController {
   ) {
     const existing = await identity(req);
     if (existing) return sessionView(existing);
+    this.guests.check(req, res);
     const client = await db.connect();
     try {
       await client.query("BEGIN");

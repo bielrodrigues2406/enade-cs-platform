@@ -12,8 +12,8 @@
     <app-exam-import />
   } @else {
   <p class="admin-intro">
-    Para dar acesso de professor, autorize o e-mail institucional: se a pessoa
-    ainda não tem conta, o papel vale assim que ela se cadastrar com esse e-mail.
+    Para dar acesso de professor, autorize o e-mail institucional. Se a pessoa
+    ainda não tem conta, ela aparece aqui depois do cadastro para você confirmar.
   </p>
   <form class="admin-invite" (ngSubmit)="authorize()" aria-labelledby="admin-invite-title">
     <h2 id="admin-invite-title">Autorizar e-mail</h2>
@@ -49,11 +49,29 @@
     <div class="notice" role="alert"><p>{{ error() }}</p></div>
   }
 
-  @if (data()?.invitations?.length) {
+  @if (claimed().length) {
+    <section class="admin-claims" aria-labelledby="admin-claims">
+      <h2 id="admin-claims">Cadastros aguardando sua confirmação</h2>
+      <p class="muted">O e-mail não é confirmado pelo sistema. Confira se o nome e o prontuário são da pessoa que você autorizou antes de confirmar.</p>
+      <ul class="admin-pending">
+        @for (invitation of claimed(); track invitation.email + invitation.role) {
+          <li>
+            <span><strong>{{ invitation.claimedName ?? "Sem nome" }}</strong> · {{ invitation.claimedEnrollment ?? "sem prontuário" }}</span>
+            <span>{{ invitation.email }}</span>
+            <span class="admin-role">{{ roleLabel[invitation.role] }}</span>
+            <span class="muted">cadastro em {{ date(invitation.claimedAt!) }}</span>
+            <button type="button" (click)="confirm(invitation)">Confirmar</button>
+            <button type="button" class="text-button" (click)="revoke(invitation.email, invitation.role)">Recusar</button>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+  @if (waiting().length) {
     <section aria-labelledby="admin-pending">
       <h2 id="admin-pending">Autorizações aguardando cadastro</h2>
       <ul class="admin-pending">
-        @for (invitation of data()!.invitations; track invitation.email + invitation.role) {
+        @for (invitation of waiting(); track invitation.email + invitation.role) {
           <li>
             <span>{{ invitation.email }}</span>
             <span class="admin-role">{{ roleLabel[invitation.role] }}</span>

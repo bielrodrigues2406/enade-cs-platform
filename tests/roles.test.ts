@@ -80,7 +80,14 @@ test("an admin authorizes professors by e-mail, before or after the account exis
   assert.deepEqual(await invited.json(), { status: "INVITED" });
   const later = await account(laterEmail, { name: "  Prof.  TEST ONLY ", enrollment: "pe3012345" });
   assert.equal(later.status, 201);
+  // O cadastro só reivindica o convite: o papel vale depois da confirmação do admin.
+  assert.deepEqual(await (await call("access", later.cookie)).json(), { roles: [] });
+  const pending = (await (await call("admin/users", admin.cookie)).json()).invitations.find((i: any) => i.email === laterEmail);
+  assert.deepEqual([pending.claimedName, pending.claimedEnrollment, Boolean(pending.claimedAt)], ["Prof. TEST ONLY", "PE3012345", true]);
+  const confirmed = await call("admin/roles", admin.cookie, "POST", { email: laterEmail, role: "PROFESSOR" });
+  assert.deepEqual(await confirmed.json(), { status: "GRANTED" });
   assert.deepEqual(await (await call("access", later.cookie)).json(), { roles: ["PROFESSOR"] });
+  assert.equal((await (await call("admin/users", admin.cookie)).json()).invitations.some((i: any) => i.email === laterEmail), false);
   const stored = (await db.query("SELECT display_name,enrollment FROM account WHERE email=$1", [laterEmail])).rows[0];
   assert.deepEqual(stored, { display_name: "Prof. TEST ONLY", enrollment: "PE3012345" });
 
@@ -92,7 +99,7 @@ test("an admin authorizes professors by e-mail, before or after the account exis
   assert.equal(removed.status, 200);
   assert.deepEqual(await (await call("access", later.cookie)).json(), { roles: [] });
   const events = (await db.query("SELECT action FROM role_event WHERE email=$1 ORDER BY id", [laterEmail])).rows.map((r) => r.action);
-  assert.deepEqual(events, ["INVITED", "GRANTED", "REVOKED"]);
+  assert.deepEqual(events, ["INVITED", "CLAIMED", "GRANTED", "REVOKED"]);
 
   // Um administrador não remove o próprio acesso pela tela.
   assert.equal((await call("admin/roles/revoke", admin.cookie, "POST", { email: adminEmail, role: "ADMIN" })).status, 409);

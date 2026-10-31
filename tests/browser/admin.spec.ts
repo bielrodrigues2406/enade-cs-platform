@@ -52,11 +52,18 @@ test("sign-up takes name and enrollment, and an admin authorizes a professor", a
   await expect(page.getByRole("status")).toContainText("ainda não tem conta");
   await expect(page.getByRole("region", { name: "Autorizações aguardando cadastro" })).toContainText(professorEmail);
 
-  // A pessoa se cadastra com o prontuário e já recebe o papel.
+  // A pessoa se cadastra com o prontuário; o papel só vale depois da confirmação.
   const other = await browser.newContext();
   const professor = await other.newPage();
   await register(professor, professorEmail, { name: "Prof TEST ONLY", enrollment: "pe3009999" });
   await other.close();
+  await page.reload();
+  await page.getByRole("button", { name: "Administração" }).first().click();
+  const claims = page.getByRole("region", { name: "Cadastros aguardando sua confirmação" });
+  await expect(claims).toContainText("Prof TEST ONLY");
+  await expect(claims).toContainText("PE3009999");
+  await claims.getByRole("button", { name: "Confirmar" }).click();
+  await expect(page.getByRole("status")).toContainText("agora tem o papel Professor");
   const stored = (await pool.query(
     `SELECT a.enrollment,r.role FROM account a JOIN account_role r ON r.identity_id=a.identity_id WHERE a.email=$1`,
     [professorEmail],

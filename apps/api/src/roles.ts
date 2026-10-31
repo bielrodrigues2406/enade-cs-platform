@@ -49,7 +49,9 @@ async function record(client: PoolClient, email: string, role: Role, action: str
 
 /**
  * Autoriza um e-mail para um papel. Se a conta já existe, o papel vale na
- * hora; senão fica um convite, aplicado quando a conta for criada.
+ * hora; senão fica um convite. Quem se cadastrar com o e-mail reivindica o
+ * convite, e o papel só vale quando um administrador confirmar (chamando esta
+ * função de novo, já com a conta existente).
  */
 export async function authorize(client: PoolClient, email: string, role: Role, actor: Actor) {
   const account = (await client.query<{ id: string }>(
@@ -61,6 +63,8 @@ export async function authorize(client: PoolClient, email: string, role: Role, a
       [account.id, role, actor],
     );
     if (granted.rowCount) await record(client, email, role, "GRANTED", actor);
+    // Confirmar um convite já reivindicado no cadastro encerra o convite.
+    await client.query("DELETE FROM role_invitation WHERE email=$1 AND role=$2", [email, role]);
     return { status: "GRANTED" as const };
   }
   if (!actor) fail("Não há conta com esse e-mail. Crie a conta pelo site antes.", 404);
@@ -123,19 +127,17 @@ export async function grantConfiguredAdmins() {
   }
 }
 
-/** Converte convites pendentes em papéis quando a conta passa a existir. */
+/**
+ * Cadastro com e-mail convidado: o convite fica "reivindicado" por essa conta e
+ * o papel só vale quando um administrador confirmar (o e-mail não é
+ * confirmado; auditoria de 31/10, C1).
+ */
 export async function applyInvitations(client: PoolClient, identityId: string, email: string) {
-  const invitations = (await client.query<{ role: Role; invitedBy: string }>(
-    `DELETE FROM role_invitation WHERE email=$1 RETURNING role,invited_by AS "invitedBy"`,
-    [email],
+  const claimed = (await client.query<{ role: Role }>(
+    `UPDATE role_invitation SET claimed_by=$2,claimed_at=now() WHERE email=$1 AND claimed_by IS NULL RETURNING role`,
+    [email, identityId],
   )).rows;
-  for (const invitation of invitations) {
-    await client.query(
-      "INSERT INTO account_role(identity_id,role,granted_by) VALUES($1,$2,$3) ON CONFLICT DO NOTHING",
-      [identityId, invitation.role, invitation.invitedBy],
-    );
-    await record(client, email, invitation.role, "GRANTED", invitation.invitedBy);
-  }
+  for (const invitation of claimed) await record(client, email, invitation.role, "CLAIMED", null);
 }
 
 async function inTransaction<T>(work: (client: PoolClient) => Promise<T>) {
@@ -179,7 +181,9 @@ export class RolesController {
          COALESCE((SELECT json_agg(m ORDER BY m."createdAt" DESC) FROM
            (SELECT * FROM matching ORDER BY "createdAt" DESC LIMIT $2 OFFSET $3) m),'[]') AS items,
          COALESCE((SELECT json_agg(i ORDER BY i."createdAt" DESC) FROM
-           (SELECT email,role,created_at AS "createdAt" FROM role_invitation) i),'[]') AS invitations`,
+           (SELECT v.email,v.role,v.created_at AS "createdAt",v.claimed_at AS "claimedAt",
+              c.display_name AS "claimedName",c.enrollment AS "claimedEnrollment"
+            FROM role_invitation v LEFT JOIN account c ON c.identity_id=v.claimed_by) i),'[]') AS invitations`,
       [q.trim(), PAGE_SIZE, offset],
     );
     return { ...result.rows[0], page: Number(page), pageSize: PAGE_SIZE };
