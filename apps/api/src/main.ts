@@ -25,6 +25,7 @@ import { CatalogController } from "./catalog.js";
 import { RolesController } from "./roles.js";
 import { ExamImportsController } from "./exam-imports.js";
 import { LessonsController } from "./lessons.js";
+import { ClassDashboardController } from "./class-dashboard.js";
 import { PracticeController } from "./exam.js";
 import {
   QuestionImagesController,
@@ -206,6 +207,10 @@ class StudyController {
           [user.id, id, optionId, (baseRevision as number) + 1],
         )
       ).rows[0];
+      await client.query(
+        "INSERT INTO answer_event(owner_id,version_id,option_id,correct,origin) VALUES($1,$2,$3,$4,'STUDY')",
+        [user.id, id, optionId, optionId === q.correctOptionId],
+      );
       await client.query("COMMIT");
       return feedback(result, q);
     } catch (error) {
@@ -228,6 +233,7 @@ class StudyController {
     RolesController,
     ExamImportsController,
     LessonsController,
+    ClassDashboardController,
     PracticeController,
     QuestionImagesController,
   ],

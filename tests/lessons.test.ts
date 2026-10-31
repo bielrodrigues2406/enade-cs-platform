@@ -22,6 +22,7 @@ after(async () => {
     const ids = (await db.query("SELECT identity_id FROM account WHERE email=ANY($1)", [emails])).rows.map((r) => r.identity_id);
     await db.query("DELETE FROM role_event WHERE email=ANY($1)", [emails]);
     await db.query("DELETE FROM account_role WHERE identity_id=ANY($1::uuid[])", [ids]);
+    await db.query("DELETE FROM answer WHERE owner_id=ANY($1::uuid[])", [ids]);
     await db.query("DELETE FROM browser_session WHERE identity_id=ANY($1::uuid[])", [ids]);
     await db.query("DELETE FROM account WHERE identity_id=ANY($1::uuid[])", [ids]);
     await db.query("DELETE FROM study_identity WHERE id=ANY($1::uuid[])", [ids]);
@@ -114,4 +115,32 @@ test("professors run classes, roll calls and exports; students see only their ow
   assert.deepEqual(await (await call(student.cookie, "my/lessons")).json(), { lessons: [] });
   const detail = await (await call(professor.cookie, `classes/${id}`)).json();
   assert.equal(detail.members.find((m: any) => m.enrollment === linked).hasAccount, true);
+});
+
+test("the class dashboard counts only first attempts and keeps the answer history append-only", async () => {
+  const professor = await account("PROFESSOR");
+  const { id } = await (await call(professor.cookie, "classes", "POST", { name: "TEST ONLY painel", editionYear: 2026 })).json();
+  classes.push(id);
+  const linked = enrollment();
+  await call(professor.cookie, `classes/${id}/members`, "POST", { text: `Aluna TEST ONLY;${linked}\nSem Conta TEST ONLY;${enrollment()}` });
+  const student = await account(undefined, { enrollment: linked });
+  // Erra e depois acerta a mesma questão: o painel conta o erro.
+  await call(student.cookie, "questions/demo-sql-v1/answer", "PUT", { optionId: "demo-sql-v1-0", baseRevision: 0 });
+  await call(student.cookie, "questions/demo-sql-v1/answer", "PUT", { optionId: "demo-sql-v1-1", baseRevision: 1 });
+  await call(student.cookie, "questions/demo-search-v1/answer", "PUT", { optionId: "demo-search-v1-2", baseRevision: 0 });
+
+  assert.equal((await call(student.cookie, `classes/${id}/dashboard`)).status, 403);
+  const board = await (await call(professor.cookie, `classes/${id}/dashboard`)).json();
+  const row = board.students.find((s: any) => s.enrollment === linked);
+  assert.deepEqual([row.hasAccount, row.firstAttempts, row.firstCorrect], [true, 2, 1]);
+  assert.equal(board.students.find((s: any) => s.enrollment !== linked).firstAttempts, 0);
+  assert.deepEqual(board.areas.map((a: any) => [a.area, a.students, a.firstAttempts, a.firstCorrect]), [
+    ["Algoritmos", 1, 1, 1],
+    ["Banco de dados", 1, 1, 0],
+  ]);
+  assert.equal(board.backfilled, 0);
+
+  const events = await db.query("SELECT count(*)::int AS n FROM answer_event WHERE owner_id=$1", [student.id]);
+  assert.equal(events.rows[0].n, 3);
+  await assert.rejects(db.query("UPDATE answer_event SET correct=true WHERE owner_id=$1", [student.id]), /append-only/);
 });

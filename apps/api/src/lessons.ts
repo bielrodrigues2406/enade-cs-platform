@@ -13,7 +13,7 @@ const ENROLLMENT = /^[A-Z]{2}[0-9]{6,8}X?$/;
 const STATUSES = ["PRESENT", "ABSENT", "LATE", "EXCUSED"] as const;
 const STATUS_CSV: Record<string, string> = { PRESENT: "P", ABSENT: "F", LATE: "A", EXCUSED: "J" };
 
-async function requireStaff(req: any) {
+export async function requireStaff(req: any) {
   const user = await requireIdentity(req);
   const roles = user.email ? await rolesOf(user.id) : [];
   if (!roles.includes("PROFESSOR") && !roles.includes("ADMIN")) fail("Área de professores.", 403);
