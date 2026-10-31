@@ -203,5 +203,8 @@ Professores e administração (403 para os demais):
 | GET /lessons/:id | — | aula e `roll` (lista da turma com a situação nesta aula) |
 | PUT /lessons/:id/attendance | `{entries:[{memberId,status,note?}]}` (`PRESENT`, `ABSENT`, `LATE`, `EXCUSED`) | `{saved}`; só pessoas da turma da aula |
 | GET /classes/:id/attendance.csv | — | CSV (UTF-8, `;`) no formato da planilha: P, F, A (atraso), J (justificada), total e % |
+| GET /classes/:id/dashboard | — | painel PROF-1: `students` (presença, questões, acertos na 1ª tentativa, treinos concluídos, último estudo), `areas` (alunos, 1ªs tentativas e acertos por área), `lessonsWithRoll` e `backfilled` |
 
 Aluno: `GET /my/lessons` → `{lessons}` das turmas em que o prontuário da conta está, com a própria situação de presença.
+
+O painel conta só a primeira resposta de cada aluno a cada questão editorial (`answer_event`, migration 018, somente inserção; cada `PUT /questions/:id/answer` grava um evento). Respostas anteriores ao histórico entram como `BACKFILL` com a última escolha e são contadas em `backfilled`. A tela omite o percentual com menos de 10 respostas e marca presença abaixo de 75%.
