@@ -8,6 +8,7 @@ import { DiscursiveComponent } from "./discursive.component";
 import type {
   Edition, EditionList, PracticeAvailability, PracticeView, PracticeItem, PracticeAnswer,
 } from "./exam.types";
+import { AREA_SIMULATION_LIMIT, areaSimulation, attemptLabel, type PracticeRequest } from "./practice-request";
 
 /** Folga para o servidor encerrar a prova depois do prazo (igual à da API). */
 const DEADLINE_GRACE_MS = 16000;
@@ -87,7 +88,7 @@ export class ExamComponent {
   private lastOperation: "load" | "start" | "save" | "finish" = "load";
   private pendingSave: { attemptId: string; position: number; body: { optionId: string | null; marked: boolean; baseRevision: number } } | null = null;
   private lastLoadId: string | null = null;
-  private pendingStart: { requestId: string; size: number; area: string | null; timed: boolean } | null = null;
+  private pendingStart: { key: string; body: PracticeRequest & { requestId: string } } | null = null;
 
   ngOnInit() { if (this.attemptId) void this.loadAttempt(this.attemptId); else void this.loadAvailability(); }
   ngOnChanges(changes: SimpleChanges) {
@@ -183,15 +184,36 @@ export class ExamComponent {
     } catch (error) { if (this.alive(generation)) { this.attempt.set(null); this.error.set(this.message(error)); } }
     finally { if (this.alive(generation)) this.loading.set(false); }
   }
-  async start() {
-    if (this.saving() || this.eligibleCount() < this.size) return;
-    const area = this.area || null;
-    if (!this.pendingStart || this.pendingStart.size !== this.size || this.pendingStart.area !== area || this.pendingStart.timed !== this.timed)
-      this.pendingStart = { requestId: crypto.randomUUID(), size: this.size, area, timed: this.timed };
+  /** Treino montado no formulário: área, quantidade e cronômetro. */
+  start() {
+    if (this.eligibleCount() < this.size) return;
+    void this.begin({ area: this.area || null, size: this.size, timed: this.timed });
+  }
+  /** Simulado de uma área: até 30 questões, com cronômetro. */
+  simulateArea(row: { name: string; count: number }) { void this.begin(areaSimulation(row.name, row.count)); }
+  /** Erros do estudo livre que já passaram do intervalo de revisão. */
+  practiceErrors() { void this.begin({ area: null, focus: "ERRORS" }); }
+  /** Erradas e em branco do treino ou prova finalizado. */
+  retryMisses() {
+    const data = this.attempt();
+    if (data?.state === "COMPLETED") void this.begin({ area: null, focus: "RETRY", retryOf: data.id });
+  }
+  misses() { const summary = this.attempt()?.summary; return summary ? summary.incorrect + summary.unanswered : 0; }
+  readonly attemptLabel = attemptLabel;
+  simulationSize(count: number) { return Math.min(count, AREA_SIMULATION_LIMIT); }
+  /**
+   * Cria o treino. Repetir o mesmo pedido (como em "Tentar novamente") reusa o
+   * requestId: se a resposta anterior se perdeu, o servidor devolve o mesmo treino.
+   */
+  private async begin(request?: PracticeRequest) {
+    if (this.saving()) return;
+    const key = request && JSON.stringify(request);
+    if (request && this.pendingStart?.key !== key) this.pendingStart = { key: key!, body: { ...request, requestId: crypto.randomUUID() } };
+    if (!this.pendingStart) return;
     const generation = this.generation;
     this.saving.set(true); this.error.set(""); this.lastOperation = "start"; this.emitBusy();
     try {
-      const data = await this.api<PracticeView>("", { method: "POST", body: JSON.stringify(this.pendingStart) });
+      const data = await this.api<PracticeView>("", { method: "POST", body: JSON.stringify(this.pendingStart.body) });
       if (this.alive(generation)) { this.applyAttempt(data, 1); this.pendingStart = null; this.locationChange.emit({ attemptId: data.id, position: 1 }); }
     } catch (error) {
       if (this.alive(generation)) {
@@ -362,5 +384,5 @@ export class ExamComponent {
     this.dirty.set(false); this.saveUncertain.set(false); this.pendingSave = null; this.discardOpen.set(false); this.emitBusy(); await this.loadAttempt(id);
     this.focusContent();
   }
-  retry() { if (this.lastOperation === "start") void this.start(); else if (this.lastOperation === "finish") void this.finish(); else if (this.lastLoadId) void this.loadAttempt(this.lastLoadId); else void this.loadAvailability(); }
+  retry() { if (this.lastOperation === "start") void this.begin(); else if (this.lastOperation === "finish") void this.finish(); else if (this.lastLoadId) void this.loadAttempt(this.lastLoadId); else void this.loadAvailability(); }
 }

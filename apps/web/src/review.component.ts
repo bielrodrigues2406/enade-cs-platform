@@ -43,6 +43,8 @@ export class ReviewComponent {
   @Output() positionChange = new EventEmitter<ReviewPosition>();
   @Output() resolve = new EventEmitter<ReviewItem>();
   @Output() browse = new EventEmitter<void>();
+  /** Treino só com os erros prontos; acertar lá tira a questão do caderno. */
+  @Output() practiceErrors = new EventEmitter<void>();
   notebook = signal<Notebook | null>(null);
   loading = signal(false);
   error = signal("");

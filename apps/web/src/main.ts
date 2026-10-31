@@ -10,6 +10,8 @@ import { LessonsComponent } from "./lessons.component";
 import { DiscursiveComponent } from "./discursive.component";
 import { QuestionContentComponent } from "./question-content.component";
 import { ExamComponent } from "./exam.component";
+import { ProfileComponent } from "./profile.component";
+import { requestPractice, type PracticeRequest } from "./practice-request";
 import {
   ReviewComponent,
   type ReviewItem,
@@ -112,6 +114,7 @@ type Question = Summary & {
     DiscursiveComponent,
     QuestionContentComponent,
     ExamComponent,
+    ProfileComponent,
     ReviewComponent,
   ],
   templateUrl: "./app.component.html",
@@ -152,6 +155,7 @@ class App {
   adminView = signal(false);
   lessonsView = signal(false);
   discursiveView = signal(false);
+  profileView = signal(false);
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
@@ -274,6 +278,7 @@ class App {
     this.adminView.set(false);
     this.lessonsView.set(false);
     this.discursiveView.set(false);
+    this.profileView.set(false);
     this.curationView.set(true);
     this.leaveHomePath();
     this.focusMain();
@@ -307,8 +312,26 @@ class App {
     history.pushState(null, "", `/questoes?year=${year}`);
     void this.restoreCatalogNavigation();
   }
+  /** Nome da seção atual, para a trilha "Estudar / …". */
+  sectionLabel() {
+    if (this.accountView()) return "Conta";
+    if (this.profileView()) return "Meu perfil";
+    if (this.adminView()) return "Administração";
+    if (this.lessonsView()) return "Aulas";
+    if (this.discursiveView()) return "Discursivas";
+    if (this.curationView()) return "Curadoria";
+    if (this.practiceView()) return "Treino parcial";
+    if (this.reviewView()) return "Caderno de erros";
+    if (this.homeView()) return "Início";
+    return this.question() ? "Resolução" : "Banco de questões";
+  }
+  /** O banco de questões (lista ou resolução) é a seção atual. */
+  onCatalog() {
+    const label = this.sectionLabel();
+    return (label === "Banco de questões" || label === "Resolução") && !this.reviewReturn();
+  }
   onHome() {
-    return this.homeView() && !this.accountView();
+    return this.sectionLabel() === "Início";
   }
   openReview() {
     if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
@@ -353,12 +376,35 @@ class App {
     this.adminView.set(false);
     this.lessonsView.set(false);
     this.discursiveView.set(false);
+    this.profileView.set(false);
     this.error.set("");
     this.practiceAttemptId.set(null);
     this.practiceItemPosition.set(1);
     this.practiceView.set(true);
     this.writePracticeAddress("push");
     this.focusMain();
+  }
+  /** Cria um treino (área, erros) e abre-o direto na primeira questão. */
+  async startPractice(request: PracticeRequest) {
+    if (this.saving() || this.authBusy() || this.practiceBusy()) return;
+    this.practiceBusy.set(true);
+    this.error.set("");
+    let attemptId: string | null = null;
+    try {
+      attemptId = (await requestPractice(request)).id;
+    } catch (err) {
+      this.error.set(this.message(err));
+    } finally {
+      this.practiceBusy.set(false);
+    }
+    if (attemptId) this.openPracticeAttempt(attemptId);
+  }
+  /** Abre um treino existente (por exemplo, o em andamento da página inicial). */
+  openPracticeAttempt(attemptId: string) {
+    this.openPractice();
+    if (!this.practiceView()) return;
+    this.practiceAttemptId.set(attemptId);
+    this.writePracticeAddress("replace");
   }
   practiceLocationChanged(location_: { attemptId: string | null; position: number }) {
     if (!this.practiceView() || this.authBusy() || location.pathname !== "/treino") return;
@@ -722,8 +768,29 @@ class App {
     this.leaveHomePath();
     this.focusMain();
   }
+  /** Meu perfil: dados e senha da própria conta. */
+  openProfile() {
+    if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam())
+      return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.practiceView.set(false);
+      this.homeView.set(false);
+      this.profileView.set(true);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
+  profileEmailChanged(email: string) {
+    this.session.set({ mode: "account", email });
+  }
   private clearStudyState() {
     this.adminView.set(false);
+    this.profileView.set(false);
     this.lessonsView.set(false);
     this.discursiveView.set(false);
     if (this.identityGeneration > 0 && this.practiceView()) {
@@ -941,8 +1008,9 @@ class App {
     const apply = () => {
       if (generation !== this.identityGeneration || !stillCurrent()) return;
       this.adminView.set(false);
-    this.lessonsView.set(false);
-    this.discursiveView.set(false);
+      this.lessonsView.set(false);
+      this.discursiveView.set(false);
+      this.profileView.set(false);
       update();
     };
     const doc = document as Document & {

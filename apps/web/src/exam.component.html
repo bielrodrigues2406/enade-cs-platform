@@ -9,7 +9,7 @@
             <p class="metadata">Prova completa · ENADE {{ edition.year }} · {{ modalityLabel(edition.modality) }}</p>
             <h1 id="practice-result-title" tabindex="-1">Resultado da prova</h1>
           } @else {
-            <p class="metadata">Treino parcial · {{ data.area || 'Assuntos mistos' }}</p>
+            <p class="metadata">Treino parcial · {{ attemptLabel(data) }}</p>
             <h1 id="practice-result-title" tabindex="-1">Resultado do treino</h1>
           }
           @if (data.summary; as result) {
@@ -41,9 +41,15 @@
               </table>
             </div>
             <div class="practice-actions">
-              <button (click)="beginReview()">Rever respostas</button>
+              @if (misses()) {
+                <button (click)="retryMisses()" [disabled]="saving()">{{ saving() ? 'Preparando…' : 'Refazer as erradas (' + misses() + ')' }}</button>
+              }
+              <button [class.outline]="misses()" (click)="beginReview()">Rever respostas</button>
               <button class="outline" (click)="showSelection()">Voltar aos treinos</button>
             </div>
+            @if (misses()) {
+              <p class="muted">Refazer monta um treino só com as erradas e em branco, em nova ordem.</p>
+            }
           }
         </section>
       } @else if (current(); as item) {
@@ -52,7 +58,7 @@
           @if (data.edition; as edition) {
             <p class="metadata">Prova completa · ENADE {{ edition.year }} · {{ modalityLabel(edition.modality) }}</p>
           } @else {
-            <p class="metadata">{{ data.area || 'Assuntos mistos' }} · {{ data.deadlineAt ? 'com cronômetro' : 'sem cronômetro' }}</p>
+            <p class="metadata">{{ attemptLabel(data) }} · {{ data.deadlineAt ? 'com cronômetro' : 'sem cronômetro' }}</p>
           }
           @if (remaining() !== null) {
             <div class="practice-clock-row">
@@ -183,7 +189,7 @@
         @if (data.active; as active) {
           <section class="practice-active" aria-label="Treino em andamento">
             <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : 'Continue seu treino' }}</h2>
-            <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.kind === 'EDITION' ? 'prova completa, pausada' : active.area || 'Assuntos mistos' }}</p>
+            <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.kind === 'EDITION' ? 'prova completa, pausada' : attemptLabel(active) }}</p>
             <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : 'Retomar treino' }}</button>
           </section>
         } @else {
@@ -195,6 +201,40 @@
             <label class="practice-timed"><input type="checkbox" name="timed" [(ngModel)]="timed" [disabled]="saving()" /> Com cronômetro: {{ timedMinutes() }} minutos ({{ data.minutesPerQuestion }} por questão, como na prova). Dá para pausar.</label>
             <button type="submit" [disabled]="saving() || eligibleCount() < size">{{ saving() ? 'Preparando treino…' : timed ? 'Começar simulado' : 'Começar treino' }}</button>
           </form>
+        }
+        @if (!data.active) {
+          @if (data.errors.total) {
+            <section class="practice-errors" aria-labelledby="practice-errors-title">
+              <div>
+                <h2 id="practice-errors-title">Seus erros</h2>
+                <p class="muted">
+                  @if (data.errors.ready) {
+                    {{ data.errors.ready }} de {{ data.errors.total }} {{ data.errors.total === 1 ? 'erro está pronto' : 'erros estão prontos' }} para revisar. Acertou no treino, a questão sai do caderno de erros.
+                  } @else {
+                    {{ data.errors.total }} {{ data.errors.total === 1 ? 'erro volta' : 'erros voltam' }} para revisão um dia depois da resposta, quando a memória já não ajuda.
+                  }
+                </p>
+              </div>
+              <button (click)="practiceErrors()" [disabled]="saving() || !data.errors.ready">Treinar meus erros@if (data.errors.ready) { ({{ data.errors.ready }}) }</button>
+            </section>
+          }
+          <section class="practice-areas" aria-labelledby="practice-areas-title">
+            <h2 id="practice-areas-title">Simulado por área</h2>
+            <p class="muted">Só questões da área, com {{ data.minutesPerQuestion }} minutos por questão e pausa. Áreas com até 30 publicadas entram inteiras.</p>
+            <ol>
+              @for (row of data.areas; track row.name) {
+                @if (row.count) {
+                  <li>
+                    <div>
+                      <strong>{{ row.name }}</strong>
+                      <span>{{ simulationSize(row.count) }} {{ simulationSize(row.count) === 1 ? 'questão' : 'questões' }} · {{ simulationSize(row.count) * data.minutesPerQuestion }} min · {{ row.unseen }} {{ row.unseen === 1 ? 'inédita' : 'inéditas' }}</span>
+                    </div>
+                    <button class="outline" (click)="simulateArea(row)" [disabled]="saving()" [attr.aria-label]="'Simular ' + row.name">Simular</button>
+                  </li>
+                }
+              }
+            </ol>
+          </section>
         }
         @if (!data.active && editions()?.editions?.length) {
           <section class="practice-editions" aria-labelledby="practice-editions-title">
@@ -248,7 +288,7 @@
         }
         <div class="practice-actions"><button class="text-button" (click)="browse.emit()" [disabled]="saving()">Abrir banco de questões</button><button class="text-button" (click)="loadAvailability()" [disabled]="saving()">Atualizar disponibilidade</button></div>
         @if (data.recent.length) {
-          <section class="practice-history" aria-labelledby="practice-recent-title"><h2 id="practice-recent-title">Treinos concluídos recentes</h2><ol>@for (row of data.recent; track row.id) { <li><div><strong>{{ row.size }} questões · {{ row.area || 'Assuntos mistos' }}</strong><p><time [attr.datetime]="row.finishedAt">{{ dateLabel(row.finishedAt) }}</time></p></div><button class="outline" (click)="openAttempt(row.id)" [disabled]="saving()">Ver resultado</button></li> }</ol></section>
+          <section class="practice-history" aria-labelledby="practice-recent-title"><h2 id="practice-recent-title">Treinos concluídos recentes</h2><ol>@for (row of data.recent; track row.id) { <li><div><strong>{{ row.size }} questões · {{ row.kind === 'EDITION' ? 'Prova completa' : attemptLabel(row) }}</strong><p><time [attr.datetime]="row.finishedAt">{{ dateLabel(row.finishedAt) }}</time></p></div><button class="outline" (click)="openAttempt(row.id)" [disabled]="saving()">Ver resultado</button></li> }</ol></section>
         }
       }
     }

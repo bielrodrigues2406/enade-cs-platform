@@ -15,7 +15,15 @@
           <p class="cover-summary">{{ coverSummary() }}</p>
         </div>
         <div class="cover-actions">
-          @if (nextQuestion(); as next) {
+          @if (active(); as attempt) {
+            <button class="cover-primary" (click)="resume.emit(attempt.id)" [attr.aria-label]="'Retomar: ' + activeLabel()">
+              {{ attempt.kind === "EDITION" ? "Retomar a prova" : "Retomar o treino" }}
+              <span aria-hidden="true">→</span>
+            </button>
+            <button class="cover-secondary" (click)="browse.emit()">
+              Abrir o banco de questões
+            </button>
+          } @else if (nextQuestion(); as next) {
             <button
               class="cover-primary"
               (click)="openQuestion.emit(next.id)"
@@ -75,6 +83,32 @@
         @if (!catalog()) {
           <p class="todo-loading" role="status">Carregando suas questões…</p>
         } @else {
+          @if (active(); as attempt) {
+            <section class="todo-group" aria-labelledby="home-active">
+              <h3 id="home-active" class="group-title">Em andamento</h3>
+              <article class="todo-card">
+                <div class="todo-text">
+                  <span class="todo-meta">{{ attempt.kind === "EDITION" ? "Prova completa" : "Treino" }}</span>
+                  <strong>{{ activeLabel() }}</strong>
+                  <span class="todo-status">Respostas salvas; o cronômetro só corre com a tela aberta.</span>
+                </div>
+                <button (click)="resume.emit(attempt.id)">Retomar</button>
+              </article>
+            </section>
+          }
+          @if (readyErrors()) {
+            <section class="todo-group" aria-labelledby="home-ready">
+              <h3 id="home-ready" class="group-title is-danger">Revisar hoje</h3>
+              <article class="todo-card">
+                <div class="todo-text">
+                  <span class="todo-meta">Caderno de erros · revisão espaçada</span>
+                  <strong>{{ readyErrors() === 1 ? "1 erro pronto" : readyErrors() + " erros prontos" }} para revisar</strong>
+                  <span class="todo-status">Errou há mais de um dia: agora a revisão testa o raciocínio, não a memória. Acertou, sai do caderno.</span>
+                </div>
+                <button (click)="practiceErrors()" [disabled]="!!active()" [attr.title]="active() ? 'Termine o treino em andamento primeiro' : null">Treinar meus erros</button>
+              </article>
+            </section>
+          }
           @if (retryItems().length) {
             <section class="todo-group" aria-labelledby="home-retry">
               <h3 id="home-retry" class="group-title is-danger">
@@ -236,148 +270,76 @@
             }
           </div>
           <p class="panel-note">
-            Em azul, o que você já treina aqui com questões oficiais; a
-            discursiva entra quando os padrões de resposta forem importados.
-            Formato informado pelo
+            Dá para treinar todas as partes: objetivas no banco e nos
+            simulados, a discursiva com o padrão de resposta. Formato informado
+            pelo
             <a [href]="examSource" target="_blank" rel="noopener noreferrer"
               >Inep</a
             >
             para os bacharelados; datas e formato podem mudar.
           </p>
+          <button class="outline" (click)="practiceHub.emit()">
+            Fazer uma prova completa <span aria-hidden="true">→</span>
+          </button>
         </section>
 
-        <section class="panel" aria-labelledby="home-origin">
-          <h2 id="home-origin">De onde vêm as questões</h2>
-          <dl class="home-origins">
-            <div>
-              <dt>Oficial · Inep</dt>
-              <dd>{{ countLabel(officialCount()) }}</dd>
-            </div>
-            <div>
-              <dt>Autoral</dt>
-              <dd>{{ countLabel(authorCount()) }}</dd>
-            </div>
-            <div>
-              <dt>Autoral demonstrativa</dt>
-              <dd>{{ countLabel(demoCount()) }}</dd>
-            </div>
-          </dl>
-          <p class="panel-note">
-            Oficiais vêm de provas anteriores, com edição, página e gabarito
-            definitivo. Autorais têm autoria identificada e não são do Inep; as
-            demonstrativas servem para conhecer a plataforma.
-            @if (catalog() && !officialCount()) {
-              As provas de 2005 a 2021 estão em transcrição e conferência.
-            }
-          </p>
-        </section>
       </div>
     </div>
 
-    <section
-      class="home-section home-how"
-      aria-labelledby="home-how"
-      data-reveal
-    >
-      <div class="how-text">
-        <h2 id="home-how">Como o caderno funciona</h2>
-        <ol class="home-steps">
-          @for (step of steps; track step.title; let i = $index) {
-            <li data-reveal [style.--reveal-index]="i">
-              <span class="home-step-number" aria-hidden="true">{{
-                (i + 1).toString().padStart(2, "0")
-              }}</span>
-              <div>
-                <h3>{{ step.title }}</h3>
-                <p>{{ step.text }}</p>
+    <section class="home-areas" aria-labelledby="home-areas-title">
+      <div class="areas-head">
+        <div>
+          <h2 id="home-areas-title">Seu desempenho por área</h2>
+          <p>
+            Conta a primeira resposta a cada questão, no estudo, no treino ou
+            na prova; refazer até acertar não infla o acerto.
+            @if (weakest(); as low) {
+              Onde você mais erra até agora:
+              <strong>{{ low.area }}</strong>.
+            }
+          </p>
+        </div>
+        <button class="text-button" (click)="practiceHub.emit()">
+          Montar outro treino <span aria-hidden="true">→</span>
+        </button>
+      </div>
+      @if (!progress()) {
+        <p role="status">Carregando seu desempenho…</p>
+      } @else {
+        <ol class="areas-list">
+          @for (row of areas(); track row.area; let i = $index) {
+            <li [class.is-weakest]="weakest()?.area === row.area">
+              <span class="areas-index" aria-hidden="true">{{ (i + 1).toString().padStart(2, "0") }}</span>
+              <div class="areas-name">
+                <strong>{{ row.area }}</strong>
+                <span>{{ row.firstAttempts }} de {{ row.published }} vistas · simulado de {{ simulationSize(row) }} {{ simulationSize(row) === 1 ? "questão" : "questões" }}</span>
               </div>
+              <div class="areas-score">
+                @if (row.firstAttempts) {
+                  <span class="areas-track" aria-hidden="true"><span class="areas-fill" [style.--value]="ratio(row.firstCorrect, row.firstAttempts)"></span></span>
+                  <span class="areas-value">{{ accuracy(row) }}% de acerto · {{ row.firstCorrect }} de {{ row.firstAttempts }}</span>
+                } @else {
+                  <span class="areas-value is-empty">sem respostas ainda</span>
+                }
+                @if (smallSample(row)) {
+                  <span class="areas-note">poucas respostas: é só um indício</span>
+                }
+              </div>
+              <button
+                class="outline"
+                (click)="simulate(row)"
+                [disabled]="!!active()"
+                [attr.aria-label]="'Simular ' + row.area + ': ' + simulationSize(row) + (simulationSize(row) === 1 ? ' questão' : ' questões')"
+              >
+                Simular
+              </button>
             </li>
           }
         </ol>
-      </div>
-
-      <figure class="home-demo">
-        <div class="demo-sheet" aria-hidden="true">
-          <p class="demo-meta">Redes · Exemplo autoral</p>
-          <p class="demo-prompt">
-            Qual protocolo da camada de transporte entrega um fluxo de bytes em
-            ordem e retransmite o que se perdeu?
-          </p>
-          <ol class="demo-options">
-            @for (option of demoOptions; track option.letter) {
-              <li
-                [class.is-hover]="demoStep() === 1 && option.letter === 'B'"
-                [class.is-selected]="demoStep() >= 2 && option.letter === 'D'"
-                [class.is-correct]="demoStep() >= 4 && option.letter === 'D'"
-              >
-                <span class="demo-letter">{{ option.letter }}</span>
-                <span>{{ option.text }}</span>
-                @if (demoStep() >= 4 && option.letter === "D") {
-                  <span class="demo-tag"
-                    ><svg class="demo-check" viewBox="0 0 20 20">
-                      <path d="M3.5 10.5 8 15 16.5 4.5" pathLength="1" /></svg
-                    >Alternativa correta</span
-                  >
-                  <!-- Volta de caneta: a correção que o professor faria. -->
-                  <svg
-                    class="demo-circle"
-                    viewBox="0 0 300 60"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M24 9C90 2 230 3 284 12c16 4 15 32-6 39C214 60 70 59 20 50 0 45 1 20 21 12c20-7 60-8 92-8"
-                      pathLength="1"
-                    />
-                  </svg>
-                }
-              </li>
-            }
-          </ol>
-          @if (demoStep() < 4) {
-            <div class="demo-confirm" [class.is-pressed]="demoStep() === 3">
-              {{ demoStep() === 3 ? "Confirmando…" : "Confirmar resposta" }}
-            </div>
-          } @else {
-            <div class="demo-feedback">
-              <strong>Resposta correta.</strong>
-              TCP numera os segmentos, confirma o recebimento e reenvia o que
-              não chegou; UDP não oferece essas garantias.
-            </div>
-          }
-        </div>
-        <figcaption>
-          <span
-            >Uma questão em poucos segundos: você escolhe, confirma e só então
-            vê a correção, com explicação.</span
-          >
-          <button
-            type="button"
-            class="text-button"
-            (click)="replay()"
-            [disabled]="demoStep() > 0 && demoStep() < 5"
-          >
-            Ver de novo
-          </button>
-        </figcaption>
-      </figure>
-    </section>
-
-    <section class="home-section" aria-labelledby="home-next" data-reveal>
-      <div class="board-head">
-        <h2 id="home-next">Em construção</h2>
-        <span>o que ainda não está no caderno</span>
-      </div>
-      <ul class="home-roadmap">
-        @for (item of roadmap; track item.title; let i = $index) {
-          <li data-reveal [style.--reveal-index]="i">
-            <span class="home-status" [class.is-active]="item.active">{{
-              item.status
-            }}</span>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.text }}</p>
-          </li>
+        @if (active()) {
+          <p class="areas-hint">Para começar um simulado, termine ou retome o treino em andamento.</p>
         }
-      </ul>
+      }
     </section>
 
     <footer class="home-footer">

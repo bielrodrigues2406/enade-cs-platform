@@ -210,6 +210,26 @@ test("answers and review marks resume after reload and final result keeps blanks
   expect(notebook.summary.answered).toBe(0);
 });
 
+test("the result rebuilds a practice with the misses, and areas offer a timed simulation", async ({ page }) => {
+  const view = await start(page, 10);
+  await saveAction(page, () => radio(page, view.items[0], correctOption(view.items[0])).check());
+  await finish(page);
+  await page.getByRole("button", { name: "Refazer as erradas (9)", exact: true }).click();
+  await expect(page.locator("#practice-position")).toHaveText("Questão 1 de 9");
+  await expect(page.getByText("Refazer as erradas · sem cronômetro")).toBeVisible();
+  const retry = await currentView(page);
+  expect(retry.focus).toBe("RETRY");
+  expect(retry.items.map((item: any) => item.question.id)).not.toContain(view.items[0].question.id);
+  await finish(page);
+
+  await page.getByRole("button", { name: "Voltar aos treinos", exact: true }).click();
+  const areas = page.getByRole("region", { name: "Simulado por área" });
+  await expect(areas).toContainText(area);
+  await areas.getByRole("button", { name: `Simular ${area}`, exact: true }).click();
+  await expect(page.locator("#practice-position")).toHaveText(/^Questão 1 de (?:[1-9]|[12][0-9]|30)$/);
+  await expect(page.getByText(`${area} · com cronômetro`)).toBeVisible();
+});
+
 test("a lost save acknowledgement stays protected until retry confirms the same operation", async ({ page }) => {
   const view = await start(page, 10), item = view.items[0];
   let loseAcknowledgement = true;

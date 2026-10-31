@@ -11,10 +11,48 @@
   @if (tab() === "imports") {
     <app-exam-import />
   } @else {
-  <p class="admin-intro">
-    Para dar acesso de professor, autorize o e-mail institucional. Se a pessoa
-    ainda não tem conta, ela aparece aqui depois do cadastro para você confirmar.
-  </p>
+  <div class="admin-intro-row">
+    <p class="admin-intro">
+      Para dar acesso de professor, autorize o e-mail institucional. Se a pessoa
+      ainda não tem conta, ela aparece aqui depois do cadastro para você confirmar.
+      Também dá para cadastrar a conta você mesmo e entregar a senha inicial.
+    </p>
+    <button type="button" class="outline" (click)="openCreate(accountDialog)">Cadastrar conta</button>
+  </div>
+  <dialog #accountDialog class="sheet-dialog" aria-labelledby="admin-account-title">
+    <div class="sheet-dialog-head"><div><p class="sheet-dialog-eyebrow">Contas e papéis</p><h2 id="admin-account-title">Cadastrar conta</h2></div><button type="button" class="sheet-close" (click)="accountDialog.close()" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button></div>
+    <form class="sheet-dialog-body" (ngSubmit)="createAccount(accountDialog)" novalidate>
+      <div class="sheet-dialog-content">
+        <div class="import-fields">
+          <div><label for="new-account-name">Nome</label><input id="new-account-name" name="name" maxlength="120" [(ngModel)]="newAccount.name" autocomplete="off" /></div>
+          <div><label for="new-account-enrollment">Prontuário <span class="optional">opcional</span></label><input id="new-account-enrollment" name="enrollment" maxlength="12" [(ngModel)]="newAccount.enrollment" placeholder="PE3012345" autocapitalize="characters" spellcheck="false" autocomplete="off" /></div>
+          <div><label for="new-account-email">E-mail</label><input id="new-account-email" name="email" type="email" maxlength="254" [(ngModel)]="newAccount.email" placeholder="nome@ifsp.edu.br" required autocomplete="off" /></div>
+          <div><label for="new-account-role">Papel</label>
+            <select id="new-account-role" name="role" [(ngModel)]="newAccount.role">
+              <option value="">Estudante (sem papel)</option>
+              <option value="PROFESSOR">Professor</option>
+              <option value="ADMIN">Administração</option>
+            </select>
+          </div>
+          <div class="admin-account-password">
+            <label for="new-account-password">Senha inicial</label>
+            <div class="password-row">
+              <input id="new-account-password" name="password" type="text" maxlength="128" [(ngModel)]="newAccount.password" autocomplete="new-password" spellcheck="false" aria-describedby="new-account-password-help" />
+              <button type="button" class="text-button" (click)="suggestPassword()">Gerar</button>
+            </div>
+            <p id="new-account-password-help" class="account-help">De 12 a 128 caracteres. Entregue à pessoa e peça que troque em Meu perfil no primeiro acesso.</p>
+          </div>
+        </div>
+        @if (createError()) {
+          <p class="field-error" role="alert">{{ createError() }}</p>
+        }
+      </div>
+      <div class="sheet-dialog-actions">
+        <button type="button" class="outline" (click)="accountDialog.close()">Cancelar</button>
+        <button type="submit" [disabled]="creating()">{{ creating() ? "Cadastrando…" : "Cadastrar" }}</button>
+      </div>
+    </form>
+  </dialog>
   <form class="admin-invite" (ngSubmit)="authorize()" aria-labelledby="admin-invite-title">
     <h2 id="admin-invite-title">Autorizar e-mail</h2>
     <div class="admin-invite-fields">

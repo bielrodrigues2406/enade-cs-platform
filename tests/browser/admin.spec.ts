@@ -34,7 +34,7 @@ async function register(page: Page, address: string, extra: { name?: string; enr
   await page.getByLabel("E-mail").fill(address);
   await page.getByLabel("Senha", { exact: true }).fill(password);
   await page.locator("form").getByRole("button", { name: "Criar conta" }).click();
-  await expect(page.getByLabel("Conta conectada")).toHaveText(address);
+  await expect(page.getByRole("button", { name: `Meu perfil, ${address}` })).toBeVisible();
 }
 
 test("sign-up takes name and enrollment, and an admin authorizes a professor", async ({ page, browser }) => {
@@ -78,6 +78,69 @@ test("sign-up takes name and enrollment, and an admin authorizes a professor", a
   await row.getByRole("button", { name: `Remover papel de professor de ${professorEmail}` }).click();
   await expect(page.getByRole("status")).toContainText("removido");
   await expect(row).toContainText("Aluno");
+});
+
+test("an admin registers a professor account, who then updates profile and password", async ({ page, browser }) => {
+  const adminEmail = email("admin");
+  await register(page, adminEmail, { name: "Admin TEST ONLY" });
+  await pool.query("INSERT INTO account_role(identity_id,role) SELECT identity_id,'ADMIN' FROM account WHERE email=$1", [adminEmail]);
+  await page.reload();
+  await page.getByRole("button", { name: "Administração" }).click();
+
+  const professorEmail = email("manual-prof");
+  await page.getByRole("button", { name: "Cadastrar conta" }).click();
+  const dialog = page.getByRole("dialog", { name: "Cadastrar conta" });
+  await expect(dialog).toBeVisible();
+  // A senha inicial já vem sugerida; o admin pode trocar.
+  await expect(dialog.getByLabel("Senha inicial")).toHaveValue(/^[a-z2-9]{4}(-[a-z2-9]{4}){3}$/);
+  await dialog.getByLabel("Nome").fill("Prof Manual TEST ONLY");
+  await dialog.getByLabel("E-mail").fill(professorEmail);
+  await dialog.getByLabel("Papel").selectOption("PROFESSOR");
+  await dialog.getByLabel("Senha inicial").fill(password);
+  await dialog.getByRole("button", { name: "Cadastrar", exact: true }).click();
+  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("status")).toContainText(`Conta de ${professorEmail} cadastrada com o papel Professor`);
+
+  // E-mail repetido: o modal mostra o erro e continua aberto.
+  await page.getByRole("button", { name: "Cadastrar conta" }).click();
+  await dialog.getByLabel("E-mail").fill(professorEmail);
+  await dialog.getByRole("button", { name: "Cadastrar", exact: true }).click();
+  await expect(dialog.getByRole("alert")).toContainText("já tem conta");
+  await dialog.getByRole("button", { name: "Cancelar" }).click();
+
+  // O professor entra com a senha inicial, corrige os dados e troca a senha.
+  const other = await browser.newContext();
+  const professor = await other.newPage();
+  expect((await other.request.post("/api/session", { data: {} })).status()).toBe(201);
+  await professor.goto("/");
+  await professor.getByRole("button", { name: "Entrar" }).first().click();
+  await professor.getByLabel("E-mail").fill(professorEmail);
+  await professor.getByLabel("Senha", { exact: true }).fill(password);
+  await professor.locator("form").getByRole("button", { name: "Entrar" }).click();
+  await professor.getByRole("button", { name: `Meu perfil, ${professorEmail}` }).click();
+  await expect(professor.getByRole("heading", { name: "Meu perfil", level: 1 })).toBeVisible();
+  await expect(professor.getByLabel("Nome")).toHaveValue("Prof Manual TEST ONLY");
+  await professor.getByLabel("Prontuário IFSP").fill("pe3007777");
+  await professor.getByRole("button", { name: "Salvar dados" }).click();
+  await expect(professor.getByText("Dados salvos.")).toBeVisible();
+  await expect(professor.getByLabel("Prontuário IFSP")).toHaveValue("PE3007777");
+
+  const newPassword = "Nova senha teste 2026!";
+  await professor.getByLabel("Senha atual", { exact: true }).fill("errada errada 1");
+  await professor.getByLabel("Nova senha", { exact: true }).fill(newPassword);
+  await professor.getByLabel("Repita a nova senha").fill(newPassword);
+  await professor.getByRole("button", { name: "Trocar senha" }).click();
+  await expect(professor.getByText("Senha atual incorreta.")).toBeVisible();
+  await professor.getByLabel("Senha atual", { exact: true }).fill(password);
+  await professor.getByRole("button", { name: "Trocar senha" }).click();
+  await expect(professor.getByText(/Senha trocada/)).toBeVisible();
+  await other.close();
+  // A nova senha vale num navegador novo.
+  const fresh = await browser.newContext();
+  expect((await fresh.request.post("/api/session", { data: {} })).status()).toBe(201);
+  const login = await fresh.request.post("/api/auth/login", { data: { email: professorEmail, password: newPassword } });
+  expect(login.status()).toBe(200);
+  await fresh.close();
 });
 
 test("accounts without the admin role do not see administration", async ({ page }) => {

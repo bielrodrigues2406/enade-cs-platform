@@ -33,9 +33,15 @@
             </button>
           }
           @if (session().mode === "account") {
-            <span class="account-email" aria-label="Conta conectada">{{
-              accountEmail()
-            }}</span>
+            <button
+              class="text-button account-email"
+              (click)="openProfile()"
+              [attr.aria-current]="profileView() ? 'page' : null"
+              [attr.aria-label]="'Meu perfil, ' + accountEmail()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            >
+              {{ accountEmail() }}
+            </button>
             <button
               class="text-button"
               (click)="logout()"
@@ -76,6 +82,7 @@
           class="text-button"
           (click)="back()"
           [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="onCatalog() ? 'page' : null"
         >
           Banco de questões
         </button>
@@ -124,16 +131,7 @@
           class="nav secondary-nav"
           (click)="back()"
           [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="
-            !homeView() &&
-            !practiceView() &&
-            !curationView() &&
-            !reviewView() &&
-            !reviewReturn() &&
-            !accountView()
-              ? 'page'
-              : null
-          "
+          [attr.aria-current]="onCatalog() ? 'page' : null"
         >
           <span class="nav-index" aria-hidden="true">02</span>
           Banco de questões
@@ -182,27 +180,7 @@
       <main id="content" tabindex="-1">
         <div class="breadcrumb">
           Estudar <span>/</span>
-          {{
-            accountView()
-              ? "Conta"
-              : adminView()
-                ? "Administração"
-              : lessonsView()
-                ? "Aulas"
-              : discursiveView()
-                ? "Discursivas"
-              : curationView()
-                ? "Curadoria"
-                : practiceView()
-                  ? "Treino parcial"
-                  : reviewView()
-                  ? "Caderno de erros"
-                  : homeView()
-                    ? "Início"
-                    : question()
-                      ? "Resolução"
-                      : "Banco de questões"
-          }}
+          {{ sectionLabel() }}
         </div>
         @if (booting()) {
           <p role="status">Preparando seu caderno…</p>
@@ -227,6 +205,12 @@
             />
           } @else if (authBusy()) {
             <p role="status">Atualizando sua sessão…</p>
+          } @else if (profileView()) {
+            @defer (on immediate) {
+              <app-profile (emailChange)="profileEmailChanged($event)" (back)="openHome()" />
+            } @placeholder {
+              <p role="status">Carregando seu perfil…</p>
+            }
           } @else if (discursiveView()) {
             @defer (on immediate) {
               <app-discursive />
@@ -269,6 +253,7 @@
               (positionChange)="reviewPosition = $event"
               (resolve)="openReviewQuestion($event)"
               (browse)="back()"
+              (practiceErrors)="startPractice({ area: null, focus: 'ERRORS' })"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
@@ -288,6 +273,9 @@
               (register)="openAccount('register')"
               (openQuestion)="open($event)"
               (retry)="openReviewQuestion($event)"
+              (practice)="startPractice($event)"
+              (resume)="openPracticeAttempt($event)"
+              (practiceHub)="openPractice()"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>

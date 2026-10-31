@@ -1076,6 +1076,12 @@ fieldset:disabled .option:active {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
 }
+/* O e-mail no cabeçalho abre Meu perfil. */
+.account-email[aria-current="page"] {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
 /* Entrar e cadastro (AUTH-2): tela focada, formulário e capa lado a lado. */
 .account-mode .layout {
   display: block;
@@ -1294,7 +1300,7 @@ fieldset:disabled .option:active {
     row-gap: var(--space-1);
   }
   .header-actions .account-email {
-    display: none;
+    max-width: 7rem;
   }
 }
 
@@ -2663,79 +2669,10 @@ app-home .panel h2 {
     transform: scaleX(0);
   }
 }
-.home-origins {
-  margin: 0;
-}
-.home-origins div {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: var(--space-2) 0;
-  border-top: var(--border-thin) solid var(--color-border);
-  font-size: var(--text-sm);
-}
-.home-origins dt {
-  font-weight: var(--weight-medium);
-}
-.home-origins dd {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  text-align: right;
-}
 
-/* Como funciona: passos e demonstração */
-.home-section {
-  padding-top: var(--space-12);
-}
-.home-how {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: var(--space-10);
-  align-items: start;
-}
+/* Demonstração de uma questão (página pública) */
 .how-text h2 {
   margin-bottom: var(--space-4);
-}
-.home-steps {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.home-steps li {
-  --reveal-delay: calc(var(--reveal-index, 0) * 80ms);
-  position: relative;
-  display: grid;
-  grid-template-columns: 2.75rem minmax(0, 1fr);
-  gap: var(--space-3);
-  padding: var(--space-4) 0;
-}
-.home-steps li::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 1px;
-  background: var(--color-border);
-  transform-origin: left;
-  transition: transform 700ms var(--ease-out) var(--reveal-delay, 0ms);
-}
-.home-step-number {
-  font-family: var(--font-reading);
-  font-size: 1.5rem;
-  line-height: 1.1;
-  color: var(--color-accent);
-}
-.home-steps h3 {
-  margin: 0 0 2px;
-  font-size: var(--text-base);
-  font-weight: var(--weight-semibold);
-}
-.home-steps p,
-.home-roadmap p {
-  margin: 0;
-  font-size: var(--text-md);
-  color: var(--color-text-muted);
 }
 .home-demo {
   margin: 0;
@@ -2943,42 +2880,6 @@ app-home .panel h2 {
   font-size: var(--text-sm);
 }
 
-/* Em construção */
-.home-roadmap {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3);
-}
-.home-roadmap li {
-  --reveal-delay: calc(var(--reveal-index, 0) * 70ms);
-  padding: 16px 18px;
-  border: var(--border-thin) solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-}
-.home-roadmap h3 {
-  margin: var(--space-3) 0 2px;
-  font-size: var(--text-base);
-  font-weight: var(--weight-semibold);
-}
-.home-status {
-  display: inline-block;
-  padding: 2px var(--space-3);
-  border: var(--border-thin) dashed var(--color-border-control);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-}
-.home-status.is-active {
-  border-style: solid;
-  border-color: var(--color-accent);
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-}
 .home-footer {
   display: flex;
   flex-wrap: wrap;
@@ -2996,24 +2897,6 @@ app-home .panel h2 {
   margin: 0;
 }
 
-/*
- * Revelação ao rolar: só depois que o componente confirma que vai animar
- * (classe motion-ready). Sem JavaScript ou com movimento reduzido, tudo
- * aparece imediatamente.
- */
-app-home.motion-ready [data-reveal] {
-  transition:
-    opacity 500ms var(--ease-out) var(--reveal-delay, 0ms),
-    transform var(--spring-gentle-duration) var(--spring-gentle)
-      var(--reveal-delay, 0ms);
-}
-app-home.motion-ready [data-reveal]:not(.is-visible) {
-  opacity: 0;
-  transform: translateY(14px);
-}
-app-home.motion-ready .home-steps li:not(.is-visible)::before {
-  transform: scaleX(0);
-}
 @media (prefers-reduced-motion: reduce) {
   .cover-mark {
     animation: none;
@@ -3022,8 +2905,7 @@ app-home.motion-ready .home-steps li:not(.is-visible)::before {
 }
 
 @media (max-width: 1000px) {
-  .home-board,
-  .home-how {
+  .home-board {
     grid-template-columns: minmax(0, 1fr);
   }
   .home-aside {
@@ -3058,9 +2940,6 @@ app-home.motion-ready .home-steps li:not(.is-visible)::before {
   }
   .todo-card button {
     flex: 1 1 100%;
-  }
-  .home-roadmap {
-    grid-template-columns: minmax(0, 1fr);
   }
   .demo-sheet {
     padding: var(--space-5) var(--space-4) var(--space-5) var(--space-8);
@@ -4084,6 +3963,20 @@ app-landing [data-reveal] {
   max-width: 64ch;
   color: var(--color-text-muted);
   line-height: 1.6;
+}
+.admin-intro-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+}
+/* Senha inicial do cadastro manual: linha inteira, com o botão Gerar ao lado. */
+.admin-account-password {
+  grid-column: 1 / -1;
+}
+.admin-account-password input {
+  font-family: var(--font-mono);
 }
 .admin-invite {
   margin-top: var(--space-8);

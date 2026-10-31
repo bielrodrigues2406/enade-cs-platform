@@ -21,6 +21,14 @@ type Invitation = {
 };
 type UsersPage = { total: number; page: number; pageSize: number; items: UserRow[]; invitations: Invitation[] };
 
+/** Senha inicial legível: 4 grupos de 4 letras e dígitos sem caracteres ambíguos (≈80 bits). */
+export function generatePassword() {
+  const alphabet = "abcdefghjkmnpqrstuvwxyz23456789";
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  const chars = Array.from(bytes, (byte) => alphabet[byte % alphabet.length]);
+  return [0, 4, 8, 12].map((i) => chars.slice(i, i + 4).join("")).join("-");
+}
+
 export const ROLE_LABEL: Record<Role, string> = { ADMIN: "Administração", PROFESSOR: "Professor" };
 
 @Component({
@@ -39,6 +47,9 @@ export class AdminComponent {
   search = "";
   inviteEmail = "";
   inviteRole: Role = "PROFESSOR";
+  newAccount = { name: "", enrollment: "", email: "", role: "" as Role | "", password: "" };
+  creating = signal(false);
+  createError = signal("");
 
   ngOnInit() {
     void this.load(1);
@@ -82,6 +93,39 @@ export class AdminComponent {
   async confirm(invitation: Invitation) {
     if (await this.change("admin/roles", invitation.email, invitation.role))
       this.notice.set(`${invitation.claimedName ?? invitation.email} agora tem o papel ${ROLE_LABEL[invitation.role]}.`);
+  }
+  openCreate(dialog: HTMLDialogElement) {
+    this.newAccount = { name: "", enrollment: "", email: "", role: "", password: generatePassword() };
+    this.createError.set("");
+    dialog.showModal();
+  }
+  suggestPassword() {
+    this.newAccount.password = generatePassword();
+  }
+  /** Cadastro feito pelo admin: a conta já nasce com o papel escolhido, sem convite. */
+  async createAccount(dialog: HTMLDialogElement) {
+    const account = this.newAccount;
+    const length = [...account.password].length;
+    if (!account.email.trim()) return this.createError.set("Informe o e-mail.");
+    if (length < 12 || length > 128) return this.createError.set("A senha inicial deve ter de 12 a 128 caracteres.");
+    this.creating.set(true);
+    this.createError.set("");
+    try {
+      await this.request("admin/accounts", {
+        email: account.email.trim(),
+        password: account.password,
+        name: account.name.trim(),
+        enrollment: account.enrollment.trim().toUpperCase(),
+        role: account.role || null,
+      });
+      dialog.close();
+      this.notice.set(`Conta de ${account.email.trim()} cadastrada${account.role ? ` com o papel ${ROLE_LABEL[account.role]}` : ""}. Entregue a senha inicial por um canal seguro.`);
+      await this.load(1);
+    } catch (error) {
+      this.createError.set(this.message(error));
+    } finally {
+      this.creating.set(false);
+    }
   }
   claimed() { return (this.data()?.invitations ?? []).filter((i) => i.claimedAt); }
   waiting() { return (this.data()?.invitations ?? []).filter((i) => !i.claimedAt); }

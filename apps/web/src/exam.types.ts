@@ -9,6 +9,8 @@ export type AttemptSummary = {
   finishedAt: string | null;
   answered: number;
   kind?: "PARTIAL" | "EDITION";
+  /** Treino montado com os erros prontos (ERRORS) ou com as erradas de um treino (RETRY). */
+  focus?: "ERRORS" | "RETRY" | null;
   /** Prova da edição: prazo do servidor; o cronômetro só o exibe. */
   deadlineAt?: string | null;
   /** Pausada desde; null quando o cronômetro corre. */
@@ -33,6 +35,8 @@ export type PracticeAvailability = {
   /** Ainda não vistas pela pessoa (estudo, treino ou prova); o sorteio começa por elas. */
   unseen: number;
   areas: { name: string; count: number; unseen: number }[];
+  /** Erros do estudo livre; os prontos já passaram do intervalo de revisão. */
+  errors: { total: number; ready: number };
   active: AttemptSummary | null;
   recent: AttemptSummary[];
 };

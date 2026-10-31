@@ -32,6 +32,11 @@
             Cada erro volta um dia depois de você ver o gabarito, para a
             revisão testar o raciocínio e não a memória da resposta.
           </p>
+          @if (data.summary.ready) {
+            <button type="button" (click)="practiceErrors.emit()">
+              Treinar os {{ data.summary.ready === 1 ? "1 erro pronto" : data.summary.ready + " erros prontos" }}
+            </button>
+          }
         }
         <p class="muted">
           {{ data.summary.demonstration }}
