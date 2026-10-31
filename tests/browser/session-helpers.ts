@@ -6,7 +6,7 @@ import { expect, type BrowserContext } from "@playwright/test";
 export async function signUp(context: BrowserContext, profile: { enrollment?: string } = {}) {
   expect((await context.request.post("/api/session", { data: {} })).status()).toBe(201);
   const response = await context.request.post("/api/auth/register", {
-    data: { email: `home-${randomUUID()}@example.invalid`, password: "Painel teste 2026!", ...profile },
+    data: { email: `home-${randomUUID()}@example.invalid`, password: "Painel teste 2026!", name: "Pessoa Teste", ...profile },
   });
   expect(response.status()).toBe(201);
 }

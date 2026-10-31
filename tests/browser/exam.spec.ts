@@ -226,6 +226,7 @@ test("the result rebuilds a practice with the misses, and areas offer a timed si
   const areas = page.getByRole("region", { name: "Simulado por área" });
   await expect(areas).toContainText(area);
   await areas.getByRole("button", { name: `Simular ${area}`, exact: true }).click();
+  await page.getByRole("dialog", { name: area }).getByRole("button", { name: /^Com cronômetro/ }).click();
   await expect(page.locator("#practice-position")).toHaveText(/^Questão 1 de (?:[1-9]|[12][0-9]|30)$/);
   await expect(page.getByText(`${area} · com cronômetro`)).toBeVisible();
 });
@@ -334,10 +335,11 @@ test("registering preserves the guest attempt and logout isolates it from a fres
   const email = `practice-${randomUUID()}@example.invalid`; emails.add(email);
   await page.locator("header").getByRole("button", { name: "Criar conta", exact: true }).click();
   const form = page.locator("app-account form");
+  await form.getByLabel("Nome", { exact: true }).fill("Pessoa Teste");
   await form.getByLabel("E-mail", { exact: true }).fill(email);
   await form.getByLabel("Senha", { exact: true }).fill("TEST ONLY treino senha 2026!");
   await form.getByRole("button", { name: "Criar conta", exact: true }).click();
-  await expect(page.locator("header").getByText(email, { exact: true })).toBeVisible();
+  await expect(page.locator("header .account-chip")).toHaveAttribute("title", email);
   await expect(page.getByRole("button", { name: "Retomar treino", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Retomar treino", exact: true }).click();
   await expect(page.locator("#practice-position")).toBeFocused();

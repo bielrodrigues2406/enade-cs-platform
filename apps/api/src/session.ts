@@ -3,7 +3,7 @@ import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 
-export type Identity = { id: string; email: string | null; tokenHash: string };
+export type Identity = { id: string; email: string | null; name: string | null; tokenHash: string };
 export const digest = (value: string) =>
   createHash("sha256").update(value).digest("hex");
 export function sessionHash(req: any): string | null {
@@ -22,8 +22,8 @@ export async function identity(
   const tokenHash = sessionHash(req);
   if (!tokenHash) return null;
   const row = (
-    await (client ?? db).query<{ id: string; email: string | null }>(
-      `SELECT s.identity_id AS id,a.email FROM browser_session s LEFT JOIN account a ON a.identity_id=s.identity_id WHERE s.token_hash=$1 AND s.expires_at>clock_timestamp() ${lock ? "FOR UPDATE OF s" : ""}`,
+    await (client ?? db).query<{ id: string; email: string | null; name: string | null }>(
+      `SELECT s.identity_id AS id,a.email,a.display_name AS name FROM browser_session s LEFT JOIN account a ON a.identity_id=s.identity_id WHERE s.token_hash=$1 AND s.expires_at>clock_timestamp() ${lock ? "FOR UPDATE OF s" : ""}`,
       [tokenHash],
     )
   ).rows[0];
@@ -39,9 +39,9 @@ export async function requireIdentity(
     user ?? fail("Sua sessão expirou. Recarregue a página para continuar.", 401)
   );
 }
-export const sessionView = (user: { email: string | null }) =>
+export const sessionView = (user: { email: string | null; name?: string | null }) =>
   user.email
-    ? { mode: "account" as const, email: user.email }
+    ? { mode: "account" as const, email: user.email, name: user.name ?? null }
     : { mode: "guest" as const };
 export function setSessionCookie(res: any, token: string) {
   res.cookie("enade_session", token, {

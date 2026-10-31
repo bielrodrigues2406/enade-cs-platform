@@ -30,12 +30,12 @@ test.afterAll(async () => {
 async function register(page: Page, address: string, extra: { name?: string; enrollment?: string } = {}) {
   await page.goto("/");
   await page.getByRole("button", { name: "Criar conta" }).first().click();
-  if (extra.name) await page.getByLabel("Nome").fill(extra.name);
+  await page.getByLabel("Nome").fill(extra.name ?? "Pessoa Teste");
   if (extra.enrollment) await page.getByLabel("Prontuário IFSP").fill(extra.enrollment);
   await page.getByLabel("E-mail").fill(address);
   await page.getByLabel("Senha", { exact: true }).fill(password);
   await page.locator("form").getByRole("button", { name: "Criar conta" }).click();
-  await expect(page.getByRole("button", { name: `Meu perfil, ${address}` })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Meu perfil, ${extra.name ?? "Pessoa Teste"}` })).toBeVisible();
 }
 
 test("sign-up takes name and enrollment, and an admin authorizes a professor", async ({ page, browser }) => {
@@ -104,6 +104,7 @@ test("an admin registers a professor account, who then updates profile and passw
 
   // E-mail repetido: o modal mostra o erro e continua aberto.
   await page.getByRole("button", { name: "Cadastrar conta" }).click();
+  await dialog.getByLabel("Nome").fill("Outra Pessoa TEST ONLY");
   await dialog.getByLabel("E-mail").fill(professorEmail);
   await dialog.getByRole("button", { name: "Cadastrar", exact: true }).click();
   await expect(dialog.getByRole("alert")).toContainText("já tem conta");
@@ -118,7 +119,7 @@ test("an admin registers a professor account, who then updates profile and passw
   await professor.getByLabel("E-mail").fill(professorEmail);
   await professor.getByLabel("Senha", { exact: true }).fill(password);
   await professor.locator("form").getByRole("button", { name: "Entrar" }).click();
-  await professor.getByRole("button", { name: `Meu perfil, ${professorEmail}` }).click();
+  await professor.getByRole("button", { name: "Meu perfil, Prof Manual TEST ONLY" }).click();
   await expect(professor.getByRole("heading", { name: "Meu perfil", level: 1 })).toBeVisible();
   await expect(professor.getByLabel("Nome")).toHaveValue("Prof Manual TEST ONLY");
   await professor.getByLabel("Prontuário IFSP").fill("pe3007777");

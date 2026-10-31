@@ -76,6 +76,7 @@ async function createAccount(extra: Record<string, unknown> = {}) {
   const response = await request("auth/register", original.cookie, "POST", {
     email,
     password,
+    name: "Pessoa Teste",
     ...extra,
   });
   assert.equal(response.status, 201);

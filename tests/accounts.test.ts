@@ -53,6 +53,7 @@ function credentials() {
   return {
     email: `accounts-${randomUUID()}@example.invalid`,
     password: `test-only-${randomUUID()}`,
+    name: "Pessoa Teste",
   };
 }
 
@@ -108,6 +109,7 @@ async function register(input = credentials(), originalCookie?: string) {
   assert.deepEqual(await response.json(), {
     mode: "account",
     email: input.email.trim().toLowerCase(),
+    name: input.name,
   });
   return { ...input, original, cookie: await issuedCookie(response) };
 }
@@ -145,10 +147,11 @@ test("registration preserves guest answers, normalizes email and rotates the bea
   assert.deepEqual(await (await request("auth/me", account.cookie)).json(), {
     mode: "account",
     email: input.email,
+    name: input.name,
   });
   assert.deepEqual(
     await (await request("session", account.cookie, "POST", {})).json(),
-    { mode: "account", email: input.email },
+    { mode: "account", email: input.email, name: input.name },
   );
   const saved = await readAnswer(account.cookie);
   assert.equal(saved.optionId, "demo-sql-v1-1");
@@ -265,6 +268,9 @@ test("invalid credentials are rejected before creating an account", async () => 
     { email: credentials().email, password: "x".repeat(129) },
     { email: [credentials().email], password: credentials().password },
     { email: credentials().email, password: null },
+    // O nome é obrigatório no cadastro.
+    { email: credentials().email, password: credentials().password },
+    { ...credentials(), name: " x " },
   ])
     assert.equal(
       (await request("auth/register", cookie, "POST", body)).status,
@@ -290,6 +296,7 @@ test("concurrent registration of the same email creates exactly one account", as
   assert.deepEqual(await (await request("auth/me", signedIn)).json(), {
     mode: "account",
     email: input.email,
+    name: input.name,
   });
   assert.equal(
     (
@@ -415,7 +422,7 @@ test(
       // The credential SELECT FOR UPDATE must be behind the logout DELETE, not
       // merely in flight. This establishes the serialization order under test.
       await waitForBlockedQuery(
-        "SELECT s.identity_id AS id,a.email FROM browser_session",
+        "SELECT s.identity_id AS id,a.email,a.display_name AS name FROM browser_session",
         logoutPid,
       );
       await locker.query("COMMIT");

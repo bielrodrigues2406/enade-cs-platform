@@ -3,12 +3,13 @@ import {
   ViewChild, computed, inject, signal, type SimpleChanges,
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ChoiceService } from "./choice-dialog";
 import { QuestionContentComponent } from "./question-content.component";
 import { DiscursiveComponent } from "./discursive.component";
 import type {
   Edition, EditionList, PracticeAvailability, PracticeView, PracticeItem, PracticeAnswer,
 } from "./exam.types";
-import { AREA_SIMULATION_LIMIT, areaSimulation, attemptLabel, type PracticeRequest } from "./practice-request";
+import { AREA_SIMULATION_LIMIT, attemptLabel, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 
 /** Folga para o servidor encerrar a prova depois do prazo (igual à da API). */
 const DEADLINE_GRACE_MS = 16000;
@@ -45,6 +46,7 @@ export class ExamComponent {
   @ViewChild("finishDialog") finishDialog?: ElementRef<HTMLDialogElement>;
   private host: ElementRef<HTMLElement> = inject(ElementRef);
   private injector = inject(Injector);
+  private choice = inject(ChoiceService);
   availability = signal<PracticeAvailability | null>(null);
   attempt = signal<PracticeView | null>(null);
   position = signal(1);
@@ -189,8 +191,11 @@ export class ExamComponent {
     if (this.eligibleCount() < this.size) return;
     void this.begin({ area: this.area || null, size: this.size, timed: this.timed });
   }
-  /** Simulado de uma área: até 30 questões, com cronômetro. */
-  simulateArea(row: { name: string; count: number }) { void this.begin(areaSimulation(row.name, row.count)); }
+  /** Simulado de uma área: até 30 questões; a pessoa escolhe se corre o cronômetro. */
+  async simulateArea(row: { name: string; count: number }) {
+    const request = await chooseAreaSimulation(this.choice, row.name, row.count, this.availability()?.minutesPerQuestion);
+    if (request) void this.begin(request);
+  }
   /** Erros do estudo livre que já passaram do intervalo de revisão. */
   practiceErrors() { void this.begin({ area: null, focus: "ERRORS" }); }
   /** Erradas e em branco do treino ou prova finalizado. */
@@ -351,9 +356,30 @@ export class ExamComponent {
   }
   showResult() { this.reviewing.set(false); this.focusContent(); }
   beginReview() { this.reviewing.set(true); this.go(this.position()); }
-  showSelection() {
+  /** Nome do que está aberto, para os rótulos de saída. */
+  kindLabel(data: PracticeView) { return data.edition ? "prova" : data.deadlineAt ? "simulado" : "treino"; }
+  async showSelection() {
     if (this.protectedState()) return;
-    if (this.running() && !confirm("Sair da prova? O cronômetro fica pausado e suas respostas estão salvas.")) return;
+    const data = this.attempt();
+    if (data?.state === "IN_PROGRESS") {
+      const kind = this.kindLabel(data);
+      const timed = this.running();
+      const choice = await this.choice.choose({
+        eyebrow: timed ? "Cronômetro correndo" : "Respostas salvas",
+        title: `Sair ${kind === "prova" ? "da" : "do"} ${kind}?`,
+        message: timed
+          ? "Ao sair, o cronômetro pausa e suas respostas ficam salvas. Você retoma de onde parou."
+          : "Suas respostas ficam salvas e você retoma de onde parou. Se já terminou, finalize para ver o resultado.",
+        cancel: "Continuar respondendo",
+        actions: [
+          { value: "leave", label: timed ? "Pausar e sair" : "Sair", kind: "outline" },
+          { value: "finish", label: "Finalizar agora" },
+        ],
+      });
+      if (choice === "finish") { this.openFinish(); return; }
+      if (choice !== "leave") return;
+      if (this.running()) { await this.pause(); if (this.running()) return; }
+    }
     void this.loadAvailability(); this.locationChange.emit({ attemptId: null, position: 1 });
   }
   openFinish() { if (!this.protectedState()) { this.error.set(""); this.finishDialog?.nativeElement.showModal(); } }

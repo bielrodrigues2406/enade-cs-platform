@@ -81,7 +81,7 @@ const test = base.extend<Fixtures>({
       expect(
         (
           await context.request.post("/api/auth/register", {
-            data: { email, password },
+            data: { email, password, name: "Pessoa Teste" },
           })
         ).status(),
       ).toBe(201);

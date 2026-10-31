@@ -117,6 +117,7 @@ async function createAccount() {
   const response = await request("auth/register", initial.cookie, "POST", {
     email: `sources-${randomUUID()}@example.invalid`,
     password: `test-only-${randomUUID()}`,
+    name: "Pessoa Teste",
   });
   assert.equal(response.status, 201);
   return actor(response);

@@ -342,18 +342,10 @@
       }
     </section>
 
-    <footer class="home-footer">
-      <p>
-        Projeto independente de estudo, sem vínculo com o Inep ou o MEC. Provas
-        e gabaritos oficiais pertencem ao Inep. A data da prova segue o
-        <a [href]="examSource" target="_blank" rel="noopener noreferrer"
-          >cronograma divulgado pelo Inep</a
-        >
-        e pode mudar.
-      </p>
-      @if (sessionMode === "guest") {
+    @if (sessionMode === "guest") {
+      <p class="home-guest-cta">
         <button type="button" class="text-button" (click)="register.emit()">
           Criar conta para guardar o histórico
         </button>
-      }
-    </footer>
+      </p>
+    }

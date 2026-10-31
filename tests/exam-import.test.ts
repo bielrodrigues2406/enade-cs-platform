@@ -78,7 +78,7 @@ async function session(admin: boolean) {
   emails.push(email);
   const created = await fetch(`${base}/api/auth/register`, {
     method: "POST", headers: { Cookie: cookie, "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password: "Importar teste 2026!" }),
+    body: JSON.stringify({ email, password: "Importar teste 2026!", name: "Pessoa Teste" }),
   });
   cookie = created.headers.get("set-cookie")!.split(";")[0];
   if (admin) {

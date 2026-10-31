@@ -288,6 +288,7 @@ test("a late review response cannot reveal account history after logout in anoth
         data: {
           email: `notebook-${randomUUID()}@example.invalid`,
           password: `test-only-${randomUUID()}`,
+          name: "Pessoa Teste",
         },
       })
     ).status(),

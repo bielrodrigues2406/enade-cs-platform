@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { initials } from "./initials";
 
 type Profile = { email: string; name: string | null; enrollment: string | null; createdAt?: string };
 type Status = { kind: "success" | "error"; text: string } | null;
@@ -30,8 +31,8 @@ async function call<T>(path: string, method: string, body?: unknown): Promise<T>
   styleUrl: "./profile.component.css",
 })
 export class ProfileComponent {
-  /** O e-mail da conta mudou: o cabeçalho mostra o novo. */
-  @Output() emailChange = new EventEmitter<string>();
+  /** Nome ou e-mail mudaram: o cabeçalho mostra os novos. */
+  @Output() accountChange = new EventEmitter<{ email: string; name: string | null }>();
   @Output() back = new EventEmitter<void>();
 
   loaded = signal<Profile | null>(null);
@@ -50,6 +51,7 @@ export class ProfileComponent {
   confirmPassword = "";
   showPasswords = false;
   passwordSubmitted = false;
+  profileSubmitted = false;
 
   ngOnInit() {
     void this.load();
@@ -71,6 +73,14 @@ export class ProfileComponent {
   emailChanged() {
     return this.email.trim().toLowerCase() !== (this.loaded()?.email ?? "");
   }
+  nameError() {
+    const length = this.name.trim().length;
+    return length < 2 ? "Informe seu nome." : length > 120 ? "Use até 120 caracteres." : "";
+  }
+  avatar() {
+    const data = this.loaded();
+    return initials(data?.name, data?.email);
+  }
   enrollmentError() {
     const value = this.enrollment.trim().toUpperCase();
     return value && !ENROLLMENT.test(value) ? "Use o formato do prontuário IFSP, por exemplo PE3012345." : "";
@@ -81,7 +91,8 @@ export class ProfileComponent {
   }
 
   async saveProfile() {
-    if (this.savingProfile() || this.enrollmentError()) return;
+    this.profileSubmitted = true;
+    if (this.savingProfile() || this.nameError() || this.enrollmentError()) return;
     if (this.emailChanged() && !this.profilePassword) {
       this.profileStatus.set({ kind: "error", text: "Para mudar o e-mail, informe a senha atual." });
       return;
@@ -95,13 +106,13 @@ export class ProfileComponent {
         email: this.email.trim(),
         ...(this.emailChanged() ? { currentPassword: this.profilePassword } : {}),
       });
-      const previousEmail = this.loaded()?.email;
       this.loaded.set({ ...this.loaded()!, ...saved });
       this.name = saved.name ?? "";
       this.enrollment = saved.enrollment ?? "";
       this.email = saved.email;
       this.profilePassword = "";
-      if (saved.email !== previousEmail) this.emailChange.emit(saved.email);
+      this.profileSubmitted = false;
+      this.accountChange.emit({ email: saved.email, name: saved.name });
       this.profileStatus.set({ kind: "success", text: "Dados salvos." });
     } catch (error) {
       this.profileStatus.set({ kind: "error", text: message(error) });

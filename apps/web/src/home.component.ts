@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, signal } from "@angular/core";
+import { Component, EventEmitter, Input, Output, inject, signal } from "@angular/core";
 import type { ReviewItem } from "./review.component";
-import { AREA_SIMULATION_LIMIT, areaSimulation, type PracticeRequest } from "./practice-request";
+import { AREA_SIMULATION_LIMIT, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
+import { ChoiceService } from "./choice-dialog";
 
 type CatalogRow = {
   id: string;
@@ -63,6 +64,7 @@ const monday = (date: Date) => {
   styleUrl: "./home.component.css",
 })
 export class HomeComponent {
+  private choice = inject(ChoiceService);
   @Input() sessionMode: "guest" | "account" = "guest";
   @Output() browse = new EventEmitter<void>();
   @Output() review = new EventEmitter<void>();
@@ -197,8 +199,9 @@ export class HomeComponent {
   simulationSize(row: AreaProgress) {
     return Math.min(row.published, AREA_SIMULATION_LIMIT);
   }
-  simulate(row: AreaProgress) {
-    this.practice.emit(areaSimulation(row.area, row.published));
+  async simulate(row: AreaProgress) {
+    const request = await chooseAreaSimulation(this.choice, row.area, row.published);
+    if (request) this.practice.emit(request);
   }
   practiceErrors() {
     this.practice.emit({ area: null, focus: "ERRORS" });

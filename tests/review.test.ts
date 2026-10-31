@@ -259,6 +259,7 @@ test(
     const registered = await request("auth/register", guest.cookie, "POST", {
       email,
       password,
+      name: "Pessoa Teste",
     });
     assert.equal(registered.status, 201);
     const first = await actor(registered),
@@ -266,6 +267,7 @@ test(
     const loggedIn = await request("auth/login", anotherGuest.cookie, "POST", {
       email,
       password,
+      name: "Pessoa Teste",
     });
     assert.equal(loggedIn.status, 200);
     const second = await actor(loggedIn),
@@ -347,6 +349,7 @@ test("guest signup preserves review history and logout/login enforce the account
   const registered = await request("auth/register", user.cookie, "POST", {
     email,
     password,
+    name: "Pessoa Teste",
   });
   assert.equal(registered.status, 201);
   user = await actor(registered);
@@ -359,6 +362,7 @@ test("guest signup preserves review history and logout/login enforce the account
   const loggedIn = await request("auth/login", signedOut.cookie, "POST", {
     email,
     password,
+    name: "Pessoa Teste",
   });
   assert.equal(loggedIn.status, 200);
   assert.equal((await notebook(await actor(loggedIn))).items[0].id, q.id);

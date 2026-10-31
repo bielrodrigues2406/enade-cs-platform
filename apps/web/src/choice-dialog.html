@@ -1,0 +1,20 @@
+<dialog #dialog class="sheet-dialog choice-dialog" aria-labelledby="choice-title" aria-describedby="choice-message" (close)="closed()">
+  @if (choice.pending(); as ask) {
+    <div class="sheet-dialog-head">
+      <div>
+        @if (ask.eyebrow) { <p class="sheet-dialog-eyebrow">{{ ask.eyebrow }}</p> }
+        <h2 id="choice-title">{{ ask.title }}</h2>
+      </div>
+      <button type="button" class="sheet-close" (click)="choice.answer(null)" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button>
+    </div>
+    <div class="sheet-dialog-body">
+      <div class="sheet-dialog-content"><p id="choice-message">{{ ask.message }}</p></div>
+      <div class="sheet-dialog-actions">
+        <button type="button" class="outline" (click)="choice.answer(null)" autofocus>{{ ask.cancel ?? "Cancelar" }}</button>
+        @for (action of ask.actions; track action.value) {
+          <button type="button" [class.outline]="action.kind === 'outline'" [class.danger]="action.kind === 'danger'" (click)="choice.answer(action.value)">{{ action.label }}</button>
+        }
+      </div>
+    </div>
+  }
+</dialog>
