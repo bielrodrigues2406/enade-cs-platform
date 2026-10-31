@@ -195,7 +195,10 @@ O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE301
 | GET /editions | — | `{minutes, editions}`; cada edição tem `objectives`, `general`, `discursive` e `missing` (números sem objetiva publicada) |
 | POST /editions/:source/attempts | `{requestId}` (UUID) | 201 com a tentativa (`kind: "EDITION"`, `deadlineAt`, `edition`, `discursive`); repetir o `requestId` devolve a mesma; 409 se já houver treino em andamento |
 
-A tentativa usa as rotas de `/practice/:id` (itens, finalização e leitura). Depois do prazo, a leitura finaliza e a gravação responde 409. A finalização envia os rascunhos das discursivas da edição. O resumo inclui `byBlock` (`general`, `specific`).
+| POST /editions/attempts/:id/pause | `{}` | 200 com a tentativa pausada (`pausedAt`); gravação de resposta responde 409 enquanto pausada |
+| POST /editions/attempts/:id/resume | `{}` | 200 com a tentativa retomada; o prazo efetivo (`deadlineAt`) anda o tempo pausado |
+
+O tempo restante (`remainingMs`) é calculado no servidor. A tentativa usa as rotas de `/practice/:id` (itens, finalização e leitura). Depois do prazo, a leitura finaliza e a gravação responde 409. A finalização envia os rascunhos das discursivas da edição. O resumo inclui `byBlock` (`general`, `specific`).
 
 ## Discursivas (DISC-1, ADR-013)
 

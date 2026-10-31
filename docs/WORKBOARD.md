@@ -128,7 +128,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 018 | HIST-1 — histórico de respostas somente de inserção | Claude |
 | 019 | DISC-1 — discursivas | Claude |
 | 020 | SIM-1 — prova completa da edição | Claude |
-| 021 | próxima livre — reserve aqui antes do primeiro commit | |
+| 021 | SIM-1 — pausa da prova completa | Claude |
+| 022 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 
@@ -155,6 +156,7 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
 
+- **31/10/2026 · Claude → Codex · SIM-1 pausa** · Gabriel pediu pausa e saída segura e liberou 2008. Migration 021 (`paused_at`, `paused_ms`), rotas `/editions/attempts/:id/pause|resume`, `remainingMs` do servidor, saída pelo menu com confirmação (`leaveExam()` no shell), pausa por `keepalive` ao fechar ou recarregar, mínimo de 10 objetivas. Corrigido bug anterior: abrir Aulas/Discursivas/Administração não desligava o treino e voltar ao treino não desligava essas telas. `npm test` 151/153, E2E 58/58.
 - **31/10/2026 · Claude → Codex · SIM-1 (núcleo)** · `claude/confident-cray-ndnwmk`. Peguei SIM-1 porque o Codex está sem limite. A prova completa reaproveita a tentativa de SIM-P1: `kind=EDITION`, prova oficial e `deadline_at` imutáveis (migration 020), objetivas publicadas na ordem original (mínimo 20, lacunas listadas), 4 h no servidor (prazo vencido finaliza ao ler ou gravar), discursivas da edição escritas na prova com o componente de DISC-1 e enviadas ao finalizar, resultado por bloco (`byBlock`). O teste existente de resumo ganhou `byBlock` (mudança aditiva). O treino passou a carregar sob demanda (initial 474 kB). Validação em `enade_ci`: `npm test` 151/153 (2 de pypdf local), E2E 58/58. Falta: modo por área com tempo configurável e revisão de SIM-2.
 - **31/10/2026 · Claude → Codex · DISC-1** · `claude/confident-cray-ndnwmk`. Discursivas entram pelo importador com o PDF do padrão de resposta (opcional no lote): `response-standard.mjs` separa os blocos "PADRÃO DE RESPOSTA" e lê os itens "(valor: X pontos)" do enunciado; testado em 2011/2014/2017/2021 (5 blocos cada; 2005/2008 ficam manuais). Editor ganhou a aba "Padrão de resposta" e os itens de avaliação. Estudante: aba "Discursivas", folha pautada com rascunho automático, envio imutável, padrão só depois do envio (também na rota de imagens) e autoavaliação 0/1/2 por item com nota estimada. CSS de importação, aulas e painel saiu do global para o componente (initial 490 kB, abaixo do limite). Validação em `enade_ci`: `npm test` 150/152 (2 de pypdf local), E2E 57/57, discursiva conferida a 320/390/1280 px. ADR-013.
 - **31/10/2026 · Claude → Codex · PROF-1 e HIST-1 (parte)** · `claude/confident-cray-ndnwmk`. Migration 018: `answer_event` somente de inserção (UPDATE bloqueado; sai só com o dono ou a questão), gravado na mesma transação de `PUT /questions/:id/answer`; respostas anteriores entram como `BACKFILL`. Painel na aba "Desempenho" da turma: alunos com conta, presença média em aulas com chamada, alerta abaixo de 75%, acerto na primeira tentativa por área (percentual só com 10+ respostas) e tabela por aluno, que vira blocos no celular. Validação em `enade_ci`: ver PR. Falta do HIST-1: caderno de erros espaçado.
