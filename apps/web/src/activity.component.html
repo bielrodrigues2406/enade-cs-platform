@@ -1,0 +1,79 @@
+<section class="activity" aria-labelledby="activity-title">
+  <h2 id="activity-title" class="visually-hidden">Registro de atividades</h2>
+  @if (data(); as page) {
+    <dl class="activity-summary" aria-label="Últimas 24 horas">
+      <div><dt>Entradas</dt><dd>{{ page.summary.logins }}</dd></div>
+      <div [class.is-alert]="page.summary.failedLogins > 0"><dt>Senhas erradas</dt><dd>{{ page.summary.failedLogins }}</dd></div>
+      <div [class.is-alert]="page.summary.blocked > 0"><dt>Bloqueios</dt><dd>{{ page.summary.blocked }}</dd></div>
+      <div><dt>IPs com falha ou bloqueio</dt><dd>{{ page.summary.suspiciousIps }}</dd></div>
+    </dl>
+    <p class="muted activity-note">Resumo das últimas 24 horas. O registro guarda {{ page.retentionDays }} dias; o IP fica só em acessos e eventos de segurança.</p>
+  }
+
+  <form class="activity-filters" (ngSubmit)="load(1)" role="search" aria-label="Filtrar atividades">
+    <div>
+      <label for="activity-category">Categoria</label>
+      <select id="activity-category" name="category" [(ngModel)]="category" (ngModelChange)="category = $event; load(1)">
+        <option value="">Todas</option>
+        @for (entry of categories; track entry[0]) {
+          <option [value]="entry[0]">{{ entry[1] }}</option>
+        }
+      </select>
+    </div>
+    <div class="activity-search">
+      <label for="activity-search">E-mail, assunto ou IP</label>
+      <input id="activity-search" name="search" type="search" maxlength="120" [(ngModel)]="search" />
+    </div>
+    <button type="submit" class="outline" [disabled]="loading()">{{ loading() ? "Carregando…" : "Filtrar" }}</button>
+  </form>
+
+  @if (error()) {
+    <div class="notice" role="alert"><p>{{ error() }}</p></div>
+  }
+
+  @if (data(); as page) {
+    <p class="muted" role="status">{{ page.total }} {{ page.total === 1 ? "registro" : "registros" }}</p>
+    @if (page.items.length) {
+      <div class="activity-table-wrap">
+        <table class="activity-table">
+          <caption class="visually-hidden">Atividades, das mais recentes para as mais antigas</caption>
+          <thead>
+            <tr><th scope="col">Quando</th><th scope="col">Atividade</th><th scope="col">Quem</th><th scope="col">Sobre</th><th scope="col">IP</th></tr>
+          </thead>
+          <tbody>
+            @for (row of page.items; track row.id) {
+              <tr [class.is-security]="row.category === 'SECURITY' || row.action === 'LOGIN_FAILED'">
+                <td data-label="Quando"><time [attr.datetime]="row.at">{{ when(row.at) }}</time></td>
+                <td data-label="Atividade">
+                  <span class="activity-category">{{ categoryLabel[row.category] }}</span>
+                  <strong>{{ actionLabel(row.action) }}</strong>
+                </td>
+                <td data-label="Quem">{{ who(row) }}</td>
+                <td data-label="Sobre">
+                  {{ row.subject ?? "" }}
+                  @if (row.detail) { <span class="activity-detail">{{ row.detail }}</span> }
+                </td>
+                <td data-label="IP">
+                  @if (row.ip) {
+                    <button type="button" class="text-button activity-ip" (click)="filterIp(row.ip)" [attr.aria-label]="'Ver tudo do IP ' + row.ip">{{ row.ip }}</button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      @if (pageCount() > 1) {
+        <nav class="activity-pages" aria-label="Páginas do registro">
+          <button type="button" class="outline" (click)="load(page.page - 1)" [disabled]="loading() || page.page <= 1">Anterior</button>
+          <span>Página {{ page.page }} de {{ pageCount() }}</span>
+          <button type="button" class="outline" (click)="load(page.page + 1)" [disabled]="loading() || page.page >= pageCount()">Próxima</button>
+        </nav>
+      }
+    } @else {
+      <p>Nenhuma atividade com esses filtros.</p>
+    }
+  } @else if (loading()) {
+    <p role="status">Carregando o registro…</p>
+  }
+</section>

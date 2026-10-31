@@ -16,6 +16,7 @@ const email = (label: string) => {
 
 test.afterAll(async () => {
   const ids = (await pool.query("SELECT identity_id FROM account WHERE email=ANY($1)", [emails])).rows.map((r) => r.identity_id);
+  await pool.query("DELETE FROM activity_log WHERE subject=ANY($1) OR actor_id=ANY($2::uuid[])", [emails, ids]);
   await pool.query("DELETE FROM role_event WHERE email=ANY($1)", [emails]);
   await pool.query("DELETE FROM role_invitation WHERE email=ANY($1)", [emails]);
   await pool.query("DELETE FROM account_role WHERE identity_id=ANY($1::uuid[])", [ids]);
@@ -141,6 +142,32 @@ test("an admin registers a professor account, who then updates profile and passw
   const login = await fresh.request.post("/api/auth/login", { data: { email: professorEmail, password: newPassword } });
   expect(login.status()).toBe(200);
   await fresh.close();
+});
+
+test("the activity tab shows sign-ins and failed passwords, filtered by IP", async ({ page, browser }) => {
+  const adminEmail = email("admin-log");
+  await register(page, adminEmail, { name: "Admin Log TEST ONLY" });
+  await pool.query("INSERT INTO account_role(identity_id,role) SELECT identity_id,'ADMIN' FROM account WHERE email=$1", [adminEmail]);
+  // Uma senha errada para a própria conta, de outro navegador.
+  const other = await browser.newContext();
+  expect((await other.request.post("/api/session", { data: {} })).status()).toBe(201);
+  expect((await other.request.post("/api/auth/login", { data: { email: adminEmail, password: "errada errada 2026" } })).status()).toBe(401);
+  await other.close();
+
+  await page.reload();
+  await page.getByRole("button", { name: "Administração" }).click();
+  await page.getByRole("tab", { name: "Atividades" }).click();
+  await expect(page.getByRole("definition").first()).toBeVisible();
+  await page.getByLabel("E-mail, assunto ou IP").fill(adminEmail);
+  await page.getByRole("button", { name: "Filtrar" }).click();
+  const table = page.getByRole("table");
+  await expect(table).toContainText("Senha errada no login");
+  await expect(table).toContainText("Criou conta");
+  await page.getByLabel("Categoria").selectOption("ACCESS");
+  await expect(table).not.toContainText("Papel concedido");
+  await table.getByRole("button", { name: /^Ver tudo do IP / }).first().click();
+  await expect(page.getByLabel("E-mail, assunto ou IP")).not.toHaveValue(adminEmail);
+  await expect(table).toContainText("Senha errada no login");
 });
 
 test("accounts without the admin role do not see administration", async ({ page }) => {

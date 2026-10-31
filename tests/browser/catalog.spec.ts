@@ -265,7 +265,6 @@ test("home counts the full collection and suggests an unanswered item beyond the
   const before = await response.json();
   expect(before.total).toBeGreaterThan(50);
   expect(before.items.length).toBeGreaterThan(20);
-  const next = before.items[20];
   // Answers belong only to this test's anonymous identity. Source questions,
   // including the three existing demos, are never edited or republished.
   for (const row of before.items.slice(0, 20)) {
@@ -282,7 +281,12 @@ test("home counts the full collection and suggests an unanswered item beyond the
   const updated = await updatedResponse.json();
   expect(updated.summary.total).toBe(before.total);
   expect(updated.summary.answered).toBe(20);
-  expect(updated.suggestions[0].id).toBe(next.id);
+  // O início sugere não respondidas, oficiais antes das autorais, uma por área.
+  const suggested = updated.suggestions;
+  expect(suggested.every((row: any) => !row.answered)).toBe(true);
+  const official = suggested.map((row: any) => row.origin === "OFFICIAL");
+  expect(official).toEqual([...official].sort((a: boolean, b: boolean) => Number(b) - Number(a)));
+  expect(new Set(suggested.map((row: any) => row.area ?? row.topic)).size).toBe(suggested.length);
 
   await page.goto(catalogUrl({ area: "Algoritmos", page: "2" }));
   await expect(pager(page)).toContainText("Página 2 de 3");
@@ -291,8 +295,8 @@ test("home counts the full collection and suggests an unanswered item beyond the
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator(".cover-summary")).toContainText(`Você respondeu 20 de ${before.total} questões`);
   await expect(page.getByRole("region", { name: "Seu andamento" }).locator(".bar-row").first()).toContainText(`20 de ${before.total}`);
-  await expect(page.getByRole("button", { name: `Continuar com: ${next.title}`, exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: `Resolver: ${next.title}`, exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Continuar com: ${suggested[0].title}`, exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Resolver: ${suggested[0].title}`, exact: true })).toBeVisible();
 
   await page.getByRole("button", { name: "Banco de questões", exact: true }).first().click();
   await expect(page).toHaveURL(selectionUrl);
@@ -303,6 +307,6 @@ test("home counts the full collection and suggests an unanswered item beyond the
   await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   await expect(pager(page)).toContainText("Página 2 de 3");
   await page.getByRole("button", { name: "Início", exact: true }).first().click();
-  await page.getByRole("button", { name: `Continuar com: ${next.title}`, exact: true }).click();
-  await expect(page.getByRole("heading", { name: next.title, exact: true })).toBeVisible();
+  await page.getByRole("button", { name: `Continuar com: ${suggested[0].title}`, exact: true }).click();
+  await expect(page.getByRole("heading", { name: suggested[0].title, exact: true })).toBeVisible();
 });

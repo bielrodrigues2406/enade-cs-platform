@@ -7,15 +7,20 @@
   <div class="admin-tabs" role="tablist" aria-label="Seções da administração">
     <button type="button" role="tab" [attr.aria-selected]="tab() === 'accounts'" (click)="tab.set('accounts')">Contas e papéis</button>
     <button type="button" role="tab" [attr.aria-selected]="tab() === 'imports'" (click)="tab.set('imports')">Importar prova</button>
+    <button type="button" role="tab" [attr.aria-selected]="tab() === 'activity'" (click)="tab.set('activity')">Atividades</button>
   </div>
   @if (tab() === "imports") {
     <app-exam-import />
+  } @else if (tab() === "activity") {
+    <app-activity />
   } @else {
   <div class="admin-intro-row">
     <p class="admin-intro">
       Para dar acesso de professor, autorize o e-mail institucional. Se a pessoa
       ainda não tem conta, ela aparece aqui depois do cadastro para você confirmar.
       Também dá para cadastrar a conta você mesmo e entregar a senha inicial.
+      Professores e administração também cadastram questões em Curadoria; publicar
+      exige a revisão de outra pessoa.
     </p>
     <button type="button" class="outline" (click)="openCreate(accountDialog)">Cadastrar conta</button>
   </div>
