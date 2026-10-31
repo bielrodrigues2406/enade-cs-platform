@@ -22,7 +22,7 @@ export type Activity = {
 };
 /** Entradas mais antigas que isso são apagadas. */
 export const ACTIVITY_RETENTION_DAYS = 180;
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 10;
 
 type Queryable = Pick<PoolClient, "query">;
 

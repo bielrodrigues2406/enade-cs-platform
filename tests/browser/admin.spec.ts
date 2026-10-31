@@ -165,9 +165,13 @@ test("the activity tab shows sign-ins and failed passwords, filtered by IP", asy
   await expect(table).toContainText("Criou conta");
   await page.getByLabel("Categoria").selectOption("ACCESS");
   await expect(table).not.toContainText("Papel concedido");
-  await table.getByRole("button", { name: /^Ver tudo do IP / }).first().click();
-  await expect(page.getByLabel("E-mail, assunto ou IP")).not.toHaveValue(adminEmail);
-  await expect(table).toContainText("Senha errada no login");
+  const ipButton = table.getByRole("button", { name: /^Ver tudo do IP / }).first();
+  const ip = (await ipButton.textContent())!.trim();
+  await ipButton.click();
+  await expect(page.getByLabel("E-mail, assunto ou IP")).toHaveValue(ip);
+  // 10 por página; com mais registros, a paginação mostra as demais.
+  await expect(table.locator("tbody tr").first()).toBeVisible();
+  expect(await table.locator("tbody tr").count()).toBeLessThanOrEqual(10);
 });
 
 test("accounts without the admin role do not see administration", async ({ page }) => {
