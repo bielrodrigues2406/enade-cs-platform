@@ -65,10 +65,10 @@ export class CatalogController {
         SELECT LEAST($7::integer,GREATEST(0,((total-1)/$6::integer)*$6::integer)) AS effective_offset FROM counts
       )
       SELECT json_build_object(
-        'items',COALESCE((SELECT json_agg(i ORDER BY i.year DESC NULLS LAST,i.modality,i."questionNumber",i.id) FROM (
+        'items',COALESCE((SELECT json_agg(i ORDER BY i.id) FROM (
           SELECT id,title,topic,subject,origin,demonstration,"versionNumber",answered,
             area,year,modality,"questionNumber"
-          FROM filtered ORDER BY year DESC NULLS LAST,modality,"questionNumber",id LIMIT $6 OFFSET (SELECT effective_offset FROM page_bounds)
+          FROM filtered ORDER BY id LIMIT $6 OFFSET (SELECT effective_offset FROM page_bounds)
         ) i),'[]'::json),
         'total',(SELECT total FROM counts),
         'answeredTotal',(SELECT answered FROM counts),
@@ -80,10 +80,10 @@ export class CatalogController {
           'author',count(*) FILTER (WHERE origin<>'OFFICIAL' AND NOT demonstration)::integer,
           'demonstration',count(*) FILTER (WHERE demonstration)::integer
         ) FROM published),
-        'suggestions',COALESCE((SELECT json_agg(i ORDER BY i.year DESC NULLS LAST,i.modality,i."questionNumber",i.id) FROM (
+        'suggestions',COALESCE((SELECT json_agg(i ORDER BY i.id) FROM (
           SELECT id,title,topic,subject,origin,demonstration,"versionNumber",answered,
             area,year,modality,"questionNumber"
-          FROM published WHERE NOT answered ORDER BY year DESC NULLS LAST,modality,"questionNumber",id LIMIT 3
+          FROM published WHERE NOT answered ORDER BY id LIMIT 3
         ) i),'[]'::json),
         'facets',json_build_object(
           'areas',(SELECT json_agg(json_build_object(
