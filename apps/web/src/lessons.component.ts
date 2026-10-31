@@ -55,6 +55,7 @@ export class LessonsComponent {
     return new Date(iso).getTime() < Date.now();
   }
   async loadClasses() {
+    this.notice.set("");
     this.detail.set(null);
     this.roll.set(null);
     await this.attempt(async () => this.classes.set(await this.request<ClassSummary[]>("classes")));
@@ -110,6 +111,7 @@ export class LessonsComponent {
     });
   }
   async openRoll(id: string) {
+    this.notice.set("");
     await this.attempt(async () => this.roll.set(await this.request<Roll>(`lessons/${id}`)));
   }
   async closeRoll() {

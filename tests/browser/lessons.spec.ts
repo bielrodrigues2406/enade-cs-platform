@@ -38,7 +38,12 @@ test("a professor creates a class, pastes the roster, schedules a lesson and tak
   await page.getByRole("button", { name: "Marcar não lançados como presentes" }).click();
   await expect(page.getByText("1 de 2 presentes")).toBeVisible();
   await expect(page.getByRole("radio", { name: "Presente: Ana TEST ONLY" })).toHaveAttribute("aria-checked", "true");
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `largura ${width}`).toBe(true);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({ path: `test-results/lessons-roll-${width}.png` });
+  }
 
   await page.getByRole("button", { name: new RegExp(`← ${className}`) }).click();
   const download = page.waitForEvent("download");
