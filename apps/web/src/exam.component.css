@@ -246,3 +246,146 @@
   letter-spacing: 0.04em;
   color: var(--color-text-muted);
 }
+
+/* ==========================================================================
+   Movimento do treino (o restante está na seção "Movimento" de styles.css)
+   ========================================================================== */
+/* Treino: a questão entra pelo lado do passo; a folha marca o que foi salvo. */
+.practice-sheet {
+  overflow-x: clip;
+}
+.practice-step {
+  animation: step-in 440ms var(--ease-out) both;
+}
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--step-dir, 1) * 28px));
+  }
+}
+.practice-map ol button {
+  transition:
+    background-color 320ms var(--ease-out),
+    border-color 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out);
+}
+.practice-map ol button.is-answered span {
+  animation: tick-in var(--spring-snappy-duration) var(--spring-snappy) both;
+}
+@keyframes tick-in {
+  from { opacity: 0; transform: scale(0.3); }
+}
+
+/* Cronômetro nos últimos 15 minutos: um ponto que pulsa, sem piscar. */
+.practice-clock {
+  transition: color 400ms var(--ease-out);
+}
+.practice-clock.is-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.practice-clock.is-warning::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: clock-ring 2.2s var(--ease-out) infinite;
+}
+@keyframes clock-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 9px color-mix(in srgb, currentColor 0%, transparent); }
+}
+
+/* Resultado: o placar conta até o total e as barras por assunto crescem. */
+@property --count {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+.count-up {
+  --count: var(--count-to, 0);
+  counter-reset: score var(--count);
+  animation: count-up 1100ms cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
+}
+.count-up::after {
+  content: counter(score);
+}
+@keyframes count-up {
+  from { --count: 0; }
+}
+.practice-score {
+  animation: rise-in 520ms var(--ease-out) both;
+}
+.result-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  white-space: nowrap;
+}
+.result-bar {
+  flex: 1;
+  min-width: 3.5rem;
+  max-width: 9rem;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+.result-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(var(--value, 0));
+  animation: bar-grow 900ms var(--ease-out) 300ms both;
+}
+@keyframes bar-grow {
+  from { transform: scaleX(0); }
+}
+.practice-table tbody tr {
+  animation: rise-in 460ms var(--ease-out) both;
+}
+.practice-table tbody tr:nth-child(2) { animation-delay: 50ms; }
+.practice-table tbody tr:nth-child(3) { animation-delay: 100ms; }
+.practice-table tbody tr:nth-child(4) { animation-delay: 150ms; }
+.practice-table tbody tr:nth-child(5) { animation-delay: 200ms; }
+.practice-table tbody tr:nth-child(n + 6) { animation-delay: 250ms; }
+
+/* Diálogo de finalizar: entra como os demais. */
+dialog.practice-confirm {
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  transition:
+    opacity 200ms ease-out,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    overlay 320ms allow-discrete,
+    display 320ms allow-discrete;
+}
+dialog.practice-confirm[open] {
+  opacity: 1;
+  transform: none;
+}
+@starting-style {
+  dialog.practice-confirm[open] {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practice-step {
+    animation-name: practice-fade;
+  }
+  .practice-clock.is-warning::before {
+    animation: none;
+  }
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+@keyframes practice-fade {
+  from { opacity: 0.4; }
+}

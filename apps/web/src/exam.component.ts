@@ -50,6 +50,8 @@ export class ExamComponent {
   availability = signal<PracticeAvailability | null>(null);
   attempt = signal<PracticeView | null>(null);
   position = signal(1);
+  /** 1 ao avançar, -1 ao voltar: a próxima questão entra pelo lado certo. */
+  stepDirection = signal(1);
   loading = signal(false);
   saving = signal(false);
   error = signal("");
@@ -342,6 +344,7 @@ export class ExamComponent {
   }
   go(position: number) {
     if (this.protectedState() || position < 1 || position > (this.attempt()?.size ?? 0)) return;
+    this.stepDirection.set(position >= this.position() ? 1 : -1);
     this.position.set(position); this.discursiveOpen.set(null); this.syncDraft(); this.error.set("");
     this.locationChange.emit({ attemptId: this.attempt()!.id, position });
     this.focusContent();
