@@ -121,7 +121,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 012 | SIM-P1 / núcleo de SIM-1 — treino parcial, reservada antes do código | Codex |
 | 013 | PUB-A2 — assunto e nota; reserva observada na branch Claude `09a40f7`, ainda fora da main | Claude |
 | 014 | ROLE-1 — papéis, convites e perfil (nome, prontuário) | Claude |
-| 015 | próxima livre — reserve aqui antes do primeiro commit | |
+| 015 | IMP-1 — importação de provas com editor de caixas | Claude |
+| 016 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 

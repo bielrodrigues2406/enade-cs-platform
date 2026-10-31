@@ -23,6 +23,7 @@ import { SourcesController } from "./sources.js";
 import { ReviewController } from "./review.js";
 import { CatalogController } from "./catalog.js";
 import { RolesController } from "./roles.js";
+import { ExamImportsController } from "./exam-imports.js";
 import { PracticeController } from "./exam.js";
 import {
   QuestionImagesController,
@@ -224,6 +225,7 @@ class StudyController {
     ReviewController,
     CatalogController,
     RolesController,
+    ExamImportsController,
     PracticeController,
     QuestionImagesController,
   ],
@@ -304,9 +306,11 @@ export async function createApp() {
       req.headers.origin !== (process.env.APP_ORIGIN || "http://localhost:4200")
     )
       return res.status(403).json({ message: "Origem não autorizada." });
+    // Única escrita não-JSON: o envio dos PDFs de uma importação (IMP-1).
+    const upload = req.method === "POST" && req.path === "/api/imports" && !!req.is("multipart/form-data");
     if (
       !["GET", "HEAD", "OPTIONS"].includes(req.method) &&
-      !req.is("application/json")
+      !req.is("application/json") && !upload
     ) {
       return res
         .status(415)

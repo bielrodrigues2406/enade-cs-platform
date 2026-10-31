@@ -16,10 +16,14 @@ ENV NODE_ENV=production \
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
+# Importação de provas (IMP-1): leitura e recorte de PDF no servidor.
+RUN apt-get update && apt-get install -y --no-install-recommends poppler-utils imagemagick \
+  && rm -rf /var/lib/apt/lists/*
 COPY --from=build /app/dist ./dist
 COPY migrations ./migrations
 COPY data ./data
-COPY scripts/migrate.mjs ./scripts/migrate.mjs
+COPY scripts/migrate.mjs scripts/import-exam.mjs ./scripts/
+COPY scripts/lib ./scripts/lib
 RUN mkdir -p /data/sources /data/question-assets && chown -R node:node /data
 USER node
 EXPOSE 3000
