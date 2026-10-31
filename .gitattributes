@@ -1,0 +1,6 @@
+# Conferências guardam o SHA-256 de arquivos de data/ (manifestos de recortes,
+# relatórios). O Git não pode converter quebras de linha (CRLF no Windows), ou
+# o hash muda e a carga recusa a conferência.
+data/** -text
+*.webp binary
+*.pdf binary
