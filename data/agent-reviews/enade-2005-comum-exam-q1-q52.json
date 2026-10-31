@@ -1,0 +1,315 @@
+{
+  "document": "enade-2005-comum-exam",
+  "examSha256": "ba95b66e95b6a4071a970f794e0b0c71aeebf18740b95b6ca02dfcb72d0be76c",
+  "cropsManifestSha256": "97be895b6907cea8e07b72a5a2b8f98621578dacd91484b72e6fa3369a19b747",
+  "extractor": "claude",
+  "reviewer": "claude-autoconferencia",
+  "reviewedAt": "2026-10-31T16:51:14Z",
+  "items": [
+    {
+      "key": "Q1",
+      "verdict": "APPROVED",
+      "fragments": [
+        "356dad0e018dd6c9779e2e08903db29e11bab91213809655867d4ccee5305237"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Reforma política, transparência e ética",
+      "notes": "Questão 1 completa: texto e A–E. Letra D. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede o aspecto principal que uma reforma da legislação eleitoral reforçaria, a partir das medidas citadas no texto: financiamento público, fidelidade partidária, declaração pública de bens, prestação de contas dos gastos e fortalecimento dos órgãos de fiscalização e controle.\n\nA alternativa D está correta. Exigir declaração de bens, prestação de contas e fiscalização mais forte são mecanismos de transparência que dificultam a corrupção, e isso é um reforço da ética na vida pública.\n\nAs demais falham. Em A, o texto não trata de selecionar políticos experientes: as regras citadas controlam condutas, não qualificam candidatos. Em B, o controle sobre gastos de campanha não visa incentivar gastos de empresas. Em C, nada se diz sobre o preparo intelectual dos candidatos, e as medidas não inviabilizam candidaturas por esse motivo. Em E, as propostas tratam de financiamento, partidos e prestação de contas, e não de ampliar o número de eleitores com direito ao voto.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q2",
+      "verdict": "APPROVED",
+      "fragments": [
+        "58d7ae915282a197762e8587185114bf7fcb1f8865602940efb585a1b75ab300"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Inclusão digital e exclusão social",
+      "notes": "Questão 2 completa: texto, charge legível com crédito e A–E. Letra E. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede a relação entre um texto de apoio e uma charge. O texto defende que o governo promova a inclusão digital porque a falta de acesso às tecnologias digitais exclui socialmente o cidadão, em especial o jovem. A charge mostra um mendigo sentado na calçada, com o chapéu estendido, pedindo um mouse sob o título Inclusão Digital.\n\nA alternativa E está correta. Tanto o texto quanto a charge ligam a dificuldade de acesso ao mundo digital à exclusão social: quem não tem o equipamento fica à margem, como o personagem que, em vez de esmola comum, pede um mouse.\n\nAs demais falham. A afirma que o conhecimento digital está democratizado, o que a charge e o texto contradizem. B atribui à preocupação social o objetivo de formar quadros para a informática, algo que não aparece. C diz que o apelo atrai jovens para a computação, mas o foco é a exclusão. D declara o acesso perdido para as comunidades carentes, conclusão pessimista que o texto, que defende a ação do governo, não sustenta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q3",
+      "verdict": "APPROVED",
+      "fragments": [
+        "fb0c3508ec8ad790c3e2e1f512ee7122585203067fe14938b3cb19b9dbc92545"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Terrorismo, exclusão social e pobreza",
+      "notes": "Questão 3 completa: notícia, fonte e A–E. Letra C. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a leitura do discurso do governante espanhol e pede a principal razão que ele aponta para as iniciativas terroristas. A frase decisiva do texto é a que diz que não se deve continuar ignorando a pobreza extrema, a exclusão social ou os Estados falidos, que constituem, segundo ele, um terreno fértil para o terrorismo.\n\nA alternativa C está correta, pois associa a desigualdade social existente em alguns países ao alimento do terrorismo, o que reformula essa passagem.\n\nAs demais falham. Em A, o texto diz que no terror não há política, ideologia nem resistência, só barbárie; o desejo de vingança não é apontado como causa. Em B, a democracia é apresentada como o único caminho para derrotar o terrorismo, e não como algo que o favoreça. Em D, o governante propõe uma aliança de civilizações e recusa vincular o fenômeno a uma civilização, cultura ou religião, portanto não fala em choque de civilizações. Em E, o texto não cita intolerância, medo ou insegurança como causa.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q4",
+      "verdict": "APPROVED",
+      "fragments": [
+        "ab6442b96dca0175f69ff26c4b7bd5dc5c1349e36aeba89d28e88b301584b15e"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Charges sobre saúde e segurança pública",
+      "notes": "Questão 4 completa: as duas tiras de Laerte com balões legíveis, fonte e A–E. Letra A. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede que se identifiquem, nas duas charges de Laerte, os problemas sociais criticados. É preciso interpretar cada tirinha pelo humor.\n\nNa primeira, o paciente recebe uma consulta marcada para daqui a três meses e comenta que o problema que tinha já passou. A crítica recai sobre a demora no atendimento, ou seja, a crise na saúde. Na segunda, o síndico é avisado por telefone de que chegou um pessoal para dedetizar o prédio. Quem chega é um grupo armado, e o morador diz que pensou que era outra coisa. O humor depende do medo de assalto e de violência, isto é, da insegurança pública.\n\nA alternativa A está correta, pois reúne saúde e segurança pública.\n\nAs demais falham porque trazem pares que nenhuma das charges aborda. Assistência social e habitação (B), educação básica e comunicação (C) e previdência social e desemprego (D) não aparecem nas cenas. Em E, a dedetização apenas serve de pretexto para a piada, e não há referência a epidemias urbanas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q5",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8d6ced16669a94d271d00407cd4aa573299787bd5d2bac147aca8286ce9b14f5"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Educação formal e educação não escolar",
+      "notes": "Questão 5 completa: carta do cacique, fonte e A–E. Letra E. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão parte da carta de um cacique indígena que recusa enviar jovens às escolas dos brancos. Pede a relação entre os dois principais temas do texto e a forma de educação que o cacique privilegia.\n\nA alternativa E está correta. Os temas são educação e cultura: o cacique afirma que nações diferentes têm concepções diferentes de educação e que os jovens formados nas escolas do Norte voltaram sem saber caçar, construir cabanas ou suportar a vida da floresta. A educação que ele defende é transmitida pela convivência e pelo exemplo, sem escola ou currículo, portanto assistemática.\n\nAs demais falham. Em B, educação formal é justamente o modelo que ele recusa. Em C, não se discute educação superior, e ideologia e filosofia não são os temas centrais. Em D, escolaridade e educação técnica remetem ao modelo escolar que ele relativiza. Em A, sabedoria e política não são os temas principais, e a educação difusa não nomeia com a mesma precisão o modelo defendido.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q6",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b5ae44391cf14ca03fa1ad464b377e35f9d359e7a54bde338c31ecd809d35c12"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Referendo popular e esclarecimento da população",
+      "notes": "Questão 6 completa: charge da cédula legível, texto e A–E. Letra C. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão trata do referendo como prática democrática e pede o que a crítica contida na charge indica. A charge mostra uma cédula sobre a Constituição Europeia com muitas opções confusas, como sim, não, sim mas não, não mas sim, abstenção ativa e passiva, voto em branco e outros, além da possibilidade de marcar duas casas.\n\nA alternativa C está correta. A crítica é à falta de clareza: se a consulta traz opções ambíguas e contraditórias, o eleitor não entende o que está decidindo. Por isso a charge sugere que o referendo seja precedido de amplo debate para esclarecer a população.\n\nAs demais falham. A trata de plebiscito já ocorrido, o que a charge não discute. B afirma que uma vasta gama de opções garante o caráter democrático, o oposto do que a charge ironiza. D generaliza que o referendo inviabiliza os rumos políticos de uma nação, quando o alvo da crítica é o modelo da cédula. E diz que o referendo é estratégia de governos para manter a soberania, ideia que a charge não apresenta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q7",
+      "verdict": "APPROVED",
+      "fragments": [
+        "4e129cd365d703f44afa8a38553dcea4e9438039fb0c11e440bbab3660a1342d"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Cidade retratada na pintura e versos sobre Ouro Preto",
+      "notes": "Questão 7 completa: pintura de Guignard com crédito e os cinco poemas A–E com fontes. Letra B. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "A pintura não traz título no enunciado; reconhecer Ouro Preto depende do casario colonial e da igreja de duas torres.",
+      "explanation": "A questão pede que se relacione a cidade retratada em uma pintura aos versos que a tematizam. A pintura de Guignard mostra uma cidade em ladeiras, com casario baixo de estilo colonial, uma rua que desce em direção a uma igreja de duas torres e morros ao fundo.\n\nA alternativa B está correta. Os versos de Murilo Mendes falam de Ouro Preto e da igreja de São Francisco de Assis, o que combina com o cenário de uma cidade histórica, de ruas inclinadas e igreja no centro da paisagem.\n\nAs demais falham, pois cada uma tematiza outro lugar. Em A, os versos falam do Recife entre o Beberibe e o oceano, com areia e lagadiço, cenário litorâneo. Em C, trata-se de Belém do Pará, descrita como porto moderno integrado na equatorial. Em D, o poema canta a Bahia, com a entrada do porto, o Farol da Barra e o Cristo Redentor. Em E, o poema fala de Brasília e do cimento, cidade moderna que nada tem a ver com o casario colonial da pintura.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q41",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3a140bef4bc5c15c2f7afd291631c158808b5a9192260a939253f0c35e63b447"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Interrupções e exceções em processadores",
+      "notes": "Questão 41 completa: enunciado e A–E. Letra C. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o funcionamento das interrupções em processadores: o fluxo normal de instruções é desviado para tratar a causa da interrupção.\n\nA alternativa C está correta. Além das interrupções externas, o processador pode se auto-interromper por exceções geradas pela própria execução, como erro aritmético, instrução ilegal ou falha de página em memória virtual.\n\nAs demais falham. Em A, controladores de entrada e saída geram interrupções de forma assíncrona, em instantes que não dependem do que o processador executa, e não de forma síncrona. Em B, o hardware salva apenas o mínimo necessário, como o contador de programa e o estado, e a rotina de atendimento salva e restaura o restante; não é o processador que salva todo o contexto. Em D, não é obrigatório executar as rotinas com interrupções inibidas, pois há sistemas que permitem aninhamento, por exemplo por prioridades. Em E, a lógica está invertida: a interrupção é vantajosa para dispositivos lentos e esporádicos, como teclado e mouse, porque evita que o processador fique esperando em laço de teste.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q42",
+      "verdict": "APPROVED",
+      "fragments": [
+        "0e45614dadfc50c6075efbef903a4343ee608f91589c8791e31f413eb2b804d9"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Multiprocessadores SMP versus clusters",
+      "notes": "Questão 42 completa: enunciado e A–E. Letra E. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão compara dois modos de construir sistemas com vários processadores: SMP, com processadores idênticos e um único espaço de endereçamento ligados por um barramento, e cluster, com máquinas monoprocessadas conectadas por rede.\n\nA alternativa E está correta. Em um cluster, a interconexão pode usar equipamentos comuns de rede local, e a escalabilidade é barata: basta acrescentar máquinas. Já um SMP exige conexões extras no barramento e gabinetes especiais, o que encarece o crescimento.\n\nAs demais falham. Em A, compara-se taxa de rede em gigabits com frequência de memória em megahertz, grandezas diferentes; a comunicação por memória compartilhada em um SMP tende a ser mais rápida que a troca de mensagens pela rede. Em B, processos em um SMP se comunicam por memória compartilhada, com eficiência, e compartilhar dispositivos de entrada e saída não impede isso. Em C, no cluster cada máquina é independente, e trocar uma não exige desabilitar toda a rede. Em D, não é verdade que cada processador de um cluster execute um único processo, pois cada máquina tem seu sistema operacional e gerencia vários processos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q43",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f9edca4006ba550ed7b3570155cf6a2deb9b57a09a182ec459dfac6496dc5c70"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Pesquisa binária: número máximo de comparações",
+      "notes": "Questão 43 completa: enunciado e A–E. Letra B; ⌊log2 n⌋+1 = 6, 10 e 9 conferido. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a complexidade da pesquisa binária. A cada comparação o intervalo restante cai pela metade, então o número máximo de comparações para n elementos é o maior inteiro k tal que 2 elevado a k seja menor ou igual a n, mais 1, isto é, o piso de log2 n mais 1.\n\nPara 50 elementos: 32 é menor que 50, que é menor que 64, então o piso de log2 50 é 5 e o máximo é 6 comparações.\n\nPara 1.000 elementos: 512 é menor que 1.000, que é menor que 1.024, então o piso de log2 1.000 é 9 e o máximo é 10 comparações.\n\nPara 300 elementos: 256 é menor que 300, que é menor que 512, então o piso é 8 e o máximo é 9 comparações.\n\nA alternativa B (6, 10 e 9) está correta. As demais trazem valores de ordem linear ou proporcional ao tamanho do vetor, como 5, 100 e 30, ou 25, 500 e 150, que correspondem a percorrer parte do vetor e não ao comportamento logarítmico da pesquisa binária. A alternativa C, com 8, 31 e 18, também não segue a relação logarítmica.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q44",
+      "verdict": "APPROVED",
+      "fragments": [
+        "34f5cf94f97601a7f47ae4a97fd18de9a9b430af45dabbe5c81799e1bab4bd97"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Grafos: conectividade e grafo completo",
+      "notes": "Questão 44 completa: texto, tabela das quatro empresas, itens I–IV e A–E em duas colunas. Letra C; 45 = C(10,2) e árvore com 14 vértices e 13 arestas conferidos. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão modela cada rede como um grafo: filiais são vértices e ramos de fibra são arestas, sem arestas repetidas e com a rede conectada. Um grafo completo com n vértices tem n(n-1)/2 arestas, e um grafo conexo com n vértices e n-1 arestas é uma árvore.\n\nItem I: E1 tem 9 filiais e 18 ramos, menos que as 36 arestas do grafo completo. Perder um ramo não torna certa uma nova perda de comunicação direta, pois nem todos já se comunicavam diretamente. Item falso.\n\nItem II: E2 tem 10 filiais e 45 ramos, exatamente o grafo completo. Qualquer ramo novo repetiria um par já ligado, violando a informação de um único ramo por par. Item certo.\n\nItem III: E3 tem 14 filiais e 13 ramos e é conexa, logo é uma árvore. Remover qualquer ramo a desconecta. Item certo.\n\nItem IV: E4 tem 8 filiais e 24 ramos, menos que os 28 do grafo completo, então nem todas se comunicam diretamente. Item falso.\n\nA alternativa C (II e III) está correta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q45",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f3e4ef5591b37f93d67fa2ab6774f2bf57b8328fd101dd126ef88cf021604a84"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Requisitos não funcionais",
+      "notes": "Questão 45 completa: enunciado e A–E. Letra D. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a classificação de requisitos em funcionais, não funcionais e de domínio, e pede a definição de requisitos não funcionais.\n\nRequisitos funcionais descrevem o que o sistema deve fazer, como reage a entradas e como se comporta em situações particulares. Requisitos de domínio derivam do domínio da aplicação e refletem suas características e restrições. Requisitos não funcionais são restrições e qualidades do sistema, como desempenho, segurança ou confiabilidade, que não estão diretamente ligadas às funções específicas oferecidas aos usuários.\n\nA alternativa D está correta, pois define os não funcionais justamente como requisitos não diretamente relacionados às funções específicas do sistema.\n\nAs demais falham. A descreve ferramentas de apoio ao desenvolvimento, e não requisitos. B é a definição de requisitos funcionais. C é a definição de requisitos de domínio. E descreve especificação de testes, com entradas, resultados esperados e condições, o que é um caso de teste e não uma categoria de requisito.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q46",
+      "verdict": "APPROVED",
+      "fragments": [
+        "02e28dee8bfe0462f5d2d923176c7225b5b060ec6f0c35b11aa23af7d8bc0881"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Fases do Processo Unificado (RUP)",
+      "notes": "Questão 46 completa: enunciado e A–E. Letra E. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra as quatro fases do Processo Unificado (RUP) e a ordem em que são executadas. As fases são concepção, elaboração, construção e transição.\n\nNa concepção, define-se o escopo e a viabilidade do projeto. Na elaboração, estabelece-se a arquitetura e refina-se o entendimento dos requisitos. Na construção, o sistema é desenvolvido. Na transição, o produto é entregue aos usuários.\n\nA alternativa E está correta, pois apresenta exatamente essa sequência.\n\nAs demais falham. A inclui teste como quarta fase e omite a transição; no RUP, teste é uma atividade (disciplina) que ocorre ao longo das fases, e não uma fase própria. B começa pela elaboração e coloca a transição antes da concepção, ordem impossível. C também começa pela elaboração, põe concepção depois dela e usa teste como fase. D troca a ordem, colocando a transição antes da construção, quando a entrega só acontece depois que o produto é construído.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q47",
+      "verdict": "APPROVED",
+      "fragments": [
+        "11347a2d7705fe528bc08579d3681f12fa664a14db608484d43c2333cb62ad23"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Pirataria de software",
+      "notes": "Questão 47 completa: texto, itens I–IV e A–E; sem resto de outra questão no recorte atual. Letra B. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "Os itens refletem o contexto de 2005 (estudo de 1994 a 2002).",
+      "explanation": "A questão trata de pirataria de software e pede que se julguem quatro afirmações, a partir de um estudo sobre sua redução entre 1994 e 2002.\n\nItem I: certo. A redução da pirataria traz benefícios econômicos, como mais empregos, mais arrecadação de impostos e maior faturamento do setor.\n\nItem II: falso. A cópia de segurança, ou backup, de software original ou autorizado, feita para fins de segurança, não é considerada pirataria. Pirataria é a reprodução ou uso sem autorização.\n\nItem III: certo. Iniciativas antipirataria devem combinar conscientização, educação e atuação direta sobre os infratores.\n\nItem IV: falso. A afirmação diz que não há legislação específica no Brasil sobre o tema, mas o gabarito oficial considera o item errado, ou seja, existe legislação que regula a questão.\n\nOs itens certos são I e III, o que corresponde à alternativa B. As demais combinam o item II ou o item IV, que são falsos, com algum dos corretos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q48",
+      "verdict": "APPROVED",
+      "fragments": [
+        "cb02ad3c3364c23bbb25a7766f117654361769f3fa1651d12af95df86f906e80"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Ordem parcial e diagrama de Hasse",
+      "notes": "Questão 48 completa: diagrama de Hasse em baixa resolução, mas nomes e ligações distinguíveis (e repetidos nas alternativas), comando e A–E. Letra A. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o diagrama de Hasse, que representa uma relação de ordem parcial: um elemento mais abaixo precede (é menor que) os que estão acima dele, se houver caminho ascendente entre eles. Uma lista que preserva a ordem do diagrama é uma extensão linear: se x está abaixo de y, x deve aparecer antes de y.\n\nNo diagrama, Marcos está na base e é ligado a Emerson e a José Roberto. Estes dois estão ligados a Ronaldo, que está ligado a Adriano, no topo. Logo, Marcos precede Emerson e José Roberto, e estes precedem Ronaldo, que precede Adriano. Emerson e José Roberto não são comparáveis entre si, então podem aparecer em qualquer ordem relativa.\n\nA alternativa A (Marcos, José Roberto, Emerson, Ronaldo, Adriano) respeita todas essas relações e está correta.\n\nAs demais violam alguma relação. Em B, Emerson vem antes de Marcos. Em C, a ordem está invertida, com Adriano primeiro. Em D, Ronaldo aparece antes de Marcos. Em E, Adriano vem antes de Emerson, José Roberto e Ronaldo.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q49",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8c662e2f65c807127f4be34d55c6db8a1489e16cc6db6493d564cb2812ad28cd"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Análise combinatória: arranjos e combinações",
+      "notes": "Questão 49 completa: texto, notação C e A e A–E. Letra C. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra análise combinatória. É preciso formar dois grupos disjuntos a partir de 14 funcionários, todos aptos a qualquer função: um de três membros, com funções distintas (presidente, relator e auxiliar), em que a ordem importa, e outro de quatro membros, em que a ordem não importa.\n\nEscolhendo primeiro o grupo de quatro, há C(14,4) maneiras, pois a ordem não conta. Restam 10 funcionários, dos quais se escolhem três em ordem para as funções de presidente, relator e auxiliar, o que dá A(10,3). Pelo princípio multiplicativo, o total é C(14,4) x A(10,3).\n\nA alternativa C está correta.\n\nAs demais falham. A usa arranjo para o grupo de quatro, que não tem ordem, e A(14,3) para o outro grupo sem descontar os já escolhidos. B também usa arranjo para o grupo de quatro. D usa combinação para o grupo de três, que exige ordem, e arranjo para o de quatro. E usa combinação para o grupo de três, ignorando as funções distintas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q50",
+      "verdict": "APPROVED",
+      "fragments": [
+        "fde812ca26d5d15323164e09e02035171c9a02d89df05f10317c3e8e400c2e6d"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Paradigmas de linguagens de programação",
+      "notes": "Questão 50 completa: itens I–V e A–E em duas colunas. Letra D. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "Os itens I e II são formulações genéricas e discutíveis; o gabarito oficial considera certos apenas III e V.",
+      "explanation": "A questão cobra características de paradigmas de linguagens de programação e pede os itens certos entre cinco afirmações.\n\nItem III: certo, pois linguagens funcionais, baseadas na composição de funções, favorecem a decomposição funcional e a definição de requisitos em termos de funções.\n\nItem V: certo, pois a orientação a objetos favorece reutilização, encapsulamento e modularidade, o que reduz custos de desenvolvimento e manutenção.\n\nItem IV: falso, pois linguagens estruturadas organizam o código em procedimentos e estruturas de controle e mantêm dados e funções em separado; o forte acoplamento entre dados e funções é característica da orientação a objetos.\n\nOs itens I e II, segundo o gabarito oficial, não são considerados certos: atribuem a um paradigma vantagens específicas, a legibilidade e a documentação às procedurais e o apoio à decisão às declarativas, que não são características definidoras desses paradigmas.\n\nA alternativa D (III e V) está correta. As demais incluem ao menos um dos itens falsos: I e II em A, I e IV em B, II em C, IV em E.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q51",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a4421de8a13c52219accc3ef12c455e29dd936dfd665fc6537832f914a8d2532"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Torre de Hanói: número mínimo de movimentos",
+      "notes": "Questão 51 completa: figura da torre, texto com as regras e A–E. Letra C; 2^5 − 1 = 31 conferido. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a solução recursiva da Torre de Hanói e pede o número mínimo de movimentos para transportar 5 discos de um pino a outro, respeitando as regras do enunciado.\n\nO raciocínio é por recorrência. Para mover n discos, é preciso mover os n-1 menores para o pino auxiliar, mover o maior para o destino e mover de novo os n-1 menores sobre ele. Assim, T(n) = 2T(n-1) + 1, com T(1) = 1.\n\nCalculando: T(1) = 1, T(2) = 3, T(3) = 7, T(4) = 15 e T(5) = 31. De forma geral, T(n) = 2 elevado a n, menos 1; para n = 5, 32 - 1 = 31.\n\nA alternativa C (31) está correta.\n\nAs demais não resultam da recorrência. 25 e 28 ficam abaixo de 31, e a recorrência mostra que não há como concluir a tarefa com tão poucos movimentos. 34 e 38 ficam acima de 31, o que corresponderia a uma solução com movimentos desperdiçados, contrariando o enunciado, que pede o mínimo.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q52",
+      "verdict": "APPROVED",
+      "fragments": [
+        "40b6b7eaa037f059fe859ccae1882807b87e42633cb7e1006d765f4e4cab38a6"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Alocação de espaço em disco em sistemas de arquivos",
+      "notes": "Questão 52 completa: texto, itens I–III e A–E. Letra A. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra os métodos de alocação de espaço de disco em sistemas de arquivos: contígua, indexada e encadeada.\n\nItem I: falso. Na alocação contígua, cada arquivo ocupa blocos consecutivos. Com inserções e remoções frequentes, o disco se fragmenta em buracos que dificultam encontrar espaço e fazem arquivos não crescerem. Por isso o método não é adequado a esse cenário.\n\nItem II: certo. Na alocação indexada, o tamanho máximo do arquivo é limitado pela quantidade de entradas que cabem nos blocos de índice, que depende do tamanho desses blocos e do número de bits de cada índice.\n\nItem III: falso. Na alocação encadeada, cada bloco aponta para o seguinte, e não há limite de tamanho ligado ao tamanho do bloco de dados; o limite é o espaço do disco.\n\nSó o item II está certo, o que corresponde à alternativa A (apenas um item está certo). As alternativas B, C, D e E exigem que pelo menos dois itens sejam certos, o que não ocorre.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ],
+  "explainer": "claude-explain-11"
+}
