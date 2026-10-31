@@ -80,6 +80,22 @@ Se o log mostrar `EACCES` em `/data`, o disco foi montado sem permissão para o 
 
 `BOOTSTRAP_CONTENT=0` desliga a carga automática (por exemplo, para subir mais rápido quando o Inep estiver fora do ar).
 
+## 5.2 Força bruta e negação de serviço
+
+O que a aplicação faz sozinha (uma instância, contadores em memória):
+
+| Ameaça | Proteção | Onde |
+| --- | --- | --- |
+| Adivinhar senha | 50 tentativas por IP e 10 por e-mail a cada 15 min, antes do scrypt; o scrypt (~128 MiB) roda no máximo 2 por vez | `AuthThrottle`, `password.ts` |
+| Criar sessões de visitante em massa | 600 por IP a cada 15 min | `GuestThrottle` |
+| Um cliente disparando requisições | 1200 por minuto por IP na API em produção (`API_RATE_LIMIT` muda; fora de produção fica desligado) | `request-limit.ts` |
+| Conexões lentas de propósito | cabeçalhos em 20 s, requisição inteira em 2 min | `serve.ts` |
+| Corpos grandes | JSON até 16 kB (64 kB na curadoria); PDFs só para administradores, com tamanho máximo | `main.ts`, `exam-imports.ts` |
+
+Cada bloqueio entra uma vez por janela no registro de atividades (categoria Segurança), com o IP; a aba Atividades da administração mostra o resumo das últimas 24 horas.
+
+O que ela **não** resolve: um ataque distribuído (muitos IPs) esgota a instância antes de qualquer contador. Para isso a proteção precisa estar na borda: o Render já filtra parte do tráfego de rede, e um proxy como o Cloudflare (plano gratuito, modo "Under Attack" quando necessário) na frente do domínio próprio cobre o resto. Os limites dependem de `TRUST_PROXY` correto: com o valor errado, todos os acessos parecem vir do mesmo IP (bloqueio geral) ou o IP pode ser forjado.
+
 ## 6. Reverter
 
 Migrations só avançam. Para reverter código, publique a imagem anterior; se uma migration nova tiver sido aplicada, ela continua válida para a versão anterior somente se foi aditiva (regra de revisão das migrations). Para dano em dados, restaure o backup mais recente em um banco novo e aponte `DATABASE_URL` para ele.
