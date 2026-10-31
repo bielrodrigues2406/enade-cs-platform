@@ -2,6 +2,10 @@
 
 Base de desenvolvimento de uma plataforma de estudo de Ciência da Computação. Interface em português, Angular 22.2.3, API NestJS 12.2.0 e PostgreSQL 17.6, com versões diretas e lockfile fixados.
 
+Na web, HTML fica nos arquivos `.component.html`, lógica/estado em `.ts` e estilos em `.css`. O shell usa `app.component.html` com bootstrap em `main.ts`. As [convenções de engenharia](docs/ENGINEERING-AND-DELIVERY.md#11-organização-da-interface) valem para as duas trilhas de desenvolvimento.
+
+O projeto será disponibilizado à fábrica de software. Código compreensível para mantenedores humanos é requisito obrigatório de Claude e Codex em cada entrega. Depois da estabilização dos fluxos prioritários, a [revisão integral CQ-2](docs/ENGINEERING-AND-DELIVERY.md#13-manutenção-humana-e-passagem-à-fábrica-de-software), com simplificação e reescrita onde necessárias, deve ser concluída antes da passagem institucional; essa etapa ainda não foi executada.
+
 ## O que funciona
 
 - Página inicial em `/` com a situação do estudante: semanas até a prova, questões para retomar e para resolver, andamento salvo, formato da prova de 2026 e origem das questões com contagens reais; o banco fica em `/questoes`.
@@ -133,6 +137,7 @@ Para encerrar o banco sem apagar dados: `docker compose stop db`. API e web pode
 - [Questões por imagem e importação de prova + gabarito — proposta e medições](docs/QUESTION-IMAGES-AND-IMPORT.md)
 - [Análise por perspectivas simuladas de alunos/professores e pendências](docs/reviews/2026-10-28-product-perspectives.md)
 - [Auditoria atual com agentes: simulados, áreas e prontidão das telas](docs/reviews/2026-10-29-study-readiness.md)
+- [Organização do código, revisão da entrega do Claude e pendências atuais](docs/reviews/2026-10-30-maintenance-and-pending.md)
 - [Continuidade do Claude: recuperação de texto e qualidade das questões](docs/reviews/derived-text-quality.md)
 - [Colaboração entre agentes](docs/COLLABORATION.md), [quadro de trabalho](docs/WORKBOARD.md) e [plano de design e motion](docs/DESIGN-QUALITY.md)
 

@@ -8,6 +8,8 @@ Construir uma plataforma de estudo de Ciência da Computação que ajude o estud
 
 O pedido é avançar o máximo possível com alta qualidade. O limite de cada entrega é sua capacidade de ser validada; não reduzir qualidade do conteúdo, integridade dos dados ou usabilidade para aumentar a contagem de telas.
 
+Requisito de Gabriel em 30/10/2026: o projeto será disponibilizado à fábrica de software e deve ser compreensível e mantido por humanos. Legibilidade, simplicidade e divisão clara de responsabilidades são critérios das entregas atuais. Após estabilizar os fluxos prioritários, a revisão integral CQ-2 é obrigatória antes da passagem institucional: revisar toda a base, corrigir redundâncias e funções/retornos confusos, refatorar ou reescrever o necessário e documentar a manutenção, conforme [ENGINEERING-AND-DELIVERY §1.3](ENGINEERING-AND-DELIVERY.md#13-manutenção-humana-e-passagem-à-fábrica-de-software).
+
 ## 2. Premissas verificadas e limites
 
 - A referência oficial consultada informa aplicação de bacharelados/CST em 29/11/2026, duração de quatro horas, 15 questões objetivas de Formação Geral e 30 objetivas mais uma discursiva do componente específico.

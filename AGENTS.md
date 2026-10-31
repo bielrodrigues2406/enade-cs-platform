@@ -6,6 +6,12 @@ Siga docs/COLLABORATION.md e mantenha docs/WORKBOARD.md atualizado: pegue apenas
 
 Antes de trabalho de interface, leia .claude/skills/README.md e as skills de design listadas ali.
 
+## Manutenção humana — requisito obrigatório
+
+Pedido explícito de Gabriel em 30/10/2026: o projeto será disponibilizado à fábrica de software e deve ser compreensível e modificável por mantenedores humanos. **Claude Code e Codex devem aplicar esse requisito em cada entrega**, além de fazer a revisão integral de código prevista em CQ-2 antes da passagem institucional. Funcionar e passar nos testes não bastam para considerar o código pronto para essa passagem.
+
+Organize módulos por responsabilidade, separe apresentação, regras e persistência, use nomes claros, funções pequenas e retornos tipados e previsíveis. Elimine redundâncias, funções que acumulam tarefas e fluxos difíceis de acompanhar. Reescreva trechos quando isso os tornar mais simples e legíveis, preservando o comportamento validado. Não adie problemas novos para a revisão final. Os critérios e o procedimento estão em [ENGINEERING-AND-DELIVERY §1.3](docs/ENGINEERING-AND-DELIVERY.md#13-manutenção-humana-e-passagem-à-fábrica-de-software).
+
 ## Antes de trabalhar
 
 1. Leia README e os documentos relevantes em docs/. Confira o estado atual do código; o planejamento não comprova implementação.
@@ -19,6 +25,7 @@ Antes de trabalho de interface, leia .claude/skills/README.md e as skills de des
 - Entregue fluxos completos com contratos, estados e persistência coerentes. Identifique claramente fixtures, demonstrações e integrações reais.
 - Preserve regras de domínio, origem e revisão editorial do conteúdo. Não invente questões oficiais, citações ou resultados de aprendizagem.
 - Prefira soluções claras, módulos por domínio e dependências justificadas. Não crie frameworks internos, repositórios genéricos ou camadas vazias por antecipação.
+- Separe apresentação e lógica: templates Angular em arquivos `.html` referenciados por `templateUrl`, estilos em `.css` e comportamento/estado em `.ts`. Não acrescente blocos de HTML ou CSS em strings TypeScript. Classes representam estados visuais; bindings de estilo ficam restritos a valores dinâmicos dos dados, com as regras no CSS. Veja ENGINEERING-AND-DELIVERY §1.1.
 - Reutilize componentes e tokens. Adapte a composição de cada tela à tarefa; não replique a mesma grade de cards em todo o produto.
 - Registre mudanças arquiteturais relevantes em docs/ARCHITECTURE.md ou ADR dedicado. Não altere regras de produto silenciosamente.
 - Valide entradas nas fronteiras, autorização no servidor e integridade no banco. Conteúdo de PDF ou IA é não confiável.

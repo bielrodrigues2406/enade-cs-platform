@@ -10,6 +10,39 @@ Revisar a solução por funcionalidade, correção, complexidade, segurança, op
 
 O projeto usa princípios de TigerStyle — invariantes, limites, estados e falhas explícitas — adaptados a TypeScript e aplicações web. Não importar mecanicamente regras de alocação, quotas de assertions, zero dependências ou encerramento de processo para entradas inválidas.
 
+### 1.1 Organização da interface
+
+Pedido de Gabriel em 30/10/2026, válido para Claude e Codex:
+
+- HTML em arquivos `.html` ao lado do componente, referenciados por `templateUrl`; TypeScript contém tipos, estado, eventos e coordenação. O Angular aceita templates inline, mas a convenção deste projeto é usar arquivos separados.
+- CSS em arquivos `.css`. Tokens e regras compartilhadas permanecem no stylesheet global; regras exclusivas de um componente podem usar `styleUrl`. Não criar arquivos CSS vazios nem mover regras globais para estilos encapsulados sem conferir seus consumidores.
+- Não usar strings de HTML/CSS em TypeScript, atributos `style` com regras estáticas ou manipulação de estilo para compor telas. Usar classes para estados e CSS para layout, cores, espaçamento e animação. Bindings de propriedades CSS podem fornecer valores dinâmicos necessários (dimensão original de imagem, índice ou proporção); cálculos de apresentação e regras ficam no CSS.
+- Nomes devem explicar a responsabilidade; funções pequenas quando a divisão ajudar a leitura. Extrair componentes e contratos quando houver responsabilidade própria ou reutilização real, sem criar camadas por antecipação.
+- Refatorações de organização preservam contratos e comportamento. Não misturar extração de templates com redesenho, mudança de regras ou troca do roteamento. Validar build e fluxos existentes; criar teste novo somente para risco ou comportamento novo.
+
+### 1.2 Revisão proporcional de conteúdo
+
+Não repetir integralmente a conferência já registrada por agentes independentes para os mesmos arquivos e hashes. Verificar automaticamente integridade, vínculos, cobertura, anulações e elegibilidade; concentrar a inspeção manual nos recortes alterados, divergências, ressalvas e amostras dos demais lotes. Se houver erro sistemático, ampliar a revisão do grupo afetado. Amostragem não cria aprovação para itens ainda sem conferência independente, nem transforma registro de aprovação em comprovação de publicação em outro ambiente.
+
+### 1.3 Manutenção humana e passagem à fábrica de software
+
+**Requisito obrigatório de Gabriel em 30/10/2026, para Claude Code e Codex.** O código será disponibilizado à fábrica de software. Um mantenedor humano novo deve conseguir localizar uma regra, entender seu fluxo, alterá-la e verificar o resultado usando o repositório, sem depender de conversas com os agentes. Esse critério vale durante o desenvolvimento e na revisão integral final (CQ-2).
+
+- **Arquitetura e responsabilidades:** módulos por domínio; componentes cuidam da interação, regras de negócio têm lugar definido e acesso a dados tem fronteiras claras. Shell e bootstrap coordenam telas, sem continuar acumulando regras de funcionalidades. Criar separações úteis para o fluxo atual, com dependências explícitas; não acrescentar camadas ou frameworks internos sem necessidade.
+- **Funções legíveis:** uma responsabilidade clara por função, nomes que expliquem a intenção e encadeamento fácil de seguir. Dividir funções longas, callbacks extensos, condicionais profundas e expressões que obriguem o leitor a decifrar várias decisões de uma vez. Usar retornos antecipados quando simplificarem o fluxo. Extrair por responsabilidade, sem apenas repartir a mesma complexidade entre dezenas de helpers.
+- **Contratos compreensíveis:** entradas e retornos tipados, pequenos o suficiente para sua finalidade e com significado estável. Separar DTO público de linha do banco; representar variações legítimas explicitamente. Evitar objetos que reúnem dados de vários fluxos, formatos de retorno surpreendentes, flags contraditórias e conversões que escondam inconsistências de tipos.
+- **Redundância e estado:** concentrar regras duplicadas em um lugar claro quando forem a mesma regra; remover código morto, cópias de componentes, requisições repetidas e estado derivável desnecessário. Preservar validações nas fronteiras e constraints do banco: proteções em camadas diferentes não são duplicação acidental.
+- **Apresentação e explicação:** manter HTML/CSS/TypeScript separados conforme §1.1. Documentar decisões, limites e razões de regras menos óbvias; o nome e a estrutura devem explicar o funcionamento comum. A documentação precisa corresponder ao código entregue.
+
+**CQ-2 é uma etapa obrigatória após estabilizar os fluxos prioritários e antes de declarar a entrega pronta para a fábrica de software.** Revisar toda a base mantida pelo projeto: frontend (TS/HTML/CSS), API, SQL/migrations, scripts administrativos/importação, testes e configuração de execução/CI. A revisão proporcional de questões em §1.2 não reduz esse escopo de código. Dependências de terceiros e artefatos gerados não serão reescritos.
+
+1. Inventariar módulos, dependências, pontos de entrada e responsabilidades; registrar cobertura da revisão e achados por módulo, com um responsável por lote no WORKBOARD.
+2. Simplificar e refatorar os achados; reescrever trechos ou módulos quando a estrutura atual impedir clareza. Dividir em PRs coesos e revisáveis, preservando funcionalidades, autorização, contratos e integridade dos dados. Não fazer uma reescrita geral sem diagnóstico nem editar migrations já aplicadas.
+3. Executar os testes apropriados aos riscos e revisar cada lote independentemente. Acrescentar testes de comportamento quando a proteção existente for insuficiente; aprovação de testes e métricas automáticas não substitui leitura do código.
+4. Atualizar o mapa da arquitetura, os contratos e o guia para novos mantenedores: preparação local, localização das regras, alteração de um fluxo, execução dos testes, migrations e operação. Registrar o que foi revisado, corrigido e validado, com os limites restantes.
+
+A etapa só fica concluída com cobertura de todos os módulos registrada, achados que comprometem os critérios de clareza, divisão e manutenção corrigidos e documentação utilizável por quem recebe o projeto. Pendências nesses critérios impedem chamá-la de concluída; preferências estéticas e melhorias opcionais ficam identificadas separadamente. Não marcar CQ-2 pronta apenas porque o sistema funciona, o CI está verde ou os templates foram separados. Esta exigência de qualidade não amplia o escopo de funcionalidades.
+
 ## 2. Propriedades de domínio e critérios de aceitação
 
 | ID | Propriedade | Evidência/teste apropriado |

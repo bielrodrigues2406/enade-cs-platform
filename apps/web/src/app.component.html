@@ -1,0 +1,718 @@
+
+    <a class="skip" href="#content" (click)="skipToContent($event)">Ir para o conteúdo</a>
+    <header>
+      <a
+        href="/"
+        class="brand"
+        aria-label="Caderno de Computação, início"
+        (click)="openHome($event)"
+        ><span class="brand-symbol" aria-hidden="true">cc.</span
+        ><span
+          >Caderno<span class="brand-sub">CIÊNCIA DA COMPUTAÇÃO</span></span
+        ></a
+      >
+      <div class="header-actions">
+        <span class="environment">Base de desenvolvimento</span>
+        @if (!booting() && !bootError()) {
+          @if (canCurate()) {
+            <button
+              class="text-button mobile-curation"
+              (click)="openCuration()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            >
+              Curadoria
+            </button>
+          }
+          @if (session().mode === "account") {
+            <span class="account-email" aria-label="Conta conectada">{{
+              accountEmail()
+            }}</span>
+            <button
+              class="text-button"
+              (click)="logout()"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            >
+              Sair da conta
+            </button>
+          } @else {
+            <button
+              class="text-button"
+              (click)="openAccount('login')"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            >
+              Entrar
+            </button>
+            <button
+              class="outline"
+              (click)="openAccount('register')"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            >
+              Criar conta
+            </button>
+          }
+        }
+      </div>
+    </header>
+    @if (!booting() && !bootError()) {
+      <nav class="mobile-study-nav" aria-label="Navegação de estudo">
+        <button
+          class="text-button"
+          (click)="openHome()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="onHome() ? 'page' : null"
+        >
+          Início
+        </button>
+        <button
+          class="text-button"
+          (click)="back()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+        >
+          Banco de questões
+        </button>
+        <button
+          class="text-button"
+          (click)="openReview()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
+        >
+          Caderno de erros
+        </button>
+        <button
+          class="text-button"
+          (click)="openPractice()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
+        >Treino parcial</button>
+      </nav>
+    }
+    <div class="layout">
+      <aside aria-label="Sobre este caderno">
+        <button
+          class="nav"
+          (click)="openHome()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="onHome() ? 'page' : null"
+        >
+          <span class="nav-index" aria-hidden="true">01</span>
+          Início
+        </button>
+        <button
+          class="nav secondary-nav"
+          (click)="back()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="
+            !homeView() &&
+            !practiceView() &&
+            !curationView() &&
+            !reviewView() &&
+            !reviewReturn() &&
+            !accountView()
+              ? 'page'
+              : null
+          "
+        >
+          <span class="nav-index" aria-hidden="true">02</span>
+          Banco de questões
+        </button>
+        <button
+          class="nav secondary-nav"
+          (click)="openReview()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
+        >
+          <span class="nav-index" aria-hidden="true">03</span>
+          Caderno de erros
+        </button>
+        <button
+          class="nav secondary-nav"
+          (click)="openPractice()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
+        ><span class="nav-index" aria-hidden="true">04</span>Treino parcial</button>
+        @if (canCurate()) {
+          <button
+            class="nav secondary-nav"
+            (click)="openCuration()"
+            [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            [attr.aria-current]="curationView() ? 'page' : null"
+          >
+            <span class="nav-index" aria-hidden="true">05</span>
+            Curadoria
+          </button>
+        }
+        <div class="sidebar-note">
+          <p class="muted">
+            O catálogo identifica a origem de cada questão. Conteúdo oficial
+            informa a prova e a edição; as questões iniciais autorais são
+            demonstrações.
+          </p>
+        </div>
+      </aside>
+      <main id="content" tabindex="-1">
+        <div class="breadcrumb">
+          Estudar <span>/</span>
+          {{
+            accountView()
+              ? "Conta"
+              : curationView()
+                ? "Curadoria"
+                : practiceView()
+                  ? "Treino parcial"
+                  : reviewView()
+                  ? "Caderno de erros"
+                  : homeView()
+                    ? "Início"
+                    : question()
+                      ? "Resolução"
+                      : "Banco de questões"
+          }}
+        </div>
+        @if (booting()) {
+          <p role="status">Preparando seu caderno…</p>
+        } @else if (bootError()) {
+          <section class="notice" role="alert">
+            <h1>Não foi possível abrir o caderno</h1>
+            <p>{{ bootError() }}</p>
+            <button (click)="boot()">Tentar novamente</button>
+          </section>
+        } @else {
+          @if (accountNotice()) {
+            <p class="account-success" role="status">{{ accountNotice() }}</p>
+          }
+          @if (accountView()) {
+            <app-account
+              [mode]="accountView()!"
+              [busy]="authBusy()"
+              [error]="authError()"
+              (modeChange)="changeAccountMode($event)"
+              (submitCredentials)="authenticate($event)"
+              (cancel)="closeAccount()"
+            />
+          } @else if (authBusy()) {
+            <p role="status">Atualizando sua sessão…</p>
+          } @else if (curationView()) {
+            <app-curation (busyChange)="curationBusy.set($event)" />
+          } @else if (practiceView()) {
+            <app-exam
+              [attemptId]="practiceAttemptId()"
+              [itemPosition]="practiceItemPosition()"
+              (locationChange)="practiceLocationChanged($event)"
+              (busyChange)="practiceBusy.set($event)"
+              (browse)="back()"
+            />
+          } @else if (reviewView()) {
+            <app-review
+              [position]="reviewPosition"
+              [opening]="loading()"
+              (positionChange)="reviewPosition = $event"
+              (resolve)="openReviewQuestion($event)"
+              (browse)="back()"
+            />
+            @if (error()) {
+              <p class="notice" role="alert">{{ error() }}</p>
+            }
+          } @else if (homeView()) {
+            <app-home
+              [sessionMode]="session().mode"
+              (browse)="back()"
+              (review)="openReview()"
+              (register)="openAccount('register')"
+              (openQuestion)="open($event)"
+              (retry)="openReviewQuestion($event)"
+            />
+            @if (error()) {
+              <p class="notice" role="alert">{{ error() }}</p>
+            }
+          } @else if (!question()) {
+            <section class="page-intro catalog-intro">
+              <div>
+                <h1>Banco de questões</h1>
+                <p>
+                  Escolha um assunto. Entenda o raciocínio.<br
+                    class="desktop"
+                  />
+                  Continue a construir sua base.
+                </p>
+              </div>
+              @if (catalogTotal()) {
+                <p class="catalog-progress">
+                  <strong>{{ catalogAnswered() }}</strong>
+                  <span
+                    >de {{ catalogTotal() }}
+                    {{ catalogTotal() === 1 ? "questão" : "questões" }}
+                    desta seleção com resposta salva</span
+                  >
+                </p>
+              }
+            </section>
+            <p class="source-note">
+              <strong>Origem do conteúdo.</strong> Questões oficiais indicam
+              prova e edição. As questões iniciais autorais são demonstrações.
+            </p>
+            <form class="filters catalog-filters" (ngSubmit)="loadCatalog()">
+              <div>
+                <label for="search">Buscar no caderno</label
+                ><input
+                  id="search"
+                  type="search"
+                  name="search"
+                  [(ngModel)]="search"
+                  maxlength="120"
+                  placeholder="Título ou trecho do enunciado"
+                />
+              </div>
+              <div>
+                <label for="area">Área</label>
+                <select id="area" name="area" [(ngModel)]="area">
+                  <option value="">Todas as áreas</option>
+                  @for (availableArea of catalogAreas(); track availableArea.name) {
+                    <option [value]="availableArea.name" [disabled]="availableArea.count === 0 && area !== availableArea.name">
+                      {{ availableArea.name }} ({{ availableArea.count }})
+                    </option>
+                  }
+                  @if (area && area !== 'unclassified' && !hasCatalogArea(area)) {
+                    <option [value]="area">{{ area }} (indisponível)</option>
+                  }
+                  @if (catalogUnclassified() || area === 'unclassified') {
+                    <option value="unclassified">Sem área classificada ({{ catalogUnclassified() }})</option>
+                  }
+                </select>
+              </div>
+              <div>
+                <label for="topic">Assunto</label
+                ><select id="topic" name="topic" [(ngModel)]="topic">
+                  <option value="">Todos os assuntos</option>
+                  @if (topic && !catalogTopics().includes(topic)) {
+                    <option [value]="topic">{{ topic }} (indisponível)</option>
+                  }
+                  @for (
+                    availableTopic of catalogTopics();
+                    track availableTopic
+                  ) {
+                    <option [value]="availableTopic">
+                      {{ availableTopic }}
+                    </option>
+                  }
+                </select>
+              </div>
+              <div>
+                <label for="year">Ano da prova</label>
+                <select id="year" name="year" [(ngModel)]="year">
+                  <option value="">Todos os anos</option>
+                  @if (year && !hasCatalogYear(year)) {
+                    <option [value]="year">{{ year }} (indisponível)</option>
+                  }
+                  @for (availableYear of catalogYears(); track availableYear) {
+                    <option [value]="availableYear">{{ availableYear }}</option>
+                  }
+                </select>
+              </div>
+              <div class="catalog-filter-actions">
+              <button type="submit" [disabled]="loading()">Filtrar</button>
+              @if (search || topic || area || year) {
+                <button
+                  type="button"
+                  class="text-button"
+                  (click)="clearFilters()"
+                >
+                  Limpar
+                </button>
+              }
+              </div>
+            </form>
+            <div class="list-heading">
+              <h2 id="catalog-results" tabindex="-1">Questões</h2>
+              <span aria-live="polite" aria-atomic="true">
+                {{ catalogTotal() }} {{ catalogTotal() === 1 ? "questão" : "questões" }} nesta seleção
+                @if (catalogTotal() > rows().length) {
+                  · {{ catalogOffset() + 1 }}–{{ catalogOffset() + rows().length }} nesta página
+                }
+              </span>
+            </div>
+            @if (loading()) {
+              <p role="status">Buscando questões…</p>
+            }
+            @if (error()) {
+              <div class="notice" role="alert">
+                <p>{{ error() }}</p>
+                <button (click)="retryCatalog()">Tentar novamente</button>
+              </div>
+            } @else if (!loading() && rows().length === 0) {
+              <div class="empty">
+                <h3>Nenhuma questão nesta seleção</h3>
+                <p>Experimente outra palavra ou remova os filtros.</p>
+                <button (click)="clearFilters()">Limpar filtros</button>
+              </div>
+            } @else {
+              <ol class="question-list">
+                @for (row of rows(); track row.id; let i = $index) {
+                  <li [class.is-answered]="row.answered">
+                    <span class="question-number" aria-hidden="true">{{
+                      (catalogOffset() + i + 1).toString().padStart(2, "0")
+                    }}</span>
+                    <div class="question-summary">
+                      <p class="metadata">
+                        {{ row.topic }} <span>·</span>
+                        {{ originLabel(row.origin, row.demonstration) }}
+                        @if (row.year) {
+                          <span>·</span> {{ row.year }} · {{ modalityLabel(row.modality || '') }}
+                          @if (row.questionNumber) { · Q{{ row.questionNumber }} }
+                        }
+                      </p>
+                      <h3>{{ row.title }}</h3>
+                      <p class="state">
+                        @if (row.answered) {
+                          <svg
+                            class="status-icon"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                          >
+                            <circle
+                              cx="8"
+                              cy="8"
+                              r="6.25"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                            />
+                            <path
+                              d="M5.2 8.3l1.9 1.9 3.7-4.2"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                          Resposta salva · você pode revisar
+                        } @else {
+                          <svg
+                            class="status-icon"
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                          >
+                            <circle
+                              cx="8"
+                              cy="8"
+                              r="6.25"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-dasharray="2.5 2.2"
+                            />
+                          </svg>
+                          Disponível para praticar
+                        }
+                      </p>
+                    </div>
+                    <button
+                      class="outline"
+                      (click)="open(row.id)"
+                      [disabled]="loading()"
+                      [attr.aria-label]="
+                        (row.answered ? 'Revisar: ' : 'Resolver: ') + row.title
+                      "
+                    >
+                      {{ row.answered ? "Revisar" : "Resolver" }}
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </li>
+                }
+              </ol>
+            }
+            @if (catalogTotal() > catalogPageSize) {
+              <nav class="catalog-pagination" aria-label="Paginação do banco de questões">
+                <button class="outline" (click)="changeCatalogPage(-1)" [disabled]="loading() || catalogOffset() === 0">Anterior</button>
+                <p>Página {{ catalogPage() }} de {{ catalogPages() }}</p>
+                <button class="outline" (click)="changeCatalogPage(1)" [disabled]="loading() || catalogOffset() + rows().length >= catalogTotal()">Próxima</button>
+              </nav>
+            }
+            <footer>
+              @if (session().mode === "account") {
+                Seu histórico está salvo na sua conta. Entre com o mesmo e-mail
+                e senha para retomá-lo em outro navegador.
+              } @else {
+                Seu histórico fica associado à sessão deste navegador por até 30
+                dias.
+                <button
+                  type="button"
+                  class="text-button"
+                  (click)="openAccount('register')"
+                >
+                  Guardar meu histórico em uma conta
+                </button>
+              }
+            </footer>
+          } @else {
+            <div class="resolution-bar">
+              <button
+                class="back text-button"
+                (click)="reviewReturn() ? openReview() : back()"
+                [disabled]="saving() || authBusy()"
+              >
+                {{
+                  reviewReturn()
+                    ? "← Voltar ao caderno de erros"
+                    : "← Voltar ao banco"
+                }}
+              </button>
+              @if (position(); as at) {
+                <p class="resolution-position">
+                  Questão {{ at.index + 1 }} de {{ at.total }} nesta seleção
+                </p>
+              }
+            </div>
+            @if (reviewReturn()) {
+              <p class="review-context">
+                {{
+                  question()!.answer && !editing()
+                    ? "Resposta confirmada. Volte ao caderno para conferir as questões a retomar."
+                    : "Resolva novamente. A resposta anterior só será substituída após confirmar."
+                }}
+              </p>
+              @if (
+                reviewCurrentVersion() &&
+                reviewCurrentVersion() !== question()!.id
+              ) {
+                <p class="review-version">
+                  Existe uma versão publicada mais recente. O resultado desta
+                  resolução usa o gabarito da versão
+                  {{ question()!.versionNumber }}.
+                </p>
+              }
+            }
+            <article class="resolution">
+              <app-question-content [question]="question()!" />
+              <form (ngSubmit)="save()">
+                <fieldset
+                  [class.answer-sheet]="isImage()"
+                  [disabled]="saving() || (!!question()!.answer && !editing())"
+                >
+                  <legend>
+                    {{
+                      isImage()
+                        ? "Marque a alternativa da imagem"
+                        : "Selecione uma alternativa"
+                    }}
+                  </legend>
+                  @for (
+                    option of question()!.options;
+                    track option.id;
+                    let i = $index
+                  ) {
+                    <div
+                      class="option-row"
+                      [class.is-correct]="
+                        optionOutcome(option.id) === 'correct'
+                      "
+                      [class.is-wrong]="optionOutcome(option.id) === 'wrong'"
+                    >
+                      <label
+                        class="option"
+                        [class.selected]="selected === option.id"
+                        ><input
+                          type="radio"
+                          name="answer"
+                          [value]="option.id"
+                          [(ngModel)]="selected"
+                          [attr.aria-label]="
+                            isImage() ? 'Alternativa ' + option.id : null
+                          "
+                          [attr.aria-describedby]="
+                            optionOutcome(option.id)
+                              ? 'outcome-' + option.id
+                              : null
+                          "
+                        /><span class="letter" aria-hidden="true">{{
+                          "ABCDE"[i]
+                        }}</span
+                        >@if (!isImage()) {
+                          <span>{{ option.text }}</span>
+                        }</label
+                      >
+                      @if (optionOutcome(option.id); as outcome) {
+                        <span class="option-tag" [id]="'outcome-' + option.id">
+                          @if (outcome === "correct") {
+                            <svg
+                              class="status-icon"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M3.5 8.5l3 3 6-7"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                            {{ isImage() ? "Correta" : "Alternativa correta" }}
+                          } @else {
+                            <svg
+                              class="status-icon"
+                              viewBox="0 0 16 16"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M4.5 4.5l7 7m0-7l-7 7"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                              />
+                            </svg>
+                            Sua resposta
+                          }
+                        </span>
+                      }
+                    </div>
+                  }
+                </fieldset>
+                @if (!question()!.answer || editing()) {
+                  <div class="submit-row">
+                    <button type="submit" [disabled]="!selected || saving()">
+                      {{
+                        saving() ? "Confirmando…" : "Confirmar resposta"
+                      }}</button
+                    ><span>O feedback aparece após a confirmação.</span>
+                  </div>
+                }
+              </form>
+              @if (error()) {
+                <div class="notice" role="alert">
+                  <p>{{ error() }}</p>
+                  <p>
+                    Sua seleção foi preservada. Tente confirmar novamente; se
+                    houver conflito, reabra a questão.
+                  </p>
+                  <button class="outline" (click)="open(question()!.id)">
+                    Reabrir questão
+                  </button>
+                </div>
+              }
+              @if (question()!.answer && !editing()) {
+                <section
+                  class="feedback"
+                  [class.is-correct]="question()!.answer!.correct"
+                  [class.is-wrong]="!question()!.answer!.correct"
+                  aria-label="Resultado da resposta"
+                  role="status"
+                >
+                  <p class="feedback-result">
+                    @if (question()!.answer!.correct) {
+                      <svg
+                        class="status-icon"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M3.5 8.5l3 3 6-7"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      Resposta correta
+                    } @else {
+                      <svg
+                        class="status-icon"
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M4.5 4.5l7 7m0-7l-7 7"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                      Resposta incorreta
+                    }
+                  </p>
+                  <p class="eyebrow">RESPOSTA SALVA</p>
+                  <h2>
+                    {{
+                      question()!.answer!.correct
+                        ? "Você acertou."
+                        : "Vamos entender este conceito."
+                    }}
+                  </h2>
+                  <p>
+                    <strong>Alternativa correta:</strong> {{ correctText() }}
+                  </p>
+                  @if (question()!.answer!.reviewNote) {
+                    <p class="review-note">
+                      <strong>Nota da conferência:</strong>
+                      {{ question()!.answer!.reviewNote }}
+                    </p>
+                  }
+                  @if (question()!.answer!.explanation) {
+                    <p class="feedback-explanation">
+                      {{ question()!.answer!.explanation }}
+                    </p>
+                    @if (question()!.answer!.explanationCredit) {
+                      <p class="metadata">
+                        @if (question()!.reviewOrigin !== "ASSISTED") {
+                          Explicação editorial:
+                        }
+                        {{ question()!.answer!.explanationCredit }}
+                      </p>
+                    }
+                  } @else {
+                    <p class="metadata">
+                      Ainda não há explicação para esta questão. Confira o
+                      raciocínio na prova original.
+                    </p>
+                  }
+                  @if (question()!.answer!.answerKey) {
+                    <p class="answer-key-source">
+                      <a
+                        [href]="question()!.answer!.answerKey!.officialUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >{{
+                          question()!.answer!.answerKey!.finality ===
+                          "ONLY_PUBLISHED"
+                            ? "Gabarito publicado pelo Inep"
+                            : "Gabarito definitivo"
+                        }}:
+                        {{ question()!.answer!.answerKey!.title }}</a
+                      >
+                      · página {{ question()!.answer!.answerKey!.page }}
+                    </p>
+                    @if (
+                      question()!.answer!.answerKey!.finality ===
+                      "ONLY_PUBLISHED"
+                    ) {
+                      <p class="metadata">
+                        O Inep não indicou este gabarito como definitivo; é o
+                        único publicado para a edição.
+                      </p>
+                    }
+                  }
+                  <div class="feedback-actions">
+                    @if (nextQuestion(); as next) {
+                      <button
+                        (click)="openNext()"
+                        [disabled]="loading()"
+                        [attr.aria-label]="'Próxima questão: ' + next.title"
+                      >
+                        Próxima questão <span aria-hidden="true">→</span>
+                      </button>
+                    }
+                    <button class="text-button" (click)="editing.set(true)">
+                      Alterar resposta
+                    </button>
+                  </div>
+                </section>
+              }
+            </article>
+          }
+        }
+      </main>
+    </div>

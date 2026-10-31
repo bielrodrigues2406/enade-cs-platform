@@ -1,0 +1,154 @@
+
+    @if (loading()) {
+      <h1>Treino parcial</h1>
+      <p role="status">Carregando seu treino…</p>
+    } @else if (attempt(); as data) {
+      @if (data.state === 'COMPLETED' && !reviewing()) {
+        <section class="page-intro">
+          <p class="metadata">Treino parcial · {{ data.area || 'Assuntos mistos' }}</p>
+          <h1 id="practice-result-title" tabindex="-1">Resultado do treino</h1>
+          @if (data.summary; as result) {
+            <p class="practice-score"><strong>{{ result.correct }} de {{ result.total }}</strong> acertos</p>
+            <p>{{ result.incorrect }} {{ result.incorrect === 1 ? 'errada' : 'erradas' }} · {{ result.unanswered }} {{ result.unanswered === 1 ? 'não respondida' : 'não respondidas' }}.</p>
+            <p class="muted">Resultado deste treino, sem previsão de nota ENADE. As respostas ficam separadas do estudo livre.</p>
+            <p class="metadata">{{ result.official }} oficiais · {{ result.author }} autorais · {{ result.demonstration }} demonstrações autorais.</p>
+            <div class="practice-table-wrap">
+              <table class="practice-table">
+                <caption>Resultado por assunto</caption>
+                <thead><tr><th scope="col">Assunto</th><th scope="col">Acertos</th><th scope="col">Em branco</th></tr></thead>
+                <tbody>
+                  @for (row of result.byTopic; track row.topic) {
+                    <tr><th scope="row">{{ row.topic }}</th><td>{{ row.correct }} de {{ row.total }}</td><td>{{ row.unanswered }}</td></tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+            <div class="practice-actions">
+              <button (click)="beginReview()">Rever respostas</button>
+              <button class="outline" (click)="showSelection()">Voltar aos treinos</button>
+            </div>
+          }
+        </section>
+      } @else if (current(); as item) {
+        <div class="practice-toolbar">
+          <button class="text-button" (click)="data.state === 'COMPLETED' ? showResult() : showSelection()" [disabled]="protectedState()">{{ data.state === 'COMPLETED' ? '← Voltar ao resultado' : '← Voltar aos treinos' }}</button>
+          <p class="metadata">{{ data.area || 'Assuntos mistos' }} · sem cronômetro</p>
+        </div>
+        <div class="practice-layout">
+          <section class="practice-sheet">
+            <p id="practice-position" class="practice-position" tabindex="-1">Questão {{ position() }} de {{ data.size }}</p>
+            <article class="resolution">
+              <app-question-content [question]="item.question" />
+              <fieldset class="practice-options" [class.answer-sheet]="isImage(item)" [disabled]="saving() || saveUncertain() || data.state === 'COMPLETED'">
+                <legend>{{ isImage(item) ? 'Marque a alternativa da imagem' : 'Selecione uma alternativa' }}</legend>
+                @for (option of item.question.options; track option.id; let i = $index) {
+                  <div class="option-row" [class.is-correct]="outcome(item, option.id) === 'correct'" [class.is-wrong]="outcome(item, option.id) === 'wrong'">
+                    <label class="option" [class.selected]="draftOption() === option.id">
+                      <input type="radio" name="practice-answer" [value]="option.id" [checked]="draftOption() === option.id" (change)="selectOption(option.id)" [attr.aria-label]="isImage(item) ? 'Alternativa ' + option.id : null" />
+                      <span class="letter" aria-hidden="true">{{ 'ABCDE'[i] }}</span>
+                      @if (!isImage(item)) { <span>{{ option.text }}</span> }
+                    </label>
+                    @if (outcome(item, option.id); as state) {
+                      <span class="option-tag">{{ state === 'correct' ? 'Alternativa correta' : 'Sua resposta' }}</span>
+                    }
+                  </div>
+                }
+              </fieldset>
+              @if (data.state === 'IN_PROGRESS') {
+                <div class="practice-answer-actions">
+                  <label class="practice-mark"><input type="checkbox" [checked]="draftMarked()" (change)="setMarked($any($event.target).checked)" [disabled]="saving() || saveUncertain()" /> Marcar para revisar</label>
+                  <button class="text-button" (click)="selectOption(null)" [disabled]="saving() || saveUncertain() || draftOption() === null">Limpar resposta</button>
+                </div>
+                <p class="practice-save-status" role="status">{{ saving() ? 'Salvando…' : dirty() ? 'Seleção ainda não salva.' : item.answer.revision ? 'Alterações salvas.' : 'Ainda não respondida.' }}</p>
+              } @else if (item.result; as result) {
+                <section class="feedback" [class.is-correct]="result.correct === true" [class.is-wrong]="result.correct === false" aria-label="Correção da questão">
+                  <h2>{{ result.correct === null ? 'Não respondida' : result.correct ? 'Resposta correta' : 'Resposta incorreta' }}</h2>
+                  <p><strong>Alternativa correta:</strong> {{ correctText(item) }}</p>
+                  @if (result.reviewNote) {
+                    <p class="review-note"><strong>Nota da conferência:</strong> {{ result.reviewNote }}</p>
+                  }
+                  @if (result.explanation) {
+                    <p class="feedback-explanation">{{ result.explanation }}</p>
+                    @if (result.explanationCredit) { <p class="metadata">{{ result.explanationCredit }}</p> }
+                  } @else { <p>Ainda não há explicação para esta questão.</p> }
+                  @if (result.answerKey; as key) {
+                    <p><a [href]="key.officialUrl" target="_blank" rel="noopener noreferrer">{{ key.finality === 'ONLY_PUBLISHED' ? 'Gabarito publicado pelo Inep' : 'Gabarito definitivo' }}: {{ key.title }}</a> · página {{ key.page }}</p>
+                    @if (key.finality === 'ONLY_PUBLISHED') { <p class="metadata">O Inep não indicou este gabarito como definitivo. É o único gabarito publicado que foi localizado para esta prova.</p> }
+                  }
+                </section>
+              }
+            </article>
+            <div class="practice-actions practice-item-actions">
+              <button class="outline" (click)="go(position() - 1)" [disabled]="protectedState() || position() === 1">Anterior</button>
+              <button class="outline" (click)="go(position() + 1)" [disabled]="protectedState() || position() === data.size">Próxima questão</button>
+            </div>
+          </section>
+          <nav class="practice-map" aria-label="Questões do treino">
+            <details [open]="mapExpanded()" (toggle)="mapExpanded.set($any($event.target).open)">
+              <summary><strong>Folha de respostas</strong><span>{{ answered() }} de {{ data.size }} respondidas</span></summary>
+            <ol>
+              @for (row of data.items; track row.position) {
+                <li><button class="outline" [class.is-answered]="row.answer.optionId !== null" [class.is-marked]="row.answer.marked" [attr.aria-current]="position() === row.position ? 'step' : null" [attr.aria-label]="'Questão ' + row.position + ', ' + (row.answer.optionId !== null ? 'respondida' : 'em branco') + (row.answer.marked ? ', marcada para revisar' : '')" (click)="go(row.position)" [disabled]="protectedState()">{{ row.position }}<span aria-hidden="true">{{ row.answer.marked ? '*' : row.answer.optionId !== null ? '✓' : '' }}</span></button></li>
+              }
+            </ol>
+            <p class="metadata">✓ Respondida · * Revisar</p>
+            </details>
+            @if (data.state === 'IN_PROGRESS') {
+              <button (click)="openFinish()" [disabled]="protectedState()">Revisar e finalizar</button>
+              <p class="metadata">Gabarito e resultado aparecem ao finalizar.</p>
+            }
+          </nav>
+        </div>
+        @if (data.state === 'IN_PROGRESS') {
+          <dialog #finishDialog class="practice-confirm" aria-labelledby="practice-confirm-title">
+            <h2 id="practice-confirm-title">Finalizar este treino?</h2>
+            <p>{{ answered() }} respondidas · {{ data.size - answered() }} em branco · {{ marked() }} {{ marked() === 1 ? 'marcada' : 'marcadas' }} para revisar.</p>
+            <p>Depois de finalizar, as respostas não poderão ser alteradas.</p>
+            <div class="practice-actions">
+              <button class="outline" (click)="finishDialog.close()" [disabled]="saving()" autofocus>Continuar respondendo</button>
+              <button (click)="finish()" [disabled]="protectedState()">{{ saving() ? 'Finalizando…' : 'Finalizar treino' }}</button>
+            </div>
+          </dialog>
+        }
+      }
+    } @else {
+      <section class="page-intro">
+        <h1 id="practice-setup-title" tabindex="-1">Treino parcial</h1>
+        <p>Resolva 10, 20 ou 30 questões e confira o resultado ao finalizar. Você pode sair e retomar o treino salvo.</p>
+        <p class="metadata">Sem cronômetro. As questões mantêm sua origem e versão. Este treino não reproduz uma prova oficial.</p>
+      </section>
+      @if (availability(); as data) {
+        @if (data.active; as active) {
+          <section class="practice-active" aria-label="Treino em andamento">
+            <h2>Continue seu treino</h2>
+            <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.area || 'Assuntos mistos' }}</p>
+            <button (click)="openAttempt(active.id)" [disabled]="saving()">Retomar treino</button>
+          </section>
+        } @else {
+          <form class="practice-setup" (ngSubmit)="start()">
+            <div><label for="practice-area">Área do treino</label><select id="practice-area" name="area" [(ngModel)]="area" [disabled]="saving()"><option value="">Assuntos mistos</option>@for (row of data.areas; track row.name) { <option [value]="row.name">{{ row.name }} ({{ row.count }})</option> }</select></div>
+            <fieldset [disabled]="saving()" aria-describedby="practice-availability"><legend>Quantidade de questões</legend><div class="practice-sizes">@for (value of data.sizes; track value) { <label><input type="radio" name="size" [value]="value" [(ngModel)]="size" [disabled]="eligibleCount() < value" /> {{ value }} questões</label> }</div></fieldset>
+            <p class="muted" id="practice-availability">{{ eligibleCount() }} questões publicadas disponíveis nesta seleção.</p>
+            @if (eligibleCount() < size) { <p>Para {{ size }} questões, faltam {{ size - eligibleCount() }}. Escolha um tamanho disponível ou volte ao banco enquanto o acervo é ampliado.</p> }
+            <button type="submit" [disabled]="saving() || eligibleCount() < size">{{ saving() ? 'Preparando treino…' : 'Começar treino' }}</button>
+          </form>
+        }
+        <div class="practice-actions"><button class="text-button" (click)="browse.emit()" [disabled]="saving()">Abrir banco de questões</button><button class="text-button" (click)="loadAvailability()" [disabled]="saving()">Atualizar disponibilidade</button></div>
+        @if (data.recent.length) {
+          <section class="practice-history" aria-labelledby="practice-recent-title"><h2 id="practice-recent-title">Treinos concluídos recentes</h2><ol>@for (row of data.recent; track row.id) { <li><div><strong>{{ row.size }} questões · {{ row.area || 'Assuntos mistos' }}</strong><p><time [attr.datetime]="row.finishedAt">{{ dateLabel(row.finishedAt) }}</time></p></div><button class="outline" (click)="openAttempt(row.id)" [disabled]="saving()">Ver resultado</button></li> }</ol></section>
+        }
+      }
+    }
+    @if (error()) {
+      <section class="notice practice-error" role="alert">
+        <h2>{{ dirty() ? 'Não foi possível salvar' : 'Não foi possível concluir a operação' }}</h2><p>{{ error() }}</p>
+        @if (dirty()) {
+          <p>Sua seleção continua nesta tela. Salve ou descarte antes de sair.</p>
+          @if (!conflict()) { <button (click)="save()" [disabled]="saving()">Tentar salvar novamente</button> }
+          <button class="outline" (click)="openDiscard()" [disabled]="saving()">{{ conflict() ? 'Reabrir treino' : 'Descartar seleção local' }}</button>
+        } @else { <button (click)="retry()" [disabled]="saving()">Tentar novamente</button> }
+      </section>
+    }
+    @if (discardOpen()) {
+      <section class="notice" role="alert" id="practice-discard" tabindex="-1"><h2>Descartar a seleção não salva?</h2><p>O treino será recarregado com as respostas confirmadas no servidor.</p><div class="practice-actions"><button class="outline" (click)="cancelDiscard()">Continuar editando</button><button (click)="discardAndReload()">Descartar e reabrir</button></div></section>
+    }

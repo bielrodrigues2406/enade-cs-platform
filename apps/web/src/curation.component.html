@@ -1,0 +1,680 @@
+
+    @if (!editing()) {
+      <nav class="curation-sections" aria-label="Área da curadoria">
+        <button
+          class="text-button"
+          (click)="showQuestions()"
+          [attr.aria-current]="!sourceView() && !importView() ? 'page' : null"
+          [disabled]="busy() || sourceBusy()"
+        >
+          Questões</button
+        ><button
+          class="text-button"
+          (click)="showSources()"
+          [attr.aria-current]="sourceView() ? 'page' : null"
+          [disabled]="busy() || sourceBusy()"
+        >
+          Fontes
+        </button>
+        <button class="text-button" (click)="showImports()" [attr.aria-current]="importView() ? 'page' : null" [disabled]="busy() || sourceBusy()">Importação</button>
+      </nav>
+    }
+    @if (importView()) {
+      <app-question-imports (busyChange)="setSourceBusy($event)" />
+    } @else if (sourceView()) {
+      <app-sources (busyChange)="setSourceBusy($event)" />
+    } @else if (!editing()) {
+      <section class="curation-intro">
+        <div>
+          <h1 id="curation-heading" tabindex="-1">Curadoria</h1>
+          <p>Prepare questões e confira fontes e versões antes de publicar.</p>
+        </div>
+        <div class="curation-create-actions">
+          <button (click)="newDraft()" [disabled]="busy()">
+            Nova questão autoral</button
+          ><button
+            class="outline"
+            (click)="newDraft('OFFICIAL')"
+            [disabled]="busy()"
+          >
+            Nova questão oficial
+          </button>
+        </div>
+      </section>
+      <p class="editorial-scope">
+        Questões oficiais exigem prova e gabarito definitivo verificados. Todo
+        conteúdo passa por revisão independente antes de ser publicado.
+      </p>
+      <div class="editorial-queue-heading">
+        <h2>Fila editorial</h2>
+        <button
+          class="text-button"
+          (click)="loadQueue()"
+          [disabled]="busy() || loading()"
+        >
+          Atualizar fila
+        </button>
+      </div>
+      @if (loading()) {
+        <p role="status">Carregando a fila editorial…</p>
+      }
+      @if (error()) {
+        <div class="notice" role="alert">
+          <p>{{ error() }}</p>
+          <button (click)="loadQueue()">Tentar novamente</button>
+        </div>
+      } @else if (!loading() && rows().length === 0) {
+        <div class="empty">
+          <h3>A fila está vazia</h3>
+          <p>Crie uma questão autoral para começar a preparação do conteúdo.</p>
+        </div>
+      } @else {
+        <table class="editorial-table">
+          <caption class="visually-hidden">
+            Versão mais recente de cada questão
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Questão</th>
+              <th scope="col">Situação</th>
+              <th scope="col">Versão</th>
+              <th scope="col"><span class="visually-hidden">Ação</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of rows(); track row.id) {
+              <tr>
+                <td>
+                  <strong>{{ row.title }}</strong
+                  ><span class="editorial-row-meta"
+                    >{{ row.topic }} ·
+                    {{ row.origin === "OFFICIAL" ? "Oficial" : "Autoral" }} ·
+                    {{ row.authorCredit }}</span
+                  >
+                </td>
+                <td>
+                  <span
+                    class="editorial-status"
+                    [class.published]="row.editorialStatus === 'PUBLISHED'"
+                    >{{ statusLabel(row.editorialStatus) }}</span
+                  >
+                </td>
+                <td>
+                  <span class="mobile-label">Versão </span>{{ row.sequence }}
+                  @if (
+                    row.currentVersionId && row.currentVersionId !== row.id
+                  ) {
+                    <span class="editorial-row-meta"
+                      >A versão anterior segue publicada</span
+                    >
+                  }
+                </td>
+                <td>
+                  <button
+                    class="outline"
+                    (click)="open(row.id)"
+                    [disabled]="loading() || busy()"
+                    [attr.aria-label]="'Abrir: ' + row.title"
+                  >
+                    Abrir <span aria-hidden="true">→</span>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    } @else {
+      <button
+        id="editorial-back"
+        class="back text-button"
+        (click)="backToQueue()"
+        [disabled]="busy()"
+      >
+        ← Voltar à fila
+      </button>
+      @if (discard()) {
+        <section class="notice" aria-label="Alterações locais">
+          <p id="editorial-discard-message" tabindex="-1">
+            Há alterações que ainda não foram salvas. Voltar à fila descarta essas alterações.
+          </p>
+          <button class="outline" (click)="continueEditing()">Continuar editando</button>
+          <button (click)="discardAndBack()">Descartar alterações</button>
+        </section>
+      }
+      <section class="editorial-document">
+        <p class="eyebrow">
+          {{
+            draft.origin === "OFFICIAL" ? "QUESTÃO OFICIAL" : "QUESTÃO AUTORAL"
+          }}
+          @if (detail()) {
+            · VERSÃO {{ detail()!.sequence }}
+          }
+        </p>
+        <h1 id="editorial-heading" tabindex="-1">
+          {{
+            editable()
+              ? detail()
+                ? "Editar rascunho"
+                : draft.origin === "OFFICIAL"
+                  ? "Nova questão oficial"
+                  : "Nova questão autoral"
+              : detail()!.title
+          }}
+        </h1>
+        @if (detail()) {
+          <p class="editorial-document-state">
+            <span
+              class="editorial-status"
+              [class.published]="detail()!.editorialStatus === 'PUBLISHED'"
+              >{{ statusLabel(detail()!.editorialStatus) }}</span
+            ><span>Crédito: {{ detail()!.authorCredit }}</span>
+          </p>
+        }
+        @if (notice()) {
+          <p class="account-success" role="status">{{ notice() }}</p>
+        }
+        @if (detail()?.editorialStatus === "REJECTED") {
+          <section class="editorial-review-note">
+            <h2>Ajustes solicitados</h2>
+            <p>{{ detail()!.reviewNote }}</p>
+          </section>
+        }
+        @if (editable()) {
+          <form #draftForm="ngForm" (ngSubmit)="save(draftForm)" novalidate>
+            <fieldset [disabled]="busy()">
+              <legend class="visually-hidden">Conteúdo da questão</legend>
+              @if (draft.origin === "OFFICIAL") {
+                <fieldset class="official-provenance-fields">
+                  <legend>Procedência da questão oficial</legend>
+                  <p class="account-help">
+                    Selecione documentos verificados da mesma edição, área e
+                    modalidade. Confira as páginas e o número na prova.
+                  </p>
+                  @if (sourceLoading()) {
+                    <p role="status">Carregando fontes verificadas…</p>
+                  }
+                  <div class="editorial-field">
+                    <label for="draft-exam">Prova oficial verificada</label
+                    ><select
+                      id="draft-exam"
+                      name="examSourceId"
+                      [(ngModel)]="draft.provenance!.examSourceId"
+                      (ngModelChange)="examChanged()"
+                      [disabled]="!!detail()"
+                      required
+                    >
+                      <option value="">Selecione uma prova</option>
+                      @for (source of verifiedExams(); track source.id) {
+                        <option [value]="source.id">
+                          {{ source.year }} · {{ source.area }} ·
+                          {{ source.title }}
+                        </option>
+                      }
+                    </select>
+                    @if (exam()) {
+                      <p class="account-help">
+                        <a
+                          [href]="exam()!.officialUrl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Conferir prova oficial</a
+                        >
+                        · {{ exam()!.pageCount }} páginas
+                      </p>
+                    }
+                  </div>
+                  <div class="editorial-field">
+                    <label for="draft-key">Gabarito definitivo verificado</label
+                    ><select
+                      id="draft-key"
+                      name="keySourceId"
+                      [(ngModel)]="draft.provenance!.keySourceId"
+                      required
+                      [disabled]="!exam()"
+                    >
+                      <option value="">
+                        Selecione o gabarito da mesma edição
+                      </option>
+                      @for (source of compatibleKeys(); track source.id) {
+                        <option [value]="source.id">{{ source.title }}</option>
+                      }
+                    </select>
+                    @if (keySource()) {
+                      <p class="account-help">
+                        <a
+                          [href]="keySource()!.officialUrl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Conferir gabarito definitivo</a
+                        >
+                        · {{ keySource()!.pageCount }} páginas
+                      </p>
+                    }
+                  </div>
+                  <div class="provenance-page-fields">
+                    <div class="editorial-field">
+                      <label for="draft-page">Página da questão</label
+                      ><input
+                        id="draft-page"
+                        name="page"
+                        type="number"
+                        [(ngModel)]="draft.provenance!.page"
+                        required
+                        min="1"
+                        [max]="exam()?.pageCount || 1"
+                        step="1"
+                      />
+                    </div>
+                    <div class="editorial-field">
+                      <label for="draft-question-number">Número na prova</label
+                      ><input
+                        id="draft-question-number"
+                        name="questionNumber"
+                        type="number"
+                        [(ngModel)]="draft.provenance!.questionNumber"
+                        [readonly]="!!detail()"
+                        required
+                        min="1"
+                        max="1000"
+                        step="1"
+                      />
+                    </div>
+                    <div class="editorial-field">
+                      <label for="draft-key-page">Página do gabarito</label
+                      ><input
+                        id="draft-key-page"
+                        name="keyPage"
+                        type="number"
+                        [(ngModel)]="draft.provenance!.keyPage"
+                        required
+                        min="1"
+                        [max]="keySource()?.pageCount || 1"
+                        step="1"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="text-button"
+                    (click)="loadSources()"
+                    [disabled]="sourceLoading()"
+                  >
+                    Atualizar fontes verificadas
+                  </button>
+                </fieldset>
+              }
+              <div class="editorial-field">
+                <label for="draft-title">Título</label
+                ><input
+                  id="draft-title"
+                  name="title"
+                  [(ngModel)]="draft.title"
+                  required
+                  maxlength="160"
+                />
+              </div>
+              <div class="editorial-fields-row">
+                <div class="editorial-field">
+                  <label for="draft-topic">Assunto</label
+                  ><input
+                    id="draft-topic"
+                    name="topic"
+                    [(ngModel)]="draft.topic"
+                    required
+                    maxlength="80"
+                  />
+                </div>
+                @if (draft.origin === "AUTHOR_CREATED") {
+                  <div class="editorial-field">
+                    <label for="draft-credit">Crédito de autoria</label
+                    ><input
+                      id="draft-credit"
+                      name="authorCredit"
+                      [(ngModel)]="draft.authorCredit"
+                      required
+                      maxlength="160"
+                      aria-describedby="credit-help"
+                    />
+                    <p id="credit-help" class="account-help">
+                      Nome ou equipe responsável pelo conteúdo autoral.
+                    </p>
+                  </div>
+                } @else {
+                  <p class="account-help">
+                    Fonte da questão: Inep. A explicação abaixo é um comentário
+                    editorial, com crédito próprio.
+                  </p>
+                }
+              </div>
+              <div class="editorial-field">
+                <label for="draft-prompt">Enunciado</label
+                ><textarea
+                  id="draft-prompt"
+                  name="prompt"
+                  [(ngModel)]="draft.prompt"
+                  required
+                  maxlength="6000"
+                  rows="6"
+                ></textarea>
+                <p class="account-help">
+                  Texto simples, com quebras de linha preservadas. Mantenha a
+                  estrutura de exemplos e código.
+                </p>
+              </div>
+              <fieldset class="editorial-options">
+                <legend>Alternativas e gabarito</legend>
+                <p class="account-help">
+                  Use de 2 a 5 alternativas. Marque uma única resposta correta.
+                </p>
+                @for (
+                  option of draft.options;
+                  track option.id;
+                  let i = $index
+                ) {
+                  <div class="editorial-option-row">
+                    <div class="editorial-field">
+                      <label [for]="'draft-option-' + option.id"
+                        >Alternativa {{ letters[i] }}</label
+                      ><textarea
+                        [id]="'draft-option-' + option.id"
+                        [name]="'option-' + option.id"
+                        [(ngModel)]="option.text"
+                        required
+                        maxlength="1000"
+                        rows="2"
+                      ></textarea>
+                    </div>
+                    <div class="editorial-option-controls">
+                      <label class="editorial-radio"
+                        ><input
+                          type="radio"
+                          name="correctOptionId"
+                          [value]="option.id"
+                          [(ngModel)]="draft.correctOptionId"
+                          [attr.aria-label]="
+                            'Definir alternativa ' +
+                            letters[i] +
+                            ' como correta'
+                          "
+                        />Correta</label
+                      ><button
+                        type="button"
+                        class="text-button"
+                        (click)="removeOption(option.id)"
+                        [disabled]="draft.options.length <= 2"
+                        [attr.aria-label]="'Remover alternativa ' + letters[i]"
+                      >
+                        Remover
+                      </button>
+                    </div>
+                  </div>
+                }
+                <button
+                  type="button"
+                  class="outline"
+                  (click)="addOption()"
+                  [disabled]="draft.options.length >= 5"
+                >
+                  Adicionar alternativa
+                </button>
+              </fieldset>
+              @if (draft.origin === "OFFICIAL") {
+                <div class="editorial-field">
+                  <label for="draft-explanation-credit"
+                    >Crédito da explicação editorial</label
+                  ><input
+                    id="draft-explanation-credit"
+                    name="explanationCredit"
+                    [(ngModel)]="draft.explanationCredit"
+                    required
+                    maxlength="160"
+                  />
+                  <p class="account-help">
+                    Identifique quem escreveu o comentário. A explicação não é
+                    uma correção oficial do Inep.
+                  </p>
+                </div>
+              }
+              <div class="editorial-field">
+                <label for="draft-explanation">Explicação do gabarito</label
+                ><textarea
+                  id="draft-explanation"
+                  name="explanation"
+                  [(ngModel)]="draft.explanation"
+                  required
+                  maxlength="4000"
+                  rows="5"
+                ></textarea>
+              </div>
+              <div class="editorial-actions">
+                <button type="submit">
+                  {{ busy() ? "Salvando…" : "Salvar rascunho" }}
+                </button>
+                @if (detail()) {
+                  <button
+                    type="button"
+                    class="outline"
+                    (click)="submitForReview()"
+                    [disabled]="
+                      hasChanges() || detail()!.editorialStatus === 'REJECTED'
+                    "
+                  >
+                    Enviar para revisão
+                  </button>
+                }
+              </div>
+              @if (
+                detail() &&
+                (hasChanges() || detail()!.editorialStatus === "REJECTED")
+              ) {
+                <p class="account-help">
+                  Salve as alterações antes de enviar esta versão para revisão.
+                </p>
+              }
+            </fieldset>
+          </form>
+        } @else {
+          <section class="editorial-readonly">
+            <p class="metadata">
+              {{ detail()!.topic }} ·
+              {{ detail()!.origin === "OFFICIAL" ? "Oficial" : "Autoral" }}
+            </p>
+            @if (detail()!.provenance) {
+              <section class="question-provenance">
+                <h2>Procedência</h2>
+                <p>
+                  {{ exam()?.title || "Prova oficial" }} · questão
+                  {{ detail()!.provenance!.questionNumber }}, página
+                  {{ detail()!.provenance!.page }}
+                </p>
+                <p>
+                  {{ keySource()?.title || "Gabarito definitivo" }} · página
+                  {{ detail()!.provenance!.keyPage }}
+                </p>
+                @if (exam()) {
+                  <a
+                    [href]="exam()!.officialUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Conferir prova oficial</a
+                  >
+                }
+                @if (keySource()) {
+                  <a
+                    [href]="keySource()!.officialUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Conferir gabarito definitivo</a
+                  >
+                }
+              </section>
+            }
+            <h2>Enunciado</h2>
+            <p class="editorial-text">{{ detail()!.prompt }}</p>
+            <h2>Alternativas</h2>
+            <ol class="editorial-readonly-options">
+              @for (
+                option of detail()!.options;
+                track option.id;
+                let i = $index
+              ) {
+                <li>
+                  <strong>{{ letters[i] }}.</strong
+                  ><span>{{ option.text }}</span>
+                  @if (detail()!.correctOptionId === option.id) {
+                    <strong class="editorial-answer-label">Correta</strong>
+                  }
+                </li>
+              }
+            </ol>
+            <h2>Explicação do gabarito</h2>
+            @if (detail()!.explanationCredit) {
+              <p class="metadata">
+                Comentário editorial: {{ detail()!.explanationCredit }}
+              </p>
+            }
+            <p class="editorial-text">{{ detail()!.explanation }}</p>
+          </section>
+          @if (detail()!.editorialStatus === "IN_REVIEW") {
+            @if (detail()!.canReview) {
+              <section class="editorial-review" aria-labelledby="review-title">
+                <h2 id="review-title">Conferência independente</h2>
+                <p>
+                  Confira o conteúdo, o gabarito e os créditos antes de decidir.
+                </p>
+                <fieldset [disabled]="busy()">
+                  <legend class="visually-hidden">
+                    Conferência para publicação
+                  </legend>
+                  <label class="editorial-check"
+                    ><input
+                      type="checkbox"
+                      [(ngModel)]="checks.content"
+                    />Conferi o enunciado e as alternativas.</label
+                  ><label class="editorial-check"
+                    ><input
+                      type="checkbox"
+                      [(ngModel)]="checks.answer"
+                    />Conferi o gabarito e a explicação.</label
+                  ><label class="editorial-check"
+                    ><input
+                      type="checkbox"
+                      [(ngModel)]="checks.credit"
+                    />Conferi o crédito de autoria.</label
+                  >
+                  @if (detail()!.origin === "OFFICIAL") {
+                    <label class="editorial-check"
+                      ><input
+                        type="checkbox"
+                        [(ngModel)]="checks.source"
+                      />Conferi a questão e o gabarito nos documentos oficiais
+                      indicados.</label
+                    >
+                  }
+                  <div class="editorial-field">
+                    <label for="review-note">Parecer da revisão</label
+                    ><textarea
+                      id="review-note"
+                      [(ngModel)]="reviewNote"
+                      minlength="10"
+                      maxlength="2000"
+                      rows="4"
+                      aria-describedby="review-help"
+                    ></textarea>
+                    <p id="review-help" class="account-help">
+                      Registre de 10 a 2.000 caracteres. Ao devolver, explique
+                      os ajustes necessários.
+                    </p>
+                  </div>
+                  @if (confirmPublication()) {
+                    <div class="editorial-confirm">
+                      <h3>Confirmar publicação desta versão?</h3>
+                      <p>
+                        Esta versão ficará disponível no banco de questões. A
+                        versão publicada anterior continuará preservada no
+                        histórico.
+                      </p>
+                      <div class="editorial-actions">
+                        <button
+                          (click)="review('PUBLISH')"
+                          [disabled]="!canPublish()"
+                        >
+                          Confirmar publicação</button
+                        ><button
+                          class="text-button"
+                          (click)="confirmPublication.set(false)"
+                        >
+                          Cancelar publicação
+                        </button>
+                      </div>
+                    </div>
+                  } @else {
+                    <div class="editorial-actions">
+                      <button
+                        (click)="confirmPublication.set(true)"
+                        [disabled]="!canPublish()"
+                      >
+                        Publicar versão</button
+                      ><button
+                        class="outline"
+                        (click)="review('REJECT')"
+                        [disabled]="!validReviewNote()"
+                      >
+                        Devolver para ajustes
+                      </button>
+                    </div>
+                  }
+                </fieldset>
+              </section>
+            } @else {
+              <p class="editorial-scope">
+                A revisão precisa de outra pessoa da curadoria. Quem criou ou
+                editou esta versão não pode publicá-la.
+              </p>
+            }
+          }
+          @if (detail()!.editorialStatus === "PUBLISHED") {
+            <section class="editorial-next-version">
+              <h2>Atualizar o conteúdo</h2>
+              <p>
+                Prepare um rascunho sem alterar esta versão. O conteúdo
+                publicado só será substituído após uma nova revisão
+                independente.
+              </p>
+              <button
+                class="outline"
+                (click)="cloneVersion()"
+                [disabled]="busy()"
+              >
+                Preparar nova versão
+              </button>
+            </section>
+          }
+        }
+        @if (error()) {
+          <div class="notice" role="alert">
+            <p>{{ error() }}</p>
+            <p>As alterações desta tela não foram descartadas.</p>
+            @if (detail()) {
+              <button
+                class="outline"
+                (click)="open(detail()!.id)"
+                [disabled]="busy()"
+              >
+                Reabrir versão
+              </button>
+              <p class="account-help">
+                Reabrir descarta alterações locais ainda não salvas e consulta a
+                versão no servidor.
+              </p>
+            } @else {
+              <p class="account-help">
+                Se a conexão caiu após o envio, confira a fila antes de criar o
+                rascunho novamente.
+              </p>
+            }
+          </div>
+        }
+      </section>
+    }

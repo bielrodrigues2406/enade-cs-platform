@@ -4,6 +4,8 @@ Status: protocolo operacional. Referência: 26/10/2026. Complementa AGENTS.md e 
 
 Dois agentes trabalham em paralelo no mesmo repositório. Este documento define quem faz o quê, como evitar conflitos e como uma entrega passa de um agente para outro. O quadro vivo de tarefas está em [WORKBOARD.md](WORKBOARD.md).
 
+**Instrução direta de Gabriel em 30/10/2026 para Claude Code e Codex:** escrevam código para manutenção por pessoas da fábrica de software. Claude deve aplicar isso também nas funcionalidades e branches que já está desenvolvendo: responsabilidades separadas, nomes claros, funções pequenas, retornos previsíveis e ausência de redundância acidental. Não basta adotar a separação de HTML/CSS; legibilidade e arquitetura são critérios de cada revisão. Após estabilizar os fluxos prioritários, ambos devem executar CQ-2, a revisão de toda a base com simplificação e reescrita quando necessárias, antes da passagem institucional. Seguir [ENGINEERING-AND-DELIVERY §1.3](ENGINEERING-AND-DELIVERY.md#13-manutenção-humana-e-passagem-à-fábrica-de-software); a etapa final não permite adiar problemas introduzidos agora.
+
 Pedido de Gabriel em 28/10/2026: estudar questões como imagens e importação de prova + gabarito. A [proposta compartilhada](QUESTION-IMAGES-AND-IMPORT.md) reúne medição de peso, apresentação ao aluno, fluxo de revisão e divisão proposta CT-1/IMG-I1/IMG-U1/CAT-1. A [análise de produto](reviews/2026-10-28-product-perspectives.md) distingue perspectivas simuladas de agentes e validação humana. O handoff do PR #16 da trilha Claude (ADR-010, CNT-C1/CT-1b e CNT-T1/CNT-V1/PUB-A1) foi considerado, incluindo suas reservas 010/011; a entrega final foi integrada na main `42a45d6`. D8 transferiu imagens/publicação/catálogo ao Claude; Codex continua na conferência e corrige os achados de integridade no PR #18. Consulte o quadro antes de iniciar trabalho; upload/editor em lote continuam pendentes. Em 29/10, o pedido direto de Gabriel transferiu somente CAT-1 ao Codex (D12/WORKBOARD); publicação e imagens continuam com Claude.
 
 ## 1. Papéis
@@ -29,6 +31,8 @@ Nenhum agente transcreve questões oficiais, gabaritos ou comentários editoriai
 
 ## 3. Ownership de arquivos e pontos de conflito
 
+A organização de código em ENGINEERING-AND-DELIVERY §1.1 vale para as duas trilhas: HTML em `.html`, CSS em `.css`, lógica em `.ts`. Ao atualizar uma branch anterior à extração de templates, aplicar mudanças de apresentação no novo HTML e preservar `templateUrl`, sem restaurar o template inline. Conferências de conteúdo já registradas seguem a revisão proporcional de §1.2; não repetir lotes inteiros sem um achado que justifique.
+
 A divisão por domínio evita a maior parte dos conflitos. Cada tarefa do quadro lista os arquivos que pretende criar ou alterar. Os arquivos abaixo são compartilhados e seguem regras próprias:
 
 | Arquivo / área | Regra |
@@ -51,6 +55,7 @@ Quando uma tarefa de uma trilha depende de dados ou rotas da outra (por exemplo,
 - Validação executada e informada no PR com os comandos reais do README: `npm run build`, `npm test`, `npm run test:e2e` (em sequência, não simultâneos). Se o ambiente impediu algum, escrever qual e por quê; não declarar que passou.
 - Mudança de UI verificada no navegador em 320/390/768/1440 px e por teclado.
 - Documentação do domínio atualizada; mudança arquitetural registrada em ADR.
+- Código compreensível para manutenção humana conforme ENGINEERING-AND-DELIVERY §1.3; funções, responsabilidades e retornos revisados. Corrigir problemas de legibilidade da entrega antes de integrá-la, sem acumulá-los para CQ-2.
 - Conventional Commits, commits coesos, template de PR preenchido.
 - Quadro atualizado: status `em revisão`, link do PR.
 

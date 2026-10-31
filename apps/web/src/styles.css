@@ -2471,6 +2471,7 @@ app-home .panel h2 {
   gap: 3px;
 }
 .map-cell {
+  --cell-delay: calc(var(--cell-index, 0) * 12ms);
   aspect-ratio: 1;
   border-radius: 2px;
   border: 1.5px solid var(--color-border-control);
@@ -2552,6 +2553,7 @@ app-home .panel h2 {
   padding: 0;
 }
 .home-steps li {
+  --reveal-delay: calc(var(--reveal-index, 0) * 80ms);
   position: relative;
   display: grid;
   grid-template-columns: 2.75rem minmax(0, 1fr);
@@ -2800,6 +2802,7 @@ app-home .panel h2 {
   gap: var(--space-3);
 }
 .home-roadmap li {
+  --reveal-delay: calc(var(--reveal-index, 0) * 70ms);
   padding: 16px 18px;
   border: var(--border-thin) solid var(--color-border);
   border-radius: var(--radius-md);
@@ -2943,6 +2946,8 @@ app-home.motion-ready .home-steps li:not(.is-visible)::before {
 }
 .question-images img {
   display: block;
+  /* Escala de impressão: 200 dpi ≈ 1,9 px por px CSS. */
+  width: calc(var(--image-width) * 1px / 1.9);
   max-width: 100%;
   height: auto;
   cursor: zoom-in;
