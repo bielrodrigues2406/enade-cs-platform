@@ -63,6 +63,8 @@ export class ExamComponent {
   private wideViewport = window.innerWidth > 1000;
   size = 20;
   area = "";
+  /** Treino com tempo (minutos por questão vêm da API). */
+  timed = false;
   // Prova completa da edição (SIM-1).
   editions = signal<EditionList | null>(null);
   chosenEdition = signal<Edition | null>(null);
@@ -85,7 +87,7 @@ export class ExamComponent {
   private lastOperation: "load" | "start" | "save" | "finish" = "load";
   private pendingSave: { attemptId: string; position: number; body: { optionId: string | null; marked: boolean; baseRevision: number } } | null = null;
   private lastLoadId: string | null = null;
-  private pendingStart: { requestId: string; size: number; area: string | null } | null = null;
+  private pendingStart: { requestId: string; size: number; area: string | null; timed: boolean } | null = null;
 
   ngOnInit() { if (this.attemptId) void this.loadAttempt(this.attemptId); else void this.loadAvailability(); }
   ngOnChanges(changes: SimpleChanges) {
@@ -111,7 +113,25 @@ export class ExamComponent {
   }
   protectedState() { return this.saving() || this.dirty() || this.saveUncertain(); }
   current() { return this.attempt()?.items.find((item) => item.position === this.position()) ?? null; }
-  eligibleCount() { return this.area ? this.availability()?.areas.find((row) => row.name === this.area)?.count ?? 0 : this.availability()?.total ?? 0; }
+  eligibleCount() { return this.areaRow()?.count ?? (this.area ? 0 : this.availability()?.total ?? 0); }
+  unseenCount() { return this.areaRow()?.unseen ?? (this.area ? 0 : this.availability()?.unseen ?? 0); }
+  private areaRow() { return this.area ? this.availability()?.areas.find((row) => row.name === this.area) : undefined; }
+  /** Com área: 5/10/20/30 que caibam e, se o total for outro número, "todas". Sem área: 10/20/30. */
+  sizeOptions(): { value: number; label: string }[] {
+    const data = this.availability();
+    if (!data) return [];
+    if (!this.area) return data.sizes.map((value) => ({ value, label: `${value} questões` }));
+    const count = this.eligibleCount();
+    const options = data.areaSizes.filter((value) => value <= count).map((value) => ({ value, label: `${value} questões` }));
+    if (count > 0 && count <= 30 && !data.areaSizes.includes(count)) options.push({ value: count, label: `Todas (${count})` });
+    return options;
+  }
+  /** Ao trocar a área, mantém o tamanho se ele existir nela; senão, o maior possível. */
+  areaChanged() {
+    const options = this.sizeOptions();
+    if (!options.some((option) => option.value === this.size)) this.size = options.at(-1)?.value ?? this.size;
+  }
+  timedMinutes() { return this.size * (this.availability()?.minutesPerQuestion ?? 4); }
   answered() { return this.attempt()?.items.filter((item) => item.answer.optionId !== null).length ?? 0; }
   marked() { return this.attempt()?.items.filter((item) => item.answer.marked).length ?? 0; }
   isImage(item: PracticeItem) { return item.question.presentation === "IMAGE" && !!item.question.images?.length; }
@@ -166,7 +186,8 @@ export class ExamComponent {
   async start() {
     if (this.saving() || this.eligibleCount() < this.size) return;
     const area = this.area || null;
-    if (!this.pendingStart || this.pendingStart.size !== this.size || this.pendingStart.area !== area) this.pendingStart = { requestId: crypto.randomUUID(), size: this.size, area };
+    if (!this.pendingStart || this.pendingStart.size !== this.size || this.pendingStart.area !== area || this.pendingStart.timed !== this.timed)
+      this.pendingStart = { requestId: crypto.randomUUID(), size: this.size, area, timed: this.timed };
     const generation = this.generation;
     this.saving.set(true); this.error.set(""); this.lastOperation = "start"; this.emitBusy();
     try {
@@ -228,8 +249,8 @@ export class ExamComponent {
     this.ticker = null; this.expiryReload = null;
   }
   timeUp() { return (this.remaining() ?? 1) <= 0; }
-  /** Prova completa em andamento, sem pausa. */
-  running() { const data = this.attempt(); return data?.kind === "EDITION" && data.state === "IN_PROGRESS" && !data.pausedAt; }
+  /** Prova ou treino cronometrado em andamento, sem pausa. */
+  running() { const data = this.attempt(); return Boolean(data?.deadlineAt) && data!.state === "IN_PROGRESS" && !data!.pausedAt; }
   async pause() { await this.setPaused(true); }
   async resume() { await this.setPaused(false); }
   private async setPaused(paused: boolean) {
@@ -238,7 +259,7 @@ export class ExamComponent {
     const generation = this.generation;
     this.saving.set(true); this.error.set(""); this.emitBusy();
     try {
-      const next = await this.api<PracticeView>(`/attempts/${data.id}/${paused ? "pause" : "resume"}`, { method: "POST", body: "{}" }, "/api/editions");
+      const next = await this.api<PracticeView>(`/${data.id}/${paused ? "pause" : "resume"}`, { method: "POST", body: "{}" });
       if (this.alive(generation)) this.applyAttempt(next, this.position());
     } catch (error) { if (this.alive(generation)) this.error.set(this.message(error)); }
     finally { if (this.alive(generation)) { this.saving.set(false); this.emitBusy(); } }
@@ -248,7 +269,7 @@ export class ExamComponent {
     if (!this.running()) return;
     const id = this.attempt()!.id;
     this.examRunningChange.emit(false);
-    void fetch(`/api/editions/attempts/${id}/pause`, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" }, body: "{}" }).catch(() => undefined);
+    void fetch(`/api/practice/${id}/pause`, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" }, body: "{}" }).catch(() => undefined);
   }
   timeWarning() { const left = this.remaining(); return left !== null && left > 0 && left <= WARNING_MS; }
   private applyAttempt(data: PracticeView, position: number) {

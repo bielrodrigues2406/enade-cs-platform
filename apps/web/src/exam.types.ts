@@ -25,9 +25,14 @@ export type Edition = {
 export type EditionList = { minutes: number; editions: Edition[] };
 export type PracticeAvailability = {
   sizes: number[];
+  /** Com área escolhida: 5/10/20/30 ou todas as publicadas dela. */
+  areaSizes: number[];
+  minutesPerQuestion: number;
   defaultSize: number;
   total: number;
-  areas: { name: string; count: number }[];
+  /** Ainda não vistas pela pessoa (estudo, treino ou prova); o sorteio começa por elas. */
+  unseen: number;
+  areas: { name: string; count: number; unseen: number }[];
   active: AttemptSummary | null;
   recent: AttemptSummary[];
 };
