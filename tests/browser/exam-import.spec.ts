@@ -5,6 +5,7 @@ import path from "node:path";
 import { Pool } from "pg";
 import { test, expect } from "@playwright/test";
 import { signUp } from "./session-helpers";
+import { testPdf as pdf } from "./pdf-fixture";
 
 // Lote READY sintético (TEST ONLY), como se o processo de extração tivesse
 // terminado; o teste exercita o editor de caixas e a publicação.
@@ -12,23 +13,6 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const archive = process.env.SOURCE_ARCHIVE_DIR || path.resolve(".local/sources");
 const importId = randomUUID();
 let examSha = "";
-
-function pdf(label: string) {
-  const stream = `BT /F1 14 Tf 60 720 Td (TEST ONLY ${label}) Tj ET`;
-  const objects = [
-    "<< /Type /Catalog /Pages 2 0 R >>",
-    "<< /Type /Pages /Count 1 /Kids [3 0 R] >>",
-    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>",
-    `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`,
-    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
-  ];
-  let out = "%PDF-1.4\n";
-  const offsets: number[] = [];
-  objects.forEach((object, i) => { offsets.push(out.length); out += `${i + 1} 0 obj\n${object}\nendobj\n`; });
-  const xref = out.length;
-  out += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n${offsets.map((o) => `${String(o).padStart(10, "0")} 00000 n \n`).join("")}`;
-  return Buffer.from(out + `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`);
-}
 
 test.afterAll(async () => {
   const sources = (await pool.query("SELECT id FROM source_document WHERE sha256=$1 OR title LIKE 'ENADE 2098%'", [examSha])).rows.map((r) => r.id);
@@ -77,7 +61,7 @@ test("an admin adjusts a proposed box, classifies and publishes the question", a
 
   await page.getByLabel("Área").selectOption("Redes");
   await page.getByRole("button", { name: "Confirmar e seguir" }).click();
-  await expect(page.getByText(/1 confirmadas · 0 objetivas/)).toBeVisible();
+  await expect(page.getByText(/1 confirmadas · 0 a conferir/)).toBeVisible();
   await page.getByRole("button", { name: "Publicar 1 confirmadas" }).click();
   await expect(page.getByRole("status")).toContainText("1 questões publicadas");
   const version = (await pool.query(
