@@ -257,13 +257,18 @@
           } @else if (curationView()) {
             <app-curation (busyChange)="curationBusy.set($event)" />
           } @else if (practiceView()) {
-            <app-exam
-              [attemptId]="practiceAttemptId()"
-              [itemPosition]="practiceItemPosition()"
-              (locationChange)="practiceLocationChanged($event)"
-              (busyChange)="practiceBusy.set($event)"
-              (browse)="back()"
-            />
+            @defer (on immediate) {
+              <app-exam
+                [attemptId]="practiceAttemptId()"
+                [itemPosition]="practiceItemPosition()"
+                (locationChange)="practiceLocationChanged($event)"
+                (busyChange)="practiceBusy.set($event)"
+                (browse)="back()"
+                (discursiveStudy)="openDiscursive()"
+              />
+            } @placeholder {
+              <p role="status">Carregando os treinos…</p>
+            }
           } @else if (reviewView()) {
             <app-review
               [position]="reviewPosition"

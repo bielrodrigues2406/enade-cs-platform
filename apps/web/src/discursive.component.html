@@ -4,7 +4,9 @@
   }
 
   @if (detail(); as q) {
-    <button type="button" class="back text-button" (click)="loadList()">← Discursivas</button>
+    @if (!embedded) {
+      <button type="button" class="back text-button" (click)="loadList()">← Discursivas</button>
+    }
     <p class="metadata">{{ q.area }}@if (q.subject) { <span>·</span> {{ q.subject }} } <span>·</span> Oficial · Inep</p>
     <h1 id="discursive-title">{{ q.title }}</h1>
     <p class="disc-criteria">
@@ -41,15 +43,19 @@
         <textarea id="disc-body" rows="14" [maxlength]="maxBody" [ngModel]="body()" (ngModelChange)="write($event)" (blur)="flush()"
           placeholder="Escreva como na prova: um texto corrido, respondendo a cada item."></textarea>
         <div class="disc-submit">
-          <p class="muted">{{ body().length }} de {{ maxBody }} caracteres. Depois de enviar, o texto não muda mais.</p>
-          <button type="button" (click)="submit()" [disabled]="busy() || !body().trim()">Enviar e ver o padrão de resposta</button>
+          @if (embedded) {
+            <p class="muted">{{ body().length }} de {{ maxBody }} caracteres. O texto é enviado quando você finalizar a prova.</p>
+          } @else {
+            <p class="muted">{{ body().length }} de {{ maxBody }} caracteres. Depois de enviar, o texto não muda mais.</p>
+            <button type="button" (click)="submit()" [disabled]="busy() || !body().trim()">Enviar e ver o padrão de resposta</button>
+          }
         </div>
       } @else {
         <blockquote class="disc-sent">{{ body() }}</blockquote>
       }
     </section>
 
-    @if (submitted()) {
+    @if (submitted() && !embedded) {
       <section class="disc-standard" aria-labelledby="disc-standard-title">
         <h2 id="disc-standard-title">Padrão de resposta</h2>
         <figure class="question-sheet">

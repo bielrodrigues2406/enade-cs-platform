@@ -5,12 +5,29 @@
     } @else if (attempt(); as data) {
       @if (data.state === 'COMPLETED' && !reviewing()) {
         <section class="page-intro">
-          <p class="metadata">Treino parcial · {{ data.area || 'Assuntos mistos' }}</p>
-          <h1 id="practice-result-title" tabindex="-1">Resultado do treino</h1>
+          @if (data.edition; as edition) {
+            <p class="metadata">Prova completa · {{ edition.title }}</p>
+            <h1 id="practice-result-title" tabindex="-1">Resultado da prova</h1>
+          } @else {
+            <p class="metadata">Treino parcial · {{ data.area || 'Assuntos mistos' }}</p>
+            <h1 id="practice-result-title" tabindex="-1">Resultado do treino</h1>
+          }
           @if (data.summary; as result) {
             <p class="practice-score"><strong>{{ result.correct }} de {{ result.total }}</strong> acertos</p>
             <p>{{ result.incorrect }} {{ result.incorrect === 1 ? 'errada' : 'erradas' }} · {{ result.unanswered }} {{ result.unanswered === 1 ? 'não respondida' : 'não respondidas' }}.</p>
             <p class="muted">Resultado deste treino, sem previsão de nota ENADE. As respostas ficam separadas do estudo livre.</p>
+            @if (data.edition && result.byBlock; as blocks) {
+              <dl class="practice-blocks">
+                <div><dt>Formação Geral</dt><dd><strong>{{ blocks.general.correct }}</strong> de {{ blocks.general.total }}</dd></div>
+                <div><dt>Componente específico</dt><dd><strong>{{ blocks.specific.correct }}</strong> de {{ blocks.specific.total }}</dd></div>
+              </dl>
+            }
+            @if (data.discursive?.length) {
+              <p>
+                As discursivas com texto foram enviadas. Compare com o padrão de resposta e faça a autoavaliação.
+                <button type="button" class="text-button" (click)="discursiveStudy.emit()">Abrir as discursivas</button>
+              </p>
+            }
             <p class="metadata">{{ result.official }} oficiais · {{ result.author }} autorais · {{ result.demonstration }} demonstrações autorais.</p>
             <div class="practice-table-wrap">
               <table class="practice-table">
@@ -32,10 +49,29 @@
       } @else if (current(); as item) {
         <div class="practice-toolbar">
           <button class="text-button" (click)="data.state === 'COMPLETED' ? showResult() : showSelection()" [disabled]="protectedState()">{{ data.state === 'COMPLETED' ? '← Voltar ao resultado' : '← Voltar aos treinos' }}</button>
-          <p class="metadata">{{ data.area || 'Assuntos mistos' }} · sem cronômetro</p>
+          @if (data.edition; as edition) {
+            <p class="metadata">Prova completa · {{ edition.title }}</p>
+            @if (remaining() !== null) {
+              <p class="practice-clock" [class.is-warning]="timeWarning()" [class.is-over]="timeUp()">
+                <span class="visually-hidden">Tempo restante: </span>
+                @if (timeUp()) { Tempo esgotado. Registrando o resultado… } @else { <time>{{ clock(remaining()!) }}</time> }
+              </p>
+            }
+          } @else {
+            <p class="metadata">{{ data.area || 'Assuntos mistos' }} · sem cronômetro</p>
+          }
         </div>
         <div class="practice-layout">
           <section class="practice-sheet">
+            @if (discursiveOpen(); as discursiveId) {
+              <p id="practice-position" class="practice-position" tabindex="-1">Discursiva da prova</p>
+              <!-- Carregada sob demanda: o texto é salvo como rascunho e enviado ao finalizar. -->
+              @defer (on immediate) {
+                <app-discursive [questionId]="discursiveId" [embedded]="data.state === 'IN_PROGRESS'" />
+              } @placeholder {
+                <p role="status">Carregando a discursiva…</p>
+              }
+            } @else {
             <p id="practice-position" class="practice-position" tabindex="-1">Questão {{ position() }} de {{ data.size }}</p>
             <article class="resolution">
               <app-question-content [question]="item.question" />
@@ -80,8 +116,13 @@
             </article>
             <div class="practice-actions practice-item-actions">
               <button class="outline" (click)="go(position() - 1)" [disabled]="protectedState() || position() === 1">Anterior</button>
-              <button class="outline" (click)="go(position() + 1)" [disabled]="protectedState() || position() === data.size">Próxima questão</button>
+              @if (position() === data.size && data.discursive?.length) {
+                <button class="outline" (click)="openDiscursiveItem(data.discursive![0].id)" [disabled]="protectedState()">Ir para as discursivas</button>
+              } @else {
+                <button class="outline" (click)="go(position() + 1)" [disabled]="protectedState() || position() === data.size">Próxima questão</button>
+              }
             </div>
+            }
           </section>
           <nav class="practice-map" aria-label="Questões do treino">
             <details [open]="mapExpanded()" (toggle)="mapExpanded.set($any($event.target).open)">
@@ -92,6 +133,15 @@
               }
             </ol>
             <p class="metadata">✓ Respondida · * Revisar</p>
+            @if (data.discursive?.length) {
+              <p class="practice-map-label">Discursivas</p>
+              <ol>
+                @for (row of data.discursive!; track row.id) {
+                  <li><button class="outline" [attr.aria-current]="discursiveOpen() === row.id ? 'step' : null"
+                    [attr.aria-label]="'Discursiva ' + row.number" (click)="openDiscursiveItem(row.id)" [disabled]="protectedState()">D{{ row.number }}</button></li>
+                }
+              </ol>
+            }
             </details>
             @if (data.state === 'IN_PROGRESS') {
               <button (click)="openFinish()" [disabled]="protectedState()">Revisar e finalizar</button>
@@ -101,12 +151,12 @@
         </div>
         @if (data.state === 'IN_PROGRESS') {
           <dialog #finishDialog class="practice-confirm" aria-labelledby="practice-confirm-title">
-            <h2 id="practice-confirm-title">Finalizar este treino?</h2>
+            <h2 id="practice-confirm-title">{{ data.edition ? 'Finalizar a prova?' : 'Finalizar este treino?' }}</h2>
             <p>{{ answered() }} respondidas · {{ data.size - answered() }} em branco · {{ marked() }} {{ marked() === 1 ? 'marcada' : 'marcadas' }} para revisar.</p>
-            <p>Depois de finalizar, as respostas não poderão ser alteradas.</p>
+            <p>Depois de finalizar, as respostas não poderão ser alteradas.@if (data.discursive?.length) { As discursivas com texto serão enviadas. }</p>
             <div class="practice-actions">
               <button class="outline" (click)="finishDialog.close()" [disabled]="saving()" autofocus>Continuar respondendo</button>
-              <button (click)="finish()" [disabled]="protectedState()">{{ saving() ? 'Finalizando…' : 'Finalizar treino' }}</button>
+              <button (click)="finish()" [disabled]="protectedState()">{{ saving() ? 'Finalizando…' : data.edition ? 'Finalizar prova' : 'Finalizar treino' }}</button>
             </div>
           </dialog>
         }
@@ -120,8 +170,8 @@
       @if (availability(); as data) {
         @if (data.active; as active) {
           <section class="practice-active" aria-label="Treino em andamento">
-            <h2>Continue seu treino</h2>
-            <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.area || 'Assuntos mistos' }}</p>
+            <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : 'Continue seu treino' }}</h2>
+            <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.kind === 'EDITION' ? 'prova completa, o tempo continua correndo' : active.area || 'Assuntos mistos' }}</p>
             <button (click)="openAttempt(active.id)" [disabled]="saving()">Retomar treino</button>
           </section>
         } @else {
@@ -132,6 +182,42 @@
             @if (eligibleCount() < size) { <p>Para {{ size }} questões, faltam {{ size - eligibleCount() }}. Escolha um tamanho disponível ou volte ao banco enquanto o acervo é ampliado.</p> }
             <button type="submit" [disabled]="saving() || eligibleCount() < size">{{ saving() ? 'Preparando treino…' : 'Começar treino' }}</button>
           </form>
+        }
+        @if (!data.active && editions()?.editions?.length) {
+          <section class="practice-editions" aria-labelledby="practice-editions-title">
+            <h2 id="practice-editions-title">Prova completa da edição</h2>
+            <p class="muted">
+              As objetivas publicadas da prova, na ordem original, com {{ editions()!.minutes / 60 }} horas de prova.
+              O tempo corre no servidor, mesmo se você sair.
+            </p>
+            <ol>
+              @for (edition of editions()!.editions; track edition.id) {
+                <li [class.is-chosen]="chosenEdition()?.id === edition.id">
+                  <div>
+                    <strong>ENADE {{ edition.year }} · {{ modalityLabel(edition.modality) }}</strong>
+                    <p class="muted">
+                      {{ edition.objectives }} objetivas ({{ edition.general }} de Formação Geral)
+                      @if (edition.discursive) { · {{ edition.discursive }} {{ edition.discursive === 1 ? 'discursiva' : 'discursivas' }} }
+                      @if (edition.missing.length) { · {{ missingLabel(edition) }}, anuladas ou ainda não publicadas }
+                    </p>
+                  </div>
+                  @if (chosenEdition()?.id !== edition.id) {
+                    <button class="outline" (click)="chosenEdition.set(edition)" [disabled]="saving()">Fazer esta prova</button>
+                  }
+                </li>
+              }
+            </ol>
+            @if (chosenEdition(); as edition) {
+              <div class="practice-edition-confirm" role="group" aria-labelledby="practice-edition-confirm-title">
+                <h3 id="practice-edition-confirm-title">Começar a prova de {{ edition.year }}?</h3>
+                <p>O cronômetro de {{ editions()!.minutes / 60 }} horas começa agora e não para se você sair. Ao terminar o tempo, a prova é finalizada com o que estiver salvo.</p>
+                <div class="practice-actions">
+                  <button (click)="startEdition()" [disabled]="saving()">{{ saving() ? 'Preparando a prova…' : 'Começar agora' }}</button>
+                  <button class="outline" (click)="chosenEdition.set(null)" [disabled]="saving()">Cancelar</button>
+                </div>
+              </div>
+            }
+          </section>
         }
         <div class="practice-actions"><button class="text-button" (click)="browse.emit()" [disabled]="saving()">Abrir banco de questões</button><button class="text-button" (click)="loadAvailability()" [disabled]="saving()">Atualizar disponibilidade</button></div>
         @if (data.recent.length) {

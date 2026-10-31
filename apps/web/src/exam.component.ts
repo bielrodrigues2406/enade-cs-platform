@@ -1,12 +1,25 @@
 import {
   afterNextRender, Component, ElementRef, EventEmitter, HostListener, Injector, Input, Output,
-  ViewChild, inject, signal, type SimpleChanges,
+  ViewChild, computed, inject, signal, type SimpleChanges,
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { QuestionContentComponent } from "./question-content.component";
+import { DiscursiveComponent } from "./discursive.component";
 import type {
-  PracticeAvailability, PracticeView, PracticeItem, PracticeAnswer,
+  Edition, EditionList, PracticeAvailability, PracticeView, PracticeItem, PracticeAnswer,
 } from "./exam.types";
+
+/** Folga para o servidor encerrar a prova depois do prazo (igual à da API). */
+const DEADLINE_GRACE_MS = 16000;
+/** A partir daqui o cronômetro pede atenção. */
+const WARNING_MS = 15 * 60000;
+
+/** Tempo restante em h:mm:ss. */
+export function clock(ms: number) {
+  const total = Math.max(0, Math.ceil(ms / 1000));
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${Math.floor(total / 3600)}:${pad(Math.floor((total % 3600) / 60))}:${pad(total % 60)}`;
+}
 
 class PracticeError extends Error {
   constructor(message: string, readonly status: number) { super(message); }
@@ -14,8 +27,9 @@ class PracticeError extends Error {
 
 @Component({
   selector: "app-exam",
-  imports: [FormsModule, QuestionContentComponent],
+  imports: [FormsModule, QuestionContentComponent, DiscursiveComponent],
   templateUrl: "./exam.component.html",
+  styleUrl: "./exam.component.css",
 })
 export class ExamComponent {
   @Input() attemptId: string | null = null;
@@ -23,6 +37,8 @@ export class ExamComponent {
   @Output() locationChange = new EventEmitter<{ attemptId: string | null; position: number }>();
   @Output() busyChange = new EventEmitter<boolean>();
   @Output() browse = new EventEmitter<void>();
+  /** Depois da prova completa: ver o padrão de resposta e se autoavaliar. */
+  @Output() discursiveStudy = new EventEmitter<void>();
   @ViewChild("finishDialog") finishDialog?: ElementRef<HTMLDialogElement>;
   private host: ElementRef<HTMLElement> = inject(ElementRef);
   private injector = inject(Injector);
@@ -45,6 +61,19 @@ export class ExamComponent {
   private wideViewport = window.innerWidth > 1000;
   size = 20;
   area = "";
+  // Prova completa da edição (SIM-1).
+  editions = signal<EditionList | null>(null);
+  chosenEdition = signal<Edition | null>(null);
+  discursiveOpen = signal<string | null>(null);
+  now = signal(Date.now());
+  remaining = computed(() => {
+    const deadline = this.attempt()?.deadlineAt;
+    return deadline && this.attempt()?.state === "IN_PROGRESS" ? new Date(deadline).getTime() - this.now() : null;
+  });
+  readonly clock = clock;
+  private ticker: ReturnType<typeof setInterval> | null = null;
+  private expiryReload: ReturnType<typeof setTimeout> | null = null;
+  private pendingEditionStart: { requestId: string; source: string } | null = null;
   private abort = new AbortController();
   private generation = 0;
   private destroyed = false;
@@ -61,7 +90,7 @@ export class ExamComponent {
       this.position.set(this.validPosition(this.itemPosition)); this.syncDraft();
     }
   }
-  ngOnDestroy() { this.destroyed = true; this.generation++; this.abort.abort(); this.busyChange.emit(false); }
+  ngOnDestroy() { this.destroyed = true; this.generation++; this.abort.abort(); this.stopClock(); this.busyChange.emit(false); }
   @HostListener("window:beforeunload", ["$event"])
   beforeUnload(event: BeforeUnloadEvent) { if (this.protectedState()) { event.preventDefault(); event.returnValue = ""; } }
   @HostListener("window:resize")
@@ -84,8 +113,8 @@ export class ExamComponent {
   dateLabel(date: string | null) { return date ? new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(date)) : ""; }
   private alive(generation: number) { return !this.destroyed && generation === this.generation; }
   private emitBusy() { this.busyChange.emit(this.protectedState()); }
-  private async api<T>(path: string, init: RequestInit = {}): Promise<T> {
-    const response = await fetch("/api/practice" + path, { ...init, signal: this.abort.signal, headers: { "Content-Type": "application/json" } });
+  private async api<T>(path: string, init: RequestInit = {}, base = "/api/practice"): Promise<T> {
+    const response = await fetch(base + path, { ...init, signal: this.abort.signal, headers: { "Content-Type": "application/json" } });
     const body = await response.json().catch(() => null);
     if (!response.ok) throw new PracticeError(body?.message || "Verifique a conexão e tente novamente.", response.status);
     return body;
@@ -97,8 +126,13 @@ export class ExamComponent {
     this.loading.set(true); this.error.set(""); this.lastOperation = "load";
     this.attempt.set(null); this.reviewing.set(false); this.lastLoadId = null;
     try {
-      const data = await this.api<PracticeAvailability>("");
-      if (this.alive(generation)) { this.availability.set(data); this.locationChange.emit({ attemptId: null, position: 1 }); this.focusContent(); }
+      const [data, editions] = await Promise.all([
+        this.api<PracticeAvailability>(""), this.api<EditionList>("", {}, "/api/editions"),
+      ]);
+      if (this.alive(generation)) {
+        this.availability.set(data); this.editions.set(editions); this.chosenEdition.set(null);
+        this.locationChange.emit({ attemptId: null, position: 1 }); this.focusContent();
+      }
     } catch (error) { if (this.alive(generation)) this.error.set(this.message(error)); }
     finally { if (this.alive(generation)) this.loading.set(false); }
   }
@@ -134,8 +168,57 @@ export class ExamComponent {
       }
     } finally { if (this.alive(generation)) { this.saving.set(false); this.emitBusy(); } }
   }
+  /** Começa a prova da edição escolhida; repetir a mesma solicitação devolve a mesma prova. */
+  async startEdition() {
+    const edition = this.chosenEdition();
+    if (!edition || this.saving()) return;
+    if (this.pendingEditionStart?.source !== edition.id) this.pendingEditionStart = { requestId: crypto.randomUUID(), source: edition.id };
+    const { requestId, source } = this.pendingEditionStart;
+    const generation = this.generation;
+    this.saving.set(true); this.error.set(""); this.emitBusy();
+    try {
+      const data = await this.api<PracticeView>(`/${source}/attempts`, { method: "POST", body: JSON.stringify({ requestId }) }, "/api/editions");
+      if (this.alive(generation)) { this.applyAttempt(data, 1); this.pendingEditionStart = null; this.locationChange.emit({ attemptId: data.id, position: 1 }); }
+    } catch (error) {
+      if (this.alive(generation)) this.error.set(this.message(error));
+    } finally { if (this.alive(generation)) { this.saving.set(false); this.emitBusy(); } }
+  }
+  missingLabel(edition: Edition) {
+    const list = edition.missing;
+    if (!list.length) return "";
+    return list.length === 1 ? `falta a ${list[0]}` : `faltam ${list.slice(0, -1).join(", ")} e ${list.at(-1)}`;
+  }
+  modalityLabel(modality: string) {
+    return ({ BACHARELADO: "Bacharelado", LICENCIATURA: "Licenciatura", COMUM: "Caderno compartilhado" } as Record<string, string>)[modality] ?? modality;
+  }
+  openDiscursiveItem(id: string) {
+    if (this.protectedState()) return;
+    this.discursiveOpen.set(id); this.error.set("");
+    this.focusContent();
+  }
+  /** O cronômetro só mostra o prazo do servidor; ao zerar, recarrega o resultado registrado. */
+  private syncClock() {
+    this.stopClock();
+    const data = this.attempt();
+    if (!data?.deadlineAt || data.state !== "IN_PROGRESS") return;
+    this.now.set(Date.now());
+    this.ticker = setInterval(() => {
+      this.now.set(Date.now());
+      if ((this.remaining() ?? 1) <= 0 && !this.expiryReload) {
+        const id = data.id;
+        this.expiryReload = setTimeout(() => { this.expiryReload = null; this.discursiveOpen.set(null); void this.loadAttempt(id, 1); }, DEADLINE_GRACE_MS);
+      }
+    }, 1000);
+  }
+  private stopClock() {
+    if (this.ticker) clearInterval(this.ticker);
+    if (this.expiryReload) clearTimeout(this.expiryReload);
+    this.ticker = null; this.expiryReload = null;
+  }
+  timeUp() { return (this.remaining() ?? 1) <= 0; }
+  timeWarning() { const left = this.remaining(); return left !== null && left > 0 && left <= WARNING_MS; }
   private applyAttempt(data: PracticeView, position: number) {
-    this.attempt.set(data); this.position.set(this.validPosition(position));
+    this.attempt.set(data); this.position.set(this.validPosition(position)); this.discursiveOpen.set(null); this.syncClock();
     this.reviewing.set(false); this.conflict.set(false); this.discardOpen.set(false); this.syncDraft(); this.focusContent();
   }
   private validPosition(position: number) { const total = this.attempt()?.size ?? 1; return Number.isInteger(position) && position >= 1 && position <= total ? position : 1; }
@@ -144,7 +227,7 @@ export class ExamComponent {
     this.draftOption.set(answer?.optionId ?? null); this.draftMarked.set(answer?.marked ?? false); this.dirty.set(false); this.saveUncertain.set(false); this.pendingSave = null; this.emitBusy();
   }
   selectOption(optionId: string | null) {
-    if (this.saving() || this.saveUncertain() || this.attempt()?.state !== "IN_PROGRESS") return;
+    if (this.saving() || this.saveUncertain() || this.attempt()?.state !== "IN_PROGRESS" || this.timeUp()) return;
     this.draftOption.set(optionId); this.changed();
   }
   setMarked(marked: boolean) {
@@ -176,7 +259,7 @@ export class ExamComponent {
   }
   go(position: number) {
     if (this.protectedState() || position < 1 || position > (this.attempt()?.size ?? 0)) return;
-    this.position.set(position); this.syncDraft(); this.error.set("");
+    this.position.set(position); this.discursiveOpen.set(null); this.syncDraft(); this.error.set("");
     this.locationChange.emit({ attemptId: this.attempt()!.id, position });
     this.focusContent();
   }

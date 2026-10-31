@@ -8,7 +8,17 @@ export type AttemptSummary = {
   createdAt: string;
   finishedAt: string | null;
   answered: number;
+  kind?: "PARTIAL" | "EDITION";
+  /** Prova da edição: prazo do servidor; o cronômetro só o exibe. */
+  deadlineAt?: string | null;
 };
+export type Edition = {
+  id: string; year: number; modality: string; title: string; officialUrl: string;
+  objectives: number; general: number; discursive: number;
+  /** Números sem objetiva publicada (anuladas ou ainda não conferidas). */
+  missing: number[];
+};
+export type EditionList = { minutes: number; editions: Edition[] };
 export type PracticeAvailability = {
   sizes: number[];
   defaultSize: number;
@@ -40,5 +50,9 @@ export type PracticeView = AttemptSummary & {
     author: number;
     demonstration: number;
     byTopic: (PracticeTotals & { topic: string })[];
+    /** Ausente em resultados anteriores à prova completa. */
+    byBlock?: { general: PracticeTotals; specific: PracticeTotals };
   }) | null;
+  edition?: { year: number; modality: string; title: string; officialUrl: string } | null;
+  discursive?: { id: string; number: number }[];
 };

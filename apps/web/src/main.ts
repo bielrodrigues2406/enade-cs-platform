@@ -357,7 +357,7 @@ class App {
     const valid = location.pathname === "/treino" && id && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id);
     this.practiceAttemptId.set(valid ? id.toLowerCase() : null);
     const position = params.getAll("item").length === 1 ? params.get("item") ?? "1" : "1";
-    this.practiceItemPosition.set(valid && /^([1-9]|[12][0-9]|30)$/.test(position) ? Number(position) : 1);
+    this.practiceItemPosition.set(valid && /^([1-9]|[1-5][0-9]|60)$/.test(position) ? Number(position) : 1);
   }
   private writePracticeAddress(mode: "push" | "replace") {
     const params = new URLSearchParams();

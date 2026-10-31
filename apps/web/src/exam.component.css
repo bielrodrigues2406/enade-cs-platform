@@ -1,0 +1,105 @@
+/* Prova completa da edição (SIM-1): escolha, cronômetro e resultado por bloco.
+   O restante do treino usa os estilos .practice-* globais. */
+.practice-editions {
+  margin: var(--space-8) 0 var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+.practice-editions h2 {
+  margin: 0 0 var(--space-2);
+}
+.practice-editions ol {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+.practice-editions li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.practice-editions li p {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-sm);
+}
+.practice-editions li.is-chosen strong {
+  color: var(--color-accent);
+}
+.practice-edition-confirm {
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-surface);
+}
+.practice-edition-confirm h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-base);
+}
+
+/* Cronômetro: números tabulares; aviso nos últimos 15 minutos. */
+.practice-clock {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.practice-clock.is-warning {
+  color: var(--color-warning-text);
+  font-weight: 600;
+}
+.practice-clock.is-over {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--color-danger-text);
+}
+
+.practice-blocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin: var(--space-4) 0 var(--space-6);
+  border-block: 1px solid var(--color-border);
+}
+.practice-blocks > div {
+  padding: var(--space-4) var(--space-4) var(--space-4) 0;
+}
+.practice-blocks > div + div {
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--color-border);
+}
+.practice-blocks dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.practice-blocks dd {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-muted);
+}
+.practice-blocks strong {
+  font-family: var(--font-reading);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  color: var(--color-text);
+}
+.practice-map-label {
+  margin: var(--space-4) 0 var(--space-2);
+  font-weight: 600;
+}
+@media (max-width: 640px) {
+  .practice-blocks {
+    grid-template-columns: 1fr;
+  }
+  .practice-blocks > div + div {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+  }
+}

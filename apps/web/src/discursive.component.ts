@@ -1,9 +1,11 @@
-import { Component, computed, signal } from "@angular/core";
+import { Component, Input, computed, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 // Discursivas (DISC-1): o aluno escreve a resposta (o rascunho é salvo
 // sozinho), envia, vê o padrão de resposta do Inep e se autoavalia em cada
-// item. A nota é uma estimativa dele, não uma correção.
+// item. A nota é uma estimativa dele, não uma correção. Dentro da prova
+// completa (`embedded`), mostra só o enunciado e o rascunho: o envio acontece
+// ao finalizar a prova.
 type Image = { url: string; width: number; height: number; page: number };
 type Criterion = { label: string | null; points: number };
 type Level = 0 | 1 | 2;
@@ -38,6 +40,8 @@ export function points(value: number) {
   styleUrl: "./discursive.component.css",
 })
 export class DiscursiveComponent {
+  @Input() questionId: string | null = null;
+  @Input() embedded = false;
   readonly statusLabel = STATUS_LABEL;
   readonly levels = LEVELS;
   readonly maxBody = MAX_BODY;
@@ -59,7 +63,7 @@ export class DiscursiveComponent {
   });
 
   ngOnInit() {
-    void this.loadList();
+    void (this.questionId ? this.open(this.questionId) : this.loadList());
   }
   ngOnDestroy() {
     void this.flush();
