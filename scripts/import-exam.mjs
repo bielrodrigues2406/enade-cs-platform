@@ -44,6 +44,32 @@ async function graphicsByPage(file, pages, work) {
   return result;
 }
 
+/**
+ * Confere o lote antes da pessoa: o que não bate vira aviso e, quando o
+ * gabarito tem um número que não apareceu no PDF, um item vazio para ela
+ * desenhar a caixa. Nada é corrigido por suposição.
+ */
+export function checkBatch(items, answers, definitive) {
+  const issues = [];
+  const counts = new Map();
+  for (const item of items) counts.set(item.key, (counts.get(item.key) ?? 0) + 1);
+  for (const [key, count] of counts)
+    if (count > 1) issues.push(`O número ${key.slice(1)} aparece ${count} vezes na prova; ficou só a primeira. Confira as caixas.`);
+  const placeholders = [];
+  for (const [key, answer] of answers) {
+    if (!/^Q\d+$/.test(key) || answer === "DISCURSIVA" || counts.has(key)) continue;
+    issues.push(`A questão ${key.slice(1)} está no gabarito mas não foi encontrada no PDF: desenhe a caixa dela.`);
+    placeholders.push({ key, number: Number(key.slice(1)), kind: "OBJECTIVE", answer: /^[A-E]$|^ANULADA$/.test(answer) ? answer : null,
+      boxes: [], prompt: "", options: [], warnings: ["Não encontrada automaticamente: desenhe a caixa na página certa."] });
+  }
+  for (const item of items)
+    if (item.kind === "OBJECTIVE" && !item.answer) issues.push(`A questão ${item.number} não tem letra no gabarito.`);
+  const annulled = [...answers.values()].filter((a) => a === "ANULADA").length;
+  if (annulled) issues.push(`${annulled} questão(ões) anulada(s) pelo Inep: não entram no estudo.`);
+  if (!definitive) issues.push("O gabarito não se declara definitivo. Confira no site do Inep se há versão definitiva antes de publicar.");
+  return { issues, placeholders };
+}
+
 /** Proposta de itens a partir dos dois PDFs; não depende do catálogo fixo. */
 export async function propose(examFile, keyFile) {
   const work = await mkdtemp(path.join(tmpdir(), "enade-import-"));
@@ -57,10 +83,7 @@ export async function propose(examFile, keyFile) {
       if (answers.get(question.key) === "DISCURSIVA") question.kind = "DISCURSIVE";
     const graphics = await graphicsByPage(examFile, pages, work);
     const items = classify(questions, { answers, definitive, graphicsByPage: graphics, symbolPages: new Set(), keyAvailable: true });
-    return {
-      pageSizes: pages.map((page) => ({ width: page.width, height: page.height })),
-      definitive,
-      items: questions.map((question, index) => {
+    const proposed = questions.map((question, index) => {
         const item = items[index];
         const answer = answers.get(question.key);
         return {
@@ -77,7 +100,13 @@ export async function propose(examFile, keyFile) {
             ...(item.flags ?? []).flatMap((flag) => (WARNINGS[flag] ? [WARNINGS[flag]] : [])),
           ],
         };
-      }),
+      });
+    const { issues, placeholders } = checkBatch(proposed, answers, definitive);
+    return {
+      pageSizes: pages.map((page) => ({ width: page.width, height: page.height })),
+      definitive,
+      issues,
+      items: [...proposed, ...placeholders],
     };
   } finally {
     await rm(work, { recursive: true, force: true });
@@ -96,14 +125,14 @@ async function main(id) {
       await db.query("BEGIN");
       for (const item of proposal.items)
         await db.query(
-          `INSERT INTO exam_import_item(import_id,question_key,number,kind,answer,boxes,prompt,options,warnings)
-           VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) ON CONFLICT (import_id,question_key) DO NOTHING`,
+          `INSERT INTO exam_import_item(import_id,question_key,number,kind,answer,key_answer,boxes,prompt,options,warnings)
+           VALUES($1,$2,$3,$4,$5,$5,$6,$7,$8,$9) ON CONFLICT (import_id,question_key) DO NOTHING`,
           [id, item.key, item.number, item.kind, item.answer, JSON.stringify(item.boxes), item.prompt,
             JSON.stringify(item.options), item.warnings],
         );
       await db.query(
-        "UPDATE exam_import SET state='READY',page_count=$2,page_sizes=$3,updated_at=now() WHERE id=$1",
-        [id, proposal.pageSizes.length, JSON.stringify(proposal.pageSizes)],
+        "UPDATE exam_import SET state='READY',page_count=$2,page_sizes=$3,issues=$4,updated_at=now() WHERE id=$1",
+        [id, proposal.pageSizes.length, JSON.stringify(proposal.pageSizes), JSON.stringify(proposal.issues)],
       );
       await db.query("COMMIT");
     } catch (error) {

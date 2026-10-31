@@ -55,7 +55,7 @@ async function batch(id: string) {
   if (!ID.test(id)) fail("Importação não encontrada.", 404);
   const row = (await db.query(
     `SELECT id,year,modality,exam_url AS "examUrl",key_url AS "keyUrl",exam_sha256 AS "examSha256",
-       page_count AS "pageCount",page_sizes AS "pageSizes",state,failure,created_at AS "createdAt"
+       page_count AS "pageCount",page_sizes AS "pageSizes",state,failure,issues,created_at AS "createdAt"
      FROM exam_import WHERE id=$1`, [id],
   )).rows[0];
   return row ?? fail("Importação não encontrada.", 404);
@@ -116,7 +116,8 @@ export class ExamImportsController {
     await requireRole(req, "ADMIN");
     const row = await batch(id);
     const items = (await db.query(
-      `SELECT question_key AS key,number,kind,answer,boxes,prompt,options,status,area,subject,warnings,revision
+      `SELECT question_key AS key,number,kind,answer,key_answer AS "keyAnswer",answer_note AS "answerNote",
+         boxes,prompt,options,status,area,subject,warnings,revision
        FROM exam_import_item WHERE import_id=$1 ORDER BY kind DESC,number`, [id],
     )).rows;
     return { ...row, areas: AREAS, items };
@@ -151,19 +152,26 @@ export class ExamImportsController {
     const area = body?.area ? String(body.area) : null;
     if (area && !(AREAS as readonly string[]).includes(area)) fail("Área fora da lista.", 400);
     const subject = typeof body?.subject === "string" && body.subject.trim() ? body.subject.trim().slice(0, 80) : null;
+    // Letra do gabarito: pode ser corrigida (inclusive para ANULADA), com justificativa.
+    const answer = body?.answer ?? null;
+    if (answer !== null && !["A", "B", "C", "D", "E", "ANULADA"].includes(answer)) fail("Letra do gabarito inválida.", 400);
+    const answerNote = typeof body?.answerNote === "string" && body.answerNote.trim() ? body.answerNote.trim().slice(0, 500) : null;
+    if (answerNote && answerNote.length < 5) fail("Explique a troca do gabarito em pelo menos 5 caracteres.", 400);
     if (status === "CONFIRMED" && (!area || !boxes.length))
       fail("Para confirmar, informe a área e pelo menos uma caixa.", 400);
     const updated = await db.query(
       `UPDATE exam_import_item SET boxes=$3,status=$4,area=$5,subject=$6,revision=revision+1,
+         answer=$9,answer_note=CASE WHEN $9 IS NOT DISTINCT FROM key_answer THEN NULL ELSE $10 END,
          confirmed_by=CASE WHEN $4='CONFIRMED' THEN $7::uuid END,
          confirmed_at=CASE WHEN $4='CONFIRMED' THEN now() END
        WHERE import_id=$1 AND question_key=$2 AND revision=$8
-         AND ($4<>'CONFIRMED' OR (kind='OBJECTIVE' AND answer IN ('A','B','C','D','E')))
+         AND ($4<>'CONFIRMED' OR (kind='OBJECTIVE' AND $9 IN ('A','B','C','D','E')))
+         AND ($9 IS NOT DISTINCT FROM key_answer OR $10::text IS NOT NULL)
        RETURNING revision`,
-      [id, key, JSON.stringify(boxes), status, area, subject, admin.id, Number(body?.revision)],
+      [id, key, JSON.stringify(boxes), status, area, subject, admin.id, Number(body?.revision), answer, answerNote],
     );
     if (!updated.rowCount)
-      fail("Não foi possível salvar: a questão mudou em outra aba, ou é discursiva/anulada e não pode ser confirmada.", 409);
+      fail("Não foi possível salvar: a questão mudou em outra aba, é discursiva ou anulada, ou a troca de letra está sem justificativa.", 409);
     return { revision: updated.rows[0].revision };
   }
 

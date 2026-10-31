@@ -18,7 +18,7 @@ import { sourcePath } from "./source-store.js";
 const run = promisify(execFile);
 const CROP_DPI = 200;
 type Box = { page: number; x0: number; y0: number; x1: number; y1: number };
-type Item = { key: string; number: number; answer: string; boxes: Box[]; prompt: string;
+type Item = { key: string; number: number; answer: string; keyAnswer: string | null; answerNote: string | null; boxes: Box[]; prompt: string;
   options: { letter: string; text: string }[]; area: string; subject: string | null; confirmedBy: string };
 
 async function renderCrop(pdf: string, box: Box, work: string) {
@@ -95,9 +95,10 @@ async function publishItem(client: PoolClient, batch: any, item: Item, ids: { ex
   );
   await client.query("UPDATE editorial_question SET current_version_id=$2 WHERE id=$1", [questionId, versionId]);
   await client.query(
-    `INSERT INTO editorial_event(question_id,version_id,actor_id,event_type,note)
-     VALUES($1,$2,$3,'PUBLISHED','Importada do PDF oficial e conferida na tela de importação.')`,
-    [questionId, versionId, item.confirmedBy],
+    `INSERT INTO editorial_event(question_id,version_id,actor_id,event_type,note) VALUES($1,$2,$3,'PUBLISHED',$4)`,
+    [questionId, versionId, item.confirmedBy, item.answer === item.keyAnswer
+      ? "Importada do PDF oficial e conferida na tela de importação."
+      : `Importada e conferida; gabarito lido ${item.keyAnswer ?? "ausente"}, publicado ${item.answer}: ${item.answerNote}`.slice(0, 1000)],
   );
   return true;
 }
@@ -110,7 +111,8 @@ export async function publishImport(id: string, admin: string) {
     const batch = (await client.query("SELECT * FROM exam_import WHERE id=$1 FOR UPDATE", [id])).rows[0];
     if (batch.state !== "READY") fail("Esta importação não está pronta para publicar.", 409);
     const items = (await client.query<Item>(
-      `SELECT question_key AS key,number,answer,boxes,prompt,options,area,subject,confirmed_by AS "confirmedBy"
+      `SELECT question_key AS key,number,answer,key_answer AS "keyAnswer",answer_note AS "answerNote",
+         boxes,prompt,options,area,subject,confirmed_by AS "confirmedBy"
        FROM exam_import_item WHERE import_id=$1 AND status='CONFIRMED' ORDER BY number`, [id],
     )).rows;
     if (!items.length) fail("Confirme pelo menos uma questão antes de publicar.", 409);

@@ -55,8 +55,8 @@ test("an admin adjusts a proposed box, classifies and publishes the question", a
     [importId, examSha, keySha, JSON.stringify([{ width: 612, height: 792 }]), admin],
   );
   await pool.query(
-    `INSERT INTO exam_import_item(import_id,question_key,number,kind,answer,boxes,warnings) VALUES
-     ($1,'Q1',1,'OBJECTIVE','C','[{"page":1,"x0":40,"y0":40,"x1":400,"y1":160}]','{"Tem figura: confira se a caixa pega a figura inteira."}')`,
+    `INSERT INTO exam_import_item(import_id,question_key,number,kind,answer,key_answer,boxes,warnings) VALUES
+     ($1,'Q1',1,'OBJECTIVE','C','C','[{"page":1,"x0":40,"y0":40,"x1":400,"y1":160}]','{"Tem figura: confira se a caixa pega a figura inteira."}')`,
     [importId],
   );
 

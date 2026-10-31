@@ -134,9 +134,10 @@ test("confirmed boxes are cropped, published as image questions and never duplic
     [id, sha(exam), sha(key), JSON.stringify([{ width: 612, height: 792 }]), adminId],
   );
   await db.query(
-    `INSERT INTO exam_import_item(import_id,question_key,number,kind,answer,boxes,prompt,options) VALUES
-     ($1,'Q1',1,'OBJECTIVE','B','[{"page":1,"x0":40,"y0":40,"x1":400,"y1":120}]','TEST ONLY','[{"letter":"A","text":"TEST ONLY a"}]'),
-     ($1,'D1',1,'DISCURSIVE',NULL,'[]','',  '[]')`,
+    `INSERT INTO exam_import_item(import_id,question_key,number,kind,answer,key_answer,boxes,prompt,options) VALUES
+     ($1,'Q1',1,'OBJECTIVE','B','B','[{"page":1,"x0":40,"y0":40,"x1":400,"y1":120}]','TEST ONLY','[{"letter":"A","text":"TEST ONLY a"}]'),
+     ($1,'Q2',2,'OBJECTIVE','ANULADA','ANULADA','[{"page":1,"x0":40,"y0":200,"x1":400,"y1":300}]','',  '[]'),
+     ($1,'D1',1,'DISCURSIVE',NULL,NULL,'[]','',  '[]')`,
     [id],
   );
   const page = await fetch(`${base}/api/imports/${id}/pages/1`, { headers: { Cookie: admin } });
@@ -146,9 +147,15 @@ test("confirmed boxes are cropped, published as image questions and never duplic
   const boxes = [{ page: 1, x0: 50, y0: 60, x1: 420, y1: 140 }];
   assert.equal((await edit("Q1", { boxes, status: "CONFIRMED", revision: 1 })).status, 400); // sem área
   assert.equal((await edit("Q1", { boxes: [{ page: 1, x0: 0, y0: 0, x1: 900, y1: 100 }], status: "PENDING", revision: 1 })).status, 400);
-  const saved = await edit("Q1", { boxes, status: "CONFIRMED", area: "Redes", subject: "TEST ONLY roteamento", revision: 1 });
+  // Trocar a letra lida no gabarito exige justificativa.
+  assert.equal((await edit("Q1", { boxes, status: "PENDING", answer: "C", revision: 1 })).status, 409);
+  assert.equal((await edit("Q1", { boxes, status: "PENDING", answer: "C", answerNote: "ok", revision: 1 })).status, 400);
+  const saved = await edit("Q1", { boxes, status: "CONFIRMED", area: "Redes", subject: "TEST ONLY roteamento",
+    answer: "C", answerNote: "TEST ONLY gabarito republicado", revision: 1 });
   assert.deepEqual(await saved.json(), { revision: 2 });
-  assert.equal((await edit("Q1", { boxes, status: "CONFIRMED", area: "Redes", revision: 1 })).status, 409); // revisão antiga
+  assert.equal((await edit("Q1", { boxes, status: "CONFIRMED", area: "Redes", answer: "C", answerNote: "TEST ONLY x", revision: 1 })).status, 409); // revisão antiga
+  // Anulada não é confirmada, nem mesmo com área e caixa.
+  assert.equal((await edit("Q2", { boxes, status: "CONFIRMED", area: "Redes", answer: "ANULADA", revision: 1 })).status, 409);
   assert.equal((await edit("D1", { boxes, status: "CONFIRMED", area: "Redes", revision: 1 })).status, 409); // discursiva
 
   const published = await fetch(`${base}/api/imports/${id}/publish`, json(admin, "POST", {}));
@@ -157,7 +164,9 @@ test("confirmed boxes are cropped, published as image questions and never duplic
     "SELECT * FROM question_version WHERE question_id=$1", [`official-${sha(exam).slice(0, 12)}-q1`],
   )).rows[0];
   assert.deepEqual([version.review_origin, version.presentation, version.correct_option_id, version.subject, version.editorial_status],
-    ["IMPORT", "IMAGE", "B", "TEST ONLY roteamento", "PUBLISHED"]);
+    ["IMPORT", "IMAGE", "C", "TEST ONLY roteamento", "PUBLISHED"]);
+  const event = (await db.query("SELECT note FROM editorial_event WHERE version_id=$1 AND event_type='PUBLISHED'", [version.id])).rows[0];
+  assert.match(event.note, /gabarito lido B, publicado C: TEST ONLY gabarito republicado/);
   assert.equal(version.reviewed_by, adminId);
   const detail = await (await fetch(`${base}/api/questions/${version.id}`, { headers: { Cookie: admin } })).json();
   assert.equal(detail.images.length, 1);
@@ -166,4 +175,21 @@ test("confirmed boxes are cropped, published as image questions and never duplic
   // A pendência da discursiva mantém o lote aberto; republicar não duplica.
   const again = await fetch(`${base}/api/imports/${id}/publish`, json(admin, "POST", {}));
   assert.deepEqual(await again.json(), { published: 0, alreadyPublished: 1 });
+});
+
+test("the batch check lists gaps, repeats, annulled items and a non-definitive key without guessing", async () => {
+  const { checkBatch } = await import("../scripts/import-exam.mjs");
+  const items = [
+    { key: "Q1", number: 1, kind: "OBJECTIVE", answer: "A" },
+    { key: "Q1", number: 1, kind: "OBJECTIVE", answer: "A" },
+    { key: "Q3", number: 3, kind: "OBJECTIVE", answer: null },
+  ];
+  const answers = new Map([["Q1", "A"], ["Q2", "C"], ["Q4", "ANULADA"], ["D1", "DISCURSIVA"]]);
+  const { issues, placeholders } = checkBatch(items, answers, false);
+  assert.deepEqual(placeholders.map((p: any) => [p.key, p.answer, p.boxes.length]), [["Q2", "C", 0], ["Q4", "ANULADA", 0]]);
+  assert.ok(issues.some((i: string) => i.includes("número 1 aparece 2 vezes")));
+  assert.ok(issues.some((i: string) => i.includes("questão 2 está no gabarito mas não foi encontrada")));
+  assert.ok(issues.some((i: string) => i.includes("questão 3 não tem letra")));
+  assert.ok(issues.some((i: string) => i.includes("1 questão(ões) anulada(s)")));
+  assert.ok(issues.some((i: string) => i.includes("não se declara definitivo")));
 });
