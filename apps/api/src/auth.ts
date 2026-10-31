@@ -10,6 +10,7 @@ import {
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { hashPassword, verifyPassword } from "./password.js";
+import { applyInvitations } from "./roles.js";
 import {
   createGuest,
   digest,
@@ -79,6 +80,17 @@ function credentials(body: unknown) {
     fail("A senha deve ter de 12 a 128 caracteres.", 400);
   return { email, password: password as string };
 }
+// Nome e prontuário são opcionais no cadastro; ligam a conta à turma (D13).
+function profile(body: unknown) {
+  const { name, enrollment } = (body ?? {}) as Record<string, unknown>;
+  const cleanName = typeof name === "string" ? name.trim().replace(/\s+/g, " ") : "";
+  const cleanEnrollment = typeof enrollment === "string" ? enrollment.trim().toUpperCase() : "";
+  if (name !== undefined && (typeof name !== "string" || (cleanName && (cleanName.length < 2 || cleanName.length > 120))))
+    fail("Informe o nome com 2 a 120 caracteres.", 400);
+  if (enrollment !== undefined && (typeof enrollment !== "string" || (cleanEnrollment && !/^[A-Z]{2}[0-9]{6,8}X?$/.test(cleanEnrollment))))
+    fail("Prontuário inválido. Use o formato do IFSP, por exemplo PE3012345.", 400);
+  return { name: cleanName || null, enrollment: cleanEnrollment || null };
+}
 @Controller("api")
 export class AuthController {
   private throttle = new AuthThrottle();
@@ -114,6 +126,7 @@ export class AuthController {
     @Body() body: unknown,
   ) {
     const { email, password } = credentials(body);
+    const { name, enrollment } = profile(body);
     this.throttle.check(req, res, email);
     const current = await requireIdentity(req);
     if (current.email)
@@ -128,15 +141,18 @@ export class AuthController {
         "SELECT id FROM study_identity WHERE id=$1 FOR UPDATE",
         [guest.id],
       );
+      if (enrollment && (await client.query("SELECT 1 FROM account WHERE enrollment=$1", [enrollment])).rowCount)
+        fail("Esse prontuário já está ligado a outra conta.", 409);
       const created = await client.query(
-        "INSERT INTO account(identity_id,email,password_hash) VALUES($1,$2,$3) ON CONFLICT DO NOTHING RETURNING identity_id",
-        [guest.id, email, encoded],
+        "INSERT INTO account(identity_id,email,password_hash,display_name,enrollment) VALUES($1,$2,$3,$4,$5) ON CONFLICT DO NOTHING RETURNING identity_id",
+        [guest.id, email, encoded, name, enrollment],
       );
       if (!created.rowCount)
         fail(
           "Não foi possível cadastrar esse e-mail. Se você já tem conta, entre com sua senha.",
           409,
         );
+      await applyInvitations(client, guest.id, email);
       // Rotate all guest credentials. A leaked anonymous token must not gain account access.
       await client.query("DELETE FROM browser_session WHERE identity_id=$1", [
         guest.id,

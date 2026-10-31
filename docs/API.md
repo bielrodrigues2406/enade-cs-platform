@@ -158,3 +158,17 @@ Somente após finalizar, `summary` contém `{total,correct,incorrect,unanswered,
 Seleção: uma versão atual por questão lógica, somente PUBLISHED de origem AUTHOR_CREATED/OFFICIAL, duas a cinco alternativas e gabarito pertencente à versão; apresentação IMAGE também exige recorte vinculado; tamanho exato sem repetição. area=null mistura assuntos; área deve pertencer à lista canônica de 18 áreas, por correspondência exata de topic. A disponibilidade e a seleção usam a mesma regra. Ordem escolhida aleatoriamente no início e preservada no banco. Uma tentativa ativa por proprietário e requestId por criação permitem retomada/retry sem duplicação. Ver ADR-007 para estado, locks e limites.
 
 A web usa `/treino?attempt=UUID&item=2`, sem resposta ou identidade na URL. Navegação por item atualiza o endereço; reload recupera a tentativa pelo servidor. O componente preserva a gravação pendente após erro/409: edição, saída e finalização só são liberadas após ACK ou reabertura com descarte confirmado da seleção local. A folha de respostas é recolhível no mobile. O conjunto atual de três demos não habilita nenhum tamanho; conteúdo revisado ainda precisa ser publicado/ampliado.
+
+
+## Papéis e administração (ROLE-1, D14)
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /access | cookie | `{roles:("ADMIN"\|"PROFESSOR")[]}`; vazio para visitantes e contas sem papel |
+| GET /admin/users | cookie de admin; `q` até 120, `page` | `{total,page,pageSize,items:[{id,email,name,enrollment,createdAt,roles,answers}],invitations:[{email,role,createdAt}]}` |
+| POST /admin/roles | `{email,role}` | 200 `{status:"GRANTED"}` se a conta existe; `{status:"INVITED"}` se ainda não existe (o papel é aplicado no cadastro) |
+| POST /admin/roles/revoke | `{email,role}` | 200 `{status:"REVOKED"}`; remove papel e convite. Admin não remove o próprio ADMIN (409) |
+
+Sem o papel, as rotas `/admin/*` respondem 403. Toda atribuição, convite e remoção fica em `role_event`. O primeiro administrador é criado no servidor: `npm run admin:role -- grant <e-mail>` (ou `node dist/admin/admin-role.mjs grant <e-mail>` na imagem); a conta precisa existir.
+
+O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE3012345`), opcionais. Prontuário repetido responde 409.

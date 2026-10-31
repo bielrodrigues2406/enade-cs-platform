@@ -120,7 +120,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 011 | PUB-A1 — publicação por agente (passou ao Claude em 28/10, D8) | Claude |
 | 012 | SIM-P1 / núcleo de SIM-1 — treino parcial, reservada antes do código | Codex |
 | 013 | PUB-A2 — assunto e nota; reserva observada na branch Claude `09a40f7`, ainda fora da main | Claude |
-| 014 | próxima livre — reserve aqui antes do primeiro commit | |
+| 014 | ROLE-1 — papéis, convites e perfil (nome, prontuário) | Claude |
+| 015 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 
