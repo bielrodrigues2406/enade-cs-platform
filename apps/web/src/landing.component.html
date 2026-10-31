@@ -1,0 +1,218 @@
+<section class="lp-hero" aria-labelledby="lp-title">
+  <div class="lp-hero-grid" aria-hidden="true"></div>
+  <div class="lp-hero-inner">
+    <div class="lp-hero-text">
+      <p class="lp-eyebrow lp-rise">
+        IFSP · câmpus Presidente Epitácio · Ciência da Computação
+      </p>
+      <h1 id="lp-title" class="lp-title">
+        <span class="lp-line"><span>Preparação </span></span>
+        <span class="lp-line"><span>ENADE.</span></span>
+      </h1>
+      <p class="lp-lead lp-rise">
+        Questões reais das provas de 2005 a 2021, cada uma com a página
+        original, o gabarito do Inep e uma explicação. Treine por área,
+        volte ao que errou e chegue à prova sabendo onde está.
+      </p>
+      <div class="lp-actions lp-rise">
+        <button class="lp-primary" (click)="start.emit()">
+          Começar a estudar <span aria-hidden="true">→</span>
+        </button>
+        <button class="lp-secondary" (click)="register.emit()">
+          Criar conta
+        </button>
+      </div>
+      @if (daysLeft(); as days) {
+        <p class="lp-status lp-rise">
+          <span class="lp-dot" aria-hidden="true"></span>
+          ENADE 2026 · 29 de novembro · {{ days }}
+        </p>
+      }
+    </div>
+    <div class="lp-sheets" aria-hidden="true">
+      @for (sheet of sheets(); track sheet.url; let i = $index) {
+        <figure class="lp-sheet" [style.--i]="i">
+          <figcaption>{{ sheet.title }}</figcaption>
+          <img [src]="sheet.url" alt="" decoding="async" />
+        </figure>
+      } @empty {
+        @for (i of [0, 1, 2]; track i) {
+          <div class="lp-sheet lp-sheet-blank" [style.--i]="i">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+  <dl class="lp-stats" aria-label="O que já está no banco">
+    <div>
+      <dt>questões oficiais</dt>
+      <dd>{{ catalog()?.summary?.official ?? "–" }}</dd>
+    </div>
+    <div>
+      <dt>edições do ENADE</dt>
+      <dd>{{ catalog() ? editions().length : "–" }}</dd>
+    </div>
+    <div>
+      <dt>áreas da Computação</dt>
+      <dd>{{ catalog() ? areasCovered() : "–" }}</dd>
+    </div>
+    <div>
+      <dt>dias até a prova</dt>
+      <dd>{{ daysCount() ?? "–" }}</dd>
+    </div>
+  </dl>
+</section>
+
+<section class="lp-section lp-editions" aria-labelledby="lp-editions" data-reveal>
+  <div class="lp-section-head">
+    <h2 id="lp-editions">Provas anteriores, questão por questão.</h2>
+    <button class="lp-link" (click)="start.emit()">
+      Abrir o banco <span aria-hidden="true">→</span>
+    </button>
+  </div>
+  @if (editions().length) {
+    <ul class="lp-edition-list">
+      @for (edition of editions(); track edition.year; let i = $index) {
+        <li data-reveal [style.--reveal-index]="i">
+          <button (click)="browseYear.emit(edition.year)">
+            <span class="lp-edition-year">ENADE {{ edition.year }}</span>
+            <span class="lp-edition-desc">{{ editionText(edition.year) }}</span>
+            <span class="lp-edition-count"
+              >{{ edition.total }}
+              {{ edition.total === 1 ? "questão" : "questões" }}</span
+            >
+          </button>
+        </li>
+      }
+    </ul>
+  } @else if (catalog()) {
+    <p class="lp-muted">
+      As provas de 2005 a 2021 estão em conferência. As questões aparecem
+      aqui assim que forem publicadas.
+    </p>
+  }
+</section>
+
+<section class="lp-section lp-how" aria-labelledby="lp-how" data-reveal>
+  <div class="lp-how-text">
+    <h2 id="lp-how">Uma questão de cada vez, como no papel.</h2>
+    <ol class="lp-steps">
+      @for (step of steps; track step.title; let i = $index) {
+        <li data-reveal [style.--reveal-index]="i">
+          <span class="lp-step-number" aria-hidden="true">{{
+            (i + 1).toString().padStart(2, "0")
+          }}</span>
+          <div>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.text }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+  <figure class="home-demo lp-demo">
+    <div class="demo-sheet" aria-hidden="true">
+      <p class="demo-meta">Redes · Exemplo</p>
+      <p class="demo-prompt">
+        Qual protocolo da camada de transporte entrega um fluxo de bytes em
+        ordem e retransmite o que se perdeu?
+      </p>
+      <ol class="demo-options">
+        @for (option of demoOptions; track option.letter) {
+          <li
+            [class.is-hover]="demoStep() === 1 && option.letter === 'B'"
+            [class.is-selected]="demoStep() >= 2 && option.letter === 'D'"
+            [class.is-correct]="demoStep() >= 4 && option.letter === 'D'"
+          >
+            <span class="demo-letter">{{ option.letter }}</span>
+            <span>{{ option.text }}</span>
+            @if (demoStep() >= 4 && option.letter === "D") {
+              <span class="demo-tag"
+                ><svg class="demo-check" viewBox="0 0 20 20">
+                  <path d="M3.5 10.5 8 15 16.5 4.5" pathLength="1" /></svg
+                >Alternativa correta</span
+              >
+              <svg class="demo-circle" viewBox="0 0 300 60" preserveAspectRatio="none">
+                <path
+                  d="M24 9C90 2 230 3 284 12c16 4 15 32-6 39C214 60 70 59 20 50 0 45 1 20 21 12c20-7 60-8 92-8"
+                  pathLength="1"
+                />
+              </svg>
+            }
+          </li>
+        }
+      </ol>
+      @if (demoStep() < 4) {
+        <div class="demo-confirm" [class.is-pressed]="demoStep() === 3">
+          {{ demoStep() === 3 ? "Confirmando…" : "Confirmar resposta" }}
+        </div>
+      } @else {
+        <div class="demo-feedback">
+          <strong>Resposta correta.</strong>
+          TCP numera os segmentos, confirma o recebimento e reenvia o que
+          não chegou; UDP não oferece essas garantias.
+        </div>
+      }
+    </div>
+    <figcaption>
+      <span>Você escolhe, confirma e só então vê a correção.</span>
+      <button
+        type="button"
+        class="text-button"
+        (click)="replay()"
+        [disabled]="demoStep() > 0 && demoStep() < 5"
+      >
+        Ver de novo
+      </button>
+    </figcaption>
+  </figure>
+</section>
+
+<section class="lp-section lp-pillars" aria-labelledby="lp-pillars" data-reveal>
+  <div class="lp-pillars-intro">
+    <h2 id="lp-pillars">Tudo o que a preparação pede, num lugar só.</h2>
+    <p>
+      O banco reúne as provas oficiais; o treino junta questões num bloco
+      com resultado no final; o caderno guarda o que você errou para voltar
+      depois. As aulas de preparação do câmpus entram no mesmo sistema.
+    </p>
+  </div>
+  <ul class="lp-pillar-grid">
+    @for (pillar of pillars; track pillar.title; let i = $index) {
+      <li data-reveal [style.--reveal-index]="i">
+        <span class="lp-pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path [attr.d]="pillar.icon" /></svg>
+        </span>
+        <h3>
+          {{ pillar.title }}
+          @if (pillar.soon) {
+            <span class="lp-soon">em breve</span>
+          }
+        </h3>
+        <p>{{ pillar.text }}</p>
+      </li>
+    }
+  </ul>
+</section>
+
+<section class="lp-cta" aria-labelledby="lp-cta" data-reveal>
+  <h2 id="lp-cta">Faltam {{ daysCount() ?? "poucos" }} dias. Comece pela próxima questão.</h2>
+  <div class="lp-actions">
+    <button class="lp-primary" (click)="start.emit()">
+      Começar a estudar <span aria-hidden="true">→</span>
+    </button>
+    <button class="lp-secondary" (click)="login.emit()">Já tenho conta</button>
+  </div>
+</section>
+
+<footer class="lp-footer">
+  <p>
+    Questões oficiais do Inep, sempre com a prova e o gabarito originais a
+    um clique. Recortes, classificação e explicações são feitos por agentes
+    de IA e conferidos por outro agente; não há revisão humana. Em caso de
+    diferença, vale a prova original.
+  </p>
+  <p>Sem conta, suas respostas ficam neste navegador.</p>
+</footer>
+  

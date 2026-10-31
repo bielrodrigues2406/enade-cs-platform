@@ -4,6 +4,7 @@ import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
 import { HomeComponent } from "./home.component";
+import { LandingComponent } from "./landing.component";
 import { QuestionContentComponent } from "./question-content.component";
 import { ExamComponent } from "./exam.component";
 import {
@@ -92,11 +93,14 @@ type Question = Summary & {
 
 @Component({
   selector: "app-root",
+  // A página pública ocupa a largura toda, sem o índice lateral.
+  host: { "[class.landing-mode]": "landingMode()" },
   imports: [
     FormsModule,
     AccountComponent,
     CurationComponent,
     HomeComponent,
+    LandingComponent,
     QuestionContentComponent,
     ExamComponent,
     ReviewComponent,
@@ -270,6 +274,14 @@ class App {
     });
     this.setPath("/");
     this.focusMain();
+  }
+  // Quem ainda não entrou vê a apresentação; quem tem conta, o painel.
+  landingMode() {
+    return this.homeView() && !this.accountView() && this.session().mode !== "account" && !this.booting();
+  }
+  browseYear(year: number) {
+    history.pushState(null, "", `/questoes?year=${year}`);
+    void this.restoreCatalogNavigation();
   }
   onHome() {
     return this.homeView() && !this.accountView();

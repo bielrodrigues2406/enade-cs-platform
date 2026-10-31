@@ -212,6 +212,13 @@
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
             }
+          } @else if (landingMode()) {
+            <app-landing
+              (start)="back()"
+              (login)="openAccount('login')"
+              (register)="openAccount('register')"
+              (browseYear)="browseYear($event)"
+            />
           } @else if (homeView()) {
             <app-home
               [sessionMode]="session().mode"
