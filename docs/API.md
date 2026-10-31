@@ -143,13 +143,13 @@ Todos os endpoints exigem cookie válido; escritas JSON e validação fechada de
 
 | Método | Entrada | Resposta |
 | --- | --- | --- |
-| GET /practice | sem query | `{sizes:[10,20,30],defaultSize:20,total,areas:[{name,count}],active:AttemptSummary|null,recent:AttemptSummary[]}`; 18 áreas fixas e recent até 5 concluídas |
-| POST /practice | `{requestId,size,area:null|string}` | 201 `PracticeView`; mesma chave/configuração é retry; chave divergente ou outra ativa 409; conteúdo insuficiente 409 sem criar tentativa |
+| GET /practice | sem query | `{sizes:[10,20,30],areaSizes:[5,10,20,30],minutesPerQuestion:4,defaultSize:20,total,unseen,areas:[{name,count,unseen}],errors:{total,ready},active:AttemptSummary|null,recent:AttemptSummary[]}`; 18 áreas fixas, recent até 5 concluídas; `errors` são os erros do estudo livre e os prontos para revisão (1 dia depois) |
+| POST /practice | `{requestId,size,area:null|string,timed?}` ou `{requestId,area:null,focus:"ERRORS"}` ou `{requestId,area:null,focus:"RETRY",retryOf}` | 201 `PracticeView`; mesma chave/configuração é retry; chave divergente ou outra ativa 409; conteúdo insuficiente 409 sem criar tentativa. Com área, o tamanho é 5/10/20/30 ou todas as da área; `timed` dá 4 min por questão. `ERRORS` monta o treino com os erros prontos (acertar tira a questão do caderno ao finalizar); `RETRY` com as erradas e em branco de `retryOf` finalizado; o tamanho vem da seleção (até 30) e seleção vazia é 409 |
 | GET /practice/:id | UUID | 200 `PracticeView` somente da sessão |
 | PUT /practice/:id/items/:position | `{optionId:string|null,marked:boolean,baseRevision:number}` | 200 `{position,optionId,marked,revision}`; base inicial 0; retry idêntico retorna revisão já aplicada; conflito/finalizada 409 |
 | POST /practice/:id/finish | `{}` | 200 `PracticeView` finalizado; repetição/concorrência devolvem o mesmo resultado |
 
-`AttemptSummary` = `{id,state,size,area,createdAt,finishedAt,answered}`. `PracticeView` acrescenta `{items,summary}`. Datas ISO; state IN_PROGRESS ou COMPLETED. Cada item = `{position,question:PracticeQuestion,answer:{optionId,marked,revision},result?:PracticeFeedback}`.
+`AttemptSummary` = `{id,state,size,area,kind,focus,createdAt,finishedAt,answered}` (o detalhe traz também `deadlineAt,pausedAt,remainingMs`). `PracticeView` acrescenta `{items,summary}`. Datas ISO; state IN_PROGRESS ou COMPLETED. Cada item = `{position,question:PracticeQuestion,answer:{optionId,marked,revision},result?:PracticeFeedback}`.
 
 `PracticeQuestion` = `{id,title,topic,subject,origin,authorCredit,demonstration,versionNumber,prompt,options:[{id,text}],presentation,images,reviewOrigin,provenance}`. Presentation/images/provenance usam o contrato de estudo existente. Nunca inclui answer do estudo livre, correctOptionId ou explanation.
 
@@ -160,13 +160,23 @@ Seleção: uma versão atual por questão lógica, somente PUBLISHED de origem A
 A web usa `/treino?attempt=UUID&item=2`, sem resposta ou identidade na URL. Navegação por item atualiza o endereço; reload recupera a tentativa pelo servidor. O componente preserva a gravação pendente após erro/409: edição, saída e finalização só são liberadas após ACK ou reabertura com descarte confirmado da seleção local. A folha de respostas é recolhível no mobile. O conjunto atual de três demos não habilita nenhum tamanho; conteúdo revisado ainda precisa ser publicado/ampliado.
 
 
+### Desempenho e perfil da pessoa
+
+| Método | Entrada | Resposta |
+| --- | --- | --- |
+| GET /me/progress | cookie | `{areas:[{area,published,firstAttempts,firstCorrect}],errors:{total,ready},active}`. Conta a primeira resposta a cada questão (estudo livre ou treino/prova finalizados); `published` usa a mesma seleção do treino. Só áreas com questões |
+| GET /me/profile | conta | `{email,name,enrollment,createdAt}`; visitante 401 |
+| PUT /me/profile | `{name,enrollment,email?,currentPassword?}` | `{email,name,enrollment}`; e-mail novo exige a senha atual (403 se errada, limite de tentativas do login); prontuário ou e-mail de outra conta 409 |
+| POST /me/password | `{currentPassword,newPassword}` | 200 `{status:"CHANGED"}`; encerra as outras sessões da conta, mantém a atual |
+
 ## Papéis e administração (ROLE-1, D14)
 
 | Método e caminho (prefixo /api) | Entrada | Retorno |
 | --- | --- | --- |
 | GET /access | cookie | `{roles:("ADMIN"\|"PROFESSOR")[]}`; vazio para visitantes e contas sem papel |
-| GET /admin/users | cookie de admin; `q` até 120, `page` | `{total,page,pageSize,items:[{id,email,name,enrollment,createdAt,roles,answers}],invitations:[{email,role,createdAt}]}` |
-| POST /admin/roles | `{email,role}` | 200 `{status:"GRANTED"}` se a conta existe; `{status:"INVITED"}` se ainda não existe (o papel é aplicado no cadastro) |
+| GET /admin/users | cookie de admin; `q` até 120, `page` | `{total,page,pageSize,items:[{id,email,name,enrollment,createdAt,roles,answers}],invitations:[{email,role,createdAt,claimedAt,claimedName,claimedEnrollment}]}`; com `claimedAt`, a pessoa já se cadastrou e o papel espera a confirmação do admin |
+| POST /admin/roles | `{email,role}` | 200 `{status:"GRANTED"}` se a conta existe (também confirma um convite reivindicado); `{status:"INVITED"}` se ainda não existe: o cadastro só reivindica e o admin confirma |
+| POST /admin/accounts | `{email,password,name?,enrollment?,role?}` | 201 `{id,email,role}`; cadastro manual pelo admin, com papel opcional já concedido; e-mail ou prontuário existente 409 |
 | POST /admin/roles/revoke | `{email,role}` | 200 `{status:"REVOKED"}`; remove papel e convite. Admin não remove o próprio ADMIN (409) |
 
 Sem o papel, as rotas `/admin/*` respondem 403. Toda atribuição, convite e remoção fica em `role_event`. O primeiro administrador é criado no servidor: `npm run admin:role -- grant <e-mail>` (ou `node dist/admin/admin-role.mjs grant <e-mail>` na imagem); a conta precisa existir.

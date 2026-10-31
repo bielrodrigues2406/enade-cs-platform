@@ -108,3 +108,16 @@ Critérios para ampliar: nenhum item do piloto com contexto/alternativa cortados
 | Lote piloto e publicação | Extrator e revisor independente, com registro do caminho aplicado | Conferência de origem, captura, gabarito e acessibilidade; usar o caminho assistido das ADR-010/011 após conferir os bytes exatos. Não atribuir revisão humana a agentes |
 
 Os agentes não iniciam a tarefa da outra trilha nem editam migrations aplicadas. A entrega de imagens/publicação veio do PR #16; o fluxo de upload/editor continua pendente. Não se atribui aprovação editorial a simulações de alunos/professores. A avaliação do produto e as pendências estão em [análise por perspectivas](reviews/2026-10-28-product-perspectives.md).
+
+## Completar as questões que faltam (pela tela de importação)
+
+Situação em 31/10/2026 no banco de desenvolvimento: **119 objetivas oficiais publicadas** (2014: 35, 2017: 35, 2021: 33, 2008: 16) e 3 demonstrativas. Faltam as provas de 2005 e 2011 inteiras, 2008 Q1–Q22 e as questões só de Licenciatura. Os rascunhos com explicação estão em `data/agent-reviews/pending/` e **não foram conferidos por outra pessoa**: o Claude extraiu esse material e não pode aprová-lo (D15).
+
+Para publicar sem depender de agentes, uma pessoa com papel de administração confere pela tela:
+
+1. **Administração → Importar prova.** Envie o PDF do caderno da edição e, se houver, o gabarito definitivo (e o padrão de resposta, para as discursivas).
+2. O lote abre com uma caixa por questão. As que **já estão publicadas aparecem marcadas** e são puladas na publicação; não é preciso apagá-las.
+3. Para cada questão nova, confira no editor: o recorte (caixa) cobre enunciado, figuras e alternativas; o texto transcrito confere com a imagem; a alternativa correta é a do gabarito; a área está certa. Explicação é opcional: sem explicação conferida, a questão sai sem texto explicativo (D11).
+4. Confirme as questões conferidas e publique o lote. Só as confirmadas entram no banco, nos treinos e na prova completa.
+
+Uma edição só vira "Prova completa" com 10 objetivas publicadas ou mais. Questões anuladas pelo Inep não são publicadas; a prova as lista como faltantes.
