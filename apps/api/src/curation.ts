@@ -248,7 +248,9 @@ export class CurationController {
     const user = await curator(req);
     return (
       await db.query(
-        `SELECT v.id,v.question_id AS "questionId",v.title,v.topic,v.origin,v.editorial_status AS "editorialStatus",v.version_number AS sequence,v.editorial_revision AS revision,v.author_credit AS "authorCredit",q.current_version_id AS "currentVersionId",COALESCE(v.created_by=$1,false) AS "isAuthor",(v.editorial_status='IN_REVIEW' AND v.created_by IS DISTINCT FROM $1::uuid AND v.last_editor_id IS DISTINCT FROM $1::uuid) AS "canReview" FROM editorial_question q JOIN LATERAL(SELECT * FROM question_version WHERE question_id=q.id ORDER BY version_number DESC LIMIT 1) v ON true ORDER BY v.title,q.id LIMIT 50`,
+        `SELECT v.id,v.question_id AS "questionId",v.title,v.topic,v.origin,v.editorial_status AS "editorialStatus",v.version_number AS sequence,v.editorial_revision AS revision,v.author_credit AS "authorCredit",q.current_version_id AS "currentVersionId",COALESCE(v.created_by=$1,false) AS "isAuthor",(v.editorial_status='IN_REVIEW' AND v.created_by IS DISTINCT FROM $1::uuid AND v.last_editor_id IS DISTINCT FROM $1::uuid) AS "canReview" FROM editorial_question q JOIN LATERAL(SELECT * FROM question_version WHERE question_id=q.id ORDER BY version_number DESC LIMIT 1) v ON true
+         ORDER BY CASE v.editorial_status WHEN 'IN_REVIEW' THEN 0 WHEN 'DRAFT' THEN 1 ELSE 2 END,
+           regexp_replace(v.title,'[0-9]+$',''),(substring(v.title from '([0-9]+)$'))::integer NULLS FIRST,q.id LIMIT 50`,
         [user.id],
       )
     ).rows;
