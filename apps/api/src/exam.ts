@@ -23,6 +23,7 @@ export type Attempt = {
   id: string; size: number; area: string | null; state: "IN_PROGRESS" | "COMPLETED";
   createdAt: Date; finishedAt: Date | null; answered: number; summary: Result | null;
   kind: "PARTIAL" | "EDITION"; examSourceId: string | null; deadlineAt: Date | null;
+  pausedAt: Date | null; remainingMs: number | null;
 };
 type Counts = { total: number; correct: number; incorrect: number; unanswered: number };
 type Result = Counts & {
@@ -44,7 +45,10 @@ type Item = {
 // Tolerância para a última gravação feita no limite do prazo chegar ao servidor.
 const DEADLINE_GRACE = "15 seconds";
 export const ATTEMPT_FIELDS = `p.id,p.size,p.area,p.state,p.created_at AS "createdAt",p.finished_at AS "finishedAt",p.summary,
-  p.kind,p.exam_source_id AS "examSourceId",p.deadline_at AS "deadlineAt",
+  p.kind,p.exam_source_id AS "examSourceId",p.paused_at AS "pausedAt",
+  p.deadline_at + p.paused_ms * interval '1 millisecond' AS "deadlineAt",
+  CASE WHEN p.deadline_at IS NOT NULL AND p.state='IN_PROGRESS' THEN GREATEST(0, extract(epoch FROM
+    p.deadline_at + p.paused_ms * interval '1 millisecond' - COALESCE(p.paused_at, clock_timestamp())) * 1000)::integer END AS "remainingMs",
   (SELECT count(*)::integer FROM practice_item i WHERE i.attempt_id=p.id AND i.option_id IS NOT NULL) AS answered`;
 
 export function closed(body: unknown, keys: string[]) {
@@ -55,7 +59,7 @@ export function closed(body: unknown, keys: string[]) {
 function noQuery(req: any) {
   if (Object.keys(req.query ?? {}).length) fail("Filtro de treino inválido.", 400);
 }
-function attemptId(value: string) {
+export function attemptId(value: string) {
   if (!UUID.test(value)) fail("Treino não encontrado.", 404);
   return value.toLowerCase();
 }
@@ -63,7 +67,7 @@ function attemptSummary(row: Attempt) {
   return {
     id: row.id, state: row.state, size: row.size, area: row.area,
     createdAt: row.createdAt, finishedAt: row.finishedAt, answered: row.answered,
-    kind: row.kind, deadlineAt: row.deadlineAt,
+    kind: row.kind, deadlineAt: row.deadlineAt, pausedAt: row.pausedAt, remainingMs: row.remainingMs,
   };
 }
 export async function owned(client: PoolClient, id: string, owner: string, lock = false) {
@@ -123,7 +127,7 @@ async function editionDiscursive(client: PoolClient, attempt: Attempt) {
  */
 async function complete(client: PoolClient, attempt: Attempt, owner: string) {
   const summary = result(await items(client, attempt.id));
-  await client.query("UPDATE practice_attempt SET state='COMPLETED',finished_at=clock_timestamp(),summary=$2::jsonb WHERE id=$1",
+  await client.query("UPDATE practice_attempt SET state='COMPLETED',finished_at=clock_timestamp(),summary=$2::jsonb,paused_at=NULL WHERE id=$1",
     [attempt.id, JSON.stringify(summary)]);
   const discursive = (await editionDiscursive(client, attempt)).map((row) => row.id);
   if (discursive.length)
@@ -134,9 +138,9 @@ async function complete(client: PoolClient, attempt: Attempt, owner: string) {
     );
 }
 
-/** Prazo da prova vencido: finaliza com o que foi salvo. Devolve se finalizou. */
-async function expire(client: PoolClient, attempt: Attempt, owner: string) {
-  if (attempt.state !== "IN_PROGRESS" || !attempt.deadlineAt) return false;
+/** Prazo da prova vencido: finaliza com o que foi salvo. Pausada, não vence. Devolve se finalizou. */
+export async function expire(client: PoolClient, attempt: Attempt, owner: string) {
+  if (attempt.state !== "IN_PROGRESS" || !attempt.deadlineAt || attempt.pausedAt) return false;
   const late = (await client.query(`SELECT $1::timestamptz + interval '${DEADLINE_GRACE}' < clock_timestamp() AS late`,
     [attempt.deadlineAt])).rows[0].late;
   if (late) await complete(client, attempt, owner);
@@ -215,9 +219,9 @@ export class PracticeController {
         'areas',(SELECT json_agg(json_build_object('name',a.name,'count',
           (SELECT count(*)::integer FROM eligible e WHERE e.topic=a.name)) ORDER BY a.ordinality)
           FROM unnest($2::text[]) WITH ORDINALITY a(name,ordinality)),
-        'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
+        'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,kind,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
         'recent',COALESCE((SELECT json_agg(a ORDER BY a."finishedAt" DESC,a.id DESC) FROM (
-          SELECT id,state,size,area,"createdAt","finishedAt",answered FROM owned
+          SELECT id,state,size,area,kind,"createdAt","finishedAt",answered FROM owned
           WHERE state='COMPLETED' ORDER BY "finishedAt" DESC,id DESC LIMIT 5
         ) a),'[]'::json)
       ) AS availability`, [user.id, [...AREAS]],
@@ -304,6 +308,7 @@ export class PracticeController {
         return fail("O tempo da prova acabou. O resultado foi registrado com o que estava salvo.", 409);
       }
       if (attempt.state !== "IN_PROGRESS") fail("Este treino já foi finalizado. Consulte o resultado.", 409);
+      if (attempt.pausedAt) fail("A prova está pausada. Continue a prova para responder.", 409);
       const item = (await client.query<{ versionId: string; position: number; optionId: string | null; marked: boolean; revision: number }>(
         'SELECT version_id AS "versionId",position,option_id AS "optionId",marked,revision FROM practice_item WHERE attempt_id=$1 AND position=$2', [id, Number(rawPosition)],
       )).rows[0];

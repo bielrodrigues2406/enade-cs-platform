@@ -1,19 +1,20 @@
 import { randomUUID } from "node:crypto";
-import { Body, Controller, Get, Param, Post, Req } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, Param, Post, Req } from "@nestjs/common";
+import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
-import { ATTEMPT_FIELDS, ELIGIBLE, closed, owned, view, type Attempt } from "./exam.js";
+import { ATTEMPT_FIELDS, ELIGIBLE, attemptId, closed, expire, owned, view, type Attempt } from "./exam.js";
 
 // Prova completa da edição (SIM-1, ADR-014): as objetivas publicadas de uma
 // prova oficial, na ordem original, com o tempo da prova. Usa a mesma
-// tentativa do treino parcial; só a seleção e o prazo são próprios.
+// tentativa do treino parcial; só a seleção, o prazo e a pausa são próprios.
 
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
 /** Duração das provas de 2004 a 2026 (bacharelados e CST): quatro horas. */
 export const EDITION_MINUTES = 240;
-/** Abaixo disso a prova ficaria desfigurada: a edição não é oferecida. */
-export const MIN_OBJECTIVES = 20;
+/** Abaixo disso não vale como prova: a edição não é oferecida (2008 tem 16 de Computação). */
+export const MIN_OBJECTIVES = 10;
 
 type Edition = {
   id: string; year: number; modality: string; title: string; officialUrl: string;
@@ -39,6 +40,31 @@ async function editions(): Promise<Edition[]> {
   )).rows;
 }
 
+/** Pausa ou retoma o cronômetro. Pausada, a prova não vence e não aceita respostas. */
+async function setPaused(req: any, rawId: string, paused: boolean) {
+  const id = attemptId(rawId);
+  const client: PoolClient = await db.connect();
+  try {
+    await client.query("BEGIN");
+    const user = await requireIdentity(req, client, true);
+    const attempt = await owned(client, id, user.id, true);
+    if (attempt.kind !== "EDITION") fail("Só a prova completa tem cronômetro.", 400);
+    if (!(await expire(client, attempt, user.id)) && attempt.state === "IN_PROGRESS")
+      await client.query(paused
+        ? "UPDATE practice_attempt SET paused_at=COALESCE(paused_at,clock_timestamp()) WHERE id=$1"
+        : `UPDATE practice_attempt SET paused_ms=paused_ms+(extract(epoch FROM clock_timestamp()-paused_at)*1000)::bigint,
+             paused_at=NULL WHERE id=$1 AND paused_at IS NOT NULL`, [id]);
+    const dto = await view(client, await owned(client, id, user.id));
+    await client.query("COMMIT");
+    return dto;
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
 @Controller("api/editions")
 export class EditionExamController {
   @Get() async list(@Req() req: any) {
@@ -51,6 +77,14 @@ export class EditionExamController {
         missing: edition.modality === "COMUM" ? [] : missingNumbers(numbers),
       })),
     };
+  }
+
+  @Post("attempts/:id/pause") @HttpCode(200) pause(@Req() req: any, @Param("id") id: string) {
+    return setPaused(req, id, true);
+  }
+
+  @Post("attempts/:id/resume") @HttpCode(200) resume(@Req() req: any, @Param("id") id: string) {
+    return setPaused(req, id, false);
   }
 
   @Post(":source/attempts") async start(@Req() req: any, @Param("source") source: string, @Body() body: unknown) {

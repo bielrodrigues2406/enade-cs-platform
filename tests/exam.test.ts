@@ -366,7 +366,7 @@ test("practice offers only the five most recent completed results and preserves 
   assert.equal((await json(`practice/${ids[0]}`,user)).state,"COMPLETED");
 });
 
-test("an edition exam applies the published objectives in order, expires on the server and submits discursive drafts", async () => {
+test("an edition exam applies the published objectives in order, pauses, expires on the server and submits discursive drafts", async () => {
   const exam = await source("EXAM"), key = await source("ANSWER_KEY"), standard = await source("RESPONSE_STANDARD");
   // Prova TEST ONLY com as questões 1 a 23, sem a 7; as quatro primeiras são de Formação Geral.
   const numbers = Array.from({ length: 23 }, (_, i) => i + 1).filter((n) => n !== 7);
@@ -398,6 +398,15 @@ test("an edition exam applies the published objectives in order, expires on the 
   assert.ok(minutes > 239 && minutes <= 240, `prazo ${minutes}`);
   assert.equal((await json(`editions/${exam}/attempts`, user, "POST", { requestId }, 201)).id, started.id); // repetição
   assert.equal((await request(`editions/${exam}/attempts`, user, "POST", { requestId: randomUUID() })).status, 409); // já há uma ativa
+  // Pausada: não aceita resposta e o tempo restante não corre.
+  const paused = await json(`editions/attempts/${started.id}/pause`, user, "POST", {});
+  assert.ok(paused.pausedAt);
+  assert.equal((await request(`practice/${started.id}/items/1`, user, "PUT", { optionId: null, marked: true, baseRevision: 0 })).status, 409);
+  await new Promise((resolve) => setTimeout(resolve, 1100));
+  assert.equal((await json(`practice/${started.id}`, user)).remainingMs, paused.remainingMs);
+  const resumed = await json(`editions/attempts/${started.id}/resume`, user, "POST", {});
+  assert.equal(resumed.pausedAt, null);
+  assert.ok(new Date(resumed.deadlineAt).getTime() - new Date(started.deadlineAt).getTime() >= 1000, "o prazo anda com a pausa");
   await save(user, started.id, 1, `${started.items[0].question.id}-A`);
   const finished = await json(`practice/${started.id}/finish`, user, "POST", {});
   assert.deepEqual(finished.summary.byBlock.general, { total: 4, correct: 1, incorrect: 0, unanswered: 3 });
