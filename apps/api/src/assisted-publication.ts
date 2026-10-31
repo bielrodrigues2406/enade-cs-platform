@@ -47,6 +47,7 @@ type Verdict = {
   notes: string;
   studentNote: string | null;
   explanation: string | null;
+  explanationRejected: boolean;
   reason: string;
 };
 type Fragment = {
@@ -133,6 +134,7 @@ function parseReview(value: unknown) {
       notes: item.notes === undefined ? "" : str(item.notes, `Notas de ${key}`, 2000),
       studentNote: optional("studentNote", "Nota ao estudante", 400),
       explanation: check === "OK" ? explanation : null,
+      explanationRejected: check === "REJECTED",
     } as Verdict;
   });
   return {
@@ -225,6 +227,21 @@ function readAnalysis(value: unknown, exam: CatalogDocument) {
       explanations.set(key, { explanation: item.explanation, author: String(data.author ?? "IA") });
   }
   return { explanations, scope };
+}
+
+// D11: a explicação conferida na própria conferência vem primeiro. Se o
+// conferente a recusou, a questão sai sem explicação; uma análise anterior não
+// substitui a recusa. Sem nenhuma das duas, também sai sem explicação.
+function chooseExplanation(
+  verdict: Verdict,
+  review: { explainer: string | null; reviewer: string },
+  previous: { explanation: string; author: string } | undefined,
+): { explanation: string; credit: string } | null {
+  if (verdict.explanation)
+    return { explanation: verdict.explanation,
+      credit: `Explicação gerada por IA (${review.explainer}) e conferida por agente (${review.reviewer}); sem revisão humana` };
+  if (verdict.explanationRejected || !previous) return null;
+  return { explanation: previous.explanation, credit: `Explicação gerada por IA (${previous.author}), sem revisão humana` };
 }
 
 function finalityOf(keyDoc: CatalogDocument, declared: boolean, finality: unknown) {
@@ -404,13 +421,7 @@ export async function publishAssisted(input: {
         id: letter, text: transcription.get(letter) ?? "", position,
       }));
       // Explicação conferida na própria conferência (D11) tem precedência.
-      const explained = verdict.explanation
-        ? { explanation: verdict.explanation,
-            credit: `Explicação gerada por IA (${review.explainer}) e conferida por agente (${review.reviewer}); sem revisão humana` }
-        : analysis.has(verdict.key)
-          ? { explanation: analysis.get(verdict.key)!.explanation,
-              credit: `Explicação gerada por IA (${analysis.get(verdict.key)!.author}), sem revisão humana` }
-          : null;
+      const explained = chooseExplanation(verdict, review, analysis.get(verdict.key));
       const number = item.number as number;
       const content = {
         title: exam.modality === "LICENCIATURA"

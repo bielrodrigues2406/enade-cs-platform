@@ -362,7 +362,10 @@ test("a checked explanation, subject and student note travel with the version; t
   const r2 = structuredClone(rejected.input.review) as any;
   Object.assign(r2, { explainer: "claude-explain-test" });
   Object.assign(r2.items[0], { explanation: "TEST ONLY errada.", explanationCheck: "REJECTED", explanationNote: "TEST ONLY" });
-  await publishAssisted({ ...rejected.input, review: r2 });
+  // Uma análise anterior com explicação não substitui a recusa explícita.
+  const previous = { author: "TEST ONLY", items: [{ examId: rejected.exam.id, examSha256: rejected.exam.sha256,
+    key: "Q1", explanation: "TEST ONLY explicação antiga." }] };
+  await publishAssisted({ ...rejected.input, review: r2, analysis: previous });
   const v2 = (await db.query(`SELECT v.explanation,v.explanation_credit FROM question_version v JOIN editorial_question q ON q.id=v.question_id
     WHERE q.official_exam_id=$1`, [rejected.exam.sourceId])).rows[0];
   assert.deepEqual([v2.explanation, v2.explanation_credit], ["", "Sem explicação ainda"]);
