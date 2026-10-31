@@ -71,10 +71,14 @@ O manifesto atual contém `renderer.pages` com dimensões de todas as páginas o
 
 ## Lote 2 de 29/10 — Q9–Q16
 
-`enade-2021-bacharelado-exam-q9-q16.json` registra a conferência por `codex-review-2021-b2` da extração existente de `codex-root`: Q9/Q10/Q11/Q15/Q16 APPROVED e Q12/Q13/Q14 BLOCKED. As 40 alternativas e o gabarito foram confrontados com os oito WebP e as páginas originais. O manifesto e as imagens não mudaram. O arquivo Q1–Q8 mantém o conferente anterior.
+`superseded/enade-2021-bacharelado-exam-q9-q16.json` registra a conferência por `codex-review-2021-b2` da extração existente de `codex-root`: Q9/Q10/Q11/Q15/Q16 APPROVED e Q12/Q13/Q14 BLOCKED. As 40 alternativas e o gabarito foram confrontados com os oito WebP e as páginas originais. O manifesto e as imagens não mudaram. O arquivo Q1–Q8 mantém o conferente anterior.
 
 O [relatório do lote](../../docs/reviews/2021-crop-batch-2.md) explica os bloqueios e os problemas textuais de Q11/Q16. São 11 aprovações e cinco bloqueios entre Q1–Q16; nenhuma publicação nesta etapa. O pacote adicional `.local/exports/conferencia-2021-bacharelado-q9-q16.zip` transporta os dois lotes e os mesmos assets. Passar cada arquivo separadamente ao publicador; não trocar o `reviewer` de um lote para consolidar identidades.
 
 ## Recortes canônicos de 30/10 (D15)
 
 A partir de 30/10 os recortes ficam commitados em `data/question-crops/` e o manifesto de 2021 Bacharelado foi substituído. Os dois lotes do Codex acima (`enade-2021-bacharelado-exam.json` e `-q9-q16.json`) continuam como registro, mas não publicam: seus SHA-256 são de outra geração. Seus achados entram nos pacotes novos como `previous`. Processo atual em [PROCESS.md](PROCESS.md).
+
+## Conferências substituídas
+
+`superseded/` guarda conferências feitas sobre um manifesto de recortes anterior e já refeitas por um lote novo (as de 2021 Q1–Q8 e Q9–Q16, substituídas por `enade-2021-bacharelado-exam-q1-q20.json`). Ficam como histórico; o publicador e o `bootstrap-content` leem só os arquivos da pasta principal (nem `pending/`, nem `superseded/`).
