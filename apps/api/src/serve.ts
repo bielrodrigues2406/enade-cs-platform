@@ -7,10 +7,10 @@ try {
   await grantConfiguredAdmins();
   app.enableShutdownHooks();
   // Loopback por padrão; em contêiner, HOST=0.0.0.0 atrás do proxy do provedor.
-  await app.listen(
-    Number(process.env.PORT || 3000),
-    process.env.HOST || "127.0.0.1",
-  );
+  const port = Number(process.env.PORT || 3000), host = process.env.HOST || "127.0.0.1";
+  await app.listen(port, host);
+  // Sem isso o terminal fica mudo e parece travado.
+  console.log(`API pronta em http://${host}:${port} (teste: /api/health).`);
   // Conexões lentas de propósito (slowloris) não seguram o servidor: cabeçalhos
   // em 20 s e a requisição inteira em 2 min (o envio de PDFs de importação cabe).
   const server = app.getHttpServer();
