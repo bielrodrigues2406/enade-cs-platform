@@ -1,0 +1,69 @@
+{
+  "packet": "enade-2021-licenciatura-exam-q27-q35",
+  "explainer": "claude-explain-15",
+  "items": [
+    {
+      "key": "Q27",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: avaliação digital e TIC",
+      "explanation": "A questão cobra a ideia de que, em contexto digital, ensino, aprendizagem e avaliação não são etapas isoladas. O texto diz que a tecnologia deve cumprir objetivos pedagógicos e motivar uma aprendizagem significativa, que é preciso repensar ao mesmo tempo as estratégias de ensino-aprendizagem e de avaliação, e que os resultados da avaliação permitem ao docente refletir sobre sua atuação e ajustar a atividade futura.\n\nPor isso a alternativa D, indicada no gabarito oficial, está correta: as estratégias de ensino, aprendizagem e avaliação devem andar juntas, em função dos objetivos pedagógicos.\n\nAs demais falham por afirmar o que o texto não sustenta. A propõe segmentar os recursos por finalidade, o oposto da integração. B defende só avaliações somativas, mas o texto valoriza o uso dos resultados para ajustar o ensino ao longo do processo. C exige padronizar prazos e pontuação, sem apoio no texto. E condiciona a credibilidade a um fiscal, ideia ausente da passagem.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q28",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: papéis na EaD e no AVA",
+      "explanation": "A questão trata dos papéis de professor, tutor e aluno na Educação a Distância, mediada por um Ambiente Virtual de Aprendizagem. O texto diz que o AVA reúne mídias escolhidas conforme a instituição, o público e o curso, e que professores, tutores e alunos interagem no processo de ensino e aprendizagem.\n\nO gabarito oficial é D (II, III e IV). A afirmativa II está correta: o tutor faz a mediação e a comunicação entre professores e alunos e media discussões no AVA. A III está correta: o professor elabora o material didático de acordo com os objetivos, os conteúdos e as orientações metodológicas da disciplina. A IV está correta: o tutor colabora com o professor no processo avaliativo, por exemplo avaliando a participação em um fórum.\n\nA I atribui ao professor a função de fazer chamadas virtuais de presença em intervalos regulares, o que não é uma atribuição característica do papel descrito. A V transfere ao aluno a responsabilidade de eleger os recursos pedagógicos da disciplina; embora seu papel seja ativo, a definição dos recursos cabe ao planejamento docente. Por isso as opções com I ou V ficam excluídas.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q29",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: reuso de objetos de aprendizagem",
+      "explanation": "A questão cobra o conceito de granularidade de objetos de aprendizagem e sua relação com o reuso. Granularidade grossa significa um recurso com muitos itens (imagens, texto, áudio, como uma simulação); granularidade fina significa um recurso pequeno, como uma única imagem.\n\nO gabarito oficial é A: as duas asserções são verdadeiras e a II justifica a I. A asserção II diz que o reuso depende da capacidade de aplicar o recurso em contextos diferentes e que, quanto mais contexto o recurso carrega, mais difícil reutilizá-lo; logo, quanto menor a granularidade, maior a reusabilidade. Disso decorre a I: um objeto com vários itens, que carrega mais contexto, é mais difícil de reutilizar do que uma imagem isolada.\n\nB aceitaria as duas asserções, mas negaria a relação de justificativa, que existe, pois a II explica o motivo da I. C, D e E consideram falsa ao menos uma asserção, embora ambas sejam coerentes com a ideia de que mais contexto dificulta o reuso.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q30",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: avaliação automática em MOOCs",
+      "explanation": "A questão trata das possibilidades de avaliação em plataformas MOOC (cursos online abertos e massivos). O texto descreve essas plataformas como abertas a qualquer interessado e com grande quantidade de material didático e de participantes.\n\nO gabarito oficial é A: as duas asserções são verdadeiras e a II justifica corretamente a I. A asserção I afirma que o poder de massificação gera grande potencial de automatizar a avaliação. A II explica por quê: com muitos estudantes avaliados ao longo do tempo, e com o uso de Inteligência Artificial, é possível reunir dados suficientes para criar um sistema capaz de corrigir avaliações automaticamente, mesmo com questões discursivas. A quantidade de dados é justamente o que torna viável a automação citada na I.\n\nB negaria que a II explica a I, mas é a escala de dados que sustenta o potencial de automação. C e D tratariam uma das asserções como falsa, e E, ambas, o que contraria a coerência entre elas. Note que a II descreve uma possibilidade, não uma garantia de correção perfeita.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q31",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: educação escolar quilombola",
+      "explanation": "A questão cobra a leitura do texto-base sobre a Educação Escolar Quilombola. Segundo ele, as políticas devem considerar as dimensões históricas, políticas, econômicas, sociais, culturais e educacionais dos quilombos; a educação não pode ser pensada só por aspectos normativos, burocráticos e institucionais; e a implementação deve ser sempre acompanhada de consulta prévia, feita pelo poder público junto às comunidades e suas organizações.\n\nO gabarito oficial é D (II e III, apenas). A II está correta: história, memória, território, ancestralidade e conhecimentos tradicionais são considerados na garantia do direito à educação quilombola. A III está correta: a comunidade tem papel determinante nas decisões sobre a educação escolar a ser implementada, o que decorre da consulta prévia.\n\nA I está incorreta, pois afirma que a relação com os movimentos sociais visa adequar a organização cultural ao sistema educacional. O texto aponta o contrário: a educação deve levar em conta a realidade da comunidade, e não o enquadramento da comunidade em estruturas institucionais. Por isso as opções que incluem a I ficam excluídas.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q32",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: pensamento de Paulo Freire",
+      "explanation": "A questão cobra as ideias freireanas apresentadas no texto: o contexto do Nordeste do início dos anos 1960, a chamada cultura do silêncio e a necessidade de dar a palavra a quem era analfabeto, para que participasse da construção de um país dono de seu destino e livre do colonialismo.\n\nO gabarito oficial é A: as duas asserções são verdadeiras e a II justifica a I. A asserção I afirma que Freire denunciou a opressão e a exclusão geradas pela supressão do direito à educação e à cidadania, defendendo a educação como empreitada coletiva. A II afirma que a educação deve ser entendida como ato político, pois incentiva a reflexão e a ação consciente e criativa do sujeito em seu processo de libertação. Essa concepção explica a crítica à opressão e à exclusão: se educar é libertar e agir sobre o mundo, negar a educação e a cidadania é uma forma de opressão, e a superação exige participação coletiva.\n\nB nega a relação de justificativa, que existe. C, D e E tratam como falsa ao menos uma asserção, embora ambas sejam coerentes com o texto.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q33",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: educação de crianças surdas e Libras",
+      "explanation": "A questão trata das ações da escola para garantir o direito à educação de crianças surdas, com base no Decreto n. 5.626/2005, que o enunciado cita para a Libras. A pessoa surda compreende e interage com o mundo por experiências visuais, e a escola deve desenvolver práticas que assegurem seu direito à educação.\n\nO gabarito oficial é C (I, II e IV). A I está correta: criar situações de convívio que estimulem o respeito às diferenças e o desenvolvimento afetivo, cognitivo, linguístico e sociocultural. A II está correta: Libras como primeira língua da criança surda e Língua Portuguesa escrita como segunda. A IV está correta: a escola deve fomentar parcerias com os pais, acolhendo-os e ajudando-os a formar uma imagem positiva do filho surdo.\n\nA III está incorreta, porque, se não houver intérprete, a solução proposta transfere à família o ônus de procurar outra escola, em vez de a escola garantir o direito. A V está incorreta, porque propõe avaliação mais subjetiva centrada nas dificuldades, e não em condições adequadas e em critérios pertinentes. As opções que incluem III ou V ficam excluídas.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q34",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: liderança na gestão escolar",
+      "explanation": "A questão pede que se relacionem as falas de quatro participantes de uma pesquisa (liderança como algo que se tem ou não, dom da palavra e do convencimento, carisma, algo com que se nasce) com o que o texto diz sobre liderança na gestão escolar: estudos sobre escolas eficazes apontam o efeito da liderança do gestor como um dos principais fatores explicativos.\n\nO gabarito oficial é C (III e IV). A III está correta: Andrea e Cíntia tratam a liderança por um aspecto, o interpessoal (convencimento, carisma), embora fatores administrativos e pedagógicos também interfiram na gestão escolar. A IV está correta: as falas associam liderança a convencimento e a uma habilidade inata, concepções que a afirmativa classifica como já ultrapassadas pelas investigações educacionais contemporâneas.\n\nA I está incorreta, pois atribui às investigações científicas a ideia de que nem todos podem ser gestores e de que é preciso ser empreendedor. A II está incorreta, pois as falas de Ana e Cíntia enfatizam traços pessoais, não o estilo administrativo do gestor. Por isso as opções que incluem I ou II ficam excluídas.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q35",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: virtualidade e movimentos sociais",
+      "explanation": "A questão trata de comunicação e interação virtual. O texto afirma que as redes sociais promovem interação por interesses e valores compartilhados e que a Internet vem se tornando um importante espaço para movimentos sociais, que se valem da democracia informacional, da ciberdemocracia e do ciberativismo.\n\nO gabarito oficial é E (II, IV e V). A II está correta: ciberdemocracia, democracia informacional e ciberativismo são movimentos advindos da virtualidade, como o texto apresenta. A IV está correta: com a virtualidade cada vez mais presente na vida social, tempo e espaço precisam ser repensados. A V está correta: cabe ao educador preparar os alunos para uma atuação responsável e crítica diante da virtualidade, explorando suas potencialidades.\n\nA I está incorreta, pois afirma que os movimentos sociais tendem a perder força com a virtualidade, o oposto do que o texto descreve. A III está incorreta, pois diz que as redes ainda são pouco exploradas pelos movimentos sociais, enquanto o texto fala de uso cada vez maior. Assim, as opções que incluem I ou III ficam excluídas.",
+      "keyConcern": ""
+    }
+  ]
+}

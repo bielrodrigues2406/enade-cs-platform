@@ -12,6 +12,8 @@ Processo usado a partir de 30/10/2026 para colocar todas as objetivas no estudo.
 
 Os três nomes precisam ser diferentes. Nenhum deles é revisão humana.
 
+**Exceção autorizada (31/10/2026):** Gabriel autorizou o próprio Claude, que extraiu, a conferir as provas restantes (2005, 2008 Q1–Q22, 2011 e só-Licenciatura). Esses arquivos usam o conferente `claude-autoconferencia` e dizem em cada nota que não é conferência independente. As explicações dessa rodada estão em `explanations/`.
+
 ## Recortes e relatório commitados
 
 O extrator roda `node scripts/extract-questions.mjs --id <prova> --crops <pasta> [--repair-calibri]` e commita, só para as objetivas válidas do curso: os WebP em `data/question-crops/<prova>/`, o manifesto em `data/question-crop-manifests/<prova>.json` e o relatório em `data/question-reports/<prova>.json`. Conferência e publicação usam exatamente esses bytes; gerar de novo em outra máquina muda os hashes e invalida a conferência.

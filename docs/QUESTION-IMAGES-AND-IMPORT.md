@@ -111,9 +111,9 @@ Os agentes não iniciam a tarefa da outra trilha nem editam migrations aplicadas
 
 ## Completar as questões que faltam (pela tela de importação)
 
-Situação em 31/10/2026 no banco de desenvolvimento: **119 objetivas oficiais publicadas** (2014: 35, 2017: 35, 2021: 33, 2008: 16) e 3 demonstrativas. Faltam as provas de 2005 e 2011 inteiras, 2008 Q1–Q22 e as questões só de Licenciatura. Os rascunhos com explicação estão em `data/agent-reviews/pending/` e **não foram conferidos por outra pessoa**: o Claude extraiu esse material e não pode aprová-lo (D15).
+Situação em 31/10/2026: **246 objetivas oficiais publicadas** (2005: 34, 2008: 35, 2011: 34, 2014: 35 + 17 de Licenciatura, 2017: 35 + 14, 2021: 33 + 9). A 2005 Q60 ficou bloqueada porque o circuito impresso na própria prova está ilegível. As provas de 2005, 2011, 2008 Q1–Q22 e as questões só de Licenciatura foram conferidas pelo próprio Claude, que as extraiu, **por autorização de Gabriel** (conferente `claude-autoconferencia`); não é conferência independente. Duas explicações que contrariavam o gabarito (2011 Q18 e 2005 Q69) foram recusadas e as questões saíram sem explicação, assim como as 14 de Licenciatura de 2017, que não tinham explicação.
 
-Para publicar sem depender de agentes, uma pessoa com papel de administração confere pela tela:
+Para conferir ou corrigir questões novas pela tela, sem depender de agentes:
 
 1. **Administração → Importar prova.** Envie o PDF do caderno da edição e, se houver, o gabarito definitivo (e o padrão de resposta, para as discursivas).
 2. O lote abre com uma caixa por questão. As que **já estão publicadas aparecem marcadas** e são puladas na publicação; não é preciso apagá-las.
