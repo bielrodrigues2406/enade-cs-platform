@@ -122,7 +122,7 @@
             >
               <span>{{ item.kind === "DISCURSIVE" ? "Discursiva" : "Questão" }} {{ item.number }}</span>
               <span class="import-answer">{{ item.answer ?? "—" }}</span>
-              <span class="import-status">{{ statusLabel[item.status] }}</span>
+              <span class="import-status">{{ item.alreadyPublished ? "Já publicada" : statusLabel[item.status] }}</span>
               @if (item.warnings.length) {
                 <span class="import-warn" [attr.aria-label]="item.warnings.length + ' avisos'">!</span>
               }
@@ -201,7 +201,9 @@
             @for (warning of item.warnings; track warning) {
               <p class="import-warning">{{ warning }}</p>
             }
-            @if (item.answer !== "ANULADA" && reviewable(item)) {
+            @if (item.alreadyPublished) {
+              <p class="muted">Esta questão já está publicada. Não precisa conferir de novo; ela fica de fora desta importação.</p>
+            } @else if (item.answer !== "ANULADA" && reviewable(item)) {
               <div class="import-fields">
                 <div>
                   <label for="import-area">Área</label>

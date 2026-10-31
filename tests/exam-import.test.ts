@@ -174,6 +174,9 @@ test("confirmed boxes are cropped, published as image questions and never duplic
   assert.equal(detail.images.length, 1);
   assert.equal(detail.images[0].width, Math.round((420 * 200) / 72) - Math.round((50 * 200) / 72));
 
+  // Depois de publicada, a questão aparece como "já publicada" no lote.
+  const items = (await (await fetch(`${base}/api/imports/${id}`, { headers: { Cookie: admin } })).json()).items;
+  assert.deepEqual(items.filter((i: any) => i.alreadyPublished).map((i: any) => i.key), ["Q1"]);
   // A pendência da discursiva mantém o lote aberto; republicar não duplica.
   const again = await fetch(`${base}/api/imports/${id}/publish`, json(admin, "POST", {}));
   assert.deepEqual(await again.json(), { published: 0, alreadyPublished: 1 });

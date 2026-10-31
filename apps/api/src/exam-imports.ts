@@ -143,8 +143,11 @@ export class ExamImportsController {
     const items = (await db.query(
       `SELECT question_key AS key,number,kind,answer,key_answer AS "keyAnswer",answer_note AS "answerNote",
          boxes,prompt,options,status,area,subject,warnings,revision,
-         standard_boxes AS "standardBoxes",criteria
-       FROM exam_import_item WHERE import_id=$1 ORDER BY kind DESC,number`, [id],
+         standard_boxes AS "standardBoxes",criteria,
+         -- Questão desta prova que já está no ar (publicada antes, por outro caminho).
+         EXISTS(SELECT 1 FROM editorial_question q JOIN source_document s ON s.id=q.official_exam_id
+                WHERE s.sha256=$2 AND q.official_question_number=t.number AND t.kind='OBJECTIVE') AS "alreadyPublished"
+       FROM exam_import_item t WHERE import_id=$1 ORDER BY kind DESC,number`, [id, row.examSha256],
     )).rows;
     const { standardSha256, ...visible } = row;
     return { ...visible, hasStandard: Boolean(standardSha256), areas: AREAS, items };

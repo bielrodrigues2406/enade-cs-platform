@@ -14,6 +14,8 @@ type ImportItem = {
   keyAnswer: string | null; answerNote: string | null;
   boxes: Box[]; status: ItemStatus; area: string | null; subject: string | null;
   warnings: string[]; revision: number; standardBoxes: Box[]; criteria: Criterion[];
+  /** Esta questão da prova já está publicada; não precisa conferir de novo. */
+  alreadyPublished: boolean;
 };
 type PageSize = { width: number; height: number };
 type ImportBatch = {
@@ -135,7 +137,7 @@ export class ExamImportComponent {
   }
   /** Objetivas e, com o padrão de resposta no lote, discursivas podem ser conferidas. */
   reviewable(item: ImportItem) {
-    return item.kind === "OBJECTIVE" || Boolean(this.batch()?.hasStandard);
+    return !item.alreadyPublished && (item.kind === "OBJECTIVE" || Boolean(this.batch()?.hasStandard));
   }
   canConfirm(item: ImportItem) {
     const base = Boolean(item.area) && item.boxes.length > 0 && this.batch()?.state === "READY";

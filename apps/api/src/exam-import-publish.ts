@@ -97,6 +97,9 @@ async function publishDiscursive(client: PoolClient, batch: any, item: Item, ids
 
 async function publishItem(client: PoolClient, batch: any, item: Item, ids: { exam: string; key: string }, work: string) {
   const questionId = `official-${batch.exam_sha256.slice(0, 12)}-${item.key.toLowerCase()}`;
+  // Já publicada por outro caminho (conferência por agentes): não duplica.
+  if ((await client.query("SELECT 1 FROM editorial_question WHERE official_exam_id=$1 AND official_question_number=$2",
+    [ids.exam, item.number])).rowCount) return false;
   const parent = await client.query(
     `INSERT INTO editorial_question(id,origin,official_exam_id,official_question_number) VALUES($1,'OFFICIAL',$2,$3)
      ON CONFLICT(id) DO NOTHING RETURNING id`, [questionId, ids.exam, item.number],
