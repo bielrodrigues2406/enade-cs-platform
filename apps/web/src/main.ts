@@ -3,7 +3,7 @@ import { IMAGE_CONFIG } from "@angular/common";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
-import { HomeComponent } from "./home.component";
+import { HomeComponent, forgetHomeSnapshot } from "./home.component";
 import { LandingComponent } from "./landing.component";
 import { AdminComponent } from "./admin.component";
 import { LessonsComponent } from "./lessons.component";
@@ -316,7 +316,7 @@ class App {
     history.pushState(null, "", `/questoes?year=${year}`);
     void this.restoreCatalogNavigation();
   }
-  /** Nome da seção atual, para a trilha "Estudar / …". */
+  /** Nome da seção atual (o banco de questões usa para saber se está ativo). */
   sectionLabel() {
     if (this.accountView()) return "Conta";
     if (this.profileView()) return "Meu perfil";
@@ -821,6 +821,7 @@ class App {
     this.session.set({ mode: "account", ...account });
   }
   private clearStudyState() {
+    forgetHomeSnapshot();
     this.adminView.set(false);
     this.profileView.set(false);
     this.lessonsView.set(false);

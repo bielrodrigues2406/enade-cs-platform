@@ -478,17 +478,6 @@ main,
 #content {
   scroll-margin-top: var(--header-height);
 }
-.breadcrumb {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-regular);
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-8);
-}
-.breadcrumb span {
-  margin: 0 var(--space-2);
-  color: var(--color-border-control);
-}
 /* Títulos de página na serifa de leitura: o caderno fala com voz editorial. */
 h1 {
   font-family: var(--font-reading);
@@ -1005,22 +994,9 @@ fieldset:disabled .option:active {
   top: var(--space-3);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 1ms !important;
-    transition-delay: 0ms !important;
-    animation-duration: 1ms !important;
-    animation-delay: 0ms !important;
-    animation-iteration-count: 1 !important;
-  }
-  button:active:not(:disabled),
-  .option:active,
-  .option input:checked + .letter {
-    transform: none !important;
-  }
-}
+/* Movimento: a plataforma anima de propósito (ver a seção "Movimento" no fim
+   deste arquivo). Com "reduzir movimento" do sistema, só os deslocamentos
+   grandes e os laços contínuos são cortados; transições curtas continuam. */
 
 @media (max-width: 1000px) {
   header {
@@ -1065,9 +1041,6 @@ fieldset:disabled .option:active {
   }
   main {
     padding: var(--space-6) var(--space-4) var(--space-12);
-  }
-  .breadcrumb {
-    margin-bottom: var(--space-6);
   }
   h1,
   .resolution h1 {
@@ -1194,7 +1167,6 @@ fieldset:disabled .option:active {
   display: block;
 }
 .account-mode .layout > aside,
-.account-mode main > .breadcrumb,
 .account-mode .mobile-study-nav {
   display: none;
 }
@@ -1228,13 +1200,8 @@ fieldset:disabled .option:active {
   justify-self: center;
   padding: clamp(32px, 6vw, 72px) var(--space-6) var(--space-16);
 }
-.account-eyebrow {
-  margin: var(--space-8) 0 var(--space-2);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-text-muted);
+.account-form-side .back + h1 {
+  margin-top: var(--space-8);
 }
 .account-page h1 {
   font-family: var(--font-ui);
@@ -3496,7 +3463,6 @@ app-landing [data-reveal] {
   --reveal-delay: calc(var(--reveal-index, 0) * 70ms);
 }
 .landing-mode .layout > aside,
-.landing-mode main > .breadcrumb,
 .landing-mode .mobile-study-nav,
 .landing-mode .environment {
   display: none;
@@ -4524,4 +4490,96 @@ button.danger:hover {
   .site-footer {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* Ação destrutiva discreta (ex.: Cancelar treino ao lado de Retomar). */
+.text-button.danger-text {
+  color: var(--color-danger-text);
+}
+
+/* ==========================================================================
+   Movimento
+   Curto e com propósito: confirma uma ação ou mostra que algo mudou.
+   200–650 ms; molas (--spring-*) para deslocamento, ease-out para opacidade.
+   ========================================================================== */
+
+/* 1. Correção da resposta: a certa acende, a errada balança de leve. */
+.option-row.is-correct .option {
+  animation: answer-right 650ms var(--ease-out) both;
+}
+.option-row.is-correct .letter {
+  animation: letter-pop var(--spring-snappy-duration) var(--spring-snappy) 90ms both;
+}
+.option-row.is-wrong .option {
+  animation: answer-wrong 460ms var(--ease-out) both;
+}
+.option-tag {
+  animation: tag-in 420ms var(--ease-out) 180ms both;
+}
+.feedback > * {
+  animation: feedback-in 520ms var(--ease-out) both;
+}
+.feedback > :nth-child(2) { animation-delay: 70ms; }
+.feedback > :nth-child(3) { animation-delay: 140ms; }
+.feedback > :nth-child(4) { animation-delay: 210ms; }
+.feedback > :nth-child(n + 5) { animation-delay: 280ms; }
+@keyframes answer-right {
+  0% {
+    box-shadow:
+      inset 0 0 0 1px var(--color-success-border),
+      0 0 0 0 color-mix(in srgb, var(--color-success-text) 32%, transparent);
+  }
+  100% {
+    box-shadow:
+      inset 0 0 0 1px var(--color-success-border),
+      0 0 0 12px color-mix(in srgb, var(--color-success-text) 0%, transparent);
+  }
+}
+@keyframes letter-pop {
+  0% { transform: scale(0.6); }
+  100% { transform: scale(1); }
+}
+@keyframes answer-wrong {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  45% { transform: translateX(4px); }
+  70% { transform: translateX(-2px); }
+}
+@keyframes tag-in {
+  from { opacity: 0; transform: translateY(4px); }
+}
+@keyframes feedback-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* 5. Cartões sobem um pouco ao passar o mouse. Treino, cronômetro, resultado
+   e diálogo de finalizar animam em exam.component.css (carregado sob demanda). */
+.todo-card,
+.edition-card {
+  position: relative;
+  transition:
+    transform var(--spring-snappy-duration) var(--spring-snappy),
+    box-shadow 250ms var(--ease-out),
+    background-color 200ms var(--ease-out);
+}
+@media (hover: hover) {
+  .todo-card:hover,
+  .edition-card:hover {
+    z-index: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -16px color-mix(in srgb, var(--color-text) 40%, transparent);
+  }
+}
+/* Com "reduzir movimento": sem deslocamentos nem laços; cores e opacidade ficam. */
+@media (prefers-reduced-motion: reduce) {
+  .option-row.is-wrong .option {
+    animation-name: fade-only;
+  }
+  .todo-card:hover,
+  .edition-card:hover {
+    transform: none;
+  }
+}
+@keyframes fade-only {
+  from { opacity: 0.4; }
 }

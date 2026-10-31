@@ -202,7 +202,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
     await expect(other.getByRole("status")).toContainText("Você acertou.");
     const login = await enterForm(other, "Entrar");
     await expect(
-      other.getByText(/não são transferidas ao entrar/),
+      other.getByText(/não passam para a conta ao entrar/),
     ).toBeVisible();
     await login.getByLabel("E-mail", { exact: true }).fill(accountEmail);
     await login.getByLabel("Senha", { exact: true }).fill("Senha errada 2026!");
@@ -223,7 +223,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
     await expect(
       other.getByRole("button", { name: "Sair da conta" }),
     ).toHaveCount(0);
-    await other.getByRole("button", { name: "Voltar ao estudo" }).click();
+    await other.getByRole("button", { name: "← Voltar" }).click();
     await expect(
       other.getByRole("button", {
         name: "Revisar: Entrega confiável de um fluxo",
@@ -316,7 +316,7 @@ test("account forms validate and reflow at 320/390/768/1440 CSS pixels", async (
     page.getByRole("heading", { name: "Entrar", exact: true }),
   ).toBeVisible();
   await expect(page.getByLabel("Senha", { exact: true })).toHaveValue("");
-  await page.getByRole("button", { name: "Voltar ao estudo" }).click();
+  await page.getByRole("button", { name: "← Voltar" }).click();
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
   ).toBeVisible();

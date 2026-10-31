@@ -50,6 +50,8 @@ export class ExamComponent {
   availability = signal<PracticeAvailability | null>(null);
   attempt = signal<PracticeView | null>(null);
   position = signal(1);
+  /** 1 ao avançar, -1 ao voltar: a próxima questão entra pelo lado certo. */
+  stepDirection = signal(1);
   loading = signal(false);
   saving = signal(false);
   error = signal("");
@@ -342,6 +344,7 @@ export class ExamComponent {
   }
   go(position: number) {
     if (this.protectedState() || position < 1 || position > (this.attempt()?.size ?? 0)) return;
+    this.stepDirection.set(position >= this.position() ? 1 : -1);
     this.position.set(position); this.discursiveOpen.set(null); this.syncDraft(); this.error.set("");
     this.locationChange.emit({ attemptId: this.attempt()!.id, position });
     this.focusContent();
@@ -372,15 +375,41 @@ export class ExamComponent {
           : "Suas respostas ficam salvas e você retoma de onde parou. Se já terminou, finalize para ver o resultado.",
         cancel: "Continuar respondendo",
         actions: [
+          { value: "cancel", label: `Cancelar ${kind === "prova" ? "a" : "o"} ${kind}`, kind: "danger" },
           { value: "leave", label: timed ? "Pausar e sair" : "Sair", kind: "outline" },
           { value: "finish", label: "Finalizar agora" },
         ],
       });
       if (choice === "finish") { this.openFinish(); return; }
+      if (choice === "cancel") { await this.cancelAttempt(data.id, kind); return; }
       if (choice !== "leave") return;
       if (this.running()) { await this.pause(); if (this.running()) return; }
     }
     void this.loadAvailability(); this.locationChange.emit({ attemptId: null, position: 1 });
+  }
+  /** Apaga o treino em andamento e suas respostas, depois de confirmar. */
+  async cancelAttempt(id: string, kind: string) {
+    const article = kind === "prova" ? "a" : "o";
+    const ok = await this.choice.confirm({
+      eyebrow: "Sem volta",
+      title: `Cancelar ${article} ${kind}?`,
+      message: `As respostas ${kind === "prova" ? "desta" : "deste"} ${kind} são apagadas e não entram no resultado. Use para recomeçar do zero.`,
+      cancel: "Voltar",
+      confirm: `Cancelar ${article} ${kind}`,
+      danger: true,
+    });
+    if (!ok || this.protectedState()) return;
+    const generation = this.generation;
+    this.saving.set(true); this.error.set(""); this.emitBusy();
+    try {
+      await this.api(`/${id}/cancel`, { method: "POST", body: "{}" });
+      if (!this.alive(generation)) return;
+      this.attempt.set(null); this.examRunningChange.emit(false);
+      this.saving.set(false);
+      await this.loadAvailability();
+      this.locationChange.emit({ attemptId: null, position: 1 });
+    } catch (error) { if (this.alive(generation)) this.error.set(this.message(error)); }
+    finally { if (this.alive(generation)) { this.saving.set(false); this.emitBusy(); } }
   }
   openFinish() { if (!this.protectedState()) { this.error.set(""); this.finishDialog?.nativeElement.showModal(); } }
   async finish() {

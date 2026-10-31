@@ -20,6 +20,14 @@ type Catalog = {
 type Edition = { year: number; total: number };
 type Sheet = { url: string; title: string };
 
+type Snapshot = { catalog: Catalog; editions: Edition[]; sheets: Sheet[] };
+/**
+ * Último conteúdo carregado, guardado enquanto a aba estiver aberta. Ao voltar
+ * à página, ela aparece pronta na hora e só se atualiza em segundo plano,
+ * sem piscar vazia.
+ */
+let lastSnapshot: Snapshot | null = null;
+
 // Data de aplicação para bacharelados segundo o Inep (MASTER-SPEC §2).
 const EXAM_DATE = new Date(2026, 10, 29);
 
@@ -84,6 +92,7 @@ export class LandingComponent {
   private demoStarted = false;
 
   ngOnInit() {
+    if (lastSnapshot) this.apply(lastSnapshot);
     void this.load();
   }
   ngAfterViewInit() {
@@ -171,24 +180,32 @@ export class LandingComponent {
       return null;
     }
   }
+  private apply(snapshot: Snapshot) {
+    this.catalog.set(snapshot.catalog);
+    this.editions.set(snapshot.editions);
+    this.sheets.set(snapshot.sheets);
+  }
   private async load() {
     const catalog = await this.get<Catalog>("catalog?limit=12");
     if (!catalog) return;
-    this.catalog.set(catalog);
     const years = [...catalog.facets.years].sort((a, b) => b - a);
     const byYear = await Promise.all(
       years.map((year) => this.get<{ total: number; items: Catalog["items"] }>(`catalog?year=${year}&limit=1`)),
     );
-    this.editions.set(years.map((year, i) => ({ year, total: byYear[i]?.total ?? 0 })).filter((e) => e.total));
+    const editions = years.map((year, i) => ({ year, total: byYear[i]?.total ?? 0 })).filter((e) => e.total);
+    // Catálogo e edições entram juntos: sem o intervalo em que a lista parecia vazia.
+    this.catalog.set(catalog);
+    this.editions.set(editions);
     // Três páginas reais da prova empilhadas no herói, de edições diferentes.
     const picks = byYear.flatMap((page) => page?.items.slice(0, 1) ?? [])
       .filter((item) => item.origin === "OFFICIAL").slice(0, 3).reverse();
     const details = await Promise.all(
       picks.map((item) => this.get<{ title: string; images?: { url: string }[] }>(`questions/${encodeURIComponent(item.id)}`)),
     );
-    this.sheets.set(
-      details.flatMap((d) => (d?.images?.[0] ? [{ url: d.images[0].url, title: d.title }] : [])),
-    );
+    const sheets = details.flatMap((d) => (d?.images?.[0] ? [{ url: d.images[0].url, title: d.title }] : []));
+    // Mantém as folhas já mostradas se a nova busca falhar.
+    if (sheets.length || !this.sheets().length) this.sheets.set(sheets);
+    lastSnapshot = { catalog, editions, sheets: this.sheets() };
     // Linhas que chegaram depois do primeiro desenho também se revelam.
     queueMicrotask(() => setTimeout(() => this.observeReveals(), 0));
   }

@@ -13,9 +13,10 @@
             <h1 id="practice-result-title" tabindex="-1">Resultado do treino</h1>
           }
           @if (data.summary; as result) {
-            <p class="practice-score"><strong>{{ result.correct }} de {{ result.total }}</strong> acertos</p>
+            <!-- O número visível conta de 0 até o placar (CSS); leitores de tela e testes leem o valor real. -->
+            <p class="practice-score"><strong><span class="visually-hidden">{{ result.correct }}</span><span class="count-up" aria-hidden="true" [style.--count-to]="result.correct"></span> de {{ result.total }}</strong> acertos</p>
             <p>{{ result.incorrect }} {{ result.incorrect === 1 ? 'errada' : 'erradas' }} · {{ result.unanswered }} {{ result.unanswered === 1 ? 'não respondida' : 'não respondidas' }}.</p>
-            <p class="muted">Resultado {{ data.edition ? 'desta prova' : 'deste treino' }}, sem previsão de nota ENADE. As respostas ficam separadas do estudo livre.</p>
+            <p class="muted">Sem previsão de nota ENADE. Não altera o estudo livre.</p>
             @if (data.edition && result.byBlock; as blocks) {
               <dl class="practice-blocks">
                 <div><dt>Formação Geral</dt><dd><strong>{{ blocks.general.correct }}</strong> de {{ blocks.general.total }}</dd></div>
@@ -35,7 +36,7 @@
                 <thead><tr><th scope="col">Assunto</th><th scope="col">Acertos</th><th scope="col">Em branco</th></tr></thead>
                 <tbody>
                   @for (row of result.byTopic; track row.topic) {
-                    <tr><th scope="row">{{ row.topic }}</th><td>{{ row.correct }} de {{ row.total }}</td><td>{{ row.unanswered }}</td></tr>
+                    <tr><th scope="row">{{ row.topic }}</th><td><span class="result-cell">{{ row.correct }} de {{ row.total }}<span class="result-bar" aria-hidden="true"><span [style.--value]="row.total ? row.correct / row.total : 0"></span></span></span></td><td>{{ row.unanswered }}</td></tr>
                   }
                 </tbody>
               </table>
@@ -91,7 +92,9 @@
               }
             } @else {
             <p id="practice-position" class="practice-position" tabindex="-1">Questão {{ position() }} de {{ data.size }}</p>
-            <article class="resolution">
+            <!-- Recria o artigo a cada questão para a entrada animar na direção do passo. -->
+            @for (step of [position()]; track step) {
+            <article class="resolution practice-step" [style.--step-dir]="stepDirection()">
               <app-question-content [question]="item.question" />
               <fieldset class="practice-options" [class.answer-sheet]="isImage(item)" [disabled]="saving() || saveUncertain() || data.state === 'COMPLETED'">
                 <legend>{{ isImage(item) ? 'Marque a alternativa da imagem' : 'Selecione uma alternativa' }}</legend>
@@ -132,6 +135,7 @@
                 </section>
               }
             </article>
+            }
             <div class="practice-actions practice-item-actions">
               <button class="outline" (click)="go(position() - 1)" [disabled]="protectedState() || position() === 1">Anterior</button>
               @if (position() === data.size && data.discursive?.length) {
@@ -182,8 +186,7 @@
     } @else {
       <section class="page-intro">
         <h1 id="practice-setup-title" tabindex="-1">Treino parcial</h1>
-        <p>Escolha a área e a quantidade e confira o resultado ao finalizar. As questões que você ainda não viu vêm primeiro; você pode sair e retomar o treino salvo.</p>
-        <p class="metadata">Com cronômetro, vira um simulado da área. As questões mantêm sua origem e versão.</p>
+        <p>Escolha a área e a quantidade. As questões que você ainda não viu vêm primeiro, e dá para sair e retomar depois.</p>
       </section>
       @if (availability(); as data) {
         @if (!data.active && editions()?.editions?.length) {
@@ -191,8 +194,7 @@
             <p class="edition-eyebrow">O ensaio mais próximo do dia da prova</p>
             <h2 id="practice-editions-title">Prova completa da edição</h2>
             <p class="muted edition-lead">
-              As objetivas publicadas da prova, na ordem original, com {{ editions()!.minutes / 60 }} horas de prova.
-              Você pode pausar; ao sair, a prova pausa e as respostas ficam salvas.
+              As objetivas publicadas, na ordem da prova, em {{ editions()!.minutes / 60 }} horas. Ao sair, a prova pausa e as respostas ficam salvas.
             </p>
             <ol class="edition-grid">
               @for (edition of editions()!.editions; track edition.id) {
@@ -220,7 +222,7 @@
                       }
                       <div><dt>Tempo</dt><dd>{{ editions()!.minutes / 60 }} h</dd></div>
                     </dl>
-                    <p>As questões vêm na ordem da prova original. O cronômetro começa agora e você pode pausar quando precisar. Ao terminar o tempo, a prova é finalizada com o que estiver salvo.</p>
+                    <p>Questões na ordem original. O cronômetro começa agora e você pode pausar quando precisar. Se o tempo acabar, a prova é finalizada com o que estiver salvo.</p>
                     @if (edition.missing.length) {
                       <p class="muted">Desta edição, {{ missingLabel(edition) }}: anuladas pelo Inep ou ainda não publicadas aqui.</p>
                     }
@@ -238,15 +240,18 @@
           <section class="practice-active" aria-label="Treino em andamento">
             <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : 'Continue seu treino' }}</h2>
             <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.kind === 'EDITION' ? 'prova completa, pausada' : attemptLabel(active) }}</p>
-            <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : 'Retomar treino' }}</button>
+            <div class="practice-actions">
+              <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : 'Retomar treino' }}</button>
+              <button class="text-button danger-text" (click)="cancelAttempt(active.id, active.kind === 'EDITION' ? 'prova' : 'treino')" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Cancelar prova' : 'Cancelar treino' }}</button>
+            </div>
           </section>
         } @else {
           <form class="practice-setup" (ngSubmit)="start()">
             <div><label for="practice-area">Área do treino</label><select id="practice-area" name="area" [(ngModel)]="area" (ngModelChange)="area = $event; areaChanged()" [disabled]="saving()"><option value="">Assuntos mistos</option>@for (row of data.areas; track row.name) { <option [value]="row.name">{{ row.name }} ({{ row.count }})</option> }</select></div>
             <fieldset [disabled]="saving()" aria-describedby="practice-availability"><legend>Quantidade de questões</legend><div class="practice-sizes">@for (option of sizeOptions(); track option.value) { <label><input type="radio" name="size" [value]="option.value" [(ngModel)]="size" [disabled]="eligibleCount() < option.value" /> {{ option.label }}</label> }</div></fieldset>
-            <p class="muted" id="practice-availability">{{ eligibleCount() }} questões publicadas nesta seleção · {{ unseenCount() }} inéditas para você, que vêm primeiro.</p>
-            @if (eligibleCount() < size) { <p>Para {{ size }} questões, faltam {{ size - eligibleCount() }}. Escolha um tamanho disponível ou volte ao banco enquanto o acervo é ampliado.</p> }
-            <label class="practice-timed"><input type="checkbox" name="timed" [(ngModel)]="timed" [disabled]="saving()" /> Com cronômetro: {{ timedMinutes() }} minutos ({{ data.minutesPerQuestion }} por questão, como na prova). Dá para pausar.</label>
+            <p class="muted" id="practice-availability">{{ eligibleCount() }} questões disponíveis · {{ unseenCount() }} inéditas, que vêm primeiro.</p>
+            @if (eligibleCount() < size) { <p>Faltam {{ size - eligibleCount() }} questões para {{ size }}. Escolha um tamanho menor.</p> }
+            <label class="practice-timed"><input type="checkbox" name="timed" [(ngModel)]="timed" [disabled]="saving()" /> Com cronômetro: {{ timedMinutes() }} minutos ({{ data.minutesPerQuestion }} por questão). Dá para pausar.</label>
             <button type="submit" [disabled]="saving() || eligibleCount() < size">{{ saving() ? 'Preparando treino…' : timed ? 'Começar simulado' : 'Começar treino' }}</button>
           </form>
         }
@@ -257,9 +262,9 @@
                 <h2 id="practice-errors-title">Seus erros</h2>
                 <p class="muted">
                   @if (data.errors.ready) {
-                    {{ data.errors.ready }} de {{ data.errors.total }} {{ data.errors.total === 1 ? 'erro está pronto' : 'erros estão prontos' }} para revisar. Acertou no treino, a questão sai do caderno de erros.
+                    {{ data.errors.ready }} de {{ data.errors.total }} {{ data.errors.total === 1 ? 'erro está pronto' : 'erros estão prontos' }} para revisar. Acertou, sai do caderno.
                   } @else {
-                    {{ data.errors.total }} {{ data.errors.total === 1 ? 'erro volta' : 'erros voltam' }} para revisão um dia depois da resposta, quando a memória já não ajuda.
+                    {{ data.errors.total }} {{ data.errors.total === 1 ? 'erro volta' : 'erros voltam' }} para revisão um dia depois da resposta.
                   }
                 </p>
               </div>
@@ -268,7 +273,7 @@
           }
           <section class="practice-areas" aria-labelledby="practice-areas-title">
             <h2 id="practice-areas-title">Simulado por área</h2>
-            <p class="muted">Só questões da área. Ao começar, escolha com cronômetro ({{ data.minutesPerQuestion }} minutos por questão, com pausa) ou sem, para resolver com a turma. Áreas com até 30 publicadas entram inteiras.</p>
+            <p class="muted">Até 30 questões da área. Ao começar, você escolhe com ou sem cronômetro ({{ data.minutesPerQuestion }} min por questão).</p>
             <ol>
               @for (row of data.areas; track row.name) {
                 @if (row.count) {

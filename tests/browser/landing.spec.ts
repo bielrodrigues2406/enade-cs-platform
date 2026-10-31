@@ -6,7 +6,7 @@ const noHorizontalScroll = (page: Page) =>
 test("visitors see the public page with real numbers and reach the bank", async ({ page }) => {
   await page.clock.setFixedTime(new Date(2026, 9, 28, 20, 0));
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Preparação ENADE.");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Preparação ENADE");
   await expect(page.getByText("ENADE 2026 · 29 de novembro · faltam 32 dias")).toBeVisible();
   const stats = page.getByRole("definition");
   await expect(stats.last()).toHaveText("32");

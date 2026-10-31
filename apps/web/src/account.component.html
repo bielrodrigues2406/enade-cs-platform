@@ -6,22 +6,21 @@
       (click)="cancel.emit()"
       [disabled]="busy"
     >
-      ← Voltar ao estudo
+      ← Voltar
     </button>
-    <p class="account-eyebrow">Preparação ENADE · Ciência da Computação</p>
     <h1 id="account-title">
       {{ mode === "register" ? "Criar conta" : "Entrar" }}
     </h1>
     @if (mode === "register") {
       <p class="account-intro">
-        Suas respostas desta sessão vão junto para a conta, e você retoma de
-        qualquer navegador.
+        O que você já respondeu vai junto, e você continua de qualquer
+        aparelho.
       </p>
     } @else {
-      <p class="account-intro">Entre para abrir o histórico da sua conta.</p>
+      <p class="account-intro">Continue de onde parou.</p>
       <p class="account-help">
-        As respostas da sessão sem conta não são transferidas ao entrar. Para
-        guardá-las, escolha Criar conta.
+        Respostas feitas sem conta não passam para a conta ao entrar; para
+        guardá-las, crie uma conta.
       </p>
     }
     <form #accountForm="ngForm" (ngSubmit)="submit(accountForm)" novalidate>
@@ -42,31 +41,6 @@
             <p id="name-error" class="field-error">
               @if (submitted && nameError()) {
                 {{ nameError() }}
-              }
-            </p>
-          </div>
-          <div class="account-field">
-            <label for="account-enrollment"
-              >Prontuário IFSP <span class="optional">opcional</span></label
-            >
-            <input
-              id="account-enrollment"
-              name="enrollment"
-              [(ngModel)]="enrollment"
-              maxlength="12"
-              autocapitalize="characters"
-              spellcheck="false"
-              placeholder="PE3012345"
-              aria-describedby="enrollment-help enrollment-error"
-              [attr.aria-invalid]="submitted && enrollmentError() ? true : null"
-            />
-            <p id="enrollment-help" class="account-help">
-              Liga sua conta à lista da turma de preparação, para presença e
-              acompanhamento.
-            </p>
-            <p id="enrollment-error" class="field-error">
-              @if (submitted && enrollmentError()) {
-                {{ enrollmentError() }}
               }
             </p>
           </div>
@@ -119,9 +93,11 @@
               {{ showPassword ? "Ocultar" : "Mostrar" }}
             </button>
           </div>
-          <p id="password-help" class="account-help">
-            Use de 12 a 128 caracteres. Espaços são permitidos.
-          </p>
+          @if (mode === "register") {
+            <p id="password-help" class="account-help">
+              Pelo menos 12 caracteres. Uma frase fácil de lembrar funciona bem.
+            </p>
+          }
           <p id="password-error" class="field-error">
             @if (submitted && passwordError()) {
               {{ passwordError() }}
@@ -129,9 +105,32 @@
           </p>
         </div>
         @if (mode === "register") {
+          <div class="account-field">
+            <label for="account-enrollment"
+              >Prontuário IFSP <span class="optional">opcional</span></label
+            >
+            <input
+              id="account-enrollment"
+              name="enrollment"
+              [(ngModel)]="enrollment"
+              maxlength="12"
+              autocapitalize="characters"
+              spellcheck="false"
+              placeholder="PE3012345"
+              aria-describedby="enrollment-help enrollment-error"
+              [attr.aria-invalid]="submitted && enrollmentError() ? true : null"
+            />
+            <p id="enrollment-help" class="account-help">
+              Para quem está na turma de preparação: liga a conta à chamada.
+            </p>
+            <p id="enrollment-error" class="field-error">
+              @if (submitted && enrollmentError()) {
+                {{ enrollmentError() }}
+              }
+            </p>
+          </div>
           <p class="account-limit">
-            Nesta versão, o e-mail ainda não é confirmado e não há recuperação
-            de senha. Guarde sua senha em um local seguro.
+            Ainda não há recuperação de senha: guarde a sua em local seguro.
           </p>
           <details class="account-privacy">
             <summary>Como usamos seus dados</summary>
@@ -178,8 +177,8 @@
   <aside class="account-cover" aria-hidden="true">
     <p class="account-cover-mark"><svg class="brand-mark is-large" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect width="34" height="34" rx="8" /><circle cx="9.5" cy="17" r="3.6" class="brand-bubble" /><circle cx="17" cy="17" r="3.6" class="brand-bubble is-marked" /><circle cx="24.5" cy="17" r="3.6" class="brand-bubble" /></svg></p>
     <p class="account-cover-quote">
-      Questões reais do ENADE, uma de cada vez, com a prova original e o
-      raciocínio de cada alternativa.
+      Questões do ENADE, uma de cada vez, com a prova original e a
+      explicação de cada alternativa.
     </p>
     <ul class="account-cover-list">
       <li>Banco por área e por edição</li>

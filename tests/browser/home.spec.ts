@@ -173,8 +173,16 @@ test("an untimed area simulation leaves through its own exit dialog", async ({
   await expect(page.getByText(/^Questão 1 de \d+$/)).toBeVisible();
   await page.getByRole("button", { name: "← Sair do treino" }).click();
   await leave.getByRole("button", { name: "Sair", exact: true }).click();
-  // O treino fica salvo e aparece para retomar.
+  // O treino fica salvo e aparece para retomar; cancelar apaga de vez.
   await expect(page.getByRole("button", { name: "Retomar treino", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Cancelar treino", exact: true }).click();
+  const cancel = page.getByRole("dialog", { name: "Cancelar o treino?" });
+  await cancel.getByRole("button", { name: "Voltar" }).click();
+  await expect(page.getByRole("button", { name: "Retomar treino", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Cancelar treino", exact: true }).click();
+  await cancel.getByRole("button", { name: "Cancelar o treino" }).click();
+  await expect(page.getByRole("button", { name: "Retomar treino", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("region", { name: "Simulado por área" })).toBeVisible();
 });
 
 test("home reflows without horizontal scrolling", async ({ page }) => {

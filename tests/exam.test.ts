@@ -236,6 +236,22 @@ test("practice finalization produces one persisted result with independently cho
   assert.equal(replay.status, 201); assert.deepEqual(await replay.json(), finished);
 });
 
+test("an in-progress practice can be cancelled by its owner; a finished one cannot", async () => {
+  const user = await actor(), other = await actor();
+  const attempt = await start(user);
+  await save(user, attempt.id, 1, `${attempt.items[0].question.id}-A`);
+  assert.equal((await request(`practice/${attempt.id}/cancel`, other, "POST", {})).status, 404);
+  assert.deepEqual(await json(`practice/${attempt.id}/cancel`, user, "POST", {}), { status: "CANCELLED" });
+  assert.equal((await request(`practice/${attempt.id}`, user)).status, 404);
+  assert.equal((await json("practice", user)).active, null);
+  assert.equal((await db.query("SELECT count(*)::integer AS n FROM practice_item WHERE attempt_id=$1", [attempt.id])).rows[0].n, 0);
+  // Cancelado, o próximo começa normalmente; finalizado fica no histórico.
+  const next = await start(user);
+  await json(`practice/${next.id}/finish`, user, "POST", {});
+  assert.equal((await request(`practice/${next.id}/cancel`, user, "POST", {})).status, 409);
+  assert.equal((await json(`practice/${next.id}`, user)).state, "COMPLETED");
+});
+
 test("practice fixes old versions and option identity after a new version is published", async () => {
   const user = await actor(), attempt = await start(user), item = attempt.items[0];
   const old = initial.find((q)=>q.id===item.question.id)!;
