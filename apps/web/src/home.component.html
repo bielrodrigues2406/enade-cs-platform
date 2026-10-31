@@ -313,9 +313,6 @@
             <li [class.is-weakest]="weakest()?.area === row.area" [class.is-empty]="!row.firstAttempts">
               <div class="areas-name">
                 <strong>{{ row.area }}</strong>
-                @if (weakest()?.area === row.area) {
-                  <span class="areas-flag">Mais precisa de atenção</span>
-                }
               </div>
               <div class="areas-bars" aria-hidden="true">
                 <span class="areas-track"><span class="areas-fill" [style.--value]="ratio(row.firstCorrect, row.firstAttempts)"></span></span>
