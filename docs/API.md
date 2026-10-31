@@ -12,7 +12,7 @@ REST JSON, prefixo `/api`, sem CORS entre origens; a web usa proxy na mesma orig
 | POST /auth/logout | JSON; cookie opcional | 200 `{mode:"guest"}`; revoga token corrente e emite nova identidade anônima vazia |
 | GET /catalog | cookie; `q` até 120, `topic` até 80, `area` canônica ou `unclassified`, `year` 2000–2100; `limit` 1–50 (padrão 20), `offset` 0–1.000.000 | 200 catálogo paginado com totais, filtros globais, resumo e sugestões; contrato abaixo |
 | GET /questions | cookie; `q` até 120 caracteres, `topic` até 80 | 200 lista de `{id,title,topic,origin,demonstration,versionNumber,answered}`; somente ponteiros publicados atuais, ordenados por id, máximo 50; substring literal sem distinção de maiúsculas |
-| GET /questions/:id | cookie | 200 `{id,title,topic,prompt,origin,authorCredit,demonstration,versionNumber,options:[{id,text}],presentation,images,reviewOrigin,provenance,answer}`; gabarito/explicação ausentes até haver resposta desta sessão |
+| GET /questions/:id | cookie | 200 `{id,title,topic,subject,prompt,origin,authorCredit,demonstration,versionNumber,options:[{id,text}],presentation,images,reviewOrigin,provenance,answer}`; gabarito/explicação ausentes até haver resposta desta sessão |
 | GET /question-images/:sha256.webp | cookie | 200 `image/webp` do recorte; só se a imagem pertence a uma versão publicada (ou a sessão é de curadoria); `Cache-Control: private, max-age=31536000, immutable`, pois o nome é o hash. Bytes conferidos pelo SHA-256 a cada leitura (409 se divergirem) |
 | PUT /questions/:id/answer | cookie; `{optionId,baseRevision}` | 200 `{optionId,revision,correct,correctOptionId,explanation,explanationCredit,answerKey?}`; valida alternativa da versão, persiste antes de confirmar |
 
@@ -68,7 +68,7 @@ Criar, editar e publicar conferem os arquivos arquivados. Arquivo ausente/corrom
 
 Questão em imagem (ADR-010/011): `presentation` é `TEXT` ou `IMAGE`. Em `IMAGE`, `images:[{url,width,height,page}]` traz os recortes da prova na ordem de leitura (200 dpi), as alternativas são as letras A–E e `prompt`/`options[].text` são transcrição automática de apoio. `reviewOrigin` é `HUMAN` ou `ASSISTED` (conferida por agentes, sem revisão humana); a interface mostra o rótulo correspondente.
 
-No estudo, `provenance` é null para autorais ou `{exam:{id,title,officialUrl,sha256,year,area,modality,pageCount},page,questionNumber}` para oficiais. Antes de confirmar uma resposta, o DTO não inclui IDs, URLs ou hashes do gabarito nem comentário. Depois, `answerKey:{id,title,officialUrl,sha256,page,finality}` e `explanationCredit` acompanham o feedback confirmado. `finality` é `DECLARED` (o Inep declara definitivo), `ONLY_PUBLISHED` (único gabarito publicado, sem essa indicação; D10) ou `null` (conferência humana anterior a esse campo). A URL do Inep é pública; esse comportamento separa o feedback da plataforma, não impede consultar documentos externos.
+No estudo, `provenance` é null para autorais ou `{exam:{id,title,officialUrl,sha256,year,area,modality,pageCount},page,questionNumber}` para oficiais. Antes de confirmar uma resposta, o DTO não inclui IDs, URLs ou hashes do gabarito nem comentário. Depois, `answerKey:{id,title,officialUrl,sha256,page,finality}`, `explanationCredit` e `reviewNote` acompanham o feedback confirmado. `topic` é a área (lista fixa); `subject` é o assunto específico ou null. `reviewNote` é a ressalva de conteúdo escrita pelo conferente (D15), ou null; só aparece depois da resposta para não sugerir a alternativa. `finality` é `DECLARED` (o Inep declara definitivo), `ONLY_PUBLISHED` (único gabarito publicado, sem essa indicação; D10) ou `null` (conferência humana anterior a esse campo). A URL do Inep é pública; esse comportamento separa o feedback da plataforma, não impede consultar documentos externos.
 
 ## Registro de fontes
 
@@ -151,7 +151,7 @@ Todos os endpoints exigem cookie válido; escritas JSON e validação fechada de
 
 `AttemptSummary` = `{id,state,size,area,createdAt,finishedAt,answered}`. `PracticeView` acrescenta `{items,summary}`. Datas ISO; state IN_PROGRESS ou COMPLETED. Cada item = `{position,question:PracticeQuestion,answer:{optionId,marked,revision},result?:PracticeFeedback}`.
 
-`PracticeQuestion` = `{id,title,topic,origin,authorCredit,demonstration,versionNumber,prompt,options:[{id,text}],presentation,images,reviewOrigin,provenance}`. Presentation/images/provenance usam o contrato de estudo existente. Nunca inclui answer do estudo livre, correctOptionId ou explanation.
+`PracticeQuestion` = `{id,title,topic,subject,origin,authorCredit,demonstration,versionNumber,prompt,options:[{id,text}],presentation,images,reviewOrigin,provenance}`. Presentation/images/provenance usam o contrato de estudo existente. Nunca inclui answer do estudo livre, correctOptionId ou explanation.
 
 Somente após finalizar, `summary` contém `{total,correct,incorrect,unanswered,official,author,demonstration,byTopic:[{topic,total,correct,incorrect,unanswered}]}` e cada `result` = `{correct:boolean|null,correctOptionId,explanation,explanationCredit,answerKey?}`. `correct=null` indica não respondida. `answerKey` usa o contrato de estudo, inclusive finality e o aviso D10. Antes do final, summary=null e result ausente. Respostas do treino não alteram /review ou /questions/:id/answer.
 

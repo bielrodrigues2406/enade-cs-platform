@@ -21,3 +21,10 @@ A ADR 010 trocou a revisão humana por conferência de agentes para conteúdo of
 - Produção precisa de volume persistente em `/data` para PDFs e imagens (ver [DEPLOY](DEPLOY.md)). Levar relatórios, recortes e fontes ao servidor é a tarefa DEP-2.
 - As imagens são servidas só a sessões (a mesma regra do resto do estudo) e com cache privado imutável. Não há variantes por largura: o mesmo arquivo de 200 dpi serve leitura e ampliação; no celular a leitura confortável fica no "Ampliar".
 - Risco residual da ADR 010 permanece: erro que os dois agentes não percebam. A imagem sempre visível é a mitigação; falta o canal para o estudante reportar divergência.
+
+## Emenda de 30/10/2026 (D15, PUB-A2)
+
+- Só fidelidade bloqueia: recorte incompleto ou com pedaço de outra questão, número, gabarito ou quantidade de alternativas errados, imagem ilegível. Anuladas e itens fora do curso continuam recusados, inclusive quando o achado só existe na análise do repositório. Ressalvas de conteúdo do próprio Inep viram `review_note` (até 400 caracteres), mostrada ao estudante depois da resposta.
+- A conferência pode trazer a explicação de um agente explicador diferente do extrator e do conferente; ela só entra se o conferente marcar `OK`. Recusada, a questão sai sem explicação; uma análise anterior não substitui a recusa.
+- Migration 013 acrescenta `subject` (assunto específico). `topic` continua sendo a área da lista fixa.
+- Recortes, manifestos e relatórios ficam commitados em `data/`, para que conferência e publicação usem os mesmos bytes em qualquer ambiente. Processo em `data/agent-reviews/PROCESS.md`.
