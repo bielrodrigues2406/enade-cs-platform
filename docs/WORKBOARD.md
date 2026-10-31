@@ -129,7 +129,9 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 019 | DISC-1 — discursivas | Claude |
 | 020 | SIM-1 — prova completa da edição | Claude |
 | 021 | SIM-1 — pausa da prova completa | Claude |
-| 022 | próxima livre — reserve aqui antes do primeiro commit | |
+| 022 | SIM-1 — treino por área de qualquer tamanho e cronometrado | Claude |
+| 023 | ROLE-1 — convite de papel com confirmação do admin | Claude |
+| 024 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 
@@ -156,6 +158,7 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
 
+- **31/10/2026 · Claude → Codex · treino, caderno, modais e auditoria** · Pedidos de Gabriel: questões e simulados como foco. Treino por área com 5/10/20/30 ou todas da área (Redes tem 7) e cronômetro opcional de 4 min por questão (migration 022); o sorteio prioriza questões inéditas para a pessoa; pausa vale para qualquer treino cronometrado e mudou para `/api/practice/:id/pause|resume`. Caderno de erros espaçado: o erro volta para revisão um dia depois de ver o gabarito. Formulários de Aulas e a confirmação da prova completa viraram modais (`sheet-dialog`, folha no celular). Ordem natural no banco e na curadoria (pendentes primeiro). Auditoria (`docs/reviews/2026-10-31-security-audit.md`): convite de papel agora exige confirmação do admin (migration 023), limite de sessões de visitante por IP; prontuário fica como está e professores veem todas as turmas, por decisão de Gabriel. `npm test` 153/155 (2 de pypdf local), E2E 58/58.
 - **31/10/2026 · Claude → Codex · DEP-2 e LGL-1** · Gabriel: "precisamos subir logo"; revisão de código (CQ-2) fica para depois. O contêiner agora carrega sozinho o conteúdo commitado (`bootstrap-content`): testado num banco vazio (`enade_boot`) publicou as 119 e, rodando de novo, só confirmou; o script empacotado em `dist/admin` também. As conferências de 2021 Q1–Q8 e Q9–Q16 (Codex, manifesto anterior) foram para `data/agent-reviews/superseded/`. `render.yaml` + roteiro em DEPLOY §5.1. A imagem não pôde ser construída aqui (o proxy do ambiente recusa o apt); o CI do PR constrói. Aviso de privacidade no cadastro.
 - **31/10/2026 · Claude → Codex · SIM-1 pausa** · Gabriel pediu pausa e saída segura e liberou 2008. Migration 021 (`paused_at`, `paused_ms`), rotas `/editions/attempts/:id/pause|resume`, `remainingMs` do servidor, saída pelo menu com confirmação (`leaveExam()` no shell), pausa por `keepalive` ao fechar ou recarregar, mínimo de 10 objetivas. Corrigido bug anterior: abrir Aulas/Discursivas/Administração não desligava o treino e voltar ao treino não desligava essas telas. `npm test` 151/153, E2E 58/58.
 - **31/10/2026 · Claude → Codex · SIM-1 (núcleo)** · `claude/confident-cray-ndnwmk`. Peguei SIM-1 porque o Codex está sem limite. A prova completa reaproveita a tentativa de SIM-P1: `kind=EDITION`, prova oficial e `deadline_at` imutáveis (migration 020), objetivas publicadas na ordem original (mínimo 20, lacunas listadas), 4 h no servidor (prazo vencido finaliza ao ler ou gravar), discursivas da edição escritas na prova com o componente de DISC-1 e enviadas ao finalizar, resultado por bloco (`byBlock`). O teste existente de resumo ganhou `byBlock` (mudança aditiva). O treino passou a carregar sob demanda (initial 474 kB). Validação em `enade_ci`: `npm test` 151/153 (2 de pypdf local), E2E 58/58. Falta: modo por área com tempo configurável e revisão de SIM-2.

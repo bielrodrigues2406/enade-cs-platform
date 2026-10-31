@@ -19,7 +19,7 @@ Regras aplicadas:
 
 ## Confirmados
 
-### C1 — Convite de papel vale para quem cadastrar o e-mail primeiro (Médio)
+### C1 — Convite de papel vale para quem cadastrar o e-mail primeiro (Médio) — corrigido
 
 - **Fronteira:** um visitante sem papel passa a professor.
 - **Caminho:**
@@ -30,9 +30,9 @@ Regras aplicadas:
 - **Prova local:** admin convida `prof-…@example.invalid`; outra pessoa cadastra esse endereço e recebe `["PROFESSOR"]`; `GET /api/classes` responde 200.
 - **Pré-condição:** saber um e-mail convidado ainda sem conta e cadastrá-lo antes da pessoa. O e-mail institucional costuma ser previsível.
 - **Mesmo mecanismo:** `ADMIN_EMAILS`. Foi reduzido nesta rodada: só cria o **primeiro** administrador e é ignorado quando já existe um (`grantConfiguredAdmin`, teste em `tests/roles.test.ts`).
-- **Correção mínima (decisão de Gabriel, muda o D14):** o convite não concede sozinho. O cadastro com e-mail convidado fica "aguardando confirmação" na tela de administração, e o admin confirma ao ver nome e prontuário. A correção completa é confirmar o e-mail, o que exige um serviço de envio.
+- **Correção (aprovada por Gabriel, muda o D14; migration 023):** o cadastro com e-mail convidado só reivindica o convite (`CLAIMED` no histórico). A tela de administração mostra nome e prontuário em "Cadastros aguardando sua confirmação", e o papel vale quando o admin confirma. A correção completa continua sendo confirmar o e-mail, o que exige um serviço de envio.
 
-### C2 — Prontuário declarado no cadastro sem conferência (Baixo)
+### C2 — Prontuário declarado no cadastro sem conferência (Baixo) — aceito
 
 - **Fronteira:** uma conta passa a ser associada à matrícula de outro aluno.
 - **Caminho:**
@@ -43,19 +43,15 @@ Regras aplicadas:
   - o painel do professor atribui a ela o desempenho;
   - o aluno verdadeiro recebe 409 ao usar o próprio prontuário.
 - **Prova local:** professor lança falta para `PE…`; outra conta se cadastra com esse prontuário e vê `status: "ABSENT"`; o cadastro com o mesmo prontuário responde 409.
-- **Correção mínima:**
-  - mostrar na lista da turma o e-mail da conta ligada e permitir ao professor desfazer a ligação;
-  - quando a planilha trouxer e-mail, ligar só se o e-mail da conta for o mesmo.
+- **Decisão de Gabriel:** manter como está. O risco fica registrado: se um aluno reclamar que o prontuário dá "já cadastrado", o administrador confere a conta na tela de contas.
 
-### C3 — Criação de sessões de visitante sem limite (Baixo)
+### C3 — Criação de sessões de visitante sem limite (Baixo) — corrigido
 
 - **Fronteira:** um cliente anônimo consome armazenamento compartilhado.
 - **Caminho:** `POST /api/session` sem cookie cria `study_identity` e `browser_session` a cada chamada, sem limite por IP.
 - **Prova local:** 60 chamadas paralelas geraram 60 identidades.
 - **Efeito:** o banco cresce (o do Render tem 1 GB) com esforço contínuo e ganho pequeno.
-- **Correção mínima:**
-  - limite por IP generoso, considerando que o laboratório do câmpus sai por um IP só;
-  - limpeza periódica de visitantes sem resposta e com sessão vencida.
+- **Correção:** limite de 600 sessões novas por IP a cada 15 minutos (`GuestThrottle`), generoso para um laboratório inteiro atrás de um IP. Fica pendente a limpeza periódica de visitantes sem resposta e com sessão vencida.
 
 ## A validar (sem gravidade)
 
@@ -81,4 +77,4 @@ Regras aplicadas:
 
 ## Observação de desenho (não é vulnerabilidade)
 
-Qualquer professor vê todas as turmas e todos os alunos. Isso segue o D13 como implementado. Se cada professor deve ver só as próprias turmas, é preciso uma ligação professor–turma.
+Qualquer professor vê todas as turmas e todos os alunos. Gabriel confirmou em 31/10 que deve ser assim.
