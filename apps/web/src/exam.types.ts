@@ -11,6 +11,10 @@ export type AttemptSummary = {
   kind?: "PARTIAL" | "EDITION";
   /** Prova da edição: prazo do servidor; o cronômetro só o exibe. */
   deadlineAt?: string | null;
+  /** Pausada desde; null quando o cronômetro corre. */
+  pausedAt?: string | null;
+  /** Tempo restante calculado pelo servidor no momento da resposta. */
+  remainingMs?: number | null;
 };
 export type Edition = {
   id: string; year: number; modality: string; title: string; officialUrl: string;

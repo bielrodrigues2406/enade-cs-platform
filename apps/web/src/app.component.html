@@ -263,6 +263,7 @@
                 [itemPosition]="practiceItemPosition()"
                 (locationChange)="practiceLocationChanged($event)"
                 (busyChange)="practiceBusy.set($event)"
+                (examRunningChange)="examRunning.set($event)"
                 (browse)="back()"
                 (discursiveStudy)="openDiscursive()"
               />

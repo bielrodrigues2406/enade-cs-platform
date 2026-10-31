@@ -52,10 +52,15 @@
           @if (data.edition; as edition) {
             <p class="metadata">Prova completa · {{ edition.title }}</p>
             @if (remaining() !== null) {
-              <p class="practice-clock" [class.is-warning]="timeWarning()" [class.is-over]="timeUp()">
-                <span class="visually-hidden">Tempo restante: </span>
-                @if (timeUp()) { Tempo esgotado. Registrando o resultado… } @else { <time>{{ clock(remaining()!) }}</time> }
-              </p>
+              <div class="practice-clock-row">
+                <p class="practice-clock" [class.is-warning]="timeWarning()" [class.is-over]="timeUp()">
+                  <span class="visually-hidden">Tempo restante: </span>
+                  @if (timeUp()) { Tempo esgotado. Registrando o resultado… } @else { <time>{{ clock(remaining()!) }}</time> }
+                </p>
+                @if (running() && !timeUp()) {
+                  <button class="outline" (click)="pause()" [disabled]="protectedState()">Pausar prova</button>
+                }
+              </div>
             }
           } @else {
             <p class="metadata">{{ data.area || 'Assuntos mistos' }} · sem cronômetro</p>
@@ -63,7 +68,14 @@
         </div>
         <div class="practice-layout">
           <section class="practice-sheet">
-            @if (discursiveOpen(); as discursiveId) {
+            @if (data.pausedAt && data.state === 'IN_PROGRESS') {
+              <!-- Pausada: as questões ficam escondidas e o tempo não corre. -->
+              <div class="practice-paused" role="status">
+                <h2 id="practice-position" tabindex="-1">Prova pausada</h2>
+                <p>Restam <strong>{{ clock(remaining() ?? 0) }}</strong>. Suas respostas estão salvas; o cronômetro volta quando você continuar.</p>
+                <button (click)="resume()" [disabled]="saving()">{{ saving() ? 'Retomando…' : 'Continuar prova' }}</button>
+              </div>
+            } @else if (discursiveOpen(); as discursiveId) {
               <p id="practice-position" class="practice-position" tabindex="-1">Discursiva da prova</p>
               <!-- Carregada sob demanda: o texto é salvo como rascunho e enviado ao finalizar. -->
               @defer (on immediate) {
@@ -172,7 +184,7 @@
           <section class="practice-active" aria-label="Treino em andamento">
             <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : 'Continue seu treino' }}</h2>
             <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.kind === 'EDITION' ? 'prova completa, o tempo continua correndo' : active.area || 'Assuntos mistos' }}</p>
-            <button (click)="openAttempt(active.id)" [disabled]="saving()">Retomar treino</button>
+            <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : 'Retomar treino' }}</button>
           </section>
         } @else {
           <form class="practice-setup" (ngSubmit)="start()">

@@ -103,3 +103,22 @@
     border-top: 1px solid var(--color-border);
   }
 }
+.practice-clock-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+.practice-paused {
+  padding: var(--space-8) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-surface);
+}
+.practice-paused h2 {
+  margin: 0 0 var(--space-3);
+}
+.practice-paused strong {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}

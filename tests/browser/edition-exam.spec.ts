@@ -74,7 +74,7 @@ test.afterAll(async () => {
   } catch (error) { await client.query("ROLLBACK"); throw error; } finally { client.release(); await pool.end(); }
 });
 
-test("a student takes the full edition exam with a countdown, writes the discursive and sees results by block", async ({ page }) => {
+test("a student takes the full edition exam with a countdown, pauses, leaves safely, writes the discursive and sees results by block", async ({ page }) => {
   await page.goto("/treino");
   const editions = page.getByRole("region", { name: "Prova completa da edição" });
   const row = editions.getByRole("listitem").filter({ hasText: "ENADE 2096" });
@@ -90,6 +90,26 @@ test("a student takes the full edition exam with a countdown, writes the discurs
   const saved = page.waitForResponse((r) => r.url().includes("/items/1") && r.request().method() === "PUT");
   await page.getByRole("radio").first().check();
   expect((await saved).status()).toBe(200);
+
+  // Pausar esconde as questões e para o tempo.
+  await page.getByRole("button", { name: "Pausar prova" }).click();
+  await expect(page.getByRole("heading", { name: "Prova pausada" })).toBeVisible();
+  await page.getByRole("button", { name: "Continuar prova" }).click();
+  await expect(page.getByText("Questão 1 de 20")).toBeVisible();
+  // Recarregar (ou fechar) a página pede confirmação, pausa e não perde nada.
+  page.on("dialog", (dialog) => void dialog.accept());
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Prova pausada" })).toBeVisible();
+  await page.getByRole("button", { name: "Continuar prova" }).click();
+  await expect(page.getByRole("radio").first()).toBeChecked();
+  // Sair pelo menu pede confirmação e pausa; a prova volta pelo treino.
+  await page.getByRole("button", { name: "Discursivas" }).first().click();
+  await expect(page.getByRole("heading", { name: "Discursivas", level: 1 })).toBeVisible();
+  await page.getByRole("button", { name: "Treino parcial" }).first().click();
+  await page.getByRole("button", { name: "Retomar prova" }).click();
+  await expect(page.getByRole("heading", { name: "Prova pausada" })).toBeVisible();
+  await page.getByRole("button", { name: "Continuar prova" }).click();
+  await expect(page.getByText("Questão 1 de 20")).toBeVisible();
 
   // No celular a folha de respostas começa recolhida; a discursiva está nela.
   await page.setViewportSize({ width: 390, height: 844 });
