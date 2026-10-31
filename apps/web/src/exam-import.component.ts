@@ -3,19 +3,23 @@ import { FormsModule } from "@angular/forms";
 
 // Importação de provas (IMP-1): envio dos PDFs e editor das caixas de cada
 // questão. As caixas ficam em pontos do PDF; na tela são posicionadas em
-// porcentagem da página, para valer em qualquer largura.
+// porcentagem da página, para valer em qualquer largura. Nas discursivas
+// (DISC-1) há um segundo documento, o padrão de resposta, com caixas próprias.
 type Box = { page: number; x0: number; y0: number; x1: number; y1: number };
+type Doc = "exam" | "standard";
+export type Criterion = { label: string | null; points: number };
 type ItemStatus = "PENDING" | "CONFIRMED" | "EXCLUDED";
 type ImportItem = {
   key: string; number: number; kind: "OBJECTIVE" | "DISCURSIVE"; answer: string | null;
   keyAnswer: string | null; answerNote: string | null;
   boxes: Box[]; status: ItemStatus; area: string | null; subject: string | null;
-  warnings: string[]; revision: number;
+  warnings: string[]; revision: number; standardBoxes: Box[]; criteria: Criterion[];
 };
+type PageSize = { width: number; height: number };
 type ImportBatch = {
   id: string; year: number; modality: string; state: string; failure: string | null;
-  pageCount: number | null; pageSizes: { width: number; height: number }[] | null; issues: string[];
-  areas: string[]; items: ImportItem[];
+  pageCount: number | null; pageSizes: PageSize[] | null; issues: string[];
+  hasStandard: boolean; standardPageSizes: PageSize[] | null; areas: string[]; items: ImportItem[];
 };
 type BatchSummary = { id: string; year: number; modality: string; state: string; total: number; confirmed: number; excluded: number };
 type Drag = { index: number; mode: "move" | "resize"; startX: number; startY: number; origin: Box; width: number; height: number };
@@ -29,6 +33,7 @@ export const STATE_LABEL: Record<string, string> = {
   selector: "app-exam-import",
   imports: [FormsModule],
   templateUrl: "./exam-import.component.html",
+  styleUrl: "./exam-import.component.css",
 })
 export class ExamImportComponent {
   readonly statusLabel = STATUS_LABEL;
@@ -40,8 +45,10 @@ export class ExamImportComponent {
   busy = signal(false);
   error = signal("");
   notice = signal("");
-  form = { year: new Date().getFullYear(), modality: "BACHARELADO", examUrl: "", keyUrl: "" };
-  files: { exam?: File; key?: File } = {};
+  form = { year: new Date().getFullYear(), modality: "BACHARELADO", examUrl: "", keyUrl: "", standardUrl: "" };
+  files: { exam?: File; key?: File; standard?: File } = {};
+  /** Documento mostrado no editor: a prova ou, na discursiva, o padrão de resposta. */
+  doc = signal<Doc>("exam");
   // Troca de letra em edição: só é salva junto com a justificativa.
   answerDraft = signal<string | null>(null);
   noteDraft = "";
@@ -49,16 +56,20 @@ export class ExamImportComponent {
   private poll: ReturnType<typeof setTimeout> | null = null;
 
   selected = computed(() => this.batch()?.items.find((item) => item.key === this.selectedKey()) ?? null);
-  pageBoxes = computed(() =>
-    (this.selected()?.boxes ?? []).map((box, index) => ({ box, index })).filter(({ box }) => box.page === this.page()));
+  pageBoxes = computed(() => {
+    const item = this.selected();
+    return (item ? this.boxesOf(item) : []).map((box, index) => ({ box, index })).filter(({ box }) => box.page === this.page());
+  });
+  pageSizes = computed(() => (this.doc() === "standard" ? this.batch()?.standardPageSizes : this.batch()?.pageSizes) ?? []);
   counts = computed(() => {
     const items = this.batch()?.items ?? [];
     return {
       confirmed: items.filter((i) => i.status === "CONFIRMED").length,
-      pending: items.filter((i) => i.status === "PENDING" && i.kind === "OBJECTIVE").length,
+      pending: items.filter((i) => i.status === "PENDING" && this.reviewable(i)).length,
       total: items.length,
     };
   });
+  criteriaTotal = computed(() => (this.selected()?.criteria ?? []).reduce((sum, c) => sum + (Number(c.points) || 0), 0));
 
   ngOnInit() {
     void this.loadList();
@@ -70,7 +81,7 @@ export class ExamImportComponent {
   async loadList() {
     await this.attempt(async () => this.batches.set(await this.request<BatchSummary[]>("imports")));
   }
-  pickFile(kind: "exam" | "key", event: Event) {
+  pickFile(kind: "exam" | "key" | "standard", event: Event) {
     this.files[kind] = (event.target as HTMLInputElement).files?.[0];
   }
   async create() {
@@ -78,10 +89,15 @@ export class ExamImportComponent {
       this.error.set("Escolha o PDF da prova e o do gabarito.");
       return;
     }
+    if (Boolean(this.files.standard) !== Boolean(this.form.standardUrl.trim())) {
+      this.error.set("Para as discursivas, envie o PDF do padrão de resposta junto com o link dele.");
+      return;
+    }
     const data = new FormData();
-    for (const [name, value] of Object.entries(this.form)) data.set(name, String(value));
+    for (const [name, value] of Object.entries(this.form)) if (String(value).trim()) data.set(name, String(value).trim());
     data.set("exam", this.files.exam);
     data.set("key", this.files.key);
+    if (this.files.standard) data.set("standard", this.files.standard);
     await this.attempt(async () => {
       const res = await fetch("/api/imports", { method: "POST", body: data });
       if (!res.ok) throw new Error((await res.json().catch(() => null))?.message ?? "Não foi possível enviar.");
@@ -97,7 +113,7 @@ export class ExamImportComponent {
       this.batch.set(batch);
       if (batch.state === "PROCESSING") this.poll = setTimeout(() => void this.open(id), 1500);
       else if (!this.selectedKey() || !batch.items.some((i) => i.key === this.selectedKey()))
-        this.select(batch.items.find((i) => i.kind === "OBJECTIVE")?.key ?? null);
+        this.select(batch.items.find((i) => this.reviewable(i))?.key ?? null);
     });
   }
   close() {
@@ -109,30 +125,44 @@ export class ExamImportComponent {
     this.selectedKey.set(key);
     this.answerDraft.set(null);
     this.noteDraft = "";
-    const first = this.batch()?.items.find((i) => i.key === key)?.boxes[0];
-    if (first) this.page.set(first.page);
+    this.showDoc("exam");
+  }
+  /** Troca o documento do editor e vai para a página da primeira caixa dele. */
+  showDoc(doc: Doc) {
+    this.doc.set(doc);
+    const item = this.selected();
+    this.page.set((item && this.boxesOf(item)[0]?.page) || 1);
+  }
+  /** Objetivas e, com o padrão de resposta no lote, discursivas podem ser conferidas. */
+  reviewable(item: ImportItem) {
+    return item.kind === "OBJECTIVE" || Boolean(this.batch()?.hasStandard);
+  }
+  canConfirm(item: ImportItem) {
+    const base = Boolean(item.area) && item.boxes.length > 0 && this.batch()?.state === "READY";
+    return item.kind === "OBJECTIVE" ? base : base && item.standardBoxes.length > 0 && item.criteria.length > 0;
   }
   pageUrl() {
-    return `/api/imports/${this.batch()!.id}/pages/${this.page()}`;
+    const query = this.doc() === "standard" ? "?doc=standard" : "";
+    return `/api/imports/${this.batch()!.id}/pages/${this.page()}${query}`;
   }
   // Posição em porcentagem da página (pontos do PDF → CSS).
   boxStyle(box: Box) {
-    const size = this.batch()!.pageSizes![box.page - 1];
+    const size = this.pageSizes()[box.page - 1];
     return {
       "--x": `${(box.x0 / size.width) * 100}%`, "--y": `${(box.y0 / size.height) * 100}%`,
       "--w": `${((box.x1 - box.x0) / size.width) * 100}%`, "--h": `${((box.y1 - box.y0) / size.height) * 100}%`,
     };
   }
   addBox() {
-    const size = this.batch()?.pageSizes?.[this.page() - 1];
+    const size = this.pageSizes()[this.page() - 1];
     const item = this.selected();
     if (!size || !item) return;
     const box = { page: this.page(), x0: size.width * 0.1, y0: size.height * 0.1, x1: size.width * 0.9, y1: size.height * 0.4 };
-    this.updateItem({ ...item, boxes: [...item.boxes, box] });
+    this.updateItem(this.withBoxes(item, [...this.boxesOf(item), box]));
   }
   removeBox(index: number) {
     const item = this.selected();
-    if (item) this.updateItem({ ...item, boxes: item.boxes.filter((_, i) => i !== index) });
+    if (item) this.updateItem(this.withBoxes(item, this.boxesOf(item).filter((_, i) => i !== index)));
   }
   startDrag(event: PointerEvent, index: number, mode: Drag["mode"]) {
     const item = this.selected();
@@ -142,12 +172,12 @@ export class ExamImportComponent {
     event.stopPropagation();
     (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
     const rect = surface.getBoundingClientRect();
-    this.drag = { index, mode, startX: event.clientX, startY: event.clientY, origin: { ...item.boxes[index] }, width: rect.width, height: rect.height };
+    this.drag = { index, mode, startX: event.clientX, startY: event.clientY, origin: { ...this.boxesOf(item)[index] }, width: rect.width, height: rect.height };
   }
   moveDrag(event: PointerEvent) {
     const item = this.selected(), drag = this.drag;
     if (!item || !drag) return;
-    const size = this.batch()!.pageSizes![drag.origin.page - 1];
+    const size = this.pageSizes()[drag.origin.page - 1];
     const dx = ((event.clientX - drag.startX) / drag.width) * size.width;
     const dy = ((event.clientY - drag.startY) / drag.height) * size.height;
     const o = drag.origin;
@@ -159,7 +189,7 @@ export class ExamImportComponent {
           return { ...o, x0, y0, x1: x0 + (o.x1 - o.x0), y1: y0 + (o.y1 - o.y0) };
         })()
       : { ...o, x1: clamp(o.x1 + dx, o.x0 + 12, size.width), y1: clamp(o.y1 + dy, o.y0 + 12, size.height) };
-    this.patchLocal({ ...item, boxes: item.boxes.map((b, i) => (i === drag.index ? next : b)) });
+    this.patchLocal(this.withBoxes(item, this.boxesOf(item).map((b, i) => (i === drag.index ? next : b))));
   }
   endDrag() {
     if (!this.drag) return;
@@ -174,11 +204,12 @@ export class ExamImportComponent {
     const item = this.selected();
     if (!step || !item) return;
     event.preventDefault();
-    const b = item.boxes[index];
+    const boxes = this.boxesOf(item);
+    const b = boxes[index];
     const next = event.shiftKey
       ? { ...b, x1: b.x1 + step[0], y1: b.y1 + step[1] }
       : { ...b, x0: b.x0 + step[0], x1: b.x1 + step[0], y0: b.y0 + step[1], y1: b.y1 + step[1] };
-    this.updateItem({ ...item, boxes: item.boxes.map((box, i) => (i === index ? next : box)) });
+    this.updateItem(this.withBoxes(item, boxes.map((box, i) => (i === index ? next : box))));
   }
   setStatus(status: ItemStatus) {
     const item = this.selected();
@@ -202,6 +233,29 @@ export class ExamImportComponent {
     if (!item || this.noteDraft.trim().length < 5) return;
     void this.save({ ...item, answer, answerNote: this.noteDraft.trim() }).then((ok) => ok && this.answerDraft.set(null));
   }
+  // Itens de avaliação da discursiva (a, b, c… com pontos); salvos ao mudar.
+  addCriterion() {
+    const item = this.selected();
+    if (!item || item.criteria.length >= 6) return;
+    const labels = item.criteria.length === 1 && item.criteria[0].label === null ? [{ ...item.criteria[0], label: "a" }] : item.criteria;
+    const next = String.fromCharCode(97 + labels.length);
+    this.updateItem({ ...item, criteria: [...labels, { label: next, points: 1 }] });
+  }
+  removeCriterion(index: number) {
+    const item = this.selected();
+    if (!item || item.criteria.length <= 1) return;
+    const rest = item.criteria.filter((_, i) => i !== index);
+    this.updateItem({ ...item, criteria: rest.length === 1 ? [{ ...rest[0], label: null }] : rest });
+  }
+  setPoints(index: number, value: string) {
+    const item = this.selected();
+    const points = Number(value.replace(",", "."));
+    if (!item || !(points >= 0.5 && points <= 10)) return;
+    this.updateItem({ ...item, criteria: item.criteria.map((c, i) => (i === index ? { ...c, points } : c)) });
+  }
+  criterionLabel(criterion: Criterion) {
+    return criterion.label ? `Item ${criterion.label})` : "Questão inteira";
+  }
   async publish() {
     const batch = this.batch();
     if (!batch) return;
@@ -214,8 +268,14 @@ export class ExamImportComponent {
 
   private selectNextPending() {
     const items = this.batch()?.items ?? [];
-    const next = items.find((i) => i.kind === "OBJECTIVE" && i.status === "PENDING");
+    const next = items.find((i) => this.reviewable(i) && i.status === "PENDING");
     if (next) this.select(next.key);
+  }
+  private boxesOf(item: ImportItem) {
+    return this.doc() === "standard" ? item.standardBoxes : item.boxes;
+  }
+  private withBoxes(item: ImportItem, boxes: Box[]): ImportItem {
+    return this.doc() === "standard" ? { ...item, standardBoxes: boxes } : { ...item, boxes };
   }
   private updateItem(item: ImportItem) {
     this.patchLocal(item);
@@ -231,6 +291,7 @@ export class ExamImportComponent {
       const { revision } = await this.request<{ revision: number }>(`imports/${batch.id}/items/${item.key}`, {
         boxes: item.boxes, status: item.status, area: item.area, subject: item.subject, revision: item.revision,
         answer: item.answer, answerNote: item.answerNote,
+        ...(item.kind === "DISCURSIVE" ? { standardBoxes: item.standardBoxes, criteria: item.criteria } : {}),
       }, "PUT");
       this.patchLocal({ ...item, revision });
     });

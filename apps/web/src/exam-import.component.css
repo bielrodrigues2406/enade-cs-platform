@@ -1,0 +1,253 @@
+/* Editor da importação de provas (IMP-1, DISC-1): lote, página e caixas.
+   Os campos de formulário (.import-new, .import-fields) ficam no global. */
+.import-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.import-head h2 {
+  margin: 0;
+}
+.import-progress {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+.import-editor {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+.import-items {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-4));
+  max-height: calc(100vh - var(--header-height) - var(--space-8));
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.import-items button {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto 18px;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  text-align: left;
+}
+.import-items button:hover:not(:disabled) {
+  background: var(--color-surface-sunken);
+  transform: none;
+}
+.import-items button.is-active {
+  background: var(--color-accent-soft);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+.import-items button[data-status="CONFIRMED"] .import-status {
+  color: var(--color-success-text);
+}
+.import-items button[data-status="EXCLUDED"] {
+  color: var(--color-text-muted);
+}
+.import-answer {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+.import-status {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.import-warn {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  font-size: 11px;
+  font-weight: 700;
+}
+.import-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+/* A página e as caixas: posição em porcentagem, vinda de variáveis CSS. */
+.import-page {
+  position: relative;
+  border: 1px solid var(--color-border);
+  background: var(--paper-0);
+  touch-action: none;
+  user-select: none;
+}
+.import-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.import-box {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: var(--h);
+  border: 2px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  cursor: move;
+}
+.import-box:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.import-box-label {
+  position: absolute;
+  top: -22px;
+  left: -2px;
+  padding: 1px 6px;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.import-box-remove {
+  position: absolute;
+  top: -22px;
+  right: -2px;
+  min-height: 20px;
+  padding: 0 7px;
+  border: 0;
+  border-radius: 0;
+  background: var(--color-danger-text);
+  color: var(--paper-0);
+  font-size: 13px;
+  line-height: 20px;
+}
+.import-box-handle {
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--paper-0);
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: nwse-resize;
+}
+.import-details {
+  margin-top: var(--space-4);
+}
+.import-warning {
+  margin: var(--space-1) 0;
+  color: var(--color-warning-text);
+  font-size: var(--text-sm);
+}
+.import-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+@media (max-width: 860px) {
+  .import-editor {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .import-items {
+    position: static;
+    max-height: 220px;
+  }
+}
+.import-issues {
+  margin: var(--space-4) 0;
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--color-warning-border);
+  background: var(--color-warning-bg);
+}
+.import-issues h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-base);
+}
+.import-issues ul {
+  margin: 0;
+  padding-left: var(--space-5);
+  line-height: 1.6;
+}
+.import-answer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-3) 0;
+}
+.import-answer-row label,
+.import-note label {
+  font-weight: var(--weight-semibold);
+}
+.import-changed {
+  font-size: var(--text-sm);
+  color: var(--color-warning-text);
+}
+.import-note {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 560px;
+  margin-bottom: var(--space-4);
+}
+.import-note button {
+  justify-self: start;
+}
+
+/* Importação de discursivas (DISC-1): documento e itens de avaliação. */
+.import-docs {
+  margin-bottom: var(--space-3);
+}
+.import-criteria {
+  margin: var(--space-4) 0;
+  padding: var(--space-4) 0 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+.import-criteria legend {
+  padding: 0;
+  font-weight: var(--weight-semibold);
+}
+.import-criteria legend .muted {
+  margin-left: var(--space-2);
+  font-weight: 400;
+}
+.import-criteria ul {
+  margin: 0 0 var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+.import-criteria li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+.import-criteria label {
+  min-width: 9ch;
+}
+.import-criteria input {
+  width: 6rem;
+}

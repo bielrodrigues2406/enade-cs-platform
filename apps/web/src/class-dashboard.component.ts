@@ -25,6 +25,7 @@ export function percent(value: number | null) {
 @Component({
   selector: "app-class-dashboard",
   templateUrl: "./class-dashboard.component.html",
+  styleUrl: "./class-dashboard.component.css",
 })
 export class ClassDashboardComponent {
   @Input({ required: true }) classId = "";

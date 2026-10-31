@@ -25,6 +25,7 @@ const STATUS_LABEL = Object.fromEntries(STATUS_OPTIONS.map((o) => [o.value, o.la
   selector: "app-lessons",
   imports: [FormsModule, ClassDashboardComponent],
   templateUrl: "./lessons.component.html",
+  styleUrl: "./lessons.component.css",
 })
 export class LessonsComponent {
   @Input() staff = false;

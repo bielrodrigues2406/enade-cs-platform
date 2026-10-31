@@ -94,6 +94,12 @@
           [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
         >Treino parcial</button>
+        <button
+          class="text-button"
+          (click)="openDiscursive()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="discursiveView() ? 'page' : null"
+        >Discursivas</button>
         @if (session().mode === "account") {
           <button
             class="text-button"
@@ -148,13 +154,19 @@
           [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="practiceView() && !accountView() ? 'page' : null"
         ><span class="nav-index" aria-hidden="true">04</span>Treino parcial</button>
+        <button
+          class="nav secondary-nav"
+          (click)="openDiscursive()"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="discursiveView() ? 'page' : null"
+        ><span class="nav-index" aria-hidden="true">05</span>Discursivas</button>
         @if (session().mode === "account") {
           <button
             class="nav secondary-nav"
             (click)="openLessons()"
             [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             [attr.aria-current]="lessonsView() ? 'page' : null"
-          ><span class="nav-index" aria-hidden="true">05</span>Aulas</button>
+          ><span class="nav-index" aria-hidden="true">06</span>Aulas</button>
         }
         @if (canCurate()) {
           <button
@@ -163,7 +175,7 @@
             [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             [attr.aria-current]="curationView() ? 'page' : null"
           >
-            <span class="nav-index" aria-hidden="true">05</span>
+            <span class="nav-index" aria-hidden="true">07</span>
             Curadoria
           </button>
         }
@@ -185,6 +197,8 @@
                 ? "Administração"
               : lessonsView()
                 ? "Aulas"
+              : discursiveView()
+                ? "Discursivas"
               : curationView()
                 ? "Curadoria"
                 : practiceView()
@@ -221,6 +235,12 @@
             />
           } @else if (authBusy()) {
             <p role="status">Atualizando sua sessão…</p>
+          } @else if (discursiveView()) {
+            @defer (on immediate) {
+              <app-discursive />
+            } @placeholder {
+              <p role="status">Carregando as discursivas…</p>
+            }
           } @else if (lessonsView()) {
             @defer (on immediate) {
               <app-lessons [staff]="isStaff()" />

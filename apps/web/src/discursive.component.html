@@ -1,0 +1,125 @@
+<section class="discursive" aria-labelledby="discursive-title">
+  @if (error()) {
+    <div class="notice" role="alert"><p>{{ error() }}</p></div>
+  }
+
+  @if (detail(); as q) {
+    <button type="button" class="back text-button" (click)="loadList()">← Discursivas</button>
+    <p class="metadata">{{ q.area }}@if (q.subject) { <span>·</span> {{ q.subject }} } <span>·</span> Oficial · Inep</p>
+    <h1 id="discursive-title">{{ q.title }}</h1>
+    <p class="disc-criteria">
+      @for (criterion of q.criteria; track $index) {
+        <span>{{ criterionLabel(criterion) }} <strong>{{ points(criterion.points) }}</strong></span>
+      }
+      <span class="muted">de 10 pontos</span>
+    </p>
+
+    <figure class="question-sheet">
+      <div class="question-images">
+        @for (image of q.promptImages; track image.url; let i = $index) {
+          <img [src]="image.url" [width]="image.width" [height]="image.height" [style.--image-width]="image.width"
+            decoding="async" [alt]="q.title + (q.promptImages.length > 1 ? ', parte ' + (i + 1) : '') + ': enunciado recortado da prova'" />
+        }
+      </div>
+      <figcaption>
+        <span>Recorte da prova original</span>
+        <a [href]="q.examUrl" target="_blank" rel="noopener">Prova no site do Inep</a>
+      </figcaption>
+    </figure>
+
+    <section class="disc-answer" aria-labelledby="disc-answer-title">
+      <div class="disc-answer-head">
+        <h2 id="disc-answer-title">Sua resposta</h2>
+        @if (!submitted()) {
+          <p class="muted" role="status">
+            {{ saveState() === "saving" ? "Salvando…" : saveState() === "saved" ? "Rascunho salvo" : body().length ? "Alterações não salvas" : "" }}
+          </p>
+        }
+      </div>
+      @if (!submitted()) {
+        <label for="disc-body" class="visually-hidden">Sua resposta para {{ q.title }}</label>
+        <textarea id="disc-body" rows="14" [maxlength]="maxBody" [ngModel]="body()" (ngModelChange)="write($event)" (blur)="flush()"
+          placeholder="Escreva como na prova: um texto corrido, respondendo a cada item."></textarea>
+        <div class="disc-submit">
+          <p class="muted">{{ body().length }} de {{ maxBody }} caracteres. Depois de enviar, o texto não muda mais.</p>
+          <button type="button" (click)="submit()" [disabled]="busy() || !body().trim()">Enviar e ver o padrão de resposta</button>
+        </div>
+      } @else {
+        <blockquote class="disc-sent">{{ body() }}</blockquote>
+      }
+    </section>
+
+    @if (submitted()) {
+      <section class="disc-standard" aria-labelledby="disc-standard-title">
+        <h2 id="disc-standard-title">Padrão de resposta</h2>
+        <figure class="question-sheet">
+          <div class="question-images">
+            @for (image of q.standardImages; track image.url; let i = $index) {
+              <img [src]="image.url" [width]="image.width" [height]="image.height" [style.--image-width]="image.width"
+                decoding="async" [alt]="'Padrão de resposta do Inep para ' + q.title + (q.standardImages.length > 1 ? ', parte ' + (i + 1) : '')" />
+            }
+          </div>
+          <figcaption>
+            <span>Publicado pelo Inep</span>
+            <a [href]="q.standardUrl" target="_blank" rel="noopener">Padrão de resposta no site do Inep</a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="disc-assess" aria-labelledby="disc-assess-title">
+        <h2 id="disc-assess-title">Autoavaliação</h2>
+        <p class="muted">Compare sua resposta com o padrão e marque, em cada item, o quanto você contemplou.</p>
+        <ul>
+          @for (criterion of q.criteria; track $index; let i = $index) {
+            <li>
+              <span class="disc-assess-label">{{ criterionLabel(criterion) }} <span class="muted">{{ points(criterion.points) }} pontos</span></span>
+              <span class="disc-levels" role="radiogroup" [attr.aria-label]="criterionLabel(criterion)">
+                @for (level of levels; track level.value) {
+                  <button type="button" role="radio" [attr.aria-checked]="levelsDraft()[i] === level.value"
+                    [attr.data-level]="level.value" (click)="rate(i, level.value)">{{ level.label }}</button>
+                }
+              </span>
+            </li>
+          }
+        </ul>
+        <div class="disc-score">
+          <p>
+            <strong>{{ points(estimate()) }}</strong> de 10
+            <span class="muted">estimativa sua, não é nota oficial</span>
+          </p>
+          <button type="button" (click)="saveAssessment()" [disabled]="busy() || !assessed()">
+            {{ q.response?.assessment ? "Atualizar autoavaliação" : "Salvar autoavaliação" }}
+          </button>
+        </div>
+        @if (q.response?.assessment; as saved) {
+          <p class="admin-notice" role="status">Autoavaliação salva: {{ points(saved.score) }} de 10.</p>
+        }
+      </section>
+    }
+  } @else {
+    <h1 id="discursive-title">Discursivas</h1>
+    <p class="admin-intro">
+      Escreva a resposta como na prova. Ao enviar, aparece o padrão de resposta
+      do Inep e você avalia o quanto contemplou de cada item.
+    </p>
+    @if (list(); as rows) {
+      @if (rows.length) {
+        <ol class="disc-list">
+          @for (row of rows; track row.id) {
+            <li>
+              <button type="button" (click)="open(row.id)">
+                <span class="disc-list-title">{{ row.title }}</span>
+                <span class="muted">{{ row.area }}{{ row.subject ? " · " + row.subject : "" }}</span>
+                <span class="disc-status" [attr.data-status]="row.status">
+                  {{ statusLabel[row.status] }}{{ row.score !== null ? " · " + points(row.score) : "" }}
+                </span>
+              </button>
+            </li>
+          }
+        </ol>
+      } @else {
+        <p class="muted">Nenhuma discursiva publicada ainda. Elas entram pela importação de provas, com o padrão de resposta.</p>
+      }
+    }
+  }
+</section>

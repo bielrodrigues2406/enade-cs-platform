@@ -11,7 +11,8 @@
     <p class="admin-intro">
       Envie a prova e o gabarito definitivo baixados do site do Inep e cole os
       links de onde vieram. O sistema propõe a caixa de cada questão e lê a
-      letra do gabarito; você confere uma por uma antes de publicar.
+      letra do gabarito; você confere uma por uma antes de publicar. Para
+      incluir as discursivas, envie também o padrão de resposta.
     </p>
     <div class="import-fields">
       <div>
@@ -43,6 +44,15 @@
         <label for="import-key-url">Link do gabarito no Inep</label>
         <input id="import-key-url" name="keyUrl" type="url" [(ngModel)]="form.keyUrl"
           placeholder="https://download.inep.gov.br/enade/…/gabarito.pdf" required />
+      </div>
+      <div class="import-wide">
+        <label for="import-standard">PDF do padrão de resposta <span class="optional">opcional, para as discursivas</span></label>
+        <input id="import-standard" type="file" accept="application/pdf" (change)="pickFile('standard', $event)" />
+      </div>
+      <div class="import-wide">
+        <label for="import-standard-url">Link do padrão de resposta no Inep <span class="optional">opcional</span></label>
+        <input id="import-standard-url" name="standardUrl" type="url" [(ngModel)]="form.standardUrl"
+          placeholder="https://download.inep.gov.br/enade/…/padrao_resposta.pdf" />
       </div>
     </div>
     <button type="submit" [disabled]="busy()">{{ busy() ? "Enviando…" : "Enviar e propor caixas" }}</button>
@@ -89,7 +99,7 @@
     <div class="import-progress">
       <p>
         <strong>{{ counts().confirmed }}</strong> confirmadas ·
-        <strong>{{ counts().pending }}</strong> objetivas a conferir ·
+        <strong>{{ counts().pending }}</strong> a conferir ·
         {{ counts().total }} questões
       </p>
       @if (current.state === "READY") {
@@ -123,14 +133,24 @@
 
       <div class="import-stage">
         @if (selected(); as item) {
+          @if (item.kind === "DISCURSIVE" && current.hasStandard) {
+            <div class="admin-tabs import-docs" role="tablist" aria-label="Documento da discursiva">
+              <button type="button" role="tab" [attr.aria-selected]="doc() === 'exam'" (click)="showDoc('exam')">
+                Enunciado na prova ({{ item.boxes.length }})
+              </button>
+              <button type="button" role="tab" [attr.aria-selected]="doc() === 'standard'" (click)="showDoc('standard')">
+                Padrão de resposta ({{ item.standardBoxes.length }})
+              </button>
+            </div>
+          }
           <div class="import-toolbar">
             <button type="button" class="outline" [disabled]="page() <= 1" (click)="page.set(page() - 1)">← Página</button>
-            <span>Página {{ page() }} de {{ current.pageCount }}</span>
-            <button type="button" class="outline" [disabled]="page() >= (current.pageCount ?? 1)" (click)="page.set(page() + 1)">Página →</button>
+            <span>Página {{ page() }} de {{ pageSizes().length }}</span>
+            <button type="button" class="outline" [disabled]="page() >= pageSizes().length" (click)="page.set(page() + 1)">Página →</button>
             <button type="button" class="text-button" (click)="addBox()" [disabled]="current.state !== 'READY'">+ Caixa nesta página</button>
           </div>
           <div class="import-page" (pointermove)="moveDrag($event)" (pointerup)="endDrag()" (pointercancel)="endDrag()">
-            <img [src]="pageUrl()" [alt]="'Página ' + page() + ' da prova'" draggable="false" />
+            <img [src]="pageUrl()" [alt]="'Página ' + page() + (doc() === 'standard' ? ' do padrão de resposta' : ' da prova')" draggable="false" />
             @for (entry of pageBoxes(); track entry.index) {
               <div
                 class="import-box"
@@ -152,8 +172,8 @@
           <div class="import-details">
             <p>
               <strong>{{ item.kind === "DISCURSIVE" ? "Discursiva" : "Questão" }} {{ item.number }}</strong>
-              · lida no gabarito: {{ item.keyAnswer ?? "nenhuma" }}
-              @if (item.boxes.length > 1) { · {{ item.boxes.length }} caixas, na ordem de leitura }
+              @if (item.kind === "OBJECTIVE") { · lida no gabarito: {{ item.keyAnswer ?? "nenhuma" }} }
+              @if (pageBoxes().length > 1 || item.boxes.length > 1) { · as caixas valem na ordem de leitura }
             </p>
             @if (item.kind === "OBJECTIVE" && current.state === "READY") {
               <div class="import-answer-row">
@@ -181,7 +201,7 @@
             @for (warning of item.warnings; track warning) {
               <p class="import-warning">{{ warning }}</p>
             }
-            @if (item.kind === "OBJECTIVE" && item.answer !== "ANULADA") {
+            @if (item.answer !== "ANULADA" && reviewable(item)) {
               <div class="import-fields">
                 <div>
                   <label for="import-area">Área</label>
@@ -197,8 +217,31 @@
                   <input id="import-subject" maxlength="80" [value]="item.subject ?? ''" (change)="setField('subject', $any($event.target).value)" />
                 </div>
               </div>
+              @if (item.kind === "DISCURSIVE") {
+                <fieldset class="import-criteria">
+                  <legend>Itens de avaliação <span class="muted">total {{ criteriaTotal().toLocaleString("pt-BR") }} de 10 pontos</span></legend>
+                  <p class="muted">O aluno se autoavalia em cada item depois de ver o padrão de resposta.</p>
+                  <ul>
+                    @for (criterion of item.criteria; track $index) {
+                      <li>
+                        <label [for]="'criterion-' + $index">{{ criterionLabel(criterion) }}</label>
+                        <input [id]="'criterion-' + $index" type="number" min="0.5" max="10" step="0.5"
+                          [value]="criterion.points" (change)="setPoints($index, $any($event.target).value)" />
+                        <span class="muted">pontos</span>
+                        @if (item.criteria.length > 1) {
+                          <button type="button" class="text-button" (click)="removeCriterion($index)"
+                            [attr.aria-label]="'Remover ' + criterionLabel(criterion)">Remover</button>
+                        }
+                      </li>
+                    }
+                  </ul>
+                  @if (item.criteria.length < 6) {
+                    <button type="button" class="text-button" (click)="addCriterion()" [disabled]="busy()">+ Item</button>
+                  }
+                </fieldset>
+              }
               <div class="import-actions">
-                <button type="button" (click)="setStatus('CONFIRMED')" [disabled]="busy() || !item.area || !item.boxes.length || current.state !== 'READY'">
+                <button type="button" (click)="setStatus('CONFIRMED')" [disabled]="busy() || !canConfirm(item)">
                   Confirmar e seguir
                 </button>
                 <button type="button" class="outline" (click)="setStatus('EXCLUDED')" [disabled]="busy() || current.state !== 'READY'">Deixar de fora</button>
@@ -208,7 +251,8 @@
               </div>
             } @else {
               <p class="muted">
-                {{ item.answer === "ANULADA" ? "Anulada pelo Inep: não entra no estudo." : "Discursivas ainda não entram no estudo." }}
+                {{ item.answer === "ANULADA" ? "Anulada pelo Inep: não entra no estudo."
+                  : "Sem o PDF do padrão de resposta neste lote, a discursiva não pode ser confirmada. Faça uma nova importação com ele." }}
               </p>
             }
           </div>

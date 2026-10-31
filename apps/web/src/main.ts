@@ -7,6 +7,7 @@ import { HomeComponent } from "./home.component";
 import { LandingComponent } from "./landing.component";
 import { AdminComponent } from "./admin.component";
 import { LessonsComponent } from "./lessons.component";
+import { DiscursiveComponent } from "./discursive.component";
 import { QuestionContentComponent } from "./question-content.component";
 import { ExamComponent } from "./exam.component";
 import {
@@ -108,6 +109,7 @@ type Question = Summary & {
     LandingComponent,
     AdminComponent,
     LessonsComponent,
+    DiscursiveComponent,
     QuestionContentComponent,
     ExamComponent,
     ReviewComponent,
@@ -149,6 +151,7 @@ class App {
   roles = signal<string[]>([]);
   adminView = signal(false);
   lessonsView = signal(false);
+  discursiveView = signal(false);
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
@@ -268,6 +271,7 @@ class App {
     this.practiceView.set(false);
     this.adminView.set(false);
     this.lessonsView.set(false);
+    this.discursiveView.set(false);
     this.curationView.set(true);
     this.leaveHomePath();
     this.focusMain();
@@ -598,6 +602,7 @@ class App {
     }
     this.adminView.set(false);
     this.lessonsView.set(false);
+    this.discursiveView.set(false);
     this.question.set(null);
     this.selected = "";
     this.editing.set(false);
@@ -686,9 +691,23 @@ class App {
     this.leaveHomePath();
     this.focusMain();
   }
+  openDiscursive() {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.discursiveView.set(true);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
   private clearStudyState() {
     this.adminView.set(false);
     this.lessonsView.set(false);
+    this.discursiveView.set(false);
     if (this.identityGeneration > 0 && this.practiceView()) {
       this.practiceAttemptId.set(null);
       this.practiceItemPosition.set(1);
@@ -905,6 +924,7 @@ class App {
       if (generation !== this.identityGeneration || !stillCurrent()) return;
       this.adminView.set(false);
     this.lessonsView.set(false);
+    this.discursiveView.set(false);
       update();
     };
     const doc = document as Document & {
