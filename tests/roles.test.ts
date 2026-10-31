@@ -105,3 +105,21 @@ test("profile fields are validated and an enrollment belongs to one account", as
   assert.equal((await account(email(), { enrollment })).status, 201);
   assert.equal((await account(email(), { enrollment })).status, 409);
 });
+
+test("ADMIN_EMAILS grants the admin role at sign-up and to existing accounts at start", async () => {
+  const { configuredAdmins, grantConfiguredAdmins } = await import("../apps/api/src/roles.js");
+  assert.deepEqual(configuredAdmins(" Ana@Example.invalid , não-é-email, b@example.invalid"), ["ana@example.invalid", "b@example.invalid"]);
+  const [early, late] = [email(), email()];
+  const before = process.env.ADMIN_EMAILS;
+  try {
+    const existing = await account(late);
+    process.env.ADMIN_EMAILS = `${early}, ${late}`;
+    const fresh = await account(early);
+    assert.deepEqual((await (await call("access", fresh.cookie)).json()).roles, ["ADMIN"]);
+    assert.deepEqual((await (await call("access", existing.cookie)).json()).roles, []);
+    await grantConfiguredAdmins(); // o que o servidor faz ao iniciar
+    assert.deepEqual((await (await call("access", existing.cookie)).json()).roles, ["ADMIN"]);
+  } finally {
+    process.env.ADMIN_EMAILS = before ?? "";
+  }
+});

@@ -28,6 +28,10 @@ services:
         sync: false
       - key: TRUST_PROXY
         value: "1"
+      # Seu e-mail (e de outros administradores, separados por vírgula):
+      # vira administrador ao criar a conta no site.
+      - key: ADMIN_EMAILS
+        sync: false
 
 databases:
   - name: enade-cs-db

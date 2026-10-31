@@ -10,7 +10,7 @@ import {
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { hashPassword, verifyPassword } from "./password.js";
-import { applyInvitations } from "./roles.js";
+import { applyInvitations, grantConfiguredAdmin } from "./roles.js";
 import {
   createGuest,
   digest,
@@ -153,6 +153,7 @@ export class AuthController {
           409,
         );
       await applyInvitations(client, guest.id, email);
+      await grantConfiguredAdmin(client, email);
       // Rotate all guest credentials. A leaked anonymous token must not gain account access.
       await client.query("DELETE FROM browser_session WHERE identity_id=$1", [
         guest.id,

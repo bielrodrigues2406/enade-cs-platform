@@ -86,6 +86,38 @@ export async function revoke(client: PoolClient, email: string, role: Role, acto
   if (cancelled.rowCount) await record(client, email, role, "INVITATION_CANCELLED", actor);
 }
 
+/**
+ * Administradores definidos na configuração do servidor (ADMIN_EMAILS, e-mails
+ * separados por vírgula): recebem o papel quando a conta existe, ao iniciar o
+ * servidor ou no cadastro. Facilita o primeiro acesso sem shell no provedor.
+ */
+export function configuredAdmins(value = process.env.ADMIN_EMAILS ?? "") {
+  return value.split(",").map((email) => email.trim().toLowerCase())
+    .filter((email) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && email.length <= 254);
+}
+
+export async function grantConfiguredAdmin(client: PoolClient, email: string) {
+  if (!configuredAdmins().includes(email)) return;
+  const exists = (await client.query("SELECT 1 FROM account WHERE email=$1", [email])).rowCount;
+  if (exists) await authorize(client, email, "ADMIN", null);
+}
+
+export async function grantConfiguredAdmins() {
+  for (const email of configuredAdmins()) {
+    const client = await db.connect();
+    try {
+      await client.query("BEGIN");
+      await grantConfiguredAdmin(client, email);
+      await client.query("COMMIT");
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+}
+
 /** Converte convites pendentes em papéis quando a conta passa a existir. */
 export async function applyInvitations(client: PoolClient, identityId: string, email: string) {
   const invitations = (await client.query<{ role: Role; invitedBy: string }>(
