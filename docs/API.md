@@ -188,6 +188,15 @@ O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE301
 É a única escrita aceita fora de JSON. Republicar não duplica questões; o lote fica PUBLISHED quando não resta item pendente.
 
 
+## Prova completa da edição (SIM-1, ADR-014)
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /editions | — | `{minutes, editions}`; cada edição tem `objectives`, `general`, `discursive` e `missing` (números sem objetiva publicada) |
+| POST /editions/:source/attempts | `{requestId}` (UUID) | 201 com a tentativa (`kind: "EDITION"`, `deadlineAt`, `edition`, `discursive`); repetir o `requestId` devolve a mesma; 409 se já houver treino em andamento |
+
+A tentativa usa as rotas de `/practice/:id` (itens, finalização e leitura). Depois do prazo, a leitura finaliza e a gravação responde 409. A finalização envia os rascunhos das discursivas da edição. O resumo inclui `byBlock` (`general`, `specific`).
+
 ## Discursivas (DISC-1, ADR-013)
 
 Qualquer sessão de estudo (visitante ou conta):
