@@ -6,6 +6,7 @@ import { requireIdentity } from "./session.js";
 import { randomUUID } from "node:crypto";
 import { credentials, profile } from "./auth.js";
 import { hashPassword } from "./password.js";
+import { recordActivity } from "./activity.js";
 
 // Papéis da plataforma (ROLE-1, D14). A curadoria editorial continua em
 // curator_role; aqui ficam administração e docência.
@@ -48,7 +49,9 @@ async function record(client: PoolClient, email: string, role: Role, action: str
     "INSERT INTO role_event(email,role,action,actor_id) VALUES($1,$2,$3,$4)",
     [email, role, action, actor],
   );
+  await recordActivity(client, { category: "ROLE", action: `ROLE_${action}`, actorId: actor, subject: email, detail: ROLE_NAMES[role] });
 }
+const ROLE_NAMES: Record<Role, string> = { ADMIN: "Administração", PROFESSOR: "Professor" };
 
 /**
  * Autoriza um e-mail para um papel. Se a conta já existe, o papel vale na
@@ -219,6 +222,8 @@ export class RolesController {
       await client.query(
         "INSERT INTO account(identity_id,email,password_hash,display_name,enrollment) VALUES($1,$2,$3,$4,$5)",
         [id, email, encoded, name, enrollment]);
+      await recordActivity(client, { category: "ACCOUNT", action: "ACCOUNT_CREATED", actorId: admin.id, subject: email,
+        detail: "Cadastrada pela administração" });
       if (role) await authorize(client, email, role, admin.id);
       return { id, email, role };
     });

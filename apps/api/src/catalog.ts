@@ -6,6 +6,8 @@ import { AREAS } from "./question-areas.js";
 
 // Autorais (sem edição) primeiro, como antes; depois as oficiais da edição mais
 // recente, na ordem da prova. O id desempata e mantém as páginas estáveis.
+/** Sugestões do início: oficiais antes das autorais, demonstrações por último, provas recentes primeiro. */
+const SUGGESTION_ORDER = `(origin='OFFICIAL') DESC,demonstration,year DESC NULLS LAST,"questionNumber" NULLS LAST,id`;
 const CATALOG_ORDER = `year DESC NULLS FIRST,modality,"questionNumber" NULLS FIRST,id`;
 const FILTERS = new Set(["q", "topic", "area", "year", "limit", "offset"]);
 function text(value: unknown, max: number): string {
@@ -83,10 +85,14 @@ export class CatalogController {
           'author',count(*) FILTER (WHERE origin<>'OFFICIAL' AND NOT demonstration)::integer,
           'demonstration',count(*) FILTER (WHERE demonstration)::integer
         ) FROM published),
-        'suggestions',COALESCE((SELECT json_agg(i ORDER BY i.year DESC NULLS FIRST,i.modality,i."questionNumber" NULLS FIRST,i.id) FROM (
-          SELECT id,title,topic,subject,origin,demonstration,"versionNumber",answered,
-            area,year,modality,"questionNumber"
-          FROM published WHERE NOT answered ORDER BY ${CATALOG_ORDER} LIMIT 3
+        'suggestions',COALESCE((SELECT json_agg(i ORDER BY i.rank) FROM (
+          SELECT *,row_number() OVER (ORDER BY ${SUGGESTION_ORDER}) AS rank FROM (
+            -- Uma não respondida por área, para variar o que o início sugere.
+            SELECT DISTINCT ON (COALESCE(area,topic)) id,title,topic,subject,origin,demonstration,
+              "versionNumber",answered,area,year,modality,"questionNumber"
+            FROM published WHERE NOT answered
+            ORDER BY COALESCE(area,topic),${SUGGESTION_ORDER}
+          ) per_area ORDER BY ${SUGGESTION_ORDER} LIMIT 3
         ) i),'[]'::json),
         'facets',json_build_object(
           'areas',(SELECT json_agg(json_build_object(

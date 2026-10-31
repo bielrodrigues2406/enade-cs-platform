@@ -17,6 +17,8 @@ export { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
 import { AuthController } from "./auth.js";
+import { ActivityController } from "./activity.js";
+import { requestLimiter } from "./request-limit.js";
 import { CurationController } from "./curation.js";
 import { QuestionImportsController } from "./question-imports.js";
 import { SourcesController } from "./sources.js";
@@ -228,6 +230,7 @@ class StudyController {
 @Module({
   controllers: [
     AuthController,
+    ActivityController,
     StudyController,
     CurationController,
     QuestionImportsController,
@@ -298,6 +301,7 @@ export async function createApp() {
   });
   if (hops) app.set("trust proxy", hops);
   app.disable("x-powered-by");
+  app.use(requestLimiter());
   app.use((req: any, res: any, next: any) => {
     const api = req.path === "/api" || req.path.startsWith("/api/");
     res.setHeader("X-Content-Type-Options", "nosniff");

@@ -18,6 +18,7 @@ before(async () => {
 after(async () => {
   const list = [...emails];
   const ids = (await db.query("SELECT identity_id FROM account WHERE email=ANY($1)", [list])).rows.map((r) => r.identity_id);
+  await db.query("DELETE FROM activity_log WHERE subject=ANY($1) OR actor_id=ANY($2::uuid[])", [list, ids]);
   await db.query("DELETE FROM role_event WHERE email=ANY($1)", [list]);
   await db.query("DELETE FROM role_invitation WHERE email=ANY($1)", [list]);
   await db.query("DELETE FROM account_role WHERE identity_id=ANY($1::uuid[])", [ids]);
@@ -184,4 +185,41 @@ test("people edit their profile and password; admins can create an account with 
   assert.equal(professor.status, 200);
   const professorCookie = professor.cookie;
   assert.deepEqual(await (await call("access", professorCookie)).json(), { roles: ["PROFESSOR"] });
+  // Professores e administração também cadastram questões (curadoria); quem não tem papel, não.
+  assert.deepEqual(await (await call("curation/access", professorCookie)).json(), { canCurate: true });
+  assert.equal((await call("curation/questions", professorCookie)).status, 200);
+  assert.equal((await call("curation/questions", admin.cookie)).status, 200);
+  assert.deepEqual(await (await call("curation/access", person.cookie)).json(), { canCurate: false });
+  assert.equal((await call("curation/questions", person.cookie)).status, 403);
+});
+
+test("the activity log records access, accounts and roles and is visible only to admins", async () => {
+  const adminEmail = email();
+  const admin = await account(adminEmail);
+  await makeAdmin(adminEmail);
+  const studentEmail = email();
+  const student = await account(studentEmail);
+  assert.equal((await login(studentEmail, "senha errada 2026!")).status, 401);
+  assert.equal((await call("admin/roles", admin.cookie, "POST", { email: studentEmail, role: "PROFESSOR" })).status, 200);
+
+  assert.equal((await call("admin/activity", student.cookie)).status, 403);
+  assert.equal((await call("admin/activity?category=OUTRA", admin.cookie)).status, 400);
+  // O registro da senha errada é gravado sem esperar a resposta.
+  let data: any;
+  for (let i = 0; i < 20; i++) {
+    data = await (await call(`admin/activity?q=${encodeURIComponent(studentEmail)}`, admin.cookie)).json();
+    if (data.items.some((row: any) => row.action === "LOGIN_FAILED")) break;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+  const actions = data.items.map((row: any) => row.action);
+  for (const action of ["REGISTER", "LOGIN_FAILED", "ROLE_GRANTED"]) assert.ok(actions.includes(action), action);
+  const failedRow = data.items.find((row: any) => row.action === "LOGIN_FAILED");
+  assert.equal(failedRow.category, "ACCESS");
+  assert.ok(failedRow.ip, "acesso guarda o IP");
+  const granted = data.items.find((row: any) => row.action === "ROLE_GRANTED");
+  assert.equal(granted.actorEmail, adminEmail);
+  assert.equal(granted.ip, null, "papéis não guardam IP");
+  const roles = await (await call("admin/activity?category=ROLE", admin.cookie)).json();
+  assert.ok(roles.items.every((row: any) => row.category === "ROLE"));
+  assert.equal(typeof data.summary.failedLogins, "number");
 });

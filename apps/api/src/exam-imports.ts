@@ -14,6 +14,7 @@ import { AREAS } from "./question-areas.js";
 import { requireRole } from "./roles.js";
 import { sourcePath, validateOfficialUrl } from "./source-store.js";
 import { publishImport } from "./exam-import-publish.js";
+import { recordActivity } from "./activity.js";
 
 // Importação de provas futuras (IMP-1). Quem administra envia prova,
 // gabarito e, se houver discursivas, o padrão de resposta; o processo `scripts/import-exam.mjs` propõe as caixas; a pessoa
@@ -133,6 +134,8 @@ export class ExamImportsController {
        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
       [id, year, body.modality, examUrl, keyUrl, examSha256, keySha256, standardUrl, standardSha256, admin.id],
     );
+    await recordActivity(db, { category: "CONTENT", action: "IMPORT_UPLOADED", actorId: admin.id,
+      subject: `ENADE ${year} · ${body.modality}`, detail: standard ? "Prova, gabarito e padrão de resposta" : "Prova e gabarito" });
     startExtraction(id);
     return { id, state: "PROCESSING" };
   }
@@ -222,7 +225,11 @@ export class ExamImportsController {
 
   @Post(":id/publish") @HttpCode(200) async publish(@Req() req: any, @Param("id") id: string) {
     const admin = await requireRole(req, "ADMIN");
-    await batch(id);
-    return publishImport(id, admin.id);
+    const imported = await batch(id);
+    const result = await publishImport(id, admin.id);
+    await recordActivity(db, { category: "CONTENT", action: "IMPORT_PUBLISHED", actorId: admin.id,
+      subject: `ENADE ${imported.year} · ${imported.modality}`,
+      detail: `${result.published} publicadas` + (result.alreadyPublished ? `, ${result.alreadyPublished} já estavam` : "") });
+    return result;
   }
 }

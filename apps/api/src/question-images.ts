@@ -149,8 +149,9 @@ export class QuestionImagesController {
            OR EXISTS(SELECT 1 FROM discursive_image d WHERE d.asset_sha256=a.sha256 AND d.part='PROMPT')
            OR EXISTS(SELECT 1 FROM discursive_image d JOIN discursive_response r ON r.question_id=d.question_id
                      WHERE d.asset_sha256=a.sha256 AND r.owner_id=$2 AND r.submitted_at IS NOT NULL)
-           OR EXISTS(SELECT 1 FROM curator_role c JOIN account ac ON ac.identity_id=c.identity_id
-                     WHERE c.identity_id=$2))`,
+           OR (EXISTS(SELECT 1 FROM account ac WHERE ac.identity_id=$2)
+               AND (EXISTS(SELECT 1 FROM curator_role c WHERE c.identity_id=$2)
+                    OR EXISTS(SELECT 1 FROM account_role r WHERE r.identity_id=$2 AND r.role IN ('PROFESSOR','ADMIN')))))`,
         [match![1], user.id],
       )
     ).rows[0];

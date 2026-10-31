@@ -13,8 +13,9 @@ import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
-import { object, text, revision, curator, transaction } from "./editorial.js";
+import { object, text, revision, curator, canCurate, transaction } from "./editorial.js";
 import { verifyProvenance, type Provenance } from "./source-store.js";
+import { recordActivity } from "./activity.js";
 
 type Option = { id: string; text: string };
 type Content = {
@@ -175,6 +176,11 @@ async function event(
     "INSERT INTO editorial_event(question_id,version_id,actor_id,event_type,note) VALUES($1,$2,$3,$4,$5)",
     [questionId, versionId, actorId, type, note],
   );
+  // Edições de rascunho ficam só no histórico editorial; o registro geral guarda os marcos.
+  if (type !== "EDITED") {
+    const title = (await client.query("SELECT title FROM question_version WHERE id=$1", [versionId])).rows[0]?.title;
+    await recordActivity(client, { category: "CONTENT", action: `QUESTION_${type}`, actorId, subject: title, detail: note });
+  }
 }
 async function insertVersion(
   client: PoolClient,
@@ -238,11 +244,7 @@ export async function createEditorialDraft(
 export class CurationController {
   @Get("access") async access(@Req() req: any) {
     const user = await requireIdentity(req);
-    const role = await db.query(
-      "SELECT 1 FROM curator_role WHERE identity_id=$1",
-      [user.id],
-    );
-    return { canCurate: !!user.email && !!role.rowCount };
+    return { canCurate: !!user.email && (await canCurate(db, user.id)) };
   }
   @Get("questions") async queue(@Req() req: any) {
     const user = await curator(req);

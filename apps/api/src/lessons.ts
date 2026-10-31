@@ -4,6 +4,7 @@ import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
 import { rolesOf } from "./roles.js";
+import { recordActivity } from "./activity.js";
 
 // Turmas, aulas e presença (AULA-1, D13). Professores e administração
 // gerenciam; o aluno vê as aulas da turma em que seu prontuário está.
@@ -64,9 +65,9 @@ export class LessonsController {
     const user = await requireStaff(req);
     const year = Number(body?.editionYear);
     if (!Number.isInteger(year) || year < 2004 || year > 2100) fail("Ano inválido.", 400);
-    const id = randomUUID();
-    await db.query("INSERT INTO study_class(id,name,edition_year,created_by) VALUES($1,$2,$3,$4)",
-      [id, text(body?.name, "Nome da turma", 2, 120), year, user.id]);
+    const id = randomUUID(), name = text(body?.name, "Nome da turma", 2, 120);
+    await db.query("INSERT INTO study_class(id,name,edition_year,created_by) VALUES($1,$2,$3,$4)", [id, name, year, user.id]);
+    await recordActivity(db, { category: "CLASS", action: "CLASS_CREATED", actorId: user.id, subject: name, detail: `ENADE ${year}` });
     return { id };
   }
 
@@ -101,7 +102,7 @@ export class LessonsController {
   }
 
   @Post("classes/:id/members") @HttpCode(200) async importMembers(@Req() req: any, @Param("id") id: string, @Body() body: any) {
-    await requireStaff(req);
+    const user = await requireStaff(req);
     uuid(id, "Turma");
     if (typeof body?.text !== "string" || body.text.length > 60000) fail("Cole a lista da planilha.", 400);
     const { rows, skipped } = parseRoster(body.text);
@@ -116,6 +117,9 @@ export class LessonsController {
       );
       if (result.rows[0].inserted) added++; else updated++;
     }
+    const name = (await db.query("SELECT name FROM study_class WHERE id=$1", [id])).rows[0]?.name;
+    await recordActivity(db, { category: "CLASS", action: "ROSTER_IMPORTED", actorId: user.id, subject: name,
+      detail: `${added} novos, ${updated} atualizados` });
     return { added, updated, skipped };
   }
 

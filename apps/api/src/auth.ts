@@ -11,6 +11,7 @@ import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { hashPassword, verifyPassword } from "./password.js";
 import { applyInvitations, grantConfiguredAdmin } from "./roles.js";
+import { logActivity, recordActivity, requestIp } from "./activity.js";
 import {
   createGuest,
   digest,
@@ -25,7 +26,7 @@ import {
 // Single-process development protection. Do not trust client-supplied forwarding
 // headers; deployments behind a proxy need an explicitly configured shared limiter.
 export class AuthThrottle {
-  private windows = new Map<string, { count: number; end: number }>();
+  private windows = new Map<string, { count: number; end: number; logged?: boolean }>();
   check(req: any, res: any, email: string) {
     const now = Date.now();
     for (const [key, value] of this.windows)
@@ -37,6 +38,12 @@ export class AuthThrottle {
     for (const [key, max] of keys) {
       const current = this.windows.get(key);
       if (current && current.count >= max) {
+        // Um registro por janela bloqueada, para o ataque não inundar o log.
+        if (!current.logged) {
+          current.logged = true;
+          logActivity({ category: "SECURITY", action: "LOGIN_BLOCKED", subject: key.startsWith("email:") ? email : null,
+            detail: key.startsWith("email:") ? `${max} tentativas para o e-mail em 15 min` : `${max} tentativas do IP em 15 min`, ip: requestIp(req) });
+        }
         res.setHeader("Retry-After", Math.ceil((current.end - now) / 1000));
         fail(
           "Muitas tentativas de acesso. Aguarde alguns minutos e tente novamente.",
@@ -66,13 +73,17 @@ export class AuthThrottle {
 const GUEST_SESSIONS_PER_IP = 600;
 const GUEST_WINDOW_MS = 15 * 60000;
 class GuestThrottle {
-  private windows = new Map<string, { count: number; end: number }>();
+  private windows = new Map<string, { count: number; end: number; logged?: boolean }>();
   check(req: any, res: any) {
     const now = Date.now();
     for (const [key, value] of this.windows) if (value.end <= now) this.windows.delete(key);
     const key = digest(req.ip || req.socket.remoteAddress || "unknown");
     const current = this.windows.get(key) ?? { count: 0, end: now + GUEST_WINDOW_MS };
     if (current.count >= GUEST_SESSIONS_PER_IP) {
+      if (!current.logged) {
+        current.logged = true;
+        logActivity({ category: "SECURITY", action: "GUEST_LIMITED", detail: `${GUEST_SESSIONS_PER_IP} sessões novas do IP em 15 min`, ip: requestIp(req) });
+      }
       res.setHeader("Retry-After", Math.ceil((current.end - now) / 1000));
       fail("Muitas sessões novas a partir desta rede. Aguarde alguns minutos.", 429);
     }
@@ -181,6 +192,7 @@ export class AuthController {
           409,
         );
       await applyInvitations(client, guest.id, email);
+      await recordActivity(client, { category: "ACCESS", action: "REGISTER", actorId: guest.id, subject: email, ip: requestIp(req) });
       await grantConfiguredAdmin(client, email);
       // Rotate all guest credentials. A leaked anonymous token must not gain account access.
       await client.query("DELETE FROM browser_session WHERE identity_id=$1", [
@@ -214,8 +226,10 @@ export class AuthController {
         [email],
       )
     ).rows[0];
-    if (!(await verifyPassword(password, account?.password_hash)) || !account)
+    if (!(await verifyPassword(password, account?.password_hash)) || !account) {
+      logActivity({ category: "ACCESS", action: "LOGIN_FAILED", actorId: account?.identity_id, subject: email, ip: requestIp(req) });
       fail("E-mail ou senha incorretos.", 401);
+    }
     const client = await db.connect();
     try {
       await client.query("BEGIN");
@@ -225,6 +239,7 @@ export class AuthController {
         guest.tokenHash,
       ]);
       const token = await issueSession(client, account.identity_id);
+      await recordActivity(client, { category: "ACCESS", action: "LOGIN", actorId: account.identity_id, subject: email, ip: requestIp(req) });
       await client.query("COMMIT");
       setSessionCookie(res, token);
       return { mode: "account", email };
