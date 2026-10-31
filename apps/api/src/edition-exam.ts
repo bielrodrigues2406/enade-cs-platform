@@ -3,7 +3,8 @@ import { Body, Controller, Get, Param, Post, Req } from "@nestjs/common";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
-import { ATTEMPT_FIELDS, ELIGIBLE, closed, owned, view, type Attempt } from "./exam.js";
+import { ATTEMPT_FIELDS, closed, owned, view, type Attempt } from "./exam.js";
+import { ELIGIBLE } from "./practice-eligibility.js";
 
 // Prova completa da edição (SIM-1, ADR-014): as objetivas publicadas de uma
 // prova oficial, na ordem original, com o tempo da prova. Usa a mesma

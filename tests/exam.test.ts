@@ -480,11 +480,13 @@ test("practice from errors reviews ready mistakes in study, retry redoes wrong a
   await db.query("UPDATE answer SET updated_at=now()-interval '2 days' WHERE owner_id=$1 AND question_id=ANY($2)", [user.id, made.slice(0, 2).map((m) => m.id)]);
   const progress = await json("me/progress", user);
   assert.deepEqual(progress.errors, { total: 3, ready: 2 });
+  assert.deepEqual((await json("practice", user)).errors, { total: 3, ready: 2 });
   const area = progress.areas.find((a: any) => a.area === topic);
   assert.deepEqual([area.firstAttempts, area.firstCorrect], [3, 0]);
 
   const errors = await json("practice", user, "POST", { requestId: randomUUID(), focus: "ERRORS", area: null }, 201);
   assert.equal(errors.focus, "ERRORS");
+  assert.equal((await json("practice", user)).active.focus, "ERRORS");
   assert.deepEqual(errors.items.map((i: any) => i.question.id).sort(), made.slice(0, 2).map((m) => m.id).sort());
   const right = errors.items[0];
   await save(user, errors.id, right.position, `${right.question.id}-A`);

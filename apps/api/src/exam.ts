@@ -7,6 +7,8 @@ import { requireIdentity } from "./session.js";
 import { AREAS } from "./question-areas.js";
 import { imageView, type QuestionImage } from "./question-images.js";
 import { publicExam, sourceFields, type Source } from "./source-store.js";
+import { errorCounts } from "./progress.js";
+import { ELIGIBLE } from "./practice-eligibility.js";
 
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
 const SIZES = [10, 20, 30];
@@ -19,15 +21,6 @@ const SEEN = `(EXISTS(SELECT 1 FROM answer a JOIN question_version av ON av.id=a
     WHERE a.owner_id=$OWNER AND av.question_id=e.question_id)
   OR EXISTS(SELECT 1 FROM practice_item pi JOIN practice_attempt pa ON pa.id=pi.attempt_id
     WHERE pa.owner_id=$OWNER AND pi.question_id=e.question_id))`;
-// Disponibilidade e criação usam exatamente a mesma elegibilidade. Publicação
-// e revisão pertencem à curadoria; este módulo não promove conteúdo privado.
-export const ELIGIBLE = `SELECT q.id,q.question_id,q.topic,q.origin,q.exam_source_id,q.source_question_number
-  FROM editorial_question c JOIN question_version q ON q.id=c.current_version_id
-  WHERE q.editorial_status='PUBLISHED' AND q.origin IN ('AUTHOR_CREATED','OFFICIAL')
-    AND (SELECT count(*) FROM question_option o WHERE o.question_id=q.id) BETWEEN 2 AND 5
-    AND EXISTS(SELECT 1 FROM question_option o WHERE o.question_id=q.id AND o.id=q.correct_option_id)
-    AND (q.presentation='TEXT' OR EXISTS(SELECT 1 FROM question_version_image i WHERE i.version_id=q.id))`;
-
 export type Attempt = {
   id: string; size: number; area: string | null; state: "IN_PROGRESS" | "COMPLETED";
   createdAt: Date; finishedAt: Date | null; answered: number; summary: Result | null;
@@ -305,14 +298,15 @@ export class PracticeController {
           (SELECT count(*)::integer FROM eligible e WHERE e.topic=a.name AND NOT ${SEEN.replaceAll("$OWNER", "$1")}))
           ORDER BY a.ordinality)
           FROM unnest($2::text[]) WITH ORDINALITY a(name,ordinality)),
-        'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,kind,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
+        'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,kind,focus,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
         'recent',COALESCE((SELECT json_agg(a ORDER BY a."finishedAt" DESC,a.id DESC) FROM (
-          SELECT id,state,size,area,kind,"createdAt","finishedAt",answered FROM owned
+          SELECT id,state,size,area,kind,focus,"createdAt","finishedAt",answered FROM owned
           WHERE state='COMPLETED' ORDER BY "finishedAt" DESC,id DESC LIMIT 5
         ) a),'[]'::json)
       ) AS availability`, [user.id, [...AREAS]],
     )).rows[0].availability;
-    return data;
+    // Erros do estudo livre: os prontos viram um treino próprio ("Treinar meus erros").
+    return { ...data, errors: await errorCounts(user.id) };
   }
 
   @Post()

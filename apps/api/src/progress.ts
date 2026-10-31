@@ -2,6 +2,7 @@ import { Controller, Get, Req } from "@nestjs/common";
 import { db } from "./database.js";
 import { requireIdentity } from "./session.js";
 import { AREAS } from "./question-areas.js";
+import { ELIGIBLE } from "./practice-eligibility.js";
 
 // Desempenho da pessoa (o "Meu desempenho" da página inicial). Conta a
 // primeira resposta a cada questão — no estudo livre ou em treino/prova
@@ -10,6 +11,7 @@ import { AREAS } from "./question-areas.js";
 
 export type AreaProgress = {
   area: string;
+  /** Questões da área que entram em treino (mesma contagem do simulado por área). */
   published: number;
   /** Questões da área já respondidas pela pessoa (estudo, treino ou prova). */
   firstAttempts: number;
@@ -29,13 +31,9 @@ const FIRST_ANSWERS = `
   )
   SELECT DISTINCT ON (question_id) question_id,topic,correct FROM answers ORDER BY question_id,at,ord`;
 
-const PUBLISHED = `
-  SELECT v.question_id,v.topic FROM editorial_question c JOIN question_version v ON v.id=c.current_version_id
-  WHERE v.editorial_status='PUBLISHED'`;
-
 export async function areaProgress(owner: string): Promise<AreaProgress[]> {
   return (await db.query<AreaProgress>(
-    `WITH first AS (${FIRST_ANSWERS}), published AS (${PUBLISHED})
+    `WITH first AS (${FIRST_ANSWERS}), published AS (${ELIGIBLE})
      SELECT a.name AS area,
        (SELECT count(*)::int FROM published p WHERE p.topic=a.name) AS published,
        (SELECT count(*)::int FROM first f WHERE f.topic=a.name) AS "firstAttempts",
