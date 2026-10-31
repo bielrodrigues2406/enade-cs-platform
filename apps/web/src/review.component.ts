@@ -11,6 +11,9 @@ export type ReviewItem = {
   versionNumber: number;
   answeredAt: string;
   currentVersionId: string | null;
+  /** Revisão espaçada: o erro volta um dia depois de ver o gabarito. */
+  reviewAt: string;
+  ready: boolean;
 };
 type Notebook = {
   summary: {
@@ -18,6 +21,8 @@ type Notebook = {
     correct: number;
     incorrect: number;
     demonstration: number;
+    /** Erros que já passaram do intervalo e estão prontos para refazer. */
+    ready: number;
   };
   topics: { topic: string; answered: number; incorrect: number }[];
   items: ReviewItem[];

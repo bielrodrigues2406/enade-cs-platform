@@ -1790,6 +1790,18 @@ textarea {
 .mobile-study-nav {
   display: none;
 }
+.review-ready {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+}
+.review-ready strong {
+  color: var(--color-text);
+}
+.review-wait {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-warning-text);
+}
 .review-summary {
   padding-block: 22px;
   margin-bottom: 28px;
