@@ -3,6 +3,9 @@ import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
+import { randomUUID } from "node:crypto";
+import { credentials, profile } from "./auth.js";
+import { hashPassword } from "./password.js";
 
 // Papéis da plataforma (ROLE-1, D14). A curadoria editorial continua em
 // curator_role; aqui ficam administração e docência.
@@ -193,6 +196,32 @@ export class RolesController {
     const admin = await requireRole(req, "ADMIN");
     const email = parseEmail(body?.email), role = parseRole(body?.role);
     return inTransaction((client) => authorize(client, email, role, admin.id));
+  }
+
+  /**
+   * Cadastro manual pelo administrador (ex.: um professor sem acesso ao site):
+   * cria a conta com uma senha inicial e, se pedido, já com o papel. A pessoa
+   * troca a senha em "Meu perfil".
+   */
+  @Post("admin/accounts") @HttpCode(201) async createAccount(@Req() req: any, @Body() body: any) {
+    const admin = await requireRole(req, "ADMIN");
+    const { email, password } = credentials(body);
+    const { name, enrollment } = profile({ name: body?.name ?? "", enrollment: body?.enrollment ?? "" });
+    const role = body?.role ? parseRole(body.role) : null;
+    const encoded = await hashPassword(password);
+    return inTransaction(async (client) => {
+      if (enrollment && (await client.query("SELECT 1 FROM account WHERE enrollment=$1", [enrollment])).rowCount)
+        fail("Esse prontuário já está ligado a outra conta.", 409);
+      if ((await client.query("SELECT 1 FROM account WHERE email=$1", [email])).rowCount)
+        fail("Esse e-mail já tem conta. Use Autorizar e-mail para dar o papel.", 409);
+      const id = randomUUID();
+      await client.query("INSERT INTO study_identity(id) VALUES($1)", [id]);
+      await client.query(
+        "INSERT INTO account(identity_id,email,password_hash,display_name,enrollment) VALUES($1,$2,$3,$4,$5)",
+        [id, email, encoded, name, enrollment]);
+      if (role) await authorize(client, email, role, admin.id);
+      return { id, email, role };
+    });
   }
 
   @Post("admin/roles/revoke") @HttpCode(200) async remove(@Req() req: any, @Body() body: any) {

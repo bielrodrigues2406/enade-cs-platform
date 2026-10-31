@@ -24,7 +24,7 @@ import {
 
 // Single-process development protection. Do not trust client-supplied forwarding
 // headers; deployments behind a proxy need an explicitly configured shared limiter.
-class AuthThrottle {
+export class AuthThrottle {
   private windows = new Map<string, { count: number; end: number }>();
   check(req: any, res: any, email: string) {
     const now = Date.now();
@@ -81,10 +81,8 @@ class GuestThrottle {
     this.windows.set(key, current);
   }
 }
-function credentials(body: unknown) {
-  if (!body || typeof body !== "object" || Array.isArray(body))
-    fail("Informe e-mail e senha.", 400);
-  const { email: input, password } = body as Record<string, unknown>;
+/** E-mail normalizado (minúsculas, sem espaços) ou erro 400. */
+export function emailAddress(input: unknown) {
   const email = typeof input === "string" ? input.trim().toLowerCase() : "";
   if (
     email.length > 254 ||
@@ -93,6 +91,13 @@ function credentials(body: unknown) {
     )
   )
     fail("Informe um e-mail válido.", 400);
+  return email;
+}
+export function credentials(body: unknown) {
+  if (!body || typeof body !== "object" || Array.isArray(body))
+    fail("Informe e-mail e senha.", 400);
+  const { email: input, password } = body as Record<string, unknown>;
+  const email = emailAddress(input);
   if (
     typeof password !== "string" ||
     [...password].length < 12 ||
@@ -102,7 +107,7 @@ function credentials(body: unknown) {
   return { email, password: password as string };
 }
 // Nome e prontuário são opcionais no cadastro; ligam a conta à turma (D13).
-function profile(body: unknown) {
+export function profile(body: unknown) {
   const { name, enrollment } = (body ?? {}) as Record<string, unknown>;
   const cleanName = typeof name === "string" ? name.trim().replace(/\s+/g, " ") : "";
   const cleanEnrollment = typeof enrollment === "string" ? enrollment.trim().toUpperCase() : "";

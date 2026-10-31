@@ -145,3 +145,43 @@ test("ADMIN_EMAILS only bootstraps the first admin; with an admin in place it is
     process.env.ADMIN_EMAILS = before ?? "";
   }
 });
+
+async function login(address: string, secret: string) {
+  const guest = await fetch(`${base}/api/session`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+  const cookie = guest.headers.get("set-cookie")!.split(";")[0];
+  const res = await call("auth/login", cookie, "POST", { email: address, password: secret });
+  return { status: res.status, cookie: res.headers.get("set-cookie")?.split(";")[0] ?? cookie };
+}
+test("people edit their profile and password; admins can create an account with a role", async () => {
+  const address = email();
+  const person = await account(address, { name: "Aluna TEST ONLY" });
+  assert.deepEqual(await (await call("me/profile", person.cookie)).json().then((p: any) => [p.email, p.name, p.enrollment]),
+    [address, "Aluna TEST ONLY", null]);
+  const updated = await call("me/profile", person.cookie, "PUT", { name: "Aluna Editada TEST ONLY", enrollment: "pe3077777" });
+  assert.deepEqual(await updated.json(), { email: address, name: "Aluna Editada TEST ONLY", enrollment: "PE3077777" });
+  // Trocar e-mail ou senha exige a senha atual.
+  const newAddress = email();
+  assert.equal((await call("me/profile", person.cookie, "PUT", { name: "x y", email: newAddress, currentPassword: "errada errada!" })).status, 403);
+  assert.equal((await call("me/profile", person.cookie, "PUT", { name: "Aluna Editada TEST ONLY", email: newAddress, currentPassword: password })).status, 200);
+  const other = await login(newAddress, password);
+  assert.equal(other.status, 200);
+  const otherCookie = other.cookie;
+  assert.equal((await call("me/password", person.cookie, "POST", { currentPassword: password, newPassword: "curta" })).status, 400);
+  const changed = await call("me/password", person.cookie, "POST", { currentPassword: password, newPassword: "Senha nova TEST 2026!" });
+  assert.deepEqual(await changed.json(), { status: "CHANGED" });
+  assert.equal((await call("me/profile", person.cookie)).status, 200); // esta sessão continua
+  assert.equal((await call("me/profile", otherCookie)).status, 401); // a outra saiu
+
+  const admin = await account(email());
+  await makeAdmin([...emails].at(-1)!);
+  const professorEmail = email();
+  const created = await call("admin/accounts", admin.cookie, "POST",
+    { email: professorEmail, password: "Senha inicial 2026!", name: "Prof Manual TEST ONLY", role: "PROFESSOR" });
+  assert.equal(created.status, 201);
+  assert.equal((await call("admin/accounts", admin.cookie, "POST", { email: professorEmail, password: "Senha inicial 2026!" })).status, 409);
+  assert.equal((await call("admin/accounts", person.cookie, "POST", { email: email(), password: "Senha inicial 2026!" })).status, 403);
+  const professor = await login(professorEmail, "Senha inicial 2026!");
+  assert.equal(professor.status, 200);
+  const professorCookie = professor.cookie;
+  assert.deepEqual(await (await call("access", professorCookie)).json(), { roles: ["PROFESSOR"] });
+});
