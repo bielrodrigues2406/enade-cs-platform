@@ -1,0 +1,125 @@
+{
+  "packet": "enade-2014-licenciatura-exam-q19-q35",
+  "explainer": "claude-explain-13",
+  "items": [
+    {
+      "key": "Q19",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: requisitos pedagógicos em tecnologias",
+      "explanation": "A questão cobra o planejamento de tecnologias educacionais: além dos requisitos técnicos, o desenvolvimento precisa incorporar requisitos pedagógicos e didáticos de ensino-aprendizagem.\n\nA alternativa B, indicada no gabarito oficial, é a que expressa esse vínculo. Os requisitos pedagógicos norteiam a escolha e o modo de aplicação de uma tecnologia, considerando a natureza do conteúdo a ser trabalhado e os recursos que a própria tecnologia oferece. Ou seja, o conteúdo e a didática orientam a decisão técnica, e não o contrário.\n\nAs demais alternativas tratam de outros tipos de requisito. A descreve documentação técnica de implementação e arquitetura. C trata de custos, relação custo-benefício e contratos de uso. D menciona tendências sociais, aceitabilidade e sociabilidade. E lista atributos de qualidade do sistema, como interface, adaptação, confiabilidade, conectividade e segurança. Nenhuma delas relaciona o conteúdo de ensino aos recursos da tecnologia, que é o ponto pedido pelo enunciado.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q20",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: escolha de software educacional",
+      "explanation": "A questão trata dos critérios para escolher um software educacional. O texto de apoio afirma que importa mais o modo como o software será utilizado do que o software em si, e que o professor tem papel fundamental nessa escolha.\n\nO gabarito oficial é a alternativa E (I, III e IV). A afirmação I está correta: a escolha considera o público-alvo e a adequação da interface à disciplina. A III também: o software deve ser avaliado como ferramenta do processo de ensino-aprendizagem, e não apenas como instrumento para realizar tarefas. A IV também: convém considerar diferentes caminhos para apresentar o conteúdo e resolver problemas, em especial quanto à usabilidade e à acessibilidade.\n\nA afirmação II está incorreta, pois inverte a lógica do texto. Não se deve elaborar ou alterar a proposta pedagógica da disciplina para atender ao software escolhido; é o software que deve ser escolhido de acordo com a proposta pedagógica. Por isso as alternativas A, B e D, que incluem a II, falham, e a C deixa de fora a I, que é verdadeira.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q21",
+      "area": "Interação humano-computador",
+      "subject": "Usabilidade e design centrado no usuário",
+      "explanation": "A questão cobra conceitos básicos de usabilidade em software educacional. As três afirmações descrevem corretamente a área, e o gabarito oficial é a alternativa E (I, II e III).\n\nA afirmação I define design centrado no usuário como o processo de projetar produtos interativos que satisfaçam as necessidades do usuário, o que é uma definição consolidada. A II apresenta os objetivos de usabilidade usados nas avaliações de interface: eficácia, eficiência, segurança, utilidade, facilidade de aprender e facilidade de lembrar.\n\nA III distingue duas coisas. Os critérios de usabilidade podem gerar indicadores quantitativos, úteis para melhorar a produtividade, mas não cobrem a qualidade da experiência do usuário, que é mais bem analisada pelas metas da experiência do usuário. A afirmação não nega a utilidade da usabilidade, apenas aponta seu limite, e por isso é verdadeira.\n\nAs alternativas A, B, C e D excluem ao menos uma afirmação correta. Como as três são verdadeiras, só a E está certa.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q22",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: objetos de aprendizagem em EAD",
+      "explanation": "A questão cobra o conceito de objetos de aprendizagem e seu uso em educação a distância. O traço central desses objetos é a reutilização: são unidades ou recursos digitais que podem ser empregados em vários contextos, ambientes e modalidades.\n\nO gabarito oficial é a alternativa D (I, II e IV). A afirmação I está correta, pois os objetos podem ser usados em diferentes contextos e em diferentes ambientes virtuais de aprendizagem. A II também, pois podem ser recursos digitais interativos, que permitem o diálogo do usuário com eles. A IV também, pois podem servir ao ensino presencial, a distância ou híbrido.\n\nA afirmação III é falsa: diz que os objetos servem a contextos específicos e que sua reutilização é difícil, o que contradiz a característica de reuso que os define. Por isso falham as alternativas B, C e E, que a incluem. A alternativa A é incompleta, pois omite a IV, que é verdadeira.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q23",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: EsM e Instrução pelos Colegas",
+      "explanation": "A questão pede a leitura do fluxo do Ensino sob Medida (EsM) e da Instrução pelos Colegas (IpC). Antes da aula, o professor envia uma tarefa de leitura, os alunos respondem e enviam as respostas, e o professor as revisa. Durante a aula, apresenta um teste conceitual, os alunos pensam, votam, discutem em pequenos grupos e votam de novo.\n\nO gabarito oficial é a alternativa C (I e II, apenas). A afirmação I está correta: o envio de material e de respostas antes da aula pode ser apoiado por ambientes virtuais de aprendizagem. A II também: a tarefa de leitura prévia e a revisão das respostas pelo professor levam em conta o conhecimento prévio do aluno, e a discussão em grupos favorece a interação social voltada à construção do conhecimento.\n\nA afirmação III é falsa. O método depende justamente da interação entre os alunos, que discutem para convencer os colegas, e não de limitá-la. Por isso falham A, que omite a II, B e D, que incluem a III, e E, que também a inclui.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q24",
+      "area": "Programação",
+      "subject": "Ensino de Computação: linguagens para ensinar algoritmos",
+      "explanation": "A questão cobra a adequação de linguagens de programação ao ensino de algoritmos. Cada afirmação associa uma linguagem a um benefício didático, e todas são tecnicamente coerentes, de modo que o gabarito oficial é a alternativa E (I, II e III).\n\nA afirmação I trata do Pascal: por verificar os tipos das variáveis na compilação, é fortemente tipificada, o que ajuda o aluno a entender os diferentes tipos de dados. A II trata do C padrão: seu uso exige ponteiros, o que leva o aluno a compreender alocação e endereçamento de memória para as variáveis. A III trata do Python: oferece estruturas de dados e formas de manipulá-las já prontas, sem exigir que o aluno as implemente, o que permite desenvolver programas mais elaborados mesmo com pouco conhecimento de algoritmos.\n\nAs afirmações não são excludentes, pois o enunciado apresenta cada linguagem como adequada entre outros motivos, e cada uma privilegia um aspecto diferente. As alternativas A, B, C e D excluem ao menos uma afirmação verdadeira.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q25",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: espaços de ensino e inclusão digital",
+      "explanation": "A questão trata do projeto e da implementação de espaços de ensino. A alternativa correta, conforme o gabarito oficial, é a C: os aspectos de inclusão digital devem ser considerados, buscando democratizar o acesso às tecnologias da informação e atender às restrições físicas dos alunos. É uma diretriz de equidade e acessibilidade no ambiente de ensino.\n\nAs demais alternativas apresentam posturas restritivas ou radicais que não se sustentam. A afirma que a realidade aumentada deve ser restrita por não mostrar fatos reais, o que ignora seu potencial didático como recurso de simulação. B defende a instalação irrestrita de software pelos alunos nos laboratórios, o que desconsidera a administração e a segurança do ambiente. D propõe limitar o ensino a distância por receio quanto à segurança das informações, em vez de tratar a segurança como requisito a ser atendido. E exclui os espaços não escolares do escopo do professor, apesar de eles também poderem apoiar o ensino-aprendizagem.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q26",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: requisitos de uma vídeo-aula",
+      "explanation": "A questão pergunta sobre os requisitos para elaborar uma vídeo-aula como material didático interativo. O enunciado cita quatro tipos de material: áudio-aulas, captura de tela, vídeo-aulas e quadro digital. É preciso identificar qual alternativa descreve a vídeo-aula.\n\nO gabarito oficial é a alternativa A: utilizar vídeos com conteúdos temáticos diversificados e em diferentes formatos, como a apresentação de uma atividade no laboratório ou no campo, um depoimento do professor ou uma conversa de um grupo. O foco é a variedade de conteúdo e de formato do vídeo.\n\nAs demais descrevem outros recursos. B descreve a lousa digital com sensor e tinta eletrônica, que corresponde ao quadro digital. C descreve um software que captura em vídeo o que acontece na tela enquanto a voz é gravada, que corresponde à captura de tela. D descreve uma apresentação de slides com narração exportada em formato compatível. E descreve uma simulação que exige a intervenção do estudante, recurso interativo distinto do vídeo.",
+      "keyConcern": "As alternativas C e D também descrevem formas de produzir material em vídeo; o gabarito oficial indica A, e a explicação segue esse raciocínio."
+    },
+    {
+      "key": "Q27",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: objetos de aprendizagem",
+      "explanation": "A questão cobra o conceito de objetos de aprendizagem. O enunciado os define como unidades de conteúdo, digitais ou não, que podem ser utilizadas e reutilizadas no processo de aprendizagem por meio de tecnologias, em diversas áreas do conhecimento.\n\nO gabarito oficial é a alternativa D (II e III, apenas). A afirmação II está correta: são importantes instrumentos de ensino-aprendizagem e podem ser usados de diferentes formas, inclusive na educação a distância. A III também, pois desenvolver um objeto de aprendizagem pode ser, por si só, uma atividade de construção do conhecimento.\n\nA afirmação I é falsa. Ela diz que autores não podem combinar objetos antigos e novos porque não se permitem alterações em um objeto já desenvolvido. Isso contradiz a ideia de reutilização presente na própria definição do enunciado, segundo a qual os objetos são usados e reutilizados, inclusive combinados conforme a demanda. Por isso falham A, C e E, que incluem a I, e B, que omite a II.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q28",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: evasão e retenção em MOOCs",
+      "explanation": "A questão exige leitura do gráfico de tipos de estudantes e retenção por semana em MOOCs. A área total diminui ao longo das semanas, e as faixas de participantes ativos e passivos se mantêm até o fim do curso.\n\nO gabarito oficial é a alternativa C (I e II, apenas). A afirmação I está correta: o total de alunos que permanecem cai a cada semana, ou seja, a evasão acumulada cresce. A II também: na faixa final do gráfico, a maior parte dos que chegam ao fim é de participantes ativos ou passivos.\n\nA afirmação III é falsa. Ela diz que os observadores nunca concluem os cursos, mas a faixa dos observadores ainda aparece até o fim do gráfico, o que mostra que alguns permanecem. A palavra nunca torna a afirmação incorreta. Por isso falham as alternativas B, D e E, que incluem a III, e A, que omite a II.",
+      "keyConcern": "A afirmação I depende de ler 'evasão aumenta' como queda acumulada da retenção; no gráfico há pequenas oscilações locais em algumas faixas (observadores e visitantes). O gabarito oficial considera I correta."
+    },
+    {
+      "key": "Q29",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: MOOCs e retenção de estudantes",
+      "explanation": "A questão é de asserções com relação de causa. O texto informa que as matrículas em MOOCs crescem, mas o número de concluintes não acompanha esse crescimento, e que a evasão se deve, entre outros fatores, às dificuldades de usar as tecnologias empregadas.\n\nA asserção I, de que é necessário aprimorar o ferramental tecnológico para aumentar a retenção, é verdadeira, pois decorre diretamente da dificuldade de uso apontada no texto. A asserção II, de que os estudantes nem sempre conhecem os pré-requisitos dos conteúdos, também é verdadeira, pois a falta de pré-requisitos é um fator plausível de evasão.\n\nFalta, porém, o vínculo de justificativa. O desconhecimento de pré-requisitos diz respeito ao conteúdo e ao perfil do estudante, não ao ferramental tecnológico. Portanto II não explica por que se deve aprimorar as ferramentas. O gabarito oficial é a alternativa B: ambas verdadeiras, mas II não justifica I. A falha as demais: A afirma a justificativa, C, D e E consideram alguma das asserções falsa.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q30",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: avaliação na educação a distância",
+      "explanation": "A questão cobra princípios de avaliação na educação a distância (EAD), marcada por distância, virtualidade e assincronismo.\n\nO gabarito oficial é a alternativa A (I e III). A afirmação I está correta: textos ou projetos colaborativos são uma possibilidade de avaliação na EAD. A III também: atividades que permitam construir conhecimento ou consolidar conceitos em diferentes etapas são adequadas a esse contexto.\n\nA afirmação II é falsa, pois o fórum de discussão pode, sim, ser instrumento ou critério de avaliação, já que registra a participação e as contribuições dos estudantes. A IV é falsa porque contradiz o assincronismo apontado no enunciado como característica da EAD: as atividades não precisam, e muitas vezes não podem, depender da participação simultânea de professores e alunos.\n\nPor isso falham as alternativas B, C, D e E, que incluem II ou IV, ou ambas.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q31",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: gestão escolar democrática",
+      "explanation": "A questão cobra o conceito de gestão democrática da educação a partir do texto, que a define como processo político em que os sujeitos da escola identificam problemas, discutem, deliberam, planejam, acompanham e avaliam as ações, com base no diálogo e na participação de todos os segmentos. A tirinha ironiza a decisão por comitê para qualquer coisa.\n\nO gabarito oficial é a alternativa D (I, II e IV). A afirmação I está correta: a gestão democrática serve à formação qualificada dos estudantes e faz da participação uma prática cotidiana. A II também: favorece uma cultura crítico-reflexiva, em que os envolvidos discernem o que precisam para decidir. A IV também: efetiva-se pela construção coletiva do projeto pedagógico e por seu acompanhamento e avaliação.\n\nA III é falsa, pois pressupõe líderes que orientam pessoas para objetivos definidos por eles, o que contraria a participação efetiva de todos na definição e na decisão. Por isso falham A e B, que excluem IV ou incluem III, C e E, que a incluem.",
+      "keyConcern": "A afirmação II diz 'decisões sempre coletivas', termo absoluto que a tirinha parece criticar; o gabarito oficial considera II correta."
+    },
+    {
+      "key": "Q32",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: Plano Nacional de Educação",
+      "explanation": "A questão pede uma conclusão sobre o Plano Nacional de Educação (PNE) a partir do texto de apoio e dos artigos da Lei n. 13.005/2014. O texto fixa metas para 10 anos, entre elas a aplicação de valor equivalente a 10% do PIB na educação pública. Os artigos tratam de monitoramento e avaliação periódicos, de orçamentos compatíveis com as metas e de articulação entre sistemas de ensino.\n\nO gabarito oficial é a alternativa E: o PNE permite planejar a educação para os próximos 10 anos e institui mecanismos de monitoramento e avaliação, tanto da execução do Plano quanto da qualidade da educação, por meio de metas educacionais e da definição dos investimentos para alcançá-las.\n\nAs demais distorcem os dados. A e D falam em aumento ou crescimento de 10% ao ano, mas a meta é aplicar o equivalente a 10% do PIB, não crescer 10% a cada ano. B interpreta a meta como dar aos gestores dez vezes mais possibilidades. C afirma que o crescimento econômico indica o percentual do PIB a ser aplicado, o que o texto não diz.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q33",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: currículo e seleção cultural",
+      "explanation": "A questão cobra concepções de currículo a partir do texto, que o define como organização de conhecimentos, culturas e valores a que todos têm direito, articulando os saberes das comunidades com os conhecimentos sistematizados que a escola deve tornar acessíveis.\n\nO gabarito oficial é a alternativa D (I, III e IV, apenas). A afirmação I está correta: construir o currículo é um processo de seleção cultural, que pode colocar em desvantagem certos grupos sociais e culturais. A III também: as teorias críticas reconhecem poderes diversos nas relações sociais e atribuem ao currículo um papel nos processos de inclusão escolar. A IV também: é desafio da escola incluir experiências culturais diversificadas que não reproduzam as assimetrias e desigualdades da vida social.\n\nA afirmação II é falsa. Ao tratar o currículo como práxis, que envolve uma multiplicidade de relações, não faz sentido exigir que sua materialização corresponda à forma como foi idealizado, pois na prática ele se transforma nessas relações. Por isso falham as alternativas B, C e E, que incluem a II, e A, que deixa de fora III e IV.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q34",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: Projeto Político-Pedagógico",
+      "explanation": "A questão trata da elaboração do Projeto Político-Pedagógico (PPP), que, segundo o texto, organiza o trabalho pedagógico da escola, indicando direção, fundamentos, objetivos, tipo de organização e formas de implementação e avaliação.\n\nO gabarito oficial é a alternativa C (I e II, apenas). A afirmação I está correta: o PPP é um processo participativo de decisões, que instaura uma organização do trabalho pedagógico capaz de revelar os conflitos e as contradições da escola. A II também: discutir o PPP exige refletir sobre a concepção de educação e sua relação com a sociedade e a escola, o que implica pensar o tipo de pessoa a ser formada.\n\nA afirmação III é falsa. Dizer que a construção do PPP requer convencer professores, equipe e funcionários a trabalharem pelo plano estabelecido pela gestão contraria o caráter participativo descrito na I, pois trata o plano como algo já definido de cima para baixo. Por isso falham B, D e E, que incluem a III, e A, que omite a II.",
+      "keyConcern": ""
+    },
+    {
+      "key": "Q35",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: docência e educação inclusiva",
+      "explanation": "A questão trata da postura docente diante da diversidade, a partir do texto da Política Nacional de Educação Especial na Perspectiva da Educação Inclusiva, que critica os processos normativos de distinção dos alunos próprios do modelo tradicional de escola.\n\nO gabarito oficial é a alternativa B (II e V). A afirmação II está correta: o professor deve instigar e compartilhar informações e a busca do conhecimento de forma coletiva, com relações respeitosas entre os diferentes posicionamentos dos alunos. A V também: recursos didáticos diversificados que atendam a todos e a cada um valorizam o respeito individual e coletivo.\n\nAs demais não condizem com a perspectiva inclusiva. A I enfatiza avaliações voltadas a aferir desempenho em conceitos ou notas. A III propõe selecionar e organizar grupos para evitar conflitos, o que vai contra o convívio com a diversidade. A IV foca nos esforços individuais para melhorar o desempenho escolar, sem considerar a diversidade e o coletivo. Por isso falham A, C, D e E.",
+      "keyConcern": ""
+    }
+  ]
+}

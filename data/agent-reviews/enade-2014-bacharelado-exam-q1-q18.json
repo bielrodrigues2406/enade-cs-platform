@@ -1,0 +1,300 @@
+{
+  "document": "enade-2014-bacharelado-exam",
+  "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+  "cropsManifestSha256": "59440cdc19b00868d0f750ba980136d9c0d1913836cc99daa15bcafef3b27dfb",
+  "extractor": "claude",
+  "explainer": "claude-explain-05",
+  "reviewer": "claude-review-05",
+  "reviewedAt": "2026-10-30T17:26:31Z",
+  "items": [
+    {
+      "key": "Q1",
+      "verdict": "APPROVED",
+      "fragments": [
+        "78a541a208faa110cdcf901d324d6fc092b6d112f911c823464ff6b0f49bb8c7"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Democratização da produção cultural na era digital",
+      "notes": "Recorte da p. 4 com número 01, texto, referência, asserções I e II com PORQUE e alternativas A–E, sem trecho de Q2. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível; comparado com a página original.",
+      "studentNote": "",
+      "explanation": "A questão cobra interpretação de texto e a relação de causa entre duas asserções. O texto contrapõe o passado, em que publicar dependia de centros de exposição, veículos, editoras e gravadoras, que funcionavam como um funil de curadores, aos tempos digitais, em que esse caminho deixou de ser obrigatório.\n\nA asserção I é verdadeira: a evolução tecnológica democratiza a produção e a divulgação de obras e reduz o peso que os centros de exposição tinham nos anos 1970. A asserção II também é verdadeira: as novas tecnologias permitem que artistas sejam independentes, montem seus próprios ambientes de produção e disponibilizem seus trabalhos de forma simples a muita gente. Além disso, II explica I, pois é justamente a independência do artista diante dos intermediários que diminui a importância dos centros tradicionais. Por isso a alternativa A está correta.\n\nB erra ao negar a relação de justificativa. C, D e E tratam uma das asserções, ou as duas, como falsas, o que contradiz o argumento do texto.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q2",
+      "verdict": "APPROVED",
+      "fragments": [
+        "843a684ba5b78691956ec84a360dc40ee2308fa1accfb71b91f8fa3e4f211fd0"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Terceiro setor e responsabilidade social",
+      "notes": "Recorte da p. 4 com número 02, texto de apoio, referência, afirmações I–III e alternativas A–E, sem trecho de Q1. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível; numerais romanos corretos na imagem.",
+      "studentNote": "",
+      "explanation": "A questão trata de terceiro setor e de responsabilidade social empresarial, avaliados a partir de um texto de apoio sobre organizações não governamentais e práticas das empresas.\n\nA afirmação I é considerada verdadeira pelo gabarito: o terceiro setor reúne traços do setor público (finalidade de interesse coletivo) e do privado (iniciativa de agentes não estatais). A afirmação III também é verdadeira: a responsabilidade social tem levado as empresas a reformular cultura, filosofia e estratégia institucional. A afirmação II é falsa porque atribui ao terceiro setor, como se fosse o único agente, a viabilização do acesso à educação e ao desenvolvimento de técnicas industriais, econômicas, financeiras, políticas e ambientais. Esse papel envolve também o Estado e as empresas.\n\nAssim, só I e III estão corretas, alternativa C. A omite a III, B e D tomam a II como correta, e E aceita as três afirmações.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q3",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d3cc35c9b8fc0fcbb8b6f29390d7576406d03647ec18265fa58e10ef3b6ec171"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Pegada ecológica e biocapacidade",
+      "notes": "Recorte da p. 5 com número 03, texto, gráfico completo (1961–2008, valores legíveis), fonte e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Comparado com a página original.",
+      "studentNote": "",
+      "explanation": "A questão pede a leitura de um gráfico à luz da definição dada no texto: razão entre pegada ecológica e biocapacidade igual a 1 indica reposição total dos recursos pelo planeta; maior que 1, demanda humana superior à capacidade de regeneração; menor que 1, recuperação mais rápida.\n\nNo gráfico, a razão parte de 0,74 em 1961, chega a 1,00 em 1970 e passa a subir, atingindo 1,52 em 2008. Desde 1975 ela é sempre maior que 1 e cada vez mais distante dele, isto é, a demanda humana excede cada vez mais a capacidade de regeneração. Isso evidencia uma tendência de desequilíbrio gradual e contínuo da sustentabilidade do planeta, alternativa E. Há uma leve queda entre 1980 e 1985, mas a tendência geral é de alta.\n\nAs outras falham. A confunde o hectare global, unidade de medida de área, com redução de área plantada. B inverte a leitura: razão crescente significa menos regeneração em relação às exigências humanas. C só valeria para razão igual ou menor que 1. D contradiz 1961 e 1965, quando a razão era menor que 1.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q4",
+      "verdict": "APPROVED",
+      "fragments": [
+        "eccfe4bac2b37c954a94c04f13bf154ba1782a7a4f5936c4954de445d05bc819"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Interpretação de texto: redes sociais e recrutamento",
+      "notes": "Recorte da coluna esquerda da p. 6 com número 04, os quatro parágrafos, referência e alternativas A–E, sem trecho de Q5. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível.",
+      "studentNote": "",
+      "explanation": "A questão cobra interpretação de texto: a resposta deve estar sustentada pelo que o texto afirma, sem extrapolações. O texto informa que 92% das empresas americanas já usaram ou planejam usar redes sociais na contratação, que 60% delas bisbilhotam a vida dos candidatos, que 44% de 2 500 executivos brasileiros desclassificariam um candidato por seu comportamento em rede social e que algumas empresas e instituições já adotaram cartilhas de conduta em redes sociais.\n\nA alternativa B é a que o texto sustenta: empresas monitoram o comportamento das pessoas nas redes e algumas empresas e instituições adotaram cartilhas de conduta, o que mostra atenção a esse comportamento.\n\nAs demais contradizem os dados ou dizem o que o texto não afirma. A inverte os números: a maioria das empresas usa ou planeja usar as redes, não evita. C afirma que a complexidade do rastreio impede o acesso das empresas, ideia ausente do texto. D diz que as cartilhas proíbem o uso das redes, quando o texto trata de orientar condutas. E transforma 44% em maioria dos executivos, o que é falso.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q5",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b288d97358a08a0884b8d0b95bf5ca38a5cddf4937149f1ccb5f2b5fd1db9e41"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Inovação em saúde e responsabilidade social",
+      "notes": "Recorte da coluna direita da p. 6 com número 05, texto, referência, afirmações I–IV e alternativas A–E, sem trecho de Q4. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível.",
+      "studentNote": "",
+      "explanation": "A questão avalia a leitura de uma reportagem sobre um dispositivo de parto idealizado por Jorge Odón e exige separar o que o texto sustenta do que ele não diz.\n\nA afirmação I é verdadeira: o aparelho deve substituir métodos arcaicos que, em mãos maltreinadas, podem comprometer a vida do bebê, tem apoio da OMS e preço presumido baixo, com redução em países mais pobres, o que permite supor menor mortalidade ao nascer mesmo neles. A III é verdadeira: o uso simples e o custo baixo favorecem o emprego do dispositivo onde o parto é feito por parteiras. A IV é verdadeira: prever preço reduzido em países mais pobres revela preocupação com a responsabilidade social. A II é falsa: o aparelho se baseia na técnica de remover rolhas de garrafas e deve substituir os tubos de sucção, não é variante nem aperfeiçoamento deles.\n\nLogo, estão corretas apenas I, III e IV, alternativa D. A, C e E incluem a II; B omite a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q6",
+      "verdict": "APPROVED",
+      "fragments": [
+        "95f1119c8f4338d8e07a0c0ab055530b1f75ef7408316c01c43f35f89654944e"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Leitura de gráfico: jornada de trabalho e gênero",
+      "notes": "Recorte da p. 7 com número 06, texto, gráfico de barras com valores e legenda, fonte, afirmações I–III e alternativas A–E. Na borda inferior aparece só uma lasca do número de página, sem conteúdo de outra questão. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra a interpretação conjunta de texto e gráfico de barras empilhadas, que mostra as horas semanais dedicadas a afazeres domésticos e a trabalho remunerado por tipo de família.\n\nA afirmação I é verdadeira: somando as duas barras, mãe com filhos tem 25,9 + 36,8 = 62,7 horas, contra 15,5 + 41,4 = 56,9 do pai com filhos; mulher chefe de casal com filhos tem 30,3 + 36,5 = 66,8, contra 10,1 + 44,4 = 54,5 do homem chefe. A II é verdadeira: o texto diz que as mulheres ganham menos e trabalham mais, e o gráfico mostra jornada total maior para elas, o que aponta a necessidade de políticas de igualdade de gênero. A III é falsa: o texto afirma que as mulheres dividem o tempo entre o trabalho e os cuidados com a casa e cita benefícios como auxílio-creche, portanto alude aos afazeres domésticos.\n\nAssim, só I e II estão corretas, alternativa C. A omite a II, B contém apenas a III, falsa, e D e E incluem a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q7",
+      "verdict": "APPROVED",
+      "fragments": [
+        "756874c8822b3e735bff1070b29153a6624161fdda53eb248653f346f7d22cd6"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Mobilidade urbana e deslocamento casa-trabalho",
+      "notes": "Recorte da coluna esquerda da p. 8 com número 07, quadro completo (cinco faixas, quatro localidades), fonte, afirmações I–III e alternativas A–E, sem trecho de Q8. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Valores legíveis.",
+      "studentNote": "",
+      "explanation": "A questão cobra leitura de tabela e conhecimento sobre mobilidade urbana. A tabela traz a proporção de trabalhadores por faixa de tempo de deslocamento casa-trabalho no Brasil, no Rio de Janeiro, em São Paulo e em Curitiba.\n\nA afirmação I é verdadeira: as distribuições do Rio e de São Paulo são quase idênticas (5,80 e 5,10 até cinco minutos; 32,10 e 31,60 de seis minutos a meia hora; 23,20 e 23,30 de uma a duas horas), enquanto Curitiba e o Brasil concentram-se nos deslocamentos curtos (45,80 e 52,20 na faixa de seis minutos a meia hora). A II é verdadeira: empregos concentrados nas áreas centrais e moradias de baixa renda em áreas irregulares ou periféricas aumentam tempo e custo do transporte, coerente com o fato de cerca de 29% dos trabalhadores do Rio e de São Paulo gastarem mais de uma hora, contra 11,6% no Brasil. A III é verdadeira: políticas como Bilhete Único e VLT, quando implementadas, contribuem para reduzir o tempo e o custo do deslocamento.\n\nPortanto I, II e III estão corretas, alternativa E; as demais descartam alguma afirmação verdadeira.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q8",
+      "verdict": "APPROVED",
+      "fragments": [
+        "87b5bab49760893f4d49d0fde4b0512558d63b0af6a75eab37a3b6020a91292b"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Interpretação de texto: transformações rurais e urbanas",
+      "notes": "Recorte da coluna direita da p. 8 com número 08, texto, referência e alternativas A–E até o fim da coluna, sem trecho de Q7. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Comparado com a página original.",
+      "studentNote": "",
+      "explanation": "A questão cobra uma conclusão que decorra do texto, o qual descreve transformações nos meios rural e urbano a partir do século XX: com a industrialização mudaram modos de vida, padrões culturais, valores e tradições, surgiram problemas em ambas as zonas e criaram-se técnicas para transformar os recursos naturais em benefício próprio.\n\nA alternativa D é a que o texto sustenta: tanto o espaço urbano quanto o rural sofreram transformações decorrentes da aplicação de novas tecnologias às atividades industriais e agrícolas.\n\nAs demais extrapolam ou contradizem o texto. A afirma que a industrialização ocorreu independentemente dos recursos naturais, mas o texto diz que as transformações só foram possíveis em decorrência deles. B diz que não houve prejuízo às atividades agrícolas, enquanto o texto cita prejuízo nelas. C e E são absolutas e opostas entre si: C diz que a cultura de origem foi abandonada e oposta à nova; E, que foi mantida intacta. O texto fala em mudanças de valores e tradições, sem apoiar nenhuma das duas posições extremas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q9",
+      "verdict": "APPROVED",
+      "fragments": [
+        "341505c95284eb9eef2dc8768d1facaf08f58f275de2431f9ad4229514ec105c"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Interação humano-computador",
+      "subject": "Usabilidade e avaliação de interfaces",
+      "notes": "Recorte da p. 12 com número 09, enunciado, figura das telas 1 e 2 (datas e rótulos legíveis), afirmações I–IV e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra critérios de usabilidade aplicados a duas telas de um sistema de venda de passagens: facilidade de aprendizagem, prevenção de erros, eficiência e memorização.\n\nA afirmação I é considerada verdadeira: o rótulo Ir remete a uma ação do mundo real (ir ao destino) e é simples de entender, o que facilita a aprendizagem. A II é falsa: o calendário clicável ajuda a prevenir erros, pois o usuário escolhe uma data válida em vez de digitar; a possibilidade de digitação manual não elimina essa vantagem. A III é verdadeira: na tela 2 o calendário abre na data da compra (01/09/2014), anterior à data de ida (10/10/2014), e uma data de retorno só faz sentido se for igual ou posterior à de ida; abrir já no mês da ida pouparia cliques e melhoraria a eficiência. A IV é falsa: as telas têm poucos elementos, e o calendário é o único recurso adicional, sem excesso gráfico que prejudique a memorização.\n\nLogo, só I e III estão corretas, alternativa B. As demais incluem a II ou a IV, ambas falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q10",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a625ed8cffe31caa85bf558a7f8511fa4d2d2fe9b887f872e95d3bbc96cf43df"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Gerenciamento de projetos: estimativas e cronograma",
+      "notes": "Recorte da coluna esquerda da p. 13 com número 10, afirmações I–III e alternativas A–E; a área livre e Q11 ficam fora. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível.",
+      "studentNote": "PERT e CPM são mais associados ao sequenciamento de atividades e à estimativa de prazos (caminho crítico) do que à estimativa de esforço; apenas a estimativa de três pontos do PERT costuma ser aplicada também a esforço. Por isso, a formulação da afirmação I é imprecisa.",
+      "explanation": "A questão trata de gerenciamento de projetos de software: técnicas de planejamento e estimativa, uso de dados históricos e reação a atrasos.\n\nA afirmação I é considerada verdadeira: PERT e CPM são técnicas de rede de atividades, usadas no planejamento do cronograma e em estimativas, e dão apoio à definição e ao sequenciamento das atividades. A II é falsa: séries históricas só geram estimativas consistentes quando os projetos de origem são comparáveis ao novo; domínio de aplicação, tecnologia e equipe influenciam o esforço, então não podem ser ignorados. A III é falsa: acrescentar desenvolvedores a um projeto atrasado não assegura o cronograma original, pois os novatos precisam de tempo de treinamento e aumentam a comunicação e a coordenação, o que pode até agravar o atraso.\n\nAssim, apenas I está correta, alternativa A. B, D e E aceitam a II; C, D e E aceitam a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q11",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7dfd9c6a3c045901c7f4475cdb5978b751fbbd5fda35d5ca573de7cf03e6af47"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Paginação e fragmentação de memória",
+      "notes": "Recorte da coluna direita da p. 13 com número 11, tabela de páginas completa (BV e quadros legíveis), afirmações I–III e alternativas A–E; área livre e Q10 fora. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra paginação simples: o endereço lógico se divide em número de página e deslocamento, e a tradução usa a tabela de páginas. Com quadros de 1 Kbyte, o deslocamento ocupa 10 bits.\n\nA afirmação I é falsa. A tabela tem 8 páginas, então o endereço lógico tem 3 bits de página mais 10 de deslocamento, ou seja, 13 bits. O endereço físico usa o número do quadro, que na tabela tem 4 bits (0000 a 1111), mais os mesmos 10 bits de deslocamento, totalizando 14 bits. A II é verdadeira: como os quadros têm tamanho fixo e qualquer quadro livre recebe qualquer página, a paginação reduz a fragmentação externa (na paginação simples ela deixa de ocorrer), restando só a interna na última página. A III é falsa: em 0110000000110, os 3 primeiros bits (011) indicam a página 3 e os 10 restantes, o deslocamento 6. A página 3 tem BV = 1 e está no quadro 0111, então a tradução é válida, sem exceção; a exceção ocorreria apenas para as páginas 6 e 7, com BV = 0.\n\nLogo, só II está correta, alternativa B.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q12",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3e3909c9e335f710d0a5c58289415672126836ae2e274ca5eaa0a5e182baabf2"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Complexidade de algoritmos para avaliar polinômios",
+      "notes": "Recorte da p. 14 com número 12, polinômio com índices legíveis, Algoritmos 1 e 2 completos, asserções I e II com PORQUE e alternativas A–E. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão compara a complexidade de dois algoritmos que avaliam um polinômio de grau n e relaciona o caso geral ao melhor caso.\n\nNo Algoritmo 1, para cada a[i] diferente de zero, o laço interno faz i-1 multiplicações para obter a potência de x. No pior caso, todos os coeficientes são não nulos e o total é 1 + 2 + ... + (n-1), da ordem de n ao quadrado, isto é, O(n²). O Algoritmo 2 faz uma multiplicação e uma soma por iteração, em n iterações, sempre O(n). Logo, os algoritmos não têm a mesma complexidade assintótica, e a asserção I é falsa.\n\nA asserção II é verdadeira. O Algoritmo 2 custa O(n) em qualquer caso. No Algoritmo 1, o melhor caso ocorre quando só a[n] é não nulo (a[n] nunca é zero): o laço interno roda uma única vez, com n-1 multiplicações, e o laço externo faz n testes, totalizando O(n). Assim, I é falsa e II é verdadeira, alternativa D. A e B exigem I verdadeira; C exige II falsa; E exige as duas falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q13",
+      "verdict": "APPROVED",
+      "fragments": [
+        "601dd763de00bd17684327d5434c637eae694a2c9b08d6527a62dd60fb6bb269"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Árvores binárias de busca: propriedades e percursos",
+      "notes": "Recorte da coluna esquerda da p. 15 com número 13, árvore com os oito nós legíveis, afirmações I–IV e alternativas A–E, sem trecho de Q14. Na borda inferior aparece só uma lasca do número de página. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra propriedades de árvores binárias de busca (ABB): eficiência de busca, balanceamento e percursos.\n\nA afirmação I é verdadeira: a ABB permite busca eficiente, descartando uma subárvore a cada comparação, de modo análogo à busca binária em vetor. A II é falsa: o balanceamento não se mede pelo número de nós, e sim pela diferença de altura entre as subárvores. Aqui, a subárvore esquerda (raiz 10, até o nó 14) tem altura 3 e a direita (raiz 20) tem altura 2, diferença de 1, aceita em uma árvore balanceada. A III é falsa: o percurso pós-ordem visita 7, 14, 13, 10, 17, 25, 20 e 15, que não é uma ordem decrescente; o percurso em ordem é que dá os valores em ordem crescente. A IV é verdadeira: nesta árvore, com altura próxima de log n, uma busca com sucesso faz O(log n) comparações.\n\nPortanto estão corretas apenas I e IV, alternativa B. As demais incluem a II ou a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q14",
+      "verdict": "APPROVED",
+      "fragments": [
+        "dc6592890ddc15745e176eec6ab52cdf23965ff0a5760ecdb75a434c302a9814"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Lógica de predicados: validade e contraexemplo",
+      "notes": "Recorte da coluna direita da p. 15 com número 14, universo U, fórmulas I–III com quantificadores e sinais legíveis e alternativas A–E, sem trecho de Q15. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra a validade de fórmulas com quantificadores sobre domínios diferentes: uma fórmula universal só é válida se valer para todos os elementos do domínio, e um único contraexemplo a invalida.\n\nNa afirmação I, para todo natural x deveria existir y em U = {10, 20, 30, 40} com x < y. Isso falha para x = 40 (ou qualquer natural maior), pois nenhum elemento de U é maior; I é falsa. Na II, para todo natural x deveria existir um natural y menor que x. Isso falha para o menor natural (0, ou 1 se N começar em 1), que não tem natural menor; II é falsa. Na III, para todo x em U deveria existir y em U com x > y. Para x = 10, o menor elemento de U, nenhum y de U é menor, então x = 10 é de fato um contraexemplo e a fórmula é inválida; III é verdadeira.\n\nApenas III está correta, alternativa B. A, C, D e E incluem I ou II, ambas falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q15",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d6a331ef17462bbb991a4eaefb79f8df079897e7db33036340511f0637de9f07"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Expressões regulares e autômatos finitos",
+      "notes": "Recorte da coluna direita da p. 15 com número 15, R1 e R2, alternativas A–E com símbolos de união e interseção legíveis; área livre fora. Alerta de texto ilegível do extrator não se confirma na imagem. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "A questão cobra a relação entre expressões regulares, linguagens regulares e autômatos finitos. R1 é a letra a seguida de qualquer sequência, inclusive vazia, de a e b, logo L(R1) é o conjunto das cadeias que começam com a. R2 é análoga, com b: cadeias que começam com b.\n\nA alternativa C é correta: L(R1) U L(R2) é o conjunto de todas as cadeias não vazias sobre {a, b}. Como é descrito por uma expressão regular (R1 U R2), é uma linguagem regular, e toda linguagem regular é reconhecida por algum autômato finito determinístico.\n\nAs outras falham. A é falsa, pois L(R1) e L(R2) são disjuntas: a cadeia a só pertence a L(R1). B é falsa, pois R2 descreve cadeias que começam com b, não que terminam com b; ba está em L(R2) e termina com a. D é falsa: nenhuma cadeia começa ao mesmo tempo com a e com b, então a interseção é vazia, conjunto finito. E é falsa: um autômato de dois estados (inicial e final, com laços a e b no final) já reconhece essa união, sem precisar de quatro.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q16",
+      "verdict": "APPROVED",
+      "fragments": [
+        "dff7f623dd31c4d8b6b47deb0041e700158e03611166c38af57da08dc7c7ce81",
+        "0898aa23155c114a0441445be35ec275dd410bd9598e798b6b3e115ff6af8787"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Pilha em C: complexidade, execução e malloc/free",
+      "notes": "Dois recortes da p. 16 na ordem de leitura: coluna esquerda (enunciado, struct, cria_pilha, push, pop) e coluna direita (main, afirmações I–III e alternativas A–E). Comparado com a página original: nada faltando. O código original traz return pilha; e aspas tipográficas no printf. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "O código impresso tem dois defeitos de editoração: em cria_pilha, \"return pilha;\" devolve o nome do tipo e não compila (a intenção evidente é \"return p;\"), e o printf usa aspas tipográficas em vez de aspas retas. Analise o programa considerando essas correções.",
+      "explanation": "A questão cobra o funcionamento de uma pilha implementada com vetor em C e a gestão de memória dinâmica.\n\nA afirmação I é verdadeira: push e pop só atualizam o índice topo e acessam uma posição do vetor, um número constante de operações, O(1). Para a II, rastreie a execução: push 2, 3 e 4; pop remove o 4; push 2 deixa a pilha com 2, 3, 2 (topo à direita); em a = pop(p) + pop(p), saem 2 e 3 e a = 5; push(p, a) coloca 5 no topo; a += pop(p) retira esse 5, logo a = 5 + 5 = 10. Com a += a o resultado também seria 5 + 5 = 10, o mesmo valor exibido; II é verdadeira. A III é falsa: o vetor elementos[100] é membro da estrutura pilha, alocada por malloc em cria_pilha. Portanto o vetor fica no heap, e não chamar free(p) causa vazamento de memória.\n\nAssim, só I e II estão corretas, alternativa C. A omite a II; B, D e E aceitam a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q17",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c59a041041f30c0c62573988a6f5c47cbd5b27d2d2e4eaf02e79cb5a01879b20"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Gerência e controle de qualidade de software",
+      "notes": "Recorte da p. 17 com número 17, afirmações I–III e alternativas A–E, sem trecho de Q18. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível.",
+      "studentNote": "",
+      "explanation": "A questão cobra conceitos de garantia e controle de qualidade de software, sob a ótica do gerente de qualidade, que define os meios para obter o produto desejado e as técnicas para aferir sua qualidade.\n\nA afirmação I é falsa: processos padronizados contribuem para a qualidade, mas aplicá-los sem adaptações, independentemente do tipo de software, não assegura o resultado; o processo deve ser adequado ao projeto, à equipe e ao sistema, e nenhum processo garante qualidade sozinho. A II é verdadeira: o controle de qualidade pode ser feito por revisões, como inspeções de programas e de artefatos de projeto, que detectam defeitos de forma sistemática. A III é falsa: fatores de qualidade, como confiabilidade e manutenibilidade, dependem de vários atributos internos do software, e um mesmo atributo pode influenciar vários fatores; a relação com um único atributo é incorreta.\n\nPortanto só a II está correta, alternativa A. B, C, D e E incluem a I ou a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q18",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f8faba1a7a22e08af29509245d261d90c736dfdb20b80ccd05a2818dc7bae595"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Aplicações de técnicas de Inteligência Artificial",
+      "notes": "Recorte da p. 17 com número 18, afirmações I–III e alternativas A–E; área livre fora. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Legível.",
+      "studentNote": "",
+      "explanation": "A questão cobra o conhecimento de aplicações típicas de técnicas de Inteligência Artificial e da adequação de cada técnica ao problema.\n\nA afirmação I é verdadeira: a indução de árvores de decisão é uma técnica de aprendizado supervisionado que, a partir de exemplos rotulados de transações, gera regras de classificação interpretáveis, sendo aplicada na identificação de fraudes em cartões de crédito. A II é verdadeira: redes neurais artificiais aprendem padrões a partir de dados históricos e são usadas em sistemas de análise de risco em aplicações financeiras. A III é verdadeira: sistemas especialistas baseados em regras codificam o conhecimento de especialistas em regras do tipo se-então e são empregados no diagnóstico de falhas, inclusive em hardware.\n\nComo as três afirmações estão corretas, a alternativa E é a certa. A, B, C e D deixam de fora ao menos uma afirmação verdadeira.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "document": "enade-2011-comum-exam",
+  "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+  "cropsManifestSha256": "2bf785081cf15a9f5c8b41c63d92e8ac61ea28c3ad85dcfb4d82a46631d00332",
+  "extractor": "claude",
+  "reviewer": "claude-autoconferencia",
+  "reviewedAt": "2026-10-31T16:48:21Z",
+  "items": [
+    {
+      "key": "Q21",
+      "verdict": "APPROVED",
+      "fragments": [
+        "fa4fb01435cd614d17569789f757e6ecf8324198d9a73a2ebd3b2bf5bf9df184"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Pilhas e filas: efeito de transferir elementos",
+      "notes": "Questão 21 completa: cenário com as três sequências e A–E. Letra A conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o comportamento de pilha (LIFO) e fila (FIFO) quando os elementos são retirados de uma estrutura e inseridos em outra, um a um. Se a estrutura de destino é uma pilha, a ordem se inverte, pois o último elemento inserido fica no topo, à esquerda. Se o destino é uma fila, a ordem se mantém, pois cada elemento novo entra no fim.\n\nNa primeira transferência, (A,G,T,C,A,G,T,T) virou (T,T,G,A,C,T,G,A), a sequência invertida; logo, a segunda estrutura é uma pilha. Na segunda transferência, a sequência permaneceu idêntica; logo, a terceira estrutura é uma fila. A primeira pode ser fila ou pilha, pois nas duas o elemento mais à esquerda é o primeiro a sair. Isso resulta em Fila - Pilha - Fila, alternativa A.\n\nAs demais falham: B e D têm fila como segunda estrutura, o que preservaria a ordem na primeira transferência; C e E têm pilha como terceira estrutura, o que inverteria de novo a sequência na segunda transferência.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q22",
+      "verdict": "APPROVED",
+      "fragments": [
+        "79be22e842c3ee36613871c5df27598ca3cb24370a38f81d6431a35832aaa45a"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Simplificação de expressões booleanas (soma de produtos)",
+      "notes": "Questão 22 completa: tabela verdade de 16 linhas legível e expressões A–E. Letra C conferida; uns e zeros conferidos contra C e E. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "As alternativas A e E representam a mesma função que C; só C está escrita como soma de produtos, como pede o enunciado.",
+      "explanation": "A questão cobra a obtenção de uma expressão booleana mínima, em soma de produtos, a partir de uma tabela verdade. Os valores 1 de S ocorrem em ABCD = 0000, 0010, 0100, 0110, 1000, 1001, 1011, 1110 e 1111. Com A=0, S vale 1 sempre que D=0, o que dá o termo A'D'. Com A=1, o par 1000 e 1001 resulta em AB'C'; o par 1001 e 1011 resulta em AB'D; e o par 1110 e 1111 resulta em ABC. Assim, S = A'D' + AB'C' + AB'D + ABC, alternativa C, que cobre todos os uns e nenhum zero.\n\nAs outras: B contém o termo AD, que vale 1 em 1101, onde S=0. D é um produto de somas e vale 0 na linha 1000, onde S=1. A, ao distribuir AB'(D+C'), fica igual a C, mas não está escrita como soma de produtos, pois tem fatores entre parênteses. E é um produto de somas, equivalente à função, mas também não é soma de produtos. Como o enunciado pede soma de produtos, a resposta é C.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q23",
+      "verdict": "APPROVED",
+      "fragments": [
+        "dc7334fde8db91569600d5ce23b32aba51477bd1e1bca31745ebf2977066dbb8"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Autômatos finitos, gramáticas e linguagens regulares",
+      "notes": "Questão 23 completa: autômato com rótulos das transições legíveis, gramática e A–E. Letra C conferida; linguagem Σ*ababcΣ* conferida no autômato e na gramática. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "A alternativa B também pode ser lida como verdadeira (a gramática é linear à direita e toda linguagem regular é livre de contexto); o gabarito oficial é C.",
+      "explanation": "A questão cobra a relação entre autômatos finitos, gramáticas e linguagens regulares. O autômato avança de 0 a 1 com a, a 2 com b, a 3 com a, a 4 com b e a 5 com c; os demais símbolos o fazem voltar a estados anteriores (por exemplo, a no estado 3 leva a 1), e o estado final 5 absorve qualquer símbolo. Ele aceita as cadeias que contêm ababc em qualquer posição, isto é, Σ*ababcΣ*.\n\nA gramática gera uma cadeia qualquer, depois ab, depois zero ou mais repetições de ab, depois abc e, por fim, qualquer cadeia (não terminal B). Isso é Σ*(ab)+abcΣ*. Como (ab)+abc termina em ababc, e toda ocorrência de ababc pode ser escrita assim, a linguagem é a mesma do autômato. Alternativa C.\n\nAs outras: A é falsa, pois a linguagem é regular e, portanto, tem gramática não ambígua. B apenas afirma algo genérico (toda linguagem regular também é livre de contexto) e não estabelece a relação entre gramática e autômato. D é falsa: cababc é aceita sem ter ababc como prefixo. E é falsa: com (ab)* podendo ser vazio, a expressão aceita abc, que o autômato rejeita.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q24",
+      "verdict": "APPROVED",
+      "fragments": [
+        "fab8a9f4e98e397cc6aa08b94874c8db541ddc70f7f28a50f0c02a690d5f040b"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Heaps (filas de prioridade) e custos de operações",
+      "notes": "Questão 24 completa: texto, afirmações I–IV e A–E. Letra C conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra propriedades de heaps. I é falsa: um heap não é uma árvore binária de pesquisa, mas uma árvore binária essencialmente completa em que cada pai é maior (ou menor) que seus filhos, sem ordem entre irmãos; além disso, a construção ascendente custa O(n). II é falsa: na implementação em vetor, os filhos do elemento i ficam em 2i e 2i+1 (ou 2i+1 e 2i+2 com índice zero) e o pai fica em ⌊i/2⌋ (ou ⌊(i-1)/2⌋); 2i+1 é posição de filho, não de pai. III é verdadeira: cada extração do maior elemento custa O(log n) pelo reajuste do heap, então m extrações custam O(m log n), o que serve ao caso em que só os m primeiros documentos interessam. IV é verdadeira: o maior elemento fica na raiz e é consultado em O(1).\n\nPortanto, só III e IV estão corretas, alternativa C. As alternativas A, B, D e E falham por incluir I ou II, ou por deixar de incluir IV ou III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q25",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d5d9e6b019f7755d3311b9b847f703e14e3e310bf4ae92d6fa33671d93a9eea3"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Padrões de projeto (Prototype, Singleton, Template Method)",
+      "notes": "Questão 25 completa: texto, referência, afirmações I–IV e A–E. Letra E conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o catálogo de padrões de projeto orientados a objetos, classificados em criacionais, estruturais e comportamentais. I é falsa: Prototype é criacional, pois cria novos objetos copiando uma instância-protótipo. II é falsa: Singleton garante que uma classe tenha apenas uma instância (e não 'ao menos uma') e fornece um ponto global de acesso a ela. III é verdadeira: Template Method define o esqueleto de um algoritmo em uma operação e deixa alguns passos para as subclasses, que os redefinem sem mudar a estrutura geral. IV é verdadeira: Iterator dá acesso sequencial aos elementos de um objeto agregado sem expor sua representação interna.\n\nPortanto, só III e IV estão corretas, alternativa E. As alternativas A, B, C e D falham porque tomam I ou II como verdadeiras e deixam de reconhecer III ou IV.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q26",
+      "verdict": "APPROVED",
+      "fragments": [
+        "94e292625656bd60aa142c65f1bcb75466761facb82325ff5028b8a826fa4331"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Análise combinatória: contagem de full houses",
+      "notes": "Questão 26 completa: figura das cartas, texto e A–E. Letra D conferida; 13·4·12·6 = 3744 conferido. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra análise combinatória: contar as mãos de cinco cartas do tipo full house, isto é, uma trinca de um valor e um par de outro valor. A contagem se faz em etapas independentes, combinando valores e naipes.\n\nPrimeiro, escolhe-se o valor da trinca: 13 possibilidades. Depois, escolhem-se 3 dos 4 naipes desse valor: C(4,3) = 4. Em seguida, escolhe-se o valor do par, diferente do primeiro: 12 possibilidades. Por fim, escolhem-se 2 dos 4 naipes desse valor: C(4,2) = 6. Pelo princípio multiplicativo, 13 x 4 x 12 x 6 = 3744, alternativa D. Trinca e par têm papéis distintos: três K e dois 10 é uma mão diferente de três 10 e dois K, por isso os valores são escolhidos em ordem.\n\nAs outras alternativas falham por erro de contagem: 156 = 13 x 12 ignora os naipes; 624 = 13 x 4 x 12 esquece a escolha dos naipes do par; 1872 é a metade da resposta, o que ocorreria ao tratar os dois valores como não ordenados; 7488 é o dobro.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q27",
+      "verdict": "APPROVED",
+      "fragments": [
+        "cc3541faf5e113d6acc335a51e1a85bc37a761e966a41462cfcc1183ba301c72"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Paralelização de laços: multiplicação de matrizes",
+      "notes": "Questão 27 completa: código numerado de 7 linhas legível, afirmações I–IV e A–E. Letra E conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra paralelização de laços aninhados em memória compartilhada. O cálculo de cada c[i,j] usa apenas a linha i de a e a coluna j de b, e escreve somente em c[i,j]. Elementos diferentes de c não dependem uns dos outros, o que caracteriza um problema embaraçosamente paralelo, decomponível em operações independentes (I verdadeira).\n\nTrocar o for da linha 1 por co cria n processos, um por linha i; cada um executa sequencialmente os laços de j e k e escreve apenas em sua linha de c, sem conflito. O resultado é correto e o tempo diminui (II verdadeira). Trocar o for da linha 2 mantém i sequencial e, para cada i, cria n processos, um por coluna j, também independentes (III verdadeira). Trocar ambos cria n² processos, cada um calculando um c[i,j] (IV verdadeira). Em todos os casos o laço k deve permanecer sequencial, pois acumula a soma em c[i,j].\n\nComo as quatro afirmativas são verdadeiras, a resposta é E. As demais alternativas deixam de fora alguma afirmativa verdadeira.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q28",
+      "verdict": "APPROVED",
+      "fragments": [
+        "e09d88a5bc11495fbabed12ea3ff36aeae95bf35d1f5ec41acf9de8f727aba0c"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Paradigmas de projeto de algoritmos",
+      "notes": "Questão 28 completa: texto, afirmações I–IV e A–E. Letra B conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "A afirmação III é discutível: a programação dinâmica resolve todos os subproblemas, que são finitos. O gabarito oficial a considera falsa por descrever exploração exaustiva.",
+      "explanation": "A questão cobra as técnicas de projeto de algoritmos. I é falsa: escolher o ótimo local esperando chegar ao ótimo global descreve a técnica gulosa; o backtracking constrói a solução por etapas e retrocede quando uma escolha parcial não leva a uma solução. II é verdadeira: é a descrição clássica da divisão e conquista, em três etapas: dividir, resolver recursivamente e combinar. III é tratada como falsa: a programação dinâmica decompõe o problema em subproblemas que se sobrepõem e guarda suas soluções em tabela para não recalculá-las; a exploração exaustiva de todas as possibilidades é característica da força bruta e do backtracking. IV é falsa: um procedimento que chama a si próprio, direta ou indiretamente, define a recursão; heurísticas e algoritmos aproximados buscam soluções boas, sem garantia de ótimo, em tempo viável.\n\nAssim, apenas II está correta, alternativa B. As demais alternativas incluem I, III ou IV, que são falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q29",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d2a005d5f92bcdcdc86c3b1f4ccb85195ff6445cdce269b1ce35285ba6f8e806"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Processos e threads: ciclo de vida, memória e migração",
+      "notes": "Questão 29 completa: texto, afirmações I–IV e A–E. Letra A conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "Dizer que os ciclos de vida de processos e threads são idênticos só vale para o diagrama de estados (pronto, executando, bloqueado); o gabarito oficial aceita a afirmação I.",
+      "explanation": "A questão cobra conceitos de processos e threads em sistemas operacionais multitarefa. O gabarito oficial aceita apenas I: processos e threads passam pelos mesmos estados básicos de ciclo de vida (criado, pronto, em execução, bloqueado e terminado), de modo que os ciclos são equivalentes nesse sentido.\n\nII é falsa: threads de um mesmo processo compartilham o espaço de endereçamento, mas threads de processos diferentes não compartilham memória, pois cada processo tem espaço próprio. III é falsa: programas multithreads também rodam em processador de um só núcleo, por multiplexação no tempo; o multi-core apenas permite paralelismo real. IV é falsa: uma thread pertence ao processo que a criou, usa os recursos dele e não migra para outro processo.\n\nLogo, a alternativa correta é A. As alternativas B, C, D e E incluem II, III ou IV, todas falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q30",
+      "verdict": "APPROVED",
+      "fragments": [
+        "24831840b69290ebf3bce55efad1eeac23fe59d946ec2d09e3f7a260b44afe53"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Busca em árvore binária de pesquisa",
+      "notes": "Questão 30 completa: enunciado, quatro sequências e A–E. Letra C conferida; limites de cada sequência conferidos. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a busca em árvore binária de pesquisa: em cada nó, se a chave buscada é menor, segue-se pela esquerda; se é maior, pela direita. Cada decisão restringe o intervalo de valores possíveis nos nós seguintes, e uma sequência só é válida se cada chave examinada respeita todos os limites impostos pelos nós anteriores do caminho.\n\nI: 7 (vai à direita, valores maiores que 7), 342 (esquerda, entre 7 e 342), 199 (direita), 201 (direita), 310 (esquerda, menor que 310), 258 (direita, maior que 258), 287; todos dentro dos limites, logo válida. II: 110, 132, 133 e 156 (sempre à direita), 289 (esquerda, menor que 289), 288 (esquerda, menor que 288) e 287; válida. III: após 294 (esquerda, valores menores que 294), aparece 295, maior que 294; inválida. IV: após 249 (direita, valores maiores que 249) e 406 (esquerda), aparece 234, menor que 249; inválida.\n\nSó I e II são válidas, alternativa C.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q36",
+      "verdict": "APPROVED",
+      "fragments": [
+        "62b84f4b02339f9ed74869c5636b8d5d8795bb5f9f5d513efa843d5407f33b47"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Classes P, NP e NP-completo",
+      "notes": "Questão 36 completa: texto, afirmações I–IV e A–E. Letra D conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra as classes P, NP e NP-completo. I é falsa: todo problema resolvido em tempo polinomial também tem solução verificável em tempo polinomial (basta resolvê-lo de novo), então P está contida em NP; não há problema de P fora de NP. II é verdadeira: se A se transforma eficientemente em B e B tem algoritmo polinomial, compõe-se a transformação com esse algoritmo e obtém-se um algoritmo polinomial para A. III é verdadeira: um problema NP-completo está em NP; se P = NP, ele está em P e é resolvido em tempo polinomial. IV é falsa: se P é diferente de NP, nenhum problema NP-completo está em P, pois isso o tornaria eficientemente resolvível e, como todo problema de NP se transforma nele, implicaria P = NP.\n\nPortanto, só II e III estão corretas, alternativa D. As alternativas A, B, C e E erram ao aceitar I ou IV, ou ao deixar de reconhecer II ou III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q37",
+      "verdict": "APPROVED",
+      "fragments": [
+        "829847f67fb43cd3ba667349f024bca57978b19c493b84e0a9f46a222a261ae4"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Escopo dinâmico e verificação de tipos",
+      "notes": "Questão 37 completa: texto, referência, afirmações I–III e A–E. Letra D conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra as consequências do escopo dinâmico em uma linguagem com tipagem estática. No escopo dinâmico, um nome não local é resolvido em execução, pela última vinculação feita na cadeia de chamadas. Assim, o mesmo identificador usado dentro de um subprograma pode se referir a variáveis de tipos diferentes, conforme quem o chamou.\n\nI é falsa: se o programador não declara a variável nem o tipo, o compilador não sabe o tipo de uma referência que pode vir de vários chamadores; tratá-la como parâmetro sem tipo exigiria justamente polimorfismo e impediria verificar os tipos em compilação. II é verdadeira: como subprogramas diferentes podem declarar variáveis de mesmo nome e tipos distintos, uma referência não declarada no escopo local só pode ser aceita se a linguagem suportar polimorfismo de tipos. III é verdadeira: se a variável é declarada, com marca de escopo dinâmico, tanto onde é criada quanto onde é referenciada, o compilador conhece o tipo nos dois pontos e pode checar a consistência estaticamente.\n\nPortanto, só II e III estão corretas, alternativa D.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q38",
+      "verdict": "APPROVED",
+      "fragments": [
+        "2b62ff9f9f0dc6ba38a22b146c3fadbd51037f269c6e459f9249a984959bb362"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Compiladores",
+      "subject": "Autômato LR(0) e conflitos shift-reduce",
+      "notes": "Questão 38 completa: gramática, estados e0 e e1, asserções e A–E legíveis. Letra E conferida. O e1 impresso traz M → N·x e M → N·d, itens que não existem na gramática; vira nota ao estudante. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "Na prova, o estado e1 lista M → N·x e M → N·d, que não existem na gramática (seriam E → N·x e N → N·d). O gabarito oficial (E) considera a segunda asserção falsa por isso.",
+      "explanation": "A questão cobra a construção do autômato LR(0) e a condição para uma gramática ser LR(0): nenhum estado pode ter conflito que dependa do próximo símbolo, isto é, item de redução junto de item de empilhamento (shift) ou duas reduções possíveis.\n\nPrimeira asserção: na gramática M → E | N, E → Nx, N → Nd | d, o estado alcançado de e0 por N contém o item de redução M → N· e também os itens que empilham x (E → N·x) e d (N → N·d). Há conflito shift-reduce: sem olhar o próximo símbolo, não se decide entre reduzir e empilhar. A gramática não é LR(0) (seria SLR(1), pois Seguinte(M) = {$}); a asserção é falsa.\n\nSegunda asserção: o estado e1 como impresso lista M → N·x e M → N·d, itens que não existem nas produções dadas (seriam E → N·x e N → N·d). Assim, esse e1 não é estado do autômato dessa gramática, e a asserção é falsa.\n\nAmbas são falsas: alternativa E.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q39",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a1e3c18e4c6a4146a688b6f4e778f997694fde218995ffc06ca3cf46873d66a7"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Programação",
+      "subject": "Tipos de dados abstratos, subtipos e encapsulamento",
+      "notes": "Questão 39 completa: afirmações I–IV e A–E em uma linha. Letra D conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra conceitos de Tipos de Dados Abstratos (TDA) e orientação a objetos. I é falsa: a especificação de um TDA descreve o tipo pelas operações aplicáveis e seu comportamento, ocultando a representação interna e as implementações das operações; incluí-las na especificação contraria a abstração. II é verdadeira: em programas orientados a objetos, TDAs são implementados por mecanismos como composição (um tipo usa outros como componentes) e herança (um tipo reaproveita e estende outro). III é falsa: o princípio da substituição vai no sentido inverso; se S é subtipo de T, entidades do tipo T podem ser substituídas por entidades de S sem alterar a corretude do programa, e não o contrário. IV é verdadeira: ao expor só as operações e ocultar a representação, o uso de TDA leva ao encapsulamento, efeito positivo nas linguagens orientadas a objetos.\n\nLogo, estão corretas II e IV, alternativa D. As alternativas A, B, C e E aceitam I ou III, que são falsas, ou deixam de reconhecer II ou IV.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q40",
+      "verdict": "APPROVED",
+      "fragments": [
+        "eb9851b0b2d44af5ee26ff723c4a4b7a95ce375d765c4d04ff4490ec5c3e727c"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Algoritmo A*: função f(x) = g(x) + h(x)",
+      "notes": "Questão 40 completa: grade 4×6 com quadrados verde, vermelho e pretos nítidos e A–E. Letra B conferida; Manhattan 2+1 = 3 e caminho real 7 conferidos. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o cálculo de f(x) = g(x) + h(x) no algoritmo A*. O nó inicial é o quadrado verde, onde o custo real acumulado g é zero, pois ainda não houve movimento. A heurística h é a distância de Manhattan até o objetivo (o quadrado vermelho): soma das distâncias horizontal e vertical, ignorando os obstáculos.\n\nNa grade de 4 linhas por 6 colunas, o verde está na primeira linha e na segunda coluna; o vermelho, na terceira linha e na terceira coluna. A diferença é de 2 linhas e 1 coluna, então h = 2 + 1 = 3. Portanto f(verde) = 0 + 3 = 3, alternativa B.\n\nAs outras falham: 2 omite uma das componentes da distância. 7 é o custo real do menor caminho que contorna os quadrados pretos (sete movimentos pela coluna da esquerda), mas esse custo não entra no f do nó inicial, em que g é 0 e h é só uma estimativa. 5 e 9 não correspondem a nenhuma combinação válida de g e h para o nó verde.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ],
+  "explainer": "claude-explain-08"
+}

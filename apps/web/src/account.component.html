@@ -1,62 +1,97 @@
-
-    <section class="account-page" aria-labelledby="account-title">
-      <button
-        type="button"
-        class="back text-button"
-        (click)="cancel.emit()"
-        [disabled]="busy"
-      >
-        ← Voltar ao estudo
-      </button>
-      <h1 id="account-title">
-        {{ mode === "register" ? "Criar conta" : "Entrar" }}
-      </h1>
-      @if (mode === "register") {
-        <p class="account-intro">
-          Guarde as respostas já confirmadas nesta sessão e retome seus estudos
-          em outro navegador.
-        </p>
-      } @else {
-        <p class="account-intro">Entre para abrir o histórico da sua conta.</p>
-        <p class="account-help">
-          As respostas da sessão sem conta não são transferidas ao entrar. Para
-          guardá-las em uma conta nova, escolha Criar conta.
-        </p>
-      }
-      <form #accountForm="ngForm" (ngSubmit)="submit(accountForm)" novalidate>
-        <fieldset [disabled]="busy">
+<section class="account-page" aria-labelledby="account-title">
+  <div class="account-form-side">
+    <button
+      type="button"
+      class="back text-button"
+      (click)="cancel.emit()"
+      [disabled]="busy"
+    >
+      ← Voltar ao estudo
+    </button>
+    <p class="account-eyebrow">Preparação ENADE · Ciência da Computação</p>
+    <h1 id="account-title">
+      {{ mode === "register" ? "Criar conta" : "Entrar" }}
+    </h1>
+    @if (mode === "register") {
+      <p class="account-intro">
+        Suas respostas desta sessão vão junto para a conta, e você retoma de
+        qualquer navegador.
+      </p>
+    } @else {
+      <p class="account-intro">Entre para abrir o histórico da sua conta.</p>
+      <p class="account-help">
+        As respostas da sessão sem conta não são transferidas ao entrar. Para
+        guardá-las, escolha Criar conta.
+      </p>
+    }
+    <form #accountForm="ngForm" (ngSubmit)="submit(accountForm)" novalidate>
+      <fieldset [disabled]="busy">
+        @if (mode === "register") {
           <div class="account-field">
-            <label for="account-email">E-mail</label>
+            <label for="account-name">Nome <span class="optional">opcional</span></label>
             <input
-              id="account-email"
-              type="email"
-              name="email"
-              [(ngModel)]="email"
-              #emailField="ngModel"
-              required
-              email
-              maxlength="254"
-              autocomplete="username"
-              autocapitalize="none"
-              spellcheck="false"
-              [attr.aria-invalid]="
-                submitted && emailField.invalid ? true : null
-              "
-              [attr.aria-describedby]="
-                submitted && emailField.invalid ? 'email-error' : null
-              "
+              id="account-name"
+              name="name"
+              [(ngModel)]="name"
+              maxlength="120"
+              autocomplete="name"
             />
-            @if (submitted && emailField.invalid) {
-              <p id="email-error" class="field-error">
-                Informe um e-mail válido.
-              </p>
-            }
           </div>
           <div class="account-field">
-            <label for="account-password">Senha</label>
+            <label for="account-enrollment"
+              >Prontuário IFSP <span class="optional">opcional</span></label
+            >
+            <input
+              id="account-enrollment"
+              name="enrollment"
+              [(ngModel)]="enrollment"
+              maxlength="12"
+              autocapitalize="characters"
+              spellcheck="false"
+              placeholder="PE3012345"
+              aria-describedby="enrollment-help enrollment-error"
+              [attr.aria-invalid]="submitted && enrollmentError() ? true : null"
+            />
+            <p id="enrollment-help" class="account-help">
+              Liga sua conta à lista da turma de preparação, para presença e
+              acompanhamento.
+            </p>
+            <p id="enrollment-error" class="field-error">
+              @if (submitted && enrollmentError()) {
+                {{ enrollmentError() }}
+              }
+            </p>
+          </div>
+        }
+        <div class="account-field">
+          <label for="account-email">E-mail</label>
+          <input
+            id="account-email"
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            #emailField="ngModel"
+            required
+            email
+            maxlength="254"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            [attr.aria-invalid]="submitted && emailField.invalid ? true : null"
+            [attr.aria-describedby]="
+              submitted && emailField.invalid ? 'email-error' : null
+            "
+          />
+          @if (submitted && emailField.invalid) {
+            <p id="email-error" class="field-error">Informe um e-mail válido.</p>
+          }
+        </div>
+        <div class="account-field">
+          <label for="account-password">Senha</label>
+          <div class="password-row">
             <input
               id="account-password"
-              type="password"
+              [type]="showPassword ? 'text' : 'password'"
               name="password"
               [(ngModel)]="password"
               required
@@ -67,56 +102,81 @@
               [attr.aria-invalid]="submitted && passwordError() ? true : null"
               aria-describedby="password-help password-error"
             />
-            <p id="password-help" class="account-help">
-              Use de 12 a 128 caracteres. Espaços são permitidos.
-            </p>
-            <p id="password-error" class="field-error">
-              @if (submitted && passwordError()) {
-                {{ passwordError() }}
-              }
-            </p>
+            <button
+              type="button"
+              class="text-button password-toggle"
+              [attr.aria-pressed]="showPassword"
+              (click)="showPassword = !showPassword"
+            >
+              {{ showPassword ? "Ocultar" : "Mostrar" }}
+            </button>
           </div>
-          @if (mode === "register") {
-            <p class="account-limit">
-              Nesta versão, o e-mail ainda não é confirmado e não há recuperação
-              de senha. Guarde sua senha em um local seguro.
-            </p>
-          }
-          <button type="submit">
-            {{
-              busy
-                ? "Confirmando…"
-                : mode === "register"
-                  ? "Criar conta"
-                  : "Entrar"
-            }}
-          </button>
-        </fieldset>
-        @if (error) {
-          <div class="notice" role="alert">
-            <p>{{ error }}</p>
-          </div>
-        }
-        @if (busy) {
-          <p class="account-help" role="status">
-            Confirmando os dados da conta…
+          <p id="password-help" class="account-help">
+            Use de 12 a 128 caracteres. Espaços são permitidos.
           </p>
+          <p id="password-error" class="field-error">
+            @if (submitted && passwordError()) {
+              {{ passwordError() }}
+            }
+          </p>
+        </div>
+        @if (mode === "register") {
+          <p class="account-limit">
+            Nesta versão, o e-mail ainda não é confirmado e não há recuperação
+            de senha. Guarde sua senha em um local seguro.
+          </p>
+          <details class="account-privacy">
+            <summary>Como usamos seus dados</summary>
+            <ul>
+              <li>Guardamos seu e-mail, a senha (só em forma cifrada, sem como recuperá-la), o nome e o prontuário, se você informar, e o seu estudo: respostas, treinos, provas e discursivas.</li>
+              <li>Isso serve para salvar seu progresso. Se o seu prontuário estiver na lista de uma turma de preparação, os professores e a administração veem sua presença e seu desempenho por área.</li>
+              <li>A administração vê a lista de contas: nome, e-mail, prontuário, papéis e quantidade de respostas.</li>
+              <li>Para segurança, registramos entradas, tentativas com senha errada e mudanças na conta, com data e endereço IP. A administração consulta esse registro, que é apagado depois de 180 dias.</li>
+              <li>Não usamos seus dados para publicidade e não os enviamos a outros serviços.</li>
+              <li>Você corrige nome, prontuário, e-mail e senha em Meu perfil (clique no seu e-mail no topo). Para excluir a conta, peça à administração da plataforma.</li>
+            </ul>
+          </details>
         }
-      </form>
-      <p class="account-switch">
-        {{
-          mode === "register" ? "Já tem uma conta?" : "Primeira vez por aqui?"
-        }}
-        <button
-          type="button"
-          class="text-button"
-          (click)="switchMode()"
-          [disabled]="busy"
-        >
-          {{ mode === "register" ? "Entrar" : "Criar conta" }}
+        <button type="submit" class="account-submit">
+          {{
+            busy ? "Confirmando…" : mode === "register" ? "Criar conta" : "Entrar"
+          }}
         </button>
-      </p>
-      <p class="account-help">
-        Você também pode continuar estudando sem criar uma conta.
-      </p>
-    </section>
+      </fieldset>
+      @if (error) {
+        <div class="notice" role="alert">
+          <p>{{ error }}</p>
+        </div>
+      }
+      @if (busy) {
+        <p class="account-help" role="status">Confirmando os dados da conta…</p>
+      }
+    </form>
+    <p class="account-switch">
+      {{ mode === "register" ? "Já tem uma conta?" : "Primeira vez por aqui?" }}
+      <button
+        type="button"
+        class="text-button"
+        (click)="switchMode()"
+        [disabled]="busy"
+      >
+        {{ mode === "register" ? "Entrar" : "Criar conta" }}
+      </button>
+    </p>
+    <p class="account-help">
+      Você também pode continuar estudando sem criar uma conta.
+    </p>
+  </div>
+  <aside class="account-cover" aria-hidden="true">
+    <p class="account-cover-mark"><svg class="brand-mark is-large" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect width="34" height="34" rx="8" /><circle cx="9.5" cy="17" r="3.6" class="brand-bubble" /><circle cx="17" cy="17" r="3.6" class="brand-bubble is-marked" /><circle cx="24.5" cy="17" r="3.6" class="brand-bubble" /></svg></p>
+    <p class="account-cover-quote">
+      Questões reais do ENADE, uma de cada vez, com a prova original e o
+      raciocínio de cada alternativa.
+    </p>
+    <ul class="account-cover-list">
+      <li>Banco por área e por edição</li>
+      <li>Treino com resultado no final</li>
+      <li>Caderno com o que você errou</li>
+    </ul>
+  </aside>
+</section>

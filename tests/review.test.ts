@@ -112,7 +112,7 @@ test("review requires a valid session and returns an honest empty notebook", asy
   assert.equal((await request("review")).status, 401);
   const user = await actor();
   assert.deepEqual(await notebook(user), {
-    summary: { answered: 0, correct: 0, incorrect: 0, demonstration: 0 },
+    summary: { answered: 0, correct: 0, incorrect: 0, demonstration: 0, ready: 0 },
     topics: [],
     total: 0,
     items: [],
@@ -137,8 +137,16 @@ test("review isolates owners, counts distinct questions and removes corrected er
     correct: 0,
     incorrect: 1,
     demonstration: 1,
+    ready: 0, // acabou de ver o gabarito: volta amanhã
   });
   assert.equal(data.items[0].id, q.id);
+  assert.equal(data.items[0].ready, false);
+  assert.ok(new Date(data.items[0].reviewAt).getTime() - Date.now() > 23 * 3600000);
+  // Passado o intervalo, a questão fica pronta para revisar.
+  await db.query("UPDATE answer SET updated_at=now()-interval '2 days' WHERE owner_id=$1 AND question_id=$2", [user.id, q.id]);
+  const due = await notebook(user);
+  assert.equal(due.summary.ready, 1);
+  assert.equal(due.items[0].ready, true);
   assert.equal(data.items[0].questionId, q.question);
   assert.equal(data.items[0].versionNumber, 1);
   assert.equal(data.items[0].correctOptionId, undefined);
@@ -164,6 +172,7 @@ test("review isolates owners, counts distinct questions and removes corrected er
     correct: 1,
     incorrect: 0,
     demonstration: 1,
+    ready: 0,
   });
   assert.equal(data.total, 0);
   assert.deepEqual(data.topics, [

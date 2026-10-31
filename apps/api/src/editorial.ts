@@ -31,13 +31,22 @@ export function revision(body: Record<string, unknown>) {
     fail("Revisão inválida. Reabra a versão.", 400);
   return body.baseRevision as number;
 }
+/**
+ * Quem cura conteúdo: o papel próprio de curadoria ou os papéis de professor e
+ * administração. Publicar continua exigindo a revisão de outra pessoa.
+ * Com `lock`, segura as linhas de papel até o fim da transação.
+ */
+export async function canCurate(client: PoolClient | typeof db, identityId: string, lock = false) {
+  const share = lock ? " FOR SHARE" : "";
+  const own = await client.query(`SELECT 1 FROM curator_role WHERE identity_id=$1${share}`, [identityId]);
+  if (own.rowCount) return true;
+  const staff = await client.query(
+    `SELECT 1 FROM account_role WHERE identity_id=$1 AND role IN ('PROFESSOR','ADMIN')${share}`, [identityId]);
+  return Boolean(staff.rowCount);
+}
 export async function curator(req: any, client?: PoolClient, lock = false) {
   const user = await requireIdentity(req, client, lock);
-  const role = await (client ?? db).query(
-    `SELECT identity_id FROM curator_role WHERE identity_id=$1 ${lock ? "FOR SHARE" : ""}`,
-    [user.id],
-  );
-  if (!user.email || !role.rowCount) fail("Acesso reservado à curadoria.", 403);
+  if (!user.email || !(await canCurate(client ?? db, user.id, lock))) fail("Acesso reservado à curadoria.", 403);
   return user;
 }
 export async function transaction<T>(

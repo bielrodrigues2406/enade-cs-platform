@@ -4,6 +4,7 @@ export type QuestionContent = {
   id: string;
   title: string;
   topic: string;
+  subject?: string | null;
   origin: string;
   authorCredit: string;
   demonstration: boolean;

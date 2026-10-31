@@ -129,8 +129,9 @@ export const imageView = (image: QuestionImage) => ({
 
 @Controller("api")
 export class QuestionImagesController {
-  // Recorte de uma versão publicada (qualquer sessão) ou de rascunho
-  // (somente curadoria). O nome é o hash: pode ficar em cache para sempre.
+  // Recorte de uma versão publicada (qualquer sessão), de discursiva
+  // publicada ou de rascunho (somente curadoria). O nome é o hash: pode
+  // ficar em cache para sempre.
   @Get("question-images/:file") async image(
     @Req() req: any,
     @Res() res: any,
@@ -144,8 +145,13 @@ export class QuestionImagesController {
         `SELECT a.byte_size AS "byteSize" FROM question_asset a WHERE a.sha256=$1 AND (
            EXISTS(SELECT 1 FROM question_version_image i JOIN question_version v ON v.id=i.version_id
                   WHERE i.asset_sha256=a.sha256 AND v.editorial_status='PUBLISHED')
-           OR EXISTS(SELECT 1 FROM curator_role c JOIN account ac ON ac.identity_id=c.identity_id
-                     WHERE c.identity_id=$2))`,
+           -- Discursiva: enunciado para todos; padrão de resposta só para quem já enviou a resposta.
+           OR EXISTS(SELECT 1 FROM discursive_image d WHERE d.asset_sha256=a.sha256 AND d.part='PROMPT')
+           OR EXISTS(SELECT 1 FROM discursive_image d JOIN discursive_response r ON r.question_id=d.question_id
+                     WHERE d.asset_sha256=a.sha256 AND r.owner_id=$2 AND r.submitted_at IS NOT NULL)
+           OR (EXISTS(SELECT 1 FROM account ac WHERE ac.identity_id=$2)
+               AND (EXISTS(SELECT 1 FROM curator_role c WHERE c.identity_id=$2)
+                    OR EXISTS(SELECT 1 FROM account_role r WHERE r.identity_id=$2 AND r.role IN ('PROFESSOR','ADMIN')))))`,
         [match![1], user.id],
       )
     ).rows[0];

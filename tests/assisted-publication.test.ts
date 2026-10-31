@@ -306,32 +306,73 @@ test("duplicate or inconsistent question numbers cannot overwrite entries before
   await noPublication(exam);
 });
 
-test("APPROVED does not waive material findings in analysis or in the persisted intake", async () => {
-  const { exam, key, input } = await scenario(true);
-  const raw = input.report.items[0];
-  for (const code of ["DEFEITO_NO_CODIGO_ORIGINAL", "DADOS_E_UNIDADES_NA_FONTE", "AMBIGUIDADE_INTERPRETATIVA", "ANULADA_OFICIAL", "ANULACAO_PRESERVADA", "CONFERIR_CONTEXTO_LEGAL", "UNCLASSIFIED_PENDING_ISSUE"]) {
+test("D15: content findings do not block; only annulment and out-of-scope items are rejected", async () => {
+  for (const code of ["DEFEITO_NO_CODIGO_ORIGINAL", "DADOS_E_UNIDADES_NA_FONTE", "AMBIGUIDADE_INTERPRETATIVA", "CONFERIR_CONTEXTO_LEGAL", "UNCLASSIFIED_PENDING_ISSUE"]) {
+    const { exam, input } = await scenario(true);
     const analysis = { author: "TEST ONLY", items: [{ examId: exam.id, examSha256: exam.sha256,
-      key: "Q1", issues: [{ code, note: "TEST ONLY unresolved material issue" }] }] };
-    assert.match((await publishAssisted({ ...input, analysis })).rejected[0].reason, /pendência material/);
+      key: "Q1", issues: [{ code, note: "TEST ONLY content finding" }] }] };
+    assert.deepEqual((await publishAssisted({ ...input, analysis })).published, ["Q1"], code);
   }
+  for (const code of ["ANULADA_OFICIAL", "ANULACAO_PRESERVADA", "FORA_ESCOPO_LICENCIATURA"]) {
+    const { exam, input } = await scenario(true);
+    const analysis = { author: "TEST ONLY", items: [{ examId: exam.id, examSha256: exam.sha256,
+      key: "Q1", issues: [{ code, note: "TEST ONLY scope finding" }] }] };
+    assert.match((await publishAssisted({ ...input, analysis })).rejected[0].reason, /fora das questões pontuáveis/, code);
+    await noPublication(exam);
+  }
+  const { exam, key, input } = await scenario(true);
   await db.query(`INSERT INTO question_intake(id,exam_source_id,key_source_id,source_key,question_number,kind,pages,
     original_raw,extraction,machine_digest,content,assisted_review,flags,state)
     VALUES($1,$2,$3,'Q1',1,'OBJECTIVE','{1}',$4,'{}',$5,'{}',$6,$7,'HOLD')`,
-    [randomUUID(), exam.sourceId, key.sourceId, raw, sha("TEST ONLY digest"),
-      { origin: "ASSISTED", humanReviewed: false, issues: [{ code: "DEFEITO_NO_CODIGO_ORIGINAL" }] }, ["DEFEITO_NO_CODIGO_ORIGINAL"]]);
-  assert.match((await publishAssisted(input)).rejected[0].reason, /DEFEITO_NO_CODIGO_ORIGINAL/);
+    [randomUUID(), exam.sourceId, key.sourceId, input.report.items[0], sha("TEST ONLY digest"),
+      { origin: "ASSISTED", humanReviewed: false, issues: [] }, ["fora-escopo-ciencia-computacao"]]);
+  assert.match((await publishAssisted(input)).rejected[0].reason, /fora-escopo-ciencia-computacao/);
   await noPublication(exam);
 });
 
-test("omitting analysis cannot hide material findings stored with the repository review", async () => {
+test("omitting analysis cannot hide scope findings stored with the repository review", async () => {
   const { exam, input } = await scenario(true, { year: 2099 }, { year: 2099 });
   const file = path.resolve("data/question-reviews/2099-review.json");
   await writeFile(file, JSON.stringify({ author: "TEST ONLY", items: [{ examId: exam.id, examSha256: exam.sha256,
-    key: "Q1", issues: [{ code: "AMBIGUIDADE_CONCEITUAL" }] }] }), { flag: "wx" });
+    key: "Q1", issues: [{ code: "ANULADA_OFICIAL" }] }] }), { flag: "wx" });
   try {
-    assert.match((await publishAssisted(input)).rejected[0].reason, /AMBIGUIDADE_CONCEITUAL/);
+    assert.match((await publishAssisted(input)).rejected[0].reason, /ANULADA_OFICIAL/);
     await noPublication(exam);
   } finally { await rm(file); }
+});
+
+test("a checked explanation, subject and student note travel with the version; the explainer stays distinct", async () => {
+  const { exam, input } = await scenario(true);
+  const review = structuredClone(input.review) as any;
+  Object.assign(review, { explainer: "claude-explain-test" });
+  Object.assign(review.items[0], {
+    subject: "TEST ONLY Roteamento", studentNote: "TEST ONLY: o texto da prova arredonda um dado.",
+    explanation: "TEST ONLY explicação conferida.", explanationCheck: "OK", explanationNote: "",
+  });
+  assert.deepEqual((await publishAssisted({ ...input, review })).published, ["Q1"]);
+  const v = (await db.query(`SELECT v.* FROM question_version v JOIN editorial_question q ON q.id=v.question_id
+    WHERE q.official_exam_id=$1`, [exam.sourceId])).rows[0];
+  assert.equal(v.subject, "TEST ONLY Roteamento");
+  assert.equal(v.review_note, "TEST ONLY: o texto da prova arredonda um dado.");
+  assert.equal(v.explanation, "TEST ONLY explicação conferida.");
+  assert.match(v.explanation_credit, /claude-explain-test\) e conferida por agente \(codex\)/);
+  // Republicar o mesmo conteúdo não cria versão; uma explicação recusada não entra.
+  assert.deepEqual((await publishAssisted({ ...input, review })).unchanged, ["Q1"]);
+  const rejected = await scenario(true);
+  const r2 = structuredClone(rejected.input.review) as any;
+  Object.assign(r2, { explainer: "claude-explain-test" });
+  Object.assign(r2.items[0], { explanation: "TEST ONLY errada.", explanationCheck: "REJECTED", explanationNote: "TEST ONLY" });
+  // Uma análise anterior com explicação não substitui a recusa explícita.
+  const previous = { author: "TEST ONLY", items: [{ examId: rejected.exam.id, examSha256: rejected.exam.sha256,
+    key: "Q1", explanation: "TEST ONLY explicação antiga." }] };
+  await publishAssisted({ ...rejected.input, review: r2, analysis: previous });
+  const v2 = (await db.query(`SELECT v.explanation,v.explanation_credit FROM question_version v JOIN editorial_question q ON q.id=v.question_id
+    WHERE q.official_exam_id=$1`, [rejected.exam.sourceId])).rows[0];
+  assert.deepEqual([v2.explanation, v2.explanation_credit], ["", "Sem explicação ainda"]);
+  for (const explainer of ["codex", "claude"])
+    await assert.rejects(publishAssisted({ ...input, review: { ...review, explainer } }), /Quem explica/);
+  const unchecked = structuredClone(review); delete unchecked.items[0].explanationCheck;
+  await assert.rejects(publishAssisted({ ...input, review: unchecked }), /precisa de agente explicador e de conferência/);
 });
 
 test("visual and OCR-only warnings can be satisfied by complete approved image evidence", async () => {

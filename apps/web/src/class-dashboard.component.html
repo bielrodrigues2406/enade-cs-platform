@@ -1,0 +1,84 @@
+@if (error()) {
+  <div class="notice" role="alert"><p>{{ error() }}</p></div>
+}
+@if (data(); as board) {
+  <dl class="dash-summary">
+    <div><dt>Alunos com conta</dt><dd><strong>{{ summary().withAccount }}</strong> de {{ summary().total }}</dd></div>
+    <div><dt>Presença média</dt><dd><strong>{{ percent(summary().attendance) }}</strong> em {{ plural(board.lessonsWithRoll, "aula com chamada", "aulas com chamada") }}</dd></div>
+    <div [class.is-alert]="summary().lowAttendance">
+      <dt>Abaixo de 75%</dt><dd><strong>{{ summary().lowAttendance }}</strong> {{ summary().lowAttendance === 1 ? "aluno" : "alunos" }}</dd>
+    </div>
+  </dl>
+
+  <section aria-labelledby="dash-areas-title">
+    <h2 id="dash-areas-title">Acerto na primeira tentativa, por área</h2>
+    <p class="muted">
+      Conta só a primeira resposta de cada aluno a cada questão. Com menos de
+      {{ minSample }} respostas na área, o percentual não aparece.
+      @if (board.backfilled) {
+        {{ board.backfilled }} respostas são anteriores ao histórico e contam a última escolha.
+      }
+    </p>
+    @if (board.areas.length) {
+      <ul class="dash-areas">
+        @for (area of board.areas; track area.area) {
+          <li [class.is-small]="!accuracy(area.firstCorrect, area.firstAttempts)">
+            <span class="dash-area-name">{{ area.area }}</span>
+            <span class="dash-bar" aria-hidden="true"><span [style.width]="barWidth(area)"></span></span>
+            <span class="dash-area-value">
+              @if (accuracy(area.firstCorrect, area.firstAttempts); as value) {
+                <strong>{{ value }}</strong>
+              } @else {
+                <strong>amostra pequena</strong>
+              }
+              <span class="muted">{{ area.firstCorrect }} de {{ area.firstAttempts }} · {{ plural(area.students, "aluno", "alunos") }}</span>
+            </span>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="muted">Nenhum aluno da lista respondeu questões ainda.</p>
+    }
+  </section>
+
+  <section aria-labelledby="dash-students-title">
+    <h2 id="dash-students-title">Alunos</h2>
+    <div class="admin-table-wrap">
+      <table class="admin-table dash-table">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Presença</th>
+            <th scope="col">Questões</th>
+            <th scope="col">Acerto 1ª</th>
+            <th scope="col">Treinos</th>
+            <th scope="col">Último estudo</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (student of board.students; track student.id) {
+            <tr>
+              <th scope="row">{{ student.name }}<span class="muted">{{ student.enrollment }}</span></th>
+              <td data-label="Presença" [class.is-alert]="lowAttendance(student)">
+                {{ attendance(student) }}<span class="muted">{{ student.present }} de {{ student.recorded }}</span>
+              </td>
+              @if (student.hasAccount) {
+                <td data-label="Questões">{{ student.firstAttempts }}</td>
+                <td data-label="Acerto 1ª">
+                  {{ accuracy(student.firstCorrect, student.firstAttempts) ?? "—" }}
+                  @if (student.firstAttempts) {
+                    <span class="muted">{{ student.firstCorrect }} de {{ student.firstAttempts }}</span>
+                  }
+                </td>
+                <td data-label="Treinos">{{ student.practiceDone }}</td>
+                <td data-label="Último estudo">{{ lastSeen(student.lastActivity) }}</td>
+              } @else {
+                <td colspan="4" class="muted dash-no-account">Sem conta com este prontuário</td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+}

@@ -1,0 +1,334 @@
+{
+  "document": "enade-2021-bacharelado-exam",
+  "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+  "cropsManifestSha256": "8c4b0eea885d7890ea2a21c36a80b69ed1f0f6163f6b3a9492131ed808da002a",
+  "extractor": "claude",
+  "explainer": "claude-explain-01",
+  "reviewer": "claude-review-01",
+  "reviewedAt": "2026-10-30T22:37:35Z",
+  "items": [
+    {
+      "key": "Q1",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c365f18fd40fdaba6e8a03695c806eb462ac07308cb75810a417232610efbd94"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Mobilidade social e desigualdade",
+      "notes": "Recorte da página 5: número 01, texto, referência, comando e A–E legíveis, sem conteúdo vizinho. Letra E conferida no gabarito definitivo (não anulada). Explicação conferida com o texto.",
+      "studentNote": "",
+      "explanation": "A questão cobra a interpretação de um texto sobre mobilidade social, isto é, a facilidade com que uma pessoa muda de camada social ao longo da vida ou das gerações. O texto relaciona a baixa mobilidade no Brasil à dificuldade de acesso à saúde, à escola de baixa qualidade e aos empregos de baixa remuneração para quem nasce na base da pirâmide.\n\nA alternativa E, indicada no gabarito oficial, resume esse raciocínio: a ascensão depende de fatores viabilizadores, como educação, saúde e oportunidades de trabalho, que estão fora do alcance das camadas pobres. A parte sobre conflitos sociais é uma inferência plausível, e E é a única alternativa compatível com o texto.\n\nAs demais afirmam o que o texto não sustenta. A atribui o problema a natalidade e fatores ambientais, que não aparecem. B culpa a baixa organização dos pobres, invertendo a causa apontada. C fala em um fator ancestral que limitaria políticas públicas, algo não dito. D descreve um ciclo de subida e queda, quando o texto trata do ciclo de perpetuação da pobreza.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q2",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8821ecaa98ebebd5436322a36a23ee3a9d6882555a27b3849f4be427f343cf0a",
+        "dd96eae85eaf01e30a69d5057937fcad62af5669ad6a3ce629e612392650d25e"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Desperdício de alimentos e padrão estético de hortaliças",
+      "notes": "Dois recortes em ordem (páginas 6 e 7, comparadas com o original): infográfico Embrapa completo com crédito, texto II, asserções e A–E. Letra C conferida. Ressalva do explicador sobre II avaliada: o texto não divulga aumento de perdas no Brasil; sem nota.",
+      "studentNote": "",
+      "explanation": "A questão pede a leitura conjunta de um infográfico (texto I) e de um artigo (texto II) sobre hortaliças fora do padrão visual, avaliando duas asserções ligadas por PORQUE.\n\nA asserção I é verdadeira. O infográfico separa o que indica hortaliça estragada (amassada, machucada, quebrada, sem a coloração apropriada) do que é apenas feiura (formato fora do padrão, pequenas cicatrizes superficiais). O texto II defende essa mesma distinção, ao propor esclarecer quais aspectos da aparência comprometem a qualidade. Logo, o texto I sintetiza uma ideia central do II.\n\nA asserção II é considerada falsa pelo gabarito oficial. O texto II contrapõe a exigência por aparência perfeita, que deslocaria o desperdício para o campo, à exigência por hortaliças sem danos, causados por falta de cuidado e de higiene, que reduz a perda. A asserção generaliza para produtos agropecuários e apresenta como informação divulgada um aumento das perdas no Brasil proporcional à exigência dos consumidores, o que o texto não afirma nesses termos. Assim, I verdadeira e II falsa: alternativa C. A e B tratam II como verdadeira; D e E tratam I como falsa.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q3",
+      "verdict": "APPROVED",
+      "fragments": [
+        "505d9588035b4a2df60fb7db1aac8d8eda6301b0c5558d2990a6cb8fb40905e2"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Bicicleta, ciclovias e qualidade de vida urbana",
+      "notes": "Recorte da página 8: textos I/II, charge completa com crédito, afirmações I–III e A–E. Letra B conferida. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão pede avaliar três afirmações a partir de um texto sobre a origem das ciclovias, de uma charge e do tema do uso de bicicletas para melhorar a qualidade de vida nas cidades. A afirmação II é verdadeira e é a única correta, como indica o gabarito oficial (B): a bicicleta não emite poluentes durante o uso e pedalar é atividade física, dois ganhos para a qualidade de vida nas grandes metrópoles.\n\nA afirmação I é falsa. Embora a bicicleta ocupe pouco espaço, o texto I menciona a criação de espaço exclusivo para ciclistas e políticas públicas que incentivem o uso da bicicleta, e a charge mostra um ciclista espremido entre carros, com os balões ciclovias e ciclofaixas, sugerindo a falta dessa infraestrutura. Dispensar investimento em ciclovias contradiz esse quadro.\n\nA afirmação III é falsa. O texto conta que as primeiras ciclovias surgiram na Alemanha nazista porque os ciclistas atrapalhavam os veículos automotivos; não diz que a bicicleta passou a prevalecer nas cidades europeias. Por isso A, C, D e E erram ao incluir I ou III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q4",
+      "verdict": "APPROVED",
+      "fragments": [
+        "5b82359412072f930a62a61919252105b3a40a25755dd7bf3010518e891f41b2"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Gig Economy e trabalho informal",
+      "notes": "Recorte da página 9: texto, referência, asserções com PORQUE e A–E. Letra B conferida. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão trata da Gig Economy, a contratação de trabalhadores autônomos por plataformas digitais, e pede avaliar duas asserções e a relação entre elas. A asserção I é verdadeira: segundo o texto, nesse modelo as empresas tratam os motoristas como autônomos, sem vínculo empregatício, regulamentação ou proteção legal, e é isso que se chama de Gig Economy.\n\nA asserção II também é verdadeira em relação ao texto: o trabalhador arca com os custos da atividade, enfrenta longas jornadas e relata problemas de coluna e estresse, e a remuneração por produção é típica desse modelo.\n\nPorém II não justifica I. A asserção I define quem compõe a Gig Economy (autônomos sem vínculo e sem proteção), enquanto II descreve condições e consequências do trabalho. Desgaste e problemas de saúde não explicam por que esses trabalhadores fazem parte desse modelo. Por isso o gabarito é B. A erra ao ver relação de justificativa; C e D tratam uma das asserções como falsa; E trata as duas como falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q5",
+      "verdict": "APPROVED",
+      "fragments": [
+        "12c0bda6028fbaffa43e3ea31cf24e386228ca802c023f4984fdf64fb4a9db6c",
+        "153523e68a7aef204fc15a42682d9c80167ca85265b5143b498b6b289ea0e3b7"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Suicídio de crianças e adolescentes indígenas",
+      "notes": "Dois recortes em ordem (páginas 10 e 11, comparadas com o original): textos I/II, mapa com legenda e crédito, afirmações I–IV e A–E. Letra A conferida. Ressalva numérica do texto I (\"três vezes\", 6,8 \"óbitos\") vira nota ao estudante (D15).",
+      "studentNote": "O texto I traz imprecisões numéricas da própria fonte: 15,2 corresponde a cerca de 2,7 vezes 5,7, e não exatamente a três vezes, e o valor 6,8 deriva de uma taxa por 100 mil habitantes, não de uma contagem absoluta de óbitos. Essas imprecisões não interferem na avaliação das afirmações.",
+      "explanation": "A questão combina dois textos e um mapa sobre suicídio de crianças e adolescentes indígenas no Brasil e pede identificar as afirmações corretas. I é correta: o texto I mostra incidência de óbitos muito acima da média nacional (15,2 contra 5,7 por 100 mil), com parcela expressiva entre 10 e 19 anos, o que evidencia a necessidade de ações voltadas aos direitos fundamentais dessas crianças e desses adolescentes.\n\nII é falsa: no mapa, os maiores símbolos e as maiores concentrações de casos de 10 a 14 anos estão no Amazonas e no Mato Grosso do Sul; Pará e Tocantins aparecem com poucos pontos pequenos. III é falsa: os povos originários têm amparo constitucional quanto à sua história e preservação cultural, e nada no texto sugere o contrário.\n\nIV é falsa: o texto I contrasta o panorama indígena, concentrado entre 10 e 19 anos, com o nacional, de 15 a 20 anos. Ações preventivas devem considerar a realidade e a faixa etária indígenas, e não apenas os fatores da população geral nessa faixa. Logo, só I está correta: alternativa A.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q6",
+      "verdict": "APPROVED",
+      "fragments": [
+        "6f377afd5219204d695785d4eec5b0e7a0c3d7d6a1c67e777f7129ca4c6f8a1c"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Covid-19, expectativa de vida e vulnerabilidade social",
+      "notes": "Recorte da página 11 contém só a questão 06, sem alternativas da 05 (comparado com o original). Letra A conferida. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão pede avaliar duas asserções sobre o impacto desigual da Covid-19 na expectativa de vida nos Estados Unidos e a relação entre elas.\n\nA asserção I é verdadeira. O texto mostra que a queda foi maior para negros (2,1 anos) e latinos (3 anos) do que para a população em geral (1,1 ano) e destaca que os latinos têm menos condições crônicas, que são fatores de risco da doença. Isso indica que a explicação não está só em doenças prévias e aponta para a vulnerabilidade social como fator associado ao efeito desproporcional. A asserção II também é verdadeira: apresenta uma hipótese explicativa, a de que condições precárias de trabalho aumentam a exposição ao contágio.\n\nE II justifica I, porque a precariedade no trabalho é uma forma concreta de vulnerabilidade social e ajuda a explicar por que esses grupos foram mais expostos e sofreram maior queda. Por isso o gabarito é A. B nega a justificativa; C e D tratam uma das asserções como falsa; E trata as duas como falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q7",
+      "verdict": "APPROVED",
+      "fragments": [
+        "0a35a553006687f8a903f1124f51a8fc60d6b195d53d983c7ebf3531ac26c69d"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Informação em saúde na internet",
+      "notes": "Recorte da página 12: textos I/II com referências, afirmações I–III e A–E. Letra C conferida. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão pede comparar dois textos sobre informação de saúde na internet e avaliar três afirmações. A afirmação I é verdadeira. O texto I diz que a divulgação de temas médicos é uma faca de dois gumes, pois quem tem a mente cheia de informações equivocadas está mais longe da verdade. O texto II alerta para o perigo do autodiagnóstico e da automedicação, já que boa parte das buscas não adota critérios. Os dois evidenciam a importância de critérios nas buscas e o risco de compreensão equivocada de sintomas e profilaxias.\n\nA afirmação II é verdadeira. O texto I afirma haver correlação positiva estimada entre o conhecimento sobre as doenças e a adoção de hábitos saudáveis, e cita como exemplos o aumento dos diagnósticos precoces de câncer de mama e a diminuição do tabagismo.\n\nA afirmação III é falsa. O texto II não defende o acesso a informações de pesquisas da área da saúde com o argumento de que tornam o indivíduo proativo na prevenção; ele reconhece o aumento do acesso, mas enfatiza os perigos do autodiagnóstico e da automedicação. Assim, só I e II estão corretas: alternativa C.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q8",
+      "verdict": "APPROVED",
+      "fragments": [
+        "83bf385abd12774aa66c275e6a85e6985604b6ecfad0dac1c77e1d0007d32a0d"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Democracia majoritária e democracia consensual",
+      "notes": "Recorte da página 13: texto, referência, afirmações I–IV e A–E. Letra D conferida. Ambiguidade da afirmação II (bloqueio anterior por conteúdo) vira nota neutra (D15).",
+      "studentNote": "A redação da afirmação II é discutível: o texto associa a democracia consensual à busca de consensos mais amplos e a lideranças maduras no governo e na oposição, o que permite mais de uma leitura. Avalie a afirmação comparando-a com a definição central de cada modelo apresentada no texto.",
+      "explanation": "A questão cobra a leitura de um texto que contrasta a democracia majoritária (governar para a maioria) e a consensual (governar para o máximo possível de pessoas), e pede avaliar quatro afirmações. I é verdadeira: se a democracia consensual busca governar para o máximo de pessoas, e não só para a maioria, o bem comum nem sempre coincide com a opinião da maioria.\n\nIII é verdadeira: no modelo majoritário a resposta ao desacordo é governar para a maioria, o que combina com cenários de polarização, alta competitividade e combatividade; o modelo consensual, em contraste, exige lideranças mais maduras no governo e na oposição. IV é verdadeira: governar para o máximo de pessoas, isto é, para todo o povo, pressupõe que quem está no poder considere as necessidades das minorias.\n\nII é considerada falsa pelo gabarito oficial. O texto apresenta a democracia consensual como governar para o máximo possível de pessoas, em busca de consensos mais amplos no interesse de todos; reduzir sua característica ao consenso entre situação e oposição nas decisões governamentais restringe essa ideia. Logo, I, III e IV: alternativa D. As demais incluem II ou deixam de fora uma afirmação correta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q9",
+      "verdict": "APPROVED",
+      "fragments": [
+        "bb087549ad71c201e02efd6233759f3c9e6dccea103062e18bbb335429b81c6b"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Algoritmos de escalonamento de processos",
+      "notes": "Recorte da coluna esquerda da página 19: número 09, texto, referência e A–E, sem trecho da 10. Letra E conferida. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a relação entre algoritmos de escalonamento de processos e o tipo de ambiente em que são adequados. Na classificação usual de sistemas operacionais, em sistemas em lote servem algoritmos como primeiro a chegar, primeiro a ser servido e tarefa mais curta primeiro; em sistemas interativos, chaveamento circular (round-robin), prioridades e múltiplas filas, que privilegiam o tempo de resposta; em tempo real, algoritmos como taxas monotônicas.\n\nA alternativa E, o gabarito oficial, associa o escalonamento por prioridades a sistemas interativos, que é um par correto.\n\nAs outras falham. A cita FILO, que não é um algoritmo de escalonamento (o usual é FIFO, primeiro a entrar, primeiro a sair), e o associa a tempo real. B atribui o RMS, projetado para tarefas periódicas de tempo real, a sistemas em lote. C coloca tarefa mais curta primeiro, típico de ambientes em lote, em sistemas interativos. D atribui o round-robin, que divide a CPU em fatias de tempo para dar boa resposta ao usuário, ao tempo real.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q10",
+      "verdict": "APPROVED",
+      "fragments": [
+        "2ec443c56483cb94e19ece692d3646ffb2a390831b0f51e66e67d1885e4f1d09"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Estruturas de dados: pilha, fila, deque e lista ligada",
+      "notes": "Recorte da coluna direita da página 19: número 10, quatro classes e A–E, sem trecho da 09. Letra B conferida. Área Algoritmos confirmada (estruturas de dados).",
+      "studentNote": "",
+      "explanation": "A questão cobra o reconhecimento de estruturas de dados elementares a partir da descrição de seu comportamento.\n\nA Classe A permite inserir apenas no início ou no final de uma sequência linear: é o deque (fila de duas pontas). A Classe B organiza os objetos em ordem linear em que cada elemento guarda uma referência ao próximo: é a lista simplesmente ligada. A Classe C remove na ordem oposta à de inserção, ou seja, o último a entrar é o primeiro a sair (LIFO): é a pilha. A Classe D remove sempre o elemento inserido primeiro (FIFO): é a fila. A sequência deque, lista simplesmente ligada, pilha e fila corresponde à alternativa B, o gabarito oficial.\n\nAs demais falham. A usa lista circular para a classe A, que não se define por inserção só nas pontas. C usa lista duplamente ligada para A e inverte fila e pilha em C e D. D apresenta todas as estruturas fora de ordem. E acerta A e D, mas troca B e C, chamando de pilha a estrutura com referência ao próximo e de lista ligada a que remove em ordem inversa.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q11",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7bab24df315659fdbedabbb352334d08894dd16f1f3ceb19695e5bf64d804714"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Redes neurais profundas: treinamento e acurácia",
+      "notes": "Recorte da página 20: diagrama completo (Σ, setas, Y′/Y), afirmações I–V e A–E. Letra D conferida. Ressalva sobre V avaliada sem nota: nenhuma opção combina II, IV e V, então a leitura de V não muda a resposta.",
+      "studentNote": "",
+      "explanation": "A questão trata do ajuste de uma rede neural profunda que classifica imagens, diante de treinamento lento e acurácia insuficiente.\n\nI é falsa: mais camadas podem melhorar a acurácia, mas aumentam o número de parâmetros e o custo de cada passo de treino; não diminuem o tempo de treinamento. II é verdadeira: redes convolucionais exploram a estrutura espacial das imagens e podem melhorar a acurácia, mas costumam exigir máquinas com maior poder de processamento. III é falsa: aumentar os neurônios por camada eleva o custo de treino, não o reduz; ainda que possa piorar a acurácia por sobreajuste, a parte sobre diminuir o tempo torna a afirmação incorreta. IV é verdadeira: mais amostras de treinamento tendem a melhorar a generalização e a acurácia, ao custo de um treino mais demorado.\n\nV é considerada falsa pelo gabarito oficial: redes recorrentes são voltadas a dados sequenciais, como texto e séries temporais, e não são a escolha usual para classificar imagens. Logo, só II e IV estão corretas: alternativa D.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q12",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b1e669b12511b2763d542207413b73fea0ec9070993610cb9d45f936c9f0e54a"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "LGPD e proteção de dados pessoais",
+      "notes": "Recorte da página 21: enunciado, I–IV e A–E legíveis. Letra B conferida. Simplificação da vigência da LGPD (bloqueio anterior por conteúdo) vira nota (D15). Área Sociedade e ética confirmada (aspectos legais).",
+      "studentNote": "O enunciado simplifica a vigência da LGPD: a lei foi publicada em 2018, mas seus dispositivos entraram em vigor em etapas, e a maior parte passou a valer depois. Essa imprecisão não interfere na avaliação das afirmações.",
+      "explanation": "A questão cobra conhecimentos gerais sobre a LGPD, lei que regula o tratamento de dados pessoais. I é verdadeira: a lei dá proteção reforçada aos dados pessoais sensíveis, como origem racial ou étnica, convicção religiosa e opinião política, e reprime o uso indiscriminado deles. III é verdadeira: o titular pode exigir que a empresa informe se trata seus dados e pedir correção, atualização e, nos casos previstos, eliminação.\n\nII é falsa: dados anonimizados deixam de ser considerados pessoais, mas a lei volta a tratá-los como pessoais quando o processo de anonimização pode ser revertido, seja com meios próprios, seja com esforços razoáveis; a asserção afirma o contrário. IV é falsa: a ANPD fiscaliza, regulamenta, orienta e apura denúncias, mas não modifica a legislação, tarefa que cabe ao Poder Legislativo.\n\nLogo, só I e III estão corretas: alternativa B. A e C incluem II; D e E incluem II ou IV.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q13",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1c4a36af7da38e7d5dafaea59a20d514f7be7de3cb9f9fe90f8d1850f2bf4133"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Desenvolvimento iterativo e evolutivo",
+      "notes": "Recorte da página 22: texto, referência e A–E. Letra E conferida. Ambiguidade de D (bloqueio anterior por conteúdo) vira nota neutra (D15). Explicação aceita; a ligação entre testes por iteração e acessibilidade é fraca, mas não incorreta.",
+      "studentNote": "O termo protótipo admite acepções diferentes na literatura, e nem todas as alternativas decorrem diretamente do texto-base. Mais de uma opção pode parecer plausível à primeira leitura; compare cada uma com a descrição de iteração dada no texto.",
+      "explanation": "A questão cobra princípios do desenvolvimento iterativo e evolutivo apresentados no texto: ciclos de duração fixa, chamados iterações, cada um com análise de requisitos, projeto, implementação e teste, produzindo um sistema parcial executável, testável e integrável, com realimentação e adaptação cíclicas.\n\nA alternativa E, indicada no gabarito oficial, é coerente com esse enfoque: como cada iteração inclui testes, o documento do teste de usabilidade deve contemplar critérios de acessibilidade, para que o sistema atenda a todos os usuários.\n\nAs demais falham. A trata a mudança de requisitos como algo a evitar, quando a adaptação cíclica a partir da realimentação é um propulsor do método. B diz que a duração do ciclo poderá ser alterada em sistemas críticos, contrariando a duração fixa das iterações. C adia a usabilidade para o último ciclo, embora cada iteração tenha seus próprios testes. D chama de protótipo o subsistema ao fim da iteração, enquanto o texto o descreve como um sistema parcial executável, testável e integrável, isto é, um incremento; o gabarito oficial não a considera a opção correta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q14",
+      "verdict": "APPROVED",
+      "fragments": [
+        "426cba6dc7781599b4679a56034003946e6b5bdf959efa5068c76215a06eaeff"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Arquitetura de Von Neumann",
+      "notes": "Recorte da página 23: texto, referência, asserções com PORQUE e A–E. Letra C conferida. Simplificações históricas (ENIAC, década de 1950; bloqueio anterior por conteúdo) viram nota (D15).",
+      "studentNote": "O texto-base e a asserção I trazem simplificações históricas: o ENIAC é apresentado como o primeiro computador sem qualificar a categoria, e a arquitetura de Von Neumann é datada da década de 1950, embora sua proposta seja usualmente associada a meados da década de 1940.",
+      "explanation": "A questão cobra a arquitetura de Von Neumann, que armazena dados e instruções em código binário, o que facilita a análise e reduz erros em relação ao uso de decimais, como no ENIAC. A asserção I é considerada verdadeira: apesar da grande evolução desde o ENIAC, o modelo de Von Neumann se mantém até os computadores atuais.\n\nA asserção II é falsa pelo gabarito oficial. Ela descreve a busca antecipada (prefetch) de instruções, técnica de organização e desempenho da CPU para reduzir a espera pela memória principal, mais lenta. Essa técnica não é uma propriedade definidora da arquitetura de Von Neumann, cuja contribuição destacada no texto é o armazenamento de dados e instruções em binário. Assim, II não é verdadeira como afirmada e, de todo modo, não explicaria a permanência da arquitetura.\n\nPortanto, I verdadeira e II falsa: alternativa C. A e B tratam II como verdadeira; D e E tratam I como falsa.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q15",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b5ce1a2747ff6232bd2af895f72602e1ac529dc441bd41050347dc48ced33b9d"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Scrum: papéis de Scrum Master e Product Owner",
+      "notes": "Recorte da página 24: texto, referência, I–III e A–E. Letra C conferida. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão trata dos papéis do Scrum, framework para projetos ágeis que prevê o Scrum Master e o Product Owner como interface entre a equipe de desenvolvimento e a organização. A afirmação I é verdadeira: o Scrum Master guia a equipe para que use o Scrum de forma efetiva, ajudando a aplicar o processo. A afirmação II é verdadeira: o Product Owner representa o negócio, mantém a equipe focada em construir um produto útil e evita que ela se perca em questões técnicas menos relevantes.\n\nA afirmação III é falsa: nenhum dos dois papéis é chefia da equipe. O Scrum trabalha com equipes que se autogerenciam; o Scrum Master facilita o processo e o Product Owner define e prioriza o que gera valor, sem autoridade hierárquica direta sobre o time.\n\nPortanto, só I e II estão corretas: alternativa C. A (só II) e B (só III) estão incompletas ou erradas; D e E incluem III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q16",
+      "verdict": "APPROVED",
+      "fragments": [
+        "411304786b2c8ed48515002ee648dad01d218eaefdc22e2a4601713e523627ff"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Circuitos combinacionais e álgebra booleana",
+      "notes": "Recorte da página 25: portas básicas, circuito com índices e bolhas legíveis, A–E. Letra B conferida percorrendo o circuito: ((X3 . X2′) + X1′)′. Área Arquitetura de computadores confirmada (circuitos lógicos).",
+      "studentNote": "",
+      "explanation": "A questão pede converter um circuito combinacional em expressão booleana. Na notação do texto, o apóstrofo é a negação (porta não), o ponto é o e (AND) e o sinal de mais é o ou (OR).\n\nNo circuito, X1 passa por uma porta não e gera X1'. X2 passa por outra porta não, gerando X2', que entra em uma porta e junto com X3, produzindo X3 . X2'. A porta ou recebe X1' e X3 . X2', resultando em (X3 . X2') + X1'. Por fim, uma porta não inverte essa saída: ((X3 . X2') + X1')'. Como o e tem precedência sobre o ou, a alternativa B, (X3 . (X2') + (X1'))', escreve exatamente essa expressão, e é o gabarito oficial.\n\nAs demais falham. A não tem a negação final da saída. C usa X2 sem negação e nega a saída da porta e, o que não ocorre no circuito. D repete esses desvios e ainda não tem a inversão final. E nega a saída da porta e antes do ou, negação inexistente no circuito.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q17",
+      "verdict": "APPROVED",
+      "fragments": [
+        "ac7dc5b5dc770594f5d50fc6e76409bde88fb690b1fce3dbaa52425d17bedabd",
+        "b62e6ed7a22a915867107553861563e3cfefdb0c0130cfcdf1251d81cbaf1c04"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Exclusão mútua e regiões críticas",
+      "notes": "Dois recortes em ordem (páginas 26 e 27, comparadas com o original): texto, quatro condições, figura T1–T4 com crédito, asserções com PORQUE e A–E, sem trecho da 18. Letra C conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra exclusão mútua e regiões críticas: dois processos nunca podem estar ao mesmo tempo em suas regiões críticas, e na figura B fica bloqueado entre T2 e T3 enquanto A ocupa a sua. Avalia-se a técnica de desabilitar interrupções. A asserção I é verdadeira: em algumas situações, desabilitar interrupções permite obter exclusão mútua, pois o processo em sua região crítica não é retirado da CPU por uma interrupção, como a de relógio, que levaria à troca de processo. Como essa operação é privilegiada, o controle fica com o sistema operacional, e não com o usuário.\n\nA asserção II é falsa. Embora a técnica impeça que o processador seja interrompido durante a região crítica, ela não é mais eficiente em multiprocessadores. Desabilitar interrupções afeta apenas a CPU que executou a instrução; as demais continuam em execução e podem acessar a memória compartilhada, de modo que a exclusão mútua não é garantida.\n\nAssim, I verdadeira e II falsa: alternativa C. A e B tratam II como verdadeira; D inverte os valores; E trata I como falsa.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q18",
+      "verdict": "APPROVED",
+      "fragments": [
+        "4a621e88c902211683c212134f89e9192a25961a10c5b1fbbe86d615722e6c59"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Aprendizado supervisionado e não supervisionado",
+      "notes": "Recorte da página 27: texto, referência, I–IV e A–E, sem trecho da 17. Letra E conferida. Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a distinção entre aprendizado supervisionado, em que há uma referência do objetivo (treinamento com conhecimento do ambiente), e não supervisionado, em que não há essa referência.\n\nI é verdadeira: a regressão linear é ajustada a partir de exemplos com saídas conhecidas, caso típico de aprendizado supervisionado. II é falsa: a diferença entre a saída desejada e a gerada só existe quando há uma saída de referência; é o erro de um aprendizado supervisionado, não de um não supervisionado. III é verdadeira: sem referências, o aprendizado não supervisionado é usado para entender os dados por meio do reconhecimento de padrões, como a formação de grupos. IV é verdadeira: o aprendizado supervisionado treina com dados conhecidos para depois decidir sobre dados novos, isto é, generalizar o que aprendeu.\n\nLogo, I, III e IV: alternativa E. As demais incluem II ou deixam de fora uma afirmação correta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q19",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b6ee4a23cc55bbebd2949c620a35ce59b29d57dc0c0b9f270147b77adacd6f7c"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Interação humano-computador",
+      "subject": "Personas e cenários na elicitação de requisitos",
+      "notes": "Recorte da página 28: texto, referência, I–IV e A–E. Letra D conferida. Área corrigida para Interação humano-computador: personas e cenários são técnicas de design de interação e a fonte é de IHC.",
+      "studentNote": "",
+      "explanation": "A questão cobra o papel de personas e cenários na elicitação de requisitos. Personas descrevem usuários típicos e cenários narram situações de uso; juntos trazem detalhes realistas sobre as atividades atuais do usuário e o uso futuro do produto.\n\nI é verdadeira: narrativas concretas de uso trazem à tona situações que ficam implícitas nos requisitos. II é verdadeira: ao imaginar pessoas em situações de uso, o projetista entende melhor o impacto de suas decisões de projeto. IV é verdadeira: ao dar características a usuários, essas técnicas lembram à equipe que pessoas reais usarão o produto.\n\nIII é falsa: personas e cenários são descrições narrativas e informais, e não uma especificação formal e não ambígua dos requisitos de interação; esse não é o objetivo das técnicas. Portanto, I, II e IV: alternativa D. A, C e E incluem III; B deixa de fora II.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q20",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3ef0b57edeccb227d5ccc1eabb10f847878e99019f046ad45b3dfda6a2be53e6"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Busca sequencial e busca binária recursiva",
+      "notes": "Recorte da página 29: código completo (linhas 1–26), I–III e A–E. Letra A conferida; traço 7 - 7 refeito. A camada de texto do PDF confirma funcaol (linha 3) e m+l (linha 18) impressos com a letra l: erro da prova, registrado em nota. Área Algoritmos confirmada.",
+      "studentNote": "No código impresso, o nome da função na linha 3 aparece como funcaol e a expressão da linha 18 como m+l, com a letra l, enquanto a linha 24 chama funcao1. É um erro tipográfico da prova: leia essas ocorrências como o algarismo 1, única leitura coerente com o restante do código.",
+      "explanation": "A questão compara duas funções de busca em C sobre o vetor ordenado {1, 3, 5, 7, 9, 11, 13, 15, 17, 19}, procurando o valor 15, lendo funcao1 e m+1 como no código original.\n\nI é verdadeira. funcao1 é busca sequencial: percorre o vetor desde o índice 0 até achar 15, na posição 7, e retorna 7. funcao2 é busca binária recursiva: com i = 0 e f = 9, m = 4 e vetor[4] = 9; como 15 > 9, chama com i = 5 e f = 9, o que dá m = 7, e vetor[7] = 15, retornando 7. A impressão é 7 - 7.\n\nII é falsa: no pior caso a busca sequencial faz até n comparações (custo linear), enquanto a binária reduz o intervalo à metade a cada chamada (custo logarítmico); funcao1 não é mais rápida. III é falsa: funcao2 chama a si mesma, então sua estratégia é recursiva; a funcao1 é que usa laço for. Assim, só I está correta: alternativa A.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ]
+}

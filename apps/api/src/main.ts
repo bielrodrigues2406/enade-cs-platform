@@ -17,11 +17,21 @@ export { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
 import { AuthController } from "./auth.js";
+import { ActivityController } from "./activity.js";
+import { requestLimiter } from "./request-limit.js";
 import { CurationController } from "./curation.js";
 import { QuestionImportsController } from "./question-imports.js";
 import { SourcesController } from "./sources.js";
 import { ReviewController } from "./review.js";
 import { CatalogController } from "./catalog.js";
+import { RolesController } from "./roles.js";
+import { ExamImportsController } from "./exam-imports.js";
+import { LessonsController } from "./lessons.js";
+import { ClassDashboardController } from "./class-dashboard.js";
+import { DiscursiveController } from "./discursive.js";
+import { EditionExamController } from "./edition-exam.js";
+import { ProgressController } from "./progress.js";
+import { AccountProfileController } from "./account-profile.js";
 import { PracticeController } from "./exam.js";
 import {
   QuestionImagesController,
@@ -36,7 +46,7 @@ async function published(id: string) {
   if (id.length > 100) fail("Questão não encontrada.", 404);
   const q = (
     await db.query<Question>(
-      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,explanation_credit AS "explanationCredit",exam_source_id AS "examSourceId",key_source_id AS "keySourceId",source_page AS "sourcePage",source_question_number AS "sourceQuestionNumber",key_page AS "keyPage",correct_option_id AS "correctOptionId",presentation,review_origin AS "reviewOrigin" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
+      `SELECT id,title,topic,prompt,origin,author_credit AS "authorCredit",demonstration,version_number AS "versionNumber",explanation,explanation_credit AS "explanationCredit",exam_source_id AS "examSourceId",key_source_id AS "keySourceId",source_page AS "sourcePage",source_question_number AS "sourceQuestionNumber",key_page AS "keyPage",correct_option_id AS "correctOptionId",presentation,review_origin AS "reviewOrigin",subject,review_note AS "reviewNote" FROM question_version WHERE id=$1 AND editorial_status='PUBLISHED'`,
       [id],
     )
   ).rows[0];
@@ -77,6 +87,8 @@ async function feedback(
           },
         }
       : {}),
+    // D15: ressalva de conteúdo da conferência, só depois da resposta.
+    reviewNote: q.reviewNote,
     optionId: answer.optionId,
     revision: answer.revision,
     correct: answer.optionId === q.correctOptionId,
@@ -128,6 +140,7 @@ class StudyController {
       id: q.id,
       title: q.title,
       topic: q.topic,
+      subject: q.subject,
       prompt: q.prompt,
       origin: q.origin,
       authorCredit: q.authorCredit,
@@ -200,6 +213,10 @@ class StudyController {
           [user.id, id, optionId, (baseRevision as number) + 1],
         )
       ).rows[0];
+      await client.query(
+        "INSERT INTO answer_event(owner_id,version_id,option_id,correct,origin) VALUES($1,$2,$3,$4,'STUDY')",
+        [user.id, id, optionId, optionId === q.correctOptionId],
+      );
       await client.query("COMMIT");
       return feedback(result, q);
     } catch (error) {
@@ -213,12 +230,21 @@ class StudyController {
 @Module({
   controllers: [
     AuthController,
+    ActivityController,
     StudyController,
     CurationController,
     QuestionImportsController,
     SourcesController,
     ReviewController,
     CatalogController,
+    RolesController,
+    ExamImportsController,
+    LessonsController,
+    ClassDashboardController,
+    DiscursiveController,
+    EditionExamController,
+    ProgressController,
+    AccountProfileController,
     PracticeController,
     QuestionImagesController,
   ],
@@ -275,6 +301,7 @@ export async function createApp() {
   });
   if (hops) app.set("trust proxy", hops);
   app.disable("x-powered-by");
+  app.use(requestLimiter());
   app.use((req: any, res: any, next: any) => {
     const api = req.path === "/api" || req.path.startsWith("/api/");
     res.setHeader("X-Content-Type-Options", "nosniff");
@@ -299,9 +326,11 @@ export async function createApp() {
       req.headers.origin !== (process.env.APP_ORIGIN || "http://localhost:4200")
     )
       return res.status(403).json({ message: "Origem não autorizada." });
+    // Única escrita não-JSON: o envio dos PDFs de uma importação (IMP-1).
+    const upload = req.method === "POST" && req.path === "/api/imports" && !!req.is("multipart/form-data");
     if (
       !["GET", "HEAD", "OPTIONS"].includes(req.method) &&
-      !req.is("application/json")
+      !req.is("application/json") && !upload
     ) {
       return res
         .status(415)

@@ -1,0 +1,1819 @@
+{
+  "document": "enade-2017-bacharelado-exam",
+  "completeness": {
+    "missing": [],
+    "unexpected": []
+  },
+  "extraction": {
+    "method": "PDF_TEXT",
+    "textCopy": {
+      "schemaVersion": 1,
+      "algorithm": "CALIBRI_TOUNICODE_V1",
+      "generatorSha256": "359a5565d6d229405cec9a38de68b0f9d12234a4dc625c4a8c5904435c9233ab",
+      "pypdfVersion": "6.10.0",
+      "derivedFrom": {
+        "file": "enade-2017-bacharelado-exam.pdf",
+        "sha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518"
+      },
+      "map": {
+        "file": "calibri-cid-unicode.json",
+        "sha256": "f20d49d5a2c2f9a768d8139f7b37d36a13118744158433c3afce42a1bb5f8f05"
+      },
+      "fixedFonts": [
+        "Calibri-Bold-Identity-H",
+        "Calibri-Identity-H",
+        "Calibri-Italic-Identity-H"
+      ],
+      "output": {
+        "file": "enade-2017-bacharelado-exam.pdf",
+        "sha256": "3c81ee013510b3716b3b8a342278869b4b803b22254fffa13030fd7c46729000"
+      },
+      "tool": "scripts/repair-calibri-text.py com pypdf 6.10.0",
+      "purpose": "Somente extração de texto; imagem e procedência vêm do PDF original."
+    }
+  },
+  "warnings": [
+    "Texto extraído de cópia Unicode gerada localmente; imagem, páginas e procedência pertencem ao PDF original. A cópia e seu recibo não aprovam a fidelidade do item."
+  ],
+  "items": [
+    {
+      "key": "D1",
+      "kind": "DISCURSIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        2,
+        3
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "hifenizacao",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "TEXTO 1\nEm 2001, a incidência da sífilis congênita ― transmitida da mulher para o feto durante a gravidez ― era de um caso a cada mil bebês nascidos vivos. Havia uma meta da Organização Pan-Americana de Saúde e da Unicef de essa ocorrência diminuir no Brasil, chegando, em 2015, a 5 casos de sífilis congênita por 10 mil nascidos vivos. O país não atingiu esse objetivo, tendo se distanciado ainda mais dele, embora o tratamento para sífilis seja relativamente simples, à base de antibióticos. Trata- se de uma doença para a qual a medicina já encontrou a solução, mas a sociedade ainda não.\nDisponível em: http://www1.folha.uol.com.br . Acesso em: 23 jul. 2017 (adaptado).\nTEXTO 2\nO Ministério da Saúde anunciou que há uma epidemia de sífilis no Brasil. Nos últimos cinco anos, foram 230 mil novos casos, um aumento de 32% somente entre 2014 e 2015. Por que isso aconteceu?\nPrimeiro, ampliou-se o diagnóstico com o teste rápido para sífilis realizado na unidade básica de saúde e cujo resultado sai em 30 minutos. Aí vem o segundo ponto, um dos mais negativos, que foi o desabastecimento, no país, da matéria-prima para a penicilina. O Ministério da Saúde importou essa penicilina, mas, por um bom tempo, não esteve disponível, e isso fez com que mais pessoas se infectassem. O terceiro ponto é a prevenção. Houve, nos últimos dez anos, uma redução do uso do preservativo, o que aumentou, e muito, a transmissão.\nA incidência de casos de sífilis, que, em 2010, era maior entre homens, hoje recai sobre as mulheres. Por que a vulnerabilidade neste grupo está aumentando?\nAs mulheres ainda são as mais vulneráveis a doenças sexualmente transmissíveis (DST), de uma forma geral. Elas têm dificuldade de negociar o preservativo com o parceiro, por exemplo. Mas o acesso da mulher ao diagnóstico também é maior, por isso, é mais fácil contabilizar essa população. Quando um homem faz exame para a sífilis? Somente quando tem sintoma aparente ou outra doença. E a sífilis pode ser uma doença silenciosa. A mulher, por outro lado, vai fazer o pré-natal e, automaticamente, faz o teste para a sífilis. No Brasil, estima-se que apenas 12% dos parceiros sexuais recebam tratamento para sífilis.\nEntrevista com Ana Gabriela Travassos, presidente da regional baiana da Sociedade Brasileira de Doenças Sexualmente Transmissíveis. Disponível em: http://www.agenciapatriciagalvao.org.br . Acesso em: 25 jul. 2017 (adaptado).\nTEXTO 3\nVários estudos constatam que os homens, em geral, padecem mais de condições severas e crônicas de saúde que as mulheres e morrem mais que elas em razão de doenças que levam a óbito. Entretanto, apesar de as taxas de morbimortalidade masculinas assumirem um peso significativo, observa-se que a presença de homens nos serviços de atenção primária à saúde é muito menor que a de mulheres.\nGOMES, R.; NASCIMENTO, E.; ARAUJO, F. Por que os homens buscam menos os serviços de saúde do que as mulheres? As explicações de homens com baixa escolaridade e homens com ensino superior. Cad. Saúde Pública [online], v. 23, n. 3, 2007 (adaptado). A partir das informações apresentadas, redija um texto acerca do tema:\nEpidemia de sífilis congênita no Brasil e relações de gênero\nEm seu texto, aborde os seguintes aspectos:\n• a vulnerabilidade das mulheres às DSTs e o papel social do homem em relação à prevenção dessas doenças;\n• duas ações especificamente voltadas para o público masculino, a serem adotadas no âmbito das políticas públicas de saúde ou de educação, para reduzir o problema.\n(valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D2",
+      "kind": "DISCURSIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "A pessoa trans precisa que alguém ateste, confirme e comprove que ela pode ser reconhecida pelo nome que ela escolheu. Não aceitam que ela se autodeclare mulher ou homem. Exigem que um profissional de saúde diga quem ela é. Sua declaração é o que menos conta na hora de solicitar, judicialmente, a mudança dos documentos.\nDisponível em: http://www.ebc.com.br . Acesso em: 31 ago. 2017 (adaptado).\nNo chão, a travesti morre Ninguém jamais saberá seu nome Nos jornais, fala-se de outra morte De tal homem que ninguém conheceu\nDisponível em: http://www.aminoapps.com . Acesso em: 31 ago. 2017 (adaptado).\nUsava meu nome oficial, feminino, no currículo porque diziam que eu estava cometendo um crime, que era falsidade ideológica se eu usasse outro nome. Depois fui pesquisar e descobri que não é assim. Infelizmente, ainda existe muita desinformação sobre os direitos das pessoas trans.\nDisponível em: https://www.brasil.elpais.com . Acesso em: 31 ago. 2017 (adaptado).\nUma vez o segurança da balada achou que eu tinha, por engano, mostrado o RG do meu namorado. Isso quando insistem em não colocar meu nome social na minha ficha de consumação.\nDisponível em: https://www.brasil.elpais.com . Acesso em: 31 ago. 2017 (adaptado).\nCom base nessas falas, discorra sobre a importância do nome para as pessoas transgêneras e, nesse contexto, proponha uma medida, no âmbito das políticas públicas, que tenha como objetivo facilitar o acesso dessas pessoas à cidadania. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "Q1",
+      "kind": "OBJECTIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        5
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "tabela",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Os britânicos decidiram sair da União Europeia (UE). A decisão do referendo abalou os mercados financeiros em meio às incertezas sobre os possíveis impactos dessa saída.\nOs gráficos a seguir apresentam, respectivamente, as contribuições dos países integrantes do bloco para a UE, em 2014, que somam 144,9 bilhões de euros, e a comparação entre a contribuição do Reino Unido para a UE e a contrapartida dos gastos da UE com o Reino Unido.\nContribuições para a UE Reino Unido e UE Dados de 2014, em € bilhões Dados de 2014, em € bilhões\n50 15\n42,1 11,3\n40 10\n6,9\n30 5\n25,8\n20 19,5 0\n14,3\n11,3 9,9 10 6,3 Contribuição do Reino Unido com a UE 3,8 3,6 3,5 2,6 2,2\n0 Gasto da UE com o Reino Unido Alemanha França Itália Unido Espanha Holanda Suécia Bélgica Polônia Áustria Dinamarca países Reino Outros\nDisponível em: http://www.g1.globo.com . Acesso em: 6 set. 2017 (adaptado).\nConsiderando o texto e as informações apresentadas nos gráficos acima, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A contribuição dos quatro maiores países do bloco somou 41,13%."
+        },
+        {
+          "letter": "B",
+          "text": "O grupo “Outros países” contribuiu para esse bloco econômico com 42,1%."
+        },
+        {
+          "letter": "C",
+          "text": "A diferença da contribuição do Reino Unido em relação ao recebido do bloco econômico foi 38,94%."
+        },
+        {
+          "letter": "D",
+          "text": "A soma das participações dos três países com maior contribuição para o bloco econômico supera 50%."
+        },
+        {
+          "letter": "E",
+          "text": "O percentual de participação do Reino Unido com o bloco econômico em 2014 foi de 17,8%, o que o colocou entre os quatro maiores participantes."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q2",
+      "kind": "OBJECTIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Segundo o relatório da Organização das Nações Unidas para a Alimentação e a Agricultura de 2014, a agricultura familiar produz cerca de 80% dos alimentos no mundo e é guardiã de aproximadamente 75% de todos os recursos agrícolas do planeta. Nesse sentido, a agricultura familiar é fundamental para a melhoria da sustentabilidade ecológica.\nDisponível em: http://www.fao.org . Acesso em: 29 ago. 2017 (adaptado).\nConsiderando as informações apresentadas no texto, avalie as afirmações a seguir.\nI. Os principais desafios da agricultura familiar estão relacionados à segurança alimentar, à sustentabilidade ambiental e à capacidade produtiva.\nII. As políticas públicas para o desenvolvimento da agricultura familiar devem fomentar a inovação, respeitando o tamanho das propriedades, as tecnologias utilizadas, a integração de mercados e as configurações ecológicas.\nIII. A maioria das propriedades agrícolas no mundo tem caráter familiar, entretanto o trabalho realizado nessas propriedades é majoritariamente resultante da contratação de mão de obra assalariada.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q3",
+      "kind": "OBJECTIVE",
+      "number": 3,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        7
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura",
+        "versalete",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "O sistema de tarifação de energia elétrica funciona com base em três bandeiras. Na bandeira verde, as condições de geração de energia são favoráveis e a tarifa não sofre acréscimo. Na bandeira amarela, a tarifa sofre acréscimo de R 0,020 para cada kWh consumido, e na bandeira vermelha, condição de maior custo de geração de energia, a tarifa sofre acréscimo de R 0,035 para cada kWh consumido. Assim, para saber o quanto se gasta com o consumo de energia de cada aparelho, basta multiplicar o consumo em kWh do aparelho pela tarifa em questão.\nDisponível em: http://www.aneel.gov.br . Acesso em: 17 jul. 2017 (adaptado).\nNa tabela a seguir, são apresentadas a potência e o tempo de uso diário de alguns aparelhos eletroeletrônicos usuais em residências.\nPotência Tempo de uso Aparelho kWh (kW) diário (h)\nCarregador de celular 0,010 24 0,240 Chuveiro 3 500 W 3,500 0,5 1,750 Chuveiro 5 500 W 5,500 0,5 2,250 Lâmpada de LED 0,008 5 0,040 Lâmpada fluorescente 0,015 5 0,075 Lâmpada incandescente 0,060 5 0,300 Modem de internet em stand-by 0,005 24 0,120 Modem de internet em uso 0,012 8 0,096\nDisponível em: https://www.educandoseubolso.blog.br . Acesso em: 17 jul. 2017 (adaptado).\nConsiderando as informações do texto, os dados apresentados na tabela, uma tarifa de R 0,50 por kWh em bandeira verde e um mês de 30 dias, avalie as afirmações a seguir.\nI. Em bandeira amarela, o valor mensal da tarifa de energia elétrica para um chuveiro de 3 500 W seria de R 1,05, e de R 1,65, para um chuveiro de 5 500 W.\nII. Deixar um carregador de celular e um modem de internet em stand-by conectados na rede de energia durante 24 horas representa um gasto mensal de R 5,40 na tarifa de energia elétrica em bandeira verde, e de R 5,78, em bandeira amarela.\nIII. Em bandeira verde, o consumidor gastaria mensalmente R 3,90 a mais na tarifa de energia elétrica em relação a cada lâmpada incandescente usada no lugar de uma lâmpada LED.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q4",
+      "kind": "OBJECTIVE",
+      "number": 4,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Sobre a televisão, considere a tirinha e o texto a seguir.\nTEXTO 1\nDisponível em: https://www.coletivando.files.wordpress.com . Acesso em: 25 jul. 2015.\nTEXTO 2 A televisão é este contínuo de imagens, em que o telejornal se confunde com o anúncio de pasta de dentes, que é semelhante à novela, que se mistura com a transmissão de futebol. Os programas mal se distinguem uns dos outros. O espetáculo consiste na própria sequência, cada vez mais vertiginosa, de imagens.\nPEIXOTO, N. B. As imagens de TV têm tempo? In: NOVAES, A. Rede imaginária: televisão e democracia. São Paulo: Companhia das Letras, 1991 (adaptado).\nCom base nos textos 1 e 2, é correto afirmar que o tempo de recepção típico da televisão como veículo de comunicação estimula a",
+      "options": [
+        {
+          "letter": "A",
+          "text": "contemplação das imagens animadas como meio de reflexão acerca do estado de coisas no mundo contemporâneo, traduzido em forma de espetáculo."
+        },
+        {
+          "letter": "B",
+          "text": "fragmentação e o excesso de informação, que evidenciam a opacidade do mundo contemporâneo, cada vez mais impregnado de imagens e informações superficiais."
+        },
+        {
+          "letter": "C",
+          "text": "especialização do conhecimento, com vistas a promover uma difusão de valores e princípios amplos, com espaço garantido para a diferença cultural como capital simbólico valorizado."
+        },
+        {
+          "letter": "D",
+          "text": "atenção concentrada do telespectador em determinado assunto, uma vez que os recursos expressivos próprios do meio garantem a motivação necessária para o foco em determinado assunto."
+        },
+        {
+          "letter": "E",
+          "text": "reflexão crítica do telespectador, uma vez que permite o acesso a uma sequência de assuntos de interesse público que são apresentados de forma justaposta, o que permite o estabelecimento de comparações."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q5",
+      "kind": "OBJECTIVE",
+      "number": 5,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Hidrogéis são materiais poliméricos em forma de pó, grão ou fragmentos semelhantes a pedaços de plástico maleável. Surgiram nos anos 1950, nos Estados Unidos da América e, desde então, têm sido usados na agricultura. Os hidrogéis ou polímeros hidrorretentores podem ser criados a partir de polímeros naturais ou sintetizados em laboratório. Os estudos com polímeros naturais mostram que eles são viáveis ecologicamente, mas ainda não comercialmente.\nNo infográfico abaixo, explica-se como os polímeros naturais superabsorventes, quando misturados ao solo, podem viabilizar culturas agrícolas em regiões áridas.\nDisponível em: http://www.revistapesquisa.fapesp.br . Acesso em: 18 jul. 2017 (adaptado).\nA partir das informações apresentadas, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "O uso do hidrogel, em caso de estiagem, propicia a mortalidade dos pés de café."
+        },
+        {
+          "letter": "B",
+          "text": "O hidrogel criado a partir de polímeros naturais deve ter seu uso restrito a solos áridos."
+        },
+        {
+          "letter": "C",
+          "text": "Os hidrogéis são usados em culturas agrícolas e florestais e em diferentes tipos de solos."
+        },
+        {
+          "letter": "D",
+          "text": "O uso de hidrogéis naturais é economicamente viável em lavouras tradicionais de larga escala."
+        },
+        {
+          "letter": "E",
+          "text": "O uso dos hidrogéis permite que as plantas sobrevivam sem a água da irrigação ou das chuvas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q6",
+      "kind": "OBJECTIVE",
+      "number": 6,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        10
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "A imigração haitiana para o Brasil passou a ter grande repercussão na imprensa a partir de 2010. Devido ao pior terremoto do país, muitos haitianos redescobriram o Brasil como rota alternativa para migração. O país já havia sido uma alternativa para os haitianos desde 2004, e isso se deve à reorientação da política externa nacional para alcançar liderança regional nos assuntos humanitários.\nA descoberta e a preferência pelo Brasil também sofreram influência da presença do exército brasileiro no Haiti, que intensificou a relação de proximidade entre brasileiros e haitianos. Em meio a esse clima amistoso, os haitianos presumiram que seriam bem acolhidos em uma possível migração ao país que passara a liderar a missão da ONU.\nNo entanto, os imigrantes haitianos têm sofrido ataques xenofóbicos por parte da população brasileira. Recentemente, uma das grandes cidades brasileiras serviu como palco para uma marcha anti-imigração, com demonstrações de um crescente discurso de ódio em relação a povos imigrantes marginalizados.\nObserva-se, na maneira como esses discursos se conformam, que a reação de uma parcela dos brasileiros aos imigrantes se dá em termos bem específicos: os que sofrem com a violência dos atos de xenofobia, em geral, são negros e têm origem em países mais pobres.\nSILVA, C. A. S.; MORAES, M. T. A política migratória brasileira para refugiados e a imigração haitiana. Revista do Direito. Santa Cruz do Sul, v. 3, n. 50, p. 98-117, set./dez. 2016 (adaptado).\nA partir das informações do texto, conclui-se que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "o processo de acolhimento dos imigrantes haitianos tem sido pautado por características fortemente associadas ao povo brasileiro: a solidariedade e o respeito às diferenças."
+        },
+        {
+          "letter": "B",
+          "text": "as reações xenófobas estão relacionadas ao fato de que os imigrantes são concorrentes diretos para os postos de trabalho de maior prestígio na sociedade, aumentando a disputa por boas vagas de emprego."
+        },
+        {
+          "letter": "C",
+          "text": "o acolhimento promovido pelos brasileiros aos imigrantes oriundos de países do leste europeu tende a ser semelhante ao oferecido aos imigrantes haitianos, pois no Brasil vigora a ideia de democracia racial e do respeito às etnias."
+        },
+        {
+          "letter": "D",
+          "text": "o nacionalismo exacerbado de classes sociais mais favorecidas, no Brasil, motiva a rejeição aos imigrantes haitianos e a perseguição contra os brasileiros que pretendem morar fora do seu país em busca de melhores condições de vida."
+        },
+        {
+          "letter": "E",
+          "text": "a crescente onda de xenofobia que vem se destacando no Brasil evidencia que o preconceito e a rejeição por parte dos brasileiros em relação aos imigrantes haitianos é pautada pela discriminação social e pelo racismo."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q7",
+      "kind": "OBJECTIVE",
+      "number": 7,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "A produção artesanal de panela de barro é uma das maiores expressões da cultura popular do Espírito Santo. A técnica de produção pouco mudou em mais de 400 anos, desde quando a panela de barro era produzida em comunidades indígenas. Atualmente, apresenta-se com modelagem própria e original, adaptada às necessidades funcionais da culinária típica da região. As artesãs, vinculadas à Associação das Paneleiras de Goiabeiras, do município de Vitória-ES, trabalham em um galpão com cabines individuais preparadas para a realização de todas as etapas de produção. Para fazer as panelas, as artesãs retiram a argila do Vale do Mulembá e do manguezal que margeia a região e coletam a casca da Rhysophora mangle, popularmente chamada de mangue vermelho. Da casca dessa planta as artesãs retiram a tintura impermeabilizante com a qual açoitam as panelas ainda quentes. Por tradição, as autênticas moqueca e torta capixabas, dois pratos típicos regionais, devem ser servidas nas panelas de barro assim produzidas. Essa fusão entre as panelas de barro e os pratos preparados com frutos do mar, principalmente a moqueca, pelo menos no estado do Espírito Santo, faz parte das tradições deixadas pelas comunidades indígenas.\nDisponível em: http://www.vitoria.es.gov.br . Acesso em: 14 jul. 2017 (adaptado).\nComo principal elemento cultural na elaboração de pratos típicos da cultura capixaba, a panela de barro de Goiabeiras foi tombada, em 2002, tornando-se a primeira indicação geográfica brasileira na área do artesanato, considerada bem imaterial, registrado e protegido no Instituto do Patrimônio Histórico e Artístico Nacional (Iphan), no Livro de Registro dos Saberes e declarada patrimônio cultural do Brasil.\nSILVA, A. Comunidade tradicional, práticas coletivas e reconhecimento: narrativas contemporâneas do patrimônio cultural. 40 Encontro Anual da Anpocs. Caxambu, 2016 (adaptado).\nAtualmente, o trabalho foi profissionalizado e a concorrência para atender ao mercado ficou mais acirrada, a produção que se desenvolve no galpão ganhou um ritmo mais empresarial com maior visibilidade publicitária, enquanto as paneleiras de fundo de quintal se queixam de ficarem ofuscadas comercialmente depois que o galpão ganhou notoriedade.\nMERLO, P. Repensando a tradição: a moqueca capixaba e a construção da identidade local. Interseções. Rio de Janeiro. v. 13, n. 1, 2011 (adaptado).\nCom base nas informações apresentadas, assinale a alternativa correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A produção das panelas de barro abrange interrelações com a natureza local, de onde se extrai a matéria-prima indispensável à confecção das peças ceramistas."
+        },
+        {
+          "letter": "B",
+          "text": "A relação entre as tradições das panelas de barro e o prato típico da culinária indígena permanece inalterada, o que viabiliza a manutenção da identidade cultural capixaba."
+        },
+        {
+          "letter": "C",
+          "text": "A demanda por bens culturais produzidos por comunidades tradicionais insere o ofício das paneleiras no mercado comercial, com retornos positivos para toda a comunidade."
+        },
+        {
+          "letter": "D",
+          "text": "A inserção das panelas de barro no mercado turístico reduz a dimensão histórica, cultural e estética do ofício das paneleiras à dimensão econômica da comercialização de produtos artesanais."
+        },
+        {
+          "letter": "E",
+          "text": "O ofício das paneleiras representa uma forma de resistência sociocultural da comunidade tradicional na medida em que o estado do Espírito Santo mantém-se alheio aos modos de produção, divulgação e comercialização dos produtos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q8",
+      "kind": "OBJECTIVE",
+      "number": 8,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        12,
+        13
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Os Objetivos de Desenvolvimento Sustentável (ODS) compõem uma agenda mundial adotada durante a Cúpula das Nações Unidas sobre o Desenvolvimento Sustentável, em setembro de 2015. Nessa agenda, representada na figura a seguir, são previstas ações em diversas áreas para o estabelecimento de parcerias, grupos e redes que favoreçam o cumprimento desses objetivos.\nDisponível em: http://www.stockholmresilience.org . Acesso em: 26 set. 2017 (adaptado).\nConsiderando que os ODS devem ser implementados por meio de ações que integrem a economia, a sociedade e a biosfera, avalie as afirmações a seguir.\nI. O capital humano deve ser capacitado para atender às demandas por pesquisa e inovação em áreas estratégicas para o desenvolvimento sustentável.\nII. A padronização cultural dinamiza a difusão do conhecimento científico e tecnológico entre as nações para a promoção do desenvolvimento sustentável.\nIII. Os países devem incentivar políticas de desenvolvimento do empreendedorismo e de atividades produtivas com geração de empregos que garantam a dignidade da pessoa humana.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III. COMPONENTE ESPEC FICO"
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D3",
+      "kind": "DISCURSIVE",
+      "number": 3,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Listas lineares armazenam uma coleção de elementos. A seguir, é apresentada a declaração de uma lista simplesmente encadeada.\nstruct ListaEncadeada {\nint dado;\nstruct ListaEncadeada *proximo;\n};\nPara imprimir os seus elementos da cauda para a cabeça (do final para o início) de forma eficiente, um algoritmo pode ser escrito da seguinte forma:\nvoid mostrar(struct ListaEncadeada *lista) {\nif (lista != NULL) {\nmostrar(lista->proximo);\nprintf(\"%d \", lista->dado);\n}\n}\nCom base no algoritmo apresentado, faça o que se pede nos itens a seguir.\na) Apresente a classe de complexidade do algoritmo, usando a notação 4. (valor: 3,0 pontos)\nb) Considerando que já existe implementada uma estrutura de dados do tipo pilha de inteiros com as operações de empilhar, desempilhar e verificar pilha vazia reescreva o algoritmo de forma não recursiva, mantendo a mesma complexidade. Seu algoritmo pode ser escrito em português estruturado ou em alguma linguagem de programação, como C, Java ou Pascal. (valor: 7,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D4",
+      "kind": "DISCURSIVE",
+      "number": 4,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "Uma empresa pretende desenvolver um sistema de folha de pagamento cujo processo de modelagem utilizará UML (Unified Modeling Language). Essa empresa tem três tipos de colaborador: o comissionado, o horista e o assalariado. Todos os colaboradores registram, para efeito de controle, o número de horas trabalhadas no mês. Adicionalmente, os comissionados registram o valor do percentual de comissão e o valor total de vendas acumulado no mês; os horistas registram o valor recebido por hora; e os assalariados registram o valor do salário.\nCada colaborador pertence a um departamento e cada departamento possui pelo menos um colaborador. No final de cada mês, cada departamento deve calcular o salário dos seus colaboradores da seguinte forma: os comissionados devem receber o valor total das vendas multiplicado pela percentagem, independentemente do número de horas trabalhadas; os horistas devem receber o valor da hora trabalhada multiplicado pelo número de horas trabalhadas; e os assalariados devem receber o valor nominal do salário.\nConsiderando essa situação e que o modelo que será elaborado para representá-la utilizará herança e polimorfismo, desenhe um diagrama de classe UML que contenha:\n• as classes que representam as entidades mencionadas (departamento, colaborador e seus tipos);\n• as respectivas associações, atributos e métodos, não sendo necessário tipar os atributos;\n• eventuais classes abstratas com a indicação da restrição abstract ;\n• a multiplicidade de papel das associações;\n• ao lado de cada ocorrência do método para cálculo do pagamento, sua definição na forma de uma expressão que combine os valores dos atributos da classe.\n(valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "D5",
+      "kind": "DISCURSIVE",
+      "number": 5,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "status": "discursiva",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "texto-derivado-calibri"
+      ],
+      "prompt": "A busca primeiro em profundidade é um algoritmo de exploração sistemática em grafos, em que as arestas são exploradas a partir do vértice v mais recentemente descoberto que ainda tem arestas inexploradas saindo dele. Quando todas as arestas de v são exploradas, a busca regressa para explorar as arestas que deixam o vértice a partir do qual v foi descoberto. Esse processo continua até que todos os vértices acessíveis a partir do vértice inicial sejam explorados.\nCORMEN, T. H.; LEISERSON, C. E.; RIVEST, R. L.; STEIN, C. Introduction to algorithms. 3. ed. Cambridge, Massachusetts: The MIT Press, 2009 (adaptado).\nConsidere o grafo a seguir.\nq r\ns t u\np w x y\nz\nCom base nas informações apresentadas, faça o que se pede nos itens a seguir.\na) Mostre a sequência de vértices descobertos no grafo durante a execução de uma busca em profundidade com controle de estados repetidos. Para isso, utilize o vértice r como inicial. No caso de um vértice explorado ter mais de um vértice adjacente, utilize a ordem alfabética crescente como critério para priorizar a exploração. (valor: 7,0 pontos)\nb) Faça uma representação da matriz de adjacências desse grafo, podendo os zeros ser omitidos nessa matriz. (valor: 3,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true
+      }
+    },
+    {
+      "key": "Q9",
+      "kind": "OBJECTIVE",
+      "number": 9,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        16
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "alternativas",
+        "tabela",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Uma árvore AVL é um tipo de árvore binária balanceada na qual a diferença entre as alturas de suas subárvores da esquerda e da direita não pode ser maior do que 1 para qualquer nó. Após a inserção de um nó em uma AVL, a raiz da subárvore de nível mais baixo no qual o novo nó foi inserido é marcada. Se a altura de seus filhos diferir em mais de uma unidade, é realizada uma rotação simples ou uma rotação dupla para igualar suas alturas.\nLAFORE, R. Data structures & algorithms in Java. Indianópolis: Sams Publishing, 2003 (adaptado).\nA seguir, é apresentado um exemplo de árvore AVL.\n13\n10 15\n5 11 16\n4 8\nPelo exposto no texto acima, após a inserção de um nó com valor 3 na árvore AVL exemplificada, é correto afirmar que ela ficará com a seguinte configuração:\n13 10\n5 15 5 13 A D 4 8 11 15 4 10 16\n3 8 11 3 16\n13\n10 10 15\n4 13 B 5 11 16 E 3 8 15 16 4 8\n5 11\n3\n10\n5 13 C 4 11 15 16\n3 8",
+      "options": [],
+      "optionLetters": "ABC",
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q10",
+      "kind": "OBJECTIVE",
+      "number": 10,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Considere os seguintes requisitos para desenvolvimento de uma solução para uma rede de restaurantes fast-food:\nQuando o status de um pedido é atualizado, todos os dispositivos dos envolvidos devem receber a informação. Os sistemas a ser atualizados incluem os acessados pelo entregador, pela linha de produção e pela central de atendimento. Espera-se ainda que outros sistemas possam ser incluídos futuramente (por exemplo, sistema de pedido on-line do cliente), devendo se comportar da mesma forma.\nConsiderando esse contexto, avalie as asserções a seguir e a relação proposta entre elas.\nI. O requisito apresentado pode ser implementado com a utilização do padrão de projeto Observer.\nPORQUE\nII. O padrão de projeto Observer realiza o estilo arquitetural cliente-servidor, no qual o servidor é responsável por enviar notificações aos clientes sempre que houver atualização em alguma informação de interesse.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q11",
+      "kind": "OBJECTIVE",
+      "number": 11,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O encapsulamento é um mecanismo da programação orientada a objetos no qual os membros de uma classe (atributos e métodos) constituem uma caixa preta. O nível de visibilidade dos membros pode ser definido pelos modificadores de visibilidade \"privado\", \"público\" e \"protegido\".\nCom relação ao comportamento gerado pelos modificadores de visibilidade, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Um atributo privado pode ser acessado pelos métodos privados da própria classe e pelos métodos protegidos das suas classes descendentes."
+        },
+        {
+          "letter": "B",
+          "text": "Um atributo privado pode ser acessado pelos métodos públicos da própria classe e pelos métodos públicos das suas classes descendentes."
+        },
+        {
+          "letter": "C",
+          "text": "Um membro público é visível na classe à qual ele pertence, mas não é visível nas suas classes descendentes."
+        },
+        {
+          "letter": "D",
+          "text": "Um método protegido não pode acessar os atributos privados e declarados na própria classe."
+        },
+        {
+          "letter": "E",
+          "text": "Um membro protegido é visível na classe à qual pertence e em suas classes descendentes."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q12",
+      "kind": "OBJECTIVE",
+      "number": 12,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Em um computador, a memória é a unidade funcional que armazena e recupera operações e dados. Tipicamente, a memória de um computador usa uma técnica chamada acesso aleatório, que permite o acesso a qualquer uma de suas posições (células). As memórias de acesso aleatório são divididas em células de tamanho fixo, estando cada célula associada a um identificador numérico único chamado endereço. Todos os acessos à memória referem-se a um endereço específico e deve-se sempre buscar ou armazenar o conteúdo completo de uma célula, ou seja, a célula é a unidade mínima de acesso.\nSCHNEIDER, G. M.; GERSTING, J. L. An Invitation to computer science. 6. ed. Boston: MA: Course Technology, Cengage Learning, 2009 (adaptado).\nA figura que se segue apresenta a estrutura de uma unidade de memória de acesso aleatório.\nEndereço Memória 1 bit\n0\n1 N bits\n2\n3 Registrador de endereços da memória\nRegistrador de dados da 2N-1 memória\nLargura da memória\nConsiderando o funcionamento de uma memória de acesso aleatório, avalie as afirmações a seguir.\nI. Se a largura do registrador de endereços da memória for de 8 bits, o tamanho máximo dessa unidade de memória será de 256 células.\nII. Se o registrador de dados da memória tiver 8 bits, será necessária mais que uma operação para armazenar o valor inteiro 2 024 nessa unidade de memória.\nIII. Se o registrador de dados da memória tiver 12 bits, é possível que a largura da memória seja de 8 bits.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q13",
+      "kind": "OBJECTIVE",
+      "number": 13,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "tabela",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Os sistemas de refrigeração de piscinas de combustível em usinas nucleares evitam que a temperatura desses tanques exceda o limite de segurança. O circuito representado na figura a seguir atende aos requisitos necessários para o controle da ativação do sistema de resfriamento quando a temperatura está próxima de seu ponto crítico.\nO diagrama de tempo ilustrado na figura apresenta uma amostra das temperaturas lidas desde o momento t ao t . Os sinais de entrada Ta, Tb e Tc são de termômetros que medem a temperatura da piscina em 1 8 diferentes pontos ao longo do dia e S é o terminal de acionamento do sistema.\nTa\nTa Tb S Tb\nTc Tc\nt t t t t t t t 1 2 3 4 5 6 7 8\nNesse contexto, assinale a opção em que são apresentados os momentos em que o sistema foi acionado.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "t , t e t . 1 4 8"
+        },
+        {
+          "letter": "B",
+          "text": "t , t e t . 1 6 8"
+        },
+        {
+          "letter": "C",
+          "text": "t , t e t . 2 4 6"
+        },
+        {
+          "letter": "D",
+          "text": "t , t e t . 2 6 8"
+        },
+        {
+          "letter": "E",
+          "text": "t , t e t . 3 5 7"
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q14",
+      "kind": "OBJECTIVE",
+      "number": 14,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Uma relação de equivalência é uma relação binária R em um conjunto A, tal que R é reflexiva, simétrica e transitiva.\nConsidere as relações binárias apresentadas a seguir.\n• R1 = {(a,b) : a,b ∈ N e a = b};\n• R2 = {(a,b) : a,b ∈ N e a ≤ b};\n• R3 = {(a,b) : a,b ∈ N e a = b − 1};\n• R4 = {(a,b) : a,b ∈ N e a + b é um número par}.\nSão relações de equivalência apenas o que se apresenta em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "R2 e R3."
+        },
+        {
+          "letter": "B",
+          "text": "R1 e R3."
+        },
+        {
+          "letter": "C",
+          "text": "R1 e R4."
+        },
+        {
+          "letter": "D",
+          "text": "R1, R2 e R4."
+        },
+        {
+          "letter": "E",
+          "text": "R2, R3 e R4."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q15",
+      "kind": "OBJECTIVE",
+      "number": 15,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "referencia-versalete",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Uma das técnicas de ataques em ambientes virtuais é denominada \"homem no meio\" (man in the middle), cujo objetivo é associar o endereço MAC do intruso ao endereço IP de um outro nó da rede – nesse caso, o ponto de acesso (Access Point - AP) wi-fi da rede. Como o AP é o gateway padrão dessa subrede sem fio, todo o tráfego originalmente direcionado ao ponto de acesso pode ser interceptado pelo intruso. Esse ataque explora deficiências conhecidas no projeto de segurança do IEEE 802.11 wi-fi.\nCOULOURIS, G. et al. Sistemas distribuídos: conceitos e projeto. Porto Alegre: Bookman, 2013 (adaptado)\nConsiderando um ataque virtual pela técnica “homem no meio”, por meio de Address Resolution Protocol (ARP) spoofing, avalie as afirmações a seguir.\nI. O problema do compartilhamento de chave presente no projeto de segurança do AP pode ser resolvido com a utilização de um protocolo baseado em chave pública para negociar chaves individuais, como é feito no Transport Layer Security (TLS) / Secure Sockets Layer (SSL).\nII. O problema do desvio de tráfego causado pelo ataque de homem no meio pode ser evitado com a configuração de um firewall nos pontos de acesso que filtram tráfego entre clientes de uma mesma subrede.\nIII. O problema da falta de autenticação dos pontos de acesso sem fio pode ser contornado, obrigando-se o ponto de acesso a fornecer um certificado que possa ser autenticado pelo uso de uma chave pública obtida de terceiros.\nIV. A vulnerabilidade das chaves de 40 bits ou 64 bits a ataques de força bruta pode ser evitada utilizando-se um AP que permita chaves de 128 bits e limitando-se o tráfego a dispositivos compatíveis com chaves de 128 bits.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q16",
+      "kind": "OBJECTIVE",
+      "number": 16,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "A segurança da informação está diretamente relacionada com a proteção de um conjunto de informações, no sentido de preservar o valor que possuem para um indivíduo ou uma organização, tendo como propriedades básicas a confidencialidade, a integridade, a disponibilidade e a autenticidade.\nLYRA, M. R. Segurança e auditoria em sistemas de informação. Rio de Janeiro: Ciência Moderna, 2008 (adaptado).\nA engenharia social é definida como o conjunto de técnicas utilizadas para reunir informações, explorando a tendência humana a ignorar os sistemas de segurança. Os ataques de engenharia social implicam interação com outros indivíduos, o que evidencia o aspecto psicológico da engenharia social.\nMITNICK, K. D.; SIMON, W. L. The art of deception: controlling the human element of security. New York: Wiley, 2001 (adaptado).\nA ética normativa é o \"certo\" e o \"errado\" do comportamento social interpretado. A principal diferença entre essas duas perspectivas é a forma como um dilema moral é abordado, e não necessariamente as consequências disso.\nDisponível em: http://www.ethicsmorals.com . Acesso em: 18 Jul. 2017 (adaptado).\nEm relação à segurança da informação, avalie as afirmações a seguir.\nI. As empresas sempre estarão vulneráveis, pois o fator humano é o elo mais fraco da segurança da informação.\nII. A segurança da informação não é um produto e, sim, um processo.\nIII. A ética profissional é um importante fator a ser considerado na segurança da informação.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q17",
+      "kind": "OBJECTIVE",
+      "number": 17,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Grupos de cientistas e grandes corporações de todo o mundo têm buscado desenvolver sistemas computacionais inteligentes capazes de ajudar as pessoas a aprender. As possibilidades, os efeitos e as implicações éticas da aplicação da chamada Inteligência Artificial (IA) na educação são temas que vêm ganhando espaço nos debates na área de tecnologia educacional em todo o mundo.\nDisponível em: http://www.revistaeducacao.com.br . Acesso em: 26 set. 2017 (adaptado).\nA respeito da adoção de técnicas de IA no processo educacional, avalie as asserções a seguir e a relação proposta entre elas.\nI. Algoritmos de IA adaptativos podem auxiliar a experiência de aprendizado da pessoa de acordo com o seu perfil.\nPORQUE\nII. Os sistemas com algoritmos de IA adaptativos analisam respostas anteriores, buscando determinados padrões que possam indicar pontos de dificuldade ou facilidade da pessoa em relação a determinado assunto.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q18",
+      "kind": "OBJECTIVE",
+      "number": 18,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "O algoritmo a seguir recebe um vetor v de números inteiros e rearranja esse vetor de tal forma que seus elementos, ao final, estejam ordenados de forma crescente.\n01 void ordena(int *v, int n)\n02 {\n03 int i, j, chave;\n04 for(i = 1; i < n; i++)\n05 {\n06 chave = v[i];\n07 j = i - 1;\n08 while(j >= 0 && v[j] < chave)\n09 {\n10 v[j-1] = v[j];\n11 j = j - 1;\n12 }\n13 v[j+1] = chave;\n14 }\n15 }\nConsiderando que nesse algoritmo há erros de lógica que devem ser corrigidos para que os elementos sejam ordenados de forma crescente, assinale a opção correta no que se refere às correções adequadas.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "A linha 04 deve ser corrigida da seguinte forma: for(i = 1; i < n - 1; i++) e a linha 13, do seguinte modo: v[j - 1] = chave;."
+        },
+        {
+          "letter": "B",
+          "text": "A linha 04 deve ser corrigida da seguinte forma: for(i = 1; i < n - 1; i++) e a linha 07, do seguinte modo: j = i + 1;."
+        },
+        {
+          "letter": "C",
+          "text": "A linha 07 deve ser corrigida da seguinte forma: j = i + 1 e a linha 08, do seguinte modo: while(j >= 0 && v[j] > chave)."
+        },
+        {
+          "letter": "D",
+          "text": "A linha 08 deve ser corrigida da seguinte forma: while(j >= 0 && v[j] > chave) e a linha 10, do seguinte modo: v[j + 1] = v[j];."
+        },
+        {
+          "letter": "E",
+          "text": "A linha 10 deve ser corrigida da seguinte forma: v[j + 1] = v[j]; e a linha 13, do seguinte modo: v[j - 1] = chave;."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q19",
+      "kind": "OBJECTIVE",
+      "number": 19,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "versalete",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Considere o diagrama Entidade-Relacionamento apresentado a seguir.\nPartido idPartido: INTEGER NOT NULL [PK]\nsiglaPartido: VARCHAR(45) NOT NULL descricaoPartido: VARCHAR(45) NOT NULL\nDeputado idPartido: INTEGER NOT NULL [PK]\nidPartido: INTEGER NOT NULL [FK] nomeDeputado: VARCHAR(60) NOT NULL\nSecao idSecao: INTEGER NOT NULL [PK] Participacao dataSecao: DATE NOT NULL idSecao: INTEGER NOT NULL [PFK] horaSecao: TIME NOT NULL idDeputado: INTEGER NOT NULL [PFK] decisao: VARCHAR(2000) NOT NULL\nQual código SQL exibe o nome de todos os deputados que compareceram a pelo menos uma seção e as datas de cada seção em que os deputados participaram?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado, Participacao, Secao WHERE Deputado.idDeputado=Participacao.idDeputado;"
+        },
+        {
+          "letter": "B",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado, Participacao, Secao WHERE Deputado.idDeputado = Participacao.\nidDeputado OR Secao.idSecao = Participacao.idSecao;"
+        },
+        {
+          "letter": "C",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado LEFT OUTER JOIN Participacao ON Deputado.idDeputado = Participacao.idDeputado\nLEFT OUTER JOIN Secao ON Secao.idSecao = Participacao.idSecao;"
+        },
+        {
+          "letter": "D",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado RIGHT OUTER JOIN Participacao ON Deputado.idDeputado = Participacao.idDeputado\nRIGHT OUTER JOIN Secao ON Secao.idSecao = Participacao.idSecao;"
+        },
+        {
+          "letter": "E",
+          "text": "SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado INNER JOIN Participacao ON Deputado.idDeputado = Participacao.idDeputado\nINNER JOIN Secao ON Participacao.idSecao=Secao.idSecao;"
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q20",
+      "kind": "OBJECTIVE",
+      "number": 20,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Em redes de computadores, a camada de transporte é responsável pela transferência de dados entre máquinas de origem e destino. Dois protocolos tradicionais para essa camada são o Transmission Control Protocol (TCP) e o User Datagram Protocol (UDP). Diferentemente do UDP, o TCP é orientado à conexão. Com relação a esses protocolos, avalie as afirmações a seguir.\nI. O UDP é mais eficiente que o TCP quando o tempo de envio de pacotes é fundamental.\nII. O TCP é o mais utilizado em jogos on-line de ação para a apresentação gráfica.\nIII. O TCP é mais eficiente que o UDP quando a confiabilidade de entrega de dados é fundamental.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q21",
+      "kind": "OBJECTIVE",
+      "number": 21,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "caracteres-suspeitos",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Na lógica proposicional, definem-se regras para determinar o valor-verdade (verdadeiro ou falso) de sentenças em relação a um modelo particular. Essas regras permitem representar raciocínios lógicos comuns das linguagens naturais.\nNesse contexto, considere a sentença e as proposições lógicas a seguir.\n“Um veículo que é elétrico (E) pode ser um robô (R) se for autônomo (A), caso contrário não é um robô (R)”. P1 = (E ∧ R) ↔ A ;\nP2 = E → (R ↔ A) ; P3 = E → ((A → R) ∨ ¬R) .\nA sentença pode ser representada pela(s) expressão(ões) lógica(s)",
+      "options": [
+        {
+          "letter": "A",
+          "text": "P2, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "P3, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "P1 e P2, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "P1 e P3, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "P1, P2 e P3."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q22",
+      "kind": "OBJECTIVE",
+      "number": 22,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "Um país utiliza moedas de 1, 5, 10, 25 e 50 centavos. Um programador desenvolveu o método a seguir, que implementa a estratégia gulosa para o problema do troco mínimo. Esse método recebe como parâmetro um valor inteiro, em centavos, e retorna um array no qual cada posição indica a quantidade de moedas de cada valor.\npublic static int[] troco(int valor){\nint[] moedas = new int[5];\nmoedas[4] = valor / 50;\nvalor = valor % 50;\nmoedas[3] = valor / 25;\nvalor = valor % 25;\nmoedas[2] = valor / 10;\nvalor = valor % 10;\nmoedas[1] = valor / 5;\nvalor = valor % 5;\nmoedas[0] = valor;\nreturn(moedas);\n}\nConsiderando o método apresentado, avalie as asserções a seguir e a relação proposta entre elas.\nI. O método guloso encontra o menor número de moedas para o valor de entrada, considerando as moedas do país.\nPORQUE\nII. Métodos gulosos sempre encontram a solução global ótima.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q23",
+      "kind": "OBJECTIVE",
+      "number": 23,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "texto-ilegivel",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Considere o seguinte alfabeto:\nΣ = {(,), 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, −} .\nConsidere, ainda, uma linguagem L definida sobre esse alfabeto.\nL {w | w  6 , para cada ocorrência de ‘(‘ em w, existe uma ocorrência de ‘)’} Por exemplo, a cadeia x (2 + (3 - 4)) pertence a L, mas a cadeia y (2 + (3 - 4) não pertence a L. Com relação à linguagem L, avalie as asserções a seguir e a relação proposta entre elas.\nI. A linguagem L não pode ser considerada regular.\nPORQUE\nII. Autômatos finitos não possuem mecanismos que permitam contar infinitamente o número de ocorrências de determinado símbolo em uma cadeia.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q24",
+      "kind": "OBJECTIVE",
+      "number": 24,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "tabela",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "A figura a seguir exibe um grafo que representa um mapa rodoviário, no qual os vértices representam cidades e as arestas representam vias. Os pesos indicam o tempo atual de deslocamento entre duas cidades.\n2\n4 1 2 1\ni 2 k j 2 2 1 w\n1 1\n15\nConsiderando que os tempos de ida e volta são iguais para qualquer via, avalie as afirmações a seguir acerca desse grafo.\nI. Dado o vértice de origem i, o algoritmo de Dijkstra encontra o menor tempo de deslocamento entre a cidade i e todas as demais cidades do grafo.\nII. Uma árvore geradora de custo mínimo gerada pelo algoritmo de Kruskal contém um caminho de custo mínimo cuja origem é i e cujo destino é k.\nIII. Se um caminho de custo mínimo entre os vértices i e k contém o vértice w, então o subcaminho de origem w e destino k deve também ser mínimo.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q25",
+      "kind": "OBJECTIVE",
+      "number": 25,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "texto-ilegivel",
+        "caracteres-suspeitos",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "C",
+      "prompt": "A sequência de Fibonacci é uma sequência de números inteiros que começa em 1, a que se segue 1, e na qual cada elemento subsequente é a soma dos dois elementos anteriores. A função ¿E a seguir calcula o n-ésimo elemento da sequência de Fibonacci:\nXQVLJQHG\u0003LQW\u0003¿E\u0003 XQVLJQHG\u0003LQW\u0003Q\n{\nif (n < 2)\nreturn 1;\nUHWXUQ\u0003¿E Q\u0003±\u0003\u0015 \u0003\u000e\u0003¿E\u0003 Q\u0003±\u0003\u0014 \u001e\n}\nConsiderando a implementação acima, avalie as afirmações a seguir.\nI. A complexidade de tempo da função ¿E é exponencial no valor de n.\nII. A complexidade de espaço da função ¿E é exponencial no valor de n.\nIII. É possível implementar uma versão iterativa da função ¿E com complexidade de tempo linear no valor de n e complexidade de espaço constante.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q26",
+      "kind": "OBJECTIVE",
+      "number": 26,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "A figura a seguir mostra uma imagem de ressonância magnética corrompida por ruído do tipo “sal e pimenta”.\nPara que o ruído seja atenuado e as bordas das estruturas representadas sejam preservadas, deve-se aplicar na imagem o filtro",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Sobel."
+        },
+        {
+          "letter": "B",
+          "text": "da média."
+        },
+        {
+          "letter": "C",
+          "text": "Laplaciano."
+        },
+        {
+          "letter": "D",
+          "text": "do mínimo."
+        },
+        {
+          "letter": "E",
+          "text": "da mediana."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q27",
+      "kind": "OBJECTIVE",
+      "number": 27,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Em computação gráfica, existem vários modelos de iluminação diferentes que expressam e controlam os fatores que determinam a cor de uma superfície em função de um determinado conjunto de luzes. Uma vez definido um modelo de iluminação, pode-se aplicar luz sobre as várias faces dos objetos de uma cena, processo denominado sombreamento.\nAs figuras a seguir ilustram a aplicação de dois modelos de iluminação, a saber: o modelo de sombreamento constante (à esquerda) e o modelo de Phong (à direita).\nAZEVEDO, E.; CONCI, A. Computação gráfica: geração de imagens. Rio de Janeiro: Campus, 2003 (adaptado).\nDisponível em: https://www.cs.cmu.edu . Acesso em: 17 jul 2017.\nEm relação aos modelos de iluminação apresentados, avalie as afirmações a seguir.\nI. A aplicação do modelo de sombreamento constante causa na imagem um efeito visual denominado Bandas de Mach.\nII. Embora seja útil para gerar imagens realísticas, o modelo de Phong mostra-se pouco eficiente na apresentação das reflexões especulares.\nIII. O modelo de sombreamento constante não é útil para gerar imagens realísticas porque ele dá destaque ao aspecto facetado da representação poliedral das superfícies.\nIV. Para a utilização do modelo de Phong, é necessário supor que a fonte de luz localiza-se no infinito.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q28",
+      "kind": "OBJECTIVE",
+      "number": 28,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Os métodos ágeis são fundamentados no desenvolvimento e entrega incremental tendo em vista atender aos requisitos dos clientes. Eles agregam um conjunto de princípios provenientes do manifesto ágil, tais como:\n• envolvimento do cliente;\n• entrega incremental;\n• pessoas, não processos;\n• aceitação das mudanças;\n• manutenção da simplicidade.\nO Scrum é um exemplo de método ágil de gerenciamento de projetos. Avalie as afirmações a seguir sobre a relação do Scrum com os princípios do manifesto ágil.\nI. O Scrum adota a entrega incremental por meio de Sprints.\nII. O Scrum adota a simplicidade por meio do uso da programação em pares.\nIII. O Scrum adota o envolvimento do cliente com a priorização e a negociação dos requisitos na concepção de Sprints.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q29",
+      "kind": "OBJECTIVE",
+      "number": 29,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "O projetista do gerenciador de memória de um novo sistema operacional precisa escolher entre os algoritmos de substituição de páginas FIFO (First In First Out - o primeiro a entrar é o primeiro a sair) e LRU (Least Recently Used - menos recentemente usado). Para isso, avaliou o número de faltas de página obtidas em ambos os algoritmos para o tamanho de memória de 4 páginas, utilizando a sequência de acessos às páginas 1-2-3-4-1-2-5-1-2- 3-4-5 de um processo e memória inicialmente vazia.\nCom base nessa simulação, avalie as asserções a seguir e a relação proposta entre elas.\nI. Na simulação proposta, é possível observar que os algoritmos FIFO e LRU apresentam o mesmo desempenho.\nPORQUE\nII. Os parâmetros utilizados na simulação são insuficientes para determinar a diferença de funcionamento entre os algoritmos.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I."
+        },
+        {
+          "letter": "B",
+          "text": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I."
+        },
+        {
+          "letter": "C",
+          "text": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "As asserções I e II são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q30",
+      "kind": "OBJECTIVE",
+      "number": 30,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "versalete",
+        "texto-ilegivel",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "Em um compilador, um analisador sintático descendente preditivo pode ser implementado com o auxílio de uma tabela construída a partir de uma gramática livre de contexto. Essa tabela, chamada tabela LL(k), indica a regra de produção a ser aplicada olhando-se o k-ésimo próximo símbolo lido, chamado lookahead(k). Por motivo de eficiência, normalmente busca-se utilizar k 1. Considere a gramática livre de contexto G (X, Y, Z, a, b, c, d, e, P, X) , em que P é composto pelas seguintes regras de produção:\nX → aZbXY | c Y → dX | ε Z → e Considere, ainda, a seguinte tabela LL(1), construída a partir da gramática G, sendo o símbolo que representa o fim da cadeia. Essa tabela possui duas produções distintas na célula (Y, d), gerando, no analisador sintático, uma dúvida na escolha da regra de produção aplicada em determinados momentos da análise.\na b c d e $ X XoaZbXY Xoc YodX Y YoH YoH Z Zoe\nConsiderando que o processo de construção dessa tabela LL(1), a partir da gramática G, foi seguido corretamente, a existência de duas regras de produção distintas na célula (Y, d), neste caso específico, resulta",
+      "options": [
+        {
+          "letter": "A",
+          "text": "da ausência do símbolo de fim de cadeia ( ) nas regras de produção."
+        },
+        {
+          "letter": "B",
+          "text": "de um não-determinismo causado por uma ambiguidade na gramática."
+        },
+        {
+          "letter": "C",
+          "text": "do uso incorreto do símbolo de cadeia vazia (H) nas regras de produção."
+        },
+        {
+          "letter": "D",
+          "text": "da presença de duas regras de produção com um único terminal no corpo."
+        },
+        {
+          "letter": "E",
+          "text": "da presença de duas regras de produção com o mesmo não terminal na cabeça."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q31",
+      "kind": "OBJECTIVE",
+      "number": 31,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        29
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "mencao-a-figura",
+        "texto-ilegivel",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Considere o programa a seguir, que ilustra a criação, execução e sincronização de duas threads.\n#include <stdio.h>\n#include <pthread.h>\nint x = 0, y = 0; // Variáveis compartilhadas\nvoid funcao1(void *threadarg){\nx = 1;\n... // várias instruções\nif (y == 0)\nprintf(\"1 \");\npthread_exit(0);\n}\nvoid funcao2(void *threadarg){\ny = 1;\n... // várias instruções\nif (x == 0)\nprintf(\"2 \");\npthread_exit(0);\n}\nvoid main(){\npthread_t t1, t2;\n// Cria e dispara t1 que executa funcao1\npthread_create(&t1, NULL,(void *)funcao1, NULL);\n// Cria e dispara t2 que executa funcao2\npthread_create(&t2, NULL,(void *)funcao2, NULL);\n\u0012\u0012\u00033DL\u0003HVSHUD\u0003¿OKR\u0003WHUPLQDU\npthread_join(t1, NULL);\n\u0012\u0012\u00033DL\u0003HVSHUD\u0003¿OKR\u0003WHUPLQDU\npthread_join(t2, NULL);\n}\nAo final da execução da função main, será impresso",
+      "options": [
+        {
+          "letter": "A",
+          "text": "ambos os valores “1” e “2”."
+        },
+        {
+          "letter": "B",
+          "text": "o valor \"1\", necessariamente."
+        },
+        {
+          "letter": "C",
+          "text": "o valor \"2\", necessariamente."
+        },
+        {
+          "letter": "D",
+          "text": "o valor \"1\", ou o valor \"2\", mas nunca ambos."
+        },
+        {
+          "letter": "E",
+          "text": "o valor \"1\", ou o valor \"2\", ou nenhum valor, mas nunca ambos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q32",
+      "kind": "OBJECTIVE",
+      "number": 32,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "B",
+      "prompt": "O uso de agentes inteligentes permite a resolução de problemas complexos por meio do uso de heurísticas implementadas de forma distribuída. Na literatura, o Mundo do Aspirador de Pó (Vacuum-Cleaner World) é um problema fictício que envolve o emprego e uso de agentes no ensino dos conceitos relacionados a Inteligência Artificial. Esse mundo fictício é composto por um aspirador de pó e dois ou mais ambientes, conforme ilustra a figura a seguir. Os ambientes podem estar sujos ou limpos.\nNesse mundo, um agente representa o aspirador de pó equipado com dois sensores: um de localização e outro para a identificação de sujeira. O agente pode executar as seguintes operações:\n• verificar se o ambiente atual está sujo;\n• limpar o ambiente;\n• fazer nada;\n• mover-se para o próximo ambiente, utilizando um dos comandos: direita, esquerda, frente ou trás.\nRussell, S. J.; Norvig, P. Artificial intelligence: a modern approach. 3. ed. New Jersey: Pearson, 2009 (adaptado).\nCom relação aos conceitos envolvendo sistemas multiagentes e o problema do Mundo do Aspirador de Pó apresentado, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Definidas as localizações do agente e da sujeira como elementos únicos de um estado, no cenário da figura, há 22 = 4 estados possíveis para avaliação."
+        },
+        {
+          "letter": "B",
+          "text": "O comportamento de um agente é definido por uma ou mais funções que mapeiam uma dada sequência percebida para uma ação definida."
+        },
+        {
+          "letter": "C",
+          "text": "A sequência percebida de um agente refere-se ao histórico do resultado de todas as ações tomadas pelo agente até o presente momento."
+        },
+        {
+          "letter": "D",
+          "text": "A percepção de um agente refere-se aos resultados das ações tomadas por ele."
+        },
+        {
+          "letter": "E",
+          "text": "A opção “fazer nada” é uma percepção válida do agente."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q33",
+      "kind": "OBJECTIVE",
+      "number": 33,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "fonte-de-simbolos",
+        "codigo",
+        "texto-derivado-calibri"
+      ],
+      "answer": "D",
+      "prompt": "Considere a função recursiva F a seguir, que em sua execução chama a função G:\n1 void F(int n) {\n2 if(n > 0) {\n3 for(int i = 0; i < n; i++) {\n4 G(i);\n5 }\n6 F(n/2);\n7 }\n8 }\nCom base nos conceitos de teoria da complexidade, avalie as afirmações a seguir.\nI. A equação de recorrência que define a complexidade da função F é a mesma do algoritmo clássico de ordenação mergesort.\nII. O número de chamadas recursivas da função F é 4 (log n).\nIII. O número de vezes que a função G da linha 4 é chamada é O(n log n).\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q34",
+      "kind": "OBJECTIVE",
+      "number": 34,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        32
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "mencao-a-figura",
+        "texto-derivado-calibri"
+      ],
+      "answer": "A",
+      "prompt": "Quando se trabalha com banco de dados, é possível encontrar redundância de dados e mistura de diferentes assuntos em uma mesma tabela. Para evitar esses tipos de falhas, podem ser aplicadas formas normais, que são regras que compõem o processo chamado normalização. Entre essas regras, as mais utilizadas e que resolvem a maioria das falhas são a Primeira Forma Normal (1FN), a Segunda Forma Normal (2FN) e a Terceira Forma Normal (3FN). A figura a seguir mostra um exemplo de tabela que poderia ser armazenada em um banco de dados. Nela, a coluna Numero contém um valor único, sequencial, que não se repete.\nNumero Titulo Zona Seção UF NomeEleitor FoneEleitor Sigla NomePartido NumCand NomeCand\n11111-1111 1 11111111111 40 999 DF Pessoa1 P1 Partido1 99 Candidato1 22222-2222\n33333-3333 2 22222222222 22 888 RR Pessoa2 P2 Partido2 88 Candidato2 44444-4444\nCom base no texto e no exemplo de tabela apresentado, avalie as afirmações a seguir.\nI. A tabela não está na 1FN e, portanto, pode-se dizer que ela não atende à 2FN nem à 3FN.\nII. Se forem criadas duas novas tabelas: Partido (com as colunas Sigla e NomePartido) e Candidato(com as colunas NumCand e NomeCand), pode-se dizer que as três tabelas atendem à 2FN.\nIII. Se a tabela for transformada em duas: Voto (com as colunas Numero, Sigla, NomePartido, NumCand, NomeCand e Titulo) e Eleitor (com a coluna Titulo e as colunas restantes), pode-se dizer que as duas tabelas atendem à 3FN.\nIV. Os atributos Sigla, NomePartido, NumCand e NomeCand não dependem funcionalmente do atributo Numero, mas os atributos restantes, sim.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "IV."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e III."
+        },
+        {
+          "letter": "E",
+          "text": "II e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q35",
+      "kind": "OBJECTIVE",
+      "number": 35,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        33
+      ],
+      "ligatureJoins": [],
+      "status": "revisao-manual",
+      "flags": [
+        "figura",
+        "fonte-de-simbolos",
+        "mencao-a-figura",
+        "texto-ilegivel",
+        "texto-derivado-calibri"
+      ],
+      "answer": "E",
+      "prompt": "Um programador inexperiente está desenvolvendo um sistema multithread que possui duas estruturas de dados diferentes, E1 e E2, as quais armazenam valores inteiros. O acesso concorrente a essas estruturas é controlado por semáforos. Durante sua execução, o sistema dispara as threads T1 e T2 simultaneamente. A tabela a seguir possibilita uma visão em linhas gerais dos algoritmos dessas threads.\nT1 T2 Aloca E1 Aloca E2 Calcula a média M1 dos valores de E1 Calcula a soma S1 de todos os valores de E2 Aloca E2 Aloca E1 Calcula a média M2 dos valores de E2 Calcula a soma S2 de todos os valores de E1 Calcula M3 M1 + M2 Calcula S3 |S1 \u0010 S2| Soma M3 em todos os valores de E2 Subtrai S2 de todos os valores de E1 Libera E1 Libera E2 Libera E2 Libera E1\nDurante a execução do referido programa, é possível que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "não ocorra deadlock, porque a sequência de alocação dos recursos impede naturalmente o problema."
+        },
+        {
+          "letter": "B",
+          "text": "ocorra deadlock, que pode ser evitado se o programador tomar o cuidado de não executar cálculos entre um pedido de alocação e outro."
+        },
+        {
+          "letter": "C",
+          "text": "ocorra deadlock, sendo a probabilidade dessa ocorrência tão baixa e sua consequência tão inócua que não haverá comprometimento do programa."
+        },
+        {
+          "letter": "D",
+          "text": "não ocorra deadlock, desde que o programador use semáforos para controlar o acesso às estruturas de dados, o que é suficiente para evitar o problema."
+        },
+        {
+          "letter": "E",
+          "text": "ocorra deadlock, que pode ser evitado se o programador tomar o cuidado de solicitar o acesso às estruturas de dados na mesma ordem em ambas as threads."
+        }
+      ],
+      "source": {
+        "examId": "enade-2017-bacharelado-exam",
+        "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+        "answerKeyId": "enade-2017-bacharelado-answer-key",
+        "answerKeySha256": "2db27c0d8d82c4cc47ad52556b1923222ba083ef9ef5aff614169c1bf8535fe7",
+        "answerKeyDefinitive": true,
+        "answerKeyPage": 1
+      }
+    }
+  ]
+}

@@ -5,7 +5,7 @@ for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/questoes");
     await page.getByLabel("Assunto", { exact: true }).selectOption("Banco de dados");
-    await page.getByLabel("Buscar no caderno").fill("transação");
+    await page.getByLabel("Buscar questão").fill("transação");
     await page.getByRole("button", { name: "Filtrar", exact: true }).click();
     const question = page.getByRole("button", { name: "Resolver: Quando uma transação falha" });
     await expect(question).toBeVisible();
@@ -23,7 +23,7 @@ for (const width of [390, 1440]) {
     await page.keyboard.press("Enter");
     await expect(page.locator("main#content")).toBeFocused();
     await expect(page).toHaveURL(url);
-    await expect(page.getByLabel("Buscar no caderno")).toHaveValue("transação");
+    await expect(page.getByLabel("Buscar questão")).toHaveValue("transação");
     await expect(page.getByLabel("Assunto", { exact: true })).toHaveValue("Banco de dados");
 
     await question.click();
@@ -47,7 +47,7 @@ test("filter, keyboard response, persistence, failure and retry", async ({
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
   ).toBeVisible();
-  await page.getByLabel("Buscar no caderno").fill("inexistente");
+  await page.getByLabel("Buscar questão").fill("inexistente");
   await page.getByRole("button", { name: "Filtrar", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Nenhuma questão nesta seleção" }),

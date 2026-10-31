@@ -1,6 +1,10 @@
 
     <p class="metadata">
-      {{ question.topic }} <span>·</span>
+      {{ question.topic }}
+      @if (question.subject && question.subject !== question.topic) {
+        <span>·</span> {{ question.subject }}
+      }
+      <span>·</span>
       {{ originLabel(question.origin, question.demonstration) }}
       <span>·</span> Versão {{ question.versionNumber }}
     </p>

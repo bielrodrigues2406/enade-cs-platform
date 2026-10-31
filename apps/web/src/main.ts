@@ -4,8 +4,14 @@ import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
 import { HomeComponent } from "./home.component";
+import { LandingComponent } from "./landing.component";
+import { AdminComponent } from "./admin.component";
+import { LessonsComponent } from "./lessons.component";
+import { DiscursiveComponent } from "./discursive.component";
 import { QuestionContentComponent } from "./question-content.component";
 import { ExamComponent } from "./exam.component";
+import { ProfileComponent } from "./profile.component";
+import { requestPractice, type PracticeRequest } from "./practice-request";
 import {
   ReviewComponent,
   type ReviewItem,
@@ -62,6 +68,7 @@ type Answer = {
   correctOptionId: string;
   explanation: string;
   explanationCredit?: string;
+  reviewNote?: string | null;
   answerKey?: {
     id: string;
     title: string;
@@ -91,13 +98,23 @@ type Question = Summary & {
 
 @Component({
   selector: "app-root",
+  // A página pública ocupa a largura toda, sem o índice lateral.
+  host: {
+    "[class.landing-mode]": "landingMode()",
+    "[class.account-mode]": "!!accountView()",
+  },
   imports: [
     FormsModule,
     AccountComponent,
     CurationComponent,
     HomeComponent,
+    LandingComponent,
+    AdminComponent,
+    LessonsComponent,
+    DiscursiveComponent,
     QuestionContentComponent,
     ExamComponent,
+    ProfileComponent,
     ReviewComponent,
   ],
   templateUrl: "./app.component.html",
@@ -133,6 +150,12 @@ class App {
   authError = signal("");
   accountNotice = signal("");
   canCurate = signal(false);
+  // Papéis da conta (ROLE-1); o servidor confere de novo em cada rota.
+  roles = signal<string[]>([]);
+  adminView = signal(false);
+  lessonsView = signal(false);
+  discursiveView = signal(false);
+  profileView = signal(false);
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
@@ -140,6 +163,8 @@ class App {
   practiceAttemptId = signal<string | null>(null);
   practiceItemPosition = signal(1);
   practiceBusy = signal(false);
+  /** Prova completa com o cronômetro correndo: sair pede confirmação e pausa. */
+  examRunning = signal(false);
   // A página inicial fica em "/" e o banco de questões em "/questoes".
   homeView = signal(location.pathname === "/");
   reviewReturn = signal(false);
@@ -217,8 +242,13 @@ class App {
   private async loadCurationAccess(transition: number) {
     if (this.session().mode !== "account") {
       this.canCurate.set(false);
+      this.roles.set([]);
       return;
     }
+    void this.api<{ roles: string[] }>("access").then(
+      (access) => transition === this.identityTransition && this.roles.set(access.roles),
+      () => transition === this.identityTransition && this.roles.set([]),
+    );
     try {
       const access = await this.api<{ canCurate: boolean }>("curation/access");
       if (transition === this.identityTransition)
@@ -232,7 +262,7 @@ class App {
       !this.canCurate() ||
       this.saving() ||
       this.authBusy() ||
-      this.curationBusy() || this.practiceBusy()
+      this.curationBusy() || this.practiceBusy() || !this.leaveExam()
     )
       return;
     this.requestNumber++;
@@ -245,13 +275,17 @@ class App {
     this.accountNotice.set("");
     this.error.set("");
     this.practiceView.set(false);
+    this.adminView.set(false);
+    this.lessonsView.set(false);
+    this.discursiveView.set(false);
+    this.profileView.set(false);
     this.curationView.set(true);
     this.leaveHomePath();
     this.focusMain();
   }
   openHome(event?: Event) {
     event?.preventDefault();
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
     this.requestNumber++;
     this.swapView(() => {
       this.loading.set(false);
@@ -270,11 +304,37 @@ class App {
     this.setPath("/");
     this.focusMain();
   }
+  // Quem ainda não entrou vê a apresentação; quem tem conta, o painel.
+  landingMode() {
+    return this.homeView() && !this.accountView() && this.session().mode !== "account" && !this.booting();
+  }
+  browseYear(year: number) {
+    history.pushState(null, "", `/questoes?year=${year}`);
+    void this.restoreCatalogNavigation();
+  }
+  /** Nome da seção atual, para a trilha "Estudar / …". */
+  sectionLabel() {
+    if (this.accountView()) return "Conta";
+    if (this.profileView()) return "Meu perfil";
+    if (this.adminView()) return "Administração";
+    if (this.lessonsView()) return "Aulas";
+    if (this.discursiveView()) return "Discursivas";
+    if (this.curationView()) return "Curadoria";
+    if (this.practiceView()) return "Treino parcial";
+    if (this.reviewView()) return "Caderno de erros";
+    if (this.homeView()) return "Início";
+    return this.question() ? "Resolução" : "Banco de questões";
+  }
+  /** O banco de questões (lista ou resolução) é a seção atual. */
+  onCatalog() {
+    const label = this.sectionLabel();
+    return (label === "Banco de questões" || label === "Resolução") && !this.reviewReturn();
+  }
   onHome() {
-    return this.homeView() && !this.accountView();
+    return this.sectionLabel() === "Início";
   }
   openReview() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
     this.requestNumber++;
     this.swapView(() => {
       this.loading.set(false);
@@ -292,8 +352,18 @@ class App {
     this.leaveHomePath();
     this.focusMain();
   }
+  /**
+   * Sair de uma prova em andamento pede confirmação; a prova fica pausada (o
+   * componente do treino pausa ao sair) e as respostas já estão salvas.
+   */
+  leaveExam() {
+    if (!this.examRunning()) return true;
+    if (!confirm("Sair da prova? O cronômetro fica pausado e suas respostas estão salvas. Você continua depois em Treino parcial.")) return false;
+    this.examRunning.set(false);
+    return true;
+  }
   openPractice() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
     this.requestNumber++;
     this.loading.set(false);
     this.question.set(null);
@@ -303,12 +373,38 @@ class App {
     this.reviewReturn.set(false);
     this.reviewCurrentVersion.set(null);
     this.homeView.set(false);
+    this.adminView.set(false);
+    this.lessonsView.set(false);
+    this.discursiveView.set(false);
+    this.profileView.set(false);
     this.error.set("");
     this.practiceAttemptId.set(null);
     this.practiceItemPosition.set(1);
     this.practiceView.set(true);
     this.writePracticeAddress("push");
     this.focusMain();
+  }
+  /** Cria um treino (área, erros) e abre-o direto na primeira questão. */
+  async startPractice(request: PracticeRequest) {
+    if (this.saving() || this.authBusy() || this.practiceBusy()) return;
+    this.practiceBusy.set(true);
+    this.error.set("");
+    let attemptId: string | null = null;
+    try {
+      attemptId = (await requestPractice(request)).id;
+    } catch (err) {
+      this.error.set(this.message(err));
+    } finally {
+      this.practiceBusy.set(false);
+    }
+    if (attemptId) this.openPracticeAttempt(attemptId);
+  }
+  /** Abre um treino existente (por exemplo, o em andamento da página inicial). */
+  openPracticeAttempt(attemptId: string) {
+    this.openPractice();
+    if (!this.practiceView()) return;
+    this.practiceAttemptId.set(attemptId);
+    this.writePracticeAddress("replace");
   }
   practiceLocationChanged(location_: { attemptId: string | null; position: number }) {
     if (!this.practiceView() || this.authBusy() || location.pathname !== "/treino") return;
@@ -322,7 +418,7 @@ class App {
     const valid = location.pathname === "/treino" && id && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id);
     this.practiceAttemptId.set(valid ? id.toLowerCase() : null);
     const position = params.getAll("item").length === 1 ? params.get("item") ?? "1" : "1";
-    this.practiceItemPosition.set(valid && /^([1-9]|[12][0-9]|30)$/.test(position) ? Number(position) : 1);
+    this.practiceItemPosition.set(valid && /^([1-9]|[1-5][0-9]|60)$/.test(position) ? Number(position) : 1);
   }
   private writePracticeAddress(mode: "push" | "replace") {
     const params = new URLSearchParams();
@@ -494,7 +590,7 @@ class App {
     }
   }
   back() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
     this.swapView(() => {
       this.homeView.set(false);
       this.practiceView.set(false);
@@ -561,10 +657,13 @@ class App {
   }
   @HostListener("window:popstate")
   async restoreCatalogNavigation() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) {
       history.pushState(null, "", this.currentAddress);
       return;
     }
+    this.adminView.set(false);
+    this.lessonsView.set(false);
+    this.discursiveView.set(false);
     this.question.set(null);
     this.selected = "";
     this.editing.set(false);
@@ -602,7 +701,7 @@ class App {
     return session.mode === "account" ? session.email : "";
   }
   openAccount(mode: AccountMode) {
-    if (this.saving() || this.authBusy() || this.practiceBusy() || this.session().mode === "account")
+    if (this.saving() || this.authBusy() || this.practiceBusy() || this.session().mode === "account" || !this.leaveExam())
       return;
     this.accountView.set(mode);
     this.authError.set("");
@@ -622,7 +721,78 @@ class App {
     if (!this.question() && !this.reviewView() && !this.practiceView()) void this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
     this.focusMain();
   }
+  openAdmin() {
+    if (!this.roles().includes("ADMIN") || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam())
+      return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.practiceView.set(false);
+      this.adminView.set(true);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
+  isStaff() {
+    return this.roles().includes("PROFESSOR") || this.roles().includes("ADMIN");
+  }
+  openLessons() {
+    if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam())
+      return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.practiceView.set(false);
+      this.lessonsView.set(true);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
+  openDiscursive() {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.practiceView.set(false);
+      this.discursiveView.set(true);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
+  /** Meu perfil: dados e senha da própria conta. */
+  openProfile() {
+    if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam())
+      return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.practiceView.set(false);
+      this.homeView.set(false);
+      this.profileView.set(true);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
+  profileEmailChanged(email: string) {
+    this.session.set({ mode: "account", email });
+  }
   private clearStudyState() {
+    this.adminView.set(false);
+    this.profileView.set(false);
+    this.lessonsView.set(false);
+    this.discursiveView.set(false);
     if (this.identityGeneration > 0 && this.practiceView()) {
       this.practiceAttemptId.set(null);
       this.practiceItemPosition.set(1);
@@ -698,7 +868,7 @@ class App {
     }
   }
   async logout() {
-    if (this.authBusy() || this.saving() || this.curationBusy() || this.practiceBusy()) return;
+    if (this.authBusy() || this.saving() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
     const transition = ++this.identityTransition;
     this.authBusy.set(true);
     this.authError.set("");
@@ -836,7 +1006,12 @@ class App {
   private swapView(update: () => void, stillCurrent = () => true) {
     const generation = this.identityGeneration;
     const apply = () => {
-      if (generation === this.identityGeneration && stillCurrent()) update();
+      if (generation !== this.identityGeneration || !stillCurrent()) return;
+      this.adminView.set(false);
+      this.lessonsView.set(false);
+      this.discursiveView.set(false);
+      this.profileView.set(false);
+      update();
     };
     const doc = document as Document & {
       startViewTransition?: (callback: () => void) => unknown;

@@ -1,0 +1,220 @@
+{
+  "document": "enade-2021-bacharelado-exam",
+  "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+  "cropsManifestSha256": "8c4b0eea885d7890ea2a21c36a80b69ed1f0f6163f6b3a9492131ed808da002a",
+  "extractor": "claude",
+  "explainer": "claude-explain-02",
+  "reviewer": "claude-review-02",
+  "reviewedAt": "2026-10-30T22:36:20Z",
+  "items": [
+    {
+      "key": "Q21",
+      "verdict": "APPROVED",
+      "fragments": [
+        "67930aa9733e04573436032fa8fd1561120ff636558b77d841efa285fe9b2503"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Dispositivos de interconexão e camadas de rede",
+      "notes": "Recorte conferido contra a página original: número impresso 21, cinco alternativas, gabarito definitivo E (não anulada), imagem legível. Inclui texto, figuras 1 e 2 e fonte, sem trecho de outra questão.",
+      "studentNote": "",
+      "explanation": "A questão cobra em que camada cada dispositivo de interconexão opera e qual informação ele usa para decidir o encaminhamento, conforme as figuras 1 e 2. Repetidores e hubs atuam na camada física, bridges e switches no enlace de dados, roteadores na camada de rede e gateways nas camadas de transporte e aplicação.\n\nA alternativa E está correta: um gateway de transporte opera na camada de transporte e conecta dois computadores que usam protocolos de transporte orientados a conexões diferentes, como TCP e SCTP, convertendo um no outro.\n\nAs demais falham. Em A, o repetidor trabalha na camada física, regenerando sinais, e não interpreta cabeçalhos de quadros ou pacotes. Em B, o hub apenas repete eletricamente os bits para todas as portas; não há buffer nem arbitragem, e quadros simultâneos colidem. Em C, a bridge isola o domínio de colisão de cada porta, mas decide pelo endereço no cabeçalho do quadro, sem examinar a carga útil (o pacote de rede). Em D, a descrição de roteadores está correta até certo ponto, mas dizer que o roteamento é mais complicado em redes de broadcast é inadequado, pois o meio compartilhado já entrega o quadro a todos os nós.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q22",
+      "verdict": "APPROVED",
+      "fragments": [
+        "29ba2c0c411cafabe79377c2650195bfbfef80363a692ff262a2c9c06d29a52d"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Banco de dados",
+      "subject": "Mapeamento do modelo ER para o modelo relacional",
+      "notes": "Recorte conferido contra a página original: número impresso 22, cinco alternativas, gabarito definitivo A (não anulada), imagem legível. Inclui DER e os cinco esquemas; no rodapé esquerdo sobra um traço de poucos pixels do rótulo \"Área livre\" da página, que não é questão nem instrução de bloco e não afeta a leitura.",
+      "studentNote": "",
+      "explanation": "A questão cobra o mapeamento de um Diagrama Entidade Relacionamento para o modelo relacional. Pelas cardinalidades, cada pet tem exatamente um tipo (1,1 junto a TIPO_PET) e exatamente um adotante (1,1 junto a PESSOA), enquanto um tipo agrupa um ou mais pets (1,n) e uma pessoa pode adotar zero ou mais pets (0,n). São dois relacionamentos 1:N. Pela regra de mapeamento, cada entidade vira uma relação com sua chave primária, e o relacionamento 1:N é implementado com chave estrangeira no lado N, aqui PET.\n\nA alternativa A faz exatamente isso: PESSOA e TIPO_PET têm relações próprias, e PET recebe codigo_tipo_pet, que referencia TIPO_PET(codigo), e adotante, que referencia PESSOA(cpf).\n\nAs demais falham. Em B e C, a chave estrangeira está no lado errado: PESSOA guarda codigo_pet, o que limitaria cada pessoa a um pet; em B, TIPO_PET também guarda codigo_pet, limitando cada tipo a um pet. Em C, falta ainda o vínculo do pet com o adotante. Em D, tudo vai para uma única relação, repetindo dados de pessoa e de tipo a cada pet, com redundância e risco de anomalias de atualização. Em E, a descrição do tipo é copiada para PET e TIPO_PET deixa de existir como relação.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q23",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3a25372e3aea8af12b2dc979e669dd545d37a2ef9c6378c618a11e7072926bb5"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Árvore binária de busca e percursos",
+      "notes": "Recorte conferido contra a página original: número impresso 23, cinco alternativas, gabarito definitivo C (não anulada), imagem legível. Inclui texto, figura de exemplo e fonte; árvore e percursos refeitos.",
+      "studentNote": "",
+      "explanation": "A questão cobra a construção de uma árvore binária de busca por inserções sucessivas e os percursos pré-ordem, em-ordem e pós-ordem. Inserindo 27, 34, 40, 18, 23, 5, 25, 36, 10, 7, -2: a raiz é 27. À esquerda ficam 18 (filhos 5 e 23), com -2 e 10 sob o 5, 7 sob o 10 e 25 sob o 23. À direita ficam 34 e 40, com 36 à esquerda de 40.\n\nA alternativa C está correta: o percurso em-ordem (esquerda, raiz, direita) de uma árvore de busca visita os valores em ordem crescente: -2, 5, 7, 10, 18, 23, 25, 27, 34, 36, 40.\n\nAs outras falham. Em A, o caminho mais longo (27, 18, 5, 10, 7) tem 5 elementos, mas há 7 elementos à esquerda da raiz e 3 à direita, não 6 e 4. Em B, a sequência apresentada é a pós-ordem; a pré-ordem seria 27, 18, 5, -2, 10, 7, 23, 25, 34, 40, 36. Em D, a sequência apresentada é a pré-ordem; a pós-ordem seria -2, 7, 10, 5, 25, 23, 18, 36, 40, 34, 27. Em E, uma árvore binária com 10 níveis comporta no máximo 2^10 - 1 = 1023 elementos, não 1024.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q24",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8621e5921bfd96c08a4046db7370397dc1d9750640361d1995b5991dc5681cb1"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Segurança",
+      "subject": "Criptografia, assinatura, IV e hash em mensageria",
+      "notes": "Recorte conferido contra a página original: número impresso 24, cinco alternativas, gabarito definitivo E (não anulada), imagem legível. Quatro afirmativas completas; ressalva do explicador sobre a afirmativa II confirmada e registrada como nota ao estudante.",
+      "studentNote": "Ressalva sobre a afirmativa II: o vetor de inicialização (IV) não é uma chave nem compõe chaves; sua função é fazer mensagens iguais gerarem textos cifrados diferentes. Sozinho, ele também não impede ataques de reprodução, que costumam exigir números de sequência ou marcas de tempo. A redação da afirmativa é imprecisa nesses pontos.",
+      "explanation": "A questão avalia conceitos de criptografia aplicados a um aplicativo de mensagens: chaves públicas, vetor de inicialização (IV), criptografia simétrica e função de hash.\n\nO gabarito oficial é E (I, II e IV). A afirmação I é correta: com um par de chaves, a chave pública do remetente, obtida do servidor, permite verificar uma assinatura feita com a chave privada correspondente, o que atesta a autenticidade. A II é considerada correta: variar o IV a cada mensagem faz com que textos iguais gerem cifrados diferentes, ocultando padrões e dificultando a reprodução de mensagens capturadas. A IV é correta: o SHA-256 gera um resumo (hash) da mensagem, e comparar o valor da mensagem enviada com o da recebida revela qualquer modificação, ou seja, verifica a integridade.\n\nA III é incorreta: criptografia simétrica, como a do AES, usa uma única chave compartilhada para cifrar e decifrar; o par de chaves distintas caracteriza a criptografia assimétrica. Por isso B, C e D, que incluem a III, falham, e A falha por omitir a II.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q25",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a7ebf36ffd670d6f7f8353bf43270fddb9418e535d03cc69ee8b57b9b6e8d6df"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Sistemas distribuídos",
+      "subject": "Computação em nuvem: modelos de serviço e implantação",
+      "notes": "Recorte conferido contra a página original: número impresso 25, cinco alternativas, gabarito definitivo B (não anulada), imagem legível. Quatro afirmativas completas; ressalva sobre a afirmativa III confirmada e registrada como nota ao estudante.",
+      "studentNote": "Ressalva sobre a afirmativa III: na definição usual, a nuvem comunitária é uma infraestrutura compartilhada por organizações com interesses em comum e pode pertencer a uma ou mais delas ou a terceiros. O texto da prova não define esse modelo, e a redação da afirmativa admite mais de uma leitura.",
+      "explanation": "A questão cobra a definição de computação em nuvem segundo o NIST apresentada no enunciado: características essenciais, modelos de serviço (SaaS, PaaS, IaaS) e modelos de implantação.\n\nO gabarito é B (I e IV). A afirmação I é correta: em SaaS o usuário consome a aplicação sem comprar nem atualizar hardware e sem controlar a infraestrutura subjacente, e as atualizações de software cabem ao provedor. A IV é correta: em IaaS o usuário não administra a infraestrutura da nuvem, mas controla sistemas operacionais, armazenamento e aplicativos implantados.\n\nA II é incorreta: a elasticidade é a capacidade de aumentar ou diminuir os recursos (capacidade) conforme a demanda, e não de alterar o tempo de disponibilidade dos recursos contratados. A III foi considerada incorreta pelo gabarito: ela descreve a nuvem comunitária como gestão de recursos pertencentes a cada organização participante, mas o modelo se define por uma infraestrutura compartilhada por uma comunidade de organizações com preocupações em comum, sem exigir que cada uma contribua com recursos próprios. Assim, A, C, D e E falham, pois incluem a II ou a III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q26",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3898bccacb615b1d6a15df55598754949a99cc271f2af11c1e92149c809749fa"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Interação humano-computador",
+      "subject": "Interfaces adaptativas: níveis e técnicas de adaptação",
+      "notes": "Recorte conferido contra a página original: número impresso 26, cinco alternativas, gabarito definitivo A (não anulada), imagem legível. Texto, fonte e três afirmativas completos.",
+      "studentNote": "",
+      "explanation": "A questão trata de interfaces adaptativas e dos três níveis de adaptação citados no texto: conteúdo, navegação e apresentação. A tarefa é associar cada técnica ao nível correto.\n\nO gabarito é A (apenas I). A afirmação I é correta: fragmentos de texto, fragmentos condicionais, páginas variantes e abordagem baseada em frames são técnicas de adaptação de conteúdo, pois alteram o que é mostrado ao usuário.\n\nA II é incorreta: layouts de página e guias de estilos dizem respeito à forma de exibir o conteúdo, ou seja, à adaptação da apresentação, e não da navegação. A III é incorreta pelo erro inverso: orientação direta, anotação de links, apresentação e ocultação de links e ordenação de links atuam sobre o caminho do usuário pelos links, ou seja, são técnicas de adaptação da navegação, e não da apresentação. As afirmações II e III, portanto, trocam os níveis a que as técnicas pertencem. Por isso B, C, D e E, que incluem II ou III, falham, e apenas a alternativa A, que reconhece somente a I, está correta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q27",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a33f6b3395330ec39e3d873bccf3200751ffb7e8431bcc282451e3164c3ed98f"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Distribuição normal e regra empírica (68-95-99,7)",
+      "notes": "Recorte conferido contra a página original: número impresso 27, cinco alternativas, gabarito definitivo D (não anulada), imagem legível. Histograma, tabela de média e desvio e fonte completos.",
+      "studentNote": "",
+      "explanation": "A questão cobra o uso da distribuição normal e da regra empírica (68-95-99,7) para estimar probabilidades a partir da média e do desvio padrão. O histograma tem formato aproximado de sino, com média 171 e desvio padrão 10, o que justifica a aproximação normal. Em torno da média: média ± 1 desvio, [161, 181], concentra cerca de 68,27% dos valores; média ± 2 desvios, [151, 191], cerca de 95,44%; média ± 3 desvios, [141, 201], cerca de 99,74%. A faixa entre a média e um desvio de um dos lados vale a metade do primeiro valor, 34,13%.\n\nA alternativa D está correta: [151, 191] é 171 ± 2 × 10, com cerca de 95,44%.\n\nAs demais falham. A associa 34,13% a [141, 201], que é ± 3 desvios e teria cerca de 99,74%. B associa 34,13% a [161, 181], que é ± 1 desvio e teria cerca de 68,27%; 34,13% valeria só para um lado, como [171, 181]. C usa [171, 191], da média a + 2 desvios, que contém cerca de 47,72%, não 76,68%. E associa 99,74% a [161, 181], que tem cerca de 68,27%.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q28",
+      "verdict": "APPROVED",
+      "fragments": [
+        "89239a86c43e13f788098850f56c7a23ed2dfa241cab7a6532a6ab4aecb94be9",
+        "3a1c4573c63522c4b659c28e7e9a2476580abaa17b9be0b1efe032ba5315c2c6"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Pipeline de instruções, bolhas e previsão de desvios",
+      "notes": "Recorte conferido contra a página original: número impresso 28, cinco alternativas, gabarito definitivo B (não anulada), imagem legível. Dois recortes (págs. 36 e 37) em ordem, sem lacuna; figuras 1 e 2, fonte e quatro afirmativas completas.",
+      "studentNote": "",
+      "explanation": "A questão trata de um pipeline de instruções com cinco estágios: S1 busca a instrução, S2 decodifica, S3 busca operandos, S4 executa e S5 grava o resultado. A cada ciclo, cada estágio trabalha em uma instrução diferente.\n\nO gabarito é B (I e IV). A afirmação I é correta: se S1 não obtém instrução em um ciclo, entra uma bolha (ausência de instrução útil) que avança um estágio por ciclo e sai do pipeline após percorrer os quatro estágios seguintes, nos próximos 4 ciclos. A IV é correta no caso ideal: com um BTB, que guarda alvos de desvios, o fluxo segue a previsão, e as instruções seguintes ao desvio condicional são buscadas e entram no pipeline, evitando bolhas enquanto a previsão acerta.\n\nA II é incorreta: no modelo apresentado o pipeline é fixo e toda instrução passa pelos cinco estágios, em 5 ciclos; não há salto de S3 para S4 por falta de operandos. A III é incorreta: S1 busca apenas instruções (na cache de instruções); os dados são buscados em outro estágio, como S3, mesmo com caches separadas. Logo, A, C, D e E, que incluem a II ou a III, falham.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q30",
+      "verdict": "APPROVED",
+      "fragments": [
+        "fee057f08eca2996bc70a79b33b8621584485c85ff479ce1594b55a612dd05b0"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Compiladores",
+      "subject": "Fases do compilador: análise léxica, sintática, semântica",
+      "notes": "Recorte conferido contra a página original: número impresso 30, cinco alternativas, gabarito definitivo E (não anulada), imagem legível. Texto, fonte e quatro afirmativas completos.",
+      "studentNote": "",
+      "explanation": "A questão cobra as fases de um compilador: análise léxica, sintática e semântica, além da otimização. O texto descreve a tradução do programa de alto nível para uma linguagem simbólica equivalente, depois convertida em código de máquina pelo montador.\n\nO gabarito é E (I, III e IV). A I é correta: o analisador sintático recebe a sequência de símbolos produzida pelo analisador léxico e verifica se ela forma um programa válido segundo a gramática da linguagem. A III é correta: o analisador semântico usa o programa para detectar incoerências de significado, como o uso de tipos incompatíveis. A IV é correta: a otimização procura melhorar o código intermediário para que o código de máquina final execute mais rápido.\n\nA II é incorreta: o analisador léxico identifica os símbolos com significado para a linguagem, mas as categorias (palavras reservadas, identificadores, operadores e outras) e as regras dependem de cada linguagem; Java e Pascal, por exemplo, não geram a mesma classificação. Portanto, B, C e D, que incluem a II, falham; A omite a III; e E reúne exatamente as três afirmações corretas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q31",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8e664c36ec2fa6fdc2225006f3e267e56123a833b43206b00ed9921bb4acb681"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Máquina de Turing, palíndromos e autômato com pilha",
+      "notes": "Recorte conferido contra a página original: número impresso 31, cinco alternativas, gabarito definitivo E (não anulada), imagem legível. Diagrama da máquina de Turing completo e legível; execução com 110011 refeita.",
+      "studentNote": "",
+      "explanation": "A questão cobra o rastreio de uma máquina de Turing M, que aceita palíndromos binários de comprimento par, e a relação dessa linguagem com autômatos com pilha. M apaga (escreve B) o primeiro símbolo, vai ao fim da entrada para conferir e apagar o último símbolo igual a ele, volta ao início e repete.\n\nCom a entrada 110011, no movimento 1 M apaga o primeiro 1 (q0 para q5). Após 4 movimentos a fita é 10011, não 110011, então I é falsa. No movimento 7 M encontra o B à direita e recua; no movimento 8 apaga o último 1 (q6 para q7), e a fita fica 1001, então II é verdadeira. Em seguida M repete o processo com 1001 e depois com 00, apaga tudo e chega a qf; para essa entrada M para em estado de aceitação, e III é verdadeira.\n\nA IV é verdadeira: palíndromos de comprimento par formam uma linguagem livre de contexto, reconhecida por um autômato com pilha não determinístico, que empilha a primeira metade e a confere com a segunda. Assim, II, III e IV valem, o que corresponde à alternativa E. As alternativas A, B, C e D incluem a I ou omitem uma das corretas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q32",
+      "verdict": "APPROVED",
+      "fragments": [
+        "171b110969d00f33e76c6605c337b8e845592eb449bb0807dc54487f132a7c8d"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Quicksort: espaço, estabilidade e comparações",
+      "notes": "Recorte conferido contra a página original: número impresso 32, cinco alternativas, gabarito definitivo A (não anulada), imagem legível. Código completo; ressalva sobre o recuo das linhas dentro do \"se\" confirmada na imagem e registrada como nota ao estudante.",
+      "studentNote": "No código impresso, as linhas \"troca A[i] com A[j]\" e \"i := i + 1\" aparecem com o mesmo recuo de \"se A[j] < pivot entao\". A leitura usual desse particionamento considera as duas linhas dentro do \"se\"; lidas fora dele, o algoritmo não particionaria o vetor.",
+      "explanation": "O código é um quicksort: particao usa o último elemento como pivô, move para o início os elementos menores que ele e devolve a posição final do pivô; ordena aplica o mesmo processo recursivamente às duas partes.\n\nO gabarito é A (I e III). A I é correta: com partições muito desequilibradas (pior caso), a profundidade da recursão chega a ser proporcional a n, então a pilha de recursão exige espaço adicional O(n) como limite superior. A III é correta: no caso médio as partições são razoavelmente equilibradas e o algoritmo faz O(n log n) comparações.\n\nA II é incorreta: embora seja recursivo, o algoritmo não é estável, pois as trocas entre posições distantes (A[i] com A[j] e a troca final com o pivô) podem inverter a ordem de elementos iguais. A IV é incorreta: usar o primeiro elemento em vez do último não traz ganho de eficiência; para entradas aleatórias os dois são equivalentes em média, e um vetor já ordenado é caso ruim para ambos. Portanto, B, C, D e E, que incluem a II ou a IV, falham, e A reúne as duas afirmações corretas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q34",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d6e56acee6b3b4106e7626daf4a9f5eb096135158f87e63d568c902b925252e3"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Algoritmo de Dijkstra: caminho mínimo em dígrafos",
+      "notes": "Recorte conferido contra a página original: número impresso 34, cinco alternativas, gabarito definitivo C (não anulada), imagem legível. Grafo com pesos legível; duas iterações de Dijkstra refeitas.",
+      "studentNote": "",
+      "explanation": "A questão cobra a execução passo a passo do algoritmo de Dijkstra a partir de D, com uma fila de prioridades cujas chaves são estimativas de custo (-1 significa infinito, ou seja, nenhum caminho conhecido).\n\nInicialmente D vale 0 e os demais, -1. Na iteração 1, sai D, de menor estimativa, e seus arcos são relaxados: A = 5, B = 9, E = 5 e F = 1; C e G continuam em -1. Na iteração 2, sai F (estimativa 1, a menor) e seus arcos são analisados: F para E custa 1 + 3 = 4, melhor que 5, então E passa a 4; F para G custa 1 + 1 = 2, então G passa a 2. B e C não mudam, pois A, E e G, que têm arcos para eles, ainda não foram retirados da fila. O resultado é A: 5, B: 9, C: -1, D: 0, E: 4, F: 1, G: 2, a alternativa C.\n\nAs outras falham. B mostra E = 5 e G = -1, o estado após apenas a iteração 1. A mantém G = -1 mesmo com F já processado. D e E trazem valores de B ou C que exigiriam processar A, E ou G, o que só ocorre em iterações posteriores.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q35",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c59402ea02e7b27693d681f14231672b1ef3c8402336a2e7400a2e3e7d999a3a"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Sistemas distribuídos",
+      "subject": "Características de sistemas distribuídos: escalabilidade",
+      "notes": "Recorte conferido contra a página original: número impresso 35, cinco alternativas, gabarito definitivo D (não anulada), imagem legível. Texto, fonte e alternativas completos.",
+      "studentNote": "",
+      "explanation": "A questão parte da definição de sistema distribuído: componentes em computadores ligados em rede que se comunicam e coordenam ações apenas por troca de mensagens. A tarefa é identificar a afirmação coerente com essa definição e com características básicas desses sistemas.\n\nO gabarito é D. Escalabilidade é a capacidade de o sistema continuar funcionando bem quando cresce a demanda ou o número de usuários, em geral pela adição de recursos; incluir novos dispositivos para atender a uma demanda crescente ou temporária é essa característica.\n\nAs demais falham. Em A, a coordenação se dá por troca de mensagens e não depende de um relógio físico sincronizado com um relógio global; a ausência de relógio global é característica desses sistemas. Em B, num sistema peer-to-peer a falha de um componente não interrompe necessariamente os demais, pois falhas parciais são comuns e toleradas. Em C, o compartilhamento de recursos não exige homogeneidade: sistemas distribuídos costumam ser heterogêneos, e isso é um desafio de projeto. Em E, a transparência de concorrência oculta a interferência entre acessos simultâneos, mas a possibilidade de vários clientes acessarem o mesmo recurso decorre do tratamento de concorrência no servidor, e não de um alto nível de transparência.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+<section class="lessons" aria-labelledby="lessons-title">
+  @if (error()) {
+    <div class="notice" role="alert"><p>{{ error() }}</p></div>
+  }
+  @if (notice()) {
+    <p class="admin-notice" role="status">{{ notice() }}</p>
+  }
+
+  @if (!staff) {
+    <h1 id="lessons-title">Minhas aulas</h1>
+    <p class="admin-intro">
+      Aulas de preparação da sua turma. Elas aparecem quando o seu prontuário
+      está na lista da turma e na sua conta.
+    </p>
+    @if (mine(); as lessons) {
+      @if (lessons.length) {
+        <ol class="lesson-list">
+          @for (lesson of lessons; track lesson.id) {
+            <li [class.is-past]="isPast(lesson.endsAt)">
+              <span class="lesson-when">{{ when(lesson.startsAt) }}</span>
+              <span class="lesson-what"><strong>{{ lesson.subject }}</strong>{{ lesson.topic ? " · " + lesson.topic : "" }}</span>
+              <span class="muted">{{ lesson.room }} · {{ lesson.teacher }}</span>
+              @if (lesson.status) {
+                <span class="lesson-status" [attr.data-status]="lesson.status">{{ statusLabel[lesson.status] }}</span>
+              }
+            </li>
+          }
+        </ol>
+      } @else {
+        <p class="muted">
+          Nenhuma aula para você ainda. Se você participa da preparação,
+          confira se informou o prontuário no cadastro.
+        </p>
+      }
+    }
+  } @else if (roll(); as current) {
+    <!-- Chamada: pensada para o celular, um toque por pessoa. -->
+    <button type="button" class="back text-button" (click)="closeRoll()">← {{ current.className }}</button>
+    <h1 id="lessons-title">Chamada</h1>
+    <p class="admin-intro">
+      {{ when(current.startsAt) }} · {{ current.subject }}{{ current.topic ? " · " + current.topic : "" }} ·
+      {{ current.room }} · {{ current.teacher }}
+    </p>
+    <div class="roll-bar">
+      <p><strong>{{ rollCount().present }}</strong> de {{ rollCount().total }} presentes</p>
+      <button type="button" class="outline" (click)="markAllPresent()" [disabled]="busy()">Marcar não lançados como presentes</button>
+    </div>
+    <ul class="roll">
+      @for (entry of current.roll; track entry.id) {
+        <li>
+          <span class="roll-name">{{ entry.name }}<span class="muted">{{ entry.enrollment }}</span></span>
+          <span class="roll-options" role="radiogroup" [attr.aria-label]="'Presença de ' + entry.name">
+            @for (option of statusOptions; track option.value) {
+              <button
+                type="button"
+                role="radio"
+                [attr.aria-checked]="entry.status === option.value"
+                [attr.data-status]="option.value"
+                [attr.aria-label]="option.label + ': ' + entry.name"
+                (click)="mark(entry, option.value)"
+              >{{ option.short }}</button>
+            }
+          </span>
+        </li>
+      }
+    </ul>
+    <p class="muted">P presente · A atraso · F falta · J justificada. Cada toque já fica salvo.</p>
+  } @else if (detail(); as cls) {
+    <button type="button" class="back text-button" (click)="loadClasses()">← Turmas</button>
+    <h1 id="lessons-title">{{ cls.name }}</h1>
+    <p class="admin-intro">ENADE {{ cls.editionYear }} · {{ plural(cls.members.length, "pessoa", "pessoas") }} · {{ plural(cls.lessons.length, "aula", "aulas") }}</p>
+    <div class="admin-tabs" role="tablist" aria-label="Seções da turma">
+      <button type="button" role="tab" [attr.aria-selected]="classTab() === 'lessons'" (click)="classTab.set('lessons')">Aulas e lista</button>
+      <button type="button" role="tab" [attr.aria-selected]="classTab() === 'dashboard'" (click)="classTab.set('dashboard')">Desempenho</button>
+    </div>
+
+    @if (classTab() === "dashboard") {
+      <app-class-dashboard [classId]="cls.id" />
+    } @else {
+    <section aria-labelledby="lessons-list-title">
+      <div class="admin-users-head">
+        <h2 id="lessons-list-title">Aulas</h2>
+        <div class="lessons-actions">
+          @if (cls.lessons.length) {
+            <a class="lesson-export" [href]="exportUrl()" download>Exportar presença (planilha)</a>
+          }
+          <button type="button" (click)="lessonDialog.showModal()">Nova aula</button>
+        </div>
+      </div>
+      @if (cls.lessons.length) {
+        <ol class="lesson-list">
+          @for (lesson of cls.lessons; track lesson.id) {
+            <li [class.is-past]="isPast(lesson.endsAt)">
+              <span class="lesson-when">{{ when(lesson.startsAt) }}</span>
+              <span class="lesson-what"><strong>{{ lesson.subject }}</strong>{{ lesson.topic ? " · " + lesson.topic : "" }}</span>
+              <span class="muted">{{ lesson.room }} · {{ lesson.teacher }} · {{ lesson.present }}/{{ cls.members.length }} presentes</span>
+              <button type="button" (click)="openRoll(lesson.id)">Chamada</button>
+            </li>
+          }
+        </ol>
+      } @else {
+        <p class="muted">Nenhuma aula marcada.</p>
+      }
+      <dialog #lessonDialog class="sheet-dialog" aria-labelledby="lesson-new-title">
+        <div class="sheet-dialog-head"><div><p class="sheet-dialog-eyebrow">{{ cls.name }}</p><h2 id="lesson-new-title">Marcar aula</h2></div><button type="button" class="sheet-close" (click)="lessonDialog.close()" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button></div>
+        <form class="sheet-dialog-body" (ngSubmit)="createLesson(lessonDialog)">
+          <div class="sheet-dialog-content">
+          <div class="import-fields">
+            <div><label for="lesson-date">Data</label><input id="lesson-date" name="date" type="date" [(ngModel)]="newLesson.date" required /></div>
+            <div class="lesson-times">
+              <div><label for="lesson-start">Início</label><input id="lesson-start" name="start" type="time" [(ngModel)]="newLesson.start" required /></div>
+              <div><label for="lesson-end">Fim</label><input id="lesson-end" name="end" type="time" [(ngModel)]="newLesson.end" required /></div>
+            </div>
+            <div><label for="lesson-subject">Matéria</label><input id="lesson-subject" name="subject" maxlength="80" [(ngModel)]="newLesson.subject" placeholder="Redes, Teoria da computação…" required /></div>
+            <div><label for="lesson-room">Sala</label><input id="lesson-room" name="room" maxlength="60" [(ngModel)]="newLesson.room" placeholder="Lab 3" required /></div>
+            <div><label for="lesson-teacher">Professor</label>
+              <select id="lesson-teacher" name="teacherId" [(ngModel)]="newLesson.teacherId" required>
+                @for (teacher of cls.teachers; track teacher.id) {
+                  <option [value]="teacher.id">{{ teacher.name }}</option>
+                }
+              </select>
+            </div>
+            <div><label for="lesson-topic">Tema <span class="optional">opcional</span></label><input id="lesson-topic" name="topic" maxlength="200" [(ngModel)]="newLesson.topic" /></div>
+          </div>
+          </div>
+          <div class="sheet-dialog-actions">
+            <button type="button" class="outline" (click)="lessonDialog.close()">Cancelar</button>
+            <button type="submit" [disabled]="busy() || !newLesson.date || !newLesson.room || !newLesson.subject">Marcar aula</button>
+          </div>
+        </form>
+      </dialog>
+    </section>
+
+    <section aria-labelledby="roster-title">
+      <div class="admin-users-head">
+        <h2 id="roster-title">Lista da turma</h2>
+        <button type="button" class="outline" (click)="rosterDialog.showModal()">Adicionar alunos</button>
+      </div>
+      @if (!cls.members.length) {
+        <p class="muted">Ninguém na lista ainda. Cole os nomes e prontuários da planilha em "Adicionar alunos".</p>
+      }
+      @if (cls.members.length) {
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th scope="col">Nome</th><th scope="col">Prontuário</th><th scope="col">Conta</th><th scope="col">Presença</th><th scope="col"><span class="visually-hidden">Ações</span></th></tr></thead>
+            <tbody>
+              @for (member of cls.members; track member.id) {
+                <tr>
+                  <td>{{ member.name }}</td>
+                  <td>{{ member.enrollment }}</td>
+                  <td>{{ member.hasAccount ? "Tem conta" : "Sem conta" }}</td>
+                  <td>{{ member.present }} de {{ cls.lessons.length }}</td>
+                  <td class="admin-actions"><button type="button" class="text-button" (click)="removeMember(member)" [attr.aria-label]="'Remover ' + member.name">Remover</button></td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+      <dialog #rosterDialog class="sheet-dialog" aria-labelledby="roster-import-title">
+        <div class="sheet-dialog-head"><div><p class="sheet-dialog-eyebrow">{{ cls.name }}</p><h2 id="roster-import-title">Adicionar alunos</h2></div><button type="button" class="sheet-close" (click)="rosterDialog.close()" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button></div>
+        <form class="sheet-dialog-body" (ngSubmit)="importRoster(rosterDialog)">
+          <div class="sheet-dialog-content">
+          <label for="roster-text">Copie da planilha as colunas de nome e prontuário (e-mail opcional) e cole aqui. A ordem das colunas não importa.</label>
+          <textarea id="roster-text" name="rosterText" rows="8" [(ngModel)]="rosterText" placeholder="Ana Souza	PE3012345&#10;Bruno Lima	PE3012346"></textarea>
+          </div>
+          <div class="sheet-dialog-actions">
+            <button type="button" class="outline" (click)="rosterDialog.close()">Cancelar</button>
+            <button type="submit" [disabled]="busy() || !rosterText.trim()">Adicionar à turma</button>
+          </div>
+        </form>
+      </dialog>
+    </section>
+    }
+  } @else {
+    <h1 id="lessons-title">Aulas de preparação</h1>
+    <div class="admin-users-head">
+      <p class="admin-intro">Turmas, aulas, chamada e exportação da presença no formato da planilha.</p>
+      <button type="button" (click)="classDialog.showModal()">Nova turma</button>
+    </div>
+    @if (!classes().length) {
+      <p class="muted">Nenhuma turma ainda. Comece criando a turma de preparação deste ano.</p>
+    }
+    @if (classes().length) {
+      <ul class="admin-pending">
+        @for (cls of classes(); track cls.id) {
+          <li>
+            <strong>{{ cls.name }}</strong>
+            <span class="muted">ENADE {{ cls.editionYear }} · {{ plural(cls.members, "pessoa", "pessoas") }} · {{ plural(cls.lessons, "aula", "aulas") }}</span>
+            @if (cls.nextLesson) {
+              <span class="admin-role">Próxima: {{ when(cls.nextLesson) }}</span>
+            }
+            <button type="button" class="text-button" (click)="openClass(cls.id)">Abrir</button>
+          </li>
+        }
+      </ul>
+    }
+    <dialog #classDialog class="sheet-dialog" aria-labelledby="class-new-title">
+      <div class="sheet-dialog-head"><div><p class="sheet-dialog-eyebrow">Aulas de preparação</p><h2 id="class-new-title">Nova turma</h2></div><button type="button" class="sheet-close" (click)="classDialog.close()" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button></div>
+      <form class="sheet-dialog-body" (ngSubmit)="createClass(classDialog)">
+        <div class="sheet-dialog-content">
+        <div class="import-fields">
+          <div><label for="class-name">Nome</label><input id="class-name" name="name" maxlength="120" [(ngModel)]="newClass.name" placeholder="Preparação ENADE 2026" required /></div>
+          <div><label for="class-year">Ano do ENADE</label><input id="class-year" name="editionYear" type="number" min="2004" max="2100" [(ngModel)]="newClass.editionYear" required /></div>
+        </div>
+        </div>
+        <div class="sheet-dialog-actions">
+          <button type="button" class="outline" (click)="classDialog.close()">Cancelar</button>
+          <button type="submit" [disabled]="busy() || newClass.name.trim().length < 2">Criar turma</button>
+        </div>
+      </form>
+    </dialog>
+  }
+</section>

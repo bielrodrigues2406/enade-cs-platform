@@ -1,0 +1,122 @@
+/* Desempenho por área: lista indexada com filetes, uma linha por área.
+   O resto da página inicial usa os estilos globais .home-*, .todo-* e .panel. */
+.home-areas {
+  container-type: inline-size;
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+.areas-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  margin-bottom: var(--space-4);
+}
+.areas-head h2 {
+  margin: 0 0 var(--space-2);
+}
+.areas-head p {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+.areas-head strong {
+  color: var(--color-text);
+}
+.areas-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+.areas-list li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(10rem, 1.1fr) minmax(12rem, 2fr) auto;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.areas-index {
+  font-family: var(--font-reading);
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+}
+.areas-list li.is-weakest .areas-index {
+  color: var(--color-danger-text);
+}
+.areas-name {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.areas-name span,
+.areas-value,
+.areas-note {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.areas-score {
+  display: grid;
+  grid-template-columns: minmax(4rem, 1fr) auto;
+  align-items: center;
+  gap: 4px var(--space-3);
+}
+.areas-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+.areas-fill {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(var(--value, 0));
+  transition: transform 700ms var(--ease-out);
+}
+@starting-style {
+  .areas-fill {
+    transform: scaleX(0);
+  }
+}
+.areas-list li.is-weakest .areas-fill {
+  background: var(--color-danger-text);
+}
+.areas-value.is-empty {
+  grid-column: 1 / -1;
+}
+.areas-note {
+  grid-column: 1 / -1;
+  color: var(--color-warning-text);
+}
+.areas-hint {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .areas-fill {
+    transition: none;
+  }
+}
+/* A coluna de conteúdo depende da barra lateral: decide pela largura da seção. */
+@container (max-width: 44rem) {
+  .areas-list li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+  .areas-score,
+  .areas-list li button {
+    grid-column: 2;
+  }
+  .areas-list li button {
+    justify-self: start;
+  }
+}

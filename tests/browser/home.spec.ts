@@ -1,11 +1,16 @@
 import { test, expect, type Page } from "@playwright/test";
+import { signUp } from "./session-helpers";
 
 const noHorizontalScroll = (page: Page) =>
   page.evaluate(
     () => document.documentElement.scrollWidth <= window.innerWidth,
   );
 const goHome = (page: Page) =>
-  page.getByRole("link", { name: "Caderno de Computação, início" }).click();
+  page.getByRole("link", { name: "Preparação ENADE, início" }).click();
+
+test.beforeEach(async ({ context }) => {
+  await signUp(context);
+});
 
 test("home shows the study board and leads to study and back", async ({
   page,
@@ -19,9 +24,7 @@ test("home shows the study board and leads to study and back", async ({
   for (const name of [
     "Para você estudar",
     "A prova de 2026",
-    "De onde vêm as questões",
-    "Como o caderno funciona",
-    "Em construção",
+    "Seu desempenho por área",
   ])
     await expect(page.getByRole("heading", { name })).toBeVisible();
   const weeks = page.getByRole("list", { name: "Semanas até a prova" });
@@ -32,6 +35,9 @@ test("home shows the study board and leads to study and back", async ({
     page.getByRole("img", { name: /Mapa da prova: 15 questões/ }),
   ).toBeVisible();
   await expect(page.getByText("Autoral demonstrativa").first()).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /^Simular Redes: \d+ questõ?(?:es|ão)$/ }),
+  ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Início" }).first(),
   ).toHaveAttribute("aria-current", "page");
@@ -109,7 +115,7 @@ test("a wrong answer appears first on the home page and can be retried", async (
   ).toContainText("espera no caderno de erros");
   await page
     .getByRole("button", {
-      name: "Tentar novamente: Entrega confiável de um fluxo",
+      name: /^(?:Revisar agora|Tentar novamente): Entrega\ confiável\ de\ um\ fluxo$/,
     })
     .click();
   await expect(
@@ -120,20 +126,24 @@ test("a wrong answer appears first on the home page and can be retried", async (
   ).not.toBeChecked();
 });
 
-test("home shows everything at once with reduced motion", async ({
-  browser,
+test("an area simulation starts from the home page and opens on its first question", async ({
+  page,
 }) => {
-  const context = await browser.newContext({ reducedMotion: "reduce" });
-  const page = await context.newPage();
   await page.goto("/");
-  // Sem animação: a demonstração já mostra a correção e nada fica escondido.
-  await expect(page.getByText("Resposta correta.")).toBeVisible();
   await page
-    .getByRole("heading", { name: "Em construção" })
-    .scrollIntoViewIfNeeded();
-  for (const item of await page.locator("app-home [data-reveal]").all())
-    await expect(item).toHaveCSS("opacity", "1");
-  await context.close();
+    .getByRole("button", { name: /^Simular Redes: / })
+    .click();
+  await expect(page).toHaveURL(/\/treino\?attempt=/);
+  await expect(page.getByText(/^Questão 1 de \d+$/)).toBeVisible();
+  await expect(page.getByText("Redes · com cronômetro")).toBeVisible();
+  await expect(page.locator(".practice-clock time")).toBeVisible();
+
+  // Pausada pela saída, a prova aparece como "Em andamento" e retoma dali.
+  page.once("dialog", (dialog) => dialog.accept());
+  await goHome(page);
+  await expect(page.getByRole("heading", { name: "Em andamento" })).toBeVisible();
+  await page.getByRole("button", { name: /^Retomar: Treino de Redes/ }).click();
+  await expect(page.getByText(/^Questão 1 de \d+$|Simulado pausado/)).toBeVisible();
 });
 
 test("home reflows without horizontal scrolling", async ({ page }) => {

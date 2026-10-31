@@ -148,9 +148,10 @@ test("partial practice shows real availability and blocks sizes without enough p
   await page.goto("/treino");
   await expect(page.getByRole("radio", { name: "20 questões", exact: true })).toBeChecked();
   await page.getByLabel("Área do treino").selectOption("Segurança");
-  for (const size of [10, 20, 30]) await expect(page.getByRole("radio", { name: `${size} questões`, exact: true })).toBeDisabled();
+  // Área sem questões: nenhum tamanho é oferecido e não dá para começar.
+  await expect(page.getByRole("radio", { name: /questões|Todas/ })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Começar treino", exact: true })).toBeDisabled();
-  await expect(page.getByText("0 questões publicadas disponíveis nesta seleção.")).toBeVisible();
+  await expect(page.getByText(/^0 questões publicadas nesta seleção/)).toBeVisible();
   await page.getByLabel("Área do treino").selectOption(area);
   await expect(page.getByRole("radio", { name: "30 questões", exact: true })).toBeEnabled();
   await page.getByRole("button", { name: "Caderno de erros", exact: true }).click();
@@ -207,6 +208,26 @@ test("answers and review marks resume after reload and final result keeps blanks
   await expect(page.getByRole("region", { name: "Correção da questão", exact: true })).toContainText("Resposta incorreta");
   const notebook = await (await page.request.get("/api/review?topic=&offset=0")).json();
   expect(notebook.summary.answered).toBe(0);
+});
+
+test("the result rebuilds a practice with the misses, and areas offer a timed simulation", async ({ page }) => {
+  const view = await start(page, 10);
+  await saveAction(page, () => radio(page, view.items[0], correctOption(view.items[0])).check());
+  await finish(page);
+  await page.getByRole("button", { name: "Refazer as erradas (9)", exact: true }).click();
+  await expect(page.locator("#practice-position")).toHaveText("Questão 1 de 9");
+  await expect(page.getByText("Refazer as erradas · sem cronômetro")).toBeVisible();
+  const retry = await currentView(page);
+  expect(retry.focus).toBe("RETRY");
+  expect(retry.items.map((item: any) => item.question.id)).not.toContain(view.items[0].question.id);
+  await finish(page);
+
+  await page.getByRole("button", { name: "Voltar aos treinos", exact: true }).click();
+  const areas = page.getByRole("region", { name: "Simulado por área" });
+  await expect(areas).toContainText(area);
+  await areas.getByRole("button", { name: `Simular ${area}`, exact: true }).click();
+  await expect(page.locator("#practice-position")).toHaveText(/^Questão 1 de (?:[1-9]|[12][0-9]|30)$/);
+  await expect(page.getByText(`${area} · com cronômetro`)).toBeVisible();
 });
 
 test("a lost save acknowledgement stays protected until retry confirms the same operation", async ({ page }) => {

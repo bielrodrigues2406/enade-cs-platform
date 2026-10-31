@@ -1,0 +1,2933 @@
+{
+  "document": "enade-2011-comum-exam",
+  "completeness": {
+    "missing": [],
+    "unexpected": []
+  },
+  "extraction": {
+    "method": "PDF_TEXT",
+    "optionFonts": {
+      "fonts": [
+        {
+          "id": "20",
+          "family": "ANPAYO+BundesbahnPiStd-1",
+          "size": 15,
+          "occurrences": 340
+        }
+      ],
+      "markers": 340,
+      "unmatched": 0
+    }
+  },
+  "warnings": [
+    "Marcadores das edições antigas foram comparados ao XML de fontes do próprio PDF; alternativas e reconstruções de layout continuam exigindo conferência visual.",
+    "Caderno compartilhado: os blocos de outros cursos foram preservados com courseScope e não são automaticamente questões de Ciência da Computação.",
+    "O gabarito não se declara definitivo; confirmação documental pendente."
+  ],
+  "items": [
+    {
+      "key": "Q1",
+      "kind": "OBJECTIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        2
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "D",
+      "prompt": "Retrato de uma princesa desconhecida Para que ela tivesse um pescoço tão fino Para que os seus pulsos tivessem um quebrar de caule Para que os seus olhos fossem tão frontais e limpos Para que a sua espinha fosse tão direita E ela usasse a cabeça tão erguida Com uma tão simples claridade sobre a testa Foram necessárias sucessivas gerações de escravos De corpo dobrado e grossas mãos pacientes Servindo sucessivas gerações de príncipes Ainda um pouco toscos e grosseiros Ávidos cruéis e fraudulentos Foi um imenso desperdiçar de gente Para que ela fosse aquela perfeição Solitária exilada sem destino\nANDRESEN, S. M. B. Dual. Lisboa: Caminho, 2004. p. 73. No poema, a autora sugere que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "os príncipes e as princesas são naturalmente belos."
+        },
+        {
+          "letter": "B",
+          "text": "os príncipes generosos cultivavam a beleza da princesa."
+        },
+        {
+          "letter": "C",
+          "text": "a beleza da princesa é desperdiçada pela miscigenação racial."
+        },
+        {
+          "letter": "D",
+          "text": "o trabalho compulsório de escravos proporcionou privilégios aos príncipes."
+        },
+        {
+          "letter": "E",
+          "text": "o exílio e a solidão são os responsáveis pela manutenção do corpo esbelto da princesa."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q2",
+      "kind": "OBJECTIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        2
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "A",
+      "prompt": "Exclusão digital é um conceito que diz respeito às extensas camadas sociais que ficaram à margem do fenômeno da sociedade da informação e da extensão das redes digitais. O problema da exclusão digital se apresenta como um dos maiores desafios dos dias de hoje, com implicações diretas e indiretas sobre os mais variados aspectos da sociedade contemporânea.\nNessa nova sociedade, o conhecimento é essencial para aumentar a produtividade e a competição global. É fundamental para a invenção, para a inovação e para a geração de riqueza. As tecnologias de informação e comunicação (TICs) proveem uma fundação para a construção e aplicação do conhecimento nos setores públicos e privados. É nesse contexto que se aplica o termo exclusão digital, referente à falta de acesso às vantagens e aos benefícios trazidos por essas novas tecnologias, por motivos sociais, econômicos, políticos ou culturais.\nConsiderando as ideias do texto acima, avalie as afirmações a seguir.\nI. Um mapeamento da exclusão digital no Brasil permite aos gestores de políticas públicas escolherem o público- alvo de possíveis ações de inclusão digital.\nII. O uso das TICs pode cumprir um papel social, ao prover informações àqueles que tiveram esse direito negado ou negligenciado e, portanto, permitir maiores graus de mobilidade social e econômica.\nIII. O direito à informação diferencia-se dos direitos sociais, uma vez que esses estão focados nas relações entre os indivíduos e, aqueles, na relação entre o indivíduo e o conhecimento.\nIV. O maior problema de acesso digital no Brasil está na deficitária tecnologia existente em território nacional, muito aquém da disponível na maior parte dos países do primeiro mundo.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "II e IV."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e III."
+        },
+        {
+          "letter": "E",
+          "text": "I, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q3",
+      "kind": "OBJECTIVE",
+      "number": 3,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        3
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "E",
+      "prompt": "A cibercultura pode ser vista como herdeira legítima (embora distante) do projeto progressista dos filósofos do século XVII. De fato, ela valoriza a participação das pessoas em comunidades de debate e argumentação. Na linha reta das morais da igualdade, ela incentiva uma forma de reciprocidade essencial nas relações humanas. Desenvolveu-se a partir de uma prática assídua de trocas de informações e conhecimentos, coisa que os filósofos do Iluminismo viam como principal motor do progresso. (...) A cibercultura não seria pós-moderna, mas estaria inserida perfeitamente na continuidade dos ideais revolucionários e republicanos de liberdade, igualdade e fraternidade. A diferença é apenas que, na cibercultura, esses “valores” se encarnam em dispositivos técnicos concretos. Na era das mídias eletrônicas, a igualdade se concretiza na possibilidade de cada um transmitir a todos; a liberdade toma forma nos softwares de codificação e no acesso a múltiplas comunidades virtuais, atravessando fronteiras, enquanto a fraternidade, finalmente, se traduz em interconexão mundial.\nLEVY, P. Revolução virtual. Folha de S. Paulo. Caderno Mais, 16 ago. 1998, p.3 (adaptado).\nO desenvolvimento de redes de relacionamento por meio de computadores e a expansão da Internet abriram novas perspectivas para a cultura, a comunicação e a educação. De acordo com as ideias do texto acima, a cibercultura",
+      "options": [
+        {
+          "letter": "A",
+          "text": "representa uma modalidade de cultura pós-moderna de liberdade de comunicação e ação."
+        },
+        {
+          "letter": "B",
+          "text": "constituiu negação dos valores progressistas defendidos pelos filósofos do Iluminismo."
+        },
+        {
+          "letter": "C",
+          "text": "banalizou a ciência ao disseminar o conhecimento nas redes sociais."
+        },
+        {
+          "letter": "D",
+          "text": "valorizou o isolamento dos indivíduos pela produção de softwares de codificação."
+        },
+        {
+          "letter": "E",
+          "text": "incorpora valores do Iluminismo ao favorecer o compartilhamento de informações e conhecimentos."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q4",
+      "kind": "OBJECTIVE",
+      "number": 4,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        3
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "A",
+      "prompt": "Com o advento da República, a discussão sobre a questão educacional torna-se pauta significativa nas esferas dos Poderes Executivo e Legislativo, tanto no âmbito Federal quanto no Estadual. Já na Primeira República, a expansão da demanda social se propaga com o movimento da escola- novista; no período getulista, encontram-se as reformas de Francisco Campos e Gustavo Capanema; no momento de crítica e balanço do pós-1946, ocorre a promulgação da primeira Lei de Diretrizes e Bases da Educação Nacional, em 1961. É somente com a Constituição de 1988, no entanto, que os brasileiros têm assegurada a educação de forma universal, como um direito de todos, tendo em vista o pleno desenvolvimento da pessoa no que se refere a sua preparação para o exercício da cidadania e sua qualificação para o trabalho. O artigo 208 do texto constitucional prevê como dever do Estado a oferta da educação tanto a crianças como àqueles que não tiveram acesso ao ensino em idade própria à escolarização cabida.\nNesse contexto, avalie as seguintes asserções e a relação proposta entre elas.\nA relação entre educação e cidadania se estabelece na busca da universalização da educação como uma das condições necessárias para a consolidação da democracia no Brasil.\nPORQUE\nPor meio da atuação de seus representantes nos Poderes Executivos e Legislativo, no decorrer do século XX, passou a ser garantido no Brasil o direito de acesso à educação, inclusive aos jovens e adultos que já estavam fora da idade escolar.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas são proposições verdadeiras, mas a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira é uma proposição verdadeira, e a segunda, falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira é uma proposição falsa, e a segunda, verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q5",
+      "kind": "OBJECTIVE",
+      "number": 5,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        4
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura",
+        "caracteres-suspeitos"
+      ],
+      "answer": "C",
+      "prompt": "Desmatamento na Amazônia Legal. Disponível em: <www.imazon.org.br/mapas/desmatamento-mensal-2011>. Acesso em: 20 ago. 2011.\nO ritmo de desmatamento na Amazônia Legal diminuiu no mês de junho de 2011, segundo levantamento feito pela organização ambiental brasileira Imazon (Instituto do Homem e Meio Ambiente da Amazônia). O relatório elaborado pela ONG, a partir de imagens de satélite, apontou desmatamento de 99 km² no bioma em junho de 2011, uma redução de 42% no comparativo com junho de 2010. No acumulado entre agosto de 2010 e junho de 2011, o desmatamento foi de 1 534 km², aumento de 15% em relação a agosto de 2009 e junho de 2010. O estado de Mato Grosso foi responsável por derrubar 38% desse total e é líder no ranking do desmatamento, seguido do Pará (25%) e de Rondônia (21%).\nDisponível em: <http://www.imazon.org.br/imprensa/imazon-na-midia>. Acesso em: 20 ago. 2011(com adaptações).\nDe acordo com as informações do mapa e do texto,",
+      "options": [
+        {
+          "letter": "A",
+          "text": "foram desmatados 1 534 km² na Amazônia Legal nos últimos dois anos."
+        },
+        {
+          "letter": "B",
+          "text": "não houve aumento do desmatamento no último ano na Amazônia Legal."
+        },
+        {
+          "letter": "C",
+          "text": "três estados brasileiros responderam por 84% do desmatamento na Amazônia Legal entre agosto de 2010 e junho de 2011."
+        },
+        {
+          "letter": "D",
+          "text": "o estado do Amapá apresenta alta taxa de desmatamento em comparação aos demais estados da Amazônia Legal."
+        },
+        {
+          "letter": "E",
+          "text": "o desmatamento na Amazônia Legal, em junho de 2010, foi de 140 km2, comparando-se o índice de junho de 2011 ao índice de junho de 2010."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q6",
+      "kind": "OBJECTIVE",
+      "number": 6,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        5
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "A educação é o Xis da questão\nDesemprego Salário Aqui se vê que a taxa de Aqui se vê que os salários desemprego é menor para aumentam conforme os quem fica mais tempo anos de estudo (em reais) na escola 13,05%\nAté 10 anos de estudo 18 500\nSalário de 7,91% quem tem doutorado 12 a 14 anos ou MBA de estudo\n8 600 3,83%\nSalário de 15 a 17 anos quem tem curso de estudo superior e fala uma língua 2,66% estrangeira Mais de 1 800 17 anos de estudo Salário de quem conclui o ensino médio Fontes: Manager Assessoria em Recursos Humanos e IBGE\nDisponível em: <http://ead.uepb.edu.br/noticias,82>. Acesso em: 24 ago. 2011.\nA expressão “o Xis da questão” usada no título do infográfico diz respeito",
+      "options": [
+        {
+          "letter": "A",
+          "text": "à quantidade de anos de estudos necessários para garantir um emprego estável com salário digno."
+        },
+        {
+          "letter": "B",
+          "text": "às oportunidades de melhoria salarial que surgem à medida que aumenta o nível de escolaridade dos indivíduos."
+        },
+        {
+          "letter": "C",
+          "text": "à influência que o ensino de língua estrangeira nas escolas tem exercido na vida profissional dos indivíduos."
+        },
+        {
+          "letter": "D",
+          "text": "aos questionamentos que são feitos acerca da quantidade mínima de anos de estudo que os indivíduos precisam para ter boa educação."
+        },
+        {
+          "letter": "E",
+          "text": "à redução da taxa de desemprego em razão da política atual de controle da evasão escolar e de aprovação automática de ano de acordo com a idade."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q7",
+      "kind": "OBJECTIVE",
+      "number": 7,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        5
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "B",
+      "prompt": "A definição de desenvolvimento sustentável mais usualmente utilizada é a que procura atender às necessidades atuais sem comprometer a capacidade das gerações futuras. O mundo assiste a um questionamento crescente de paradigmas estabelecidos na economia e também na cultura política. A crise ambiental no planeta, quando traduzida na mudança climática, é uma ameaça real ao pleno desenvolvimento das potencialidades dos países.\nO Brasil está em uma posição privilegiada para enfrentar os enormes desafios que se acumulam. Abriga elementos fundamentais para o desenvolvimento: parte significativa da biodiversidade e da água doce existentes no planeta; grande extensão de terras cultiváveis; diversidade étnica e cultural e rica variedade de reservas naturais.\nO campo do desenvolvimento sustentável pode ser conceitualmente dividido em três componentes: sustentabilidade ambiental, sustentabilidade econômica e sustentabilidade sociopolítica.\nNesse contexto, o desenvolvimento sustentável pressupõe",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a preservação do equilíbrio global e do valor das reservas de capital natural, o que não justifica a desaceleração do desenvolvimento econômico e político de uma sociedade."
+        },
+        {
+          "letter": "B",
+          "text": "a redefinição de critérios e instrumentos de avaliação de custo-benefício que reflitam os efeitos socioeconômicos e os valores reais do consumo e da preservação."
+        },
+        {
+          "letter": "C",
+          "text": "o reconhecimento de que, apesar de os recursos naturais serem ilimitados, deve ser traçado um novo modelo de desenvolvimento econômico para a humanidade."
+        },
+        {
+          "letter": "D",
+          "text": "a redução do consumo das reservas naturais com a consequente estagnação do desenvolvimento econômico e tecnológico."
+        },
+        {
+          "letter": "E",
+          "text": "a distribuição homogênea das reservas naturais entre as nações e as regiões em nível global e regional."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q8",
+      "kind": "OBJECTIVE",
+      "number": 8,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        6
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "E",
+      "prompt": "Em reportagem, Owen Jones, autor do livro Chavs: a difamação da classe trabalhadora, publicado no Reino Unido, comenta as recentes manifestações de rua em Londres e em outras principais cidades inglesas.\nJones prefere chamar atenção para as camadas sociais mais desfavorecidas do país, que desde o início dos distúrbios, ficaram conhecidas no mundo todo pelo apelido chavs, usado pelos britânicos para escarnecer dos hábitos de consumo da classe trabalhadora. Jones denuncia um sistemático abandono governamental dessa parcela da população: “Os políticos insistem em culpar os indivíduos pela desigualdade”, diz. (...) “você não vai ver alguém assumir ser um chav, pois se trata de um insulto criado como forma de generalizar o comportamento das classes mais baixas. Meu medo não é o preconceito e, sim, a cortina de fumaça que ele oferece. Os distúrbios estão servindo como o argumento ideal para que se faça valer a ideologia de que os problemas sociais são resultados de defeitos individuais, não de falhas maiores. Trata-se de uma filosofia que tomou conta da sociedade britânica com a chegada de Margaret Thatcher ao poder, em 1979, e que basicamente funciona assim: você é culpado pela falta de oportunidades. (...) Os políticos insistem em culpar os indivíduos pela desigualdade”.\nSuplemento Prosa & Verso, O Globo, Rio de Janeiro, 20 ago. 2011, p. 6 (adaptado).\nConsiderando as ideias do texto, avalie as afirmações a seguir.\nI. Chavs é um apelido que exalta hábitos de consumo de parcela da população britânica.\nII. Os distúrbios ocorridos na Inglaterra serviram para atribuir deslizes de comportamento individual como causas de problemas sociais.\nIII. Indivíduos da classe trabalhadora britânica são responsabilizados pela falta de oportunidades decorrente da ausência de políticas públicas.\nIV. As manifestações de rua na Inglaterra reivindicavam formas de inclusão nos padrões de consumo vigente.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "I, III e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D1",
+      "kind": "DISCURSIVE",
+      "number": 1,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        7
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "figura"
+      ],
+      "prompt": "A Educação a Distância (EaD) é a modalidade de ensino que permite que a\ncomunicação e a construção do conhecimento entre os usuários envolvidos\npossam acontecer em locais e tempos distintos. São necessárias tecnologias\ncada vez mais sofisticadas para essa modalidade de ensino não presencial, com\nvistas à crescente necessidade de uma pedagogia que se desenvolva por meio\nde novas relações de ensino-aprendizagem.\nO Censo da Educação Superior de 2009, realizado pelo MEC/INEP, aponta\npara o aumento expressivo do número de matrículas nessa modalidade. Entre\n2004 e 2009, a participação da EaD na Educação Superior passou de 1,4%\npara 14,1%, totalizando 838 mil matrículas, das quais 50% em cursos de\nlicenciatura. Levantamentos apontam ainda que 37% dos estudantes de EaD\nestão na pós-graduação e que 42% estão fora do seu estado de origem.\nConsiderando as informações acima, enumere três vantagens de um curso a distância, justificando brevemente cada uma delas. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false
+      }
+    },
+    {
+      "key": "D2",
+      "kind": "DISCURSIVE",
+      "number": 2,
+      "block": "FORMACAO_GERAL",
+      "pages": [
+        8
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "figura",
+        "caracteres-suspeitos"
+      ],
+      "prompt": "A Síntese de Indicadores Sociais (SIS 2010) utiliza-se da Pesquisa Nacional por Amostra de Domicílios (PNAD) População analfabeta com idade superior a 15 anos para apresentar sucinta análise das condições de vida no Brasil. Quanto ao analfabetismo, a SIS 2010 mostra que ano porcentagem os maiores índices se concentram na população idosa, em camadas de menores rendimentos e predominantemente 2000 13,6 na região Nordeste, conforme dados do texto a seguir.\n2001 12,4 A taxa de analfabetismo referente a pessoas de 15 anos ou mais de idade baixou de 13,3% em 1999 para 9,7% 2002 11,8 em 2009. Em números absolutos, o contingente era de 14,1 milhões de pessoas analfabetas. Dessas, 42,6% 2003 11,6 tinham mais de 60 anos, 52,2% residiam no Nordeste 2004 11,2 e 16,4% viviam com ½ salário-mínimo de renda familiar per capita. Os maiores decréscimos no analfabetismo 2005 10,7 por grupos etários entre 1999 a 2009 ocorreram na faixa dos 15 a 24 anos. Nesse grupo, as mulheres eram mais 2006 10,2 alfabetizadas, mas a população masculina apresentou queda um pouco mais acentuada dos índices de 2007 9,9 analfabetismo, que passou de 13,5% para 6,3%, contra 2008 10,0 6,9% para 3,0% para as mulheres.\nSIS 2010: Mulheres mais escolarizadas são mães mais tarde e têm menos filhos. 2009 9,7\nDisponível em: <www.ibge.gov.br/home/presidencia/noticias>.\nAcesso em: 25 ago. 2011 (adaptado). Fonte: IBGE\nCom base nos dados apresentados, redija um texto dissertativo acerca da importância de políticas e programas educacionais para a erradicação do analfabetismo e para a empregabilidade, considerando as disparidades sociais e as dificuldades de obtenção de emprego provocadas pelo analfabetismo. Em seu texto, apresente uma proposta para a superação do analfabetismo e para o aumento da empregabilidade. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false
+      }
+    },
+    {
+      "key": "Q9",
+      "kind": "OBJECTIVE",
+      "number": 9,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [
+        "verifi|cadas,",
+        "defi|nida",
+        "defi|nições",
+        "afi|rmações",
+        "afi|rma"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "D",
+      "prompt": "Seja A um conjunto e seja ~ uma relação entre pares de elementos de A.\nDiz-se que ~ é uma relação de equivalência entre pares de elementos de A se as seguintes propriedades são verificadas, para quaisquer elementos a, a’ e a’’ de A: (i) a ~ a; (ii) se a ~ a’, então a’ ~ a; (iii) se a ~ a’ e a’ ~ a’’, então a ~ a’’.\nUma classe de equivalência do elemento a de A com respeito à relação ~ é o conjunto\nO conjunto quociente de A pela relação de equivalência ~ é o conjunto de todas as classes de equivalência relativamente à relação ~, definido e denotado como a seguir:\nA função é chamada projeção canônica e é definida como\nConsiderando as definições acima, analise as afirmações a seguir.\nI. A relação de equivalência ~ no conjunto A particiona o conjunto A em subconjuntos disjuntos: as classes de equivalência.\nII. A união das classes de equivalência da relação de equivalência ~ no conjunto A resulta no conjunto das partes de A.\nIII. As três relações seguintes\nsão relações de equivalência no conjunto dos números inteiros .\nIV. Qualquer relação de equivalência no conjunto A é proveniente de sua projeção canônica.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "II."
+        },
+        {
+          "letter": "B",
+          "text": "III."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "I e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q10",
+      "kind": "OBJECTIVE",
+      "number": 10,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        9
+      ],
+      "ligatureJoins": [
+        "identifi|cados"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "tabela",
+        "mencao-a-figura"
+      ],
+      "answer": "E",
+      "prompt": "Em determinado período letivo, cada estudante de um curso universitário tem aulas com um de três professores, esses identificados pelas letras X, Y e Z. As quantidades de estudantes (homens e mulheres) que têm aulas com cada professor é apresentada na tabela de contingência abaixo.\nProfessor X Professor Y Professor Z Estudantes 45 5 32 homens Estudantes 67 2 4 mulheres\nA partir do grupo de estudantes desse curso universitário, escolhe-se um estudante ao acaso. Qual é a probabilidade de que esse estudante seja mulher, dado que ele tem aulas apenas com o professor X?\n61",
+      "options": [
+        {
+          "letter": "A",
+          "text": " 73 61"
+        },
+        {
+          "letter": "B",
+          "text": " 155 67"
+        },
+        {
+          "letter": "C",
+          "text": " 155 22"
+        },
+        {
+          "letter": "D",
+          "text": " 112 67"
+        },
+        {
+          "letter": "E",
+          "text": " 112"
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q11",
+      "kind": "OBJECTIVE",
+      "number": 11,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        10
+      ],
+      "ligatureJoins": [
+        "fi|nita,",
+        "indefi|nidamente."
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "C",
+      "prompt": "O problema da parada para máquinas de Turing, ou simplesmente problema da parada, pode ser assim descrito: determinar, para quaisquer máquina de Turing M e palavra w, se M irá eventualmente parar com entrada w. Mais informalmente, o mesmo problema também pode ser assim descrito: dados um algoritmo e uma entrada finita, decidir se o algoritmo termina ou se executará indefinidamente.\nPara o problema da parada,",
+      "options": [
+        {
+          "letter": "A",
+          "text": "existe algoritmo exato de tempo de execução polinomial para solucioná-lo."
+        },
+        {
+          "letter": "B",
+          "text": "existe algoritmo exato de tempo de execução exponencial para solucioná-lo."
+        },
+        {
+          "letter": "C",
+          "text": "não existe algoritmo que o solucione, não importa quanto tempo seja disponibilizado."
+        },
+        {
+          "letter": "D",
+          "text": "não existe algoritmo exato, mas existe algoritmo de aproximação de tempo de execução polinomial que o soluciona, fornecendo respostas aproximadas."
+        },
+        {
+          "letter": "E",
+          "text": "não existe algoritmo exato, mas existe algoritmo de aproximação de tempo de execução exponencial que o soluciona, fornecendo respostas aproximadas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q12",
+      "kind": "OBJECTIVE",
+      "number": 12,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        10
+      ],
+      "ligatureJoins": [
+        "afi|rmações",
+        "afi|rma"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "B",
+      "prompt": "Considere a gramática a seguir, em que , e são símbolos não terminais, e são terminais e é a cadeia vazia.\nA respeito dessa gramática, analise as afirmações a seguir.\nI. Nas cadeias geradas por essa gramática, o último símbolo é .\nII. O número de zeros consecutivos nas cadeias geradas pela gramática é, no máximo, dois.\nIII. O número de uns em cada cadeia gerada pela gramática é maior que o número de zeros.\nIV. Nas cadeias geradas por essa gramática, todos os uns estão à esquerda de todos os zeros.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "II."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q13",
+      "kind": "OBJECTIVE",
+      "number": 13,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        10
+      ],
+      "ligatureJoins": [
+        "fi|m",
+        "verifi|car",
+        "justifi|cativa",
+        "justifi|cativa"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "anulada",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "ANULADA",
+      "prompt": "O problema do escalonamento de intervalos tem como entrada um conjunto de intervalos numéricos (usualmente interpretados como início e fim de atividades), e o objetivo é escolher, desse conjunto, o maior número possível de intervalos disjuntos dois a dois. Há vários problemas práticos que podem ser modelados dessa forma, como, por exemplo, a seleção de tarefas com horário marcado.\nO problema do escalonamento de intervalos pode ser resolvido com o algoritmo descrito a seguir. O conjunto de intervalos dados inicialmente é R e o conjunto de intervalos escolhidos, A, começa vazio.\nenquanto R não estiver vazio,\nseja x o intervalo de R com menor tempo\nde término, e que não tenha interseção com\nalgum intervalo em A\nretire x de R e adicione ao conjunto A\nretorne A\nA respeito desse algoritmo, analise as seguintes asserções.\nPara checar se o algoritmo está correto, basta verificar que o primeiro intervalo adicionado ao conjunto A necessariamente faz parte de uma solução ótima.\nPORQUE\nPode-se mostrar, por indução no número máximo de intervalos calculados (ou seja, no número de vezes que o laço “enquanto” é executado), que, embora possa haver soluções tão boas quanto A, nenhuma delas é estritamente melhor que A. O conjunto com um único intervalo é a base de indução.\nAcerca dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, mas a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda, uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A segunda asserção é uma proposição falsa e a segunda, uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q14",
+      "kind": "OBJECTIVE",
+      "number": 14,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "tabela",
+        "mencao-a-figura"
+      ],
+      "answer": "E",
+      "prompt": "Observe o diagrama de Venn a seguir.\nA função representada em azul no diagrama também poderia ser expressa pela função lógica",
+      "options": [
+        {
+          "letter": "A",
+          "text": "."
+        },
+        {
+          "letter": "B",
+          "text": "."
+        },
+        {
+          "letter": "C",
+          "text": "."
+        },
+        {
+          "letter": "D",
+          "text": "."
+        },
+        {
+          "letter": "E",
+          "text": "."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q15",
+      "kind": "OBJECTIVE",
+      "number": 15,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [
+        "efi|ciente)",
+        "Confi|guration"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura"
+      ],
+      "answer": "D",
+      "prompt": "Suponha que seja necessário desenvolver uma ferramenta que apresente o endereço IP dos múltiplos roteadores, salto a salto, que compõem o caminho do hospedeiro em que a ferramenta é executada até um determinado destino (segundo seu endereço IP), assim como o round-trip time até cada roteador. Tal ferramenta precisa funcionar na Internet atual, sem demandar mudanças em roteadores nem a introdução de novos protocolos.\nConsiderando o problema acima, qual dos seguintes protocolos representaria a melhor (mais simples e eficiente) solução?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "IP: Internet Protocol."
+        },
+        {
+          "letter": "B",
+          "text": "UDP: User Datagram Protocol."
+        },
+        {
+          "letter": "C",
+          "text": "TCP: Transmission Control Protocol."
+        },
+        {
+          "letter": "D",
+          "text": "ICMP: Internet Control Message Protocol."
+        },
+        {
+          "letter": "E",
+          "text": "DHCP: Dynamic Host Configuration Protocol."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q16",
+      "kind": "OBJECTIVE",
+      "number": 16,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        11
+      ],
+      "ligatureJoins": [
+        "profi|ssional",
+        "confi|gurado"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "Um navegador Web executa em um hospedeiro A, em uma rede de uma organização, e acessa uma página localizada de um servidor Web em um hospedeiro B, situado em outra rede na Internet. A rede em que A se situa conta com um servidor DNS local. Um profissional deseja fazer uma lista com a sequência de protocolos empregados e comparar com o resultado apresentado por uma ferramenta de monitoramento executada no hospedeiro A. A lista assume que\ni) todas as tabelas com informações temporárias e caches estão vazias;\nii) o hospedeiro cliente está configurado com o endereço IP do servidor DNS local.\nQual das sequências a seguir representa a ordem em que mensagens, segmentos e pacotes serão observados em um meio físico ao serem enviados pelo hospedeiro A?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "ARP, DNS/UDP/IP, TCP/IP e HTTP/TCP/IP."
+        },
+        {
+          "letter": "B",
+          "text": "ARP, DNS/UDP/IP, HTTP/TCP/IP e TCP/IP."
+        },
+        {
+          "letter": "C",
+          "text": "DNS/UDP/IP, ARP, HTTP/TCP/IP e TCP/IP."
+        },
+        {
+          "letter": "D",
+          "text": "DNS/UDP/IP, ARP, TCP/IP e HTTP/TCP/IP."
+        },
+        {
+          "letter": "E",
+          "text": "HTTP/TCP/IP, TCP/IP, DNS/UDP/IP e ARP."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q17",
+      "kind": "OBJECTIVE",
+      "number": 17,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        12
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "A tabela a seguir apresenta a relação de mintermos e maxtermos para três variáveis.\nAnalise o circuito de quatro variáveis a seguir.\nConsiderando esse circuito, as funções f e g são, respectivamente,",
+      "options": [
+        {
+          "letter": "A",
+          "text": "∑m(0,1,2,3,6,7,8,9) e ∑m(2,3,6,7,10,14)."
+        },
+        {
+          "letter": "B",
+          "text": "∑m(4,5,10,11,12,13,14,15) e ∑m(0,1,4,5,8,9,11,12,13,15)."
+        },
+        {
+          "letter": "C",
+          "text": "∏M(0,1,2,3,6,7,8,9) e ∏M(0,1,4,5,8,9,11,12,13,15)."
+        },
+        {
+          "letter": "D",
+          "text": "∏M(4,5,10,11,12,13,14,15) e ∑m(2,3,6,7,10,14)."
+        },
+        {
+          "letter": "E",
+          "text": "∏M(4,5,10,11,12,13,14,15) e ∏M(2,3,6,7,10,14)."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q18",
+      "kind": "OBJECTIVE",
+      "number": 18,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [
+        "afi|rmações",
+        "afi|rma"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "B",
+      "prompt": "Um vendedor de artigos de pesca obteve com um amigo o código executável (já compilado) de um programa que gerencia vendas e faz o controle de estoque, com o intuito de usá-lo em sua loja. Segundo o seu amigo, o referido programa foi compilado em seu sistema computacional pessoal (sistema A) e funciona corretamente. O vendedor constatou que o programa excecutável também funciona corretamente no sistema computacional de sua loja (sistema B). Considerando a situação relatada, analise as afirmações a seguir.\nI. Os computadores poderiam ter quantidades diferentes de núcleos (cores).\nII. As chamadas ao sistema (system call) do sistema operacional no sistema A devem ser compatíveis com as do sistema B.\nIII. O conjunto de instruções do sistema A poderia ser diferente do conjunto de instruções do sistema B.\nIV. Se os registradores do sistema A forem de 64 bits, os registradores do sistema B poderiam ser de 32 bits.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q19",
+      "kind": "OBJECTIVE",
+      "number": 19,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [
+        "verifi|cação"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "E",
+      "prompt": "Uma equipe está realizando testes com base nos códigos-fonte de um sistema. Os testes envolvem a verificação de diversos componentes individualmente, bem como das interfaces entre os componentes.\nNo contexto apresentado, essa equipe está realizando testes em nível de",
+      "options": [
+        {
+          "letter": "A",
+          "text": "unidade."
+        },
+        {
+          "letter": "B",
+          "text": "aceitação."
+        },
+        {
+          "letter": "C",
+          "text": "sistema e aceitação."
+        },
+        {
+          "letter": "D",
+          "text": "integração e sistema."
+        },
+        {
+          "letter": "E",
+          "text": "unidade e integração."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q20",
+      "kind": "OBJECTIVE",
+      "number": 20,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [
+        "justifi|cativa",
+        "justifi|cativa"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "D",
+      "prompt": "Considere que G é um grafo qualquer e que V e E são os conjuntos de vértices e de arestas de G, respectivamente. Considere também que grau (v) é o grau de um vértice v pertencente ao conjunto V. Nesse contexto, analise as seguintes asserções.\nEm G, a quantidade de vértices com grau ímpar é ímpar.\nPORQUE\nPara G, vale a identidade dada pela expressão\nAcerca dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, mas a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q21",
+      "kind": "OBJECTIVE",
+      "number": 21,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        13
+      ],
+      "ligatureJoins": [
+        "fi|la.",
+        "fi|la,",
+        "fi|cou",
+        "fi|cou",
+        "fi|cou"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "A",
+      "prompt": "No desenvolvimento de um software que analisa bases de DNA, representadas pelas letras A, C, G, T, utilizou-se as estruturas de dados: pilha e fila. Considere que, se uma sequência representa uma pilha, o topo é o elemento mais à esquerda; e se uma sequência representa uma fila, a sua frente é o elemento mais à esquerda.\nAnalise o seguinte cenário: “a sequência inicial ficou armazenada na primeira estrutura de dados na seguinte ordem: (A,G,T,C,A,G,T,T). Cada elemento foi retirado da primeira estrutura de dados e inserido na segunda estrutura de dados, e a sequência ficou armazenada na seguinte ordem: (T,T,G,A,C,T,G,A). Finalmente, cada elemento foi retirado da segunda estrutura de dados e inserido na terceira estrutura de dados e a sequência ficou armazenada na seguinte ordem: (T,T,G,A,C,T,G,A)”. Qual a única sequência de estruturas de dados apresentadas a seguir pode ter sido usada no cenário descrito acima?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Fila - Pilha - Fila."
+        },
+        {
+          "letter": "B",
+          "text": "Fila - Fila - Pilha."
+        },
+        {
+          "letter": "C",
+          "text": "Fila - Pilha - Pilha."
+        },
+        {
+          "letter": "D",
+          "text": "Pilha - Fila - Pilha."
+        },
+        {
+          "letter": "E",
+          "text": "Pilha - Pilha - Pilha."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q22",
+      "kind": "OBJECTIVE",
+      "number": 22,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [
+        "defi|nidas"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "Considere a seguinte tabela verdade, na qual estão definidas quatro entradas – A, B, C e D – e uma saída S.\nA B C D S 0 0 0 0 1 0 0 0 1 0 0 0 1 0 1 0 0 1 1 0 0 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 1 0 1 0 0 0 1 1 0 0 1 1 1 0 1 0 0 1 0 1 1 1 1 1 0 0 0 1 1 0 1 0 1 1 1 0 1 1 1 1 1 1\nA menor expressão de chaveamento representada por uma soma de produtos correspondente à saída S é",
+      "options": [
+        {
+          "letter": "A",
+          "text": "AB’(D+C’)+A’D’+ABC."
+        },
+        {
+          "letter": "B",
+          "text": "AD + A’BD’+A’BC+A’B’C’."
+        },
+        {
+          "letter": "C",
+          "text": "A’D’ + AB’D+AB’C’+ABC."
+        },
+        {
+          "letter": "D",
+          "text": "(A’+D)(A+B+C’)(A+B’+C+D’)."
+        },
+        {
+          "letter": "E",
+          "text": "(A+D’)(A’+B’+C)(A’+B+C’+D)."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q23",
+      "kind": "OBJECTIVE",
+      "number": 23,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        14
+      ],
+      "ligatureJoins": [
+        "fi|nitos",
+        "fi|gura",
+        "prefi|xo"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "Autômatos finitos possuem diversas aplicações práticas, como na detecção de sequências de caracteres em um texto. A figura abaixo apresenta um autômato que reconhece sequências sobre o alfabeto e uma gramática livre de contexto que gera um subconjunto de , em que representa o string vazio.\nAnalisando a gramática e o autômato acima, conclui-se que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a linguagem gerada pela gramática é inerentemente ambígua."
+        },
+        {
+          "letter": "B",
+          "text": "a gramática é regular e gera uma linguagem livre de contexto."
+        },
+        {
+          "letter": "C",
+          "text": "a linguagem reconhecida pelo autômato é a mesma gerada pela gramática."
+        },
+        {
+          "letter": "D",
+          "text": "o autômato reconhece a linguagem sobre em que os strings possuem o prefixo ababc."
+        },
+        {
+          "letter": "E",
+          "text": "a linguagem reconhecida pelo autômato é a mesma que a representada pela expressão regular ."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q24",
+      "kind": "OBJECTIVE",
+      "number": 24,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "C",
+      "prompt": "As filas de prioridades (heaps) são estruturas de dados importantes no projeto de algoritmos. Em especial, heaps podem ser utilizados na recuperação de informação em grandes bases de dados constituídos por textos. Basicamente, para se exibir o resultado de uma consulta, os documentos recuperados são ordenados de acordo com a relevância presumida para o usuário. Uma consulta pode recuperar milhões de documentos que certamente não serão todos examinados. Na verdade, o usuário examina os primeiros m documentos dos n recuperados, em que m é da ordem de algumas dezenas.\nConsiderando as características dos heaps e sua aplicação no problema descrito acima, avalie as seguintes afirmações.\nI. Uma vez que o heap é implementado como uma árvore binária de pesquisa essencialmente completa, o custo computacional para sua construção é O(n log n).\nII. A implementação de heaps utilizando-se vetores é eficiente em tempo de execução e em espaço de armazenamento, pois o pai de um elemento armazenado na posição i se encontra armazenado na posição 2i+1.\nIII. O custo computacional para se recuperar de forma ordenada os m documentos mais relevantes armazenados em um heap de tamanho n é O(m log n).\nIV. Determinar o documento com maior valor de relevância armazenado em um heap tem custo computacional O(1).\nEstá correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "II e III."
+        },
+        {
+          "letter": "C",
+          "text": "III e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "I, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q25",
+      "kind": "OBJECTIVE",
+      "number": 25,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "E",
+      "prompt": "Um Padrão de Projeto nomeia, abstrai e identifica os aspectos-chave de uma estrutura de projeto comum para torná-la útil para a criação de um projeto orientado a objetos reutilizáveis.\nGAMMA, E., HELM, R., JOHNSON, R., VLISSIDES, J. Padrões de Projeto-Soluções Reutilizáveis de Software Orientado a Objetos. Porto Alegre: Bookman, 2000. Em relação a Padrões de Projeto, analise as afirmações a seguir.\nI. Prototype é um tipo de padrão estrutural.\nII. Singleton tem por objetivos garantir que uma classe tenha ao menos uma instância e fornecer um ponto global de acesso para ela.\nIII. Template Method tem por objetivo definir o esqueleto de um algoritmo em uma operação, postergando a definição de alguns passos para subclasses.\nIV. Iterator fornece uma maneira de acessar sequencialmente os elementos de um objeto agregado sem expor sua representação subjacente.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "II."
+        },
+        {
+          "letter": "C",
+          "text": "I e IV."
+        },
+        {
+          "letter": "D",
+          "text": "II e III."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q26",
+      "kind": "OBJECTIVE",
+      "number": 26,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        15
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "D",
+      "prompt": "Um baralho tem 52 cartas, organizadas em 4 naipes, com 13 valores diferentes para cada naipe. Os valores possíveis são: Ás, 2, 3, ..., 10, J, Q, K. No jogo de poker, uma das combinações de 5 cartas mais valiosas é o full house, que é formado por três cartas de mesmo valor e outras duas cartas de mesmo valor. São exemplos de full houses: i) três cartas K e duas 10 (como visto na figura) ou ii) três cartas 4 e duas Ás.\nQuantas possibilidades para full house existem em um baralho de 52 cartas?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "156."
+        },
+        {
+          "letter": "B",
+          "text": "624."
+        },
+        {
+          "letter": "C",
+          "text": "1872."
+        },
+        {
+          "letter": "D",
+          "text": "3744."
+        },
+        {
+          "letter": "E",
+          "text": "7488."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q27",
+      "kind": "OBJECTIVE",
+      "number": 27,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        16
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "codigo"
+      ],
+      "answer": "E",
+      "prompt": "Um dos problemas clássicos da computação científica é a multiplicação de matrizes. Assuma que foram declaradas e inicializadas três matrizes quadradas de ponto flutuante, a, b e c, cujos índices variam entre 0 e n - 1. O seguinte trecho de código pode ser usado para multiplicar matrizes de forma sequencial:\n1. for [i = 0 to n - 1] {\n2. for [j = 0 to n - 1] {\n3. c[i, j] = 0.0;\n4. for [k = 0 to n - 1]\n5. c[i, j] = c[i, j] + a[i, k] * b[k, j];\n6. }\n7. }\nO objetivo é paralelizar esse código para que o tempo de execução seja reduzido em uma máquina com múltiplos processadores e memória compartilhada. Suponha que o comando “co” seja usado para definição de comandos concorrentes, da seguinte forma: “co [i = 0 to n - 1] { x; y; z;}” cria n processos concorrentes, cada um executando sequencialmente uma instância dos comandos x, y, z contidos no bloco.\nAvalie as seguintes afirmações sobre o problema.\nI. Esse problema é exemplo do que se chama “embaraçosamente paralelo”, porque pode ser decomposto em um conjunto de várias operações menores que podem ser executadas independentemente.\nII. O programa produziria resultados corretos e em tempo menor do que o sequencial, trocando-se o “for” na linha 1 por um “co”.\nIII. O programa produziria resultados corretos e em tempo menor do que o sequencial, trocando-se o “for” na linha 2 por um “co”.\nIV. O programa produziria resultados corretos e em tempo menor do que o sequencial, trocando-se ambos “for”, nas linhas 1 e 2, por “co”.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, II e III, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "I, II e IV, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I, III e IV, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II, III e IV, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II, III, IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q28",
+      "kind": "OBJECTIVE",
+      "number": 28,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        16
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "B",
+      "prompt": "Algoritmos criados para resolver um mesmo problema podem diferir de forma drástica quanto a sua eficiência. Para evitar este fato, são utilizadas técnicas algorítmicas, isto é, conjunto de técnicas que compreendem os métodos de codificação de algoritmos de forma a salientar sua complexidade, levando-se em conta a forma pela qual determinado algoritmo chega à solução desejada.\nConsiderando os diferentes paradigmas e técnicas de projeto de algoritmos, analise as afirmações abaixo.\nI. A técnica de tentativa e erro (backtracking) efetua uma escolha ótima local, na esperança de obter uma solução ótima global.\nII. A técnica de divisão e conquista pode ser dividida em três etapas: dividir a instância do problema em duas ou mais instâncias menores; resolver as instâncias menores recursivamente; obter a solução para as instâncias originais (maiores) por meio da combinação dessas soluções.\nIII. A técnica de programação dinâmica decompõe o processo em um número finito de subtarefas parciais que devem ser exploradas exaustivamente.\nIV. O uso de heurísticas (ou algoritmos aproximados) é caracterizado pela ação de um procedimento chamar a si próprio, direta ou indiretamente.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "II."
+        },
+        {
+          "letter": "C",
+          "text": "I e IV."
+        },
+        {
+          "letter": "D",
+          "text": "II e III."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q29",
+      "kind": "OBJECTIVE",
+      "number": 29,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "A",
+      "prompt": "Uma antiga empresa de desenvolvimento de software resolveu atualizar toda sua infraestrutura computacional adquirindo um sistema operacional multitarefa, processadores multi-core (múltiplos núcleos) e o uso de uma linguagem de programação com suporte a threads.\nO sistema operacional multitarefa de um computador é capaz de executar vários processos (programas) em paralelo. Considerando esses processos implementados com mais de uma thread (multi-threads), analise as afirmações abaixo.\nI. Os ciclos de vida de processos e threads são idênticos.\nII. Threads de diferentes processos compartilham memória.\nIII. Somente processadores multi-core são capazes de executar programas multi-threads.\nIV. Em sistemas operacionais multitarefa, threads podem migrar de um processo para outro.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "II."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "I e IV."
+        },
+        {
+          "letter": "E",
+          "text": "II e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q30",
+      "kind": "OBJECTIVE",
+      "number": 30,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        17
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "C",
+      "prompt": "Suponha que se queira pesquisar a chave 287 em uma árvore binária de pesquisa com chaves entre 1 e 1 000. Durante uma pesquisa como essa, uma sequência de chaves é examinada. Cada sequência abaixo é uma suposta sequência de chaves examinadas em uma busca da chave 287.\nI. 7, 342, 199, 201, 310, 258, 287\nII. 110, 132, 133, 156, 289, 288, 287\nIII. 252, 266, 271, 294, 295, 289, 287\nIV. 715, 112, 530, 249, 406, 234, 287 É válido apenas o que se apresenta em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "III."
+        },
+        {
+          "letter": "C",
+          "text": "I e II."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "D3",
+      "kind": "DISCURSIVE",
+      "number": 3,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        18
+      ],
+      "ligatureJoins": [
+        "infi|nita"
+      ],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "figura"
+      ],
+      "prompt": "Os números de Fibonacci correspondem à uma sequência infinita na qual os dois primeiros termos são 0 e 1. Cada termo da sequência, à exceção dos dois primeiros, é igual à soma dos dois anteriores, conforme a relação de recorrência abaixo.\nDesenvolva dois algoritmos, um iterativo e outro recursivo, que, dado um número natural n > 0, retorna o n-ésimo termo da sequência de Fibonacci. Apresente as vantagens e desvantagens de cada algoritmo. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false
+      }
+    },
+    {
+      "key": "D4",
+      "kind": "DISCURSIVE",
+      "number": 4,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        19
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "figura"
+      ],
+      "prompt": "Listas ordenadas implementadas com vetores são estruturas de dados adequadas para a busca binária, mas possuem o inconveniente de exigirem custo computacional de ordem linear para a inserção de novos elementos. Se as operações de inserção ou remoção de elementos forem frequentes, uma alternativa é transformar a lista em uma árvore binária de pesquisa balanceada, que permitirá a execução dessas operações com custo logarítmico.\nConsiderando essas informações, escreva um algoritmo recursivo que construa uma árvore binária de pesquisa completa, implementada por estruturas auto-referenciadas ou apontadores, a partir de um vetor ordenado, v, de n inteiros, em que n = 2m - 1, m > 0. O algoritmo deve construir a árvore em tempo linear, sem precisar fazer qualquer comparação entre os elementos do vetor, uma vez que este já está ordenado. Para isso,\na) descreva a estrutura de dados utilizada para a implementação da árvore (valor = 2,0 pontos)\nb) escreva o algoritmo para a construção da árvore. A chamada principal à função recursiva deve passar, como parâmetros, o vetor, índice do primeiro e último elementos, retornando a referência ou apontador para a raiz da árvore criada (valor: 8,0 pontos).\nObservação: Qualquer notação em português estruturado, de forma imperativa ou orientada a objetos deve ser considerada, assim como em uma linguagem de alto nível, como o Pascal, C e Java.\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15",
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false
+      }
+    },
+    {
+      "key": "D5",
+      "kind": "DISCURSIVE",
+      "number": 5,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        20,
+        21
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação",
+        "Engenharia de Computação",
+        "Sistemas de Informação",
+        "Licenciatura em Computação"
+      ],
+      "status": "discursiva",
+      "flags": [
+        "caderno-compartilhado",
+        "figura"
+      ],
+      "prompt": "As memórias cache são usadas para diminuir o tempo de acesso à memória principal,\nmantendo cópias de seus dados. Uma função de mapeamento é usada para determinar\nem que parte da memória cache um dado da memória principal será mapeado. Em certos\ncasos, é necessário usar um algoritmo de substituição para determinar qual parte da cache\nserá substituída.\nSuponha uma arquitetura hipotética com as seguintes características:\n• A memória principal possui 4 Gbytes, em que cada byte é diretamente endereçável\ncom um endereço 32 bits.\n• A memória cache possui 512 Kbytes, organizados em 128 K linhas de 4 bytes.\n• Os dados são transferidos entre as duas memórias em blocos de 4 bytes.\nConsiderando os mapeamentos direto, totalmente associativo e associativo por conjuntos (em 4 vias), redija um\ntexto que contemple as organizações dessas memórias, demonstrando como são calculados os endereços das\npalavras, linhas (blocos), rótulos (tags) e conjunto na memória cache em cada um dos três casos. Cite as vantagens\ne desvantagens de cada função de mapeamento, bem como a necessidade de algoritmos de substituição em cada\numa delas. (valor: 10,0 pontos)\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15 ATENÇÃO! Prezado(a)\n1 - A seguir serão apresentadas questões de múltipla Específico dos cursos da área de Computação, Cursos Licenciatura Ciência da Computação Engenharia de Computação Sistemas de Informação 2 - Você deverá responder APENAS às questões conforme consta no Caderno de Respostas.\n3 - Observe atentamente os números das questões no qual você está inscrito para assinalar corretamente",
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false
+      }
+    },
+    {
+      "key": "Q31",
+      "kind": "OBJECTIVE",
+      "number": 31,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "B",
+      "prompt": "Na Sociologia da Educação, o currículo é considerado um mecanismo por meio do qual a escola define o plano educativo para a consecução do projeto global de educação de uma sociedade, realizando, assim, sua função social. Considerando o currículo na perspectiva crítica da Educação, avalie as afirmações a seguir.\nI. O currículo é um fenômeno escolar que se desdobra em uma prática pedagógica expressa por determinações do contexto da escola.\nII. O currículo reflete uma proposta educacional que inclui o estabelecimento da relação entre o ensino e a pesquisa, na perspectiva do desenvolvimento profissional docente.\nIII. O currículo é uma realidade objetiva que inviabiliza intervenções, uma vez que o conteúdo é condição lógica do ensino.\nIV. O currículo é a expressão da harmonia de valores dominantes inerentes ao processo educativo.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "II."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV.\nestudante, escolha (objetivas) relativas ao Componente assim distribuídas:\nNúmero das questões 31 a 35 36 a 40 41 a 45 46 a 50 referentes ao curso no qual você está inscrito,\nde múltipla escolha correspondentes ao curso no Caderno de Respostas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q32",
+      "kind": "OBJECTIVE",
+      "number": 32,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        21
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "B",
+      "prompt": "O fazer docente pressupõe a realização de um conjunto de operações didáticas coordenadas entre si. São o planejamento, a direção do ensino e da aprendizagem e a avaliação, cada uma delas desdobradas em tarefas ou funções didáticas, mas que convergem para a realização do ensino propriamente dito.\nLIBÂNEO, J. C. Didática. São Paulo: Cortez, 2004, p. 72. Considerando que, para desenvolver cada operação didática inerente ao ato de planejar, executar e avaliar, o professor precisa dominar certos conhecimentos didáticos, avalie quais afirmações abaixo se referem a conhecimentos e domínios esperados do professor.\nI. Conhecimento dos conteúdos da disciplina que leciona, bem como capacidade de abordá-los de modo contextualizado.\nII. Domínio das técnicas de elaboração de provas objetivas, por se configurarem instrumentos quantitativos precisos e fidedignos.\nIII. Domínio de diferentes métodos e procedimentos de ensino e capacidade de escolhê-los conforme a natureza dos temas a serem tratados e as características dos estudantes.\nIV. Domínio do conteúdo do livro didático adotado, que deve conter todos os conteúdos a serem trabalhados durante o ano letivo.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e II."
+        },
+        {
+          "letter": "B",
+          "text": "I e III."
+        },
+        {
+          "letter": "C",
+          "text": "II e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q33",
+      "kind": "OBJECTIVE",
+      "number": 33,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        22
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "D",
+      "prompt": "Figura. Brasil: Pirâmide Etária Absoluta (2010-2040)\nDisponível em: <www.ibge.gov.br/home/estatistica/populacao/projecao_da_populacao/piramide/piramide.shtm>. Acesso em: 23 ago. 2011.\nCom base na projeção da população brasileira para o período 2010-2040 apresentada nos gráficos, avalie as seguintes asserções.\nConstata-se a necessidade de construção, em larga escala, em nível nacional, de escolas especializadas na Educação de Jovens e Adultos, ao longo dos próximos 30 anos.\nPORQUE\nHaverá, nos próximos 30 anos, aumento populacional na faixa etária de 20 a 60 anos e decréscimo da população com idade entre 0 e 20 anos.\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, mas a segunda não é uma justificativa da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda, uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda, uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q34",
+      "kind": "OBJECTIVE",
+      "number": 34,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "A",
+      "prompt": "Na escola em que João é professor, existe um laboratório de informática, que é utilizado para os estudantes trabalharem conteúdos em diferentes disciplinas. Considere que João quer utilizar o laboratório para favorecer o processo ensino- aprendizagem, fazendo uso da abordagem da Pedagogia de Projetos. Nesse caso, seu planejamento deve",
+      "options": [
+        {
+          "letter": "A",
+          "text": "ter como eixo temático uma problemática significativa para os estudantes, considerando as possibilidades tecnológicas existentes no laboratório."
+        },
+        {
+          "letter": "B",
+          "text": "relacionar os conteúdos previamente instituídos no início do período letivo e os que estão no banco de dados disponível nos computadores do laboratório de informática."
+        },
+        {
+          "letter": "C",
+          "text": "definir os conteúdos a serem trabalhados, utilizando a relação dos temas instituídos no Projeto Pedagógico da escola e o banco de dados disponível nos computadores do laboratório."
+        },
+        {
+          "letter": "D",
+          "text": "listar os conteúdos que deverão ser ministrados durante o semestre, considerando a sequência apresentada no livro didático e os programas disponíveis nos computadores do laboratório."
+        },
+        {
+          "letter": "E",
+          "text": "propor o estudo dos projetos que foram desenvolvidos pelo governo quanto ao uso de laboratórios de informática, relacionando o que consta no livro didático com as tecnologias existentes no laboratório."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q35",
+      "kind": "OBJECTIVE",
+      "number": 35,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        23
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Licenciatura em Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "alternativas-reconstruidas-layout",
+        "mencao-a-figura"
+      ],
+      "answer": "D",
+      "prompt": "QUINO. Toda a Mafalda. Trad. Andréa Stahel M. da Silva et al. São Paulo: Martins Fontes, 1993, p. 71. Muitas vezes, os próprios educadores, por incrível que pareça, também vítimas de uma formação alienante, não sabem o porquê daquilo que dão, não sabem o significado daquilo que ensinam e quando interrogados dão respostas evasivas: “é pré-requisito para as séries seguintes”, “cai no vestibular”, “hoje você não entende, mas daqui a dez anos vai entender”. Muitos alunos acabam acreditando que aquilo que se aprende na escola não é para entender mesmo, que só entenderão quando forem adultos, ou seja, acabam se conformando com o ensino desprovido de sentido.\nVASCONCELLOS, C. S. Construção do conhecimento em sala de aula. 13ª ed. São Paulo: Libertad, 2002, p. 27-8. Correlacionando a tirinha de Mafalda e o texto de Vasconcellos, avalie as afirmações a seguir.\nI. O processo de conhecimento deve ser refletido e encaminhado a partir da perspectiva de uma prática social.\nII. Saber qual conhecimento deve ser ensinado nas escolas continua sendo uma questão nuclear para o processo pedagógico.\nIII. O processo de conhecimento deve possibilitar compreender, usufruir e transformar a realidade.\nIV. A escola deve ensinar os conteúdos previstos na matriz curricular, mesmo que sejam desprovidos de significado e sentido para professores e alunos.\nV. Os projetos curriculares devem desconsiderar a influência do currículo oculto que ocorre na escola com caráter informal e sem planejamento.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV."
+        },
+        {
+          "letter": "C",
+          "text": "II e IV."
+        },
+        {
+          "letter": "D",
+          "text": "I, II e III."
+        },
+        {
+          "letter": "E",
+          "text": "II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q36",
+      "kind": "OBJECTIVE",
+      "number": 36,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "D",
+      "prompt": "O problema P versus NP é um problema ainda não resolvido e um dos mais estudados em Computação. Em linhas gerais, deseja-se saber se todo problema cuja solução pode ser eficientemente verificada por um computador, também pode ser eficientemente obtida por um computador. Por “eficientemente” ou “eficiente” significa “em tempo polinomial”.\nA classe dos problemas cujas soluções podem ser eficientemente obtidas por um computador é chamada de classe P. Os algoritmos que solucionam os problemas dessa classe têm complexidade de pior caso polinomial no tamanho das suas entradas.\nPara alguns problemas computacionais, não se conhece solução eficiente, isto é, não se conhece algoritmo eficiente para resolvê-los. No entanto, se para uma dada solução de um problema é possível verificá-la eficientemente, então o problema é dito estar em NP. Dessa forma, a classe de problemas para os quais suas soluções podem ser eficientemente verificadas é chamada de classe NP. Um problema é dito ser NP-completo se pertence à classe NP e, além disso, se qualquer outro problema na classe NP pode ser eficientemente transformado nesse problema. Essa transformação eficiente envolve as entradas e saídas dos problemas.\nConsiderando as noções de complexidade computacional apresentadas acima, analise as afirmações que se seguem.\nI. Existem problemas na classe P que não estão na classe NP.\nII. Se o problema A pode ser eficientemente transformado no problema B e B está na classe P, então A está na classe P.\nIII. Se P = NP, então um problema NP-completo pode ser solucionado eficientemente.\nIV. Se P é diferente de NP, então existem problemas na classe P que são NP-completos.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "IV."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e III."
+        },
+        {
+          "letter": "E",
+          "text": "II e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q37",
+      "kind": "OBJECTIVE",
+      "number": 37,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        24
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "D",
+      "prompt": "Escopo dinâmico: para as linguagens com escopo dinâmico, a vinculação das variáveis ao escopo é realizada em tempo de execução. (...) Se uma variável é local ao bloco, então o uso da dada variável no bloco será sempre vinculado àquela local. Contudo, se a variável for não- local, a sua vinculação depende da ordem de execução, a última vinculada na execução. A consequência disso é que, em um mesmo bloco de comandos, um identificador pode ter significados diferentes, e o programador precisa ter a ideia precisa de qual variável está sendo usada.\nde MELO, A. C. V.; da SILVA, F. S. C. Princípios de Linguagens de Programação. São Paulo: Edgard Blücher, 2003. p.65. Suponha que uma linguagem de programação tenha sido projetada com vinculação e verificação estáticas para tipos de variáveis, além de passagem de parâmetros por valor. Também é exigido pela especificação da linguagem que programas sejam compilados integralmente e que não é permitido compilar bibliotecas separadamente. Durante uma revisão da especificação da linguagem, alguém propôs que seja adicionado um mecanismo para suporte a variáveis com escopo dinâmico.\nA respeito da proposta de modificação da linguagem, analise as seguintes afirmações.\nI. As variáveis com escopo dinâmico podem ser tratadas como se fossem parâmetros para os subprogramas que as utilizam, sem que o programador tenha que especificá-las ou declarar seu tipo (o compilador fará isso). Assim, elimina- se a necessidade de polimorfismo e é possível verificar tipos em tempo de compilação.\nII. Como diferentes subprogramas podem declarar variáveis com o mesmo nome mas com tipos diferentes, se as variáveis com escopo dinâmico não forem declaradas no escopo onde são referenciadas, será necessário que a linguagem suporte polimorfismo de tipos.\nIII. Se as variáveis dinâmicas forem declaradas tanto nos escopos onde são criadas como nos subprogramas em que são referenciadas, marcadas como tendo escopo dinâmico, será possível identificar todos os erros de tipo em tempo de compilação.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "II."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e III."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q38",
+      "kind": "OBJECTIVE",
+      "number": 38,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [
+        "defi|nidos:",
+        "justifi|cativa",
+        "justifi|cativa"
+      ],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "tabela",
+        "caracteres-suspeitos"
+      ],
+      "answer": "E",
+      "prompt": "É comum que linguagens de programação permitam a descrição textual de constantes em hexadecimal, além de descrições na base dez. O compilador para uma linguagem que suporte constantes inteiras em hexadecimal precisa diferenciar inteiros em base dez dos números hexadecimais que não usam os dígitos de a . Por exemplo, a sequência de caracteres pode ser interpretada como doze em base dez ou como dezoito em hexadecimal. Uma maneira de resolver esse problema é exigindo que as constantes em hexadecimal terminem com o caracter “ ”. Assim, não há ambiguidade, por exemplo, no tratamento das sequências e . A gramática a seguir descreve números inteiros, possivelmente com o símbolo “ ” após os dígitos. Os não terminais são , , e os terminais são e , em que d representa um dígito.\nM → E M → N E → N N → Nd N → d Durante a construção de um autômato LR para essa gramática, os seguintes estados são definidos:\ne :\nM´ → ·M 0 M → ·E M → ·N E → ·N N → ·Nd N → ·d e (e , N):\n1 0 M → N · M → N · M → N · d A respeito dessa gramática, analise as seguintes asserções e a relação proposta entre elas.\nA gramática descrita é do tipo LR(0).\nPORQUE\nÉ possível construir um autômato LR(0), determinístico, cujos estados incluem e acima descritos.\nAcerca dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a segunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, mas a segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira, e a segunda, uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa, e a segunda, uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são proposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q39",
+      "kind": "OBJECTIVE",
+      "number": 39,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [
+        "afi|rmativas",
+        "especifi|cação",
+        "afi|rma"
+      ],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "alternativas-reconstruidas-layout"
+      ],
+      "answer": "D",
+      "prompt": "O conceito de Tipo de Dados Abstrato (TDA) é popular em linguagens de programação. Nesse contexto, analise as afirmativas a seguir.\nI. A especificação de um TDA é composta das operações aplicáveis a ele, da sua representação interna, e das implementações das operações.\nII. Dois mecanismos utilizáveis na implementação de um TDA em programas orientados a objetos são a composição e a herança.\nIII. Se S é um subtipo de outro T, então entidades do tipo S em um programa podem ser substituídas por entidades do tipo T, sem alterar a corretude desse programa.\nIV. O encapsulamento em linguagens de programação orientadas a objetos é um efeito positivo do uso de TDA.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I."
+        },
+        {
+          "letter": "B",
+          "text": "II."
+        },
+        {
+          "letter": "C",
+          "text": "I e III."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV."
+        },
+        {
+          "letter": "E",
+          "text": "III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q40",
+      "kind": "OBJECTIVE",
+      "number": 40,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        25
+      ],
+      "ligatureJoins": [
+        "fi|gura"
+      ],
+      "courseScope": [
+        "Ciência da Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "marcador-fonte-pdf",
+        "figura",
+        "alternativas-reconstruidas-layout",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "Considere que a figura abaixo corresponde ao cenário de um jogo de computador. Esse cenário é dividido em 24 quadrados e a movimentação de um personagem entre cada quadrado tem custo 1, sendo permitida apenas na horizontal ou na vertical. Os quadrados marcados em preto correspondem a regiões para as quais os personagens não podem se mover.\nNesse cenário, o algoritmo A* vai ser usado para determinar o caminho de custo mínimo pelo qual um personagem deve se mover desde o quadrado verde até o quadrado vermelho. Considere que, no A*, o custo f(x) = g(x) + h(x) de determinado nó x é computado somando-se o custo real g(x) ao custo da função heurística h(x) e que a função heurística utilizada é a distância de Manhattan (soma das distâncias horizontal e vertical de x até o objetivo). Desse modo, o custo f(x) do quadrado verde é igual a",
+      "options": [
+        {
+          "letter": "A",
+          "text": "2."
+        },
+        {
+          "letter": "B",
+          "text": "3."
+        },
+        {
+          "letter": "C",
+          "text": "5."
+        },
+        {
+          "letter": "D",
+          "text": "7."
+        },
+        {
+          "letter": "E",
+          "text": "9."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q41",
+      "kind": "OBJECTIVE",
+      "number": 41,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "A figura abaixo ilustra a tentativa de se utilizar um filtro\ndigital no domínio da frequência, para suavizar o sinal\nbidimensional de entrada que está no domínio do espaço.\nA partir do resultado obtido no processo de filtragem,\nanalise as seguintes asserções e a relação proposta\nentre elas.\nO sinal de saída possui as características de um sinal\nprocessado por um filtro passa-baixa ideal.\nPORQUE\nEmbora suavizado, o sinal de saída evidencia a presença\ndo efeito de ringing, que é típico de um sinal convolucionado\npela função sinc no domínio do espaço.\nAcerca dessas asserções, assinale a opção correta.",
+      "options": [
+        {
+          "letter": "A",
+          "text": "As duas asserções são proposições verdadeiras, e a\nsegunda é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "B",
+          "text": "As duas asserções são proposições verdadeiras, mas\na segunda não é uma justificativa correta da primeira."
+        },
+        {
+          "letter": "C",
+          "text": "A primeira asserção é uma proposição verdadeira e a\nsegunda, uma proposição falsa."
+        },
+        {
+          "letter": "D",
+          "text": "A primeira asserção é uma proposição falsa e a\nsegunda, uma proposição verdadeira."
+        },
+        {
+          "letter": "E",
+          "text": "Tanto a primeira quanto a segunda asserções são\nproposições falsas."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q42",
+      "kind": "OBJECTIVE",
+      "number": 42,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        26
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "hifenizacao"
+      ],
+      "answer": "C",
+      "prompt": "Sabendo que a principal tarefa de um sistema será de\nclassificação em domínios complexos, um gerente de\nprojetos precisa decidir como vai incorporar essa capa-\ncidade em um sistema computacional a fim de torná-lo\ninteligente. Existem diversas técnicas de inteligência\ncomputacional / artificial que possibilitam isso.\nNesse contexto, a técnica de inteligência artificial mais\nindicada para o gerente é",
+      "options": [
+        {
+          "letter": "A",
+          "text": "lógica nebulosa."
+        },
+        {
+          "letter": "B",
+          "text": "árvores de decisão."
+        },
+        {
+          "letter": "C",
+          "text": "redes neurais artificiais."
+        },
+        {
+          "letter": "D",
+          "text": "ACO (do inglês, Ant-Colony Optimization)."
+        },
+        {
+          "letter": "E",
+          "text": "PSO (do inglês, Particle Swarm Optimization)."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q43",
+      "kind": "OBJECTIVE",
+      "number": 43,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        27
+      ],
+      "ligatureJoins": [
+        "fi|gura,",
+        "afi|rmações",
+        "afi|rma"
+      ],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "D",
+      "prompt": "O razor é uma arquitetura para desempenho better-than-worst-case que usa um registrador especializado, mostrado na figura, que mede e avalia os erros.\nO registrador do sistema mantém o valor chaveado e é comandado por um clock de sistema better-than-worst-case. Um registrador adicional é comandado separadamente por um clock ligeiramente atrasado com relação ao do sistema. Se os resultados armazenados nos dois registradores são diferentes, então um erro ocorreu, provavelmente devido à temporização. A porta XOR detecta o erro e faz com que este valor seja substituído por aquele no registrador do sistema.\nWolf, W. High-performance embedded computing: architectures, applications, and methodologies. Morgan Kaufmann, 2007\nConsiderando essas informações, analise as afirmações a seguir.\nI. Sistemas digitais são tradicionalmente concebidos como sistemas assíncronos regidos por um clock.\nII. Better-than-worst-case é um estilo de projeto alternativo em que a lógica detecta e se recupera de erros, permitindo que o circuito possa operar com uma frequência maior.\nIII. Nos sistemas digitais, o período de clock é determinado por uma análise cuidadosa para que os valores sejam armazenados corretamente nos registradores, com o período de clock alargado para abranger o atraso de pior caso.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "III, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "I e II, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II e III."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q44",
+      "kind": "OBJECTIVE",
+      "number": 44,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        28
+      ],
+      "ligatureJoins": [
+        "fi|nal",
+        "signifi|cativos.",
+        "fi|gura",
+        "signifi|cativos",
+        "signifi|cativos.",
+        "signifi|cativos"
+      ],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "anulada",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "ANULADA",
+      "prompt": "A utilização dos somadores completos em cascata no projeto de Unidades Lógicas Aritméticas pode comprometer o seu desempenho, uma vez que o sinal de vai-um final deve propagar por todos os somadores, desde as entradas dos bits menos significativos. Esse caminho crítico insere um atraso no sistema que compromete o projeto de ULAs rápidas. Para reduzir esse atraso, mecanismos de predição de vai-um podem ser usados. Um esquema bem simples de predição de vai-um para um somador de 8 bits é apresentado na figura a seguir.\nOs 4 bits mais significativos são somados de forma redundante, considerando o vem-um 0 no primeiro somador e vem-um igual a 1 no segundo somador. A saída dos somadores é selecionada a partir de um multiplexador, que é acionado pelo vai-um resultado da soma dos 4 bits menos significativos. Como os 3 somadores podem realizar as operações ao mesmo tempo, o multiplexador pode entregar o resultado mais rapidamente.\nConsidere as seguintes equações dos somadores:\ne Considere, ainda, a equação dos multiplexadores a seguir:\nSuponha que o somador de 8 bits tem predição de vai-um baseada na duplicação da soma dos 4 bits mais significativos e que 7 ns é o tempo de atraso de propagação por nível de porta AND, OR e XOR. Desconsiderando os inversores, o aumento do número de portas e a redução do tempo de propagação podem ser expressos, em porcentagem, como aumento de",
+      "options": [
+        {
+          "letter": "A",
+          "text": "26 portas, representando 65% de acréscimo no número de portas e redução de 112 ns para 70 ns, redução de 47% do tempo para a execução da soma."
+        },
+        {
+          "letter": "B",
+          "text": "20 portas, representando 50% de acréscimo no número de portas e redução de 112 ns para 70 ns, redução de 47% do tempo para a execução da soma."
+        },
+        {
+          "letter": "C",
+          "text": "26 portas, representando 65% de acréscimo no número de portas e redução de 112 ns para 56 ns, redução de 50% do tempo para a execução da soma."
+        },
+        {
+          "letter": "D",
+          "text": "20 portas, representando 50% de acréscimo no número de portas e redução de 112 ns para 56 ns, redução de 50% do tempo para a execução da soma."
+        },
+        {
+          "letter": "E",
+          "text": "26 portas, representando 65% de acréscimo no número de portas. Não há redução no tempo de atraso de propagação para a execução da soma."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q45",
+      "kind": "OBJECTIVE",
+      "number": 45,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        29
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Engenharia de Computação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "B",
+      "prompt": "Os amplificadores operacionais, como ilustra a figura a seguir, são componentes úteis em diversas aplicações.\nConsiderando que o amplificador operacional do circuito é ideal, avalie as seguintes afirmativas.\nI. A corrente i1 é idealmente nula.\nII. A corrente i2 é idealmente nula.\nIII. O circuito exemplifica um seguidor de tensão.\nIV. A diferença de potencial entre o ponto v1 e o ponto terra do circuito é idealmente nula.\nV. A diferença de potencial entre o ponto v2 e o ponto terra do circuito é de +3,6 V.\nÉ correto apenas o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I, II e III."
+        },
+        {
+          "letter": "B",
+          "text": "I, II e IV."
+        },
+        {
+          "letter": "C",
+          "text": "I, III e V."
+        },
+        {
+          "letter": "D",
+          "text": "II, IV e V."
+        },
+        {
+          "letter": "E",
+          "text": "III, IV e V."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q46",
+      "kind": "OBJECTIVE",
+      "number": 46,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "A",
+      "prompt": "Em um modelo de dados que descreve a publicação acadêmica de pesquisadores de diferentes instituições em eventos acadêmicos, considere as tabelas abaixo. DEPARTAMENTO (#CodDepartamento, NomeDepartamento)\nEMPREGADO (#CodEmpregado, NomeEmpregado, CodDepartamento, Salario)\nNa linguagem SQL, o comando mais simples para recuperar os códigos dos departamentos cuja média salarial seja maior que 2000 é",
+      "options": [
+        {
+          "letter": "A",
+          "text": "SELECT CodDepartamento FROM EMPREGADO GROUP BY CodDepartamento HAVING AVG (Salario) > 2000"
+        },
+        {
+          "letter": "B",
+          "text": "SELECT CodDepartamento FROM EMPREGADO WHERE AVG (Salario) > 2000 GROUP BY CodDepartamento"
+        },
+        {
+          "letter": "C",
+          "text": "SELECT CodDepartamento FROM EMPREGADO WHERE AVG (Salario) > 2000"
+        },
+        {
+          "letter": "D",
+          "text": "SELECT CodDepartamento, AVG (Salario) > 2000 FROM EMPREGADO GROUP BY CodDepartamento"
+        },
+        {
+          "letter": "E",
+          "text": "SELECT CodDepartamento FROM EMPREGADO GROUP BY CodDepartamento ORDER BY AVG (Salario) > 2000"
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q47",
+      "kind": "OBJECTIVE",
+      "number": 47,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        30
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "D",
+      "prompt": "Uma empresa de natureza estritamente operacional deseja implantar um setor de suporte ao processo de tomada de decisão, já que os resultados que vem apresentando demonstram contínua queda da margem de lucro e aumento do custo operacional. Para isso, os executivos de alto escalão da empresa decidiram investir na aquisição de uma ferramenta OLAP acoplada a uma data warehouse.\nNessa situação, avalie as afirmações a seguir.\nI. No que tange ao tipo de suporte propiciado, os sistemas OLAP podem ser classificados como sistemas de trabalhadores do conhecimento.\nII. Ferramentas OLAP apresentam foco orientado a assunto, em contraposição a sistemas OLTP, que são orientados a aplicação.\nIII. Tendo em vista que data marts são construídos utilizando-se os sistemas legados da empresa, sem a utilização de dados externos, o processo de extração, transformação e carga envolve a integração de dados, suprimindo-se a tarefa de limpeza.\nIV. O projeto de um data warehouse define a forma com que a base de dados será construída. Uma das opções é a abordagem data mart, em que os diversos data marts são integrados, até que se obtenha, ao final do processo, um data warehouse da empresa.\nÉ correto o que se afirma em",
+      "options": [
+        {
+          "letter": "A",
+          "text": "I e III, apenas."
+        },
+        {
+          "letter": "B",
+          "text": "I e IV, apenas."
+        },
+        {
+          "letter": "C",
+          "text": "II e III, apenas."
+        },
+        {
+          "letter": "D",
+          "text": "II e IV, apenas."
+        },
+        {
+          "letter": "E",
+          "text": "I, II, III e IV."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q48",
+      "kind": "OBJECTIVE",
+      "number": 48,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura",
+        "mencao-a-figura"
+      ],
+      "answer": "C",
+      "prompt": "No desenvolvimento de um software para um sistema de venda de produtos nacionais e importados, o analista gerou o diagrama de casos de uso a seguir.\nDa análise do diagrama, conclui-se que",
+      "options": [
+        {
+          "letter": "A",
+          "text": "a execução do caso de uso ‘Consultar estoque’ incorpora opcionalmente o caso de uso ‘Liberar desconto’."
+        },
+        {
+          "letter": "B",
+          "text": "a execução do caso de uso ‘Liberar desconto’ incorpora opcionalmente o caso de uso ‘Realizar venda’."
+        },
+        {
+          "letter": "C",
+          "text": "a execução do caso de uso ‘Realizar venda’ incorpora obrigatoriamente o caso de uso ‘Consultar estoque’."
+        },
+        {
+          "letter": "D",
+          "text": "a execução do caso de uso ‘Realizar venda de produto nacional’ incorpora obrigatoriamente o caso de uso ‘Liberar desconto’."
+        },
+        {
+          "letter": "E",
+          "text": "um Gerente pode interagir com o caso de uso ‘Realizar venda’, pois ele é um Usuário."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q49",
+      "kind": "OBJECTIVE",
+      "number": 49,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "figura"
+      ],
+      "answer": "B",
+      "prompt": "Considerando o conceito de sistema, trazido pela Teoria Geral de Sistemas, um projeto de desenvolvimento de software poderia ser considerado como um sistema aberto.\nNessa perspectiva, solicitações de mudanças originadas de um stakeholder externo e que afetam o projeto podem ser consideradas como",
+      "options": [
+        {
+          "letter": "A",
+          "text": "ambiente."
+        },
+        {
+          "letter": "B",
+          "text": "entrada."
+        },
+        {
+          "letter": "C",
+          "text": "feedback."
+        },
+        {
+          "letter": "D",
+          "text": "processos."
+        },
+        {
+          "letter": "E",
+          "text": "saída."
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    },
+    {
+      "key": "Q50",
+      "kind": "OBJECTIVE",
+      "number": 50,
+      "block": "COMPONENTE_ESPECIFICO",
+      "pages": [
+        31,
+        32
+      ],
+      "ligatureJoins": [],
+      "courseScope": [
+        "Sistemas de Informação"
+      ],
+      "status": "sem-gabarito-definitivo",
+      "flags": [
+        "caderno-compartilhado",
+        "fora-escopo-ciencia-computacao",
+        "marcador-fonte-pdf",
+        "revisao-colunas-pdf",
+        "figura",
+        "versalete"
+      ],
+      "answer": "A",
+      "prompt": "Uma empresa vem desenvolvendo um programa de melhoria de seus processos de software utilizando o modelo de qualidade CMMI. O programa envolveu a definição de todos os processos padrão da organização, implementação de técnicas de controle estatístico de processos e métodos de melhoria contínua. Após a avaliação SCAMPI, classe A, foi detectado que a área de processo de PP - Project Planning (Planejamento de Projeto) não estava aderente ao modelo.\nNesse contexto, considerando a representação por estágios do CMMI, a empresa seria classificada em que nível de maturidade?",
+      "options": [
+        {
+          "letter": "A",
+          "text": "Nível 1."
+        },
+        {
+          "letter": "B",
+          "text": "Nível 2."
+        },
+        {
+          "letter": "C",
+          "text": "Nível 3."
+        },
+        {
+          "letter": "D",
+          "text": "Nível 4."
+        },
+        {
+          "letter": "E",
+          "text": "Nível 5. QUESTIONÁRIOQUESTIONÁRIODEDEPERCEPÇÃOPERCEPÇÃO\nAsAsquestõesquestõesabaixoabaixovisamvisamlevantarlevantarsuasuaopiniãoopinião quequevocêvocêacabouacaboudederealizar.realizar.AssinaleAssinaleasasalternativasalternativas espaçosespaçosapropriadosapropriadosdodoCaderno\nAgradecemosAgradecemossuasua"
+        }
+      ],
+      "source": {
+        "examId": "enade-2011-comum-exam",
+        "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+        "answerKeyId": "enade-2011-comum-answer-key",
+        "answerKeySha256": "e799cac6ced431c0e5341e583592568d28db66e0e0c43c2f2e7757bdd807577b",
+        "answerKeyDefinitive": false,
+        "answerKeyPage": 1
+      }
+    }
+  ]
+}

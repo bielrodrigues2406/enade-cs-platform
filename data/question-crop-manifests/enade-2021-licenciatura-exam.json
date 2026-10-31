@@ -1,0 +1,1206 @@
+{
+ "document": "enade-2021-licenciatura-exam",
+ "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+ "renderer": {
+  "dpi": 200,
+  "format": "image/webp",
+  "lossless": true,
+  "pages": [
+   {
+    "page": 1,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 2,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 3,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 4,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 5,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 6,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 7,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 8,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 9,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 10,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 11,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 12,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 13,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 14,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 15,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 16,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 17,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 18,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 19,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 20,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 21,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 22,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 23,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 24,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 25,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 26,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 27,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 28,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 29,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 30,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 31,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 32,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 33,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 34,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 35,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 36,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 37,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 38,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 39,
+    "width": 566.929,
+    "height": 779.528
+   },
+   {
+    "page": 40,
+    "width": 566.929,
+    "height": 779.528
+   }
+  ],
+  "pdftoppm": "pdftoppm version 24.02.0",
+  "imagemagick": "Version: ImageMagick 6.9.12-98 Q16 x86_64 18038 https://legacy.imagemagick.org"
+ },
+ "items": [
+  {
+   "key": "D1",
+   "number": 1,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D1-1.webp",
+     "page": 2,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 706.3
+     },
+     "width": 1443,
+     "height": 1766,
+     "byteSize": 117340,
+     "sha256": "22a7ac97606bc523f2d115d19e20ac73ef6fb04aa819d29e60a1eee1e70b8f2f"
+    }
+   ]
+  },
+  {
+   "key": "D2",
+   "number": 2,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D2-1.webp",
+     "page": 4,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 396.12
+     },
+     "width": 1443,
+     "height": 904,
+     "byteSize": 71210,
+     "sha256": "fe92a18268883da63b68193ba791d565ab08fa39e500ecf8d01f900baad8cb17"
+    }
+   ]
+  },
+  {
+   "key": "Q1",
+   "number": 1,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q1-1.webp",
+     "page": 5,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.16,
+      "y1": 585.65
+     },
+     "width": 1443,
+     "height": 1431,
+     "byteSize": 100978,
+     "sha256": "1c13bfcf6a0dba20e7d22f39e2388e968181f15d5e1799bbc336031e2553b1ab"
+    }
+   ]
+  },
+  {
+   "key": "Q2",
+   "number": 2,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q2-1.webp",
+     "page": 6,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 668.83
+     },
+     "width": 1443,
+     "height": 1662,
+     "byteSize": 377110,
+     "sha256": "48a868101d77229e174478b9bfea02a0f487ed1968a4cf7b6751c96e4d57112a"
+    },
+    {
+     "file": "Q2-2.webp",
+     "page": 7,
+     "box": {
+      "x0": 23.74,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 658.47
+     },
+     "width": 1443,
+     "height": 1633,
+     "byteSize": 101982,
+     "sha256": "6628b317435877b4eecd27f3123f30c3ad63e40bd917edffb0e5fe80a5982314"
+    }
+   ]
+  },
+  {
+   "key": "Q3",
+   "number": 3,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q3-1.webp",
+     "page": 8,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 741.86
+     },
+     "width": 1443,
+     "height": 1865,
+     "byteSize": 400262,
+     "sha256": "0e66d1b919949612fbe3ff39a42495b380b632814bc1050f5541dd1c6f6266f3"
+    }
+   ]
+  },
+  {
+   "key": "Q4",
+   "number": 4,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q4-1.webp",
+     "page": 9,
+     "box": {
+      "x0": 23.75,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 580.8
+     },
+     "width": 1443,
+     "height": 1417,
+     "byteSize": 99060,
+     "sha256": "74c53cde375c6fbc97de5297fafa872ffd24edd44be0d89d8f50508f7bbf68e2"
+    }
+   ]
+  },
+  {
+   "key": "Q5",
+   "number": 5,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q5-1.webp",
+     "page": 10,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 744.63
+     },
+     "width": 1443,
+     "height": 1872,
+     "byteSize": 321686,
+     "sha256": "12c0bda6028fbaffa43e3ea31cf24e386228ca802c023f4984fdf64fb4a9db6c"
+    },
+    {
+     "file": "Q5-2.webp",
+     "page": 11,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.95,
+      "x1": 543.17,
+      "y1": 333.95
+     },
+     "width": 1443,
+     "height": 731,
+     "byteSize": 35538,
+     "sha256": "153523e68a7aef204fc15a42682d9c80167ca85265b5143b498b6b289ea0e3b7"
+    }
+   ]
+  },
+  {
+   "key": "Q6",
+   "number": 6,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q6-1.webp",
+     "page": 11,
+     "box": {
+      "x0": 23.75,
+      "y0": 328.24,
+      "x1": 543.17,
+      "y1": 742.58
+     },
+     "width": 1443,
+     "height": 1151,
+     "byteSize": 75868,
+     "sha256": "6f377afd5219204d695785d4eec5b0e7a0c3d7d6a1c67e777f7129ca4c6f8a1c"
+    }
+   ]
+  },
+  {
+   "key": "Q7",
+   "number": 7,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q7-1.webp",
+     "page": 12,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 744.23
+     },
+     "width": 1443,
+     "height": 1871,
+     "byteSize": 132722,
+     "sha256": "0cf19b5ba30b64054b08c3db7f29f147892eb42cbba9d1db78c993749a0e4711"
+    }
+   ]
+  },
+  {
+   "key": "Q8",
+   "number": 8,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q8-1.webp",
+     "page": 13,
+     "box": {
+      "x0": 24.01,
+      "y0": 70.53,
+      "x1": 543.43,
+      "y1": 589.34
+     },
+     "width": 1443,
+     "height": 1441,
+     "byteSize": 85076,
+     "sha256": "83bf385abd12774aa66c275e6a85e6985604b6ecfad0dac1c77e1d0007d32a0d"
+    }
+   ]
+  },
+  {
+   "key": "D3",
+   "number": 3,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D3-1.webp",
+     "page": 14,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.15,
+      "y1": 742.71
+     },
+     "width": 1443,
+     "height": 1867,
+     "byteSize": 82372,
+     "sha256": "dc04fee91a4c48a00510e4a21a6da6ab390959857f80a1d63c38f614df1ce5de"
+    },
+    {
+     "file": "D3-2.webp",
+     "page": 15,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.95,
+      "x1": 464.48,
+      "y1": 181.14
+     },
+     "width": 1224,
+     "height": 306,
+     "byteSize": 19882,
+     "sha256": "4bd3eed6512976021e397df4dbef5069ebc82be0de97d2185976bdba986dde4b"
+    }
+   ]
+  },
+  {
+   "key": "D4",
+   "number": 4,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D4-1.webp",
+     "page": 16,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.16,
+      "y1": 398.64
+     },
+     "width": 1443,
+     "height": 911,
+     "byteSize": 55804,
+     "sha256": "2c7136c7cad741e6f38d95044439e2f2cb61fb718381e5dc5f17c01e60cb4690"
+    }
+   ]
+  },
+  {
+   "key": "D5",
+   "number": 5,
+   "kind": "DISCURSIVE",
+   "status": "discursiva",
+   "answer": null,
+   "warnings": [
+    "15 linha(s) da transcrição fora do recorte"
+   ],
+   "fragments": [
+    {
+     "file": "D5-1.webp",
+     "page": 17,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 456.02
+     },
+     "width": 1443,
+     "height": 1071,
+     "byteSize": 69934,
+     "sha256": "e86a8bc470e4e7b76a2a327a1ce8060d14da15c8be152262db3a0d6ec51eab2a"
+    }
+   ]
+  },
+  {
+   "key": "Q9",
+   "number": 9,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q9-1.webp",
+     "page": 18,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 283.48,
+      "y1": 561.18
+     },
+     "width": 721,
+     "height": 1363,
+     "byteSize": 67194,
+     "sha256": "89d4bcb5f8cece4f32a8ed0b2d1b98bfba9fb03422120b80143df0a6330cc8f3"
+    }
+   ]
+  },
+  {
+   "key": "Q10",
+   "number": 10,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q10-1.webp",
+     "page": 18,
+     "box": {
+      "x0": 283.46,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 559.63
+     },
+     "width": 722,
+     "height": 1359,
+     "byteSize": 50776,
+     "sha256": "e83df064a43a00d84564ddacfed7d611887ef1aedfaf72934e25b4c4c7435f5b"
+    }
+   ]
+  },
+  {
+   "key": "Q11",
+   "number": 11,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q11-1.webp",
+     "page": 19,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 744.79
+     },
+     "width": 1443,
+     "height": 1873,
+     "byteSize": 94236,
+     "sha256": "d4292cde71f829144d49663f419143904d58a8b3fc4d78f174dbc191a49771e4"
+    }
+   ]
+  },
+  {
+   "key": "Q12",
+   "number": 12,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q12-1.webp",
+     "page": 20,
+     "box": {
+      "x0": 23.75,
+      "y0": 70.72,
+      "x1": 543.15,
+      "y1": 417.54
+     },
+     "width": 1443,
+     "height": 964,
+     "byteSize": 50678,
+     "sha256": "d7edb0434574691918cccfc8a78efd351b99ae48bf84c4567e2ae893b7248918"
+    }
+   ]
+  },
+  {
+   "key": "Q13",
+   "number": 13,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q13-1.webp",
+     "page": 20,
+     "box": {
+      "x0": 23.75,
+      "y0": 414.27,
+      "x1": 543.15,
+      "y1": 742.51
+     },
+     "width": 1443,
+     "height": 912,
+     "byteSize": 62640,
+     "sha256": "b3a93eb92713bc11ccd16de5a2d348b8d2274d62c459324a6e4da175cde13454"
+    }
+   ]
+  },
+  {
+   "key": "Q14",
+   "number": 14,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q14-1.webp",
+     "page": 21,
+     "box": {
+      "x0": 23.74,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 624.21
+     },
+     "width": 1443,
+     "height": 1538,
+     "byteSize": 121128,
+     "sha256": "d6ed5de0d4bcaec6b7baa394e1fdf3b9807bb5d29a1510f0d76c4997a736f478"
+    }
+   ]
+  },
+  {
+   "key": "Q15",
+   "number": 15,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q15-1.webp",
+     "page": 22,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.15,
+      "y1": 437.78
+     },
+     "width": 1443,
+     "height": 1020,
+     "byteSize": 67830,
+     "sha256": "c94db3e71f12664bb6c27c2209cc247fb3df39865d5b55f5b7606f991218266d"
+    }
+   ]
+  },
+  {
+   "key": "Q16",
+   "number": 16,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q16-1.webp",
+     "page": 23,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 745.08
+     },
+     "width": 1443,
+     "height": 1874,
+     "byteSize": 66842,
+     "sha256": "8944bda0dad9a216aaf0d2580e9b9ff2a97533d0ed93e46061cfaf69e1556162"
+    }
+   ]
+  },
+  {
+   "key": "Q17",
+   "number": 17,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q17-1.webp",
+     "page": 24,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.84,
+      "y1": 727.08
+     },
+     "width": 1445,
+     "height": 1824,
+     "byteSize": 82166,
+     "sha256": "d57ed31563cd3c869dcc9c5f29027d93f56bca2d0c169a95375752dbaf8106ca"
+    },
+    {
+     "file": "Q17-2.webp",
+     "page": 25,
+     "box": {
+      "x0": 23.74,
+      "y0": 70.95,
+      "x1": 543.12,
+      "y1": 315.96
+     },
+     "width": 1443,
+     "height": 681,
+     "byteSize": 39144,
+     "sha256": "b62e6ed7a22a915867107553861563e3cfefdb0c0130cfcdf1251d81cbaf1c04"
+    }
+   ]
+  },
+  {
+   "key": "Q18",
+   "number": 18,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q18-1.webp",
+     "page": 25,
+     "box": {
+      "x0": 23.74,
+      "y0": 313.68,
+      "x1": 543.15,
+      "y1": 741.6
+     },
+     "width": 1443,
+     "height": 1189,
+     "byteSize": 61596,
+     "sha256": "de65000e4fcbb7dbaa61264631328b0e90c410b14127320148d66f296e5854c9"
+    }
+   ]
+  },
+  {
+   "key": "Q19",
+   "number": 19,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q19-1.webp",
+     "page": 26,
+     "box": {
+      "x0": 23.75,
+      "y0": 70.72,
+      "x1": 543.15,
+      "y1": 507.81
+     },
+     "width": 1443,
+     "height": 1215,
+     "byteSize": 62458,
+     "sha256": "a797ce3c32aae7326861455481086a6e7303d2236cbbde1c42fe5f4060f87bbf"
+    }
+   ]
+  },
+  {
+   "key": "Q20",
+   "number": 20,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q20-1.webp",
+     "page": 27,
+     "box": {
+      "x0": 23.72,
+      "y0": 70.72,
+      "x1": 543.12,
+      "y1": 743.31
+     },
+     "width": 1443,
+     "height": 1869,
+     "byteSize": 50248,
+     "sha256": "fbaa1866d52f5f1f90a39775d0041439403a86e43434499ff954b6b7fbb6ee7f"
+    }
+   ]
+  },
+  {
+   "key": "Q21",
+   "number": 21,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q21-1.webp",
+     "page": 28,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 738.43
+     },
+     "width": 1443,
+     "height": 1855,
+     "byteSize": 152040,
+     "sha256": "27cf4de7fbfd4d70ede91407f3e433c4ceb60c26640ffff11c2cb71745f9f9dd"
+    }
+   ]
+  },
+  {
+   "key": "Q22",
+   "number": 22,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q22-1.webp",
+     "page": 29,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.16,
+      "y1": 680.52
+     },
+     "width": 1443,
+     "height": 1694,
+     "byteSize": 73408,
+     "sha256": "2a61bf0cb39f688ed173b885f851dc0a1c9acc5ee6dde7ae8b6475131a6b2f23"
+    }
+   ]
+  },
+  {
+   "key": "Q23",
+   "number": 23,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q23-1.webp",
+     "page": 30,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 737.78
+     },
+     "width": 1443,
+     "height": 1853,
+     "byteSize": 124784,
+     "sha256": "d17c6a6e036c216d5764e1fec424dda69dd20046233cb14d63d5c9bc8cef2036"
+    }
+   ]
+  },
+  {
+   "key": "Q24",
+   "number": 24,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q24-1.webp",
+     "page": 31,
+     "box": {
+      "x0": 23.75,
+      "y0": 70.72,
+      "x1": 543.16,
+      "y1": 532.69
+     },
+     "width": 1443,
+     "height": 1284,
+     "byteSize": 74486,
+     "sha256": "cde000a4c8252ddc7eb384c55659f8e7aaf3e96bf501d10466e6d699ea912a83"
+    }
+   ]
+  },
+  {
+   "key": "Q25",
+   "number": 25,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "B",
+   "fragments": [
+    {
+     "file": "Q25-1.webp",
+     "page": 32,
+     "box": {
+      "x0": 23.75,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 553.74
+     },
+     "width": 1443,
+     "height": 1342,
+     "byteSize": 86960,
+     "sha256": "91c5e3655726925cdda4248dd76aa257814be58740b71c3a243bbbc469a3153a"
+    }
+   ]
+  },
+  {
+   "key": "Q26",
+   "number": 26,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q26-1.webp",
+     "page": 33,
+     "box": {
+      "x0": 23.75,
+      "y0": 70.72,
+      "x1": 283.48,
+      "y1": 740.18
+     },
+     "width": 721,
+     "height": 1860,
+     "byteSize": 74678,
+     "sha256": "503bc6cd1edd18a9a6a9aef37af72ab06feea3daccc0b393f48574505efb9106"
+    }
+   ]
+  },
+  {
+   "key": "Q27",
+   "number": 27,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q27-1.webp",
+     "page": 33,
+     "box": {
+      "x0": 283.45,
+      "y0": 70.72,
+      "x1": 543.21,
+      "y1": 742.04
+     },
+     "width": 722,
+     "height": 1865,
+     "byteSize": 88714,
+     "sha256": "f35ca9b1455de984854218d66c507185403a5ec562d11508e1909324dc8c1822"
+    }
+   ]
+  },
+  {
+   "key": "Q28",
+   "number": 28,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q28-1.webp",
+     "page": 34,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.2,
+      "y1": 555.04
+     },
+     "width": 1443,
+     "height": 1346,
+     "byteSize": 83750,
+     "sha256": "28e3eedd195513ce0d76e000f3eed8c46a10163151f54246007d8e562ed1ad57"
+    }
+   ]
+  },
+  {
+   "key": "Q29",
+   "number": 29,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q29-1.webp",
+     "page": 35,
+     "box": {
+      "x0": 23.74,
+      "y0": 70.72,
+      "x1": 283.48,
+      "y1": 743.16
+     },
+     "width": 721,
+     "height": 1868,
+     "byteSize": 78328,
+     "sha256": "d45d0c5b58e70a254280523ca9959ade8c1d68eb6c7c6a0f7fc8c08fe64e5dcb"
+    }
+   ]
+  },
+  {
+   "key": "Q30",
+   "number": 30,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q30-1.webp",
+     "page": 35,
+     "box": {
+      "x0": 283.44,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 743.17
+     },
+     "width": 722,
+     "height": 1868,
+     "byteSize": 83838,
+     "sha256": "69a7542dbf29dcb6760df922c0d341d3763c5f28d2460082452d6069768950e1"
+    }
+   ]
+  },
+  {
+   "key": "Q31",
+   "number": 31,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "D",
+   "fragments": [
+    {
+     "file": "Q31-1.webp",
+     "page": 36,
+     "box": {
+      "x0": 23.75,
+      "y0": 70.72,
+      "x1": 283.47,
+      "y1": 743.96
+     },
+     "width": 721,
+     "height": 1871,
+     "byteSize": 70344,
+     "sha256": "79b2b34e899f0dab060b8a64359f2551ff35208f08419577a7a4a42e2e58881d"
+    }
+   ]
+  },
+  {
+   "key": "Q32",
+   "number": 32,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "A",
+   "fragments": [
+    {
+     "file": "Q32-1.webp",
+     "page": 36,
+     "box": {
+      "x0": 283.46,
+      "y0": 70.72,
+      "x1": 543.17,
+      "y1": 604.15
+     },
+     "width": 722,
+     "height": 1482,
+     "byteSize": 64448,
+     "sha256": "5387558365ac4f167f59f92ff20f508179e1dabc0c6e3e2db2a32c6bf754dfc0"
+    }
+   ]
+  },
+  {
+   "key": "Q33",
+   "number": 33,
+   "kind": "OBJECTIVE",
+   "status": "revisao-manual",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q33-1.webp",
+     "page": 37,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.15,
+      "y1": 502.63
+     },
+     "width": 1443,
+     "height": 1200,
+     "byteSize": 74076,
+     "sha256": "19757bb2b39d4e905f4b33ee99c620b2c63bea625c9fe3260a301d4ed70cbbfb"
+    }
+   ]
+  },
+  {
+   "key": "Q34",
+   "number": 34,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "C",
+   "fragments": [
+    {
+     "file": "Q34-1.webp",
+     "page": 38,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 644.88
+     },
+     "width": 1443,
+     "height": 1595,
+     "byteSize": 99814,
+     "sha256": "ce0c55992fa255d645e7d3a90ce040075ba5e921e5edac601839f7b27e85244e"
+    }
+   ]
+  },
+  {
+   "key": "Q35",
+   "number": 35,
+   "kind": "OBJECTIVE",
+   "status": "rascunho",
+   "answer": "E",
+   "fragments": [
+    {
+     "file": "Q35-1.webp",
+     "page": 39,
+     "box": {
+      "x0": 23.76,
+      "y0": 70.72,
+      "x1": 543.18,
+      "y1": 478.91
+     },
+     "width": 1443,
+     "height": 1134,
+     "byteSize": 56926,
+     "sha256": "d5f6af494dfdccc4ff14ae59fd504f105bb82ef6b866b09e815297fe050dc31a"
+    }
+   ]
+  }
+ ]
+}
