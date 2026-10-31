@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { signUp } from "./session-helpers";
 
 const noHorizontalScroll = (page: Page) =>
   page.evaluate(
@@ -6,6 +7,10 @@ const noHorizontalScroll = (page: Page) =>
   );
 const goHome = (page: Page) =>
   page.getByRole("link", { name: "Caderno de Computação, início" }).click();
+
+test.beforeEach(async ({ context }) => {
+  await signUp(context);
+});
 
 test("home shows the study board and leads to study and back", async ({
   page,
@@ -124,6 +129,7 @@ test("home shows everything at once with reduced motion", async ({
   browser,
 }) => {
   const context = await browser.newContext({ reducedMotion: "reduce" });
+  await signUp(context);
   const page = await context.newPage();
   await page.goto("/");
   // Sem animação: a demonstração já mostra a correção e nada fica escondido.

@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { signUp } from "./session-helpers";
 import { createHash, randomUUID } from "node:crypto";
 import { Pool } from "pg";
 import { test, expect, type Page } from "@playwright/test";
@@ -256,6 +257,7 @@ test("catalog filters and pagination reflow and remain keyboard operable", async
 });
 
 test("home counts the full collection and suggests an unanswered item beyond the first page", async ({ page, context }) => {
+  await signUp(context);
   await page.goto("/questoes");
   await expectList(page, 20);
   const response = await context.request.get("/api/catalog?limit=50");
