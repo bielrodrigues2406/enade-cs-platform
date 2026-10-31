@@ -123,7 +123,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 014 | ROLE-1 — papéis, convites e perfil (nome, prontuário) | Claude |
 | 015 | IMP-1 — importação de provas com editor de caixas | Claude |
 | 016 | IMP-1 — correção de gabarito na importação e inconsistências do lote | Claude |
-| 017 | próxima livre — reserve aqui antes do primeiro commit | |
+| 017 | AULA-1 — turmas, aulas e presença | Claude |
+| 018 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 

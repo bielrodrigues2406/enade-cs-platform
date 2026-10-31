@@ -24,6 +24,7 @@ import { ReviewController } from "./review.js";
 import { CatalogController } from "./catalog.js";
 import { RolesController } from "./roles.js";
 import { ExamImportsController } from "./exam-imports.js";
+import { LessonsController } from "./lessons.js";
 import { PracticeController } from "./exam.js";
 import {
   QuestionImagesController,
@@ -226,6 +227,7 @@ class StudyController {
     CatalogController,
     RolesController,
     ExamImportsController,
+    LessonsController,
     PracticeController,
     QuestionImagesController,
   ],

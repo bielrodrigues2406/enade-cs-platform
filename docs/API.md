@@ -186,3 +186,22 @@ O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE301
 | POST /imports/:id/publish | `{}` | 200 `{published,alreadyPublished}`; recorta as caixas confirmadas em 200 dpi e publica com revisão `IMPORT` registrando quem confirmou |
 
 É a única escrita aceita fora de JSON. Republicar não duplica questões; o lote fica PUBLISHED quando não resta item pendente.
+
+
+## Turmas, aulas e presença (AULA-1, D13)
+
+Professores e administração (403 para os demais):
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /classes | — | turmas com totais de pessoas e aulas e a próxima aula |
+| POST /classes | `{name,editionYear}` | 201 `{id}` |
+| GET /classes/:id | — | turma, `members` (presenças, se já tem conta pelo prontuário), `lessons` e `teachers` disponíveis |
+| POST /classes/:id/members | `{text}` colado da planilha (nome, prontuário, e-mail opcional; tab, `;` ou `,`) | `{added,updated,skipped}`; prontuário identifica a pessoa na turma |
+| POST /classes/:id/members/:member/remove | `{}` | `{removed:true}` |
+| POST /classes/:id/lessons | `{startsAt,endsAt,room,subject,topic?,teacherId}` | 201 `{id}`; fim depois do início; professor com papel |
+| GET /lessons/:id | — | aula e `roll` (lista da turma com a situação nesta aula) |
+| PUT /lessons/:id/attendance | `{entries:[{memberId,status,note?}]}` (`PRESENT`, `ABSENT`, `LATE`, `EXCUSED`) | `{saved}`; só pessoas da turma da aula |
+| GET /classes/:id/attendance.csv | — | CSV (UTF-8, `;`) no formato da planilha: P, F, A (atraso), J (justificada), total e % |
+
+Aluno: `GET /my/lessons` → `{lessons}` das turmas em que o prontuário da conta está, com a própria situação de presença.
