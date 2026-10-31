@@ -14,6 +14,16 @@
       <div class="header-actions">
         <span class="environment">Base de desenvolvimento</span>
         @if (!booting() && !bootError()) {
+          @if (roles().includes("ADMIN")) {
+            <button
+              class="text-button"
+              (click)="openAdmin()"
+              [attr.aria-current]="adminView() ? 'page' : null"
+              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+            >
+              Administração
+            </button>
+          }
           @if (canCurate()) {
             <button
               class="text-button mobile-curation"
@@ -155,6 +165,8 @@
           {{
             accountView()
               ? "Conta"
+              : adminView()
+                ? "Administração"
               : curationView()
                 ? "Curadoria"
                 : practiceView()
@@ -191,6 +203,8 @@
             />
           } @else if (authBusy()) {
             <p role="status">Atualizando sua sessão…</p>
+          } @else if (adminView()) {
+            <app-admin (back)="openHome()" />
           } @else if (curationView()) {
             <app-curation (busyChange)="curationBusy.set($event)" />
           } @else if (practiceView()) {

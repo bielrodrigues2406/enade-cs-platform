@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { CurationComponent } from "./curation.component";
 import { HomeComponent } from "./home.component";
 import { LandingComponent } from "./landing.component";
+import { AdminComponent } from "./admin.component";
 import { QuestionContentComponent } from "./question-content.component";
 import { ExamComponent } from "./exam.component";
 import {
@@ -94,13 +95,17 @@ type Question = Summary & {
 @Component({
   selector: "app-root",
   // A página pública ocupa a largura toda, sem o índice lateral.
-  host: { "[class.landing-mode]": "landingMode()" },
+  host: {
+    "[class.landing-mode]": "landingMode()",
+    "[class.account-mode]": "!!accountView()",
+  },
   imports: [
     FormsModule,
     AccountComponent,
     CurationComponent,
     HomeComponent,
     LandingComponent,
+    AdminComponent,
     QuestionContentComponent,
     ExamComponent,
     ReviewComponent,
@@ -138,6 +143,9 @@ class App {
   authError = signal("");
   accountNotice = signal("");
   canCurate = signal(false);
+  // Papéis da conta (ROLE-1); o servidor confere de novo em cada rota.
+  roles = signal<string[]>([]);
+  adminView = signal(false);
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
@@ -222,8 +230,13 @@ class App {
   private async loadCurationAccess(transition: number) {
     if (this.session().mode !== "account") {
       this.canCurate.set(false);
+      this.roles.set([]);
       return;
     }
+    void this.api<{ roles: string[] }>("access").then(
+      (access) => transition === this.identityTransition && this.roles.set(access.roles),
+      () => transition === this.identityTransition && this.roles.set([]),
+    );
     try {
       const access = await this.api<{ canCurate: boolean }>("curation/access");
       if (transition === this.identityTransition)
@@ -250,6 +263,7 @@ class App {
     this.accountNotice.set("");
     this.error.set("");
     this.practiceView.set(false);
+    this.adminView.set(false);
     this.curationView.set(true);
     this.leaveHomePath();
     this.focusMain();
@@ -578,6 +592,7 @@ class App {
       history.pushState(null, "", this.currentAddress);
       return;
     }
+    this.adminView.set(false);
     this.question.set(null);
     this.selected = "";
     this.editing.set(false);
@@ -635,7 +650,22 @@ class App {
     if (!this.question() && !this.reviewView() && !this.practiceView()) void this.loadCatalog(false, this.catalogOffset(), "replace", this.appliedFilters);
     this.focusMain();
   }
+  openAdmin() {
+    if (!this.roles().includes("ADMIN") || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy())
+      return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.adminView.set(true);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
   private clearStudyState() {
+    this.adminView.set(false);
     if (this.identityGeneration > 0 && this.practiceView()) {
       this.practiceAttemptId.set(null);
       this.practiceItemPosition.set(1);
@@ -849,7 +879,9 @@ class App {
   private swapView(update: () => void, stillCurrent = () => true) {
     const generation = this.identityGeneration;
     const apply = () => {
-      if (generation === this.identityGeneration && stillCurrent()) update();
+      if (generation !== this.identityGeneration || !stillCurrent()) return;
+      this.adminView.set(false);
+      update();
     };
     const doc = document as Document & {
       startViewTransition?: (callback: () => void) => unknown;

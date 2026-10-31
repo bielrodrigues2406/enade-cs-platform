@@ -1,0 +1,171 @@
+<section class="admin" aria-labelledby="admin-title">
+  <button type="button" class="back text-button" (click)="back.emit()">
+    ← Voltar
+  </button>
+  <h1 id="admin-title">Administração</h1>
+  <p class="admin-intro">
+    Contas cadastradas e papéis. Para dar acesso de professor, autorize o
+    e-mail institucional: se a pessoa ainda não tem conta, o papel vale assim
+    que ela se cadastrar com esse e-mail.
+  </p>
+
+  <form class="admin-invite" (ngSubmit)="authorize()" aria-labelledby="admin-invite-title">
+    <h2 id="admin-invite-title">Autorizar e-mail</h2>
+    <div class="admin-invite-fields">
+      <div>
+        <label for="invite-email">E-mail</label>
+        <input
+          id="invite-email"
+          name="inviteEmail"
+          type="email"
+          [(ngModel)]="inviteEmail"
+          required
+          maxlength="254"
+          autocomplete="off"
+          placeholder="nome@ifsp.edu.br"
+        />
+      </div>
+      <div>
+        <label for="invite-role">Papel</label>
+        <select id="invite-role" name="inviteRole" [(ngModel)]="inviteRole">
+          <option value="PROFESSOR">Professor</option>
+          <option value="ADMIN">Administração</option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="!inviteEmail.trim()">Autorizar</button>
+    </div>
+  </form>
+
+  @if (notice()) {
+    <p class="admin-notice" role="status">{{ notice() }}</p>
+  }
+  @if (error()) {
+    <div class="notice" role="alert"><p>{{ error() }}</p></div>
+  }
+
+  @if (data()?.invitations?.length) {
+    <section aria-labelledby="admin-pending">
+      <h2 id="admin-pending">Autorizações aguardando cadastro</h2>
+      <ul class="admin-pending">
+        @for (invitation of data()!.invitations; track invitation.email + invitation.role) {
+          <li>
+            <span>{{ invitation.email }}</span>
+            <span class="admin-role">{{ roleLabel[invitation.role] }}</span>
+            <span class="muted">desde {{ date(invitation.createdAt) }}</span>
+            <button
+              type="button"
+              class="text-button"
+              (click)="revoke(invitation.email, invitation.role)"
+            >
+              Cancelar
+            </button>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  <section aria-labelledby="admin-users">
+    <div class="admin-users-head">
+      <h2 id="admin-users">
+        Contas
+        @if (data(); as page) {
+          <span class="muted">{{ page.total }}</span>
+        }
+      </h2>
+      <form class="admin-search" (ngSubmit)="load(1)" role="search">
+        <label for="admin-search" class="visually-hidden">Buscar contas</label>
+        <input
+          id="admin-search"
+          name="search"
+          [(ngModel)]="search"
+          maxlength="120"
+          placeholder="Nome, e-mail ou prontuário"
+        />
+        <button type="submit" class="outline">Buscar</button>
+      </form>
+    </div>
+    @if (loading() && !data()) {
+      <p role="status">Carregando contas…</p>
+    } @else if (data()?.items?.length) {
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th scope="col">Pessoa</th>
+              <th scope="col">Prontuário</th>
+              <th scope="col">Papéis</th>
+              <th scope="col">Respostas</th>
+              <th scope="col">Desde</th>
+              <th scope="col"><span class="visually-hidden">Ações</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (user of data()!.items; track user.id) {
+              <tr>
+                <td>
+                  <strong>{{ user.name || "Sem nome" }}</strong>
+                  <span class="admin-email">{{ user.email }}</span>
+                </td>
+                <td>{{ user.enrollment || "—" }}</td>
+                <td>
+                  @for (role of user.roles; track role) {
+                    <span class="admin-role">{{ roleLabel[role] }}</span>
+                  } @empty {
+                    <span class="muted">Aluno</span>
+                  }
+                </td>
+                <td>{{ user.answers }}</td>
+                <td>{{ date(user.createdAt) }}</td>
+                <td class="admin-actions">
+                  @if (user.roles.includes("PROFESSOR")) {
+                    <button
+                      type="button"
+                      class="text-button"
+                      (click)="revoke(user.email, 'PROFESSOR')"
+                      [attr.aria-label]="'Remover papel de professor de ' + user.email"
+                    >
+                      Remover professor
+                    </button>
+                  } @else {
+                    <button
+                      type="button"
+                      class="text-button"
+                      (click)="grant(user, 'PROFESSOR')"
+                      [attr.aria-label]="'Tornar professor: ' + user.email"
+                    >
+                      Tornar professor
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      @if (pageCount() > 1) {
+        <nav class="admin-pages" aria-label="Páginas de contas">
+          <button
+            type="button"
+            class="outline"
+            [disabled]="data()!.page <= 1 || loading()"
+            (click)="load(data()!.page - 1)"
+          >
+            Anterior
+          </button>
+          <span>Página {{ data()!.page }} de {{ pageCount() }}</span>
+          <button
+            type="button"
+            class="outline"
+            [disabled]="data()!.page >= pageCount() || loading()"
+            (click)="load(data()!.page + 1)"
+          >
+            Próxima
+          </button>
+        </nav>
+      }
+    } @else if (data()) {
+      <p class="muted">Nenhuma conta encontrada.</p>
+    }
+  </section>
+</section>
