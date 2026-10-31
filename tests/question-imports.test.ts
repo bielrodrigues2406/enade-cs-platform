@@ -27,7 +27,7 @@ async function request(route: string, cookie = "", method = "GET", body?: unknow
 async function account(curates = false) {
   const guest = await request("session", "", "POST", {});
   const guestCookie = guest.headers.get("set-cookie")!.split(";")[0];
-  const response = await request("auth/register", guestCookie, "POST", { email: `intake-${randomUUID()}@example.invalid`, password: `test-only-${randomUUID()}` });
+  const response = await request("auth/register", guestCookie, "POST", { email: `intake-${randomUUID()}@example.invalid`, password: `test-only-${randomUUID()}`, name: "Pessoa Teste" });
   assert.equal(response.status, 201);
   const cookie = response.headers.get("set-cookie")!.split(";")[0];
   const hash = createHash("sha256").update(cookie.slice("enade_session=".length)).digest("hex");

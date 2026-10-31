@@ -38,6 +38,9 @@ test("home shows the study board and leads to study and back", async ({
   await expect(
     page.getByRole("button", { name: /^Simular Redes: \d+ questõ?(?:es|ão)$/ }),
   ).toBeVisible();
+  await page
+    .getByRole("region", { name: "Seu desempenho por área" })
+    .screenshot({ path: "test-results/home-areas.png" });
   await expect(
     page.getByRole("button", { name: "Início" }).first(),
   ).toHaveAttribute("aria-current", "page");
@@ -133,17 +136,45 @@ test("an area simulation starts from the home page and opens on its first questi
   await page
     .getByRole("button", { name: /^Simular Redes: / })
     .click();
+  // O cronômetro é opcional: em aula a turma resolve junto, sem tempo.
+  const choice = page.getByRole("dialog", { name: "Redes" });
+  await expect(choice.getByRole("button", { name: "Sem cronômetro" })).toBeVisible();
+  await choice.getByRole("button", { name: /^Com cronômetro \(\d+ min\)$/ }).click();
   await expect(page).toHaveURL(/\/treino\?attempt=/);
   await expect(page.getByText(/^Questão 1 de \d+$/)).toBeVisible();
   await expect(page.getByText("Redes · com cronômetro")).toBeVisible();
   await expect(page.locator(".practice-clock time")).toBeVisible();
 
   // Pausada pela saída, a prova aparece como "Em andamento" e retoma dali.
-  page.once("dialog", (dialog) => dialog.accept());
   await goHome(page);
+  const leave = page.getByRole("dialog", { name: "Sair agora?" });
+  await leave.getByRole("button", { name: "Pausar e sair" }).click();
   await expect(page.getByRole("heading", { name: "Em andamento" })).toBeVisible();
   await page.getByRole("button", { name: /^Retomar: Treino de Redes/ }).click();
   await expect(page.getByText(/^Questão 1 de \d+$|Simulado pausado/)).toBeVisible();
+});
+
+test("an untimed area simulation leaves through its own exit dialog", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: /^Simular Redes: / }).click();
+  await page
+    .getByRole("dialog", { name: "Redes" })
+    .getByRole("button", { name: "Sem cronômetro" })
+    .click();
+  await expect(page.getByText("Redes · sem cronômetro")).toBeVisible();
+  await expect(page.locator(".practice-clock")).toHaveCount(0);
+  await page.getByRole("button", { name: "← Sair do treino" }).click();
+  const leave = page.getByRole("dialog", { name: "Sair do treino?" });
+  await expect(leave.getByRole("button", { name: "Finalizar agora" })).toBeVisible();
+  await leave.getByRole("button", { name: "Continuar respondendo" }).click();
+  await expect(leave).toBeHidden();
+  await expect(page.getByText(/^Questão 1 de \d+$/)).toBeVisible();
+  await page.getByRole("button", { name: "← Sair do treino" }).click();
+  await leave.getByRole("button", { name: "Sair", exact: true }).click();
+  // O treino fica salvo e aparece para retomar.
+  await expect(page.getByRole("button", { name: "Retomar treino", exact: true })).toBeVisible();
 });
 
 test("home reflows without horizontal scrolling", async ({ page }) => {

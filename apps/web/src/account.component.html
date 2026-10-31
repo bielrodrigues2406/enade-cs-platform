@@ -28,14 +28,22 @@
       <fieldset [disabled]="busy">
         @if (mode === "register") {
           <div class="account-field">
-            <label for="account-name">Nome <span class="optional">opcional</span></label>
+            <label for="account-name">Nome</label>
             <input
               id="account-name"
               name="name"
               [(ngModel)]="name"
+              required
               maxlength="120"
               autocomplete="name"
+              aria-describedby="name-error"
+              [attr.aria-invalid]="submitted && nameError() ? true : null"
             />
+            <p id="name-error" class="field-error">
+              @if (submitted && nameError()) {
+                {{ nameError() }}
+              }
+            </p>
           </div>
           <div class="account-field">
             <label for="account-enrollment"

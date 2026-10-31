@@ -1,5 +1,6 @@
-import { Component, Input, computed, signal } from "@angular/core";
+import { Component, Input, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ChoiceService } from "./choice-dialog";
 import { ClassDashboardComponent } from "./class-dashboard.component";
 
 // Aulas de preparação e presença (AULA-1). Professores e administração
@@ -33,6 +34,7 @@ export class LessonsComponent {
   readonly statusLabel = STATUS_LABEL;
   classes = signal<ClassSummary[]>([]);
   detail = signal<ClassDetail | null>(null);
+  private choice = inject(ChoiceService);
   classTab = signal<"lessons" | "dashboard">("lessons");
   roll = signal<Roll | null>(null);
   mine = signal<MyLesson[] | null>(null);
@@ -99,7 +101,15 @@ export class LessonsComponent {
   }
   async removeMember(member: Member) {
     const detail = this.detail();
-    if (!detail || !confirm(`Remover ${member.name} da turma? A presença dela nesta turma também sai.`)) return;
+    if (!detail) return;
+    const ok = await this.choice.confirm({
+      eyebrow: detail.name,
+      title: `Remover ${member.name}?`,
+      message: "A pessoa sai da turma e as presenças dela nesta turma também saem. Dá para adicioná-la de novo depois.",
+      confirm: "Remover da turma",
+      danger: true,
+    });
+    if (!ok) return;
     await this.attempt(async () => {
       await this.request(`classes/${detail.id}/members/${member.id}/remove`, {});
       await this.openClass(detail.id);

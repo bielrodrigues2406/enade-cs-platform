@@ -63,7 +63,7 @@ const test = base.extend<Fixtures>({
         expect((await context.request.post("/api/session", { data: {} })).status()).toBe(201);
         const email = `intake-browser-${randomUUID()}@example.invalid`;
         expect((await context.request.post("/api/auth/register", {
-          data: { email, password: "Importação sintética 2026!" },
+          data: { email, password: "Importação sintética 2026!", name: "Pessoa Teste" },
         })).status()).toBe(201);
         const id = (await pool.query("SELECT identity_id FROM account WHERE email=$1", [email])).rows[0].identity_id;
         identities.push(id);

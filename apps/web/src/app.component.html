@@ -34,13 +34,15 @@
           }
           @if (session().mode === "account") {
             <button
-              class="text-button account-email"
+              class="account-chip"
               (click)="openProfile()"
               [attr.aria-current]="profileView() ? 'page' : null"
-              [attr.aria-label]="'Meu perfil, ' + accountEmail()"
+              [attr.aria-label]="'Meu perfil, ' + accountLabel()"
+              [attr.title]="accountEmail()"
               [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             >
-              {{ accountEmail() }}
+              <span class="account-avatar" aria-hidden="true">{{ accountInitials() }}</span>
+              <span class="account-chip-name">{{ accountName() }}</span>
             </button>
             <button
               class="text-button"
@@ -207,7 +209,7 @@
             <p role="status">Atualizando sua sessão…</p>
           } @else if (profileView()) {
             @defer (on immediate) {
-              <app-profile (emailChange)="profileEmailChanged($event)" (back)="openHome()" />
+              <app-profile (accountChange)="profileAccountChanged($event)" (back)="openHome()" />
             } @placeholder {
               <p role="status">Carregando seu perfil…</p>
             }
@@ -770,5 +772,29 @@
             </article>
           }
         }
+        @if (!landingMode() && !accountView() && !booting()) {
+          <footer class="site-footer">
+            <div class="site-footer-brand">
+              <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect width="34" height="34" rx="8" /><circle cx="9.5" cy="17" r="3.6" class="brand-bubble" /><circle cx="17" cy="17" r="3.6" class="brand-bubble is-marked" /><circle cx="24.5" cy="17" r="3.6" class="brand-bubble" /></svg>
+              <div>
+                <strong>Preparação ENADE</strong>
+                <p>Ciência da Computação · IFSP Presidente Epitácio</p>
+              </div>
+            </div>
+            <nav class="site-footer-nav" aria-label="Rodapé">
+              <p class="site-footer-title">Estudar</p>
+              <button type="button" class="text-button" (click)="back()">Todas as questões</button>
+              <button type="button" class="text-button" (click)="openPractice()">Simulados e provas completas</button>
+              <button type="button" class="text-button" (click)="openReview()">Revisar o que errei</button>
+              <button type="button" class="text-button" (click)="openDiscursive()">Questões discursivas</button>
+            </nav>
+            <div class="site-footer-note">
+              <p class="site-footer-title">Sobre o conteúdo</p>
+              <p>Questões e gabaritos oficiais são do Inep, com a página da prova de origem. Projeto de estudo independente, sem vínculo com o Inep ou o MEC.</p>
+            </div>
+            <p class="site-footer-base">ENADE 2026 · domingo, 29 de novembro · <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade" target="_blank" rel="noopener noreferrer">cronograma no Inep</a></p>
+          </footer>
+        }
+        <app-choice-dialog />
       </main>
     </div>

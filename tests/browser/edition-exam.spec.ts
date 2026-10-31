@@ -104,6 +104,7 @@ test("a student takes the full edition exam with a countdown, pauses, leaves saf
   await expect(page.getByRole("radio").first()).toBeChecked();
   // Sair pelo menu pede confirmação e pausa; a prova volta pelo treino.
   await page.getByRole("button", { name: "Discursivas" }).first().click();
+  await page.getByRole("dialog", { name: "Sair agora?" }).getByRole("button", { name: "Pausar e sair" }).click();
   await expect(page.getByRole("heading", { name: "Discursivas", level: 1 })).toBeVisible();
   await page.getByRole("button", { name: "Treino parcial" }).first().click();
   await page.getByRole("button", { name: "Retomar prova" }).click();

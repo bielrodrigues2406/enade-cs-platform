@@ -39,7 +39,7 @@ async function account(role?: "PROFESSOR", profile: Record<string, string> = {})
   emails.push(email);
   const created = await fetch(`${base}/api/auth/register`, {
     method: "POST", headers: { Cookie: cookie, "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password: "Aula teste 2026!", ...profile }),
+    body: JSON.stringify({ email, password: "Aula teste 2026!", name: "Pessoa Teste", ...profile }),
   });
   cookie = created.headers.get("set-cookie")!.split(";")[0];
   const id = (await db.query("SELECT identity_id FROM account WHERE email=$1", [email])).rows[0].identity_id;

@@ -1,0 +1,58 @@
+# Plataforma ENADE na VPS compartilhada (docs/DEPLOY.md §5.3), no mesmo padrão
+# das outras aplicações do servidor: copie esta pasta para /srv/apps/enade.
+#   - nenhuma porta publicada: só o proxy Caddy abre 80 e 443;
+#   - banco próprio, só na rede interna desta aplicação;
+#   - só o app entra na rede "proxy", com o alias "enade";
+#   - limite de memória em cada serviço.
+
+name: enade
+
+services:
+  db:
+    # Mesma versão do CI e do desenvolvimento.
+    image: postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: enade
+      POSTGRES_USER: enade
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U enade -d enade']
+      interval: 10s
+      retries: 6
+    mem_limit: 512m
+
+  app:
+    image: ghcr.io/bielrodrigues2406/enade-cs-platform:${VERSAO:-latest}
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://enade:${POSTGRES_PASSWORD}@db:5432/enade
+      # Endereço público HTTPS (APP_ORIGIN no .env)
+      APP_ORIGIN: ${APP_ORIGIN:?defina APP_ORIGIN no .env}
+      # Um proxy (o Caddy) à frente: o IP do aluno vem dele.
+      TRUST_PROXY: '1'
+      ADMIN_EMAILS: ${ADMIN_EMAILS:-}
+      BOOTSTRAP_CONTENT: ${BOOTSTRAP_CONTENT:-1}
+    volumes:
+      # PDFs oficiais e recortes das questões.
+      - data:/data
+    networks:
+      default:
+      proxy:
+        aliases: [enade]
+    depends_on:
+      db:
+        condition: service_healthy
+    # Login (scrypt ~128 MiB, até 2 ao mesmo tempo) e importação de prova
+    # (pdftoppm e ImageMagick) são os picos.
+    mem_limit: 1g
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  pgdata:
+  data:

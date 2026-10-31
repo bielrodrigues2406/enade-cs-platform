@@ -67,6 +67,8 @@ Questões oficiais conferidas por agentes (ADR-011) entram sozinhas: ao iniciar,
 
 ## 5.1 Render (D16): passo a passo
 
+Alternativa ao caminho da §5.3. Continua válida para quem preferir não administrar servidor.
+
 O `render.yaml` da raiz descreve tudo: serviço web pelo `Dockerfile`, disco de 1 GB em `/data`, PostgreSQL 17 sem acesso externo e publicação só depois do CI verde em `main`. Custo de referência em 31/10/2026: ~US$ 14/mês (web starter + banco basic-256mb + disco); confira em render.com/pricing.
 
 1. **Conta:** crie a conta no Render com 2FA e conecte o GitHub dando acesso só a este repositório.
@@ -95,6 +97,39 @@ O que a aplicação faz sozinha (uma instância, contadores em memória):
 Cada bloqueio entra uma vez por janela no registro de atividades (categoria Segurança), com o IP; a aba Atividades da administração mostra o resumo das últimas 24 horas.
 
 O que ela **não** resolve: um ataque distribuído (muitos IPs) esgota a instância antes de qualquer contador. Para isso a proteção precisa estar na borda: o Render já filtra parte do tráfego de rede, e um proxy como o Cloudflare (plano gratuito, modo "Under Attack" quando necessário) na frente do domínio próprio cobre o resto. Os limites dependem de `TRUST_PROXY` correto: com o valor errado, todos os acessos parecem vir do mesmo IP (bloqueio geral) ou o IP pode ser forjado.
+
+## 5.3 VPS compartilhada com o Mira Salgados (caminho escolhido em 31/10/2026)
+
+Gabriel decidiu publicar a plataforma na mesma VPS do Mira Salgados (Hostinger KVM 2, 8 GB), no padrão do servidor descrito em `mira-salgados/docs/servidor.md`. As principais diferenças em relação ao Render: custo único para vários projetos (R$ 43–78/mês) e manutenção do servidor por conta de quem administra. Uso previsto: novembro de 2026, até a prova; depois, a plataforma passa para a Fábrica de Software, que escolhe o endereço do IFSP.
+
+- **Endereço:** sem compra de domínio e sem ligar a plataforma ao Mira Salgados nem ao IP. Duas opções:
+  - **subdomínio do IFSP** (ex.: `enade.pep.ifsp.edu.br`), pedido à TI do câmpus com um registro A para o IP da VPS. É o melhor endereço, e a Fábrica já herda;
+  - **subdomínio gratuito do DuckDNS** (ex.: `enade-cc.duckdns.org`): login no duckdns.org, cria o nome e informa o IP da VPS. Funciona com HTTPS do Caddy.
+
+  O endereço só aparece em `APP_ORIGIN` (`.env`) e em `ENADE_DOMINIO` (`/srv/proxy/.env`); trocar depois é mudar os dois e reiniciar. O cookie de sessão não define `Domain`, então não se mistura com outros sites do servidor.
+- **Imagem:** o workflow `publicar.yml` publica `ghcr.io/bielrodrigues2406/enade-cs-platform` (tags `latest` e o commit curto) depois do CI verde num push à `main`. A VPS não compila nada.
+- **Arquivos do servidor:** `deploy/vps/`. Nenhuma porta publicada, banco próprio, alias `enade` na rede `proxy`, limite de 1 GB para o app e 512 MB para o banco.
+
+Passo a passo (servidor já preparado pelo `preparar.sh` do Mira, com o proxy Caddy em `/srv/proxy`):
+
+1. **DNS:** aponte o endereço escolhido para o IP da VPS e espere o `nslookup` dele responder o IP.
+2. **Imagem:** depois do primeiro merge com este workflow, confira em GitHub → Packages que `enade-cs-platform` existe. Se o pacote for privado, o login da VPS no ghcr.io (o mesmo token `read:packages` do Mira) já serve.
+3. **Aplicação:**
+   ```sh
+   mkdir -p /srv/apps/enade && cd /srv/apps/enade
+   # copie para cá os arquivos de deploy/vps/ (scp -r deploy/vps/. vps:/srv/apps/enade/)
+   cp .env.example .env && chmod 600 .env   # POSTGRES_PASSWORD (openssl rand -hex 24), APP_ORIGIN, ADMIN_EMAILS
+   ./atualizar.sh
+   docker compose logs -f app   # migrations, carga das 246 questões e "API ouvindo"
+   ```
+   A primeira subida baixa as provas do Inep e recorta as questões: leva alguns minutos.
+4. **Proxy:** copie `enade.caddy` para `/srv/proxy/sites/`, acrescente `ENADE_DOMINIO=<endereço, sem https://>` ao `/srv/proxy/.env` e rode `cd /srv/proxy && docker compose up -d && docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile`. O Caddy emite o certificado na hora.
+5. **Conferir:** `https://<endereço>/api/health` e o site. Crie sua conta com o e-mail de `ADMIN_EMAILS` antes de divulgar o endereço (§5.1, item 5).
+6. **Backup diário:** no cron, `0 3 * * * /srv/apps/enade/backup-postgres.sh /srv/apps/enade >> /srv/backups/backup.log 2>&1`. Copie `/srv/backups` para fora da máquina.
+
+Atualizar: depois de um merge na `main`, rode `./atualizar.sh`. Voltar de versão: `VERSAO=<7 caracteres do commit>` no `.env` e `./atualizar.sh`. Desligar depois da prova: `docker compose down` (os volumes ficam; `docker compose down -v` apaga dados e arquivos) e remova `enade.caddy` do proxy. Faça um backup antes de entregar à Fábrica.
+
+O limite de requisições por IP (§5.2) funciona porque `TRUST_PROXY=1` corresponde ao único proxy, o Caddy. Se um dia houver Cloudflare na frente, passa a 2.
 
 ## 6. Reverter
 

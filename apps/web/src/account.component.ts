@@ -4,7 +4,7 @@ import { FormsModule, NgForm } from "@angular/forms";
 export type AccountMode = "login" | "register";
 export type SessionStatus =
   | { mode: "guest" }
-  | { mode: "account"; email: string };
+  | { mode: "account"; email: string; name: string | null };
 export type Credentials = {
   email: string;
   password: string;
@@ -43,6 +43,10 @@ export class AccountComponent {
       ? "A senha deve ter de 12 a 128 caracteres."
       : "";
   }
+  nameError() {
+    const length = this.name.trim().length;
+    return length < 2 ? "Informe seu nome." : length > 120 ? "Use até 120 caracteres." : "";
+  }
   // Mesmo formato que a API aceita: duas letras e 6 a 8 dígitos, X opcional.
   enrollmentError() {
     const value = this.enrollment.trim().toUpperCase();
@@ -53,7 +57,7 @@ export class AccountComponent {
   submit(form: NgForm) {
     this.submitted = true;
     if (this.busy || form.invalid || this.passwordError()) return;
-    if (this.mode === "register" && this.enrollmentError()) return;
+    if (this.mode === "register" && (this.nameError() || this.enrollmentError())) return;
     this.submitCredentials.emit({
       email: this.email.trim(),
       password: this.password,
@@ -63,7 +67,7 @@ export class AccountComponent {
   private profile() {
     const name = this.name.trim();
     const enrollment = this.enrollment.trim().toUpperCase();
-    return { ...(name ? { name } : {}), ...(enrollment ? { enrollment } : {}) };
+    return { name, ...(enrollment ? { enrollment } : {}) };
   }
   switchMode() {
     this.password = "";

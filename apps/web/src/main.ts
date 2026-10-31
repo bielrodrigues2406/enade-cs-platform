@@ -11,6 +11,8 @@ import { DiscursiveComponent } from "./discursive.component";
 import { QuestionContentComponent } from "./question-content.component";
 import { ExamComponent } from "./exam.component";
 import { ProfileComponent } from "./profile.component";
+import { firstName, initials } from "./initials";
+import { ChoiceDialogComponent, ChoiceService } from "./choice-dialog";
 import { requestPractice, type PracticeRequest } from "./practice-request";
 import {
   ReviewComponent,
@@ -115,6 +117,7 @@ type Question = Summary & {
     QuestionContentComponent,
     ExamComponent,
     ProfileComponent,
+    ChoiceDialogComponent,
     ReviewComponent,
   ],
   templateUrl: "./app.component.html",
@@ -171,6 +174,7 @@ class App {
   reviewCurrentVersion = signal<string | null>(null);
   reviewPosition: ReviewPosition = { topic: "", offset: 0 };
   private appRef = inject(ApplicationRef);
+  private choice = inject(ChoiceService);
   private identityGeneration = 0;
   private identityTransition = 0;
   private requestNumber = 0;
@@ -262,7 +266,7 @@ class App {
       !this.canCurate() ||
       this.saving() ||
       this.authBusy() ||
-      this.curationBusy() || this.practiceBusy() || !this.leaveExam()
+      this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openCuration())
     )
       return;
     this.requestNumber++;
@@ -285,7 +289,7 @@ class App {
   }
   openHome(event?: Event) {
     event?.preventDefault();
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openHome())) return;
     this.requestNumber++;
     this.swapView(() => {
       this.loading.set(false);
@@ -334,7 +338,7 @@ class App {
     return this.sectionLabel() === "Início";
   }
   openReview() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openReview())) return;
     this.requestNumber++;
     this.swapView(() => {
       this.loading.set(false);
@@ -356,14 +360,24 @@ class App {
    * Sair de uma prova em andamento pede confirmação; a prova fica pausada (o
    * componente do treino pausa ao sair) e as respostas já estão salvas.
    */
-  leaveExam() {
+  leaveExam(then: () => void) {
     if (!this.examRunning()) return true;
-    if (!confirm("Sair da prova? O cronômetro fica pausado e suas respostas estão salvas. Você continua depois em Treino parcial.")) return false;
-    this.examRunning.set(false);
-    return true;
+    // Pergunta no modal; se a pessoa confirmar, refaz a navegação pedida.
+    void this.choice.confirm({
+      eyebrow: "Cronômetro correndo",
+      title: "Sair agora?",
+      message: "O cronômetro fica pausado e suas respostas estão salvas. Você continua depois em Treino parcial.",
+      cancel: "Continuar respondendo",
+      confirm: "Pausar e sair",
+    }).then((ok) => {
+      if (!ok) return;
+      this.examRunning.set(false);
+      then();
+    });
+    return false;
   }
   openPractice() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openPractice())) return;
     this.requestNumber++;
     this.loading.set(false);
     this.question.set(null);
@@ -590,7 +604,7 @@ class App {
     }
   }
   back() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.back())) return;
     this.swapView(() => {
       this.homeView.set(false);
       this.practiceView.set(false);
@@ -657,7 +671,12 @@ class App {
   }
   @HostListener("window:popstate")
   async restoreCatalogNavigation() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) {
+    const target = location.pathname + location.search;
+    const resume = () => {
+      history.replaceState(null, "", target);
+      void this.restoreCatalogNavigation();
+    };
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(resume)) {
       history.pushState(null, "", this.currentAddress);
       return;
     }
@@ -700,8 +719,21 @@ class App {
     const session = this.session();
     return session.mode === "account" ? session.email : "";
   }
+  /** Nome no topo; contas antigas sem nome mostram o e-mail. */
+  accountName() {
+    const session = this.session();
+    return session.mode === "account" ? firstName(session.name) || session.email : "";
+  }
+  accountLabel() {
+    const session = this.session();
+    return session.mode === "account" ? session.name || session.email : "";
+  }
+  accountInitials() {
+    const session = this.session();
+    return session.mode === "account" ? initials(session.name, session.email) : "";
+  }
   openAccount(mode: AccountMode) {
-    if (this.saving() || this.authBusy() || this.practiceBusy() || this.session().mode === "account" || !this.leaveExam())
+    if (this.saving() || this.authBusy() || this.practiceBusy() || this.session().mode === "account" || !this.leaveExam(() => this.openAccount(mode)))
       return;
     this.accountView.set(mode);
     this.authError.set("");
@@ -722,7 +754,7 @@ class App {
     this.focusMain();
   }
   openAdmin() {
-    if (!this.roles().includes("ADMIN") || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam())
+    if (!this.roles().includes("ADMIN") || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openAdmin()))
       return;
     this.swapView(() => {
       this.question.set(null);
@@ -740,7 +772,7 @@ class App {
     return this.roles().includes("PROFESSOR") || this.roles().includes("ADMIN");
   }
   openLessons() {
-    if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam())
+    if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openLessons()))
       return;
     this.swapView(() => {
       this.question.set(null);
@@ -755,7 +787,7 @@ class App {
     this.focusMain();
   }
   openDiscursive() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openDiscursive())) return;
     this.swapView(() => {
       this.question.set(null);
       this.accountView.set(null);
@@ -770,7 +802,7 @@ class App {
   }
   /** Meu perfil: dados e senha da própria conta. */
   openProfile() {
-    if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam())
+    if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openProfile()))
       return;
     this.swapView(() => {
       this.question.set(null);
@@ -785,8 +817,8 @@ class App {
     this.leaveHomePath();
     this.focusMain();
   }
-  profileEmailChanged(email: string) {
-    this.session.set({ mode: "account", email });
+  profileAccountChanged(account: { email: string; name: string | null }) {
+    this.session.set({ mode: "account", ...account });
   }
   private clearStudyState() {
     this.adminView.set(false);
@@ -868,7 +900,7 @@ class App {
     }
   }
   async logout() {
-    if (this.authBusy() || this.saving() || this.curationBusy() || this.practiceBusy() || !this.leaveExam()) return;
+    if (this.authBusy() || this.saving() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => void this.logout())) return;
     const transition = ++this.identityTransition;
     this.authBusy.set(true);
     this.authError.set("");

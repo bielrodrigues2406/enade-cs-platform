@@ -571,6 +571,85 @@ select:hover,
 textarea:hover {
   border-color: var(--color-text-muted);
 }
+/* Seletores: seta própria em todos os navegadores; onde o navegador deixa
+   estilizar a lista (appearance: base-select), ela segue a paleta do site. */
+select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
+    linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 52%,
+    calc(100% - 15px) 52%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+select:focus-visible {
+  border-color: var(--color-accent);
+}
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+@supports (appearance: base-select) {
+  select,
+  ::picker(select) {
+    appearance: base-select;
+  }
+  select {
+    display: flex;
+    align-items: center;
+    background-image: none;
+    padding-right: 12px;
+  }
+  select::picker-icon {
+    content: "";
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+    border-right: 2px solid var(--color-text-muted);
+    border-bottom: 2px solid var(--color-text-muted);
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+  select:open::picker-icon {
+    transform: translateY(2px) rotate(-135deg);
+  }
+  ::picker(select) {
+    margin-top: 4px;
+    padding: 4px;
+    max-height: min(22rem, 60vh);
+    border: var(--border-thin) solid var(--color-border-control);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.25);
+  }
+  select option {
+    gap: var(--space-2);
+    padding: 8px 12px;
+    border-radius: calc(var(--radius-sm) - 2px);
+    font-size: var(--text-md);
+  }
+  select option:hover,
+  select option:focus-visible {
+    background: var(--color-highlight);
+    outline: none;
+  }
+  select option:checked {
+    font-weight: var(--weight-semibold);
+  }
+  select option::checkmark {
+    color: var(--color-accent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  select::picker-icon {
+    transition: none;
+  }
+}
 input::placeholder,
 textarea::placeholder {
   color: var(--color-text-muted);
@@ -1068,19 +1147,47 @@ fieldset:disabled .option:active {
 .header-actions .text-button {
   padding-inline: var(--space-2);
 }
-.account-email {
-  max-width: 230px;
+/* Pessoa conectada no cabeçalho: iniciais e primeiro nome; abre Meu perfil. */
+.header-actions .account-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 220px;
+  min-height: 40px;
+  padding: 3px var(--space-3) 3px 3px;
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+.header-actions .account-chip:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+.account-chip[aria-current="page"] {
+  border-color: var(--color-accent);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+.account-avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+.account-chip-name {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-}
-/* O e-mail no cabeçalho abre Meu perfil. */
-.account-email[aria-current="page"] {
-  color: var(--color-text);
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
 }
 /* Entrar e cadastro (AUTH-2): tela focada, formulário e capa lado a lado. */
 .account-mode .layout {
@@ -1281,8 +1388,8 @@ fieldset:disabled .option:active {
   .header-actions {
     gap: var(--space-1) var(--space-2);
   }
-  .header-actions .account-email {
-    max-width: 120px;
+  .header-actions .account-chip {
+    max-width: 140px;
   }
   .header-actions button {
     padding-inline: var(--space-3);
@@ -1299,8 +1406,11 @@ fieldset:disabled .option:active {
     padding-block: var(--space-2);
     row-gap: var(--space-1);
   }
-  .header-actions .account-email {
-    max-width: 7rem;
+  .header-actions .account-chip-name {
+    display: none;
+  }
+  .header-actions .account-chip {
+    padding-right: 3px;
   }
 }
 
@@ -2880,21 +2990,8 @@ app-home .panel h2 {
   font-size: var(--text-sm);
 }
 
-.home-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-2) var(--space-6);
-  margin-top: var(--space-12);
-  padding-top: var(--space-5);
-  border-top: var(--border-thin) solid var(--color-border);
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-}
-.home-footer p {
-  max-width: 44rem;
-  margin: 0;
+.home-guest-cta {
+  margin: var(--space-10) 0 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4281,6 +4378,20 @@ dialog.sheet-dialog[open]::backdrop {
   background: color-mix(in srgb, var(--color-surface-sunken) 55%, var(--color-surface));
   border-radius: 0 0 18px 18px;
 }
+/* Ação que não se desfaz (remover, desistir). */
+button.danger {
+  border-color: var(--color-danger-text);
+  background: var(--color-danger-text);
+  color: #fff;
+}
+button.danger:hover {
+  background: color-mix(in srgb, var(--color-danger-text) 85%, #000);
+}
+.choice-dialog .sheet-dialog-content p {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.6;
+}
 /* Resumo em números (ex.: o que a prova tem antes de começar). */
 .sheet-stats {
   display: grid;
@@ -4348,5 +4459,69 @@ dialog.sheet-dialog[open]::backdrop {
   dialog.sheet-dialog,
   dialog.sheet-dialog::backdrop {
     transition: none;
+  }
+}
+
+/* Rodapé de todas as telas (a página pública tem o seu). */
+.site-footer {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1.2fr) minmax(10rem, 0.8fr) minmax(14rem, 1.4fr);
+  gap: var(--space-6) var(--space-8);
+  margin-top: var(--space-16, 4rem);
+  padding: var(--space-8) 0 var(--space-6);
+  border-top: var(--border-thin) solid var(--color-border);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.site-footer-brand {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+.site-footer-brand .brand-mark {
+  flex: none;
+  width: 34px;
+  height: 34px;
+}
+.site-footer-brand strong {
+  display: block;
+  color: var(--color-text);
+  font-size: var(--text-base);
+}
+.site-footer-brand p,
+.site-footer-note p {
+  margin: var(--space-1) 0 0;
+  line-height: 1.6;
+}
+.site-footer-title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.site-footer-nav {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-1);
+}
+.site-footer-nav .text-button {
+  min-height: 32px;
+  padding: 0;
+  font-size: var(--text-sm);
+}
+.site-footer-base {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: var(--border-thin) solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+}
+@media (max-width: 860px) {
+  .site-footer {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

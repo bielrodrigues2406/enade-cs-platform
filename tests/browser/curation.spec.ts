@@ -26,7 +26,7 @@ const test = base.extend<Fixtures>({
       expect(session.status()).toBe(201);
       const email = `curation-${randomUUID()}@example.invalid`;
       const registered = await context.request.post("/api/auth/register", {
-        data: { email, password },
+        data: { email, password, name: "Pessoa Teste" },
       });
       expect(registered.status()).toBe(201);
       const cookie = (await context.cookies("http://localhost:4200/api")).find(

@@ -306,25 +306,36 @@
       @if (!progress()) {
         <p role="status">Carregando seu desempenho…</p>
       } @else {
+        <!-- Barras em ordem de atenção: a mais fraca no alto. A barra grossa é o
+             acerto; a fina, quanto da área já foi visto. -->
         <ol class="areas-list">
-          @for (row of areas(); track row.area; let i = $index) {
-            <li [class.is-weakest]="weakest()?.area === row.area">
-              <span class="areas-index" aria-hidden="true">{{ (i + 1).toString().padStart(2, "0") }}</span>
+          @for (row of ranked(); track row.area) {
+            <li [class.is-low]="needsAttention(row)" [class.is-empty]="!row.firstAttempts">
               <div class="areas-name">
                 <strong>{{ row.area }}</strong>
-                <span>{{ row.firstAttempts }} de {{ row.published }} vistas · simulado de {{ simulationSize(row) }} {{ simulationSize(row) === 1 ? "questão" : "questões" }}</span>
+                @if (needsAttention(row)) {
+                  <span class="areas-flag">Precisa de atenção</span>
+                }
               </div>
-              <div class="areas-score">
+              <div class="areas-bars" aria-hidden="true">
+                <span class="areas-track"><span class="areas-fill" [style.--value]="ratio(row.firstCorrect, row.firstAttempts)"></span></span>
+                <span class="areas-track is-thin"><span class="areas-fill is-coverage" [style.--value]="coverage(row)"></span></span>
+              </div>
+              <p class="areas-figure">
                 @if (row.firstAttempts) {
-                  <span class="areas-track" aria-hidden="true"><span class="areas-fill" [style.--value]="ratio(row.firstCorrect, row.firstAttempts)"></span></span>
-                  <span class="areas-value">{{ accuracy(row) }}% de acerto · {{ row.firstCorrect }} de {{ row.firstAttempts }}</span>
+                  <strong>{{ accuracy(row) }}%</strong>
+                  <span>{{ row.firstCorrect }} de {{ row.firstAttempts }} certas</span>
                 } @else {
-                  <span class="areas-value is-empty">sem respostas ainda</span>
+                  <strong>—</strong>
+                  <span>sem respostas</span>
                 }
+              </p>
+              <p class="areas-meta">
+                {{ row.firstAttempts }} de {{ row.published }} vistas · simulado de {{ simulationSize(row) }} {{ simulationSize(row) === 1 ? "questão" : "questões" }}
                 @if (smallSample(row)) {
-                  <span class="areas-note">poucas respostas: é só um indício</span>
+                  <span class="areas-note">Poucas respostas: é só um indício.</span>
                 }
-              </div>
+              </p>
               <button
                 class="outline"
                 (click)="simulate(row)"
@@ -336,24 +347,20 @@
             </li>
           }
         </ol>
+        <p class="areas-legend" aria-hidden="true">
+          <span><i class="areas-key"></i> acerto na primeira resposta</span>
+          <span><i class="areas-key is-coverage"></i> parte da área já vista</span>
+        </p>
         @if (active()) {
           <p class="areas-hint">Para começar um simulado, termine ou retome o treino em andamento.</p>
         }
       }
     </section>
 
-    <footer class="home-footer">
-      <p>
-        Projeto independente de estudo, sem vínculo com o Inep ou o MEC. Provas
-        e gabaritos oficiais pertencem ao Inep. A data da prova segue o
-        <a [href]="examSource" target="_blank" rel="noopener noreferrer"
-          >cronograma divulgado pelo Inep</a
-        >
-        e pode mudar.
-      </p>
-      @if (sessionMode === "guest") {
+    @if (sessionMode === "guest") {
+      <p class="home-guest-cta">
         <button type="button" class="text-button" (click)="register.emit()">
           Criar conta para guardar o histórico
         </button>
-      }
-    </footer>
+      </p>
+    }

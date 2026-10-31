@@ -117,16 +117,17 @@ export function credentials(body: unknown) {
     fail("A senha deve ter de 12 a 128 caracteres.", 400);
   return { email, password: password as string };
 }
-// Nome e prontuário são opcionais no cadastro; ligam a conta à turma (D13).
+// O nome é obrigatório: aparece no topo, na turma e para quem corrige.
+// O prontuário é opcional e liga a conta à lista da turma (D13).
 export function profile(body: unknown) {
   const { name, enrollment } = (body ?? {}) as Record<string, unknown>;
   const cleanName = typeof name === "string" ? name.trim().replace(/\s+/g, " ") : "";
   const cleanEnrollment = typeof enrollment === "string" ? enrollment.trim().toUpperCase() : "";
-  if (name !== undefined && (typeof name !== "string" || (cleanName && (cleanName.length < 2 || cleanName.length > 120))))
-    fail("Informe o nome com 2 a 120 caracteres.", 400);
+  if (cleanName.length < 2 || cleanName.length > 120)
+    fail("Informe seu nome, com 2 a 120 caracteres.", 400);
   if (enrollment !== undefined && (typeof enrollment !== "string" || (cleanEnrollment && !/^[A-Z]{2}[0-9]{6,8}X?$/.test(cleanEnrollment))))
     fail("Prontuário inválido. Use o formato do IFSP, por exemplo PE3012345.", 400);
-  return { name: cleanName || null, enrollment: cleanEnrollment || null };
+  return { name: cleanName, enrollment: cleanEnrollment || null };
 }
 @Controller("api")
 export class AuthController {
@@ -201,7 +202,7 @@ export class AuthController {
       const token = await issueSession(client, guest.id);
       await client.query("COMMIT");
       setSessionCookie(res, token);
-      return { mode: "account", email };
+      return { mode: "account", email, name };
     } catch (error) {
       await client.query("ROLLBACK");
       throw error;
@@ -221,8 +222,8 @@ export class AuthController {
     if (current.email)
       fail("Você já está em uma conta. Saia antes de entrar em outra.", 409);
     const account = (
-      await db.query<{ identity_id: string; password_hash: string }>(
-        "SELECT identity_id,password_hash FROM account WHERE email=$1",
+      await db.query<{ identity_id: string; password_hash: string; display_name: string | null }>(
+        "SELECT identity_id,password_hash,display_name FROM account WHERE email=$1",
         [email],
       )
     ).rows[0];
@@ -242,7 +243,7 @@ export class AuthController {
       await recordActivity(client, { category: "ACCESS", action: "LOGIN", actorId: account.identity_id, subject: email, ip: requestIp(req) });
       await client.query("COMMIT");
       setSessionCookie(res, token);
-      return { mode: "account", email };
+      return { mode: "account", email, name: account.display_name };
     } catch (error) {
       await client.query("ROLLBACK");
       throw error;

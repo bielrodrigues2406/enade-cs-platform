@@ -1,4 +1,4 @@
-/* Desempenho por área: lista indexada com filetes, uma linha por área.
+/* Desempenho por área: barras horizontais em ordem de atenção.
    O resto da página inicial usa os estilos globais .home-*, .todo-* e .panel. */
 .home-areas {
   container-type: inline-size;
@@ -33,69 +33,127 @@
 }
 .areas-list li {
   display: grid;
-  grid-template-columns: 2.5rem minmax(10rem, 1.1fr) minmax(12rem, 2fr) auto;
+  grid-template-columns: minmax(9rem, 13rem) minmax(8rem, 1fr) 8.5rem auto;
+  grid-template-areas:
+    "name bars figure action"
+    "name meta meta action";
   align-items: center;
-  gap: var(--space-2) var(--space-5);
-  padding: var(--space-3) 0;
+  gap: var(--space-1) var(--space-5);
+  padding: var(--space-4) 0;
   border-bottom: 1px solid var(--color-border);
 }
-.areas-index {
-  font-family: var(--font-reading);
-  font-size: 1.35rem;
-  line-height: 1;
-  color: var(--color-text-muted);
-}
-.areas-list li.is-weakest .areas-index {
-  color: var(--color-danger-text);
-}
 .areas-name {
+  grid-area: name;
   display: grid;
-  gap: 2px;
+  gap: 4px;
   min-width: 0;
 }
-.areas-name span,
-.areas-value,
-.areas-note {
+.areas-flag {
+  justify-self: start;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  letter-spacing: 0.03em;
-  color: var(--color-text-muted);
-  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
 }
-.areas-score {
+.areas-bars {
+  grid-area: bars;
   display: grid;
-  grid-template-columns: minmax(4rem, 1fr) auto;
-  align-items: center;
-  gap: 4px var(--space-3);
+  gap: 5px;
 }
 .areas-track {
-  height: 6px;
-  border-radius: 3px;
+  display: block;
+  height: 12px;
+  border-radius: 6px;
   background: var(--color-border);
   overflow: hidden;
+}
+.areas-track.is-thin {
+  height: 4px;
+  border-radius: 2px;
 }
 .areas-fill {
   display: block;
   height: 100%;
+  border-radius: inherit;
   background: var(--color-accent);
   transform-origin: left;
   transform: scaleX(var(--value, 0));
   transition: transform 700ms var(--ease-out);
+}
+.areas-fill.is-coverage {
+  background: var(--color-text-muted);
+  opacity: 0.55;
 }
 @starting-style {
   .areas-fill {
     transform: scaleX(0);
   }
 }
-.areas-list li.is-weakest .areas-fill {
+.areas-list li.is-low .areas-fill:not(.is-coverage) {
   background: var(--color-danger-text);
 }
-.areas-value.is-empty {
-  grid-column: 1 / -1;
+.areas-figure {
+  grid-area: figure;
+  display: grid;
+  margin: 0;
+  text-align: right;
+}
+.areas-figure strong {
+  font-family: var(--font-reading);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.areas-list li.is-low .areas-figure strong {
+  color: var(--color-danger-text);
+}
+.areas-list li.is-empty .areas-figure strong {
+  color: var(--color-text-muted);
+}
+.areas-figure span,
+.areas-meta,
+.areas-legend {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.areas-meta {
+  grid-area: meta;
+  margin: 0;
 }
 .areas-note {
-  grid-column: 1 / -1;
+  display: block;
+  margin-top: 2px;
   color: var(--color-warning-text);
+}
+.areas-list li button {
+  grid-area: action;
+}
+.areas-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin: var(--space-3) 0 0;
+}
+.areas-key {
+  display: inline-block;
+  width: 18px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 4px;
+  background: var(--color-accent);
+  vertical-align: middle;
+}
+.areas-key.is-coverage {
+  height: 4px;
+  background: var(--color-text-muted);
+  opacity: 0.55;
 }
 .areas-hint {
   margin: var(--space-3) 0 0;
@@ -110,13 +168,14 @@
 /* A coluna de conteúdo depende da barra lateral: decide pela largura da seção. */
 @container (max-width: 44rem) {
   .areas-list li {
-    grid-template-columns: 2rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name figure"
+      "bars bars"
+      "meta action";
+    gap: var(--space-2) var(--space-4);
   }
-  .areas-score,
   .areas-list li button {
-    grid-column: 2;
-  }
-  .areas-list li button {
-    justify-self: start;
+    justify-self: end;
   }
 }

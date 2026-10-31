@@ -141,6 +141,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   await answerSQL(page);
   const form = await enterForm(page, "Criar conta");
   await expect(page.getByText(/não há recuperação de senha/)).toBeVisible();
+  await form.getByLabel("Nome", { exact: true }).fill("Pessoa Teste");
   await form.getByLabel("E-mail", { exact: true }).fill(accountEmail);
   await form.getByLabel("Senha", { exact: true }).fill(password);
   const registration = page.waitForResponse(
@@ -158,7 +159,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
     page.getByRole("button", { name: "Revisar: Quando uma transação falha" }),
   ).toBeVisible();
   await page.reload();
-  await expect(page.locator("header")).toContainText(accountEmail);
+  await expect(page.locator("header .account-chip")).toHaveAttribute("title", accountEmail);
   await page.route("**/api/auth/logout", (route) =>
     route.fulfill({
       status: 503,
@@ -172,7 +173,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   await expect(page.getByRole("alert")).toContainText(
     "Não foi possível sair agora.",
   );
-  await expect(page.locator("header")).toContainText(accountEmail);
+  await expect(page.locator("header .account-chip")).toHaveAttribute("title", accountEmail);
   await page.unroute("**/api/auth/logout");
   await page
     .getByRole("button", { name: "Sair da conta", exact: true })
@@ -180,7 +181,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   await expect(
     page.getByRole("button", { name: "Resolver: Quando uma transação falha" }),
   ).toBeVisible();
-  await expect(page.locator("header")).not.toContainText(accountEmail);
+  await expect(page.locator("header .account-chip")).toHaveCount(0);
   await trackIdentity(context);
 
   const otherContext = await browser.newContext({
@@ -333,11 +334,11 @@ test("logout in another tab clears a pending save and rejects its late UI respon
   ).toBeVisible();
   await trackIdentity(context);
   const registered = await context.request.post("/api/auth/register", {
-    data: { email: accountEmail, password },
+    data: { email: accountEmail, password, name: "Pessoa Teste" },
   });
   expect(registered.status()).toBe(201);
   await page.reload();
-  await expect(page.locator("header")).toContainText(accountEmail);
+  await expect(page.locator("header .account-chip")).toHaveAttribute("title", accountEmail);
   const tab = await context.newPage();
   await tab.goto("/questoes");
   await tab
@@ -406,7 +407,7 @@ test("a delayed logout blocks study actions until the guest catalog replaces acc
   ).toBeVisible();
   await trackIdentity(context);
   const registered = await context.request.post("/api/auth/register", {
-    data: { email: accountEmail, password },
+    data: { email: accountEmail, password, name: "Pessoa Teste" },
   });
   expect(registered.status()).toBe(201);
   const saved = await context.request.put("/api/questions/demo-sql-v1/answer", {
@@ -461,7 +462,7 @@ test("a delayed logout blocks study actions until the guest catalog replaces acc
         name: "Resolver: Quando uma transação falha",
       }),
     ).toBeVisible();
-    await expect(page.locator("header")).not.toContainText(accountEmail);
+    await expect(page.locator("header .account-chip")).toHaveCount(0);
     await expect(
       page.getByRole("heading", {
         name: "Quando uma transação falha",

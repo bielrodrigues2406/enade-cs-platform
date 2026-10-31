@@ -10,8 +10,35 @@ export type PracticeRequest =
 /** Maior simulado de uma área: 30 questões ou todas, se ela tiver menos. */
 export const AREA_SIMULATION_LIMIT = 30;
 
-export function areaSimulation(area: string, count: number): PracticeRequest {
-  return { area, size: Math.min(count, AREA_SIMULATION_LIMIT), timed: true };
+/** Minutos por questão no simulado com cronômetro, como na prova. */
+export const MINUTES_PER_QUESTION = 4;
+
+export function areaSimulation(area: string, count: number, timed = true): PracticeRequest {
+  return { area, size: Math.min(count, AREA_SIMULATION_LIMIT), timed };
+}
+
+/**
+ * Pergunta se o simulado da área corre com cronômetro. Em aula, o professor
+ * resolve as questões com a turma e o tempo atrapalha; sozinho, o tempo treina.
+ * Devolve null se a pessoa desistir.
+ */
+export async function chooseAreaSimulation(
+  choice: { choose<T extends string>(request: { eyebrow?: string; title: string; message: string; cancel?: string; actions: { value: T; label: string; kind?: "primary" | "outline" | "danger" }[] }): Promise<T | null> },
+  area: string,
+  count: number,
+  minutesPerQuestion = MINUTES_PER_QUESTION,
+): Promise<PracticeRequest | null> {
+  const size = Math.min(count, AREA_SIMULATION_LIMIT);
+  const answer = await choice.choose({
+    eyebrow: "Simulado por área",
+    title: area,
+    message: `${size} ${size === 1 ? "questão" : "questões"} só desta área. Com cronômetro são ${size * minutesPerQuestion} minutos, com pausa. Sem cronômetro, bom para resolver junto com a turma.`,
+    actions: [
+      { value: "free", label: "Sem cronômetro", kind: "outline" },
+      { value: "timed", label: `Com cronômetro (${size * minutesPerQuestion} min)` },
+    ],
+  });
+  return answer ? areaSimulation(area, count, answer === "timed") : null;
 }
 
 /** Rótulo de um treino na lista e no resultado. */

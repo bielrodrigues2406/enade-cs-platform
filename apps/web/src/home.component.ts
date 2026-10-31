@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, signal } from "@angular/core";
+import { Component, EventEmitter, Input, Output, inject, signal } from "@angular/core";
 import type { ReviewItem } from "./review.component";
-import { AREA_SIMULATION_LIMIT, areaSimulation, type PracticeRequest } from "./practice-request";
+import { AREA_SIMULATION_LIMIT, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
+import { ChoiceService } from "./choice-dialog";
 
 type CatalogRow = {
   id: string;
@@ -37,6 +38,8 @@ const DAY = 86400000;
 const MONTHS = "jan fev mar abr mai jun jul ago set out nov dez".split(" ");
 /** Abaixo disso, o acerto da área é só um indício: a página avisa. */
 const SMALL_SAMPLE = 5;
+/** Acerto abaixo disso, com amostra suficiente, marca a área para atenção. */
+const LOW_ACCURACY = 0.5;
 
 const range = (from: number, to: number) =>
   Array.from({ length: to - from }, (_, i) => from + i);
@@ -63,6 +66,7 @@ const monday = (date: Date) => {
   styleUrl: "./home.component.css",
 })
 export class HomeComponent {
+  private choice = inject(ChoiceService);
   @Input() sessionMode: "guest" | "account" = "guest";
   @Output() browse = new EventEmitter<void>();
   @Output() review = new EventEmitter<void>();
@@ -180,11 +184,32 @@ export class HomeComponent {
   areas() {
     return this.progress()?.areas ?? [];
   }
+  /**
+   * Áreas em ordem de atenção: primeiro as medidas (pelo menos SMALL_SAMPLE
+   * respostas), do menor para o maior acerto; depois as com poucas
+   * respostas; por fim as ainda não estudadas, por nome.
+   */
+  ranked() {
+    const rank = (row: AreaProgress) => (row.firstAttempts >= SMALL_SAMPLE ? 0 : row.firstAttempts ? 1 : 2);
+    return [...this.areas()].sort((a, b) =>
+      rank(a) - rank(b)
+      || (rank(a) < 2 ? this.ratio(a.firstCorrect, a.firstAttempts) - this.ratio(b.firstCorrect, b.firstAttempts) : 0)
+      || a.area.localeCompare(b.area, "pt-BR"),
+    );
+  }
+  /** Quanto da área a pessoa já viu, de 0 a 1. */
+  coverage(row: AreaProgress) {
+    return this.ratio(Math.min(row.firstAttempts, row.published), row.published);
+  }
   accuracy(row: AreaProgress) {
     return Math.round(100 * this.ratio(row.firstCorrect, row.firstAttempts));
   }
   smallSample(row: AreaProgress) {
     return row.firstAttempts > 0 && row.firstAttempts < SMALL_SAMPLE;
+  }
+  /** Acerto abaixo de 50% com amostra suficiente: a área ganha destaque. */
+  needsAttention(row: AreaProgress) {
+    return row.firstAttempts >= SMALL_SAMPLE && this.ratio(row.firstCorrect, row.firstAttempts) < LOW_ACCURACY;
   }
   /** Área com menor acerto entre as que já têm amostra suficiente. */
   weakest() {
@@ -197,8 +222,9 @@ export class HomeComponent {
   simulationSize(row: AreaProgress) {
     return Math.min(row.published, AREA_SIMULATION_LIMIT);
   }
-  simulate(row: AreaProgress) {
-    this.practice.emit(areaSimulation(row.area, row.published));
+  async simulate(row: AreaProgress) {
+    const request = await chooseAreaSimulation(this.choice, row.area, row.published);
+    if (request) this.practice.emit(request);
   }
   practiceErrors() {
     this.practice.emit({ area: null, focus: "ERRORS" });

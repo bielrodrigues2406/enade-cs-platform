@@ -44,7 +44,7 @@ async function call(path: string, cookie: string, method = "GET", body?: unknown
 async function account(address: string, extra: Record<string, string> = {}) {
   const guest = await fetch(`${base}/api/session`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
   const cookie = guest.headers.get("set-cookie")!.split(";")[0];
-  const created = await call("auth/register", cookie, "POST", { email: address, password, ...extra });
+  const created = await call("auth/register", cookie, "POST", { email: address, password, name: "Pessoa Teste", ...extra });
   return { status: created.status, cookie: created.headers.get("set-cookie")?.split(";")[0] ?? cookie };
 }
 async function makeAdmin(address: string) {
@@ -179,7 +179,10 @@ test("people edit their profile and password; admins can create an account with 
   const created = await call("admin/accounts", admin.cookie, "POST",
     { email: professorEmail, password: "Senha inicial 2026!", name: "Prof Manual TEST ONLY", role: "PROFESSOR" });
   assert.equal(created.status, 201);
-  assert.equal((await call("admin/accounts", admin.cookie, "POST", { email: professorEmail, password: "Senha inicial 2026!" })).status, 409);
+  assert.equal((await call("admin/accounts", admin.cookie, "POST", { email: professorEmail, password: "Senha inicial 2026!", name: "Outra TEST ONLY" })).status, 409);
+  // O nome é obrigatório também no cadastro feito pela administração e no perfil.
+  assert.equal((await call("admin/accounts", admin.cookie, "POST", { email: email(), password: "Senha inicial 2026!" })).status, 400);
+  assert.equal((await call("me/profile", person.cookie, "PUT", { name: " " })).status, 400);
   assert.equal((await call("admin/accounts", person.cookie, "POST", { email: email(), password: "Senha inicial 2026!" })).status, 403);
   const professor = await login(professorEmail, "Senha inicial 2026!");
   assert.equal(professor.status, 200);
