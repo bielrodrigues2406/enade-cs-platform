@@ -180,9 +180,9 @@ O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE301
 | --- | --- | --- |
 | POST /imports | `multipart/form-data`: `exam` e `key` (PDF até 10 MB), `year`, `modality`, `examUrl`, `keyUrl` (links do Inep) | 201 `{id,state:"PROCESSING"}`; a extração roda em processo separado (`scripts/import-exam.mjs`) |
 | GET /imports | cookie de admin | lotes recentes com totais de questões confirmadas e excluídas |
-| GET /imports/:id | cookie de admin | lote (`state` PROCESSING, READY, FAILED ou PUBLISHED; `failure`; `pageCount`; `pageSizes`) e itens com `boxes`, `answer`, `status`, `area`, `subject`, `warnings`, `revision` |
+| GET /imports/:id | cookie de admin | lote (`state` PROCESSING, READY, FAILED ou PUBLISHED; `failure`; `issues`; `pageCount`; `pageSizes`) e itens com `boxes`, `answer`, `keyAnswer`, `answerNote`, `status`, `area`, `subject`, `warnings`, `revision` |
 | GET /imports/:id/pages/:n | cookie de admin | PNG da página em 100 dpi para o editor de caixas |
-| PUT /imports/:id/items/:key | `{boxes,status,area,subject,revision}` | 200 `{revision}`; caixas em pontos do PDF dentro da página; confirmar exige área, caixa e gabarito A–E; revisão antiga, discursiva ou anulada respondem 409 |
+| PUT /imports/:id/items/:key | `{boxes,status,area,subject,answer,answerNote,revision}` (`answer` A–E, ANULADA ou null; diferente da letra lida exige `answerNote` de 5–500) | 200 `{revision}`; caixas em pontos do PDF dentro da página; confirmar exige área, caixa e gabarito A–E; revisão antiga, discursiva ou anulada respondem 409 |
 | POST /imports/:id/publish | `{}` | 200 `{published,alreadyPublished}`; recorta as caixas confirmadas em 200 dpi e publica com revisão `IMPORT` registrando quem confirmou |
 
 É a única escrita aceita fora de JSON. Republicar não duplica questões; o lote fica PUBLISHED quando não resta item pendente.

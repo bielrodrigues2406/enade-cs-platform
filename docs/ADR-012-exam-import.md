@@ -13,6 +13,9 @@ O sistema será usado a cada edição do ENADE de Computação, mantido pela Fá
 3. A tela de importação mostra cada página com as caixas desenhadas. A pessoa move, redimensiona, acrescenta ou remove caixas (mouse, toque ou teclado), escolhe área e assunto e confirma ou deixa a questão de fora. Discursivas e anuladas não podem ser confirmadas.
 4. Publicar recorta as caixas confirmadas em 200 dpi (WebP sem perda) e cria versões com `review_origin = 'IMPORT'`: uma conta com papel de administrador é a revisora registrada. Fontes ficam com `verification_origin = 'IMPORT'`. Republicar não duplica questões (migration 015).
 
+5. **Exceções param, não adivinham** (migration 016). A leitura confere o lote e mostra no topo da tela o que não bate: número repetido, número do gabarito que não apareceu no PDF (vira item vazio para desenhar a caixa), questão sem letra, anuladas e gabarito que não se diz definitivo. PDF sem texto ou gabarito contraditório deixam o lote como FAILED, com a mensagem. Questão sem letra, anulada ou discursiva não pode ser confirmada.
+6. **Gabarito corrigível com justificativa.** A letra lida fica guardada; a pessoa pode escolher outra (ou ANULADA) só com justificativa, e a publicação registra no histórico a letra lida, a publicada e o motivo.
+
 ## Consequências
 
 - Uma pessoa confere sozinha, ao contrário do caminho HUMAN (duas contas). É o mesmo nível de controle de quem publica um material da coordenação, com a imagem original sempre visível ao estudante e a autoria registrada.
