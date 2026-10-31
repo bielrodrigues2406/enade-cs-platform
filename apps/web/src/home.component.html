@@ -310,9 +310,12 @@
              acerto; a fina, quanto da área já foi visto. -->
         <ol class="areas-list">
           @for (row of ranked(); track row.area) {
-            <li [class.is-weakest]="weakest()?.area === row.area" [class.is-empty]="!row.firstAttempts">
+            <li [class.is-low]="needsAttention(row)" [class.is-empty]="!row.firstAttempts">
               <div class="areas-name">
                 <strong>{{ row.area }}</strong>
+                @if (needsAttention(row)) {
+                  <span class="areas-flag">Precisa de atenção</span>
+                }
               </div>
               <div class="areas-bars" aria-hidden="true">
                 <span class="areas-track"><span class="areas-fill" [style.--value]="ratio(row.firstCorrect, row.firstAttempts)"></span></span>
@@ -330,7 +333,7 @@
               <p class="areas-meta">
                 {{ row.firstAttempts }} de {{ row.published }} vistas · simulado de {{ simulationSize(row) }} {{ simulationSize(row) === 1 ? "questão" : "questões" }}
                 @if (smallSample(row)) {
-                  <span class="areas-note"> · poucas respostas: é só um indício</span>
+                  <span class="areas-note">Poucas respostas: é só um indício.</span>
                 }
               </p>
               <button

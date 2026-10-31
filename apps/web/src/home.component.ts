@@ -38,6 +38,8 @@ const DAY = 86400000;
 const MONTHS = "jan fev mar abr mai jun jul ago set out nov dez".split(" ");
 /** Abaixo disso, o acerto da área é só um indício: a página avisa. */
 const SMALL_SAMPLE = 5;
+/** Acerto abaixo disso, com amostra suficiente, marca a área para atenção. */
+const LOW_ACCURACY = 0.5;
 
 const range = (from: number, to: number) =>
   Array.from({ length: to - from }, (_, i) => from + i);
@@ -204,6 +206,10 @@ export class HomeComponent {
   }
   smallSample(row: AreaProgress) {
     return row.firstAttempts > 0 && row.firstAttempts < SMALL_SAMPLE;
+  }
+  /** Acerto abaixo de 50% com amostra suficiente: a área ganha destaque. */
+  needsAttention(row: AreaProgress) {
+    return row.firstAttempts >= SMALL_SAMPLE && this.ratio(row.firstCorrect, row.firstAttempts) < LOW_ACCURACY;
   }
   /** Área com menor acerto entre as que já têm amostra suficiente. */
   weakest() {
