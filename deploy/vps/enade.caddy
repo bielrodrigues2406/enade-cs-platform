@@ -1,0 +1,8 @@
+# Copie para /srv/proxy/sites/enade.caddy, ponha ENADE_DOMINIO no
+# /srv/proxy/.env (ex.: enade.mirasalgados.com.br) e recarregue o proxy:
+#   cd /srv/proxy && docker compose up -d && \
+#   docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
+{$ENADE_DOMINIO} {
+	encode zstd gzip
+	reverse_proxy enade:3000
+}

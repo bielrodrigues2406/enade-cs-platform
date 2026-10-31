@@ -1,0 +1,53 @@
+name: Publicar imagem
+
+# Depois do CI verde num push à main, publica a imagem de produção no GitHub
+# Container Registry. A VPS só baixa e sobe (docs/DEPLOY.md §5.3): não compila
+# nada, e o build do Angular não disputa memória com as aplicações.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    name: Imagem no GHCR
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+
+      - uses: docker/setup-buildx-action@v4
+
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Versão
+        id: versao
+        run: echo "curta=$(echo '${{ github.event.workflow_run.head_sha }}' | cut -c1-7)" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/build-push-action@v7
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/enade-cs-platform:latest
+            ghcr.io/${{ github.repository_owner }}/enade-cs-platform:${{ steps.versao.outputs.curta }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
