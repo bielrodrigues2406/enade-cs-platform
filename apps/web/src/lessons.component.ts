@@ -1,5 +1,6 @@
 import { Component, Input, computed, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ClassDashboardComponent } from "./class-dashboard.component";
 
 // Aulas de preparação e presença (AULA-1). Professores e administração
 // gerenciam turmas, aulas e a chamada; o aluno vê as próprias aulas.
@@ -22,7 +23,7 @@ const STATUS_LABEL = Object.fromEntries(STATUS_OPTIONS.map((o) => [o.value, o.la
 
 @Component({
   selector: "app-lessons",
-  imports: [FormsModule],
+  imports: [FormsModule, ClassDashboardComponent],
   templateUrl: "./lessons.component.html",
 })
 export class LessonsComponent {
@@ -31,6 +32,7 @@ export class LessonsComponent {
   readonly statusLabel = STATUS_LABEL;
   classes = signal<ClassSummary[]>([]);
   detail = signal<ClassDetail | null>(null);
+  classTab = signal<"lessons" | "dashboard">("lessons");
   roll = signal<Roll | null>(null);
   mine = signal<MyLesson[] | null>(null);
   busy = signal(false);
@@ -50,6 +52,9 @@ export class LessonsComponent {
   }
   when(iso: string) {
     return new Date(iso).toLocaleString("pt-BR", { weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+  }
+  plural(count: number, one: string, many: string) {
+    return `${count} ${count === 1 ? one : many}`;
   }
   isPast(iso: string) {
     return new Date(iso).getTime() < Date.now();
@@ -71,6 +76,7 @@ export class LessonsComponent {
     });
   }
   async openClass(id: string) {
+    if (this.detail()?.id !== id) this.classTab.set("lessons");
     this.roll.set(null);
     await this.attempt(async () => {
       const detail = await this.request<ClassDetail>(`classes/${id}`);

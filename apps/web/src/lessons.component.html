@@ -68,8 +68,15 @@
   } @else if (detail(); as cls) {
     <button type="button" class="back text-button" (click)="loadClasses()">← Turmas</button>
     <h1 id="lessons-title">{{ cls.name }}</h1>
-    <p class="admin-intro">ENADE {{ cls.editionYear }} · {{ cls.members.length }} pessoas · {{ cls.lessons.length }} aulas</p>
+    <p class="admin-intro">ENADE {{ cls.editionYear }} · {{ plural(cls.members.length, "pessoa", "pessoas") }} · {{ plural(cls.lessons.length, "aula", "aulas") }}</p>
+    <div class="admin-tabs" role="tablist" aria-label="Seções da turma">
+      <button type="button" role="tab" [attr.aria-selected]="classTab() === 'lessons'" (click)="classTab.set('lessons')">Aulas e lista</button>
+      <button type="button" role="tab" [attr.aria-selected]="classTab() === 'dashboard'" (click)="classTab.set('dashboard')">Desempenho</button>
+    </div>
 
+    @if (classTab() === "dashboard") {
+      <app-class-dashboard [classId]="cls.id" />
+    } @else {
     <section aria-labelledby="lessons-list-title">
       <div class="admin-users-head">
         <h2 id="lessons-list-title">Aulas</h2>
@@ -141,6 +148,7 @@
         <button type="submit" [disabled]="busy() || !rosterText.trim()">Adicionar à turma</button>
       </form>
     </section>
+    }
   } @else {
     <h1 id="lessons-title">Aulas de preparação</h1>
     <p class="admin-intro">Turmas, aulas, chamada e exportação da presença no formato da planilha.</p>
@@ -149,7 +157,7 @@
         @for (cls of classes(); track cls.id) {
           <li>
             <strong>{{ cls.name }}</strong>
-            <span class="muted">ENADE {{ cls.editionYear }} · {{ cls.members }} pessoas · {{ cls.lessons }} aulas</span>
+            <span class="muted">ENADE {{ cls.editionYear }} · {{ plural(cls.members, "pessoa", "pessoas") }} · {{ plural(cls.lessons, "aula", "aulas") }}</span>
             @if (cls.nextLesson) {
               <span class="admin-role">Próxima: {{ when(cls.nextLesson) }}</span>
             }
