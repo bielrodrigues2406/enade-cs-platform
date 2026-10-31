@@ -29,8 +29,8 @@
           <p class="review-ready">
             <strong>{{ data.summary.ready }}</strong>
             {{ data.summary.ready === 1 ? "pronta" : "prontas" }} para revisar hoje.
-            Cada erro volta um dia depois de você ver o gabarito, para a
-            revisão testar o raciocínio e não a memória da resposta.
+            Cada erro volta um dia depois, para testar o raciocínio, não a
+            memória.
           </p>
           @if (data.summary.ready) {
             <button type="button" (click)="practiceErrors.emit()">
@@ -45,9 +45,7 @@
               ? "dessas questões é autoral demonstrativa."
               : "dessas questões são autorais demonstrativas."
           }}
-          Editar uma resposta ou resolver outra versão não aumenta a contagem de
-          questões. Este resumo descreve sua prática salva; não estima sua nota
-          no ENADE.
+          Não estima nota do ENADE.
         </p>
       </section>
     }

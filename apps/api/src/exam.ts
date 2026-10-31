@@ -455,4 +455,25 @@ export class PracticeController {
       await client.query("ROLLBACK"); throw error;
     } finally { client.release(); }
   }
+
+  /**
+   * Cancela um treino ou prova em andamento: a tentativa e suas respostas
+   * somem, sem resultado. Concluídos não podem ser cancelados.
+   */
+  @Post(":id/cancel") @HttpCode(200)
+  async cancel(@Req() req: any, @Param("id") rawId: string, @Body() body: unknown) {
+    await requireIdentity(req); noQuery(req); closed(body, []);
+    const id = attemptId(rawId), client = await db.connect();
+    try {
+      await client.query("BEGIN");
+      const user = await requireIdentity(req, client, true);
+      const attempt = await owned(client, id, user.id, true);
+      if (attempt.state !== "IN_PROGRESS") fail("Treino já finalizado não pode ser cancelado.", 409);
+      await client.query("DELETE FROM practice_attempt WHERE id=$1 AND owner_id=$2", [id, user.id]);
+      await client.query("COMMIT");
+      return { status: "CANCELLED" };
+    } catch (error) {
+      await client.query("ROLLBACK"); throw error;
+    } finally { client.release(); }
+  }
 }

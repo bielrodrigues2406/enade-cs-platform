@@ -29,6 +29,14 @@ type Progress = {
 };
 type Week = { label: string; now: boolean; exam: boolean };
 
+type HomeSnapshot = { catalog: HomeCatalog | null; notebook: Notebook | null; progress: Progress | null };
+/** Último painel carregado nesta aba: volta pronto e se atualiza por trás. */
+let lastHome: HomeSnapshot | null = null;
+/** Ao entrar, sair ou trocar de conta, o painel guardado não vale mais. */
+export function forgetHomeSnapshot() {
+  lastHome = null;
+}
+
 // Data de aplicação para bacharelados/CST segundo o Inep (MASTER-SPEC §2).
 // Revalidar a cada edição; a página informa a fonte.
 const EXAM_DATE = new Date(2026, 10, 29);
@@ -117,6 +125,11 @@ export class HomeComponent {
   private abort = new AbortController();
 
   ngOnInit() {
+    if (lastHome) {
+      this.catalog.set(lastHome.catalog);
+      this.notebook.set(lastHome.notebook);
+      this.progress.set(lastHome.progress);
+    }
     void this.load();
   }
   ngOnDestroy() {
@@ -294,5 +307,6 @@ export class HomeComponent {
     if (notebook) this.notebook.set(notebook);
     if (progress) this.progress.set(progress);
     if (catalog) this.catalog.set(catalog);
+    if (catalog && notebook && progress) lastHome = { catalog, notebook, progress };
   }
 }

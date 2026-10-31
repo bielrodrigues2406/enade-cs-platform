@@ -151,7 +151,7 @@ test("partial practice shows real availability and blocks sizes without enough p
   // Área sem questões: nenhum tamanho é oferecido e não dá para começar.
   await expect(page.getByRole("radio", { name: /questões|Todas/ })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Começar treino", exact: true })).toBeDisabled();
-  await expect(page.getByText(/^0 questões publicadas nesta seleção/)).toBeVisible();
+  await expect(page.getByText(/^0 questões disponíveis/)).toBeVisible();
   await page.getByLabel("Área do treino").selectOption(area);
   await expect(page.getByRole("radio", { name: "30 questões", exact: true })).toBeEnabled();
   await page.getByRole("button", { name: "Caderno de erros", exact: true }).click();

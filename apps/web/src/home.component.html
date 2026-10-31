@@ -270,9 +270,8 @@
             }
           </div>
           <p class="panel-note">
-            Dá para treinar todas as partes: objetivas no banco e nos
-            simulados, a discursiva com o padrão de resposta. Formato informado
-            pelo
+            Objetivas no banco e nos simulados; discursivas com o padrão de
+            resposta. Formato informado pelo
             <a [href]="examSource" target="_blank" rel="noopener noreferrer"
               >Inep</a
             >
@@ -291,10 +290,9 @@
         <div>
           <h2 id="home-areas-title">Seu desempenho por área</h2>
           <p>
-            Conta a primeira resposta a cada questão, no estudo, no treino ou
-            na prova; refazer até acertar não infla o acerto.
+            Conta só a primeira resposta de cada questão.
             @if (weakest(); as low) {
-              Onde você mais erra até agora:
+              Onde você mais erra:
               <strong>{{ low.area }}</strong>.
             }
           </p>
