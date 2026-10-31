@@ -11,15 +11,23 @@ import { storeAsset } from "./question-images.js";
 import { sourcePath } from "./source-store.js";
 
 // Publicação de uma importação conferida (IMP-1): recorta as caixas
-// confirmadas em 200 dpi, registra prova e gabarito como fontes conferidas na
-// importação e cria uma versão publicada por questão. Quem confirmou na tela
+// confirmadas em 200 dpi, registra prova, gabarito e padrão de resposta como
+// fontes conferidas na importação e cria uma versão publicada por objetiva e
+// uma discursiva publicada (DISC-1) por discursiva. Quem confirmou na tela
 // fica registrado como revisor (revisão IMPORT).
 
 const run = promisify(execFile);
 const CROP_DPI = 200;
 type Box = { page: number; x0: number; y0: number; x1: number; y1: number };
-type Item = { key: string; number: number; answer: string; keyAnswer: string | null; answerNote: string | null; boxes: Box[]; prompt: string;
-  options: { letter: string; text: string }[]; area: string; subject: string | null; confirmedBy: string };
+type Item = { key: string; number: number; kind: "OBJECTIVE" | "DISCURSIVE"; answer: string; keyAnswer: string | null;
+  answerNote: string | null; boxes: Box[]; prompt: string; options: { letter: string; text: string }[]; area: string;
+  subject: string | null; confirmedBy: string; standardBoxes: Box[]; criteria: unknown[] };
+type SourceKind = "EXAM" | "ANSWER_KEY" | "RESPONSE_STANDARD";
+const SOURCE: Record<SourceKind, { column: "exam" | "key" | "standard"; label: string }> = {
+  EXAM: { column: "exam", label: "Prova" },
+  ANSWER_KEY: { column: "key", label: "Gabarito" },
+  RESPONSE_STANDARD: { column: "standard", label: "Padrão de resposta" },
+};
 
 async function renderCrop(pdf: string, box: Box, work: string) {
   const px = (value: number) => Math.round((value * CROP_DPI) / 72);
@@ -37,8 +45,9 @@ async function pageCount(pdf: string) {
 }
 
 /** Registra (ou reaproveita) a fonte conferida pela importação. */
-async function source(client: PoolClient, batch: any, kind: "EXAM" | "ANSWER_KEY", admin: string) {
-  const sha256 = kind === "EXAM" ? batch.exam_sha256 : batch.key_sha256;
+async function source(client: PoolClient, batch: any, kind: SourceKind, admin: string) {
+  const { column, label } = SOURCE[kind];
+  const sha256 = batch[`${column}_sha256`];
   const existing = (await client.query("SELECT id,status FROM source_document WHERE sha256=$1", [sha256])).rows[0];
   if (existing) {
     if (existing.status !== "VERIFIED") fail("Este PDF já está cadastrado como fonte ainda não conferida.", 409);
@@ -46,17 +55,44 @@ async function source(client: PoolClient, batch: any, kind: "EXAM" | "ANSWER_KEY
   }
   const file = sourcePath(sha256);
   const id = randomUUID();
-  const label = kind === "EXAM" ? "Prova" : "Gabarito";
   await client.query(
     `INSERT INTO source_document(id,title,official_url,kind,year,area,modality,sha256,byte_size,page_count,
        status,verification_origin,imported_by,last_editor_id,reviewed_by,reviewed_at,is_final,key_finality)
      VALUES($1,$2,$3,$4,$5,'Ciência da Computação',$6,$7,$8,$9,'VERIFIED','IMPORT',$10,$10,$10,now(),$11,$12)`,
     [id, `ENADE ${batch.year} · ${batch.modality.toLowerCase()} · ${label}`,
-      kind === "EXAM" ? batch.exam_url : batch.key_url, kind, batch.year, batch.modality, sha256,
+      batch[`${column}_url`], kind, batch.year, batch.modality, sha256,
       (await readFile(file)).length, await pageCount(file), admin, kind === "ANSWER_KEY",
       kind === "ANSWER_KEY" ? "DECLARED" : null],
   );
   return id;
+}
+
+async function cropAll(pdf: string, boxes: Box[], work: string, client: PoolClient) {
+  const images = [];
+  for (const box of boxes) images.push({ box, ...(await storeAsset(client, await renderCrop(pdf, box, work))) });
+  return images;
+}
+
+async function publishDiscursive(client: PoolClient, batch: any, item: Item, ids: { exam: string; standard: string }, work: string) {
+  const id = `discursive-${batch.exam_sha256.slice(0, 12)}-${item.key.toLowerCase()}`;
+  const created = await client.query(
+    `INSERT INTO discursive_question(id,exam_source_id,standard_source_id,year,modality,number,area,subject,criteria,reviewed_by)
+     VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) ON CONFLICT DO NOTHING RETURNING id`,
+    [id, ids.exam, ids.standard, batch.year, batch.modality, item.number, item.area, item.subject,
+      JSON.stringify(item.criteria), item.confirmedBy],
+  );
+  if (!created.rowCount) return false; // já publicada antes: não duplica
+  const parts = [
+    { part: "PROMPT", pdf: sourcePath(batch.exam_sha256), boxes: item.boxes },
+    { part: "STANDARD", pdf: sourcePath(batch.standard_sha256), boxes: item.standardBoxes },
+  ];
+  for (const { part, pdf, boxes } of parts)
+    for (const [index, image] of (await cropAll(pdf, boxes, work, client)).entries())
+      await client.query(
+        "INSERT INTO discursive_image(question_id,part,position,asset_sha256,source_page,box,dpi) VALUES($1,$2,$3,$4,$5,$6,$7)",
+        [id, part, index + 1, image.sha256, image.box.page, [image.box.x0, image.box.y0, image.box.x1, image.box.y1], CROP_DPI],
+      );
+  return true;
 }
 
 async function publishItem(client: PoolClient, batch: any, item: Item, ids: { exam: string; key: string }, work: string) {
@@ -66,9 +102,7 @@ async function publishItem(client: PoolClient, batch: any, item: Item, ids: { ex
      ON CONFLICT(id) DO NOTHING RETURNING id`, [questionId, ids.exam, item.number],
   );
   if (!parent.rowCount) return false; // já publicada antes: não duplica
-  const images = [];
-  for (const box of item.boxes)
-    images.push({ box, ...(await storeAsset(client, await renderCrop(sourcePath(batch.exam_sha256), box, work))) });
+  const images = await cropAll(sourcePath(batch.exam_sha256), item.boxes, work, client);
   const versionId = `${questionId}-v1`;
   const title = batch.modality === "LICENCIATURA"
     ? `ENADE ${batch.year} · Licenciatura · Questão ${item.number}` : `ENADE ${batch.year} · Questão ${item.number}`;
@@ -111,14 +145,20 @@ export async function publishImport(id: string, admin: string) {
     const batch = (await client.query("SELECT * FROM exam_import WHERE id=$1 FOR UPDATE", [id])).rows[0];
     if (batch.state !== "READY") fail("Esta importação não está pronta para publicar.", 409);
     const items = (await client.query<Item>(
-      `SELECT question_key AS key,number,answer,key_answer AS "keyAnswer",answer_note AS "answerNote",
-         boxes,prompt,options,area,subject,confirmed_by AS "confirmedBy"
+      `SELECT question_key AS key,number,kind,answer,key_answer AS "keyAnswer",answer_note AS "answerNote",
+         boxes,prompt,options,area,subject,confirmed_by AS "confirmedBy",standard_boxes AS "standardBoxes",criteria
        FROM exam_import_item WHERE import_id=$1 AND status='CONFIRMED' ORDER BY number`, [id],
     )).rows;
     if (!items.length) fail("Confirme pelo menos uma questão antes de publicar.", 409);
-    const ids = { exam: await source(client, batch, "EXAM", admin), key: await source(client, batch, "ANSWER_KEY", admin) };
+    const objective = items.filter((item) => item.kind === "OBJECTIVE");
+    const discursive = items.filter((item) => item.kind === "DISCURSIVE");
+    if (discursive.length && !batch.standard_sha256) fail("Discursivas confirmadas precisam do padrão de resposta no lote.", 409);
+    const exam = await source(client, batch, "EXAM", admin);
+    const key = objective.length ? await source(client, batch, "ANSWER_KEY", admin) : null;
+    const standard = discursive.length ? await source(client, batch, "RESPONSE_STANDARD", admin) : null;
     let published = 0;
-    for (const item of items) if (await publishItem(client, batch, item, ids, work)) published++;
+    for (const item of objective) if (await publishItem(client, batch, item, { exam, key: key! }, work)) published++;
+    for (const item of discursive) if (await publishDiscursive(client, batch, item, { exam, standard: standard! }, work)) published++;
     const open = await client.query("SELECT 1 FROM exam_import_item WHERE import_id=$1 AND status='PENDING' LIMIT 1", [id]);
     if (!open.rowCount) await client.query("UPDATE exam_import SET state='PUBLISHED',updated_at=now() WHERE id=$1", [id]);
     await client.query("COMMIT");

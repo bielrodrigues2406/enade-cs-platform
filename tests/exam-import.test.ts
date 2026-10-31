@@ -50,10 +50,11 @@ after(async () => {
     )).rows.map((r) => r.id);
     await db.query("DELETE FROM answer WHERE question_id=ANY($1)", [versions]);
     const sources = (await db.query(
-      "SELECT s.id FROM source_document s JOIN exam_import i ON s.sha256 IN (i.exam_sha256,i.key_sha256) WHERE i.id=ANY($1::uuid[])",
+      "SELECT s.id FROM source_document s JOIN exam_import i ON s.sha256 IN (i.exam_sha256,i.key_sha256,i.standard_sha256) WHERE i.id=ANY($1::uuid[])",
       [imports],
     )).rows.map((r) => r.id);
     await db.query("DELETE FROM editorial_question WHERE official_exam_id=ANY($1::uuid[])", [sources]);
+    await db.query("DELETE FROM discursive_question WHERE exam_source_id=ANY($1::uuid[])", [sources]);
     await db.query("DELETE FROM exam_import WHERE id=ANY($1::uuid[])", [imports]);
     await db.query("DELETE FROM source_document WHERE id=ANY($1::uuid[])", [sources]);
     const ids = (await db.query("SELECT identity_id FROM account WHERE email=ANY($1)", [emails])).rows.map((r) => r.identity_id);
@@ -156,7 +157,8 @@ test("confirmed boxes are cropped, published as image questions and never duplic
   assert.equal((await edit("Q1", { boxes, status: "CONFIRMED", area: "Redes", answer: "C", answerNote: "TEST ONLY x", revision: 1 })).status, 409); // revisão antiga
   // Anulada não é confirmada, nem mesmo com área e caixa.
   assert.equal((await edit("Q2", { boxes, status: "CONFIRMED", area: "Redes", answer: "ANULADA", revision: 1 })).status, 409);
-  assert.equal((await edit("D1", { boxes, status: "CONFIRMED", area: "Redes", revision: 1 })).status, 409); // discursiva
+  // Discursiva sem a caixa do padrão de resposta não é confirmada.
+  assert.equal((await edit("D1", { boxes, status: "CONFIRMED", area: "Redes", revision: 1 })).status, 400);
 
   const published = await fetch(`${base}/api/imports/${id}/publish`, json(admin, "POST", {}));
   assert.deepEqual(await published.json(), { published: 1, alreadyPublished: 0 });
@@ -192,4 +194,70 @@ test("the batch check lists gaps, repeats, annulled items and a non-definitive k
   assert.ok(issues.some((i: string) => i.includes("questão 3 não tem letra")));
   assert.ok(issues.some((i: string) => i.includes("1 questão(ões) anulada(s)")));
   assert.ok(issues.some((i: string) => i.includes("não se declara definitivo")));
+});
+
+test("a confirmed discursive item publishes prompt and response standard; students write, submit and self-assess", async () => {
+  const admin = await session(true);
+  const exam = pdf(randomUUID()), key = pdf(randomUUID()), standard = pdf(randomUUID());
+  for (const file of [exam, key, standard]) await writeFile(path.join(archiveDir, `${sha(file)}.pdf`), file);
+  const id = randomUUID();
+  imports.push(id);
+  const adminId = (await db.query("SELECT identity_id FROM account WHERE email=$1", [emails.at(-1)])).rows[0].identity_id;
+  const sizes = JSON.stringify([{ width: 612, height: 792 }]);
+  await db.query(
+    `INSERT INTO exam_import(id,year,modality,exam_url,key_url,standard_url,exam_sha256,key_sha256,standard_sha256,
+       page_count,page_sizes,standard_page_sizes,state,created_by)
+     VALUES($1,2099,'BACHARELADO','https://download.inep.gov.br/enade/test-only/p.pdf','https://download.inep.gov.br/enade/test-only/g.pdf',
+       'https://download.inep.gov.br/enade/test-only/pr.pdf',$2,$3,$4,1,$5,$5,'READY',$6)`,
+    [id, sha(exam), sha(key), sha(standard), sizes, adminId],
+  );
+  await db.query(
+    `INSERT INTO exam_import_item(import_id,question_key,number,kind,boxes,criteria)
+     VALUES($1,'D3',3,'DISCURSIVE','[{"page":1,"x0":40,"y0":40,"x1":400,"y1":200}]','[{"label":"a","points":5},{"label":"b","points":5}]')`,
+    [id],
+  );
+  assert.equal((await fetch(`${base}/api/imports/${id}/pages/1?doc=standard`, { headers: { Cookie: admin } })).headers.get("content-type"), "image/png");
+  const edit = (body: unknown) => fetch(`${base}/api/imports/${id}/items/D3`, json(admin, "PUT", body));
+  const boxes = [{ page: 1, x0: 40, y0: 40, x1: 400, y1: 200 }];
+  const standardBoxes = [{ page: 1, x0: 40, y0: 300, x1: 500, y1: 420 }];
+  assert.equal((await edit({ boxes, standardBoxes, criteria: [{ label: "a", points: 5 }, { label: "a", points: 5 }],
+    status: "CONFIRMED", area: "Teoria da computação", revision: 1 })).status, 400); // rótulo repetido
+  const criteria = [{ label: "a", points: 4 }, { label: "b", points: 6 }];
+  assert.deepEqual(await (await edit({ boxes, standardBoxes, criteria, status: "CONFIRMED", area: "Teoria da computação",
+    subject: "TEST ONLY lógica", revision: 1 })).json(), { revision: 2 });
+  assert.deepEqual(await (await fetch(`${base}/api/imports/${id}/publish`, json(admin, "POST", {}))).json(),
+    { published: 1, alreadyPublished: 0 });
+
+  const questionId = `discursive-${sha(exam).slice(0, 12)}-d3`;
+  const student = await session(false);
+  const call = (path: string, method = "GET", body?: unknown) =>
+    fetch(`${base}/api/discursive${path}`, body === undefined ? { method, headers: { Cookie: student } } : json(student, method, body));
+  const listed = (await (await call("")).json()).find((q: any) => q.id === questionId);
+  assert.deepEqual([listed.title, listed.status, listed.area], ["ENADE 2099 · Discursiva 3", "NEW", "Teoria da computação"]);
+  const before = await (await call(`/${questionId}`)).json();
+  assert.equal(before.promptImages.length, 1);
+  assert.deepEqual(before.standardImages, []); // o padrão só aparece depois do envio
+  assert.deepEqual(before.criteria, criteria);
+  const standardAsset = (await db.query("SELECT asset_sha256 FROM discursive_image WHERE question_id=$1 AND part='STANDARD'", [questionId])).rows[0].asset_sha256;
+  const standardUrl = `${base}/api/question-images/${standardAsset}.webp`;
+  assert.equal((await fetch(standardUrl, { headers: { Cookie: student } })).status, 404);
+  assert.equal((await fetch(`${base}${before.promptImages[0].url}`, { headers: { Cookie: student } })).status, 200);
+
+  assert.equal((await call(`/${questionId}/assessment`, "PUT", { levels: [2, 2] })).status, 409); // ainda não enviou
+  assert.deepEqual(await (await call(`/${questionId}/response`, "PUT", { body: "TEST ONLY rascunho", baseRevision: 0 })).json(), { revision: 1 });
+  assert.equal((await call(`/${questionId}/response`, "PUT", { body: "TEST ONLY outra aba", baseRevision: 0 })).status, 409);
+  const submitted = await (await call(`/${questionId}/submit`, "POST", { body: "TEST ONLY resposta final", baseRevision: 1 })).json();
+  assert.equal(submitted.standardImages.length, 1);
+  assert.ok(submitted.response.submittedAt);
+  assert.equal((await fetch(standardUrl, { headers: { Cookie: student } })).status, 200);
+  assert.equal((await call(`/${questionId}/response`, "PUT", { body: "TEST ONLY mudar", baseRevision: 2 })).status, 409);
+  await assert.rejects(db.query("UPDATE discursive_response SET body='x' WHERE question_id=$1", [questionId]), /immutable/);
+
+  assert.equal((await call(`/${questionId}/assessment`, "PUT", { levels: [2] })).status, 400);
+  // a vale 4: contemplado (4); b vale 6: em parte (3) → 7.
+  assert.deepEqual(await (await call(`/${questionId}/assessment`, "PUT", { levels: [2, 1] })).json(), { levels: [2, 1], score: 7 });
+  const after = (await (await call("")).json()).find((q: any) => q.id === questionId);
+  assert.deepEqual([after.status, after.score], ["ASSESSED", 7]);
+  // Sem pendências, o lote fecha como publicado.
+  assert.equal((await fetch(`${base}/api/imports/${id}/publish`, json(admin, "POST", {}))).status, 409);
 });

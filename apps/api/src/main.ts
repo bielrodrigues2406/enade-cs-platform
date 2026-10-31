@@ -26,6 +26,7 @@ import { RolesController } from "./roles.js";
 import { ExamImportsController } from "./exam-imports.js";
 import { LessonsController } from "./lessons.js";
 import { ClassDashboardController } from "./class-dashboard.js";
+import { DiscursiveController } from "./discursive.js";
 import { PracticeController } from "./exam.js";
 import {
   QuestionImagesController,
@@ -234,6 +235,7 @@ class StudyController {
     ExamImportsController,
     LessonsController,
     ClassDashboardController,
+    DiscursiveController,
     PracticeController,
     QuestionImagesController,
   ],
