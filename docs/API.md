@@ -188,6 +188,20 @@ O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE301
 É a única escrita aceita fora de JSON. Republicar não duplica questões; o lote fica PUBLISHED quando não resta item pendente.
 
 
+## Discursivas (DISC-1, ADR-013)
+
+Qualquer sessão de estudo (visitante ou conta):
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /discursive | — | discursivas publicadas com `status` (`NEW`, `DRAFT`, `SUBMITTED`, `ASSESSED`) e `score` da autoavaliação |
+| GET /discursive/:id | — | título, área, assunto, `criteria` (`{label,points}`), links do Inep, `promptImages`, `response`; `standardImages` só depois do envio |
+| PUT /discursive/:id/response | `{body,baseRevision}` (até 6000 caracteres) | `{revision}`; 409 se a revisão mudou ou a resposta já foi enviada |
+| POST /discursive/:id/submit | `{body,baseRevision}` (texto não vazio) | `{response,standardImages}`; o texto não muda mais |
+| PUT /discursive/:id/assessment | `{levels}`, um 0/1/2 por item | `{levels,score}`; 409 antes do envio |
+
+Na importação, `POST /imports` aceita `standard` (PDF) e `standardUrl`, sempre juntos; `GET /imports/:id/pages/:n?doc=standard` mostra o padrão; `PUT /imports/:id/items/:key` aceita `standardBoxes` e `criteria` nas discursivas.
+
 ## Turmas, aulas e presença (AULA-1, D13)
 
 Professores e administração (403 para os demais):
