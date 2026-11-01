@@ -1,0 +1,74 @@
+/*
+ * Seção do mascote na página pública (MAS-1, ver docs/MASCOT.md).
+ * As demais seções da página ainda estão no styles.css global; o que for
+ * novo entra aqui.
+ * No computador, a cena tem espaço vazio da cor do papel à esquerda e o
+ * texto ocupa esse espaço, sem caixa por cima da imagem.
+ */
+.lp-duck {
+  position: relative;
+  max-width: 1320px;
+  margin: clamp(72px, 10vw, 140px) auto 0;
+  padding: 0 clamp(20px, 6vw, 96px);
+}
+.lp-duck-art { position: relative; display: block; }
+/* Véu de papel à esquerda: garante contraste do texto sobre a cena. */
+.lp-duck-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(90deg, rgb(244 243 239 / 0.94) 0%, rgb(244 243 239 / 0.82) 30%, rgb(244 243 239 / 0) 52%);
+  pointer-events: none;
+}
+.lp-duck-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 30px 60px -40px rgb(15 31 61 / 0.45);
+}
+.lp-duck-text {
+  position: absolute;
+  top: 50%;
+  left: calc(clamp(20px, 6vw, 96px) + clamp(24px, 4vw, 64px));
+  width: min(34%, 28rem);
+  transform: translateY(-50%);
+}
+.lp-duck-kicker {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.lp-duck h2 {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: clamp(2rem, 1.2rem + 2.4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--color-text);
+}
+.lp-duck-text p:last-child {
+  margin: var(--space-4) 0 0;
+  max-width: 38ch;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+/* Abaixo de 1100 px o texto não cabe ao lado do pato: vai acima da imagem. */
+@media (max-width: 1099px) {
+  .lp-duck { display: flex; flex-direction: column; gap: var(--space-5); }
+  .lp-duck-text { position: static; order: -1; width: auto; transform: none; }
+  .lp-duck-art::after { display: none; }
+}
+/* Celular: cena vertical, cortando a faixa clara de cima da imagem. */
+@media (max-width: 720px) {
+  .lp-duck-art img { aspect-ratio: 1179 / 1000; object-fit: cover; object-position: 50% 100%; }
+  .lp-duck h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 2.4rem); }
+  .lp-duck-text p:last-child { margin-top: var(--space-3); font-size: 1rem; line-height: 1.55; }
+}

@@ -34,6 +34,7 @@ const EXAM_DATE = new Date(2026, 10, 29);
 @Component({
   selector: "app-landing",
   templateUrl: "./landing.component.html",
+  styleUrl: "./landing.component.css",
 })
 export class LandingComponent {
   @Output() start = new EventEmitter<void>();
