@@ -28,6 +28,9 @@
         <a [href]="q.examUrl" target="_blank" rel="noopener">Prova no site do Inep</a>
       </figcaption>
     </figure>
+    @if (q.reviewCredit) {
+      <p class="disc-credit">{{ q.reviewCredit }}@if (q.reviewNote) { {{ q.reviewNote }} }</p>
+    }
 
     <section class="disc-answer" aria-labelledby="disc-answer-title">
       <div class="disc-answer-head">
