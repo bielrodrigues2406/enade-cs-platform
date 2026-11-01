@@ -1,3 +1,5 @@
+import { EngagementController } from "./engagement.js";
+import { FlashcardsController } from "./flashcards.js";
 import "reflect-metadata";
 import "dotenv/config";
 import {
@@ -247,6 +249,8 @@ class StudyController {
     AccountProfileController,
     PracticeController,
     QuestionImagesController,
+    EngagementController,
+    FlashcardsController,
   ],
 })
 class AppModule {}

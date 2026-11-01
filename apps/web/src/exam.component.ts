@@ -4,6 +4,7 @@ import {
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ChoiceService } from "./choice-dialog";
+import { EngagementService } from "./engagement.service";
 import { QuestionContentComponent } from "./question-content.component";
 import { DiscursiveComponent } from "./discursive.component";
 import type {
@@ -49,6 +50,7 @@ export class ExamComponent {
   private host: ElementRef<HTMLElement> = inject(ElementRef);
   private injector = inject(Injector);
   private choice = inject(ChoiceService);
+  readonly engagement = inject(EngagementService);
   availability = signal<PracticeAvailability | null>(null);
   attempt = signal<PracticeView | null>(null);
   position = signal(1);
@@ -441,6 +443,7 @@ export class ExamComponent {
       const completed = await this.api<PracticeView>(`/${data.id}/finish`, { method: "POST", body: "{}" });
       if (this.alive(generation)) {
         this.finishDialog?.nativeElement.close(); this.applyAttempt(completed, 1);
+        void this.engagement.refresh();
         this.locationChange.emit({ attemptId: completed.id, position: 1 });
         this.focusContent();
       }

@@ -245,3 +245,20 @@ Professores e administração (403 para os demais):
 Aluno: `GET /my/lessons` → `{lessons}` das turmas em que o prontuário da conta está, com a própria situação de presença.
 
 O painel conta só a primeira resposta de cada aluno a cada questão editorial (`answer_event`, migration 018, somente inserção; cada `PUT /questions/:id/answer` grava um evento). Respostas anteriores ao histórico entram como `BACKFILL` com a última escolha e são contadas em `backfilled`. A tela omite o percentual com menos de 10 respostas e marca presença abaixo de 75%.
+
+## Estudo diário: meta, conquistas, ranking, flashcards e fichas (ENG-1, FLASH-1, LIB-1)
+
+Detalhes do algoritmo e das regras em [FLASHCARDS.md](FLASHCARDS.md). Rotas de quem está na sessão (visitante ou conta):
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /me/engagement | — | `{goal, today, streak, best, days[28]{date,count}, achievements[]{code,title,description,icon,tier,unlockedAt,isNew,progress}}` |
+| PUT /me/goal | `{dailyTarget}` (1 a 50) | engagement atualizado |
+| POST /me/achievements/seen | `{}` | `{status:"SEEN"}`; tira o "novo" das medalhas |
+| GET /ranking | — | `{top[≤20]{position,name,days7,days30,me}, me{position|null,days7,days30}|null, visible, canJoin}`; só contas visíveis |
+| PUT /me/ranking | `{visible}` | `{visible}`; 403 para visitante |
+| GET /flashcards | — | `{reviewedToday, decks[]{deck,area,title,description,total,due,fresh,mastered}}` |
+| GET /flashcards/session?deck= | baralho opcional | `{cards[]{id,deck,area,front,back,isNew,preview[4]}}`; vencidos primeiro, até 10 novos, máx. 30; `preview` em minutos por nota |
+| POST /flashcards/:card/review | `{grade}` (1 errei, 2 difícil, 3 bom, 4 fácil) | `{dueInMinutes, stability, difficulty}`; 404 se o cartão não existe |
+| GET /sheets | — | lista `[{slug,area,title,summary}]` |
+| GET /sheets/:slug | — | ficha com `sections`, `pitfalls`, `references`; 404 se não existe |

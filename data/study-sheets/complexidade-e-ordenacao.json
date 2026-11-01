@@ -1,0 +1,51 @@
+{
+  "slug": "complexidade-e-ordenacao",
+  "area": "Algoritmos",
+  "title": "Complexidade e ordenação",
+  "summary": "Como medir o custo de um algoritmo e escolher a ordenação certa. Cai todo ano, em geral pedindo a ordem de crescimento de um trecho de código ou comparando algoritmos.",
+  "sections": [
+    {
+      "title": "Notação assintótica",
+      "points": [
+        "O(g): limite superior; Ω(g): inferior; Θ(g): os dois (crescimento exato).",
+        "Ordem usual: 1 < log n < n < n log n < n² < n³ < 2ⁿ < n!.",
+        "Laços aninhados que vão até n multiplicam: dois níveis dão n²; um laço que divide n por 2 a cada passo dá log n."
+      ]
+    },
+    {
+      "title": "Recorrências",
+      "points": [
+        "Teorema mestre para T(n) = a·T(n/b) + f(n): compare f(n) com n^(log_b a).",
+        "Merge Sort: T(n) = 2T(n/2) + n, logo Θ(n log n). Busca binária: T(n) = T(n/2) + 1, logo Θ(log n).",
+        "Fibonacci recursivo ingênuo é exponencial; com memoização vira Θ(n)."
+      ]
+    },
+    {
+      "title": "Ordenação",
+      "points": [
+        "Por comparação, nada é melhor que Ω(n log n) no pior caso.",
+        "Merge Sort: Θ(n log n) sempre, estável, O(n) de memória extra.",
+        "Quicksort: Θ(n log n) em média, Θ(n²) no pior caso (pivô extremo), in-place.",
+        "Heap Sort: Θ(n log n), in-place, não estável. Insertion Sort: Θ(n²), mas ótimo para vetor quase ordenado.",
+        "Counting e Radix Sort: lineares quando as chaves são inteiros num intervalo pequeno (não comparam)."
+      ]
+    },
+    {
+      "title": "Estruturas e custos",
+      "points": [
+        "Vetor ordenado: busca O(log n), inserção O(n). Lista ligada: inserção O(1) com o ponteiro, busca O(n).",
+        "Heap: inserir e extrair em O(log n), construir em O(n). Árvore AVL ou rubro-negra: O(log n) em tudo.",
+        "Hash: O(1) esperado, O(n) no pior caso."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Confundir melhor caso com caso médio: o Quicksort é Θ(n²) só no pior caso.",
+    "Esquecer que constantes e termos menores somem: 3n² + 100n é Θ(n²).",
+    "Achar que estabilidade importa só para números: importa para ordenar registros por mais de uma chave."
+  ],
+  "references": [
+    "CORMEN, T. H. et al. Algoritmos: teoria e prática.",
+    "ZIVIANI, N. Projeto de algoritmos."
+  ]
+}

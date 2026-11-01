@@ -1,0 +1,58 @@
+{
+  "deck": "programacao",
+  "area": "Programação",
+  "title": "Programação e orientação a objetos",
+  "description": "Conceitos de linguagens, recursão, passagem de parâmetros e POO. Base: Sebesta; Deitel.",
+  "cards": [
+    {
+      "id": "prog-001",
+      "front": "Quais são os quatro pilares da orientação a objetos?",
+      "back": "Abstração, encapsulamento, herança e polimorfismo."
+    },
+    {
+      "id": "prog-002",
+      "front": "Sobrecarga x sobrescrita de métodos.",
+      "back": "Sobrecarga: mesmo nome, parâmetros diferentes, resolvida em compilação. Sobrescrita: subclasse redefine um método herdado com a mesma assinatura, resolvida em execução (ligação dinâmica)."
+    },
+    {
+      "id": "prog-003",
+      "front": "Classe abstrata x interface.",
+      "back": "Classe abstrata pode ter estado e métodos implementados e permite herança simples. Interface define um contrato; uma classe pode implementar várias."
+    },
+    {
+      "id": "prog-004",
+      "front": "O que é ligação dinâmica (dynamic dispatch)?",
+      "back": "Escolha, em tempo de execução, de qual implementação de um método chamar, conforme o tipo real do objeto, e não o tipo declarado da variável."
+    },
+    {
+      "id": "prog-005",
+      "front": "Passagem por valor x por referência.",
+      "back": "Por valor: a função recebe uma cópia; alterá-la não muda o original. Por referência: a função recebe o endereço; alterações aparecem para quem chamou."
+    },
+    {
+      "id": "prog-006",
+      "front": "O que é recursão de cauda e por que importa?",
+      "back": "A chamada recursiva é a última operação. O compilador pode reaproveitar o quadro de pilha (otimização de cauda), usando memória constante."
+    },
+    {
+      "id": "prog-007",
+      "front": "Acoplamento e coesão: o que se busca?",
+      "back": "Baixo acoplamento (módulos pouco dependentes entre si) e alta coesão (cada módulo com uma responsabilidade bem definida)."
+    },
+    {
+      "id": "prog-008",
+      "front": "O que é um ponteiro pendente (dangling pointer)?",
+      "back": "Ponteiro que ainda aponta para memória já liberada ou fora de escopo; usá-lo tem comportamento indefinido."
+    },
+    {
+      "id": "prog-009",
+      "front": "Tipagem estática x dinâmica; forte x fraca.",
+      "back": "Estática: tipos verificados na compilação; dinâmica: na execução. Forte: conversões implícitas perigosas são proibidas; fraca: a linguagem converte tipos implicitamente."
+    },
+    {
+      "id": "prog-010",
+      "front": "O que é composição e por que muitas vezes é preferida à herança?",
+      "back": "Composição: um objeto contém outros e delega a eles. Reduz o acoplamento à hierarquia e permite trocar comportamento em tempo de execução (\"prefira composição à herança\")."
+    }
+  ]
+}

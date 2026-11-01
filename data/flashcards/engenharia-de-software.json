@@ -1,0 +1,58 @@
+{
+  "deck": "engenharia-de-software",
+  "area": "Engenharia de software",
+  "title": "Engenharia de software",
+  "description": "Processos, requisitos, UML, testes e qualidade. Base: Sommerville; Pressman.",
+  "cards": [
+    {
+      "id": "es-001",
+      "front": "Requisitos funcionais x não funcionais.",
+      "back": "Funcionais: o que o sistema faz (serviços, comportamentos). Não funcionais: restrições e qualidades (desempenho, segurança, usabilidade, disponibilidade)."
+    },
+    {
+      "id": "es-002",
+      "front": "Modelo cascata x desenvolvimento iterativo e incremental.",
+      "back": "Cascata: fases sequenciais, cada uma termina antes da próxima; mudanças tardias custam caro. Iterativo e incremental: entregas em ciclos curtos, com retorno do usuário a cada incremento."
+    },
+    {
+      "id": "es-003",
+      "front": "Papéis e eventos do Scrum.",
+      "back": "Papéis: Product Owner, Scrum Master e desenvolvedores. Eventos: sprint, planejamento, reunião diária, revisão e retrospectiva. Artefatos: product backlog, sprint backlog e incremento."
+    },
+    {
+      "id": "es-004",
+      "front": "Teste de caixa-preta x caixa-branca.",
+      "back": "Caixa-preta: baseado na especificação, sem ver o código (partição de equivalência, valores-limite). Caixa-branca: baseado na estrutura do código (cobertura de comandos, de ramos, de caminhos)."
+    },
+    {
+      "id": "es-005",
+      "front": "Níveis de teste.",
+      "back": "Unidade (componentes isolados), integração (interação entre componentes), sistema (o todo contra os requisitos) e aceitação (validação pelo cliente)."
+    },
+    {
+      "id": "es-006",
+      "front": "Verificação x validação.",
+      "back": "Verificação: estamos construindo o produto corretamente (conforme a especificação)? Validação: estamos construindo o produto certo (atende ao usuário)?"
+    },
+    {
+      "id": "es-007",
+      "front": "Como se calcula a complexidade ciclomática?",
+      "back": "V(G) = E − N + 2P (arestas, nós e componentes do grafo de fluxo), ou número de decisões + 1. Indica o mínimo de caminhos independentes a testar."
+    },
+    {
+      "id": "es-008",
+      "front": "No diagrama de classes UML, associação, agregação, composição e generalização.",
+      "back": "Associação: vínculo entre classes. Agregação (losango vazio): todo-parte com vida independente. Composição (losango cheio): a parte não existe sem o todo. Generalização (seta de triângulo vazio): herança."
+    },
+    {
+      "id": "es-009",
+      "front": "O que são os princípios SOLID?",
+      "back": "Responsabilidade única, aberto/fechado, substituição de Liskov, segregação de interfaces e inversão de dependência."
+    },
+    {
+      "id": "es-010",
+      "front": "Cite padrões de projeto do GoF e suas categorias.",
+      "back": "Criacionais (Singleton, Factory Method, Builder), estruturais (Adapter, Composite, Decorator) e comportamentais (Observer, Strategy, State)."
+    }
+  ]
+}

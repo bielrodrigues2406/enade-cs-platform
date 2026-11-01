@@ -1,0 +1,43 @@
+{
+  "deck": "computacao-grafica",
+  "area": "Computação gráfica",
+  "title": "Computação gráfica",
+  "description": "Transformações, rasterização, modelos de cor e iluminação. Base: Foley et al.; Hearn e Baker.",
+  "cards": [
+    {
+      "id": "cg-001",
+      "front": "Por que usar coordenadas homogêneas?",
+      "back": "Para representar translação, rotação, escala e projeção como multiplicação de matrizes, e assim compor transformações num único produto."
+    },
+    {
+      "id": "cg-002",
+      "front": "A ordem das transformações importa?",
+      "back": "Sim: o produto de matrizes não é comutativo. Rotacionar e depois transladar dá resultado diferente de transladar e depois rotacionar."
+    },
+    {
+      "id": "cg-003",
+      "front": "Projeção ortográfica x perspectiva.",
+      "back": "Ortográfica: raios paralelos, preserva medidas, sem encurtamento. Perspectiva: raios convergem no observador, objetos distantes parecem menores."
+    },
+    {
+      "id": "cg-004",
+      "front": "Modelos de cor RGB e CMYK.",
+      "back": "RGB: aditivo, usado em telas (luz). CMYK: subtrativo, usado em impressão (tinta)."
+    },
+    {
+      "id": "cg-005",
+      "front": "Para que serve o algoritmo de Bresenham?",
+      "back": "Rasterizar retas usando só aritmética inteira, escolhendo a cada passo o pixel mais próximo da reta ideal."
+    },
+    {
+      "id": "cg-006",
+      "front": "O que faz o z-buffer?",
+      "back": "Guarda a profundidade de cada pixel; um novo fragmento só é desenhado se estiver mais perto do observador do que o já armazenado (remoção de superfícies ocultas)."
+    },
+    {
+      "id": "cg-007",
+      "front": "Quais são as componentes do modelo de iluminação de Phong?",
+      "back": "Ambiente, difusa (lei de Lambert) e especular (brilho que depende do ângulo entre o reflexo e o observador)."
+    }
+  ]
+}

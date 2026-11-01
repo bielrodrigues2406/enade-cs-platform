@@ -184,6 +184,19 @@
 
       <!-- div, não aside: o shell estiliza aside como a barra lateral. -->
       <div class="home-aside">
+        @if (engagement.state(); as g) {
+          <section class="panel goal-panel" aria-label="Meta de hoje">
+            <span class="panel-eyebrow">META DE HOJE</span>
+            <p class="goal-line"><strong>{{ g.today }}</strong> de {{ g.goal }} questões
+              @if (g.today >= g.goal) { <span class="goal-done">✓ batida</span> }</p>
+            <span class="goal-bar" aria-hidden="true"><span [style.--value]="g.today / g.goal"></span></span>
+            <p class="goal-week" [attr.aria-label]="'Sequência: ' + g.streak + (g.streak === 1 ? ' dia' : ' dias')">
+              @for (d of g.days.slice(-7); track d.day) { <i [class.is-met]="d.met" [class.is-partial]="!d.met && d.count > 0"></i> }
+              <span>{{ g.streak }} {{ g.streak === 1 ? "dia seguido" : "dias seguidos" }}</span>
+            </p>
+            <button type="button" class="text-button" (click)="progressHub.emit()">Ver conquistas <span aria-hidden="true">→</span></button>
+          </section>
+        }
         <section class="panel" aria-label="Seu andamento">
           <span class="panel-eyebrow">SEU ANDAMENTO</span>
           <h2>Banco de questões</h2>

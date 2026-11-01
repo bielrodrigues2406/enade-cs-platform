@@ -1,0 +1,56 @@
+/* Medalha: tamanho pelo --badge-size de quem usa; cor pelo nível. */
+:host {
+  --badge-size: 56px;
+  display: inline-block;
+  width: var(--badge-size);
+  height: var(--badge-size);
+  flex: none;
+}
+:host(.tier-bronze) { --rim: #b8733f; --face: #d99a63; --ink: #fff8f0; }
+:host(.tier-silver) { --rim: #7f8c99; --face: #b5c0cb; --ink: #ffffff; }
+:host(.tier-gold) { --rim: #b8891a; --face: #e8bd3e; --ink: #fffaf0; }
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.badge-rim {
+  fill: var(--rim);
+}
+.badge-face {
+  fill: var(--face);
+  stroke: color-mix(in srgb, var(--rim) 60%, white);
+  stroke-width: 1.5;
+}
+.badge-shine {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.55);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.badge-glyph path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Bloqueada: sem cor, traço tracejado, à espera. */
+:host(.is-locked) {
+  --rim: var(--color-border);
+  --face: var(--color-surface-sunken, var(--color-surface));
+  --ink: var(--color-text-muted);
+}
+:host(.is-locked) .badge-rim {
+  fill: none;
+  stroke: var(--color-border-control);
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+}
+:host(.is-locked) .badge-shine {
+  display: none;
+}
+:host(.is-locked) .badge-glyph {
+  opacity: 0.55;
+}

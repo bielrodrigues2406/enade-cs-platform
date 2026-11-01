@@ -1,0 +1,50 @@
+{
+  "slug": "processos-e-memoria",
+  "area": "Sistemas operacionais",
+  "title": "Processos, concorrência e memória",
+  "summary": "O que o sistema operacional faz para dividir a CPU e a memória entre programas sem que um atrapalhe o outro.",
+  "sections": [
+    {
+      "title": "Processos e threads",
+      "points": [
+        "Estados: novo, pronto, executando, bloqueado, terminado.",
+        "Threads compartilham a memória do processo; cada uma tem pilha e registradores."
+      ]
+    },
+    {
+      "title": "Escalonamento",
+      "points": [
+        "FCFS: simples, sofre efeito comboio.",
+        "SJF/SRTF: menor espera média, risco de inanição.",
+        "Round Robin: quantum pequeno demais causa muitas trocas de contexto; grande demais vira FCFS.",
+        "Prioridades com envelhecimento (aging) evitam inanição."
+      ]
+    },
+    {
+      "title": "Concorrência",
+      "points": [
+        "Condição de corrida: o resultado depende da ordem de execução.",
+        "Exclusão mútua com mutex, semáforo ou monitor.",
+        "Deadlock exige as quatro condições de Coffman; quebre uma delas para prevenir. Algoritmo do banqueiro evita."
+      ]
+    },
+    {
+      "title": "Memória",
+      "points": [
+        "Paginação: sem fragmentação externa; tabela de páginas e TLB.",
+        "Memória virtual: só as páginas usadas ficam na RAM; falta de página carrega do disco.",
+        "Substituição: ótimo (teórico), LRU, FIFO (anomalia de Belady), relógio (segunda chance).",
+        "Thrashing: quadros insuficientes para o conjunto de trabalho."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Confundir deadlock com inanição (starvation).",
+    "Achar que mais quadros sempre reduzem faltas: no FIFO pode piorar (Belady).",
+    "Esquecer que semáforo binário e mutex não são idênticos (posse do lock)."
+  ],
+  "references": [
+    "SILBERSCHATZ, A.; GALVIN, P.; GAGNE, G. Fundamentos de sistemas operacionais.",
+    "TANENBAUM, A. Sistemas operacionais modernos."
+  ]
+}

@@ -1,0 +1,103 @@
+@if (current(); as card) {
+  <section class="flash-session" aria-labelledby="flash-session-title">
+    <div class="flash-top">
+      <button type="button" class="text-button" (click)="leave()"><span aria-hidden="true">←</span> Baralhos</button>
+      <p id="flash-session-title" class="metadata">{{ sessionTitle() }} · faltam {{ queue().length }}</p>
+    </div>
+    <div class="flash-progress" aria-hidden="true"><span [style.--value]="progress()"></span></div>
+
+    <div class="flash-stage">
+      <button type="button" class="flash-card" [class.is-flipped]="flipped()" (click)="flip()"
+        [attr.aria-label]="flipped() ? 'Resposta: ' + card.back : 'Pergunta: ' + card.front + '. Toque para ver a resposta.'">
+        <span class="flash-inner" aria-hidden="true">
+        <span class="flash-face flash-front">
+          <span class="flash-kicker">{{ card.area }}@if (card.isNew) { · novo }</span>
+          <span class="flash-ai">Gerado por IA</span>
+          <span class="flash-text">{{ card.front }}</span>
+          <span class="flash-hint">Pense na resposta e toque para virar</span>
+        </span>
+        <span class="flash-face flash-back">
+          <span class="flash-kicker">Resposta</span>
+          <span class="flash-ai">Gerado por IA · confira na fonte</span>
+          <span class="flash-text">{{ card.back }}</span>
+        </span>
+        </span>
+      </button>
+    </div>
+
+    @if (flipped()) {
+      <div class="flash-grades" role="group" aria-label="Como foi lembrar?">
+        @for (g of grades; track g.grade) {
+          <button type="button" [class]="'flash-grade grade-' + g.grade" (click)="rate(g.grade)" [disabled]="saving()">
+            <strong>{{ g.label }}</strong>
+            <span>{{ intervalLabel(card.preview[g.grade - 1]) }}</span>
+          </button>
+        }
+      </div>
+      <p class="flash-keys" aria-hidden="true">Atalhos: 1 Errei · 2 Difícil · 3 Bom · 4 Fácil</p>
+    } @else {
+      <div class="flash-grades is-waiting">
+        <button type="button" class="flash-reveal" (click)="flip()">Mostrar resposta</button>
+      </div>
+      <p class="flash-keys" aria-hidden="true">Atalho: espaço vira o cartão</p>
+    }
+    @if (error()) { <p class="field-error" role="alert">{{ error() }}</p> }
+  </section>
+} @else if (done(); as result) {
+  <section class="flash-done" aria-labelledby="flash-done">
+    <p class="metadata">Sessão concluída</p>
+    <h1 id="flash-done" tabindex="-1">{{ result.total }} {{ result.total === 1 ? "revisão" : "revisões" }}</h1>
+    <ul class="flash-tally">
+      @for (g of grades; track g.grade) {
+        <li [class]="'grade-' + g.grade" [style.--delay]="$index">
+          <strong>{{ result.byGrade[g.grade - 1] }}</strong>
+          <span>{{ g.label }}</span>
+        </li>
+      }
+    </ul>
+    <p class="muted">Os cartões voltam no prazo de cada um: quem você achou fácil some por mais tempo; quem errou volta logo.</p>
+    <div class="flash-actions">
+      <button type="button" (click)="leave()">Ver baralhos</button>
+      @if (totalDue()) { <button type="button" class="outline" (click)="start(null)">Revisar o que ainda vence ({{ totalDue() }})</button> }
+    </div>
+  </section>
+} @else {
+  <section class="page-intro">
+    <h1 id="flash-title" tabindex="-1">Flashcards</h1>
+    <p>Tente lembrar antes de virar o cartão. Os que você erra voltam logo; os que acerta somem por mais tempo, no ponto certo para não esquecer.</p>
+  </section>
+  @if (error()) { <p class="notice" role="alert">{{ error() }}</p> }
+  @if (decks(); as list) {
+    <div class="flash-summary">
+      <p><strong>{{ totalDue() }}</strong> {{ totalDue() === 1 ? "cartão vence" : "cartões vencem" }} hoje · {{ reviewedToday() }} {{ reviewedToday() === 1 ? "revisão feita" : "revisões feitas" }} hoje</p>
+      <button type="button" (click)="start(null)">{{ totalDue() ? "Revisar agora" : "Estudar cartões novos" }} <span aria-hidden="true">→</span></button>
+    </div>
+    <ul class="deck-grid">
+      @for (deck of list; track deck.deck; let i = $index) {
+        <li class="deck" [style.--delay]="i">
+          <button type="button" class="deck-card" (click)="start(deck)">
+            <span class="deck-stack" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="deck-area">{{ deck.area }}</span>
+            <strong>{{ deck.title }}</strong>
+            <span class="deck-desc">{{ deck.description }}</span>
+            <span class="flash-ai">Gerado por IA</span>
+            <span class="deck-bar" aria-hidden="true"><span [style.--value]="masteredRatio(deck)"></span></span>
+            <span class="deck-counts">
+              @if (deck.due) { <em class="is-due">{{ deck.due }} para hoje</em> }
+              <span>{{ deck.fresh }} novos</span>
+              <span>{{ percent(deck.mastered, deck.total) }}% guardado</span>
+            </span>
+          </button>
+        </li>
+      }
+    </ul>
+    <details class="flash-method">
+      <summary>Como funciona</summary>
+      <p>Duas técnicas com as evidências mais fortes de aprendizagem: <strong>prática de recuperação</strong> (tentar lembrar, em vez de reler) e <strong>prática espaçada</strong> (revisar em intervalos crescentes). As duas receberam a maior nota de utilidade em Dunlosky et al. (2013) e foram as mais eficazes na meta-análise de Donoghue e Hattie (2021).</p>
+      <p>Os prazos vêm do <strong>FSRS-5</strong>, o algoritmo livre de repetição espaçada hoje usado no Anki. Ele estima, para cada cartão, a dificuldade e a estabilidade da sua memória e marca a revisão para quando a chance de lembrar cair a 90%. Errou: volta em 10 minutos. Acertou: o intervalo cresce (3, 11, 35 dias…).</p>
+      <p>Cartões escritos por IA (Claude) a partir da bibliografia de cada área, sem revisão humana. Na dúvida, confira na fonte.</p>
+    </details>
+  } @else if (!error()) {
+    <p role="status">Carregando os baralhos…</p>
+  }
+}

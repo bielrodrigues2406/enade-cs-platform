@@ -425,3 +425,35 @@ dialog.practice-confirm[open] {
 @keyframes practice-fade {
   from { opacity: 0.4; }
 }
+
+/* Resumo do dia no resultado: anel cônico da meta e a sequência. */
+.session-goal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  width: fit-content;
+  max-width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 14px;
+  background: var(--color-accent-soft);
+  animation: rise-in 520ms var(--ease-out) 400ms both;
+}
+.session-goal.is-met { background: color-mix(in srgb, var(--color-success-text) 12%, var(--color-surface)); }
+.session-goal-ring {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: conic-gradient(var(--color-accent) calc(min(1, var(--value, 0)) * 360deg), var(--color-border) 0);
+}
+.session-goal.is-met .session-goal-ring { background: var(--color-success-text); }
+.session-goal-ring span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+.session-streak { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; }
+.session-streak svg { width: 18px; height: 18px; fill: #e8743b; }

@@ -4,6 +4,8 @@
 
 Siga docs/COLLABORATION.md e mantenha docs/WORKBOARD.md atualizado: pegue apenas tarefas da sua trilha, reserve número de migration antes de criar, registre handoff no diário e faça push antes de encerrar a sessão.
 
+Comece por docs/HANDOFF.md: estado atual, como testar, regras de design, mascote, pendências e melhorias.
+
 Antes de trabalho de interface, leia .claude/skills/README.md e as skills de design listadas ali.
 
 ## Manutenção humana — requisito obrigatório

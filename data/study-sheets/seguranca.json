@@ -1,0 +1,42 @@
+{
+  "slug": "seguranca",
+  "area": "Segurança",
+  "title": "Segurança da informação",
+  "summary": "Princípios, criptografia e os ataques mais comuns em aplicações.",
+  "sections": [
+    {
+      "title": "Princípios",
+      "points": [
+        "Tríade CIA: confidencialidade, integridade e disponibilidade.",
+        "Autenticação (quem é você) x autorização (o que pode fazer).",
+        "Menor privilégio e defesa em profundidade."
+      ]
+    },
+    {
+      "title": "Criptografia",
+      "points": [
+        "Simétrica (AES): mesma chave, rápida; problema de distribuir a chave.",
+        "Assimétrica (RSA, curvas elípticas): chave pública cifra, privada decifra; ou privada assina, pública verifica.",
+        "Hash (SHA-256): resumo de tamanho fixo, resistente a colisões; senhas com bcrypt, scrypt ou Argon2 e sal."
+      ]
+    },
+    {
+      "title": "Ataques",
+      "points": [
+        "Injeção de SQL: use consultas parametrizadas.",
+        "XSS: escape a saída e use política de segurança de conteúdo (CSP).",
+        "CSRF: tokens anti-CSRF e cookies SameSite.",
+        "Força bruta e negação de serviço: limite de tentativas e de requisições."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Dizer que hash é criptografia reversível.",
+    "Confundir assinatura (privada assina) com cifragem para sigilo (pública cifra).",
+    "Achar que HTTPS protege contra injeção de SQL."
+  ],
+  "references": [
+    "STALLINGS, W. Criptografia e segurança de redes.",
+    "OWASP. OWASP Top 10."
+  ]
+}

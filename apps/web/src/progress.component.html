@@ -1,0 +1,144 @@
+<section class="page-intro">
+  <h1 id="progress-title" tabindex="-1">Conquistas</h1>
+  <p>Um pouco por dia vale mais que muito de uma vez. Bata a meta, mantenha a sequência e desbloqueie as medalhas.</p>
+</section>
+
+@if (engagement.state(); as s) {
+  <section class="streak-hero" aria-label="Sequência e meta de hoje">
+    <div class="streak-ring">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="ring-track" cx="60" cy="60" r="52" />
+        <circle class="ring-fill" [class.is-met]="s.today >= s.goal" cx="60" cy="60" r="52"
+          [attr.stroke-dasharray]="ring" [attr.stroke-dashoffset]="ringOffset()" />
+      </svg>
+      <div class="ring-center">
+        <strong>{{ s.today }}</strong>
+        <span>de {{ s.goal }} hoje</span>
+      </div>
+    </div>
+    <div class="streak-copy">
+      <p class="streak-flame" [class.is-lit]="s.streak > 0">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 1.6 1.2 2.6 2.5 3 0-3-.5-5.5 0-8z" /></svg>
+        <span><strong>{{ s.streak }}</strong> {{ s.streak === 1 ? "dia seguido" : "dias seguidos" }}</span>
+      </p>
+      <p class="muted">
+        @if (s.today >= s.goal) { Meta de hoje batida. Volte amanhã para manter a sequência. }
+        @else { Faltam {{ s.goal - s.today }} {{ s.goal - s.today === 1 ? "questão" : "questões" }} para a meta de hoje. }
+        Recorde: {{ s.best }} {{ s.best === 1 ? "dia" : "dias" }}. Uma folga por semana não quebra a sequência.
+      </p>
+      <div class="goal-picker" role="radiogroup" aria-label="Meta de questões por dia">
+        @for (goal of goals; track goal) {
+          <label [class.is-on]="s.goal === goal">
+            <input type="radio" name="goal" [value]="goal" [checked]="s.goal === goal" (change)="chooseGoal(goal)" [disabled]="savingGoal()" />
+            {{ goal }}
+          </label>
+        }
+        <span class="goal-unit">questões por dia</span>
+      </div>
+      @if (error()) { <p class="field-error" role="alert">{{ error() }}</p> }
+      <button type="button" (click)="study.emit()">Estudar agora <span aria-hidden="true">→</span></button>
+    </div>
+  </section>
+
+  <section class="calendar" aria-labelledby="calendar-title">
+    <h2 id="calendar-title">Últimas quatro semanas</h2>
+    <div class="calendar-grid">
+      @for (w of weekdays; track $index) { <span class="calendar-head" aria-hidden="true">{{ w }}</span> }
+      @for (cell of calendar(); track $index) {
+        @if (cell) {
+          <span class="calendar-day" [class.is-met]="cell.met" [class.is-partial]="!cell.met && cell.count > 0" [class.is-forgiven]="cell.forgiven"
+            [style.--delay]="$index" [attr.title]="dayLabel(cell.day) + ': ' + cell.count + (cell.count === 1 ? ' questão' : ' questões')">
+            <span class="visually-hidden">{{ dayLabel(cell.day) }}: {{ cell.count }} {{ cell.count === 1 ? "questão" : "questões" }}{{ cell.met ? ", meta batida" : cell.forgiven ? ", folga da semana" : "" }}</span>
+          </span>
+        } @else {
+          <span class="calendar-pad" aria-hidden="true"></span>
+        }
+      }
+    </div>
+    <p class="calendar-legend" aria-hidden="true">
+      <span><i class="calendar-day is-met"></i> meta batida</span>
+      <span><i class="calendar-day is-partial"></i> estudou</span>
+      <span><i class="calendar-day is-forgiven"></i> folga</span>
+    </p>
+  </section>
+
+  <section class="medals" aria-labelledby="medals-title">
+    <h2 id="medals-title">Medalhas <span class="muted">{{ unlocked().length }} de {{ s.achievements.length }}</span></h2>
+    <ul class="medal-grid">
+      @for (a of unlocked(); track a.code) {
+        <li class="medal" [style.--delay]="$index">
+          <app-badge [icon]="a.icon" [tier]="a.tier" />
+          <strong>{{ a.title }}</strong>
+          <span>{{ a.description }}</span>
+          <small>Desde {{ dateLabel(a.unlockedAt!) }}</small>
+        </li>
+      }
+      @for (a of locked(); track a.code) {
+        <li class="medal is-locked">
+          <app-badge [icon]="a.icon" [tier]="a.tier" [locked]="true" />
+          <strong>{{ a.title }}</strong>
+          <span>{{ a.description }}</span>
+          @if (a.progress; as p) {
+            <span class="medal-progress" aria-hidden="true"><span [style.--value]="p.value / p.target"></span></span>
+            <small>{{ p.value }} de {{ p.target }}</small>
+          }
+        </li>
+      }
+    </ul>
+  </section>
+} @else {
+  <p role="status">Carregando suas conquistas…</p>
+}
+
+<section class="ranking" aria-labelledby="ranking-title">
+  <div class="ranking-head">
+    <h2 id="ranking-title">Ranking de constância</h2>
+    <p class="muted">Dias com estudo nos últimos 7 dias. Conta constância, não nota.</p>
+  </div>
+  @if (ranking(); as r) {
+    @if (r.top.length) {
+      <ol class="ranking-list">
+        @for (row of r.top; track row.position) {
+          <li [class.is-me]="row.me" [class.is-podium]="row.position <= 3" [style.--delay]="$index">
+            <span class="rank-position" [class]="'rank-position place-' + row.position">{{ row.position }}</span>
+            <span class="rank-avatar" aria-hidden="true">{{ avatar(row.name) }}</span>
+            <span class="rank-name">{{ row.name }}@if (row.me) { <em>você</em> }</span>
+            <span class="rank-week" [attr.aria-label]="row.days7 + ' de 7 dias'">
+              @for (on of weekDots(row.days7); track $index) { <i [class.is-on]="on"></i> }
+            </span>
+            <span class="rank-month">{{ row.days30 }}<small> em 30 dias</small></span>
+          </li>
+        }
+      </ol>
+      @if (myRowOutsideTop(r); as mine) {
+        <ol class="ranking-list ranking-mine" [attr.start]="mine.position" aria-label="Sua posição">
+          <li class="is-me">
+            <span class="rank-position">{{ mine.position }}</span>
+            <span class="rank-avatar" aria-hidden="true">EU</span>
+            <span class="rank-name">Sua posição <em>você</em></span>
+            <span class="rank-week" [attr.aria-label]="mine.days7 + ' de 7 dias'">
+              @for (on of weekDots(mine.days7); track $index) { <i [class.is-on]="on"></i> }
+            </span>
+            <span class="rank-month">{{ mine.days30 }}<small> em 30 dias</small></span>
+          </li>
+        </ol>
+      }
+    } @else {
+      <p class="muted">Ninguém no ranking ainda. Estude hoje e apareça aqui.</p>
+    }
+    @if (r.me && r.me.position === null && r.visible === false) {
+      <p class="muted">Você está fora do ranking.</p>
+    }
+    @if (r.canJoin) {
+      <label class="ranking-toggle">
+        <input type="checkbox" [checked]="r.visible" (change)="toggleRanking($any($event.target).checked)" />
+        Aparecer no ranking com meu primeiro nome
+      </label>
+    } @else {
+      <p class="muted">
+        Para aparecer no ranking, crie uma conta.
+        <button type="button" class="text-button" (click)="register.emit()">Criar conta</button>
+      </p>
+    }
+  }
+</section>

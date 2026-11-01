@@ -133,7 +133,9 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 023 | ROLE-1 — convite de papel com confirmação do admin | Claude |
 | 024 | SIM-1 — treino de erros e refazer as erradas (`focus`, `retry_of`) | Claude |
 | 025 | ACT-1 — registro de atividades (auditoria) | Claude |
-| 026 | próxima livre — reserve aqui antes do primeiro commit | |
+| 026 | DISC-2 — discursivas conferidas por agente (`review_origin` ASSISTED) | Claude |
+| 027 | ENG-1/FLASH-1 — meta diária, conquistas, ranking e flashcards | Claude |
+| 028 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 
@@ -160,6 +162,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
 
+- **01/11/2026 · Claude → próximo agente · passagem** · Limite do Claude acabando. **Leia `docs/HANDOFF.md`**: estado, como testar, regras de design, plano do mascote (patinho de borracha, prompts para o Gemini), pendências por prioridade (deploy em VPS própria e domínio, revisão humana dos flashcards, CQ-2, plano até a prova, materiais por área) e melhorias. Flashcards ganharam selo "Gerado por IA" e, no celular, cada troca de tela volta ao topo sem o topo fixo cobrir o cartão.
+- **01/11/2026 · Claude → Codex · ENG-1, FLASH-1, LIB-1 estudo diário** · Pedido de Gabriel. Migration 027. Meta diária (padrão 5 questões, fuso de São Paulo) com anel no topo, painel no início e linha no resultado do treino; sequência com um dia perdoado por semana. 14 conquistas em medalhas SVG com aviso discreto. Ranking de constância (dias ativos em 7/30 dias, só contas, pode sair). Flashcards com FSRS-5 (`fsrs.ts`, funções puras): 14 baralhos e 135 cartões; Biblioteca com 12 fichas de uma página; Materiais e Plano "em breve". Conteúdo escrito por IA, sem revisão humana (avisado na tela). Detalhes e literatura em `docs/FLASHCARDS.md`. Pacote inicial 499,6 kB (anel e aviso carregam sob demanda). Próxima migration livre: 028.
 - **01/11/2026 · Claude → Codex · DISC-2 discursivas publicadas** · Autorizado por Gabriel ("pode conferir e publicar"). 35 discursivas (2011, 2014, 2017 e 2021, Bacharelado e Licenciatura), conferidas recorte a recorte pelo Claude (autoconferência, `independent: false`). Migration 026 (`review_origin` ASSISTED); publicador `assisted-discursive.ts`; `bootstrap-content` publica `data/discursive-reviews`. Recorte do padrão pela tinta da página (figuras, código e UML entram; enunciado repetido como imagem, logotipos e títulos de seção saem); itens também em "(valor = X pontos)". 2005 e 2008 pendentes (padrão sem blocos). Próxima migration livre: 027. ADR-013 com adendo.
 - **01/11/2026 · Claude → Codex · UI-9 Provas completas** · Pedido de Gabriel. Seção própria no menu (`/provas`), separada do Treino parcial (`/treino`); o mesmo `ExamComponent` com `section`. `GET /api/editions` passa a trazer `lastResult` (última prova finalizada pela pessoa em cada edição); cartão mostra a nota, "Ver resultado" e "Refazer esta prova", com filtro por curso. Treino ficou só com formulário, simulados por área, erros e histórico de treinos. Página pública carregada sob demanda (pacote inicial 489 kB). Sem migration.
 - **31/10/2026 · Claude → Codex · UI-8 movimento** · Pedido de Gabriel ("qualidade, elegância"). Seção "Movimento" no fim de `styles.css` (correção da resposta, cartões) e em `exam.component.css` (questão entra pelo lado do passo, folha de respostas, ponto pulsante nos últimos 15 min, placar que conta até o total com `@property`, barras por assunto, diálogo de finalizar). O bloco global que zerava toda animação com "reduzir movimento" saiu: nesse modo só caem deslocamentos e laços. Pacote inicial em 497 kB (limite 500): novas animações do treino ficam no CSS do componente. Título da página pública sem ponto final.

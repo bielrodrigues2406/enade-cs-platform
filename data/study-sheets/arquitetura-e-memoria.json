@@ -1,0 +1,49 @@
+{
+  "slug": "arquitetura-e-memoria",
+  "area": "Arquitetura de computadores",
+  "title": "Arquitetura, pipeline e memória",
+  "summary": "Representação de dados, circuitos lógicos, organização do processador e hierarquia de memória.",
+  "sections": [
+    {
+      "title": "Dados e circuitos",
+      "points": [
+        "Complemento de dois: inverta os bits e some 1; faixa de −2ⁿ⁻¹ a 2ⁿ⁻¹ − 1.",
+        "Somador completo: S = A ⊕ B ⊕ Cin; Cout = AB + Cin(A ⊕ B).",
+        "Mapas de Karnaugh simplificam expressões booleanas."
+      ]
+    },
+    {
+      "title": "Processador",
+      "points": [
+        "RISC: instruções simples e de tamanho fixo, load/store; CISC: instruções complexas e variáveis.",
+        "Pipeline aumenta a vazão, não a latência de cada instrução.",
+        "Hazards: estrutural, de dados (forwarding, bolhas) e de controle (previsão de desvio)."
+      ]
+    },
+    {
+      "title": "Memória",
+      "points": [
+        "Hierarquia: registradores, cache, RAM, disco; mais rápido é menor e mais caro.",
+        "Localidade temporal e espacial justificam a cache.",
+        "Mapeamento direto, associativo por conjunto (k vias) e totalmente associativo.",
+        "Endereço na cache direta: rótulo | índice | deslocamento."
+      ]
+    },
+    {
+      "title": "Desempenho",
+      "points": [
+        "Tempo de CPU = instruções × CPI × tempo de ciclo.",
+        "Lei de Amdahl: ganho = 1/((1 − f) + f/s)."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Achar que pipeline reduz o tempo de uma instrução isolada.",
+    "Esquecer os bits de deslocamento ao dividir o endereço da cache.",
+    "Confundir taxa de acerto da cache com tempo médio de acesso."
+  ],
+  "references": [
+    "PATTERSON, D.; HENNESSY, J. Organização e projeto de computadores.",
+    "STALLINGS, W. Arquitetura e organização de computadores."
+  ]
+}

@@ -12,6 +12,12 @@ import { QuestionContentComponent } from "./question-content.component";
 import { ExamComponent } from "./exam.component";
 import { ProfileComponent } from "./profile.component";
 import { firstName, initials } from "./initials";
+import { EngagementService } from "./engagement.service";
+import { GoalRingComponent } from "./goal-ring.component";
+import { AchievementToastComponent } from "./achievement-toast.component";
+import { ProgressComponent } from "./progress.component";
+import { LibraryComponent } from "./library.component";
+import { FlashcardsComponent } from "./flashcards.component";
 import { ChoiceDialogComponent, ChoiceService } from "./choice-dialog";
 import { requestPractice, type PracticeRequest } from "./practice-request";
 import {
@@ -119,6 +125,11 @@ type Question = Summary & {
     ProfileComponent,
     ChoiceDialogComponent,
     ReviewComponent,
+    GoalRingComponent,
+    AchievementToastComponent,
+    ProgressComponent,
+    LibraryComponent,
+    FlashcardsComponent,
   ],
   templateUrl: "./app.component.html",
 })
@@ -158,6 +169,8 @@ class App {
   adminView = signal(false);
   lessonsView = signal(false);
   discursiveView = signal(false);
+  /** Seções de estudo complementar: conquistas, biblioteca e flashcards. */
+  studyView = signal<StudyView | null>(null);
   profileView = signal(false);
   curationView = signal(false);
   curationBusy = signal(false);
@@ -177,6 +190,7 @@ class App {
   reviewPosition: ReviewPosition = { topic: "", offset: 0 };
   private appRef = inject(ApplicationRef);
   private choice = inject(ChoiceService);
+  readonly engagement = inject(EngagementService);
   private identityGeneration = 0;
   private identityTransition = 0;
   private requestNumber = 0;
@@ -239,7 +253,7 @@ class App {
         method: "POST",
       });
       if (transition !== this.identityTransition) return;
-      this.session.set(session);
+      this.session.set(session);      void this.engagement.refresh();
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       await this.loadCatalog(true, this.catalogOffset(), "replace", this.appliedFilters);
@@ -293,7 +307,7 @@ class App {
     this.practiceView.set(false);
     this.adminView.set(false);
     this.lessonsView.set(false);
-    this.discursiveView.set(false);
+    this.discursiveView.set(false);    this.studyView.set(null);
     this.profileView.set(false);
     this.curationView.set(true);
     this.leaveHomePath();
@@ -335,6 +349,7 @@ class App {
     if (this.adminView()) return "Administração";
     if (this.lessonsView()) return "Aulas";
     if (this.discursiveView()) return "Discursivas";
+    if (this.studyView()) return STUDY_LABELS[this.studyView()!];
     if (this.curationView()) return "Curadoria";
     if (this.practiceView()) return this.practiceSection() === "provas" ? "Provas completas" : "Treino parcial";
     if (this.reviewView()) return "Caderno de erros";
@@ -402,7 +417,7 @@ class App {
     this.homeView.set(false);
     this.adminView.set(false);
     this.lessonsView.set(false);
-    this.discursiveView.set(false);
+    this.discursiveView.set(false);    this.studyView.set(null);
     this.profileView.set(false);
     this.error.set("");
     this.practiceAttemptId.set(null);
@@ -608,6 +623,8 @@ class App {
       ) {
         this.question.set({ ...q, answer });
         this.editing.set(false);
+        // Meta, sequência e conquistas mudam a cada resposta.
+        void this.engagement.refresh();
       }
     } catch (err) {
       if (identity === this.identityGeneration)
@@ -695,7 +712,7 @@ class App {
     }
     this.adminView.set(false);
     this.lessonsView.set(false);
-    this.discursiveView.set(false);
+    this.discursiveView.set(false);    this.studyView.set(null);
     this.question.set(null);
     this.selected = "";
     this.editing.set(false);
@@ -814,6 +831,21 @@ class App {
     this.leaveHomePath();
     this.focusMain();
   }
+  /** Conquistas, biblioteca e flashcards: mesmo fluxo das discursivas. */
+  openStudy(view: StudyView) {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openStudy(view))) return;
+    this.swapView(() => {
+      this.question.set(null);
+      this.accountView.set(null);
+      this.curationView.set(false);
+      this.reviewView.set(false);
+      this.reviewReturn.set(false);
+      this.practiceView.set(false);
+      this.studyView.set(view);
+    });
+    this.leaveHomePath();
+    this.focusMain();
+  }
   /** Meu perfil: dados e senha da própria conta. */
   openProfile() {
     if (this.session().mode !== "account" || this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openProfile()))
@@ -836,10 +868,11 @@ class App {
   }
   private clearStudyState() {
     forgetHomeSnapshot();
+    this.engagement.clear();
     this.adminView.set(false);
     this.profileView.set(false);
     this.lessonsView.set(false);
-    this.discursiveView.set(false);
+    this.discursiveView.set(false);    this.studyView.set(null);
     if (this.identityGeneration > 0 && this.practiceView()) {
       this.practiceAttemptId.set(null);
       this.practiceItemPosition.set(1);
@@ -890,7 +923,7 @@ class App {
         return;
       }
       this.clearStudyState();
-      this.session.set(session);
+      this.session.set(session);      void this.engagement.refresh();
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       this.accountView.set(null);
@@ -931,7 +964,7 @@ class App {
         return;
       }
       this.clearStudyState();
-      this.session.set(session);
+      this.session.set(session);      void this.engagement.refresh();
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       this.accountView.set(null);
@@ -965,7 +998,7 @@ class App {
         method: "POST",
       });
       if (transition !== this.identityTransition) return;
-      this.session.set(session);
+      this.session.set(session);      void this.engagement.refresh();
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       if (
@@ -1056,7 +1089,7 @@ class App {
       if (generation !== this.identityGeneration || !stillCurrent()) return;
       this.adminView.set(false);
       this.lessonsView.set(false);
-      this.discursiveView.set(false);
+      this.discursiveView.set(false);      this.studyView.set(null);
       this.profileView.set(false);
       update();
     };
@@ -1088,6 +1121,8 @@ class App {
   }
 }
 type PracticeSection = "treino" | "provas";
+type StudyView = "conquistas" | "biblioteca" | "flashcards";
+const STUDY_LABELS: Record<StudyView, string> = { conquistas: "Conquistas", biblioteca: "Biblioteca", flashcards: "Flashcards" };
 function isPracticePath(path: string) {
   return path === "/treino" || path === "/provas";
 }

@@ -1,0 +1,53 @@
+{
+  "deck": "seguranca",
+  "area": "Segurança",
+  "title": "Segurança da informação",
+  "description": "Princípios, criptografia, autenticação e ataques. Base: Stallings, Criptografia e Segurança de Redes.",
+  "cards": [
+    {
+      "id": "seg-001",
+      "front": "O que é a tríade CIA?",
+      "back": "Confidencialidade (só quem pode lê), Integridade (não é alterado indevidamente) e Disponibilidade (acessível quando preciso)."
+    },
+    {
+      "id": "seg-002",
+      "front": "Criptografia simétrica x assimétrica.",
+      "back": "Simétrica: mesma chave para cifrar e decifrar, rápida (AES). Assimétrica: par de chaves pública e privada, resolve a distribuição de chaves e permite assinatura (RSA, curvas elípticas)."
+    },
+    {
+      "id": "seg-003",
+      "front": "Como funciona a assinatura digital?",
+      "back": "O autor cifra o resumo (hash) da mensagem com a sua chave privada; qualquer um verifica com a chave pública. Garante integridade, autenticidade e não repúdio."
+    },
+    {
+      "id": "seg-004",
+      "front": "Que propriedades uma função hash criptográfica deve ter?",
+      "back": "Resistência à pré-imagem, à segunda pré-imagem e a colisões; saída de tamanho fixo e efeito avalanche."
+    },
+    {
+      "id": "seg-005",
+      "front": "Como se guardam senhas corretamente?",
+      "back": "Nunca em texto claro nem com hash simples: usa-se função lenta e com sal único por usuário (bcrypt, scrypt, Argon2)."
+    },
+    {
+      "id": "seg-006",
+      "front": "O que é injeção de SQL e como evitar?",
+      "back": "Entrada do usuário interpretada como parte do comando SQL. Evita-se com consultas parametrizadas (prepared statements) e validação de entrada."
+    },
+    {
+      "id": "seg-007",
+      "front": "XSS x CSRF.",
+      "back": "XSS: script malicioso injetado na página e executado no navegador da vítima. CSRF: induz o navegador autenticado da vítima a enviar uma requisição indesejada a um site."
+    },
+    {
+      "id": "seg-008",
+      "front": "O que é autenticação multifator?",
+      "back": "Combinar fatores de categorias diferentes: algo que você sabe (senha), tem (token, celular) ou é (biometria)."
+    },
+    {
+      "id": "seg-009",
+      "front": "Firewall x IDS.",
+      "back": "Firewall filtra o tráfego conforme regras (permite ou bloqueia). IDS detecta e alerta sobre atividade suspeita; um IPS também bloqueia."
+    }
+  ]
+}

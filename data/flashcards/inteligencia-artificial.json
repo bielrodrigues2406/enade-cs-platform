@@ -1,0 +1,53 @@
+{
+  "deck": "inteligencia-artificial",
+  "area": "Inteligência artificial",
+  "title": "Inteligência artificial",
+  "description": "Busca, conhecimento, aprendizado de máquina e redes neurais. Base: Russell e Norvig.",
+  "cards": [
+    {
+      "id": "ia-001",
+      "front": "Busca cega x busca heurística.",
+      "back": "Cega (largura, profundidade, custo uniforme) não usa informação sobre o objetivo. Heurística usa uma estimativa h(n) da distância ao objetivo (gulosa, A*)."
+    },
+    {
+      "id": "ia-002",
+      "front": "Quando o A* é ótimo?",
+      "back": "Em busca em árvore, quando h é admissível (nunca superestima o custo real). Em busca em grafo, quando h é consistente: h(n) ≤ c(n, n') + h(n')."
+    },
+    {
+      "id": "ia-003",
+      "front": "Como funciona o minimax e a poda alfa-beta?",
+      "back": "Minimax alterna níveis de MAX e MIN propagando valores das folhas. A poda alfa-beta descarta ramos que não podem mudar a decisão, sem alterar o resultado."
+    },
+    {
+      "id": "ia-004",
+      "front": "Aprendizado supervisionado, não supervisionado e por reforço.",
+      "back": "Supervisionado: exemplos rotulados (classificação, regressão). Não supervisionado: sem rótulos (agrupamento, redução de dimensionalidade). Por reforço: agente aprende por recompensas ao interagir com o ambiente."
+    },
+    {
+      "id": "ia-005",
+      "front": "O que é overfitting e como reduzi-lo?",
+      "back": "O modelo decora o treino e generaliza mal. Reduz-se com mais dados, regularização, validação cruzada, poda (árvores), dropout ou modelos mais simples."
+    },
+    {
+      "id": "ia-006",
+      "front": "Precisão, revocação e acurácia.",
+      "back": "Precisão = VP/(VP+FP). Revocação = VP/(VP+FN). Acurácia = (VP+VN)/total, que engana em classes desbalanceadas."
+    },
+    {
+      "id": "ia-007",
+      "front": "Que problemas um perceptron simples resolve?",
+      "back": "Só problemas linearmente separáveis; não aprende o XOR. Redes com camadas ocultas e ativação não linear resolvem."
+    },
+    {
+      "id": "ia-008",
+      "front": "Como funciona o k-means?",
+      "back": "Escolhe k centróides, atribui cada ponto ao mais próximo, recalcula os centróides como médias e repete até estabilizar. Depende da escolha inicial e de k."
+    },
+    {
+      "id": "ia-009",
+      "front": "Para que serve a retropropagação (backpropagation)?",
+      "back": "Calcula o gradiente do erro em relação a cada peso da rede pela regra da cadeia, da saída para a entrada, para atualizar os pesos por descida do gradiente."
+    }
+  ]
+}

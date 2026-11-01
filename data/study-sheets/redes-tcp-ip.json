@@ -1,0 +1,49 @@
+{
+  "slug": "redes-tcp-ip",
+  "area": "Redes",
+  "title": "Redes e a pilha TCP/IP",
+  "summary": "Camadas, transporte confiável, endereçamento IP e roteamento: o núcleo das questões de redes.",
+  "sections": [
+    {
+      "title": "Camadas",
+      "points": [
+        "Aplicação (HTTP, DNS, SMTP), transporte (TCP, UDP), rede (IP, ICMP), enlace (Ethernet; o ARP liga IP a MAC), física.",
+        "Encapsulamento: cada camada acrescenta o seu cabeçalho; o roteador olha até a camada de rede, o switch até a de enlace."
+      ]
+    },
+    {
+      "title": "Transporte",
+      "points": [
+        "TCP: conexão (SYN, SYN-ACK, ACK), entrega confiável e ordenada, controle de fluxo (janela do receptor) e de congestionamento.",
+        "Congestionamento (Reno): partida lenta exponencial, depois crescimento linear; 3 ACKs duplicados cortam a janela pela metade; timeout volta a 1 MSS.",
+        "UDP: sem conexão e sem garantias; útil para DNS, voz e vídeo."
+      ]
+    },
+    {
+      "title": "Endereçamento",
+      "points": [
+        "Uma rede /n tem 2^(32−n) endereços e 2^(32−n) − 2 hosts.",
+        "Máscara /26 = 255.255.255.192; sub-redes de 64 endereços.",
+        "Faixas privadas: 10.0.0.0/8, 172.16.0.0/12 e 192.168.0.0/16; o NAT as traduz para um IP público.",
+        "IPv6 tem 128 bits."
+      ]
+    },
+    {
+      "title": "Roteamento e serviços",
+      "points": [
+        "Vetor de distâncias (RIP, Bellman-Ford) x estado de enlace (OSPF, Dijkstra).",
+        "BGP faz o roteamento entre sistemas autônomos.",
+        "DNS: nome para IP; DHCP: configuração automática de IP."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Esquecer de descontar rede e broadcast ao contar hosts.",
+    "Dizer que o UDP é orientado a conexão ou ordenado.",
+    "Confundir controle de fluxo (receptor) com controle de congestionamento (rede)."
+  ],
+  "references": [
+    "KUROSE, J.; ROSS, K. Redes de computadores e a internet.",
+    "TANENBAUM, A.; WETHERALL, D. Redes de computadores."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "slug": "compiladores",
+  "area": "Compiladores",
+  "title": "Fases de um compilador",
+  "summary": "Da sequência de caracteres ao código de máquina, fase por fase.",
+  "sections": [
+    {
+      "title": "Análise",
+      "points": [
+        "Léxica: expressões regulares e autômatos finitos geram os tokens.",
+        "Sintática: gramáticas livres de contexto; descendente (LL) ou ascendente (LR, SLR, LALR).",
+        "Semântica: tipos, escopo, declarações; usa a tabela de símbolos."
+      ]
+    },
+    {
+      "title": "Síntese",
+      "points": [
+        "Código intermediário (código de três endereços, árvore sintática abstrata).",
+        "Otimizações: constantes, subexpressões comuns, código morto, laços.",
+        "Geração de código e alocação de registradores."
+      ]
+    },
+    {
+      "title": "Gramáticas para LL(1)",
+      "points": [
+        "Elimine recursão à esquerda e fatore à esquerda.",
+        "Calcule FIRST e FOLLOW para montar a tabela preditiva."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Achar que o analisador léxico precisa de autômato de pilha.",
+    "Esquecer que gramática ambígua não é LL(1) nem LR(1)."
+  ],
+  "references": [
+    "AHO, A. et al. Compiladores: princípios, técnicas e ferramentas."
+  ]
+}

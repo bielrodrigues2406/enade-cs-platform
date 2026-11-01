@@ -1,0 +1,11 @@
+<svg viewBox="0 0 64 64" focusable="false">
+  <circle class="badge-rim" cx="32" cy="32" r="30" />
+  <circle class="badge-face" cx="32" cy="32" r="24" />
+  <!-- Reflexo: arco claro no alto, dá volume sem gradiente. -->
+  <path class="badge-shine" d="M15 26a18 18 0 0 1 22-14" />
+  <g class="badge-glyph" transform="translate(20 20)">
+    @for (d of glyph(); track $index) {
+      <path [attr.d]="d" />
+    }
+  </g>
+</svg>

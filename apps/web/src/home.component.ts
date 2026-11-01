@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, inject, signal } from "@angular
 import type { ReviewItem } from "./review.component";
 import { AREA_SIMULATION_LIMIT, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 import { ChoiceService } from "./choice-dialog";
+import { EngagementService } from "./engagement.service";
 
 type CatalogRow = {
   id: string;
@@ -87,6 +88,9 @@ export class HomeComponent {
   @Output() resume = new EventEmitter<string>();
   /** Tela de treinos (prova completa e treino montado). */
   @Output() practiceHub = new EventEmitter<void>();
+  /** Abre Conquistas (meta, sequência, medalhas). */
+  @Output() progressHub = new EventEmitter<void>();
+  readonly engagement = inject(EngagementService);
   /** Abre a seção Provas completas. */
   @Output() editionsHub = new EventEmitter<void>();
 

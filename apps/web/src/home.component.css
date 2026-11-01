@@ -179,3 +179,22 @@
     justify-self: end;
   }
 }
+
+/* Meta de hoje: barra que enche e os últimos 7 dias. */
+.goal-line { margin: var(--space-1) 0 var(--space-2); }
+.goal-line strong { font-family: var(--font-reading); font-size: 1.8rem; font-weight: 400; }
+.goal-done { margin-left: var(--space-2); font-size: var(--text-sm); font-weight: 600; color: var(--color-success-text); }
+.goal-bar { display: block; height: 6px; border-radius: 3px; background: var(--color-border); overflow: hidden; }
+.goal-bar span {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(min(1, var(--value, 0)));
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.goal-week { display: flex; align-items: center; gap: 5px; margin: var(--space-3) 0 var(--space-2); font-size: var(--text-sm); color: var(--color-text-muted); }
+.goal-week i { width: 12px; height: 12px; border-radius: 3px; background: var(--color-border); }
+.goal-week i.is-partial { background: color-mix(in srgb, var(--color-success-text) 30%, var(--color-surface)); }
+.goal-week i.is-met { background: var(--color-success-text); }
+.goal-week span { margin-left: var(--space-2); }
