@@ -45,6 +45,7 @@
   </section>
 } @else if (done(); as result) {
   <section class="flash-done" aria-labelledby="flash-done">
+    <app-mascot pose="cartoes" [size]="120" />
     <p class="metadata">Sessão concluída</p>
     <h1 id="flash-done" tabindex="-1">{{ result.total }} {{ result.total === 1 ? "revisão" : "revisões" }}</h1>
     <ul class="flash-tally">

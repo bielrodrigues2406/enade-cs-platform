@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, Injector, afterNextRender, computed, inject, signal } from "@angular/core";
 import { EngagementService } from "./engagement.service";
+import { MascotComponent } from "./mascot.component";
 
 // Flashcards (FLASH-1). Prática de recuperação (tentar lembrar antes de ver a
 // resposta) com repetição espaçada pelo FSRS-5 no servidor. Quem erra revê o
@@ -29,6 +30,7 @@ export function intervalLabel(minutes: number) {
   selector: "app-flashcards",
   templateUrl: "./flashcards.component.html",
   styleUrl: "./flashcards.component.css",
+  imports: [MascotComponent],
 })
 export class FlashcardsComponent {
   private host: ElementRef<HTMLElement> = inject(ElementRef);
