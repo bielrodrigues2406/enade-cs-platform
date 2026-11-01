@@ -22,6 +22,10 @@ Nome: **Dudu**. Alternativa: "Bit".
 | `design/mascot/poses-sheet.jpg` | folha original das 14 poses, gerada no Gemini |
 | `apps/web/public/mascot/<pose>.webp` | poses recortadas, fundo transparente, ~300×400 px, ~15 kB cada |
 | `scripts/crop-mascot.py` | recorte da folha (Pillow + numpy) |
+| `design/mascot/scene-wide.jpg`, `scene-mobile.jpg` → `apps/web/public/mascot/scene-*.webp` | cena da página pública (seção "Explique para o pato") |
+| `design/mascot/icon-navy-head.jpg` → `apps/web/public/icons/` | favicon 32/48, apple-touch-icon 180, ícones 192/512 do `manifest.webmanifest` |
+| `design/mascot/icons-three-backgrounds.jpg` | ícones alternativos (papel e azul), ainda sem uso |
+| `design/mascot/poses-magenta-lowres.jpg` | folha com fundo magenta para recorte limpo, **mas é captura de tela (1179 px, ~110 px por pose)**: baixa demais. Pedir a Gabriel o arquivo original em alta e recortar por chroma key |
 | `apps/web/src/mascot.component.*` | `<app-mascot pose="…" [size]="96" motion="pop|bob|none" [decorative]="true">` |
 | `apps/web/src/mascot.service.ts` | preferência "mostrar o mascote" (hoje no navegador) |
 
@@ -52,7 +56,7 @@ mascote só sobre fundo claro** até existir uma versão em PNG com transparênc
 | --- | --- | --- | --- |
 | Flashcards, fim da sessão | resumo da sessão | `cartoes` | **feito** |
 | Flashcards, nada vencendo | "Nada vence hoje" | `dormindo` | a fazer |
-| Página pública | cena principal ao lado do título (gerar a cena, ver §6) | cena | a fazer |
+| Página pública | seção "Explique para o pato" antes do convite final; texto sobre a cena a partir de 1100 px, acima dela abaixo disso | cena | **feito** |
 | Entrar / cadastro | aceno pequeno | `acenando` | a fazer |
 | Início | uma frase pela situação: falta X para a meta, erros para revisar, treino pela metade | `contente` / `lupa` / `relogio` | a fazer |
 | Aviso de meta batida | trocar o anel do aviso pelo pato | `comemorando` | a fazer |
@@ -66,7 +70,7 @@ mascote só sobre fundo claro** até existir uma versão em PNG com transparênc
 | Biblioteca | cabeçalho; cartões "Em breve" | `lendo` / `em-obras` | a fazer |
 | Carregando | `motion="bob"` | `boiando` | a fazer |
 | Erro / página não encontrada | sem drama | `bug` | a fazer |
-| Ícone do app / favicon | cabeça e lápis sobre `#0f285a` (gerar, ver §6) | ícone | a fazer |
+| Ícone do app / favicon | cabeça e lápis sobre `#0f285a`, `manifest.webmanifest` | ícone | **feito** |
 
 ## 5. Ordem de construção
 
@@ -96,12 +100,9 @@ character from the attached image (… do not redesign it)". Terminar com o bloc
 STYLE LOCK: soft 3D clay/vinyl toy render, rounded chunky shapes, matte surface with subtle subsurface glow, soft studio key light from top-left, gentle contact shadow, no outlines, no text, no logos. Palette only: duck body warm yellow #F6C945 with lighter belly #FCE7A1, beak and feet orange #F08A2C, eyes deep navy #151E2F with one small white highlight, brand navy #0F285A, brand blue #1649AE, paper off-white #F4F3EF, accent amber #B77B29. Friendly, clever, calm — a study buddy for university Computer Science students, not a baby toy.
 ```
 
-Ainda faltam:
-- **cena da página pública** (16:9, pato sobre um caderno aberto, notebook com linhas de
-  código ilegíveis e pilha de cartões; 45% à esquerda livre para o título);
-- **ícone do app** (cabeça e lápis, 70% de um quadrado arredondado, fundos `#0F285A`,
-  `#F4F3EF` e `#1649AE`; legível a 48 px);
-- se possível, **PNG com fundo transparente** de todas as poses.
+Ainda falta: a **folha de poses em alta resolução** com fundo magenta liso `#FF00FF`, sem
+sombra (a recebida é captura de tela). As cenas e o ícone também vieram como captura
+(1179 px de largura); se Gabriel tiver os originais, trocar pelos arquivos em alta.
 
 Para recortar uma folha nova: ajuste `bounds` (colunas) e `bands` (faixas) em
 `scripts/crop-mascot.py` e rode
