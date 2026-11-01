@@ -300,10 +300,6 @@
                 </p>
               }
             </section>
-            <p class="source-note">
-              <strong>Origem.</strong> Cada questão oficial mostra o recorte da
-              prova do Inep, a edição e a página.
-            </p>
             <form class="filters catalog-filters" (ngSubmit)="loadCatalog()">
               <div>
                 <label for="search">Buscar questão</label
@@ -483,10 +479,7 @@
               </nav>
             }
             <footer>
-              @if (session().mode === "account") {
-                Seu histórico está salvo na sua conta. Entre com o mesmo e-mail
-                e senha para retomá-lo em outro navegador.
-              } @else {
+              @if (session().mode !== "account") {
                 Seu histórico fica associado à sessão deste navegador por até 30
                 dias.
                 <button
@@ -768,7 +761,7 @@
             </article>
           }
         }
-        @if (!landingMode() && !accountView() && !booting()) {
+        @if (!accountView() && !booting()) {
           <footer class="site-footer">
             <div class="site-footer-brand">
               <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect width="34" height="34" rx="8" /><circle cx="9.5" cy="17" r="3.6" class="brand-bubble" /><circle cx="17" cy="17" r="3.6" class="brand-bubble is-marked" /><circle cx="24.5" cy="17" r="3.6" class="brand-bubble" /></svg>
@@ -786,7 +779,7 @@
             </nav>
             <div class="site-footer-note">
               <p class="site-footer-title">Sobre o conteúdo</p>
-              <p>Questões e gabaritos oficiais são do Inep, com a página da prova de origem. Projeto de estudo independente, sem vínculo com o Inep ou o MEC.</p>
+              <p>Questões e gabaritos oficiais do Inep, com a página da prova de origem. Recortes, classificação e explicações são feitos por IA e conferidos por outro agente, sem revisão humana; na dúvida, vale a prova original. Projeto independente, sem vínculo com o Inep ou o MEC.</p>
             </div>
             <p class="site-footer-base">ENADE 2026 · domingo, 29 de novembro · <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade" target="_blank" rel="noopener noreferrer">cronograma no Inep</a></p>
           </footer>

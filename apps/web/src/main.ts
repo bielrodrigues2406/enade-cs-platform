@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, HostListener, inject, signal } from "@angular/core";
+import { ApplicationRef, Component, HostListener, effect, inject, signal } from "@angular/core";
 import { IMAGE_CONFIG } from "@angular/common";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
@@ -182,7 +182,17 @@ class App {
     typeof BroadcastChannel === "undefined"
       ? null
       : new BroadcastChannel("enade-identity");
+  private lastSection = "";
   constructor() {
+    // Trocou de seção, começa do topo. Voltar da questão para a lista mantém
+    // a posição, para a pessoa continuar de onde estava.
+    effect(() => {
+      const section = this.sectionLabel();
+      const backToList = this.lastSection === "Resolução" && section === "Banco de questões";
+      if (this.lastSection && section !== this.lastSection && !backToList)
+        window.scrollTo({ top: 0, behavior: "instant" });
+      this.lastSection = section;
+    });
     this.readCatalogAddress();
     this.readPracticeAddress();
     if (this.identityChannel) {
@@ -1061,8 +1071,12 @@ class App {
       this.appRef.tick();
     });
   }
+  /** Nova seção começa do topo: o foco sozinho não rola se o rodapé já estava à vista. */
   private focusMain() {
-    setTimeout(() => document.getElementById("content")?.focus(), 0);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      document.getElementById("content")?.focus({ preventScroll: true });
+    }, 0);
   }
   skipToContent(event: Event) {
     event.preventDefault();

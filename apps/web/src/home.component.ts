@@ -165,7 +165,7 @@ export class HomeComponent {
     if (!this.catalog()) return "";
     const answered = this.answeredCount();
     if (!answered)
-      return "Resolva por assunto, veja por que cada alternativa está certa ou errada e volte ao que errou. Suas respostas ficam salvas neste navegador ou na sua conta.";
+      return "Resolva, entenda cada alternativa e volte ao que errou.";
     const total = this.catalog()!.summary.total;
     const ready = this.readyErrors();
     return (

@@ -29,7 +29,6 @@
                 <button type="button" class="text-button" (click)="discursiveStudy.emit()">Abrir as discursivas</button>
               </p>
             }
-            <p class="metadata">{{ result.official }} oficiais · {{ result.author }} autorais · {{ result.demonstration }} demonstrações autorais.</p>
             <div class="practice-table-wrap">
               <table class="practice-table">
                 <caption>Resultado por assunto</caption>
@@ -48,9 +47,6 @@
               <button [class.outline]="misses()" (click)="beginReview()">Rever respostas</button>
               <button class="outline" (click)="showSelection()">Voltar aos treinos</button>
             </div>
-            @if (misses()) {
-              <p class="muted">Refazer monta um treino só com as erradas e em branco, em nova ordem.</p>
-            }
           }
         </section>
       } @else if (current(); as item) {
@@ -289,7 +285,6 @@
             </ol>
           </section>
         }
-        <div class="practice-actions"><button class="text-button" (click)="browse.emit()" [disabled]="saving()">Abrir banco de questões</button><button class="text-button" (click)="loadAvailability()" [disabled]="saving()">Atualizar disponibilidade</button></div>
         @if (data.recent.length) {
           <section class="practice-history" aria-labelledby="practice-recent-title"><h2 id="practice-recent-title">Treinos concluídos recentes</h2><ol>@for (row of data.recent; track row.id) { <li><div><strong>{{ row.size }} questões · {{ row.kind === 'EDITION' ? 'Prova completa' : attemptLabel(row) }}</strong><p><time [attr.datetime]="row.finishedAt">{{ dateLabel(row.finishedAt) }}</time></p></div><button class="outline" (click)="openAttempt(row.id)" [disabled]="saving()">Ver resultado</button></li> }</ol></section>
         }

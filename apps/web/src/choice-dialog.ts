@@ -5,13 +5,13 @@ import { Component, ElementRef, Injectable, ViewChild, effect, inject, signal } 
  * diálogo fica no shell; qualquer tela pede uma escolha e recebe o valor do
  * botão clicado, ou null ao cancelar (Esc, fechar ou clicar fora).
  */
-export type ChoiceAction<T extends string> = { value: T; label: string; kind?: "primary" | "outline" | "danger" };
+export type ChoiceAction<T extends string> = { value: T; label: string; kind?: "primary" | "outline" | "danger" | "danger-link" };
 export type ChoiceRequest<T extends string> = {
   eyebrow?: string;
   title: string;
   message: string;
-  /** Rótulo do botão que só fecha; o padrão é "Cancelar". */
-  cancel?: string;
+  /** Rótulo do botão que só fecha; o padrão é "Cancelar". null: sem esse botão (fecha no X ou Esc). */
+  cancel?: string | null;
   actions: ChoiceAction<T>[];
 };
 type Pending = ChoiceRequest<string> & { resolve: (value: string | null) => void };

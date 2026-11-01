@@ -248,7 +248,10 @@ export class ExamComponent {
   missingLabel(edition: Edition) {
     const list = edition.missing;
     if (!list.length) return "";
-    return list.length === 1 ? `falta a ${list[0]}` : `faltam ${list.slice(0, -1).join(", ")} e ${list.at(-1)}`;
+    if (list.length === 1) return `falta a ${list[0]}`;
+    // Lista longa polui o cartão: acima de três, só a quantidade.
+    if (list.length > 3) return `faltam ${list.length} questões`;
+    return `faltam ${list.slice(0, -1).join(", ")} e ${list.at(-1)}`;
   }
   modalityLabel(modality: string) {
     return ({ BACHARELADO: "Bacharelado", LICENCIATURA: "Licenciatura", COMUM: "Caderno compartilhado" } as Record<string, string>)[modality] ?? modality;
@@ -373,9 +376,9 @@ export class ExamComponent {
         message: timed
           ? "Ao sair, o cronômetro pausa e suas respostas ficam salvas. Você retoma de onde parou."
           : "Suas respostas ficam salvas e você retoma de onde parou. Se já terminou, finalize para ver o resultado.",
-        cancel: "Continuar respondendo",
+        cancel: null,
         actions: [
-          { value: "cancel", label: `Cancelar ${kind === "prova" ? "a" : "o"} ${kind}`, kind: "danger" },
+          { value: "cancel", label: `Cancelar ${kind === "prova" ? "a" : "o"} ${kind}`, kind: "danger-link" },
           { value: "leave", label: timed ? "Pausar e sair" : "Sair", kind: "outline" },
           { value: "finish", label: "Finalizar agora" },
         ],
