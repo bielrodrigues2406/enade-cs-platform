@@ -1,0 +1,30 @@
+<div class="toast-region" aria-live="polite">
+  @if (current(); as toast) {
+    @if (toast.kind === "achievement") {
+      <div class="toast" [class]="'toast tier-' + toast.achievement.tier">
+        <span class="toast-medal">
+          <span class="toast-rays" aria-hidden="true"></span>
+          <app-badge [icon]="toast.achievement.icon" [tier]="toast.achievement.tier" />
+        </span>
+        <div class="toast-text">
+          <p class="toast-eyebrow">Conquista desbloqueada</p>
+          <p class="toast-title">{{ toast.achievement.title }}</p>
+          <p class="toast-body">{{ toast.achievement.description }}</p>
+        </div>
+        <button type="button" class="toast-close" (click)="next()" aria-label="Fechar aviso">×</button>
+      </div>
+    } @else {
+      <div class="toast is-goal">
+        <span class="toast-check" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+        </span>
+        <div class="toast-text">
+          <p class="toast-eyebrow">Meta do dia batida</p>
+          <p class="toast-title">{{ toast.goal }} {{ toast.goal === 1 ? "questão" : "questões" }} hoje</p>
+          <p class="toast-body">{{ toast.streak === 1 ? "Primeiro dia da sequência." : toast.streak + " dias seguidos. Continue amanhã." }}</p>
+        </div>
+        <button type="button" class="toast-close" (click)="next()" aria-label="Fechar aviso">×</button>
+      </div>
+    }
+  }
+</div>

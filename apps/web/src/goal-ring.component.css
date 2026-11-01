@@ -1,0 +1,81 @@
+.goal-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  margin: 0;
+  padding: 3px var(--space-3) 3px 3px;
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.goal-ring:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+.goal-ring > svg {
+  width: 32px;
+  height: 32px;
+  transform: rotate(-90deg);
+}
+.goal-track {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 4;
+}
+.goal-fill {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 700ms cubic-bezier(0.22, 1, 0.36, 1), stroke 300ms ease-out;
+}
+.goal-ring.is-met .goal-fill {
+  stroke: var(--color-success-text);
+}
+/* Número dentro do anel. */
+.goal-count {
+  position: absolute;
+  left: 3px;
+  width: 32px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+.goal-ring.is-met .goal-count {
+  color: var(--color-success-text);
+}
+.goal-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-variant-numeric: tabular-nums;
+}
+.goal-streak svg {
+  width: 16px;
+  height: 16px;
+  fill: #e8743b;
+}
+.goal-ring.is-met .goal-streak svg {
+  animation: flame-flicker 1.6s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  30% { transform: scale(1.08, 1.12) rotate(-3deg); }
+  60% { transform: scale(0.96, 1.04) rotate(2deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .goal-ring.is-met .goal-streak svg {
+    animation: none;
+  }
+}
+@media (max-width: 420px) {
+  .goal-ring {
+    padding-right: 6px;
+  }
+}

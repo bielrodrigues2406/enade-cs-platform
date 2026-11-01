@@ -16,6 +16,17 @@
             <!-- O número visível conta de 0 até o placar (CSS); leitores de tela e testes leem o valor real. -->
             <p class="practice-score"><strong><span class="visually-hidden">{{ result.correct }}</span><span class="count-up" aria-hidden="true" [style.--count-to]="result.correct"></span> de {{ result.total }}</strong> acertos</p>
             <p>{{ result.incorrect }} {{ result.incorrect === 1 ? 'errada' : 'erradas' }} · {{ result.unanswered }} {{ result.unanswered === 1 ? 'não respondida' : 'não respondidas' }}.</p>
+            @if (engagement.state(); as g) {
+              <!-- Resumo do dia: meta e sequência depois deste treino. -->
+              <p class="session-goal" [class.is-met]="g.today >= g.goal">
+                <span class="session-goal-ring" aria-hidden="true"><span [style.--value]="g.today / g.goal"></span></span>
+                <span>Hoje: <strong>{{ g.today }}</strong> de {{ g.goal }} questões@if (g.today >= g.goal) { · meta batida }</span>
+                <span class="session-streak">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 1.6 1.2 2.6 2.5 3 0-3-.5-5.5 0-8z" /></svg>
+                  {{ g.streak }} {{ g.streak === 1 ? "dia seguido" : "dias seguidos" }}
+                </span>
+              </p>
+            }
             <p class="muted">Sem previsão de nota ENADE. Não altera o estudo livre.</p>
             @if (data.edition && result.byBlock; as blocks) {
               <dl class="practice-blocks">

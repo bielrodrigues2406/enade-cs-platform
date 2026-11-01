@@ -1,0 +1,80 @@
+@if (open(); as sheet) {
+  <article class="sheet" aria-labelledby="sheet-title">
+    <div class="sheet-bar">
+      <button type="button" class="text-button" (click)="close()"><span aria-hidden="true">←</span> Biblioteca</button>
+      <button type="button" class="text-button" (click)="print()">Imprimir ficha</button>
+    </div>
+    <p class="metadata">{{ sheet.area }} · Ficha de uma página</p>
+    <h1 id="sheet-title" tabindex="-1">{{ sheet.title }}</h1>
+    <p class="sheet-summary">{{ sheet.summary }}</p>
+    <div class="sheet-sections">
+      @for (section of sheet.sections; track section.title; let i = $index) {
+        <section class="sheet-section" [style.--delay]="i">
+          <h2><span aria-hidden="true">{{ (i + 1).toString().padStart(2, "0") }}</span>{{ section.title }}</h2>
+          <ul>
+            @for (point of section.points; track $index) { <li>{{ point }}</li> }
+          </ul>
+        </section>
+      }
+    </div>
+    @if (sheet.pitfalls.length) {
+      <section class="sheet-pitfalls" aria-labelledby="pitfalls-title">
+        <h2 id="pitfalls-title">Pegadinhas comuns</h2>
+        <ul>
+          @for (pitfall of sheet.pitfalls; track $index) { <li>{{ pitfall }}</li> }
+        </ul>
+      </section>
+    }
+    <div class="sheet-actions">
+      <button type="button" (click)="practiceArea.emit(sheet.area)">Treinar {{ sheet.area }} <span aria-hidden="true">→</span></button>
+      <button type="button" class="outline" (click)="flashcards.emit()">Revisar com flashcards</button>
+    </div>
+    @if (sheet.references.length) {
+      <p class="sheet-refs"><strong>Para aprofundar:</strong> {{ sheet.references.join(" · ") }}</p>
+    }
+    <p class="sheet-credit">Ficha escrita por IA (Claude) a partir da bibliografia indicada, sem revisão humana. Na dúvida, confira na fonte.</p>
+  </article>
+} @else {
+  <section class="page-intro">
+    <h1 id="library-title" tabindex="-1">Biblioteca</h1>
+    <p>Fichas de uma página para revisar um assunto antes de treinar. Cada uma traz o essencial, as pegadinhas comuns e onde aprofundar.</p>
+  </section>
+  @if (error()) {
+    <p class="notice" role="alert">{{ error() }}</p>
+  } @else if (!sheets()) {
+    <p role="status">Carregando as fichas…</p>
+  } @else {
+    @for (group of byArea(); track group.area; let g = $index) {
+      <section class="library-area" [attr.aria-labelledby]="'area-' + g">
+        <h2 [id]="'area-' + g">{{ group.area }}</h2>
+        <ul class="sheet-grid">
+          @for (sheet of group.items; track sheet.slug) {
+            <li>
+              <button type="button" class="sheet-card" (click)="read(sheet.slug)">
+                <span class="sheet-card-kicker">Ficha</span>
+                <strong>{{ sheet.title }}</strong>
+                <span>{{ sheet.summary }}</span>
+                <span class="sheet-card-cta" aria-hidden="true">Ler →</span>
+              </button>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+  <section class="library-soon" aria-labelledby="soon-title">
+    <h2 id="soon-title">Em breve</h2>
+    <div class="soon-grid">
+      <div class="soon-card">
+        <span class="soon-badge">Em breve</span>
+        <strong>Materiais por área</strong>
+        <p>PDFs, guias e links indicados pelos professores, organizados por área e ligados às questões.</p>
+      </div>
+      <div class="soon-card">
+        <span class="soon-badge">Em breve</span>
+        <strong>Plano até a prova</strong>
+        <p>Com as semanas que faltam e as suas áreas mais fracas, um roteiro do que estudar em cada semana.</p>
+      </div>
+    </div>
+  </section>
+}

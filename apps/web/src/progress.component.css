@@ -1,0 +1,277 @@
+/* Conquistas: anel grande da meta, calendário, medalhas e ranking. */
+.streak-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-6) var(--space-10);
+  margin: var(--space-6) 0 var(--space-10);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: var(--color-surface);
+}
+.streak-ring {
+  position: relative;
+  width: 152px;
+  height: 152px;
+}
+.streak-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.ring-track { fill: none; stroke: var(--color-border); stroke-width: 10; }
+.ring-fill {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: ring-in 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.ring-fill.is-met { stroke: var(--color-success-text); }
+@keyframes ring-in { from { stroke-dashoffset: 327; } }
+.ring-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+.ring-center strong {
+  font-family: var(--font-reading);
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1;
+}
+.ring-center span {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.streak-flame {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-lg);
+}
+.streak-flame strong {
+  font-family: var(--font-reading);
+  font-size: 2rem;
+  font-weight: 400;
+}
+.streak-flame svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--color-border-control);
+}
+.streak-flame.is-lit svg {
+  fill: #e8743b;
+  animation: flame 1.8s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+@keyframes flame {
+  0%, 100% { transform: scale(1) rotate(0); }
+  35% { transform: scale(1.08, 1.14) rotate(-4deg); }
+  65% { transform: scale(0.97, 1.05) rotate(3deg); }
+}
+.goal-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+}
+.goal-picker label {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-control);
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
+}
+.goal-picker label.is-on {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+.goal-picker label:has(input:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.goal-picker input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.goal-unit {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Calendário: 7 colunas, quadradinhos que aparecem em cascata. */
+.calendar { margin-bottom: var(--space-10); }
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 32px);
+  gap: 6px;
+  margin-top: var(--space-4);
+}
+.calendar-head {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.calendar-day {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-border);
+  animation: pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(var(--delay, 0) * 18ms);
+}
+.calendar-day.is-partial { background: color-mix(in srgb, var(--color-success-text) 30%, var(--color-surface)); }
+.calendar-day.is-met { background: var(--color-success-text); }
+.calendar-day.is-forgiven {
+  background: transparent;
+  border: 2px dashed color-mix(in srgb, var(--color-success-text) 60%, transparent);
+}
+@keyframes pop { from { opacity: 0; transform: scale(0.4); } }
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.calendar-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.calendar-legend .calendar-day { width: 14px; height: 14px; border-radius: 4px; animation: none; }
+
+/* Medalhas */
+.medals h2 .muted { font-size: var(--text-sm); font-weight: 400; margin-left: var(--space-2); }
+.medal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-10);
+  padding: 0;
+  list-style: none;
+}
+.medal {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: var(--space-5) var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  text-align: center;
+  animation: rise 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--delay, 0) * 50ms);
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 250ms ease-out;
+}
+.medal app-badge { --badge-size: 64px; margin-bottom: var(--space-2); }
+.medal strong { font-size: var(--text-sm); }
+.medal span { font-size: var(--text-xs); color: var(--color-text-muted); }
+.medal small { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-text-muted); }
+@media (hover: hover) {
+  .medal:not(.is-locked):hover {
+    transform: translateY(-3px) rotate(-1deg);
+    box-shadow: 0 14px 28px -16px rgb(15 31 61 / 0.45);
+  }
+  .medal:not(.is-locked):hover app-badge { animation: wiggle 600ms ease-in-out; }
+}
+@keyframes wiggle {
+  25% { transform: rotate(-8deg); }
+  60% { transform: rotate(6deg); }
+}
+.medal.is-locked { background: transparent; }
+.medal-progress {
+  display: block;
+  width: 70%;
+  height: 4px;
+  margin-top: var(--space-1);
+  border-radius: 2px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+.medal-progress span {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(var(--value, 0));
+}
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+
+/* Ranking */
+.ranking-head h2 { margin-bottom: var(--space-1); }
+.ranking-list {
+  margin: var(--space-4) 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+.ranking-list li {
+  display: grid;
+  grid-template-columns: 2.25rem 2.5rem minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  animation: rise 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--delay, 0) * 40ms);
+}
+.ranking-list li.is-me { background: var(--color-accent-soft); border-radius: 10px; }
+/* Fora dos 20 primeiros: a própria linha, separada por reticências. */
+.ranking-mine { position: relative; margin-top: var(--space-5); }
+.ranking-mine::before { content: "⋯" / ""; position: absolute; top: calc(-1 * var(--space-5)); left: 0.75rem; color: var(--color-text-muted); line-height: var(--space-5); }
+.rank-position {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.rank-position.place-1 { background: #e8bd3e; color: #3a2a00; }
+.rank-position.place-2 { background: #b5c0cb; color: #1f2933; }
+.rank-position.place-3 { background: #d99a63; color: #3a1f0a; }
+.rank-avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.rank-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.rank-name em { margin-left: var(--space-2); font-style: normal; font-size: var(--text-xs); color: var(--color-accent); }
+.rank-week { display: inline-flex; gap: 3px; }
+.rank-week i { width: 9px; height: 9px; border-radius: 50%; background: var(--color-border); }
+.rank-week i.is-on { background: var(--color-success-text); }
+.rank-month { font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; }
+.rank-month small { font-weight: 400; color: var(--color-text-muted); }
+.ranking-toggle { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); }
+
+@media (max-width: 640px) {
+  .streak-hero { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
+  .streak-flame, .goal-picker { justify-content: center; }
+  .ranking-list li { grid-template-columns: 2rem 2.25rem minmax(0, 1fr) auto; }
+  .rank-week { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .streak-flame.is-lit svg { animation: none; }
+}

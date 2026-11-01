@@ -12,6 +12,11 @@
       >
       <div class="header-actions">
         <span class="environment">Base de desenvolvimento</span>
+        @if (!booting() && !bootError() && !landingMode() && !accountView()) {
+          @defer (on idle) {
+            <app-goal-ring (open)="openStudy('conquistas')" />
+          }
+        }
         @if (!booting() && !bootError()) {
           @if (roles().includes("ADMIN")) {
             <button
@@ -114,6 +119,24 @@
           [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="discursiveView() ? 'page' : null"
         >Discursivas</button>
+        <button
+          class="text-button"
+          (click)="openStudy('flashcards')"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="studyView() === 'flashcards' ? 'page' : null"
+        >Flashcards</button>
+        <button
+          class="text-button"
+          (click)="openStudy('biblioteca')"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="studyView() === 'biblioteca' ? 'page' : null"
+        >Biblioteca</button>
+        <button
+          class="text-button"
+          (click)="openStudy('conquistas')"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="studyView() === 'conquistas' ? 'page' : null"
+        >Conquistas</button>
         @if (session().mode === "account") {
           <button
             class="text-button"
@@ -171,13 +194,31 @@
           [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
           [attr.aria-current]="discursiveView() ? 'page' : null"
         ><span class="nav-index" aria-hidden="true">06</span>Discursivas</button>
+        <button
+          class="nav secondary-nav"
+          (click)="openStudy('flashcards')"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="studyView() === 'flashcards' ? 'page' : null"
+        ><span class="nav-index" aria-hidden="true">07</span>Flashcards</button>
+        <button
+          class="nav secondary-nav"
+          (click)="openStudy('biblioteca')"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="studyView() === 'biblioteca' ? 'page' : null"
+        ><span class="nav-index" aria-hidden="true">08</span>Biblioteca</button>
+        <button
+          class="nav secondary-nav"
+          (click)="openStudy('conquistas')"
+          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
+          [attr.aria-current]="studyView() === 'conquistas' ? 'page' : null"
+        ><span class="nav-index" aria-hidden="true">09</span>Conquistas</button>
         @if (session().mode === "account") {
           <button
             class="nav secondary-nav"
             (click)="openLessons()"
             [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             [attr.aria-current]="lessonsView() ? 'page' : null"
-          ><span class="nav-index" aria-hidden="true">07</span>Aulas</button>
+          ><span class="nav-index" aria-hidden="true">10</span>Aulas</button>
         }
         @if (canCurate()) {
           <button
@@ -186,7 +227,7 @@
             [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
             [attr.aria-current]="curationView() ? 'page' : null"
           >
-            <span class="nav-index" aria-hidden="true">08</span>
+            <span class="nav-index" aria-hidden="true">11</span>
             Curadoria
           </button>
         }
@@ -226,6 +267,24 @@
               <app-discursive />
             } @placeholder {
               <p role="status">Carregando as discursivas…</p>
+            }
+          } @else if (studyView() === "conquistas") {
+            @defer (on immediate) {
+              <app-progress [sessionMode]="session().mode" (study)="back()" (register)="openAccount('register')" />
+            } @placeholder {
+              <p role="status">Carregando as conquistas…</p>
+            }
+          } @else if (studyView() === "biblioteca") {
+            @defer (on immediate) {
+              <app-library (practiceArea)="openPractice('treino')" (flashcards)="openStudy('flashcards')" />
+            } @placeholder {
+              <p role="status">Carregando a biblioteca…</p>
+            }
+          } @else if (studyView() === "flashcards") {
+            @defer (on immediate) {
+              <app-flashcards />
+            } @placeholder {
+              <p role="status">Carregando os flashcards…</p>
             }
           } @else if (lessonsView()) {
             @defer (on immediate) {
@@ -293,6 +352,7 @@
               (resume)="openPracticeAttempt($event)"
               (practiceHub)="openPractice()"
               (editionsHub)="openPractice('provas')"
+              (progressHub)="openStudy('conquistas')"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
@@ -805,5 +865,9 @@
           </footer>
         }
         <app-choice-dialog />
+        <!-- Aviso de conquista: carregado quando a página fica ociosa, fora do pacote inicial. -->
+        @defer (on idle) {
+          <app-achievement-toast />
+        }
       </main>
     </div>
