@@ -22,3 +22,15 @@ Cada prova do ENADE de Computação tem cinco discursivas (duas de Formação Ge
 - As discursivas de 2005–2021 entram reimportando cada prova com o padrão de resposta, conferindo pela tela.
 - Simulado completo (SIM-1/2) pode reaproveitar `discursive_response` para a discursiva da prova.
 - O professor ainda não vê as respostas da turma; isso exige decidir antes o consentimento do aluno.
+
+## Adendo (01/11/2026) · DISC-2: discursivas conferidas por agente
+
+Gabriel pediu as discursivas publicadas antes da prova e autorizou o Claude a conferir e publicar.
+
+- **Caminho:** igual ao das objetivas assistidas (ADR-011).
+  - `scripts/extract-discursives.mjs` reaproveita os recortes do enunciado gerados para as objetivas e recorta o padrão de resposta pela tinta da página. Assim entram figuras e código em imagem; o enunciado repetido como imagem, os logotipos e os títulos de seção ficam de fora.
+  - A conferência fica em `data/discursive-reviews/<prova>.json`, com quem extraiu, quem conferiu, os itens, a área, o assunto e o SHA-256 de cada recorte. Os recortes ficam em `data/discursive-crops/`.
+  - `apps/api/src/assisted-discursive.ts` valida e publica; o `bootstrap-content` chama esse publicador.
+- **Banco (migration 026):** `review_origin` IMPORT ou ASSISTED. A origem assistida exige quem extraiu e quem conferiu, e não usa conta humana. A tela avisa "conferidos por agente de IA, sem revisão humana".
+- **Conferência:** 35 discursivas de 2011, 2014, 2017 e 2021 (Bacharelado e Licenciatura), conferidas recorte a recorte. É autoconferência, não independente; o arquivo registra `independent: false`. Em 2011 D5, o segundo recorte do enunciado era das instruções da prova e foi descartado.
+- **Fora desta passagem:** 2005 e 2008. São cadernos de vários cursos, e o padrão de resposta deles não segue o formato por blocos.

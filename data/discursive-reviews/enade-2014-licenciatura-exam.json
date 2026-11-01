@@ -1,0 +1,286 @@
+{
+  "document": "enade-2014-licenciatura-exam",
+  "examSha256": "6244002c601c8173c151642bea4df1af04f989b38b34ffb3a62bf5cde3a23c85",
+  "standardDocument": "enade-2014-licenciatura-response-standard",
+  "standardSha256": "88dd25733d172037c449a8c0104e11430c6146130dd73cfd981bdbce901fb5e4",
+  "extractor": "claude-extrator-discursivas",
+  "reviewer": "claude-autoconferencia",
+  "independent": false,
+  "reviewedAt": "2026-11-01T02:01:05Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 1,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Mobilidade urbana sustentável",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 5
+        },
+        {
+          "label": "b",
+          "points": 5
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D1-prompt-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 45.85,
+            "y0": 102.54,
+            "x1": 584.98,
+            "y1": 427.83
+          },
+          "width": 1498,
+          "height": 903,
+          "byteSize": 71908,
+          "sha256": "5056f9246233ffb28341529d26ca5a329af1878f2d5523f5235312b8790b1581"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D1-standard-1.webp",
+          "page": 1,
+          "box": {
+            "x0": 79,
+            "y0": 509.07,
+            "x1": 516.46,
+            "y1": 774
+          },
+          "width": 1216,
+          "height": 736,
+          "byteSize": 34900,
+          "sha256": "63b7507451b0b77d56305d263a8465b047c330d50cb65537d0617260ddd18c4e"
+        },
+        {
+          "file": "D1-standard-2.webp",
+          "page": 2,
+          "box": {
+            "x0": 79,
+            "y0": 67,
+            "x1": 516.12,
+            "y1": 319
+          },
+          "width": 1215,
+          "height": 700,
+          "byteSize": 37150,
+          "sha256": "a546e96b482ff659df14217c889cff358a6524e660062b1f76ddb178e66134b2"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Violência urbana",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 7
+        },
+        {
+          "label": "b",
+          "points": 3
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D2-prompt-1.webp",
+          "page": 3,
+          "box": {
+            "x0": 45.85,
+            "y0": 102.54,
+            "x1": 584.96,
+            "y1": 321.28
+          },
+          "width": 1498,
+          "height": 607,
+          "byteSize": 49982,
+          "sha256": "2523b6098b85d01f691342147fe676102840571f5dff7479417cec97043be898"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D2-standard-1.webp",
+          "page": 3,
+          "box": {
+            "x0": 79,
+            "y0": 324.25,
+            "x1": 516.15,
+            "y1": 734
+          },
+          "width": 1215,
+          "height": 1138,
+          "byteSize": 48166,
+          "sha256": "9dd3bd021415e9fe5873246a90e9c5606d028861143e738fa53b8fac90f0f2bd"
+        },
+        {
+          "file": "D2-standard-2.webp",
+          "page": 4,
+          "box": {
+            "x0": 78,
+            "y0": 67,
+            "x1": 516.42,
+            "y1": 315
+          },
+          "width": 1218,
+          "height": 689,
+          "byteSize": 52434,
+          "sha256": "350f2ac96bcbc6a09d42c08254eb21b3d7ba607991005eaef4ac9956474ac4b2"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Backtracking: resolver Sudoku",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D3-prompt-1.webp",
+          "page": 9,
+          "box": {
+            "x0": 45.71,
+            "y0": 102.54,
+            "x1": 585.12,
+            "y1": 428.19
+          },
+          "width": 1498,
+          "height": 904,
+          "byteSize": 91292,
+          "sha256": "a30accc2efafff54c9904a555d24cecec690a38008863212921049b177fe473c"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D3-standard-1.webp",
+          "page": 5,
+          "box": {
+            "x0": 79,
+            "y0": 363.17,
+            "x1": 516.06,
+            "y1": 608
+          },
+          "width": 1214,
+          "height": 680,
+          "byteSize": 25446,
+          "sha256": "223bd121d6850ec64b94ea865fb7b11e9b29c98c72a7b7cb322fe59c926bff2d"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "decision": "APPROVED",
+      "area": "Sociedade e ética",
+      "subject": "Educação popular e não formal",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 4
+        },
+        {
+          "label": "b",
+          "points": 6
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D4-prompt-1.webp",
+          "page": 10,
+          "box": {
+            "x0": 46.28,
+            "y0": 102.54,
+            "x1": 585.69,
+            "y1": 425.19
+          },
+          "width": 1498,
+          "height": 896,
+          "byteSize": 87426,
+          "sha256": "97264ca4a5954154f9c7ee8a1a54a524c1a3f560aac3452ac0acc925874ce51e"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D4-standard-1.webp",
+          "page": 6,
+          "box": {
+            "x0": 79,
+            "y0": 355.49,
+            "x1": 516.36,
+            "y1": 507
+          },
+          "width": 1215,
+          "height": 421,
+          "byteSize": 17236,
+          "sha256": "c66f0be462cfccd76111a1f8f92a468265c3b14181722f97434b48755e8bc7ac"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "decision": "APPROVED",
+      "area": "Sociedade e ética",
+      "subject": "Tecnologias digitais no ensino",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 4
+        },
+        {
+          "label": "b",
+          "points": 6
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D5-prompt-1.webp",
+          "page": 11,
+          "box": {
+            "x0": 45.71,
+            "y0": 102.54,
+            "x1": 584.82,
+            "y1": 375.65
+          },
+          "width": 1497,
+          "height": 758,
+          "byteSize": 60854,
+          "sha256": "752df9c69085a824d20642780954c0ce64dfb794464c638f1cf1ab1e97442263"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D5-standard-1.webp",
+          "page": 7,
+          "box": {
+            "x0": 79,
+            "y0": 294,
+            "x1": 516.46,
+            "y1": 473
+          },
+          "width": 1216,
+          "height": 497,
+          "byteSize": 26344,
+          "sha256": "0f66369e301e95f3a84d2ea7bad8eb458461461b6b49f928c2e55710c82dcbb5"
+        }
+      ]
+    }
+  ]
+}

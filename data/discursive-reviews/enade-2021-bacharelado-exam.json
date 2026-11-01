@@ -1,0 +1,332 @@
+{
+  "document": "enade-2021-bacharelado-exam",
+  "examSha256": "0254b274cc4adddbb503cf18553ee70c26014cbb0848fe3c5b787c80137b11e8",
+  "standardDocument": "enade-2021-bacharelado-response-standard",
+  "standardSha256": "c0348ce0006201f25e9f97502f59ad1b802c6c3e83c232b9c3c8330f6a6e7ded",
+  "extractor": "claude-extrator-discursivas",
+  "reviewer": "claude-autoconferencia",
+  "independent": false,
+  "reviewedAt": "2026-11-01T02:01:05Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 1,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Arte, cultura e censura",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D1-prompt-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.95,
+            "x1": 543.18,
+            "y1": 706.3
+          },
+          "width": 1443,
+          "height": 1765,
+          "byteSize": 117270,
+          "sha256": "c308ac62db6f7e782812efbb15b8b547a10977242c54ef8023e0621d70601bdd"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D1-standard-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 50.69,
+            "y0": 51,
+            "x1": 544.64,
+            "y1": 217
+          },
+          "width": 1372,
+          "height": 461,
+          "byteSize": 31954,
+          "sha256": "03eaefda95d80e9cc99e48d4031c1125c6b38b3230d74ec7816ae99ec5318f17"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Cidades inteligentes",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 5
+        },
+        {
+          "label": "b",
+          "points": 5
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D2-prompt-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.95,
+            "x1": 543.17,
+            "y1": 396.12
+          },
+          "width": 1443,
+          "height": 903,
+          "byteSize": 71212,
+          "sha256": "0e02d58b8da21cb3da137df268f3704197754baa9e268ae12bdf7ef025be4353"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D2-standard-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 50.69,
+            "y0": 585,
+            "x1": 544.64,
+            "y1": 787
+          },
+          "width": 1372,
+          "height": 561,
+          "byteSize": 32962,
+          "sha256": "57e2e4a4c40d8311915ab25d8a8953ebedd35ac44f767f987946aa19ce0b3a18"
+        },
+        {
+          "file": "D2-standard-2.webp",
+          "page": 3,
+          "box": {
+            "x0": 50.69,
+            "y0": 53,
+            "x1": 544.63,
+            "y1": 134
+          },
+          "width": 1372,
+          "height": 225,
+          "byteSize": 12006,
+          "sha256": "9249ca581cafc5c441d76ffae69cdd49a000ed23771ec2fff838e8e5279ac4a9"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "decision": "APPROVED",
+      "area": "Matemática",
+      "subject": "Lógica proposicional",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 2.5
+        },
+        {
+          "label": "b",
+          "points": 2.5
+        },
+        {
+          "label": "c",
+          "points": 2.5
+        },
+        {
+          "label": "d",
+          "points": 2.5
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D3-prompt-1.webp",
+          "page": 14,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.95,
+            "x1": 543.15,
+            "y1": 742.71
+          },
+          "width": 1443,
+          "height": 1866,
+          "byteSize": 82354,
+          "sha256": "9799a7526e5a84570fd3a68597fe2cbd1134cdb717f4ff1ded245ded46f47e8f"
+        },
+        {
+          "file": "D3-prompt-2.webp",
+          "page": 15,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.95,
+            "x1": 464.48,
+            "y1": 179.8
+          },
+          "width": 1224,
+          "height": 302,
+          "byteSize": 19878,
+          "sha256": "a6b5b6b274bf712ff05cd5c81dd4f0319d1bcd3f26aa978fe523568d76d12c0b"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D3-standard-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 50,
+            "y0": 159,
+            "x1": 544.67,
+            "y1": 323
+          },
+          "width": 1374,
+          "height": 455,
+          "byteSize": 31394,
+          "sha256": "05857b3fcd46049e878b9e6455ecafacba56ff87e5ff0079c8ca491d3bf9afca"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "decision": "APPROVED",
+      "area": "Arquitetura de computadores",
+      "subject": "Somador completo de 1 bit",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D4-prompt-1.webp",
+          "page": 16,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.95,
+            "x1": 543.16,
+            "y1": 398.64
+          },
+          "width": 1443,
+          "height": 910,
+          "byteSize": 55822,
+          "sha256": "6671be257ff38e1f1d6b927c1357cdc462944773997d5d62c9ccff56f1636f67"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D4-standard-1.webp",
+          "page": 5,
+          "box": {
+            "x0": 50.69,
+            "y0": 51,
+            "x1": 544.62,
+            "y1": 593
+          },
+          "width": 1372,
+          "height": 1505,
+          "byteSize": 223246,
+          "sha256": "6d21d2eaace4d2010ddb212d0ef4ea5056ae5f8c410ce5fafe73bf60441c780f"
+        },
+        {
+          "file": "D4-standard-2.webp",
+          "page": 6,
+          "box": {
+            "x0": 50.69,
+            "y0": 142,
+            "x1": 479,
+            "y1": 677
+          },
+          "width": 1190,
+          "height": 1487,
+          "byteSize": 68128,
+          "sha256": "858bb357e14b7214f24f1d8a300c50ef107471f6dad2a1dd28a11e2cb322de1e"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Heap binário e buildHeap",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 5
+        },
+        {
+          "label": "b",
+          "points": 5
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D5-prompt-1.webp",
+          "page": 17,
+          "box": {
+            "x0": 23.52,
+            "y0": 70.95,
+            "x1": 282.48,
+            "y1": 723.58
+          },
+          "width": 720,
+          "height": 1813,
+          "byteSize": 74768,
+          "sha256": "efd93af443e84e4fc1aa3cf2bd270bf64fa75191c859b05dcddf49f44c2a5811"
+        },
+        {
+          "file": "D5-prompt-2.webp",
+          "page": 17,
+          "box": {
+            "x0": 285.46,
+            "y0": 94.26,
+            "x1": 542.14,
+            "y1": 592.03
+          },
+          "width": 713,
+          "height": 1383,
+          "byteSize": 22890,
+          "sha256": "a48197dcf446d5f1368422811a40bfc2276844ee173f40b4b554dfdd1093aef5"
+        },
+        {
+          "file": "D5-prompt-3.webp",
+          "page": 18,
+          "box": {
+            "x0": 23.75,
+            "y0": 70.95,
+            "x1": 543.17,
+            "y1": 170.87
+          },
+          "width": 1443,
+          "height": 278,
+          "byteSize": 19144,
+          "sha256": "252e50f9f17f2a92135a55c85d72be57f1307295b8ffd2eb19266f7f040e9fc1"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D5-standard-1.webp",
+          "page": 8,
+          "box": {
+            "x0": 50.69,
+            "y0": 51,
+            "x1": 544.6,
+            "y1": 152
+          },
+          "width": 1372,
+          "height": 280,
+          "byteSize": 21320,
+          "sha256": "ece06d9a8f1a31f3cb10afa9f399cbbd7e0074ddd4f5d03b2359e14e4788e393"
+        }
+      ]
+    }
+  ]
+}

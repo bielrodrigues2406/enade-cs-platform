@@ -1,0 +1,314 @@
+{
+  "document": "enade-2021-licenciatura-exam",
+  "examSha256": "9537deb2d2d7f7e00eacd526a06b887e932fedf4b5e7abf9be6501138d561b72",
+  "standardDocument": "enade-2021-licenciatura-response-standard",
+  "standardSha256": "e8083c85e549eefeb4a31ff9220fb52eb8c657f903c65d2fed221db985d6e53e",
+  "extractor": "claude-extrator-discursivas",
+  "reviewer": "claude-autoconferencia",
+  "independent": false,
+  "reviewedAt": "2026-11-01T02:01:05Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 1,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Arte, cultura e censura",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D1-prompt-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.72,
+            "x1": 543.18,
+            "y1": 706.3
+          },
+          "width": 1443,
+          "height": 1766,
+          "byteSize": 117340,
+          "sha256": "22a7ac97606bc523f2d115d19e20ac73ef6fb04aa819d29e60a1eee1e70b8f2f"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D1-standard-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 50.69,
+            "y0": 51,
+            "x1": 544.64,
+            "y1": 217
+          },
+          "width": 1372,
+          "height": 461,
+          "byteSize": 31954,
+          "sha256": "03eaefda95d80e9cc99e48d4031c1125c6b38b3230d74ec7816ae99ec5318f17"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Cidades inteligentes",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 5
+        },
+        {
+          "label": "b",
+          "points": 5
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D2-prompt-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.72,
+            "x1": 543.17,
+            "y1": 396.12
+          },
+          "width": 1443,
+          "height": 904,
+          "byteSize": 71210,
+          "sha256": "fe92a18268883da63b68193ba791d565ab08fa39e500ecf8d01f900baad8cb17"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D2-standard-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 50.69,
+            "y0": 585,
+            "x1": 544.64,
+            "y1": 787
+          },
+          "width": 1372,
+          "height": 561,
+          "byteSize": 32962,
+          "sha256": "57e2e4a4c40d8311915ab25d8a8953ebedd35ac44f767f987946aa19ce0b3a18"
+        },
+        {
+          "file": "D2-standard-2.webp",
+          "page": 3,
+          "box": {
+            "x0": 50.69,
+            "y0": 53,
+            "x1": 544.63,
+            "y1": 134
+          },
+          "width": 1372,
+          "height": 225,
+          "byteSize": 12006,
+          "sha256": "9249ca581cafc5c441d76ffae69cdd49a000ed23771ec2fff838e8e5279ac4a9"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "decision": "APPROVED",
+      "area": "Matemática",
+      "subject": "Lógica proposicional",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 2.5
+        },
+        {
+          "label": "b",
+          "points": 2.5
+        },
+        {
+          "label": "c",
+          "points": 2.5
+        },
+        {
+          "label": "d",
+          "points": 2.5
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D3-prompt-1.webp",
+          "page": 14,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.72,
+            "x1": 543.15,
+            "y1": 742.71
+          },
+          "width": 1443,
+          "height": 1867,
+          "byteSize": 82372,
+          "sha256": "dc04fee91a4c48a00510e4a21a6da6ab390959857f80a1d63c38f614df1ce5de"
+        },
+        {
+          "file": "D3-prompt-2.webp",
+          "page": 15,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.95,
+            "x1": 464.48,
+            "y1": 181.14
+          },
+          "width": 1224,
+          "height": 306,
+          "byteSize": 19882,
+          "sha256": "4bd3eed6512976021e397df4dbef5069ebc82be0de97d2185976bdba986dde4b"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D3-standard-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 50,
+            "y0": 159,
+            "x1": 544.67,
+            "y1": 323
+          },
+          "width": 1374,
+          "height": 455,
+          "byteSize": 31394,
+          "sha256": "05857b3fcd46049e878b9e6455ecafacba56ff87e5ff0079c8ca491d3bf9afca"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "decision": "APPROVED",
+      "area": "Arquitetura de computadores",
+      "subject": "Somador completo de 1 bit",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D4-prompt-1.webp",
+          "page": 16,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.72,
+            "x1": 543.16,
+            "y1": 398.64
+          },
+          "width": 1443,
+          "height": 911,
+          "byteSize": 55804,
+          "sha256": "2c7136c7cad741e6f38d95044439e2f2cb61fb718381e5dc5f17c01e60cb4690"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D4-standard-1.webp",
+          "page": 5,
+          "box": {
+            "x0": 50.69,
+            "y0": 51,
+            "x1": 544.62,
+            "y1": 593
+          },
+          "width": 1372,
+          "height": 1505,
+          "byteSize": 223246,
+          "sha256": "6d21d2eaace4d2010ddb212d0ef4ea5056ae5f8c410ce5fafe73bf60441c780f"
+        },
+        {
+          "file": "D4-standard-2.webp",
+          "page": 6,
+          "box": {
+            "x0": 50.69,
+            "y0": 142,
+            "x1": 479,
+            "y1": 677
+          },
+          "width": 1190,
+          "height": 1487,
+          "byteSize": 68128,
+          "sha256": "858bb357e14b7214f24f1d8a300c50ef107471f6dad2a1dd28a11e2cb322de1e"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "decision": "APPROVED",
+      "area": "Sociedade e ética",
+      "subject": "Objetos de aprendizagem no ensino remoto",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D5-prompt-1.webp",
+          "page": 17,
+          "box": {
+            "x0": 23.76,
+            "y0": 70.72,
+            "x1": 543.17,
+            "y1": 456.02
+          },
+          "width": 1443,
+          "height": 1071,
+          "byteSize": 69934,
+          "sha256": "e86a8bc470e4e7b76a2a327a1ce8060d14da15c8be152262db3a0d6ec51eab2a"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D5-standard-1.webp",
+          "page": 7,
+          "box": {
+            "x0": 50,
+            "y0": 411,
+            "x1": 544.62,
+            "y1": 771
+          },
+          "width": 1374,
+          "height": 1000,
+          "byteSize": 59720,
+          "sha256": "f42454d0fc4b89d23a942f42c88479d8691ae69b1b4d8efa6357e4aa09b7a819"
+        },
+        {
+          "file": "D5-standard-2.webp",
+          "page": 8,
+          "box": {
+            "x0": 50.7,
+            "y0": 52,
+            "x1": 544.64,
+            "y1": 355
+          },
+          "width": 1372,
+          "height": 842,
+          "byteSize": 54670,
+          "sha256": "6af43494e0ee932b5025f60206e4cab877a5a1048a45aa16790e5ef55a2e9ecf"
+        }
+      ]
+    }
+  ]
+}

@@ -7,6 +7,9 @@ import { contentWords, groupLines, lineHeader, lineText, pageBands } from "./que
 // O título do documento ("PADRÃO DE RESPOSTA DAS QUESTÕES DISCURSIVAS") não abre bloco.
 const MARKER = /^PADR[ÃA]O DE RESPOSTA(?!S?\s+DAS?\s+QUEST)/i;
 const PAD = 6;
+// Títulos de seção do documento ("CIÊNCIA DA COMPUTAÇÃO – BACHARELADO",
+// "FORMAÇÃO GERAL") ficam fora do recorte do bloco que os antecede.
+const SECTION = /^(CI[ÊE]NCIA DA COMPUTA[ÇC][ÃA]O|COMPUTA[ÇC][ÃA]O|FORMA[ÇC][ÃA]O GERAL|COMPONENTE ESPEC[ÍI]FICO|LICENCIATURA|BACHARELADO)\b[^a-z]*$/;
 
 /** Linhas de conteúdo de todas as páginas, em ordem de leitura (coluna única). */
 function documentLines(pages) {
@@ -14,21 +17,35 @@ function documentLines(pages) {
     groupLines(contentWords(page, pageBands(page))).map((line) => ({ ...line, page: index + 1 })));
 }
 
+/**
+ * Caixas de um bloco, página a página: do início ao fim do bloco na largura
+ * da área de conteúdo. Pega figuras e código em imagem, que não têm palavras;
+ * um título de seção no caminho encerra o bloco antes dele.
+ */
 function boxesBetween(pages, start, end) {
   const boxes = [];
   for (let p = start.page; p <= end.page; p++) {
     const page = pages[p - 1];
-    const from = p === start.page ? start.y : 0;
-    const to = p === end.page ? end.y : page.height;
-    const words = contentWords(page, pageBands(page)).filter((w) => w.yMin >= from - 1 && w.yMax <= to + 1);
-    if (!words.length) continue;
+    const bands = pageBands(page);
+    const lines = groupLines(contentWords(page, bands));
+    const from = p === start.page ? start.y : bands.top;
+    let to = p === end.page ? Math.min(end.y, bands.bottom) : bands.bottom;
+    const section = lines.find((line) => line.yMin >= from - 1 && line.yMin <= to && SECTION.test(lineText(line.words).trim()));
+    if (section) to = section.yMin - 1;
+    const text = lines.filter((line) => !SECTION.test(lineText(line.words).trim())).flatMap((line) => line.words);
+    const inside = text.filter((w) => w.yMin >= from - 1 && w.yMax <= to + 1);
+    // Página sem texto do bloco e sem espaço para figura: nada a recortar.
+    if (!inside.length && to - from < 40) continue;
+    const xs = text.length ? text : inside;
+    if (!xs.length) continue;
     boxes.push({
       page: p,
-      x0: Math.max(0, Math.min(...words.map((w) => w.xMin)) - PAD),
-      y0: Math.max(0, Math.min(...words.map((w) => w.yMin)) - PAD),
-      x1: Math.min(page.width, Math.max(...words.map((w) => w.xMax)) + PAD),
-      y1: Math.min(page.height, Math.max(...words.map((w) => w.yMax)) + PAD),
+      x0: Math.max(0, Math.min(...xs.map((w) => w.xMin)) - PAD),
+      y0: Math.max(0, from - PAD),
+      x1: Math.min(page.width, Math.max(...xs.map((w) => w.xMax)) + PAD),
+      y1: Math.min(page.height, to + (p === end.page && !section ? 0 : PAD)),
     });
+    if (section) break;
   }
   return boxes;
 }
@@ -80,9 +97,9 @@ const toPoints = (value) => Number(value.replace(",", "."));
  * itens, a questão vale como um todo (10 pontos quando o valor não aparece).
  */
 export function parseCriteria(prompt) {
-  const items = [...prompt.matchAll(/(?:^|\n)\s*([a-e])\)[^]*?\(valor:\s*(\d{1,2}(?:,\d{1,2})?)\s*pontos?\)/gi)]
+  const items = [...prompt.matchAll(/(?:^|\n)\s*([a-e])\)[^]*?\(valor\s*[:=]\s*(\d{1,2}(?:,\d{1,2})?)\s*pontos?\)/gi)]
     .map(([, label, points]) => ({ label: label.toLowerCase(), points: toPoints(points) }));
   if (items.length) return items;
-  const total = /\(valor:\s*(\d{1,2}(?:,\d{1,2})?)\s*pontos?\)/i.exec(prompt);
+  const total = /\(valor\s*[:=]\s*(\d{1,2}(?:,\d{1,2})?)\s*pontos?\)/i.exec(prompt);
   return [{ label: null, points: total ? toPoints(total[1]) : 10 }];
 }

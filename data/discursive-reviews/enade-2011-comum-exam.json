@@ -1,0 +1,260 @@
+{
+  "document": "enade-2011-comum-exam",
+  "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+  "standardDocument": "enade-2011-comum-response-standard",
+  "standardSha256": "386353635a8e2fa8081dce177f37918bcaf9426d8ee6881b88aa739bdf0cd412",
+  "extractor": "claude-extrator-discursivas",
+  "reviewer": "claude-autoconferencia",
+  "independent": false,
+  "reviewedAt": "2026-11-01T02:01:05Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 1,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Vantagens da educação a distância",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D1-prompt-1.webp",
+          "page": 7,
+          "box": {
+            "x0": 45.85,
+            "y0": 84.72,
+            "x1": 582.25,
+            "y1": 435.25
+          },
+          "width": 1490,
+          "height": 974,
+          "byteSize": 49166,
+          "sha256": "a1186fda7074bb43041d4ed12686eee07a9ddfeae6572fdb438695c49b428c76"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D1-standard-1.webp",
+          "page": 1,
+          "box": {
+            "x0": 79,
+            "y0": 131.02,
+            "x1": 516.35,
+            "y1": 421
+          },
+          "width": 1215,
+          "height": 805,
+          "byteSize": 46170,
+          "sha256": "31d447297d324d0f4405d5f5535fe6b23447223917e8e2aa1aa2547db6816e89"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Analfabetismo e empregabilidade",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D2-prompt-1.webp",
+          "page": 8,
+          "box": {
+            "x0": 45.97,
+            "y0": 84.72,
+            "x1": 582.72,
+            "y1": 453.58
+          },
+          "width": 1491,
+          "height": 1025,
+          "byteSize": 86206,
+          "sha256": "8e9a1aec6fc33d2a89ac06f2116355e6b6f16f13e172995aa2a6e16c3d16f353"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D2-standard-1.webp",
+          "page": 1,
+          "box": {
+            "x0": 79,
+            "y0": 483,
+            "x1": 516.35,
+            "y1": 723
+          },
+          "width": 1215,
+          "height": 666,
+          "byteSize": 31984,
+          "sha256": "053aab0499af62ea1020e322b3882d1963d122f90e23e0b33cf64555b487e109"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Fibonacci iterativo e recursivo",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D3-prompt-1.webp",
+          "page": 18,
+          "box": {
+            "x0": 45.85,
+            "y0": 84.72,
+            "x1": 582.26,
+            "y1": 302.17
+          },
+          "width": 1490,
+          "height": 604,
+          "byteSize": 30556,
+          "sha256": "abe173569277b9dc0010c33734be9fdb0ca6c58ffdeb7b75310393d8bb624f27"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D3-standard-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 79,
+            "y0": 92.5,
+            "x1": 516.24,
+            "y1": 686
+          },
+          "width": 1215,
+          "height": 1649,
+          "byteSize": 37068,
+          "sha256": "793df619acd769d8964c6468dc599afe7b682d75e30d2821bcf836de05800022"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Árvore binária de pesquisa a partir de vetor",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 2
+        },
+        {
+          "label": "b",
+          "points": 8
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D4-prompt-1.webp",
+          "page": 19,
+          "box": {
+            "x0": 45.85,
+            "y0": 84.72,
+            "x1": 582.26,
+            "y1": 454.88
+          },
+          "width": 1490,
+          "height": 1029,
+          "byteSize": 57670,
+          "sha256": "81e9a73f4ca74b95147d15cdff5766c6bd735bdfa3119872224ed0a25afb0356"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D4-standard-1.webp",
+          "page": 3,
+          "box": {
+            "x0": 79,
+            "y0": 97,
+            "x1": 514.74,
+            "y1": 710
+          },
+          "width": 1211,
+          "height": 1703,
+          "byteSize": 73596,
+          "sha256": "156abf009b348dc4802ea2c26caecfa17aaf593055144c80f3372353f6745565"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "decision": "APPROVED",
+      "area": "Arquitetura de computadores",
+      "subject": "Mapeamento de memória cache",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": "O segundo recorte do enunciado era das instruções da prova e foi descartado.",
+      "prompt": [
+        {
+          "file": "D5-prompt-1.webp",
+          "page": 20,
+          "box": {
+            "x0": 45.85,
+            "y0": 84.72,
+            "x1": 582.23,
+            "y1": 453.75
+          },
+          "width": 1490,
+          "height": 1025,
+          "byteSize": 53860,
+          "sha256": "0d9c64749b6294f6d4afb3b671a8d741d3a5fc589540a1424e7ec7f92b47f0ee"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D5-standard-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 79,
+            "y0": 93,
+            "x1": 515.57,
+            "y1": 742
+          },
+          "width": 1213,
+          "height": 1803,
+          "byteSize": 77488,
+          "sha256": "9c94bd8dda7813a4608c77ba624ad15498d0ef4a2d4a7fe471852ec049f9381a"
+        },
+        {
+          "file": "D5-standard-2.webp",
+          "page": 5,
+          "box": {
+            "x0": 79,
+            "y0": 68,
+            "x1": 511.44,
+            "y1": 394
+          },
+          "width": 1202,
+          "height": 905,
+          "byteSize": 44982,
+          "sha256": "35cfaeb472529e5a8b1f11f87958eb367a2f7f40c8552cd6923f092432989623"
+        }
+      ]
+    }
+  ]
+}

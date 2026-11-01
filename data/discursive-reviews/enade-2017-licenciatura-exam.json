@@ -1,0 +1,330 @@
+{
+  "document": "enade-2017-licenciatura-exam",
+  "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+  "standardDocument": "enade-2017-licenciatura-response-standard",
+  "standardSha256": "1039dd50765b5ab48ab5dcc47da6cff7283bc179e91b3340ca65b671c5cc001f",
+  "extractor": "claude-extrator-discursivas",
+  "reviewer": "claude-autoconferencia",
+  "independent": false,
+  "reviewedAt": "2026-11-01T02:01:05Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 1,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Sífilis congênita e relações de gênero",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D1-prompt-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 54.6,
+            "y0": 112.29,
+            "x1": 576.5,
+            "y1": 754.54
+          },
+          "width": 1449,
+          "height": 1784,
+          "byteSize": 149840,
+          "sha256": "2b2c47587493d19661ddd69f2a6f65f8b7cf856c06ae207522e919563f263e71"
+        },
+        {
+          "file": "D1-prompt-2.webp",
+          "page": 3,
+          "box": {
+            "x0": 54.35,
+            "y0": 107.18,
+            "x1": 577.15,
+            "y1": 275.38
+          },
+          "width": 1452,
+          "height": 467,
+          "byteSize": 25904,
+          "sha256": "6f58a593fb71dfe9a5972ceb324645bda0b4a469d5ebf09cd197628dfff63ca6"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D1-standard-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 79,
+            "y0": 203.18,
+            "x1": 516.47,
+            "y1": 756
+          },
+          "width": 1216,
+          "height": 1536,
+          "byteSize": 108918,
+          "sha256": "94fe026d211438e2c063e9e51395f390d2ef654783832a469e20d55113681077"
+        },
+        {
+          "file": "D1-standard-2.webp",
+          "page": 3,
+          "box": {
+            "x0": 79,
+            "y0": 67,
+            "x1": 516.41,
+            "y1": 226
+          },
+          "width": 1215,
+          "height": 442,
+          "byteSize": 29176,
+          "sha256": "3bad99b2cd7c49f63104d32d09dbfd97990b578b19b13b2843c9d63425ed904a"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Nome social de pessoas trans",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D2-prompt-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 54.35,
+            "y0": 82.7,
+            "x1": 576.45,
+            "y1": 476.83
+          },
+          "width": 1450,
+          "height": 1095,
+          "byteSize": 71944,
+          "sha256": "ed6c09a7da833b9f5808047736057640996a210137bd64a0f9162a2bc9691b63"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D2-standard-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 79,
+            "y0": 408.07,
+            "x1": 516.41,
+            "y1": 765
+          },
+          "width": 1215,
+          "height": 991,
+          "byteSize": 59500,
+          "sha256": "9556749ca9e341eb0f02c1320a96b20c324efa1c05bde5c9248c63158691714c"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Lista encadeada impressa ao contrário",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 3
+        },
+        {
+          "label": "b",
+          "points": 7
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D3-prompt-1.webp",
+          "page": 13,
+          "box": {
+            "x0": 54.35,
+            "y0": 109.29,
+            "x1": 576.43,
+            "y1": 487.1
+          },
+          "width": 1450,
+          "height": 1049,
+          "byteSize": 55034,
+          "sha256": "a1101125311db02ea7819f3125ef5bfe1d551f18f203ac71ed26dd03575154a7"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D3-standard-1.webp",
+          "page": 5,
+          "box": {
+            "x0": 79,
+            "y0": 433.27,
+            "x1": 516.41,
+            "y1": 567
+          },
+          "width": 1215,
+          "height": 371,
+          "byteSize": 22456,
+          "sha256": "9044abb3badb0698c591969376ab39628e7e3d8656beb39ab14e8a6d7a2b7253"
+        },
+        {
+          "file": "D3-standard-2.webp",
+          "page": 6,
+          "box": {
+            "x0": 79,
+            "y0": 73,
+            "x1": 469,
+            "y1": 676
+          },
+          "width": 1084,
+          "height": 1675,
+          "byteSize": 236406,
+          "sha256": "de22461ef547f1bfa370fce6310c3d6718313b04861e6dc1ad344a5a0c5a7366"
+        },
+        {
+          "file": "D3-standard-3.webp",
+          "page": 7,
+          "box": {
+            "x0": 79,
+            "y0": 68,
+            "x1": 516.17,
+            "y1": 673
+          },
+          "width": 1215,
+          "height": 1680,
+          "byteSize": 141380,
+          "sha256": "1e8a764f3256668b053001e20d5d582d1d68d451142bd655be237342486ee5b1"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "decision": "APPROVED",
+      "area": "Engenharia de software",
+      "subject": "Diagrama de classes UML",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D4-prompt-1.webp",
+          "page": 14,
+          "box": {
+            "x0": 54.35,
+            "y0": 82.68,
+            "x1": 576.46,
+            "y1": 450.13
+          },
+          "width": 1450,
+          "height": 1020,
+          "byteSize": 70518,
+          "sha256": "0a28db183b63898c8a164a05c225e7fd53b6457791d7dcd6a397ced908f72f97"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D4-standard-1.webp",
+          "page": 8,
+          "box": {
+            "x0": 79,
+            "y0": 400.63,
+            "x1": 508,
+            "y1": 590
+          },
+          "width": 1192,
+          "height": 526,
+          "byteSize": 134000,
+          "sha256": "1276d0f1d918b676397a47852fc7a26b0197e6f3f5b356f37ce45dc641e347da"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "decision": "APPROVED",
+      "area": "Sociedade e ética",
+      "subject": "Software educativo aberto",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D5-prompt-1.webp",
+          "page": 15,
+          "box": {
+            "x0": 54.34,
+            "y0": 82.68,
+            "x1": 576.46,
+            "y1": 476.15
+          },
+          "width": 1450,
+          "height": 1093,
+          "byteSize": 80414,
+          "sha256": "3740505710e9eb7c0c984433374bc254d71c3e667b51fc0b70d547e976458c57"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D5-standard-1.webp",
+          "page": 9,
+          "box": {
+            "x0": 79,
+            "y0": 395.95,
+            "x1": 516.4,
+            "y1": 756
+          },
+          "width": 1215,
+          "height": 1000,
+          "byteSize": 41828,
+          "sha256": "1d301dbf75b492335c1fa0acd3ddfef244991b5373dda3439fd971e5d14b6e11"
+        },
+        {
+          "file": "D5-standard-2.webp",
+          "page": 10,
+          "box": {
+            "x0": 79,
+            "y0": 88,
+            "x1": 516.42,
+            "y1": 766
+          },
+          "width": 1216,
+          "height": 1884,
+          "byteSize": 99454,
+          "sha256": "6868d3da5e090e80bd11a3513adc5caa2957d82f64bc9cb3fb46a3873a6613ea"
+        },
+        {
+          "file": "D5-standard-3.webp",
+          "page": 11,
+          "box": {
+            "x0": 79,
+            "y0": 67,
+            "x1": 516.6,
+            "y1": 738
+          },
+          "width": 1216,
+          "height": 1864,
+          "byteSize": 90300,
+          "sha256": "5d21ed577dc946163d5e47014e54babc526ce11799d5b1ae42110b6f94ef445f"
+        }
+      ]
+    }
+  ]
+}
