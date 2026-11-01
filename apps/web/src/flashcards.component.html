@@ -12,11 +12,13 @@
         <span class="flash-inner" aria-hidden="true">
         <span class="flash-face flash-front">
           <span class="flash-kicker">{{ card.area }}@if (card.isNew) { · novo }</span>
+          <span class="flash-ai">Gerado por IA</span>
           <span class="flash-text">{{ card.front }}</span>
           <span class="flash-hint">Pense na resposta e toque para virar</span>
         </span>
         <span class="flash-face flash-back">
           <span class="flash-kicker">Resposta</span>
+          <span class="flash-ai">Gerado por IA · confira na fonte</span>
           <span class="flash-text">{{ card.back }}</span>
         </span>
         </span>
@@ -78,6 +80,7 @@
             <span class="deck-area">{{ deck.area }}</span>
             <strong>{{ deck.title }}</strong>
             <span class="deck-desc">{{ deck.description }}</span>
+            <span class="flash-ai">Gerado por IA</span>
             <span class="deck-bar" aria-hidden="true"><span [style.--value]="masteredRatio(deck)"></span></span>
             <span class="deck-counts">
               @if (deck.due) { <em class="is-due">{{ deck.due }} para hoje</em> }

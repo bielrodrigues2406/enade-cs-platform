@@ -145,6 +145,10 @@ export class FlashcardsComponent {
   }
 
   private focus(selector: string) {
-    afterNextRender(() => this.host.nativeElement.querySelector<HTMLElement>(selector)?.focus(), { injector: this.injector });
+    // Cada troca de tela começa no topo; o foco não rola (no celular o topo fixo cobria o cartão).
+    afterNextRender(() => {
+      window.scrollTo({ top: 0 });
+      this.host.nativeElement.querySelector<HTMLElement>(selector)?.focus({ preventScroll: true });
+    }, { injector: this.injector });
   }
 }
