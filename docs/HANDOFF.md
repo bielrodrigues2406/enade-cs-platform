@@ -29,28 +29,16 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 - Celular primeiro: conferir 320, 390, 768 e 1440 px; sem rolagem horizontal; alvos de toque ≥ 44 px; topo fixo não pode cobrir o foco (use `focus({ preventScroll: true })` após rolar ao topo).
 - Conteúdo escrito por IA é sempre sinalizado na tela ("Gerado por IA") e no dado.
 
-## 4. Mascote (planejado, ainda não feito)
+## 4. Mascote
 
-Proposta aceita para avaliação de Gabriel: **patinho de borracha** (referência ao *rubber duck debugging*: explicar para o pato = prática de recuperação), amarelo `#F6C945`, bico `#F08A2C`, com um lápis azul-marinho atrás da cabeça como traço marcante. Nomes sugeridos: Dudu, Bit, Quack.
-
-Gabriel vai gerar as imagens no Gemini (Nano Banana). Ordem: (1) personagem e vistas; (2) folha de 10 expressões; (3) ícone do app em 3 fundos; (4) cena da página pública; (5) poses por momento. A partir do 2º, anexar sempre a imagem escolhida do 1º e repetir o bloco de estilo:
-
-```
-STYLE LOCK: soft 3D clay/vinyl toy render, rounded chunky shapes, matte surface with subtle subsurface glow, soft studio key light from top-left, gentle contact shadow, no outlines, no text, no logos. Palette only: duck body warm yellow #F6C945 with lighter belly #FCE7A1, beak and feet orange #F08A2C, eyes deep navy #151E2F with one small white highlight, brand navy #0F285A, brand blue #1649AE, paper off-white #F4F3EF, accent amber #B77B29. Friendly, clever, calm — a study buddy for university Computer Science students, not a baby toy.
-```
-
-Quando as imagens chegarem:
-- recortar o fundo liso, exportar WebP (e PNG para ícones), em `apps/web/public/mascot/`;
-- usar só em momentos: página pública, meta batida (aviso), fim dos flashcards, telas vazias, erro/404, favicon e ícones PWA. Ícones da interface continuam SVG;
-- carregar com `loading="lazy"` e `alt` descritivo (ou `alt=""` quando decorativo); nunca no pacote inicial;
-- uma expressão por momento (comemorando na meta, estudando nos flashcards, pensando no vazio).
+**Decidido: Dudu, o pato de borracha** com lápis azul-marinho. Tudo em **`docs/MASCOT.md`**: arquivos, regras (nunca dá dica, só em momentos, desligável), onde cada pose entra, ordem de construção (telas → gestor de ritmo → "Explique para o pato") e como gerar e recortar novas imagens. Já existe `<app-mascot>` com 14 poses em `apps/web/public/mascot/`, usado no fim da sessão de flashcards.
 
 ## 5. O que falta (por prioridade)
 
 1. **Deploy em VPS própria e domínio** (Gabriel comprando). `deploy/vps/` foi feito para dividir o servidor do Mira; adaptar para Caddy próprio com HTTPS do domínio. Nomes sugeridos: cadernocc.com.br (preferido), bitabit.app, gabaritou.com.br. Só publicar com autorização.
 2. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
 3. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória, ainda não iniciada).
-4. **Mascote** (seção 4).
+4. **Mascote**: etapas 1 a 3 de `docs/MASCOT.md` §5; gerar a cena da página pública e o ícone do app.
 5. **Plano até a prova** (aparece como "Em breve" na Biblioteca): semanas até a prova + áreas mais fracas (`/api/me/progress`) → roteiro semanal.
 6. **Materiais por área** ("Em breve"): PDFs e links dos professores; precisa de migration, upload no admin e licença de uso.
 7. Discursivas de 2005 e 2008 (padrão de resposta sem blocos; recorte manual).
