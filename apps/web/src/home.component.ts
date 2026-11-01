@@ -87,6 +87,8 @@ export class HomeComponent {
   @Output() resume = new EventEmitter<string>();
   /** Tela de treinos (prova completa e treino montado). */
   @Output() practiceHub = new EventEmitter<void>();
+  /** Abre a seção Provas completas. */
+  @Output() editionsHub = new EventEmitter<void>();
 
   readonly examSource = EXAM_SOURCE;
   private readonly now = new Date();

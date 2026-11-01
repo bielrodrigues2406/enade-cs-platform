@@ -45,7 +45,7 @@
                 <button (click)="retryMisses()" [disabled]="saving()">{{ saving() ? 'Preparando…' : 'Refazer as erradas (' + misses() + ')' }}</button>
               }
               <button [class.outline]="misses()" (click)="beginReview()">Rever respostas</button>
-              <button class="outline" (click)="showSelection()">Voltar aos treinos</button>
+              <button class="outline" (click)="showSelection()">{{ section === 'provas' ? 'Voltar às provas' : 'Voltar aos treinos' }}</button>
             </div>
           }
         </section>
@@ -179,30 +179,52 @@
           </dialog>
         }
       }
-    } @else {
-      <section class="page-intro">
-        <h1 id="practice-setup-title" tabindex="-1">Treino parcial</h1>
-        <p>Escolha a área e a quantidade. As questões que você ainda não viu vêm primeiro, e dá para sair e retomar depois.</p>
+    } @else if (section === 'provas') {
+      <!-- Provas completas: ensaio do dia da prova, uma edição por cartão. -->
+      <section class="page-intro editions-intro">
+        <p class="edition-eyebrow">O ensaio mais próximo do dia da prova</p>
+        <h1 id="practice-setup-title" tabindex="-1">Provas completas</h1>
+        <p>As objetivas publicadas de cada edição, na ordem original, em {{ (editions()?.minutes ?? 240) / 60 }} horas. Ao sair, a prova pausa e as respostas ficam salvas.</p>
       </section>
       @if (availability(); as data) {
-        @if (!data.active && editions()?.editions?.length) {
-          <section class="practice-editions" aria-labelledby="practice-editions-title">
-            <p class="edition-eyebrow">O ensaio mais próximo do dia da prova</p>
-            <h2 id="practice-editions-title">Prova completa da edição</h2>
-            <p class="muted edition-lead">
-              As objetivas publicadas, na ordem da prova, em {{ editions()!.minutes / 60 }} horas. Ao sair, a prova pausa e as respostas ficam salvas.
-            </p>
+        @if (data.active; as active) {
+          <section class="practice-active" aria-label="Treino em andamento">
+            <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : 'Continue seu treino' }}</h2>
+            <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.kind === 'EDITION' ? 'prova completa, pausada' : attemptLabel(active) }}</p>
+            <div class="practice-actions">
+              <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : 'Retomar treino' }}</button>
+              <button class="text-button danger-text" (click)="cancelAttempt(active.id, active.kind === 'EDITION' ? 'prova' : 'treino')" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Cancelar prova' : 'Cancelar treino' }}</button>
+            </div>
+          </section>
+        }
+        @if (editions()?.editions?.length) {
+          <section class="practice-editions" aria-label="Edições disponíveis">
+            @if (editionModalities().length > 1) {
+              <div class="edition-filter" role="radiogroup" aria-label="Filtrar por curso">
+                <label><input type="radio" name="edition-filter" value="" [checked]="!editionFilter()" (change)="editionFilter.set('')" /> Todas</label>
+                @for (modality of editionModalities(); track modality) {
+                  <label><input type="radio" name="edition-filter" [value]="modality" [checked]="editionFilter() === modality" (change)="editionFilter.set(modality)" /> {{ modalityLabel(modality) }}</label>
+                }
+              </div>
+            }
             <ol class="edition-grid">
-              @for (edition of editions()!.editions; track edition.id) {
-                <li class="edition-card" [class.is-chosen]="chosenEdition()?.id === edition.id">
+              @for (edition of visibleEditions(); track edition.id) {
+                <li class="edition-card" [class.is-chosen]="chosenEdition()?.id === edition.id" [class.is-done]="edition.lastResult">
                   <p class="edition-modality">{{ modalityLabel(edition.modality) }}</p>
                   <strong class="edition-year"><span class="edition-kicker">ENADE </span>{{ edition.year }}</strong>
                   <p class="edition-stats">
-                    {{ edition.objectives }} objetivas@if (edition.general) { ({{ edition.general }} de Formação Geral) }
-                    @if (edition.discursive) { · {{ edition.discursive }} {{ edition.discursive === 1 ? 'discursiva' : 'discursivas' }} }
-                    @if (edition.missing.length) { · {{ missingLabel(edition) }}, anuladas ou ainda não publicadas }
+                    {{ edition.objectives }} objetivas@if (edition.discursive) { · {{ edition.discursive }} {{ edition.discursive === 1 ? 'discursiva' : 'discursivas' }} }
                   </p>
-                  <button (click)="chosenEdition.set(edition); editionDialog.showModal()" [disabled]="saving() || chosenEdition()?.id === edition.id">Fazer esta prova</button>
+                  @if (edition.missing.length) {
+                    <p class="edition-missing" [attr.title]="'Anuladas pelo Inep ou ainda não publicadas aqui'">{{ capitalize(missingLabel(edition)) }}</p>
+                  }
+                  @if (edition.lastResult; as last) {
+                    <p class="edition-last">
+                      <span>Sua última: <strong>{{ last.correct }} de {{ last.total }}</strong> · {{ shortDate(last.finishedAt) }}</span>
+                      <button type="button" class="text-button" (click)="openAttempt(last.attemptId)" [disabled]="saving()">Ver resultado</button>
+                    </p>
+                  }
+                  <button [class.outline]="edition.lastResult" (click)="chosenEdition.set(edition); editionDialog.showModal()" [disabled]="saving() || !!data.active || chosenEdition()?.id === edition.id">{{ edition.lastResult ? 'Refazer esta prova' : 'Fazer esta prova' }}</button>
                 </li>
               }
             </ol>
@@ -231,7 +253,16 @@
               }
             </dialog>
           </section>
+        } @else if (editions()) {
+          <p class="muted">Nenhuma edição tem objetivas publicadas suficientes para uma prova completa ainda.</p>
         }
+      }
+    } @else {
+      <section class="page-intro">
+        <h1 id="practice-setup-title" tabindex="-1">Treino parcial</h1>
+        <p>Escolha a área e a quantidade. As questões que você ainda não viu vêm primeiro, e dá para sair e retomar depois.</p>
+      </section>
+      @if (availability(); as data) {
         @if (data.active; as active) {
           <section class="practice-active" aria-label="Treino em andamento">
             <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : 'Continue seu treino' }}</h2>
@@ -250,8 +281,6 @@
             <label class="practice-timed"><input type="checkbox" name="timed" [(ngModel)]="timed" [disabled]="saving()" /> Com cronômetro: {{ timedMinutes() }} minutos ({{ data.minutesPerQuestion }} por questão). Dá para pausar.</label>
             <button type="submit" [disabled]="saving() || eligibleCount() < size">{{ saving() ? 'Preparando treino…' : timed ? 'Começar simulado' : 'Começar treino' }}</button>
           </form>
-        }
-        @if (!data.active) {
           @if (data.errors.total) {
             <section class="practice-errors" aria-labelledby="practice-errors-title">
               <div>
@@ -285,8 +314,8 @@
             </ol>
           </section>
         }
-        @if (data.recent.length) {
-          <section class="practice-history" aria-labelledby="practice-recent-title"><h2 id="practice-recent-title">Treinos concluídos recentes</h2><ol>@for (row of data.recent; track row.id) { <li><div><strong>{{ row.size }} questões · {{ row.kind === 'EDITION' ? 'Prova completa' : attemptLabel(row) }}</strong><p><time [attr.datetime]="row.finishedAt">{{ dateLabel(row.finishedAt) }}</time></p></div><button class="outline" (click)="openAttempt(row.id)" [disabled]="saving()">Ver resultado</button></li> }</ol></section>
+        @if (partialRecent(data).length) {
+          <section class="practice-history" aria-labelledby="practice-recent-title"><h2 id="practice-recent-title">Treinos concluídos recentes</h2><ol>@for (row of partialRecent(data); track row.id) { <li><div><strong>{{ row.size }} questões · {{ attemptLabel(row) }}</strong><p><time [attr.datetime]="row.finishedAt">{{ dateLabel(row.finishedAt) }}</time></p></div><button class="outline" (click)="openAttempt(row.id)" [disabled]="saving()">Ver resultado</button></li> }</ol></section>
         }
       }
     }

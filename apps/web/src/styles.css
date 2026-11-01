@@ -4586,3 +4586,7 @@ button.danger:hover {
 :is(h1, h2, p, main, section, article)[tabindex="-1"]:focus {
   outline: none;
 }
+/* Espaço da página pública enquanto o código dela chega (evita salto no rodapé). */
+.landing-placeholder {
+  min-height: 100vh;
+}
