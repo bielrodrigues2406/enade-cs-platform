@@ -1,0 +1,58 @@
+{
+  "deck": "teoria-computacao",
+  "area": "Teoria da computação",
+  "title": "Linguagens formais, autômatos e computabilidade",
+  "description": "Hierarquia de Chomsky, autômatos, Turing e complexidade. Base: Sipser; Hopcroft, Motwani e Ullman.",
+  "cards": [
+    {
+      "id": "tc-001",
+      "front": "Quais são os níveis da hierarquia de Chomsky e seus reconhecedores?",
+      "back": "Regulares (autômato finito), livres de contexto (autômato de pilha), sensíveis ao contexto (autômato linearmente limitado) e recursivamente enumeráveis (máquina de Turing)."
+    },
+    {
+      "id": "tc-002",
+      "front": "AFD e AFN reconhecem as mesmas linguagens?",
+      "back": "Sim. Todo AFN tem um AFD equivalente (construção de subconjuntos), mas o AFD pode ter até 2ⁿ estados."
+    },
+    {
+      "id": "tc-003",
+      "front": "Para que serve o lema do bombeamento para linguagens regulares?",
+      "back": "Para provar que uma linguagem NÃO é regular: se for, toda palavra longa o bastante pode ser dividida em xyz com y ≠ ε, |xy| ≤ p, e xyⁱz continua na linguagem para todo i ≥ 0."
+    },
+    {
+      "id": "tc-004",
+      "front": "Dê um exemplo clássico de linguagem livre de contexto não regular.",
+      "back": "{aⁿbⁿ | n ≥ 0}: exige contar, o que um autômato finito não faz, mas um autômato de pilha faz."
+    },
+    {
+      "id": "tc-005",
+      "front": "O que é uma gramática ambígua?",
+      "back": "Gramática em que alguma palavra tem duas ou mais árvores de derivação (ou derivações mais à esquerda) diferentes."
+    },
+    {
+      "id": "tc-006",
+      "front": "O que diz a tese de Church-Turing?",
+      "back": "Todo procedimento efetivo (algoritmo) pode ser executado por uma máquina de Turing."
+    },
+    {
+      "id": "tc-007",
+      "front": "O problema da parada é decidível?",
+      "back": "Não. Não existe máquina de Turing que, para toda máquina M e entrada w, decida se M para em w (prova por diagonalização)."
+    },
+    {
+      "id": "tc-008",
+      "front": "Defina as classes P e NP.",
+      "back": "P: problemas de decisão resolvidos em tempo polinomial por máquina determinística. NP: problemas cuja solução pode ser verificada em tempo polinomial (ou resolvida por máquina não determinística em tempo polinomial)."
+    },
+    {
+      "id": "tc-009",
+      "front": "O que é um problema NP-completo?",
+      "back": "Está em NP e todo problema de NP se reduz a ele em tempo polinomial. Ex.: SAT (teorema de Cook-Levin), 3-SAT, clique, caixeiro-viajante (versão de decisão)."
+    },
+    {
+      "id": "tc-010",
+      "front": "Linguagens regulares são fechadas sob quais operações?",
+      "back": "União, concatenação, fecho de Kleene, interseção, complemento e diferença."
+    }
+  ]
+}

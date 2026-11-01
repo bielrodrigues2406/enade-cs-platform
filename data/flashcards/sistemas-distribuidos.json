@@ -1,0 +1,43 @@
+{
+  "deck": "sistemas-distribuidos",
+  "area": "Sistemas distribuídos",
+  "title": "Sistemas distribuídos",
+  "description": "Comunicação, tempo, consistência e tolerância a falhas. Base: Tanenbaum e van Steen; Coulouris.",
+  "cards": [
+    {
+      "id": "sd-001",
+      "front": "O que diz o teorema CAP?",
+      "back": "Num sistema distribuído sujeito a partições de rede, não dá para ter ao mesmo tempo Consistência forte e Disponibilidade: durante a partição, escolhe-se uma das duas."
+    },
+    {
+      "id": "sd-002",
+      "front": "Para que servem os relógios lógicos de Lamport?",
+      "back": "Ordenar eventos sem relógio global: se a → b (aconteceu antes), então C(a) < C(b). Relógios vetoriais permitem também detectar eventos concorrentes."
+    },
+    {
+      "id": "sd-003",
+      "front": "O que é RPC?",
+      "back": "Chamada de procedimento remoto: o cliente chama uma função como se fosse local; stubs empacotam os parâmetros (marshalling) e os enviam pela rede ao servidor."
+    },
+    {
+      "id": "sd-004",
+      "front": "Consistência forte x consistência eventual.",
+      "back": "Forte: toda leitura vê a escrita mais recente. Eventual: sem novas escritas, as réplicas convergem com o tempo, mas leituras podem ver valores antigos."
+    },
+    {
+      "id": "sd-005",
+      "front": "O que é o problema dos generais bizantinos?",
+      "back": "Chegar a consenso com participantes que podem falhar de forma arbitrária ou maliciosa; com mensagens orais, exige n ≥ 3f + 1 para tolerar f traidores."
+    },
+    {
+      "id": "sd-006",
+      "front": "Para que serve o protocolo de efetivação em duas fases (2PC)?",
+      "back": "Garantir que uma transação distribuída seja confirmada em todos os participantes ou abortada em todos: fase de votação e fase de decisão, conduzidas por um coordenador."
+    },
+    {
+      "id": "sd-007",
+      "front": "Transparência em sistemas distribuídos: cite tipos.",
+      "back": "De acesso, localização, migração, replicação, concorrência e falha: o usuário não percebe a distribuição."
+    }
+  ]
+}

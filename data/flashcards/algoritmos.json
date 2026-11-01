@@ -1,0 +1,83 @@
+{
+  "deck": "algoritmos",
+  "area": "Algoritmos",
+  "title": "Algoritmos e estruturas de dados",
+  "description": "Complexidade, ordenação, busca, grafos e técnicas de projeto. Base: Cormen et al., Algoritmos.",
+  "cards": [
+    {
+      "id": "alg-001",
+      "front": "O que significa f(n) = O(g(n))?",
+      "back": "Existem constantes c > 0 e n₀ tais que 0 ≤ f(n) ≤ c·g(n) para todo n ≥ n₀: g é um limite superior assintótico de f."
+    },
+    {
+      "id": "alg-002",
+      "front": "Diferença entre O, Ω e Θ.",
+      "back": "O: limite superior. Ω: limite inferior. Θ: as duas coisas ao mesmo tempo (crescimento exato, a menos de constantes)."
+    },
+    {
+      "id": "alg-003",
+      "front": "Enuncie o teorema mestre para T(n) = a·T(n/b) + f(n).",
+      "back": "Compare f(n) com n^(log_b a): se f é polinomialmente menor, T = Θ(n^(log_b a)); se é igual, T = Θ(n^(log_b a)·log n); se é polinomialmente maior (e regular), T = Θ(f(n))."
+    },
+    {
+      "id": "alg-004",
+      "front": "Complexidade do Merge Sort e do Quicksort (melhor, médio, pior).",
+      "back": "Merge Sort: Θ(n log n) em todos os casos, estável, usa O(n) de memória extra. Quicksort: Θ(n log n) no melhor e no médio, Θ(n²) no pior (pivô sempre extremo), in-place."
+    },
+    {
+      "id": "alg-005",
+      "front": "Qual é o limite inferior para ordenação por comparação e por quê?",
+      "back": "Ω(n log n): a árvore de decisão precisa ter n! folhas, e sua altura é pelo menos log₂(n!) = Θ(n log n)."
+    },
+    {
+      "id": "alg-006",
+      "front": "Quando Counting Sort e Radix Sort rodam em tempo linear?",
+      "back": "Counting Sort: chaves inteiras num intervalo k com k = O(n), tempo Θ(n + k). Radix Sort: d dígitos com Counting Sort estável em cada um, Θ(d·(n + k))."
+    },
+    {
+      "id": "alg-007",
+      "front": "O que caracteriza a programação dinâmica?",
+      "back": "Subestrutura ótima mais subproblemas sobrepostos: cada subproblema é resolvido uma vez e guardado (memoização ou tabela de baixo para cima)."
+    },
+    {
+      "id": "alg-008",
+      "front": "O que é preciso para um algoritmo guloso ser ótimo?",
+      "back": "Propriedade da escolha gulosa (uma escolha localmente ótima leva a uma solução global ótima) e subestrutura ótima."
+    },
+    {
+      "id": "alg-009",
+      "front": "Busca em largura (BFS) x busca em profundidade (DFS): estrutura e complexidade.",
+      "back": "BFS usa fila e acha o caminho com menos arestas em grafo não ponderado; DFS usa pilha ou recursão. Ambas são O(V + E) com lista de adjacência."
+    },
+    {
+      "id": "alg-010",
+      "front": "Quando usar Dijkstra e quando usar Bellman-Ford?",
+      "back": "Dijkstra: pesos não negativos, O((V + E) log V) com heap. Bellman-Ford: aceita pesos negativos e detecta ciclo negativo, O(V·E)."
+    },
+    {
+      "id": "alg-011",
+      "front": "Kruskal x Prim para árvore geradora mínima.",
+      "back": "Kruskal ordena as arestas e usa union-find, O(E log E). Prim cresce uma árvore a partir de um vértice com fila de prioridade, O(E log V). Ambos são gulosos e corretos pela propriedade do corte."
+    },
+    {
+      "id": "alg-012",
+      "front": "Operações e custos de um heap binário de máximo.",
+      "back": "Inserir e extrair o máximo: O(log n). Consultar o máximo: O(1). Construir a partir de um vetor (buildHeap): O(n). O filho de i fica em 2i+1 e 2i+2 (base 0)."
+    },
+    {
+      "id": "alg-013",
+      "front": "Altura de uma árvore AVL e custo das operações.",
+      "back": "A altura é O(log n), porque os fatores de balanceamento ficam em −1, 0 ou 1. Busca, inserção e remoção custam O(log n), com rotações para rebalancear."
+    },
+    {
+      "id": "alg-014",
+      "front": "Tabela hash: custo esperado e como tratar colisões.",
+      "back": "Busca, inserção e remoção esperadas O(1) com bom espalhamento e fator de carga limitado. Colisões: encadeamento (listas) ou endereçamento aberto (sondagem linear, quadrática, hash duplo)."
+    },
+    {
+      "id": "alg-015",
+      "front": "O que é ordenação topológica e quando existe?",
+      "back": "Ordem linear dos vértices em que toda aresta (u, v) tem u antes de v. Existe se e somente se o grafo é dirigido e acíclico (DAG). Pode ser feita com DFS (ordem inversa de término) em O(V + E)."
+    }
+  ]
+}

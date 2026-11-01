@@ -1,0 +1,48 @@
+{
+  "slug": "inteligencia-artificial",
+  "area": "Inteligência artificial",
+  "title": "Busca e aprendizado de máquina",
+  "summary": "As duas grandes famílias cobradas: resolver problemas por busca e aprender a partir de dados.",
+  "sections": [
+    {
+      "title": "Busca",
+      "points": [
+        "Cega: largura (completa e ótima com custo uniforme por passo), profundidade (pouca memória), custo uniforme.",
+        "Heurística: gulosa (rápida, não ótima) e A* com f(n) = g(n) + h(n).",
+        "A* é ótimo se h é admissível (árvore) ou consistente (grafo).",
+        "Jogos: minimax com poda alfa-beta."
+      ]
+    },
+    {
+      "title": "Aprendizado de máquina",
+      "points": [
+        "Supervisionado: classificação e regressão; não supervisionado: agrupamento (k-means); por reforço: recompensas.",
+        "Divida treino, validação e teste; use validação cruzada.",
+        "Overfitting: ótimo no treino e ruim no teste; regularização e mais dados ajudam."
+      ]
+    },
+    {
+      "title": "Métricas",
+      "points": [
+        "Precisão = VP/(VP+FP); revocação = VP/(VP+FN); F1 é a média harmônica das duas.",
+        "Acurácia engana com classes desbalanceadas."
+      ]
+    },
+    {
+      "title": "Redes neurais",
+      "points": [
+        "Perceptron só separa classes linearmente separáveis (não faz XOR).",
+        "Camadas ocultas com ativação não linear e treino por retropropagação e descida do gradiente."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Usar heurística que superestima e esperar que o A* seja ótimo.",
+    "Avaliar o modelo nos mesmos dados do treino.",
+    "Chamar de supervisionado um agrupamento sem rótulos."
+  ],
+  "references": [
+    "RUSSELL, S.; NORVIG, P. Inteligência artificial: uma abordagem moderna.",
+    "FACELI, K. et al. Inteligência artificial: uma abordagem de aprendizado de máquina."
+  ]
+}

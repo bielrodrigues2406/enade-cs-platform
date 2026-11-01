@@ -1,0 +1,49 @@
+{
+  "slug": "modelagem-e-sql",
+  "area": "Banco de dados",
+  "title": "Modelagem, SQL e transações",
+  "summary": "Do diagrama ER às tabelas normalizadas, consultas SQL e garantias das transações.",
+  "sections": [
+    {
+      "title": "Modelagem",
+      "points": [
+        "Entidades, atributos e relacionamentos com cardinalidade (1:1, 1:N, N:N).",
+        "Relacionamento N:N vira tabela associativa com as duas chaves estrangeiras.",
+        "Entidade fraca depende de outra para ser identificada."
+      ]
+    },
+    {
+      "title": "Normalização",
+      "points": [
+        "1FN: atributos atômicos.",
+        "2FN: sem dependência parcial de chave composta.",
+        "3FN: sem dependência transitiva. BCNF: todo determinante é superchave."
+      ]
+    },
+    {
+      "title": "SQL",
+      "points": [
+        "SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER BY: WHERE filtra linhas, HAVING filtra grupos.",
+        "INNER JOIN só com correspondência; LEFT JOIN mantém todas da esquerda.",
+        "Subconsultas com IN, EXISTS; agregações COUNT, SUM, AVG, MAX, MIN."
+      ]
+    },
+    {
+      "title": "Transações",
+      "points": [
+        "ACID: atomicidade, consistência, isolamento e durabilidade.",
+        "Níveis de isolamento e anomalias: leitura suja, não repetível e fantasma.",
+        "Bloqueio em duas fases (2PL) garante serializabilidade; log com write-ahead garante recuperação."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Usar função de agregação no WHERE em vez do HAVING.",
+    "Esquecer a tabela associativa ao mapear N:N.",
+    "Achar que a 3FN sempre implica BCNF (não implica)."
+  ],
+  "references": [
+    "ELMASRI, R.; NAVATHE, S. Sistemas de banco de dados.",
+    "SILBERSCHATZ, A.; KORTH, H.; SUDARSHAN, S. Sistema de banco de dados."
+  ]
+}

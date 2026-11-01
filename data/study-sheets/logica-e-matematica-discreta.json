@@ -1,0 +1,48 @@
+{
+  "slug": "logica-e-matematica-discreta",
+  "area": "Matemática",
+  "title": "Lógica e matemática discreta",
+  "summary": "Lógica proposicional, conjuntos, relações e contagem: a base das questões de raciocínio formal.",
+  "sections": [
+    {
+      "title": "Lógica proposicional",
+      "points": [
+        "Tautologia: sempre V; contradição: sempre F; contingência: depende.",
+        "p → q ≡ ¬p ∨ q ≡ ¬q → ¬p (contrapositiva). A recíproca q → p NÃO é equivalente.",
+        "De Morgan: ¬(p ∧ q) ≡ ¬p ∨ ¬q; ¬(p ∨ q) ≡ ¬p ∧ ¬q.",
+        "Um conjunto de fórmulas é satisfazível se alguma valoração torna todas verdadeiras; A é consequência lógica de Γ se toda valoração que satisfaz Γ satisfaz A."
+      ]
+    },
+    {
+      "title": "Relações",
+      "points": [
+        "Equivalência: reflexiva, simétrica e transitiva (gera classes).",
+        "Ordem parcial: reflexiva, antissimétrica e transitiva."
+      ]
+    },
+    {
+      "title": "Contagem",
+      "points": [
+        "Arranjo: n!/(n−k)!; combinação: n!/(k!(n−k)!).",
+        "Casa dos pombos: n + 1 objetos em n caixas forçam uma repetição.",
+        "Inclusão-exclusão: |A ∪ B| = |A| + |B| − |A ∩ B|."
+      ]
+    },
+    {
+      "title": "Provas",
+      "points": [
+        "Indução: base e passo (P(k) ⇒ P(k+1)).",
+        "Contradição: suponha o contrário e chegue a um absurdo."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Tratar a recíproca como equivalente à implicação.",
+    "Esquecer que p → q é verdadeira quando p é falsa.",
+    "Confundir arranjo (ordem importa) com combinação."
+  ],
+  "references": [
+    "ROSEN, K. Matemática discreta e suas aplicações.",
+    "GERSTING, J. Fundamentos matemáticos para a ciência da computação."
+  ]
+}

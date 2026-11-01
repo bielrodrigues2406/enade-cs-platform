@@ -1,0 +1,58 @@
+{
+  "deck": "sistemas-operacionais",
+  "area": "Sistemas operacionais",
+  "title": "Sistemas operacionais",
+  "description": "Processos, escalonamento, concorrência, memória e arquivos. Base: Silberschatz; Tanenbaum.",
+  "cards": [
+    {
+      "id": "so-001",
+      "front": "Processo x thread.",
+      "back": "Processo: programa em execução, com espaço de endereçamento próprio. Threads: fluxos de execução dentro de um processo, que compartilham memória e recursos, mas têm pilha e registradores próprios."
+    },
+    {
+      "id": "so-002",
+      "front": "Quais são os estados de um processo?",
+      "back": "Novo, pronto, executando, bloqueado (esperando) e terminado."
+    },
+    {
+      "id": "so-003",
+      "front": "Compare FCFS, SJF e Round Robin.",
+      "back": "FCFS: ordem de chegada, sofre efeito comboio. SJF: o menor primeiro, minimiza a espera média, mas pode causar inanição. Round Robin: fatia de tempo (quantum) em rodízio, bom para sistemas interativos."
+    },
+    {
+      "id": "so-004",
+      "front": "Quais são as quatro condições de Coffman para deadlock?",
+      "back": "Exclusão mútua, posse e espera, não preempção e espera circular. Todas precisam valer ao mesmo tempo."
+    },
+    {
+      "id": "so-005",
+      "front": "O que é uma condição de corrida e como evitá-la?",
+      "back": "Resultado que depende da ordem de execução de processos que acessam dados compartilhados. Evita-se protegendo a seção crítica com exclusão mútua (mutex, semáforo, monitor)."
+    },
+    {
+      "id": "so-006",
+      "front": "Semáforo: operações e uso.",
+      "back": "Contador inteiro com wait/P (decrementa e bloqueia se negativo) e signal/V (incrementa e acorda um processo). Binário serve como mutex; contador controla N recursos."
+    },
+    {
+      "id": "so-007",
+      "front": "Paginação x segmentação.",
+      "back": "Paginação: memória lógica em páginas de tamanho fixo mapeadas em quadros (sem fragmentação externa, com interna). Segmentação: segmentos de tamanho variável, com sentido lógico (código, pilha), sujeita a fragmentação externa."
+    },
+    {
+      "id": "so-008",
+      "front": "O que é a TLB?",
+      "back": "Cache associativa de traduções de página para quadro; evita consultar a tabela de páginas na memória a cada acesso."
+    },
+    {
+      "id": "so-009",
+      "front": "Algoritmos de substituição de página: FIFO, LRU e ótimo.",
+      "back": "Ótimo (OPT): sai a página que demorará mais a ser usada (referência teórica). LRU: sai a usada há mais tempo. FIFO: sai a mais antiga e sofre a anomalia de Belady."
+    },
+    {
+      "id": "so-010",
+      "front": "O que é thrashing?",
+      "back": "O sistema gasta mais tempo trocando páginas do que executando, porque os processos não têm quadros suficientes para o seu conjunto de trabalho."
+    }
+  ]
+}

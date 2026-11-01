@@ -1,0 +1,49 @@
+{
+  "slug": "engenharia-de-software",
+  "area": "Engenharia de software",
+  "title": "Processos, UML e testes",
+  "summary": "Como se organiza o desenvolvimento de software, como se modela e como se testa.",
+  "sections": [
+    {
+      "title": "Processos",
+      "points": [
+        "Cascata: fases sequenciais. Incremental e iterativo: entregas em ciclos.",
+        "Scrum: sprints, Product Owner, Scrum Master, reuniões diárias, revisão e retrospectiva.",
+        "XP: programação em par, TDD, integração contínua."
+      ]
+    },
+    {
+      "title": "Requisitos e UML",
+      "points": [
+        "Funcionais (o que faz) x não funcionais (qualidades e restrições).",
+        "Casos de uso: atores e objetivos; include (obrigatório) e extend (opcional).",
+        "Diagrama de classes: associação, agregação (losango vazio), composição (losango cheio), herança (triângulo vazio), multiplicidade.",
+        "Classe abstrata em itálico ou com {abstract}."
+      ]
+    },
+    {
+      "title": "Testes",
+      "points": [
+        "Caixa-preta: partição de equivalência e valores-limite. Caixa-branca: cobertura de comandos, ramos e caminhos.",
+        "Níveis: unidade, integração, sistema e aceitação; regressão após cada mudança.",
+        "Complexidade ciclomática = decisões + 1: mínimo de caminhos independentes."
+      ]
+    },
+    {
+      "title": "Qualidade de projeto",
+      "points": [
+        "Alta coesão, baixo acoplamento.",
+        "SOLID e padrões de projeto (Strategy, Observer, Factory, Adapter…)."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Confundir verificação (conforme a especificação) com validação (atende ao usuário).",
+    "Trocar agregação por composição: na composição a parte morre com o todo.",
+    "Achar que 100% de cobertura de comandos garante ausência de defeitos."
+  ],
+  "references": [
+    "SOMMERVILLE, I. Engenharia de software.",
+    "PRESSMAN, R.; MAXIM, B. Engenharia de software: uma abordagem profissional."
+  ]
+}

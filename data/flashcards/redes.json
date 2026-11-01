@@ -1,0 +1,58 @@
+{
+  "deck": "redes",
+  "area": "Redes",
+  "title": "Redes de computadores",
+  "description": "Camadas, TCP/IP, endereçamento, roteamento e aplicações. Base: Kurose e Ross; Tanenbaum.",
+  "cards": [
+    {
+      "id": "red-001",
+      "front": "Quais são as camadas do modelo TCP/IP (Kurose)?",
+      "back": "Aplicação, transporte, rede, enlace e física."
+    },
+    {
+      "id": "red-002",
+      "front": "TCP x UDP.",
+      "back": "TCP: orientado a conexão (three-way handshake), entrega confiável e ordenada, controle de fluxo e de congestionamento. UDP: sem conexão, sem garantias, menor sobrecarga (DNS, streaming, jogos)."
+    },
+    {
+      "id": "red-003",
+      "front": "Descreva o three-way handshake do TCP.",
+      "back": "Cliente envia SYN; servidor responde SYN-ACK; cliente envia ACK. Os números de sequência iniciais são combinados nesse processo."
+    },
+    {
+      "id": "red-004",
+      "front": "Como funciona o controle de congestionamento do TCP (Reno)?",
+      "back": "Partida lenta (a janela dobra por RTT até o limiar), depois prevenção de congestionamento (cresce 1 MSS por RTT). Perda por 3 ACKs duplicados reduz a janela à metade; timeout volta a 1 MSS."
+    },
+    {
+      "id": "red-005",
+      "front": "Quantos hosts cabem numa rede /24 e numa /26?",
+      "back": "/24: 2⁸ − 2 = 254 hosts. /26: 2⁶ − 2 = 62 hosts (desconta-se o endereço de rede e o de broadcast)."
+    },
+    {
+      "id": "red-006",
+      "front": "Para que servem o ARP e o DNS?",
+      "back": "ARP: descobre o endereço MAC a partir do IP na rede local. DNS: traduz nomes (ex.: inep.gov.br) em endereços IP."
+    },
+    {
+      "id": "red-007",
+      "front": "Roteamento por vetor de distâncias x estado de enlace.",
+      "back": "Vetor de distâncias (RIP): cada roteador troca distâncias com os vizinhos (Bellman-Ford), converge devagar (contagem ao infinito). Estado de enlace (OSPF): todos conhecem a topologia e calculam rotas com Dijkstra."
+    },
+    {
+      "id": "red-008",
+      "front": "O que faz o NAT?",
+      "back": "Traduz endereços privados da rede interna para um endereço público, usando portas para distinguir conexões; economiza endereços IPv4."
+    },
+    {
+      "id": "red-009",
+      "front": "Hub, switch e roteador: em que camada atuam?",
+      "back": "Hub: física, repete o sinal para todas as portas. Switch: enlace, encaminha por endereço MAC. Roteador: rede, encaminha por endereço IP entre redes."
+    },
+    {
+      "id": "red-010",
+      "front": "Que portas e protocolos de transporte usam HTTP, HTTPS, DNS e SSH?",
+      "back": "HTTP 80/TCP, HTTPS 443/TCP, DNS 53 (UDP, e TCP em respostas grandes), SSH 22/TCP."
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "deck": "compiladores",
+  "area": "Compiladores",
+  "title": "Compiladores",
+  "description": "Fases de compilação, análise léxica e sintática. Base: Aho, Lam, Sethi e Ullman (livro do dragão).",
+  "cards": [
+    {
+      "id": "comp-001",
+      "front": "Quais são as fases clássicas de um compilador?",
+      "back": "Análise léxica, sintática e semântica; geração de código intermediário; otimização; geração de código objeto. A tabela de símbolos é usada por todas."
+    },
+    {
+      "id": "comp-002",
+      "front": "O que faz o analisador léxico?",
+      "back": "Lê os caracteres e agrupa em tokens (identificadores, palavras-chave, números, operadores), descartando espaços e comentários. É especificado por expressões regulares e implementado com autômato finito."
+    },
+    {
+      "id": "comp-003",
+      "front": "Que formalismo descreve a sintaxe de uma linguagem de programação?",
+      "back": "Gramáticas livres de contexto; o analisador sintático constrói a árvore de derivação ou a árvore sintática abstrata."
+    },
+    {
+      "id": "comp-004",
+      "front": "Análise descendente x ascendente.",
+      "back": "Descendente (LL, recursiva) constrói a árvore da raiz para as folhas; ascendente (LR, SLR, LALR) reduz das folhas até a raiz, com ações de empilhar e reduzir."
+    },
+    {
+      "id": "comp-005",
+      "front": "Que gramáticas um analisador LL(1) não aceita diretamente?",
+      "back": "Gramáticas com recursão à esquerda ou ambíguas, ou com produções de um mesmo não terminal que começam pelos mesmos símbolos (precisa fatorar à esquerda)."
+    },
+    {
+      "id": "comp-006",
+      "front": "O que verifica a análise semântica?",
+      "back": "Regras que a gramática não expressa: tipos compatíveis, variáveis declaradas antes do uso, número de argumentos, escopo."
+    },
+    {
+      "id": "comp-007",
+      "front": "Compilador x interpretador.",
+      "back": "O compilador traduz o programa inteiro para outra linguagem antes da execução; o interpretador executa instrução a instrução. Há híbridos, como bytecode com compilação JIT."
+    },
+    {
+      "id": "comp-008",
+      "front": "Dê exemplos de otimização de código.",
+      "back": "Eliminação de subexpressões comuns, propagação de constantes, remoção de código morto, movimentação de código invariante para fora de laços e alocação de registradores."
+    }
+  ]
+}

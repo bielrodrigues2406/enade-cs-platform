@@ -1,0 +1,58 @@
+{
+  "deck": "banco-de-dados",
+  "area": "Banco de dados",
+  "title": "Banco de dados",
+  "description": "Modelagem, modelo relacional, SQL, normalização e transações. Base: Elmasri e Navathe; Silberschatz.",
+  "cards": [
+    {
+      "id": "bd-001",
+      "front": "Quais são as propriedades ACID?",
+      "back": "Atomicidade (tudo ou nada), Consistência (de um estado válido a outro), Isolamento (transações concorrentes não interferem) e Durabilidade (o que foi confirmado não se perde)."
+    },
+    {
+      "id": "bd-002",
+      "front": "Chave primária, candidata e estrangeira.",
+      "back": "Candidata: conjunto mínimo de atributos que identifica cada tupla. Primária: a candidata escolhida. Estrangeira: atributo que referencia a chave de outra relação (integridade referencial)."
+    },
+    {
+      "id": "bd-003",
+      "front": "Quando uma tabela está na 1FN, 2FN e 3FN?",
+      "back": "1FN: valores atômicos. 2FN: 1FN e nenhum atributo não chave depende de parte de uma chave composta. 3FN: 2FN e nenhum atributo não chave depende transitivamente da chave."
+    },
+    {
+      "id": "bd-004",
+      "front": "O que exige a forma normal de Boyce-Codd (BCNF)?",
+      "back": "Para toda dependência funcional não trivial X → Y, X é superchave."
+    },
+    {
+      "id": "bd-005",
+      "front": "Como um relacionamento N:N do modelo ER vira tabelas?",
+      "back": "Cria-se uma tabela associativa com as chaves estrangeiras das duas entidades (chave primária composta) e os atributos do próprio relacionamento."
+    },
+    {
+      "id": "bd-006",
+      "front": "INNER JOIN x LEFT JOIN.",
+      "back": "INNER: só as linhas com correspondência nas duas tabelas. LEFT: todas as da esquerda, com NULL onde não há correspondência na direita."
+    },
+    {
+      "id": "bd-007",
+      "front": "WHERE x HAVING.",
+      "back": "WHERE filtra linhas antes do agrupamento; HAVING filtra grupos depois do GROUP BY e pode usar funções de agregação."
+    },
+    {
+      "id": "bd-008",
+      "front": "Quais anomalias os níveis de isolamento evitam?",
+      "back": "Leitura suja (read uncommitted permite), leitura não repetível (read committed permite), leitura fantasma (repeatable read pode permitir). Serializable evita todas."
+    },
+    {
+      "id": "bd-009",
+      "front": "O que é um índice e quando ele piora o desempenho?",
+      "back": "Estrutura auxiliar (geralmente árvore B+ ou hash) que acelera buscas. Piora escritas (inserção, atualização e remoção precisam mantê-lo) e ocupa espaço."
+    },
+    {
+      "id": "bd-010",
+      "front": "Álgebra relacional: seleção, projeção e junção.",
+      "back": "Seleção (σ) filtra tuplas por condição; projeção (π) escolhe colunas; junção (⋈) combina tuplas de duas relações que satisfazem uma condição."
+    }
+  ]
+}

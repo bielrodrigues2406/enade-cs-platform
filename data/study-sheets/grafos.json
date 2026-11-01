@@ -1,0 +1,48 @@
+{
+  "slug": "grafos",
+  "area": "Algoritmos",
+  "title": "Grafos e seus algoritmos",
+  "summary": "Representação de grafos e os algoritmos clássicos de busca, caminho mínimo e árvore geradora. Aparecem tanto em objetivas quanto em discursivas.",
+  "sections": [
+    {
+      "title": "Representação",
+      "points": [
+        "Matriz de adjacência: O(V²) de espaço, teste de aresta em O(1).",
+        "Lista de adjacência: O(V + E) de espaço, melhor para grafos esparsos."
+      ]
+    },
+    {
+      "title": "Buscas",
+      "points": [
+        "BFS (fila): visita por camadas; acha o menor número de arestas em grafo não ponderado.",
+        "DFS (pilha ou recursão): detecta ciclos, faz ordenação topológica e acha componentes fortemente conexas.",
+        "Ambas O(V + E) com lista de adjacência."
+      ]
+    },
+    {
+      "title": "Caminho mínimo",
+      "points": [
+        "Dijkstra: pesos não negativos, O((V + E) log V) com heap.",
+        "Bellman-Ford: aceita pesos negativos e detecta ciclo negativo, O(V·E).",
+        "Floyd-Warshall: todos os pares, programação dinâmica, O(V³)."
+      ]
+    },
+    {
+      "title": "Árvore geradora mínima",
+      "points": [
+        "Kruskal: arestas em ordem crescente, union-find evita ciclos.",
+        "Prim: cresce uma árvore a partir de um vértice com fila de prioridade.",
+        "Os dois são gulosos e corretos pela propriedade do corte."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Usar Dijkstra com peso negativo: o resultado pode estar errado.",
+    "Esquecer que a ordenação topológica só existe em grafo dirigido acíclico.",
+    "Confundir caminho euleriano (passa por todas as arestas) com hamiltoniano (por todos os vértices)."
+  ],
+  "references": [
+    "CORMEN, T. H. et al. Algoritmos: teoria e prática.",
+    "ROSEN, K. Matemática discreta e suas aplicações."
+  ]
+}

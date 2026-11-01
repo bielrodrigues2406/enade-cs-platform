@@ -1,0 +1,49 @@
+{
+  "slug": "automatos-e-computabilidade",
+  "area": "Teoria da computação",
+  "title": "Autômatos, linguagens e computabilidade",
+  "summary": "Hierarquia de Chomsky, o que cada máquina reconhece e os limites do que é computável e eficiente.",
+  "sections": [
+    {
+      "title": "Hierarquia de Chomsky",
+      "points": [
+        "Regulares: autômato finito, expressão regular, gramática regular.",
+        "Livres de contexto: autômato de pilha, gramática livre de contexto (linguagens de programação).",
+        "Sensíveis ao contexto: autômato linearmente limitado. Recursivamente enumeráveis: máquina de Turing."
+      ]
+    },
+    {
+      "title": "Autômatos finitos",
+      "points": [
+        "AFD e AFN são equivalentes (construção de subconjuntos, até 2ⁿ estados).",
+        "Regulares são fechadas sob união, concatenação, Kleene, interseção e complemento.",
+        "Lema do bombeamento: serve para provar que uma linguagem NÃO é regular (ex.: aⁿbⁿ)."
+      ]
+    },
+    {
+      "title": "Computabilidade",
+      "points": [
+        "Tese de Church-Turing: algoritmo = máquina de Turing.",
+        "O problema da parada é indecidível (diagonalização).",
+        "Decidível: a máquina sempre para com sim ou não. Reconhecível: para no sim, pode não parar no não."
+      ]
+    },
+    {
+      "title": "Complexidade",
+      "points": [
+        "P ⊆ NP; se P = NP é um problema em aberto.",
+        "NP-completo: em NP e todo NP se reduz a ele (SAT, 3-SAT, clique, caixeiro-viajante de decisão).",
+        "Para mostrar que X é NP-difícil, reduza um NP-completo conhecido a X, e não o contrário."
+      ]
+    }
+  ],
+  "pitfalls": [
+    "Inverter o sentido da redução ao provar NP-dificuldade.",
+    "Achar que AFN reconhece mais linguagens que AFD.",
+    "Confundir indecidível com intratável (exponencial, mas decidível)."
+  ],
+  "references": [
+    "SIPSER, M. Introdução à teoria da computação.",
+    "HOPCROFT, J.; MOTWANI, R.; ULLMAN, J. Introdução à teoria de autômatos, linguagens e computação."
+  ]
+}

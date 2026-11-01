@@ -1,0 +1,58 @@
+{
+  "deck": "arquitetura",
+  "area": "Arquitetura de computadores",
+  "title": "Arquitetura e organização de computadores",
+  "description": "Representação de dados, circuitos, processador, pipeline e memória. Base: Patterson e Hennessy; Stallings.",
+  "cards": [
+    {
+      "id": "arq-001",
+      "front": "Como se representa −5 em complemento de dois com 8 bits?",
+      "back": "Escreva 5 (00000101), inverta os bits (11111010) e some 1: 11111011."
+    },
+    {
+      "id": "arq-002",
+      "front": "Quais são as saídas de um somador completo de 1 bit?",
+      "back": "S = A ⊕ B ⊕ Cin e Cout = A·B + Cin·(A ⊕ B)."
+    },
+    {
+      "id": "arq-003",
+      "front": "Arquitetura de von Neumann x Harvard.",
+      "back": "Von Neumann: dados e instruções na mesma memória e no mesmo barramento (gargalo de von Neumann). Harvard: memórias e barramentos separados para dados e instruções."
+    },
+    {
+      "id": "arq-004",
+      "front": "RISC x CISC.",
+      "back": "RISC: poucas instruções simples, de tamanho fixo, load/store, muitas em um ciclo, favorece pipeline. CISC: muitas instruções complexas, de tamanho variável, com acesso à memória em várias delas."
+    },
+    {
+      "id": "arq-005",
+      "front": "Quais são os conflitos (hazards) de um pipeline?",
+      "back": "Estruturais (recurso disputado), de dados (instrução depende de resultado ainda não pronto) e de controle (desvios). Tratamentos: bolhas, adiantamento (forwarding), previsão de desvio."
+    },
+    {
+      "id": "arq-006",
+      "front": "O que é localidade temporal e espacial?",
+      "back": "Temporal: o que foi acessado tende a ser acessado de novo em breve. Espacial: endereços próximos tendem a ser acessados juntos. É o que faz a cache funcionar."
+    },
+    {
+      "id": "arq-007",
+      "front": "Mapeamento direto, totalmente associativo e associativo por conjunto na cache.",
+      "back": "Direto: cada bloco tem uma única linha possível (simples e rápido, mais conflitos). Totalmente associativo: qualquer linha (menos falhas, mais caro). Por conjunto (k vias): uma linha entre k de um conjunto."
+    },
+    {
+      "id": "arq-008",
+      "front": "Como se divide o endereço na cache de mapeamento direto?",
+      "back": "Rótulo (tag), índice da linha e deslocamento (palavra ou byte dentro do bloco)."
+    },
+    {
+      "id": "arq-009",
+      "front": "Escreva a lei de Amdahl.",
+      "back": "Aceleração = 1 / ((1 − f) + f/s), em que f é a fração melhorada e s a aceleração dessa fração. O trecho não melhorado limita o ganho total."
+    },
+    {
+      "id": "arq-010",
+      "front": "O que é DMA?",
+      "back": "Acesso direto à memória: um controlador transfere blocos entre o dispositivo e a memória sem a CPU copiar cada palavra, e a avisa por interrupção ao terminar."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "deck": "matematica",
+  "area": "Matemática",
+  "title": "Matemática discreta e lógica",
+  "description": "Lógica proposicional, conjuntos, relações, combinatória e grafos. Base: Rosen, Matemática Discreta.",
+  "cards": [
+    {
+      "id": "mat-001",
+      "front": "Quando uma fórmula é tautologia, contradição ou contingência?",
+      "back": "Tautologia: verdadeira em todas as valorações. Contradição: falsa em todas. Contingência: verdadeira em algumas e falsa em outras."
+    },
+    {
+      "id": "mat-002",
+      "front": "Escreva as leis de De Morgan.",
+      "back": "¬(p ∧ q) ≡ ¬p ∨ ¬q e ¬(p ∨ q) ≡ ¬p ∧ ¬q."
+    },
+    {
+      "id": "mat-003",
+      "front": "Qual é a contrapositiva de p → q e ela é equivalente?",
+      "back": "¬q → ¬p, logicamente equivalente a p → q. A recíproca (q → p) e a inversa (¬p → ¬q) não são."
+    },
+    {
+      "id": "mat-004",
+      "front": "O que é uma relação de equivalência?",
+      "back": "Relação reflexiva, simétrica e transitiva; particiona o conjunto em classes de equivalência."
+    },
+    {
+      "id": "mat-005",
+      "front": "O que é uma ordem parcial?",
+      "back": "Relação reflexiva, antissimétrica e transitiva, como ⊆ entre conjuntos ou divisibilidade entre naturais."
+    },
+    {
+      "id": "mat-006",
+      "front": "Permutação x combinação (fórmulas).",
+      "back": "Arranjos de k entre n, a ordem importa: n!/(n−k)!. Combinações, a ordem não importa: C(n,k) = n!/(k!(n−k)!)."
+    },
+    {
+      "id": "mat-007",
+      "front": "Enuncie o princípio da casa dos pombos.",
+      "back": "Se n + 1 objetos são postos em n caixas, alguma caixa recebe pelo menos dois. Forma geral: alguma recebe pelo menos ⌈N/k⌉."
+    },
+    {
+      "id": "mat-008",
+      "front": "Quando um grafo tem caminho ou circuito euleriano?",
+      "back": "Circuito euleriano: conexo e todos os vértices com grau par. Caminho euleriano (não circuito): exatamente dois vértices de grau ímpar."
+    },
+    {
+      "id": "mat-009",
+      "front": "Quantas arestas tem uma árvore com n vértices?",
+      "back": "n − 1; é conexa e acíclica, e entre dois vértices há exatamente um caminho."
+    },
+    {
+      "id": "mat-010",
+      "front": "Como funciona a prova por indução matemática?",
+      "back": "Base: prove P(n₀). Passo: suponha P(k) e prove P(k+1). Então P(n) vale para todo n ≥ n₀."
+    }
+  ]
+}
