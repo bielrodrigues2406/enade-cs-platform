@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, HostListener, inject, signal } from "@angular/core";
+import { ApplicationRef, Component, HostListener, effect, inject, signal } from "@angular/core";
 import { IMAGE_CONFIG } from "@angular/common";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
@@ -162,7 +162,9 @@ class App {
   curationView = signal(false);
   curationBusy = signal(false);
   reviewView = signal(false);
-  practiceView = signal(location.pathname === "/treino");
+  practiceView = signal(isPracticePath(location.pathname));
+  /** Treino parcial (/treino) ou provas completas (/provas): o mesmo componente, seleções diferentes. */
+  practiceSection = signal<PracticeSection>(location.pathname === "/provas" ? "provas" : "treino");
   practiceAttemptId = signal<string | null>(null);
   practiceItemPosition = signal(1);
   practiceBusy = signal(false);
@@ -182,7 +184,17 @@ class App {
     typeof BroadcastChannel === "undefined"
       ? null
       : new BroadcastChannel("enade-identity");
+  private lastSection = "";
   constructor() {
+    // Trocou de seção, começa do topo. Voltar da questão para a lista mantém
+    // a posição, para a pessoa continuar de onde estava.
+    effect(() => {
+      const section = this.sectionLabel();
+      const backToList = this.lastSection === "Resolução" && section === "Banco de questões";
+      if (this.lastSection && section !== this.lastSection && !backToList)
+        window.scrollTo({ top: 0, behavior: "instant" });
+      this.lastSection = section;
+    });
     this.readCatalogAddress();
     this.readPracticeAddress();
     if (this.identityChannel) {
@@ -324,7 +336,7 @@ class App {
     if (this.lessonsView()) return "Aulas";
     if (this.discursiveView()) return "Discursivas";
     if (this.curationView()) return "Curadoria";
-    if (this.practiceView()) return "Treino parcial";
+    if (this.practiceView()) return this.practiceSection() === "provas" ? "Provas completas" : "Treino parcial";
     if (this.reviewView()) return "Caderno de erros";
     if (this.homeView()) return "Início";
     return this.question() ? "Resolução" : "Banco de questões";
@@ -376,8 +388,9 @@ class App {
     });
     return false;
   }
-  openPractice() {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openPractice())) return;
+  openPractice(section: PracticeSection = "treino") {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openPractice(section))) return;
+    this.practiceSection.set(section);
     this.requestNumber++;
     this.loading.set(false);
     this.question.set(null);
@@ -415,13 +428,13 @@ class App {
   }
   /** Abre um treino existente (por exemplo, o em andamento da página inicial). */
   openPracticeAttempt(attemptId: string) {
-    this.openPractice();
+    this.openPractice(this.practiceSection());
     if (!this.practiceView()) return;
     this.practiceAttemptId.set(attemptId);
     this.writePracticeAddress("replace");
   }
   practiceLocationChanged(location_: { attemptId: string | null; position: number }) {
-    if (!this.practiceView() || this.authBusy() || location.pathname !== "/treino") return;
+    if (!this.practiceView() || this.authBusy() || !isPracticePath(location.pathname)) return;
     this.practiceAttemptId.set(location_.attemptId);
     this.practiceItemPosition.set(location_.position);
     this.writePracticeAddress("replace");
@@ -429,7 +442,7 @@ class App {
   private readPracticeAddress() {
     const params = new URLSearchParams(location.search);
     const id = params.getAll("attempt").length === 1 ? params.get("attempt") : null;
-    const valid = location.pathname === "/treino" && id && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id);
+    const valid = isPracticePath(location.pathname) && id && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(id);
     this.practiceAttemptId.set(valid ? id.toLowerCase() : null);
     const position = params.getAll("item").length === 1 ? params.get("item") ?? "1" : "1";
     this.practiceItemPosition.set(valid && /^([1-9]|[1-5][0-9]|60)$/.test(position) ? Number(position) : 1);
@@ -440,7 +453,7 @@ class App {
       params.set("attempt", this.practiceAttemptId()!);
       if (this.practiceItemPosition() > 1) params.set("item", String(this.practiceItemPosition()));
     }
-    const address = "/treino" + (params.size ? "?" + params.toString() : "");
+    const address = "/" + this.practiceSection() + (params.size ? "?" + params.toString() : "");
     if (location.pathname + location.search !== address) {
       if (mode === "push") history.pushState(null, "", address);
       else history.replaceState(null, "", address);
@@ -631,7 +644,7 @@ class App {
     this.currentAddress = location.pathname + location.search;
   }
   private leaveHomePath() {
-    if (location.pathname === "/" || location.pathname === "/treino") {
+    if (location.pathname === "/" || isPracticePath(location.pathname)) {
       this.setPath("/questoes");
       this.writeCatalogAddress("replace");
     }
@@ -692,8 +705,9 @@ class App {
     this.curationView.set(false);
     this.accountView.set(null);
     this.homeView.set(location.pathname === "/");
-    this.practiceView.set(location.pathname === "/treino");
+    this.practiceView.set(isPracticePath(location.pathname));
     if (this.practiceView()) {
+      this.practiceSection.set(location.pathname === "/provas" ? "provas" : "treino");
       this.requestNumber++;
       this.loading.set(false);
       this.error.set("");
@@ -1061,14 +1075,23 @@ class App {
       this.appRef.tick();
     });
   }
+  /** Nova seção começa do topo: o foco sozinho não rola se o rodapé já estava à vista. */
   private focusMain() {
-    setTimeout(() => document.getElementById("content")?.focus(), 0);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      document.getElementById("content")?.focus({ preventScroll: true });
+    }, 0);
   }
   skipToContent(event: Event) {
     event.preventDefault();
     this.focusMain();
   }
 }
+type PracticeSection = "treino" | "provas";
+function isPracticePath(path: string) {
+  return path === "/treino" || path === "/provas";
+}
+
 bootstrapApplication(App, {
   // Os recortes das questões vêm em 200 dpi de propósito: a mesma imagem
   // serve à leitura e à ampliação. O aviso de imagem maior que a exibida

@@ -23,6 +23,8 @@ export type Edition = {
   objectives: number; general: number; discursive: number;
   /** Números sem objetiva publicada (anuladas ou ainda não conferidas). */
   missing: number[];
+  /** Última vez que a pessoa finalizou esta prova. */
+  lastResult?: { attemptId: string; correct: number; total: number; finishedAt: string } | null;
 };
 export type EditionList = { minutes: number; editions: Edition[] };
 export type PracticeAvailability = {

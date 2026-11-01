@@ -219,3 +219,9 @@
     padding: 0 var(--space-2);
   }
 }
+/* Aviso de conferência por agente, discreto, logo abaixo do recorte. */
+.disc-credit {
+  margin: var(--space-2) 0 var(--space-6);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}

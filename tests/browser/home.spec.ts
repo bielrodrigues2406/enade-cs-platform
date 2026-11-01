@@ -54,7 +54,7 @@ test("home shows the study board and leads to study and back", async ({
   await expect(page).toHaveURL(/\/$/);
 
   await page
-    .getByRole("button", { name: "Abrir o banco de questões" })
+    .getByRole("button", { name: "Banco de questões" })
     .first()
     .click();
   await expect(
@@ -168,7 +168,8 @@ test("an untimed area simulation leaves through its own exit dialog", async ({
   await page.getByRole("button", { name: "← Sair do treino" }).click();
   const leave = page.getByRole("dialog", { name: "Sair do treino?" });
   await expect(leave.getByRole("button", { name: "Finalizar agora" })).toBeVisible();
-  await leave.getByRole("button", { name: "Continuar respondendo" }).click();
+  // Continuar respondendo é só fechar a janela.
+  await leave.getByRole("button", { name: "Fechar" }).click();
   await expect(leave).toBeHidden();
   await expect(page.getByText(/^Questão 1 de \d+$/)).toBeVisible();
   await page.getByRole("button", { name: "← Sair do treino" }).click();

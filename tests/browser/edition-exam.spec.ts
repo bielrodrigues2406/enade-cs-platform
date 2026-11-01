@@ -75,10 +75,12 @@ test.afterAll(async () => {
 });
 
 test("a student takes the full edition exam with a countdown, pauses, leaves safely, writes the discursive and sees results by block", async ({ page }) => {
-  await page.goto("/treino");
-  const editions = page.getByRole("region", { name: "Prova completa da edição" });
+  await page.goto("/provas");
+  await expect(page.getByRole("heading", { name: "Provas completas", level: 1 })).toBeVisible();
+  const editions = page.getByRole("region", { name: "Edições disponíveis" });
   const row = editions.getByRole("listitem").filter({ hasText: "ENADE 2096" });
-  await expect(row).toContainText("20 objetivas (3 de Formação Geral) · 1 discursiva · falta a 5");
+  await expect(row).toContainText("20 objetivas · 1 discursiva");
+  await expect(row).toContainText("Falta a 5");
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: "test-results/edition-setup-1280.png", fullPage: true });
   await row.getByRole("button", { name: "Fazer esta prova" }).click();
@@ -102,11 +104,11 @@ test("a student takes the full edition exam with a countdown, pauses, leaves saf
   await expect(page.getByRole("heading", { name: "Prova pausada" })).toBeVisible();
   await page.getByRole("button", { name: "Continuar prova" }).click();
   await expect(page.getByRole("radio").first()).toBeChecked();
-  // Sair pelo menu pede confirmação e pausa; a prova volta pelo treino.
+  // Sair pelo menu pede confirmação e pausa; a prova volta por Provas completas.
   await page.getByRole("button", { name: "Discursivas" }).first().click();
   await page.getByRole("dialog", { name: "Sair agora?" }).getByRole("button", { name: "Pausar e sair" }).click();
   await expect(page.getByRole("heading", { name: "Discursivas", level: 1 })).toBeVisible();
-  await page.getByRole("button", { name: "Treino parcial" }).first().click();
+  await page.getByRole("button", { name: "Provas completas" }).first().click();
   await page.getByRole("button", { name: "Retomar prova" }).click();
   await expect(page.getByRole("heading", { name: "Prova pausada" })).toBeVisible();
   await page.getByRole("button", { name: "Continuar prova" }).click();
@@ -132,4 +134,12 @@ test("a student takes the full edition exam with a countdown, pauses, leaves saf
   await page.screenshot({ path: "test-results/edition-result-390.png", fullPage: true });
   await page.getByRole("button", { name: "Abrir as discursivas" }).click();
   await expect(page.getByRole("button", { name: /ENADE 2096 · Discursiva 1/ })).toContainText("Enviada");
+
+  // De volta às provas, o cartão mostra a última nota e oferece refazer.
+  await page.getByRole("button", { name: "Provas completas" }).first().click();
+  const done = page.getByRole("region", { name: "Edições disponíveis" }).getByRole("listitem").filter({ hasText: "ENADE 2096" });
+  await expect(done).toContainText("Sua última: 1 de 20");
+  await expect(done.getByRole("button", { name: "Refazer esta prova" })).toBeEnabled();
+  await done.getByRole("button", { name: "Ver resultado" }).click();
+  await expect(page.getByRole("heading", { name: "Resultado da prova" })).toBeVisible();
 });

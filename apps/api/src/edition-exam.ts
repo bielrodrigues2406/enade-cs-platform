@@ -40,16 +40,31 @@ async function editions(): Promise<Edition[]> {
   )).rows;
 }
 
+type LastResult = { attemptId: string; correct: number; total: number; finishedAt: string };
+
+/** Última prova finalizada pela pessoa em cada edição, para mostrar no cartão. */
+async function lastResults(owner: string): Promise<Map<string, LastResult>> {
+  const rows = (await db.query<LastResult & { source: string }>(
+    `SELECT DISTINCT ON (exam_source_id) exam_source_id AS source,id AS "attemptId",
+       (summary->>'correct')::int AS correct,(summary->>'total')::int AS total,finished_at AS "finishedAt"
+     FROM practice_attempt WHERE owner_id=$1 AND kind='EDITION' AND state='COMPLETED'
+     ORDER BY exam_source_id,finished_at DESC,id DESC`, [owner],
+  )).rows;
+  return new Map(rows.map(({ source, ...result }) => [source, result]));
+}
+
 @Controller("api/editions")
 export class EditionExamController {
   @Get() async list(@Req() req: any) {
-    await requireIdentity(req);
+    const user = await requireIdentity(req);
+    const last = await lastResults(user.id);
     return {
       minutes: EDITION_MINUTES,
       editions: (await editions()).map(({ numbers, ...edition }) => ({
         ...edition,
         // Caderno compartilhado tem questões de outros cursos: lacunas não dizem nada.
         missing: edition.modality === "COMUM" ? [] : missingNumbers(numbers),
+        lastResult: last.get(edition.id) ?? null,
       })),
     };
   }

@@ -10,9 +10,19 @@
     <div class="sheet-dialog-body">
       <div class="sheet-dialog-content"><p id="choice-message">{{ ask.message }}</p></div>
       <div class="sheet-dialog-actions">
-        <button type="button" class="outline" (click)="choice.answer(null)" autofocus>{{ ask.cancel ?? "Cancelar" }}</button>
+        <!-- Ação destrutiva secundária vai à esquerda, como link; as demais, à direita. -->
         @for (action of ask.actions; track action.value) {
-          <button type="button" [class.outline]="action.kind === 'outline'" [class.danger]="action.kind === 'danger'" (click)="choice.answer(action.value)">{{ action.label }}</button>
+          @if (action.kind === "danger-link") {
+            <button type="button" class="text-button danger-text choice-aside" (click)="choice.answer(action.value)">{{ action.label }}</button>
+          }
+        }
+        @if (ask.cancel !== null) {
+          <button type="button" class="outline" (click)="choice.answer(null)" autofocus>{{ ask.cancel ?? "Cancelar" }}</button>
+        }
+        @for (action of ask.actions; track action.value) {
+          @if (action.kind !== "danger-link") {
+            <button type="button" [class.outline]="action.kind === 'outline'" [class.danger]="action.kind === 'danger'" (click)="choice.answer(action.value)">{{ action.label }}</button>
+          }
         }
       </div>
     </div>

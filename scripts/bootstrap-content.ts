@@ -1,7 +1,8 @@
 // Carrega num banco novo (produção) o conteúdo publicado que está no
 // repositório (DEP-2): baixa a prova e o gabarito de cada conferência em
 // data/agent-reviews, confere o SHA-256 do catálogo, importa as fontes e
-// publica as conferências. Pode rodar de novo: o que já existe é mantido.
+// publica as conferências; depois, as discursivas de data/discursive-reviews
+// (com o padrão de resposta). Pode rodar de novo: o que já existe é mantido.
 //   node dist/admin/bootstrap-content.mjs        (na imagem)
 //   npm run bootstrap:content                    (local)
 import { execFile } from "node:child_process";
@@ -14,6 +15,7 @@ import { db } from "../apps/api/src/database.js";
 import { importDocument, validateMirrorUrl, validateOfficialUrl } from "../apps/api/src/source-store.js";
 import { downloadPdf } from "./lib/source-download.mjs";
 import { describe, publishReview, reviewDocument } from "./lib/publish-review.js";
+import { describeDiscursive, discursiveReviewFiles, publishDiscursiveFile, readDiscursiveReview } from "./lib/publish-discursive.js";
 
 const run = promisify(execFile);
 const REVIEWS = "data/agent-reviews";
@@ -27,14 +29,18 @@ async function reviewFiles() {
   return (await readdir(REVIEWS)).filter((name) => name.endsWith(".json")).sort().map((name) => path.join(REVIEWS, name));
 }
 
-/** Prova e gabarito de cada conferência, como estão no catálogo. */
-async function neededDocuments(files: string[]) {
+/** Prova e gabarito de cada conferência, e o padrão de resposta das discursivas, como estão no catálogo. */
+async function neededDocuments(files: string[], discursiveFiles: string[]) {
   const catalog: CatalogDocument[] = JSON.parse(await readFile("data/official-sources.json", "utf8")).documents;
   const byId = new Map(catalog.map((doc) => [doc.id, doc]));
   const ids = new Set<string>();
   for (const file of files) {
     const exam = await reviewDocument(file);
     ids.add(exam).add(exam.replace(/-exam$/, "-answer-key"));
+  }
+  for (const file of discursiveFiles) {
+    const review = await readDiscursiveReview(file);
+    ids.add(review.document).add(review.standardDocument);
   }
   return [...ids].map((id) => byId.get(id) ?? (() => { throw new Error(`Documento fora do catálogo: ${id}`); })());
 }
@@ -77,9 +83,10 @@ async function importSource(doc: CatalogDocument, work: string) {
 
 async function main() {
   const files = await reviewFiles();
+  const discursiveFiles = await discursiveReviewFiles();
   const work = await mkdtemp(path.join(tmpdir(), "enade-bootstrap-"));
   try {
-    for (const doc of await neededDocuments(files)) console.log(await importSource(doc, work));
+    for (const doc of await neededDocuments(files, discursiveFiles)) console.log(await importSource(doc, work));
   } finally {
     await rm(work, { recursive: true, force: true });
   }
@@ -89,6 +96,7 @@ async function main() {
     rejected += summary.rejected.length;
     console.log(describe(summary));
   }
+  for (const file of discursiveFiles) console.log(describeDiscursive(await publishDiscursiveFile(file)));
   if (rejected) process.exitCode = 1;
 }
 

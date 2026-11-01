@@ -1,0 +1,296 @@
+{
+  "document": "enade-2014-bacharelado-exam",
+  "examSha256": "bd3e8436b4d2da2211eaedc4fd6a28a3a2583c0c0b3280aa210cd3d305bcce42",
+  "standardDocument": "enade-2014-bacharelado-response-standard",
+  "standardSha256": "35f342eed6e6befc1819edee393cd6e5728d03a89af310a2869e89b4e33fda8d",
+  "extractor": "claude-extrator-discursivas",
+  "reviewer": "claude-autoconferencia",
+  "independent": false,
+  "reviewedAt": "2026-11-01T02:01:05Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 1,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Mobilidade urbana sustentável",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 5
+        },
+        {
+          "label": "b",
+          "points": 5
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D1-prompt-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 45.85,
+            "y0": 102.54,
+            "x1": 584.98,
+            "y1": 427.83
+          },
+          "width": 1498,
+          "height": 903,
+          "byteSize": 71908,
+          "sha256": "5056f9246233ffb28341529d26ca5a329af1878f2d5523f5235312b8790b1581"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D1-standard-1.webp",
+          "page": 1,
+          "box": {
+            "x0": 79,
+            "y0": 509.07,
+            "x1": 516.46,
+            "y1": 774
+          },
+          "width": 1216,
+          "height": 736,
+          "byteSize": 34900,
+          "sha256": "63b7507451b0b77d56305d263a8465b047c330d50cb65537d0617260ddd18c4e"
+        },
+        {
+          "file": "D1-standard-2.webp",
+          "page": 2,
+          "box": {
+            "x0": 79,
+            "y0": 67,
+            "x1": 516.12,
+            "y1": 319
+          },
+          "width": 1215,
+          "height": 700,
+          "byteSize": 37280,
+          "sha256": "056d14f99d4fd9639208052a87f240d9b8138938622843c707d718a3c7ff170a"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Violência urbana",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 7
+        },
+        {
+          "label": "b",
+          "points": 3
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D2-prompt-1.webp",
+          "page": 3,
+          "box": {
+            "x0": 45.85,
+            "y0": 102.54,
+            "x1": 584.96,
+            "y1": 321.28
+          },
+          "width": 1498,
+          "height": 607,
+          "byteSize": 49982,
+          "sha256": "2523b6098b85d01f691342147fe676102840571f5dff7479417cec97043be898"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D2-standard-1.webp",
+          "page": 3,
+          "box": {
+            "x0": 79,
+            "y0": 324.25,
+            "x1": 516.15,
+            "y1": 734
+          },
+          "width": 1215,
+          "height": 1138,
+          "byteSize": 48178,
+          "sha256": "16135f57b1b6b668a41dabad8dd082c579ee34f36b8aac671ea79ebade2b94c8"
+        },
+        {
+          "file": "D2-standard-2.webp",
+          "page": 4,
+          "box": {
+            "x0": 78,
+            "y0": 67,
+            "x1": 516.3,
+            "y1": 315
+          },
+          "width": 1217,
+          "height": 689,
+          "byteSize": 52810,
+          "sha256": "813a9fff980f4b7a4e3756c7d80f1544f15598436d772dee42204d7642c762e4"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Backtracking: resolver Sudoku",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D3-prompt-1.webp",
+          "page": 9,
+          "box": {
+            "x0": 45.71,
+            "y0": 102.54,
+            "x1": 585.12,
+            "y1": 428.19
+          },
+          "width": 1498,
+          "height": 904,
+          "byteSize": 91292,
+          "sha256": "a30accc2efafff54c9904a555d24cecec690a38008863212921049b177fe473c"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D3-standard-1.webp",
+          "page": 5,
+          "box": {
+            "x0": 79,
+            "y0": 349.37,
+            "x1": 515.99,
+            "y1": 594
+          },
+          "width": 1214,
+          "height": 680,
+          "byteSize": 25188,
+          "sha256": "45c38a3c7be48ed3f863d8f2423f7f12383da550a6a5780333a6516d4c84ec94"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "decision": "APPROVED",
+      "area": "Banco de dados",
+      "subject": "Modelo entidade-relacionamento",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D4-prompt-1.webp",
+          "page": 10,
+          "box": {
+            "x0": 45.85,
+            "y0": 102.54,
+            "x1": 585,
+            "y1": 424.58
+          },
+          "width": 1498,
+          "height": 894,
+          "byteSize": 70270,
+          "sha256": "538cc6af73b6af03f7d583b9c1ac54dfdfde6c6ef976760cfb529dc1c0756584"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D4-standard-1.webp",
+          "page": 6,
+          "box": {
+            "x0": 79,
+            "y0": 360.89,
+            "x1": 516.01,
+            "y1": 772
+          },
+          "width": 1214,
+          "height": 1142,
+          "byteSize": 159932,
+          "sha256": "9dbde9d80a6fd090cbdb9786d7b26270f9a5f256a80cb7d51973dc2ecf55a608"
+        },
+        {
+          "file": "D4-standard-2.webp",
+          "page": 7,
+          "box": {
+            "x0": 97,
+            "y0": 67,
+            "x1": 516.12,
+            "y1": 249
+          },
+          "width": 1165,
+          "height": 506,
+          "byteSize": 22604,
+          "sha256": "666d45f08fdc23178aac4aaf628c9815568599eaadf43b4cb8c9e651e7167d8b"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Divisão e conquista",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 6
+        },
+        {
+          "label": "b",
+          "points": 4
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D5-prompt-1.webp",
+          "page": 11,
+          "box": {
+            "x0": 45.85,
+            "y0": 102.54,
+            "x1": 584.96,
+            "y1": 250.25
+          },
+          "width": 1498,
+          "height": 410,
+          "byteSize": 33174,
+          "sha256": "cb71c50e0fa9253e7c1bfd6e9a04f9025bc27e79c4dfbdb96d89199e43523102"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D5-standard-1.webp",
+          "page": 8,
+          "box": {
+            "x0": 79,
+            "y0": 248.21,
+            "x1": 516.16,
+            "y1": 414
+          },
+          "width": 1215,
+          "height": 461,
+          "byteSize": 25798,
+          "sha256": "951ba4035639d08fd0e8bd169f1d182c07daf4fca1769692b506d1827d3b3262"
+        }
+      ]
+    }
+  ]
+}

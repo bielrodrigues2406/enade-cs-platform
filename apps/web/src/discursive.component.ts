@@ -14,7 +14,9 @@ type Summary = { id: string; title: string; area: string; subject: string | null
 type Response = { body: string; revision: number; submittedAt: string | null; assessment: { levels: Level[]; score: number } | null };
 type Detail = {
   id: string; title: string; area: string; subject: string | null; criteria: Criterion[];
-  examUrl: string; standardUrl: string; promptImages: Image[]; standardImages: Image[]; response: Response | null;
+  examUrl: string; standardUrl: string;
+  /** Aviso de conferência por agente, quando houver. */
+  reviewCredit?: string | null; reviewNote?: string | null; promptImages: Image[]; standardImages: Image[]; response: Response | null;
 };
 
 export const STATUS_LABEL: Record<Status, string> = {

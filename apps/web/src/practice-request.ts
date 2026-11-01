@@ -1,3 +1,5 @@
+import type { ChoiceService } from "./choice-dialog";
+
 /**
  * Pedido de um novo treino (POST /api/practice). A página inicial, a revisão e
  * a tela de treino montam o mesmo corpo; o servidor confere tamanho e área.
@@ -23,7 +25,7 @@ export function areaSimulation(area: string, count: number, timed = true): Pract
  * Devolve null se a pessoa desistir.
  */
 export async function chooseAreaSimulation(
-  choice: { choose<T extends string>(request: { eyebrow?: string; title: string; message: string; cancel?: string; actions: { value: T; label: string; kind?: "primary" | "outline" | "danger" }[] }): Promise<T | null> },
+  choice: Pick<ChoiceService, "choose">,
   area: string,
   count: number,
   minutesPerQuestion = MINUTES_PER_QUESTION,

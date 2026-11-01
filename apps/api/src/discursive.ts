@@ -30,7 +30,10 @@ async function question(id: string) {
   if (!ID.test(id)) fail("Discursiva não encontrada.", 404);
   const row = (await db.query(
     `SELECT q.id,q.year,q.modality,q.number,q.area,q.subject,q.criteria,
-       e.official_url AS "examUrl",s.official_url AS "standardUrl"
+       e.official_url AS "examUrl",s.official_url AS "standardUrl",
+       -- Conferida por agente (DISC-2): a tela avisa, como nas objetivas.
+       CASE WHEN q.review_origin='ASSISTED' THEN 'Recortes e itens conferidos por agente de IA (' || q.assisted_reviewer || '), sem revisão humana. Na dúvida, vale a prova original.' END AS "reviewCredit",
+       q.review_note AS "reviewNote"
      FROM discursive_question q JOIN source_document e ON e.id=q.exam_source_id
      JOIN source_document s ON s.id=q.standard_source_id WHERE q.id=$1`, [id],
   )).rows[0];

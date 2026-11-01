@@ -1,0 +1,334 @@
+{
+  "document": "enade-2017-bacharelado-exam",
+  "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+  "standardDocument": "enade-2017-bacharelado-response-standard",
+  "standardSha256": "283649fd660736c73045013c29a03c9c365f750106b38ccf69fd213a3d72f34d",
+  "extractor": "claude-extrator-discursivas",
+  "reviewer": "claude-autoconferencia",
+  "independent": false,
+  "reviewedAt": "2026-11-01T02:01:05Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 1,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Sífilis congênita e relações de gênero",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D1-prompt-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 54.6,
+            "y0": 112.29,
+            "x1": 576.5,
+            "y1": 754.54
+          },
+          "width": 1449,
+          "height": 1784,
+          "byteSize": 149840,
+          "sha256": "2b2c47587493d19661ddd69f2a6f65f8b7cf856c06ae207522e919563f263e71"
+        },
+        {
+          "file": "D1-prompt-2.webp",
+          "page": 3,
+          "box": {
+            "x0": 54.35,
+            "y0": 107.18,
+            "x1": 577.15,
+            "y1": 275.38
+          },
+          "width": 1452,
+          "height": 467,
+          "byteSize": 25904,
+          "sha256": "6f58a593fb71dfe9a5972ceb324645bda0b4a469d5ebf09cd197628dfff63ca6"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D1-standard-1.webp",
+          "page": 2,
+          "box": {
+            "x0": 79,
+            "y0": 203.06,
+            "x1": 516.47,
+            "y1": 742
+          },
+          "width": 1216,
+          "height": 1497,
+          "byteSize": 103230,
+          "sha256": "f1c331b844e2fd480f8fc0bf2b0e51a78057a13db622e73a9f49094149d96f9a"
+        },
+        {
+          "file": "D1-standard-2.webp",
+          "page": 3,
+          "box": {
+            "x0": 79,
+            "y0": 67,
+            "x1": 516.41,
+            "y1": 259
+          },
+          "width": 1215,
+          "height": 533,
+          "byteSize": 34374,
+          "sha256": "750aabc4f75a9b8ebcfb6ff4dc89527c7d3b1d813a82ceeef01deea961d73e27"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "decision": "APPROVED",
+      "area": "Formação Geral",
+      "subject": "Nome social de pessoas trans",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D2-prompt-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 54.35,
+            "y0": 82.7,
+            "x1": 576.45,
+            "y1": 476.83
+          },
+          "width": 1450,
+          "height": 1095,
+          "byteSize": 71944,
+          "sha256": "ed6c09a7da833b9f5808047736057640996a210137bd64a0f9162a2bc9691b63"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D2-standard-1.webp",
+          "page": 4,
+          "box": {
+            "x0": 79,
+            "y0": 407.95,
+            "x1": 516.41,
+            "y1": 765
+          },
+          "width": 1215,
+          "height": 992,
+          "byteSize": 59502,
+          "sha256": "21274a07b7924e96a4da3d4e58cdda9d26d47de54649cd583cbd20236848f276"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Lista encadeada impressa ao contrário",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 3
+        },
+        {
+          "label": "b",
+          "points": 7
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D3-prompt-1.webp",
+          "page": 13,
+          "box": {
+            "x0": 54.35,
+            "y0": 109.09,
+            "x1": 576.43,
+            "y1": 484.38
+          },
+          "width": 1450,
+          "height": 1042,
+          "byteSize": 55234,
+          "sha256": "cf0a4ab0a0ec1cca54c7ac0838306cd9a7efe51345a8fc7881f3a60e1b7b5659"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D3-standard-1.webp",
+          "page": 5,
+          "box": {
+            "x0": 79,
+            "y0": 405.43,
+            "x1": 516.41,
+            "y1": 539
+          },
+          "width": 1215,
+          "height": 371,
+          "byteSize": 22506,
+          "sha256": "b9079941d96cf1776450f5d0f04ebe04d073881302bda952a7f80fd8fe1830a6"
+        },
+        {
+          "file": "D3-standard-2.webp",
+          "page": 6,
+          "box": {
+            "x0": 79,
+            "y0": 73,
+            "x1": 469,
+            "y1": 676
+          },
+          "width": 1084,
+          "height": 1675,
+          "byteSize": 236534,
+          "sha256": "87ced28dbc7105e58f78f062a8ba709399aa9503fe4d8a0c80aec004f84c2c5d"
+        },
+        {
+          "file": "D3-standard-3.webp",
+          "page": 7,
+          "box": {
+            "x0": 79,
+            "y0": 68,
+            "x1": 516.12,
+            "y1": 673
+          },
+          "width": 1215,
+          "height": 1680,
+          "byteSize": 141704,
+          "sha256": "895927866a0509a5738763cb4d6a0a8ef7b2bc007a4fa9f29efb6db56a3256c2"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "decision": "APPROVED",
+      "area": "Engenharia de software",
+      "subject": "Diagrama de classes UML",
+      "criteria": [
+        {
+          "label": null,
+          "points": 10
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D4-prompt-1.webp",
+          "page": 14,
+          "box": {
+            "x0": 54.35,
+            "y0": 82.68,
+            "x1": 576.46,
+            "y1": 450.13
+          },
+          "width": 1450,
+          "height": 1020,
+          "byteSize": 70518,
+          "sha256": "0a28db183b63898c8a164a05c225e7fd53b6457791d7dcd6a397ced908f72f97"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D4-standard-1.webp",
+          "page": 8,
+          "box": {
+            "x0": 79,
+            "y0": 400.63,
+            "x1": 508,
+            "y1": 590
+          },
+          "width": 1192,
+          "height": 526,
+          "byteSize": 134000,
+          "sha256": "1276d0f1d918b676397a47852fc7a26b0197e6f3f5b356f37ce45dc641e347da"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "decision": "APPROVED",
+      "area": "Algoritmos",
+      "subject": "Busca em profundidade em grafo",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 7
+        },
+        {
+          "label": "b",
+          "points": 3
+        }
+      ],
+      "note": null,
+      "prompt": [
+        {
+          "file": "D5-prompt-1.webp",
+          "page": 15,
+          "box": {
+            "x0": 54.35,
+            "y0": 82.68,
+            "x1": 576.47,
+            "y1": 470.19
+          },
+          "width": 1450,
+          "height": 1076,
+          "byteSize": 68876,
+          "sha256": "103a4ede7a94f38652a381fe9eca2177292b4839ca10134e94c790d08323c55a"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D5-standard-1.webp",
+          "page": 9,
+          "box": {
+            "x0": 79,
+            "y0": 394.97,
+            "x1": 516.18,
+            "y1": 546
+          },
+          "width": 1215,
+          "height": 420,
+          "byteSize": 18576,
+          "sha256": "b7da4e21c692af8674ace5b3ee465c1beca313bffc9116a8121deafe47ad60db"
+        },
+        {
+          "file": "D5-standard-2.webp",
+          "page": 10,
+          "box": {
+            "x0": 79,
+            "y0": 71,
+            "x1": 516.39,
+            "y1": 646
+          },
+          "width": 1215,
+          "height": 1597,
+          "byteSize": 61230,
+          "sha256": "ed4730f2f26858cb57d0ecb30a3f3c1957ee9f43b60e08f1b448248c5efb55f9"
+        },
+        {
+          "file": "D5-standard-3.webp",
+          "page": 11,
+          "box": {
+            "x0": 109,
+            "y0": 65,
+            "x1": 339,
+            "y1": 252
+          },
+          "width": 639,
+          "height": 519,
+          "byteSize": 4296,
+          "sha256": "bb0751ba92541cfedf202ca320ec3b542112c3b53c9101eff13e610565233720"
+        }
+      ]
+    }
+  ]
+}

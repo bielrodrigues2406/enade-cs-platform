@@ -34,6 +34,8 @@ class PracticeError extends Error {
   styleUrl: "./exam.component.css",
 })
 export class ExamComponent {
+  /** Treino parcial ou provas completas: muda só a tela de escolha. */
+  @Input() section: "treino" | "provas" = "treino";
   @Input() attemptId: string | null = null;
   @Input() itemPosition = 1;
   @Output() locationChange = new EventEmitter<{ attemptId: string | null; position: number }>();
@@ -73,6 +75,13 @@ export class ExamComponent {
   // Prova completa da edição (SIM-1).
   editions = signal<EditionList | null>(null);
   chosenEdition = signal<Edition | null>(null);
+  /** Filtro por curso na seção Provas completas ("" = todas). */
+  editionFilter = signal("");
+  editionModalities = computed(() => [...new Set((this.editions()?.editions ?? []).map((e) => e.modality))]);
+  visibleEditions = computed(() => {
+    const filter = this.editionFilter();
+    return (this.editions()?.editions ?? []).filter((e) => !filter || e.modality === filter);
+  });
   discursiveOpen = signal<string | null>(null);
   now = signal(Date.now());
   /** Tempo restante do servidor e o instante em que chegou: o relógio local só desconta daí. */
@@ -248,7 +257,19 @@ export class ExamComponent {
   missingLabel(edition: Edition) {
     const list = edition.missing;
     if (!list.length) return "";
-    return list.length === 1 ? `falta a ${list[0]}` : `faltam ${list.slice(0, -1).join(", ")} e ${list.at(-1)}`;
+    if (list.length === 1) return `falta a ${list[0]}`;
+    // Lista longa polui o cartão: acima de três, só a quantidade.
+    if (list.length > 3) return `faltam ${list.length} questões`;
+    return `faltam ${list.slice(0, -1).join(", ")} e ${list.at(-1)}`;
+  }
+  capitalize(text: string) { return text.charAt(0).toUpperCase() + text.slice(1); }
+  /** "20 out", para o cartão da edição. */
+  shortDate(iso: string) {
+    return new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "short" }).format(new Date(iso)).replace(".", "");
+  }
+  /** No treino, o histórico mostra só treinos; provas ficam no cartão da edição. */
+  partialRecent(data: PracticeAvailability) {
+    return data.recent.filter((row) => row.kind !== "EDITION");
   }
   modalityLabel(modality: string) {
     return ({ BACHARELADO: "Bacharelado", LICENCIATURA: "Licenciatura", COMUM: "Caderno compartilhado" } as Record<string, string>)[modality] ?? modality;
@@ -373,9 +394,9 @@ export class ExamComponent {
         message: timed
           ? "Ao sair, o cronômetro pausa e suas respostas ficam salvas. Você retoma de onde parou."
           : "Suas respostas ficam salvas e você retoma de onde parou. Se já terminou, finalize para ver o resultado.",
-        cancel: "Continuar respondendo",
+        cancel: null,
         actions: [
-          { value: "cancel", label: `Cancelar ${kind === "prova" ? "a" : "o"} ${kind}`, kind: "danger" },
+          { value: "cancel", label: `Cancelar ${kind === "prova" ? "a" : "o"} ${kind}`, kind: "danger-link" },
           { value: "leave", label: timed ? "Pausar e sair" : "Sair", kind: "outline" },
           { value: "finish", label: "Finalizar agora" },
         ],

@@ -428,6 +428,10 @@ test("an edition exam applies the published objectives in order, pauses, expires
   assert.deepEqual(finished.summary.byBlock.general, { total: 4, correct: 1, incorrect: 0, unanswered: 3 });
   const draft = (await db.query("SELECT submitted_at FROM discursive_response WHERE owner_id=$1 AND question_id=$2", [user.id, discursiveId])).rows[0];
   assert.ok(draft.submitted_at, "o rascunho da discursiva é enviado com a prova");
+  // O cartão da edição mostra a última prova finalizada só para quem a fez.
+  const card = (await json("editions", user)).editions.find((e: any) => e.id === exam);
+  assert.deepEqual(card.lastResult, { attemptId: finished.id, correct: 1, total: 22, finishedAt: finished.finishedAt });
+  assert.equal((await json("editions", reviewer)).editions.find((e: any) => e.id === exam).lastResult, null);
 
   // Prazo vencido: a próxima gravação finaliza com o que estava salvo.
   const late = await actor();

@@ -10,6 +10,11 @@ test("evaluation items are read from the prompt values, or the whole question co
   ]);
   assert.deepEqual(parseCriteria("Discorra sobre TEST ONLY. (valor: 10,0 pontos)"), [{ label: null, points: 10 }]);
   assert.deepEqual(parseCriteria("Sem valor indicado"), [{ label: null, points: 10 }]);
+  // 2011 escreve "(valor = 2,0 pontos)" em um item e "(valor: 8,0 pontos)" no outro.
+  assert.deepEqual(parseCriteria("a) descreva TEST ONLY (valor = 2,0 pontos)\nb) escreva TEST ONLY (valor: 8,0 pontos)."), [
+    { label: "a", points: 2 },
+    { label: "b", points: 8 },
+  ]);
 });
 
 test("response standard blocks match by heading number, else by order only when the count agrees", () => {

@@ -20,9 +20,6 @@
               {{ attempt.kind === "EDITION" ? "Retomar a prova" : "Retomar o treino" }}
               <span aria-hidden="true">→</span>
             </button>
-            <button class="cover-secondary" (click)="browse.emit()">
-              Abrir o banco de questões
-            </button>
           } @else if (nextQuestion(); as next) {
             <button
               class="cover-primary"
@@ -36,9 +33,6 @@
                 answeredCount() ? "Continuar estudando" : "Começar a resolver"
               }}
               <span aria-hidden="true">→</span>
-            </button>
-            <button class="cover-secondary" (click)="browse.emit()">
-              Abrir o banco de questões
             </button>
           } @else {
             <button class="cover-primary" (click)="browse.emit()">
@@ -270,14 +264,11 @@
             }
           </div>
           <p class="panel-note">
-            Objetivas no banco e nos simulados; discursivas com o padrão de
-            resposta. Formato informado pelo
-            <a [href]="examSource" target="_blank" rel="noopener noreferrer"
-              >Inep</a
-            >
-            para os bacharelados; datas e formato podem mudar.
+            Formato do
+            <a [href]="examSource" target="_blank" rel="noopener noreferrer">Inep</a>;
+            pode mudar.
           </p>
-          <button class="outline" (click)="practiceHub.emit()">
+          <button class="outline" (click)="editionsHub.emit()">
             Fazer uma prova completa <span aria-hidden="true">→</span>
           </button>
         </section>
