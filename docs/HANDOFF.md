@@ -4,7 +4,9 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
-- Branch de trabalho do Claude: `claude/confident-cray-ndnwmk`, aberta no PR #30 para a `main`. Gabriel faz o merge; agentes não fazem merge, deploy nem force push.
+- Branch de trabalho do Claude: `claude/confident-cray-ndnwmk`. O PR #30 foi integrado; meta, conquistas, ranking, flashcards, biblioteca e esta passagem estão no **PR #31** (aguardando CI e merge de Gabriel). Se o #31 já tiver sido integrado, recomece a branch a partir da `main` atualizada.
+- Gabriel faz o merge; agentes não fazem merge, deploy nem force push (foi negado uma vez). Para atualizar a branch, faça merge da `main` nela.
+- Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
 - Próxima migration livre: **028** (reserve no WORKBOARD antes do primeiro commit).
 - Conteúdo publicado: 246 objetivas e 35 discursivas (2011–2021) conferidas por agente; 2005/2008 discursivas pendentes (padrão sem blocos).
 - Funções prontas: banco de questões, caderno de erros espaçado, treino parcial e por área (com cronômetro opcional), provas completas (`/provas`), discursivas com autoavaliação, turmas/aulas/presença, painel do professor, papéis e administração, importação de provas, registro de atividades, **meta diária, conquistas, ranking de constância, flashcards (FSRS-5) e biblioteca** (ver `docs/FLASHCARDS.md`).
