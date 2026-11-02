@@ -32,6 +32,8 @@ import { LessonsController } from "./lessons.js";
 import { ClassDashboardController } from "./class-dashboard.js";
 import { DiscursiveController } from "./discursive.js";
 import { EditionExamController } from "./edition-exam.js";
+import { EnadeFormatController } from "./enade-format.js";
+import { PracticeDiscursiveController } from "./practice-discursive.js";
 import { ProgressController } from "./progress.js";
 import { AccountProfileController } from "./account-profile.js";
 import { PracticeController } from "./exam.js";
@@ -245,6 +247,8 @@ class StudyController {
     ClassDashboardController,
     DiscursiveController,
     EditionExamController,
+    EnadeFormatController,
+    PracticeDiscursiveController,
     ProgressController,
     AccountProfileController,
     PracticeController,
