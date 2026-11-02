@@ -76,6 +76,7 @@ export async function formatFixture(pool: Pool) {
       await client.query("DELETE FROM editorial_question WHERE official_exam_id=$1",[exam]);
       await client.query("DELETE FROM source_document WHERE id=ANY($1::uuid[])",[[exam,key,standard]]);
       await client.query("DELETE FROM browser_session WHERE identity_id=ANY($1::uuid[])",[owners]);
+      await client.query("DELETE FROM account WHERE identity_id=ANY($1::uuid[])",[owners]);
       await client.query("DELETE FROM study_identity WHERE id=ANY($1::uuid[])",[owners]);
       await client.query("DELETE FROM question_asset WHERE sha256=ANY($1::text[])",[assets]);
       await client.query("COMMIT");

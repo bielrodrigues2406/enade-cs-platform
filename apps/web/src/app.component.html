@@ -268,7 +268,7 @@
             }
           } @else if (discursiveView()) {
             @defer (on immediate) {
-              <app-discursive />
+              <app-discursive (draftStateChange)="discursiveState.set($event)" />
             } @placeholder {
               <p role="status">Carregando as discursivas…</p>
             }

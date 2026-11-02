@@ -1,5 +1,5 @@
 import { MascotComponent } from "./mascot.component";
-import { Component, EventEmitter, Input, Output, computed, inject, signal } from "@angular/core";
+import { Component, EventEmitter, HostListener, Input, Output, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ChoiceService } from "./choice-dialog";
 
@@ -88,12 +88,20 @@ export class DiscursiveComponent {
   ngOnDestroy() {
     this.destroyed = true;
     if (this.timer) clearTimeout(this.timer);
-    void this.flush();
+    // Uma troca de conta pode já ter mudado o cookie; não enviar o texto antigo aqui.
     this.draftStateChange.emit({ dirty: false, saving: false });
+  }
+
+  @HostListener("window:beforeunload", ["$event"])
+  warnUnsaved(event: BeforeUnloadEvent) {
+    if (!this.submitted() && (this.body() !== (this.detail()?.response?.body ?? "") || this.saveState() === "saving")) {
+      event.preventDefault(); event.returnValue = "";
+    }
   }
 
   async loadList() {
     await this.flush();
+    if (!this.submitted() && this.body() !== (this.detail()?.response?.body ?? "")) return;
     this.detail.set(null);
     await this.attempt(async () => this.list.set(await this.request<Summary[]>("discursive")));
   }
@@ -130,7 +138,7 @@ export class DiscursiveComponent {
 
   /** Uma gravação por vez; texto digitado durante o pedido usa a revisão confirmada. */
   private async saveDrafts() {
-    while (!this.locked) {
+    while (!this.locked && !this.destroyed) {
       const detail = this.detail();
       if (!detail || this.submitted() || this.body() === (detail.response?.body ?? "")) break;
       const body = this.body(), endpoint = this.endpoint(detail.id);

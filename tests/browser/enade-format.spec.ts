@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { Pool } from "pg";
 import { test, expect, type Page } from "@playwright/test";
 import { formatFixture } from "../enade-format-fixture.js";
+import { signUp } from "./session-helpers";
 
 const pool=new Pool({connectionString:process.env.DATABASE_URL});
 let fixture:Awaited<ReturnType<typeof formatFixture>>;
@@ -84,4 +85,31 @@ test("unavailable format reports the exact missing blocks and cannot start",asyn
   await expect(offer.getByRole("button",{name:"Começar simulado no formato 2026"})).toBeDisabled();
   await rememberOwner(page);
   expect(starts).toBe(0); expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+});
+
+test("an unsaved free-study essay is guarded and never flushed into the guest after logout in another tab",async({page,context})=>{
+  await signUp(context);
+  const other=await context.newPage(); await other.goto("/");
+  await page.clock.install();
+  await page.goto("/questoes"); await rememberOwner(page);
+  await page.getByRole("button",{name:"Discursivas",exact:true}).first().click();
+  await page.getByRole("button",{name:/ENADE 2004 · Discursiva 3/}).click();
+  const body=page.getByRole("textbox",{name:/Sua resposta para/});
+  await page.route("**/api/discursive/*/response",route=>route.fulfill({status:503,json:{message:"TEST ONLY saving unavailable"}}));
+  await body.fill("TEST ONLY private unsaved account essay");
+  await page.getByRole("button",{name:"Início",exact:true}).first().click();
+  await expect(page.getByRole("alert")).toContainText("TEST ONLY saving unavailable");
+  await page.getByRole("button",{name:"Início",exact:true}).first().click();
+  const warning=page.getByRole("dialog",{name:"Sair sem guardar o rascunho?"});
+  await expect(warning).toBeVisible();
+  await warning.getByRole("button",{name:"Continuar escrevendo"}).click();
+  await page.unroute("**/api/discursive/*/response");
+  expect((await context.request.post("/api/auth/logout",{data:{}})).status()).toBe(200);
+  const refreshed=page.waitForResponse(r=>new URL(r.url()).pathname==="/api/session");
+  await other.evaluate(()=>{const channel=new BroadcastChannel("enade-identity");channel.postMessage({type:"identity-changed"});channel.close();});
+  await refreshed; await page.clock.runFor(1000);
+  await expect(page.getByRole("button",{name:"Entrar",exact:true}).first()).toBeVisible();
+  const guest=await (await context.request.get(`/api/discursive/${fixture.discursive}`)).json();
+  expect(guest.response?.body??"").toBe("");
+  await other.close();
 });

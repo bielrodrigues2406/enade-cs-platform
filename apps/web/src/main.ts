@@ -141,20 +141,27 @@ type Question = Summary & {
 class App {
   readonly mascot = inject(MascotService);
   readonly reflectionState = signal({ dirty: false, saving: false });
+  readonly discursiveState = signal({ dirty: false, saving: false });
 
-  private leaveReflection(then: () => void) {
-    const state = this.reflectionState();
-    if (state.saving) return false;
-    if (!state.dirty) return true;
+  private leavePersonalDraft(then: () => void) {
+    const reflection = this.reflectionState(), discursive = this.discursiveState();
+    if (reflection.saving || discursive.saving) return false;
+    if (!reflection.dirty && !discursive.dirty) return true;
     void this.choice.confirm({
-      title: "Sair sem guardar a reflexão?", message: "O texto que você escreveu ainda não foi guardado no caderno.",
+      title: discursive.dirty ? "Sair sem guardar o rascunho?" : "Sair sem guardar a reflexão?",
+      message: discursive.dirty ? "O texto da discursiva ainda não foi confirmado no servidor." : "O texto que você escreveu ainda não foi guardado no caderno.",
       cancel: "Continuar escrevendo", confirm: "Descartar e sair",
-    }).then(ok => { if (ok) { this.reflectionState.set({ dirty: false, saving: false }); then(); } });
+    }).then(ok => {
+      if (!ok) return;
+      this.reflectionState.set({ dirty: false, saving: false });
+      this.discursiveState.set({ dirty: false, saving: false });
+      then();
+    });
     return false;
   }
 
   editAnswer() {
-    if (this.leaveReflection(() => this.editAnswer())) this.editing.set(true);
+    if (this.leavePersonalDraft(() => this.editAnswer())) this.editing.set(true);
   }
   rows = signal<Summary[]>([]);
   catalogTopics = signal<string[]>([]);
@@ -412,7 +419,7 @@ class App {
    * componente do treino pausa ao sair) e as respostas já estão salvas.
    */
   leaveExam(then: () => void) {
-    if (!this.leaveReflection(then)) return false;
+    if (!this.leavePersonalDraft(then)) return false;
     if (!this.examRunning()) return true;
     // Pergunta no modal; se a pessoa confirmar, refaz a navegação pedida.
     void this.choice.confirm({
@@ -573,7 +580,7 @@ class App {
     }
   }
   async openNext() {
-    if (!this.leaveReflection(() => void this.openNext())) return;
+    if (!this.leavePersonalDraft(() => void this.openNext())) return;
     if (this.loading() || this.saving() || this.authBusy()) return;
     const next = this.nextQuestion();
     if (!next) return;
@@ -615,7 +622,7 @@ class App {
     this.focusMain();
   }
   async open(id: string, retry = false) {
-    if (!this.leaveReflection(() => void this.open(id, retry))) return;
+    if (!this.leavePersonalDraft(() => void this.open(id, retry))) return;
     if (this.authBusy()) return;
     const request = ++this.requestNumber;
     this.loading.set(true);
@@ -894,6 +901,8 @@ class App {
     this.session.set({ mode: "account", ...account });
   }
   private clearStudyState() {
+    this.reflectionState.set({ dirty: false, saving: false });
+    this.discursiveState.set({ dirty: false, saving: false });
     forgetHomeSnapshot();
     this.engagement.clear();
     this.adminView.set(false);
