@@ -1,5 +1,6 @@
 
     <section class="page-intro">
+      @if (notebook()?.summary?.incorrect) { <app-mascot pose="lupa" [size]="64" motion="none" /> }
       <h1>Caderno de erros</h1>
       <p>Volte às questões cuja última resposta salva está incorreta.</p>
     </section>
@@ -133,6 +134,7 @@
     } @else if (notebook(); as data) {
       @if (!data.summary.answered) {
         <section class="empty">
+          <app-mascot pose="lupa" [size]="80" motion="none" />
           <h2>Ainda não há respostas salvas</h2>
           <p>
             Resolva uma questão no banco. Se precisar retomar o conceito, ela
@@ -142,6 +144,7 @@
         </section>
       } @else if (!data.total) {
         <section class="empty">
+          <app-mascot pose="contente" [size]="80" motion="none" />
           <h2>
             {{
               topic && data.summary.incorrect
@@ -187,6 +190,9 @@
                 <p class="state">
                   Última resposta incorreta salva em {{ date(row.answeredAt) }}.
                 </p>
+                @if (row.reflection) {
+                  <p class="review-reflection"><strong>Seu raciocínio:</strong> {{ row.reflection }}</p>
+                }
                 @if (!row.ready) {
                   <p class="review-wait">Volta para revisão em {{ date(row.reviewAt) }}. Você viu o gabarito há pouco.</p>
                 }

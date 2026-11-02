@@ -1,0 +1,8 @@
+.account-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.account-heading h1 { margin: 0; }

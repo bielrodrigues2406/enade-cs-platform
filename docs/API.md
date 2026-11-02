@@ -89,6 +89,18 @@ VERIFY exige checklist `{origin:true,edition:true,integrity:true}` e, para ANSWE
 
 ## Caderno de erros
 
+MAS-2: cada item inclui `reflection` (texto pessoal ou `null`), sem dados de outro proprietário.
+`GET /api/review/:version/reflection` exige sessão e uma resposta própria já salva; retorna
+`{text, revision}` (vazio/revisão 0 quando ainda não há nota), ou 404 sem resposta própria.
+`PUT` aceita apenas `{text, revision}`: texto até 600 caracteres e revisão inteira de
+0 a 999999. Só permite resposta incorreta do estudo livre. A gravação retorna o texto
+confirmado e a próxima revisão; repetição idêntica da revisão anterior é idempotente.
+Conflito entre abas ou resposta já corrigida: 409. Identidade vem da sessão.
+
+`GET /api/me/preferences` e `PUT /api/me/preferences` exigem conta (401 para visitante).
+Retornam `{mascotEnabled: boolean}`; o PUT aceita exatamente esse campo booleano.
+A preferência é confirmada no servidor antes de a interface anunciar o salvamento.
+
 `GET /api/review?topic=&offset=0` exige sessão válida (anônima ou conta). `topic` é correspondência exata de até 80 caracteres; `offset` aceita inteiro decimal de 0 a 1.000.000. Valores repetidos, negativos ou fracionários retornam 400. A página tem 20 itens; não há parâmetro de tamanho. Offset além do total retorna lista vazia. A leitura não muda respostas nem concede acesso por IDs de pessoa enviados no query.
 
 Retorno:

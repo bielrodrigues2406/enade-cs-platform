@@ -34,6 +34,8 @@ import { DiscursiveController } from "./discursive.js";
 import { EditionExamController } from "./edition-exam.js";
 import { ProgressController } from "./progress.js";
 import { AccountProfileController } from "./account-profile.js";
+import { StudyPreferencesController } from "./study-preferences.js";
+import { AnswerReflectionsController } from "./answer-reflections.js";
 import { PracticeController } from "./exam.js";
 import {
   QuestionImagesController,
@@ -247,6 +249,8 @@ class StudyController {
     EditionExamController,
     ProgressController,
     AccountProfileController,
+    StudyPreferencesController,
+    AnswerReflectionsController,
     PracticeController,
     QuestionImagesController,
     EngagementController,

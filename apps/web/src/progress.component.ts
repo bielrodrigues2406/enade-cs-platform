@@ -1,3 +1,4 @@
+import { MascotComponent } from "./mascot.component";
 import { Component, EventEmitter, Input, Output, computed, inject, signal } from "@angular/core";
 import { BadgeComponent } from "./badge.component";
 import { EngagementService } from "./engagement.service";
@@ -16,7 +17,7 @@ const RING = 2 * Math.PI * 52;
 
 @Component({
   selector: "app-progress",
-  imports: [BadgeComponent],
+  imports: [MascotComponent, BadgeComponent],
   templateUrl: "./progress.component.html",
   styleUrl: "./progress.component.css",
 })

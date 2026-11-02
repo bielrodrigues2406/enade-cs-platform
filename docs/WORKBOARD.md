@@ -1,6 +1,6 @@
 # Quadro de trabalho — Claude Code × Codex
 
-Atualizado em 30/10/2026. Regras de uso em [COLLABORATION.md](COLLABORATION.md). Edite linha a linha; não reordene a tabela inteira.
+Atualizado em 02/11/2026. Regras de uso em [COLLABORATION.md](COLLABORATION.md). Edite linha a linha; não reordene a tabela inteira.
 
 Status: `pronta` · `em andamento` · `em revisão` · `entregue` · `bloqueada` · `backlog`
 
@@ -21,6 +21,9 @@ Sem lote oficial conferido, R1 sai com conteúdo autoral identificado como tal. 
 | COORD-0 | Protocolo de colaboração, quadro e avaliação de design | Claude | entregue | — | [#7](https://github.com/bielrodrigues2406/enade-cs-platform/pull/7), `59425c0` | `docs/COLLABORATION.md`, `docs/WORKBOARD.md`, `docs/DESIGN-QUALITY.md`, `AGENTS.md` |
 | CQ-1 | Separar templates HTML da lógica TypeScript e reforçar as convenções compartilhadas, preservando as telas e os contratos | Codex | entregue junto ao merge do PR #23 | — | [#23](https://github.com/bielrodrigues2406/enade-cs-platform/pull/23), `codex/refactor-external-templates` | componentes web, novos `.html`, AGENTS e documentos de engenharia/colaboração |
 | CQ-2 | **Obrigatória:** revisar toda a base para manutenção humana na fábrica de software; corrigir arquitetura, responsabilidades, redundâncias, funções extensas e retornos confusos; simplificar/reescrever onde necessário e documentar a passagem | Claude + Codex, um responsável por lote | backlog | estabilizar os fluxos prioritários; concluir antes da passagem institucional | critérios em ENGINEERING-AND-DELIVERY §1.3; não iniciada | frontend, API, SQL, scripts, testes, configuração e documentação; migrations aplicadas somente para leitura |
+| MAS-2 | Concluir o mapa de telas do Dudu, preferência acessível/persistida, ritmo sem dicas e autoexplicação no caderno; comparar as novas artes enviadas por Gabriel com o acervo atual | Codex (pedido direto de Gabriel em 02/11) | em andamento | MAS-1 integrado (#32) | `codex/feat-mascot-completion` | migration 028, componentes de estudante, perfil/revisão, testes e MASCOT |
+| CNT-FINAL | Completar/revisar 19 explicações, discursivas 2005/2008 e retomar aquisição dos 33 PDFs recentes, preservando fontes, anulações e bloqueios legítimos | Codex (pedido direto de Gabriel em 02/11) | em andamento | acervo histórico integrado | `codex/finish-content` (próximo lote) | conferências/explicações, recortes discursivos, catálogo/recibos e documentação |
+| SIM26-1 | Simulado autoral no formato ENADE 2026: 15 FG + 30 específicas + 1 discursiva de edições anteriores, 4 h, mesmo modelo de tentativa, sem se apresentar como prova oficial de 2026 | Codex (pedido direto de Gabriel em 02/11) | em andamento | disponibilidade real por bloco | `codex/feat-enade-2026` (próximo lote) | migration 029 reservada, API de tentativa/formato, seleção de discursiva e web |
 | SRC-1 | Aquisição dos PDFs de todos os anos, cópias fixadas, catálogo e importação offline (pedido direto de Gabriel, iniciado antes deste quadro) | Codex | entregue | — | [#9](https://github.com/bielrodrigues2406/enade-cs-platform/pull/9), `7a4049c` | `migrations/006_source_acquisition.sql`, `data/official-sources.json`, importadores, fontes e testes |
 | SRC-2 | Confinar caminhos do downloader e preservar recibos válidos após falhas | Codex | entregue | SRC-1 | [#10](https://github.com/bielrodrigues2406/enade-cs-platform/pull/10), `e46c54a` | `scripts/download-sources.mjs`, `tests/source-download.test.ts`, `docs/OFFICIAL-SOURCES.md` |
 | OPS-1 | CI no GitHub Actions: build, `npm test` e E2E com PostgreSQL de serviço | Claude | entregue no PR #11 | — | [#11](https://github.com/bielrodrigues2406/enade-cs-platform/pull/11) | `.github/workflows/ci.yml` |
@@ -135,7 +138,9 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 025 | ACT-1 — registro de atividades (auditoria) | Claude |
 | 026 | DISC-2 — discursivas conferidas por agente (`review_origin` ASSISTED) | Claude |
 | 027 | ENG-1/FLASH-1 — meta diária, conquistas, ranking e flashcards | Claude |
-| 028 | próxima livre — reserve aqui antes do primeiro commit | |
+| 028 | MAS-2 — preferência do mascote e autoexplicação do próprio estudante | Codex |
+| 029 | SIM26-1 — tentativa no formato de 2026, sem editar migrations aplicadas | Codex |
+| 030 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 
@@ -161,6 +166,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 ## Diário (handoffs)
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
+
+- **02/11/2026 · Codex · MAS-2 / CNT-FINAL / SIM26-1:** Gabriel confirmou que os itens 3/4 são conteúdo e simulado 2026, além de concluir o que foi planejado para o mascote. Base `2e6c296`, sem PR aberto. Trabalho separado por objetivo: primeiro `codex/feat-mascot-completion`, depois conteúdo e formato 2026. Reservadas 028/029 antes do código. Gabriel informa que a aplicação **não está rodando**; nenhum deploy autorizado por esta tarefa. Prévia visual da seção do pato com respostas sintéticas (sem API/banco), a320/390/768/1100/1440, sem overflow/erro JS; isso não é teste de integração. Novas imagens recebidas no chat: duas faixas de poses, ícone e cenas vertical/horizontal; comparar qualidade, resolução por pose e transparência antes de substituir. Preservar a identidade do Dudu, nada que dê dica ou atrapalhe resolução; etapas futuras condicionais/POSCOMP não ampliam o escopo atual.
 
 - **01/11/2026 · Claude → próximo agente · MAS-1 mascote (base)** · Gabriel aprovou o pato de borracha (Dudu). Folhas originais em `design/mascot/`, 14 poses recortadas em WebP transparente em `apps/web/public/mascot/` (`scripts/crop-mascot.py`), `<app-mascot>` e `MascotService` (desligar), primeiro uso no fim da sessão de flashcards. Regras, mapa de telas e etapas em `docs/MASCOT.md`. Próximo: etapa 1 (telas sem banco) e gerar cena da página pública e ícone do app. Migration livre: 028.
 - **01/11/2026 · Claude → próximo agente · passagem** · Limite do Claude acabando. **Leia `docs/HANDOFF.md`**: estado, como testar, regras de design, plano do mascote (patinho de borracha, prompts para o Gemini), pendências por prioridade (deploy em VPS própria e domínio, revisão humana dos flashcards, CQ-2, plano até a prova, materiais por área) e melhorias. Flashcards ganharam selo "Gerado por IA" e, no celular, cada troca de tela volta ao topo sem o topo fixo cobrir o cartão.

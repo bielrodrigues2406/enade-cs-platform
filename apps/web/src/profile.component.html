@@ -146,6 +146,15 @@
       <p class="account-help">Trocar a senha encerra a conta nos outros aparelhos; este continua conectado.</p>
     </form>
   </div>
+  <section class="profile-section" aria-labelledby="profile-mascot-title">
+    <h2 id="profile-mascot-title">Companhia de estudo</h2>
+    <label class="profile-show">
+      <input type="checkbox" [checked]="mascot.enabled()" (change)="saveMascot($event)" [disabled]="savingMascot()" />
+      Mostrar o mascote Dudu
+    </label>
+    <p class="account-help">A preferência acompanha sua conta. Desligar o mascote não altera seu estudo nem seus resultados.</p>
+    <p class="profile-status" [class.is-error]="mascotStatus()?.kind === 'error'" aria-live="polite">{{ mascotStatus()?.text }}</p>
+  </section>
   <p class="profile-foot">
     Para excluir a conta e os dados de estudo, peça à administração da plataforma.
     <button type="button" class="text-button" (click)="back.emit()">Voltar ao início</button>
