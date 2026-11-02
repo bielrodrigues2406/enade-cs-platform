@@ -1,8 +1,13 @@
 // Synthetic TEST ONLY sources. Nothing from the real catalogue is edited.
 import { createHash, randomUUID } from "node:crypto";
-import { readFile, rm } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import path from "node:path";
 import type { Pool } from "pg";
-import { assetPath, storeAsset } from "../apps/api/src/question-images.js";
+
+// O Playwright também usa este fixture: não importar controladores Nest nele.
+const assetPath = (sha: string) => path.join(
+  process.env.QUESTION_ASSET_DIR || path.resolve(".local/question-assets"), sha.slice(0,2), `${sha}.webp`,
+);
 
 export async function formatFixture(pool: Pool) {
   const prefix=`test-only-format-${randomUUID()}`;
@@ -43,7 +48,13 @@ export async function formatFixture(pool: Pool) {
       const chunk=Buffer.alloc(8+marker.length+padding);
       chunk.write("TST0"); chunk.writeUInt32LE(marker.length,4); marker.copy(chunk,8);
       const bytes=Buffer.concat([original,chunk]); bytes.writeUInt32LE(bytes.length-8,4);
-      const asset=await storeAsset(client,bytes); assets.push(asset.sha256);
+      const sha=createHash("sha256").update(bytes).digest("hex");
+      const file=assetPath(sha);
+      await mkdir(path.dirname(file),{recursive:true}); await writeFile(file,bytes);
+      // Dimensões do arquivo tests/fixtures/test-only-question.webp.
+      await client.query(`INSERT INTO question_asset(sha256,media_type,byte_size,width,height)
+        VALUES($1,'image/webp',$2,760,240)`,[sha,bytes.length]);
+      assets.push(sha);
     }
     await client.query(
       `INSERT INTO discursive_question(id,exam_source_id,standard_source_id,year,modality,number,area,subject,

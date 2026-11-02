@@ -19,11 +19,17 @@ async function rememberOwner(page:Page) {
 }
 
 test("student takes the authored format, resumes its own draft and sees the standard only after finishing",async({page})=>{
-  await page.setViewportSize({width:1280,height:900});
+  await page.setViewportSize({width:1440,height:900});
   await page.goto("/provas");
   const offer=page.getByRole("region",{name:"Simulado no formato ENADE 2026"});
   await expect(offer).toContainText("Não é a prova oficial de 2026");
   await expect(offer).toContainText("15 objetivas"); await expect(offer).toContainText("30 objetivas + 1 discursiva");
+  for (const width of [320,390,768,1440]) {
+    await page.setViewportSize({width,height:900});
+    await expect(offer.getByRole("button",{name:"Começar simulado no formato 2026"})).toBeVisible();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    await page.screenshot({path:`test-results/format-offer-${width}.png`,fullPage:true});
+  }
   await offer.getByRole("button",{name:"Começar simulado no formato 2026"}).click();
   await page.getByRole("dialog",{name:"Começar o simulado no formato 2026?"}).getByRole("button",{name:"Começar simulado",exact:true}).click();
   await expect(page.getByText(/Questão 1 de 45/)).toBeVisible();
@@ -52,13 +58,17 @@ test("student takes the authored format, resumes its own draft and sees the stan
   await page.getByRole("button",{name:"Rever a discursiva desta tentativa"}).click();
   await expect(page.locator(".disc-sent")).toHaveText("TEST ONLY: explico meu raciocínio nesta tentativa.");
   await expect(page.getByRole("heading",{name:"Padrão de resposta",exact:true})).toBeVisible();
+  await expect(page.getByText(/organize o raciocínio antes de enviar/)).toHaveCount(0);
   await expect(page.getByRole("textbox",{name:/Sua resposta para/})).toHaveCount(0);
   for (const button of await page.getByRole("radio",{name:"Contemplei",exact:true}).all()) await button.click();
   await page.getByRole("button",{name:"Salvar autoavaliação"}).click();
   await expect(page.getByText("Autoavaliação salva: 10,0 de 10.")).toBeVisible();
-  await page.setViewportSize({width:390,height:844});
-  await expect(page.getByRole("heading",{name:"Padrão de resposta",exact:true})).toBeVisible();
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+  for (const width of [320,390,768,1440]) {
+    await page.setViewportSize({width,height:900});
+    await expect(page.getByRole("heading",{name:"Padrão de resposta",exact:true})).toBeVisible();
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    await page.screenshot({path:`test-results/format-result-${width}.png`,fullPage:true});
+  }
 });
 
 test("unavailable format reports the exact missing blocks and cannot start",async({page})=>{
