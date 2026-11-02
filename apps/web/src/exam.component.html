@@ -1,14 +1,17 @@
 
     @if (loading()) {
-      <h1>Treino parcial</h1>
-      <p role="status">Carregando seu treino…</p>
+      <h1>{{ section === 'provas' ? 'Provas e simulados' : 'Treino parcial' }}</h1>
+      <p role="status">Carregando suas tentativas…</p>
     } @else if (attempt(); as data) {
       @if (data.state === 'COMPLETED' && !reviewing()) {
         <section class="page-intro">
           @if (data.summary; as result) {
             <app-mascot [pose]="result.correct / result.total >= 0.7 ? 'comemorando' : result.correct / result.total >= 0.4 ? 'contente' : 'ouvindo'" [size]="80" motion="none" />
           }
-          @if (data.edition; as edition) {
+          @if (data.kind === 'FORMAT') {
+            <p class="metadata">Simulado autoral no formato ENADE {{ data.formatYear }}</p>
+            <h1 id="practice-result-title" tabindex="-1">Desempenho no simulado</h1>
+          } @else if (data.edition; as edition) {
             <p class="metadata">Prova completa · ENADE {{ edition.year }} · {{ modalityLabel(edition.modality) }}</p>
             <h1 id="practice-result-title" tabindex="-1">Resultado da prova</h1>
           } @else {
@@ -31,7 +34,7 @@
               </p>
             }
             <p class="muted">Sem previsão de nota ENADE. Não altera o estudo livre.</p>
-            @if (data.edition && result.byBlock; as blocks) {
+            @if ((data.edition || data.kind === 'FORMAT') && result.byBlock; as blocks) {
               <dl class="practice-blocks">
                 <div><dt>Formação Geral</dt><dd><strong>{{ blocks.general.correct }}</strong> de {{ blocks.general.total }}</dd></div>
                 <div><dt>Componente específico</dt><dd><strong>{{ blocks.specific.correct }}</strong> de {{ blocks.specific.total }}</dd></div>
@@ -39,8 +42,13 @@
             }
             @if (data.discursive?.length) {
               <p>
-                As discursivas com texto foram enviadas. Compare com o padrão de resposta e faça a autoavaliação.
-                <button type="button" class="text-button" (click)="discursiveStudy.emit()">Abrir as discursivas</button>
+                @if (data.kind === 'FORMAT') {
+                  A discursiva desta tentativa foi encerrada. Compare seu texto com o padrão e faça a autoavaliação separadamente.
+                  <button type="button" class="text-button" (click)="reviewDiscursive(data.discursive![0].id)">Rever a discursiva desta tentativa</button>
+                } @else {
+                  As discursivas com texto foram enviadas. Compare com o padrão de resposta e faça a autoavaliação.
+                  <button type="button" class="text-button" (click)="discursiveStudy.emit()">Abrir as discursivas</button>
+                }
               </p>
             }
             <div class="practice-table-wrap">
@@ -66,7 +74,9 @@
       } @else if (current(); as item) {
         <div class="practice-toolbar">
           <button class="text-button" (click)="data.state === 'COMPLETED' ? showResult() : showSelection()" [disabled]="protectedState()">{{ data.state === 'COMPLETED' ? '← Voltar ao resultado' : '← Sair ' + (kindLabel(data) === 'prova' ? 'da prova' : 'do ' + kindLabel(data)) }}</button>
-          @if (data.edition; as edition) {
+          @if (data.kind === 'FORMAT') {
+            <p class="metadata">Simulado autoral no formato ENADE {{ data.formatYear }} · questões históricas</p>
+          } @else if (data.edition; as edition) {
             <p class="metadata">Prova completa · ENADE {{ edition.year }} · {{ modalityLabel(edition.modality) }}</p>
           } @else {
             <p class="metadata">{{ attemptLabel(data) }} · {{ data.deadlineAt ? 'com cronômetro' : 'sem cronômetro' }}</p>
@@ -101,15 +111,17 @@
                 <button (click)="resume()" [disabled]="saving()">{{ saving() ? 'Retomando…' : data.edition ? 'Continuar prova' : 'Continuar simulado' }}</button>
               </div>
             } @else if (discursiveOpen(); as discursiveId) {
-              <p id="practice-position" class="practice-position" tabindex="-1">Discursiva da prova</p>
+              <p id="practice-position" class="practice-position" tabindex="-1">{{ data.kind === 'FORMAT' ? 'Discursiva do simulado' : 'Discursiva da prova' }}</p>
               <!-- Carregada sob demanda: o texto é salvo como rascunho e enviado ao finalizar. -->
               @defer (on immediate) {
-                <app-discursive [questionId]="discursiveId" [embedded]="data.state === 'IN_PROGRESS'" />
+                <app-discursive [questionId]="discursiveId" [embedded]="data.state === 'IN_PROGRESS'"
+                  [attemptId]="data.kind === 'FORMAT' ? data.id : null" [locked]="timeUp()"
+                  (draftStateChange)="discursiveChanged($event)" />
               } @placeholder {
                 <p role="status">Carregando a discursiva…</p>
               }
             } @else {
-            <p id="practice-position" class="practice-position" tabindex="-1">Questão {{ position() }} de {{ data.size }}</p>
+            <p id="practice-position" class="practice-position" tabindex="-1">Questão {{ position() }} de {{ data.size }}@if (data.kind === 'FORMAT') { · {{ position() <= 15 ? 'Formação Geral' : 'Componente específico' }} }</p>
             <!-- Recria o artigo a cada questão para a entrada animar na direção do passo. -->
             @for (step of [position()]; track step) {
             <article class="resolution practice-step" [style.--step-dir]="stepDirection()">
@@ -191,12 +203,12 @@
         </div>
         @if (data.state === 'IN_PROGRESS') {
           <dialog #finishDialog class="practice-confirm" aria-labelledby="practice-confirm-title">
-            <h2 id="practice-confirm-title">{{ data.edition ? 'Finalizar a prova?' : 'Finalizar este treino?' }}</h2>
+            <h2 id="practice-confirm-title">{{ data.kind === 'FORMAT' ? 'Finalizar o simulado?' : data.edition ? 'Finalizar a prova?' : 'Finalizar este treino?' }}</h2>
             <p>{{ answered() }} respondidas · {{ data.size - answered() }} em branco · {{ marked() }} {{ marked() === 1 ? 'marcada' : 'marcadas' }} para revisar.</p>
-            <p>Depois de finalizar, as respostas não poderão ser alteradas.@if (data.discursive?.length) { As discursivas com texto serão enviadas. }</p>
+            <p>Depois de finalizar, as respostas não poderão ser alteradas.@if (data.kind === 'FORMAT') { A discursiva será encerrada com o texto salvo, mesmo se estiver em branco. } @else if (data.discursive?.length) { As discursivas com texto serão enviadas. }</p>
             <div class="practice-actions">
               <button class="outline" (click)="finishDialog.close()" [disabled]="saving()" autofocus>Continuar respondendo</button>
-              <button (click)="finish()" [disabled]="protectedState()">{{ saving() ? 'Finalizando…' : data.edition ? 'Finalizar prova' : 'Finalizar treino' }}</button>
+              <button (click)="finish()" [disabled]="protectedState()">{{ saving() ? 'Finalizando…' : data.kind === 'FORMAT' ? 'Finalizar simulado' : data.edition ? 'Finalizar prova' : 'Finalizar treino' }}</button>
             </div>
           </dialog>
         }
@@ -208,13 +220,40 @@
         <h1 id="practice-setup-title" tabindex="-1">Provas completas</h1>
         <p>As objetivas publicadas de cada edição, na ordem original, em {{ (editions()?.minutes ?? 240) / 60 }} horas. Ao sair, a prova pausa e as respostas ficam salvas.</p>
       </section>
+      <section class="format-offer" aria-labelledby="format-2026-title">
+        <div>
+          <p class="metadata">Ciência da Computação · Bacharelado</p>
+          <h2 id="format-2026-title">Simulado no formato ENADE 2026</h2>
+          <p>Uma montagem autoral com questões revisadas de provas anteriores. Não é a prova oficial de 2026.</p>
+        </div>
+        <dl class="format-structure">
+          <div><dt>Formação Geral</dt><dd>15 objetivas</dd></div>
+          <div><dt>Específicas</dt><dd>30 objetivas + 1 discursiva</dd></div>
+          <div><dt>Tempo</dt><dd>4 horas, com pausa</dd></div>
+        </dl>
+        @if (formatLoading()) { <p role="status">Conferindo as questões disponíveis para o formato…</p> }
+        @else if (formatError()) {
+          <p role="alert">{{ formatError() }}</p>
+          <button type="button" class="outline" (click)="loadFormat()">Conferir disponibilidade novamente</button>
+        } @else if (formatAvailability(); as format) {
+          @if (!format.available) {
+            <p class="format-missing">Ainda não é possível montar o simulado completo. Faltam {{ format.missing.general }} de Formação Geral, {{ format.missing.specific }} específicas e {{ format.missing.discursive }} discursiva específica.</p>
+          }
+          <div class="practice-actions">
+            <button type="button" (click)="confirmFormat()" [disabled]="saving() || !!availability()?.active || !format.available">Começar simulado no formato 2026</button>
+            @if (format.lastResult; as last) {
+              <button type="button" class="outline" (click)="openAttempt(last.attemptId)" [disabled]="saving()">Ver último resultado do formato 2026</button>
+            }
+          </div>
+        }
+      </section>
       @if (availability(); as data) {
         @if (data.active; as active) {
           <section class="practice-active" aria-label="Treino em andamento">
-            <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : 'Continue seu treino' }}</h2>
+            <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : active.kind === 'FORMAT' ? 'Continue seu simulado' : 'Continue seu treino' }}</h2>
             <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.kind === 'EDITION' ? 'prova completa, pausada' : attemptLabel(active) }}</p>
             <div class="practice-actions">
-              <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : 'Retomar treino' }}</button>
+              <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : active.kind === 'FORMAT' ? 'Retomar simulado' : 'Retomar treino' }}</button>
               <button class="text-button danger-text" (click)="cancelAttempt(active.id, active.kind === 'EDITION' ? 'prova' : 'treino')" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Cancelar prova' : 'Cancelar treino' }}</button>
             </div>
           </section>
@@ -287,10 +326,10 @@
       @if (availability(); as data) {
         @if (data.active; as active) {
           <section class="practice-active" aria-label="Treino em andamento">
-            <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : 'Continue seu treino' }}</h2>
+            <h2>{{ active.kind === 'EDITION' ? 'Continue sua prova' : active.kind === 'FORMAT' ? 'Continue seu simulado' : 'Continue seu treino' }}</h2>
             <p>{{ active.answered }} de {{ active.size }} respondidas · {{ active.kind === 'EDITION' ? 'prova completa, pausada' : attemptLabel(active) }}</p>
             <div class="practice-actions">
-              <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : 'Retomar treino' }}</button>
+              <button (click)="openAttempt(active.id)" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Retomar prova' : active.kind === 'FORMAT' ? 'Retomar simulado' : 'Retomar treino' }}</button>
               <button class="text-button danger-text" (click)="cancelAttempt(active.id, active.kind === 'EDITION' ? 'prova' : 'treino')" [disabled]="saving()">{{ active.kind === 'EDITION' ? 'Cancelar prova' : 'Cancelar treino' }}</button>
             </div>
           </section>

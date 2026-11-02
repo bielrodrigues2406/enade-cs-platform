@@ -65,7 +65,7 @@ export class ProgressController {
       areaProgress(user.id),
       errorCounts(user.id),
       db.query(
-        `SELECT p.id,p.kind,p.size,p.area,p.paused_at AS "pausedAt",
+        `SELECT p.id,p.kind,p.format_year AS "formatYear",p.size,p.area,p.paused_at AS "pausedAt",
            (SELECT count(*)::int FROM practice_item i WHERE i.attempt_id=p.id AND i.option_id IS NOT NULL) AS answered
          FROM practice_attempt p WHERE p.owner_id=$1 AND p.state='IN_PROGRESS'`, [user.id],
       ),

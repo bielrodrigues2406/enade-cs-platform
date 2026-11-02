@@ -274,3 +274,18 @@ Detalhes do algoritmo e das regras em [FLASHCARDS.md](FLASHCARDS.md). Rotas de q
 | POST /flashcards/:card/review | `{grade}` (1 errei, 2 difícil, 3 bom, 4 fácil) | `{dueInMinutes, stability, difficulty}`; 404 se o cartão não existe |
 | GET /sheets | — | lista `[{slug,area,title,summary}]` |
 | GET /sheets/:slug | — | ficha com `sections`, `pitfalls`, `references`; 404 se não existe |
+
+
+### Simulado autoral no formato ENADE 2026 (SIM26-1)
+
+Este modo combina questões históricas publicadas de Ciência da Computação, em cadernos de Bacharelado ou compartilhados; não importa nem representa uma prova oficial de 2026. Usa sessão anônima ou conta e a mesma tentativa das rotas `/api/practice/:id` (leitura, itens, pausa, retomada, conclusão e cancelamento).
+
+- `GET /api/formats/enade-2026`: `{ format: { year: 2026, general: 15, specific: 30, discursive: 1, minutes: 240 }, counts: { general, specific, discursive }, missing: { general, specific, discursive }, available, lastResult }`. `lastResult` é null ou `{ attemptId, correct, total, finishedAt }` da última tentativa concluída pela pessoa. A disponibilidade exige os três blocos completos. Demos, versões não publicadas, fontes não verificadas, Licenciatura/PND e anos a partir de 2026 ficam de fora.
+- `POST /api/formats/enade-2026/attempts`, corpo estrito `{ requestId: UUID }`: cria uma tentativa `kind: "FORMAT"`, `formatYear: 2026`, `size: 45`, com quatro horas no servidor. Posições 1–15 são FG e 16–45 específicas, em ordem sorteada dentro do bloco. Há exatamente uma discursiva específica. A mesma solicitação repete a mesma tentativa; configuração diferente ou outra tentativa ativa retorna 409. Sem quantidade suficiente, 409 e nenhuma tentativa parcial é gravada.
+- A leitura de tentativa inclui `formatYear` e `discursive: [{ id, number }]`. As versões das objetivas, o vínculo da discursiva, os critérios e os recortes ficam fixos. Não há resposta correta, explicação, fonte de gabarito nem padrão discursivo antes da conclusão. O resultado reutiliza `summary.byBlock`; acertos objetivos e autoavaliação discursiva não são somados numa nota ENADE.
+- `GET /api/practice/:id/discursive`: metadados da discursiva fixada, `promptImages` e `response: { body, revision, submittedAt, assessment }`. Antes de concluir, `standardImages: []`, `standardUrl: null`, `submittedAt: null`. Depois de concluir, o texto fica imutável, inclusive se estiver em branco, e o padrão é liberado. Uma resposta antiga do estudo livre não é reutilizada.
+- `PUT /api/practice/:id/discursive/response`, corpo estrito `{ body: string, baseRevision: integer }`: até 6000 caracteres, revisão inicial zero. Salva com comparação de revisão; repetição exata é idempotente. Conflito entre abas, pausa ou conclusão retorna 409. Prazo vencido conclui com o texto já salvo e recusa a alteração.
+- `PUT /api/practice/:id/discursive/assessment`, corpo estrito `{ levels: [0|1|2 por critério] }`: apenas após concluir. Retorna `{ levels, score }`, uma estimativa de autoavaliação, sem correção por IA.
+- `GET /api/practice/:id/discursive/images/:sha256.webp`: exige o proprietário da tentativa; padrão apenas após concluir. URL de outro proprietário ou padrão ainda fechado retorna 404. As imagens usam `Cache-Control: private, no-store`.
+
+A configuração e os 45 itens mais uma discursiva são conferidos também pela migration 029. Repetir uma tentativa não reaproveita o texto discursivo anterior nem concede acesso ao resultado de outra identidade.

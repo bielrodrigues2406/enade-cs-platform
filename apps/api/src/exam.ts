@@ -9,6 +9,7 @@ import { imageView, type QuestionImage } from "./question-images.js";
 import { publicExam, sourceFields, type Source } from "./source-store.js";
 import { errorCounts } from "./progress.js";
 import { ELIGIBLE } from "./practice-eligibility.js";
+import { formatDiscursiveSummary } from "./practice-discursive.js";
 
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
 const SIZES = [10, 20, 30];
@@ -24,7 +25,7 @@ const SEEN = `(EXISTS(SELECT 1 FROM answer a JOIN question_version av ON av.id=a
 export type Attempt = {
   id: string; size: number; area: string | null; state: "IN_PROGRESS" | "COMPLETED";
   createdAt: Date; finishedAt: Date | null; answered: number; summary: Result | null;
-  kind: "PARTIAL" | "EDITION"; examSourceId: string | null; deadlineAt: Date | null;
+  kind: "PARTIAL" | "EDITION" | "FORMAT"; formatYear: number | null; examSourceId: string | null; deadlineAt: Date | null;
   pausedAt: Date | null; remainingMs: number | null;
   /** ERRORS: erros do caderno prontos para revisão; RETRY: erradas de outro treino. */
   focus: "ERRORS" | "RETRY" | null;
@@ -49,7 +50,7 @@ type Item = {
 // Tolerância para a última gravação feita no limite do prazo chegar ao servidor.
 const DEADLINE_GRACE = "15 seconds";
 export const ATTEMPT_FIELDS = `p.id,p.size,p.area,p.state,p.created_at AS "createdAt",p.finished_at AS "finishedAt",p.summary,
-  p.kind,p.focus,p.exam_source_id AS "examSourceId",p.paused_at AS "pausedAt",
+  p.kind,p.format_year AS "formatYear",p.focus,p.exam_source_id AS "examSourceId",p.paused_at AS "pausedAt",
   p.deadline_at + p.paused_ms * interval '1 millisecond' AS "deadlineAt",
   CASE WHEN p.deadline_at IS NOT NULL AND p.state='IN_PROGRESS' THEN GREATEST(0, extract(epoch FROM
     p.deadline_at + p.paused_ms * interval '1 millisecond' - COALESCE(p.paused_at, clock_timestamp())) * 1000)::integer END AS "remainingMs",
@@ -71,7 +72,7 @@ function attemptSummary(row: Attempt) {
   return {
     id: row.id, state: row.state, size: row.size, area: row.area,
     createdAt: row.createdAt, finishedAt: row.finishedAt, answered: row.answered,
-    kind: row.kind, focus: row.focus, deadlineAt: row.deadlineAt, pausedAt: row.pausedAt, remainingMs: row.remainingMs,
+    kind: row.kind, formatYear: row.formatYear, focus: row.focus, deadlineAt: row.deadlineAt, pausedAt: row.pausedAt, remainingMs: row.remainingMs,
   };
 }
 export async function owned(client: PoolClient, id: string, owner: string, lock = false) {
@@ -221,7 +222,7 @@ export async function view(client: PoolClient, attempt: Attempt) {
     ...attemptSummary(attempt), answered: rows.filter((row) => row.optionId !== null).length,
     summary: complete ? attempt.summary : null,
     edition: edition ? publicExam(edition) : null,
-    discursive: await editionDiscursive(client, attempt),
+    discursive: attempt.kind === "FORMAT" ? await formatDiscursiveSummary(client, attempt) : await editionDiscursive(client, attempt),
     items: rows.map((row) => {
       const exam = row.examSourceId ? bySource.get(row.examSourceId) : null;
       const key = row.keySourceId ? bySource.get(row.keySourceId) : null;
@@ -298,9 +299,9 @@ export class PracticeController {
           (SELECT count(*)::integer FROM eligible e WHERE e.topic=a.name AND NOT ${SEEN.replaceAll("$OWNER", "$1")}))
           ORDER BY a.ordinality)
           FROM unnest($2::text[]) WITH ORDINALITY a(name,ordinality)),
-        'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,kind,focus,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
+        'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,kind,"formatYear",focus,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
         'recent',COALESCE((SELECT json_agg(a ORDER BY a."finishedAt" DESC,a.id DESC) FROM (
-          SELECT id,state,size,area,kind,focus,"createdAt","finishedAt",answered FROM owned
+          SELECT id,state,size,area,kind,"formatYear",focus,"createdAt","finishedAt",answered FROM owned
           WHERE state='COMPLETED' ORDER BY "finishedAt" DESC,id DESC LIMIT 5
         ) a),'[]'::json)
       ) AS availability`, [user.id, [...AREAS]],

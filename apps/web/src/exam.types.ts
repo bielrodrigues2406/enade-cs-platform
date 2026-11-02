@@ -8,7 +8,8 @@ export type AttemptSummary = {
   createdAt: string;
   finishedAt: string | null;
   answered: number;
-  kind?: "PARTIAL" | "EDITION";
+  kind?: "PARTIAL" | "EDITION" | "FORMAT";
+  formatYear?: number | null;
   /** Treino montado com os erros prontos (ERRORS) ou com as erradas de um treino (RETRY). */
   focus?: "ERRORS" | "RETRY" | null;
   /** Prova da edição: prazo do servidor; o cronômetro só o exibe. */
@@ -70,4 +71,12 @@ export type PracticeView = AttemptSummary & {
   }) | null;
   edition?: { year: number; modality: string; title: string; officialUrl: string } | null;
   discursive?: { id: string; number: number }[];
+};
+
+export type FormatAvailability = {
+  format: { year: number; general: number; specific: number; discursive: number; minutes: number };
+  counts: { general: number; specific: number; discursive: number };
+  missing: { general: number; specific: number; discursive: number };
+  available: boolean;
+  lastResult: { attemptId: string; correct: number; total: number; finishedAt: string } | null;
 };

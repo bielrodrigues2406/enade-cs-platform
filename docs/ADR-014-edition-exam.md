@@ -24,5 +24,5 @@ O treino parcial (ADR-007) já tem versões fixas, salvamento com revisão, fina
 
 - Não há nota ENADE estimada. Pesos e conceito do Inep não se aplicam a um subconjunto de questões.
 - A pausa deixa a prova menos parecida com a real; quem quiser treinar o tempo de verdade simplesmente não pausa.
-- O formato de 2026 (15 FG + 30 específicas + 1 discursiva) só poderá ser simulado com questões oficiais de 2026, depois da aplicação. Até lá, a prova completa usa as edições anteriores.
+- A prova oficial de 2026 depende de questões publicadas após a aplicação. O simulado autoral no formato de 2026 usa itens históricos revisados, em um modo próprio descrito na ADR-016; não representa a prova oficial.
 - O treino passou a ser carregado sob demanda, o que reduziu o pacote inicial.

@@ -458,6 +458,15 @@ dialog.practice-confirm[open] {
 .session-streak { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; }
 .session-streak svg { width: 18px; height: 18px; fill: #e8743b; }
 
+/* SIM26-1: uma oferta de formato, distinta das edições oficiais abaixo. */
+.format-offer { margin-block: var(--space-6); padding-block: var(--space-5); border-block: var(--border-thin) solid var(--color-border); }
+.format-offer h2 { margin-block: var(--space-2) var(--space-3); }
+.format-offer p { max-width: 64ch; }
+.format-structure { display: flex; flex-wrap: wrap; gap: var(--space-5) var(--space-8); margin-block: var(--space-5); }
+.format-structure div { min-width: 10rem; }
+.format-structure dt { color: var(--color-text-muted); font-size: var(--text-sm); }
+.format-structure dd { margin: var(--space-2) 0 0; font-weight: var(--weight-semibold); }
+.format-missing { border-left: var(--border-thin) solid var(--color-border); padding-left: var(--space-4); }
 /* MAS-2: o aviso de ritmo fica fora do enunciado e não se repete por questão. */
 .pace-note { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding: var(--space-4); border: var(--border-thin) solid var(--color-border); background: var(--color-surface); }
 .pace-note p { flex: 1 1 16rem; margin: 0; }

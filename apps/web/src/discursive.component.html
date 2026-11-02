@@ -1,13 +1,18 @@
 <section class="discursive" aria-labelledby="discursive-title">
   @if (error()) {
-    <div class="notice" role="alert"><p>{{ error() }}</p></div>
+    <div class="notice" role="alert"><p>{{ error() }}</p>
+      @if (detail() && !submitted()) {
+        <button type="button" (click)="flush()" [disabled]="saveState() === 'saving' || locked">Tentar salvar rascunho</button>
+        <button type="button" class="outline" (click)="reloadDraft()" [disabled]="saveState() === 'saving'">Reabrir com o texto salvo</button>
+      }
+    </div>
   }
 
-  @if (!embedded) {
+  @if (!embedded && detail() && !submitted()) {
     <p><app-mascot pose="ouvindo" [size]="64" motion="none" /> Explique como se fosse para o pato: organize o raciocínio antes de enviar.</p>
   }
   @if (detail(); as q) {
-    @if (!embedded) {
+    @if (!embedded && !attemptId) {
       <button type="button" class="back text-button" (click)="loadList()">← Discursivas</button>
     }
     <p class="metadata">{{ q.area }}@if (q.subject) { <span>·</span> {{ q.subject }} } <span>·</span> Oficial · Inep</p>
@@ -46,7 +51,7 @@
       </div>
       @if (!submitted()) {
         <label for="disc-body" class="visually-hidden">Sua resposta para {{ q.title }}</label>
-        <textarea id="disc-body" rows="14" [maxlength]="maxBody" [ngModel]="body()" (ngModelChange)="write($event)" (blur)="flush()"
+        <textarea [disabled]="busy() || locked" id="disc-body" rows="14" [maxlength]="maxBody" [ngModel]="body()" (ngModelChange)="write($event)" (blur)="flush()"
           placeholder="Escreva como na prova: um texto corrido, respondendo a cada item."></textarea>
         <div class="disc-submit">
           @if (embedded) {
@@ -57,7 +62,8 @@
           }
         </div>
       } @else {
-        <blockquote class="disc-sent">{{ body() }}</blockquote>
+        @if (body().trim()) { <blockquote class="disc-sent">{{ body() }}</blockquote> }
+        @else { <p>A discursiva ficou em branco nesta tentativa.</p> }
       }
     </section>
 
@@ -110,6 +116,8 @@
     }
   } @else {
     <h1 id="discursive-title">Discursivas</h1>
+    @if (busy()) { <p role="status">Carregando a discursiva…</p> }
+    @else if (error() && questionId) { <button type="button" (click)="open(questionId!)">Tentar carregar novamente</button> }
     <p class="admin-intro">
       Escreva como na prova. Ao enviar, aparece o padrão de resposta do Inep
       para você se avaliar item a item.
