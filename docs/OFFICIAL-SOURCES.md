@@ -1,6 +1,6 @@
 # Inventário de documentos de Computação
 
-Consulta: 23/10/2026. O catálogo completo, com URLs oficiais, cópias, SHA-256, páginas e situação de cada arquivo está em [data/official-sources.json](../data/official-sources.json).
+Inventário consultado em 23/10/2026; situação de conteúdo atualizada em 02/11/2026. O catálogo completo, com URLs oficiais, cópias, SHA-256, páginas e situação de cada arquivo está em [data/official-sources.json](../data/official-sources.json).
 
 ## Cobertura encontrada
 
@@ -17,11 +17,40 @@ Consulta: 23/10/2026. O catálogo completo, com URLs oficiais, cópias, SHA-256,
 | 2026 | PND: Computação, tipos 1–5 e gabarito NVDA listados no portal | 0 | 11 |
 | **Total** | **Famílias e modalidades identificadas separadamente** | **28** | **33** |
 
-Os 27 arquivos históricos incluem prova, gabarito e padrão de resposta. O 28º arquivo é o caderno PND 2025 tipo 4, localizado em cópia com nome incorreto; a identidade foi conferida pela capa e registrada no catálogo. Veja a [auditoria recente](reviews/recent-pdf-audit.md). Foram arquivados e registrados como **IMPORTED**, com revisão independente pendente. Nenhuma fonte foi marcada automaticamente como definitiva/conferida e nenhuma questão oficial foi publicada.
+Os 27 arquivos históricos incluem prova, gabarito e padrão de resposta. O 28º arquivo é o caderno PND 2025 tipo 4, localizado em cópia com nome incorreto; a identidade foi conferida pela capa e registrada no catálogo. Veja a [auditoria recente](reviews/recent-pdf-audit.md). A aquisição inicialmente os registrou como **IMPORTED**, sem aprovação automática. Depois, a curadoria assistida separou os componentes de Ciência da Computação, conferiu recortes/gabaritos e preparou os lotes de publicação. O inventário de PDFs não é a contagem de questões.
 
 Foram consultadas todas as páginas anuais expostas no [índice tradicional do Inep](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade/provas-e-gabaritos), de 2004 a 2025. As seis edições históricas de Computação encontradas foram 2005, 2008, 2011, 2014, 2017 e 2021. Anos sem documento de Ciência da Computação listado não foram preenchidos com arquivos de Engenharia ou de outros cursos. As páginas e seus hashes também constam no catálogo.
 
-A série recente usa outras páginas: [ENADE das Licenciaturas 2024](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade-das-licenciaturas/provas-e-gabaritos/2024), [PND 2025](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/prova-nacional-docente/provas-e-gabaritos/2025-1) e [PND 2026](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/prova-nacional-docente/provas-e-gabaritos/2026). A existência do link no portal não comprova disponibilidade do PDF; os 34 arquivos permanecem pendentes. PND/Licenciatura não são provas de Bacharelado de 2025/2026. O conteúdo de Bacharelado de 2026 não foi inventado nem antecipado.
+A série recente usa outras páginas: [ENADE das Licenciaturas 2024](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade-das-licenciaturas/provas-e-gabaritos/2024), [PND 2025](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/prova-nacional-docente/provas-e-gabaritos/2025-1) e [PND 2026](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/prova-nacional-docente/provas-e-gabaritos/2026). A existência do link no portal não comprova disponibilidade do PDF; 33 arquivos continuam sem PDF obtido (um dos 34 recentes já foi localizado). PND/Licenciatura não são provas de Bacharelado de 2025/2026. O conteúdo de Bacharelado de 2026 não foi inventado nem antecipado.
+
+## Conteúdo revisado e utilidade dos arquivos pendentes (02/11/2026)
+
+Os lotes históricos ativos contêm **246 objetivas, todas com explicação conferida**, e
+**39 discursivas** com enunciado e padrão oficial em imagens. Conferência de agente,
+sem revisão humana. Validação real em banco isolado: bootstrap repetido duas vezes,
+com as mesmas versões e contagens. Isso é conteúdo pronto para carregar, não um deploy.
+[Registro da revisão e validação](reviews/2026-11-02-content-completion.md).
+
+| Edição | Objetivas aprovadas | Discursivas aprovadas | Pendência histórica |
+| --- | ---: | ---: | --- |
+| 2005 comum, blocos de CC | 34 | 1 | Q60 objetiva ilegível; Q70 discursiva anulada; faltam padrões FG Q8–Q10 |
+| 2008 comum, blocos de CC | 35 | 3 | faltam padrões FG Q9–Q10 |
+| 2011 comum, blocos de CC | 34 | 5 | anulações e componentes de outros cursos excluídos |
+| 2014 Bacharelado + exclusivas Licenciatura | 52 | 10 | discursivas comuns conservam procedência por prova |
+| 2017 Bacharelado + exclusivas Licenciatura | 49 | 10 | idem |
+| 2021 Bacharelado + exclusivas Licenciatura | 42 | 10 | objetivas Q29/Q33 Bacharelado anuladas |
+
+As 39 discursivas são registros por prova: as comuns entre Bacharelado/Licenciatura
+não representam necessariamente 39 enunciados distintos. A tabela não chama de completa
+uma edição que ainda tem bloqueio de fonte ou padrão ausente.
+
+Os 33 PDFs recentes são uma **ampliação**: hoje não há questões deles no acervo publicado.
+Incluem cadernos alternativos, mapas e gabaritos, que ajudam a importar/conferir, mas não
+somam 33 provas com questões inéditas. São Licenciatura/PND; nem todo item é pertinente
+ao Bacharelado. Não impedem treinos, provas históricas nem o simulado autoral no formato
+de 2026 com fontes anteriores. A tentativa de download de 02/11 retornou HTTP 503 nos
+34 endereços tentados; nenhum arquivo existente foi substituído. A ausência dos cinco
+padrões antigos de Formação Geral é outra pendência, não deve ser escondida nessa lista.
 
 ## Como as cópias foram obtidas
 
@@ -78,7 +107,7 @@ Estrutura das provas recentes: 8 objetivas e 2 discursivas de Formação Geral, 
 
 A Formação Geral é a mesma para todos os cursos da edição. No componente específico, a comparação de trechos de texto mostrou que boa parte das questões é idêntica: em 2021, as objetivas 9 a 26 e as discursivas 3 e 4 aparecem nas duas provas; só as objetivas 27 a 35 e a discursiva 5 são exclusivas do Bacharelado. As exclusivas da Licenciatura tratam de tecnologia na educação, EaD, AVA e objetos de aprendizagem. Em 2014 e 2017 a extração por colunas foi menos limpa, mas também mostrou itens comuns.
 
-Consequências: as provas de Licenciatura não devem ser contadas integralmente como novas questões de Bacharelado. Os itens comuns podem servir como segunda procedência, sem duplicar a questão, e os exclusivos precisam de avaliação de pertinência. ENADE das Licenciaturas 2024 e PND 2025/2026 são provas docentes, identificadas separadamente. Dos 34 PDFs recentes, **33 continuam pendentes de aquisição**; o pedido de obter todos os anos permanece no escopo. Priorizar somente Bacharelado no conteúdo de R1 é a proposta D6 do quadro, ainda pendente de Gabriel.
+Consequências: as provas de Licenciatura não devem ser contadas integralmente como novas questões de Bacharelado. Os itens comuns podem servir como segunda procedência, sem duplicar a questão, e os exclusivos precisam de avaliação de pertinência. ENADE das Licenciaturas 2024 e PND 2025/2026 são provas docentes, identificadas separadamente. Dos 34 PDFs recentes, **33 continuam pendentes de aquisição**; o pedido de obter todos os anos permanece no escopo. A separação por modalidade permanece necessária mesmo com o pedido de cobrir todos os anos.
 
 ## Extração assistida (CNT-0, etapa 1)
 
@@ -88,7 +117,7 @@ Consequências: as provas de Licenciatura não devem ser contadas integralmente 
 | --- | --- |
 | `rascunho` | Objetiva com enunciado e cinco alternativas não vazios, A–E reconhecidas, gabarito definitivo, sem nenhum alerta. Ainda exige conferência com a página original |
 | `revisao-manual` | Objetiva com algum alerta; transcrever a partir do PDF |
-| `discursiva` | Fila própria; o sistema ainda não publica discursivas |
+| `discursiva` | Fila própria; publicação por recortes e padrão conferido conforme ADR-013 |
 | `anulada` | Não vira questão de estudo |
 | `sem-gabarito-definitivo` | Gabarito ausente ou não declarado definitivo |
 
