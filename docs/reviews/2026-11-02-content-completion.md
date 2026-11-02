@@ -53,7 +53,11 @@ substituídas saíram dos lotes ativos. Os novos lotes mantêm autoria real e co
 rodada. A unicidade foi verificada: 246 objetivas aprovadas e 246 explicações OK, mais 39
 discursivas aprovadas. Propostas em subdiretórios continuam como registro da preparação.
 
-Ainda pendem publicação em banco isolado e repetição idempotente do bootstrap. Isso não
-representa deploy nem publicação em ambiente de produção. 2005 Q60 continua bloqueada
+Validação executada em `enade_content_ci`, banco local separado do E2E, com arquivos
+PDF locais e SHA-256 fixados: importação de 27 fontes e duas execuções reais de
+`npm run bootstrap:content`. Ambas terminaram sem recusa. Primeira: 246 objetivas,
+246 versões, 246 explicações e 39 discursivas (111 fragmentos). Segunda: as mesmas
+contagens e os mesmos IDs de versões correntes; nenhuma nova versão ou duplicação.
+Isso não representa deploy nem publicação em ambiente de produção. 2005 Q60 continua bloqueada
 pela imagem ilegível; 2005 Q70 discursiva permanece anulada. As cinco de Formação Geral
 sem padrão e os PDFs recentes continuam fora do acervo aprovado.
