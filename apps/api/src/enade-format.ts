@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import type { IncomingMessage } from "node:http";
 import { Body, Controller, Get, Post, Req } from "@nestjs/common";
 import type { PoolClient } from "pg";
 import { db } from "./database.js";
@@ -45,7 +46,7 @@ async function availability(client: Pick<PoolClient, "query">) {
 
 @Controller("api/formats/enade-2026")
 export class EnadeFormatController {
-  @Get() async availability(@Req() req: any) {
+  @Get() async availability(@Req() req: IncomingMessage) {
     const user = await requireIdentity(req);
     const lastResult = (await db.query(
       `SELECT id AS "attemptId",(summary->>'correct')::int AS correct,(summary->>'total')::int AS total,
@@ -55,7 +56,7 @@ export class EnadeFormatController {
     return {...await availability(db),lastResult};
   }
 
-  @Post("attempts") async start(@Req() req: any, @Body() body: unknown) {
+  @Post("attempts") async start(@Req() req: IncomingMessage, @Body() body: unknown) {
     await requireIdentity(req);
     const data = closed(body, ["requestId"]);
     if (typeof data.requestId!=="string" || !UUID.test(data.requestId)) fail("Solicitação inválida.",400);

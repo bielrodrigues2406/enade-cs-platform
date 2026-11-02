@@ -1,6 +1,6 @@
 # ADR 016 — Simulado autoral no formato ENADE 2026
 
-Status: em implementação em `codex/feat-enade-2026`, por pedido direto de Gabriel em 02/11/2026. Complementa ADR-007/013/014 e MASTER-SPEC §5.
+Status: implementação preparada, aguardando validação da integração, em `codex/feat-enade-2026`, por pedido direto de Gabriel em 02/11/2026. Complementa ADR-007/013/014 e MASTER-SPEC §5.
 
 ## Decisão
 

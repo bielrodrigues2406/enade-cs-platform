@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Put, Req, Res } from "@nestjs/common";
 import type { PoolClient } from "pg";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
@@ -76,7 +77,7 @@ function readDraft(input: unknown) {
 
 @Controller("api/practice/:id/discursive")
 export class PracticeDiscursiveController {
-  @Get() async detail(@Req() req: any,@Param("id") rawId: string) {
+  @Get() async detail(@Req() req: IncomingMessage,@Param("id") rawId: string) {
     const user = await requireIdentity(req), id=attemptId(rawId), client=await db.connect();
     try {
       await client.query("BEGIN");
@@ -88,7 +89,7 @@ export class PracticeDiscursiveController {
     finally { client.release(); }
   }
 
-  @Put("response") async save(@Req() req: any,@Param("id") rawId: string,@Body() input: unknown) {
+  @Put("response") async save(@Req() req: IncomingMessage,@Param("id") rawId: string,@Body() input: unknown) {
     const value=readDraft(input), id=attemptId(rawId), client=await db.connect();
     try {
       await client.query("BEGIN");
@@ -110,7 +111,7 @@ export class PracticeDiscursiveController {
     finally { client.release(); }
   }
 
-  @Put("assessment") async assess(@Req() req: any,@Param("id") rawId: string,@Body() input: unknown) {
+  @Put("assessment") async assess(@Req() req: IncomingMessage,@Param("id") rawId: string,@Body() input: unknown) {
     const data=closed(input,["levels"]), id=attemptId(rawId), client=await db.connect();
     try {
       await client.query("BEGIN");
@@ -126,7 +127,7 @@ export class PracticeDiscursiveController {
     finally { client.release(); }
   }
 
-  @Get("images/:file") async image(@Req() req: any,@Param("id") rawId: string,@Param("file") file: string,@Res() res: any) {
+  @Get("images/:file") async image(@Req() req: IncomingMessage,@Param("id") rawId: string,@Param("file") file: string,@Res() res: ServerResponse) {
     const user=await requireIdentity(req), id=attemptId(rawId), match=/^([a-f0-9]{64})\.webp$/.exec(file);
     if (!match) return fail("Imagem não encontrada.",404);
     const row=(await db.query<{byteSize:number}>(
