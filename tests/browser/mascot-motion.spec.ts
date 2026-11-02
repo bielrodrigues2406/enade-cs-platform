@@ -8,12 +8,16 @@ async function sampleGesture(image: Locator) {
     if (!animation?.effect) throw new Error("O gesto não começou depois de carregar a imagem.");
     animation.pause();
     const timing = animation.effect.getComputedTiming();
+    const footprintBefore = el.parentElement!.getBoundingClientRect().toJSON();
     animation.currentTime = Number(timing.duration) / 2;
     const moving = getComputedStyle(el).transform;
+    const footprintDuring = el.parentElement!.getBoundingClientRect().toJSON();
     animation.currentTime = Number(timing.duration);
     const resting = getComputedStyle(el).transform;
+    // Mantém o gesto em andamento para exercitar teclado e redução de movimento.
+    animation.currentTime = Number(timing.duration) / 2;
     return { iterations: timing.iterations, duration: Number(timing.duration), moving, resting,
-      restingIsIdentity: new DOMMatrix(resting).isIdentity };
+      restingIsIdentity: new DOMMatrix(resting).isIdentity, footprintBefore, footprintDuring };
   });
 }
 
@@ -29,13 +33,12 @@ test("Dudu waits for a slow image, greets once and leaves the form usable", asyn
   await expect.poll(() => image.evaluate(el => (el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   await expect.poll(() => image.evaluate(el => el.getAnimations().length)).toBeGreaterThan(0);
   const email = page.getByRole("textbox", { name: "E-mail", exact: true });
-  const before = await email.boundingBox();
   const gesture = await sampleGesture(image);
   expect(gesture.iterations).toBe(1);
   expect(gesture.duration).toBeLessThanOrEqual(700);
   expect(gesture.moving).not.toBe(gesture.resting);
   expect(gesture.restingIsIdentity).toBe(true);
-  expect(await email.boundingBox()).toEqual(before);
+  expect(gesture.footprintDuring).toEqual(gesture.footprintBefore);
   await email.focus();
   await page.keyboard.type("aluno@example.invalid");
   await expect(email).toHaveValue("aluno@example.invalid");
