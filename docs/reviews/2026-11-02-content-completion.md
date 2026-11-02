@@ -33,3 +33,27 @@ Após a conferência independente, manter uma única entrada ativa por `(documen
 A cópia em `superseded/` precisa ser byte a byte igual ao arquivo anterior à separação. Não reescrever o arquivo arquivado para mudar autoria, datas, notas ou decisões. O bootstrap lê JSON apenas no nível superior de `data/agent-reviews/`; `explanations/` e `superseded/` ficam de fora. O mesmo vale para `data/discursive-reviews/pending/`.
 
 Na integração, verificar unicidade das chaves aprovadas ativas e repetir o bootstrap em ambiente de validação controlado: a segunda execução deve manter conteúdo, versões e contagens. Essa validação depende de banco e fica com quem integra. Não há autorização de aprovação registrada por esta preparação.
+
+## Conferência independente — Codex raiz, 02/11/2026
+
+Conferente real: `codex-root-review-2026-11-02`, distinto do autor
+`codex-content-author-2026-11-02` e dos extratores anteriores. Foram abertos os 19 recortes
+objetivos, suas alternativas e os 14 fragmentos discursivos. O raciocínio das explicações
+foi confrontado com as questões e os gabaritos já catalogados. Manifestos e recortes foram
+conferidos por SHA-256; as quatro fontes PDF locais coincidem com os hashes catalogados.
+
+Aprovadas as 19 explicações, com nota explícita sobre a interpretação do gabarito em
+2011 Q18. Nenhuma explicação afirma que largura de registrador da máquina de compilação
+fixa necessariamente a arquitetura do binário. Aprovadas as quatro discursivas, preservando
+as ressalvas de pontuação de 2005 Q55 e do diagrama/UNION de 2008 Q40. Os valores de
+autoavaliação são os impressos no enunciado, sem critérios adicionais atribuídos ao Inep.
+
+Os cinco lotes originais foram copiados byte a byte para `superseded/`; apenas as entradas
+substituídas saíram dos lotes ativos. Os novos lotes mantêm autoria real e conferente desta
+rodada. A unicidade foi verificada: 246 objetivas aprovadas e 246 explicações OK, mais 39
+discursivas aprovadas. Propostas em subdiretórios continuam como registro da preparação.
+
+Ainda pendem publicação em banco isolado e repetição idempotente do bootstrap. Isso não
+representa deploy nem publicação em ambiente de produção. 2005 Q60 continua bloqueada
+pela imagem ilegível; 2005 Q70 discursiva permanece anulada. As cinco de Formação Geral
+sem padrão e os PDFs recentes continuam fora do acervo aprovado.

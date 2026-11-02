@@ -136,22 +136,6 @@
       "explanationNote": ""
     },
     {
-      "key": "Q9",
-      "verdict": "APPROVED",
-      "fragments": [
-        "713e2a61c583eb9932c324289bf23b9cb0d812e493dc64b47f7018b58fe8b0bc"
-      ],
-      "answer": "A",
-      "optionCount": 5,
-      "area": "Algoritmos",
-      "subject": "Árvores AVL: rotação após inserção",
-      "notes": "Recorte da p. 16 com número 09, texto, árvore inicial e as cinco árvores A–E com vínculos legíveis. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Inserção e rotação refeitas: resultado coincide com a árvore da letra oficial.",
-      "studentNote": "Mais de uma alternativa mostra uma árvore AVL válida contendo o valor 3. A questão pede a configuração obtida pelo procedimento descrito no texto, em que o rebalanceamento é feito no nó desbalanceado de nível mais baixo.",
-      "explanation": "A questão cobra a inserção em árvore AVL: após inserir, localiza-se o nó desbalanceado mais baixo e aplica-se rotação simples ou dupla.\n\nO valor 3 desce por 13, 10, 5 e 4 e vira filho esquerdo de 4. A subárvore de 5 passa a ter altura 3, e o nó 10 fica com subárvore esquerda de altura 3 e direita (apenas o 11) de altura 1, diferença 2. O caso é esquerda-esquerda, corrigido por rotação simples à direita em 10: o 5 sobe, o 10 vira seu filho direito e o antigo filho direito de 5 (o 8) passa a filho esquerdo de 10. A raiz continua 13, que segue balanceada. O resultado é a árvore da alternativa A.\n\nAs outras falham. B apenas insere o 3 sem rebalancear, e a árvore deixa de ser AVL. C e E colocam o 11 na subárvore esquerda da raiz 10, violando a ordem de busca. D é balanceada, mas põe o 10 na raiz e exigiria rotacionar o 13, que não estava desbalanceado; o procedimento do texto corrige apenas o nó 10.",
-      "explanationCheck": "REJECTED",
-      "explanationNote": "Erro técnico na análise da D: afirma que o nó 13 \"não estava desbalanceado\", mas após inserir 3 a subárvore esquerda de 13 tem altura 4 (caminho 10-5-4-3) e a direita altura 2 (15, 16), diferença 2. O motivo correto é que o procedimento corrige o nó desbalanceado mais baixo (10), o que já rebalanceia 13; D resultaria de rotacionar a raiz."
-    },
-    {
       "key": "Q10",
       "verdict": "APPROVED",
       "fragments": [
@@ -278,22 +262,6 @@
       "explanation": "A questão cobra o conceito de algoritmos de IA adaptativos aplicados à educação e a relação entre duas asserções.\n\nA asserção I é verdadeira: sistemas adaptativos ajustam conteúdo, ritmo e atividades ao perfil de cada pessoa, auxiliando sua experiência de aprendizado. A asserção II também é verdadeira: esses algoritmos analisam respostas anteriores em busca de padrões que indiquem pontos de dificuldade ou facilidade em um assunto, o que descreve o mecanismo básico da adaptação a partir de dados de desempenho.\n\nA II justifica a I porque explica como a adaptação ao perfil é possível: sem identificar padrões de acerto e erro, o sistema não teria base para saber quais conteúdos reforçar ou antecipar. Portanto, a alternativa A está correta. B nega a relação de justificativa, que existe. C e D tratam uma das asserções como falsa, mas ambas descrevem práticas reconhecidas de IA na educação. E nega as duas, o que contraria o que se conhece de sistemas adaptativos.",
       "explanationCheck": "OK",
       "explanationNote": ""
-    },
-    {
-      "key": "Q18",
-      "verdict": "APPROVED",
-      "fragments": [
-        "1f19e49f6664754bc82a89a1dd3d8e9b1bbcba037fcd28c5d3164eaa095b2532"
-      ],
-      "answer": "D",
-      "optionCount": 5,
-      "area": "Algoritmos",
-      "subject": "Ordenação por inserção: correção de erros lógicos",
-      "notes": "Recorte da coluna direita da p. 21 com número 18, código das linhas 01–15 e alternativas A–E com trechos de código legíveis. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
-      "studentNote": "",
-      "explanation": "A questão cobra o algoritmo de ordenação por inserção e a identificação de erros lógicos. Para cada posição i, guarda-se o elemento em chave, desloca-se uma posição à direita cada elemento anterior maior que a chave e insere-se a chave na posição livre.\n\nHá dois erros. Na linha 08, a condição v[j] < chave faz o deslocamento enquanto os elementos anteriores são menores, o que ordenaria de forma decrescente; para ordem crescente deve ser v[j] > chave. Na linha 10, o deslocamento deve copiar v[j] para a posição à direita, v[j + 1] = v[j]; com v[j - 1] sobrescreve-se o elemento anterior e, para j igual a 0, acessa-se posição inválida do vetor. A linha 13, v[j + 1] = chave, já está correta. Isso corresponde à alternativa D.\n\nAs demais falham. A altera o limite do laço, deixando o último elemento fora, e muda a linha 13, que estava certa. B e C usam j = i + 1, que ultrapassa o vetor. E corrige a linha 10, mas altera a 13, que estava certa, e mantém o sinal errado na 08.",
-      "explanationCheck": "REJECTED",
-      "explanationNote": "Erro técnico na análise da B: afirma que j = i + 1 ultrapassa o vetor, mas em B o laço vai até i < n - 1, então j = i + 1 vale no máximo n - 1, dentro do vetor. B falha porque começa a comparação pelo elemento seguinte à chave e mantém os erros das linhas 08 e 10; só em C (laço até i < n) j = n sai do vetor."
     }
   ]
 }

@@ -1,0 +1,315 @@
+{
+  "document": "enade-2011-comum-exam",
+  "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+  "cropsManifestSha256": "2bf785081cf15a9f5c8b41c63d92e8ac61ea28c3ad85dcfb4d82a46631d00332",
+  "extractor": "claude",
+  "reviewer": "claude-autoconferencia",
+  "reviewedAt": "2026-10-31T16:47:02Z",
+  "items": [
+    {
+      "key": "Q1",
+      "verdict": "APPROVED",
+      "fragments": [
+        "3c418117ac4b19eabc63ff54c14e606e74483e9e9d3607780a194a5cd33246a8"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Interpretação de poema: trabalho escravo e privilégio",
+      "notes": "Questão 1 completa: poema, fonte, enunciado e A–E legíveis; só um resto do cabeçalho da página na borda superior. Letra D conferida no gabarito de Computação 2011. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra interpretação de texto poético. A autora descreve a “perfeição” física da princesa (pescoço fino, espinha direita, cabeça erguida) e diz que, para isso, foram necessárias “sucessivas gerações de escravos”, de corpo dobrado e mãos grossas, servindo “sucessivas gerações de príncipes”. Fala ainda em “imenso desperdiçar de gente”. A leitura coerente é que o trabalho compulsório dos escravos proporcionou privilégios aos príncipes e, por consequência, o refinamento da princesa. Por isso a alternativa D está correta.\n\nA falha: o poema mostra a beleza como resultado de um longo processo social, não como algo natural. B falha: os príncipes são chamados de “ávidos, cruéis e fraudulentos”, e não de generosos. C falha: não há referência a miscigenação racial; o desperdício citado é de gente, isto é, das vidas dos escravos. E falha: o exílio e a solidão aparecem apenas no último verso, como destino da princesa, e não como causa de seu corpo esbelto.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q2",
+      "verdict": "APPROVED",
+      "fragments": [
+        "97c3c8d0ee7b1a22fef7e98ec7a6acaf24bf537d1f402186b8e0c06de99b67a1"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Exclusão digital e inclusão por TICs",
+      "notes": "Questão 2 completa: texto, afirmações I–IV e A–E legíveis. Letra A conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "O texto define exclusão digital como a falta de acesso às vantagens das tecnologias de informação e comunicação (TICs) por motivos sociais, econômicos, políticos ou culturais. Avaliando as afirmativas:\n\nI é correta: mapear a exclusão digital permite que gestores de políticas públicas escolham o público-alvo de ações de inclusão. II é correta: o texto diz que as TICs são base para construir e aplicar conhecimento, de modo que prover informação a quem teve esse direito negado favorece a mobilidade social e econômica. III é incorreta: ela estabelece uma diferenciação entre direito à informação e direitos sociais que o texto não apresenta. IV é incorreta: o texto atribui a exclusão a motivos sociais, econômicos, políticos ou culturais, e não a uma suposta deficiência da tecnologia existente no país, nem compara o Brasil ao primeiro mundo.\n\nComo só I e II são corretas, a alternativa A é a certa; as demais incluem III ou IV.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q3",
+      "verdict": "APPROVED",
+      "fragments": [
+        "8e48ffc04cd655b6ec70e11b0bc1274104fc7c8952fd3021f5c32727e3d74903"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Cibercultura e valores do Iluminismo",
+      "notes": "Questão 3 completa: texto de Lévy, fonte, comando e A–E. Letra E conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede a leitura das ideias do texto de Lévy sobre a cibercultura. O autor a apresenta como herdeira do projeto progressista dos filósofos do século XVII: ela valoriza a participação em comunidades de debate e argumentação, nasceu de trocas de informações e conhecimentos (o que o Iluminismo via como motor do progresso) e dá forma técnica a liberdade, igualdade e fraternidade. Assim, a cibercultura incorpora valores do Iluminismo ao favorecer o compartilhamento de informações e conhecimentos, o que corresponde à alternativa E.\n\nA falha: o texto diz que a cibercultura “não seria pós-moderna”, mas inserida na continuidade dos ideais revolucionários e republicanos. B falha: ela não nega os valores progressistas, e sim os continua. C falha: nada no texto sugere que ela banalize a ciência. D falha: o texto cita acesso a múltiplas comunidades virtuais e interconexão mundial, o contrário de isolamento dos indivíduos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q4",
+      "verdict": "APPROVED",
+      "fragments": [
+        "17d20e614eb5184f20f99f43ff029e242c651f5d5ff4ce1d5e70dd67a63c9789"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Educação e cidadania no Brasil",
+      "notes": "Questão 4 completa: texto, duas asserções e A–E. Letra A conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão é de asserção e razão e parte de um texto sobre a trajetória do debate educacional no país, até a Constituição de 1988, que assegura a educação como direito de todos, inclusive de quem não teve acesso em idade própria (artigo 208).\n\nA primeira asserção é verdadeira: o texto liga educação e cidadania ao dizer que a educação visa à preparação para o exercício da cidadania, e a universalização da educação é condição para consolidar a democracia. A segunda também é verdadeira: o texto mostra que a pauta educacional passou pelos Poderes Executivo e Legislativo ao longo do século XX (escolanovismo, reformas, a primeira LDB) e que o direito de acesso, inclusive de jovens e adultos fora da idade escolar, passou a ser garantido. Ela justifica a primeira porque descreve o caminho institucional pelo qual a universalização foi sendo buscada e assegurada.\n\nAssim, a alternativa A é a correta. B exigiria que a segunda não explicasse a primeira; C, D e E tratam uma ou as duas asserções como falsas, o que o texto não sustenta.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q5",
+      "verdict": "APPROVED",
+      "fragments": [
+        "5eceeba599d038555c3befe8c11d3824d8091add02f7ab8109fc94b3482b296f"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Leitura de mapa e texto: desmatamento na Amazônia",
+      "notes": "Questão 5 completa: mapa com legenda legível, texto, fonte e A–E. Letra C conferida no gabarito; cálculo da E conferido (99/0,58 ≈ 171). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão exige cruzar o texto com o mapa e conferir cada número. O texto informa que, entre agosto de 2010 e junho de 2011, o desmatamento acumulado foi de 1 534 km², e que Mato Grosso respondeu por 38%, o Pará por 25% e Rondônia por 21%. Somando, 38 + 25 + 21 = 84%, de modo que três estados responderam por 84% do desmatamento, como diz a alternativa C.\n\nA falha: os 1 534 km² referem-se a cerca de um ano (agosto a junho), não a dois anos. B falha: o texto fala em aumento de 15% no acumulado em relação ao período anterior. D falha: o Amapá não aparece entre os líderes do ranking e o mapa mostra pouco desmatamento ali. E falha: junho de 2011 teve 99 km², queda de 42% sobre junho de 2010; logo junho de 2010 foi de cerca de 99 / 0,58, aproximadamente 171 km², e não 140 km².",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q6",
+      "verdict": "APPROVED",
+      "fragments": [
+        "e6ed7530d2aae041495fc833c7e391853cb2900605434ce5003bb4cb5dfb969b"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Leitura de infográfico: escolaridade, emprego e salário",
+      "notes": "Questão 6 completa: infográfico com todos os valores legíveis, fonte, comando e A–E. Letra B conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede a interpretação de um infográfico. Ele mostra duas setas que se cruzam, formando um “X”: a taxa de desemprego cai conforme aumentam os anos de estudo (de 13,05% com até 10 anos para 2,66% com mais de 17 anos) e os salários aumentam com a escolaridade (1 800 para quem conclui o ensino médio, 8 600 para quem tem curso superior e fala língua estrangeira, 18 500 para doutorado ou MBA). A expressão “o Xis da questão” refere-se, portanto, às oportunidades de melhoria salarial (e de menor desemprego) que surgem à medida que aumenta a escolaridade, o que é a alternativa B.\n\nA falha: o infográfico não define quantos anos de estudo garantem emprego estável com salário digno. C falha: a língua estrangeira aparece só em um dado salarial, sem avaliar o ensino nas escolas. D falha: não há questionamento sobre uma quantidade mínima de anos de estudo. E falha: não se menciona política de controle de evasão nem aprovação automática como causa da queda do desemprego.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q7",
+      "verdict": "APPROVED",
+      "fragments": [
+        "93b88890a0dd99e017ec346e6c22e58efaafc246cebab27ce7a222c6bdd0c301"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Sustentabilidade e desenvolvimento sustentável",
+      "notes": "Questão 7 completa: texto e A–E; cabeçalho de página cortado na borda superior, sem conteúdo de outra questão. Letra B conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "O texto define desenvolvimento sustentável como o que atende às necessidades atuais sem comprometer as gerações futuras, aponta um questionamento crescente dos paradigmas estabelecidos na economia e na cultura política e divide o campo em sustentabilidade ambiental, econômica e sociopolítica. Nesse contexto, o desenvolvimento sustentável pressupõe redefinir critérios e instrumentos de avaliação de custo-benefício para que reflitam os efeitos socioeconômicos e os valores reais do consumo e da preservação, o que é a alternativa B.\n\nA falha: A afirma que preservar o capital natural não afeta o desenvolvimento econômico e político, sem expressar a revisão de critérios de avaliação que o texto sugere ao falar em questionar paradigmas. C falha: diz que os recursos naturais são ilimitados, o que contradiz a preocupação com as gerações futuras. D falha: sustentabilidade não significa estagnação do desenvolvimento econômico e tecnológico. E falha: o texto não pressupõe distribuição homogênea das reservas; aliás, destaca que o Brasil abriga parte significativa delas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q8",
+      "verdict": "APPROVED",
+      "fragments": [
+        "9ee9ca9babe48989823d62de9554543b3ef0660fbad34eae6817af67409014d7"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Formação Geral",
+      "subject": "Desigualdade, culpabilização individual e protestos",
+      "notes": "Questão 8 completa: texto, fonte, afirmações I–IV e A–E. Letra E conferida no gabarito. A afirmação IV não está explícita no texto; vira nota ao estudante. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "A afirmação IV (reivindicação de inclusão nos padrões de consumo) não aparece de forma explícita no texto; o gabarito oficial a considera correta.",
+      "explanation": "A questão pede avaliar quatro afirmativas sobre o texto de Owen Jones. I é incorreta: “chav” é um insulto usado para escarnecer os hábitos de consumo da classe trabalhadora, não para exaltá-los. II é correta: segundo Jones, os distúrbios servem de argumento para a ideologia de que os problemas sociais resultam de defeitos individuais. III é correta: os indivíduos da classe trabalhadora são responsabilizados pela falta de oportunidades, enquanto o autor denuncia o abandono governamental e a ausência de políticas públicas. IV é tomada como correta pelo gabarito: as manifestações envolvem justamente as camadas desfavorecidas, estigmatizadas por seus hábitos de consumo, e a leitura é de que reivindicavam inclusão nesse padrão.\n\nComo II, III e IV são as afirmativas aceitas, a alternativa E é a correta. A, B, C e D incluem a afirmativa I, que é falsa, ou deixam de fora alguma das corretas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q9",
+      "verdict": "APPROVED",
+      "fragments": [
+        "9d4e2c8754900d276482ea2c19c2d8742064e27f416d67c96452c09e72d40768"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Relações de equivalência e conjunto quociente",
+      "notes": "Questão 9 completa: definições com notação matemática legível, afirmações I–IV e A–E. Letra D conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão trata de relações de equivalência (reflexiva, simétrica e transitiva), classes de equivalência, conjunto quociente e projeção canônica. Avaliando as afirmativas:\n\nI é verdadeira: as classes de equivalência são disjuntas e cobrem A, isto é, formam uma partição. II é falsa: a união das classes é o próprio conjunto A, já que cada elemento pertence à sua classe, e não o conjunto das partes de A. III é falsa: a igualdade e a congruência módulo n são relações de equivalência, mas “maior ou igual” não é simétrica (3 ≥ 2, porém 2 não é ≥ 3). IV é verdadeira: toda relação de equivalência ~ provém da projeção canônica, pois a ~ a' se, e somente se, as classes são iguais, isto é, π(a) = π(a').\n\nPortanto só I e IV são corretas, e a alternativa D é a certa. A, B, C e E incluem II ou III, ou omitem I ou IV.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q10",
+      "verdict": "APPROVED",
+      "fragments": [
+        "5224a9f384e2f80c914ad4918062ae72bcb99892f0d279da08c5e2d71aeeb85a"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Probabilidade condicional com tabela de contingência",
+      "notes": "Questão 10 completa: tabela de contingência e frações A–E legíveis. Letra E conferida; 67/(45+67) conferido. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede uma probabilidade condicional: a probabilidade de ser mulher, dado que o estudante tem aulas apenas com o professor X. Condicionar significa restringir o espaço amostral aos estudantes do professor X, que são 45 homens e 67 mulheres, ou seja, 45 + 67 = 112 estudantes. Entre eles, 67 são mulheres. Logo, P(mulher | professor X) = 67/112, que é a alternativa E.\n\nAs demais não correspondem a esse cálculo. C usa 67/155, em que 155 é o total geral de estudantes (45 + 5 + 32 + 67 + 2 + 4); isso seria a probabilidade conjunta de ser mulher e ter aulas com X, não a condicional. As alternativas A, B e D usam numeradores e denominadores que não correspondem ao conjunto de estudantes do professor X nem à contagem de mulheres dentro dele.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q11",
+      "verdict": "APPROVED",
+      "fragments": [
+        "55d74b40d08908ba875ec620fe05fee2d8bdd888c15849e1db32d887377598a8"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Problema da parada e indecidibilidade",
+      "notes": "Questão 11 completa: enunciado e A–E. Letra C conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "O problema da parada pergunta, para uma máquina de Turing M e uma entrada w, se M eventualmente para com w. Esse é o exemplo clássico de problema indecidível, demonstrado por Turing por diagonalização: se existisse um algoritmo H que decidisse corretamente para todo par (M, w), poderia ser construída uma máquina que usa H sobre si mesma e se contradiz. Portanto não existe algoritmo que o solucione para todas as entradas, não importa quanto tempo seja disponibilizado, o que corresponde à alternativa C.\n\nAs alternativas A e B afirmam que existe um algoritmo exato, com tempo polinomial ou exponencial; mas o problema não é limitado por tempo, e sim pela inexistência de qualquer algoritmo que o decida. As alternativas D e E dizem que não há algoritmo exato, mas que haveria um algoritmo de aproximação, polinomial ou exponencial, que o soluciona; essa ideia se aplica a problemas de otimização difíceis, não a um problema indecidível, e também ficam descartadas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q12",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f1606a0aa4e49831e98dce26cca2e0187c57e93097b055155603501beed09c79"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Gramáticas regulares e linguagem gerada",
+      "notes": "Questão 12 completa: gramática com produções legíveis, afirmações I–IV e A–E. Letra B conferida; contraexemplos da explicação conferidos. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede analisar a linguagem gerada pela gramática S → 1S | 0A | ε, A → 1S | 0B | ε, B → 1S | ε. Cada 0 leva de S a A e de A a B, enquanto B só gera 1S ou a cadeia vazia: não é possível escrever um terceiro 0 seguido. Todo 1 volta a S. Logo, nunca há mais de dois zeros consecutivos.\n\nI é falsa: S ⇒ 0A ⇒ 0 gera a cadeia “0”, que termina em zero (e a cadeia vazia nem tem último símbolo). II é verdadeira, pelo argumento acima. III é falsa: a cadeia “0” tem um zero e nenhum um, e a cadeia vazia tem zero de cada. IV é falsa: S ⇒ 0A ⇒ 01S ⇒ 01 tem um 1 à direita de um 0.\n\nComo só II é correta, a alternativa B é a certa. As outras combinam II com afirmativas falsas ou apresentam I, III ou IV, todas refutadas por contraexemplos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q14",
+      "verdict": "APPROVED",
+      "fragments": [
+        "a7b590296c0b5a2a51334dda6416af8a7384b907ef5e188a0eab19a97a2b05e6"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Álgebra booleana: diagrama de Venn e função lógica",
+      "notes": "Questão 14 completa: diagrama de Venn com regiões azuis distinguíveis e fórmulas A–E legíveis (barras de negação nítidas). Letra E conferida; regiões x, y, z e x∩z fora de y conferidas na imagem. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão exige traduzir um diagrama de Venn em função lógica. As regiões azuis são: só x, só y, só z e a interseção de x com z fora de y. Em termos de (x, y, z), isso dá os mintermos 100, 010, 001 e 101, ou seja, f = x·ȳ·z̄ + x̄·y·z̄ + x̄·ȳ·z + x·ȳ·z. Agrupando os termos com ȳ: ȳ(x·z̄ + x̄·z + x·z) = ȳ(x + z), pois x·z̄ + x̄·z + x·z = x + z. Sobra o termo x̄·y·z̄, que é a região só y. Assim, f = (x + z)·ȳ + x̄·y·z̄, alternativa E.\n\nA, B e C usam (x + z)·y, que cobre a região central e a interseção de y com x ou z, todas brancas no diagrama. D mantém (x + z)·ȳ mas acrescenta x·ȳ·z, que já está contido, e deixa de cobrir a região só y.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q15",
+      "verdict": "APPROVED",
+      "fragments": [
+        "91a0d69c159e07cec370af6fe88a2737c79fe444037008c037a3e73760984664"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "ICMP e rastreamento de rota (traceroute)",
+      "notes": "Questão 15 completa: enunciado e A–E. Letra D conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A ferramenta descrita é um rastreador de rota, como o traceroute. Ela envia pacotes com o campo TTL crescente; cada roteador que descarta um pacote por TTL expirado responde com uma mensagem de erro, o que revela o endereço IP do roteador e permite medir o round-trip time. Essas respostas são mensagens ICMP (Time Exceeded e, no destino, mensagens como Destination Unreachable ou Echo Reply). O ICMP já existe na Internet atual e nos roteadores, portanto a solução funciona sem mudar roteadores nem criar protocolos, o que corresponde à alternativa D.\n\nA falha: o IP apenas transporta os datagramas e não define por si só um relatório de erros do roteador. B e C são protocolos de transporte (UDP e TCP) e não fornecem informação sobre os roteadores do caminho. E, o DHCP, serve para configurar automaticamente endereços e parâmetros de rede de hospedeiros, nada tendo a ver com descobrir a rota.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q16",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f56b8bc24ea365bfb4fc6155a4943a09d95ea558aab75ae47520f198a158cd7b"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Sequência de protocolos ao acessar uma página Web",
+      "notes": "Questão 16 completa: enunciado, premissas i–ii e A–E. Letra A conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede a ordem das mensagens vistas no meio físico quando o hospedeiro A, com todas as tabelas e caches vazios, acessa uma página em B. Com as tabelas vazias, A conhece o IP do servidor DNS local, mas não seu endereço de enlace; por isso o primeiro quadro observado é uma consulta ARP. Depois, A envia a consulta DNS (DNS/UDP/IP) para obter o IP de B. Com o IP de B em mãos, A precisa estabelecer a conexão de transporte, o que gera segmentos TCP/IP de abertura (handshake). Só depois da conexão estabelecida é enviada a requisição HTTP sobre TCP/IP. A sequência é ARP, DNS/UDP/IP, TCP/IP e HTTP/TCP/IP, alternativa A.\n\nC e D colocam o DNS antes do ARP, o que é impossível sem o endereço de enlace do servidor DNS. B e E colocam HTTP antes de estabelecer a conexão TCP, e E ainda faz HTTP antes de resolver o nome de B.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q17",
+      "verdict": "APPROVED",
+      "fragments": [
+        "9f75c6866debbde320eea9649dc6ca35107bc9deb56877882443e17a47275f7b"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Mintermos, maxtermos e análise de circuito lógico",
+      "notes": "Questão 17 completa: tabela de mintermos/maxtermos, circuito com portas e ligações nítidas e A–E. Letra B conferida; f = x1x3 + x2x̄3 e g = x̄3 + x1x4 conferidas no circuito, índices conferidos. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede deduzir as funções f e g do circuito e expressá-las como soma de mintermos ou produto de maxtermos, com x1 como bit mais significativo da linha (x1x2x3x4).\n\nPelo circuito, f = x1·x3 + x2·x̄3 (x4 não participa). Ela vale 1 quando x1 = 1 e x3 = 1 (linhas 10, 11, 14, 15) ou quando x2 = 1 e x3 = 0 (linhas 4, 5, 12, 13). Logo f = Σm(4, 5, 10, 11, 12, 13, 14, 15). A função g = (x1 + x̄3)·(x̄3 + x4) = x̄3 + x1·x4 vale 1 quando x3 = 0 (linhas 0, 1, 4, 5, 8, 9, 12, 13) ou x1 = x4 = 1 (linhas 9, 11, 13, 15); a união é Σm(0, 1, 4, 5, 8, 9, 11, 12, 13, 15). Isso corresponde à alternativa B.\n\nA traz f e g diferentes das obtidas do circuito. C e E usam produtos de maxtermos com índices que indicariam as linhas em que a função vale 0, e não 1. D mistura maxtermos para f com um g que não corresponde ao circuito.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q18",
+      "verdict": "APPROVED",
+      "fragments": [
+        "10ad035d76ed30b4a426aaad594c674ef39f5c2a5936a29fb710a690a768ba54"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Portabilidade de executável: ISA, registradores e núcleos",
+      "notes": "Questão 18 completa: enunciado, afirmações I–IV e A–E. Letra B (I e II) conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão trata do que precisa (e do que não precisa) ser igual entre dois sistemas para um mesmo executável funcionar. Pelo gabarito, as quatro afirmativas são possíveis.\n\nI: o número de núcleos pode diferir, pois o programa não depende dessa quantidade para funcionar corretamente; o sistema operacional escala o trabalho. II: o executável chama o sistema operacional por chamadas ao sistema, então as do sistema A devem ser compatíveis com as do sistema B. III: o conjunto de instruções poderia ser diferente, por exemplo se B executa o código de A por emulação ou tradução binária. IV: a largura dos registradores poderia ser diferente, como na execução de código de 32 bits em hardware de 64 bits.\n\nComo todas as afirmativas são aceitas, a alternativa E é a correta. A, B, C e D excluem alguma das afirmativas que o gabarito considera válidas.",
+      "explanationCheck": "REJECTED",
+      "explanationNote": "A explicação defende a alternativa E (as quatro afirmações), mas o gabarito oficial é B (I e II, apenas)."
+    },
+    {
+      "key": "Q19",
+      "verdict": "APPROVED",
+      "fragments": [
+        "2a74512d6e689cdc1f3ce7a1834eb8e07ab06290b19f30606a19b6e58555537f"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Engenharia de software",
+      "subject": "Testes de unidade e de integração",
+      "notes": "Questão 19 completa: enunciado e A–E. Letra E conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra os níveis de teste de software. A equipe testa com base no código-fonte (teste estrutural, ou de caixa-branca) e verifica componentes individualmente e também as interfaces entre eles. Verificar cada componente isoladamente é teste de unidade; verificar as interfaces e a interação entre componentes é teste de integração. Logo, a alternativa E (unidade e integração) é a correta.\n\nA falha: considera só a unidade e ignora a verificação das interfaces. B falha: o teste de aceitação valida o sistema segundo as necessidades do cliente ou usuário, não é feito a partir do código-fonte nem componente a componente. C falha: teste de sistema e de aceitação avaliam o sistema completo, não componentes individuais. D falha: inclui a integração, mas troca a unidade pelo nível de sistema, que verifica o produto completo contra os requisitos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q20",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b05846c020974757edf8354bfeb8c53623130cc8b2cc23e2983fbeb3e8e9da85"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Teoria dos grafos: grau dos vértices",
+      "notes": "Questão 20 completa: asserções com a soma dos graus legível e A–E. Letra D conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão é de asserção e razão sobre grafos. A segunda asserção é verdadeira: a soma dos graus de todos os vértices é igual a 2|E|, porque cada aresta contribui com uma unidade para o grau de cada uma de suas duas extremidades. É o lema do aperto de mãos.\n\nDessa identidade decorre que a soma dos graus é par. Os vértices de grau par contribuem com parcelas pares; assim, a soma dos graus dos vértices de grau ímpar também deve ser par, e isso só ocorre se a quantidade desses vértices for par. Logo, a primeira asserção, que diz que a quantidade de vértices de grau ímpar é ímpar, é falsa. Um contraexemplo simples é um grafo com dois vértices ligados por uma aresta, em que há dois vértices de grau 1.\n\nAssim, a primeira asserção é falsa e a segunda é verdadeira, alternativa D. A e B exigiriam a primeira verdadeira; C, a segunda falsa; E, as duas falsas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ],
+  "explainer": "claude-explain-07"
+}

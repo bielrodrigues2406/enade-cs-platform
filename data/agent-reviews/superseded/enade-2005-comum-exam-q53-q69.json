@@ -1,0 +1,257 @@
+{
+  "document": "enade-2005-comum-exam",
+  "examSha256": "ba95b66e95b6a4071a970f794e0b0c71aeebf18740b95b6ca02dfcb72d0be76c",
+  "cropsManifestSha256": "97be895b6907cea8e07b72a5a2b8f98621578dacd91484b72e6fa3369a19b747",
+  "extractor": "claude",
+  "reviewer": "claude-autoconferencia",
+  "reviewedAt": "2026-10-31T16:52:25Z",
+  "items": [
+    {
+      "key": "Q53",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d26b42739e1d7c70be42d3fdc96f29161bc974e3ee23b5dd7bc62a9b3d72b134"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Sistemas operacionais",
+      "subject": "Semáforos e buffer limitado (produtor/consumidor)",
+      "notes": "Questão 53 completa: texto, tabela produtor/consumidor e A–E com as operações legíveis. Letra A. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a solução clássica do buffer limitado com três semáforos: vazio (começa com N e conta posições livres), cheio (começa com 0 e conta itens disponíveis) e mutex (começa com 1 e dá exclusão mútua no acesso ao buffer).\n\nO produtor deve primeiro esperar uma posição livre, wait(vazio), depois entrar na região crítica, wait(mutex), colocar o item, sair com signal(mutex) e avisar que há um item novo, signal(cheio). O consumidor faz o espelho: wait(cheio), wait(mutex), retira o item, signal(mutex) e signal(vazio). Assim, comando_a a comando_h são, nessa ordem, wait(vazio), wait(mutex), signal(mutex), signal(cheio), wait(cheio), wait(mutex), signal(mutex) e signal(vazio), que é a alternativa A.\n\nAs demais falham por trocar os papéis dos semáforos ou a ordem das operações. Em B, C, D e E aparecem, por exemplo, wait(cheio) no produtor, wait(mutex) antes de wait(vazio) (risco de deadlock, pois o processo segura o mutex enquanto espera) ou signal(mutex) no lugar de wait(mutex), o que quebra a exclusão mútua e o controle de itens e vagas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q54",
+      "verdict": "APPROVED",
+      "fragments": [
+        "5586a38c754063b2cca4a4b911da2a9af86e7c4dd61cf249356b4dfbf6d22b0a"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Complexidade de recorrência em programação dinâmica",
+      "notes": "Questão 54 completa: fórmula recursiva legível e A–E; na borda inferior aparece só o rótulo RASCUNHO da página, sem conteúdo de outra questão. Letra B. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede a complexidade de uma solução obtida de uma fórmula recursiva C(i,j) com i variando de 0 a M e j de 0 a N. O ponto central é que cada valor C(i,j) depende apenas de C(i-1,j-1), C(i,j-1) e C(i-1,j), ou seja, de células já definidas da mesma tabela.\n\nCalculando a tabela com programação dinâmica, cada uma das (M+1) x (N+1) células exige uma quantidade constante de trabalho: um teste de i = j, uma soma ou um máximo entre dois valores. Com M e N da ordem de n, são cerca de n x n células, e a complexidade é O(n^2), alternativa B.\n\nAs outras não correspondem a esse esforço. O(n log n) seria menor que o número de células da tabela. O(n^2 log n) e O(n^3) exigiriam trabalho não constante por célula, o que a fórmula não pede. O(2^n) seria o custo de implementar a recursão de forma ingênua, recalculando os mesmos subproblemas, e não o da solução que aproveita os resultados já calculados.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q56",
+      "verdict": "APPROVED",
+      "fragments": [
+        "f214043c64b37b6a140b64020b71203da91462309c32033ef8c09e7161b63506"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Banco de dados",
+      "subject": "Propriedades ACID de transações",
+      "notes": "Questão 56 completa: texto, tabela de T1 com as 6 operações, itens I–III e A–E. Letra B. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão trata das propriedades de transações: atomicidade (tudo ou nada), consistência (a transação leva o banco de um estado íntegro a outro), isolamento e durabilidade.\n\nNo item I, a falha ocorre depois da escrita de X e antes da escrita de Y (operação 6). Se o sistema restabelece o valor original de X, o banco volta ao estado anterior à transação, como se T1 não tivesse ocorrido. Isso é atomicidade, então o item está certo.\n\nNo item II, a transação terminou com sucesso, houve falha e, na reinicialização, o sistema reconstrói as atualizações feitas. Efeitos de uma transação confirmada que sobrevivem a falhas caracterizam a durabilidade, então o item está certo.\n\nNo item III, impedir que T2 escreva em Y enquanto T1 está no meio da execução evita interferência entre transações concorrentes. Isso é isolamento, não consistência, que diz respeito à preservação das regras de integridade do banco. O item está errado.\n\nEstão certos apenas I e II, alternativa B. As demais incluem o item III ou omitem um dos corretos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q57",
+      "verdict": "APPROVED",
+      "fragments": [
+        "bd40f1808935bde6c95afaacb8d3a6d8ec38dacde3b47c643e214fe3319b451e"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Representação de conhecimento: regras, redes e frames",
+      "notes": "Questão 57 completa: enunciado e A–E. Letra B. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "Descrever o encadeamento progressivo como busca gulosa é discutível; o gabarito oficial considera a alternativa B correta.",
+      "explanation": "A questão compara mecanismos de representação de conhecimento em inteligência artificial: sistemas de regras com encadeamento progressivo e regressivo, redes semânticas, frames e lógica de primeira ordem.\n\nPelo gabarito oficial, a alternativa B é a correta: no encadeamento progressivo, o sistema compara os fatos da memória de trabalho com os antecedentes das regras para decidir quais regras disparar, e a prova trata essa comparação como uma busca gulosa.\n\nAs demais afirmativas falham. A diz que o encadeamento regressivo usa busca em largura para resolver conflitos e por isso é menos usado, afirmação que a área não sustenta. C inverte a relação: a lógica de primeira ordem é mais expressiva que as redes semânticas, e não o contrário. D atribui aos frames um mecanismo de inferência semanticamente bem definido, justamente um ponto fraco dessa representação. E diz que redes semânticas e frames representam facilmente conhecimento procedural, quando o forte dessas estruturas é o conhecimento estrutural e de categorias.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q58",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d1e78bbb9cbad8515a5d78e2eefea6f47410f49774faae56e54d6a24b61272d8"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Busca heurística: A*, busca gulosa e simulated annealing",
+      "notes": "Questão 58 completa: grafo com pesos legíveis, tabelas de distância em linha reta, itens I–V e A–E. Letra B; custo de ACDFLM = 56,18 e escolha gulosa de B a partir de A conferidos. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão avalia busca heurística no grafo de rodovias, com as distâncias em linha reta até M como heurística.\n\nItem I: a rota ACDFLM tem custo 11,18 + 10 + 5 + 10 + 20 = 56,18 km, que é a rota encontrada pelo A*, então está certo. Item II: a busca gulosa escolhe, a cada passo, o vizinho com menor valor da heurística. Partindo de A, B (20,00) é preferido a C (33,54) e K (40,00), então a rota não é ACDFLM; o item está errado. Item III: a heurística deve ser admissível, isto é, não superestimar o custo restante; exigir que superestime está errado. Item IV: com heurísticas admissíveis o A* é completo e ótimo, certo. Item V: o simulated annealing pode aceitar estados piores, com probabilidade que depende da temperatura, certo.\n\nEstão certos apenas I, IV e V, alternativa B. As outras alternativas incluem II ou III, ou deixam de fora um item correto.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q59",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7a948b13afd13ff283f0ba8fefcee0ec93133742bfff17050dd86774792eea12"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Banco de dados",
+      "subject": "Otimização de consultas e plano de avaliação",
+      "notes": "Questão 59 completa: esquema, consulta SQL e as cinco árvores A–E legíveis. Letra C. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra a otimização heurística de consultas em álgebra relacional. A regra principal é executar as seleções o mais cedo possível, antes das junções, porque elas reduzem o número de tuplas que entram nos passos seguintes.\n\nNa consulta, há três condições de seleção, cada uma sobre uma relação: CIDADE_AGENCIA = 'SAO PAULO' sobre AGENCIAS, SALDO > 1000 sobre CONTAS e CIDADE_NASCIMENTO = 'RECIFE' sobre CLIENTES (100.000 de 1.500.000 clientes). A alternativa C aplica as três nos nós folha e só depois faz as junções, que passam a operar com relações bem menores. Esse é o melhor plano.\n\nAs demais deixam seleções para depois das junções. Em A e E, todas as seleções ficam no topo, depois de juntar as três relações inteiras. Em B, as seleções sobre AGENCIAS e CONTAS ocorrem depois da junção entre elas. Em D, as seleções sobre CLIENTES e CONTAS vêm depois da junção entre ambas, que é a maior. Em todos esses casos os resultados intermediários são maiores que em C.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q60",
+      "verdict": "BLOCKED",
+      "reason": "A figura do circuito na própria prova tem ligações interrompidas e portas incompletas; não é possível rastrear a função a partir da imagem, que é trecho necessário (D15, item 5)."
+    },
+    {
+      "key": "Q61",
+      "verdict": "APPROVED",
+      "fragments": [
+        "2dd7d7b2a308a3d42f5564b5e4c7f5f95efce9e7087fe5e05bba667696cc6aaf"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Computação gráfica",
+      "subject": "Pipeline de visualização, recorte e remoção de faces",
+      "notes": "Questão 61 completa: figura do volume de visualização com os objetos 1–3, texto, itens I–IV e A–E; sem texto de outra questão no recorte atual. As alternativas D e E estão impressas iguais na prova (III e IV). Letra B. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "Na prova original, as alternativas D e E aparecem com o mesmo texto (III e IV). Isso não afeta o gabarito, que é B.",
+      "explanation": "A questão cobra o pipeline de visualização 3D: o volume de visualização define o que pode aparecer na imagem, o recorte descarta o que está fora dele e a remoção de faces traseiras elimina faces voltadas para longe do observador.\n\nItem I: o objeto 1 está alinhado com a visão do observador, mas fora do volume de visualização; ele é recortado e não aparece. Certo. Item II: o recorte só remove o que está fora do volume. Dentro dele, uma face pode ficar escondida por outra, e determinar as faces visíveis exige também um algoritmo de visibilidade. Errado, pois o recorte sozinho não basta. Item III: a remoção de faces traseiras compara a orientação de cada face com a posição e a direção do observador. Certo. Item IV: estar dentro do volume é necessário, mas não garante visibilidade total, pois um objeto pode ocultar parte do outro. Errado.\n\nEstão certos apenas I e III, alternativa B. A, C, D e E incluem II ou IV.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q62",
+      "verdict": "APPROVED",
+      "fragments": [
+        "0bea1a293a7a0a81d6abe7195021d89b898934a5174802ce744890a904f0746b"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Computação gráfica",
+      "subject": "Filtros em processamento de imagens",
+      "notes": "Questão 62 completa: imagens I e II legíveis, texto e A–E. Letra D. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra o efeito de operações de processamento digital de imagens. A imagem I é uma fotografia comum em tons de cinza; a imagem II é escura, e só aparecem em claro os contornos e detalhes finos da cena, como o chapéu, a pena e os olhos.\n\nContornos e texturas finas correspondem a variações bruscas de intensidade entre pixels vizinhos, isto é, altas frequências. Regiões suaves, de intensidade quase constante, são baixas frequências e ficam escuras. Um filtro passa-altas preserva as altas frequências e atenua as baixas, que é exatamente o resultado visto na imagem II. Alternativa D.\n\nAs demais falham. O filtro passa-baixas faz o oposto: suaviza a imagem e borra os contornos. O quantizador reduz o número de níveis de cinza, mas mantém a aparência geral da cena. A reamostragem altera a resolução ou o tamanho da imagem, sem remover as regiões suaves. A compressão reduz o tamanho do arquivo, mas não produz uma imagem só de contornos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q63",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1a8c2e2cb22f21da41812e73644f591898a2c6b6f8159242af931b6e07a27133"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Máquina de Turing: simulação passo a passo",
+      "notes": "Questão 63 completa: tabela de transições, fita inicial e as cinco fitas A–E legíveis. Letra E; simulação conferida (inversão dos bits 2–6). Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede para simular a máquina de Turing da tabela sobre a fita ● 0 1 1 0 1 e brancos, começando no estado início, com a cabeça na posição 1.\n\nNo estado início, lê ●, grava ●, move para a direita e vai ao estado 0. No estado 0, a máquina troca cada 0 por 1 e cada 1 por 0, sempre andando para a direita. As posições 2 a 6, que continham 0 1 1 0 1, passam a conter 1 0 0 1 0. Ao ler o branco da posição 7, grava branco, move para a esquerda e entra no estado 1. No estado 1, lê 0 ou 1, regrava o mesmo símbolo e continua para a esquerda até encontrar ● na posição 1; então grava ●, move para a direita e para. A cabeça termina na posição 2.\n\nA fita final é ● 1 0 0 1 0 seguida de brancos, alternativa E. A mostra outro padrão de bits e sem brancos. B é a fita original, sem a inversão. C tem bits estranhos nas posições 7 a 11, que eram brancos. D apaga o conteúdo, o que a tabela nunca faz.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q64",
+      "verdict": "APPROVED",
+      "fragments": [
+        "96e3fbd2bb634604f86e9aef3b84e0a80eca7f370b9a8da5682b6aa434d41066"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Compiladores",
+      "subject": "Gramáticas e autômatos na análise de expressões",
+      "notes": "Questão 64 completa: texto, itens I–IV e A–E. Letra D. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "O item III só faz sentido se o autômato servir para reconhecer números e operadores (análise léxica); o gabarito oficial o considera correto.",
+      "explanation": "A questão trata de qual formalismo usar para um componente que lê expressões aritméticas com precedência de operadores. Aqui entram as etapas clássicas de análise: reconhecer símbolos com linguagens regulares e especificar a estrutura com gramáticas livres de contexto.\n\nItem I: guardar e imprimir a expressão de entrada como cadeia de caracteres é uma necessidade do software, que reproduz a entrada na tela. Certo. Item II: uma gramática regular não consegue descrever a estrutura das expressões válidas, com suas precedências, o que exige uma gramática livre de contexto. Errado. Item III: um autômato finito determinístico reconhece linguagens regulares, adequadas para identificar os elementos básicos da expressão, como números e operadores. Certo. Item IV: a ordem de precedência de operadores é especificada em notação de gramática livre de contexto, com níveis de não terminais. Certo.\n\nEstão certos apenas I, III e IV, alternativa D. As alternativas A, B, C e E incluem o item II ou omitem um item correto.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q65",
+      "verdict": "APPROVED",
+      "fragments": [
+        "c4cd46900d010d2a8701d0f17166577653c6bd8da6b9c6bea096ab6e7e89f77e"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Classes P, NP, NP-difícil e NP-completo",
+      "notes": "Questão 65 completa: texto, itens I–V com símbolos de conjunto legíveis e A–E. Letra B. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão cobra as relações entre as classes P e NP e os conceitos de NP-difícil e NP-completo.\n\nItem I: P está contido em NP, o que é demonstrável, mas NP contido em P equivale a P = NP, questão em aberto, então o item está errado. Item II: NP-completos são os problemas de NP que são NP-difíceis; se P é diferente de NP, nenhum deles tem solução polinomial, portanto a interseção entre P e os NP-completos é vazia. Certo. Item III: por definição, um problema NP-difícil que também pertence a NP é NP-completo. Certo. Item IV: a satisfatibilidade de fórmulas booleanas foi provada NP-difícil e pertence a NP, logo é NP-completo. Certo. Item V: encontrar o caminho mais curto entre dois vértices em um grafo pode ser resolvido em tempo polinomial, portanto pertence a P; dizer que não pertence está errado.\n\nEstão certos apenas II, III e IV, alternativa B. As demais incluem I ou V, ou deixam de fora um item correto.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q66",
+      "verdict": "APPROVED",
+      "fragments": [
+        "daa9fc260db013d4d56de1d1c59b1c2e00ad9fa532fb73333644cb631d6533b8"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Sistemas distribuídos",
+      "subject": "UDP, RPC/RMI e semânticas de invocação",
+      "notes": "Questão 66 completa em um recorte: texto, trechos I–IV e A–E; os gráficos da Q67 não fazem mais parte desta questão. Letra D. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede para identificar quais trechos do manual de treinamento estão corretos sobre comunicação em sistemas distribuídos.\n\nItem I: o UDP não garante entrega, ordem nem ausência de duplicatas, então a aplicação pode precisar tratar perdas, mensagens fora de ordem e duplicações. Certo. Item II: a chamada a procedimento remoto torna a chamada remota parecida com a local, mas não é possível abstrair todos os detalhes da distribuição, como falhas parciais e atrasos de comunicação. O trecho exagera e está errado. Item III: serviços remotos são descritos por interfaces, que um compilador processa para gerar stubs, usados por clientes e servidores para empacotar e enviar as chamadas. Certo. Item IV: sistemas de RPC e RMI tipicamente implementam as semânticas at-most-once ou at-least-once, porque garantir exactly-once é mais difícil. Certo.\n\nEstão certos I, III e IV, alternativa D. As demais incluem o item II ou omitem um trecho correto.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q67",
+      "verdict": "APPROVED",
+      "fragments": [
+        "98aa0b99b4eeb9d04ba3c63b39c71ce6cb60b1da183f8b5caf478f540db5c39d",
+        "47c98f3103eca2cd6fc02a2fb02e23c24d6de4f3abef1e243bccb2d36b4f8778"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Sociedade e ética",
+      "subject": "Pirataria de software: leitura de gráficos",
+      "notes": "Questão 67 em dois recortes da página 25: os três gráficos com a chamada 'para responder à questão 67' e, depois, texto, itens I–V e A–E; o quadro RASCUNHO é elemento da página. Letra C; 77→57 (≈26%) conferido no gráfico. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede interpretar três gráficos sobre pirataria de software: a relação entre a participação do setor de TI no PIB e o índice de pirataria, a evolução do índice mundial de 1994 a 2002 e o índice versus as perdas de faturamento no Brasil.\n\nItem I: o índice mundial vai de 49 a 36 de 1994 a 1999 e depois sobe a 37, 40 e cai a 39, então a redução não foi constante. Errado. Item II: o índice do Brasil passa de cerca de 77 em 1994 para cerca de 57 em 2002, queda de aproximadamente 25%. Certo. Item III: os gráficos não mostram a redução dos demais países, então não é possível afirmar que o Brasil teve a maior. Errado. Item IV: no gráfico de dispersão, países com maior participação de TI no PIB, como Dinamarca e Estados Unidos, tendem a ter índices de pirataria menores. Certo. Item V: o gráfico mostra perdas de faturamento, não aumento de faturamento. Errado.\n\nEstão certos apenas II e IV, alternativa C.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q68",
+      "verdict": "APPROVED",
+      "fragments": [
+        "da4c7fe0f73dc5d1471d015f7a57667b6bc2319ac231804566fa401e6d7a621c"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Requisitos de protocolos de transporte orientados a conexão",
+      "notes": "Questão 68 completa: texto, requisitos I–IV e A–E. Letra D. Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão pede quais requisitos são típicos da camada de transporte orientada a conexão, como o TCP.\n\nItem I: janela deslizante permite enviar vários pacotes antes de receber confirmação, com tamanho variável que controla o fluxo de dados. É típico do transporte confiável. Adequado. Item II: roteamento de pacotes entre redes interligadas, com tabelas de roteamento, é função da camada de rede, não do transporte. Não é adequado. Item III: o ciclo de estabelecimento, transferência e término da conexão, com uma estrutura de dados por conexão alocada e liberada, é característico de protocolo orientado a conexão. Adequado. Item IV: calcular dinamicamente o timeout de retransmissão com um algoritmo adaptativo, para acomodar atrasos variáveis, também é típico de protocolos de transporte confiáveis. Adequado.\n\nPortanto são adequados apenas I, III e IV, alternativa D. As alternativas A, C e E incluem o item II, e B deixa de fora o item III.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q69",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1c2c05ad32ed699e74266792ec131aa744d0ec87ec1a7a1c93d3c6fc219715fa"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Endereçamento IP, NAT, roteamento e X.25",
+      "notes": "Questão 69 completa: esquema da rede com interfaces E1–E10, texto, itens I–X e A–E. Letra B (I, II, III, IV, V e VIII). Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão avalia dez afirmativas sobre a rede da empresa, com quatro redes locais TCP/IP interligadas por um túnel X.25, e um firewall que dá acesso à Internet.\n\nPelo gabarito, estão certos os itens III, IV, V, VII, VIII e IX. As interfaces E2, E4, E5 e E7 ficam na mesma rede de interligação, logo na mesma sub-rede (III). O endereço E10 fica do lado da Internet e deve ser da rede 164.41.0.0 (IV). Como as máquinas internas usam a rede 10.0.0.0 e acessam a Internet, o firewall deve fazer a tradução entre as redes 10.0.0.0 e 164.41.0.0 (V). Os roteadores 1, 3 e 4 enviam o tráfego externo pelo endereço E4, e o roteador 2 usa o caminho do firewall como rota default (VIII e IX).\n\nSão errados o item VI, porque o X.25 atua como túnel e os pacotes IP é que viajam dentro dele, e o item X, porque endereços da rede privada 10.0.0.0 não são visíveis na Internet. Os itens I e II são tratados como errados, e o VII como certo, pelo gabarito.\n\nAlternativa E.",
+      "explanationCheck": "REJECTED",
+      "explanationNote": "A explicação conclui pela alternativa E e trata I e II como errados e VII e IX como certos, contrariando o gabarito oficial B (I, II, III, IV, V e VIII)."
+    }
+  ],
+  "explainer": "claude-explain-12"
+}

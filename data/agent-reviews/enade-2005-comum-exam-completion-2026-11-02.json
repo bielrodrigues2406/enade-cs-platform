@@ -1,0 +1,27 @@
+{
+  "document": "enade-2005-comum-exam",
+  "examSha256": "ba95b66e95b6a4071a970f794e0b0c71aeebf18740b95b6ca02dfcb72d0be76c",
+  "cropsManifestSha256": "97be895b6907cea8e07b72a5a2b8f98621578dacd91484b72e6fa3369a19b747",
+  "extractor": "claude",
+  "explainer": "codex-content-author-2026-11-02",
+  "reviewer": "codex-root-review-2026-11-02",
+  "reviewedAt": "2026-11-02T14:39:10.130625+00:00",
+  "items": [
+    {
+      "key": "Q69",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1c2c05ad32ed699e74266792ec131aa744d0ec87ec1a7a1c93d3c6fc219715fa"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Endereçamento IP, NAT, roteamento e X.25",
+      "notes": "Recorte e explicação reconferidos independentemente em 02/11/2026. Questão 69 completa: esquema da rede com interfaces E1–E10, texto, itens I–X e A–E. Letra B (I, II, III, IV, V e VIII). Letra conferida no gabarito publicado de 2005 (não declarado definitivo, D10). Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "",
+      "explanation": "A questão combina sub-redes IP, tradução de endereços e transporte de IP sobre X.25. O gabarito B reúne I, II, III, IV, V e VIII.\n\nA máscara 255.255.0.0 permite subdividir o espaço privado 10.0.0.0 em sub-redes /16, e as interfaces E1 a E9 podem receber endereços desse espaço, distribuídos adequadamente (I e II). E2, E4, E5 e E7 pertencem à interligação IP fornecida pelo túnel e devem compartilhar a sub-rede correspondente (III). E10 é a interface externa do firewall; entre as duas redes citadas, deve usar 164.41.0.0, pois 10.0.0.0 é privado (IV). Para o acesso externo descrito, o firewall traduz os endereços internos (V). Nos roteadores 1, 3 e 4, E4 é o próximo salto em direção à saída para a Internet (VIII).\n\nVI inverte o encapsulamento: no cenário, IP é transportado sobre X.25. VII dispensa incorretamente o endereçamento necessário à rede X.25. IX usa E10, que está no lado externo do firewall; o próximo salto do roteador 2 é E9, diretamente alcançável pela rede 2. X também é falso: os endereços privados não são roteados publicamente na Internet. As outras alternativas incluem afirmações incorretas ou excluem afirmações aceitas.",
+      "explanationCheck": "OK",
+      "explanationNote": "Conferência independente de codex-root-review-2026-11-02: recorte, alternativas e raciocínio confrontados. "
+    }
+  ]
+}
