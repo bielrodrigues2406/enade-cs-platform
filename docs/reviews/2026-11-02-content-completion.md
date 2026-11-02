@@ -61,3 +61,15 @@ contagens e os mesmos IDs de versões correntes; nenhuma nova versão ou duplica
 Isso não representa deploy nem publicação em ambiente de produção. 2005 Q60 continua bloqueada
 pela imagem ilegível; 2005 Q70 discursiva permanece anulada. As cinco de Formação Geral
 sem padrão e os PDFs recentes continuam fora do acervo aprovado.
+
+## Padrões de resposta no bootstrap
+
+A integração com SIM26 identificou que os padrões ficavam IMPORTED após a publicação
+das discursivas. A publicação agora relê e confere o arquivo arquivado antes de promover
+um padrão ainda importado a VERIFIED/ASSISTED, com evento e identidade da conferência.
+Fontes já verificadas conservam seus metadados; recortes recusados ou arquivo alterado
+não promovem o padrão. A repetição também corrige o estado legado de questões que já
+existem, sem duplicá-las. Quatro testes do domínio passaram, incluindo integridade,
+auditoria e repetição; build e suíte completa da branch: 170 testes passaram.
+Nova publicação real em `enade_content_ci`: nove provas, nove gabaritos e nove padrões
+VERIFIED; mantidas 246 versões e 39 discursivas em duas execuções.
