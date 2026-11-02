@@ -27,7 +27,7 @@ Nome: **Dudu**. Alternativa: "Bit".
 | `design/mascot/icons-three-backgrounds.jpg` | ícones alternativos (papel e azul), ainda sem uso |
 | `design/mascot/poses-magenta-lowres.jpg` | folha com fundo magenta para recorte limpo, **mas é captura de tela (1179 px, ~110 px por pose)**: baixa demais. Pedir a Gabriel o arquivo original em alta e recortar por chroma key |
 | `apps/web/src/mascot.component.*` | `<app-mascot pose="…" [size]="96" motion="pop|bob|none" [decorative]="true">` |
-| `apps/web/src/mascot.service.ts` | preferência "mostrar o mascote" (hoje no navegador) |
+| `apps/web/src/mascot.service.ts` | preferência "mostrar o mascote" (conta no servidor; visitante neste navegador) |
 
 Poses: `acenando`, `comemorando`, `sequencia` (chama), `medalha`, `ouvindo`, `contente`,
 `lupa`, `relogio`, `cartoes`, `dormindo`, `lendo` (óculos), `em-obras` (capacete),
@@ -55,34 +55,34 @@ mascote só sobre fundo claro** até existir uma versão em PNG com transparênc
 | Tela | Comportamento | Pose | Estado |
 | --- | --- | --- | --- |
 | Flashcards, fim da sessão | resumo da sessão | `cartoes` | **feito** |
-| Flashcards, nada vencendo | "Nada vence hoje" | `dormindo` | a fazer |
+| Flashcards, nada vencendo | "Nada vence hoje" | `dormindo` | **feito (MAS-2)** |
 | Página pública | seção "Explique para o pato" antes do convite final; texto sobre a cena a partir de 1100 px, acima dela abaixo disso | cena | **feito** |
-| Entrar / cadastro | aceno pequeno | `acenando` | a fazer |
-| Início | uma frase pela situação: falta X para a meta, erros para revisar, treino pela metade | `contente` / `lupa` / `relogio` | a fazer |
-| Aviso de meta batida | trocar o anel do aviso pelo pato | `comemorando` | a fazer |
-| Sequência (Conquistas) | ao lado da chama | `sequencia` | a fazer |
-| Aviso de conquista | pato com a medalha | `medalha` | a fazer |
-| Depois de errar (estudo) | **"Explique para o pato"**: campo curto, salvo no caderno de erros (etapa 3) | `ouvindo` | a fazer |
-| Caderno de erros | vazio: "Nada para revisar hoje"; com revisões: lupa | `contente` / `lupa` | a fazer |
-| Treino cronometrado | **gestor de ritmo** (etapa 2) | `relogio` | a fazer |
-| Resultado do treino | reação por faixa de nota (<40, 40–69, ≥70) | `ouvindo` / `contente` / `comemorando` | a fazer |
-| Discursivas | "Explique como se fosse para o pato" acima da folha | `ouvindo` | a fazer |
-| Biblioteca | cabeçalho; cartões "Em breve" | `lendo` / `em-obras` | a fazer |
-| Carregando | `motion="bob"` | `boiando` | a fazer |
-| Erro / página não encontrada | sem drama | `bug` | a fazer |
+| Entrar / cadastro | aceno pequeno | `acenando` | **feito (MAS-2)** |
+| Início | uma frase pela situação: falta X para a meta, erros para revisar, treino pela metade | `contente` / `lupa` / `relogio` | **feito (MAS-2)** |
+| Aviso de meta batida | trocar o anel do aviso pelo pato | `comemorando` | **feito (MAS-2)** |
+| Sequência (Conquistas) | ao lado da chama | `sequencia` | **feito (MAS-2)** |
+| Aviso de conquista | pato com a medalha | `medalha` | **feito (MAS-2)** |
+| Depois de errar (estudo) | **"Explique para o pato"**: campo curto, salvo no caderno de erros (etapa 3) | `ouvindo` | **feito (MAS-2)** |
+| Caderno de erros | vazio: "Nada para revisar hoje"; com revisões: lupa | `contente` / `lupa` | **feito (MAS-2)** |
+| Treino cronometrado | **gestor de ritmo** (etapa 2) | `relogio` | **feito (MAS-2)** |
+| Resultado do treino | reação por faixa de nota (<40, 40–69, ≥70) | `ouvindo` / `contente` / `comemorando` | **feito (MAS-2)** |
+| Discursivas | "Explique como se fosse para o pato" acima da folha | `ouvindo` | **feito (MAS-2)** |
+| Biblioteca | cabeçalho; cartões "Em breve" | `lendo` / `em-obras` | **feito (MAS-2)** |
+| Carregando | `motion="bob"` | `boiando` | **feito (MAS-2)** |
+| Erro / página não encontrada | sem drama | `bug` | **feito (MAS-2)** |
 | Ícone do app / favicon | cabeça e lápis sobre `#0f285a`, `manifest.webmanifest` | ícone | **feito** |
 
-## 5. Ordem de construção
+## 5. Etapas implementadas e continuação
 
-1. **Só tela, sem banco**: as linhas "a fazer" que não dependem das etapas 2 e 3, e um
-   interruptor "Mostrar o mascote" no Meu perfil (`MascotService`). Depois, guardar a
-   preferência na conta (migration).
+1. **Telas e preferência** (MAS-2, migration 028): as linhas "a fazer" que não dependem das etapas 2 e 3, e um
+   interruptor "Mostrar o mascote" no Meu perfil (`MascotService`). A conta guarda a
+   preferência no servidor. Visitantes têm um botão no rodapé e guardam a escolha no navegador.
 2. **Gestor de ritmo** (só no navegador): no treino com cronômetro, quando a pessoa passa de
    6 min na mesma questão (1,5× o ritmo de 4 min), mostrar **uma vez por questão**, ao lado da
    folha, sem animação: "Está há 6 min nesta. Marcar para revisar e seguir?" com o botão
    "Marcar e seguir" (usa a marcação de revisão que já existe). Desligado por padrão na prova
    completa da edição (simula a prova real). Testar com relógio falso no Playwright.
-3. **"Explique para o pato"** (migration nova): depois de errar no estudo, um campo opcional
+3. **"Explique para o pato"** (MAS-2, migration 028): depois de errar no estudo, um campo opcional
    "Por que você marcou essa? Explique em uma frase." O texto fica no caderno de erros e
    volta na revisão espaçada. Base: autoexplicação e elaboração (Dunlosky et al., 2013).
 4. **Depois**: "por que essa alternativa atrai", escrito na curadoria e mostrado **só depois**
@@ -108,3 +108,32 @@ Para recortar uma folha nova: ajuste `bounds` (colunas) e `bands` (faixas) em
 `scripts/crop-mascot.py` e rode
 `python3 scripts/crop-mascot.py design/mascot/<folha>.jpg apps/web/public/mascot/`.
 Confira o resultado sobre fundo claro e escuro antes de commitar.
+
+## 7. Acabamento e arte recebida em 02/11/2026
+
+O pedido é um companheiro expressivo e com movimento breve: entrada nas comemorações,
+boiar apenas durante carregamento, nenhuma animação no aviso de ritmo ou na resolução.
+Todos respeitam `prefers-reduced-motion`. O interruptor esconde imagens do companheiro e
+a cena pública; reflexões, textos e ações continuam disponíveis. Ícones do aplicativo
+continuam sendo a marca. As telas administrativas/professor não ganham o mascote.
+
+O aviso de conquista perdeu a faixa lateral colorida e os raios giratórios. Usa o papel,
+a borda e a tipografia do caderno com uma entrada curta do Dudu. Evitar repetir grades,
+etiquetas e decorações por hábito; cada composição deve servir à tarefa da tela.
+Referência lida: [anti-slop](https://github.com/miqdadbadjuber/anti-slop), MIT, commit
+`941b1532f9cc8ffde766bca5921d75257c9e5762`, somente como referência, sem instalar instruções.
+Os links antiwebslop e do artigo da Anthropic ficaram inacessíveis pelo proxy nesta sessão;
+não foram usados como se tivessem sido lidos.
+
+Gabriel enviou duas tiras de sete poses, um ícone, uma cena vertical e outra horizontal.
+A comparação visual favorece o rosto/lápis das novas cenas e do ícone; as tiras têm
+expressões consistentes, porém cada pose ocupa menos pixels que os recortes atuais.
+Magenta ainda não é transparência: conferir bordas sem halo a 64/96/120 px antes de trocar.
+Os anexos inline não forneceram arquivos originais locais; **nenhuma dessas novas artes
+foi incorporada ou declarada como substituída**. Mantidos os arquivos atuais até a extração
+dos originais, sem ampliar artificialmente e chamar isso de mais resolução.
+
+A reflexão é pessoal, opcional, até 600 caracteres, salva por ação explícita e só aparece
+depois de uma resposta errada confirmada no estudo livre. A navegação protege rascunhos;
+um erro de rede preserva o texto. Não há avaliação por IA nem alteração da nota.
+O caderno a apresenta junto à questão. Contratos em API.md e decisão em ADR-015.
