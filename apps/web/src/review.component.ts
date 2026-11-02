@@ -1,3 +1,4 @@
+import { MascotComponent } from "./mascot.component";
 import { Component, EventEmitter, Input, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
@@ -14,6 +15,7 @@ export type ReviewItem = {
   /** Revisão espaçada: o erro volta um dia depois de ver o gabarito. */
   reviewAt: string;
   ready: boolean;
+  reflection?: string | null;
 };
 type Notebook = {
   summary: {
@@ -34,7 +36,7 @@ export type ReviewPosition = { topic: string; offset: number };
 
 @Component({
   selector: "app-review",
-  imports: [FormsModule],
+  imports: [MascotComponent, FormsModule],
   templateUrl: "./review.component.html",
 })
 export class ReviewComponent {

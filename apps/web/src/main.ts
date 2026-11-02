@@ -1,3 +1,6 @@
+import { MascotService } from "./mascot.service";
+import { AnswerReflectionComponent } from "./answer-reflection.component";
+import { MascotComponent } from "./mascot.component";
 import { ApplicationRef, Component, HostListener, effect, inject, signal } from "@angular/core";
 import { IMAGE_CONFIG } from "@angular/common";
 import { bootstrapApplication } from "@angular/platform-browser";
@@ -112,6 +115,8 @@ type Question = Summary & {
     "[class.account-mode]": "!!accountView()",
   },
   imports: [
+    AnswerReflectionComponent,
+    MascotComponent,
     FormsModule,
     AccountComponent,
     CurationComponent,
@@ -134,6 +139,23 @@ type Question = Summary & {
   templateUrl: "./app.component.html",
 })
 class App {
+  readonly mascot = inject(MascotService);
+  readonly reflectionState = signal({ dirty: false, saving: false });
+
+  private leaveReflection(then: () => void) {
+    const state = this.reflectionState();
+    if (state.saving) return false;
+    if (!state.dirty) return true;
+    void this.choice.confirm({
+      title: "Sair sem guardar a reflexão?", message: "O texto que você escreveu ainda não foi guardado no caderno.",
+      cancel: "Continuar escrevendo", confirm: "Descartar e sair",
+    }).then(ok => { if (ok) { this.reflectionState.set({ dirty: false, saving: false }); then(); } });
+    return false;
+  }
+
+  editAnswer() {
+    if (this.leaveReflection(() => this.editAnswer())) this.editing.set(true);
+  }
   rows = signal<Summary[]>([]);
   catalogTopics = signal<string[]>([]);
   catalogAreas = signal<{ name: string; count: number }[]>([]);
@@ -253,7 +275,9 @@ class App {
         method: "POST",
       });
       if (transition !== this.identityTransition) return;
-      this.session.set(session);      void this.engagement.refresh();
+      this.session.set(session);
+      void this.mascot.sync(session.mode);
+      void this.engagement.refresh();
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       await this.loadCatalog(true, this.catalogOffset(), "replace", this.appliedFilters);
@@ -388,6 +412,7 @@ class App {
    * componente do treino pausa ao sair) e as respostas já estão salvas.
    */
   leaveExam(then: () => void) {
+    if (!this.leaveReflection(then)) return false;
     if (!this.examRunning()) return true;
     // Pergunta no modal; se a pessoa confirmar, refaz a navegação pedida.
     void this.choice.confirm({
@@ -548,6 +573,7 @@ class App {
     }
   }
   async openNext() {
+    if (!this.leaveReflection(() => void this.openNext())) return;
     if (this.loading() || this.saving() || this.authBusy()) return;
     const next = this.nextQuestion();
     if (!next) return;
@@ -589,6 +615,7 @@ class App {
     this.focusMain();
   }
   async open(id: string, retry = false) {
+    if (!this.leaveReflection(() => void this.open(id, retry))) return;
     if (this.authBusy()) return;
     const request = ++this.requestNumber;
     this.loading.set(true);
@@ -923,7 +950,9 @@ class App {
         return;
       }
       this.clearStudyState();
-      this.session.set(session);      void this.engagement.refresh();
+      this.session.set(session);
+      void this.mascot.sync(session.mode);
+      void this.engagement.refresh();
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       this.accountView.set(null);
@@ -964,7 +993,9 @@ class App {
         return;
       }
       this.clearStudyState();
-      this.session.set(session);      void this.engagement.refresh();
+      this.session.set(session);
+      void this.mascot.sync(session.mode);
+      void this.engagement.refresh();
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       this.accountView.set(null);
@@ -998,7 +1029,9 @@ class App {
         method: "POST",
       });
       if (transition !== this.identityTransition) return;
-      this.session.set(session);      void this.engagement.refresh();
+      this.session.set(session);
+      void this.mascot.sync(session.mode);
+      void this.engagement.refresh();
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       if (

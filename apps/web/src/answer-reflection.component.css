@@ -1,0 +1,8 @@
+:host { display: block; }
+.reflection { margin-block: var(--space-6); padding-top: var(--space-5); border-top: var(--border-thin) solid var(--color-border); }
+.reflection-heading { display: flex; align-items: center; gap: var(--space-4); }
+h2 { margin: 0 0 var(--space-2); font-size: var(--text-lg); }
+p { max-width: 64ch; }
+label { display: block; margin: var(--space-4) 0 var(--space-2); }
+textarea { width: 100%; max-width: 64ch; }
+@media (max-width: 400px) { .reflection-heading { align-items: start; } }

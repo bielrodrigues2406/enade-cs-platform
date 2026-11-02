@@ -57,6 +57,8 @@ export class ReviewController {
           SELECT id,question_id AS "questionId",title,topic,origin,demonstration,
             version_number AS "versionNumber",updated_at AS "answeredAt",
             current_version_id AS "currentVersionId",
+            (SELECT r.body FROM answer_reflection r
+              WHERE r.owner_id=$1 AND r.version_id=pending.id) AS reflection,
             updated_at + interval '1 day' AS "reviewAt",updated_at <= now() - interval '1 day' AS ready
           FROM pending ORDER BY updated_at,id LIMIT 20 OFFSET $3
         ) i),'[]'::json)

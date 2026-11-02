@@ -457,3 +457,7 @@ dialog.practice-confirm[open] {
 }
 .session-streak { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; }
 .session-streak svg { width: 18px; height: 18px; fill: #e8743b; }
+
+/* MAS-2: o aviso de ritmo fica fora do enunciado e não se repete por questão. */
+.pace-note { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding: var(--space-4); border: var(--border-thin) solid var(--color-border); background: var(--color-surface); }
+.pace-note p { flex: 1 1 16rem; margin: 0; }
