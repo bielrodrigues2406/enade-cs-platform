@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "origin": "AI_GENERATED",
+  "humanReviewed": false,
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "document": "enade-2005-comum-exam",
+  "examSha256": "ba95b66e95b6a4071a970f794e0b0c71aeebf18740b95b6ca02dfcb72d0be76c",
+  "cropsManifestSha256": "97be895b6907cea8e07b72a5a2b8f98621578dacd91484b72e6fa3369a19b747",
+  "explainer": "codex-content-author-2026-11-02",
+  "sourceReviews": [
+    "data/agent-reviews/enade-2005-comum-exam-q53-q69.json"
+  ],
+  "items": [
+    {
+      "key": "Q69",
+      "answer": "B",
+      "area": "Redes",
+      "subject": "Endereçamento IP, NAT, roteamento e X.25",
+      "fragments": [
+        "1c2c05ad32ed699e74266792ec131aa744d0ec87ec1a7a1c93d3c6fc219715fa"
+      ],
+      "explanation": "A questão combina sub-redes IP, tradução de endereços e transporte de IP sobre X.25. O gabarito B reúne I, II, III, IV, V e VIII.\n\nA máscara 255.255.0.0 permite subdividir o espaço privado 10.0.0.0 em sub-redes /16, e as interfaces E1 a E9 podem receber endereços desse espaço, distribuídos adequadamente (I e II). E2, E4, E5 e E7 pertencem à interligação IP fornecida pelo túnel e devem compartilhar a sub-rede correspondente (III). E10 é a interface externa do firewall; entre as duas redes citadas, deve usar 164.41.0.0, pois 10.0.0.0 é privado (IV). Para o acesso externo descrito, o firewall traduz os endereços internos (V). Nos roteadores 1, 3 e 4, E4 é o próximo salto em direção à saída para a Internet (VIII).\n\nVI inverte o encapsulamento: no cenário, IP é transportado sobre X.25. VII dispensa incorretamente o endereçamento necessário à rede X.25. IX usa E10, que está no lado externo do firewall; o próximo salto do roteador 2 é E9, diretamente alcançável pela rede 2. X também é falso: os endereços privados não são roteados publicamente na Internet. As outras alternativas incluem afirmações incorretas ou excluem afirmações aceitas.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    }
+  ]
+}
