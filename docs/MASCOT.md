@@ -161,11 +161,16 @@ se a preferência mudar com a tela aberta. Ocultar o mascote continua funcionand
 
 ### Próximo passo para olhos e asas
 
-Preferir uma sequência curta de quadros do mesmo Dudu 3D, com câmera/tamanho fixos e
-fundo transparente: piscar, levantar uma asa e comemorar. Cada gesto precisa começar
-e terminar na pose de repouso. Só então comparar sprite e WebP animado, medindo o peso
-real, a nitidez a 56/64/96/120 px, o controle de uma única reprodução e a interrupção por
-`prefers-reduced-motion`. Manter uma imagem estática equivalente para movimento reduzido.
+Gabriel reforçou que quer movimento das partes, não apenas a inclinação da imagem.
+Escolha inicial de MAS-4: **PNG em camadas** do mesmo Dudu 3D, com cabeça, asas e olhos
+separados e alinhados. [Prompts completos e nomes dos sete arquivos](MASCOT-ANIMATION-PROMPTS.md).
+O grupo dos olhos acompanha a cabeça; as asas giram no ombro. A montagem exige conferir
+as peças reais antes de implementar. As artes e a animação articulada estão pendentes.
+
+Uma sequência curta de quadros continua sendo alternativa para gestos que mudem muito
+a perspectiva. Nesse caso, comparar sprite e WebP animado só após medir o peso real, a
+nitidez a 56/64/96/120 px e o controle de reprodução/interrupção. Manter sempre a imagem
+estática equivalente para movimento reduzido.
 
 SVG em camadas também permite articular olhos/asas, mas exige redesenho para preservar
 a identidade. Rive/Lottie acrescentariam arte e runtime; não incluir essas dependências

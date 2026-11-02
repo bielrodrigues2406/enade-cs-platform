@@ -31,7 +31,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 4. Mascote
 
-**Decidido: Dudu, o pato de borracha** com lápis azul-marinho. Tudo em **`docs/MASCOT.md`**: 14 poses integradas às telas, preferência, gestor de ritmo e reflexão. MAS-3 dá movimento ao corpo inteiro por CSS, após a imagem carregar. Olhos e asas articulados exigem novos quadros ou arte em camadas; não chamar os gestos atuais de animação facial. Respeitar movimento reduzido e manter leitura/ritmo estáticos. Capturas de 32 situações em desktop/celular foram entregues a Gabriel antes desta mudança.
+**Decidido: Dudu, o pato de borracha** com lápis azul-marinho. Tudo em **`docs/MASCOT.md`**: 14 poses integradas às telas, preferência, gestor de ritmo e reflexão. MAS-3 dá movimento ao corpo inteiro por CSS, após a imagem carregar. Gabriel pediu articulação real em seguida: MAS-4 usará PNG em camadas; os sete prompts estão em **`docs/MASCOT-ANIMATION-PROMPTS.md`**, e as artes ainda são necessárias. Não chamar os gestos de MAS-3 de animação facial. Respeitar movimento reduzido e manter leitura/ritmo estáticos. Capturas de 32 situações em desktop/celular foram entregues a Gabriel antes desta mudança.
 
 ## 5. O que falta (por prioridade)
 
