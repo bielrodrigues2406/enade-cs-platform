@@ -1,3 +1,4 @@
+import { MascotComponent } from "./mascot.component";
 import { Component, ElementRef, EventEmitter, Output, afterNextRender, computed, inject, Injector, signal } from "@angular/core";
 
 // Biblioteca (LIB-1): fichas de uma página por assunto, lidas do repositório.
@@ -8,6 +9,7 @@ type SheetSummary = { slug: string; area: string; title: string; summary: string
 type Sheet = SheetSummary & { sections: { title: string; points: string[] }[]; pitfalls: string[]; references: string[] };
 
 @Component({
+  imports: [MascotComponent],
   selector: "app-library",
   templateUrl: "./library.component.html",
   styleUrl: "./library.component.css",

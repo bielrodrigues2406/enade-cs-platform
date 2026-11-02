@@ -1,0 +1,27 @@
+{
+  "document": "enade-2008-comum-exam",
+  "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+  "cropsManifestSha256": "9f2de020cc10421e667b28629ba1da206812f74839325e6d5b50790002bd7002",
+  "extractor": "claude",
+  "explainer": "codex-content-author-2026-11-02",
+  "reviewer": "codex-root-review-2026-11-02",
+  "reviewedAt": "2026-11-02T14:39:10.130625+00:00",
+  "items": [
+    {
+      "key": "Q28",
+      "verdict": "APPROVED",
+      "fragments": [
+        "16de3798aa1d5cf4676283fe8794d3ddfbbc0ce8555f2bd50a37d19e34ba31dd"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Classificação por árvore de decisão",
+      "notes": "Recorte e explicação reconferidos independentemente em 02/11/2026. Recorte da página 13 (impressa 12): número 28, árvore de decisão com rótulos de ramos e folhas legíveis, tabela O1–O3 e A–E em duas colunas, ordem conferida. Letra A conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação recusada: eliminação de B e D descrita de forma incorreta.",
+      "studentNote": "",
+      "explanation": "Uma árvore de decisão classifica cada objeto seguindo, da raiz até uma folha, os testes dos atributos encontrados no caminho. Os atributos que não aparecem nesse caminho não precisam ser consultados.\n\nPara O1, X1=a leva ao teste X3. Como X3=20 é menor ou igual a 35, a folha indica classe 1. Para O2, X1=b leva diretamente à folha de classe 1; X2, X3 e X4 não alteram essa decisão. Para O3, X1=c leva a X2. Como X2=M, a folha indica classe 2. O teste de X4 pertence ao ramo X2=G, que esse objeto não percorre.\n\nA sequência resultante é 1, 1 e 2, alternativa A. B erra O2 e O3; C erra O1; D erra os três objetos; E erra O3. A classificação depende dos ramos efetivamente percorridos, não da utilização de todos os atributos em todos os objetos.",
+      "explanationCheck": "OK",
+      "explanationNote": "Conferência independente de codex-root-review-2026-11-02: recorte, alternativas e raciocínio confrontados. "
+    }
+  ]
+}

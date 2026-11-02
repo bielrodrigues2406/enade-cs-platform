@@ -1,0 +1,82 @@
+{
+  "document": "enade-2005-comum-exam",
+  "examSha256": "ba95b66e95b6a4071a970f794e0b0c71aeebf18740b95b6ca02dfcb72d0be76c",
+  "standardDocument": "enade-2005-comum-response-standard",
+  "standardSha256": "f68a5fab4aa09c9875919a51e75b3b10e96e18b5b3ee9418267e425976686627",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "extractor": "codex-content-author-2026-11-02",
+  "preparedAt": "2026-11-02T14:16:52Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 55,
+      "area": "Arquitetura de computadores",
+      "subject": "Localidade e hierarquia de memória cache",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 4
+        },
+        {
+          "label": "b",
+          "points": 6
+        }
+      ],
+      "note": "Os valores adotados são os impressos no enunciado (a: 4; b: 6). O padrão oficial detalha níveis de até 2 em a e em cada subitem de b, sem esclarecer a conversão para os 10 pontos. A autoavaliação é apenas uma estimativa.",
+      "reviewConcerns": [
+        "O padrão detalhado soma máximos a=2, b1=2 e b2=2. O parágrafo final declara mudança de 3 para 2 nos subitens de b, mas diz manter seu valor total. Não há regra inequívoca de conversão para a=4 e b=6; não foram criados pesos novos."
+      ],
+      "decision": "PENDING",
+      "prompt": [
+        {
+          "file": "D55-prompt-1.webp",
+          "page": 20,
+          "box": {
+            "x0": 30,
+            "y0": 35,
+            "x1": 565,
+            "y1": 352
+          },
+          "width": 1486,
+          "height": 881,
+          "byteSize": 84098,
+          "sha256": "862528083f9a01253807f457114cda5f3e303a0f98ed514675f44fc3e2cdad29"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D55-standard-1.webp",
+          "page": 3,
+          "box": {
+            "x0": 52,
+            "y0": 674,
+            "x1": 546,
+            "y1": 775
+          },
+          "width": 1373,
+          "height": 281,
+          "byteSize": 21448,
+          "sha256": "662e02a5ceff2a395480235c46e7a3fdadc8b5c68b6f50d74daa45bfaad3c070"
+        },
+        {
+          "file": "D55-standard-2.webp",
+          "page": 4,
+          "box": {
+            "x0": 52,
+            "y0": 10,
+            "x1": 546,
+            "y1": 533
+          },
+          "width": 1373,
+          "height": 1453,
+          "byteSize": 116588,
+          "sha256": "f727dea5ad9d44387d799683d52c58a0490534bda4edf0ea25fc07adcd8d58b9"
+        }
+      ]
+    }
+  ]
+}

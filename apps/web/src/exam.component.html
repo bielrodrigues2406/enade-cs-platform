@@ -5,6 +5,9 @@
     } @else if (attempt(); as data) {
       @if (data.state === 'COMPLETED' && !reviewing()) {
         <section class="page-intro">
+          @if (data.summary; as result) {
+            <app-mascot [pose]="result.correct / result.total >= 0.7 ? 'comemorando' : result.correct / result.total >= 0.4 ? 'contente' : 'ouvindo'" [size]="80" motion="none" />
+          }
           @if (data.kind === 'FORMAT') {
             <p class="metadata">Simulado autoral no formato ENADE {{ data.formatYear }}</p>
             <h1 id="practice-result-title" tabindex="-1">Desempenho no simulado</h1>
@@ -91,6 +94,14 @@
           }
         </div>
         <div class="practice-layout">
+          @if (showPace()) {
+            <div class="pace-note" role="note" aria-label="Ritmo de estudo">
+              <app-mascot pose="relogio" [size]="56" motion="none" />
+              <p>Está há 6 minutos nesta questão. Marcar para revisar e seguir?</p>
+              <button type="button" class="outline" (click)="markAndContinue()" [disabled]="protectedState()">Marcar e seguir</button>
+              <button type="button" class="text-button" (click)="dismissPace()">Continuar nesta</button>
+            </div>
+          }
           <section class="practice-sheet">
             @if (data.pausedAt && data.state === 'IN_PROGRESS') {
               <!-- Pausada: as questões ficam escondidas e o tempo não corre. -->

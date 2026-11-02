@@ -6,6 +6,7 @@ import {
   inject,
   signal,
 } from "@angular/core";
+import { MascotService } from "./mascot.service";
 
 // Página pública (HOME-2): apresenta a preparação a quem ainda não entrou.
 // Usa só dados reais do catálogo; nada de métricas, depoimentos ou contagens
@@ -37,6 +38,7 @@ const EXAM_DATE = new Date(2026, 10, 29);
   styleUrl: "./landing.component.css",
 })
 export class LandingComponent {
+  readonly mascot = inject(MascotService);
   @Output() start = new EventEmitter<void>();
   @Output() login = new EventEmitter<void>();
   @Output() register = new EventEmitter<void>();

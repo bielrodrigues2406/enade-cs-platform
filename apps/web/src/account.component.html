@@ -8,9 +8,12 @@
     >
       ← Voltar
     </button>
+    <div class="account-heading">
     <h1 id="account-title">
       {{ mode === "register" ? "Criar conta" : "Entrar" }}
     </h1>
+    <app-mascot pose="acenando" [size]="56" motion="pop" />
+    </div>
     @if (mode === "register") {
       <p class="account-intro">
         O que você já respondeu vai junto, e você continua de qualquer

@@ -263,22 +263,6 @@
       "explanationNote": ""
     },
     {
-      "key": "Q18",
-      "verdict": "APPROVED",
-      "fragments": [
-        "10ad035d76ed30b4a426aaad594c674ef39f5c2a5936a29fb710a690a768ba54"
-      ],
-      "answer": "B",
-      "optionCount": 5,
-      "area": "Arquitetura de computadores",
-      "subject": "Portabilidade de executável: ISA, registradores e núcleos",
-      "notes": "Questão 18 completa: enunciado, afirmações I–IV e A–E. Letra B (I e II) conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
-      "studentNote": "",
-      "explanation": "A questão trata do que precisa (e do que não precisa) ser igual entre dois sistemas para um mesmo executável funcionar. Pelo gabarito, as quatro afirmativas são possíveis.\n\nI: o número de núcleos pode diferir, pois o programa não depende dessa quantidade para funcionar corretamente; o sistema operacional escala o trabalho. II: o executável chama o sistema operacional por chamadas ao sistema, então as do sistema A devem ser compatíveis com as do sistema B. III: o conjunto de instruções poderia ser diferente, por exemplo se B executa o código de A por emulação ou tradução binária. IV: a largura dos registradores poderia ser diferente, como na execução de código de 32 bits em hardware de 64 bits.\n\nComo todas as afirmativas são aceitas, a alternativa E é a correta. A, B, C e D excluem alguma das afirmativas que o gabarito considera válidas.",
-      "explanationCheck": "REJECTED",
-      "explanationNote": "A explicação defende a alternativa E (as quatro afirmações), mas o gabarito oficial é B (I e II, apenas)."
-    },
-    {
       "key": "Q19",
       "verdict": "APPROVED",
       "fragments": [

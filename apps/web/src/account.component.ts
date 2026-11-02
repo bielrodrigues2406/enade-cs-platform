@@ -1,3 +1,4 @@
+import { MascotComponent } from "./mascot.component";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
 
@@ -14,8 +15,9 @@ export type Credentials = {
 
 @Component({
   selector: "app-account",
-  imports: [FormsModule],
+  imports: [MascotComponent, FormsModule],
   templateUrl: "./account.component.html",
+  styleUrl: "./account.component.css",
 })
 export class AccountComponent {
   @Input({ required: true }) mode: AccountMode = "login";

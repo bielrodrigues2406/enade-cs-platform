@@ -28,7 +28,7 @@ export async function formatFixture(pool: Pool) {
           correct_option_id,author_credit,explanation_credit,exam_source_id,key_source_id,source_page,
           source_question_number,key_page,review_origin,assisted_extractor,assisted_reviewer,reviewed_at)
          VALUES($1,$2,$3,$4,'TEST ONLY synthetic prompt','OFFICIAL','DRAFT','TEST ONLY private explanation',
-          'A','TEST ONLY synthetic source','TEST ONLY',$5,$6,1,$7,1,'ASSISTED','test-only-extractor','test-only-reviewer',now())`,
+          'A','Inep','TEST ONLY',$5,$6,1,$7,1,'ASSISTED','test-only-extractor','test-only-reviewer',now())`,
         [version,parent,`TEST ONLY format ${n}`,n<=15?"Formação Geral":"Algoritmos",exam,key,n]);
       for (const [position,id] of ["A","B","C","D","E"].entries())
         await client.query("INSERT INTO question_option(question_id,id,text,position) VALUES($1,$2,$3,$4)",[version,id,`TEST ONLY ${id}`,position]);
@@ -64,6 +64,7 @@ export async function formatFixture(pool: Pool) {
       await client.query("DELETE FROM discursive_question WHERE id=$1",[discursive]);
       await client.query("DELETE FROM editorial_question WHERE official_exam_id=$1",[exam]);
       await client.query("DELETE FROM source_document WHERE id=ANY($1::uuid[])",[[exam,key,standard]]);
+      await client.query("DELETE FROM browser_session WHERE identity_id=ANY($1::uuid[])",[owners]);
       await client.query("DELETE FROM study_identity WHERE id=ANY($1::uuid[])",[owners]);
       await client.query("DELETE FROM question_asset WHERE sha256=ANY($1::text[])",[assets]);
       await client.query("COMMIT");

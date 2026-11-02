@@ -1,0 +1,239 @@
+{
+  "document": "enade-2008-comum-exam",
+  "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+  "standardDocument": "enade-2008-comum-response-standard",
+  "standardSha256": "7021d115731ddcbad3c227da50f6d8c9c2c7f8a5a4b4d7dabce4b3726d0d35ef",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "extractor": "codex-content-author-2026-11-02",
+  "preparedAt": "2026-11-02T14:16:58Z",
+  "renderer": {
+    "dpi": 200,
+    "format": "image/webp",
+    "lossless": true
+  },
+  "items": [
+    {
+      "number": 20,
+      "area": "Algoritmos",
+      "subject": "Dispersão e encadeamento exterior",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 4
+        },
+        {
+          "label": "b",
+          "points": 6
+        }
+      ],
+      "note": null,
+      "reviewConcerns": [],
+      "decision": "PENDING",
+      "prompt": [
+        {
+          "file": "D20-prompt-1.webp",
+          "page": 10,
+          "box": {
+            "x0": 30.84,
+            "y0": 327,
+            "x1": 565.44,
+            "y1": 765
+          },
+          "width": 1485,
+          "height": 1217,
+          "byteSize": 58772,
+          "sha256": "6d0a2552663d1ca0b70c5fab1db8fb7610e5ad71bc631d7fc06c0fef3c3d48f5"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D20-standard-1.webp",
+          "page": 1,
+          "box": {
+            "x0": 66,
+            "y0": 110,
+            "x1": 532,
+            "y1": 386
+          },
+          "width": 1295,
+          "height": 766,
+          "byteSize": 74254,
+          "sha256": "7f94e8c4ecc5e0a576b26353249d8e5298b682d52d20b9cc5eb71afcc52a695b"
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "area": "Compiladores",
+      "subject": "Árvores sintáticas e ambiguidade de gramáticas",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 5
+        },
+        {
+          "label": "b",
+          "points": 5
+        }
+      ],
+      "note": null,
+      "reviewConcerns": [],
+      "decision": "PENDING",
+      "prompt": [
+        {
+          "file": "D39-prompt-1.webp",
+          "page": 16,
+          "box": {
+            "x0": 30,
+            "y0": 69,
+            "x1": 565.44,
+            "y1": 333
+          },
+          "width": 1488,
+          "height": 733,
+          "byteSize": 36852,
+          "sha256": "15ec7574b394b0b112a942d7ac4b055504d718c47f30c162e0be19965667ae51"
+        },
+        {
+          "file": "D39-prompt-2.webp",
+          "page": 16,
+          "box": {
+            "x0": 30,
+            "y0": 536,
+            "x1": 565.44,
+            "y1": 580
+          },
+          "width": 1488,
+          "height": 122,
+          "byteSize": 10740,
+          "sha256": "be80954a20174ad269c5745563659946a93856b98c0f3dbaf9bb0a7d21a7cd4a"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D39-standard-1.webp",
+          "page": 1,
+          "box": {
+            "x0": 66,
+            "y0": 408,
+            "x1": 532,
+            "y1": 700
+          },
+          "width": 1295,
+          "height": 811,
+          "byteSize": 99512,
+          "sha256": "0939e65464b024908aedf3b2f106ba60455b69c0d345adb801b965bd3c3d91aa"
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "area": "Banco de dados",
+      "subject": "Otimização de consultas e união em SQL",
+      "criteria": [
+        {
+          "label": "a",
+          "points": 5
+        },
+        {
+          "label": "b",
+          "points": 5
+        }
+      ],
+      "note": "No diagrama original, renda aparece com “< 30000”, enquanto a descrição, o SQL e o padrão usam “> 30000”. O padrão adota UNION, que elimina tuplas duplicadas em SQL; o enunciado não informa se nome e endereço são únicos.",
+      "reviewConcerns": [
+        "Preservado o erro de sinal do predicado de renda no diagrama do enunciado; os demais trechos usam renda > 30000.",
+        "A equivalência de OR com UNION é a solução oficial. Em semântica SQL de multiconjuntos, UNION pode eliminar duplicatas de nome/endereço que a consulta original conservaria; a unicidade desses atributos não está especificada."
+      ],
+      "decision": "PENDING",
+      "prompt": [
+        {
+          "file": "D40-prompt-1.webp",
+          "page": 17,
+          "box": {
+            "x0": 30,
+            "y0": 70.87,
+            "x1": 296.77,
+            "y1": 759.71
+          },
+          "width": 741,
+          "height": 1913,
+          "byteSize": 68588,
+          "sha256": "056102357e7f1c142212b662295704833a3532309a419c1b030008a8a2b1de2a"
+        },
+        {
+          "file": "D40-prompt-2.webp",
+          "page": 17,
+          "box": {
+            "x0": 298.44,
+            "y0": 70.87,
+            "x1": 565.44,
+            "y1": 156
+          },
+          "width": 742,
+          "height": 236,
+          "byteSize": 10432,
+          "sha256": "2296625d2bca82478dcc4100660c88363a5e16857478baa4e2b9809736bc77ec"
+        },
+        {
+          "file": "D40-prompt-3.webp",
+          "page": 17,
+          "box": {
+            "x0": 298.44,
+            "y0": 328,
+            "x1": 565.44,
+            "y1": 361
+          },
+          "width": 742,
+          "height": 92,
+          "byteSize": 5088,
+          "sha256": "ed4bdb29fcf5609866b0907a94a0ec422b191887f0760a6ddf0609c50966a099"
+        }
+      ],
+      "standard": [
+        {
+          "file": "D40-standard-1.webp",
+          "page": 1,
+          "box": {
+            "x0": 66,
+            "y0": 708,
+            "x1": 532,
+            "y1": 751
+          },
+          "width": 1295,
+          "height": 119,
+          "byteSize": 7434,
+          "sha256": "6c7b7062a420f3d159a5046a632b1b9535dfa04f6ece68bdb19b16b9f8427d93"
+        },
+        {
+          "file": "D40-standard-2.webp",
+          "page": 2,
+          "box": {
+            "x0": 66,
+            "y0": 72,
+            "x1": 532,
+            "y1": 634
+          },
+          "width": 1295,
+          "height": 1561,
+          "byteSize": 247674,
+          "sha256": "930c44b23a761b6f940f7099bd2d050f1ccf70f535b8949c702d223bb1f52c4d"
+        },
+        {
+          "file": "D40-standard-3.webp",
+          "page": 3,
+          "box": {
+            "x0": 66,
+            "y0": 73,
+            "x1": 532,
+            "y1": 447
+          },
+          "width": 1295,
+          "height": 1039,
+          "byteSize": 238446,
+          "sha256": "810c05db2869441c6a3fe94ba3e1c4d561580d9dfef53e75edadfbad472c40a6"
+        }
+      ]
+    }
+  ]
+}

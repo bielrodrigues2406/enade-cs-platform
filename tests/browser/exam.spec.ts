@@ -231,6 +231,39 @@ test("the result rebuilds a practice with the misses, and areas offer a timed si
   await expect(page.getByText(`${area} · com cronômetro`)).toBeVisible();
 });
 
+test("the rhythm prompt waits six active minutes and marks before advancing, once per question", async ({ page }) => {
+  await page.clock.install();
+  await page.goto("/treino");
+  await page.getByLabel("Área do treino").selectOption(area);
+  await page.getByRole("radio", { name: "10 questões", exact: true }).check();
+  await page.getByRole("checkbox", { name: /Com cronômetro:/ }).check();
+  await page.getByRole("button", { name: "Começar simulado", exact: true }).click();
+  await expect(map(page)).toBeVisible();
+  await page.clock.runFor(359000);
+  await expect(page.getByRole("button", { name: "Marcar e seguir", exact: true })).toHaveCount(0);
+  await page.clock.runFor(1000);
+  const mark = page.getByRole("button", { name: "Marcar e seguir", exact: true });
+  await expect(mark).toBeVisible();
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    const note = page.getByRole("note", { name: "Ritmo de estudo" });
+    expect((await note.boundingBox())!.height).toBeLessThan(320);
+    await expect(page.locator("#practice-position")).toBeInViewport();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.screenshot({ path: `test-results/mascot-rhythm-${width}.png` });
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const marked = page.waitForResponse(row => row.request().method() === "PUT" && /\/api\/practice\/[^/]+\/items\/1$/.test(new URL(row.url()).pathname));
+  await mark.click();
+  expect((await marked).status()).toBe(200);
+  await expect(page.locator("#practice-position")).toHaveText("Questão 2 de 10");
+  const data = await currentView(page);
+  expect(data.items[0].answer.marked).toBe(true);
+  await questionButton(page, 1).click();
+  await page.clock.runFor(361000);
+  await expect(mark).toHaveCount(0);
+});
+
 test("a lost save acknowledgement stays protected until retry confirms the same operation", async ({ page }) => {
   const view = await start(page, 10), item = view.items[0];
   let loseAcknowledgement = true;

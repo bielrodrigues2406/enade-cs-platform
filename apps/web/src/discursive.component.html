@@ -8,6 +8,9 @@
     </div>
   }
 
+  @if (!embedded) {
+    <p><app-mascot pose="ouvindo" [size]="64" motion="none" /> Explique como se fosse para o pato: organize o raciocínio antes de enviar.</p>
+  }
   @if (detail(); as q) {
     @if (!embedded && !attemptId) {
       <button type="button" class="back text-button" (click)="loadList()">← Discursivas</button>

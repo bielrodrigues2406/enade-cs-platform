@@ -8,6 +8,7 @@ const pool=new Pool({connectionString:process.env.DATABASE_URL});
 let fixture:Awaited<ReturnType<typeof formatFixture>>;
 const owners=new Set<string>();
 test.beforeAll(async()=>{ fixture=await formatFixture(pool); });
+test.afterEach(async({page})=>{ await rememberOwner(page); });
 test.afterAll(async()=>{ try { await fixture?.cleanup([...owners]); } finally { await pool.end(); } });
 async function rememberOwner(page:Page) {
   const cookie=(await page.context().cookies()).find(c=>c.name==="enade_session");
