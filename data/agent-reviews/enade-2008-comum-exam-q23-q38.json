@@ -88,22 +88,6 @@
       "explanationNote": ""
     },
     {
-      "key": "Q28",
-      "verdict": "APPROVED",
-      "fragments": [
-        "16de3798aa1d5cf4676283fe8794d3ddfbbc0ce8555f2bd50a37d19e34ba31dd"
-      ],
-      "answer": "A",
-      "optionCount": 5,
-      "area": "Inteligência artificial",
-      "subject": "Classificação por árvore de decisão",
-      "notes": "Recorte da página 13 (impressa 12): número 28, árvore de decisão com rótulos de ramos e folhas legíveis, tabela O1–O3 e A–E em duas colunas, ordem conferida. Letra A conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação recusada: eliminação de B e D descrita de forma incorreta.",
-      "studentNote": "",
-      "explanation": "A questão cobra o uso de uma árvore de decisão: partindo da raiz, testa-se em cada nó o atributo do objeto e segue-se o ramo correspondente até uma folha, que dá a classe.\n\nO1 (X1=a, X2=P, X3=20, X4=não): na raiz, X1=a leva ao nó X3; como 20 <= 35, vai-se à folha de classe 1. O2 (X1=b): o ramo b leva direto à folha de classe 1, sem consultar os demais atributos. O3 (X1=c, X2=M): o ramo c leva ao nó X2; o valor M leva à folha de classe 2. O atributo X4 só é testado no ramo X2=G, que O3 não segue; o valor X4=sim de O3 é irrelevante.\n\nAs classes são, portanto, 1, 1 e 2, alternativa A, conforme o gabarito. As demais combinações erram ao menos um objeto: B troca a classe de O2, C troca a de O1, D troca O1 e O2, e E erra O3, que não cai na folha 1.",
-      "explanationCheck": "REJECTED",
-      "explanationNote": "O último parágrafo descreve mal as alternativas erradas: B (1, 2 e 1) erra O2 e também O3, não só O2; D (2, 2 e 1) erra os três objetos, não só O1 e O2. A eliminação fica incoerente com as alternativas impressas e precisa ser corrigida."
-    },
-    {
       "key": "Q29",
       "verdict": "APPROVED",
       "fragments": [

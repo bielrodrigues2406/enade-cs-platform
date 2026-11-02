@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "origin": "AI_GENERATED",
+  "humanReviewed": false,
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "document": "enade-2017-licenciatura-exam",
+  "examSha256": "7ae440c22df812f9b28bcd3f746ea4ec1f836ad15dbe81ff468a883007f90348",
+  "cropsManifestSha256": "23708ec1779da6e041aeaff6ffc80f6fbc4e27f487e2d1fed52da607a556fd74",
+  "explainer": "codex-content-author-2026-11-02",
+  "sourceReviews": [
+    "data/agent-reviews/enade-2017-licenciatura-exam-q22-q35.json"
+  ],
+  "items": [
+    {
+      "key": "Q22",
+      "answer": "E",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: ferramentas de EaD com acesso restrito",
+      "fragments": [
+        "df2d6b9735896f6e4c692c5a595f0e64ec5ef3504e8b2c82c613aa8835c41028"
+      ],
+      "explanation": "A escolha das ferramentas deve considerar as condições reais de acesso, e não apenas a quantidade de recursos disponíveis. Com uma conexão lenta e instável, atividades que toleram interrupções e não exigem todos conectados ao mesmo tempo são mais adequadas.\n\nA biblioteca permite baixar os livros e estudá-los off-line. O fórum organiza a troca de mensagens de modo assíncrono, permitindo participar em horários e conexões diferentes. A wiki oferece produção colaborativa de textos e imagens. Juntas, essas ferramentas atendem ao acervo, à interação e à construção coletiva, como afirma a alternativa E.\n\nVideoteca, no enunciado, exige assistir on-line e não permite download; videoconferência exige comunicação audiovisual em tempo real. Chat também depende de participação síncrona. As alternativas A, B, C e D incluem pelo menos uma dessas exigências e deixam de oferecer o mesmo equilíbrio diante da restrição de conexão apresentada.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q23",
+      "answer": "B",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: canais de interação na EaD",
+      "fragments": [
+        "537bf90fa1f4b054ad8925ed901a0e190c0d5972a6933a6e1255026af84f029a"
+      ],
+      "explanation": "O foco da questão é a qualidade do processo de ensino e aprendizagem na educação a distância. A separação física entre participantes torna importante oferecer meios de comunicação e acompanhamento, sem reduzir o estudante ao recebimento solitário de conteúdo.\n\nA alternativa B atende a esse objetivo ao combinar diferentes canais, como chats, fóruns, e-mails e troca de materiais. Essa diversidade amplia as possibilidades de interação entre estudantes e professores, considerando atividades e necessidades distintas.\n\nA reduz a aprendizagem a um único aspecto. C apresenta uma escolha de tecnologia ou licenciamento, que pode ser pertinente, mas não garante o processo pedagógico pretendido nem elimina, por si só, custos de manutenção. D transforma a diminuição da tutoria em objetivo central, enfraquecendo o acompanhamento. E propõe uma neutralidade cultural absoluta, em vez de contextualizar o conhecimento e lidar de forma crítica com a diversidade dos estudantes.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q24",
+      "answer": "B",
+      "area": "Engenharia de software",
+      "subject": "Requisitos funcionais e não funcionais",
+      "fragments": [
+        "29b336987c2062bb05f6a7c7c47fb7cfee0315513ba3c5bbe3a6ea7bc9dc9dd8"
+      ],
+      "explanation": "Requisitos funcionais descrevem serviços, ações e regras que o sistema precisa realizar. Requisitos não funcionais estabelecem qualidades ou restrições para a solução, como desempenho e tecnologias obrigatórias.\n\nI descreve a função de registrar um pedido com tamanho e resolução. IV estabelece uma regra de aprovação: pedidos acima do valor indicado precisam passar pelo gerente. Ambos definem comportamento do sistema e, portanto, são funcionais. O fato de IV impor uma condição não transforma toda regra de negócio em requisito não funcional.\n\nII restringe a implementação a Java e JPA. III define um limite de tempo para a confirmação, uma exigência de desempenho. Assim, somente II e III são não funcionais, correspondendo à alternativa B. As demais combinações incluem I ou IV nessa classificação, ou deixam de reconhecer alguma das duas restrições efetivamente apresentadas.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q25",
+      "answer": "C",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: classes de software educativo",
+      "fragments": [
+        "d9671ff14550b390ff8078df0634a1e06c14863d0b98e545ecb1c61e015dedb3"
+      ],
+      "explanation": "A classificação de software educativo depende do objetivo pedagógico e da forma de participação do estudante. Um mesmo meio digital pode servir a finalidades distintas; por isso, não basta chamar todo recurso de multimídia.\n\nI está correta: tutoriais organizam a apresentação de informações, objetivos e estímulos para orientar a aprendizagem de conteúdos. II também está correta: jogos educativos podem usar desafios, competição, instruções e regras como parte de uma atividade de aprendizagem.\n\nIII atribui aos softwares de multimídia características próprias de ambientes de programação, nos quais o estudante cria soluções usando uma linguagem e exercita o raciocínio lógico. Combinar textos, imagens, áudio ou vídeo não exige, por si só, programar nem garante essa liberdade de construção. Logo, somente I e II são aceitas, alternativa C. A exclui indevidamente II; B toma III como correta; D e E também incluem a afirmação que confunde as categorias.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q26",
+      "answer": "B",
+      "area": "Interação humano-computador",
+      "subject": "Comunicabilidade da interface",
+      "fragments": [
+        "fb4be14953e36cbda58f71001b1a8936e859d092f5d5bfa87599a2696f130c88"
+      ],
+      "explanation": "Comunicabilidade é a qualidade pela qual a interface permite ao usuário compreender o que o sistema oferece e como utilizá-lo. Na imagem, o botão Pincel de Formatação vem acompanhado de uma explicação da finalidade, dos atalhos e dos passos de uso.\n\nEsse texto comunica o significado da ferramenta e orienta a ação da pessoa, correspondendo à alternativa B. A avaliação não depende apenas de reconhecer o desenho do botão: o enunciado destaca justamente a ajuda que explica a intenção e a forma de interação.\n\nAcessibilidade trata da possibilidade de uso por pessoas com diferentes capacidades e necessidades, o que não é o aspecto especificamente demonstrado. Tempo de resposta se refere à demora do sistema. Cognição distribuída analisa a atividade cognitiva entre pessoas e artefatos. Proximidade diz respeito ao agrupamento visual de elementos. Esses conceitos não descrevem tão diretamente a explicação exibida na interface.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q27",
+      "answer": "B",
+      "area": "Sistemas de informação",
+      "subject": "Governança de TI: COBIT",
+      "fragments": [
+        "67d0b0768754bd3529a4a91121b530374960514729ef3ddaf9dc5afcef7e03f5"
+      ],
+      "explanation": "O problema apresentado envolve governança de tecnologia da informação: alinhar os investimentos aos objetivos do negócio, acompanhar resultados e estabelecer controles e métricas. A alternativa B indica o COBIT, cuja finalidade se relaciona a essa visão de governança e gestão de TI.\n\nOs sintomas não se limitam a um projeto ou a uma equipe de desenvolvimento. A empresa precisa relacionar processos, objetivos e resultados para avaliar o valor obtido com a tecnologia e controlar sua execução.\n\nITIL se concentra na gestão de serviços de TI. CMMI e MPS-BR enfatizam melhoria e avaliação de processos, especialmente no desenvolvimento e manutenção de software. PMBOK reúne conhecimentos de gestão de projetos. Todos podem apoiar atividades da organização, mas não substituem a ênfase de governança, alinhamento e avaliação global dos investimentos que o enunciado associa ao COBIT.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q28",
+      "answer": "C",
+      "area": "Programação",
+      "subject": "Herança e polimorfismo",
+      "fragments": [
+        "34ed70092522b4e4fca8fbfa5beffccff17b1101d782a44745e029c876266b4a"
+      ],
+      "explanation": "Herança permite definir uma classe especializada a partir de outra, aproveitando características e comportamentos disponíveis na superclasse. Também pode estabelecer uma relação de subtipagem, usada no polimorfismo de objetos.\n\nI é correta: uma referência do tipo da superclasse pode, em situações compatíveis, representar objetos de subclasses, permitindo comportamentos especializados. II também é correta, pois a subclasse pode reutilizar código comum que herdou, evitando reimplementá-lo em cada classe.\n\nIII faz uma equivalência que não se sustenta. Um método pode simplesmente ser herdado e usado com a mesma implementação, sem que isso corresponda a uma implementação especializada ou a um comportamento polimórfico. Herança e polimorfismo são conceitos relacionados, mas não sinônimos. Portanto, I e II são aceitas e III é rejeitada, alternativa C. As outras opções excluem uma afirmação correta ou incluem a equivalência indevida de III.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q29",
+      "answer": "A",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: comunicação síncrona e assíncrona",
+      "fragments": [
+        "350ee8f6fb44ac9f41b5e67e28fa31e35320f8e87f1738adbe29fe9e9afedc7e"
+      ],
+      "explanation": "A distinção entre comunicação síncrona e assíncrona depende da necessidade de participação simultânea. Não depende apenas de o professor intervir ou permanecer observando.\n\nI é falsa: acompanhar a tela de um estudante em tempo real exige simultaneidade, mesmo sem intervenção. II é verdadeira: uma ferramenta assíncrona permite enviar uma dúvida durante a reprodução de uma videoaula, mas a resposta pode chegar em outro momento. O envio durante o vídeo não torna a conversa automaticamente síncrona.\n\nIII não descreve uma característica necessária da atividade assíncrona. Verificar por imagens em tempo real exige uma interação simultânea e não decorre da definição apresentada. Isso não impede que uma instituição adote mecanismos de identificação; apenas não torna essa exigência uma propriedade da comunicação assíncrona. Logo, somente II é aceita, alternativa A. Todas as outras opções incluem I ou III, que confundem acompanhamento em tempo real com atividades independentes de horário.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q30",
+      "answer": "C",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: MOOCs e interação entre estudantes",
+      "fragments": [
+        "6ae741a44558f855e11bbe4a757be9579f839fa46cb41d3db0aa24d933016c55"
+      ],
+      "explanation": "A resposta deve ser obtida a partir do papel atribuído às conexões e à participação dos estudantes no texto. O MOOC descrito se apoia no conectivismo e utiliza avaliações pelos pares, participação em fóruns e outras formas de colaboração em uma rede numerosa.\n\nNesse modelo, as interações entre estudantes têm especial destaque na construção e na avaliação da aprendizagem. Essa é a comparação expressa pela alternativa C. A participação não fica restrita ao recebimento de exposições de um professor ou de um tutor.\n\nO texto não estabelece que professores, ambientes virtuais ou recursos didáticos sejam dispensáveis. Também não oferece fundamento para afirmar que a avaliação formativa ou os materiais de qualidade seriam mais importantes em apenas uma das modalidades. Por isso, A, B, D e E não correspondem à conclusão solicitada. A afirmação de C deve ser lida no contexto do modelo de MOOC apresentado, e não como uma regra universal sobre todos os cursos on-line.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q31",
+      "answer": "E",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: didática e práxis pedagógica",
+      "fragments": [
+        "799bbe4582fe049c5c0caeae94d9c08f5431bedb9c45aed15a3cc824d32edcd6"
+      ],
+      "explanation": "O texto apresenta a didática como uma atividade que integra dimensões políticas, educativas e científicas, articulando teoria e prática na investigação da realidade escolar. Essa concepção ultrapassa a seleção isolada de técnicas de ensino.\n\nI é coerente com a ideia de práxis: elaborar conhecimento envolve refletir sobre a prática e relacioná-la a uma perspectiva dialética e histórico-cultural. II também é correta, pois a apropriação crítica e histórica do conhecimento permite compreender a realidade social e atuar sobre ela, em vez de apenas reproduzi-la.\n\nIII completa essa articulação ao reconhecer que a didática utiliza questões do cotidiano escolar e da sociedade para atualizar a ação docente. As três afirmações pertencem à mesma concepção crítica apresentada no enunciado. Portanto, a alternativa E é a correta. A, B, C e D deixam de incluir pelo menos uma afirmação compatível com a integração entre teoria, prática e realidade social.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q32",
+      "answer": "A",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: educação bilíngue de surdos",
+      "fragments": [
+        "470a8303945de9e63402d1ed88dcb364b11c7da075613ea7cc7e2c5c8f35dd78"
+      ],
+      "explanation": "A proposta bilíngue considera as condições linguísticas do estudante surdo. No caso apresentado, ele já é fluente em Libras e tem dificuldades com a leitura e a escrita do português; seu potencial cognitivo não deve ser confundido com uma limitação intelectual.\n\nA alternativa A reconhece Libras como primeira língua e propõe uma escolarização bilíngue. Isso permite que o acesso ao conhecimento não dependa exclusivamente de uma língua escrita na qual o aluno ainda encontra barreiras.\n\nB prioriza o português sem reconhecer essa primeira língua. C torna a escrita em português o centro da avaliação, podendo confundir dificuldade linguística com aprendizagem dos conteúdos. D inverte a sequência ao exigir português antes de Libras, que o aluno já utiliza. E menciona inclusão de modo genérico, mas não apresenta a organização linguística necessária à situação. A resposta precisa assegurar condições efetivas de comunicação e aprendizagem, e não apenas a presença do aluno na escola.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q33",
+      "answer": "A",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: gênero no currículo",
+      "fragments": [
+        "f0d4ae9d0d0a02f76c7127bd0500cb8f787364f3533fd140820c2f820f4f005b"
+      ],
+      "explanation": "O enunciado mostra que a escola já participa da construção de ideias sobre gênero por meio das relações, das expectativas, das regras e dos materiais que utiliza. Por isso, a promoção da igualdade exige examinar práticas que atravessam o cotidiano escolar.\n\nA alternativa A propõe incorporar o conceito de gênero transversalmente aos componentes curriculares. Assim, o tema pode ser tratado de maneira articulada, relacionado às situações descritas, em vez de ficar restrito a uma atividade pontual ou a uma explicação biológica.\n\nB e E reforçam modelos fixos do que seria masculino ou feminino, reproduzindo as distinções criticadas. C usa supostas diferenças naturais para organizar e controlar a classe, mantendo essa mesma lógica. D oferece uma abordagem apenas tangencial, insuficiente diante de práticas disseminadas em diferentes espaços e momentos. A transversalidade é, portanto, a resposta compatível com transformar essas relações e respeitar as diferenças.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q34",
+      "answer": "D",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: teoria histórico-cultural de Vygotsky",
+      "fragments": [
+        "3c80ef2aba2ff0827bf1b604bcec20caa8bb24de2c9bf0f289d5c2aaacdbc722"
+      ],
+      "explanation": "Na teoria histórico-cultural apresentada, o desenvolvimento das funções mentais superiores é mediado pela linguagem, pela aprendizagem e pelas relações sociais. O sujeito se apropria de instrumentos culturais e os transforma em formas de pensar e agir.\n\nI expressa a internalização das interações sociais. II e III reconhecem que a escrita e a linguagem do meio sociocultural reorganizam o desenvolvimento e as funções mentais. V destaca que o ensino sistemático de conceitos científicos pode modificar a estrutura do pensamento. Essas quatro afirmações são compatíveis com a concepção exposta.\n\nIV é rejeitada porque explica o desenvolvimento das funções superiores apenas a partir de funções já existentes no indivíduo, omitindo a mediação social e cultural central ao enunciado. Isso não significa negar condições biológicas, mas recusar sua apresentação como explicação suficiente. Logo, I, II, III e V são aceitas, alternativa D. As outras combinações incluem IV ou retiram afirmações coerentes com a teoria.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    },
+    {
+      "key": "Q35",
+      "answer": "D",
+      "area": "Sociedade e ética",
+      "subject": "Ensino de Computação: abordagem construtivista de Piaget",
+      "fragments": [
+        "a71a512581f84ff2eb18054e2744214eb450c07c921c36924aa463d4f72aab73"
+      ],
+      "explanation": "Na abordagem construtivista de Piaget, aprender envolve a atividade do estudante sobre os problemas e a reorganização de suas formas de compreensão. As ideias que ele já possui são o ponto de partida para construir conhecimentos mais elaborados.\n\nA alternativa D propõe investigar o saber cotidiano sobre força e movimento, favorecer a elaboração de hipóteses e criar conflitos cognitivos. Ao confrontar previsões com situações que não se explicam pelos esquemas iniciais, o estudante é levado a reconstruir sua compreensão do fenômeno.\n\nExperimentos, livros, exercícios, leituras e imagens também podem participar de uma aula. Porém, A, B, C e E os apresentam sobretudo como demonstração, síntese, fixação ou transmissão de conceitos. Não explicitam a investigação das concepções dos estudantes e sua transformação, que constituem o elemento decisivo solicitado pela questão. Por isso, D é a proposta mais coerente com a fundamentação indicada.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    }
+  ]
+}

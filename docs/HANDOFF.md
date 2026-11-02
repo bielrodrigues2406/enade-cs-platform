@@ -4,13 +4,13 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
-- Base atual: `main` em `2e6c296` (PRs #31 e #32 integrados). A branch do Claude já está contida nessa base. Codex trabalha em MAS-2, CNT-FINAL e SIM26-1, em branches separadas; veja WORKBOARD para o estado de validação e os PRs.
+- Base atual: `main` em `120a44f` (PRs #31, #32 e #34 integrados). A branch do Claude já está contida nessa base. Codex trabalha em MAS-2, CNT-FINAL e SIM26-1, em branches separadas; veja WORKBOARD para o estado de validação e os PRs.
 - Gabriel autorizou nesta conversa criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Essa autorização não inclui deploy nem force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
 - Migrations reservadas: **028** para MAS-2 e **029** para SIM26-1. Próxima livre: **030**; conferir WORKBOARD antes de reservar.
-- Conteúdo publicado: 246 objetivas e 35 discursivas (2011–2021) conferidas por agente; 2005/2008 discursivas pendentes (padrão sem blocos).
+- Conteúdo preparado no PR #33: 246 objetivas com explicação e 39 discursivas, incluindo quatro de 2005/2008, conferidas por agente. Ainda faltam cinco padrões antigos de Formação Geral e os 33 PDFs recentes; não chamar essas edições de integralmente completas.
 - Funções prontas: banco de questões, caderno de erros espaçado, treino parcial e por área (com cronômetro opcional), provas completas (`/provas`), discursivas com autoavaliação, turmas/aulas/presença, painel do professor, papéis e administração, importação de provas, registro de atividades, **meta diária, conquistas, ranking de constância, flashcards (FSRS-5) e biblioteca** (ver `docs/FLASHCARDS.md`).
-- Main: CI do commit `2e6c296` passou, incluindo 65 testes Chromium. MAS-2: 173 testes de API passaram com pypdf 6.10.0 em ambiente isolado; navegador ainda em validação, pacote inicial **493,52 kB**. Não confundir essas verificações com deploy: Gabriel informou que a plataforma não está rodando.
+- Main: CI do commit `2e6c296` passou, incluindo 65 testes Chromium. MAS-2 (#34): CI passou com 173 testes de API e 73 Chromium; pacote inicial **493,66 kB**. Conteúdo (#33): 170 API na base anterior, bootstrap real repetido com 246/39 e nove padrões agora VERIFIED; CI de integração com MAS em andamento. Não confundir essas verificações com deploy: Gabriel informou que a plataforma não está rodando.
 
 ## 2. Como rodar e testar
 
@@ -38,7 +38,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 1. **Deploy em VPS própria e domínio** (Gabriel comprando). `deploy/vps/` foi feito para dividir o servidor do Mira; adaptar para Caddy próprio com HTTPS do domínio. Nomes sugeridos: cadernocc.com.br (preferido), bitabit.app, gabaritou.com.br. Só publicar com autorização.
 2. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
 3. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória, ainda não iniciada).
-4. **Mascote**: etapas 1 a 3 em implementação MAS-2. Cena e ícone atuais já vieram no #32; novas artes inline comparadas, ainda sem originais locais para substituição. Regras e pendências em MASCOT.md.
+4. **Mascote**: etapas 1 a 3 entregues no #34. Cena e ícone atuais já vieram no #32; novas artes inline comparadas, ainda sem originais locais para substituição. Regras e pendências em MASCOT.md.
 5. **Plano até a prova** (aparece como "Em breve" na Biblioteca): semanas até a prova + áreas mais fracas (`/api/me/progress`) → roteiro semanal.
 6. **Materiais por área** ("Em breve"): PDFs e links dos professores; precisa de migration, upload no admin e licença de uso.
 7. Discursivas de 2005 e 2008 (padrão de resposta sem blocos; recorte manual).

@@ -1,7 +1,9 @@
 import { createHash } from "node:crypto";
+import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { AREAS } from "./question-areas.js";
 import { storeAsset } from "./question-images.js";
+import { readArchive } from "./source-store.js";
 
 // Publicação de discursivas conferidas por agente (DISC-2). Recebe a conferência
 // commitada em data/discursive-reviews e os bytes de cada recorte; confere os
@@ -23,6 +25,9 @@ export type DiscursiveReview = {
   extractor: string; reviewer: string; renderer: { dpi: number }; items: Item[];
 };
 export type DiscursiveSummary = { document: string; published: number[]; kept: number[]; blocked: number[] };
+type SourceRecord = {
+  id: string; year: number; modality: string; sha256: string; byteSize: number;
+};
 
 function fail(message: string): never {
   throw new Error(message);
@@ -50,11 +55,30 @@ export function validateReview(review: DiscursiveReview) {
   }
 }
 
-async function sourceId(sha256: string, kind: string) {
-  const row = (await db.query<{ id: string; year: number; modality: string }>(
-    "SELECT id,year,modality FROM source_document WHERE sha256=$1 AND kind=$2", [sha256, kind],
+async function sourceId(sha256: string, kind: string): Promise<SourceRecord> {
+  const row = (await db.query<SourceRecord>(
+    'SELECT id,year,modality,sha256,byte_size AS "byteSize" FROM source_document WHERE sha256=$1 AND kind=$2', [sha256, kind],
   )).rows[0];
   return row ?? fail(`Fonte ${kind} ${sha256.slice(0, 12)} ainda não importada.`);
+}
+
+/** A conferência do padrão acompanha a publicação; nunca promove só por importar. */
+async function verifyStandard(client: PoolClient, standard: SourceRecord, reviewer: string) {
+  const current = (await client.query<{ status: string }>(
+    "SELECT status FROM source_document WHERE id=$1 FOR UPDATE", [standard.id],
+  )).rows[0];
+  if (current?.status === "VERIFIED") return;
+  if (current?.status !== "IMPORTED") fail("O padrão de resposta não está disponível para conferência.");
+  await readArchive(standard);
+  const changed = await client.query(
+    `UPDATE source_document SET status='VERIFIED',verification_origin='ASSISTED',
+       assisted_verifier=$2,reviewed_at=clock_timestamp(),revision=revision+1
+     WHERE id=$1 AND status='IMPORTED' RETURNING id`, [standard.id, reviewer],
+  );
+  if (changed.rowCount) await client.query(
+    `INSERT INTO source_event(source_id,agent,event_type,note) VALUES($1,$2,'VERIFIED',$3)`,
+    [standard.id, reviewer, "Padrão conferido por agente: recortes aprovados e SHA-256 do arquivo arquivado igual à conferência."],
+  );
 }
 
 export async function publishDiscursiveReview(
@@ -75,6 +99,7 @@ export async function publishDiscursiveReview(
     const client = await db.connect();
     try {
       await client.query("BEGIN");
+      await verifyStandard(client, standard, review.reviewer);
       const id = `discursive-${review.examSha256.slice(0, 12)}-d${item.number}`;
       const created = await client.query(
         `INSERT INTO discursive_question(id,exam_source_id,standard_source_id,year,modality,number,area,subject,criteria,
@@ -84,7 +109,7 @@ export async function publishDiscursiveReview(
           JSON.stringify(item.criteria), review.extractor, review.reviewer, item.note],
       );
       if (!created.rowCount) {
-        await client.query("ROLLBACK");
+        await client.query("COMMIT");
         summary.kept.push(item.number);
         continue;
       }

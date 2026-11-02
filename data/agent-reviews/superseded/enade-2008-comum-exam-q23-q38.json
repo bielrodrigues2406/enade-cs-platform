@@ -1,0 +1,267 @@
+{
+  "document": "enade-2008-comum-exam",
+  "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+  "cropsManifestSha256": "9f2de020cc10421e667b28629ba1da206812f74839325e6d5b50790002bd7002",
+  "extractor": "claude",
+  "explainer": "claude-explain-10",
+  "reviewer": "claude-review-10",
+  "reviewedAt": "2026-10-30T22:39:55Z",
+  "items": [
+    {
+      "key": "Q23",
+      "verdict": "APPROVED",
+      "fragments": [
+        "eead5061372ae329f706e98e87cb407a90772f5b2bb537d1eaf7ad96280ee518"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Banco de dados",
+      "subject": "Chaves primárias e integridade referencial",
+      "notes": "Recorte da página 11 (impressa 10): número 23, enunciado, esquema com atributos grifados legíveis (chave composta de FonePessoa), tuplas existentes e A–E completas, sem conteúdo vizinho. Letra E conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida com o esquema.",
+      "studentNote": "",
+      "explanation": "A questão cobra integridade de entidade (chave primária não pode ser nula nem repetida) e integridade referencial (chave estrangeira deve ser nula, quando permitido, ou apontar para uma tupla existente). Já existem Pessoa(1, ...) e Republica(20, ...).\n\nA alternativa E é a única com tuplas válidas. Em Estudante, IdPessoa=1 existe em Pessoa e IdRep nulo é aceitável, pois o enunciado diz que o estudante pode não morar em república. Em FonePessoa, IdPessoa=1 também existe, e DDD, prefixo e número estão preenchidos, compondo a chave primária completa.\n\nAs demais falham. Em A e B, FonePessoa referencia IdPessoa=10, que não existe em Pessoa, violando a chave estrangeira. Em C, o DDD é nulo, mas ele é um dos atributos grifados da chave primária composta de FonePessoa (IdPessoa, DDD, Prefixo e Nro), e nenhum componente de chave primária pode ser nulo. Em D, Estudante aponta para IdRep=50, inexistente em Republica.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q24",
+      "verdict": "APPROVED",
+      "fragments": [
+        "185390322f6439b1fd370cb8a67477ba8cfe6d207f3f8074f4451fc773e72d38"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Decodificador e análise de circuitos lógicos",
+      "notes": "Recorte da página 12 (impressa 11): número 24, bloco DEC com tabela, circuitos I–III com portas OU, NOR e OU exclusivo distinguíveis, funções com barras legíveis e A–E. Na base aparece só a borda superior do quadro RASCUNHO, cortada e sem texto de outra questão ou instrução; comparado com a página renderizada. Letra E conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida item a item.",
+      "studentNote": "",
+      "explanation": "A questão cobra a leitura de um decodificador 2x4: para as entradas S1S0, apenas uma saída vale 1. Com S1=A e S0=B, a saída 0 é ¬A¬B, a 1 é ¬A·B, a 2 é A·¬B e a 3 é A·B.\n\nItem I: o OU das saídas 1 e 2 vale ¬A·B + A·¬B, exatamente a função indicada; está certo. Item II: o NOR das saídas 0, 1 e 2 vale 1 somente quando nenhuma delas é 1, isto é, quando a saída 3 está ativa, o que dá A·B; está certo. Item III: a porta é OU exclusivo das saídas 1, 2 e 3. Como o decodificador ativa só uma saída por vez, no máximo uma entrada da porta vale 1, e o OU exclusivo coincide com o OU. Esse OU é 1 para qualquer combinação diferente de A=B=0, ou seja, A + B; está certo.\n\nComo os três itens estão certos, a opção correta é a E, conforme o gabarito. A, B, C e D contam menos itens certos e, portanto, descartam algum item que é verdadeiro.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q25",
+      "verdict": "APPROVED",
+      "fragments": [
+        "397d5312656b5b2013dd8534f0a6cc2f1c57a25ce0349d58766eae7476671d22"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Computação gráfica",
+      "subject": "Transformada de Hough para detecção de retas",
+      "notes": "Recorte da página 12 (impressa 11): número 25, figura das três retas, enunciado e A–E completas, sem conteúdo vizinho. Letra E conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra qual transformada serve para extrair retas de uma imagem binária. A transformada de Hough com parametrização de retas faz cada pixel branco votar em todas as retas que passariam por ele. Pixels colineares votam nos mesmos parâmetros, e o acumulador (o mapa de parâmetros) ganha picos; cada pico fornece os coeficientes de uma reta da imagem. Com três retas, esperam-se três picos. Por isso a alternativa E está correta, de acordo com o gabarito.\n\nAs outras falham. A: a transformada de Fourier fornece o conteúdo em frequências espaciais, não o histograma de níveis de cinza. B: a transformada de Hadamard é uma transformada ortogonal e não equivale a um filtro passa-baixas; além disso, suavizar não destacaria retas. C: a transformada de distância calcula, para cada pixel, a distância ao objeto mais próximo, e não a distância das retas ao centro da imagem. D: a transformada dos cossenos também é uma transformada de frequências e não produz lista de coeficientes linear e angular das retas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q26",
+      "verdict": "APPROVED",
+      "fragments": [
+        "9145116f15c68e19f470a06c475cf9b6557d9f61fdc617d54663a0dfe617cfb7"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Computação gráfica",
+      "subject": "Quantização de níveis de cinza em imagens",
+      "notes": "Recorte da página 13 (impressa 12): número 26, figuras I e II com legendas, enunciado (246 × 300 pixels, 256 e 4 níveis) e A–E legíveis. Letra B conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a distinção entre os atributos de uma imagem digital. A amostragem espacial define a malha de pixels, isto é, a resolução espacial, enquanto a quantização define quantos valores de intensidade cada pixel pode assumir.\n\nO enunciado informa que as duas figuras têm 246 x 300 pixels, portanto a malha e a resolução espacial são idênticas. A diferença está só no número de níveis de cinza: 256 na figura I e 4 na figura II. Reduzir o número de níveis possíveis de intensidade é quantizar mais grosseiramente, o que explica as regiões de tom uniforme e o aspecto posterizado da figura II. Assim, a alternativa B está correta, como no gabarito.\n\nAs outras falham. A e E (resolução e amostragem espacial) apontam para a quantidade de pixels, que não mudou. D: escala significaria alterar as dimensões da imagem, o que também não ocorreu. C: iluminação se refere às condições de captura da cena, não ao número de níveis representáveis; o enunciado diz que só um atributo foi manipulado.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q27",
+      "verdict": "APPROVED",
+      "fragments": [
+        "2775dcfd42c9e94dc6db8801e544f60b511483b78dd155e83f08a211e6979679"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "CSMA/CD no controle de acesso ao meio Ethernet",
+      "notes": "Recorte da página 13 (impressa 12): número 27, enunciado e A–E completas. Letra D conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra o método de controle de acesso ao meio da Ethernet IEEE 802.3 em meio compartilhado. Quando as estações estão ligadas a um concentrador (hub), todas dividem o mesmo domínio de colisão. A Ethernet usa CSMA/CD: a estação escuta o meio, transmite se ele estiver livre, monitora a transmissão para detectar colisão e, se houver, interrompe, espera um tempo aleatório (recuo) e tenta de novo. É, portanto, uma abordagem de contenção com detecção de colisão, que corresponde à alternativa D, conforme o gabarito.\n\nAs outras falham. A descreve passagem de permissão em anel, como no token ring. C e B falam de ordenação sem contenção ou com contenção de forma genérica: a Ethernet não define uma ordem fixa de acesso, as estações disputam o meio. E, arbitragem centralizada, exigiria um controlador que concedesse a vez, como em esquemas de consulta (polling), o que não ocorre no CSMA/CD.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q28",
+      "verdict": "APPROVED",
+      "fragments": [
+        "16de3798aa1d5cf4676283fe8794d3ddfbbc0ce8555f2bd50a37d19e34ba31dd"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Classificação por árvore de decisão",
+      "notes": "Recorte da página 13 (impressa 12): número 28, árvore de decisão com rótulos de ramos e folhas legíveis, tabela O1–O3 e A–E em duas colunas, ordem conferida. Letra A conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação recusada: eliminação de B e D descrita de forma incorreta.",
+      "studentNote": "",
+      "explanation": "A questão cobra o uso de uma árvore de decisão: partindo da raiz, testa-se em cada nó o atributo do objeto e segue-se o ramo correspondente até uma folha, que dá a classe.\n\nO1 (X1=a, X2=P, X3=20, X4=não): na raiz, X1=a leva ao nó X3; como 20 <= 35, vai-se à folha de classe 1. O2 (X1=b): o ramo b leva direto à folha de classe 1, sem consultar os demais atributos. O3 (X1=c, X2=M): o ramo c leva ao nó X2; o valor M leva à folha de classe 2. O atributo X4 só é testado no ramo X2=G, que O3 não segue; o valor X4=sim de O3 é irrelevante.\n\nAs classes são, portanto, 1, 1 e 2, alternativa A, conforme o gabarito. As demais combinações erram ao menos um objeto: B troca a classe de O2, C troca a de O1, D troca O1 e O2, e E erra O3, que não cai na folha 1.",
+      "explanationCheck": "REJECTED",
+      "explanationNote": "O último parágrafo descreve mal as alternativas erradas: B (1, 2 e 1) erra O2 e também O3, não só O2; D (2, 2 e 1) erra os três objetos, não só O1 e O2. A eliminação fica incoerente com as alternativas impressas e precisa ser corrigida."
+    },
+    {
+      "key": "Q29",
+      "verdict": "APPROVED",
+      "fragments": [
+        "7e996ac39755812f16f1900a34d351eb9d9372e47bfa6ba90b43fb9ae580cba0"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Teoria da computação",
+      "subject": "Gramáticas e linguagens regulares",
+      "notes": "Recorte da página 13 (impressa 12): número 29, quadro de produções (S→AB, AB→AAB, A→a, B→b) legível e A–E. Letra D conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida; linguagem a^n b, n ≥ 1.",
+      "studentNote": "",
+      "explanation": "A questão cobra a relação entre uma gramática e a linguagem que ela gera. Partindo de S, a única produção é S -> AB. Cada aplicação de AB -> AAB acrescenta um A e mantém um único B; no fim, A -> a e B -> b convertem tudo em terminais. A linguagem gerada é, portanto, o conjunto das cadeias a^n b, com n >= 1.\n\nEssa linguagem é regular: uma gramática regular equivalente é S -> aS | aT e T -> b (ou um autômato finito que lê a's e termina com um b). Por isso a alternativa D está correta, conforme o gabarito.\n\nAs outras falham. B: a produção AB -> AAB tem dois símbolos à esquerda, então G não segue a forma de gramática livre de contexto, mesmo que sua linguagem seja regular. C: aabbb tem três b, mas toda cadeia gerada tem exatamente um b no final. E: toda derivação gera pelo menos um a e um b, então a cadeia vazia não é gerada. A: o gabarito não aceita a ambiguidade; cada cadeia a^n b resulta da aplicação sucessiva das mesmas regras, sem escolhas alternativas de estrutura.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q30",
+      "verdict": "APPROVED",
+      "fragments": [
+        "d84181f5ff4b1b5728462eb0ec8fb11769c6716c93cc4b23e3bf530470ee6835"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Técnicas de múltiplo acesso em redes sem fio",
+      "notes": "Recorte da página 13 (impressa 12): número 30, enunciado e A–E completas. Letra D conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra a diferença entre técnicas de múltiplo acesso, que dividem a banda alocada a um serviço entre vários usuários, e padrões, tecnologias ou protocolos que podem usá-las.\n\nAs três técnicas clássicas são: FDMA, que separa os usuários por faixas de frequência; TDMA, que os separa por intervalos de tempo; e CDMA, que os separa por códigos, com todos transmitindo na mesma faixa ao mesmo tempo. A alternativa D traz apenas essas técnicas e é a correta, conforme o gabarito.\n\nAs demais misturam outras categorias. A: Bluetooth, WiFi e WiMax são tecnologias ou padrões de rede sem fio. B: CDMA e TDMA são técnicas, mas GSM é um padrão de telefonia celular, que por sua vez usa técnicas de múltiplo acesso, e não uma técnica equivalente. C: 3G é uma geração de telefonia móvel, WAP um protocolo de acesso a conteúdo e ZigBee um padrão de rede de baixo consumo. E: CCMP, TKIP e WEP são mecanismos de segurança e criptografia para redes sem fio, sem relação com o compartilhamento da banda.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q31",
+      "verdict": "APPROVED",
+      "fragments": [
+        "4168399d5bfe3ef59323ad240c314eab85c41707dcbbdb5933820e6f14e9e388"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Inteligência artificial",
+      "subject": "Busca cega e busca heurística",
+      "notes": "Recorte da página 14 (impressa 13): número 31, enunciado, itens I–IV e A–E. Letra B conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida item a item.",
+      "studentNote": "",
+      "explanation": "A questão cobra propriedades de estratégias de busca em problemas com custo uniforme das ações, fator de ramificação finito e sem retorno a estados visitados.\n\nItem I está certo: na busca em largura os nós são expandidos por nível; com custos iguais, o primeiro objetivo encontrado está na menor profundidade e, portanto, tem o menor custo. Item II está errado: a busca em profundidade segue um ramo até o fim e pode achar antes uma solução longa, mais custosa que outra existente em outro ramo. Item III está certo: funções heurísticas bem definidas orientam a expansão para estados promissores e reduzem o número de nós expandidos. Item IV está errado: a busca gulosa escolhe o nó de menor valor heurístico, e a heurística pode induzir a expandir nós que não pertencem ao caminho da solução; não há garantia de que só se expandam nós do caminho.\n\nEstão certos apenas I e III, alternativa B, conforme o gabarito. As demais combinações incluem II ou IV, que são falsos.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q32",
+      "verdict": "APPROVED",
+      "fragments": [
+        "53bd1ab41b2450278c31a9a1017de7b5913b99091462a54dafbf37bfbd4a0995"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Intervalo de confiança para a média",
+      "notes": "Recorte da página 14 (impressa 13): número 32, enunciado, itens I–III e A–E. Letra C conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida; trata o item II como tendência, sem afirmar garantia.",
+      "studentNote": "",
+      "explanation": "A questão cobra o comportamento de média, desvio padrão e intervalo de confiança calculados a partir de uma amostra de tempos de resposta com distribuição normal.\n\nItem I está certo: ao acrescentar 10 consultas, a média e o desvio padrão amostrais são recalculados com os novos valores e podem tanto subir quanto descer. Item II está errado: aumentar a amostra para 25 consultas, com o mesmo nível de 95%, tende a estreitar o intervalo, pois o erro padrão (desvio padrão dividido pela raiz de n) e o valor crítico diminuem; dizer que o intervalo fica maior não é válido. Item III está certo: para os mesmos 10 dados, exigir 99% de confiança em vez de 95% requer um valor crítico maior, e o intervalo fica mais largo.\n\nEstão certos apenas I e III, alternativa C, conforme o gabarito. A e E erram ao contar um item só ou todos; B inclui II, e D exclui I, que é verdadeiro.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q33",
+      "verdict": "APPROVED",
+      "fragments": [
+        "375cbf2f054fbcf63f0aaa7823a1cee89df80ef10135cee33844bf500c15360c"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Compiladores",
+      "subject": "Análise sintática top-down e bottom-up",
+      "notes": "Recorte da página 14 (impressa 13): número 33, enunciado, itens I–IV e A–E. Letra C conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida item a item.",
+      "studentNote": "",
+      "explanation": "A questão cobra conceitos de análise sintática. Item I está errado: a recursão à esquerda faz uma análise top-down por descida recursiva cair em laço infinito, então a gramática precisa ser transformada antes; ela não torna a abordagem adequada. Item II está certo: o analisador sintático recebe da análise léxica a sequência de tokens (e informações como o tipo e o lexema), seja top-down ou bottom-up. Item III está errado: poder usar as duas abordagens não implica ambiguidade; ambiguidade significa que uma sentença tem mais de uma árvore de derivação, o que prejudica, e não viabiliza, a análise. Item IV está certo: a análise bottom-up, como a do tipo LR, opera com deslocamentos (empilhar o próximo símbolo) e reduções (substituir o lado direito de uma produção pelo seu lado esquerdo).\n\nEstão certos apenas II e IV, alternativa C, conforme o gabarito. As demais incluem I ou III, ou omitem II ou IV.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q34",
+      "verdict": "APPROVED",
+      "fragments": [
+        "48942ee2687c826edb24354a874212f2c018a1d4b44d0fe31ef13afb760d37e3"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Modulação digital: ASK, FSK e PSK",
+      "notes": "Recorte da página 14 (impressa 13): número 34, enunciado, itens I–V e A–E. Letra A conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Ressalva do explicador sobre o item III avaliada: a expressão 'durante o intervalo de sinalização' é ambígua; virou nota neutra. Explicação apresenta o raciocínio oficial sem contradizer o gabarito.",
+      "studentNote": "O item III admite mais de uma leitura. Em PSK, cada símbolo corresponde a uma fase da portadora, mantida ao longo do intervalo de sinalização, e a fase muda na passagem de um intervalo para o seguinte. A expressão \"modificada durante o intervalo de sinalização\" pode ser entendida como essa mudança a cada intervalo ou como variação dentro dele.",
+      "explanation": "A questão cobra características das técnicas de modulação digital. Item I está certo: em ASK a informação está na amplitude da portadora, e o ruído altera amplitude, então ASK é suscetível a ruídos. Item II está certo: em FSK a informação está na frequência, menos afetada por variações de amplitude, e por isso tem maior imunidade a ruídos que ASK. Item IV está certo: técnicas híbridas, como QAM, variam amplitude e fase juntas. Item V está errado: com símbolos de mais de dois níveis (M-ária), cada intervalo de sinalização pode carregar mais de 2 bits.\n\nO item III diz que, no PSK, 'a fase da portadora é modificada durante o intervalo de sinalização'. A chave oficial não o conta como certo; uma leitura possível é que em PSK cada símbolo é associado a uma fase própria, e a fase muda na transição entre símbolos, não ao longo do intervalo. Assim, o gabarito oficial é a alternativa A (I, II e IV). As demais opções incluem V, que é falso, ou o item III, que a chave não considera certo.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q35",
+      "verdict": "APPROVED",
+      "fragments": [
+        "94d9aaf4a68ca7773e3dd1482c1912b9c14ec12d9d219632b333b39d9fec3332"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Camadas da arquitetura TCP/IP",
+      "notes": "Recorte da página 15 (impressa 14): número 35, enunciado e A–E completas. Letra B conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida.",
+      "studentNote": "",
+      "explanation": "A questão cobra as funções das camadas da arquitetura TCP/IP. A camada de rede (inter-rede) usa o protocolo IP: os endereços IP identificam as redes e os dispositivos, e, para interligar redes físicas com tamanhos máximos de quadro diferentes, os datagramas são fragmentados e depois remontados. A alternativa B descreve isso corretamente e é a do gabarito.\n\nAs demais falham. A: a camada de interface de rede usa endereços físicos das interfaces (como o endereço MAC) para identificar os dispositivos nos quadros; números de porta pertencem à camada de transporte e identificam processos, não dispositivos. C: o roteamento, isto é, a escolha de rotas dos datagramas, é função da camada de rede, não da de transporte. D: o protocolo de aplicação define mensagens e regras de troca entre processos; a interface com o usuário fica por conta de cada aplicação, não do protocolo. E: o TCP/IP não tem as sete camadas do OSI e não tem camadas de sessão e apresentação separadas; costuma ser descrito com quatro ou cinco camadas.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q36",
+      "verdict": "APPROVED",
+      "fragments": [
+        "df3517403c8659978c87a0a4d5d2ce0986af89702998c1fcddf3da49ced48719"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Redes",
+      "subject": "Redes sem fio IEEE 802.11",
+      "notes": "Recorte da página 15 (impressa 14): número 36, enunciado, itens I–V e A–E em duas colunas, ordem conferida. Letra A conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Ressalva do explicador confirmada: a prova grafa SSI em vez de SSID; virou nota. Explicação conferida item a item.",
+      "studentNote": "A prova grafa a sigla do identificador de rede como SSI. No padrão IEEE 802.11, o service set identifier é conhecido pela sigla SSID.",
+      "explanation": "A questão cobra fundamentos do IEEE 802.11 (Wi-Fi). Item I está certo: a rede pode operar com infraestrutura, coordenada por pontos de acesso, ou em modo ad hoc, com troca direta entre estações. Item II está certo: para usar um ponto de acesso, a interface realiza a associação, o que envolve conhecer o identificador da rede (SSID, escrito SSI no enunciado). Item III está errado: o 802.11 usa CSMA/CA, que procura evitar colisões, pois a estação não consegue detectar colisão enquanto transmite; a retransmissão se apoia em confirmações (ACK), de modo que a detecção não dispensa mensagens de confirmação. Item IV está certo: o uso de RTS e CTS reserva o meio e ajuda a evitar colisões, principalmente por terminais ocultos. Item V está errado: o WEP oferece criptografia dos dados, mas não impede que uma interface não autorizada receba o sinal de rádio.\n\nEstão certos apenas I, II e IV, alternativa A, conforme o gabarito. As demais incluem III ou V.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q37",
+      "verdict": "APPROVED",
+      "fragments": [
+        "b67f7548a19dabaa62108e15f7b1beb9294b44065faf39e95c21ed926ce15e80"
+      ],
+      "answer": "C",
+      "optionCount": 5,
+      "area": "Matemática",
+      "subject": "Regressão linear e coeficiente de correlação",
+      "notes": "Recorte da página 15 (impressa 14): número 37, enunciado e A–E em duas colunas. Letra C conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Cálculo conferido: a = 0,7 · 0,1 / 5 = 0,014; 0,014 · 20 − 0,11 = 0,17. A explicação tem quatro parágrafos (o processo pede até três); desvio de forma, sem erro de conteúdo.",
+      "studentNote": "",
+      "explanation": "A questão cobra o cálculo da reta de regressão a partir da correlação e dos desvios padrão. O coeficiente angular da regressão de Y sobre X é a = r · (desvio de Y) / (desvio de X). Com r = 0,7, desvio de Y igual a 0,1 e desvio de X igual a 5, tem-se a = 0,7 · 0,1 / 5 = 0,014.\n\nConferência: a reta passa pelas médias, então 0,1 = 0,014 · 15 + b, o que dá b = 0,1 - 0,21 = -0,11, igual ao intercepto informado no enunciado.\n\nPara x = 20: E(Y | X = 20) = 0,014 · 20 - 0,11 = 0,28 - 0,11 = 0,17. A alternativa C está correta, conforme o gabarito. É um valor esperado e pode ser fracionário, mesmo que o número real de erros seja inteiro.\n\nAs outras não decorrem desse cálculo. A alternativa A (0,10) coincide com a média de Y e desconsidera que x = 20 está acima da média de X (15). B, D e E (0,12, 0,20 e 0,22) não resultam de a = 0,014 com o intercepto -0,11 aplicados a x = 20.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    },
+    {
+      "key": "Q38",
+      "verdict": "APPROVED",
+      "fragments": [
+        "2d6aef3d84484f8aca02f436b393c4affe6450f21cf3cf29f2c8aea4c490e7a2"
+      ],
+      "answer": "E",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Circuitos lógicos NAND/NOR e expressões equivalentes",
+      "notes": "Recorte da página 15 (impressa 14): número 38, circuito com portas NAND, NOR, junção em D e OU final legíveis, A–E com barras de complemento distinguíveis (E: ¬D·¬E). Na base aparece só a borda do quadro RASCUNHO, sem texto de outra questão; comparado com a página renderizada. Letra E conferida no gabarito do caderno de Computação de 2008 (não anulada; gabarito não declarado definitivo, D10). Explicação conferida com o circuito.",
+      "studentNote": "",
+      "explanation": "A questão cobra a análise de um circuito combinacional e sua expressão booleana. Lendo a figura: as duas primeiras portas são NAND e produzem ¬(A·B) e ¬(C·D). A terceira porta, também NAND, recebe essas duas saídas e, por De Morgan, produz ¬(¬(A·B) · ¬(C·D)) = A·B + C·D. A porta inferior é NOR, com entradas D (ligada pelo ponto de junção) e E, e produz ¬(D + E) = ¬D · ¬E. A porta final é um OU entre a saída da NAND e a da NOR.\n\nAssim, f = A·B + C·D + ¬D·¬E, que é a alternativa E, conforme o gabarito.\n\nAs outras falham. Nenhuma contém a parcela ¬D·¬E gerada pela NOR: A e B trazem D·E, e C e D trazem D + E. Além disso, A e C usam os complementos ¬(A·B) e ¬(C·D) como parcelas, mas a terceira NAND já os inverte; B usa (A+B)·(C+D), que não equivale a A·B + C·D.",
+      "explanationCheck": "OK",
+      "explanationNote": ""
+    }
+  ]
+}

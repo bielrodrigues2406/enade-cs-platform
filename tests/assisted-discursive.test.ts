@@ -1,16 +1,19 @@
 import { after, test } from "node:test";
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
 // Discursivas conferidas por agente (DISC-2) no PostgreSQL real. Fontes e
 // imagens sintéticas, marcadas TEST ONLY; nada aqui é conteúdo do Inep.
 const assetDir = await mkdtemp(path.join(tmpdir(), "enade-discursive-img-"));
+const archiveDir = await mkdtemp(path.join(tmpdir(), "enade-discursive-src-"));
 process.env.QUESTION_ASSET_DIR = assetDir;
+process.env.SOURCE_ARCHIVE_DIR = archiveDir;
 const { db } = await import("../apps/api/src/database.js");
 const { publishDiscursiveReview, validateReview } = await import("../apps/api/src/assisted-discursive.js");
+const { sourcePath } = await import("../apps/api/src/source-store.js");
 type Review = Parameters<typeof validateReview>[0];
 
 const WHITE = Buffer.from("UklGRh4AAABXRUJQVlA4TBEAAAAvAkAAAAfQ//73v/+BiOh/AAA=", "base64");
@@ -51,6 +54,74 @@ after(async () => {
   await db.query("DELETE FROM source_document WHERE id=ANY($1::uuid[])", [sources]);
   await db.end();
   await rm(assetDir, { recursive: true, force: true });
+  await rm(archiveDir, { recursive: true, force: true });
+});
+
+async function importedStandard() {
+  const bytes = Buffer.from(`%PDF-1.7\nTEST ONLY standard ${randomUUID()}\n%%EOF`);
+  const hash = sha(bytes);
+  const id = randomUUID();
+  sources.push(id);
+  await db.query(`INSERT INTO source_document(id,title,official_url,kind,year,area,modality,
+    sha256,byte_size,page_count,status) VALUES($1,'TEST ONLY imported standard',$2,
+    'RESPONSE_STANDARD',2097,'TEST ONLY course','BACHARELADO',$3,$4,2,'IMPORTED')`,
+    [id, `https://download.inep.gov.br/enade/test-only-${id}.pdf`, hash, bytes.length]);
+  const file = sourcePath(hash);
+  await mkdir(path.dirname(file), { recursive: true });
+  await writeFile(file, bytes);
+  return { hash, file };
+}
+
+test("publishing a reviewed discursive verifies its archived response standard once, including existing questions", async () => {
+  const standard = await importedStandard();
+  const data = review(await source("EXAM"), standard.hash);
+  await publishDiscursiveReview(data, crops);
+  const lookup = () => db.query(`SELECT status,verification_origin,assisted_verifier,revision,
+    (SELECT count(*)::int FROM source_event e WHERE e.source_id=s.id AND e.event_type='VERIFIED') AS events
+    FROM source_document s WHERE sha256=$1`, [standard.hash]);
+  const first = (await lookup()).rows[0];
+  assert.deepEqual([first.status, first.verification_origin, first.assisted_verifier, first.events],
+    ["VERIFIED", "ASSISTED", data.reviewer, 1]);
+  await publishDiscursiveReview(data, crops);
+  assert.deepEqual((await lookup()).rows[0], first);
+  // Upgrade the old bootstrap state without duplicating the existing question.
+  const oldStandard = await importedStandard();
+  const oldData = review(await source("EXAM"), oldStandard.hash);
+  await db.query(`INSERT INTO discursive_question(id,exam_source_id,standard_source_id,year,modality,
+    number,area,criteria,review_origin,assisted_extractor,assisted_reviewer)
+    SELECT $1,e.id,s.id,e.year,e.modality,3,'Algoritmos',$4,'ASSISTED',$5,$6
+    FROM source_document e,source_document s WHERE e.sha256=$2 AND s.sha256=$3`,
+    [`discursive-${oldData.examSha256.slice(0,12)}-d3`, oldData.examSha256, oldStandard.hash,
+      JSON.stringify(oldData.items[0].criteria),oldData.extractor,oldData.reviewer]);
+  assert.equal((await publishDiscursiveReview(oldData, crops)).kept.length, 1);
+  assert.equal((await db.query("SELECT status FROM source_document WHERE sha256=$1", [oldStandard.hash])).rows[0].status, "VERIFIED");
+});
+
+test("an altered archived standard cannot become verified or publish a question", async () => {
+  const standard = await importedStandard();
+  const data = review(await source("EXAM"), standard.hash);
+  await writeFile(standard.file, "%PDF-1.7\nTEST ONLY altered");
+  await assert.rejects(publishDiscursiveReview(data, crops), /arquivo arquivado|integridade/);
+  assert.equal((await db.query("SELECT status FROM source_document WHERE sha256=$1", [standard.hash])).rows[0].status, "IMPORTED");
+  assert.equal((await db.query("SELECT count(*)::int AS n FROM discursive_question WHERE exam_source_id=(SELECT id FROM source_document WHERE sha256=$1)", [data.examSha256])).rows[0].n, 0);
+});
+
+test("a standard rejected while crops are read cannot be promoted by a stale publication", async () => {
+  const standard = await importedStandard();
+  const data = review(await source("EXAM"), standard.hash);
+  let rejected = false;
+  await assert.rejects(publishDiscursiveReview(data, async file => {
+    if (!rejected) {
+      rejected = true;
+      await db.query("UPDATE source_document SET status='REJECTED' WHERE sha256=$1", [standard.hash]);
+    }
+    return crops(file);
+  }), /não está disponível para conferência/);
+  const row = (await db.query(`SELECT status,
+    (SELECT count(*)::int FROM source_event e WHERE e.source_id=s.id AND e.event_type='VERIFIED') AS events
+    FROM source_document s WHERE sha256=$1`, [standard.hash])).rows[0];
+  assert.deepEqual(row, { status: "REJECTED", events: 0 });
+  assert.equal((await db.query("SELECT count(*)::int AS n FROM discursive_question WHERE exam_source_id=(SELECT id FROM source_document WHERE sha256=$1)", [data.examSha256])).rows[0].n, 0);
 });
 
 test("an agent-reviewed discursive is published once, with both crops and the assisted origin", async () => {

@@ -1,0 +1,43 @@
+{
+  "document": "enade-2017-bacharelado-exam",
+  "examSha256": "c9ffd7b52f24f382f2546a2ee72d1331ad830fbee903e597888c512c32552518",
+  "cropsManifestSha256": "be360acd25ba775c5a40a3f7b32b4170ea353b8dd99ec31c6dfe96409b13546b",
+  "extractor": "claude",
+  "explainer": "codex-content-author-2026-11-02",
+  "reviewer": "codex-root-review-2026-11-02",
+  "reviewedAt": "2026-11-02T14:39:10.130625+00:00",
+  "items": [
+    {
+      "key": "Q9",
+      "verdict": "APPROVED",
+      "fragments": [
+        "713e2a61c583eb9932c324289bf23b9cb0d812e493dc64b47f7018b58fe8b0bc"
+      ],
+      "answer": "A",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Árvores AVL: rotação após inserção",
+      "notes": "Recorte e explicação reconferidos independentemente em 02/11/2026. Recorte da p. 16 com número 09, texto, árvore inicial e as cinco árvores A–E com vínculos legíveis. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação. Inserção e rotação refeitas: resultado coincide com a árvore da letra oficial.",
+      "studentNote": "Mais de uma alternativa mostra uma árvore AVL válida contendo o valor 3. A questão pede a configuração obtida pelo procedimento descrito no texto, em que o rebalanceamento é feito no nó desbalanceado de nível mais baixo.",
+      "explanation": "A inserção em uma AVL começa como em uma árvore binária de busca e corrige o primeiro nó desbalanceado encontrado ao subir do novo nó para a raiz. O valor 3 percorre 13, 10, 5 e 4 e é inserido à esquerda de 4.\n\nO nó desbalanceado mais baixo é 10: sua subárvore esquerda passa a ter altura 3, enquanto a direita, formada por 11, tem altura 1. É um caso esquerda-esquerda, resolvido por rotação simples à direita em 10. O nó 5 sobe nessa subárvore; 4 permanece à sua esquerda; 10 passa à direita de 5, tendo 8 e 11 como filhos. A raiz da árvore inteira continua 13, com 15 e 16 à direita. Essa é a alternativa A.\n\nB mantém o desbalanceamento. C e E violam a ordenação de busca. D apresenta outra árvore balanceada, mas resulta de rotacionar o nó 13, não o nó desbalanceado mais baixo. Antes da correção, 13 também está desbalanceado; a rotação em 10 já restaura seu equilíbrio. O critério é o procedimento descrito, não apenas obter alguma árvore AVL válida.",
+      "explanationCheck": "OK",
+      "explanationNote": "Conferência independente de codex-root-review-2026-11-02: recorte, alternativas e raciocínio confrontados. "
+    },
+    {
+      "key": "Q18",
+      "verdict": "APPROVED",
+      "fragments": [
+        "1f19e49f6664754bc82a89a1dd3d8e9b1bbcba037fcd28c5d3164eaa095b2532"
+      ],
+      "answer": "D",
+      "optionCount": 5,
+      "area": "Algoritmos",
+      "subject": "Ordenação por inserção: correção de erros lógicos",
+      "notes": "Recorte e explicação reconferidos independentemente em 02/11/2026. Recorte da coluna direita da p. 21 com número 18, código das linhas 01–15 e alternativas A–E com trechos de código legíveis. Gabarito definitivo de Bacharelado (p. 1) confere com a letra registrada, sem anulação.",
+      "studentNote": "",
+      "explanation": "Na ordenação por inserção, cada iteração guarda v[i] em chave e abre espaço deslocando para a direita os elementos anteriores maiores que ela. A chave é então colocada no espaço livre, na posição j+1.\n\nA condição da linha 08 deve ser v[j] > chave para ordenar de forma crescente. A linha 10 deve copiar v[j] para v[j+1]; escrever em v[j-1] desloca na direção errada e pode acessar uma posição negativa. As duas mudanças são exatamente as da alternativa D. O laço externo deve continuar até i < n, e a inserção final da linha 13 já está correta.\n\nA deixa o último elemento fora do laço e altera a posição final correta. B começa pelo elemento seguinte à chave e conserva os erros das linhas 08 e 10; como também usa i < n-1, j=i+1 não ultrapassa necessariamente o vetor, mas isso não corrige o algoritmo. C permite j=n na última iteração, além de conservar o deslocamento incorreto. E corrige somente o deslocamento e introduz erro na inserção final, mantendo a comparação em sentido errado.",
+      "explanationCheck": "OK",
+      "explanationNote": "Conferência independente de codex-root-review-2026-11-02: recorte, alternativas e raciocínio confrontados. "
+    }
+  ]
+}

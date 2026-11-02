@@ -1,0 +1,27 @@
+{
+  "document": "enade-2011-comum-exam",
+  "examSha256": "eb3b497f0d0967b1b6d063784c3012e719d1758ba182e4f6d6e6e47151934548",
+  "cropsManifestSha256": "2bf785081cf15a9f5c8b41c63d92e8ac61ea28c3ad85dcfb4d82a46631d00332",
+  "extractor": "claude",
+  "explainer": "codex-content-author-2026-11-02",
+  "reviewer": "codex-root-review-2026-11-02",
+  "reviewedAt": "2026-11-02T14:39:10.130625+00:00",
+  "items": [
+    {
+      "key": "Q18",
+      "verdict": "APPROVED",
+      "fragments": [
+        "10ad035d76ed30b4a426aaad594c674ef39f5c2a5936a29fb710a690a768ba54"
+      ],
+      "answer": "B",
+      "optionCount": 5,
+      "area": "Arquitetura de computadores",
+      "subject": "Portabilidade de executável: ISA, registradores e núcleos",
+      "notes": "Recorte e explicação reconferidos independentemente em 02/11/2026. Questão 18 completa: enunciado, afirmações I–IV e A–E. Letra B (I e II) conferida no gabarito. Conferência feita pelo próprio extrator, autorizada por Gabriel em 31/10/2026; não é conferência independente.",
+      "studentNote": "O gabarito pressupõe compatibilidade binária para execução nativa. A largura dos registradores da máquina de compilação, isoladamente, não determina a arquitetura do executável produzido.",
+      "explanation": "A execução de um programa compilado exige compatibilidade entre o binário, as instruções que o processador executa e a interface de serviços do sistema operacional. O gabarito B adota o modelo de execução nativa, sem supor emulação ou uma camada de tradução.\n\nI é aceita porque máquinas com números diferentes de núcleos podem executar o mesmo programa; não é preciso ter a mesma quantidade de processadores para preservar seu funcionamento. II é aceita porque as chamadas ao sistema utilizadas pelo executável devem encontrar uma interface compatível no outro sistema. III e IV não são aceitas nessa leitura: não se presume que instruções de outra arquitetura ou operações de um binário de 64 bits sejam executadas por uma máquina de 32 bits.\n\nA ressalva é que a largura dos registradores da máquina onde se compila não determina, por si só, a arquitetura do executável produzido. Compilação para outro alvo e modos de compatibilidade exigem informações adicionais que o enunciado não fornece. Portanto, B representa a interpretação didática adotada pelo gabarito, não uma regra universal sobre toda combinação possível de máquinas e binários.",
+      "explanationCheck": "OK",
+      "explanationNote": "Conferência independente de codex-root-review-2026-11-02: recorte, alternativas e raciocínio confrontados. O enunciado não explicita o alvo de compilação. Um binário de 32 bits pode ser compilado em uma máquina de 64 bits e executado em outra de 32 bits; a leitura literal de IV não é universalmente falsa. A explicação explicita a interpretação didática do gabarito B e precisa ser conferida junto com esta ressalva."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "origin": "AI_GENERATED",
+  "humanReviewed": false,
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "document": "enade-2008-comum-exam",
+  "examSha256": "5c8a08f7fdaccaa3b5661f40705e214bffdab634b845bce6288f8eeaa25db264",
+  "cropsManifestSha256": "9f2de020cc10421e667b28629ba1da206812f74839325e6d5b50790002bd7002",
+  "explainer": "codex-content-author-2026-11-02",
+  "sourceReviews": [
+    "data/agent-reviews/enade-2008-comum-exam-q23-q38.json"
+  ],
+  "items": [
+    {
+      "key": "Q28",
+      "answer": "A",
+      "area": "Inteligência artificial",
+      "subject": "Classificação por árvore de decisão",
+      "fragments": [
+        "16de3798aa1d5cf4676283fe8794d3ddfbbc0ce8555f2bd50a37d19e34ba31dd"
+      ],
+      "explanation": "Uma árvore de decisão classifica cada objeto seguindo, da raiz até uma folha, os testes dos atributos encontrados no caminho. Os atributos que não aparecem nesse caminho não precisam ser consultados.\n\nPara O1, X1=a leva ao teste X3. Como X3=20 é menor ou igual a 35, a folha indica classe 1. Para O2, X1=b leva diretamente à folha de classe 1; X2, X3 e X4 não alteram essa decisão. Para O3, X1=c leva a X2. Como X2=M, a folha indica classe 2. O teste de X4 pertence ao ramo X2=G, que esse objeto não percorre.\n\nA sequência resultante é 1, 1 e 2, alternativa A. B erra O2 e O3; C erra O1; D erra os três objetos; E erra O3. A classificação depende dos ramos efetivamente percorridos, não da utilização de todos os atributos em todos os objetos.",
+      "keyConcern": "",
+      "evidenceNote": "Proposta escrita após leitura do recorte canônico, alternativas e gabarito registrado; sem aprovação independente nesta etapa."
+    }
+  ]
+}
