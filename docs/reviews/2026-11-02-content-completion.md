@@ -73,3 +73,5 @@ existem, sem duplicá-las. Quatro testes do domínio passaram, incluindo integri
 auditoria e repetição; build e suíte completa da branch: 170 testes passaram.
 Nova publicação real em `enade_content_ci`: nove provas, nove gabaritos e nove padrões
 VERIFIED; mantidas 246 versões e 39 discursivas em duas execuções.
+
+A revisão estática independente de `987a536` identificou uma janela de concorrência: o padrão poderia ser recusado durante a leitura dos recortes. Corrigida com releitura e bloqueio da fonte dentro da transação. O teste determinístico recusa o padrão durante o callback de leitura e confirma que não há promoção nem publicação; os cinco testes do publicador passaram.
