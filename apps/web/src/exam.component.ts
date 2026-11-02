@@ -8,7 +8,7 @@ import { EngagementService } from "./engagement.service";
 import { QuestionContentComponent } from "./question-content.component";
 import { DiscursiveComponent } from "./discursive.component";
 import type {
-  Edition, EditionList, PracticeAvailability, PracticeView, PracticeItem, PracticeAnswer,
+  Edition, EditionList, FormatAvailability, PracticeAvailability, PracticeView, PracticeItem, PracticeAnswer,
 } from "./exam.types";
 import { AREA_SIMULATION_LIMIT, attemptLabel, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 
@@ -53,6 +53,11 @@ export class ExamComponent {
   readonly engagement = inject(EngagementService);
   availability = signal<PracticeAvailability | null>(null);
   attempt = signal<PracticeView | null>(null);
+  formatAvailability = signal<FormatAvailability | null>(null);
+  formatLoading = signal(false);
+  formatError = signal("");
+  discursiveState = signal({ dirty: false, saving: false });
+  private pendingFormatRequest: string | null = null;
   position = signal(1);
   /** 1 ao avançar, -1 ao voltar: a próxima questão entra pelo lado certo. */
   stepDirection = signal(1);
@@ -100,7 +105,7 @@ export class ExamComponent {
   private abort = new AbortController();
   private generation = 0;
   private destroyed = false;
-  private lastOperation: "load" | "start" | "save" | "finish" = "load";
+  private lastOperation: "load" | "start" | "format" | "save" | "finish" = "load";
   private pendingSave: { attemptId: string; position: number; body: { optionId: string | null; marked: boolean; baseRevision: number } } | null = null;
   private lastLoadId: string | null = null;
   private pendingStart: { key: string; body: PracticeRequest & { requestId: string } } | null = null;
@@ -127,7 +132,14 @@ export class ExamComponent {
     const wide = window.innerWidth > 1000;
     if (wide !== this.wideViewport) { this.wideViewport = wide; this.mapExpanded.set(wide); }
   }
-  protectedState() { return this.saving() || this.dirty() || this.saveUncertain(); }
+  protectedState() {
+    const discursive = this.discursiveState();
+    return this.saving() || this.dirty() || this.saveUncertain()
+      || (!this.timeUp() && (discursive.dirty || discursive.saving));
+  }
+  discursiveChanged(state: { dirty: boolean; saving: boolean }) {
+    this.discursiveState.set(state); this.emitBusy();
+  }
   current() { return this.attempt()?.items.find((item) => item.position === this.position()) ?? null; }
   eligibleCount() { return this.areaRow()?.count ?? (this.area ? 0 : this.availability()?.total ?? 0); }
   unseenCount() { return this.areaRow()?.unseen ?? (this.area ? 0 : this.availability()?.unseen ?? 0); }
@@ -167,10 +179,40 @@ export class ExamComponent {
     return body;
   }
   private message(error: unknown) { return error instanceof Error ? error.message : "Verifique a conexão e tente novamente."; }
+  async loadFormat(generation = this.generation) {
+    this.formatLoading.set(true); this.formatError.set("");
+    try {
+      const data = await this.api<FormatAvailability>("", {}, "/api/formats/enade-2026");
+      if (this.alive(generation)) this.formatAvailability.set(data);
+    } catch (error) {
+      if (this.alive(generation)) this.formatError.set(this.message(error));
+    } finally { if (this.alive(generation)) this.formatLoading.set(false); }
+  }
+  async confirmFormat() {
+    if (await this.choice.confirm({ title: "Começar o simulado no formato 2026?",
+      message: "15 objetivas de Formação Geral, 30 específicas e uma discursiva de provas anteriores. São quatro horas, com pausa. O gabarito aparece ao finalizar. É uma montagem autoral, não a prova oficial de 2026.",
+      cancel: "Voltar às provas", confirm: "Começar simulado" })) await this.startFormat();
+  }
+  async startFormat() {
+    if (this.saving() || !this.formatAvailability()?.available || this.availability()?.active) return;
+    this.pendingFormatRequest ??= crypto.randomUUID();
+    const generation = this.generation;
+    this.saving.set(true); this.error.set(""); this.lastOperation = "format"; this.emitBusy();
+    try {
+      const data = await this.api<PracticeView>("/attempts", {method:"POST",body:JSON.stringify({requestId:this.pendingFormatRequest})}, "/api/formats/enade-2026");
+      if (this.alive(generation)) {
+        this.pendingFormatRequest = null; this.applyAttempt(data,1);
+        this.locationChange.emit({attemptId:data.id,position:1});
+      }
+    } catch (error) { if (this.alive(generation)) { this.error.set(this.message(error)); void this.loadFormat(generation); } }
+    finally { if (this.alive(generation)) { this.saving.set(false); this.emitBusy(); } }
+  }
+
   async loadAvailability() {
     if (this.protectedState()) return;
     this.pauseOnExit();
     const generation = ++this.generation;
+    void this.loadFormat(generation);
     this.loading.set(true); this.error.set(""); this.lastOperation = "load";
     this.attempt.set(null); this.reviewing.set(false); this.lastLoadId = null;
     try {
@@ -269,12 +311,15 @@ export class ExamComponent {
   shortDate(iso: string) {
     return new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "short" }).format(new Date(iso)).replace(".", "");
   }
-  /** No treino, o histórico mostra só treinos; provas ficam no cartão da edição. */
+  /** No treino, o histórico mostra só treinos; provas e formato têm seus cartões. */
   partialRecent(data: PracticeAvailability) {
-    return data.recent.filter((row) => row.kind !== "EDITION");
+    return data.recent.filter((row) => !row.kind || row.kind === "PARTIAL");
   }
   modalityLabel(modality: string) {
     return ({ BACHARELADO: "Bacharelado", LICENCIATURA: "Licenciatura", COMUM: "Caderno compartilhado" } as Record<string, string>)[modality] ?? modality;
+  }
+  reviewDiscursive(id: string) {
+    this.reviewing.set(true); this.openDiscursiveItem(id);
   }
   openDiscursiveItem(id: string) {
     if (this.protectedState()) return;
@@ -327,6 +372,7 @@ export class ExamComponent {
   private applyAttempt(data: PracticeView, position: number) {
     this.attempt.set(data); this.position.set(this.validPosition(position)); this.discursiveOpen.set(null);
     this.clockAt = Date.now(); this.syncClock(); this.examRunningChange.emit(this.running());
+    this.discursiveState.set({dirty:false,saving:false});
     this.reviewing.set(false); this.conflict.set(false); this.discardOpen.set(false); this.syncDraft(); this.focusContent();
   }
   private validPosition(position: number) { const total = this.attempt()?.size ?? 1; return Number.isInteger(position) && position >= 1 && position <= total ? position : 1; }
@@ -383,7 +429,7 @@ export class ExamComponent {
   showResult() { this.reviewing.set(false); this.focusContent(); }
   beginReview() { this.reviewing.set(true); this.go(this.position()); }
   /** Nome do que está aberto, para os rótulos de saída. */
-  kindLabel(data: PracticeView) { return data.edition ? "prova" : data.deadlineAt ? "simulado" : "treino"; }
+  kindLabel(data: PracticeView) { return data.kind === "FORMAT" ? "simulado" : data.edition ? "prova" : data.deadlineAt ? "simulado" : "treino"; }
   async showSelection() {
     if (this.protectedState()) return;
     const data = this.attempt();
@@ -463,5 +509,5 @@ export class ExamComponent {
     this.dirty.set(false); this.saveUncertain.set(false); this.pendingSave = null; this.discardOpen.set(false); this.emitBusy(); await this.loadAttempt(id);
     this.focusContent();
   }
-  retry() { if (this.lastOperation === "start") void this.begin(); else if (this.lastOperation === "finish") void this.finish(); else if (this.lastLoadId) void this.loadAttempt(this.lastLoadId); else void this.loadAvailability(); }
+  retry() { if (this.lastOperation === "format") void this.startFormat(); else if (this.lastOperation === "start") void this.begin(); else if (this.lastOperation === "finish") void this.finish(); else if (this.lastLoadId) void this.loadAttempt(this.lastLoadId); else void this.loadAvailability(); }
 }

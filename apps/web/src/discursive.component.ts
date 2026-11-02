@@ -1,5 +1,6 @@
-import { Component, Input, computed, signal } from "@angular/core";
+import { Component, EventEmitter, Input, Output, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ChoiceService } from "./choice-dialog";
 
 // Discursivas (DISC-1): o aluno escreve a resposta (o rascunho é salvo
 // sozinho), envia, vê o padrão de resposta do Inep e se autoavalia em cada
@@ -14,7 +15,7 @@ type Summary = { id: string; title: string; area: string; subject: string | null
 type Response = { body: string; revision: number; submittedAt: string | null; assessment: { levels: Level[]; score: number } | null };
 type Detail = {
   id: string; title: string; area: string; subject: string | null; criteria: Criterion[];
-  examUrl: string; standardUrl: string;
+  examUrl: string; standardUrl: string | null;
   /** Aviso de conferência por agente, quando houver. */
   reviewCredit?: string | null; reviewNote?: string | null; promptImages: Image[]; standardImages: Image[]; response: Response | null;
 };
@@ -44,6 +45,22 @@ export function points(value: number) {
 export class DiscursiveComponent {
   @Input() questionId: string | null = null;
   @Input() embedded = false;
+  /** Simulado: rascunho e padrão pertencem a esta tentativa, separados do estudo livre. */
+  @Input() attemptId: string | null = null;
+  @Input() locked = false;
+  @Output() draftStateChange = new EventEmitter<{ dirty: boolean; saving: boolean }>();
+  private choice = inject(ChoiceService);
+  private pendingSave: Promise<void> | null = null;
+  private destroyed = false;
+
+  private endpoint(id: string) {
+    return this.attemptId ? `practice/${this.attemptId}/discursive` : `discursive/${id}`;
+  }
+  private publishDraftState() {
+    if (!this.destroyed) this.draftStateChange.emit({
+      dirty: this.body() !== (this.detail()?.response?.body ?? ""), saving: this.saveState() === "saving",
+    });
+  }
   readonly statusLabel = STATUS_LABEL;
   readonly levels = LEVELS;
   readonly maxBody = MAX_BODY;
@@ -68,7 +85,10 @@ export class DiscursiveComponent {
     void (this.questionId ? this.open(this.questionId) : this.loadList());
   }
   ngOnDestroy() {
+    this.destroyed = true;
+    if (this.timer) clearTimeout(this.timer);
     void this.flush();
+    this.draftStateChange.emit({ dirty: false, saving: false });
   }
 
   async loadList() {
@@ -78,11 +98,12 @@ export class DiscursiveComponent {
   }
   async open(id: string) {
     await this.attempt(async () => {
-      const detail = await this.request<Detail>(`discursive/${id}`);
+      const detail = await this.request<Detail>(this.endpoint(id));
       this.detail.set(detail);
       this.body.set(detail.response?.body ?? "");
       this.levelsDraft.set(detail.criteria.map((_, i) => detail.response?.assessment?.levels[i] ?? null));
       this.saveState.set(detail.response ? "saved" : "idle");
+      this.publishDraftState();
     });
   }
   criterionLabel(criterion: Criterion) {
@@ -91,31 +112,54 @@ export class DiscursiveComponent {
 
   // Rascunho: salva um pouco depois de parar de digitar e ao sair do campo.
   write(value: string) {
+    if (this.locked) return;
     this.body.set(value);
     this.saveState.set("idle");
+    this.publishDraftState();
     if (this.timer) clearTimeout(this.timer);
     this.timer = setTimeout(() => void this.flush(), AUTOSAVE_MS);
   }
   async flush() {
     if (this.timer) clearTimeout(this.timer);
     this.timer = null;
+    if (this.pendingSave) return this.pendingSave;
+    this.pendingSave = this.saveDrafts();
+    try { await this.pendingSave; } finally { this.pendingSave = null; }
+  }
+
+  /** Uma gravação por vez; texto digitado durante o pedido usa a revisão confirmada. */
+  private async saveDrafts() {
+    while (!this.locked) {
+      const detail = this.detail();
+      if (!detail || this.submitted() || this.body() === (detail.response?.body ?? "")) break;
+      const body = this.body(), endpoint = this.endpoint(detail.id);
+      this.saveState.set("saving"); this.publishDraftState();
+      const ok = await this.attempt(async () => {
+        const { revision } = await this.request<{ revision: number }>(`${endpoint}/response`,
+          { body, baseRevision: detail.response?.revision ?? 0 }, "PUT");
+        if (this.detail()?.id === detail.id)
+          this.detail.set({ ...detail, response: { body, revision, submittedAt: null, assessment: null } });
+      }, false);
+      this.saveState.set(ok ? "saved" : "idle");
+      this.publishDraftState();
+      if (!ok) break;
+    }
+  }
+
+  async reloadDraft() {
     const detail = this.detail();
-    if (!detail || this.submitted() || this.saveState() !== "idle" || this.body() === (detail.response?.body ?? "")) return;
-    const body = this.body();
-    this.saveState.set("saving");
-    const ok = await this.attempt(async () => {
-      const { revision } = await this.request<{ revision: number }>(`discursive/${detail.id}/response`,
-        { body, baseRevision: detail.response?.revision ?? 0 }, "PUT");
-      this.detail.set({ ...detail, response: { body, revision, submittedAt: null, assessment: null } });
-    }, false);
-    // Texto digitado durante o envio: salva de novo.
-    const changed = this.body() !== body;
-    this.saveState.set(ok && !changed ? "saved" : "idle");
-    if (ok && changed) this.write(this.body());
+    if (!detail || this.pendingSave) return;
+    const dirty = this.body() !== (detail.response?.body ?? "");
+    if (dirty && !await this.choice.confirm({ title: "Descartar alterações locais?",
+      message: "A discursiva será reaberta com o texto confirmado no servidor.",
+      cancel: "Continuar escrevendo", confirm: "Descartar e reabrir" })) return;
+    if (this.timer) clearTimeout(this.timer);
+    this.body.set(detail.response?.body ?? ""); this.publishDraftState();
+    await this.open(detail.id);
   }
   async submit() {
     const detail = this.detail();
-    if (!detail || !this.body().trim()) return;
+    if (!detail || this.attemptId || !this.body().trim()) return;
     if (this.timer) clearTimeout(this.timer);
     this.timer = null;
     await this.attempt(async () => {
@@ -131,7 +175,7 @@ export class DiscursiveComponent {
     const detail = this.detail();
     if (!detail || !this.assessed()) return;
     await this.attempt(async () => {
-      const assessment = await this.request<{ levels: Level[]; score: number }>(`discursive/${detail.id}/assessment`,
+      const assessment = await this.request<{ levels: Level[]; score: number }>(`${this.endpoint(detail.id)}/assessment`,
         { levels: this.levelsDraft() }, "PUT");
       this.detail.set({ ...detail, response: { ...detail.response!, assessment } });
     });

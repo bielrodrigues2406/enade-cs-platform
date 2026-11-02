@@ -44,7 +44,8 @@ export async function chooseAreaSimulation(
 }
 
 /** Rótulo de um treino na lista e no resultado. */
-export function attemptLabel(attempt: { area: string | null; focus?: string | null }) {
+export function attemptLabel(attempt: { area: string | null; focus?: string | null; kind?: string; formatYear?: number | null }) {
+  if (attempt.kind === "FORMAT") return `Formato ENADE ${attempt.formatYear ?? 2026}`;
   if (attempt.focus === "ERRORS") return "Revisão dos erros";
   if (attempt.focus === "RETRY") return "Refazer as erradas";
   return attempt.area || "Assuntos mistos";

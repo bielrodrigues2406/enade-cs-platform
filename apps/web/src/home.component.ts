@@ -26,7 +26,7 @@ type AreaProgress = { area: string; published: number; firstAttempts: number; fi
 type Progress = {
   areas: AreaProgress[];
   errors: { total: number; ready: number };
-  active: { id: string; kind: "PARTIAL" | "EDITION"; size: number; area: string | null; pausedAt: string | null; answered: number } | null;
+  active: { id: string; kind: "PARTIAL" | "EDITION" | "FORMAT"; formatYear?: number | null; size: number; area: string | null; pausedAt: string | null; answered: number } | null;
 };
 type Week = { label: string; now: boolean; exam: boolean };
 
@@ -195,7 +195,7 @@ export class HomeComponent {
   activeLabel() {
     const active = this.active();
     if (!active) return "";
-    const kind = active.kind === "EDITION" ? "Prova completa" : active.area ? `Treino de ${active.area}` : "Treino";
+    const kind = active.kind === "FORMAT" ? `Simulado no formato ${active.formatYear ?? 2026}` : active.kind === "EDITION" ? "Prova completa" : active.area ? `Treino de ${active.area}` : "Treino";
     return `${kind} · ${active.answered} de ${active.size} respondidas${active.pausedAt ? " · pausado" : ""}`;
   }
 

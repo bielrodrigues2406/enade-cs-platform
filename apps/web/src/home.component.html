@@ -17,7 +17,7 @@
         <div class="cover-actions">
           @if (active(); as attempt) {
             <button class="cover-primary" (click)="resume.emit(attempt.id)" [attr.aria-label]="'Retomar: ' + activeLabel()">
-              {{ attempt.kind === "EDITION" ? "Retomar a prova" : "Retomar o treino" }}
+              {{ attempt.kind === "EDITION" ? "Retomar a prova" : attempt.kind === "FORMAT" ? "Retomar o simulado" : "Retomar o treino" }}
               <span aria-hidden="true">→</span>
             </button>
           } @else if (nextQuestion(); as next) {
@@ -82,7 +82,7 @@
               <h3 id="home-active" class="group-title">Em andamento</h3>
               <article class="todo-card">
                 <div class="todo-text">
-                  <span class="todo-meta">{{ attempt.kind === "EDITION" ? "Prova completa" : "Treino" }}</span>
+                  <span class="todo-meta">{{ attempt.kind === "EDITION" ? "Prova completa" : attempt.kind === "FORMAT" ? "Formato ENADE 2026" : "Treino" }}</span>
                   <strong>{{ activeLabel() }}</strong>
                   <span class="todo-status">Respostas salvas; o cronômetro só corre com a tela aberta.</span>
                 </div>
