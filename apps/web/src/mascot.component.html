@@ -1,1 +1,2 @@
-<img [src]="src()" [alt]="alt()" loading="lazy" decoding="async" draggable="false" />
+<img [src]="src()" [alt]="alt()" [class.ready]="imageReady()" (load)="imageReady.set(true)"
+  loading="lazy" decoding="async" draggable="false" />

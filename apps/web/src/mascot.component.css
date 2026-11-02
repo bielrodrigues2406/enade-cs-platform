@@ -11,23 +11,42 @@ img {
   width: 100%;
   height: auto;
   user-select: none;
-}
-:host(.mascot-pop) img {
   transform-origin: 50% 100%;
+}
+/* Espera o arquivo chegar: em rede lenta, o gesto não termina antes de aparecer. */
+:host(.mascot-pop) img.ready {
   animation: mascot-pop var(--spring-snappy-duration) var(--spring-snappy) both;
 }
+:host(.mascot-greet) img.ready {
+  animation: mascot-greet var(--spring-gentle-duration) var(--ease-out) both;
+}
+:host(.mascot-celebrate) img.ready {
+  animation: mascot-celebrate var(--spring-gentle-duration) var(--ease-out) both;
+}
 /* Boiar: o pato de borracha na água; usado só enquanto algo carrega. */
-:host(.mascot-bob) img {
+:host(.mascot-bob) img.ready {
   transform-origin: 50% 90%;
   animation: mascot-bob 2.4s ease-in-out infinite;
 }
 @keyframes mascot-pop {
   from { opacity: 0; transform: translateY(8px) scale(0.94); }
 }
+@keyframes mascot-greet {
+  0% { opacity: 0; transform: translateY(4px) rotate(-5deg); }
+  30% { opacity: 1; transform: translateY(-1px) rotate(4deg); }
+  65% { transform: rotate(-2deg); }
+  100% { transform: none; }
+}
+@keyframes mascot-celebrate {
+  0%, 100% { transform: none; }
+  25% { transform: translateY(1px) scale(1.04, 0.96); }
+  52% { transform: translateY(-7px) rotate(-3deg) scale(0.98, 1.02); }
+  78% { transform: scale(1.03, 0.97); }
+}
 @keyframes mascot-bob {
   0%, 100% { transform: translateY(0) rotate(-3deg); }
   50% { transform: translateY(-5px) rotate(3deg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  :host(.mascot-pop) img, :host(.mascot-bob) img { animation: none; }
+  img.ready { animation: none !important; }
 }

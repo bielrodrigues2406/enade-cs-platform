@@ -69,7 +69,7 @@
     </section>
 
     <p class="mascot-intro">
-      <app-mascot [pose]="progress()?.active ? 'relogio' : readyErrors() ? 'lupa' : 'contente'" [size]="64" motion="none" />
+      <app-mascot [pose]="progress()?.active ? 'relogio' : readyErrors() ? 'lupa' : 'contente'" [size]="64" motion="greet" />
       <span>
         @if (progress()?.active) { Seu treino está salvo. Retome quando estiver pronto. }
         @else if (readyErrors()) { Há conceitos esperando uma nova tentativa no caderno. }
