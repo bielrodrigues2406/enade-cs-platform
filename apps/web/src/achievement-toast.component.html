@@ -2,7 +2,10 @@
   @if (current(); as toast) {
     @if (toast.kind === "achievement") {
       <div class="toast">
-        <app-mascot pose="medalha" [size]="64" motion="pop" />
+        <!-- Renova só a reação; o botão de fechar mantém o foco na fila. -->
+        @for (reaction of [toast]; track reaction.achievement.code) {
+          <app-mascot pose="medalha" [size]="64" motion="celebrate" />
+        }
         <div class="toast-text">
           <p class="toast-eyebrow">Conquista desbloqueada</p>
           <p class="toast-title">{{ toast.achievement.title }}</p>
@@ -12,7 +15,9 @@
       </div>
     } @else {
       <div class="toast is-goal">
-        <app-mascot pose="comemorando" [size]="64" motion="pop" />
+        @for (reaction of [toast]; track reaction.goal + ':' + reaction.streak) {
+          <app-mascot pose="comemorando" [size]="64" motion="celebrate" />
+        }
         <div class="toast-text">
           <p class="toast-eyebrow">Meta do dia batida</p>
           <p class="toast-title">{{ toast.goal }} {{ toast.goal === 1 ? "questão" : "questões" }} hoje</p>

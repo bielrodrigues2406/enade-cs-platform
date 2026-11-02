@@ -6,7 +6,8 @@
       @if (data.state === 'COMPLETED' && !reviewing()) {
         <section class="page-intro">
           @if (data.summary; as result) {
-            <app-mascot [pose]="result.correct / result.total >= 0.7 ? 'comemorando' : result.correct / result.total >= 0.4 ? 'contente' : 'ouvindo'" [size]="80" motion="none" />
+            <app-mascot [pose]="result.correct / result.total >= 0.7 ? 'comemorando' : result.correct / result.total >= 0.4 ? 'contente' : 'ouvindo'" [size]="80"
+              [motion]="result.correct / result.total >= 0.7 ? 'celebrate' : 'none'" />
           }
           @if (data.kind === 'FORMAT') {
             <p class="metadata">Simulado autoral no formato ENADE {{ data.formatYear }}</p>

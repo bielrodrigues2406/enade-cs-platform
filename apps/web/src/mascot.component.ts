@@ -36,12 +36,17 @@ export const MASCOT_ALT: Record<MascotPose, string> = {
 export class MascotComponent {
   private prefs = inject(MascotService);
   private _pose = signal<MascotPose>("contente");
-  @Input() set pose(value: MascotPose) { this._pose.set(value); }
+  readonly imageReady = signal(false);
+  @Input() set pose(value: MascotPose) {
+    if (value === this._pose()) return;
+    this.imageReady.set(false);
+    this._pose.set(value);
+  }
   get pose() { return this._pose(); }
   /** Largura em px; a altura acompanha a proporção da imagem. */
   @Input() size = 96;
-  /** Entrada: "pop" (padrão), "bob" (boia, para carregar) ou "none". */
-  @Input() motion: "pop" | "bob" | "none" = "pop";
+  /** Gestos únicos; só "bob" se repete, enquanto algo carrega. */
+  @Input() motion: "pop" | "greet" | "celebrate" | "bob" | "none" = "pop";
   /** Decorativo (padrão): o texto ao lado já diz tudo e o leitor de tela pula a imagem. */
   @Input() decorative = true;
 

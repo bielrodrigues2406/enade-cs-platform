@@ -26,7 +26,7 @@ Nome: **Dudu**. Alternativa: "Bit".
 | `design/mascot/icon-navy-head.jpg` → `apps/web/public/icons/` | favicon 32/48, apple-touch-icon 180, ícones 192/512 do `manifest.webmanifest` |
 | `design/mascot/icons-three-backgrounds.jpg` | ícones alternativos (papel e azul), ainda sem uso |
 | `design/mascot/poses-magenta-lowres.jpg` | folha com fundo magenta para recorte limpo, **mas é captura de tela (1179 px, ~110 px por pose)**: baixa demais. Pedir a Gabriel o arquivo original em alta e recortar por chroma key |
-| `apps/web/src/mascot.component.*` | `<app-mascot pose="…" [size]="96" motion="pop|bob|none" [decorative]="true">` |
+| `apps/web/src/mascot.component.*` | `<app-mascot pose="…" [size]="96" motion="pop|greet|celebrate|bob|none" [decorative]="true">` |
 | `apps/web/src/mascot.service.ts` | preferência "mostrar o mascote" (conta no servidor; visitante neste navegador) |
 
 Poses: `acenando`, `comemorando`, `sequencia` (chama), `medalha`, `ouvindo`, `contente`,
@@ -137,3 +137,43 @@ A reflexão é pessoal, opcional, até 600 caracteres, salva por ação explíci
 depois de uma resposta errada confirmada no estudo livre. A navegação protege rascunhos;
 um erro de rede preserva o texto. Não há avaliação por IA nem alteração da nota.
 O caderno a apresenta junto à questão. Contratos em API.md e decisão em ADR-015.
+
+## 8. Movimento contextual (MAS-3)
+
+Pedido de Gabriel em 02/11/2026, depois de conferir as capturas: dar mais vida ao Dudu.
+As poses atuais são imagens únicas. O movimento entregue por CSS desloca, inclina e
+comprime levemente o corpo inteiro; não é animação independente dos olhos ou das asas.
+
+| Movimento | Uso | Duração e repetição |
+| --- | --- | --- |
+| `greet` | Entrar/cadastro e acolhimento no início | cumprimento com inclinação curta, uma vez, ~0,6 s |
+| `celebrate` | conquista, meta, fim de flashcards e resultado ≥70% | pequeno salto com acomodação, uma vez, ~0,6 s |
+| `pop` | entrada simples quando não há gesto específico | token de mola rápida, uma vez |
+| `bob` | exclusivamente enquanto uma requisição carrega | flutuação de 2,4 s; para ao sair da espera |
+| `none` | leitura, reflexão, aviso de ritmo e resultados abaixo de 70% | estático |
+
+O gesto só começa após o evento `load` da imagem, inclusive se o arquivo demora ou
+já está em cache. Trocar a pose reinicia essa preparação. As animações usam apenas
+`transform`/`opacity`, não alteram o espaço do texto nem aguardam terminar para liberar
+ações. Não há temporizadores de movimento, eventos de mouse, seguidores de cursor ou
+animação de repouso contínua. Reduzir movimento desativa todos os gestos, inclusive
+se a preferência mudar com a tela aberta. Ocultar o mascote continua funcionando.
+
+### Próximo passo para olhos e asas
+
+Gabriel reforçou que quer movimento das partes, não apenas a inclinação da imagem.
+Escolha inicial de MAS-4: **PNG em camadas** do mesmo Dudu 3D, com cabeça, asas e olhos
+separados e alinhados. [Prompts completos e nomes dos sete arquivos](MASCOT-ANIMATION-PROMPTS.md).
+O grupo dos olhos acompanha a cabeça; as asas giram no ombro. A montagem exige conferir
+as peças reais antes de implementar. As artes e a animação articulada estão pendentes.
+
+Uma sequência curta de quadros continua sendo alternativa para gestos que mudem muito
+a perspectiva. Nesse caso, comparar sprite e WebP animado só após medir o peso real, a
+nitidez a 56/64/96/120 px e o controle de reprodução/interrupção. Manter sempre a imagem
+estática equivalente para movimento reduzido.
+
+SVG em camadas também permite articular olhos/asas, mas exige redesenho para preservar
+a identidade. Rive/Lottie acrescentariam arte e runtime; não incluir essas dependências
+sem um ganho demonstrado. As folhas estáticas enviadas por Gabriel não fornecem as
+camadas ou os quadros intermediários: não simular uma piscada colando formas sobre o rosto.
+Esta etapa de arte articulada fica pendente; não foi implementada por MAS-3.
