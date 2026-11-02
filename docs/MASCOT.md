@@ -174,6 +174,25 @@ estática equivalente para movimento reduzido.
 
 SVG em camadas também permite articular olhos/asas, mas exige redesenho para preservar
 a identidade. Rive/Lottie acrescentariam arte e runtime; não incluir essas dependências
-sem um ganho demonstrado. As folhas estáticas enviadas por Gabriel não fornecem as
+sem um ganho demonstrado. As folhas anteriores com 14 poses não fornecem as
 camadas ou os quadros intermediários: não simular uma piscada colando formas sobre o rosto.
 Esta etapa de arte articulada fica pendente; não foi implementada por MAS-3.
+
+## 9. Revisão visual das sete camadas recebidas
+
+Gabriel enviou as sete prévias em 02/11/2026. O desenho mantém a identidade do Dudu,
+o lápis do lado correto e as partes necessárias para MAS-4. Ordem real do envio:
+referência completa, corpo/pés, cabeça, asa à direita da imagem, asa à esquerda,
+olhos fechados e olhos abertos. Nomear pelos elementos visíveis, não pela ordem dos prompts.
+
+A cabeça e os olhos aparecem mais abaixo na tela que os elementos correspondentes
+da referência. Ajustar posição/escala e pivôs na montagem; não pedir novas gerações
+apenas por esse deslocamento. As asas mostram a região arredondada do ombro necessária
+à articulação. A composição ainda não foi sobreposta nem testada: são observações visuais.
+
+Algumas prévias têm fundo branco e outras mostram quadriculado. A aparência no chat
+não permite confirmar canal alfa real ou distinguir com certeza um quadriculado
+desenhado. Os arquivos originais não foram disponibilizados no workspace; é necessário
+receber os mesmos sete PNGs em um ZIP para verificar canais, dimensões, bordas e encaixe.
+Nenhuma dessas camadas foi incorporada ao aplicativo. Não há necessidade de pedir
+novas imagens antes de conferir os arquivos existentes.

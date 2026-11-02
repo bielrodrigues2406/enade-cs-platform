@@ -4,7 +4,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
-- Base desta entrega: `main` em `08ecdf7` (PRs #31–#35 integrados). A branch do Claude já está contida nessa base. MAS-2, CNT-FINAL e SIM26-1 foram integrados. MAS-3 acrescenta gestos curtos de cumprimento/comemoração, sem novas dependências; veja WORKBOARD e MASCOT §8.
+- Base desta entrega: `main` em `5b8e414` (PRs #31–#36 integrados). MAS-3 passou no CI completo e foi integrado; acrescenta gestos curtos ao corpo inteiro. MAS-4 está em `codex/feat-dudu-articulation`, aguardando os arquivos originais das sete camadas já vistas no chat; veja MASCOT §9.
 - Gabriel autorizou nesta conversa criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Essa autorização não inclui deploy nem force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
 - Migrations reservadas: **028** para MAS-2 e **029** para SIM26-1. Próxima livre: **030**; conferir WORKBOARD antes de reservar.
@@ -31,7 +31,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 4. Mascote
 
-**Decidido: Dudu, o pato de borracha** com lápis azul-marinho. Tudo em **`docs/MASCOT.md`**: 14 poses integradas às telas, preferência, gestor de ritmo e reflexão. MAS-3 dá movimento ao corpo inteiro por CSS, após a imagem carregar. Gabriel pediu articulação real em seguida: MAS-4 usará PNG em camadas; os sete prompts estão em **`docs/MASCOT-ANIMATION-PROMPTS.md`**, e as artes ainda são necessárias. Não chamar os gestos de MAS-3 de animação facial. Respeitar movimento reduzido e manter leitura/ritmo estáticos. Capturas de 32 situações em desktop/celular foram entregues a Gabriel antes desta mudança.
+**Decidido: Dudu, o pato de borracha** com lápis azul-marinho. Tudo em **`docs/MASCOT.md`**: 14 poses integradas às telas, preferência, gestor de ritmo e reflexão. MAS-3 dá movimento ao corpo inteiro por CSS, após a imagem carregar. Gabriel pediu articulação real: MAS-4 usará PNG em camadas. Os sete prompts estão em **`docs/MASCOT-ANIMATION-PROMPTS.md`**; as sete prévias chegaram, mas os PNGs originais precisam vir em ZIP para abrir no workspace. Não pedir novas gerações antes de conferir esses arquivos. Não chamar os gestos de MAS-3 de animação facial. Respeitar movimento reduzido e manter leitura/ritmo estáticos.
 
 ## 5. O que falta (por prioridade)
 
