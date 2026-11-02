@@ -1,5 +1,4 @@
 import { test, expect, type Locator, type Route } from "@playwright/test";
-import { signUp } from "./session-helpers";
 
 /** Amostra o movimento real do navegador sem depender do instante da captura. */
 async function sampleGesture(image: Locator) {
@@ -44,8 +43,7 @@ test("Dudu waits for a slow image, greets once and leaves the form usable", asyn
   await expect(email).toHaveValue("aluno@example.invalid");
 });
 
-test("Dudu celebrates once and immediately stops when reduced motion is enabled", async ({ page, context }) => {
-  await signUp(context);
+test("Dudu celebrates once and immediately stops when reduced motion is enabled", async ({ page }) => {
   await page.goto("/questoes");
   await page.getByRole("button", { name: "Resolver: Quando uma transação falha" }).click();
   await expect(page.locator("article app-mascot:not([hidden])")).toHaveCount(0);
@@ -82,7 +80,7 @@ test("the loading duck floats only while waiting and respects reduced motion", a
 });
 
 test("consecutive medals each get a gesture without losing the close button's keyboard focus", async ({ page, context }) => {
-  await signUp(context);
+  expect((await context.request.post("/api/session", { data: {} })).status()).toBe(201);
   expect((await context.request.put("/api/me/goal", { data: { dailyTarget: 1 } })).ok()).toBe(true);
   await page.goto("/questoes");
   await page.getByRole("button", { name: "Resolver: Quando uma transação falha" }).click();
