@@ -26,7 +26,7 @@ export type DiscursiveReview = {
 };
 export type DiscursiveSummary = { document: string; published: number[]; kept: number[]; blocked: number[] };
 type SourceRecord = {
-  id: string; year: number; modality: string; status: string; sha256: string; byteSize: number;
+  id: string; year: number; modality: string; sha256: string; byteSize: number;
 };
 
 function fail(message: string): never {
@@ -57,15 +57,18 @@ export function validateReview(review: DiscursiveReview) {
 
 async function sourceId(sha256: string, kind: string): Promise<SourceRecord> {
   const row = (await db.query<SourceRecord>(
-    'SELECT id,year,modality,status,sha256,byte_size AS "byteSize" FROM source_document WHERE sha256=$1 AND kind=$2', [sha256, kind],
+    'SELECT id,year,modality,sha256,byte_size AS "byteSize" FROM source_document WHERE sha256=$1 AND kind=$2', [sha256, kind],
   )).rows[0];
   return row ?? fail(`Fonte ${kind} ${sha256.slice(0, 12)} ainda não importada.`);
 }
 
 /** A conferência do padrão acompanha a publicação; nunca promove só por importar. */
 async function verifyStandard(client: PoolClient, standard: SourceRecord, reviewer: string) {
-  if (standard.status === "VERIFIED") return;
-  if (standard.status !== "IMPORTED") fail("O padrão de resposta não está disponível para conferência.");
+  const current = (await client.query<{ status: string }>(
+    "SELECT status FROM source_document WHERE id=$1 FOR UPDATE", [standard.id],
+  )).rows[0];
+  if (current?.status === "VERIFIED") return;
+  if (current?.status !== "IMPORTED") fail("O padrão de resposta não está disponível para conferência.");
   await readArchive(standard);
   const changed = await client.query(
     `UPDATE source_document SET status='VERIFIED',verification_origin='ASSISTED',

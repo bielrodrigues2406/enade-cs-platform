@@ -106,6 +106,24 @@ test("an altered archived standard cannot become verified or publish a question"
   assert.equal((await db.query("SELECT count(*)::int AS n FROM discursive_question WHERE exam_source_id=(SELECT id FROM source_document WHERE sha256=$1)", [data.examSha256])).rows[0].n, 0);
 });
 
+test("a standard rejected while crops are read cannot be promoted by a stale publication", async () => {
+  const standard = await importedStandard();
+  const data = review(await source("EXAM"), standard.hash);
+  let rejected = false;
+  await assert.rejects(publishDiscursiveReview(data, async file => {
+    if (!rejected) {
+      rejected = true;
+      await db.query("UPDATE source_document SET status='REJECTED' WHERE sha256=$1", [standard.hash]);
+    }
+    return crops(file);
+  }), /não está disponível para conferência/);
+  const row = (await db.query(`SELECT status,
+    (SELECT count(*)::int FROM source_event e WHERE e.source_id=s.id AND e.event_type='VERIFIED') AS events
+    FROM source_document s WHERE sha256=$1`, [standard.hash])).rows[0];
+  assert.deepEqual(row, { status: "REJECTED", events: 0 });
+  assert.equal((await db.query("SELECT count(*)::int AS n FROM discursive_question WHERE exam_source_id=(SELECT id FROM source_document WHERE sha256=$1)", [data.examSha256])).rows[0].n, 0);
+});
+
 test("an agent-reviewed discursive is published once, with both crops and the assisted origin", async () => {
   const data = review(await source("EXAM"), await source("RESPONSE_STANDARD"));
   assert.deepEqual(await publishDiscursiveReview(data, crops), { document: "test-only-exam", published: [3], kept: [], blocked: [] });
