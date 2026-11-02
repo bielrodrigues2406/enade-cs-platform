@@ -1,3 +1,4 @@
+import { MascotComponent } from "./mascot.component";
 import {
   afterNextRender, Component, ElementRef, EventEmitter, HostListener, Injector, Input, Output,
   ViewChild, computed, inject, signal, type SimpleChanges,
@@ -30,7 +31,7 @@ class PracticeError extends Error {
 
 @Component({
   selector: "app-exam",
-  imports: [FormsModule, QuestionContentComponent, DiscursiveComponent],
+  imports: [MascotComponent, FormsModule, QuestionContentComponent, DiscursiveComponent],
   templateUrl: "./exam.component.html",
   styleUrl: "./exam.component.css",
 })
@@ -86,6 +87,53 @@ export class ExamComponent {
   });
   discursiveOpen = signal<string | null>(null);
   now = signal(Date.now());
+  /** Ritmo local: conta apenas o tempo ativo neste item e nunca sugere alternativa. */
+  paceSeconds = signal(0);
+  paceDismissed = signal(false);
+  private pacePosition = 0;
+  private paceAttempt = "";
+  private paceShown = new Set<string>();
+
+  showPace() {
+    const data = this.attempt();
+    return data?.kind === "PARTIAL" && data.state === "IN_PROGRESS" && !!data.deadlineAt
+      && !data.pausedAt && !this.discursiveOpen() && this.paceSeconds() >= 360 && !this.paceDismissed();
+  }
+
+  dismissPace() {
+    this.paceShown.add(`${this.paceAttempt}:${this.pacePosition}`);
+    this.paceDismissed.set(true);
+  }
+
+  async markAndContinue() {
+    if (this.protectedState()) return;
+    this.draftMarked.set(true);
+    this.dirty.set(true);
+    await this.save();
+    if (this.protectedState() || this.error()) return;
+    this.dismissPace();
+    const data = this.attempt();
+    if (!data) return;
+    if (this.position() < data.size) this.go(this.position() + 1);
+    else this.openFinish();
+  }
+
+  private tickPace() {
+    const data = this.attempt();
+    if (!data || data.kind !== "PARTIAL" || data.pausedAt || this.discursiveOpen() || document.hidden) return;
+    this.syncPaceItem();
+    this.paceSeconds.update(seconds => seconds + 1);
+    if (this.paceSeconds() === 360) this.paceShown.add(`${data.id}:${this.position()}`);
+  }
+
+  private syncPaceItem() {
+    const data = this.attempt();
+    if (!data) return;
+    if (this.paceAttempt !== data.id || this.pacePosition !== this.position()) {
+      this.paceAttempt = data.id; this.pacePosition = this.position(); this.paceSeconds.set(0);
+      this.paceDismissed.set(this.paceShown.has(`${data.id}:${this.position()}`));
+    }
+  }
   /** Tempo restante do servidor e o instante em que chegou: o relógio local só desconta daí. */
   private clockAt = 0;
   remaining = computed(() => {
@@ -110,7 +158,7 @@ export class ExamComponent {
     if (changes["attemptId"] && !changes["attemptId"].firstChange && this.attemptId !== (this.attempt()?.id ?? null)) {
       if (this.attemptId) void this.loadAttempt(this.attemptId); else void this.loadAvailability();
     } else if (changes["itemPosition"] && !changes["itemPosition"].firstChange && !this.protectedState()) {
-      this.position.set(this.validPosition(this.itemPosition)); this.syncDraft();
+      this.position.set(this.validPosition(this.itemPosition)); this.syncPaceItem(); this.syncDraft();
     }
   }
   ngOnDestroy() {
@@ -289,6 +337,7 @@ export class ExamComponent {
     this.now.set(Date.now());
     this.ticker = setInterval(() => {
       this.now.set(Date.now());
+      this.tickPace();
       if ((this.remaining() ?? 1) <= 0 && !this.expiryReload) {
         const id = data.id;
         this.expiryReload = setTimeout(() => { this.expiryReload = null; this.discursiveOpen.set(null); void this.loadAttempt(id, 1); }, DEADLINE_GRACE_MS);
@@ -325,7 +374,7 @@ export class ExamComponent {
   }
   timeWarning() { const left = this.remaining(); return left !== null && left > 0 && left <= WARNING_MS; }
   private applyAttempt(data: PracticeView, position: number) {
-    this.attempt.set(data); this.position.set(this.validPosition(position)); this.discursiveOpen.set(null);
+    this.attempt.set(data); this.position.set(this.validPosition(position)); this.syncPaceItem(); this.discursiveOpen.set(null);
     this.clockAt = Date.now(); this.syncClock(); this.examRunningChange.emit(this.running());
     this.reviewing.set(false); this.conflict.set(false); this.discardOpen.set(false); this.syncDraft(); this.focusContent();
   }
@@ -368,7 +417,7 @@ export class ExamComponent {
   go(position: number) {
     if (this.protectedState() || position < 1 || position > (this.attempt()?.size ?? 0)) return;
     this.stepDirection.set(position >= this.position() ? 1 : -1);
-    this.position.set(position); this.discursiveOpen.set(null); this.syncDraft(); this.error.set("");
+    this.position.set(position); this.syncPaceItem(); this.discursiveOpen.set(null); this.syncDraft(); this.error.set("");
     this.locationChange.emit({ attemptId: this.attempt()!.id, position });
     this.focusContent();
   }

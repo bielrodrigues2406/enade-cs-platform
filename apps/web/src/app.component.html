@@ -234,9 +234,11 @@
       </aside>
       <main id="content" tabindex="-1">
         @if (booting()) {
+          <app-mascot pose="boiando" [size]="64" motion="bob" />
           <p role="status">Preparando seu caderno…</p>
         } @else if (bootError()) {
           <section class="notice" role="alert">
+            <app-mascot pose="bug" [size]="64" motion="none" />
             <h1>Não foi possível abrir o caderno</h1>
             <p>{{ bootError() }}</p>
             <button (click)="boot()">Tentar novamente</button>
@@ -246,6 +248,7 @@
             <p class="account-success" role="status">{{ accountNotice() }}</p>
           }
           @if (accountView()) {
+            @defer (on immediate) {
             <app-account
               [mode]="accountView()!"
               [busy]="authBusy()"
@@ -254,6 +257,7 @@
               (submitCredentials)="authenticate($event)"
               (cancel)="closeAccount()"
             />
+            } @placeholder { <p>Carregando sua conta…</p> }
           } @else if (authBusy()) {
             <p role="status">Atualizando sua sessão…</p>
           } @else if (profileView()) {
@@ -460,10 +464,12 @@
               </span>
             </div>
             @if (loading()) {
+              <app-mascot pose="boiando" [size]="64" motion="bob" />
               <p role="status">Buscando questões…</p>
             }
             @if (error()) {
               <div class="notice" role="alert">
+                <app-mascot pose="bug" [size]="64" motion="none" />
                 <p>{{ error() }}</p>
                 <button (click)="retryCatalog()">Tentar novamente</button>
               </div>
@@ -821,6 +827,11 @@
                       </p>
                     }
                   }
+                  @if (!question()!.answer!.correct) {
+                    @defer (on immediate) {
+                      <app-answer-reflection [versionId]="question()!.id" (stateChange)="reflectionState.set($event)" />
+                    }
+                  }
                   <div class="feedback-actions">
                     @if (nextQuestion(); as next) {
                       <button
@@ -831,7 +842,7 @@
                         Próxima questão <span aria-hidden="true">→</span>
                       </button>
                     }
-                    <button class="text-button" (click)="editing.set(true)">
+                    <button class="text-button" (click)="editAnswer()">
                       Alterar resposta
                     </button>
                   </div>
@@ -860,6 +871,9 @@
             <div class="site-footer-note">
               <p class="site-footer-title">Sobre o conteúdo</p>
               <p>Questões e gabaritos oficiais do Inep, com a página da prova de origem. Recortes, classificação e explicações são feitos por IA e conferidos por outro agente, sem revisão humana; na dúvida, vale a prova original. Projeto independente, sem vínculo com o Inep ou o MEC.</p>
+              @if (session().mode === 'guest') {
+                <button type="button" class="text-button" [attr.aria-pressed]="mascot.enabled()" (click)="mascot.set(!mascot.enabled())">{{ mascot.enabled() ? 'Ocultar Dudu' : 'Mostrar Dudu' }}</button>
+              }
             </div>
             <p class="site-footer-base">ENADE 2026 · domingo, 29 de novembro · <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade" target="_blank" rel="noopener noreferrer">cronograma no Inep</a></p>
           </footer>
@@ -867,7 +881,9 @@
         <app-choice-dialog />
         <!-- Aviso de conquista: carregado quando a página fica ociosa, fora do pacote inicial. -->
         @defer (on idle) {
-          <app-achievement-toast />
+          @if (!adminView() && !curationView() && !lessonsView()) {
+            <app-achievement-toast />
+          }
         }
       </main>
     </div>

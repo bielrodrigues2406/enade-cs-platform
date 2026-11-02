@@ -1,17 +1,16 @@
+import { MascotComponent } from "./mascot.component";
 import { Component, effect, inject, signal, untracked } from "@angular/core";
-import { BadgeComponent } from "./badge.component";
 import { EngagementService, type AchievementView } from "./engagement.service";
 
-// Aviso animado (ENG-1): a medalha entra girando com brilho quando uma
-// conquista é desbloqueada, e um aviso mais simples quando a meta do dia é
-// batida. Um de cada vez; some sozinho ou no X.
+// Uma conquista por vez: o Dudu comemora brevemente, sem listra nem brilho
+// contínuo. O título e a descrição continuam compreensíveis sem a imagem.
 
 type Toast = { kind: "achievement"; achievement: AchievementView } | { kind: "goal"; goal: number; streak: number };
 const VISIBLE_MS = 5200;
 
 @Component({
   selector: "app-achievement-toast",
-  imports: [BadgeComponent],
+  imports: [MascotComponent],
   templateUrl: "./achievement-toast.component.html",
   styleUrl: "./achievement-toast.component.css",
 })
@@ -47,4 +46,6 @@ export class AchievementToastComponent {
     this.current.set(toast);
     if (toast) this.timer = setTimeout(() => this.next(), VISIBLE_MS);
   }
+
+  ngOnDestroy() { if (this.timer) clearTimeout(this.timer); }
 }

@@ -68,6 +68,17 @@
       }
     </section>
 
+    <p class="mascot-intro">
+      <app-mascot [pose]="progress()?.active ? 'relogio' : readyErrors() ? 'lupa' : 'contente'" [size]="64" motion="none" />
+      <span>
+        @if (progress()?.active) { Seu treino está salvo. Retome quando estiver pronto. }
+        @else if (readyErrors()) { Há conceitos esperando uma nova tentativa no caderno. }
+        @else if (engagement.state(); as goal) {
+          @if (goal.today < goal.goal) { Faltam {{ goal.goal - goal.today }} questões para sua meta de hoje. }
+          @else { Sua meta de hoje está feita. Volte quando quiser. }
+        } @else { Escolha uma área e tente lembrar antes de conferir. }
+      </span>
+    </p>
     <div class="home-board">
       <section class="home-todo" aria-labelledby="home-todo-title">
         <div class="board-head">

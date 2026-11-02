@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output, signal } from "@angular/core";
+import { Component, EventEmitter, Output, inject, signal } from "@angular/core";
+import { MascotService } from "./mascot.service";
 import { FormsModule } from "@angular/forms";
 import { initials } from "./initials";
 
@@ -31,6 +32,23 @@ async function call<T>(path: string, method: string, body?: unknown): Promise<T>
   styleUrl: "./profile.component.css",
 })
 export class ProfileComponent {
+  readonly mascot = inject(MascotService);
+  savingMascot = signal(false);
+  mascotStatus = signal<Status>(null);
+
+  async saveMascot(event: Event) {
+    const control = event.target as HTMLInputElement;
+    this.savingMascot.set(true); this.mascotStatus.set(null);
+    try {
+      await this.mascot.set(control.checked);
+      this.mascotStatus.set({ kind: "success", text: "Preferência guardada na sua conta." });
+    } catch {
+      this.mascotStatus.set({ kind: "error", text: "Não foi possível confirmar a preferência. Tente novamente." });
+    } finally {
+      control.checked = this.mascot.enabled();
+      this.savingMascot.set(false);
+    }
+  }
   /** Nome ou e-mail mudaram: o cabeçalho mostra os novos. */
   @Output() accountChange = new EventEmitter<{ email: string; name: string | null }>();
   @Output() back = new EventEmitter<void>();

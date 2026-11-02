@@ -69,6 +69,10 @@
   </section>
   @if (error()) { <p class="notice" role="alert">{{ error() }}</p> }
   @if (decks(); as list) {
+    @if (!totalDue()) {
+      <app-mascot pose="dormindo" [size]="80" motion="none" />
+      <p>Nada vence hoje. Você pode descansar ou conhecer cartões novos.</p>
+    }
     <div class="flash-summary">
       <p><strong>{{ totalDue() }}</strong> {{ totalDue() === 1 ? "cartão vence" : "cartões vencem" }} hoje · {{ reviewedToday() }} {{ reviewedToday() === 1 ? "revisão feita" : "revisões feitas" }} hoje</p>
       <button type="button" (click)="start(null)">{{ totalDue() ? "Revisar agora" : "Estudar cartões novos" }} <span aria-hidden="true">→</span></button>

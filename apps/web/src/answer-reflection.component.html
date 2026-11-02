@@ -1,0 +1,24 @@
+<section class="reflection" aria-labelledby="reflection-title">
+  <div class="reflection-heading">
+    <app-mascot pose="ouvindo" [size]="64" motion="none" />
+    <div>
+      <h2 id="reflection-title">Explique para o pato</h2>
+      <p>Em uma frase, o que levou você a marcar essa alternativa? É opcional e fica só no seu caderno.</p>
+    </div>
+  </div>
+  @if (loading()) {
+    <p>Carregando sua reflexão…</p>
+  } @else if (!loaded()) {
+    <button type="button" class="outline" (click)="load()">Tentar carregar novamente</button>
+  } @else {
+    <form (ngSubmit)="save()">
+      <label for="answer-reflection">Seu raciocínio</label>
+      <textarea id="answer-reflection" name="reflection" [ngModel]="text" (ngModelChange)="edit($event)" maxlength="600" rows="3"
+        [disabled]="saving()" aria-describedby="reflection-help"></textarea>
+      <p id="reflection-help" class="muted">Até 600 caracteres. Seu texto não é corrigido por IA e não altera o resultado.</p>
+      <button type="submit" class="outline" [disabled]="saving()">{{ saving() ? 'Guardando…' : 'Guardar reflexão' }}</button>
+    </form>
+  }
+  @if (error()) { <p class="field-error" role="alert">{{ error() }}</p> }
+  <p aria-live="polite">{{ notice() }}</p>
+</section>

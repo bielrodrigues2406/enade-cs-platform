@@ -197,7 +197,8 @@
   </ul>
 </section>
 
-<section class="lp-duck" aria-labelledby="lp-duck" data-reveal>
+@if (mascot.enabled()) {
+<section class="lp-duck" aria-labelledby="lp-duck">
   <picture class="lp-duck-art">
     <source media="(max-width: 720px)" srcset="mascot/scene-mobile.webp" width="1179" height="1444" />
     <img src="mascot/scene-wide.webp" alt="" width="1179" height="645" loading="lazy" decoding="async" />
@@ -212,6 +213,7 @@
     </p>
   </div>
 </section>
+}
 
 <section class="lp-cta" aria-labelledby="lp-cta" data-reveal>
   <h2 id="lp-cta">Faltam {{ daysCount() ?? "poucos" }} dias. Comece pela próxima questão.</h2>

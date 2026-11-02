@@ -1,3 +1,4 @@
+import { MascotComponent } from "./mascot.component";
 import { Component, Input, computed, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
@@ -37,7 +38,7 @@ export function points(value: number) {
 
 @Component({
   selector: "app-discursive",
-  imports: [FormsModule],
+  imports: [MascotComponent, FormsModule],
   templateUrl: "./discursive.component.html",
   styleUrl: "./discursive.component.css",
 })

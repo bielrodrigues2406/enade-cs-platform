@@ -198,3 +198,6 @@
 .goal-week i.is-partial { background: color-mix(in srgb, var(--color-success-text) 30%, var(--color-surface)); }
 .goal-week i.is-met { background: var(--color-success-text); }
 .goal-week span { margin-left: var(--space-2); }
+
+/* MAS-2 */
+.mascot-intro { display: flex; align-items: center; gap: var(--space-4); max-width: 64ch; margin: var(--space-5) 0; }

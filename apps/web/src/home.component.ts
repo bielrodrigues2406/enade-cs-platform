@@ -1,3 +1,4 @@
+import { MascotComponent } from "./mascot.component";
 import { Component, EventEmitter, Input, Output, inject, signal } from "@angular/core";
 import type { ReviewItem } from "./review.component";
 import { AREA_SIMULATION_LIMIT, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
@@ -70,6 +71,7 @@ const monday = (date: Date) => {
  * Usa somente dados reais da pessoa; não estima nota do ENADE.
  */
 @Component({
+  imports: [MascotComponent],
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.css",
