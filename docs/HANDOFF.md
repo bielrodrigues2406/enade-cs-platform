@@ -4,13 +4,13 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
-- Base atual: `main` em `75fbb50` (PRs #31–#34 integrados). A branch do Claude já está contida nessa base. MAS-2 e CNT-FINAL foram integrados. SIM26-1 está implementado nesta entrega, com CI completo exigido antes do merge; veja WORKBOARD e o registro de validação.
+- Base desta entrega: `main` em `08ecdf7` (PRs #31–#35 integrados). A branch do Claude já está contida nessa base. MAS-2, CNT-FINAL e SIM26-1 foram integrados. MAS-3 acrescenta gestos curtos de cumprimento/comemoração, sem novas dependências; veja WORKBOARD e MASCOT §8.
 - Gabriel autorizou nesta conversa criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Essa autorização não inclui deploy nem force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
 - Migrations reservadas: **028** para MAS-2 e **029** para SIM26-1. Próxima livre: **030**; conferir WORKBOARD antes de reservar.
 - Conteúdo integrado no PR #33: 246 objetivas com explicação e 39 discursivas, incluindo quatro de 2005/2008, conferidas por agente. Ainda faltam cinco padrões antigos de Formação Geral e os 33 PDFs recentes; não chamar essas edições de integralmente completas.
 - Funções prontas: banco de questões, caderno de erros espaçado, treino parcial e por área (com cronômetro opcional), provas completas (`/provas`), discursivas com autoavaliação, turmas/aulas/presença, painel do professor, papéis e administração, importação de provas, registro de atividades, **meta diária, conquistas, ranking de constância, flashcards (FSRS-5) e biblioteca** (ver `docs/FLASHCARDS.md`).
-- Main: CI do commit `2e6c296` passou, incluindo 65 testes Chromium. MAS-2 (#34): CI passou com 173 testes de API e 73 Chromium; pacote inicial **493,66 kB**. Conteúdo (#33): CI integrado passou. SIM26-1: build 493,86 kB, 182 API e quatro Chromium de jornada/regressão passaram localmente; acervo real montou 45+1 com 47 FG/159 específicas/16 discursivas elegíveis. Não confundir essas verificações com deploy: Gabriel informou que a plataforma não está rodando.
+- Main `08ecdf7` contém a árvore revisada `0e02ba7` do PR #35: CI completo passou com 182 API e 76 Chromium; pacote inicial **494,36 kB**. Acervo real montou 45+1 com 47 FG/159 específicas/16 discursivas elegíveis. Não confundir essas verificações com deploy: Gabriel informou que a plataforma não está rodando.
 
 ## 2. Como rodar e testar
 
@@ -31,7 +31,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 4. Mascote
 
-**Decidido: Dudu, o pato de borracha** com lápis azul-marinho. Tudo em **`docs/MASCOT.md`**: arquivos, regras (nunca dá dica, só em momentos, desligável), onde cada pose entra, ordem de construção (telas → gestor de ritmo → "Explique para o pato") e como gerar e recortar novas imagens. Já existe `<app-mascot>` com 14 poses em `apps/web/public/mascot/`, usado no fim da sessão de flashcards.
+**Decidido: Dudu, o pato de borracha** com lápis azul-marinho. Tudo em **`docs/MASCOT.md`**: 14 poses integradas às telas, preferência, gestor de ritmo e reflexão. MAS-3 dá movimento ao corpo inteiro por CSS, após a imagem carregar. Olhos e asas articulados exigem novos quadros ou arte em camadas; não chamar os gestos atuais de animação facial. Respeitar movimento reduzido e manter leitura/ritmo estáticos. Capturas de 32 situações em desktop/celular foram entregues a Gabriel antes desta mudança.
 
 ## 5. O que falta (por prioridade)
 
