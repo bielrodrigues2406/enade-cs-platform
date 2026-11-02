@@ -17,4 +17,4 @@ Rotas próprias leem e gravam o rascunho da tentativa, com a mesma semântica de
 - Não há nota combinada nem correção automática da discursiva. A autoavaliação usa os critérios fixados e aparece separada dos acertos objetivos.
 - O conjunto não é uma reprodução psicométrica da prova. As fontes originais de cada item continuam visíveis.
 - As regras valem para esta configuração de Bacharelado; formatos futuros exigem decisão própria. As provas completas antigas permanecem em seu modo e ordem originais.
-- Validação com banco e navegador será executada pela integração; esta branch não disputa o ambiente `enade_ci` com MAS-2.
+- Validação de integração executada pela raiz em `enade_format_ci`, separada do acervo real em `enade_content_ci`; detalhes em reviews/2026-11-02-enade-2026-format.md.

@@ -4,13 +4,13 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
-- Base atual: `main` em `120a44f` (PRs #31, #32 e #34 integrados). A branch do Claude já está contida nessa base. Codex trabalha em MAS-2, CNT-FINAL e SIM26-1, em branches separadas; veja WORKBOARD para o estado de validação e os PRs.
+- Base atual: `main` em `75fbb50` (PRs #31–#34 integrados). A branch do Claude já está contida nessa base. MAS-2 e CNT-FINAL foram integrados. SIM26-1 está implementado nesta entrega, com CI completo exigido antes do merge; veja WORKBOARD e o registro de validação.
 - Gabriel autorizou nesta conversa criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Essa autorização não inclui deploy nem force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
 - Migrations reservadas: **028** para MAS-2 e **029** para SIM26-1. Próxima livre: **030**; conferir WORKBOARD antes de reservar.
-- Conteúdo preparado no PR #33: 246 objetivas com explicação e 39 discursivas, incluindo quatro de 2005/2008, conferidas por agente. Ainda faltam cinco padrões antigos de Formação Geral e os 33 PDFs recentes; não chamar essas edições de integralmente completas.
+- Conteúdo integrado no PR #33: 246 objetivas com explicação e 39 discursivas, incluindo quatro de 2005/2008, conferidas por agente. Ainda faltam cinco padrões antigos de Formação Geral e os 33 PDFs recentes; não chamar essas edições de integralmente completas.
 - Funções prontas: banco de questões, caderno de erros espaçado, treino parcial e por área (com cronômetro opcional), provas completas (`/provas`), discursivas com autoavaliação, turmas/aulas/presença, painel do professor, papéis e administração, importação de provas, registro de atividades, **meta diária, conquistas, ranking de constância, flashcards (FSRS-5) e biblioteca** (ver `docs/FLASHCARDS.md`).
-- Main: CI do commit `2e6c296` passou, incluindo 65 testes Chromium. MAS-2 (#34): CI passou com 173 testes de API e 73 Chromium; pacote inicial **493,66 kB**. Conteúdo (#33): 170 API na base anterior, bootstrap real repetido com 246/39 e nove padrões agora VERIFIED; CI de integração com MAS em andamento. Não confundir essas verificações com deploy: Gabriel informou que a plataforma não está rodando.
+- Main: CI do commit `2e6c296` passou, incluindo 65 testes Chromium. MAS-2 (#34): CI passou com 173 testes de API e 73 Chromium; pacote inicial **493,66 kB**. Conteúdo (#33): CI integrado passou. SIM26-1: build 493,86 kB, 182 API e quatro Chromium de jornada/regressão passaram localmente; acervo real montou 45+1 com 47 FG/159 específicas/16 discursivas elegíveis. Não confundir essas verificações com deploy: Gabriel informou que a plataforma não está rodando.
 
 ## 2. Como rodar e testar
 
