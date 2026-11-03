@@ -11,227 +11,32 @@
         ></a
       >
       <div class="header-actions">
-        <span class="environment">Base de desenvolvimento</span>
-        @if (!booting() && !bootError() && !landingMode() && !accountView()) {
-          @defer (on idle) {
-            <app-goal-ring (open)="openStudy('conquistas')" />
-          }
-        }
         @if (!booting() && !bootError()) {
-          @if (roles().includes("ADMIN")) {
-            <button
-              class="text-button"
-              (click)="openAdmin()"
-              [attr.aria-current]="adminView() ? 'page' : null"
-              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            >
-              Administração
-            </button>
-          }
-          @if (canCurate()) {
-            <button
-              class="text-button mobile-curation"
-              (click)="openCuration()"
-              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            >
-              Curadoria
-            </button>
+          @if (!landingMode() && !accountView()) {
+            <button type="button" class="outline study-menu-trigger" (click)="openNavigation()" [disabled]="navigationBusy()" aria-haspopup="dialog">Menu</button>
           }
           @if (session().mode === "account") {
-            <button
-              class="account-chip"
-              (click)="openProfile()"
-              [attr.aria-current]="profileView() ? 'page' : null"
-              [attr.aria-label]="'Meu perfil, ' + accountLabel()"
-              [attr.title]="accountEmail()"
-              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            >
-              <span class="account-avatar" aria-hidden="true">{{ accountInitials() }}</span>
-              <span class="account-chip-name">{{ accountName() }}</span>
+            <button type="button" class="account-chip account-menu-trigger" popovertarget="account-menu" [attr.aria-label]="'Abrir conta, ' + accountLabel()" [attr.title]="accountEmail()" [disabled]="navigationBusy()">
+              <span class="account-avatar" aria-hidden="true">{{ accountInitials() }}</span><span>Conta</span>
             </button>
-            <button
-              class="text-button"
-              (click)="logout()"
-              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            >
-              Sair da conta
-            </button>
+            <div #accountPopover id="account-menu" popover="auto" class="account-menu" role="dialog" aria-labelledby="account-menu-title">
+              <h2 id="account-menu-title">Sua conta</h2>
+              <p class="account-menu-name">{{ accountLabel() }}</p>
+              @defer (on idle) { <app-goal-ring (open)="accountAction('progress')" /> }
+              <button type="button" class="text-button" (click)="accountAction('profile')" [disabled]="navigationBusy()" autofocus>Meu perfil</button>
+              <button type="button" class="text-button" (click)="accountAction('logout')" [disabled]="navigationBusy()">Sair da conta</button>
+            </div>
           } @else {
-            <button
-              class="text-button"
-              (click)="openAccount('login')"
-              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            >
-              Entrar
-            </button>
-            <button
-              class="outline"
-              (click)="openAccount('register')"
-              [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            >
-              Criar conta
-            </button>
+            <button class="text-button" (click)="openAccount('login')" [disabled]="navigationBusy()">Entrar</button>
+            <button class="outline" (click)="openAccount('register')" [disabled]="navigationBusy()">Criar conta</button>
           }
         }
       </div>
     </header>
-    @if (!booting() && !bootError()) {
-      <nav class="mobile-study-nav" aria-label="Navegação de estudo">
-        <button
-          class="text-button"
-          (click)="openHome()"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="onHome() ? 'page' : null"
-        >
-          Início
-        </button>
-        <button
-          class="text-button"
-          (click)="back()"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="onCatalog() ? 'page' : null"
-        >
-          Banco de questões
-        </button>
-        <button
-          class="text-button"
-          (click)="openReview()"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
-        >
-          Caderno de erros
-        </button>
-        <button
-          class="text-button"
-          (click)="openPractice('treino')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="practiceView() && practiceSection() === 'treino' && !accountView() ? 'page' : null"
-        >Treino parcial</button>
-        <button
-          class="text-button"
-          (click)="openPractice('provas')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="practiceView() && practiceSection() === 'provas' && !accountView() ? 'page' : null"
-        >Provas completas</button>
-        <button
-          class="text-button"
-          (click)="openDiscursive()"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="discursiveView() ? 'page' : null"
-        >Discursivas</button>
-        <button
-          class="text-button"
-          (click)="openStudy('flashcards')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="studyView() === 'flashcards' ? 'page' : null"
-        >Flashcards</button>
-        <button
-          class="text-button"
-          (click)="openStudy('biblioteca')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="studyView() === 'biblioteca' ? 'page' : null"
-        >Biblioteca</button>
-        <button
-          class="text-button"
-          (click)="openStudy('conquistas')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="studyView() === 'conquistas' ? 'page' : null"
-        >Conquistas</button>
-        @if (session().mode === "account") {
-          <button
-            class="text-button"
-            (click)="openLessons()"
-            [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            [attr.aria-current]="lessonsView() ? 'page' : null"
-          >Aulas</button>
-        }
-      </nav>
-    }
     <div class="layout">
-      <aside aria-label="Sobre este caderno">
-        <button
-          class="nav"
-          (click)="openHome()"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="onHome() ? 'page' : null"
-        >
-          <span class="nav-index" aria-hidden="true">01</span>
-          Início
-        </button>
-        <button
-          class="nav secondary-nav"
-          (click)="back()"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="onCatalog() ? 'page' : null"
-        >
-          <span class="nav-index" aria-hidden="true">02</span>
-          Banco de questões
-        </button>
-        <button
-          class="nav secondary-nav"
-          (click)="openReview()"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="reviewView() || reviewReturn() ? 'page' : null"
-        >
-          <span class="nav-index" aria-hidden="true">03</span>
-          Caderno de erros
-        </button>
-        <button
-          class="nav secondary-nav"
-          (click)="openPractice('treino')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="practiceView() && practiceSection() === 'treino' && !accountView() ? 'page' : null"
-        ><span class="nav-index" aria-hidden="true">04</span>Treino parcial</button>
-        <button
-          class="nav secondary-nav"
-          (click)="openPractice('provas')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="practiceView() && practiceSection() === 'provas' && !accountView() ? 'page' : null"
-        ><span class="nav-index" aria-hidden="true">05</span>Provas completas</button>
-        <button
-          class="nav secondary-nav"
-          (click)="openDiscursive()"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="discursiveView() ? 'page' : null"
-        ><span class="nav-index" aria-hidden="true">06</span>Discursivas</button>
-        <button
-          class="nav secondary-nav"
-          (click)="openStudy('flashcards')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="studyView() === 'flashcards' ? 'page' : null"
-        ><span class="nav-index" aria-hidden="true">07</span>Flashcards</button>
-        <button
-          class="nav secondary-nav"
-          (click)="openStudy('biblioteca')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="studyView() === 'biblioteca' ? 'page' : null"
-        ><span class="nav-index" aria-hidden="true">08</span>Biblioteca</button>
-        <button
-          class="nav secondary-nav"
-          (click)="openStudy('conquistas')"
-          [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-          [attr.aria-current]="studyView() === 'conquistas' ? 'page' : null"
-        ><span class="nav-index" aria-hidden="true">09</span>Conquistas</button>
-        @if (session().mode === "account") {
-          <button
-            class="nav secondary-nav"
-            (click)="openLessons()"
-            [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            [attr.aria-current]="lessonsView() ? 'page' : null"
-          ><span class="nav-index" aria-hidden="true">10</span>Aulas</button>
-        }
-        @if (canCurate()) {
-          <button
-            class="nav secondary-nav"
-            (click)="openCuration()"
-            [disabled]="saving() || authBusy() || curationBusy() || practiceBusy()"
-            [attr.aria-current]="curationView() ? 'page' : null"
-          >
-            <span class="nav-index" aria-hidden="true">11</span>
-            Curadoria
-          </button>
-        }
-      </aside>
+      @if (!booting() && !bootError() && !landingMode() && !accountView()) {
+        <app-study-navigation [active]="destination()" [disabled]="navigationBusy()" [account]="session().mode === 'account'" [curator]="canCurate()" [admin]="roles().includes('ADMIN')" (navigate)="navigate($event)" />
+      }
       <main id="content" tabindex="-1">
         @if (booting()) {
           <app-mascot pose="boiando" [size]="64" motion="bob" />
@@ -244,6 +49,7 @@
             <button (click)="boot()">Tentar novamente</button>
           </section>
         } @else {
+          @if (sessionError()) { <p class="notice" role="alert">{{ sessionError() }}</p> }
           @if (accountNotice()) {
             <p class="account-success" role="status">{{ accountNotice() }}</p>
           }
@@ -304,7 +110,9 @@
               <p role="status">Carregando a administração…</p>
             }
           } @else if (curationView()) {
-            <app-curation (busyChange)="curationBusy.set($event)" />
+            @defer (on immediate) {
+              <app-curation (busyChange)="curationBusy.set($event)" />
+            } @placeholder { <p role="status">Carregando a curadoria…</p> }
           } @else if (practiceView()) {
             @defer (on immediate) {
               <app-exam
@@ -365,12 +173,7 @@
             <section class="page-intro catalog-intro">
               <div>
                 <h1>Banco de questões</h1>
-                <p>
-                  Escolha um assunto. Entenda o raciocínio.<br
-                    class="desktop"
-                  />
-                  Continue a construir sua base.
-                </p>
+                <p>Escolha uma questão ou filtre por área.</p>
               </div>
               @if (catalogTotal()) {
                 <p class="catalog-progress">
@@ -412,6 +215,9 @@
                   }
                 </select>
               </div>
+              <details class="catalog-more-filters" [open]="extraFilters() || !!advancedFiltersActive()" (toggle)="filtersToggled($event)">
+                <summary>Mais filtros @if (advancedFiltersActive()) { <span>({{ advancedFiltersActive() }} ativos)</span> }</summary>
+                <div class="catalog-extra-fields">
               <div>
                 <label for="topic">Assunto</label
                 ><select id="topic" name="topic" [(ngModel)]="topic">
@@ -441,6 +247,8 @@
                   }
                 </select>
               </div>
+                </div>
+              </details>
               <div class="catalog-filter-actions">
               <button type="submit" [disabled]="loading()">Filtrar</button>
               @if (search || topic || area || year) {

@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { randomUUID } from "node:crypto";
 import { Pool } from "pg";
@@ -20,7 +21,7 @@ test("a professor creates a class, pastes the roster, schedules a lesson, takes 
   const email = (await (await context.request.get("/api/auth/me")).json()).email;
   await pool.query("INSERT INTO account_role(identity_id,role) SELECT identity_id,'PROFESSOR' FROM account WHERE email=$1", [email]);
   await page.goto("/questoes");
-  await page.getByRole("button", { name: "Aulas" }).first().click();
+  await navigateTo(page, "Aulas");
   await page.getByRole("button", { name: "Nova turma" }).click();
   await expect(page.getByLabel("Nome")).toBeFocused();
   await page.getByLabel("Nome").fill(className);

@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { signUp } from "./session-helpers";
 import { createHash, randomUUID } from "node:crypto";
@@ -145,6 +146,7 @@ test("catalog reaches beyond 50 and restores its selection through URL and brows
   await expect(pager(page)).toContainText("Página 3 de 4");
   await page.goForward();
   await expect(pager(page)).toContainText("Página 4 de 4");
+  if (!await page.getByLabel("Assunto", { exact: true }).isVisible()) await page.locator(".catalog-more-filters > summary").click();
   await page.getByLabel("Assunto", { exact: true }).selectOption(customTopic);
   await filter(page);
   await expectList(page, 1);
@@ -163,6 +165,7 @@ test("area and year filters preserve explicit classification and recover from an
   await expectList(page, 1);
   await expect(page.getByRole("heading", { name: title(60), exact: true })).toBeVisible();
   await page.getByLabel("Área", { exact: true }).selectOption("Redes");
+  if (!await page.getByLabel("Assunto", { exact: true }).isVisible()) await page.locator(".catalog-more-filters > summary").click();
   await page.getByLabel("Ano da prova").selectOption("2021");
   await filter(page);
   await expectList(page, 1);
@@ -171,6 +174,7 @@ test("area and year filters preserve explicit classification and recover from an
   await page.reload();
   await expect(page.getByLabel("Área", { exact: true })).toHaveValue("Redes");
   await expect(page.getByLabel("Ano da prova")).toHaveValue("2021");
+  if (!await page.getByLabel("Assunto", { exact: true }).isVisible()) await page.locator(".catalog-more-filters > summary").click();
   await page.getByLabel("Ano da prova").selectOption("2017");
   await filter(page);
   await expect(page.getByRole("heading", { name: "Nenhuma questão nesta seleção" })).toBeVisible();
@@ -291,14 +295,14 @@ test("home counts the full collection and suggests an unanswered item beyond the
   await page.goto(catalogUrl({ area: "Algoritmos", page: "2" }));
   await expect(pager(page)).toContainText("Página 2 de 3");
   const selectionUrl = page.url();
-  await page.getByRole("button", { name: "Início", exact: true }).first().click();
+  await navigateTo(page, "Início");
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator(".cover-summary")).toContainText(`Você respondeu 20 de ${before.total} questões`);
   await expect(page.getByRole("region", { name: "Seu andamento" }).locator(".bar-row").first()).toContainText(`20 de ${before.total}`);
   await expect(page.getByRole("button", { name: `Continuar com: ${suggested[0].title}`, exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: `Resolver: ${suggested[0].title}`, exact: true })).toBeVisible();
 
-  await page.getByRole("button", { name: "Banco de questões", exact: true }).first().click();
+  await navigateTo(page, "Banco de questões");
   await expect(page).toHaveURL(selectionUrl);
   await expect(pager(page)).toContainText("Página 2 de 3");
   await page.reload();
@@ -306,7 +310,7 @@ test("home counts the full collection and suggests an unanswered item beyond the
   await expect(page.getByLabel("Área", { exact: true })).toHaveValue("Algoritmos");
   await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);
   await expect(pager(page)).toContainText("Página 2 de 3");
-  await page.getByRole("button", { name: "Início", exact: true }).first().click();
+  await navigateTo(page, "Início");
   await page.getByRole("button", { name: `Continuar com: ${suggested[0].title}`, exact: true }).click();
   await expect(page.getByRole("heading", { name: suggested[0].title, exact: true })).toBeVisible();
 });

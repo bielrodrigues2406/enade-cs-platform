@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, unlink, writeFile } from "node:fs/promises";
@@ -134,7 +135,7 @@ test.afterAll(() => pool.end());
 
 async function openQueue(page: Page) {
   await page.goto("/questoes");
-  await page.getByRole("button", { name: "Curadoria", exact: true }).click();
+  await navigateTo(page, "Curadoria");
   await page.getByRole("button", { name: "Importação", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Questões importadas", exact: true })).toBeVisible();
 }

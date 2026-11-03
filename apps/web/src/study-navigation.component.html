@@ -1,0 +1,39 @@
+<ng-template #links>
+  <nav aria-label="Estudo">
+    <a href="/" (click)="select($event, 'inicio')" [attr.aria-current]="active() === 'inicio' ? 'page' : null" [attr.aria-disabled]="disabled()">Início</a>
+    @for (group of groups; track group.name) {
+      @if (group.name === 'Apoio') {
+        <details [open]="supportOpen() || supportActive()" (toggle)="supportToggled($event)">
+          <summary>{{ group.name }}</summary>
+          @for (item of group.items; track item.id) {
+            @if (item.id !== 'aulas' || account()) {
+              <a [href]="paths[item.id]" (click)="select($event, item.id)" [attr.aria-current]="active() === item.id ? 'page' : null" [attr.aria-disabled]="disabled()">{{ item.label }}</a>
+            }
+          }
+        </details>
+      } @else {
+        <section [attr.aria-label]="group.name">
+          <h2>{{ group.name }}</h2>
+          @for (item of group.items; track item.id) {
+            <a [href]="paths[item.id]" (click)="select($event, item.id)" [attr.aria-current]="active() === item.id ? 'page' : null" [attr.aria-disabled]="disabled()">{{ item.label }}</a>
+          }
+        </section>
+      }
+    }
+    @if (curator() || admin()) {
+      <section aria-label="Gestão">
+        <h2>Gestão</h2>
+        @if (curator()) { <a href="/curadoria" (click)="select($event, 'curadoria')" [attr.aria-current]="active() === 'curadoria' ? 'page' : null" [attr.aria-disabled]="disabled()">Curadoria</a> }
+        @if (admin()) { <a href="/administracao" (click)="select($event, 'administracao')" [attr.aria-current]="active() === 'administracao' ? 'page' : null" [attr.aria-disabled]="disabled()">Administração</a> }
+      </section>
+    }
+  </nav>
+</ng-template>
+@if (mobile()) {
+  <dialog #drawer aria-labelledby="navigation-title" class="navigation-drawer">
+    <div class="drawer-head"><h2 id="navigation-title">Seu caderno</h2><button type="button" class="outline" (click)="close()" aria-label="Fechar menu">Fechar</button></div>
+    <ng-container [ngTemplateOutlet]="links" />
+  </dialog>
+} @else {
+  <div class="study-sidebar"><ng-container [ngTemplateOutlet]="links" /></div>
+}
