@@ -87,7 +87,7 @@
       }
     </ul>
     @if (locked().length > 2) {
-      <button type="button" class="text-button" [attr.aria-expanded]="showAllMedals()" aria-controls="medals-list" (click)="showAllMedals.set(!showAllMedals())">{{ showAllMedals() ? 'Mostrar só as próximas medalhas' : 'Ver todas as medalhas' }}</button>
+      <button type="button" class="text-button" [attr.aria-expanded]="showAllMedals()" aria-controls="medals-list" (click)="showAllMedals.set(!showAllMedals())">{{ showAllMedals() ? 'Mostrar menos medalhas' : 'Ver todas as medalhas' }}</button>
     }
   </section>
 } @else {

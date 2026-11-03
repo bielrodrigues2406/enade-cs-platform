@@ -216,7 +216,7 @@
                 </select>
               </div>
               <details class="catalog-more-filters" [open]="extraFilters() || !!advancedFiltersActive()" (toggle)="filtersToggled($event)">
-                <summary>Mais filtros @if (advancedFiltersActive()) { <span>({{ advancedFiltersActive() }} ativos)</span> }</summary>
+                <summary>Mais filtros @if (advancedFiltersActive()) { <span>({{ advancedFiltersActive() }} {{ advancedFiltersActive() === 1 ? 'ativo' : 'ativos' }})</span> }</summary>
                 <div class="catalog-extra-fields">
               <div>
                 <label for="topic">Assunto</label

@@ -23,6 +23,8 @@ test("answering fills today's goal, unlocks a medal and shows it in Conquistas",
   await expect(medals.getByRole("listitem")).toHaveCount(3);
   await medals.getByRole("button", { name: "Ver todas as medalhas", exact: true }).click();
   await expect(medals.getByRole("listitem")).toHaveCount(14);
+  await medals.getByRole("button", { name: "Mostrar menos medalhas", exact: true }).click();
+  await expect(medals.getByRole("listitem")).toHaveCount(3);
   // Meta menor: a de hoje fica batida na hora.
   await page.getByRole("radiogroup", { name: "Meta de questões por dia" }).getByText("3", { exact: true }).click();
   await page.getByRole("radiogroup", { name: "Meta de questões por dia" }).getByText("3", { exact: true }).click();
