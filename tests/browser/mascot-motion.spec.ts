@@ -3,7 +3,7 @@ import { test, expect, type Locator, type Route } from "@playwright/test";
 /** Amostra o movimento real do navegador sem depender do instante da captura. */
 async function sampleGesture(image: Locator) {
   return image.evaluate(el => {
-    const animation = el.getAnimations()[0];
+    const animation = el.getAnimations().find((item): item is CSSAnimation => item instanceof CSSAnimation);
     if (!animation?.effect) throw new Error("O gesto não começou depois de carregar a imagem.");
     animation.pause();
     const timing = animation.effect.getComputedTiming();
@@ -48,6 +48,7 @@ test("Dudu waits for every layer, waves, nods and blinks without blocking the fo
   const nod = await sampleGesture(figure.locator(".head-group"));
   expect(nod.moving).not.toBe(nod.resting);
   await figure.evaluate(el => el.getAnimations({ subtree: true }).forEach(animation => {
+    if (!(animation instanceof CSSAnimation)) return;
     animation.pause(); animation.currentTime = Number(animation.effect!.getComputedTiming().duration) * 0.7;
   }));
   expect(await figure.locator(".eyes-open").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
