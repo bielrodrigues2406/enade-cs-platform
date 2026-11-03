@@ -69,7 +69,13 @@
     </section>
 
     <p class="mascot-intro">
-      <app-mascot [pose]="progress()?.active ? 'relogio' : readyErrors() ? 'lupa' : 'contente'" [size]="64" motion="greet" />
+      @if (mascot.enabled()) {
+        <span class="home-mascot-slot" aria-hidden="true">
+          @if (introPose(); as pose) {
+            <app-mascot [pose]="pose" [size]="64" [motion]="pose === 'contente' ? 'greet' : 'none'" />
+          }
+        </span>
+      }
       <span>
         @if (progress()?.active) { Seu treino está salvo. Retome quando estiver pronto. }
         @else if (readyErrors()) { Há conceitos esperando uma nova tentativa no caderno. }

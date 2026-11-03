@@ -18,7 +18,21 @@ test("home shows the study board and leads to study and back", async ({
 }) => {
   // Data fixa: a contagem e as semanas até a prova dependem do dia.
   await page.clock.setFixedTime(new Date(2026, 9, 28, 20, 0));
+  let releaseProgress: (() => void) | undefined;
+  await page.route("**/api/me/progress", async route => {
+    const response = await route.fetch();
+    const data = await response.json();
+    await new Promise<void>(resolve => { releaseProgress = resolve; });
+    await route.fulfill({ response, json: { ...data, errors: { ...data.errors, ready: 1 } } });
+  });
   await page.goto("/");
+  await expect.poll(() => !!releaseProgress).toBe(true);
+  await expect(page.locator(".home-mascot-slot app-mascot")).toHaveCount(0);
+  releaseProgress!();
+  await expect(page.locator(".home-mascot-slot app-mascot")).toHaveClass(/mascot-none/);
+  await expect(page.locator('.home-mascot-slot img[src$="lupa.webp"]')).toBeVisible();
+  await expect(page.locator(".home-mascot-slot app-dudu-figure")).toHaveCount(0);
+  await page.unroute("**/api/me/progress");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Boa noite. Faltam 32 dias para o ENADE.",
   );

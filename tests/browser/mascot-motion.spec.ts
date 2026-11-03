@@ -3,7 +3,7 @@ import { test, expect, type Locator, type Route } from "@playwright/test";
 /** Amostra o movimento real do navegador sem depender do instante da captura. */
 async function sampleGesture(image: Locator) {
   return image.evaluate(el => {
-    const animation = el.getAnimations()[0];
+    const animation = el.getAnimations().find((item): item is CSSAnimation => item instanceof CSSAnimation);
     if (!animation?.effect) throw new Error("O gesto não começou depois de carregar a imagem.");
     animation.pause();
     const timing = animation.effect.getComputedTiming();
@@ -40,13 +40,15 @@ test("Dudu waits for every layer, waves, nods and blinks without blocking the fo
   await expect(figure.locator(".fallback")).toBeHidden();
   const gesture = await sampleGesture(wing);
   expect(gesture.iterations).toBe(1);
-  expect(gesture.duration).toBeLessThanOrEqual(700);
+  expect(gesture.duration).toBeGreaterThanOrEqual(1000);
+  expect(gesture.duration).toBeLessThanOrEqual(1200);
   expect(gesture.moving).not.toBe(gesture.resting);
   expect(gesture.restingIsIdentity).toBe(true);
   expect(gesture.footprintDuring).toEqual(gesture.footprintBefore);
   const nod = await sampleGesture(figure.locator(".head-group"));
   expect(nod.moving).not.toBe(nod.resting);
   await figure.evaluate(el => el.getAnimations({ subtree: true }).forEach(animation => {
+    if (!(animation instanceof CSSAnimation)) return;
     animation.pause(); animation.currentTime = Number(animation.effect!.getComputedTiming().duration) * 0.7;
   }));
   expect(await figure.locator(".eyes-open").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
@@ -99,7 +101,8 @@ test("Dudu celebrates once and immediately stops when reduced motion is enabled"
   await expect.poll(() => image.evaluate(el => el.getAnimations().length)).toBeGreaterThan(0);
   const gesture = await sampleGesture(image);
   expect(gesture.iterations).toBe(1);
-  expect(gesture.duration).toBeLessThanOrEqual(700);
+  expect(gesture.duration).toBeGreaterThanOrEqual(1000);
+  expect(gesture.duration).toBeLessThanOrEqual(1200);
   expect(gesture.moving).not.toBe(gesture.resting);
   await page.emulateMedia({ reducedMotion: "reduce" });
   expect(await image.evaluate(el => getComputedStyle(el).animationName)).toBe("none");

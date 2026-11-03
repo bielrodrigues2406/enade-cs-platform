@@ -5,7 +5,8 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
 import {
-  Body, Controller, Get, HttpCode, Param, Post, Put, Query, Req, Res, UploadedFiles, UseInterceptors,
+  Body, Controller, Get, HttpCode, Injectable, Param, Post, Put, Query, Req, Res, UploadedFiles, UseGuards, UseInterceptors,
+  type CanActivate, type ExecutionContext,
 } from "@nestjs/common";
 import { FileFieldsInterceptor } from "@nestjs/platform-express";
 import { db } from "./database.js";
@@ -93,6 +94,15 @@ export function validCriteria(value: unknown): Criterion[] {
   return criteria;
 }
 
+/** Autoriza antes do Multer: visitantes não podem ocupar memória com PDFs. */
+@Injectable()
+class ImportAdminGuard implements CanActivate {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    await requireRole(context.switchToHttp().getRequest(), "ADMIN");
+    return true;
+  }
+}
+
 @Controller("api/imports")
 export class ExamImportsController {
   @Get() async list(@Req() req: any) {
@@ -108,6 +118,7 @@ export class ExamImportsController {
   }
 
   @Post() @HttpCode(201)
+  @UseGuards(ImportAdminGuard)
   @UseInterceptors(FileFieldsInterceptor(
     [{ name: "exam", maxCount: 1 }, { name: "key", maxCount: 1 }, { name: "standard", maxCount: 1 }],
     { limits: { fileSize: MAX_PDF, files: 3, fields: 7 } }))

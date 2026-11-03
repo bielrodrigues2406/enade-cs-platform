@@ -35,18 +35,24 @@ export class EngagementService {
     return Boolean(s && s.today >= s.goal);
   });
   private pending: Promise<void> | null = null;
+  private generation = 0;
 
   /** Recarrega; chamadas seguidas viram uma só. Falha silenciosa: é enfeite, não bloqueia o estudo. */
   refresh() {
-    this.pending ??= call<Engagement>("me/engagement")
-      .then((data) => this.state.set(data))
+    if (this.pending) return this.pending;
+    const generation = this.generation;
+    const pending = call<Engagement>("me/engagement")
+      .then((data) => { if (generation === this.generation) this.state.set(data); })
       .catch(() => undefined)
-      .finally(() => { this.pending = null; });
-    return this.pending;
+      .finally(() => { if (this.pending === pending) this.pending = null; });
+    this.pending = pending;
+    return pending;
   }
 
   async setGoal(dailyTarget: number) {
-    this.state.set(await call<Engagement>("me/goal", "PUT", { dailyTarget }));
+    const generation = this.generation;
+    const data = await call<Engagement>("me/goal", "PUT", { dailyTarget });
+    if (generation === this.generation) this.state.set(data);
   }
 
   /** O aviso já apareceu: marca no servidor e tira o "novo" localmente. */
@@ -57,6 +63,9 @@ export class EngagementService {
   }
 
   clear() {
+    // Leituras e alterações da sessão anterior podem terminar depois do cadastro/login.
+    this.generation++;
+    this.pending = null;
     this.state.set(null);
   }
 }

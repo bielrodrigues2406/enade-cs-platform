@@ -1,10 +1,10 @@
-:host { display: block; width: 100%; line-height: 0; }
+:host { display: block; width: 100%; line-height: 0; --dudu-gesture-duration: 1100ms; }
 .figure { position: relative; width: 100%; aspect-ratio: 3 / 4; }
 img { display: block; user-select: none; }
-.fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.layers { position: absolute; inset: 0; opacity: 0; transform-origin: 50% 100%; }
+.fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 1; transition: opacity 160ms var(--ease-out), visibility 0s 160ms; }
+.layers { position: absolute; inset: 0; opacity: 0; transform-origin: 50% 100%; transition: opacity 160ms var(--ease-out); }
 :host(.ready) .layers { opacity: 1; }
-:host(.ready) .fallback { visibility: hidden; }
+:host(.ready) .fallback { opacity: 0; visibility: hidden; }
 
 /* Referência de 900×1200: origem (60,180) na arte de 1024×1536.
  * Cada caixa isola sua peça no navegador, preservando os PNGs de autoria. */
@@ -48,39 +48,39 @@ img { display: block; user-select: none; }
 }
 
 :host(.ready.dudu-greet) .wing-left {
-  animation: dudu-wave var(--spring-gentle-duration) var(--ease-out) both;
+  animation: dudu-wave var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 :host(.ready.dudu-greet) .head-group,
 :host(.ready.dudu-listen) .head-group {
-  animation: dudu-nod var(--spring-gentle-duration) var(--ease-out) both;
+  animation: dudu-nod var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 :host(.ready.dudu-celebrate) .layers {
-  animation: dudu-hop var(--spring-gentle-duration) var(--ease-out) both;
+  animation: dudu-hop var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 :host(.ready.dudu-celebrate) .wing-left {
-  animation: dudu-cheer-left var(--spring-gentle-duration) var(--ease-out) both;
+  animation: dudu-cheer-left var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 :host(.ready.dudu-celebrate) .wing-right {
-  animation: dudu-cheer-right var(--spring-gentle-duration) var(--ease-out) both;
+  animation: dudu-cheer-right var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 :host(.ready.dudu-greet) .eyes-open,
 :host(.ready.dudu-celebrate) .eyes-open,
 :host(.ready.dudu-listen) .eyes-open {
-  animation: dudu-blink-open var(--spring-gentle-duration) steps(1, end) both;
+  animation: dudu-blink-open var(--dudu-gesture-duration) steps(1, end) both;
 }
 :host(.ready.dudu-greet) .eyes-closed,
 :host(.ready.dudu-celebrate) .eyes-closed,
 :host(.ready.dudu-listen) .eyes-closed {
-  animation: dudu-blink-closed var(--spring-gentle-duration) steps(1, end) both;
+  animation: dudu-blink-closed var(--dudu-gesture-duration) steps(1, end) both;
 }
 @keyframes dudu-wave {
-  0%, 100% { transform: none; }
-  25%, 65% { transform: rotate(100deg); }
-  45% { transform: rotate(75deg); }
+  0%, 12%, 100% { transform: none; }
+  38%, 70% { transform: rotate(90deg); }
+  54% { transform: rotate(65deg); }
 }
 @keyframes dudu-nod {
-  0%, 100% { transform: none; }
-  45% { transform: rotate(6deg); }
+  0%, 12%, 100% { transform: none; }
+  50% { transform: rotate(5deg); }
 }
 @keyframes dudu-hop {
   0%, 100% { transform: none; }
@@ -107,5 +107,5 @@ img { display: block; user-select: none; }
   78% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  :host(.ready) * { animation: none !important; }
+  * { animation: none !important; transition: none !important; }
 }

@@ -105,6 +105,18 @@ test("only admins import; an upload is processed outside the request and reports
   const student = await session(false);
   assert.equal((await fetch(`${base}/api/imports`, { headers: { Cookie: student } })).status, 403);
   const admin = await session(true);
+  // A autorização precede o parser multipart: sem isso, estes pedidos dão
+  // erro de parsing/tamanho depois de alocar os arquivos de um não-admin.
+  const malformed = (cookie?: string) => ({
+    method: "POST", headers: { ...(cookie ? { Cookie: cookie } : {}), "Content-Type": "multipart/form-data" },
+    body: "TEST ONLY multipart sem boundary",
+  });
+  assert.equal((await fetch(`${base}/api/imports`, malformed())).status, 401);
+  assert.equal((await fetch(`${base}/api/imports`, malformed(student))).status, 403);
+  assert.equal((await fetch(`${base}/api/imports`, malformed(admin))).status, 400);
+  const tooLarge = Buffer.alloc(10 * 1024 * 1024 + 1);
+  assert.equal((await fetch(`${base}/api/imports`, { method: "POST", headers: { Cookie: student }, body: form(tooLarge, pdf("key")) })).status, 403);
+  assert.equal((await fetch(`${base}/api/imports`, { method: "POST", headers: { Cookie: admin }, body: form(tooLarge, pdf("key")) })).status, 413);
   const created = await fetch(`${base}/api/imports`, { method: "POST", headers: { Cookie: admin }, body: form(pdf(randomUUID()), pdf(randomUUID())) });
   assert.equal(created.status, 201);
   const { id, state } = await created.json();

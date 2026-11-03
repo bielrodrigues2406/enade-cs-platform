@@ -10,7 +10,7 @@ import {
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { hashPassword, verifyPassword } from "./password.js";
-import { applyInvitations, grantConfiguredAdmin } from "./roles.js";
+import { applyInvitations } from "./roles.js";
 import { logActivity, recordActivity, requestIp } from "./activity.js";
 import {
   createGuest,
@@ -194,7 +194,6 @@ export class AuthController {
         );
       await applyInvitations(client, guest.id, email);
       await recordActivity(client, { category: "ACCESS", action: "REGISTER", actorId: guest.id, subject: email, ip: requestIp(req) });
-      await grantConfiguredAdmin(client, email);
       // Rotate all guest credentials. A leaked anonymous token must not gain account access.
       await client.query("DELETE FROM browser_session WHERE identity_id=$1", [
         guest.id,

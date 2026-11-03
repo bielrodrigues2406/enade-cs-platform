@@ -18,10 +18,10 @@ img {
   animation: mascot-pop var(--spring-snappy-duration) var(--spring-snappy) both;
 }
 :host(.mascot-greet) img.ready {
-  animation: mascot-greet var(--spring-gentle-duration) var(--ease-out) both;
+  animation: mascot-greet 1100ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 :host(.mascot-celebrate) img.ready {
-  animation: mascot-celebrate var(--spring-gentle-duration) var(--ease-out) both;
+  animation: mascot-celebrate 1100ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 /* Boiar: o pato de borracha na água; usado só enquanto algo carrega. */
 :host(.mascot-bob) img.ready {
