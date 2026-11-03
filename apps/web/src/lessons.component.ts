@@ -9,7 +9,8 @@ type Status = "PRESENT" | "ABSENT" | "LATE" | "EXCUSED";
 type ClassSummary = { id: string; name: string; editionYear: number; members: number; lessons: number; nextLesson: string | null };
 type Member = { id: string; name: string; enrollment: string; email: string | null; hasAccount: boolean; present: number; recorded: number };
 type LessonRow = { id: string; startsAt: string; endsAt: string; room: string; subject: string; topic: string | null; teacher: string; present: number; recorded: number };
-type ClassDetail = { id: string; name: string; editionYear: number; members: Member[]; lessons: LessonRow[]; teachers: { id: string; name: string }[] };
+type ClassDetail = { id: string; name: string; editionYear: number; members: Member[]; lessons: LessonRow[]; teachers: { id: string; name: string }[]; suggestedTeacherId: string | null };
+type ClassTab = "lessons" | "dashboard";
 type RollEntry = { id: string; name: string; enrollment: string; status: Status | null; note: string | null };
 type Roll = { id: string; classId: string; className: string; startsAt: string; endsAt: string; room: string; subject: string; topic: string | null; teacher: string; roll: RollEntry[] };
 type MyLesson = { id: string; className: string; startsAt: string; endsAt: string; room: string; subject: string; topic: string | null; teacher: string; status: Status | null };
@@ -35,7 +36,10 @@ export class LessonsComponent {
   classes = signal<ClassSummary[]>([]);
   detail = signal<ClassDetail | null>(null);
   private choice = inject(ChoiceService);
-  classTab = signal<"lessons" | "dashboard">("lessons");
+  readonly tabs: { id: ClassTab; label: string }[] = [
+    { id: "lessons", label: "Aulas e lista" }, { id: "dashboard", label: "Desempenho" },
+  ];
+  classTab = signal<ClassTab>("lessons");
   roll = signal<Roll | null>(null);
   mine = signal<MyLesson[] | null>(null);
   busy = signal(false);
@@ -62,6 +66,17 @@ export class LessonsComponent {
   isPast(iso: string) {
     return new Date(iso).getTime() < Date.now();
   }
+  navigateTabs(event: KeyboardEvent, index: number) {
+    const last = this.tabs.length - 1;
+    const next = event.key === "Home" ? 0 : event.key === "End" ? last
+      : event.key === "ArrowRight" ? (index + 1) % this.tabs.length
+      : event.key === "ArrowLeft" ? (index + last) % this.tabs.length : null;
+    if (next === null) return;
+    event.preventDefault();
+    this.classTab.set(this.tabs[next].id);
+    const button = event.currentTarget as HTMLButtonElement;
+    button.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
+  }
   async loadClasses() {
     this.notice.set("");
     this.detail.set(null);
@@ -80,12 +95,14 @@ export class LessonsComponent {
     });
   }
   async openClass(id: string) {
-    if (this.detail()?.id !== id) this.classTab.set("lessons");
+    const changed = this.detail()?.id !== id;
+    if (changed) this.classTab.set("lessons");
     this.roll.set(null);
     await this.attempt(async () => {
       const detail = await this.request<ClassDetail>(`classes/${id}`);
       this.detail.set(detail);
-      if (!this.newLesson.teacherId && detail.teachers.length) this.newLesson.teacherId = detail.teachers[0].id;
+      if (changed || !detail.teachers.some((teacher) => teacher.id === this.newLesson.teacherId))
+        this.newLesson.teacherId = this.suggestedTeacher(detail);
     });
   }
   async importRoster(dialog: HTMLDialogElement) {
@@ -118,7 +135,7 @@ export class LessonsComponent {
   async createLesson(dialog: HTMLDialogElement) {
     const detail = this.detail();
     const l = this.newLesson;
-    if (!detail || !l.date) return;
+    if (!detail || !l.date || !l.teacherId) return;
     await this.attempt(async () => {
       const at = (time: string) => new Date(`${l.date}T${time}`).toISOString();
       await this.request(`classes/${detail.id}/lessons`, {
@@ -126,7 +143,7 @@ export class LessonsComponent {
       });
       this.notice.set("Aula marcada.");
       dialog.close();
-      this.newLesson = { ...l, date: "", topic: "" };
+      this.newLesson = { ...l, date: "", topic: "", teacherId: this.suggestedTeacher(detail) };
       await this.openClass(detail.id);
     });
   }
@@ -146,6 +163,11 @@ export class LessonsComponent {
   }
   exportUrl() {
     return `/api/classes/${this.detail()!.id}/attendance.csv`;
+  }
+
+  private suggestedTeacher(detail: ClassDetail) {
+    const id = detail.suggestedTeacherId;
+    return id && detail.teachers.some((teacher) => teacher.id === id) ? id : "";
   }
 
   private async save(entries: RollEntry[]) {

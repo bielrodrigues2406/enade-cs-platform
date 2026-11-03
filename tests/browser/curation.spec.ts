@@ -261,6 +261,17 @@ test("authoring, independent rejection/publication, version replacement and hist
     await page
       .getByRole("button", { name: "Nova questão autoral", exact: true })
       .click();
+    const choices = page.getByRole("radio", { name: /Definir alternativa/ });
+    await expect(choices).toHaveCount(4);
+    for (const choice of await choices.all()) await expect(choice).not.toBeChecked();
+    await page.getByRole("radio", { name: "Definir alternativa B como correta", exact: true }).check();
+    await page.getByRole("button", { name: "Remover alternativa B", exact: true }).click();
+    await expect(choices).toHaveCount(3);
+    for (const choice of await choices.all()) await expect(choice).not.toBeChecked();
+    await expect(page.getByRole("alert")).toContainText("A alternativa correta foi removida");
+    await page.getByRole("button", { name: /Voltar à fila/ }).click();
+    await page.getByRole("button", { name: "Descartar alterações", exact: true }).click();
+    await page.getByRole("button", { name: "Nova questão autoral", exact: true }).click();
     const title = `Aritmética autoral ${randomUUID().slice(0, 8)}`;
     const input = content(title);
     await fillDraft(page, input);
@@ -542,3 +553,5 @@ test("curation navigation stays unavailable to an account without the local cura
   const queue = await context.request.get("/api/curation/questions");
   expect(queue.status()).toBe(403);
 });
+
+

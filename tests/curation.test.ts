@@ -2,6 +2,7 @@ import { after, before, test } from "node:test";
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";
 import { setTimeout as pollDelay } from "node:timers/promises";
+import { createEditorialDraft } from "../apps/api/src/curation.js";
 import { createApp, db } from "../apps/api/src/main.js";
 
 type Actor = { cookie: string; identityId: string };
@@ -847,4 +848,35 @@ test("role revocation and session expiry are checked before editorial mutations"
     );
   }
   assert.equal((await detail(pending.id)).editorialStatus, "IN_REVIEW");
+});
+
+
+test("editorial queue reaches drafts beyond fifty and bounds malformed pages", async () => {
+  const ids = new Set<string>();
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+    for (let index = 1; index <= 65; index++) {
+      const version = await createEditorialDraft(client, author.identityId, {
+        ...content({ title: `000 TEST ONLY fila ${String(index).padStart(3, "0")}` }), origin: "AUTHOR_CREATED",
+      });
+      questionIds.add(version.questionId);
+      ids.add(version.questionId);
+    }
+    await client.query("COMMIT");
+  } catch (error) { await client.query("ROLLBACK"); throw error; }
+  finally { client.release(); }
+  const response = await request("curation/questions?limit=20&offset=50", author.cookie);
+  assert.equal(response.status, 200);
+  const page = await response.json();
+  assert.equal(page.limit, 20);
+  assert.equal(page.offset, 50);
+  assert.ok(page.total >= 65);
+  assert.ok(page.items.some((item: Version) => ids.has(item.questionId)), "rascunhos além do limite antigo precisam ser alcançáveis");
+  const last = await (await request("curation/questions?offset=1000000", author.cookie)).json();
+  assert.ok(last.items.length > 0 && last.items.length <= 20);
+  assert.equal(last.offset + last.items.length, last.total);
+  for (const query of ["limit=0", "limit=51", "offset=-1", "offset=1.5", "offset=1&offset=2", "q=outro"]) {
+    assert.equal((await request("curation/questions?" + query, author.cookie)).status, 400);
+  }
 });

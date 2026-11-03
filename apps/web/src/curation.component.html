@@ -46,7 +46,7 @@
         conteúdo passa por revisão independente antes de ser publicado.
       </p>
       <div class="editorial-queue-heading">
-        <h2>Fila editorial</h2>
+        <h2 id="editorial-queue-title" tabindex="-1">Fila editorial <span class="queue-total">{{ queueTotal() }}</span></h2>
         <button
           class="text-button"
           (click)="loadQueue()"
@@ -123,6 +123,13 @@
             }
           </tbody>
         </table>
+        @if (queueTotal() > 0) {
+        <nav class="queue-pagination" aria-label="Paginação da curadoria">
+          <button class="outline" (click)="changeQueuePage(-1)" [disabled]="loading() || busy() || queueOffset() === 0">Anterior</button>
+          <span aria-live="polite">{{ queueOffset() + 1 }}–{{ queueOffset() + rows().length }} de {{ queueTotal() }}</span>
+          <button class="outline" (click)="changeQueuePage(1)" [disabled]="loading() || busy() || queueOffset() + rows().length >= queueTotal()">Próxima</button>
+        </nav>
+        }
       }
     } @else {
       <button
@@ -362,8 +369,9 @@
                   estrutura de exemplos e código.
                 </p>
               </div>
-              <fieldset class="editorial-options">
+              <fieldset class="editorial-options" id="draft-options" tabindex="-1" [attr.aria-describedby]="answerError() ? 'draft-answer-error' : null">
                 <legend>Alternativas e gabarito</legend>
+                @if (answerError()) { <p class="field-error" role="alert" id="draft-answer-error">{{ answerError() }}</p> }
                 <p class="account-help">
                   Use de 2 a 5 alternativas. Marque uma única resposta correta.
                 </p>
@@ -391,7 +399,7 @@
                           type="radio"
                           name="correctOptionId"
                           [value]="option.id"
-                          [(ngModel)]="draft.correctOptionId"
+                          [ngModel]="draft.correctOptionId" (ngModelChange)="selectCorrectOption($event)"
                           [attr.aria-label]="
                             'Definir alternativa ' +
                             letters[i] +

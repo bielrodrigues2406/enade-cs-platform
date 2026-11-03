@@ -1,0 +1,4 @@
+.queue-total { font-size: var(--text-md); color: var(--color-text-muted); }
+.queue-pagination { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-5); }
+.queue-pagination span { color: var(--color-text-muted); font-size: var(--text-sm); text-align: center; }
+.editorial-table { position: relative; }

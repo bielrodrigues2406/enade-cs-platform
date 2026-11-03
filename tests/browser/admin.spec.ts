@@ -47,6 +47,23 @@ test("sign-up takes name and enrollment, and an admin authorizes a professor", a
   await navigateTo(page, "Administração");
   await expect(page.getByRole("heading", { name: "Administração", level: 1 })).toBeVisible();
 
+  const tabs = page.getByRole("tab");
+  await tabs.first().focus();
+  await page.keyboard.press("End");
+  await expect(page.getByRole("tab", { name: "Atividades", exact: true })).toBeFocused();
+  await page.keyboard.press("Home");
+  await expect(tabs.first()).toBeFocused();
+  await page.getByRole("button", { name: "Cadastrar conta", exact: true }).click();
+  await expect(page.getByLabel("Nome", { exact: true })).toBeFocused();
+  await page.getByLabel("Nome", { exact: true }).fill("A");
+  await page.getByRole("dialog").getByRole("button", { name: "Cadastrar", exact: true }).click();
+  await expect(page.getByText("Informe o nome com pelo menos 2 caracteres.", { exact: true })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.locator('dialog[aria-labelledby="admin-account-title"]')).toBeHidden();
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
   // Autoriza um e-mail que ainda não tem conta: fica aguardando cadastro.
   const professorEmail = email("prof");
   await page.getByRole("textbox", { name: "E-mail" }).fill(professorEmail);
