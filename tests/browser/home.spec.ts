@@ -43,7 +43,7 @@ test("home shows the study board and leads to study and back", async ({
     .getByRole("region", { name: "Seu desempenho por área" })
     .screenshot({ path: "test-results/home-areas.png" });
   await expect(
-    page.getByRole("link", { name: "Início" }).first(),
+    page.getByRole("link", { name: "Início", exact: true }).first(),
   ).toHaveAttribute("aria-current", "page");
 
   await page.getByRole("button", { name: /^Começar por: / }).click();
