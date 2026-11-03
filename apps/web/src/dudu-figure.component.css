@@ -1,0 +1,111 @@
+:host { display: block; width: 100%; line-height: 0; }
+.figure { position: relative; width: 100%; aspect-ratio: 3 / 4; }
+img { display: block; user-select: none; }
+.fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.layers { position: absolute; inset: 0; opacity: 0; transform-origin: 50% 100%; }
+:host(.ready) .layers { opacity: 1; }
+:host(.ready) .fallback { visibility: hidden; }
+
+/* Referência de 900×1200: origem (60,180) na arte de 1024×1536.
+ * Cada caixa isola sua peça no navegador, preservando os PNGs de autoria. */
+.part, .wing { position: absolute; overflow: hidden; }
+.part img, .wing img {
+  position: absolute;
+  max-width: none;
+  width: calc(1024 / var(--source-width) * 100%);
+  height: calc(1536 / var(--source-height) * 100%);
+  left: calc(-1 * var(--source-x) / var(--source-width) * 100%);
+  top: calc(-1 * var(--source-y) / var(--source-height) * 100%);
+}
+.body {
+  z-index: 1;
+  left: 9.89%; top: 44%; width: 79.67%; height: 53.42%;
+  --source-x: 149; --source-y: 708; --source-width: 717; --source-height: 641;
+}
+.head-group { position: absolute; z-index: 2; left: 12.11%; top: 2.67%; width: 82.56%; height: 51.58%; transform-origin: 46% 96%; }
+.head {
+  inset: 0; z-index: 0;
+  --source-x: 169; --source-y: 461; --source-width: 743; --source-height: 619;
+}
+.eyes-open {
+  z-index: 1;
+  left: 16.42%; top: 35.86%; width: 56.53%; height: 20.36%;
+  --source-x: 279; --source-y: 656; --source-width: 460; --source-height: 138;
+}
+.eyes-closed {
+  z-index: 1;
+  left: 16.42%; top: 42%; width: 56.53%; height: 8.08%; opacity: 0;
+  --source-x: 269; --source-y: 696; --source-width: 481; --source-height: 57;
+}
+.wing { top: 53.33%; height: 25%; }
+.wing-left {
+  left: 2.22%; width: 20.89%; transform-origin: 80% 6%;
+  --source-x: 90; --source-y: 841; --source-width: 188; --source-height: 300;
+}
+.wing-right {
+  left: 75%; width: 20.22%; transform-origin: 20% 6%;
+  --source-x: 718; --source-y: 842; --source-width: 182; --source-height: 300;
+}
+
+:host(.ready.dudu-greet) .wing-left {
+  animation: dudu-wave var(--spring-gentle-duration) var(--ease-out) both;
+}
+:host(.ready.dudu-greet) .head-group,
+:host(.ready.dudu-listen) .head-group {
+  animation: dudu-nod var(--spring-gentle-duration) var(--ease-out) both;
+}
+:host(.ready.dudu-celebrate) .layers {
+  animation: dudu-hop var(--spring-gentle-duration) var(--ease-out) both;
+}
+:host(.ready.dudu-celebrate) .wing-left {
+  animation: dudu-cheer-left var(--spring-gentle-duration) var(--ease-out) both;
+}
+:host(.ready.dudu-celebrate) .wing-right {
+  animation: dudu-cheer-right var(--spring-gentle-duration) var(--ease-out) both;
+}
+:host(.ready.dudu-greet) .eyes-open,
+:host(.ready.dudu-celebrate) .eyes-open,
+:host(.ready.dudu-listen) .eyes-open {
+  animation: dudu-blink-open var(--spring-gentle-duration) steps(1, end) both;
+}
+:host(.ready.dudu-greet) .eyes-closed,
+:host(.ready.dudu-celebrate) .eyes-closed,
+:host(.ready.dudu-listen) .eyes-closed {
+  animation: dudu-blink-closed var(--spring-gentle-duration) steps(1, end) both;
+}
+@keyframes dudu-wave {
+  0%, 100% { transform: none; }
+  25%, 65% { transform: rotate(100deg); }
+  45% { transform: rotate(75deg); }
+}
+@keyframes dudu-nod {
+  0%, 100% { transform: none; }
+  45% { transform: rotate(6deg); }
+}
+@keyframes dudu-hop {
+  0%, 100% { transform: none; }
+  25% { transform: scale(1.03, 0.97); }
+  52% { transform: translateY(-5px); }
+  78% { transform: scale(1.02, 0.98); }
+}
+@keyframes dudu-cheer-left {
+  0%, 100% { transform: none; }
+  30%, 65% { transform: rotate(120deg); }
+}
+@keyframes dudu-cheer-right {
+  0%, 100% { transform: none; }
+  30%, 65% { transform: rotate(-120deg); }
+}
+@keyframes dudu-blink-open {
+  0%, 100% { opacity: 1; }
+  62% { opacity: 0; }
+  78% { opacity: 1; }
+}
+@keyframes dudu-blink-closed {
+  0%, 100% { opacity: 0; }
+  62% { opacity: 1; }
+  78% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :host(.ready) * { animation: none !important; }
+}

@@ -1,5 +1,7 @@
 import { Component, Input, computed, inject, signal } from "@angular/core";
 import { MascotService } from "./mascot.service";
+import { DuduFigureComponent } from "./dudu-figure.component";
+import type { MascotMotion } from "./mascot.types";
 
 // Mascote Dudu, o pato de borracha (ver docs/MASCOT.md). Uma pose por
 // momento: comemorar, telas vazias, carregar, erro. Nunca durante a
@@ -12,7 +14,7 @@ export type MascotPose =
 /** Texto alternativo de cada pose, para quando a imagem não é só decoração. */
 export const MASCOT_ALT: Record<MascotPose, string> = {
   acenando: "Dudu, o pato, acenando",
-  comemorando: "Dudu comemorando com confete",
+  comemorando: "Dudu comemorando",
   sequencia: "Dudu com uma chama acesa sobre a cabeça",
   medalha: "Dudu segurando uma medalha",
   ouvindo: "Dudu ouvindo com atenção",
@@ -29,6 +31,7 @@ export const MASCOT_ALT: Record<MascotPose, string> = {
 
 @Component({
   selector: "app-mascot",
+  imports: [DuduFigureComponent],
   templateUrl: "./mascot.component.html",
   styleUrl: "./mascot.component.css",
   host: { "[class]": "'mascot mascot-' + motion", "[style.--mascot-size]": "size + 'px'", "[hidden]": "!visible()" },
@@ -46,11 +49,13 @@ export class MascotComponent {
   /** Largura em px; a altura acompanha a proporção da imagem. */
   @Input() size = 96;
   /** Gestos únicos; só "bob" se repete, enquanto algo carrega. */
-  @Input() motion: "pop" | "greet" | "celebrate" | "bob" | "none" = "pop";
+  @Input() motion: MascotMotion = "pop";
   /** Decorativo (padrão): o texto ao lado já diz tudo e o leitor de tela pula a imagem. */
   @Input() decorative = true;
 
   src = computed(() => `/mascot/${this._pose()}.webp`);
   alt = computed(() => (this.decorative ? "" : MASCOT_ALT[this._pose()]));
   visible = this.prefs.enabled;
+  readonly articulated = computed(() => this.visible()
+    && ["acenando", "contente", "ouvindo", "comemorando"].includes(this._pose()));
 }
