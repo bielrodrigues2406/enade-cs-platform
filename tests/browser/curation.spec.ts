@@ -260,6 +260,17 @@ test("authoring, independent rejection/publication, version replacement and hist
     await page
       .getByRole("button", { name: "Nova questão autoral", exact: true })
       .click();
+    const choices = page.getByRole("radio", { name: /Definir alternativa/ });
+    await expect(choices).toHaveCount(4);
+    for (const choice of await choices.all()) await expect(choice).not.toBeChecked();
+    await page.getByRole("radio", { name: "Definir alternativa B como correta", exact: true }).check();
+    await page.getByRole("button", { name: "Remover alternativa B", exact: true }).click();
+    await expect(choices).toHaveCount(3);
+    for (const choice of await choices.all()) await expect(choice).not.toBeChecked();
+    await expect(page.getByRole("alert")).toContainText("A alternativa correta foi removida");
+    await page.getByRole("button", { name: /Voltar à fila/ }).click();
+    await page.getByRole("button", { name: "Descartar alterações", exact: true }).click();
+    await page.getByRole("button", { name: "Nova questão autoral", exact: true }).click();
     const title = `Aritmética autoral ${randomUUID().slice(0, 8)}`;
     const input = content(title);
     await fillDraft(page, input);
@@ -551,15 +562,3 @@ test("curation navigation stays unavailable to an account without the local cura
 });
 
 
-test("a new draft requires an explicit key and removing it never guesses another", async ({ page, context, provision }) => {
-  await provision(context);
-  await page.goto("/questoes");
-  await page.getByRole("button", { name: "Curadoria", exact: true }).filter({ visible: true }).click();
-  await page.getByRole("button", { name: "Nova questão autoral", exact: true }).click();
-  const choices = page.getByRole("radio", { name: /Definir alternativa/ });
-  for (const choice of await choices.all()) await expect(choice).not.toBeChecked();
-  await page.getByRole("radio", { name: "Definir alternativa B como correta", exact: true }).check();
-  await page.getByRole("button", { name: "Remover alternativa B", exact: true }).click();
-  for (const choice of await choices.all()) await expect(choice).not.toBeChecked();
-  await expect(page.getByRole("alert")).toContainText("A alternativa correta foi removida");
-});
