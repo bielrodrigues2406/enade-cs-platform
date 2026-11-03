@@ -62,7 +62,7 @@ Vantagens: preserva nomes e funções; libera a primeira dobra; não cria novas 
 
 No celular: **Início · Questões · Treinos · Revisão · Menu** fixos no rodapé. Questões reúne objetivas/discursivas; Treinos reúne parcial/provas/2026; Revisão reúne caderno/flashcards; Menu abre apoio, com conta no cabeçalho. Desktop mantém grupos laterais.
 
-É mais acessível para trocas frequentes entre tarefas, mas exige mudança maior de navegação e reserva de espaço inferior para não cobrir respostas, mapa e finalização do treino. Não recomendo começar por B sem testar A. Não criar hubs vazios nem uma sexta opção só para 2026.
+Mantém as cinco categorias ao alcance, mas exige mudança maior de navegação e reserva de espaço inferior para não cobrir respostas, mapa e finalização do treino. Não recomendo começar por B sem testar A. Não criar hubs vazios nem uma sexta opção só para 2026.
 
 Os protótipos permitem abrir/fechar o menu, selecionar destinos e expandir filtros, com conteúdo demonstrativo claramente indicado. Eles **não alteram o aplicativo**. A decisão sobre filtros é ilustrada junto ao menu e pode ser entregue em lote separado.
 
