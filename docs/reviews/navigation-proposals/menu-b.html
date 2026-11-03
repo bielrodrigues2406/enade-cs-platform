@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proposta B · Menu por tarefa</title>
+  <link rel="stylesheet" href="navigation.css">
+  <script src="navigation.js" defer></script>
+</head>
+<body data-proposal="b">
+  <header class="app-header">
+    <a class="brand" href="menu-b.html"><span class="brand-mark" aria-hidden="true">CC</span><span>Preparação ENADE</span></a>
+    <div class="header-actions"><button data-open-account aria-label="Abrir conta">Conta</button></div>
+  </header>
+  <div class="layout">
+    <nav class="sidebar" aria-label="Estudo"></nav>
+    <main id="content">
+      <p class="prototype-note">Proposta B · demonstração de navegação, sem conexão com o sistema. <a href="menu-a.html">Comparar com A</a></p>
+      <h1>Banco de questões</h1>
+      <p class="page-summary">246 questões disponíveis. Escolha por onde começar.</p>
+      <form class="filters">
+        <div><label for="search">Buscar questão</label><input type="search" id="search" placeholder="Título ou trecho do enunciado"></div>
+        <div><label for="area">Área</label><select id="area"><option>Todas as áreas</option><option>Algoritmos</option><option>Redes</option></select></div>
+        <details class="more-filters"><summary>Mais filtros</summary><div class="extra-filters"><div><label for="subject">Assunto</label><select id="subject"><option>Todos os assuntos</option></select></div><div><label for="year">Ano da prova</label><select id="year"><option>Todos os anos</option><option>2008</option><option>2021</option></select></div></div></details>
+        <button class="primary" type="submit">Filtrar</button>
+      </form>
+      <p class="demo-feedback" role="status"></p>
+      <section class="question-list" aria-label="Amostra do catálogo">
+        <article><p class="eyebrow">ENADE 2008 · Acervo oficial</p><h2>Questão 28</h2><p>Prévia do espaço de leitura após a redução do menu. O conteúdo e os filtros desta página são demonstrativos.</p><a href="#content" class="demo-resolve">Ver questão de demonstração</a></article>
+        <article><p class="eyebrow">Navegação proposta</p><h2>As funções continuam disponíveis</h2><p>Abra o menu para acessar questões, treinos, revisão e apoio. Nenhum novo destino foi acrescentado.</p></article>
+      </section>
+    </main>
+  </div>
+  <dialog class="menu-dialog" aria-labelledby="menu-title"><div class="dialog-head"><h2 id="menu-title">Estudar</h2><button data-close aria-label="Fechar menu">Fechar</button></div><nav aria-label="Estudo"></nav></dialog>
+  <dialog class="account-dialog" aria-labelledby="account-title"><div class="dialog-head"><h2 id="account-title">Sua conta</h2><button data-close>Fechar</button></div><p>Meta diária, perfil e saída ficam reunidos aqui. Esta proposta não altera sua conta.</p><button data-destination="Meu perfil">Meu perfil</button><p class="muted">Controles de administração aparecem somente para quem tem permissão.</p></dialog>
+<nav class="bottom-nav" aria-label="Navegação principal"><button type="button" data-destination="Início"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 3l9 7v11h-6v-7H9v7H3Z"/></svg>Início</button><button type="button" data-group="Resolver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h7v18H4Zm9 0h7v18h-7"/></svg>Questões</button><button type="button" data-group="Treinar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4v16l12-8Z"/></svg>Treinos</button><button type="button" data-group="Revisar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7a8 8 0 1 1-1 9M4 7v6h6"/></svg>Revisão</button><button type="button" data-group="Apoio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Menu</button></nav>
+</body>
+</html>

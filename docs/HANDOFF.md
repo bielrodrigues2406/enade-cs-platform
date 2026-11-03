@@ -1,10 +1,10 @@
-# Passagem para o próximo agente (02/11/2026)
+# Passagem para o próximo agente (03/11/2026)
 
 Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migration), `docs/ENGINEERING-AND-DELIVERY.md` §1.3 (manutenção humana) e `docs/UX-DESIGN-SPEC.md`. Responda a Gabriel sempre em pt-BR.
 
 ## 1. Estado atual
 
-- Base desta entrega: `main` em `5b8e414` (PRs #31–#36 integrados). MAS-4 está implementado em `codex/feat-dudu-articulation`: ZIP recebido, quatro fundos corrigidos e movimentos de asas/cabeça/olhos. Build, 182 API e 16 E2E locais passaram; integrar somente após CI completo do HEAD final. Veja MASCOT §10.
+- Base da auditoria DS-5: `main` em `0db9671` (PRs #31–#37 integrados). MAS-4 foi integrado no PR #37 após revisão e CI completo: 182 API, 82 Chromium e imagem de produção. Veja MASCOT §10.
 - Gabriel autorizou nesta conversa criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Essa autorização não inclui deploy nem force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
 - Migrations reservadas: **028** para MAS-2 e **029** para SIM26-1. Próxima livre: **030**; conferir WORKBOARD antes de reservar.
@@ -36,13 +36,13 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 ## 5. O que falta (por prioridade)
 
 1. **Deploy em VPS própria e domínio** (Gabriel comprando). `deploy/vps/` foi feito para dividir o servidor do Mira; adaptar para Caddy próprio com HTTPS do domínio. Nomes sugeridos: cadernocc.com.br (preferido), bitabit.app, gabaritou.com.br. Só publicar com autorização.
-2. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
-3. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória, ainda não iniciada).
-4. **Mascote**: MAS-4 implementado com o ZIP recebido. Validar CI e integrar; animação das poses com acessórios e troca de cena/ícone são trabalho separado, sem novos originais fornecidos para essas cenas.
-5. **Plano até a prova** (aparece como "Em breve" na Biblioteca): semanas até a prova + áreas mais fracas (`/api/me/progress`) → roteiro semanal.
-6. **Materiais por área** ("Em breve"): PDFs e links dos professores; precisa de migration, upload no admin e licença de uso.
-7. Discursivas de 2005 e 2008 (padrão de resposta sem blocos; recorte manual).
-8. Reduzir o pacote inicial (está no limite): mover mais telas para `@defer`, revisar CSS global.
+2. **Design e uso (DS-5):** [auditoria com evidências e propostas A/B](reviews/2026-11-03-design-audit.md). Priorizar menu móvel de dez destinos, vazamento das tabelas, curadoria limitada a 50/246 questões e gabarito autoral A pré-selecionado. Depois: rotas estáveis, primeira dobra do catálogo, estados vazios e defaults dos formulários. Os protótipos são estáticos; o menu do aplicativo ainda não foi alterado.
+3. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
+4. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória, ainda não iniciada). A auditoria de design não a substitui.
+5. **Conteúdo:** 33 PDFs recentes, cinco padrões antigos de FG e fonte legível para 2005 Q60. Quatro discursivas 2005/2008 já entraram no PR #33; não listar novamente todas essas edições como pendentes.
+6. **Operação/acessibilidade:** texto de privacidade institucional (LGL-1), leitor de tela e estados de erro ainda não auditados. Pacote inicial em 496,13 kB no PR #37; preservar carregamento lazy e evitar aumentar o shell.
+
+**Depois do essencial, sem bloquear o próximo lote:** Plano e Materiais, hoje "Em breve" na Biblioteca. Validar necessidade antes de adicionar migration, upload ou fluxos novos. Poses do mascote com acessórios/cenas exigem artes próprias; MAS-4 básico já está integrado e não exige nova biblioteca de animação.
 
 ## 6. O que pode melhorar
 
