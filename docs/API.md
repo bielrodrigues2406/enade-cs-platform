@@ -45,7 +45,7 @@ Todas as rotas abaixo exigem sessão válida e JSON nas escritas. `/curation/acc
 | Método e caminho (prefixo /api) | Entrada | Retorno |
 | --- | --- | --- |
 | GET /curation/access | cookie | `{canCurate:boolean}` |
-| GET /curation/questions | cookie de curadoria | até 50 últimas versões, uma por questão lógica |
+| GET /curation/questions | `limit` (1–50, padrão 20), `offset` (0–1.000.000) | `{items,total,limit,offset}`; uma última versão por questão lógica, pendentes primeiro e ordem natural estável; página fora do fim volta à última. Total/página no mesmo snapshot. Parâmetros inválidos retornam 400 |
 | GET /curation/versions/:id | cookie de curadoria | detalhe editorial, incluindo opções/gabarito não públicos |
 | POST /curation/questions | conteúdo autoral ou oficial | 201 nova questão e rascunho versão 1/revisão 1 |
 | PUT /curation/versions/:id | conteúdo e baseRevision | 200 rascunho atualizado; somente DRAFT/REJECTED |
@@ -245,7 +245,7 @@ Professores e administração (403 para os demais):
 | --- | --- | --- |
 | GET /classes | — | turmas com totais de pessoas e aulas e a próxima aula |
 | POST /classes | `{name,editionYear}` | 201 `{id}` |
-| GET /classes/:id | — | turma, `members` (presenças, se já tem conta pelo prontuário), `lessons` e `teachers` disponíveis |
+| GET /classes/:id | — | turma, `members` (presenças, se já tem conta pelo prontuário), `lessons` e `teachers` disponíveis; `suggestedTeacherId` é o professor da sessão, ou `null` para administração (inclusive com os dois papéis) |
 | POST /classes/:id/members | `{text}` colado da planilha (nome, prontuário, e-mail opcional; tab, `;` ou `,`) | `{added,updated,skipped}`; prontuário identifica a pessoa na turma |
 | POST /classes/:id/members/:member/remove | `{}` | `{removed:true}` |
 | POST /classes/:id/lessons | `{startsAt,endsAt,room,subject,topic?,teacherId}` | 201 `{id}`; fim depois do início; professor com papel |
