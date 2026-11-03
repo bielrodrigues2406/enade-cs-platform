@@ -91,6 +91,13 @@ export class ProfileComponent {
   emailChanged() {
     return this.email.trim().toLowerCase() !== (this.loaded()?.email ?? "");
   }
+  enrollmentChanged() {
+    const existing = this.loaded()?.enrollment;
+    return Boolean(existing) && (this.enrollment.trim().toUpperCase() || null) !== existing;
+  }
+  needsProfilePassword() {
+    return this.emailChanged() || this.enrollmentChanged();
+  }
   nameError() {
     const length = this.name.trim().length;
     return length < 2 ? "Informe seu nome." : length > 120 ? "Use até 120 caracteres." : "";
@@ -111,8 +118,8 @@ export class ProfileComponent {
   async saveProfile() {
     this.profileSubmitted = true;
     if (this.savingProfile() || this.nameError() || this.enrollmentError()) return;
-    if (this.emailChanged() && !this.profilePassword) {
-      this.profileStatus.set({ kind: "error", text: "Para mudar o e-mail, informe a senha atual." });
+    if (this.needsProfilePassword() && !this.profilePassword) {
+      this.profileStatus.set({ kind: "error", text: "Informe a senha atual para confirmar essa alteração." });
       return;
     }
     this.savingProfile.set(true);
@@ -122,7 +129,7 @@ export class ProfileComponent {
         name: this.name.trim(),
         enrollment: this.enrollment.trim().toUpperCase(),
         email: this.email.trim(),
-        ...(this.emailChanged() ? { currentPassword: this.profilePassword } : {}),
+        ...(this.needsProfilePassword() ? { currentPassword: this.profilePassword } : {}),
       });
       this.loaded.set({ ...this.loaded()!, ...saved });
       this.name = saved.name ?? "";

@@ -76,12 +76,13 @@ export class LessonsController {
     uuid(id, "Turma");
     const info = (await db.query(`SELECT id,name,edition_year AS "editionYear" FROM study_class WHERE id=$1`, [id])).rows[0];
     if (!info) fail("Turma não encontrada.", 404);
-    // Presença de cada aluno e se já tem conta (mesmo prontuário).
+    // Presença de cada aluno e se já tem conta (mesmo prontuário e, quando informado na lista, mesmo e-mail).
     const members = (await db.query(
       `SELECT m.id,m.name,m.enrollment,m.email,(a.identity_id IS NOT NULL) AS "hasAccount",
          count(t.*) FILTER (WHERE t.status IN ('PRESENT','LATE'))::int AS present,
          count(t.*)::int AS recorded
-       FROM class_member m LEFT JOIN account a ON a.enrollment=m.enrollment
+       FROM class_member m
+       LEFT JOIN account a ON a.enrollment=m.enrollment AND (m.email IS NULL OR lower(m.email)=lower(a.email))
        LEFT JOIN attendance t ON t.member_id=m.id
        WHERE m.class_id=$1 GROUP BY m.id,a.identity_id ORDER BY m.name`, [id],
     )).rows;
@@ -111,19 +112,31 @@ export class LessonsController {
     if (typeof body?.text !== "string" || body.text.length > 60000) fail("Cole a lista da planilha.", 400);
     const { rows, skipped } = parseRoster(body.text);
     if (!rows.length) fail("Nenhuma linha com nome e prontuário foi encontrada.", 400);
+    if (rows.length > 300) fail("Importe no máximo 300 alunos por vez.", 400);
+    const client = await db.connect();
     let added = 0, updated = 0;
-    for (const row of rows) {
-      const result = await db.query(
-        `INSERT INTO class_member(id,class_id,name,enrollment,email) VALUES($1,$2,$3,$4,$5)
-         ON CONFLICT (class_id,enrollment) DO UPDATE SET name=EXCLUDED.name,email=COALESCE(EXCLUDED.email,class_member.email)
-         RETURNING (xmax = 0) AS inserted`,
-        [randomUUID(), id, row.name, row.enrollment, row.email],
-      );
-      if (result.rows[0].inserted) added++; else updated++;
+    try {
+      await client.query("BEGIN");
+      const name = (await client.query("SELECT name FROM study_class WHERE id=$1 FOR SHARE", [id])).rows[0]?.name;
+      if (!name) fail("Turma não encontrada.", 404);
+      for (const row of rows) {
+        const result = await client.query(
+          `INSERT INTO class_member(id,class_id,name,enrollment,email) VALUES($1,$2,$3,$4,$5)
+           ON CONFLICT (class_id,enrollment) DO UPDATE SET name=EXCLUDED.name,email=COALESCE(EXCLUDED.email,class_member.email)
+           RETURNING (xmax = 0) AS inserted`,
+          [randomUUID(), id, row.name, row.enrollment, row.email],
+        );
+        if (result.rows[0].inserted) added++; else updated++;
+      }
+      await recordActivity(client, { category: "CLASS", action: "ROSTER_IMPORTED", actorId: user.id, subject: name,
+        detail: `${added} novos, ${updated} atualizados` });
+      await client.query("COMMIT");
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
     }
-    const name = (await db.query("SELECT name FROM study_class WHERE id=$1", [id])).rows[0]?.name;
-    await recordActivity(db, { category: "CLASS", action: "ROSTER_IMPORTED", actorId: user.id, subject: name,
-      detail: `${added} novos, ${updated} atualizados` });
     return { added, updated, skipped };
   }
 
@@ -140,6 +153,7 @@ export class LessonsController {
     uuid(id, "Turma");
     const startsAt = new Date(body?.startsAt), endsAt = new Date(body?.endsAt);
     if (Number.isNaN(+startsAt) || Number.isNaN(+endsAt) || endsAt <= startsAt) fail("Horário inválido: o fim deve ser depois do início.", 400);
+    if (!(await db.query("SELECT 1 FROM study_class WHERE id=$1", [id])).rowCount) fail("Turma não encontrada.", 404);
     const teacher = uuid(String(body?.teacherId ?? ""), "Professor");
     if (!(await rolesOf(teacher)).length) fail("Escolha um professor cadastrado.", 400);
     const lessonId = randomUUID();
@@ -210,13 +224,16 @@ export class LessonsController {
       "SELECT t.lesson_id,t.member_id,t.status FROM attendance t JOIN lesson l ON l.id=t.lesson_id WHERE l.class_id=$1", [id],
     )).rows;
     const status = new Map(marks.map((m) => [`${m.lesson_id}:${m.member_id}`, STATUS_CSV[m.status]]));
-    const cell = (value: string) => (/[;"\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value);
+    const cell = (value: string) => {
+      const safe = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+      return /[;",\r\n]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
+    };
     const date = (d: Date) => d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
     const lines = [["Nome", "Prontuário", ...lessons.map((l) => date(l.starts_at)), "Presenças", "%"].join(";")];
     for (const member of members) {
       const row = lessons.map((l) => status.get(`${l.id}:${member.id}`) ?? "");
       const present = row.filter((s) => s === "P" || s === "A").length;
-      lines.push([cell(member.name), member.enrollment, ...row, String(present),
+      lines.push([cell(member.name), cell(member.enrollment), ...row, String(present),
         lessons.length ? String(Math.round((present / lessons.length) * 100)) : ""].join(";"));
     }
     res.setHeader("Content-Type", "text/csv; charset=utf-8");
@@ -231,7 +248,8 @@ export class LessonsController {
     const lessons = (await db.query(
       `SELECT l.id,c.name AS "className",l.starts_at AS "startsAt",l.ends_at AS "endsAt",l.room,l.subject,l.topic,
          COALESCE(t2.display_name,t2.email) AS teacher,t.status
-       FROM account a JOIN class_member m ON m.enrollment=a.enrollment
+       FROM account a
+       JOIN class_member m ON m.enrollment=a.enrollment AND (m.email IS NULL OR lower(m.email)=lower(a.email))
        JOIN study_class c ON c.id=m.class_id JOIN lesson l ON l.class_id=c.id
        JOIN account t2 ON t2.identity_id=l.teacher_id
        LEFT JOIN attendance t ON t.lesson_id=l.id AND t.member_id=m.id

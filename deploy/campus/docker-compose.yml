@@ -1,0 +1,88 @@
+# Implantação no servidor do câmpus IFSP (docs/DEPLOY.md §5.1).
+#
+# Características desta configuração:
+#   - autossuficiente: não depende de rede externa de outro projeto;
+#   - PostgreSQL 17 isolado na rede interna do Compose (sem porta no host);
+#   - aplicação publicada apenas em loopback (127.0.0.1:3000 por padrão) para
+#     receber tráfego HTTPS do proxy reverso institucional (Nginx, Apache,
+#     Traefik ou Caddy);
+#   - aceita tanto build local a partir do repositório clonado
+#     (`docker compose up -d --build`) quanto imagem pronta do GHCR
+#     (`docker compose pull && docker compose up -d`);
+#   - senha do banco passada via PGPASSWORD (caracteres especiais não quebram URL).
+
+name: enade
+
+services:
+  db:
+    image: postgres:17.6-bookworm@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: enade
+      POSTGRES_USER: enade
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no arquivo .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U enade -d enade"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 512m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  app:
+    image: ${APP_IMAGE:-ghcr.io/bielrodrigues2406/enade-cs-platform}:${VERSAO:-latest}
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    init: true
+    restart: unless-stopped
+    ports:
+      - "${APP_BIND:-127.0.0.1}:${APP_PORT:-3000}:3000"
+    environment:
+      PGHOST: db
+      PGPORT: "5432"
+      PGDATABASE: enade
+      PGUSER: enade
+      PGPASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no arquivo .env}
+      APP_ORIGIN: ${APP_ORIGIN:?defina APP_ORIGIN com https:// no arquivo .env}
+      TRUST_PROXY: "${TRUST_PROXY:-1}"
+      BOOTSTRAP_CONTENT: "${BOOTSTRAP_CONTENT:-1}"
+    volumes:
+      - data:/data
+    tmpfs:
+      - /tmp:size=128m,mode=1777,noexec,nosuid,nodev
+    networks:
+      - internal
+    depends_on:
+      db:
+        condition: service_healthy
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 128
+    mem_limit: 1g
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  pgdata:
+  data:

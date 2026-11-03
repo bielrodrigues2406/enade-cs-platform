@@ -683,7 +683,7 @@
                 <button type="button" class="text-button" [attr.aria-pressed]="mascot.enabled()" (click)="mascot.set(!mascot.enabled())">{{ mascot.enabled() ? 'Ocultar Dudu' : 'Mostrar Dudu' }}</button>
               }
             </div>
-            <p class="site-footer-base">ENADE 2026 · domingo, 29 de novembro · <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade" target="_blank" rel="noopener noreferrer">cronograma no Inep</a></p>
+            <p class="site-footer-base">{{ upcomingExamFooter() ? 'ENADE 2026 · domingo, 29 de novembro' : 'Preparação ENADE · Ciência da Computação' }} · <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade" target="_blank" rel="noopener noreferrer">cronograma no Inep</a></p>
           </footer>
         }
         <app-choice-dialog />

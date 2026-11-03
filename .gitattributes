@@ -4,5 +4,6 @@
 data/** -text
 *.webp binary
 *.pdf binary
-# Migrations ficam sempre com LF no disco, inclusive no Windows.
+# Migrations e scripts shell ficam sempre com LF no disco, inclusive no Windows.
 migrations/*.sql text eol=lf
+*.sh text eol=lf

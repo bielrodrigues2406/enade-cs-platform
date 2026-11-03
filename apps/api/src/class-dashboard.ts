@@ -28,7 +28,8 @@ export type ClassDashboard = {
 const FIRST_ATTEMPTS = `
   WITH roster AS (
     SELECT m.id AS member_id,a.identity_id FROM class_member m
-    JOIN account a ON a.enrollment=m.enrollment WHERE m.class_id=$1
+    JOIN account a ON a.enrollment=m.enrollment AND (m.email IS NULL OR lower(m.email)=lower(a.email))
+    WHERE m.class_id=$1
   )
   SELECT DISTINCT ON (e.owner_id,v.question_id)
     r.member_id,e.owner_id,v.topic AS area,e.correct,e.origin
@@ -47,7 +48,8 @@ async function students(classId: string): Promise<StudentRow[]> {
        (SELECT count(*) FILTER (WHERE f.correct)::int FROM first f WHERE f.member_id=m.id) AS "firstCorrect",
        (SELECT count(*)::int FROM practice_attempt p WHERE p.owner_id=a.identity_id AND p.state='COMPLETED') AS "practiceDone",
        (SELECT max(e.answered_at) FROM answer_event e WHERE e.owner_id=a.identity_id) AS "lastActivity"
-     FROM class_member m LEFT JOIN account a ON a.enrollment=m.enrollment
+     FROM class_member m
+     LEFT JOIN account a ON a.enrollment=m.enrollment AND (m.email IS NULL OR lower(m.email)=lower(a.email))
      WHERE m.class_id=$1 ORDER BY m.name`, [classId],
   )).rows;
 }

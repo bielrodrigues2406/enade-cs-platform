@@ -50,6 +50,7 @@ export function requestIp(req: any): string | null {
 
 export async function purgeOldActivity() {
   await db.query("DELETE FROM activity_log WHERE at < now() - make_interval(days => $1)", [ACTIVITY_RETENTION_DAYS]);
+  await db.query("DELETE FROM browser_session WHERE expires_at <= now()");
 }
 
 function clip(value: string | null | undefined, max: number) {

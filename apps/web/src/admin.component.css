@@ -1,0 +1,126 @@
+.admin-actions-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+}
+
+dialog.admin-manage-dialog {
+  width: min(40rem, calc(100% - var(--space-8)));
+}
+
+.admin-manage-sub {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.admin-manage-section {
+  padding-top: var(--space-5);
+  margin-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.admin-manage-section:first-child {
+  padding-top: 0;
+  margin-top: 0;
+  border-top: 0;
+}
+
+.admin-manage-section h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+}
+
+.admin-manage-note {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.admin-manage-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.admin-manage-fields label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+}
+
+.admin-manage-fields input {
+  width: 100%;
+  min-width: 0;
+}
+
+.admin-field-wide {
+  grid-column: 1 / -1;
+}
+
+.admin-password-gen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.admin-password-gen input {
+  flex: 1 1 12rem;
+  min-width: 0;
+  font-family: var(--font-mono);
+}
+
+.admin-manage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.admin-sessions-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.admin-sessions-row p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* Mantém o botão Mostrar/Ocultar estável ao clicar ou tocar. */
+.password-toggle {
+  top: 0;
+  bottom: 0;
+  margin-block: auto;
+  height: 44px;
+  min-height: 44px;
+  transform: none;
+}
+
+.password-toggle:active:not(:disabled) {
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  dialog.admin-manage-dialog {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .admin-manage-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

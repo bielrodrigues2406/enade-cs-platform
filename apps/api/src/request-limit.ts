@@ -1,5 +1,5 @@
 import { logActivity, requestIp } from "./activity.js";
-import { digest } from "./session.js";
+import { digest, normalizeIpForLimit } from "./session.js";
 
 // Limite geral de requisições à API por IP, contra um cliente que dispara em
 // excesso (robô, laço com defeito, ataque simples de negação de serviço). Um
@@ -32,12 +32,15 @@ export function requestLimiter(limit = requestLimitPerMinute()) {
     const now = Date.now();
     if (now >= nextSweep || windows.size > MAX_TRACKED_IPS) {
       for (const [key, value] of windows) if (value.end <= now) windows.delete(key);
-      // Ainda cheio: muitos IPs ao mesmo tempo; recomeça a contagem em vez de crescer sem fim.
-      if (windows.size > MAX_TRACKED_IPS) windows.clear();
+      while (windows.size >= MAX_TRACKED_IPS) {
+        const oldest = windows.keys().next().value;
+        if (oldest === undefined) break;
+        windows.delete(oldest);
+      }
       nextSweep = now + WINDOW_MS;
     }
     const ip = requestIp(req) ?? "unknown";
-    const key = digest(ip);
+    const key = digest(normalizeIpForLimit(ip));
     const current = windows.get(key) ?? { count: 0, end: now + WINDOW_MS, logged: false };
     current.count++;
     windows.set(key, current);

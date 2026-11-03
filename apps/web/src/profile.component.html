@@ -72,9 +72,9 @@
             spellcheck="false"
           />
         </div>
-        @if (emailChanged()) {
+        @if (needsProfilePassword()) {
           <div class="account-field profile-confirm">
-            <label for="profile-password">Senha atual, para mudar o e-mail</label>
+            <label for="profile-password">Senha atual, para confirmar a alteração</label>
             <input
               id="profile-password"
               type="password"
@@ -83,7 +83,7 @@
               maxlength="256"
               autocomplete="current-password"
             />
-            <p class="account-help">Você passa a entrar com o novo e-mail.</p>
+            <p class="account-help">{{ emailChanged() ? "Você passa a entrar com o novo e-mail." : "Exigida ao alterar um prontuário já salvo." }}</p>
           </div>
         }
         <button type="submit">{{ savingProfile() ? "Salvando…" : "Salvar dados" }}</button>

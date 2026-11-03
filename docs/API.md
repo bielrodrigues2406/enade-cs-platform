@@ -178,7 +178,7 @@ A web usa `/treino?attempt=UUID&item=2`, sem resposta ou identidade na URL. Nave
 | --- | --- | --- |
 | GET /me/progress | cookie | `{areas:[{area,published,firstAttempts,firstCorrect}],errors:{total,ready},active}`. Conta a primeira resposta a cada questão (estudo livre ou treino/prova finalizados); `published` usa a mesma seleção do treino. Só áreas com questões |
 | GET /me/profile | conta | `{email,name,enrollment,createdAt}`; visitante 401 |
-| PUT /me/profile | `{name,enrollment,email?,currentPassword?}` | `{email,name,enrollment}`; e-mail novo exige a senha atual (403 se errada, limite de tentativas do login); prontuário ou e-mail de outra conta 409 |
+| PUT /me/profile | `{name,enrollment?,email?,currentPassword?}` | `{email,name,enrollment}`; omitir `enrollment` preserva o já salvo; trocar e-mail ou alterar/remover prontuário já preenchido exige `currentPassword` (403 se errada, limite de tentativas do login); prontuário ou e-mail de outra conta 409 |
 | POST /me/password | `{currentPassword,newPassword}` | 200 `{status:"CHANGED"}`; encerra as outras sessões da conta, mantém a atual |
 
 ## Papéis e administração (ROLE-1, D14)
@@ -186,13 +186,17 @@ A web usa `/treino?attempt=UUID&item=2`, sem resposta ou identidade na URL. Nave
 | Método e caminho (prefixo /api) | Entrada | Retorno |
 | --- | --- | --- |
 | GET /access | cookie | `{roles:("ADMIN"\|"PROFESSOR")[]}`; vazio para visitantes e contas sem papel |
-| GET /admin/users | cookie de admin; `q` até 120, `page` | `{total,page,pageSize,items:[{id,email,name,enrollment,createdAt,roles,answers}],invitations:[{email,role,createdAt,claimedAt,claimedName,claimedEnrollment}]}`; com `claimedAt`, a pessoa já se cadastrou e o papel espera a confirmação do admin |
+| GET /admin/users | cookie de admin; `q` até 120, `page` | `{total,page,pageSize,items:[{id,email,name,enrollment,createdAt,roles,answers,activeSessions}],invitations:[{email,role,createdAt,claimedAt,claimedName,claimedEnrollment}]}`; com `claimedAt`, a pessoa já se cadastrou e o papel espera a confirmação do admin |
 | POST /admin/roles | `{email,role}` | 200 `{status:"GRANTED"}` se a conta existe (também confirma um convite reivindicado); `{status:"INVITED"}` se ainda não existe: o cadastro só reivindica e o admin confirma |
 | POST /admin/accounts | `{email,password,name?,enrollment?,role?}` | 201 `{id,email,role}`; cadastro manual pelo admin, com papel opcional já concedido; e-mail ou prontuário existente 409 |
+| PUT /admin/accounts/:id | `{name,enrollment,email?,adminPassword?,reason?}` | 200 `{id,email,name,enrollment}`; revalida ADMIN na transação; mudar e-mail exige `adminPassword` (403 se incorreta); bloqueia edição de outro ADMIN (409); prontuário ou e-mail duplicado 409 |
+| POST /admin/accounts/:id/reset-password | `{newPassword,adminPassword,reason?}` | 200 `{status:"PASSWORD_RESET",revokedSessions}`; exige `adminPassword` (403 se incorreta), encerra todas as sessões da conta e preserva histórico de estudo; bloqueado para contas ADMIN (409) |
+| POST /admin/accounts/:id/revoke-sessions | `{reason?}` | 200 `{status:"REVOKED",revokedSessions}`; encerra sessões ativas (mantém a sessão atual se o admin revogar as próprias outras sessões; bloqueia outro ADMIN com 409) |
+| POST /admin/accounts/:id/delete | `{adminPassword,reason?}` | 200 `{status:"DELETED"\|"ANONYMIZED"}`; exige `adminPassword` (403 se incorreta); remove sessões, respostas, simulados e dados pessoais (LGPD), anonimizando o registro apenas quando houver autoria institucional em aulas/curadoria; bloqueado para ADMIN (409) |
 | GET /admin/activity | cookie de admin; `category` (ACCESS, SECURITY, ACCOUNT, ROLE, CONTENT, CLASS), `q` até 120 (e-mail, assunto ou IP), `page` | `{total,page,pageSize:10,retentionDays,summary:{logins,failedLogins,blocked,suspiciousIps},items:[{id,at,category,action,actorEmail,actorName,subject,detail,ip}]}`; resumo das últimas 24 h; IP só em ACCESS e SECURITY |
 | POST /admin/roles/revoke | `{email,role}` | 200 `{status:"REVOKED"}`; remove papel e convite. Admin não remove o próprio ADMIN (409) |
 
-Sem o papel, as rotas `/admin/*` respondem 403. Professores e administração também usam `/curation/*` (cadastrar questões); publicar continua exigindo outra pessoa na revisão. Toda atribuição, convite e remoção fica em `role_event`. O primeiro administrador é criado no servidor: `npm run admin:role -- grant <e-mail>` (ou `node dist/admin/admin-role.mjs grant <e-mail>` na imagem); a conta precisa existir. `ADMIN_EMAILS` não concede mais papéis: o cadastro público não confirma a titularidade do e-mail.
+Sem o papel, as rotas `/admin/*` respondem 403. Professores e administração também usam `/curation/*` (cadastrar questões); publicar continua exigindo outra pessoa na revisão (sem participação prévia na edição daquela versão). Toda atribuição, convite e remoção fica em `role_event`. O primeiro administrador, a recuperação de senha administrativa e a exclusão de contas administrativas são feitos no servidor: `npm run admin:role -- grant <e-mail>`, `npm run admin:role -- reset-password <e-mail> [nova-senha]` e `npm run admin:role -- delete-account <e-mail>` (ou `node dist/admin/admin-role.mjs ...` na imagem); a conta precisa existir. `ADMIN_EMAILS` não concede mais papéis: o cadastro público não confirma a titularidade do e-mail.
 
 O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE3012345`), opcionais. Prontuário repetido responde 409.
 

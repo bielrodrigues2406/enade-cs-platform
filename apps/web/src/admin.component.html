@@ -55,7 +55,7 @@
           </div>
           <div class="admin-account-password">
             <label for="new-account-password">Senha inicial</label>
-            <div class="password-row">
+            <div class="admin-password-gen">
               <input id="new-account-password" name="password" type="text" maxlength="128" [(ngModel)]="newAccount.password" autocomplete="new-password" spellcheck="false" aria-describedby="new-account-password-help" />
               <button type="button" class="text-button" (click)="suggestPassword()">Gerar</button>
             </div>
@@ -199,25 +199,35 @@
                 <td>{{ user.answers }}</td>
                 <td>{{ date(user.createdAt) }}</td>
                 <td class="admin-actions">
-                  @if (user.roles.includes("PROFESSOR")) {
+                  <div class="admin-actions-group">
+                    @if (user.roles.includes("PROFESSOR")) {
+                      <button
+                        type="button"
+                        class="text-button"
+                        (click)="revoke(user.email, 'PROFESSOR')"
+                        [attr.aria-label]="'Remover papel de professor de ' + user.email"
+                      >
+                        Remover professor
+                      </button>
+                    } @else {
+                      <button
+                        type="button"
+                        class="text-button"
+                        (click)="grant(user, 'PROFESSOR')"
+                        [attr.aria-label]="'Tornar professor: ' + user.email"
+                      >
+                        Tornar professor
+                      </button>
+                    }
                     <button
                       type="button"
                       class="text-button"
-                      (click)="revoke(user.email, 'PROFESSOR')"
-                      [attr.aria-label]="'Remover papel de professor de ' + user.email"
+                      (click)="openManage(user, manageDialog)"
+                      [attr.aria-label]="'Gerenciar conta de ' + user.email"
                     >
-                      Remover professor
+                      Gerenciar
                     </button>
-                  } @else {
-                    <button
-                      type="button"
-                      class="text-button"
-                      (click)="grant(user, 'PROFESSOR')"
-                      [attr.aria-label]="'Tornar professor: ' + user.email"
-                    >
-                      Tornar professor
-                    </button>
-                  }
+                  </div>
                 </td>
               </tr>
             }
@@ -249,6 +259,299 @@
       <p class="muted">Nenhuma conta encontrada.</p>
     }
   </section>
+
+  <dialog #manageDialog class="sheet-dialog admin-manage-dialog" aria-labelledby="admin-manage-title">
+    <div class="sheet-dialog-head">
+      <div>
+        <p class="sheet-dialog-eyebrow">Manutenção de conta</p>
+        <h2 id="admin-manage-title">{{ managedUser()?.name || "Sem nome" }}</h2>
+        @if (managedUser(); as user) {
+          <p class="admin-manage-sub">
+            {{ user.email }} · {{ user.answers }} {{ user.answers === 1 ? "resposta" : "respostas" }}
+          </p>
+        }
+      </div>
+      <button type="button" class="sheet-close" (click)="manageDialog.close()" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
+    </div>
+    <div class="sheet-dialog-body">
+      <div class="sheet-dialog-content">
+        @if (managedUser(); as user) {
+          <form class="admin-manage-section" (ngSubmit)="saveManagedProfile(manageDialog)" aria-labelledby="manage-profile-title" novalidate>
+            <h3 id="manage-profile-title">Dados cadastrais</h3>
+            <p class="admin-manage-note">
+              Corrija nome, prontuário ou e-mail mantendo todo o histórico de estudo da conta.
+            </p>
+            <fieldset [disabled]="savingEdit()">
+              <div class="admin-manage-fields">
+                <div>
+                  <label for="manage-account-name">Nome</label>
+                  <input
+                    id="manage-account-name"
+                    name="manageName"
+                    required
+                    minlength="2"
+                    maxlength="120"
+                    [(ngModel)]="editForm.name"
+                    autocomplete="off"
+                    (blur)="editNameChecked.set(true)"
+                    [attr.aria-invalid]="editNameChecked() && managedNameError() ? 'true' : null"
+                    [attr.aria-describedby]="editNameChecked() && managedNameError() ? 'manage-account-name-error' : null"
+                  />
+                  @if (editNameChecked() && managedNameError()) {
+                    <p id="manage-account-name-error" class="field-error" role="alert">{{ managedNameError() }}</p>
+                  }
+                </div>
+                <div>
+                  <label for="manage-account-enrollment">Prontuário IFSP <span class="optional">opcional</span></label>
+                  <input
+                    id="manage-account-enrollment"
+                    name="manageEnrollment"
+                    maxlength="12"
+                    [(ngModel)]="editForm.enrollment"
+                    placeholder="PE3012345"
+                    autocapitalize="characters"
+                    spellcheck="false"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="admin-field-wide">
+                  <label for="manage-account-email">E-mail</label>
+                  <input
+                    id="manage-account-email"
+                    name="manageEmail"
+                    type="email"
+                    required
+                    maxlength="254"
+                    [(ngModel)]="editForm.email"
+                    autocomplete="off"
+                    autocapitalize="none"
+                    spellcheck="false"
+                  />
+                </div>
+                @if (managedEmailChanged()) {
+                  <div class="admin-field-wide">
+                    <label for="manage-admin-password">Sua senha de administrador</label>
+                    <div class="password-row">
+                      <input
+                        id="manage-admin-password"
+                        name="manageAdminPassword"
+                        [type]="showEditAdminPassword ? 'text' : 'password'"
+                        maxlength="256"
+                        [(ngModel)]="editForm.adminPassword"
+                        autocomplete="current-password"
+                      />
+                      <button
+                        type="button"
+                        class="text-button password-toggle"
+                        (click)="showEditAdminPassword = !showEditAdminPassword"
+                        [attr.aria-pressed]="showEditAdminPassword"
+                      >
+                        {{ showEditAdminPassword ? "Ocultar" : "Mostrar" }}
+                      </button>
+                    </div>
+                    <p class="account-help">Exigida porque o e-mail é usado para entrar na conta.</p>
+                  </div>
+                }
+                <div class="admin-field-wide">
+                  <label for="manage-account-reason">Motivo <span class="optional">opcional</span></label>
+                  <input
+                    id="manage-account-reason"
+                    name="manageReason"
+                    maxlength="160"
+                    [(ngModel)]="editForm.reason"
+                    placeholder="Ex.: prontuário corrigido a pedido da coordenação"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              @if (editError()) {
+                <p class="field-error" role="alert">{{ editError() }}</p>
+              }
+              <div class="admin-manage-actions">
+                <button type="submit">{{ savingEdit() ? "Salvando…" : "Salvar dados" }}</button>
+              </div>
+            </fieldset>
+          </form>
+
+          <section class="admin-manage-section" aria-labelledby="manage-reset-title">
+            <h3 id="manage-reset-title">Redefinir senha</h3>
+            @if (user.roles.includes("ADMIN")) {
+              <p class="admin-manage-note">
+                Contas da administração trocam a própria senha em Meu perfil ou pelo comando <code>admin:role</code> no servidor.
+              </p>
+            } @else {
+              <p class="admin-manage-note">
+                Defina uma senha provisória e entregue-a pessoalmente ou por canal institucional. As sessões abertas desta conta serão encerradas.
+              </p>
+              <form (ngSubmit)="resetManagedPassword(manageDialog)" novalidate>
+                <fieldset [disabled]="resettingPassword()">
+                  <div class="admin-manage-fields">
+                    <div class="admin-field-wide">
+                      <label for="reset-new-password">Nova senha provisória</label>
+                      <div class="admin-password-gen">
+                        <input
+                          id="reset-new-password"
+                          name="resetNewPassword"
+                          type="text"
+                          maxlength="128"
+                          [(ngModel)]="resetForm.newPassword"
+                          autocomplete="new-password"
+                          spellcheck="false"
+                          aria-describedby="reset-new-password-help"
+                        />
+                        <button type="button" class="text-button" (click)="suggestResetPassword()">Gerar</button>
+                      </div>
+                      <p id="reset-new-password-help" class="account-help">De 12 a 128 caracteres. Peça que a pessoa troque em Meu perfil ao entrar.</p>
+                    </div>
+                    <div class="admin-field-wide">
+                      <label for="reset-admin-password">Sua senha de administrador</label>
+                      <div class="password-row">
+                        <input
+                          id="reset-admin-password"
+                          name="resetAdminPassword"
+                          [type]="showResetAdminPassword ? 'text' : 'password'"
+                          maxlength="256"
+                          [(ngModel)]="resetForm.adminPassword"
+                          autocomplete="current-password"
+                        />
+                        <button
+                          type="button"
+                          class="text-button password-toggle"
+                          (click)="showResetAdminPassword = !showResetAdminPassword"
+                          [attr.aria-pressed]="showResetAdminPassword"
+                        >
+                          {{ showResetAdminPassword ? "Ocultar" : "Mostrar" }}
+                        </button>
+                      </div>
+                    </div>
+                    <div class="admin-field-wide">
+                      <label for="reset-reason">Motivo <span class="optional">opcional</span></label>
+                      <input
+                        id="reset-reason"
+                        name="resetReason"
+                        maxlength="160"
+                        [(ngModel)]="resetForm.reason"
+                        placeholder="Ex.: estudante pediu redefinição presencialmente"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                  @if (resetError()) {
+                    <p class="field-error" role="alert">{{ resetError() }}</p>
+                  }
+                  <div class="admin-manage-actions">
+                    <button type="submit" class="outline">{{ resettingPassword() ? "Redefinindo…" : "Redefinir senha" }}</button>
+                  </div>
+                </fieldset>
+              </form>
+            }
+          </section>
+
+          <section class="admin-manage-section" aria-labelledby="manage-sessions-title">
+            <h3 id="manage-sessions-title">Sessões ativas</h3>
+            <div class="admin-sessions-row">
+              <p>
+                {{
+                  user.activeSessions === 0
+                    ? "Nenhum aparelho conectado agora."
+                    : user.activeSessions === 1
+                      ? "1 aparelho conectado."
+                      : user.activeSessions + " aparelhos conectados."
+                }}
+              </p>
+              <button
+                type="button"
+                class="outline"
+                [disabled]="revokingSessions() || user.activeSessions === 0"
+                (click)="revokeManagedSessions(manageDialog)"
+              >
+                {{ revokingSessions() ? "Encerrando…" : "Encerrar sessões" }}
+              </button>
+            </div>
+            @if (sessionError()) {
+              <p class="field-error" role="alert">{{ sessionError() }}</p>
+            }
+          </section>
+
+          <section class="admin-manage-section" aria-labelledby="manage-delete-title">
+            <h3 id="manage-delete-title">Excluir conta e dados de estudo</h3>
+            @if (user.roles.includes("ADMIN")) {
+              <p class="admin-manage-note">
+                Contas da administração só podem ser excluídas pelo comando
+                <code>admin:role delete-account</code> no servidor.
+              </p>
+            } @else {
+              <form (ngSubmit)="deleteManagedAccount(manageDialog)" novalidate>
+                <p class="admin-manage-note">
+                  Remove a conta, respostas, simulados e histórico de estudo conforme pedido do titular (LGPD). Ação irreversível.
+                </p>
+                <fieldset [disabled]="deletingAccount()">
+                  <div class="admin-manage-fields">
+                    <div>
+                      <label for="delete-confirm-text">Digite <strong>EXCLUIR</strong></label>
+                      <input
+                        id="delete-confirm-text"
+                        name="deleteConfirmText"
+                        maxlength="16"
+                        [(ngModel)]="deleteForm.confirmText"
+                        placeholder="EXCLUIR"
+                        autocapitalize="characters"
+                        spellcheck="false"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="admin-field-wide">
+                      <label for="delete-admin-password">Sua senha de administrador</label>
+                      <div class="password-row">
+                        <input
+                          id="delete-admin-password"
+                          name="deleteAdminPassword"
+                          [type]="showDeleteAdminPassword ? 'text' : 'password'"
+                          maxlength="256"
+                          [(ngModel)]="deleteForm.adminPassword"
+                          autocomplete="current-password"
+                        />
+                        <button
+                          type="button"
+                          class="text-button password-toggle"
+                          (click)="showDeleteAdminPassword = !showDeleteAdminPassword"
+                          [attr.aria-pressed]="showDeleteAdminPassword"
+                        >
+                          {{ showDeleteAdminPassword ? "Ocultar" : "Mostrar" }}
+                        </button>
+                      </div>
+                    </div>
+                    <div class="admin-field-wide">
+                      <label for="delete-reason">Motivo <span class="optional">opcional</span></label>
+                      <input
+                        id="delete-reason"
+                        name="deleteReason"
+                        maxlength="160"
+                        [(ngModel)]="deleteForm.reason"
+                        placeholder="Ex.: solicitação do estudante por e-mail institucional"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                  @if (deleteError()) {
+                    <p class="field-error" role="alert">{{ deleteError() }}</p>
+                  }
+                  <div class="admin-manage-actions">
+                    <button type="submit" class="outline">{{ deletingAccount() ? "Excluindo…" : "Excluir conta e dados" }}</button>
+                  </div>
+                </fieldset>
+              </form>
+            }
+          </section>
+        }
+      </div>
+      <div class="sheet-dialog-actions">
+        <button type="button" class="outline" (click)="manageDialog.close()">Fechar</button>
+      </div>
+    </div>
+  </dialog>
   }
   </div>
 </section>

@@ -148,6 +148,7 @@ class App {
   @ViewChild(StudyNavigationComponent) private navigation?: StudyNavigationComponent;
   @ViewChild("accountPopover") private accountPopover?: ElementRef<HTMLElement>;
   readonly extraFilters = signal(false);
+  upcomingExamFooter() { return Date.now() <= new Date(2026, 10, 29, 23, 59, 59, 999).getTime(); }
   navigationBusy() { return this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy(); }
   openNavigation() { this.navigation?.open(); }
   navigate(destination: Destination) {

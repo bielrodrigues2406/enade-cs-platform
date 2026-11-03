@@ -15,6 +15,7 @@ type UserRow = {
   createdAt: string;
   roles: Role[];
   answers: number;
+  activeSessions: number;
 };
 /** Convite de papel; com `claimedAt`, a pessoa já se cadastrou e aguarda confirmação. */
 type Invitation = {
@@ -31,12 +32,19 @@ export function generatePassword() {
   return [0, 4, 8, 12].map((i) => chars.slice(i, i + 4).join("")).join("-");
 }
 
+function validateDisplayName(value: string): string {
+  const length = value.trim().replace(/\s+/g, " ").length;
+  return length < 2 ? "Informe o nome com pelo menos 2 caracteres."
+    : length > 120 ? "Use até 120 caracteres no nome." : "";
+}
+
 export const ROLE_LABEL: Record<Role, string> = { ADMIN: "Administração", PROFESSOR: "Professor" };
 
 @Component({
   selector: "app-admin",
   imports: [FormsModule, ExamImportComponent, ActivityComponent],
   templateUrl: "./admin.component.html",
+  styleUrl: "./admin.component.css",
 })
 export class AdminComponent {
   @Output() back = new EventEmitter<void>();
@@ -59,6 +67,24 @@ export class AdminComponent {
   createError = signal("");
   nameChecked = signal(false);
 
+  managedUser = signal<UserRow | null>(null);
+  editForm = { name: "", enrollment: "", email: "", adminPassword: "", reason: "" };
+  resetForm = { newPassword: "", adminPassword: "", reason: "" };
+  deleteForm = { confirmText: "", adminPassword: "", reason: "" };
+  sessionReason = "";
+  savingEdit = signal(false);
+  editError = signal("");
+  editNameChecked = signal(false);
+  resettingPassword = signal(false);
+  resetError = signal("");
+  revokingSessions = signal(false);
+  sessionError = signal("");
+  deletingAccount = signal(false);
+  deleteError = signal("");
+  showEditAdminPassword = false;
+  showResetAdminPassword = false;
+  showDeleteAdminPassword = false;
+
   ngOnInit() {
     void this.load(1);
   }
@@ -74,9 +100,15 @@ export class AdminComponent {
     button.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
   }
   accountNameError() {
-    const length = this.newAccount.name.trim().replace(/\s+/g, " ").length;
-    return length < 2 ? "Informe o nome com pelo menos 2 caracteres."
-      : length > 120 ? "Use até 120 caracteres no nome." : "";
+    return validateDisplayName(this.newAccount.name);
+  }
+  managedNameError() {
+    return validateDisplayName(this.editForm.name);
+  }
+  managedEmailChanged() {
+    const current = this.managedUser()?.email ?? "";
+    const next = this.editForm.email.trim().toLowerCase();
+    return Boolean(current && next && next !== current);
   }
   pageCount() {
     const data = this.data();
@@ -126,6 +158,157 @@ export class AdminComponent {
   }
   suggestPassword() {
     this.newAccount.password = generatePassword();
+  }
+  openManage(user: UserRow, dialog: HTMLDialogElement) {
+    this.managedUser.set(user);
+    this.editForm = {
+      name: user.name ?? "",
+      enrollment: user.enrollment ?? "",
+      email: user.email,
+      adminPassword: "",
+      reason: "",
+    };
+    this.resetForm = { newPassword: generatePassword(), adminPassword: "", reason: "" };
+    this.deleteForm = { confirmText: "", adminPassword: "", reason: "" };
+    this.sessionReason = "";
+    this.editError.set("");
+    this.editNameChecked.set(false);
+    this.resetError.set("");
+    this.sessionError.set("");
+    this.deleteError.set("");
+    this.showEditAdminPassword = false;
+    this.showResetAdminPassword = false;
+    this.showDeleteAdminPassword = false;
+    dialog.showModal();
+  }
+  suggestResetPassword() {
+    this.resetForm.newPassword = generatePassword();
+  }
+  async saveManagedProfile(dialog: HTMLDialogElement) {
+    const user = this.managedUser();
+    if (!user) return;
+    this.editError.set("");
+    this.editNameChecked.set(true);
+    if (this.managedNameError()) {
+      dialog.querySelector<HTMLInputElement>("#manage-account-name")?.focus();
+      return;
+    }
+    const email = this.editForm.email.trim();
+    if (!email) return this.editError.set("Informe o e-mail.");
+    if (this.managedEmailChanged() && !this.editForm.adminPassword) {
+      return this.editError.set("Confirme sua senha de administrador para alterar o e-mail.");
+    }
+    this.savingEdit.set(true);
+    try {
+      const updated = await this.request<{ email: string; name: string | null }>(
+        `admin/accounts/${user.id}`,
+        {
+          name: this.editForm.name.trim(),
+          enrollment: this.editForm.enrollment.trim().toUpperCase(),
+          email,
+          adminPassword: this.managedEmailChanged() ? this.editForm.adminPassword : undefined,
+          reason: this.editForm.reason.trim() || undefined,
+        },
+        "PUT",
+      );
+      dialog.close();
+      this.notice.set(`Dados da conta de ${updated.email} atualizados.`);
+      await this.load(this.data()?.page ?? 1);
+    } catch (error) {
+      this.editError.set(this.message(error));
+    } finally {
+      this.savingEdit.set(false);
+    }
+  }
+  async resetManagedPassword(dialog: HTMLDialogElement) {
+    const user = this.managedUser();
+    if (!user) return;
+    this.resetError.set("");
+    const length = [...this.resetForm.newPassword].length;
+    if (length < 12 || length > 128) {
+      return this.resetError.set("A senha provisória deve ter de 12 a 128 caracteres.");
+    }
+    if (!this.resetForm.adminPassword) {
+      return this.resetError.set("Confirme sua senha de administrador para redefinir a senha.");
+    }
+    this.resettingPassword.set(true);
+    try {
+      const result = await this.request<{ revokedSessions: number }>(
+        `admin/accounts/${user.id}/reset-password`,
+        {
+          newPassword: this.resetForm.newPassword,
+          adminPassword: this.resetForm.adminPassword,
+          reason: this.resetForm.reason.trim() || undefined,
+        },
+      );
+      dialog.close();
+      const sessionsNote = result.revokedSessions
+        ? ` (${result.revokedSessions} sessão(ões) encerrada(s))`
+        : "";
+      this.notice.set(
+        `Senha de ${user.email} redefinida${sessionsNote}. Entregue a senha provisória por um canal seguro.`,
+      );
+      await this.load(this.data()?.page ?? 1);
+    } catch (error) {
+      this.resetError.set(this.message(error));
+    } finally {
+      this.resettingPassword.set(false);
+    }
+  }
+  async revokeManagedSessions(dialog: HTMLDialogElement) {
+    const user = this.managedUser();
+    if (!user) return;
+    this.sessionError.set("");
+    this.revokingSessions.set(true);
+    try {
+      const result = await this.request<{ revokedSessions: number }>(
+        `admin/accounts/${user.id}/revoke-sessions`,
+        { reason: this.sessionReason.trim() || undefined },
+      );
+      dialog.close();
+      this.notice.set(
+        result.revokedSessions
+          ? `${result.revokedSessions} sessão(ões) de ${user.email} encerrada(s).`
+          : `Nenhuma sessão ativa para encerrar em ${user.email}.`,
+      );
+      await this.load(this.data()?.page ?? 1);
+    } catch (error) {
+      this.sessionError.set(this.message(error));
+    } finally {
+      this.revokingSessions.set(false);
+    }
+  }
+  async deleteManagedAccount(dialog: HTMLDialogElement) {
+    const user = this.managedUser();
+    if (!user) return;
+    this.deleteError.set("");
+    if (this.deleteForm.confirmText.trim().toUpperCase() !== "EXCLUIR") {
+      return this.deleteError.set("Digite EXCLUIR para confirmar a remoção definitiva.");
+    }
+    if (!this.deleteForm.adminPassword) {
+      return this.deleteError.set("Confirme sua senha de administrador para excluir a conta.");
+    }
+    this.deletingAccount.set(true);
+    try {
+      const result = await this.request<{ status: "DELETED" | "ANONYMIZED" }>(
+        `admin/accounts/${user.id}/delete`,
+        {
+          adminPassword: this.deleteForm.adminPassword,
+          reason: this.deleteForm.reason.trim() || undefined,
+        },
+      );
+      dialog.close();
+      this.notice.set(
+        result.status === "DELETED"
+          ? `Conta e dados de estudo de ${user.email} excluídos.`
+          : `Dados pessoais e de estudo de ${user.email} excluídos (autoria institucional anonimizada).`,
+      );
+      await this.load(1);
+    } catch (error) {
+      this.deleteError.set(this.message(error));
+    } finally {
+      this.deletingAccount.set(false);
+    }
   }
   /** Cadastro feito pelo admin: a conta já nasce com o papel escolhido, sem convite. */
   async createAccount(dialog: HTMLDialogElement) {
@@ -177,9 +360,9 @@ export class AdminComponent {
       return null;
     }
   }
-  private async request<T>(path: string, body?: unknown): Promise<T> {
+  private async request<T>(path: string, body?: unknown, method?: "GET" | "POST" | "PUT"): Promise<T> {
     const res = await fetch("/api/" + path, {
-      method: body === undefined ? "GET" : "POST",
+      method: method ?? (body === undefined ? "GET" : "POST"),
       headers: { "Content-Type": "application/json" },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
