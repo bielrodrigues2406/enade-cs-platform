@@ -195,6 +195,9 @@ test("answers and review marks resume after reload and final result keeps blanks
   const persisted = await currentView(page);
   expect(persisted.summary).toBeNull(); expect(persisted.items[0].answer.marked).toBe(true);
   expect(persisted.items.every((item: any) => item.result === undefined)).toBe(true);
+  await questionButton(page, 10).click();
+  await expect(page.locator(".practice-item-actions").getByRole("button", { name: "Revisar e finalizar", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Próxima questão", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Revisar e finalizar", exact: true }).click();
   const confirmation = page.getByRole("dialog", { name: "Finalizar este treino?" });
   await expect(confirmation).toContainText("2 respondidas · 8 em branco · 1 marcada para revisar.");

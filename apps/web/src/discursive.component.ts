@@ -136,6 +136,13 @@ export class DiscursiveComponent {
     try { await this.pendingSave; } finally { this.pendingSave = null; }
   }
 
+  /** A prova só troca de questão depois da confirmação do rascunho. */
+  async saveBeforeLeave(): Promise<boolean> {
+    await this.flush();
+    return !!this.detail() && !this.busy()
+      && (this.submitted() || this.body() === (this.detail()?.response?.body ?? ""));
+  }
+
   /** Uma gravação por vez; texto digitado durante o pedido usa a revisão confirmada. */
   private async saveDrafts() {
     while (!this.locked && !this.destroyed) {
