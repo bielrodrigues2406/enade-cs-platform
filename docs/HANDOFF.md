@@ -4,7 +4,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
-- Base desta entrega: `main` em `08ecdf7` (PRs #31–#35 integrados). A branch do Claude já está contida nessa base. MAS-2, CNT-FINAL e SIM26-1 foram integrados. MAS-3 acrescenta gestos curtos de cumprimento/comemoração, sem novas dependências; veja WORKBOARD e MASCOT §8.
+- Base desta entrega: `main` em `5b8e414` (PRs #31–#36 integrados). MAS-4 está implementado em `codex/feat-dudu-articulation`: ZIP recebido, quatro fundos corrigidos e movimentos de asas/cabeça/olhos. Build, 182 API e 16 E2E locais passaram; integrar somente após CI completo do HEAD final. Veja MASCOT §10.
 - Gabriel autorizou nesta conversa criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Essa autorização não inclui deploy nem force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
 - Migrations reservadas: **028** para MAS-2 e **029** para SIM26-1. Próxima livre: **030**; conferir WORKBOARD antes de reservar.
@@ -31,14 +31,14 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 4. Mascote
 
-**Decidido: Dudu, o pato de borracha** com lápis azul-marinho. Tudo em **`docs/MASCOT.md`**: 14 poses integradas às telas, preferência, gestor de ritmo e reflexão. MAS-3 dá movimento ao corpo inteiro por CSS, após a imagem carregar. Gabriel pediu articulação real em seguida: MAS-4 usará PNG em camadas; os sete prompts estão em **`docs/MASCOT-ANIMATION-PROMPTS.md`**, e as artes ainda são necessárias. Não chamar os gestos de MAS-3 de animação facial. Respeitar movimento reduzido e manter leitura/ritmo estáticos. Capturas de 32 situações em desktop/celular foram entregues a Gabriel antes desta mudança.
+**Dudu articulado:** as quatro poses sem acessórios usam seis camadas transparentes. Acena com uma asa, comemora com as duas, inclina a cabeça e pisca; os gestos terminam em 610 ms. Leitura e ritmo continuam estáticos, com movimento reduzido e preferência de ocultar respeitados. Fontes/proveniência em `design/mascot/articulated/`; implementação lazy, sem biblioteca nova e com pose estática de reserva. Poses com acessórios mantêm a arte anterior. Não há laços de piscada/respiração nem olhos seguindo cursor. Enquadramento e pivôs ficam no CSS.
 
 ## 5. O que falta (por prioridade)
 
 1. **Deploy em VPS própria e domínio** (Gabriel comprando). `deploy/vps/` foi feito para dividir o servidor do Mira; adaptar para Caddy próprio com HTTPS do domínio. Nomes sugeridos: cadernocc.com.br (preferido), bitabit.app, gabaritou.com.br. Só publicar com autorização.
 2. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
 3. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória, ainda não iniciada).
-4. **Mascote**: etapas 1 a 3 entregues no #34. Cena e ícone atuais já vieram no #32; novas artes inline comparadas, ainda sem originais locais para substituição. Regras e pendências em MASCOT.md.
+4. **Mascote**: MAS-4 implementado com o ZIP recebido. Validar CI e integrar; animação das poses com acessórios e troca de cena/ícone são trabalho separado, sem novos originais fornecidos para essas cenas.
 5. **Plano até a prova** (aparece como "Em breve" na Biblioteca): semanas até a prova + áreas mais fracas (`/api/me/progress`) → roteiro semanal.
 6. **Materiais por área** ("Em breve"): PDFs e links dos professores; precisa de migration, upload no admin e licença de uso.
 7. Discursivas de 2005 e 2008 (padrão de resposta sem blocos; recorte manual).

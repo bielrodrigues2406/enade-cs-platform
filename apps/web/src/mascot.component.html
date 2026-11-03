@@ -1,2 +1,12 @@
-<img [src]="src()" [alt]="alt()" [class.ready]="imageReady()" (load)="imageReady.set(true)"
-  loading="lazy" decoding="async" draggable="false" />
+@if (articulated()) {
+  @defer (on immediate) {
+    <app-dudu-figure [gesture]="motion" [fallback]="src()" [label]="alt()" />
+  } @placeholder {
+    <img [src]="src()" [alt]="alt()" loading="lazy" decoding="async" draggable="false" />
+  } @error {
+    <img [src]="src()" [alt]="alt()" loading="lazy" decoding="async" draggable="false" />
+  }
+} @else {
+  <img [src]="src()" [alt]="alt()" [class.ready]="imageReady()" (load)="imageReady.set(true)"
+    loading="lazy" decoding="async" draggable="false" />
+}

@@ -20,27 +20,71 @@ async function sampleGesture(image: Locator) {
   });
 }
 
-test("Dudu waits for a slow image, greets once and leaves the form usable", async ({ page }) => {
+test("Dudu waits for every layer, waves, nods and blinks without blocking the form", async ({ page }) => {
   let pendingImage: Route | undefined;
-  await page.route("**/mascot/acenando.webp", route => { pendingImage = route; });
+  await page.route("**/mascot/articulated/head.webp", route => { pendingImage = route; });
   await page.goto("/questoes");
   await page.getByRole("button", { name: "Entrar", exact: true }).first().click();
-  const image = page.locator("app-account app-mascot img");
+  const figure = page.locator("app-account app-dudu-figure");
+  const wing = figure.locator(".wing-left");
   await expect.poll(() => !!pendingImage).toBe(true);
-  expect(await image.evaluate(el => getComputedStyle(el).animationName)).toBe("none");
-  await pendingImage!.continue();
-  await expect.poll(() => image.evaluate(el => (el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
-  await expect.poll(() => image.evaluate(el => el.getAnimations().length)).toBeGreaterThan(0);
+  await expect(figure.locator(".fallback")).toBeVisible();
+  expect(await figure.locator(".layers").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
+  expect(await wing.evaluate(el => getComputedStyle(el).animationName)).toBe("none");
   const email = page.getByRole("textbox", { name: "E-mail", exact: true });
-  const gesture = await sampleGesture(image);
+  await email.focus();
+  await page.keyboard.type("aluno@example.invalid");
+  await expect(email).toHaveValue("aluno@example.invalid");
+  await pendingImage!.continue();
+  await expect(figure).toHaveClass(/ready/);
+  await expect(figure.locator(".fallback")).toBeHidden();
+  const gesture = await sampleGesture(wing);
   expect(gesture.iterations).toBe(1);
   expect(gesture.duration).toBeLessThanOrEqual(700);
   expect(gesture.moving).not.toBe(gesture.resting);
   expect(gesture.restingIsIdentity).toBe(true);
   expect(gesture.footprintDuring).toEqual(gesture.footprintBefore);
-  await email.focus();
-  await page.keyboard.type("aluno@example.invalid");
+  const nod = await sampleGesture(figure.locator(".head-group"));
+  expect(nod.moving).not.toBe(nod.resting);
+  await figure.evaluate(el => el.getAnimations({ subtree: true }).forEach(animation => {
+    animation.pause(); animation.currentTime = Number(animation.effect!.getComputedTiming().duration) * 0.7;
+  }));
+  expect(await figure.locator(".eyes-open").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
+  expect(await figure.locator(".eyes-closed").evaluate(el => getComputedStyle(el).opacity)).toBe("1");
+  expect(await figure.locator(".eyes-closed").evaluate(el => {
+    const box = el.getBoundingClientRect();
+    const topImage = document.elementsFromPoint(box.x + box.width / 2, box.y + box.height / 2)
+      .find(candidate => candidate instanceof HTMLImageElement && el.closest("app-dudu-figure")!.contains(candidate));
+    return !!topImage?.closest(".eyes-closed");
+  })).toBe(true);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  expect(await figure.evaluate(el => el.getAnimations({ subtree: true }).length)).toBe(0);
+  expect(await figure.locator(".eyes-open").evaluate(el => getComputedStyle(el).opacity)).toBe("1");
+  expect(await figure.locator(".eyes-closed").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
   await expect(email).toHaveValue("aluno@example.invalid");
+});
+
+test("a missing layer preserves the static duck and the account controls", async ({ page }) => {
+  await page.route("**/mascot/articulated/left-wing.webp", route => route.fulfill({ status: 503, body: "" }));
+  await page.goto("/questoes");
+  await page.getByRole("button", { name: "Entrar", exact: true }).first().click();
+  const figure = page.locator("app-account app-dudu-figure");
+  await expect(figure.locator(".fallback")).toBeVisible();
+  await expect(figure).not.toHaveClass(/ready/);
+  expect(await figure.locator(".layers").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
+  await page.getByRole("textbox", { name: "E-mail", exact: true }).fill("teste@example.invalid");
+  await expect(page.getByRole("button", { name: "Entrar", exact: true }).last()).toBeEnabled();
+});
+
+test("hidden Dudu does not request the articulated layers", async ({ page }) => {
+  const requests: string[] = [];
+  page.on("request", request => { if (request.url().includes("/mascot/articulated/")) requests.push(request.url()); });
+  await page.goto("/questoes");
+  await page.getByRole("button", { name: "Ocultar Dudu", exact: true }).click();
+  await page.getByRole("button", { name: "Entrar", exact: true }).first().click();
+  await expect(page.getByRole("heading", { name: "Entrar", exact: true })).toBeVisible();
+  await expect(page.locator("app-dudu-figure")).toHaveCount(0);
+  expect(requests).toEqual([]);
 });
 
 test("Dudu celebrates once and immediately stops when reduced motion is enabled", async ({ page }) => {
@@ -88,6 +132,13 @@ test("consecutive medals each get a gesture without losing the close button's ke
   await page.getByRole("button", { name: "Confirmar resposta" }).click();
   const toast = page.locator(".toast");
   await expect(toast).toContainText("Meta do dia batida");
+  const figure = toast.locator("app-dudu-figure");
+  await expect(figure).toHaveClass(/ready/);
+  for (const selector of [".wing-left", ".wing-right", ".layers"]) {
+    const gesture = await sampleGesture(figure.locator(selector));
+    expect(gesture.iterations).toBe(1);
+    expect(gesture.moving).not.toBe(gesture.resting);
+  }
   await toast.getByRole("button", { name: "Fechar aviso" }).click();
   await expect(toast.locator(".toast-title")).toHaveText("Primeiro passo");
   const firstDuck = await toast.locator("app-mascot").elementHandle();
