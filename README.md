@@ -7,7 +7,7 @@ Plataforma de estudo para o ENADE de Ciência da Computação do IFSP Presidente
 - **Banco de questões:** 246 objetivas oficiais de 2005 a 2021, com imagem da prova, gabarito, área e explicação, além das questões autorais.
 - **Treinos:** por quantidade ou área (simulado de Redes, por exemplo), com cronômetro opcional; prova completa da edição em 4 h com pausa; "Refazer as erradas".
 - **Caderno de erros** com revisão espaçada e **discursivas** com padrão de resposta e autoavaliação.
-- **Contas e papéis:** perfil, administração, professores, turmas, chamada pelo celular e painel de desempenho.
+- **Contas e papéis:** perfil, administração (correção cadastral, redefinição de senha provisória e encerramento de sessões), professores, turmas, chamada pelo celular e painel de desempenho.
 - **Curadoria:** cadastro de questões com revisão por outra pessoa; importador de provas novas (PDF + gabarito) com editor de recortes.
 - **Segurança:** limites contra força bruta e excesso de requisições; registro de atividades para a administração.
 
@@ -30,7 +30,7 @@ npm run dev:api          # API em http://localhost:3000 (teste: /api/health)
 npm run dev:web          # site em http://localhost:4200
 ```
 
-Para criar o primeiro administrador, cadastre sua conta pelo site e rode `npm run admin:role -- grant seu@email` no servidor, com acesso ao banco da implantação. Cadastro público e variáveis de e-mail não concedem privilégios.
+Para criar o primeiro administrador (ou recuperar a senha de um administrador), cadastre a conta pelo site e rode `npm run admin:role -- grant seu@email` ou `npm run admin:role -- reset-password seu@email` no servidor. Cadastro público e variáveis de e-mail não concedem privilégios.
 
 ## Testes
 
@@ -44,7 +44,7 @@ O CI do GitHub roda tudo isso e constrói a imagem de produção em cada PR.
 
 ## Publicar
 
-A imagem do `Dockerfile` serve API e site juntos. O caminho escolhido é uma VPS com Caddy ([DEPLOY §5.3](docs/DEPLOY.md)); o Render fica como alternativa (§5.1).
+A imagem do `Dockerfile` serve API e site juntos. O caminho recomendado é o **servidor do câmpus IFSP** usando `deploy/campus/` ([DEPLOY §5.1](docs/DEPLOY.md)), com scripts prontos para subir/atualizar, fazer backup diário, desligar após novembro e restaurar depois sem perda de dados.
 
 ## Documentação
 

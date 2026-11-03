@@ -12,150 +12,145 @@ O CI (`.github/workflows/ci.yml`) roda auditoria de dependências de produção,
 
 | Variável | Valor | Segredo? |
 | --- | --- | --- |
-| `DATABASE_URL` | URL do PostgreSQL **pela rede privada** do provedor; `?sslmode=require` se o banco exigir TLS | **Sim — o único** |
-| `APP_ORIGIN` | Origem HTTPS pública, ex.: `https://caderno.exemplo.com.br`. A API não inicia em produção sem uma origem `https://` | Não |
-| `TRUST_PROXY` | `1` quando há um proxy reverso do provedor à frente (caso de Railway, Render e similares). Sem isso, o limite de tentativas de login trataria todos os acessos como um único IP | Não |
-| `PORT` | Normalmente definido pelo provedor; padrão 3000 | Não |
+| `DATABASE_URL` ou `PGHOST`/`PGUSER`/`PGPASSWORD`/`PGDATABASE` | Conexão ao PostgreSQL **pela rede privada** do Compose ou provedor (`deploy/campus/` usa `PGPASSWORD` discreto para aceitar qualquer caractere especial) | **Sim — o único** |
+| `APP_ORIGIN` | Origem HTTPS pública exata, sem barra no final (ex.: `https://enade.pep.ifsp.edu.br`). A API não inicia em produção sem `https://` | Não |
+| `TRUST_PROXY` | Quantidade de proxies reversos confiáveis à frente (`1` para o proxy institucional do câmpus; `2` se houver Cloudflare/WAF + proxy local) | Não |
+| `PORT` | Porta interna do contêiner; padrão `3000` | Não |
 | `SOURCE_ARCHIVE_DIR` | Padrão `/data/sources`: PDFs oficiais arquivados | Não |
 | `QUESTION_ASSET_DIR` | Padrão `/data/question-assets`: recortes WebP das questões em imagem, nomeados pelo SHA-256 | Não |
 
-Os dois caminhos ficam em `/data`: monte **um** volume persistente em `/data`, gravável pelo uid 1000 (alguns provedores montam volumes como root e pedem uma opção para isso). Sem o volume, PDFs e imagens somem a cada deploy e as questões oficiais passam a responder 404 nas imagens.
+Os dois caminhos ficam em `/data`: monte **um** volume persistente em `/data`, gravável pelo uid 1000 (`node`). Sem o volume, PDFs e imagens somem a cada atualização e as questões oficiais passam a responder 404 nas imagens.
 
-`NODE_ENV=production`, `HOST=0.0.0.0` e `WEB_DIST` já vêm da imagem. Não há chave de IA, e-mail, pagamento ou outra integração externa em R1; não cadastre variáveis que o código não usa.
+`NODE_ENV=production`, `HOST=0.0.0.0` e `WEB_DIST` já vêm da imagem, que também inclui `HEALTHCHECK` automático em `/api/health`. Não há chave de IA, e-mail, pagamento ou outra integração externa em R1; não cadastre variáveis que o código não usa.
 
 O limite de tentativas de login é mantido em memória: rode **uma instância**. Escalar horizontalmente exige um limitador compartilhado antes.
 
-## 3. Segurança: o que aprendemos com o incidente do Railway
+## 3. Segurança operacional
 
-Em 21/10/2026 o Railway detectou acesso indevido aos sistemas que guardam variáveis de ambiente de clientes; segundo o relatório preliminar, parte delas pode ter sido decifrada. Deploys foram pausados e clientes orientados a rotacionar segredos. O relatório final ainda não havia sido publicado em 26/10/2026. Fontes: [GitGuardian](https://blog.gitguardian.com/railway-october-2026-incident-environment-variables/), [Brandefense](https://brandefense.io/knowledge-hub/incidents/railway-security-incident-2026/), [guia de rotação](https://aicybr.com/blog/railway-october-2026-secrets-exposure-key-rotation-recovery).
+Regra adotada em qualquer infraestrutura: **assuma que variáveis de ambiente podem vazar se o host for comprometido** e reduza o raio de impacto:
 
-Regra adotada, em qualquer provedor: **toda variável de ambiente no provedor pode vazar**. O desenho limita o estrago:
+1. **Um só segredo.** Apenas a senha do banco (`POSTGRES_PASSWORD` / `DATABASE_URL`) é sensível.
+2. **Banco sem porta externa.** Em `deploy/campus/docker-compose.yml`, o PostgreSQL fica exclusivamente na rede interna `internal` do Docker, sem `ports:` publicados no host.
+3. **Aplicação restrita ao proxy reverso.** Por padrão, o contêiner `app` escuta somente em `127.0.0.1:3000` (`APP_BIND=127.0.0.1`), recebendo tráfego apenas do proxy reverso HTTPS institucional.
+4. **Senhas e sessões protegidas no banco.** Senhas usam `scrypt` com salt aleatório; sessões guardam apenas o SHA-256 do token. Em caso de incidente, encerre todas as sessões (`DELETE FROM browser_session`).
+5. **Backups atômicos fora do servidor.** Todo backup precisa conter **banco (`database.sql.gz`) + `/data` (`data.tar.gz`) + `SHA256SUMS`**. Guarde cópia externa cifrada em armazenamento institucional separado da VM.
+6. **Cabeçalhos e cookies.** A aplicação envia CSP estrita, HSTS em produção, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy` e `Permissions-Policy`; o cookie de sessão usa `HttpOnly`, `Secure` e `SameSite=Strict`, restrito a `/api`.
 
-1. **Um só segredo.** Só `DATABASE_URL` é sensível. Nenhuma chave de terceiros fica no provedor em R1.
-2. **Banco sem acesso público.** Desative o proxy TCP/endereço externo do PostgreSQL e use apenas a rede privada entre serviços. Assim, uma URL vazada sozinha não abre o banco pela internet.
-3. **Rotação.** Rotacione a senha do banco: ao criar o ambiente, após qualquer incidente do provedor e a cada 90 dias. Procedimento: criar a nova senha no banco → atualizar `DATABASE_URL` → redeploy → conferir `/api/health` → invalidar a senha antiga.
-4. **Senhas e sessões já protegidas no próprio dado.** Senhas são guardadas só como hash scrypt; sessões só como hash SHA-256 do token. Mesmo assim, se o banco for exposto, encerre todas as sessões (`DELETE FROM browser_session`) e avise os usuários.
-5. **Contas com 2FA.** Ative autenticação em dois fatores no provedor e no GitHub; dê acesso ao projeto só a quem opera o deploy.
-6. **Deploy só de `main`, com CI verde.** Configure o provedor para publicar apenas `main` e proteja a branch exigindo o CI.
-7. **Backups fora do provedor.** Guarde banco **e volume `/data`** (PDFs/recortes), além dos snapshots do provedor. O script da §5.3 cria um conjunto com hashes; cifre a cópia externa com a ferramenta da instituição. Ensaie a restauração antes de R1; backup sem restauração testada não conta.
-8. **Cabeçalhos e cookies.** A aplicação envia CSP estrita (sem script, estilo ou fonte de terceiros e sem inline), HSTS, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy` e `Permissions-Policy`; o cookie de sessão é `HttpOnly`, `Secure` e `SameSite=Strict`, restrito a `/api`. Alterações que exijam afrouxar a CSP precisam de justificativa no PR.
+## 4. Proteção contra força bruta e excesso de requisições
 
-## 4. Escolha do provedor (D1)
-
-O código não depende de provedor. Qualquer serviço que construa um `Dockerfile`, ofereça PostgreSQL em rede privada, volume persistente e HTTPS serve.
-
-| Opção | A favor | Contra |
-| --- | --- | --- |
-| Railway | Setup mais rápido: GitHub, Postgres, volume e HTTPS no mesmo projeto | Incidente de segredos em 21/10/2026, relatório final pendente; volume limitado a 5 GB no plano Hobby |
-| Render (**escolhido, D16**) | Fluxo parecido com Dockerfile, Postgres gerenciado e disco persistente; `render.yaml` na raiz | Postgres gratuito expira em 30 dias; disco só em plano pago (~US$ 14/mês no total) |
-
-Com as regras da seção 3, o risco residual de um novo vazamento de variáveis é a URL do banco, que não funciona fora da rede privada. Recomendação: se escolher Railway, aplique a seção 3 inteira antes de cadastrar usuários reais e acompanhe o relatório final do incidente.
-
-## 5. Passo a passo (genérico)
-
-1. Criar projeto no provedor a partir do repositório GitHub, usando o `Dockerfile`.
-2. Adicionar PostgreSQL 17 na rede privada; **desativar acesso público**.
-3. Definir `DATABASE_URL` (referência interna do provedor), `APP_ORIGIN` e `TRUST_PROXY=1`.
-4. Montar volume persistente em `/data` (PDFs e imagens das questões).
-5. Configurar health check em `/api/health` e domínio com HTTPS.
-6. Publicar. As migrations rodam no início; conferir o log `Migration aplicada: …` e `/api/health`.
-7. Opcional: conteúdo autoral demonstrativo com `node dist/admin/seed.mjs` no shell do serviço.
-8. Curadoria: após a pessoa criar a conta pelo site e a identidade ser conferida, `node dist/admin/curator-role.mjs grant <identity-uuid>` no shell do serviço.
-
-Questões oficiais conferidas por agentes (ADR-011) entram sozinhas: ao iniciar, o contêiner roda `node dist/admin/bootstrap-content.mjs` (DEP-2), que baixa e confere as fontes de cada conferência commitada e publica. Para rodar à mão, use o Shell do serviço. Não importe fontes no banco de produção a partir de máquinas pessoais; isso exigiria abrir o banco publicamente. Provas novas entram pela tela de importação (IMP-1).
-
-## 5.1 Render (D16): passo a passo
-
-Alternativa ao caminho da §5.3. Continua válida para quem preferir não administrar servidor.
-
-O `render.yaml` da raiz descreve tudo: serviço web pelo `Dockerfile`, disco de 1 GB em `/data`, PostgreSQL 17 sem acesso externo e publicação só depois do CI verde em `main`. Custo de referência em 31/10/2026: ~US$ 14/mês (web starter + banco basic-256mb + disco); confira em render.com/pricing.
-
-1. **Conta:** crie a conta no Render com 2FA e conecte o GitHub dando acesso só a este repositório.
-2. **Blueprint:** New → Blueprint → escolha o repositório. O Render lê o `render.yaml` e mostra serviço, banco e disco. Ele pede `APP_ORIGIN`: use o endereço que aparece para o serviço (`https://enade-cs.onrender.com`, ou o domínio próprio se já tiver). Confirme.
-3. **Primeiro deploy:** o contêiner aplica as migrations e carrega o conteúdo (`bootstrap-content`): baixa do Inep a prova e o gabarito de cada conferência em `data/agent-reviews/`, confere o SHA-256 do catálogo (se o Inep falhar, usa a cópia catalogada) e publica as questões. No log aparecem `importado` e `N publicadas`. Nas inicializações seguintes, o mesmo passo só confirma (`já importado`, `sem mudança`). Conferências novas commitadas são publicadas no próximo deploy.
-4. **Conferir:** abra `/api/health` e o site; o banco de questões deve mostrar 246 oficiais (2005, 2008, 2011, 2014, 2017 e 2021, bacharelado e licenciatura).
-5. **Administrador:** crie sua conta pelo site e execute `node dist/admin/admin-role.mjs grant seu@email` no Shell do serviço. Na implantação Docker, use `docker compose exec app node dist/admin/admin-role.mjs grant seu@email` na pasta do Compose. Confira o e-mail exato e a conta antes de conceder acesso. Os demais papéis são autorizados pela tela de administração. `ADMIN_EMAILS` foi removida: e-mails sem verificação não podem conceder privilégios automaticamente.
-6. **Proteger `main`:** no GitHub, exija o CI verde para merge em `main`; o Render só publica depois dos checks.
-
-Se o log mostrar `EACCES` em `/data`, corrija o proprietário/permissões do volume para o usuário `node` (uid 1000), pelo procedimento do provedor ou com apoio da TI. Mantenha `USER node` no Dockerfile; executar a aplicação como root não é a correção para permissões do volume.
-
-`BOOTSTRAP_CONTENT=0` desliga a carga automática (por exemplo, para subir mais rápido quando o Inep estiver fora do ar).
-
-## 5.2 Força bruta e negação de serviço
-
-O que a aplicação faz sozinha (uma instância, contadores em memória):
+O que a aplicação aplica sozinha (uma instância, contadores em memória):
 
 | Ameaça | Proteção | Onde |
 | --- | --- | --- |
 | Adivinhar senha | 50 tentativas por IP e 10 por e-mail a cada 15 min, antes do scrypt; o scrypt (~128 MiB) roda no máximo 2 por vez | `AuthThrottle`, `password.ts` |
 | Criar sessões de visitante em massa | 600 por IP a cada 15 min | `GuestThrottle` |
-| Um cliente disparando requisições | 1200 por minuto por IP na API em produção (`API_RATE_LIMIT` muda; fora de produção fica desligado) | `request-limit.ts` |
-| Conexões lentas de propósito | cabeçalhos em 20 s, requisição inteira em 2 min | `serve.ts` |
-| Corpos grandes | JSON até 16 kB (64 kB na curadoria); PDFs só para administradores, com tamanho máximo | `main.ts`, `exam-imports.ts` |
+| Cliente disparando requisições | 1200 por minuto por IP na API em produção (`API_RATE_LIMIT` ajusta) | `request-limit.ts` |
+| Conexões lentas (slowloris) | cabeçalhos em 20 s, requisição inteira em 2 min | `serve.ts` |
+| Corpos grandes | JSON até 16 kB (64 kB na curadoria); PDFs só para administradores (até 10 MB por arquivo) | `main.ts`, `exam-imports.ts` |
 
-Cada bloqueio entra uma vez por janela no registro de atividades (categoria Segurança), com o IP; a aba Atividades da administração mostra o resumo das últimas 24 horas.
+**Atenção à rede do câmpus (`TRUST_PROXY`):** se os computadores dos laboratórios do câmpus saírem pelo mesmo NAT institucional, configure `TRUST_PROXY` exatamente para o número de proxies reversos antes do contêiner (`1` quando há só o Nginx/Apache do servidor). Não use `TRUST_PROXY` maior que a cadeia real (permitiria forjar `X-Forwarded-For`), nem `0` atrás de proxy (faria todos os acessos parecerem `127.0.0.1`).
 
-O que ela **não** resolve: um ataque distribuído (muitos IPs) esgota a instância antes de qualquer contador. Para isso a proteção precisa estar na borda: o Render já filtra parte do tráfego de rede, e um proxy como o Cloudflare (plano gratuito, modo "Under Attack" quando necessário) na frente do domínio próprio cobre o resto. Os limites dependem de `TRUST_PROXY` correto: com o valor errado, todos os acessos parecem vir do mesmo IP (bloqueio geral) ou o IP pode ser forjado.
+## 5. Servidor do câmpus IFSP — guia para a equipe de TI (`deploy/campus/`)
 
-## 5.3 VPS compartilhada com o Mira Salgados (caminho escolhido em 31/10/2026)
+Caminho principal escolhido para publicação institucional. Não depende de Caddy externo nem de redes de outros projetos.
 
-Gabriel decidiu publicar a plataforma na mesma VPS do Mira Salgados (Hostinger KVM 2, 8 GB), no padrão do servidor descrito em `mira-salgados/docs/servidor.md`. As principais diferenças em relação ao Render: custo único para vários projetos (R$ 43–78/mês) e manutenção do servidor por conta de quem administra. Uso previsto: novembro de 2026, até a prova; depois, a plataforma passa para a Fábrica de Software, que escolhe o endereço do IFSP.
+### 5.1 Subir pela primeira vez
 
-- **Endereço:** sem compra de domínio e sem ligar a plataforma ao Mira Salgados nem ao IP. Duas opções:
-  - **subdomínio do IFSP** (ex.: `enade.pep.ifsp.edu.br`), pedido à TI do câmpus com um registro A para o IP da VPS. É o melhor endereço, e a Fábrica já herda;
-  - **subdomínio gratuito do DuckDNS** (ex.: `enade-cc.duckdns.org`): login no duckdns.org, cria o nome e informa o IP da VPS. Funciona com HTTPS do Caddy.
+Requisitos no servidor Linux do câmpus:
+- Docker Engine + plugin `docker compose` v2;
+- Proxy reverso institucional com HTTPS válido apontando para `http://127.0.0.1:3000` (há um modelo pronto de Nginx em `deploy/campus/nginx.conf.example` — **importante:** configure `client_max_body_size 35m;` e `proxy_read_timeout 120s;` para permitir importação administrativa de PDFs do Inep);
+- Saída HTTPS liberada no primeiro boot para baixar as provas oficiais do Inep durante a carga inicial (ou `BOOTSTRAP_CONTENT=0` se a rede for isolada e o acervo entrar por restauração).
 
-  O endereço só aparece em `APP_ORIGIN` (`.env`) e em `ENADE_DOMINIO` (`/srv/proxy/.env`); trocar depois é mudar os dois e reiniciar. O cookie de sessão não define `Domain`, então não se mistura com outros sites do servidor.
-- **Imagem:** o workflow `publicar.yml` publica `ghcr.io/bielrodrigues2406/enade-cs-platform` (tags `latest` e o commit curto) depois do CI verde num push à `main`. A VPS não compila nada.
-- **Arquivos do servidor:** `deploy/vps/`. Nenhuma porta publicada, banco próprio, alias `enade` na rede `proxy`, limite de 1 GB para o app e 512 MB para o banco.
-
-Passo a passo (servidor já preparado pelo `preparar.sh` do Mira, com o proxy Caddy em `/srv/proxy`):
-
-1. **DNS:** aponte o endereço escolhido para o IP da VPS e espere o `nslookup` dele responder o IP.
-2. **Imagem:** depois do primeiro merge com este workflow, confira em GitHub → Packages que `enade-cs-platform` existe. Se o pacote for privado, o login da VPS no ghcr.io (o mesmo token `read:packages` do Mira) já serve.
-3. **Aplicação:**
-   ```sh
-   mkdir -p /srv/apps/enade && cd /srv/apps/enade
-   # copie para cá os arquivos de deploy/vps/ (scp -r deploy/vps/. vps:/srv/apps/enade/)
-   cp .env.example .env && chmod 600 .env   # POSTGRES_PASSWORD (openssl rand -hex 24), APP_ORIGIN
-   ./atualizar.sh
-   docker compose logs -f app   # migrations, carga das 246 questões e "API ouvindo"
-   ```
-   A primeira subida baixa as provas do Inep e recorta as questões: leva alguns minutos.
-4. **Proxy:** copie `enade.caddy` para `/srv/proxy/sites/`, acrescente `ENADE_DOMINIO=<endereço, sem https://>` ao `/srv/proxy/.env` e rode `cd /srv/proxy && docker compose up -d && docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile`. O Caddy emite o certificado na hora.
-5. **Conferir:** `https://<endereço>/api/health` e o site. Crie sua conta e conceda o papel pelo comando no servidor (§5.1, item 5).
-6. **Backup diário:** no cron, `0 3 * * * /srv/apps/enade/backup-postgres.sh /srv/apps/enade >> /srv/backups/backup.log 2>&1`. O app precisa estar rodando: o script copia banco e `/data` para um diretório completo por execução, com `database.sql.gz`, `data.tar.gz` e `SHA256SUMS`. Copie o conjunto cifrado para fora da máquina e ensaie a §5.4. Retenção local: 30 dias; backup antigo contendo só SQL não cobre as imagens.
-
-Atualizar: depois de um merge na `main`, rode `./atualizar.sh`. Voltar de versão: `VERSAO=<7 caracteres do commit>` no `.env` e `./atualizar.sh`. Desligar depois da prova: `docker compose down` (os volumes ficam; `docker compose down -v` apaga dados e arquivos) e remova `enade.caddy` do proxy. Faça um backup antes de entregar à Fábrica.
-
-O limite de requisições por IP (§5.2) funciona porque `TRUST_PROXY=1` corresponde ao único proxy, o Caddy. Se um dia houver Cloudflare na frente, passa a 2.
-
-## 5.4 Ensaio de restauração de banco e arquivos
-
-Use uma instalação de ensaio, com banco e volume `/data` vazios, a mesma versão da imagem e um projeto Compose separado da produção. Não execute este procedimento sobre usuários ativos: o SQL contém instruções para substituir o conteúdo do banco. O Compose deve estar configurado nessa pasta e `/data` gravável pelo uid 1000. O procedimento está documentado; só é considerado validado depois de executado e conferido pela operação do servidor.
+Passo a passo para o operador do servidor:
 
 ```bash
-set -euo pipefail
-backup_dir=/caminho/do/conjunto/enade-AAAA-MM-DD-HHMMSS-sufixo
-(cd "$backup_dir" && sha256sum -c SHA256SUMS)
-docker compose stop app
-docker compose up -d db
-# Aguarde o banco ficar healthy antes do psql.
-gunzip -c "$backup_dir/database.sql.gz" | docker compose exec -T db \
-  sh -c 'psql --single-transaction --set ON_ERROR_STOP=on -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
-docker compose run --rm -T --no-deps --entrypoint tar app -C /data -xzf - < "$backup_dir/data.tar.gz"
-docker compose up -d app
+# 1. Clonar o repositório em pasta de serviço
+git clone https://github.com/bielrodrigues2406/enade-cs-platform.git /srv/enade-cs-platform
+cd /srv/enade-cs-platform/deploy/campus
+
+# 2. Criar o .env restrito ao operador
+cp .env.example .env
+chmod 600 .env
+# Edite .env:
+#   POSTGRES_PASSWORD=<saida de: openssl rand -hex 24>
+#   APP_ORIGIN=https://enade.pep.ifsp.edu.br   (sem barra no final)
+#   TRUST_PROXY=1
+
+# 3. Construir a imagem localmente e subir banco + aplicação
+./atualizar.sh
+# (Alternativa: se preferir baixar a imagem pronta do GHCR sem compilar na VM, use ./atualizar.sh --pull)
+
+# 4. Acompanhar migrations, carga das 246 questões oficiais e healthcheck
+docker compose logs -f app
+docker compose ps   # aguarde ambos os serviços ficarem (healthy)
 ```
 
-Confira `/api/health`, login de uma conta de ensaio, catálogo, imagem de questão, discursiva e retomada de treino. Use o conteúdo restaurado para essa checagem: o health só consulta o banco, e a API pode subir mesmo se o bootstrap falhar. Não exponha a cópia de ensaio publicamente com dados pessoais de produção. Guarde o `.env` de operação em local seguro separado; ele não faz parte do conjunto acima.
+Conferência imediata após subir:
+1. `curl -fsS http://127.0.0.1:3000/api/health` e `https://<dominio-do-campus>/api/health` devem responder `{"status":"ok"}`.
+2. Abra o site pelo navegador, crie a conta que será administradora e conceda o papel no servidor:
+   ```bash
+   cd /srv/enade-cs-platform/deploy/campus
+   docker compose exec app node dist/admin/admin-role.mjs grant responsavel@ifsp.edu.br
+   ```
+   Para recuperar a senha de um administrador caso necessário no futuro:
+   ```bash
+   docker compose exec app node dist/admin/admin-role.mjs reset-password responsavel@ifsp.edu.br
+   ```
+3. Agende o backup diário no `crontab` (mantém 30 dias em `/var/backups/enade`, com `umask 077`):
+   ```cron
+   0 3 * * * /srv/enade-cs-platform/deploy/campus/backup.sh /var/backups/enade >> /var/backups/enade/backup.log 2>&1
+   ```
+   Copie periodicamente os diretórios gerados em `/var/backups/enade/` para armazenamento externo à VM.
 
-## 6. Reverter
+Para atualizar o código depois de novos commits na `main`:
+```bash
+cd /srv/enade-cs-platform && git pull --ff-only
+cd deploy/campus && ./atualizar.sh
+```
 
-Migrations só avançam. Para reverter código, publique a imagem anterior; se uma migration nova tiver sido aplicada, ela continua válida para a versão anterior somente se foi aditiva (regra de revisão das migrations). Para dano em dados, restaure o backup mais recente em um banco novo e aponte `DATABASE_URL` para ele.
+### 5.2 Como desligar ao fim de novembro e religar depois sem perder nada
 
-## 7. Pendências antes de usuários reais
+Como o uso intensivo ocorre no período do ENADE (ex.: mês de novembro), a plataforma pode ficar desligada nos meses seguintes sem consumir memória ou CPU do servidor e voltar idêntica depois:
 
-- Ensaiar backup e restauração (item 7).
-- Separar papel do banco para migrations (dono do schema) e para a aplicação (só leitura/escrita de dados).
-- Recuperação de conta por e-mail (D2) ou manter a limitação já informada no cadastro.
-- Limitador de login compartilhado se houver mais de uma instância.
+#### Passo A — Desligar com segurança (fim do ciclo)
+
+1. Execute o script de hibernação (com os contêineres ainda ligados):
+   ```bash
+   cd /srv/enade-cs-platform/deploy/campus
+   ./desligar.sh /var/backups/enade
+   ```
+   O script faz automaticamente três coisas em ordem:
+   - gera um backup completo (`database.sql.gz` + `data.tar.gz` + `SHA256SUMS`);
+   - confere os hashes SHA-256 dos dois arquivos gerados;
+   - executa `docker compose down` (**sem `-v`**), desligando os contêineres mas **preservando os volumes `enade_pgdata` e `enade_data` no disco**.
+2. **Guarde cópia externa** da pasta recém-criada em `/var/backups/enade/enade-AAAA-MM-DD-...` e guarde separadamente os valores do `deploy/campus/.env` (em cofre de senhas institucional). Assim, mesmo que a VM seja formatada ou substituída até o próximo ano, nada se perde.
+3. Comente a linha do `backup.sh` no `crontab` (para não gerar erro de contêiner parado toda madrugada) e, no Nginx/Apache do câmpus, desative o virtual host ou exiba uma página estática informando que o período de preparação encerrou.
+4. **O que NUNCA executar se quiser manter os dados locais:** `docker compose down -v` ou `docker volume prune` (esses comandos apagam os volumes locais).
+
+#### Passo B — Religar depois (mesmo servidor ou servidor novo)
+
+- **Cenário 1 — Mesmo servidor, com os volumes Docker ainda presentes (`docker volume ls | grep enade`):**
+  ```bash
+  cd /srv/enade-cs-platform/deploy/campus
+  ./atualizar.sh
+  ```
+  O PostgreSQL e o volume `/data` já estão lá: todas as contas, respostas, simulados, discursivas, turmas, questões e imagens voltam imediatamente. Reative o virtual host no proxy reverso e a linha do `crontab`.
+
+- **Cenário 2 — Servidor novo, VM reformatada ou passagem à Fábrica de Software:**
+  ```bash
+  git clone https://github.com/bielrodrigues2406/enade-cs-platform.git /srv/enade-cs-platform
+  cd /srv/enade-cs-platform/deploy/campus
+  cp .env.example .env && chmod 600 .env   # preencha POSTGRES_PASSWORD e APP_ORIGIN
+  docker compose build app                 # ou docker compose pull se usar GHCR
+  ./restaurar.sh /caminho/do/backup/enade-AAAA-MM-DD-HHMMSS-XXXXXX
+  ```
+  O `restaurar.sh` confere `SHA256SUMS`, sobe o banco limpo, restaura o SQL em transação única (`ON_ERROR_STOP=on`), extrai todos os PDFs e recortes em `/data` e sobe a aplicação. Ao terminar, confira `/api/health`, login, uma questão com imagem e uma discursiva.
+
+## 6. Caminhos alternativos preservados no repositório
+
+- **Render (`render.yaml` na raiz):** PaaS gerenciado com disco persistente em `/data` e PostgreSQL privado, útil caso não haja servidor institucional disponível.
+- **VPS com Caddy (`deploy/vps/`):** configuração específica para VPS compartilhada com rede externa `proxy` do Caddy; ignorar na implantação do câmpus (use sempre `deploy/campus/`).
+
+## 7. Reverter atualização de código
+
+Migrations só avançam e são aditivas. Para voltar à versão anterior da aplicação em `deploy/campus/`: faça checkout do commit anterior validado (ou defina `VERSAO=<sha7>` no `.env` com `./atualizar.sh --pull`). Se for necessário reverter alteração destrutiva de dados, utilize `./restaurar.sh` apontando para o backup anterior ao incidente.
