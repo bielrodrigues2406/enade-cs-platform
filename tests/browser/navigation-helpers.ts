@@ -21,3 +21,11 @@ export async function logout(page: Page) {
   await openAccountMenu(page);
   await page.getByRole("button", { name: "Sair da conta", exact: true }).click();
 }
+
+/** No celular a saída é o botão Menu; no computador, o destino do índice. */
+export async function navigationControl(page: Page, label: string) {
+  const trigger = page.getByRole("button", { name: "Menu", exact: true });
+  return await trigger.isVisible()
+    ? trigger
+    : page.getByRole("navigation", { name: "Estudo", exact: true }).getByRole("link", { name: label, exact: true });
+}
