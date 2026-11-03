@@ -49,3 +49,7 @@
   .brand > span { max-width: 8rem; }
   .header-actions button { padding-inline: var(--space-2); }
 }
+@media (max-width: 360px) {
+  :host:not(.landing-mode) header .brand { min-width: 44px; min-height: 44px; justify-content: center; }
+  :host:not(.landing-mode) header .brand > span { display: none; }
+}

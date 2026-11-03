@@ -48,6 +48,7 @@ export class ExamComponent {
   /** Prova completa com o cronômetro correndo (o shell pede confirmação para sair). */
   @Output() examRunningChange = new EventEmitter<boolean>();
   @ViewChild("finishDialog") finishDialog?: ElementRef<HTMLDialogElement>;
+  @ViewChild(DiscursiveComponent) private discursive?: DiscursiveComponent;
   private host: ElementRef<HTMLElement> = inject(ElementRef);
   private injector = inject(Injector);
   private choice = inject(ChoiceService);
@@ -58,6 +59,9 @@ export class ExamComponent {
   formatLoading = signal(false);
   formatError = signal("");
   discursiveState = signal({ dirty: false, saving: false });
+  discursiveNavigating = signal(false);
+  discursiveNavigationSaveFailed = signal(false);
+  discursiveIndex = computed(() => this.attempt()?.discursive?.findIndex((row) => row.id === this.discursiveOpen()) ?? -1);
   private pendingFormatRequest: string | null = null;
   position = signal(1);
   /** 1 ao avançar, -1 ao voltar: a próxima questão entra pelo lado certo. */
@@ -182,10 +186,11 @@ export class ExamComponent {
   }
   protectedState() {
     const discursive = this.discursiveState();
-    return this.saving() || this.dirty() || this.saveUncertain()
+    return this.saving() || this.dirty() || this.saveUncertain() || this.discursiveNavigating()
       || (!this.timeUp() && (discursive.dirty || discursive.saving));
   }
   discursiveChanged(state: { dirty: boolean; saving: boolean }) {
+    if (!state.dirty && !state.saving) this.discursiveNavigationSaveFailed.set(false);
     this.discursiveState.set(state); this.emitBusy();
   }
   current() { return this.attempt()?.items.find((item) => item.position === this.position()) ?? null; }
@@ -370,9 +375,35 @@ export class ExamComponent {
     this.reviewing.set(true); this.openDiscursiveItem(id);
   }
   openDiscursiveItem(id: string) {
-    if (this.protectedState()) return;
-    this.discursiveOpen.set(id); this.error.set("");
+    if (this.protectedState() || !this.attempt()?.discursive?.some((row) => row.id === id)) return;
+    this.discursiveOpen.set(id); this.discursiveNavigationSaveFailed.set(false); this.error.set("");
     this.focusContent();
+  }
+  discursiveNavigationDisabled(): boolean {
+    return this.saving() || this.saveUncertain() || this.discursiveNavigating() || this.timeUp()
+      || !this.discursive?.detail() || this.discursive.busy();
+  }
+  async stepDiscursive(direction: -1 | 1): Promise<void> {
+    const data = this.attempt(), currentId = this.discursiveOpen(), editor = this.discursive;
+    const generation = this.generation;
+    const index = this.discursiveIndex();
+    if (!data || !editor || index < 0 || this.discursiveNavigationDisabled()) return;
+    this.discursiveNavigating.set(true); this.discursiveNavigationSaveFailed.set(false); this.emitBusy();
+    try {
+      const saved = await editor.saveBeforeLeave();
+      if (!this.alive(generation)) return;
+      if (!saved) { this.discursiveNavigationSaveFailed.set(true); return; }
+      if (this.attempt() !== data || this.discursiveOpen() !== currentId || this.timeUp()) return;
+      // Os guards continuam ativos durante o salvamento; só liberam a troca confirmada.
+      this.discursiveNavigating.set(false);
+      const next = data.discursive?.[index + direction];
+      if (next) this.openDiscursiveItem(next.id);
+      else if (direction === -1) this.go(data.size);
+      else if (data.state === "IN_PROGRESS") this.openFinish();
+      else this.showResult();
+    } finally {
+      if (this.alive(generation)) { this.discursiveNavigating.set(false); this.emitBusy(); }
+    }
   }
   /** O cronômetro só mostra o prazo do servidor; ao zerar, recarrega o resultado registrado. */
   private syncClock() {
@@ -422,6 +453,7 @@ export class ExamComponent {
     this.attempt.set(data); this.position.set(this.validPosition(position)); this.syncPaceItem(); this.discursiveOpen.set(null);
     this.clockAt = Date.now(); this.syncClock(); this.examRunningChange.emit(this.running());
     this.discursiveState.set({dirty:false,saving:false});
+    this.discursiveNavigating.set(false); this.discursiveNavigationSaveFailed.set(false);
     this.reviewing.set(false); this.conflict.set(false); this.discardOpen.set(false); this.syncDraft(); this.focusContent();
   }
   private validPosition(position: number) { const total = this.attempt()?.size ?? 1; return Number.isInteger(position) && position >= 1 && position <= total ? position : 1; }

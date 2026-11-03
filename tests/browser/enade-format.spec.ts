@@ -1,6 +1,6 @@
 import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { Pool } from "pg";
 import { test, expect, type Page } from "@playwright/test";
 import { formatFixture } from "../enade-format-fixture.js";
@@ -42,7 +42,8 @@ test("student takes the authored format, resumes its own draft and sees the stan
   await page.getByRole("button",{name:/^Discursiva \d+$/}).click();
   const draft=page.waitForResponse(r=>r.url().endsWith("/discursive/response")&&r.request().method()==="PUT");
   await page.getByRole("textbox",{name:/Sua resposta para/}).fill("TEST ONLY: explico meu raciocínio nesta tentativa.");
-  await expect(page.getByRole("button",{name:"Revisar e finalizar"})).toBeDisabled();
+  await expect(page.getByRole("button",{name:"Pausar simulado",exact:true})).toBeDisabled();
+  await expect(page.getByRole("button",{name:"Revisar e finalizar"})).toBeEnabled();
   expect((await draft).status()).toBe(200);
   await expect(page.getByText("Rascunho salvo",{exact:true})).toBeVisible();
   await expect(page.getByRole("heading",{name:"Padrão de resposta",exact:true})).toHaveCount(0);
@@ -52,6 +53,7 @@ test("student takes the authored format, resumes its own draft and sees the stan
   await page.getByRole("button",{name:"Continuar simulado",exact:true}).click();
   await page.getByRole("button",{name:/^Discursiva \d+$/}).click();
   await expect(page.getByRole("textbox",{name:/Sua resposta para/})).toHaveValue("TEST ONLY: explico meu raciocínio nesta tentativa.");
+  await expect(page.getByRole("navigation",{name:"Navegação das discursivas"})).toContainText("Discursiva 1 de 1");
   await page.getByRole("button",{name:"Revisar e finalizar"}).click();
   await page.getByRole("dialog",{name:"Finalizar o simulado?"}).getByRole("button",{name:"Finalizar simulado",exact:true}).click();
   await expect(page.getByRole("heading",{name:"Desempenho no simulado"})).toBeVisible();
@@ -86,6 +88,30 @@ test("unavailable format reports the exact missing blocks and cannot start",asyn
   await expect(offer.getByRole("button",{name:"Começar simulado no formato 2026"})).toBeDisabled();
   await rememberOwner(page);
   expect(starts).toBe(0); expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+});
+
+test("an active partial practice explains the disabled starts and offers a keyboard resume", async ({ page }) => {
+  await page.goto("/provas");
+  const offer = page.getByRole("region", { name: "Simulado no formato ENADE 2026" });
+  await expect(offer.getByRole("button", { name: "Começar simulado no formato 2026" })).toBeEnabled();
+  await rememberOwner(page);
+  const start = await page.request.post("/api/practice", { data: { requestId: randomUUID(), size: 10, area: null } });
+  expect(start.status()).toBe(201);
+  await page.reload();
+  const blocked = offer.getByRole("button", { name: "Começar simulado no formato 2026" });
+  await expect(blocked).toBeDisabled();
+  await expect(blocked).toHaveAccessibleDescription(/Você já tem um treino em andamento/);
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(offer.getByText(/Retome ou cancele para começar outro/)).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.locator("header .brand").evaluate(el => el.scrollWidth > el.clientWidth + 1)).toBe(false);
+    await offer.scrollIntoViewIfNeeded();
+    await page.screenshot({ path: `test-results/format-active-practice-${width}.png` });
+  }
+  await offer.getByRole("button", { name: "Retomar agora" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByText("Questão 1 de 10")).toBeVisible();
 });
 
 test("an unsaved free-study essay is guarded and never flushed into the guest after logout in another tab",async({page,context})=>{

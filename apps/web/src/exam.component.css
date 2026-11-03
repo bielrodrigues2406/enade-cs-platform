@@ -1,5 +1,36 @@
 /* Prova completa da edição (SIM-1): escolha, cronômetro e resultado por bloco.
    O restante do treino usa os estilos .practice-* globais. */
+.practice-blocked-note {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+.practice-blocked-note button {
+  margin-left: var(--space-2);
+}
+.discursive-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+.discursive-navigation-error {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--color-danger-text);
+  font-size: var(--text-sm);
+}
+@media (max-width: 480px) {
+  .discursive-navigation > span {
+    flex-basis: 100%;
+    order: -1;
+    text-align: center;
+  }
+}
 .practice-editions {
   margin: var(--space-6) 0 var(--space-10);
 }

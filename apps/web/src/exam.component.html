@@ -112,15 +112,30 @@
                 <button (click)="resume()" [disabled]="saving()">{{ saving() ? 'Retomando…' : data.edition ? 'Continuar prova' : 'Continuar simulado' }}</button>
               </div>
             } @else if (discursiveOpen(); as discursiveId) {
-              <p id="practice-position" class="practice-position" tabindex="-1">{{ data.kind === 'FORMAT' ? 'Discursiva do simulado' : 'Discursiva da prova' }}</p>
+              <p id="practice-position" class="practice-position" tabindex="-1">Discursiva {{ discursiveIndex() + 1 }} de {{ data.discursive!.length }}</p>
               <!-- Carregada sob demanda: o texto é salvo como rascunho e enviado ao finalizar. -->
               @defer (on immediate) {
-                <app-discursive [questionId]="discursiveId" [embedded]="data.state === 'IN_PROGRESS'"
-                  [attemptId]="data.kind === 'FORMAT' ? data.id : null" [locked]="timeUp()"
-                  (draftStateChange)="discursiveChanged($event)" />
+                @for (row of data.discursive!; track row.id) {
+                  <!-- Cada questão tem seu editor: trocar D1/D2 recarrega conteúdo e rascunho. -->
+                  @if (row.id === discursiveId) {
+                    <app-discursive [questionId]="row.id" [embedded]="data.state === 'IN_PROGRESS'"
+                      [attemptId]="data.kind === 'FORMAT' ? data.id : null" [locked]="timeUp()"
+                      (draftStateChange)="discursiveChanged($event)" />
+                  }
+                }
               } @placeholder {
                 <p role="status">Carregando a discursiva…</p>
               }
+              <nav class="discursive-navigation" aria-label="Navegação das discursivas">
+                @if (discursiveNavigationSaveFailed()) {
+                  <p class="discursive-navigation-error" role="status">Não foi possível salvar. Sua resposta continua aqui. Tente novamente.</p>
+                }
+                <button type="button" class="outline" (click)="stepDiscursive(-1)" [disabled]="discursiveNavigationDisabled()">Anterior</button>
+                <span class="metadata">Discursiva {{ discursiveIndex() + 1 }} de {{ data.discursive!.length }}</span>
+                <button type="button" (click)="stepDiscursive(1)" [disabled]="discursiveNavigationDisabled()">
+                  {{ discursiveIndex() + 1 < data.discursive!.length ? 'Próxima questão' : data.state === 'IN_PROGRESS' ? 'Revisar e finalizar' : 'Ver resultado' }}
+                </button>
+              </nav>
             } @else {
             <p id="practice-position" class="practice-position" tabindex="-1">Questão {{ position() }} de {{ data.size }}@if (data.kind === 'FORMAT') { · {{ position() <= 15 ? 'Formação Geral' : 'Componente específico' }} }</p>
             <!-- Recria o artigo a cada questão para a entrada animar na direção do passo. -->
@@ -171,8 +186,14 @@
               <button class="outline" (click)="go(position() - 1)" [disabled]="protectedState() || position() === 1">Anterior</button>
               @if (position() === data.size && data.discursive?.length) {
                 <button class="outline" (click)="openDiscursiveItem(data.discursive![0].id)" [disabled]="protectedState()">Ir para as discursivas</button>
+              } @else if (position() === data.size) {
+                @if (data.state === 'IN_PROGRESS') {
+                  <button (click)="openFinish()" [disabled]="protectedState()">Revisar e finalizar</button>
+                } @else {
+                  <button (click)="showResult()">Ver resultado</button>
+                }
               } @else {
-                <button class="outline" (click)="go(position() + 1)" [disabled]="protectedState() || position() === data.size">Próxima questão</button>
+                <button class="outline" (click)="go(position() + 1)" [disabled]="protectedState()">Próxima questão</button>
               }
             </div>
             }
@@ -182,7 +203,7 @@
               <summary><strong>Folha de respostas</strong><span>{{ answered() }} de {{ data.size }} respondidas</span></summary>
             <ol>
               @for (row of data.items; track row.position) {
-                <li><button class="outline" [class.is-answered]="row.answer.optionId !== null" [class.is-marked]="row.answer.marked" [attr.aria-current]="position() === row.position ? 'step' : null" [attr.aria-label]="'Questão ' + row.position + ', ' + (row.answer.optionId !== null ? 'respondida' : 'em branco') + (row.answer.marked ? ', marcada para revisar' : '')" (click)="go(row.position)" [disabled]="protectedState()">{{ row.position }}<span aria-hidden="true">{{ row.answer.marked ? '*' : row.answer.optionId !== null ? '✓' : '' }}</span></button></li>
+                <li><button class="outline" [class.is-answered]="row.answer.optionId !== null" [class.is-marked]="row.answer.marked" [attr.aria-current]="!discursiveOpen() && position() === row.position ? 'step' : null" [attr.aria-label]="'Questão ' + row.position + ', ' + (row.answer.optionId !== null ? 'respondida' : 'em branco') + (row.answer.marked ? ', marcada para revisar' : '')" (click)="go(row.position)" [disabled]="protectedState()">{{ row.position }}<span aria-hidden="true">{{ row.answer.marked ? '*' : row.answer.optionId !== null ? '✓' : '' }}</span></button></li>
               }
             </ol>
             <p class="metadata">✓ Respondida · * Revisar</p>
@@ -197,7 +218,7 @@
             }
             </details>
             @if (data.state === 'IN_PROGRESS') {
-              <button (click)="openFinish()" [disabled]="protectedState()">Revisar e finalizar</button>
+              @if (!discursiveOpen() && (position() !== data.size || data.discursive?.length)) { <button (click)="openFinish()" [disabled]="protectedState()">Revisar e finalizar</button> }
               <p class="metadata">Gabarito e resultado aparecem ao finalizar.</p>
             }
           </nav>
@@ -205,7 +226,7 @@
         @if (data.state === 'IN_PROGRESS') {
           <dialog #finishDialog class="practice-confirm" aria-labelledby="practice-confirm-title">
             <h2 id="practice-confirm-title">{{ data.kind === 'FORMAT' ? 'Finalizar o simulado?' : data.edition ? 'Finalizar a prova?' : 'Finalizar este treino?' }}</h2>
-            <p>{{ answered() }} respondidas · {{ data.size - answered() }} em branco · {{ marked() }} {{ marked() === 1 ? 'marcada' : 'marcadas' }} para revisar.</p>
+            <p>@if (data.discursive?.length) { Objetivas: {{ answered() }} de {{ data.size }} respondidas } @else { {{ answered() }} respondidas } · {{ data.size - answered() }} em branco · {{ marked() }} {{ marked() === 1 ? 'marcada' : 'marcadas' }} para revisar.</p>
             <p>Depois de finalizar, as respostas não poderão ser alteradas.@if (data.kind === 'FORMAT') { A discursiva será encerrada com o texto salvo, mesmo se estiver em branco. } @else if (data.discursive?.length) { As discursivas com texto serão enviadas. }</p>
             <div class="practice-actions">
               <button class="outline" (click)="finishDialog.close()" [disabled]="saving()" autofocus>Continuar respondendo</button>
@@ -241,11 +262,16 @@
             <p class="format-missing">Ainda não é possível montar o simulado completo. Faltam {{ format.missing.general }} de Formação Geral, {{ format.missing.specific }} específicas e {{ format.missing.discursive }} discursiva específica.</p>
           }
           <div class="practice-actions">
-            <button type="button" (click)="confirmFormat()" [disabled]="saving() || !!availability()?.active || !format.available">Começar simulado no formato 2026</button>
+            <button type="button" (click)="confirmFormat()" [disabled]="saving() || !!availability()?.active || !format.available" [attr.aria-describedby]="availability()?.active ? 'format-active-note' : null">Começar simulado no formato 2026</button>
             @if (format.lastResult; as last) {
               <button type="button" class="outline" (click)="openAttempt(last.attemptId)" [disabled]="saving()">Ver último resultado do formato 2026</button>
             }
           </div>
+          @if (availability()?.active; as active) {
+            <p id="format-active-note" class="practice-blocked-note">Você já tem {{ active.kind === 'EDITION' ? 'uma prova' : active.kind === 'FORMAT' ? 'um simulado' : 'um treino' }} em andamento. Retome ou cancele para começar outro.
+              <button type="button" class="text-button" (click)="openAttempt(active.id)" [disabled]="saving()">Retomar agora</button>
+            </p>
+          }
         }
       </section>
       @if (availability(); as data) {
@@ -261,6 +287,7 @@
         }
         @if (editions()?.editions?.length) {
           <section class="practice-editions" aria-label="Edições disponíveis">
+            @if (data.active) { <p id="editions-active-note" class="practice-blocked-note">Para começar outra prova, retome ou cancele a tentativa em andamento acima.</p> }
             @if (editionModalities().length > 1) {
               <div class="edition-filter" role="radiogroup" aria-label="Filtrar por curso">
                 <label><input type="radio" name="edition-filter" value="" [checked]="!editionFilter()" (change)="editionFilter.set('')" /> Todas</label>
@@ -286,7 +313,7 @@
                       <button type="button" class="text-button" (click)="openAttempt(last.attemptId)" [disabled]="saving()">Ver resultado</button>
                     </p>
                   }
-                  <button [class.outline]="edition.lastResult" (click)="chosenEdition.set(edition); editionDialog.showModal()" [disabled]="saving() || !!data.active || chosenEdition()?.id === edition.id">{{ edition.lastResult ? 'Refazer esta prova' : 'Fazer esta prova' }}</button>
+                  <button [class.outline]="edition.lastResult" (click)="chosenEdition.set(edition); editionDialog.showModal()" [disabled]="saving() || !!data.active || chosenEdition()?.id === edition.id" [attr.aria-describedby]="data.active ? 'editions-active-note' : null">{{ edition.lastResult ? 'Refazer esta prova' : 'Fazer esta prova' }}</button>
                 </li>
               }
             </ol>

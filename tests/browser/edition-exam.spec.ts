@@ -7,13 +7,13 @@ import { Pool } from "pg";
 import { test, expect } from "@playwright/test";
 
 // Prova TEST ONLY de 2096: objetivas 1 a 21 sem a 5 (as três primeiras de
-// Formação Geral) e uma discursiva. Nada real é publicado ou alterado.
+// Formação Geral) e cinco discursivas. Nada real é publicado ou alterado.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const prefix = `test-only-edition-${randomUUID()}`;
 const numbers = Array.from({ length: 21 }, (_, i) => i + 1).filter((n) => n !== 5);
 const [exam, key, standard] = [randomUUID(), randomUUID(), randomUUID()];
 const reviewer = randomUUID();
-const discursiveId = `discursive-${exam.replace(/-/g, "").slice(0, 12)}-d1`;
+const discursiveIds = Array.from({ length: 5 }, (_, i) => `discursive-${exam.replace(/-/g, "").slice(0, 12)}-d${i + 1}`);
 
 test.beforeAll(async () => {
   const bytes = await readFile("tests/fixtures/test-only-question.webp");
@@ -50,12 +50,15 @@ test.beforeAll(async () => {
     await client.query("INSERT INTO account(identity_id,email,password_hash) VALUES($1,$2,$3)",
       [reviewer, `edition-${reviewer}@example.invalid`, `scrypt$131072$8$1$${"0".repeat(32)}$${"0".repeat(64)}`]);
     await client.query("INSERT INTO question_asset(sha256,media_type,byte_size,width,height) VALUES($1,'image/webp',$2,760,240) ON CONFLICT DO NOTHING", [sha256, bytes.length]);
-    await client.query(
-      `INSERT INTO discursive_question(id,exam_source_id,standard_source_id,year,modality,number,area,criteria,reviewed_by)
-       VALUES($1,$2,$3,2096,'BACHARELADO',1,'Formação Geral','[{"label":null,"points":10}]',$4)`, [discursiveId, exam, standard, reviewer]);
-    for (const part of ["PROMPT", "STANDARD"]) await client.query(
-      "INSERT INTO discursive_image(question_id,part,position,asset_sha256,source_page,box,dpi) VALUES($1,$2,1,$3,1,'{30,60,410,186}',200)",
-      [discursiveId, part, sha256]);
+    for (const [i, id] of discursiveIds.entries()) {
+      await client.query(
+        `INSERT INTO discursive_question(id,exam_source_id,standard_source_id,year,modality,number,area,criteria,reviewed_by)
+         VALUES($1,$2,$3,2096,'BACHARELADO',$4,$5,'[{"label":null,"points":10}]',$6)`,
+        [id, exam, standard, i + 1, i < 2 ? "Formação Geral" : "Redes", reviewer]);
+      for (const part of ["PROMPT", "STANDARD"]) await client.query(
+        "INSERT INTO discursive_image(question_id,part,position,asset_sha256,source_page,box,dpi) VALUES($1,$2,1,$3,1,'{30,60,410,186}',200)",
+        [id, part, sha256]);
+    }
     await client.query("COMMIT");
   } catch (error) { await client.query("ROLLBACK"); throw error; } finally { client.release(); }
 });
@@ -65,7 +68,7 @@ test.afterAll(async () => {
     await client.query("BEGIN");
     const owners = (await client.query("SELECT DISTINCT owner_id FROM practice_attempt WHERE exam_source_id=$1", [exam])).rows.map((r) => r.owner_id);
     await client.query("DELETE FROM practice_attempt WHERE exam_source_id=$1", [exam]);
-    await client.query("DELETE FROM discursive_question WHERE id=$1", [discursiveId]);
+    await client.query("DELETE FROM discursive_question WHERE id=ANY($1::text[])", [discursiveIds]);
     await client.query("DELETE FROM editorial_question WHERE official_exam_id=$1", [exam]);
     await client.query("DELETE FROM source_document WHERE id=ANY($1::uuid[])", [[exam, key, standard]]);
     await client.query("DELETE FROM account WHERE identity_id=$1", [reviewer]);
@@ -76,11 +79,12 @@ test.afterAll(async () => {
 });
 
 test("a student takes the full edition exam with a countdown, pauses, leaves safely, writes the discursive and sees results by block", async ({ page }) => {
+  test.setTimeout(60_000);
   await page.goto("/provas");
   await expect(page.getByRole("heading", { name: "Provas completas", level: 1 })).toBeVisible();
   const editions = page.getByRole("region", { name: "Edições disponíveis" });
   const row = editions.getByRole("listitem").filter({ hasText: "ENADE 2096" });
-  await expect(row).toContainText("20 objetivas · 1 discursiva");
+  await expect(row).toContainText("20 objetivas · 5 discursivas");
   await expect(row).toContainText("Falta a 5");
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: "test-results/edition-setup-1280.png", fullPage: true });
@@ -110,31 +114,83 @@ test("a student takes the full edition exam with a countdown, pauses, leaves saf
   await page.getByRole("dialog", { name: "Sair agora?" }).getByRole("button", { name: "Pausar e sair" }).click();
   await expect(page.getByRole("heading", { name: "Discursivas", level: 1 })).toBeVisible();
   await navigateTo(page, "Provas completas");
-  await page.getByRole("button", { name: "Retomar prova" }).click();
+  const offer = page.getByRole("region", { name: "Simulado no formato ENADE 2026" });
+  const blockedStart = offer.getByRole("button", { name: "Começar simulado no formato 2026" });
+  await expect(blockedStart).toBeDisabled();
+  await expect(blockedStart).toHaveAccessibleDescription(/Você já tem uma prova em andamento/);
+  await expect(offer.getByText(/Retome ou cancele para começar outro/)).toBeVisible();
+  await expect(row.getByRole("button", { name: "Fazer esta prova" })).toHaveAccessibleDescription(/retome ou cancele/);
+  await offer.getByRole("button", { name: "Retomar agora" }).click();
   await expect(page.getByRole("heading", { name: "Prova pausada" })).toBeVisible();
   await page.getByRole("button", { name: "Continuar prova" }).click();
   await expect(page.getByText("Questão 1 de 20")).toBeVisible();
 
-  // No celular a folha de respostas começa recolhida; a discursiva está nela.
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByText("Folha de respostas").click();
-  await page.getByRole("button", { name: "Discursiva 1" }).click();
+  // Pelo mapa, cada D deve carregar seu próprio conteúdo, não reaproveitar D1.
+  for (let number = 1; number <= 5; number++) {
+    await page.getByRole("button", { name: `Discursiva ${number}`, exact: true }).click();
+    await expect(page.getByRole("heading", { name: `ENADE 2096 · Discursiva ${number}` })).toBeVisible();
+  }
+  await page.getByRole("button", { name: /^Questão 20,/ }).click();
+  await page.getByRole("button", { name: "Ir para as discursivas" }).click();
   await expect(page.getByRole("heading", { name: "ENADE 2096 · Discursiva 1" })).toBeVisible();
+
+  // O rodapé salva antes de navegar e mantém o texto se a gravação falhar.
+  await page.setViewportSize({ width: 390, height: 844 });
+  const footer = page.getByRole("navigation", { name: "Navegação das discursivas" });
+  const body = page.getByLabel(/Sua resposta para/);
   await expect(page.getByRole("button", { name: "Enviar e ver o padrão de resposta" })).toHaveCount(0);
-  await page.getByLabel(/Sua resposta para/).fill("TEST ONLY resposta escrita durante a prova.");
-  await expect(page.getByText("Rascunho salvo")).toBeVisible();
+  await page.route("**/api/discursive/*/response", route => route.fulfill({ status: 503, json: { message: "TEST ONLY falha ao salvar" } }));
+  await body.fill("TEST ONLY resposta da discursiva 1.");
+  await footer.getByRole("button", { name: "Próxima questão" }).click();
+  await expect(page.getByRole("alert")).toContainText("TEST ONLY falha ao salvar");
+  await expect(footer.getByRole("status")).toContainText("Sua resposta continua aqui");
+  await expect(page.getByRole("heading", { name: "ENADE 2096 · Discursiva 1" })).toBeVisible();
+  await expect(body).toHaveValue("TEST ONLY resposta da discursiva 1.");
+  await page.unroute("**/api/discursive/*/response");
+  await footer.getByRole("button", { name: "Próxima questão" }).click();
+  await expect(page.getByRole("heading", { name: "ENADE 2096 · Discursiva 2" })).toBeVisible();
+  await expect(footer.getByRole("status")).toHaveCount(0);
+  await expect(body).toHaveValue("");
+  await footer.getByRole("button", { name: "Anterior" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(body).toHaveValue("TEST ONLY resposta da discursiva 1.");
+  await expect(page.locator("#practice-position")).toBeFocused();
+  await footer.getByRole("button", { name: "Anterior" }).click();
+  await expect(page.getByText("Questão 20 de 20")).toBeVisible();
+  await page.getByRole("button", { name: "Ir para as discursivas" }).click();
+  await footer.getByRole("button", { name: "Próxima questão" }).click();
+  for (let number = 2; number <= 5; number++) {
+    await expect(page.getByRole("heading", { name: `ENADE 2096 · Discursiva ${number}` })).toBeVisible();
+    await body.fill(`TEST ONLY resposta da discursiva ${number}.`);
+    if (number < 5) await footer.getByRole("button", { name: "Próxima questão" }).click();
+  }
+  // O último item abre revisão; não finaliza automaticamente.
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(footer).toContainText("Discursiva 5 de 5");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await footer.scrollIntoViewIfNeeded();
+    await page.screenshot({ path: `test-results/edition-discursive-footer-${width}.png` });
+  }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.screenshot({ path: "test-results/edition-discursive-390.png", fullPage: true });
 
   await page.getByRole("button", { name: "Revisar e finalizar" }).click();
   await expect(page.getByRole("dialog")).toContainText("As discursivas com texto serão enviadas.");
+  await expect(page.getByRole("dialog")).toContainText("Objetivas: 1 de 20 respondidas · 19 em branco");
+  await page.getByRole("button", { name: "Continuar respondendo" }).click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
+  await expect(body).toHaveValue("TEST ONLY resposta da discursiva 5.");
+  await footer.getByRole("button", { name: "Revisar e finalizar" }).click();
   await page.getByRole("button", { name: "Finalizar prova" }).click();
   await expect(page.getByRole("heading", { name: "Resultado da prova" })).toBeVisible();
   await expect(page.locator(".practice-blocks")).toContainText("Formação Geral1 de 3");
   await expect(page.locator(".practice-blocks")).toContainText("Componente específico0 de 17");
   await page.screenshot({ path: "test-results/edition-result-390.png", fullPage: true });
   await page.getByRole("button", { name: "Abrir as discursivas" }).click();
-  await expect(page.getByRole("button", { name: /ENADE 2096 · Discursiva 1/ })).toContainText("Enviada");
+  for (let number = 1; number <= 5; number++) {
+    await expect(page.getByRole("button", { name: `ENADE 2096 · Discursiva ${number}`, exact: false })).toContainText("Enviada");
+  }
 
   // De volta às provas, o cartão mostra a última nota e oferece refazer.
   await navigateTo(page, "Provas completas");
