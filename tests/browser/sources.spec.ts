@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, unlink, writeFile } from "node:fs/promises";
@@ -201,7 +202,7 @@ test.afterAll(async () => {
 });
 
 async function sourceQueue(page: Page) {
-  await page.getByRole("button", { name: "Curadoria", exact: true }).click();
+  await navigateTo(page, "Curadoria");
   await page.getByRole("button", { name: "Fontes", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Fontes oficiais", level: 1 }),

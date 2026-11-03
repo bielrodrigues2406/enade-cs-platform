@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
@@ -105,10 +106,10 @@ test("a student takes the full edition exam with a countdown, pauses, leaves saf
   await page.getByRole("button", { name: "Continuar prova" }).click();
   await expect(page.getByRole("radio").first()).toBeChecked();
   // Sair pelo menu pede confirmação e pausa; a prova volta por Provas completas.
-  await page.getByRole("button", { name: "Discursivas" }).first().click();
+  await navigateTo(page, "Discursivas");
   await page.getByRole("dialog", { name: "Sair agora?" }).getByRole("button", { name: "Pausar e sair" }).click();
   await expect(page.getByRole("heading", { name: "Discursivas", level: 1 })).toBeVisible();
-  await page.getByRole("button", { name: "Provas completas" }).first().click();
+  await navigateTo(page, "Provas completas");
   await page.getByRole("button", { name: "Retomar prova" }).click();
   await expect(page.getByRole("heading", { name: "Prova pausada" })).toBeVisible();
   await page.getByRole("button", { name: "Continuar prova" }).click();
@@ -136,7 +137,7 @@ test("a student takes the full edition exam with a countdown, pauses, leaves saf
   await expect(page.getByRole("button", { name: /ENADE 2096 · Discursiva 1/ })).toContainText("Enviada");
 
   // De volta às provas, o cartão mostra a última nota e oferece refazer.
-  await page.getByRole("button", { name: "Provas completas" }).first().click();
+  await navigateTo(page, "Provas completas");
   const done = page.getByRole("region", { name: "Edições disponíveis" }).getByRole("listitem").filter({ hasText: "ENADE 2096" });
   await expect(done).toContainText("Sua última: 1 de 20");
   await expect(done.getByRole("button", { name: "Refazer esta prova" })).toBeEnabled();

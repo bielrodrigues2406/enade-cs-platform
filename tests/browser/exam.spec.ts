@@ -1,3 +1,4 @@
+import { logout, navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
@@ -154,10 +155,10 @@ test("partial practice shows real availability and blocks sizes without enough p
   await expect(page.getByText(/^0 questões disponíveis/)).toBeVisible();
   await page.getByLabel("Área do treino").selectOption(area);
   await expect(page.getByRole("radio", { name: "30 questões", exact: true })).toBeEnabled();
-  await page.getByRole("button", { name: "Caderno de erros", exact: true }).click();
-  await expect(page).toHaveURL(/\/questoes$/);
+  await navigateTo(page, "Caderno de erros");
+  await expect(page).toHaveURL(/\/caderno$/);
   await page.reload();
-  await expect(page.getByRole("heading", { name: "Banco de questões", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Caderno de erros", exact: true })).toBeVisible();
 });
 for (const size of [10, 20, 30]) {
   test(`partial practice pins ${size} distinct items and finalizes with unanswered items`, async ({ page }) => {
@@ -279,7 +280,7 @@ test("a lost save acknowledgement stays protected until retry confirms the same 
   await expect(page.getByRole("button", { name: "Limpar resposta", exact: true })).toBeDisabled();
   await expect(page.getByRole("button", { name: "Revisar e finalizar", exact: true })).toBeDisabled();
   await expect(radio(page, item, "B")).toBeDisabled();
-  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeDisabled();
+  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeDisabled();
   expect(await page.evaluate(() => { const event = new Event("beforeunload", { cancelable: true }); window.dispatchEvent(event); return event.defaultPrevented; })).toBe(true);
   await saveAction(page, () => page.getByRole("button", { name: "Tentar salvar novamente", exact: true }).click());
   expect((await currentView(page)).items[0].answer.revision).toBe(1);
@@ -377,7 +378,7 @@ test("registering preserves the guest attempt and logout isolates it from a fres
   await page.getByRole("button", { name: "Retomar treino", exact: true }).click();
   await expect(page.locator("#practice-position")).toBeFocused();
   await expect(page).toHaveURL((url) => url.searchParams.get("attempt") === view.id);
-  await page.locator("header").getByRole("button", { name: "Sair da conta", exact: true }).click();
+  await logout(page);
   await expect(page.getByRole("heading", { name: "Treino parcial", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Retomar treino", exact: true })).toHaveCount(0);
   await track(context);

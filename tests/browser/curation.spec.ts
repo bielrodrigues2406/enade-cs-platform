@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { Pool } from "pg";
@@ -94,7 +95,7 @@ const content = (title: string) => ({
   correctOptionId: "option-c",
 });
 async function openCuration(page: Page) {
-  await page.getByRole("button", { name: "Curadoria", exact: true }).click();
+  await navigateTo(page, "Curadoria");
   await expect(
     page.getByRole("heading", { name: "Curadoria", level: 1 }),
   ).toBeVisible();
@@ -149,7 +150,7 @@ async function publish(page: Page) {
       exact: true,
     })
     .check();
-  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeDisabled();
+  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeDisabled();
   expect(await hasUnloadGuard(page)).toBe(true);
   await page
     .getByRole("checkbox", {
@@ -176,7 +177,7 @@ async function publish(page: Page) {
     .getByRole("button", { name: "Confirmar publicação", exact: true })
     .click();
   await expect(page.getByRole("status")).toContainText("Versão publicada.");
-  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeEnabled();
+  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeEnabled();
   expect(await hasUnloadGuard(page)).toBe(false);
 }
 
@@ -190,7 +191,7 @@ for (const width of [390, 1440]) {
     await openCuration(page);
     const newDraft = page.getByRole("button", { name: "Nova questão autoral", exact: true });
     const back = page.getByRole("button", { name: "Voltar à fila" });
-    const bank = page.getByRole("button", { name: "Banco de questões", exact: true });
+    const bank = page.getByRole("link", { name: "Banco de questões", exact: true });
     const warning = page.getByRole("region", { name: "Alterações locais", exact: true });
 
     // A fresh form is clean; changing only the options also needs protection.
@@ -308,9 +309,7 @@ test("authoring, independent rejection/publication, version replacement and hist
     await expect(
       page.getByRole("button", { name: "Publicar versão", exact: true }),
     ).toHaveCount(0);
-    await page
-      .getByRole("button", { name: "Banco de questões", exact: true })
-      .click();
+    await navigateTo(page, "Banco de questões");
     await expect(
       page.getByRole("heading", { name: title, exact: true }),
     ).toHaveCount(0);
@@ -331,7 +330,7 @@ test("authoring, independent rejection/publication, version replacement and hist
       .fill(
         "Acrescente uma explicação mais detalhada para o raciocínio apresentado.",
       );
-    await expect(reviewer.getByRole("button", { name: "Banco de questões", exact: true })).toBeDisabled();
+    await expect(reviewer.getByRole("link", { name: "Banco de questões", exact: true })).toBeDisabled();
     expect(await hasUnloadGuard(reviewer)).toBe(true);
     await reviewer
       .getByRole("button", { name: "Devolver para ajustes", exact: true })
@@ -339,7 +338,7 @@ test("authoring, independent rejection/publication, version replacement and hist
     await expect(reviewer.getByRole("status")).toContainText(
       "Versão devolvida para ajustes.",
     );
-    await expect(reviewer.getByRole("button", { name: "Banco de questões", exact: true })).toBeEnabled();
+    await expect(reviewer.getByRole("link", { name: "Banco de questões", exact: true })).toBeEnabled();
     expect(await hasUnloadGuard(reviewer)).toBe(false);
     await openCuration(page);
     await page
@@ -382,9 +381,7 @@ test("authoring, independent rejection/publication, version replacement and hist
       fullPage: true,
     });
     await publish(reviewer);
-    await page
-      .getByRole("button", { name: "Banco de questões", exact: true })
-      .click();
+    await navigateTo(page, "Banco de questões");
     const topicFilter = page.getByLabel("Assunto", { exact: true });
     await expect(topicFilter).toContainText("Matemática discreta");
     await topicFilter.selectOption({ label: "Matemática discreta" });
@@ -446,9 +443,7 @@ test("authoring, independent rejection/publication, version replacement and hist
     await expect(page.getByRole("status")).toContainText(
       "Versão enviada para revisão independente.",
     );
-    await page
-      .getByRole("button", { name: "Banco de questões", exact: true })
-      .click();
+    await navigateTo(page, "Banco de questões");
     await expect(
       page.getByRole("button", { name: `Revisar: ${title}`, exact: true }),
     ).toBeVisible();
@@ -460,9 +455,7 @@ test("authoring, independent rejection/publication, version replacement and hist
       .getByRole("button", { name: `Abrir: ${updatedTitle}`, exact: true })
       .click();
     await publish(reviewer);
-    await page
-      .getByRole("button", { name: "Banco de questões", exact: true })
-      .click();
+    await navigateTo(page, "Banco de questões");
     await page
       .getByRole("button", { name: `Resolver: ${updatedTitle}`, exact: true })
       .click();
@@ -521,7 +514,7 @@ test("editing conflicts preserve local content and explicit reopen reconciles th
   await expect(page.getByLabel("Título", { exact: true })).toHaveValue(
     "Meu texto local ainda não salvo",
   );
-  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeDisabled();
+  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeDisabled();
   expect(await hasUnloadGuard(page)).toBe(true);
   await page
     .getByRole("button", { name: "Reabrir versão", exact: true })
@@ -529,7 +522,7 @@ test("editing conflicts preserve local content and explicit reopen reconciles th
   await expect(page.getByLabel("Título", { exact: true })).toHaveValue(
     "Edição confirmada por outra aba",
   );
-  await expect(page.getByRole("button", { name: "Banco de questões", exact: true })).toBeEnabled();
+  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeEnabled();
   expect(await hasUnloadGuard(page)).toBe(false);
 });
 
@@ -544,7 +537,7 @@ test("curation navigation stays unavailable to an account without the local cura
     page.getByRole("heading", { name: "Banco de questões", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Curadoria", exact: true }),
+    page.getByRole("link", { name: "Curadoria", exact: true }),
   ).toHaveCount(0);
   const queue = await context.request.get("/api/curation/questions");
   expect(queue.status()).toBe(403);

@@ -1,3 +1,4 @@
+import { logout, navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { Pool } from "pg";
@@ -38,10 +39,7 @@ async function track(context: BrowserContext) {
   return id;
 }
 async function review(page: Page) {
-  await page
-    .getByRole("button", { name: "Caderno de erros", exact: true })
-    .filter({ visible: true })
-    .click();
+  await navigateTo(page, "Caderno de erros");
   await expect(
     page.getByRole("heading", { name: "Caderno de erros", exact: true }),
   ).toBeVisible();
@@ -319,9 +317,7 @@ test("a late review response cannot reveal account history after logout in anoth
   try {
     await review(tab);
     await captured;
-    await page
-      .getByRole("button", { name: "Sair da conta", exact: true })
-      .click();
+    await logout(page);
     await expect(
       tab.getByRole("heading", { name: "Banco de questões", exact: true }),
     ).toBeVisible();

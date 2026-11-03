@@ -1,3 +1,4 @@
+import { openProfile } from "./navigation-helpers";
 import { test, expect } from "@playwright/test";
 import { signUp } from "./session-helpers";
 
@@ -16,14 +17,14 @@ test("a visitor can hide Dudu and the preference survives a reload", async ({ pa
 test("the account preference is acknowledged by the server and restored", async ({ page, context }) => {
   await signUp(context);
   await page.goto("/");
-  await page.getByRole("button", { name: /^Meu perfil,/ }).click();
+  await openProfile(page);
   const toggle = page.getByRole("checkbox", { name: "Mostrar o mascote Dudu" });
   await expect(toggle).toBeChecked();
   await toggle.uncheck();
   await expect(toggle).toBeEnabled();
   expect((await (await context.request.get("/api/me/preferences")).json()).mascotEnabled).toBe(false);
   await page.reload();
-  await page.getByRole("button", { name: /^Meu perfil,/ }).click();
+  await openProfile(page);
   await expect(page.getByRole("checkbox", { name: "Mostrar o mascote Dudu" })).not.toBeChecked();
 });
 
