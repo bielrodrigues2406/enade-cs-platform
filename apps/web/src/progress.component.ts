@@ -31,6 +31,7 @@ export class ProgressComponent {
   readonly ring = RING;
   ranking = signal<Ranking | null>(null);
   savingGoal = signal(false);
+  readonly showAllMedals = signal(false);
   error = signal("");
 
   readonly ringOffset = computed(() => {
@@ -39,6 +40,7 @@ export class ProgressComponent {
   });
   readonly unlocked = computed(() => (this.engagement.state()?.achievements ?? []).filter((a) => a.unlockedAt));
   readonly locked = computed(() => (this.engagement.state()?.achievements ?? []).filter((a) => !a.unlockedAt));
+  readonly visibleLocked = computed(() => this.showAllMedals() ? this.locked() : this.locked().slice(0, 2));
   /** Os 28 dias em semanas de segunda a domingo, com espaços antes do primeiro dia. */
   readonly calendar = computed(() => {
     const days = this.engagement.state()?.days ?? [];

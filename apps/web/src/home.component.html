@@ -208,6 +208,7 @@
             <button type="button" class="text-button" (click)="progressHub.emit()">Ver conquistas <span aria-hidden="true">→</span></button>
           </section>
         }
+        @if (answeredCount() > 0) {
         <section class="panel" aria-label="Seu andamento">
           <span class="panel-eyebrow">SEU ANDAMENTO</span>
           <h2>Banco de questões</h2>
@@ -255,6 +256,7 @@
           }
         </section>
 
+        }
         <section class="panel" aria-labelledby="home-exam-title">
           <div class="exam-head">
             <span class="date-block" aria-hidden="true"
@@ -319,10 +321,22 @@
       @if (!progress()) {
         <p role="status">Carregando seu desempenho…</p>
       } @else {
+        <form class="area-practice" (ngSubmit)="simulateSelected()">
+          <div><label for="home-practice-area">Treinar por área</label>
+            <select id="home-practice-area" name="practiceArea" [(ngModel)]="selectedArea">
+              <option value="">Selecione uma área</option>
+              @for (row of availableAreas(); track row.area) { <option [value]="row.area">{{ row.area }} ({{ row.published }})</option> }
+            </select>
+          </div>
+          <button type="submit" class="outline" [disabled]="!selectedArea || !!active()">Preparar treino</button>
+        </form>
+        @if (!studiedAreas().length) {
+          <p class="areas-start">Seu desempenho aparece aqui depois das primeiras respostas. Você já pode treinar qualquer área disponível.</p>
+        } @else {
         <!-- Barras em ordem de atenção: a mais fraca no alto. A barra grossa é o
              acerto; a fina, quanto da área já foi visto. -->
         <ol class="areas-list">
-          @for (row of ranked(); track row.area) {
+          @for (row of studiedAreas(); track row.area) {
             <li [class.is-low]="needsAttention(row)" [class.is-empty]="!row.firstAttempts">
               <div class="areas-name">
                 <strong>{{ row.area }}</strong>
@@ -364,6 +378,7 @@
           <span><i class="areas-key"></i> acerto na primeira resposta</span>
           <span><i class="areas-key is-coverage"></i> parte da área já vista</span>
         </p>
+        }
         @if (active()) {
           <p class="areas-hint">Para começar um simulado, termine ou retome o treino em andamento.</p>
         }

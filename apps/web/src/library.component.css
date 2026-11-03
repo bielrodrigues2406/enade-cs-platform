@@ -1,6 +1,4 @@
-/* Biblioteca: cartões de ficha por área e a ficha em formato de página. */
-.library-area { margin: var(--space-8) 0; }
-.library-area h2 { font-size: var(--text-lg); margin-bottom: var(--space-3); }
+/* Biblioteca: grade contínua, com a área identificada em cada ficha. */
 .sheet-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));

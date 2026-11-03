@@ -36,11 +36,11 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 ## 5. O que falta (por prioridade)
 
 1. **Deploy em VPS própria e domínio** (Gabriel comprando). `deploy/vps/` foi feito para dividir o servidor do Mira; adaptar para Caddy próprio com HTTPS do domínio. Nomes sugeridos: cadernocc.com.br (preferido), bitabit.app, gabaritou.com.br. Só publicar com autorização.
-2. **Design e uso (DS-5):** [auditoria com evidências e propostas A/B](reviews/2026-11-03-design-audit.md). Priorizar menu móvel de dez destinos, vazamento das tabelas, curadoria limitada a 50/246 questões e gabarito autoral A pré-selecionado. Depois: rotas estáveis, primeira dobra do catálogo, estados vazios e defaults dos formulários. Os protótipos são estáticos; o menu do aplicativo ainda não foi alterado.
+2. **Design aplicado (DS-6/7/8):** [implementação e validação](reviews/2026-11-03-design-implementation.md). PR #39 integrado; #40/#41 entram após CI do HEAD final. Menu A com **Questões/Treinar/Revisar/Apoio**, conta reunida, rotas estáveis, filtros compactos, curadoria paginada/gabarito explícito, tabelas e formulários corrigidos, Início/Biblioteca/Conquistas enxutos. As propostas antigas ficam como histórico. Preservar o nome Questões, escolhido por Gabriel. Capturas locais: 128/37 estados, mais dobras/menu. Antes de repetir a auditoria inteira, verificar se há achado novo.
 3. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
 4. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória, ainda não iniciada). A auditoria de design não a substitui.
 5. **Conteúdo:** 33 PDFs recentes, cinco padrões antigos de FG e fonte legível para 2005 Q60. Quatro discursivas 2005/2008 já entraram no PR #33; não listar novamente todas essas edições como pendentes.
-6. **Operação/acessibilidade:** texto de privacidade institucional (LGL-1), leitor de tela e estados de erro ainda não auditados. Pacote inicial em 496,13 kB no PR #37; preservar carregamento lazy e evitar aumentar o shell.
+6. **Operação/acessibilidade:** texto de privacidade institucional (LGL-1), leitor de tela e estados de erro ainda não auditados. Pacote inicial em 434,70 kB no lote de design; preservar carregamento lazy e evitar aumentar o shell.
 
 **Depois do essencial, sem bloquear o próximo lote:** Plano e Materiais, hoje "Em breve" na Biblioteca. Validar necessidade antes de adicionar migration, upload ou fluxos novos. Poses do mascote com acessórios/cenas exigem artes próprias; MAS-4 básico já está integrado e não exige nova biblioteca de animação.
 

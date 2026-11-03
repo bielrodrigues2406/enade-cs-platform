@@ -201,3 +201,10 @@
 
 /* MAS-2 */
 .mascot-intro { display: flex; align-items: center; gap: var(--space-4); max-width: 64ch; margin: var(--space-5) 0; }
+
+/* O início vazio orienta sem desenhar barras de áreas ainda não estudadas. */
+.area-practice { display: flex; align-items: end; gap: var(--space-3); margin-bottom: var(--space-5); }
+.area-practice > div { flex: 1; min-width: 0; }
+.area-practice select { width: 100%; }
+.areas-start { max-width: 64ch; color: var(--color-text-muted); }
+@media (max-width: 600px) { .area-practice { align-items: stretch; flex-direction: column; } .area-practice button { align-self: flex-start; } }
