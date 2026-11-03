@@ -1,0 +1,55 @@
+{
+  "receivedArchive": "dudu_7_camadas.zip",
+  "archiveSha256": "5a5ea053a32686c15e9931b5ca4ff46f74696f517be5bb3153a34d1182f93dba",
+  "sources": [
+    {
+      "received": "01_dudu_completo.png",
+      "receivedSha256": "743e64ba3911aa511ff3ef74fa3e3a20277ffdaf380b82806214eb1d36f3d16a",
+      "prepared": "reference.png",
+      "preparedSha256": "743e64ba3911aa511ff3ef74fa3e3a20277ffdaf380b82806214eb1d36f3d16a",
+      "preparation": "original bytes preserved"
+    },
+    {
+      "received": "02_tronco_pes.png",
+      "receivedSha256": "f6ca58f17ecdfef8ce93043582df0c73f8ec8af1fa3a4b19d63f5676efb4a3d6",
+      "prepared": "body.png",
+      "preparedSha256": "f6ca58f17ecdfef8ce93043582df0c73f8ec8af1fa3a4b19d63f5676efb4a3d6",
+      "preparation": "original bytes preserved"
+    },
+    {
+      "received": "03_cabeca.png",
+      "receivedSha256": "8cc7545ba0ae3ce20c59a50c5d114a2697a136bacc0be65da1aaf96cc7747701",
+      "prepared": "head.png",
+      "preparedSha256": "72b650bb95ba480e06feea57a4435a1c02f1887fccfb8079e28b16be8bd11654",
+      "preparation": "image_gen background removal, real transparency"
+    },
+    {
+      "received": "04_asa_direita.png",
+      "receivedSha256": "42a2a0d535c974673355a2afef1d7ceb09268e331ddf913a3325ccaaee466448",
+      "prepared": "right-wing.png",
+      "preparedSha256": "bf57c55eaae4dda61fbdb66bbc30819b98f26d39605c4ac817cb97a8da54b38a",
+      "preparation": "image_gen background removal, real transparency"
+    },
+    {
+      "received": "05_olhos_abertos.png",
+      "receivedSha256": "6e419111a69f77ab74597950a89ce1b72ac9502affe0e9c3ac2f7493f8e5e189",
+      "prepared": "open-eyes.png",
+      "preparedSha256": "6e419111a69f77ab74597950a89ce1b72ac9502affe0e9c3ac2f7493f8e5e189",
+      "preparation": "original bytes preserved"
+    },
+    {
+      "received": "06_olhos_fechados.png",
+      "receivedSha256": "1fd7a736719028d886d0f7c48c6da3d09f448fec28f76075bef0f33a6eeaa73b",
+      "prepared": "closed-eyes.png",
+      "preparedSha256": "4801e5aef1d4c833298bb94615c72e703cfc068acda1dabcdb33a1d7df818f0d",
+      "preparation": "image_gen background removal, real transparency"
+    },
+    {
+      "received": "07_asa_esquerda.png",
+      "receivedSha256": "140ed5b6dc728c8fe6065132208b3e23681f9760fc197af7c1f2f1207da4b861",
+      "prepared": "left-wing.png",
+      "preparedSha256": "9083da9c18a6c47b0c4b7d667b0886e83556c23a1ba80db86f20e45a87dbc495",
+      "preparation": "image_gen background removal, real transparency"
+    }
+  ]
+}
