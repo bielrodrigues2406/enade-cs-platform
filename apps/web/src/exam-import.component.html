@@ -20,7 +20,7 @@
         <input id="import-year" name="year" type="number" min="2004" max="2100" [(ngModel)]="form.year" required />
       </div>
       <div>
-        <label for="import-modality">Curso</label>
+        <label for="import-modality">Modalidade do caderno</label>
         <select id="import-modality" name="modality" [(ngModel)]="form.modality">
           <option value="BACHARELADO">Bacharelado</option>
           <option value="LICENCIATURA">Licenciatura</option>
@@ -55,7 +55,7 @@
           placeholder="https://download.inep.gov.br/enade/…/padrao_resposta.pdf" />
       </div>
     </div>
-    <button type="submit" [disabled]="busy()">{{ busy() ? "Enviando…" : "Enviar e propor caixas" }}</button>
+    <button type="submit" [disabled]="busy()">{{ busy() ? "Enviando…" : "Preparar recortes" }}</button>
   </form>
 
   @if (batches().length) {

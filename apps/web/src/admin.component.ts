@@ -6,6 +6,7 @@ import { ActivityComponent } from "./activity.component";
 // Administração (ROLE-1, D14): contas cadastradas e papéis. O servidor
 // confere o papel em cada chamada; esta tela só organiza as ações.
 type Role = "ADMIN" | "PROFESSOR";
+type AdminTab = "accounts" | "imports" | "activity";
 type UserRow = {
   id: string;
   email: string;
@@ -40,7 +41,12 @@ export const ROLE_LABEL: Record<Role, string> = { ADMIN: "Administração", PROF
 export class AdminComponent {
   @Output() back = new EventEmitter<void>();
   readonly roleLabel = ROLE_LABEL;
-  tab = signal<"accounts" | "imports" | "activity">("accounts");
+  readonly tabs: { id: AdminTab; label: string }[] = [
+    { id: "accounts", label: "Contas e papéis" },
+    { id: "imports", label: "Importar prova" },
+    { id: "activity", label: "Atividades" },
+  ];
+  tab = signal<AdminTab>("accounts");
   data = signal<UsersPage | null>(null);
   loading = signal(false);
   error = signal("");
@@ -51,9 +57,26 @@ export class AdminComponent {
   newAccount = { name: "", enrollment: "", email: "", role: "" as Role | "", password: "" };
   creating = signal(false);
   createError = signal("");
+  nameChecked = signal(false);
 
   ngOnInit() {
     void this.load(1);
+  }
+  navigateTabs(event: KeyboardEvent, index: number) {
+    const last = this.tabs.length - 1;
+    const next = event.key === "Home" ? 0 : event.key === "End" ? last
+      : event.key === "ArrowRight" ? (index + 1) % this.tabs.length
+      : event.key === "ArrowLeft" ? (index + last) % this.tabs.length : null;
+    if (next === null) return;
+    event.preventDefault();
+    this.tab.set(this.tabs[next].id);
+    const button = event.currentTarget as HTMLButtonElement;
+    button.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
+  }
+  accountNameError() {
+    const length = this.newAccount.name.trim().replace(/\s+/g, " ").length;
+    return length < 2 ? "Informe o nome com pelo menos 2 caracteres."
+      : length > 120 ? "Use até 120 caracteres no nome." : "";
   }
   pageCount() {
     const data = this.data();
@@ -98,6 +121,7 @@ export class AdminComponent {
   openCreate(dialog: HTMLDialogElement) {
     this.newAccount = { name: "", enrollment: "", email: "", role: "", password: generatePassword() };
     this.createError.set("");
+    this.nameChecked.set(false);
     dialog.showModal();
   }
   suggestPassword() {
@@ -107,6 +131,12 @@ export class AdminComponent {
   async createAccount(dialog: HTMLDialogElement) {
     const account = this.newAccount;
     const length = [...account.password].length;
+    this.createError.set("");
+    this.nameChecked.set(true);
+    if (this.accountNameError()) {
+      dialog.querySelector<HTMLInputElement>("#new-account-name")?.focus();
+      return;
+    }
     if (!account.email.trim()) return this.createError.set("Informe o e-mail.");
     if (length < 12 || length > 128) return this.createError.set("A senha inicial deve ter de 12 a 128 caracteres.");
     this.creating.set(true);

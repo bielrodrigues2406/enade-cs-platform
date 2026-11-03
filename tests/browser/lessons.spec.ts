@@ -22,6 +22,7 @@ test("a professor creates a class, pastes the roster, schedules a lesson, takes 
   await page.goto("/questoes");
   await page.getByRole("button", { name: "Aulas" }).first().click();
   await page.getByRole("button", { name: "Nova turma" }).click();
+  await expect(page.getByLabel("Nome")).toBeFocused();
   await page.getByLabel("Nome").fill(className);
   await page.getByRole("button", { name: "Criar turma" }).click();
   await expect(page.getByRole("heading", { name: className, level: 1 })).toBeVisible();
@@ -31,8 +32,16 @@ test("a professor creates a class, pastes the roster, schedules a lesson, takes 
   await page.getByRole("button", { name: "Adicionar à turma" }).click();
   await expect(page.getByRole("status")).toContainText("2 adicionadas");
 
+  for (const width of [320, 390, 768]) {
+    await page.setViewportSize({ width, height: 844 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
   await page.getByRole("button", { name: "Nova aula" }).click();
   await expect(page.getByRole("dialog", { name: "Marcar aula" })).toBeVisible();
+  await expect(page.getByLabel("Data")).toBeFocused();
+  const teachers = await (await context.request.get("/api/auth/me")).json();
+  const ownId = (await pool.query("SELECT identity_id FROM account WHERE email=$1", [teachers.email])).rows[0].identity_id;
+  await expect(page.getByLabel("Professor", { exact: true })).toHaveValue(ownId);
   await page.getByLabel("Data").fill("2026-11-10");
   await page.getByLabel("Matéria").fill("Redes");
   await page.getByLabel("Sala").fill("Lab 3");
