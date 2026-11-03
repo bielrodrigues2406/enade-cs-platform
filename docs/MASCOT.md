@@ -26,7 +26,10 @@ Nome: **Dudu**. Alternativa: "Bit".
 | `design/mascot/icon-navy-head.jpg` → `apps/web/public/icons/` | favicon 32/48, apple-touch-icon 180, ícones 192/512 do `manifest.webmanifest` |
 | `design/mascot/icons-three-backgrounds.jpg` | ícones alternativos (papel e azul), ainda sem uso |
 | `design/mascot/poses-magenta-lowres.jpg` | folha com fundo magenta para recorte limpo, **mas é captura de tela (1179 px, ~110 px por pose)**: baixa demais. Pedir a Gabriel o arquivo original em alta e recortar por chroma key |
-| `apps/web/src/mascot.component.*` | `<app-mascot pose="…" [size]="96" motion="pop|greet|celebrate|bob|none" [decorative]="true">` |
+| `apps/web/src/mascot.component.*` | `<app-mascot pose="…" [size]="96" motion="pop|greet|celebrate|listen|bob|none" [decorative]="true">` |
+| `apps/web/src/dudu-figure.component.*` | montagem articulada, carregada sob demanda nas quatro poses sem acessórios |
+| `design/mascot/articulated/` | sete PNGs de autoria e proveniência das quatro remoções de fundo |
+| `apps/web/public/mascot/articulated/` | seis WebPs sem perdas; receita em `scripts/prepare-mascot-assets.mjs` |
 | `apps/web/src/mascot.service.ts` | preferência "mostrar o mascote" (conta no servidor; visitante neste navegador) |
 
 Poses: `acenando`, `comemorando`, `sequencia` (chama), `medalha`, `ouvindo`, `contente`,
@@ -164,8 +167,8 @@ se a preferência mudar com a tela aberta. Ocultar o mascote continua funcionand
 Gabriel reforçou que quer movimento das partes, não apenas a inclinação da imagem.
 Escolha inicial de MAS-4: **PNG em camadas** do mesmo Dudu 3D, com cabeça, asas e olhos
 separados e alinhados. [Prompts completos e nomes dos sete arquivos](MASCOT-ANIMATION-PROMPTS.md).
-O grupo dos olhos acompanha a cabeça; as asas giram no ombro. A montagem exige conferir
-as peças reais antes de implementar. As artes e a animação articulada estão pendentes.
+O grupo dos olhos acompanha a cabeça; as asas giram no ombro. O ZIP foi recebido e a
+montagem foi implementada em MAS-4; validação e limites estão na seção 10.
 
 Uma sequência curta de quadros continua sendo alternativa para gestos que mudem muito
 a perspectiva. Nesse caso, comparar sprite e WebP animado só após medir o peso real, a
@@ -190,9 +193,40 @@ da referência. Ajustar posição/escala e pivôs na montagem; não pedir novas 
 apenas por esse deslocamento. As asas mostram a região arredondada do ombro necessária
 à articulação. A composição ainda não foi sobreposta nem testada: são observações visuais.
 
-Algumas prévias têm fundo branco e outras mostram quadriculado. A aparência no chat
-não permite confirmar canal alfa real ou distinguir com certeza um quadriculado
-desenhado. Os arquivos originais não foram disponibilizados no workspace; é necessário
-receber os mesmos sete PNGs em um ZIP para verificar canais, dimensões, bordas e encaixe.
-Nenhuma dessas camadas foi incorporada ao aplicativo. Não há necessidade de pedir
-novas imagens antes de conferir os arquivos existentes.
+O ZIP confirmou: referência, corpo e olhos abertos tinham alfa real; cabeça, asas e
+olhos fechados eram RGB com quadriculado desenhado. Essas quatro camadas foram editadas
+com image_gen para remover o fundo. Os sete fontes preparados estão em
+`design/mascot/articulated/`, com hashes dos recebidos e preparados em `provenance.json`.
+
+## 10. Articulação entregue (MAS-4, 03/11/2026)
+
+`app-mascot` usa `app-dudu-figure` nas poses `acenando`, `contente`, `ouvindo` e
+`comemorando`. As poses com acessórios preservam a arte anterior; não remover medalha,
+livro, cartões ou capacete para substituir tudo pela mesma imagem neutra.
+
+- **Cumprimento:** uma asa acena, a cabeça inclina e os olhos piscam.
+- **Comemoração:** as duas asas levantam, com salto breve e piscada.
+- **Escuta:** cabeça e olhos se movem uma vez depois do erro, no bloco de reflexão.
+- **Repouso:** olhos abertos, asas baixas; não há piscar ou respirar em laço durante leitura.
+
+Os gestos duram o token de 610 ms e usam apenas `transform`/`opacity`. `none` continua
+estático nas discursivas e demais leituras; o aviso de ritmo não ganha movimento.
+Movimento reduzido cancela os gestos, inclusive durante sua execução, e mantém olhos
+abertos. A preferência de ocultar Dudu impede a criação do componente e o pedido das camadas.
+
+O enquadramento está no CSS, com caixas dos fontes e pivôs de ombro/base da cabeça.
+A ordem de pintura é explícita: asas, tronco, cabeça e olhos. Os seis arquivos precisam
+carregar e terminar de decodificar antes de a montagem aparecer; atraso ou erro em uma camada mantém a pose
+estática, sem bloquear formulário ou estudo. A falha no chunk lazy também tem fallback.
+
+Os derivados WebP preservam dimensões e todos os pixels visíveis dos PNGs: **654.586 bytes**
+no total (~639 KiB), compartilhados entre telas. Fontes PNG ficam fora do aplicativo.
+Componente lazy: **7,40 kB**; pacote inicial: **496,13 kB**, abaixo do aviso de 500 kB.
+Sem biblioteca de animação nova. Receita e enquadramento em
+`design/mascot/articulated/README.md`.
+
+Validação local: build, **182 API e 16 Chromium** de mascote/reflexão/engajamento passaram;
+os casos cobrem espera/erro de camada, asas/cabeça/piscada, preferência, movimento reduzido,
+teclado e fila de conquistas. Capturas de acesso em 320/390/768/1440 px sem overflow.
+O CI completo do HEAD final permanece condição de merge. Demonstração ampliada separada
+do produto usa os mesmos ativos e CSS; não é gravação de uma conta de aluno real.
