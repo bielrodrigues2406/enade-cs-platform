@@ -24,9 +24,13 @@ export class DuduFigureComponent {
   private loaded = new Set<DuduLayer>();
   private failed = false;
 
-  layerLoaded(layer: DuduLayer) {
-    this.loaded.add(layer);
-    this.ready.set(!this.failed && this.loaded.size === 6);
+  async layerLoaded(layer: DuduLayer, event: Event) {
+    try {
+      // Download concluído não garante que o bitmap já possa aparecer no quadro.
+      await (event.target as HTMLImageElement).decode();
+      this.loaded.add(layer);
+      this.ready.set(!this.failed && this.loaded.size === 6);
+    } catch { this.layerFailed(); }
   }
 
   /** Uma camada ausente mantém a pose estática; o estudo continua disponível. */
