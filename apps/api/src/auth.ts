@@ -17,22 +17,35 @@ import {
   digest,
   identity,
   issueSession,
+  normalizeIpForLimit,
   requireIdentity,
   sessionHash,
   sessionView,
   setSessionCookie,
 } from "./session.js";
 
-// Single-process development protection. Do not trust client-supplied forwarding
-// headers; deployments behind a proxy need an explicitly configured shared limiter.
+function evictIfNeeded(map: Map<string, unknown>, maxEntries: number) {
+  while (map.size >= maxEntries) {
+    const oldest = map.keys().next().value;
+    if (oldest === undefined) break;
+    map.delete(oldest);
+  }
+}
+
+// Proteção por processo: em rede de câmpus (NAT compartilhado), logins corretos
+// devolvem o crédito do IP para não bloquear uma turma inteira, mantendo o
+// limite estrito de 10 falhas por e-mail e 150 tentativas não confirmadas por IP.
 export class AuthThrottle {
   private windows = new Map<string, { count: number; end: number; logged?: boolean }>();
+  private ipKey(req: any) {
+    return `ip:${digest(normalizeIpForLimit(req?.ip || req?.socket?.remoteAddress))}`;
+  }
   check(req: any, res: any, email: string) {
     const now = Date.now();
     for (const [key, value] of this.windows)
       if (value.end <= now) this.windows.delete(key);
     const keys = [
-      [`ip:${digest(req.ip || req.socket.remoteAddress || "unknown")}`, 50],
+      [this.ipKey(req), 150],
       [`email:${digest(email)}`, 10],
     ] as const;
     for (const [key, max] of keys) {
@@ -51,19 +64,23 @@ export class AuthThrottle {
         );
       }
     }
-    if (
-      this.windows.size +
-        keys.filter(([key]) => !this.windows.has(key)).length >
-      10000
-    )
-      fail("O acesso está ocupado. Tente novamente em instantes.", 503);
     for (const [key] of keys) {
-      const current = this.windows.get(key) ?? {
-        count: 0,
-        end: now + 15 * 60000,
-      };
-      current.count++;
-      this.windows.set(key, current);
+      const existing = this.windows.get(key);
+      if (existing) {
+        existing.count++;
+      } else {
+        evictIfNeeded(this.windows, 10000);
+        this.windows.set(key, { count: 1, end: now + 15 * 60000 });
+      }
+    }
+  }
+  /** Devolve o crédito do IP quando a senha conferida estava correta (evita bloqueio por NAT do câmpus). */
+  refund(req: any, email?: string) {
+    for (const key of [this.ipKey(req), ...(email ? [`email:${digest(email)}`] : [])]) {
+      const current = this.windows.get(key);
+      if (!current) continue;
+      if (current.count <= 1) this.windows.delete(key);
+      else current.count--;
     }
   }
 }
@@ -77,9 +94,9 @@ class GuestThrottle {
   check(req: any, res: any) {
     const now = Date.now();
     for (const [key, value] of this.windows) if (value.end <= now) this.windows.delete(key);
-    const key = digest(req.ip || req.socket.remoteAddress || "unknown");
-    const current = this.windows.get(key) ?? { count: 0, end: now + GUEST_WINDOW_MS };
-    if (current.count >= GUEST_SESSIONS_PER_IP) {
+    const key = digest(normalizeIpForLimit(req?.ip || req?.socket?.remoteAddress));
+    const current = this.windows.get(key);
+    if (current && current.count >= GUEST_SESSIONS_PER_IP) {
       if (!current.logged) {
         current.logged = true;
         logActivity({ category: "SECURITY", action: "GUEST_LIMITED", detail: `${GUEST_SESSIONS_PER_IP} sessões novas do IP em 15 min`, ip: requestIp(req) });
@@ -87,9 +104,12 @@ class GuestThrottle {
       res.setHeader("Retry-After", Math.ceil((current.end - now) / 1000));
       fail("Muitas sessões novas a partir desta rede. Aguarde alguns minutos.", 429);
     }
-    if (!this.windows.has(key) && this.windows.size >= 10000) fail("O acesso está ocupado. Tente novamente em instantes.", 503);
-    current.count++;
-    this.windows.set(key, current);
+    if (current) {
+      current.count++;
+    } else {
+      evictIfNeeded(this.windows, 10000);
+      this.windows.set(key, { count: 1, end: now + GUEST_WINDOW_MS });
+    }
   }
 }
 /** E-mail normalizado (minúsculas, sem espaços) ou erro 400. */
@@ -230,6 +250,7 @@ export class AuthController {
       logActivity({ category: "ACCESS", action: "LOGIN_FAILED", actorId: account?.identity_id, subject: email, ip: requestIp(req) });
       fail("E-mail ou senha incorretos.", 401);
     }
+    this.throttle.refund(req, email);
     const client = await db.connect();
     try {
       await client.query("BEGIN");
@@ -255,17 +276,26 @@ export class AuthController {
     @Req() req: any,
     @Res({ passthrough: true }) res: any,
   ) {
+    const tokenHash = sessionHash(req);
+    if (!tokenHash) return { mode: "guest" };
+    this.guests.check(req, res);
     const client = await db.connect();
     try {
       await client.query("BEGIN");
       // DELETE locks the current session, serializing with in-flight answer saves.
-      const tokenHash = sessionHash(req);
-      if (tokenHash)
-        await client.query("DELETE FROM browser_session WHERE token_hash=$1", [
-          tokenHash,
-        ]);
+      const deleted = await client.query(
+        "DELETE FROM browser_session WHERE token_hash=$1",
+        [tokenHash],
+      );
+      if (!deleted.rowCount) {
+        await client.query("ROLLBACK");
+        return { mode: "guest" };
+      }
       const token = await createGuest(client);
       await client.query("COMMIT");
+      if (process.env.NODE_ENV === "production") {
+        res.setHeader("Clear-Site-Data", '"cache"');
+      }
       setSessionCookie(res, token);
       return { mode: "guest" };
     } catch (error) {

@@ -6,12 +6,34 @@ import { fail } from "./api-error.js";
 export type Identity = { id: string; email: string | null; name: string | null; tokenHash: string };
 export const digest = (value: string) =>
   createHash("sha256").update(value).digest("hex");
+
+/** Normaliza IPv6 ao prefixo /64 e remove prefixo ::ffff: de IPv4 mapeado. */
+export function normalizeIpForLimit(raw: string | null | undefined): string {
+  const ip = (raw || "unknown").trim().toLowerCase();
+  if (ip.startsWith("::ffff:")) return ip.slice(7);
+  if (!ip.includes(":")) return ip;
+  const [left, right] = ip.split("::");
+  const head = left ? left.split(":").filter(Boolean) : [];
+  const tail = right !== undefined ? (right ? right.split(":").filter(Boolean) : []) : [];
+  const missing = right !== undefined ? Math.max(0, 8 - head.length - tail.length) : 0;
+  const full = [...head, ...Array(missing).fill("0"), ...tail].map((g) => g.padStart(4, "0"));
+  return full.length >= 4 ? `${full.slice(0, 4).join(":")}::/64` : ip;
+}
+
+export function sessionCookieName(production = process.env.NODE_ENV === "production") {
+  return production ? "__Host-enade_session" : "enade_session";
+}
+
 export function sessionHash(req: any): string | null {
-  const token = (req.headers.cookie ?? "")
+  const prefix = `${sessionCookieName()}=`;
+  const matches = (req.headers.cookie ?? "")
     .split(";")
     .map((v: string) => v.trim())
-    .find((v: string) => v.startsWith("enade_session="))
-    ?.slice(14);
+    .filter((v: string) => v.startsWith(prefix))
+    .map((v: string) => v.slice(prefix.length));
+  // Se outro subdomínio tentar injetar cookie duplicado (cookie tossing), recusamos ambos.
+  if (matches.length !== 1) return null;
+  const token = matches[0];
   return token && /^[a-f0-9]{64}$/.test(token) ? digest(token) : null;
 }
 export async function identity(
@@ -44,12 +66,14 @@ export const sessionView = (user: { email: string | null; name?: string | null }
     ? { mode: "account" as const, email: user.email, name: user.name ?? null }
     : { mode: "guest" as const };
 export function setSessionCookie(res: any, token: string) {
-  res.cookie("enade_session", token, {
+  const production = process.env.NODE_ENV === "production";
+  res.cookie(sessionCookieName(production), token, {
     httpOnly: true,
     sameSite: "strict",
-    secure: process.env.NODE_ENV === "production",
+    secure: production,
     maxAge: 30 * 86400000,
-    path: "/api",
+    // __Host- exige Path=/ e proíbe Domain no navegador, impedindo subdomínios vizinhos (*.ifsp.edu.br) de forjar o cookie.
+    path: production ? "/" : "/api",
   });
 }
 export async function issueSession(client: PoolClient, identityId: string) {

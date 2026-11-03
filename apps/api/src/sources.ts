@@ -105,7 +105,11 @@ export class SourcesController {
       const source = await sourceById(id, client);
       if (source.revision !== expected || source.status !== "IMPORTED")
         fail("A fonte mudou ou não está aguardando conferência.", 409);
-      if (source.importedBy === actor || source.lastEditor === actor)
+      const priorEdit = await client.query(
+        "SELECT 1 FROM source_event WHERE source_id=$1 AND actor_id=$2 AND event_type IN ('IMPORTED','EDITED') LIMIT 1",
+        [id, actor],
+      );
+      if (source.importedBy === actor || source.lastEditor === actor || priorEdit.rowCount)
         fail("Outra pessoa da curadoria deve conferir esta fonte.", 403);
       const verify = input.decision === "VERIFY";
       if (verify) {

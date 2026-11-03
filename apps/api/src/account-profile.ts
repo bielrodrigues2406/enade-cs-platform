@@ -35,35 +35,82 @@ export class AccountProfileController {
     )).rows[0];
   }
 
-  // Nome e prontuário livres; e-mail novo pede a senha atual.
+  // Definir prontuário pela primeira vez é livre; alterar um prontuário já salvo
+  // ou trocar o e-mail exige a senha atual (evita varredura de prontuários alheios).
   @Put("profile") async update(@Req() req: any, @Res({ passthrough: true }) res: any, @Body() body: any) {
     const user = await requireAccount(req);
-    const { name, enrollment } = profile({ name: body?.name ?? "", enrollment: body?.enrollment ?? "" });
-    const email = body?.email === undefined ? user.email! : emailAddress(body.email);
-    if (email !== user.email) {
-      this.throttle.check(req, res, user.email!);
+    const current = (
+      await db.query<{ email: string; enrollment: string | null }>(
+        "SELECT email,enrollment FROM account WHERE identity_id=$1",
+        [user.id],
+      )
+    ).rows[0];
+    if (!current) fail("Conta não encontrada.", 404);
+    const parsed = profile({
+      name: body?.name ?? "",
+      enrollment: body?.enrollment === undefined ? (current.enrollment ?? "") : body.enrollment,
+    });
+    const name = parsed.name;
+    const enrollment = body?.enrollment === undefined ? current.enrollment : parsed.enrollment;
+    const email = body?.email === undefined ? current.email : emailAddress(body.email);
+    const changingEmail = email !== current.email;
+    const changingExistingEnrollment = Boolean(current.enrollment) && enrollment !== current.enrollment;
+
+    if (changingEmail || changingExistingEnrollment) {
+      this.throttle.check(req, res, current.email);
       await checkPassword(req, user.id, body?.currentPassword);
+      this.throttle.refund(req, current.email);
     }
-    if (enrollment && (await db.query("SELECT 1 FROM account WHERE enrollment=$1 AND identity_id<>$2", [enrollment, user.id])).rowCount)
-      fail("Esse prontuário já está ligado a outra conta.", 409);
-    if (email !== user.email && (await db.query("SELECT 1 FROM account WHERE email=$1", [email])).rowCount)
-      fail("Esse e-mail já é de outra conta.", 409);
-    await db.query("UPDATE account SET display_name=$2,enrollment=$3,email=$4 WHERE identity_id=$1", [user.id, name, enrollment, email]);
-    await recordActivity(db, email === user.email
-      ? { category: "ACCOUNT", action: "PROFILE_UPDATED", actorId: user.id, subject: email }
-      : { category: "ACCOUNT", action: "EMAIL_CHANGED", actorId: user.id, subject: email, detail: `Antes: ${user.email}` });
-    return { email, name, enrollment };
+
+    const client = await db.connect();
+    try {
+      await client.query("BEGIN");
+      if (enrollment && (await client.query("SELECT 1 FROM account WHERE enrollment=$1 AND identity_id<>$2", [enrollment, user.id])).rowCount)
+        fail("Esse prontuário já está ligado a outra conta.", 409);
+      if (changingEmail && (await client.query("SELECT 1 FROM account WHERE email=$1 AND identity_id<>$2", [email, user.id])).rowCount)
+        fail("Esse e-mail já é de outra conta.", 409);
+      await client.query("UPDATE account SET display_name=$2,enrollment=$3,email=$4 WHERE identity_id=$1", [user.id, name, enrollment, email]);
+      await recordActivity(client, changingEmail
+        ? { category: "ACCOUNT", action: "EMAIL_CHANGED", actorId: user.id, subject: email, detail: `Antes: ${current.email}` }
+        : {
+            category: "ACCOUNT",
+            action: "PROFILE_UPDATED",
+            actorId: user.id,
+            subject: email,
+            detail: changingExistingEnrollment ? `Prontuário: ${current.enrollment} -> ${enrollment ?? "removido"}` : null,
+          });
+      await client.query("COMMIT");
+      return { email, name, enrollment };
+    } catch (error: any) {
+      await client.query("ROLLBACK");
+      if (error?.code === "23505") fail("Esse e-mail ou prontuário já está ligado a outra conta.", 409);
+      throw error;
+    } finally {
+      client.release();
+    }
   }
 
   @Post("password") @HttpCode(200) async password(@Req() req: any, @Res({ passthrough: true }) res: any, @Body() body: any) {
     const user = await requireAccount(req);
     this.throttle.check(req, res, user.email!);
     await checkPassword(req, user.id, body?.currentPassword);
+    this.throttle.refund(req, user.email!);
     const { password } = credentials({ email: user.email, password: body?.newPassword });
-    await db.query("UPDATE account SET password_hash=$2 WHERE identity_id=$1", [user.id, await hashPassword(password)]);
-    // As outras sessões (outros aparelhos) saem; esta continua.
-    await db.query("DELETE FROM browser_session WHERE identity_id=$1 AND token_hash<>$2", [user.id, sessionHash(req)]);
-    await recordActivity(db, { category: "ACCOUNT", action: "PASSWORD_CHANGED", actorId: user.id, subject: user.email });
-    return { status: "CHANGED" };
+    const encoded = await hashPassword(password);
+    const client = await db.connect();
+    try {
+      await client.query("BEGIN");
+      await client.query("UPDATE account SET password_hash=$2 WHERE identity_id=$1", [user.id, encoded]);
+      // As outras sessões (outros aparelhos) saem; esta continua.
+      await client.query("DELETE FROM browser_session WHERE identity_id=$1 AND token_hash<>$2", [user.id, sessionHash(req)]);
+      await recordActivity(client, { category: "ACCOUNT", action: "PASSWORD_CHANGED", actorId: user.id, subject: user.email });
+      await client.query("COMMIT");
+      return { status: "CHANGED" };
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
   }
 }

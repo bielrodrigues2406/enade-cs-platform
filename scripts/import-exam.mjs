@@ -39,7 +39,11 @@ async function graphicsByPage(file, pages, work) {
   const result = new Map();
   for (let p = 1; p <= pages.length; p++) {
     const prefix = path.join(work, `page-${p}`);
-    await run("pdftoppm", ["-gray", "-r", String(RENDER_DPI), "-f", String(p), "-l", String(p), "-singlefile", file, prefix]);
+    await run(
+      "pdftoppm",
+      ["-gray", "-r", String(RENDER_DPI), "-scale-to", "2000", "-f", String(p), "-l", String(p), "-singlefile", file, prefix],
+      { timeout: 30000 },
+    );
     const image = parsePgm(await readFile(`${prefix}.pgm`));
     result.set(p, detectGraphics({ ...image, scale: RENDER_DPI / 72 }, pages[p - 1].words, pageBands(pages[p - 1])));
   }
@@ -74,7 +78,14 @@ export function checkBatch(items, answers, definitive) {
 
 async function readPages(file) {
   const { stdout } = await run("pdftotext", ["-bbox", file, "-"], { maxBuffer: 64 * 1024 * 1024, timeout: 60000 });
-  return parseBboxHtml(stdout);
+  const pages = parseBboxHtml(stdout);
+  if (pages.length < 1 || pages.length > 120) {
+    throw new Error("O PDF deve ter entre 1 e 120 páginas.");
+  }
+  if (pages.some((page) => page.width > 2000 || page.height > 2500)) {
+    throw new Error("Página com dimensões fora do padrão de prova.");
+  }
+  return pages;
 }
 
 /**
@@ -157,7 +168,9 @@ export async function propose(examFile, keyFile, standardFile = null) {
 }
 
 async function main(id) {
-  const db = new pg.Client({ connectionString: process.env.DATABASE_URL });
+  const db = new pg.Client(
+    process.env.DATABASE_URL ? { connectionString: process.env.DATABASE_URL } : {},
+  );
   await db.connect();
   try {
     const batch = (await db.query(

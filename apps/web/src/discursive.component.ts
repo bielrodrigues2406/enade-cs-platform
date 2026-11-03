@@ -179,9 +179,9 @@ export class DiscursiveComponent {
     if (this.timer) clearTimeout(this.timer);
     this.timer = null;
     await this.attempt(async () => {
-      const result = await this.request<{ response: Response; standardImages: Image[] }>(`discursive/${detail.id}/submit`,
+      const result = await this.request<{ response: Response; standardImages: Image[]; standardUrl: string }>(`discursive/${detail.id}/submit`,
         { body: this.body(), baseRevision: detail.response?.revision ?? 0 });
-      this.detail.set({ ...detail, response: result.response, standardImages: result.standardImages });
+      this.detail.set({ ...detail, response: result.response, standardImages: result.standardImages, standardUrl: result.standardUrl });
     });
   }
   rate(index: number, level: Level) {

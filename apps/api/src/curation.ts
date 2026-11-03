@@ -400,7 +400,11 @@ export class CurationController {
       const current = await lockedVersion(client, id, expected);
       if (current.editorialStatus !== "IN_REVIEW")
         fail("A versão não está aguardando revisão.", 409);
-      if (current.createdBy === actor || current.lastEditor === actor)
+      const priorEdit = await client.query(
+        "SELECT 1 FROM editorial_event WHERE version_id=$1 AND actor_id=$2 AND event_type IN ('CREATED','VERSION_CREATED','EDITED','SUBMITTED') LIMIT 1",
+        [id, actor],
+      );
+      if (current.createdBy === actor || current.lastEditor === actor || priorEdit.rowCount)
         fail("Outra pessoa da curadoria deve revisar esta versão.", 403);
       const publish = input.decision === "PUBLISH";
       if (publish && current.origin === "OFFICIAL") {

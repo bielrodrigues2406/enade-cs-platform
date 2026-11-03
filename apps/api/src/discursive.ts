@@ -101,6 +101,7 @@ export class DiscursiveController {
     const mine = await response(user.id, id);
     return {
       ...row,
+      standardUrl: mine?.submittedAt ? row.standardUrl : null,
       title: title(row),
       promptImages: await images(id, "PROMPT"),
       // O padrão de resposta só aparece depois do envio.
@@ -118,11 +119,15 @@ export class DiscursiveController {
 
   @Post(":id/submit") @HttpCode(200) async submit(@Req() req: any, @Param("id") id: string, @Body() input: any) {
     const user = await requireIdentity(req);
-    await question(id);
+    const row = await question(id);
     const { body, base } = readBody(input);
     if (!body.trim()) fail("Escreva a resposta antes de enviar.", 400);
     await saveDraft(user.id, id, body, base, true);
-    return { response: await response(user.id, id), standardImages: await images(id, "STANDARD") };
+    return {
+      response: await response(user.id, id),
+      standardImages: await images(id, "STANDARD"),
+      standardUrl: row.standardUrl,
+    };
   }
 
   @Put(":id/assessment") async assess(@Req() req: any, @Param("id") id: string, @Body() input: any) {

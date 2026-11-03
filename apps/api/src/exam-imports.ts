@@ -1,6 +1,6 @@
 import { execFile, spawn } from "node:child_process";
 import { createHash, randomUUID } from "node:crypto";
-import { mkdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -24,6 +24,7 @@ import { recordActivity } from "./activity.js";
 const run = promisify(execFile);
 const MAX_PDF = 10 * 1024 * 1024;
 const PAGE_DPI = 100; // pré-visualização no editor; o recorte final usa 200 dpi
+const CACHE_TTL_MS = 60 * 60 * 1000;
 const MODALITIES = ["BACHARELADO", "LICENCIATURA", "CST", "COMUM"];
 const ID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 export type Box = { page: number; x0: number; y0: number; x1: number; y1: number };
@@ -49,10 +50,26 @@ export async function archivePdf(bytes: Buffer) {
   return sha256;
 }
 
-/** Processo separado: o servidor responde na hora e o lote fica em PROCESSING. */
+/** Processo separado com heap limitado: o servidor responde na hora e o lote fica em PROCESSING. */
 function startExtraction(id: string) {
   const worker = path.resolve("scripts/import-exam.mjs");
-  spawn(process.execPath, [worker, id], { detached: true, stdio: "ignore", env: process.env }).unref();
+  spawn(process.execPath, ["--max-old-space-size=384", worker, id], {
+    detached: true,
+    stdio: "ignore",
+    env: process.env,
+  }).unref();
+}
+
+async function prunePreviewCache(dir: string) {
+  const entries = await readdir(dir).catch(() => []);
+  const cutoff = Date.now() - CACHE_TTL_MS;
+  await Promise.all(
+    entries.map(async (name) => {
+      const full = path.join(dir, name);
+      const info = await stat(full).catch(() => null);
+      if (info && info.mtimeMs < cutoff) await rm(full, { force: true });
+    }),
+  );
 }
 
 async function batch(id: string) {
@@ -131,6 +148,11 @@ export class ExamImportsController {
     const keyUrl = validateOfficialUrl(String(body?.keyUrl ?? ""));
     const exam = files?.exam?.[0], key = files?.key?.[0];
     if (!exam || !key) fail("Envie o PDF da prova e o do gabarito.", 400);
+    if (
+      (await db.query("SELECT 1 FROM exam_import WHERE state='PROCESSING' AND created_at > now() - interval '5 minutes' LIMIT 1")).rowCount
+    ) {
+      fail("Já existe uma importação em processamento. Aguarde concluir antes de enviar outra.", 409);
+    }
     const [examSha256, keySha256] = [await archivePdf(exam!.buffer), await archivePdf(key!.buffer)];
     if (examSha256 === keySha256) fail("Prova e gabarito são o mesmo arquivo.", 400);
     // Padrão de resposta das discursivas: opcional, mas arquivo e link vêm juntos.
@@ -178,11 +200,16 @@ export class ExamImportsController {
     const count = standard ? (row.standardPageSizes?.length ?? 0) : (row.pageCount ?? 0);
     const page = Number(pageParam);
     if (!sha256 || !Number.isInteger(page) || page < 1 || page > count) fail("Página inválida.", 404);
-    const cache = path.join(tmpdir(), "enade-import-pages", `${sha256}-${page}`);
+    const cacheDir = path.join(tmpdir(), "enade-import-pages");
+    const cache = path.join(cacheDir, `${sha256}-${page}`);
     if (!(await stat(`${cache}.png`).catch(() => null))) {
-      await mkdir(path.dirname(cache), { recursive: true });
-      await run("pdftoppm", ["-png", "-r", String(PAGE_DPI), "-f", String(page), "-l", String(page),
-        "-singlefile", sourcePath(sha256!), cache], { timeout: 30000 });
+      await mkdir(cacheDir, { recursive: true, mode: 0o700 });
+      await prunePreviewCache(cacheDir);
+      await run(
+        "pdftoppm",
+        ["-png", "-r", String(PAGE_DPI), "-scale-to", "2000", "-f", String(page), "-l", String(page), "-singlefile", sourcePath(sha256!), cache],
+        { timeout: 30000 },
+      );
     }
     const bytes = await readFile(`${cache}.png`);
     res.setHeader("Content-Type", "image/png");
