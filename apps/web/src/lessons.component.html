@@ -70,10 +70,14 @@
     <h1 id="lessons-title">{{ cls.name }}</h1>
     <p class="admin-intro">ENADE {{ cls.editionYear }} · {{ plural(cls.members.length, "pessoa", "pessoas") }} · {{ plural(cls.lessons.length, "aula", "aulas") }}</p>
     <div class="admin-tabs" role="tablist" aria-label="Seções da turma">
-      <button type="button" role="tab" [attr.aria-selected]="classTab() === 'lessons'" (click)="classTab.set('lessons')">Aulas e lista</button>
-      <button type="button" role="tab" [attr.aria-selected]="classTab() === 'dashboard'" (click)="classTab.set('dashboard')">Desempenho</button>
+      @for (item of tabs; track item.id; let index = $index) {
+        <button type="button" role="tab" [id]="'class-tab-' + item.id"
+          [attr.aria-selected]="classTab() === item.id" [attr.tabindex]="classTab() === item.id ? 0 : -1"
+          aria-controls="class-panel"
+          (click)="classTab.set(item.id)" (keydown)="navigateTabs($event, index)">{{ item.label }}</button>
+      }
     </div>
-
+    <div role="tabpanel" id="class-panel" [attr.aria-labelledby]="'class-tab-' + classTab()">
     @if (classTab() === "dashboard") {
       <app-class-dashboard [classId]="cls.id" />
     } @else {
@@ -106,7 +110,7 @@
         <form class="sheet-dialog-body" (ngSubmit)="createLesson(lessonDialog)">
           <div class="sheet-dialog-content">
           <div class="import-fields">
-            <div><label for="lesson-date">Data</label><input id="lesson-date" name="date" type="date" [(ngModel)]="newLesson.date" required /></div>
+            <div><label for="lesson-date">Data</label><input id="lesson-date" name="date" type="date" [(ngModel)]="newLesson.date" required autofocus /></div>
             <div class="lesson-times">
               <div><label for="lesson-start">Início</label><input id="lesson-start" name="start" type="time" [(ngModel)]="newLesson.start" required /></div>
               <div><label for="lesson-end">Fim</label><input id="lesson-end" name="end" type="time" [(ngModel)]="newLesson.end" required /></div>
@@ -115,6 +119,7 @@
             <div><label for="lesson-room">Sala</label><input id="lesson-room" name="room" maxlength="60" [(ngModel)]="newLesson.room" placeholder="Lab 3" required /></div>
             <div><label for="lesson-teacher">Professor</label>
               <select id="lesson-teacher" name="teacherId" [(ngModel)]="newLesson.teacherId" required>
+                <option value="" disabled>Selecione o professor</option>
                 @for (teacher of cls.teachers; track teacher.id) {
                   <option [value]="teacher.id">{{ teacher.name }}</option>
                 }
@@ -125,7 +130,7 @@
           </div>
           <div class="sheet-dialog-actions">
             <button type="button" class="outline" (click)="lessonDialog.close()">Cancelar</button>
-            <button type="submit" [disabled]="busy() || !newLesson.date || !newLesson.room || !newLesson.subject">Marcar aula</button>
+            <button type="submit" [disabled]="busy() || !newLesson.date || !newLesson.room || !newLesson.subject || !newLesson.teacherId">Marcar aula</button>
           </div>
         </form>
       </dialog>
@@ -162,7 +167,7 @@
         <form class="sheet-dialog-body" (ngSubmit)="importRoster(rosterDialog)">
           <div class="sheet-dialog-content">
           <label for="roster-text">Copie da planilha as colunas de nome e prontuário (e-mail opcional) e cole aqui. A ordem das colunas não importa.</label>
-          <textarea id="roster-text" name="rosterText" rows="8" [(ngModel)]="rosterText" placeholder="Ana Souza	PE3012345&#10;Bruno Lima	PE3012346"></textarea>
+          <textarea id="roster-text" name="rosterText" rows="8" [(ngModel)]="rosterText" placeholder="Ana Souza	PE3012345&#10;Bruno Lima	PE3012346" autofocus></textarea>
           </div>
           <div class="sheet-dialog-actions">
             <button type="button" class="outline" (click)="rosterDialog.close()">Cancelar</button>
@@ -172,6 +177,7 @@
       </dialog>
     </section>
     }
+    </div>
   } @else {
     <h1 id="lessons-title">Aulas de preparação</h1>
     <div class="admin-users-head">
@@ -200,7 +206,7 @@
       <form class="sheet-dialog-body" (ngSubmit)="createClass(classDialog)">
         <div class="sheet-dialog-content">
         <div class="import-fields">
-          <div><label for="class-name">Nome</label><input id="class-name" name="name" maxlength="120" [(ngModel)]="newClass.name" placeholder="Preparação ENADE 2026" required /></div>
+          <div><label for="class-name">Nome</label><input id="class-name" name="name" maxlength="120" [(ngModel)]="newClass.name" placeholder="Preparação ENADE 2026" required autofocus /></div>
           <div><label for="class-year">Ano do ENADE</label><input id="class-year" name="editionYear" type="number" min="2004" max="2100" [(ngModel)]="newClass.editionYear" required /></div>
         </div>
         </div>

@@ -5,10 +5,14 @@
   <h1 id="admin-title">Administração</h1>
 
   <div class="admin-tabs" role="tablist" aria-label="Seções da administração">
-    <button type="button" role="tab" [attr.aria-selected]="tab() === 'accounts'" (click)="tab.set('accounts')">Contas e papéis</button>
-    <button type="button" role="tab" [attr.aria-selected]="tab() === 'imports'" (click)="tab.set('imports')">Importar prova</button>
-    <button type="button" role="tab" [attr.aria-selected]="tab() === 'activity'" (click)="tab.set('activity')">Atividades</button>
+    @for (item of tabs; track item.id; let index = $index) {
+      <button type="button" role="tab" [id]="'admin-tab-' + item.id"
+        [attr.aria-selected]="tab() === item.id" [attr.tabindex]="tab() === item.id ? 0 : -1"
+        aria-controls="admin-panel"
+        (click)="tab.set(item.id)" (keydown)="navigateTabs($event, index)">{{ item.label }}</button>
+    }
   </div>
+  <div role="tabpanel" id="admin-panel" [attr.aria-labelledby]="'admin-tab-' + tab()">
   @if (tab() === "imports") {
     <app-exam-import />
   } @else if (tab() === "activity") {
@@ -29,12 +33,22 @@
     <form class="sheet-dialog-body" (ngSubmit)="createAccount(accountDialog)" novalidate>
       <div class="sheet-dialog-content">
         <div class="import-fields">
-          <div><label for="new-account-name">Nome</label><input id="new-account-name" name="name" maxlength="120" [(ngModel)]="newAccount.name" autocomplete="off" /></div>
+          <div>
+            <label for="new-account-name">Nome</label>
+            <input id="new-account-name" name="name" required minlength="2" maxlength="120" [(ngModel)]="newAccount.name"
+              autocomplete="off" autofocus (blur)="nameChecked.set(true)"
+              [attr.aria-invalid]="nameChecked() && accountNameError() ? 'true' : null"
+              [attr.aria-describedby]="nameChecked() && accountNameError() ? 'new-account-name-help new-account-name-error' : 'new-account-name-help'" />
+            <p id="new-account-name-help" class="account-help">De 2 a 120 caracteres.</p>
+            @if (nameChecked() && accountNameError()) {
+              <p id="new-account-name-error" class="field-error" role="alert">{{ accountNameError() }}</p>
+            }
+          </div>
           <div><label for="new-account-enrollment">Prontuário <span class="optional">opcional</span></label><input id="new-account-enrollment" name="enrollment" maxlength="12" [(ngModel)]="newAccount.enrollment" placeholder="PE3012345" autocapitalize="characters" spellcheck="false" autocomplete="off" /></div>
           <div><label for="new-account-email">E-mail</label><input id="new-account-email" name="email" type="email" maxlength="254" [(ngModel)]="newAccount.email" placeholder="nome@ifsp.edu.br" required autocomplete="off" /></div>
           <div><label for="new-account-role">Papel</label>
             <select id="new-account-role" name="role" [(ngModel)]="newAccount.role">
-              <option value="">Estudante (sem papel)</option>
+              <option value="">Estudante</option>
               <option value="PROFESSOR">Professor</option>
               <option value="ADMIN">Administração</option>
             </select>
@@ -236,4 +250,5 @@
     }
   </section>
   }
+  </div>
 </section>

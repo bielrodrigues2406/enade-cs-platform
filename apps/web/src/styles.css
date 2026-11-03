@@ -4103,6 +4103,8 @@ app-landing [data-reveal] {
   gap: var(--space-2);
 }
 .admin-table-wrap {
+  position: relative;
+  max-width: 100%;
   overflow-x: auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -4293,8 +4295,8 @@ dialog.sheet-dialog[open]::backdrop {
   display: grid;
   flex: none;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -4396,16 +4398,6 @@ button.danger:hover {
     dialog.sheet-dialog[open] {
       transform: translateY(100%);
     }
-  }
-  /* Alça da folha. */
-  dialog.sheet-dialog::before {
-    content: "";
-    align-self: center;
-    width: 40px;
-    height: 4px;
-    margin-top: var(--space-3);
-    border-radius: 2px;
-    background: var(--color-border-strong);
   }
   .sheet-dialog-head {
     padding-top: var(--space-3);
