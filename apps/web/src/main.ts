@@ -365,7 +365,6 @@ class App {
     this.homeView.set(false);
     this.reviewView.set(false);
     this.reviewReturn.set(false);
-    this.loading.set(false);
     this.question.set(null);
     this.accountView.set(null);
     this.accountNotice.set("");
@@ -384,7 +383,6 @@ class App {
     if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openHome())) return;
     this.beginSectionChange();
     this.swapView(() => {
-      this.loading.set(false);
       this.question.set(null);
       this.accountView.set(null);
       this.curationView.set(false);
@@ -434,7 +432,6 @@ class App {
     if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openReview())) return;
     this.beginSectionChange();
     this.swapView(() => {
-      this.loading.set(false);
       this.question.set(null);
       this.accountView.set(null);
       this.curationView.set(false);
@@ -474,7 +471,6 @@ class App {
     if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openPractice(section))) return;
     this.practiceSection.set(section);
     this.beginSectionChange();
-    this.loading.set(false);
     this.question.set(null);
     this.accountView.set(null);
     this.curationView.set(false);
