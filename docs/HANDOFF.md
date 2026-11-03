@@ -7,6 +7,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 - Base do ajuste SIM-UX1: `main` em `c6d6d5c`, com DS-6/7/8 integrados nos PRs #39–#41. A auditoria DS-5 usou `0db9671`; MAS-4 já está integrado no PR #37. Veja MASCOT §10.
 - Gabriel autorizou criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Também pediu o deploy no servidor IFSP PEP; faltam acesso SSH e domínio para concretizá-lo. Não fazer force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
+- Preparação para publicar (pedido de 03/11): [revisão de segurança e manutenção](reviews/2026-11-03-security-privileges.md). Primeiro admin somente por CLI; `ADMIN_EMAILS` removida. Conferir HTTPS/proxy/portas, backup conjunto banco + `/data` e restauração em ensaio, além de catálogo/imagens reais. Recuperação de acesso, edição administrativa limitada de nome/prontuário e encerramento de sessões são prioridades de suporte ainda sem implementação; não confundir com criar conta ou gerenciar papéis já disponíveis.
 - Migrations reservadas: **028** para MAS-2 e **029** para SIM26-1. Próxima livre: **030**; conferir WORKBOARD antes de reservar.
 - Conteúdo integrado no PR #33: 246 objetivas com explicação e 39 discursivas, incluindo quatro de 2005/2008, conferidas por agente. Ainda faltam cinco padrões antigos de Formação Geral e os 33 PDFs recentes; não chamar essas edições de integralmente completas.
 - Funções prontas: banco de questões, caderno de erros espaçado, treino parcial e por área (com cronômetro opcional), provas completas (`/provas`), discursivas com autoavaliação, turmas/aulas/presença, painel do professor, papéis e administração, importação de provas, registro de atividades, **meta diária, conquistas, ranking de constância, flashcards (FSRS-5) e biblioteca** (ver `docs/FLASHCARDS.md`).
@@ -25,13 +26,13 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 - Funções pequenas, nomes claros, comentários curtos em pt-BR explicando o porquê.
 - Telas novas carregam sob demanda (`@defer`) para não estourar o pacote inicial.
 - Visual "caderno": papel `#f4f3ef`, tinta `#151e2f`, azul `#1649ae`, capa `#0f285a`, serifa para títulos e mono para rótulos. Sem emoji como ícone; ícones em SVG próprio (`badge.component.html`).
-- Movimento: curvas `cubic-bezier(0.22, 1, 0.36, 1)`, 300–600 ms, sem laços infinitos; respeitar `prefers-reduced-motion`.
+- Movimento: curvas `cubic-bezier(0.22, 1, 0.36, 1)`, 300–600 ms na interface e 1,1 s nos gestos do mascote, sem laços infinitos; respeitar `prefers-reduced-motion`.
 - Celular primeiro: conferir 320, 390, 768 e 1440 px; sem rolagem horizontal; alvos de toque ≥ 44 px; topo fixo não pode cobrir o foco (use `focus({ preventScroll: true })` após rolar ao topo).
 - Conteúdo escrito por IA é sempre sinalizado na tela ("Gerado por IA") e no dado.
 
 ## 4. Mascote
 
-**Dudu articulado:** as quatro poses sem acessórios usam seis camadas transparentes. Acena com uma asa, comemora com as duas, inclina a cabeça e pisca; os gestos terminam em 610 ms. Leitura e ritmo continuam estáticos, com movimento reduzido e preferência de ocultar respeitados. Fontes/proveniência em `design/mascot/articulated/`; implementação lazy, sem biblioteca nova e com pose estática de reserva. Poses com acessórios mantêm a arte anterior. Não há laços de piscada/respiração nem olhos seguindo cursor. Enquadramento e pivôs ficam no CSS.
+**Dudu articulado:** as quatro poses sem acessórios usam seis camadas transparentes. Acena com uma asa, comemora com as duas, inclina a cabeça e pisca; os gestos terminam em 1,1 s. Leitura e ritmo continuam estáticos, com movimento reduzido e preferência de ocultar respeitados. Fontes/proveniência em `design/mascot/articulated/`; implementação lazy, sem biblioteca nova e com pose estática de reserva. Poses com acessórios mantêm a arte anterior. Não há laços de piscada/respiração nem olhos seguindo cursor. Enquadramento e pivôs ficam no CSS.
 
 ## 5. O que falta (por prioridade)
 

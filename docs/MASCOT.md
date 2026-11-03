@@ -209,7 +209,7 @@ livro, cartões ou capacete para substituir tudo pela mesma imagem neutra.
 - **Escuta:** cabeça e olhos se movem uma vez depois do erro, no bloco de reflexão.
 - **Repouso:** olhos abertos, asas baixas; não há piscar ou respirar em laço durante leitura.
 
-Os gestos duram o token de 610 ms e usam apenas `transform`/`opacity`. `none` continua
+Os gestos duram 1,1 s, com pausa inicial e retorno suave, usando apenas `transform`/`opacity`. `none` continua
 estático nas discursivas e demais leituras; o aviso de ritmo não ganha movimento.
 Movimento reduzido cancela os gestos, inclusive durante sua execução, e mantém olhos
 abertos. A preferência de ocultar Dudu impede a criação do componente e o pedido das camadas.
