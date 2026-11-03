@@ -14,7 +14,6 @@ O CI (`.github/workflows/ci.yml`) roda auditoria de dependências de produção,
 | --- | --- | --- |
 | `DATABASE_URL` | URL do PostgreSQL **pela rede privada** do provedor; `?sslmode=require` se o banco exigir TLS | **Sim — o único** |
 | `APP_ORIGIN` | Origem HTTPS pública, ex.: `https://caderno.exemplo.com.br`. A API não inicia em produção sem uma origem `https://` | Não |
-| `ADMIN_EMAILS` | E-mail(s) do primeiro administrador: vira administrador ao ter conta, só enquanto não existir nenhum | Não |
 | `TRUST_PROXY` | `1` quando há um proxy reverso do provedor à frente (caso de Railway, Render e similares). Sem isso, o limite de tentativas de login trataria todos os acessos como um único IP | Não |
 | `PORT` | Normalmente definido pelo provedor; padrão 3000 | Não |
 | `SOURCE_ARCHIVE_DIR` | Padrão `/data/sources`: PDFs oficiais arquivados | Não |
@@ -38,7 +37,7 @@ Regra adotada, em qualquer provedor: **toda variável de ambiente no provedor po
 4. **Senhas e sessões já protegidas no próprio dado.** Senhas são guardadas só como hash scrypt; sessões só como hash SHA-256 do token. Mesmo assim, se o banco for exposto, encerre todas as sessões (`DELETE FROM browser_session`) e avise os usuários.
 5. **Contas com 2FA.** Ative autenticação em dois fatores no provedor e no GitHub; dê acesso ao projeto só a quem opera o deploy.
 6. **Deploy só de `main`, com CI verde.** Configure o provedor para publicar apenas `main` e proteja a branch exigindo o CI.
-7. **Backups fora do provedor.** Além dos snapshots do provedor, faça `pg_dump` diário cifrado e guardado em outro lugar. Ensaie a restauração antes de R1; backup sem restauração testada não conta.
+7. **Backups fora do provedor.** Guarde banco **e volume `/data`** (PDFs/recortes), além dos snapshots do provedor. O script da §5.3 cria um conjunto com hashes; cifre a cópia externa com a ferramenta da instituição. Ensaie a restauração antes de R1; backup sem restauração testada não conta.
 8. **Cabeçalhos e cookies.** A aplicação envia CSP estrita (sem script, estilo ou fonte de terceiros e sem inline), HSTS, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy` e `Permissions-Policy`; o cookie de sessão é `HttpOnly`, `Secure` e `SameSite=Strict`, restrito a `/api`. Alterações que exijam afrouxar a CSP precisam de justificativa no PR.
 
 ## 4. Escolha do provedor (D1)
@@ -72,13 +71,13 @@ Alternativa ao caminho da §5.3. Continua válida para quem preferir não admini
 O `render.yaml` da raiz descreve tudo: serviço web pelo `Dockerfile`, disco de 1 GB em `/data`, PostgreSQL 17 sem acesso externo e publicação só depois do CI verde em `main`. Custo de referência em 31/10/2026: ~US$ 14/mês (web starter + banco basic-256mb + disco); confira em render.com/pricing.
 
 1. **Conta:** crie a conta no Render com 2FA e conecte o GitHub dando acesso só a este repositório.
-2. **Blueprint:** New → Blueprint → escolha o repositório. O Render lê o `render.yaml` e mostra serviço, banco e disco. Ele pede `APP_ORIGIN`: use o endereço que aparece para o serviço (`https://enade-cs.onrender.com`, ou o domínio próprio se já tiver), e `ADMIN_EMAILS`: o seu e-mail. Confirme.
+2. **Blueprint:** New → Blueprint → escolha o repositório. O Render lê o `render.yaml` e mostra serviço, banco e disco. Ele pede `APP_ORIGIN`: use o endereço que aparece para o serviço (`https://enade-cs.onrender.com`, ou o domínio próprio se já tiver). Confirme.
 3. **Primeiro deploy:** o contêiner aplica as migrations e carrega o conteúdo (`bootstrap-content`): baixa do Inep a prova e o gabarito de cada conferência em `data/agent-reviews/`, confere o SHA-256 do catálogo (se o Inep falhar, usa a cópia catalogada) e publica as questões. No log aparecem `importado` e `N publicadas`. Nas inicializações seguintes, o mesmo passo só confirma (`já importado`, `sem mudança`). Conferências novas commitadas são publicadas no próximo deploy.
 4. **Conferir:** abra `/api/health` e o site; o banco de questões deve mostrar 246 oficiais (2005, 2008, 2011, 2014, 2017 e 2021, bacharelado e licenciatura).
-5. **Administrador:** crie sua conta pelo site **logo após o primeiro deploy**, com o e-mail de `ADMIN_EMAILS`; ela já nasce administradora (a concessão fica no histórico de papéis). A variável só cria o **primeiro** administrador: depois que existe um, ela é ignorada, e os demais são autorizados pela tela de administração. Como o e-mail ainda não é confirmado, cadastre-se antes de divulgar o endereço do site; se o cadastro disser que o e-mail já existe, alguém chegou antes: não divulgue o site e revogue pelo Shell (`node dist/admin/admin-role.mjs revoke <email>`). Alternativa sem a variável: `node dist/admin/admin-role.mjs grant seu@email` no Shell do serviço. Professores são autorizados depois pela tela de administração.
+5. **Administrador:** crie sua conta pelo site e execute `node dist/admin/admin-role.mjs grant seu@email` no Shell do serviço. Na implantação Docker, use `docker compose exec app node dist/admin/admin-role.mjs grant seu@email` na pasta do Compose. Confira o e-mail exato e a conta antes de conceder acesso. Os demais papéis são autorizados pela tela de administração. `ADMIN_EMAILS` foi removida: e-mails sem verificação não podem conceder privilégios automaticamente.
 6. **Proteger `main`:** no GitHub, exija o CI verde para merge em `main`; o Render só publica depois dos checks.
 
-Se o log mostrar `EACCES` em `/data`, o disco foi montado sem permissão para o usuário `node` (uid 1000). Abra um chamado no Render ou, como contorno, remova a linha `USER node` do Dockerfile apenas para o primeiro deploy e registre a decisão no PR.
+Se o log mostrar `EACCES` em `/data`, corrija o proprietário/permissões do volume para o usuário `node` (uid 1000), pelo procedimento do provedor ou com apoio da TI. Mantenha `USER node` no Dockerfile; executar a aplicação como root não é a correção para permissões do volume.
 
 `BOOTSTRAP_CONTENT=0` desliga a carga automática (por exemplo, para subir mais rápido quando o Inep estiver fora do ar).
 
@@ -118,18 +117,37 @@ Passo a passo (servidor já preparado pelo `preparar.sh` do Mira, com o proxy Ca
    ```sh
    mkdir -p /srv/apps/enade && cd /srv/apps/enade
    # copie para cá os arquivos de deploy/vps/ (scp -r deploy/vps/. vps:/srv/apps/enade/)
-   cp .env.example .env && chmod 600 .env   # POSTGRES_PASSWORD (openssl rand -hex 24), APP_ORIGIN, ADMIN_EMAILS
+   cp .env.example .env && chmod 600 .env   # POSTGRES_PASSWORD (openssl rand -hex 24), APP_ORIGIN
    ./atualizar.sh
    docker compose logs -f app   # migrations, carga das 246 questões e "API ouvindo"
    ```
    A primeira subida baixa as provas do Inep e recorta as questões: leva alguns minutos.
 4. **Proxy:** copie `enade.caddy` para `/srv/proxy/sites/`, acrescente `ENADE_DOMINIO=<endereço, sem https://>` ao `/srv/proxy/.env` e rode `cd /srv/proxy && docker compose up -d && docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile`. O Caddy emite o certificado na hora.
-5. **Conferir:** `https://<endereço>/api/health` e o site. Crie sua conta com o e-mail de `ADMIN_EMAILS` antes de divulgar o endereço (§5.1, item 5).
-6. **Backup diário:** no cron, `0 3 * * * /srv/apps/enade/backup-postgres.sh /srv/apps/enade >> /srv/backups/backup.log 2>&1`. Copie `/srv/backups` para fora da máquina.
+5. **Conferir:** `https://<endereço>/api/health` e o site. Crie sua conta e conceda o papel pelo comando no servidor (§5.1, item 5).
+6. **Backup diário:** no cron, `0 3 * * * /srv/apps/enade/backup-postgres.sh /srv/apps/enade >> /srv/backups/backup.log 2>&1`. O app precisa estar rodando: o script copia banco e `/data` para um diretório completo por execução, com `database.sql.gz`, `data.tar.gz` e `SHA256SUMS`. Copie o conjunto cifrado para fora da máquina e ensaie a §5.4. Retenção local: 30 dias; backup antigo contendo só SQL não cobre as imagens.
 
 Atualizar: depois de um merge na `main`, rode `./atualizar.sh`. Voltar de versão: `VERSAO=<7 caracteres do commit>` no `.env` e `./atualizar.sh`. Desligar depois da prova: `docker compose down` (os volumes ficam; `docker compose down -v` apaga dados e arquivos) e remova `enade.caddy` do proxy. Faça um backup antes de entregar à Fábrica.
 
 O limite de requisições por IP (§5.2) funciona porque `TRUST_PROXY=1` corresponde ao único proxy, o Caddy. Se um dia houver Cloudflare na frente, passa a 2.
+
+## 5.4 Ensaio de restauração de banco e arquivos
+
+Use uma instalação de ensaio, com banco e volume `/data` vazios, a mesma versão da imagem e um projeto Compose separado da produção. Não execute este procedimento sobre usuários ativos: o SQL contém instruções para substituir o conteúdo do banco. O Compose deve estar configurado nessa pasta e `/data` gravável pelo uid 1000. O procedimento está documentado; só é considerado validado depois de executado e conferido pela operação do servidor.
+
+```bash
+set -euo pipefail
+backup_dir=/caminho/do/conjunto/enade-AAAA-MM-DD-HHMMSS-sufixo
+(cd "$backup_dir" && sha256sum -c SHA256SUMS)
+docker compose stop app
+docker compose up -d db
+# Aguarde o banco ficar healthy antes do psql.
+gunzip -c "$backup_dir/database.sql.gz" | docker compose exec -T db \
+  sh -c 'psql --single-transaction --set ON_ERROR_STOP=on -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+docker compose run --rm -T --no-deps --entrypoint tar app -C /data -xzf - < "$backup_dir/data.tar.gz"
+docker compose up -d app
+```
+
+Confira `/api/health`, login de uma conta de ensaio, catálogo, imagem de questão, discursiva e retomada de treino. Use o conteúdo restaurado para essa checagem: o health só consulta o banco, e a API pode subir mesmo se o bootstrap falhar. Não exponha a cópia de ensaio publicamente com dados pessoais de produção. Guarde o `.env` de operação em local seguro separado; ele não faz parte do conjunto acima.
 
 ## 6. Reverter
 
