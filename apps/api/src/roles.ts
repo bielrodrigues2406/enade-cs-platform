@@ -97,43 +97,6 @@ export async function revoke(client: PoolClient, email: string, role: Role, acto
 }
 
 /**
- * Primeiro administrador pela configuração do servidor (ADMIN_EMAILS, e-mails
- * separados por vírgula): recebe o papel quando a conta existe, ao iniciar o
- * servidor ou no cadastro, **somente enquanto não houver nenhum administrador**.
- * Como o e-mail não é confirmado, isso limita a janela em que outra pessoa
- * poderia cadastrar o endereço antes do dono (auditoria de 31/10, C1).
- */
-export function configuredAdmins(value = process.env.ADMIN_EMAILS ?? "") {
-  return value.split(",").map((email) => email.trim().toLowerCase())
-    .filter((email) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && email.length <= 254);
-}
-
-export async function grantConfiguredAdmin(client: PoolClient, email: string) {
-  if (!configuredAdmins().includes(email)) return;
-  // Serializa com outros cadastros para dois e-mails não virarem o "primeiro" juntos.
-  await client.query("SELECT pg_advisory_xact_lock(hashtextextended('first-admin',0))");
-  const hasAdmin = (await client.query("SELECT 1 FROM account_role WHERE role='ADMIN' LIMIT 1")).rowCount;
-  const exists = (await client.query("SELECT 1 FROM account WHERE email=$1", [email])).rowCount;
-  if (!hasAdmin && exists) await authorize(client, email, "ADMIN", null);
-}
-
-export async function grantConfiguredAdmins() {
-  for (const email of configuredAdmins()) {
-    const client = await db.connect();
-    try {
-      await client.query("BEGIN");
-      await grantConfiguredAdmin(client, email);
-      await client.query("COMMIT");
-    } catch (error) {
-      await client.query("ROLLBACK");
-      throw error;
-    } finally {
-      client.release();
-    }
-  }
-}
-
-/**
  * Cadastro com e-mail convidado: o convite fica "reivindicado" por essa conta e
  * o papel só vale quando um administrador confirmar (o e-mail não é
  * confirmado; auditoria de 31/10, C1).

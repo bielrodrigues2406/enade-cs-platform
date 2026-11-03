@@ -1,10 +1,7 @@
 import { ConfigError, createApp, db } from "./main.js";
-import { grantConfiguredAdmins } from "./roles.js";
 import { purgeOldActivity } from "./activity.js";
 try {
   const app = await createApp();
-  // ADMIN_EMAILS: contas já existentes recebem o papel de administrador.
-  await grantConfiguredAdmins();
   app.enableShutdownHooks();
   // Loopback por padrão; em contêiner, HOST=0.0.0.0 atrás do proxy do provedor.
   const port = Number(process.env.PORT || 3000), host = process.env.HOST || "127.0.0.1";

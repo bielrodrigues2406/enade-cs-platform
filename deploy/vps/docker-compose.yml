@@ -33,7 +33,6 @@ services:
       APP_ORIGIN: ${APP_ORIGIN:?defina APP_ORIGIN no .env}
       # Um proxy (o Caddy) à frente: o IP do aluno vem dele.
       TRUST_PROXY: '1'
-      ADMIN_EMAILS: ${ADMIN_EMAILS:-}
       BOOTSTRAP_CONTENT: ${BOOTSTRAP_CONTENT:-1}
     volumes:
       # PDFs oficiais e recortes das questões.

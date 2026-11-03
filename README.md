@@ -30,7 +30,7 @@ npm run dev:api          # API em http://localhost:3000 (teste: /api/health)
 npm run dev:web          # site em http://localhost:4200
 ```
 
-Para virar administrador, ponha seu e-mail em `ADMIN_EMAILS` no `.env` antes de criar a conta, ou rode `npm run admin:role -- grant seu@email`.
+Para criar o primeiro administrador, cadastre sua conta pelo site e rode `npm run admin:role -- grant seu@email` no servidor, com acesso ao banco da implantação. Cadastro público e variáveis de e-mail não concedem privilégios.
 
 ## Testes
 

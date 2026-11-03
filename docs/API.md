@@ -192,7 +192,7 @@ A web usa `/treino?attempt=UUID&item=2`, sem resposta ou identidade na URL. Nave
 | GET /admin/activity | cookie de admin; `category` (ACCESS, SECURITY, ACCOUNT, ROLE, CONTENT, CLASS), `q` até 120 (e-mail, assunto ou IP), `page` | `{total,page,pageSize:10,retentionDays,summary:{logins,failedLogins,blocked,suspiciousIps},items:[{id,at,category,action,actorEmail,actorName,subject,detail,ip}]}`; resumo das últimas 24 h; IP só em ACCESS e SECURITY |
 | POST /admin/roles/revoke | `{email,role}` | 200 `{status:"REVOKED"}`; remove papel e convite. Admin não remove o próprio ADMIN (409) |
 
-Sem o papel, as rotas `/admin/*` respondem 403. Professores e administração também usam `/curation/*` (cadastrar questões); publicar continua exigindo outra pessoa na revisão. Toda atribuição, convite e remoção fica em `role_event`. O primeiro administrador é criado no servidor: `npm run admin:role -- grant <e-mail>` (ou `node dist/admin/admin-role.mjs grant <e-mail>` na imagem); a conta precisa existir.
+Sem o papel, as rotas `/admin/*` respondem 403. Professores e administração também usam `/curation/*` (cadastrar questões); publicar continua exigindo outra pessoa na revisão. Toda atribuição, convite e remoção fica em `role_event`. O primeiro administrador é criado no servidor: `npm run admin:role -- grant <e-mail>` (ou `node dist/admin/admin-role.mjs grant <e-mail>` na imagem); a conta precisa existir. `ADMIN_EMAILS` não concede mais papéis: o cadastro público não confirma a titularidade do e-mail.
 
 O cadastro aceita `name` (2–120) e `enrollment` (prontuário IFSP, ex.: `PE3012345`), opcionais. Prontuário repetido responde 409.
 

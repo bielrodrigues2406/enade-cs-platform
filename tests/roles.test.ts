@@ -41,7 +41,7 @@ async function call(path: string, cookie: string, method = "GET", body?: unknown
     body: body === undefined ? undefined : JSON.stringify(body),
   });
 }
-async function account(address: string, extra: Record<string, string> = {}) {
+async function account(address: string, extra: Record<string, unknown> = {}) {
   const guest = await fetch(`${base}/api/session`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
   const cookie = guest.headers.get("set-cookie")!.split(";")[0];
   const created = await call("auth/register", cookie, "POST", { email: address, password, name: "Pessoa Teste", ...extra });
@@ -55,6 +55,32 @@ async function makeAdmin(address: string) {
     client.release();
   }
 }
+
+test("public signup ignores ADMIN_EMAILS and client-supplied privileges", async () => {
+  const address = email();
+  const before = process.env.ADMIN_EMAILS;
+  try {
+    process.env.ADMIN_EMAILS = address;
+    const person = await account(address, { role: "ADMIN", roles: ["ADMIN"], isAdmin: true });
+    assert.equal(person.status, 201);
+    assert.deepEqual(await (await call("access", person.cookie)).json(), { roles: [] });
+    for (const [path, method, body] of [
+      ["admin/users", "GET", undefined],
+      ["admin/roles", "POST", { email: address, role: "ADMIN" }],
+      ["admin/roles/revoke", "POST", { email: address, role: "ADMIN" }],
+      ["admin/accounts", "POST", { email: email(), password, name: "TEST ONLY", role: "ADMIN" }],
+      ["admin/activity", "GET", undefined],
+      ["imports", "GET", undefined],
+    ] as const) assert.equal((await call(path, person.cookie, method, body)).status, 403, path);
+    assert.equal((await db.query("SELECT 1 FROM role_event WHERE email=$1", [address])).rowCount, 0);
+    // A concessão explícita pelo servidor continua funcionando e auditada.
+    await makeAdmin(address);
+    assert.deepEqual(await (await call("access", person.cookie)).json(), { roles: ["ADMIN"] });
+  } finally {
+    if (before === undefined) delete process.env.ADMIN_EMAILS;
+    else process.env.ADMIN_EMAILS = before;
+  }
+});
 
 test("roles are server-side: accounts without a role see nothing administrative", async () => {
   const plain = await account(email());
@@ -114,38 +140,6 @@ test("profile fields are validated and an enrollment belongs to one account", as
   assert.equal((await account(email(), { enrollment })).status, 409);
 });
 
-test("ADMIN_EMAILS only bootstraps the first admin; with an admin in place it is ignored", async () => {
-  const { configuredAdmins, grantConfiguredAdmin, grantConfiguredAdmins } = await import("../apps/api/src/roles.js");
-  assert.deepEqual(configuredAdmins(" Ana@Example.invalid , não-é-email, b@example.invalid"), ["ana@example.invalid", "b@example.invalid"]);
-  const [first, late] = [email(), email()];
-  const before = process.env.ADMIN_EMAILS;
-  try {
-    await account(first);
-    process.env.ADMIN_EMAILS = `${first}, ${late}`;
-    // Sem nenhum administrador (simulado numa transação desfeita): o e-mail configurado vira admin.
-    const client = await db.connect();
-    try {
-      await client.query("BEGIN");
-      await client.query("DELETE FROM account_role WHERE role='ADMIN'");
-      await grantConfiguredAdmin(client, first);
-      const granted = await client.query("SELECT 1 FROM account_role r JOIN account a ON a.identity_id=r.identity_id WHERE a.email=$1 AND r.role='ADMIN'", [first]);
-      assert.equal(granted.rowCount, 1);
-    } finally {
-      await client.query("ROLLBACK");
-      client.release();
-    }
-    // Com um administrador já existente, nem o cadastro nem a inicialização concedem o papel.
-    const admin = email();
-    await account(admin);
-    await makeAdmin(admin);
-    const fresh = await account(late);
-    assert.deepEqual((await (await call("access", fresh.cookie)).json()).roles, []);
-    await grantConfiguredAdmins();
-    assert.deepEqual((await (await call("access", fresh.cookie)).json()).roles, []);
-  } finally {
-    process.env.ADMIN_EMAILS = before ?? "";
-  }
-});
 
 async function login(address: string, secret: string) {
   const guest = await fetch(`${base}/api/session`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
