@@ -1,4 +1,4 @@
-import { navigateTo } from "./navigation-helpers";
+import { navigateTo, navigationControl } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { Pool } from "pg";
@@ -150,7 +150,7 @@ async function publish(page: Page) {
       exact: true,
     })
     .check();
-  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeDisabled();
+  await expect(await navigationControl(page, "Banco de questões")).toBeDisabled();
   expect(await hasUnloadGuard(page)).toBe(true);
   await page
     .getByRole("checkbox", {
@@ -191,7 +191,7 @@ for (const width of [390, 1440]) {
     await openCuration(page);
     const newDraft = page.getByRole("button", { name: "Nova questão autoral", exact: true });
     const back = page.getByRole("button", { name: "Voltar à fila" });
-    const bank = page.getByRole("link", { name: "Banco de questões", exact: true });
+    const bank = await navigationControl(page, "Banco de questões");
     const warning = page.getByRole("region", { name: "Alterações locais", exact: true });
 
     // A fresh form is clean; changing only the options also needs protection.
@@ -341,7 +341,7 @@ test("authoring, independent rejection/publication, version replacement and hist
       .fill(
         "Acrescente uma explicação mais detalhada para o raciocínio apresentado.",
       );
-    await expect(reviewer.getByRole("link", { name: "Banco de questões", exact: true })).toBeDisabled();
+    await expect(await navigationControl(reviewer, "Banco de questões")).toBeDisabled();
     expect(await hasUnloadGuard(reviewer)).toBe(true);
     await reviewer
       .getByRole("button", { name: "Devolver para ajustes", exact: true })
@@ -525,7 +525,7 @@ test("editing conflicts preserve local content and explicit reopen reconciles th
   await expect(page.getByLabel("Título", { exact: true })).toHaveValue(
     "Meu texto local ainda não salvo",
   );
-  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeDisabled();
+  await expect(await navigationControl(page, "Banco de questões")).toBeDisabled();
   expect(await hasUnloadGuard(page)).toBe(true);
   await page
     .getByRole("button", { name: "Reabrir versão", exact: true })
