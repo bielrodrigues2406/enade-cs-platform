@@ -393,6 +393,7 @@ test("authoring, independent rejection/publication, version replacement and hist
     });
     await publish(reviewer);
     await navigateTo(page, "Banco de questões");
+    await page.locator(".catalog-more-filters > summary").click();
     const topicFilter = page.getByLabel("Assunto", { exact: true });
     await expect(topicFilter).toContainText("Matemática discreta");
     await topicFilter.selectOption({ label: "Matemática discreta" });
