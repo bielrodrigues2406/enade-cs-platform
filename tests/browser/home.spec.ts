@@ -27,6 +27,9 @@ test("home shows the study board and leads to study and back", async ({
     "Seu desempenho por área",
   ])
     await expect(page.getByRole("heading", { name })).toBeVisible();
+  await expect(page.locator(".areas-list")).toHaveCount(0);
+  await expect(page.getByText(/Seu desempenho aparece aqui depois/)).toBeVisible();
+  await expect(page.getByRole("button", { name: "Preparar treino", exact: true })).toBeDisabled();
   const weeks = page.getByRole("list", { name: "Semanas até a prova" });
   await expect(weeks.getByRole("listitem")).toHaveCount(5);
   await expect(weeks).toContainText("HOJE · QUA 28");
@@ -36,7 +39,7 @@ test("home shows the study board and leads to study and back", async ({
   ).toBeVisible();
   await expect(page.getByText("Autoral demonstrativa").first()).toBeVisible();
   await expect(
-    page.getByRole("button", { name: /^Simular Redes: \d+ questõ?(?:es|ão)$/ }),
+    page.getByLabel("Treinar por área", { exact: true }),
   ).toBeVisible();
   await page
     .getByRole("region", { name: "Seu desempenho por área" })
@@ -133,9 +136,8 @@ test("an area simulation starts from the home page and opens on its first questi
   page,
 }) => {
   await page.goto("/");
-  await page
-    .getByRole("button", { name: /^Simular Redes: / })
-    .click();
+  await page.getByLabel("Treinar por área", { exact: true }).selectOption("Redes");
+  await page.getByRole("button", { name: "Preparar treino", exact: true }).click();
   // O cronômetro é opcional: em aula a turma resolve junto, sem tempo.
   const choice = page.getByRole("dialog", { name: "Redes" });
   await expect(choice.getByRole("button", { name: "Sem cronômetro" })).toBeVisible();
@@ -158,7 +160,8 @@ test("an untimed area simulation leaves through its own exit dialog", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: /^Simular Redes: / }).click();
+  await page.getByLabel("Treinar por área", { exact: true }).selectOption("Redes");
+  await page.getByRole("button", { name: "Preparar treino", exact: true }).click();
   await page
     .getByRole("dialog", { name: "Redes" })
     .getByRole("button", { name: "Sem cronômetro" })

@@ -1,3 +1,4 @@
+import { FormsModule } from "@angular/forms";
 import { MascotComponent } from "./mascot.component";
 import { Component, EventEmitter, Input, Output, inject, signal } from "@angular/core";
 import type { ReviewItem } from "./review.component";
@@ -71,7 +72,7 @@ const monday = (date: Date) => {
  * Usa somente dados reais da pessoa; não estima nota do ENADE.
  */
 @Component({
-  imports: [MascotComponent],
+  imports: [MascotComponent, FormsModule],
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.css",
@@ -199,6 +200,14 @@ export class HomeComponent {
     if (!active) return "";
     const kind = active.kind === "FORMAT" ? `Simulado no formato ${active.formatYear ?? 2026}` : active.kind === "EDITION" ? "Prova completa" : active.area ? `Treino de ${active.area}` : "Treino";
     return `${kind} · ${active.answered} de ${active.size} respondidas${active.pausedAt ? " · pausado" : ""}`;
+  }
+
+  selectedArea = "";
+  availableAreas() { return this.areas().filter((row) => row.published > 0); }
+  studiedAreas() { return this.ranked().filter((row) => row.firstAttempts > 0); }
+  simulateSelected() {
+    const area = this.availableAreas().find((row) => row.area === this.selectedArea);
+    if (area && !this.active()) void this.simulate(area);
   }
 
   // Desempenho por área -------------------------------------------------------
