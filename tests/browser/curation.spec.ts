@@ -549,3 +549,17 @@ test("curation navigation stays unavailable to an account without the local cura
   const queue = await context.request.get("/api/curation/questions");
   expect(queue.status()).toBe(403);
 });
+
+
+test("a new draft requires an explicit key and removing it never guesses another", async ({ page, context, provision }) => {
+  await provision(context);
+  await page.goto("/questoes");
+  await page.getByRole("button", { name: "Curadoria", exact: true }).filter({ visible: true }).click();
+  await page.getByRole("button", { name: "Nova questão autoral", exact: true }).click();
+  const choices = page.getByRole("radio", { name: /Definir alternativa/ });
+  for (const choice of await choices.all()) await expect(choice).not.toBeChecked();
+  await page.getByRole("radio", { name: "Definir alternativa B como correta", exact: true }).check();
+  await page.getByRole("button", { name: "Remover alternativa B", exact: true }).click();
+  for (const choice of await choices.all()) await expect(choice).not.toBeChecked();
+  await expect(page.getByRole("alert")).toContainText("A alternativa correta foi removida");
+});

@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Req,
 } from "@nestjs/common";
 import { randomUUID } from "node:crypto";
@@ -18,6 +19,18 @@ import { verifyProvenance, type Provenance } from "./source-store.js";
 import { recordActivity } from "./activity.js";
 
 type Option = { id: string; text: string };
+const QUEUE_ORDER = `CASE "editorialStatus" WHEN 'IN_REVIEW' THEN 0 WHEN 'DRAFT' THEN 1 ELSE 2 END,
+  regexp_replace(title,'[0-9]+$',''),(substring(title from '([0-9]+)$'))::numeric NULLS FIRST,"questionId"`;
+
+function queueInteger(value: unknown, fallback: number, min: number, max: number) {
+  if (value === undefined) return fallback;
+  if (typeof value !== "string" || !/^(0|[1-9]\d{0,6})$/.test(value))
+    fail("Página ou quantidade inválida.", 400);
+  const parsed = Number(value);
+  if (parsed < min || parsed > max) fail("Página ou quantidade inválida.", 400);
+  return parsed;
+}
+
 type Content = {
   origin: "AUTHOR_CREATED" | "OFFICIAL";
   explanationCredit: string;
@@ -246,16 +259,44 @@ export class CurationController {
     const user = await requireIdentity(req);
     return { canCurate: !!user.email && (await canCurate(db, user.id)) };
   }
-  @Get("questions") async queue(@Req() req: any) {
+  @Get("questions") async queue(
+    @Req() req: any,
+    @Query() query: Record<string, unknown>,
+  ) {
     const user = await curator(req);
-    return (
-      await db.query(
-        `SELECT v.id,v.question_id AS "questionId",v.title,v.topic,v.origin,v.editorial_status AS "editorialStatus",v.version_number AS sequence,v.editorial_revision AS revision,v.author_credit AS "authorCredit",q.current_version_id AS "currentVersionId",COALESCE(v.created_by=$1,false) AS "isAuthor",(v.editorial_status='IN_REVIEW' AND v.created_by IS DISTINCT FROM $1::uuid AND v.last_editor_id IS DISTINCT FROM $1::uuid) AS "canReview" FROM editorial_question q JOIN LATERAL(SELECT * FROM question_version WHERE question_id=q.id ORDER BY version_number DESC LIMIT 1) v ON true
-         ORDER BY CASE v.editorial_status WHEN 'IN_REVIEW' THEN 0 WHEN 'DRAFT' THEN 1 ELSE 2 END,
-           regexp_replace(v.title,'[0-9]+$',''),(substring(v.title from '([0-9]+)$'))::integer NULLS FIRST,q.id LIMIT 50`,
-        [user.id],
+    if (Object.keys(query).some((key) => !["limit", "offset"].includes(key)))
+      fail("Filtro inválido.", 400);
+    const limit = queueInteger(query.limit, 20, 1, 50);
+    const offset = queueInteger(query.offset, 0, 0, 1000000);
+    // Página e total usam o mesmo snapshot; só a última versão de cada questão entra na fila.
+    const result = await db.query(
+      `WITH latest AS (
+        SELECT v.id,v.question_id AS "questionId",v.title,v.topic,v.origin,
+          v.editorial_status AS "editorialStatus",v.version_number AS sequence,
+          v.editorial_revision AS revision,v.author_credit AS "authorCredit",
+          q.current_version_id AS "currentVersionId",COALESCE(v.created_by=$1,false) AS "isAuthor",
+          (v.editorial_status='IN_REVIEW' AND v.created_by IS DISTINCT FROM $1::uuid
+            AND v.last_editor_id IS DISTINCT FROM $1::uuid) AS "canReview"
+        FROM editorial_question q
+        JOIN LATERAL(SELECT * FROM question_version WHERE question_id=q.id
+          ORDER BY version_number DESC LIMIT 1) v ON true
+      ), counts AS (
+        SELECT count(*)::integer AS total FROM latest
+      ), bounds AS (
+        SELECT LEAST($3::integer,GREATEST(0,((total-1)/$2::integer)*$2::integer)) AS "offset"
+        FROM counts
       )
-    ).rows;
+      SELECT json_build_object(
+        'items',COALESCE((SELECT json_agg(page ORDER BY ${QUEUE_ORDER}) FROM (
+          SELECT * FROM latest ORDER BY ${QUEUE_ORDER}
+          LIMIT $2 OFFSET (SELECT "offset" FROM bounds)
+        ) page),'[]'::json),
+        'total',(SELECT total FROM counts),'limit',$2::integer,
+        'offset',(SELECT "offset" FROM bounds)
+      ) AS page`,
+      [user.id, limit, offset],
+    );
+    return result.rows[0].page;
   }
   @Get("versions/:id") async get(@Req() req: any, @Param("id") id: string) {
     const user = await curator(req);
