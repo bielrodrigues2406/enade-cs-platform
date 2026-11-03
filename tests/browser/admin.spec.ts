@@ -208,3 +208,111 @@ test("account and admin screens reflow without horizontal scrolling", async ({ p
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `largura ${width}`).toBe(true);
   }
 });
+
+test("an admin edits student profile and email, resets password, and revokes active sessions", async ({ page, browser }) => {
+  const adminEmail = email("admin-maint");
+  await register(page, adminEmail, { name: "Admin Manutencao TEST ONLY" });
+  await pool.query("INSERT INTO account_role(identity_id,role) SELECT identity_id,'ADMIN' FROM account WHERE email=$1", [adminEmail]);
+
+  const studentInitialEmail = email("aluno-maint");
+  const studentUpdatedEmail = email("aluno-novo");
+  const studentCtx = await browser.newContext();
+  const studentPage = await studentCtx.newPage();
+  await register(studentPage, studentInitialEmail, { name: "Estudante Inicial TEST ONLY", enrollment: "pe3011111" });
+
+  await page.reload();
+  await navigateTo(page, "Administração");
+  await page.getByLabel("Buscar contas").fill(studentInitialEmail);
+  await page.getByRole("button", { name: "Buscar" }).click();
+
+  const row = page.getByRole("row", { name: new RegExp(studentInitialEmail) });
+  await row.getByRole("button", { name: `Gerenciar conta de ${studentInitialEmail}` }).click();
+  const dialog = page.locator('dialog[aria-labelledby="admin-manage-title"]');
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText("1 aparelho conectado.");
+
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `modal ${width}`).toBe(true);
+  }
+  await page.setViewportSize({ width: 1280, height: 900 });
+
+  // Atualiza nome, prontuário e e-mail (exige senha do admin).
+  const profileForm = dialog.locator("form").first();
+  await profileForm.getByLabel("Nome").fill("Estudante Corrigido TEST ONLY");
+  await profileForm.getByLabel(/Prontuário IFSP/).fill("pe3022222");
+  await profileForm.getByLabel("E-mail").fill(studentUpdatedEmail);
+  await expect(profileForm.getByLabel("Sua senha de administrador")).toBeVisible();
+  await profileForm.getByLabel("Sua senha de administrador").fill("senha errada 123");
+  await profileForm.getByLabel(/Motivo/).fill("Correção solicitada na secretaria");
+  await profileForm.getByRole("button", { name: "Salvar dados" }).click();
+  await expect(profileForm.getByRole("alert")).toContainText("incorreta");
+
+  await profileForm.getByLabel("Sua senha de administrador").fill(password);
+  await profileForm.getByRole("button", { name: "Salvar dados" }).click();
+  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("status")).toContainText(`Dados da conta de ${studentUpdatedEmail} atualizados.`);
+
+  await page.getByLabel("Buscar contas").fill(studentUpdatedEmail);
+  await page.getByRole("button", { name: "Buscar" }).click();
+  const updatedRow = page.getByRole("row", { name: new RegExp(studentUpdatedEmail) });
+  await expect(updatedRow).toContainText("Estudante Corrigido TEST ONLY");
+  await expect(updatedRow).toContainText("PE3022222");
+
+  // Redefine a senha e encerra a sessão aberta da estudante.
+  await updatedRow.getByRole("button", { name: `Gerenciar conta de ${studentUpdatedEmail}` }).click();
+  await expect(dialog).toBeVisible();
+  const resetSection = dialog.getByRole("region", { name: "Redefinir senha" });
+  const tempPassword = await resetSection.getByLabel("Nova senha provisória").inputValue();
+  expect(tempPassword).toMatch(/^[a-z2-9]{4}(-[a-z2-9]{4}){3}$/);
+  await resetSection.getByLabel("Sua senha de administrador").fill(password);
+  await resetSection.getByLabel(/Motivo/).fill("Perdeu a senha");
+  await resetSection.getByRole("button", { name: "Redefinir senha" }).click();
+  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("status")).toContainText(`Senha de ${studentUpdatedEmail} redefinida`);
+
+  // Sessão anterior foi encerrada; login com a senha provisória funciona e pode ser encerrado avulso.
+  expect((await studentCtx.request.get("/api/me/profile")).status()).toBe(401);
+  await studentCtx.close();
+
+  const freshCtx = await browser.newContext();
+  expect((await freshCtx.request.post("/api/session", { data: {} })).status()).toBe(201);
+  expect((await freshCtx.request.post("/api/auth/login", { data: { email: studentUpdatedEmail, password: tempPassword } })).status()).toBe(200);
+
+  await page.getByRole("button", { name: "Buscar" }).click();
+  await updatedRow.getByRole("button", { name: `Gerenciar conta de ${studentUpdatedEmail}` }).click();
+  await expect(dialog).toContainText("1 aparelho conectado.");
+  await dialog.getByRole("button", { name: "Encerrar sessões" }).click();
+  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("status")).toContainText("encerrada(s)");
+  expect((await freshCtx.request.get("/api/me/profile")).status()).toBe(401);
+  await freshCtx.close();
+
+  // Confere a auditoria antes da exclusão LGPD.
+  await page.getByRole("tab", { name: "Atividades" }).click();
+  await page.getByLabel("E-mail, assunto ou IP").fill(studentUpdatedEmail);
+  await page.getByRole("button", { name: "Filtrar" }).click();
+  const logTable = page.getByRole("table");
+  await expect(logTable).toContainText("Admin alterou o e-mail");
+  await expect(logTable).toContainText("Senha redefinida pelo admin");
+  await expect(logTable).toContainText("Sessões encerradas pelo admin");
+
+  // Exclui a conta e os dados de estudo conforme pedido LGPD e confere desidentificação do log.
+  await page.getByRole("tab", { name: "Contas" }).click();
+  await updatedRow.getByRole("button", { name: `Gerenciar conta de ${studentUpdatedEmail}` }).click();
+  const deleteSection = dialog.getByRole("region", { name: "Excluir conta e dados de estudo" });
+  await deleteSection.getByLabel(/Digite EXCLUIR/).fill("EXCLUIR");
+  await deleteSection.getByLabel("Sua senha de administrador").fill(password);
+  await deleteSection.getByLabel(/Motivo/).fill("Solicitação LGPD da estudante");
+  await deleteSection.getByRole("button", { name: "Excluir conta e dados" }).click();
+  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("status")).toContainText(`Conta e dados de estudo de ${studentUpdatedEmail} excluídos.`);
+  await expect(page.getByRole("row", { name: new RegExp(studentUpdatedEmail) })).toHaveCount(0);
+
+  await page.getByRole("tab", { name: "Atividades" }).click();
+  await page.getByLabel("E-mail, assunto ou IP").fill(adminEmail);
+  await page.getByRole("button", { name: "Filtrar" }).click();
+  await expect(logTable).toContainText("Conta excluída pela administração");
+  await expect(logTable).not.toContainText(studentUpdatedEmail);
+});
+

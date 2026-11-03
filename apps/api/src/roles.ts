@@ -141,10 +141,12 @@ export class RolesController {
       `WITH matching AS (
          SELECT a.identity_id AS id,a.email,a.display_name AS name,a.enrollment,a.created_at AS "createdAt",
            COALESCE(array_agg(r.role ORDER BY r.role) FILTER (WHERE r.role IS NOT NULL),'{}') AS roles,
-           (SELECT count(*)::int FROM answer x WHERE x.owner_id=a.identity_id) AS answers
+           (SELECT count(*)::int FROM answer x WHERE x.owner_id=a.identity_id) AS answers,
+           (SELECT count(*)::int FROM browser_session s WHERE s.identity_id=a.identity_id AND s.expires_at>now()) AS "activeSessions"
          FROM account a LEFT JOIN account_role r ON r.identity_id=a.identity_id
-         WHERE $1='' OR strpos(lower(a.email),lower($1))>0 OR strpos(lower(COALESCE(a.display_name,'')),lower($1))>0
-           OR strpos(lower(COALESCE(a.enrollment,'')),lower($1))>0
+         WHERE a.email NOT LIKE '%@anon.invalid'
+           AND ($1='' OR strpos(lower(a.email),lower($1))>0 OR strpos(lower(COALESCE(a.display_name,'')),lower($1))>0
+           OR strpos(lower(COALESCE(a.enrollment,'')),lower($1))>0)
          GROUP BY a.identity_id)
        SELECT (SELECT count(*)::int FROM matching) AS total,
          COALESCE((SELECT json_agg(m ORDER BY m."createdAt" DESC) FROM

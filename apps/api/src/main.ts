@@ -27,6 +27,7 @@ import { SourcesController } from "./sources.js";
 import { ReviewController } from "./review.js";
 import { CatalogController } from "./catalog.js";
 import { RolesController } from "./roles.js";
+import { AdminAccountsController } from "./admin-accounts.js";
 import { ExamImportsController } from "./exam-imports.js";
 import { LessonsController } from "./lessons.js";
 import { ClassDashboardController } from "./class-dashboard.js";
@@ -244,6 +245,7 @@ class StudyController {
     ReviewController,
     CatalogController,
     RolesController,
+    AdminAccountsController,
     ExamImportsController,
     LessonsController,
     ClassDashboardController,
@@ -332,6 +334,14 @@ export async function createApp() {
         "max-age=31536000; includeSubDomains",
       );
     if (api) res.setHeader("Cache-Control", "no-store");
+    const fetchSite = req.headers["sec-fetch-site"];
+    if (
+      !["GET", "HEAD", "OPTIONS"].includes(req.method) &&
+      typeof fetchSite === "string" &&
+      fetchSite !== "same-origin" &&
+      fetchSite !== "none"
+    )
+      return res.status(403).json({ message: "Origem não autorizada." });
     if (
       !["GET", "HEAD", "OPTIONS"].includes(req.method) &&
       req.headers.origin &&
