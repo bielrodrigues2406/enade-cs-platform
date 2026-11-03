@@ -4,7 +4,7 @@ Gabriel autorizou os ajustes em 03/11 e escolheu **Questões** no lugar de Resol
 
 - **DS-6, PR #39 integrado:** curadoria paginada, gabarito explícito, professor sugerido apenas para docência, validação por campo, tabelas contidas, abas por teclado e modais com foco/alvos corrigidos. CI: build, 183 API, 82 Chromium e imagem de produção.
 - **DS-7:** menu lateral agrupado no computador e diálogo no celular/tablet estreito; conta/meta/saída reunidas; rotas próprias e histórico/reload das seções; filtros secundários recolhíveis com indicação de ativos. Curadoria carregada sob demanda para preservar o orçamento inicial. Em revisão/validação antes de integrar.
-- **DS-8:** composição do Início novo, Biblioteca contínua e medalhas conquistadas + próximas duas, com expansão para todas. Implementado em branch separada; validação de navegador após DS-7.
+- **DS-8:** composição do Início novo, Biblioteca contínua e medalhas conquistadas + próximas duas, com expansão para todas. Build de 434,66 kB e nove Chromium de Home/engajamento conferidos, além de revisão cruzada. CI completo e integração após o PR #40.
 
 A revisão de navegação inclui resposta de questão atrasada, callback antigo de transição após Voltar, rascunho/prova em curso e autenticação com corpo JSON interrompido após os cabeçalhos/cookie chegarem. Não altera o limite de autenticação: os testes aproveitam atores já criados para não ultrapassar a proteção compartilhada por IP.
 
