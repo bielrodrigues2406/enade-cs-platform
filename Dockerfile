@@ -28,6 +28,8 @@ COPY scripts/lib ./scripts/lib
 RUN mkdir -p /data/sources /data/question-assets && chown -R node:node /data
 USER node
 EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=5s --start-period=90s --retries=3 \
+  CMD curl -fsS http://127.0.0.1:${PORT:-3000}/api/health || exit 1
 # Migrations são transacionais e serializadas por advisory lock. Depois, a
 # carga do conteúdo commitado (idempotente; BOOTSTRAP_CONTENT=0 desliga) — uma
 # falha nela, como o Inep fora do ar, não impede a API de subir. Por fim a API

@@ -3,7 +3,9 @@ import pg from "pg";
 import { readdir, readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 const sha256 = (text) => createHash("sha256").update(text).digest("hex");
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL });
+const client = new pg.Client(
+  process.env.DATABASE_URL ? { connectionString: process.env.DATABASE_URL } : {},
+);
 try {
   await client.connect();
   await client.query("BEGIN");
