@@ -1,5 +1,5 @@
 const groups = [
-  { name: "Resolver", items: ["Banco de questões", "Discursivas"] },
+  { name: "Questões", items: ["Banco de questões", "Discursivas"] },
   { name: "Treinar", items: ["Treino parcial", "Provas completas"] },
   { name: "Revisar", items: ["Caderno de erros", "Flashcards"] },
   { name: "Apoio", items: ["Biblioteca", "Conquistas", "Aulas"] },

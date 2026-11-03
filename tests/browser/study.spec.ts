@@ -4,6 +4,7 @@ for (const width of [390, 1440]) {
   test(`skip link preserves filters and an unconfirmed answer at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/questoes");
+    if (!await page.getByLabel("Assunto", { exact: true }).isVisible()) await page.locator(".catalog-more-filters > summary").click();
     await page.getByLabel("Assunto", { exact: true }).selectOption("Banco de dados");
     await page.getByLabel("Buscar questão").fill("transação");
     await page.getByRole("button", { name: "Filtrar", exact: true }).click();

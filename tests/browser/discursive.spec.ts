@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -48,7 +49,7 @@ test("an admin confirms a discursive item; a student writes, submits and self-as
 
   // Conferência no editor: enunciado, padrão de resposta e itens.
   await page.goto("/");
-  await page.getByRole("button", { name: "Administração" }).click();
+  await navigateTo(page, "Administração");
   await page.getByRole("tab", { name: "Importar prova" }).click();
   await page.getByRole("listitem").filter({ hasText: "ENADE 2097" }).getByRole("button", { name: "Abrir" }).click();
   await expect(page.getByRole("tab", { name: "Enunciado na prova (1)" })).toBeVisible();
@@ -71,7 +72,7 @@ test("an admin confirms a discursive item; a student writes, submits and self-as
   const student = await studentContext.newPage();
   await student.setViewportSize({ width: 390, height: 844 });
   await student.goto("/questoes");
-  await student.getByRole("button", { name: "Discursivas" }).first().click();
+  await navigateTo(student, "Discursivas");
   await student.getByRole("button", { name: /ENADE 2097 · Discursiva 3/ }).click();
   await expect(student.getByRole("heading", { name: "ENADE 2097 · Discursiva 3", level: 1 })).toBeVisible();
   await expect(student.getByRole("heading", { name: "Padrão de resposta" })).toHaveCount(0);

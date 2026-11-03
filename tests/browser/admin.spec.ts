@@ -1,3 +1,4 @@
+import { navigateTo, openProfile } from "./navigation-helpers";
 import "dotenv/config";
 import { randomUUID } from "node:crypto";
 import { Pool } from "pg";
@@ -35,7 +36,7 @@ async function register(page: Page, address: string, extra: { name?: string; enr
   await page.getByLabel("E-mail").fill(address);
   await page.getByLabel("Senha", { exact: true }).fill(password);
   await page.locator("form").getByRole("button", { name: "Criar conta" }).click();
-  await expect(page.getByRole("button", { name: `Meu perfil, ${extra.name ?? "Pessoa Teste"}` })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Abrir conta, ${extra.name ?? "Pessoa Teste"}` })).toBeVisible();
 }
 
 test("sign-up takes name and enrollment, and an admin authorizes a professor", async ({ page, browser }) => {
@@ -43,9 +44,26 @@ test("sign-up takes name and enrollment, and an admin authorizes a professor", a
   await register(page, adminEmail, { name: "Admin TEST ONLY" });
   await pool.query("INSERT INTO account_role(identity_id,role) SELECT identity_id,'ADMIN' FROM account WHERE email=$1", [adminEmail]);
   await page.reload();
-  await page.getByRole("button", { name: "Administração" }).click();
+  await navigateTo(page, "Administração");
   await expect(page.getByRole("heading", { name: "Administração", level: 1 })).toBeVisible();
 
+  const tabs = page.getByRole("tab");
+  await tabs.first().focus();
+  await page.keyboard.press("End");
+  await expect(page.getByRole("tab", { name: "Atividades", exact: true })).toBeFocused();
+  await page.keyboard.press("Home");
+  await expect(tabs.first()).toBeFocused();
+  await page.getByRole("button", { name: "Cadastrar conta", exact: true }).click();
+  await expect(page.getByLabel("Nome", { exact: true })).toBeFocused();
+  await page.getByLabel("Nome", { exact: true }).fill("A");
+  await page.getByRole("dialog").getByRole("button", { name: "Cadastrar", exact: true }).click();
+  await expect(page.getByText("Informe o nome com pelo menos 2 caracteres.", { exact: true })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.locator('dialog[aria-labelledby="admin-account-title"]')).toBeHidden();
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
   // Autoriza um e-mail que ainda não tem conta: fica aguardando cadastro.
   const professorEmail = email("prof");
   await page.getByRole("textbox", { name: "E-mail" }).fill(professorEmail);
@@ -59,7 +77,7 @@ test("sign-up takes name and enrollment, and an admin authorizes a professor", a
   await register(professor, professorEmail, { name: "Prof TEST ONLY", enrollment: "pe3009999" });
   await other.close();
   await page.reload();
-  await page.getByRole("button", { name: "Administração" }).first().click();
+  await navigateTo(page, "Administração");
   const claims = page.getByRole("region", { name: "Cadastros aguardando sua confirmação" });
   await expect(claims).toContainText("Prof TEST ONLY");
   await expect(claims).toContainText("PE3009999");
@@ -86,7 +104,7 @@ test("an admin registers a professor account, who then updates profile and passw
   await register(page, adminEmail, { name: "Admin TEST ONLY" });
   await pool.query("INSERT INTO account_role(identity_id,role) SELECT identity_id,'ADMIN' FROM account WHERE email=$1", [adminEmail]);
   await page.reload();
-  await page.getByRole("button", { name: "Administração" }).click();
+  await navigateTo(page, "Administração");
 
   const professorEmail = email("manual-prof");
   await page.getByRole("button", { name: "Cadastrar conta" }).click();
@@ -119,7 +137,7 @@ test("an admin registers a professor account, who then updates profile and passw
   await professor.getByLabel("E-mail").fill(professorEmail);
   await professor.getByLabel("Senha", { exact: true }).fill(password);
   await professor.locator("form").getByRole("button", { name: "Entrar" }).click();
-  await professor.getByRole("button", { name: "Meu perfil, Prof Manual TEST ONLY" }).click();
+  await openProfile(professor);
   await expect(professor.getByRole("heading", { name: "Meu perfil", level: 1 })).toBeVisible();
   await expect(professor.getByLabel("Nome")).toHaveValue("Prof Manual TEST ONLY");
   await professor.getByLabel("Prontuário IFSP").fill("pe3007777");
@@ -156,7 +174,7 @@ test("the activity tab shows sign-ins and failed passwords, filtered by IP", asy
   await other.close();
 
   await page.reload();
-  await page.getByRole("button", { name: "Administração" }).click();
+  await navigateTo(page, "Administração");
   await page.getByRole("tab", { name: "Atividades" }).click();
   await expect(page.getByRole("definition").first()).toBeVisible();
   await page.getByLabel("E-mail, assunto ou IP").fill(adminEmail);
@@ -177,7 +195,7 @@ test("the activity tab shows sign-ins and failed passwords, filtered by IP", asy
 
 test("accounts without the admin role do not see administration", async ({ page }) => {
   await register(page, email("aluno"));
-  await expect(page.getByRole("button", { name: "Administração" })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Administração" })).toHaveCount(0);
   expect((await page.request.get("/api/admin/users")).status()).toBe(403);
 });
 

@@ -72,7 +72,7 @@ export class LessonsController {
   }
 
   @Get("classes/:id") async classDetail(@Req() req: any, @Param("id") id: string) {
-    await requireStaff(req);
+    const user = await requireStaff(req);
     uuid(id, "Turma");
     const info = (await db.query(`SELECT id,name,edition_year AS "editionYear" FROM study_class WHERE id=$1`, [id])).rows[0];
     if (!info) fail("Turma não encontrada.", 404);
@@ -98,7 +98,11 @@ export class LessonsController {
       `SELECT DISTINCT a.identity_id AS id,COALESCE(a.display_name,a.email) AS name FROM account a
        JOIN account_role r ON r.identity_id=a.identity_id ORDER BY name`,
     )).rows;
-    return { ...info, members, lessons, teachers };
+    const roles = await rolesOf(user.id);
+    // Administração escolhe explicitamente; docência começa pela própria pessoa.
+    const suggestedTeacherId = roles.includes("PROFESSOR") && !roles.includes("ADMIN") && teachers.some((teacher) => teacher.id === user.id)
+      ? user.id : null;
+    return { ...info, members, lessons, teachers, suggestedTeacherId };
   }
 
   @Post("classes/:id/members") @HttpCode(200) async importMembers(@Req() req: any, @Param("id") id: string, @Body() body: any) {

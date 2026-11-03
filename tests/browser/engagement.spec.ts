@@ -1,3 +1,4 @@
+import { navigateTo, openAccountMenu } from "./navigation-helpers";
 import { test, expect } from "@playwright/test";
 import { signUp } from "./session-helpers";
 
@@ -9,6 +10,7 @@ test("answering fills today's goal, unlocks a medal and shows it in Conquistas",
   await page.getByRole("button", { name: /^Resolver:/ }).first().click();
   await page.getByRole("radio").first().check();
   await page.getByRole("button", { name: "Confirmar resposta" }).click();
+  await openAccountMenu(page);
   await expect(page.getByRole("button", { name: /^Meta do dia: 1 de 5 questões/ })).toBeVisible();
   await expect(page.getByText("Conquista desbloqueada")).toBeVisible();
   await expect(page.getByText("Primeiro passo").first()).toBeVisible();
@@ -31,7 +33,7 @@ test("answering fills today's goal, unlocks a medal and shows it in Conquistas",
 test("a flashcard session flips cards, schedules them and ends with a summary", async ({ page, context }) => {
   await signUp(context);
   await page.goto("/");
-  await page.getByRole("button", { name: "Flashcards" }).first().click();
+  await navigateTo(page, "Flashcards");
   await expect(page.getByRole("heading", { name: "Flashcards", level: 1 })).toBeVisible();
   await page.getByRole("button", { name: /Compiladores/ }).click();
   await expect(page.getByText(/faltam 8/)).toBeVisible();
@@ -57,7 +59,7 @@ test("the library opens a one-page sheet and announces what is coming", async ({
   await signUp(context);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await page.getByRole("button", { name: "Biblioteca" }).first().click();
+  await navigateTo(page, "Biblioteca");
   await expect(page.getByRole("heading", { name: "Biblioteca", level: 1 })).toBeVisible();
   await expect(page.getByText("Plano até a prova")).toBeVisible();
   await expect(page.getByRole("list", { name: "Fichas por assunto", exact: true }).getByRole("listitem")).toHaveCount(12);
@@ -65,5 +67,5 @@ test("the library opens a one-page sheet and announces what is coming", async ({
   await expect(page.getByRole("heading", { name: "Grafos e seus algoritmos", level: 1 })).toBeVisible();
   await expect(page.getByRole("region", { name: "Pegadinhas comuns" })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  await page.getByRole("button", { name: "Biblioteca" }).first().click();
+  await navigateTo(page, "Biblioteca");
 });

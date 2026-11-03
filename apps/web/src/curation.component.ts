@@ -34,6 +34,8 @@ type EditorialDetail = EditorialRow & {
   explanationCredit: string;
   provenance: OfficialProvenance | null;
 };
+type EditorialPage = { items: EditorialRow[]; total: number; offset: number; limit: number };
+const QUEUE_PAGE_SIZE = 20;
 type Draft = Pick<
   EditorialDetail,
   | "title"
@@ -67,7 +69,7 @@ const emptyDraft = (
   prompt: "",
   authorCredit: origin === "OFFICIAL" ? "Inep" : "",
   explanation: "",
-  correctOptionId: "option-a",
+  correctOptionId: "",
   options: ["a", "b", "c", "d"].map((id) => ({ id: `option-${id}`, text: "" })),
 });
 
@@ -75,10 +77,15 @@ const emptyDraft = (
   selector: "app-curation",
   imports: [FormsModule, SourcesComponent, QuestionImportsComponent],
   templateUrl: "./curation.component.html",
+  styleUrl: "./curation.component.css",
 })
 export class CurationComponent {
   @Output() busyChange = new EventEmitter<boolean>();
   rows = signal<EditorialRow[]>([]);
+  queueTotal = signal(0);
+  queueOffset = signal(0);
+  readonly queuePageSize = QUEUE_PAGE_SIZE;
+  answerError = signal("");
   sourceView = signal(false);
   importView = signal(false);
   sourceBusy = signal(false);
@@ -100,6 +107,7 @@ export class CurationComponent {
   private sequence = 0;
   private savedDraft = "";
   private abort = new AbortController();
+  private requestedOffset = 0;
   constructor() {
     void this.loadQueue();
   }
@@ -243,14 +251,23 @@ export class CurationComponent {
       if (this.active) this.sourceLoading.set(false);
     }
   }
-  async loadQueue() {
+  async loadQueue(offset = this.requestedOffset, focus = false) {
     if (this.busy()) return;
+    this.requestedOffset = offset;
     const sequence = ++this.sequence;
     this.loading.set(true);
     this.error.set("");
     try {
-      const rows = await this.api<EditorialRow[]>("questions");
-      if (this.active && sequence === this.sequence) this.rows.set(rows);
+      const page = await this.api<EditorialPage>(
+        `questions?limit=${QUEUE_PAGE_SIZE}&offset=${offset}`,
+      );
+      if (this.active && sequence === this.sequence) {
+        this.rows.set(page.items);
+        this.queueTotal.set(page.total);
+        this.queueOffset.set(page.offset);
+        this.requestedOffset = page.offset;
+        if (focus) this.focusHeading("editorial-queue-title");
+      }
     } catch (err) {
       if (this.active && sequence === this.sequence)
         this.error.set(this.message(err));
@@ -258,12 +275,19 @@ export class CurationComponent {
       if (this.active && sequence === this.sequence) this.loading.set(false);
     }
   }
+  changeQueuePage(direction: -1 | 1) {
+    if (this.loading() || this.busy()) return;
+    const offset = this.queueOffset() + direction * QUEUE_PAGE_SIZE;
+    if (offset < 0 || offset >= this.queueTotal()) return;
+    void this.loadQueue(offset, true);
+  }
   newDraft(origin: "AUTHOR_CREATED" | "OFFICIAL" = "AUTHOR_CREATED") {
     if (this.busy() || this.sourceBusy()) return;
     this.sequence++;
     this.loading.set(false);
     this.detail.set(null);
     this.draft = emptyDraft(origin);
+    this.answerError.set("");
     this.savedDraft = JSON.stringify(this.draft);
     this.reviewNote = "";
     this.checks = { content: false, answer: false, credit: false, source: false };
@@ -336,12 +360,25 @@ export class CurationComponent {
     this.draft.options = this.draft.options.filter(
       (option) => option.id !== id,
     );
-    if (this.draft.correctOptionId === id)
-      this.draft.correctOptionId = this.draft.options[0].id;
+    if (this.draft.correctOptionId === id) {
+      this.draft.correctOptionId = "";
+      this.answerError.set("A alternativa correta foi removida. Escolha outra resposta correta.");
+    }
+    this.emitBusy();
+  }
+  selectCorrectOption(id: string) {
+    this.draft.correctOptionId = id;
+    this.answerError.set("");
     this.emitBusy();
   }
   async save(form: NgForm) {
     if (this.busy()) return;
+    if (!this.draft.options.some((option) => option.id === this.draft.correctOptionId)) {
+      this.answerError.set("Escolha a alternativa correta antes de salvar o rascunho.");
+      this.focusHeading("draft-options");
+      return;
+    }
+    this.answerError.set("");
     if (
       form.invalid ||
       !this.draft.title.trim() ||
@@ -459,6 +496,7 @@ export class CurationComponent {
     }
   }
   private applyDetail(detail: EditorialDetail) {
+    this.answerError.set("");
     this.detail.set(detail);
     this.editing.set(true);
     this.draft = {

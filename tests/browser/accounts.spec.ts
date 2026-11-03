@@ -1,3 +1,4 @@
+import { logout, navigateTo, openProfile } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { Pool } from "pg";
@@ -160,6 +161,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   ).toBeVisible();
   await page.reload();
   await expect(page.locator("header .account-chip")).toHaveAttribute("title", accountEmail);
+  await openProfile(page);
   await page.route("**/api/auth/logout", (route) =>
     route.fulfill({
       status: 503,
@@ -167,17 +169,18 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
       body: JSON.stringify({ message: "Não foi possível sair agora." }),
     }),
   );
-  await page
-    .getByRole("button", { name: "Sair da conta", exact: true })
-    .click();
+  await logout(page);
   await expect(page.getByRole("alert")).toContainText(
     "Não foi possível sair agora.",
   );
   await expect(page.locator("header .account-chip")).toHaveAttribute("title", accountEmail);
+  await expect(page).toHaveURL(/\/perfil$/);
   await page.unroute("**/api/auth/logout");
-  await page
-    .getByRole("button", { name: "Sair da conta", exact: true })
-    .click();
+  await page.route("**/api/auth/logout", async (route) => {
+    const response = await route.fetch();
+    await route.fulfill({ response, body: "{" });
+  });
+  await logout(page);
   await expect(
     page.getByRole("button", { name: "Resolver: Quando uma transação falha" }),
   ).toBeVisible();
@@ -200,7 +203,9 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
     await other.getByRole("radio", { name: "TCP", exact: true }).check();
     await other.getByRole("button", { name: "Confirmar resposta" }).click();
     await expect(other.getByRole("status")).toContainText("Você acertou.");
-    const login = await enterForm(other, "Entrar");
+    await other.goto("/perfil");
+    const login = other.locator("app-account form");
+    await expect(login).toBeVisible();
     await expect(
       other.getByText(/não passam para a conta ao entrar/),
     ).toBeVisible();
@@ -221,7 +226,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
       accountEmail,
     );
     await expect(
-      other.getByRole("button", { name: "Sair da conta" }),
+      other.getByRole("button", { name: /^Abrir conta,/ }),
     ).toHaveCount(0);
     await other.getByRole("button", { name: "← Voltar" }).click();
     await expect(
@@ -229,7 +234,8 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
         name: "Revisar: Entrega confiável de um fluxo",
       }),
     ).toBeVisible();
-    await enterForm(other, "Entrar");
+    await other.goto("/perfil");
+    await expect(login).toBeVisible();
     await login.getByLabel("E-mail", { exact: true }).fill(accountEmail);
     await login.getByLabel("Senha", { exact: true }).fill(password);
     await login.getByLabel("Senha", { exact: true }).focus();
@@ -246,8 +252,16 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
         response.request().method() === "POST",
       { timeout: 15000 },
     );
+    await other.route("**/api/auth/login", async (route) => {
+      const response = await route.fetch();
+      expect(response.status()).toBe(200);
+      await route.fulfill({ response, body: "{" });
+    });
     await other.keyboard.press("Enter");
     expect((await acceptedLogin).status()).toBe(200);
+    await expect(other).toHaveURL(/\/perfil$/);
+    await expect(other.getByRole("heading", { name: "Meu perfil", exact: true })).toBeVisible();
+    await navigateTo(other, "Banco de questões");
     await expect(
       other.getByRole("button", {
         name: "Revisar: Quando uma transação falha",
@@ -362,9 +376,7 @@ test("logout in another tab clears a pending save and rejects its late UI respon
   try {
     await tab.getByRole("button", { name: "Confirmar resposta" }).click();
     await responseCaptured;
-    await page
-      .getByRole("button", { name: "Sair da conta", exact: true })
-      .click();
+    await logout(page);
     await expect(
       tab.getByRole("heading", { name: "Banco de questões" }),
     ).toBeVisible();
@@ -432,9 +444,7 @@ test("a delayed logout blocks study actions until the guest catalog replaces acc
     await route.continue();
   });
   try {
-    await page
-      .getByRole("button", { name: "Sair da conta", exact: true })
-      .click();
+    await logout(page);
     await requestCaptured;
     await expect(page.getByRole("status")).toContainText(
       "Atualizando sua sessão",
@@ -447,10 +457,10 @@ test("a delayed logout blocks study actions until the guest catalog replaces acc
       page.getByRole("button", { name: /^(Resolver|Revisar):/ }),
     ).toHaveCount(0);
     await expect(
-      page.getByRole("button", { name: "Banco de questões", exact: true }),
+      page.getByRole("link", { name: "Banco de questões", exact: true }),
     ).toBeDisabled();
     await page
-      .getByRole("button", { name: "Banco de questões", exact: true })
+      .getByRole("link", { name: "Banco de questões", exact: true })
       .focus();
     await page.keyboard.press("Enter");
     await expect(page.getByRole("status")).toContainText(

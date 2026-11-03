@@ -115,6 +115,10 @@ test("professors run classes, roll calls and exports; students see only their ow
   assert.deepEqual(await (await call(student.cookie, "my/lessons")).json(), { lessons: [] });
   const detail = await (await call(professor.cookie, `classes/${id}`)).json();
   assert.equal(detail.members.find((m: any) => m.enrollment === linked).hasAccount, true);
+  assert.equal(detail.suggestedTeacherId, professor.id);
+  await db.query("INSERT INTO account_role(identity_id,role) VALUES($1,'ADMIN')", [professor.id]);
+  const adminDetail = await (await call(professor.cookie, `classes/${id}`)).json();
+  assert.equal(adminDetail.suggestedTeacherId, null, "administração escolhe explicitamente, mesmo com os dois papéis");
 });
 
 test("the class dashboard counts only first attempts and keeps the answer history append-only", async () => {

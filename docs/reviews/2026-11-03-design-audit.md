@@ -49,7 +49,7 @@ Referências de implementação: `apps/web/src/app.component.html`, `main.ts`, `
 | Grupo | Destinos atuais |
 | --- | --- |
 | Início | Início |
-| Resolver | Banco de questões, Discursivas |
+| Questões | Banco de questões, Discursivas |
 | Treinar | Treino parcial, Provas completas |
 | Revisar | Caderno de erros, Flashcards |
 | Apoio | Biblioteca, Conquistas, Aulas |

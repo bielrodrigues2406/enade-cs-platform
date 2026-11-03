@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import { test, expect, type Page } from "@playwright/test";
 import { signUp } from "./session-helpers";
 
@@ -45,7 +46,7 @@ test("home shows the study board and leads to study and back", async ({
     .getByRole("region", { name: "Seu desempenho por área" })
     .screenshot({ path: "test-results/home-areas.png" });
   await expect(
-    page.getByRole("button", { name: "Início" }).first(),
+    page.getByRole("link", { name: "Início" }).first(),
   ).toHaveAttribute("aria-current", "page");
 
   await page.getByRole("button", { name: /^Começar por: / }).click();
@@ -56,10 +57,7 @@ test("home shows the study board and leads to study and back", async ({
   await expect(page.getByRole("heading", { level: 1 })).toContainText("ENADE");
   await expect(page).toHaveURL(/\/$/);
 
-  await page
-    .getByRole("button", { name: "Banco de questões" })
-    .first()
-    .click();
+  await navigateTo(page, "Banco de questões");
   await expect(
     page.getByRole("heading", { name: "Banco de questões" }),
   ).toBeVisible();

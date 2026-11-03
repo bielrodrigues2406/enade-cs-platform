@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash } from "node:crypto";
 import { Pool } from "pg";
@@ -92,14 +93,14 @@ test("an unsaved free-study essay is guarded and never flushed into the guest af
   const other=await context.newPage(); await other.goto("/");
   await page.clock.install();
   await page.goto("/questoes"); await rememberOwner(page);
-  await page.getByRole("button",{name:"Discursivas",exact:true}).first().click();
+  await navigateTo(page, "Discursivas");
   await page.getByRole("button",{name:/ENADE 2004 · Discursiva 3/}).click();
   const body=page.getByRole("textbox",{name:/Sua resposta para/});
   await page.route("**/api/discursive/*/response",route=>route.fulfill({status:503,json:{message:"TEST ONLY saving unavailable"}}));
   await body.fill("TEST ONLY private unsaved account essay");
-  await page.getByRole("button",{name:"Início",exact:true}).first().click();
+  await navigateTo(page, "Início");
   await expect(page.getByRole("alert")).toContainText("TEST ONLY saving unavailable");
-  await page.getByRole("button",{name:"Início",exact:true}).first().click();
+  await navigateTo(page, "Início");
   const warning=page.getByRole("dialog",{name:"Sair sem guardar o rascunho?"});
   await expect(warning).toBeVisible();
   await warning.getByRole("button",{name:"Continuar escrevendo"}).click();

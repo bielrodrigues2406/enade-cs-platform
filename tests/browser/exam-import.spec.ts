@@ -1,3 +1,4 @@
+import { navigateTo } from "./navigation-helpers";
 import "dotenv/config";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -45,7 +46,7 @@ test("an admin adjusts a proposed box, classifies and publishes the question", a
   );
 
   await page.goto("/");
-  await page.getByRole("button", { name: "Administração" }).click();
+  await navigateTo(page, "Administração");
   await page.getByRole("tab", { name: "Importar prova" }).click();
   await page.getByRole("listitem").filter({ hasText: "ENADE 2098" }).getByRole("button", { name: "Abrir" }).click();
   await expect(page.getByText("Tem figura: confira se a caixa pega a figura inteira.")).toBeVisible();
