@@ -4,8 +4,8 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
-- Base da auditoria DS-5: `main` em `0db9671` (PRs #31–#37 integrados). MAS-4 foi integrado no PR #37 após revisão e CI completo: 182 API, 82 Chromium e imagem de produção. Veja MASCOT §10.
-- Gabriel autorizou nesta conversa criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Essa autorização não inclui deploy nem force push. Para atualizar a branch, faça merge da `main` nela.
+- Base do ajuste SIM-UX1: `main` em `c6d6d5c`, com DS-6/7/8 integrados nos PRs #39–#41. A auditoria DS-5 usou `0db9671`; MAS-4 já está integrado no PR #37. Veja MASCOT §10.
+- Gabriel autorizou criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Também pediu o deploy no servidor IFSP PEP; faltam acesso SSH e domínio para concretizá-lo. Não fazer force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
 - Migrations reservadas: **028** para MAS-2 e **029** para SIM26-1. Próxima livre: **030**; conferir WORKBOARD antes de reservar.
 - Conteúdo integrado no PR #33: 246 objetivas com explicação e 39 discursivas, incluindo quatro de 2005/2008, conferidas por agente. Ainda faltam cinco padrões antigos de Formação Geral e os 33 PDFs recentes; não chamar essas edições de integralmente completas.
@@ -35,8 +35,8 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 5. O que falta (por prioridade)
 
-1. **Deploy em VPS própria e domínio** (Gabriel comprando). `deploy/vps/` foi feito para dividir o servidor do Mira; adaptar para Caddy próprio com HTTPS do domínio. Nomes sugeridos: cadernocc.com.br (preferido), bitabit.app, gabaritou.com.br. Só publicar com autorização.
-2. **Design aplicado (DS-6/7/8):** [implementação e validação](reviews/2026-11-03-design-implementation.md). PR #39 integrado; #40/#41 entram após CI do HEAD final. Menu A com **Questões/Treinar/Revisar/Apoio**, conta reunida, rotas estáveis, filtros compactos, curadoria paginada/gabarito explícito, tabelas e formulários corrigidos, Início/Biblioteca/Conquistas enxutos. As propostas antigas ficam como histórico. Preservar o nome Questões, escolhido por Gabriel. Capturas locais: 128/37 estados, mais dobras/menu. Antes de repetir a auditoria inteira, verificar se há achado novo.
+1. **Deploy no servidor IFSP PEP**, pedido por Gabriel: faltam acesso SSH e domínio. `deploy/vps/` foi feito para dividir o servidor do Mira; conferir a infraestrutura institucional antes de adaptar proxy/HTTPS. Nenhum deploy executado nesta entrega.
+2. **Design aplicado (DS-6/7/8):** [implementação e validação](reviews/2026-11-03-design-implementation.md). PRs #39–#41 integrados. Menu A com **Questões/Treinar/Revisar/Apoio**, conta reunida, rotas estáveis, filtros compactos, curadoria paginada/gabarito explícito, tabelas e formulários corrigidos, Início/Biblioteca/Conquistas enxutos. Preservar o nome Questões, escolhido por Gabriel. SIM-UX1 corrige a troca entre discursivas, acrescenta navegação no rodapé com salvamento confirmado e explica o início bloqueado por tentativa ativa. Conferir o diário antes de integrar. Capturas locais: 128/37 estados, mais dobras/menu. Antes de repetir a auditoria inteira, verificar se há achado novo.
 3. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
 4. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória, ainda não iniciada). A auditoria de design não a substitui.
 5. **Conteúdo:** 33 PDFs recentes, cinco padrões antigos de FG e fonte legível para 2005 Q60. Quatro discursivas 2005/2008 já entraram no PR #33; não listar novamente todas essas edições como pendentes.
