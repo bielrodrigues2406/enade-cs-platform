@@ -177,7 +177,7 @@ async function publish(page: Page) {
     .getByRole("button", { name: "Confirmar publicação", exact: true })
     .click();
   await expect(page.getByRole("status")).toContainText("Versão publicada.");
-  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeEnabled();
+  await expect(await navigationControl(page, "Banco de questões")).toBeEnabled();
   expect(await hasUnloadGuard(page)).toBe(false);
 }
 
@@ -234,7 +234,7 @@ for (const width of [390, 1440]) {
     questions.add(saved.questionId);
     await expect(bank).toBeEnabled();
     expect(await hasUnloadGuard(page)).toBe(false);
-    await bank.click();
+    await navigateTo(page, "Banco de questões");
     await expect(page.getByRole("heading", { name: "Banco de questões", exact: true })).toBeVisible();
     await page.reload();
     await expect(page.getByRole("heading", { name: "Banco de questões", exact: true })).toBeVisible();
@@ -349,7 +349,7 @@ test("authoring, independent rejection/publication, version replacement and hist
     await expect(reviewer.getByRole("status")).toContainText(
       "Versão devolvida para ajustes.",
     );
-    await expect(reviewer.getByRole("link", { name: "Banco de questões", exact: true })).toBeEnabled();
+    await expect(await navigationControl(reviewer, "Banco de questões")).toBeEnabled();
     expect(await hasUnloadGuard(reviewer)).toBe(false);
     await openCuration(page);
     await page
@@ -533,7 +533,7 @@ test("editing conflicts preserve local content and explicit reopen reconciles th
   await expect(page.getByLabel("Título", { exact: true })).toHaveValue(
     "Edição confirmada por outra aba",
   );
-  await expect(page.getByRole("link", { name: "Banco de questões", exact: true })).toBeEnabled();
+  await expect(await navigationControl(page, "Banco de questões")).toBeEnabled();
   expect(await hasUnloadGuard(page)).toBe(false);
 });
 
