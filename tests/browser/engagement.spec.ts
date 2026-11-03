@@ -18,6 +18,9 @@ test("answering fills today's goal, unlocks a medal and shows it in Conquistas",
   const medals = page.getByRole("region", { name: /Medalhas/ });
   await expect(medals).toContainText("1 de 14");
   await expect(medals.getByRole("listitem").first()).toContainText("Primeiro passo");
+  await expect(medals.getByRole("listitem")).toHaveCount(3);
+  await medals.getByRole("button", { name: "Ver todas as medalhas", exact: true }).click();
+  await expect(medals.getByRole("listitem")).toHaveCount(14);
   // Meta menor: a de hoje fica batida na hora.
   await page.getByRole("radiogroup", { name: "Meta de questões por dia" }).getByText("3", { exact: true }).click();
   await page.getByRole("radiogroup", { name: "Meta de questões por dia" }).getByText("3", { exact: true }).click();
@@ -57,6 +60,7 @@ test("the library opens a one-page sheet and announces what is coming", async ({
   await page.getByRole("button", { name: "Biblioteca" }).first().click();
   await expect(page.getByRole("heading", { name: "Biblioteca", level: 1 })).toBeVisible();
   await expect(page.getByText("Plano até a prova")).toBeVisible();
+  await expect(page.getByRole("list", { name: "Fichas por assunto", exact: true }).getByRole("listitem")).toHaveCount(12);
   await page.getByRole("button", { name: /Grafos e seus algoritmos/ }).click();
   await expect(page.getByRole("heading", { name: "Grafos e seus algoritmos", level: 1 })).toBeVisible();
   await expect(page.getByRole("region", { name: "Pegadinhas comuns" })).toBeVisible();

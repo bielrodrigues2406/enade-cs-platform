@@ -45,23 +45,18 @@
   } @else if (!sheets()) {
     <p role="status">Carregando as fichas…</p>
   } @else {
-    @for (group of byArea(); track group.area; let g = $index) {
-      <section class="library-area" [attr.aria-labelledby]="'area-' + g">
-        <h2 [id]="'area-' + g">{{ group.area }}</h2>
-        <ul class="sheet-grid">
-          @for (sheet of group.items; track sheet.slug) {
-            <li>
-              <button type="button" class="sheet-card" (click)="read(sheet.slug)">
-                <span class="sheet-card-kicker">Ficha</span>
-                <strong>{{ sheet.title }}</strong>
-                <span>{{ sheet.summary }}</span>
-                <span class="sheet-card-cta" aria-hidden="true">Ler →</span>
-              </button>
-            </li>
-          }
-        </ul>
-      </section>
-    }
+    <ul class="sheet-grid" aria-label="Fichas por assunto">
+      @for (sheet of sheets(); track sheet.slug) {
+        <li>
+          <button type="button" class="sheet-card" (click)="read(sheet.slug)">
+            <span class="sheet-card-kicker">{{ sheet.area }}</span>
+            <strong>{{ sheet.title }}</strong>
+            <span>{{ sheet.summary }}</span>
+            <span class="sheet-card-cta" aria-hidden="true">Ler →</span>
+          </button>
+        </li>
+      }
+    </ul>
   }
   <section class="library-soon" aria-labelledby="soon-title">
     <h2 id="soon-title">Em breve</h2>

@@ -65,7 +65,7 @@
 
   <section class="medals" aria-labelledby="medals-title">
     <h2 id="medals-title">Medalhas <span class="muted">{{ unlocked().length }} de {{ s.achievements.length }}</span></h2>
-    <ul class="medal-grid">
+    <ul class="medal-grid" id="medals-list">
       @for (a of unlocked(); track a.code) {
         <li class="medal" [style.--delay]="$index">
           <app-badge [icon]="a.icon" [tier]="a.tier" />
@@ -74,7 +74,7 @@
           <small>Desde {{ dateLabel(a.unlockedAt!) }}</small>
         </li>
       }
-      @for (a of locked(); track a.code) {
+      @for (a of visibleLocked(); track a.code) {
         <li class="medal is-locked">
           <app-badge [icon]="a.icon" [tier]="a.tier" [locked]="true" />
           <strong>{{ a.title }}</strong>
@@ -86,6 +86,9 @@
         </li>
       }
     </ul>
+    @if (locked().length > 2) {
+      <button type="button" class="text-button" [attr.aria-expanded]="showAllMedals()" aria-controls="medals-list" (click)="showAllMedals.set(!showAllMedals())">{{ showAllMedals() ? 'Mostrar só as próximas medalhas' : 'Ver todas as medalhas' }}</button>
+    }
   </section>
 } @else {
   <p role="status">Carregando suas conquistas…</p>

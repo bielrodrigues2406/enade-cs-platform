@@ -1,5 +1,5 @@
 import { MascotComponent } from "./mascot.component";
-import { Component, ElementRef, EventEmitter, Output, afterNextRender, computed, inject, Injector, signal } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Output, afterNextRender, inject, Injector, signal } from "@angular/core";
 
 // Biblioteca (LIB-1): fichas de uma página por assunto, lidas do repositório.
 // Materiais enviados por professores e o plano até a prova ficam anunciados
@@ -22,13 +22,6 @@ export class LibraryComponent {
   sheets = signal<SheetSummary[] | null>(null);
   open = signal<Sheet | null>(null);
   error = signal("");
-  /** Fichas agrupadas por área, na ordem em que aparecem. */
-  readonly byArea = computed(() => {
-    const groups = new Map<string, SheetSummary[]>();
-    for (const sheet of this.sheets() ?? []) groups.set(sheet.area, [...(groups.get(sheet.area) ?? []), sheet]);
-    return [...groups.entries()].map(([area, items]) => ({ area, items }));
-  });
-
   async ngOnInit() {
     try {
       const response = await fetch("/api/sheets");
