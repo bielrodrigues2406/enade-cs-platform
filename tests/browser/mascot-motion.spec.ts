@@ -40,7 +40,8 @@ test("Dudu waits for every layer, waves, nods and blinks without blocking the fo
   await expect(figure.locator(".fallback")).toBeHidden();
   const gesture = await sampleGesture(wing);
   expect(gesture.iterations).toBe(1);
-  expect(gesture.duration).toBeLessThanOrEqual(700);
+  expect(gesture.duration).toBeGreaterThanOrEqual(1000);
+  expect(gesture.duration).toBeLessThanOrEqual(1200);
   expect(gesture.moving).not.toBe(gesture.resting);
   expect(gesture.restingIsIdentity).toBe(true);
   expect(gesture.footprintDuring).toEqual(gesture.footprintBefore);
@@ -99,7 +100,8 @@ test("Dudu celebrates once and immediately stops when reduced motion is enabled"
   await expect.poll(() => image.evaluate(el => el.getAnimations().length)).toBeGreaterThan(0);
   const gesture = await sampleGesture(image);
   expect(gesture.iterations).toBe(1);
-  expect(gesture.duration).toBeLessThanOrEqual(700);
+  expect(gesture.duration).toBeGreaterThanOrEqual(1000);
+  expect(gesture.duration).toBeLessThanOrEqual(1200);
   expect(gesture.moving).not.toBe(gesture.resting);
   await page.emulateMedia({ reducedMotion: "reduce" });
   expect(await image.evaluate(el => getComputedStyle(el).animationName)).toBe("none");

@@ -1,5 +1,6 @@
 import { FormsModule } from "@angular/forms";
-import { MascotComponent } from "./mascot.component";
+import { MascotComponent, type MascotPose } from "./mascot.component";
+import { MascotService } from "./mascot.service";
 import { Component, EventEmitter, Input, Output, inject, signal } from "@angular/core";
 import type { ReviewItem } from "./review.component";
 import { AREA_SIMULATION_LIMIT, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
@@ -79,6 +80,8 @@ const monday = (date: Date) => {
 })
 export class HomeComponent {
   private choice = inject(ChoiceService);
+  readonly mascot = inject(MascotService);
+  readonly introPose = signal<MascotPose | null>(null);
   @Input() sessionMode: "guest" | "account" = "guest";
   @Output() browse = new EventEmitter<void>();
   @Output() review = new EventEmitter<void>();
@@ -321,9 +324,12 @@ export class HomeComponent {
       get<Notebook>("review?topic=&offset=0"),
       get<Progress>("me/progress"),
     ]);
+    if (this.abort.signal.aborted) return;
     if (notebook) this.notebook.set(notebook);
     if (progress) this.progress.set(progress);
     if (catalog) this.catalog.set(catalog);
+    // Escolhe a pose com os dados resolvidos, antes do primeiro gesto.
+    this.introPose.set(this.active() ? "relogio" : this.readyErrors() ? "lupa" : "contente");
     if (catalog && notebook && progress) lastHome = { catalog, notebook, progress };
   }
 }

@@ -201,6 +201,7 @@
 
 /* MAS-2 */
 .mascot-intro { display: flex; align-items: center; gap: var(--space-4); max-width: 64ch; margin: var(--space-5) 0; }
+.home-mascot-slot { display: block; width: 64px; aspect-ratio: 3 / 4; flex: none; }
 
 /* O início vazio orienta sem desenhar barras de áreas ainda não estudadas. */
 .area-practice { display: flex; align-items: end; gap: var(--space-3); margin-bottom: var(--space-5); }
