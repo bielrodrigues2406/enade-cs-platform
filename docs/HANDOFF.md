@@ -45,6 +45,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 3. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
 4. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória antes da passagem institucional definitiva).
 5. **Conteúdo:** 33 PDFs recentes, cinco padrões antigos de FG e fonte legível para 2005 Q60.
+   Plano de expansão proposto em [CONTENT-EXPANSION-PLAN.md](CONTENT-EXPANSION-PLAN.md): inventário local de cobertura, matérias prioritárias, pesquisa ENADE SI/ADS e piloto de 20–30 candidatas. Na fase inicial, origem ENADE; PND/POSCOMP separados. Pesquisa, taxonomia e publicação são tarefas futuras, não questões novas já importadas. Gate antes de outro curso: curso/cobertura visíveis e elegibilidade de edições e do formato 2026 preservada.
 6. **Operação/acessibilidade:** revisão institucional do texto de privacidade (LGL-1) e auditoria com leitor de tela. Pacote inicial em ~435,8 kB; preservar carregamento lazy.
 
 **Depois do essencial, sem bloquear o próximo lote:** Plano e Materiais, hoje "Em breve" na Biblioteca. Validar necessidade antes de adicionar migration, upload ou fluxos novos. Poses do mascote com acessórios/cenas exigem artes próprias; MAS-4 básico já está integrado e não exige nova biblioteca de animação.
