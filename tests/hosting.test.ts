@@ -1,6 +1,6 @@
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createApp, db } from "../apps/api/src/main.js";
@@ -8,8 +8,11 @@ import { createApp, db } from "../apps/api/src/main.js";
 // Cada arquivo de teste roda em processo próprio; as variáveis abaixo não
 // afetam as demais suítes.
 const web = mkdtempSync(join(tmpdir(), "enade-web-"));
-writeFileSync(join(web, "index.html"), "<!doctype html><title>shell</title>");
+copyFileSync("tests/fixtures/test-only-shell.html", join(web, "index.html"));
 writeFileSync(join(web, "main-ABCD1234.js"), "export {};");
+writeFileSync(join(web, "chunk-Dtcii2KJ.js"), "export {};");
+writeFileSync(join(web, "styles-aB_1-z29.css"), "body {color: black}");
+writeFileSync(join(web, "manifest.webmanifest"), "{}");
 let app: Awaited<ReturnType<typeof createApp>>, base: string;
 
 before(async () => {
@@ -26,27 +29,44 @@ after(async () => {
 });
 
 test("web routes fall back to the shell with a strict policy and no cache", async () => {
-  for (const path of ["/", "/questoes/qualquer", "/treino?attempt=00000000-0000-4000-8000-000000000001&item=2"]) {
+  const nonces = new Set<string>();
+  for (const path of ["/", "/index.html", "/questoes/qualquer", "/treino?attempt=00000000-0000-4000-8000-000000000001&item=2"]) {
     const res = await fetch(base + path);
     assert.equal(res.status, 200);
-    assert.match(await res.text(), /<title>shell<\/title>/);
+    const html = await res.text();
+    assert.match(html, /<title>shell<\/title>/);
     const csp = res.headers.get("content-security-policy") ?? "";
     assert.match(csp, /script-src 'self'(;|$)/);
     assert.match(csp, /frame-ancestors 'none'/);
     assert.doesNotMatch(csp, /unsafe-inline|unsafe-eval/);
-    assert.equal(res.headers.get("cache-control"), "no-cache");
+    const nonce = /style-src 'self' 'nonce-([A-Za-z0-9+/=]+)'/.exec(csp)?.[1];
+    assert.ok(nonce);
+    assert.equal(Buffer.from(nonce, "base64").length, 16);
+    assert.ok(html.includes(`ngCspNonce="${nonce}"`));
+    assert.ok(!html.includes("__CSP_NONCE__"));
+    assert.ok(!nonces.has(nonce));
+    nonces.add(nonce);
+    assert.equal(res.headers.get("cache-control"), "no-store");
     assert.equal(res.headers.get("x-frame-options"), "DENY");
     assert.equal(res.headers.get("x-powered-by"), null);
   }
+  const head = await fetch(base + "/index.html", { method: "HEAD" });
+  assert.equal(head.status, 200);
+  assert.match(head.headers.get("content-security-policy") ?? "", /style-src 'self' 'nonce-/);
+  assert.equal(head.headers.get("cache-control"), "no-store");
+  assert.equal(await head.text(), "");
 });
 
 test("hashed assets are immutable and missing files are not masked by the shell", async () => {
-  const asset = await fetch(base + "/main-ABCD1234.js");
-  assert.equal(asset.status, 200);
-  assert.equal(
-    asset.headers.get("cache-control"),
-    "public, max-age=31536000, immutable",
-  );
+  for (const path of ["/main-ABCD1234.js", "/chunk-Dtcii2KJ.js", "/styles-aB_1-z29.css"]) {
+    const asset = await fetch(base + path);
+    assert.equal(asset.status, 200);
+    assert.equal(asset.headers.get("cache-control"), "public, max-age=31536000, immutable");
+    await asset.arrayBuffer();
+  }
+  const manifest = await fetch(base + "/manifest.webmanifest");
+  assert.equal(manifest.headers.get("cache-control"), "no-cache");
+  await manifest.arrayBuffer();
   const missing = await fetch(base + "/missing-ABCD1234.js");
   assert.equal(missing.status, 404);
   await missing.arrayBuffer();
