@@ -38,6 +38,7 @@ Para criar o primeiro administrador (ou recuperar a senha de um administrador), 
 npm run build
 npm test                 # API com PostgreSQL
 npm run test:e2e         # navegador (Chromium)
+npm run test:e2e:production # build otimizado servido pela API, com CSP real (após npm run build)
 ```
 
 O CI do GitHub roda tudo isso e constrói a imagem de produção em cada PR.

@@ -19,6 +19,14 @@ server {
     # Necessário para importação administrativa de provas (até 3 PDFs de 10 MB em POST /api/imports).
     client_max_body_size 35m;
 
+    # Reduz o download dos bundles; WebP e WOFF2 já são comprimidos.
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_min_length 1024;
+    gzip_comp_level 5;
+    gzip_types text/css text/javascript application/javascript application/json image/svg+xml application/manifest+json;
+
     location / {
         proxy_pass http://127.0.0.1:3000;
         proxy_http_version 1.1;

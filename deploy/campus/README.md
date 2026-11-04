@@ -4,6 +4,27 @@ Este diretório concentra a configuração Docker e os scripts operacionais para
 
 Documentação completa de arquitetura e segurança de produção: [`docs/DEPLOY.md`](../../docs/DEPLOY.md) (§5.1 e §5.2).
 
+## Atualização da EC2 com Caddy
+
+Para a instalação feita pelo checkout em `~/enade-cs-platform`, após o merge da correção:
+
+```bash
+cd ~/enade-cs-platform
+git pull --ff-only
+cd deploy/campus
+docker compose up -d --build --no-deps app
+docker compose logs --tail=50 app
+```
+
+No Caddy instalado no host, acrescente `encode zstd gzip` dentro do bloco de `cadernocc.com.br`. O arquivo `Caddyfile.ec2.example` mostra o bloco completo; preserve eventuais outros domínios da configuração atual. Valide antes de recarregar:
+
+```bash
+sudo caddy validate --config /etc/caddy/Caddyfile
+sudo systemctl reload caddy
+```
+
+Confira `/api/health`, abra o site e recarregue a página inteira para receber o novo HTML/CSP. O cabeçalho `style-src` deve conter um nonce; menu, cartões e Dudu devem manter seus estilos. Não recrie o `.env` nem execute os passos de primeira instalação para atualizar esta versão.
+
 ---
 
 ## Arquivos deste diretório
@@ -13,6 +34,7 @@ Documentação completa de arquitetura e segurança de produção: [`docs/DEPLOY
 | `docker-compose.yml` | Sobe `db` (PostgreSQL 17 em rede interna isolada, sem porta no host) e `app` (Node 24 em `127.0.0.1:3000`, `cap_drop: ALL`, `no-new-privileges`, `pids_limit: 128`, `/tmp` em `tmpfs` `noexec`). |
 | `.env.example` | Modelo de configuração (`POSTGRES_PASSWORD`, `APP_ORIGIN`, `APP_BIND`, `APP_PORT`, `TRUST_PROXY`, `BACKUP_DIR`). Copie para `.env` com `chmod 600 .env`. |
 | `nginx.conf.example` | Exemplo pronto de proxy reverso HTTPS no Nginx institucional (`client_max_body_size 35m`, `proxy_read_timeout 120s`, `X-Forwarded-Proto`). |
+| `Caddyfile.ec2.example` | Publicação de `cadernocc.com.br` com Caddy no host, HTTPS automático e compressão zstd/gzip, encaminhando ao mesmo app em loopback. |
 | `atualizar.sh` | Atualiza a aplicação preservando os volumes (`pgdata` e `data`), aplica migrations novas automaticamente e confere `/api/health`. |
 | `backup.sh` | Gera backup atômico em `backups/<timestamp>/` contendo `database.sql.gz` + `data.tar.gz` + `SHA256SUMS` (`umask 077`, retenção padrão de 30 dias). |
 | `desligar.sh` | Executa `backup.sh`, confere `sha256sum -c SHA256SUMS` e só então para os contêineres (`docker compose down`, **sem** `-v`), preservando os volumes no disco. |

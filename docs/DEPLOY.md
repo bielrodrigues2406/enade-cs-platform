@@ -36,6 +36,8 @@ Regra adotada em qualquer infraestrutura: **assuma que variáveis de ambiente po
 5. **Backups atômicos fora do servidor.** Todo backup precisa conter **banco (`database.sql.gz`) + `/data` (`data.tar.gz`) + `SHA256SUMS`**. Guarde cópia externa cifrada em armazenamento institucional separado da VM.
 6. **Cabeçalhos e cookies.** A aplicação envia CSP estrita, HSTS em produção, `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy` e `Permissions-Policy`; o cookie de sessão usa `HttpOnly`, `Secure` e `SameSite=Strict`, restrito a `/api`.
 
+O HTML do build deve ser servido pela API, inclusive `/index.html`: cada resposta contém um `ngCspNonce` e o mesmo nonce no `style-src` da CSP para autorizar os estilos dos componentes Angular. O HTML usa `no-store`; arquivos com hash usam cache imutável. Não servir o HTML bruto do volume por outro servidor nem acrescentar no proxy uma segunda CSP que bloqueie os estilos autorizados. `npm run test:e2e:production` exercita esse caminho com o build otimizado e verifica que estilos sem nonce e scripts inline permanecem bloqueados.
+
 ## 4. Proteção contra força bruta e excesso de requisições
 
 O que a aplicação aplica sozinha (uma instância, contadores em memória):

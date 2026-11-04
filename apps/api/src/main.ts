@@ -17,6 +17,7 @@ import type { NestExpressApplication } from "@nestjs/platform-express";
 import { db, type Answer, type Question } from "./database.js";
 export { db } from "./database.js";
 import { fail } from "./api-error.js";
+import { webContentPolicy, webShell } from "./web-shell.js";
 import { requireIdentity } from "./session.js";
 import { AuthController } from "./auth.js";
 import { ActivityController } from "./activity.js";
@@ -264,20 +265,6 @@ class StudyController {
   ],
 })
 class AppModule {}
-// Política para a aplicação web servida em produção: nenhum script, estilo
-// ou fonte de terceiros e nenhum conteúdo inline (o build não gera inline).
-const WEB_CSP = [
-  "default-src 'self'",
-  "script-src 'self'",
-  "style-src 'self'",
-  "font-src 'self'",
-  "img-src 'self' data:",
-  "connect-src 'self'",
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "frame-ancestors 'none'",
-].join("; ");
 const API_CSP = "default-src 'none'; frame-ancestors 'none'";
 
 // Erro de configuração cuja mensagem é segura para exibir ao iniciar.
@@ -327,7 +314,7 @@ export async function createApp() {
       "Permissions-Policy",
       "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
     );
-    res.setHeader("Content-Security-Policy", api ? API_CSP : WEB_CSP);
+    res.setHeader("Content-Security-Policy", api ? API_CSP : webContentPolicy());
     if (production)
       res.setHeader(
         "Strict-Transport-Security",
@@ -368,28 +355,17 @@ export async function createApp() {
   });
   app.useBodyParser("json", { limit: "16kb" });
   if (web) {
+    // Antes dos arquivos estáticos, inclusive para /index.html direto.
+    app.use(webShell(web));
     app.useStaticAssets(web, {
       index: false,
       setHeaders: (res: any, path: string) =>
         res.setHeader(
           "Cache-Control",
-          /-[A-Z0-9]{8}\.(?:js|css|woff2)$/.test(path)
+          /-[A-Za-z0-9_-]{8}\.(?:js|css|woff2)$/.test(path)
             ? "public, max-age=31536000, immutable"
             : "no-cache",
         ),
-    });
-    // Rotas da aplicação web caem no index.html; arquivos inexistentes e a API
-    // seguem para o 404 normal.
-    app.use((req: any, res: any, next: any) => {
-      if (
-        !["GET", "HEAD"].includes(req.method) ||
-        req.path === "/api" ||
-        req.path.startsWith("/api/") ||
-        /\.[a-z0-9]+$/i.test(req.path)
-      )
-        return next();
-      res.setHeader("Cache-Control", "no-cache");
-      res.sendFile(join(web, "index.html"));
     });
   }
   await app.init();
