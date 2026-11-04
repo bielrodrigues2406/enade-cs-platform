@@ -4,6 +4,27 @@ Este diretório concentra a configuração Docker e os scripts operacionais para
 
 Documentação completa de arquitetura e segurança de produção: [`docs/DEPLOY.md`](../../docs/DEPLOY.md) (§5.1 e §5.2).
 
+## Atualização da EC2 com Caddy
+
+Para a instalação feita pelo checkout em `~/enade-cs-platform`, após o merge da correção:
+
+```bash
+cd ~/enade-cs-platform
+git pull --ff-only
+cd deploy/campus
+docker compose up -d --build --no-deps app
+docker compose logs --tail=50 app
+```
+
+No Caddy instalado no host, acrescente `encode zstd gzip` dentro do bloco de `cadernocc.com.br`. O arquivo `Caddyfile.ec2.example` mostra o bloco completo; preserve eventuais outros domínios da configuração atual. Valide antes de recarregar:
+
+```bash
+sudo caddy validate --config /etc/caddy/Caddyfile
+sudo systemctl reload caddy
+```
+
+Confira `/api/health`, abra o site e recarregue a página inteira para receber o novo HTML/CSP. O cabeçalho `style-src` deve conter um nonce; menu, cartões e Dudu devem manter seus estilos. Não recrie o `.env` nem execute os passos de primeira instalação para atualizar esta versão.
+
 ---
 
 ## Arquivos deste diretório
