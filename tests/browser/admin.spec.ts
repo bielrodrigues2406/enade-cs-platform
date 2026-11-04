@@ -263,8 +263,15 @@ test("an admin edits student profile and email, resets password, and revokes act
   await updatedRow.getByRole("button", { name: `Gerenciar conta de ${studentUpdatedEmail}` }).click();
   await expect(dialog).toBeVisible();
   const resetSection = dialog.getByRole("region", { name: "Redefinir senha" });
-  const tempPassword = await resetSection.getByLabel("Nova senha provisória").inputValue();
-  expect(tempPassword).toMatch(/^[a-z2-9]{4}(-[a-z2-9]{4}){3}$/);
+  // A sugestão é gerada ao abrir; o ngModel a escreve no campo de forma assíncrona
+  // e o diálogo reaproveita o campo da abertura anterior. Espera essa escrita
+  // assentar e então digita uma senha conhecida, sem depender da leitura.
+  const tempField = resetSection.getByLabel("Nova senha provisória");
+  await expect(tempField).toHaveValue(/^[a-z2-9]{4}(-[a-z2-9]{4}){3}$/);
+  await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => setTimeout(done))));
+  const tempPassword = "Provisoria teste 2026";
+  await tempField.fill(tempPassword);
+  await expect(tempField).toHaveValue(tempPassword);
   await resetSection.getByLabel("Sua senha de administrador").fill(password);
   await resetSection.getByLabel(/Motivo/).fill("Perdeu a senha");
   await resetSection.getByRole("button", { name: "Redefinir senha" }).click();
