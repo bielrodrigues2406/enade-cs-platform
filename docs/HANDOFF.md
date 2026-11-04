@@ -4,6 +4,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
+- Gabriel publicou `https://cadernocc.com.br` em Docker Compose numa EC2 dos EUA (04/11). PROD-CSS1 corrige estilos Angular bloqueados pela CSP e cache de chunks; ver [diagnóstico de produção](reviews/2026-11-04-production-css.md). O servidor não foi acessado por SSH nesta revisão; aplicar a imagem corrigida e conferir a rota pública. Não desativar a CSP como contorno.
 - Base do ajuste SIM-UX1: `main` em `c6d6d5c`, com DS-6/7/8 integrados nos PRs #39–#41. A auditoria DS-5 usou `0db9671`; MAS-4 já está integrado no PR #37. Veja MASCOT §10.
 - Gabriel autorizou criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Também pediu o deploy no servidor IFSP PEP; faltam acesso SSH e domínio para concretizá-lo. Não fazer force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
@@ -39,7 +40,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 5. O que falta (por prioridade)
 
-1. **Execução do deploy no servidor IFSP PEP** pela equipe do câmpus seguindo [`deploy/campus/README.md`](../deploy/campus/README.md) e [`docs/DEPLOY.md`](DEPLOY.md) §5.1–§5.2 (`docker compose up -d --build`, proxy reverso HTTPS, `admin-role.mjs grant`, `backup.sh` no cron e `desligar.sh` ao fim de novembro).
+1. **Estabilizar a publicação AWS em cadernocc.com.br:** aplicar correção CSS/CSP com nonce, conferir compressão/cache, backups e restauração. A publicação já foi feita por Gabriel. O mesmo Compose de [`deploy/campus/`](../deploy/campus/README.md) serve como referência; eventual implantação IFSP PEP depende da infraestrutura institucional.
 2. **Design aplicado (DS-6/7/8):** [implementação e validação](reviews/2026-11-03-design-implementation.md). PRs #39–#42 integrados. Preservar o nome Questões, escolhido por Gabriel.
 3. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
 4. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória antes da passagem institucional definitiva).

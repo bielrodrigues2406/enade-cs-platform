@@ -13,6 +13,7 @@ Documentação completa de arquitetura e segurança de produção: [`docs/DEPLOY
 | `docker-compose.yml` | Sobe `db` (PostgreSQL 17 em rede interna isolada, sem porta no host) e `app` (Node 24 em `127.0.0.1:3000`, `cap_drop: ALL`, `no-new-privileges`, `pids_limit: 128`, `/tmp` em `tmpfs` `noexec`). |
 | `.env.example` | Modelo de configuração (`POSTGRES_PASSWORD`, `APP_ORIGIN`, `APP_BIND`, `APP_PORT`, `TRUST_PROXY`, `BACKUP_DIR`). Copie para `.env` com `chmod 600 .env`. |
 | `nginx.conf.example` | Exemplo pronto de proxy reverso HTTPS no Nginx institucional (`client_max_body_size 35m`, `proxy_read_timeout 120s`, `X-Forwarded-Proto`). |
+| `Caddyfile.ec2.example` | Publicação de `cadernocc.com.br` com Caddy no host, HTTPS automático e compressão zstd/gzip, encaminhando ao mesmo app em loopback. |
 | `atualizar.sh` | Atualiza a aplicação preservando os volumes (`pgdata` e `data`), aplica migrations novas automaticamente e confere `/api/health`. |
 | `backup.sh` | Gera backup atômico em `backups/<timestamp>/` contendo `database.sql.gz` + `data.tar.gz` + `SHA256SUMS` (`umask 077`, retenção padrão de 30 dias). |
 | `desligar.sh` | Executa `backup.sh`, confere `sha256sum -c SHA256SUMS` e só então para os contêineres (`docker compose down`, **sem** `-v`), preservando os volumes no disco. |

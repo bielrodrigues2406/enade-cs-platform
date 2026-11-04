@@ -1,0 +1,13 @@
+# CadernoCC na EC2, com Caddy no host e app em loopback.
+# Conferir com: sudo caddy validate --config /etc/caddy/Caddyfile
+www.cadernocc.com.br {
+    redir https://cadernocc.com.br{uri} permanent
+}
+
+cadernocc.com.br {
+    encode zstd gzip
+    request_body {
+        max_size 55MB
+    }
+    reverse_proxy 127.0.0.1:3000
+}
