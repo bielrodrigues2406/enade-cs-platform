@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-04",
+  "scope": "Read-only local enade_content_ci snapshot; not a live production inventory; published OFFICIAL current versions; before deduplication and exam eligibility filters",
+  "objectiveTotal": 246,
+  "discursive": 39,
+  "areas": [
+    {
+      "area": "Formação Geral",
+      "published": 47,
+      "distinctSubjectLabels": 47
+    },
+    {
+      "area": "Sociedade e ética",
+      "published": 38,
+      "distinctSubjectLabels": 38
+    },
+    {
+      "area": "Algoritmos",
+      "published": 24,
+      "distinctSubjectLabels": 24
+    },
+    {
+      "area": "Matemática",
+      "published": 19,
+      "distinctSubjectLabels": 19
+    },
+    {
+      "area": "Arquitetura de computadores",
+      "published": 16,
+      "distinctSubjectLabels": 16
+    },
+    {
+      "area": "Engenharia de software",
+      "published": 13,
+      "distinctSubjectLabels": 13
+    },
+    {
+      "area": "Sistemas operacionais",
+      "published": 13,
+      "distinctSubjectLabels": 13
+    },
+    {
+      "area": "Redes",
+      "published": 11,
+      "distinctSubjectLabels": 11
+    },
+    {
+      "area": "Teoria da computação",
+      "published": 11,
+      "distinctSubjectLabels": 11
+    },
+    {
+      "area": "Inteligência artificial",
+      "published": 10,
+      "distinctSubjectLabels": 10
+    },
+    {
+      "area": "Programação",
+      "published": 10,
+      "distinctSubjectLabels": 10
+    },
+    {
+      "area": "Banco de dados",
+      "published": 8,
+      "distinctSubjectLabels": 8
+    },
+    {
+      "area": "Compiladores",
+      "published": 7,
+      "distinctSubjectLabels": 7
+    },
+    {
+      "area": "Computação gráfica",
+      "published": 7,
+      "distinctSubjectLabels": 7
+    },
+    {
+      "area": "Interação humano-computador",
+      "published": 5,
+      "distinctSubjectLabels": 5
+    },
+    {
+      "area": "Segurança",
+      "published": 3,
+      "distinctSubjectLabels": 3
+    },
+    {
+      "area": "Sistemas distribuídos",
+      "published": 3,
+      "distinctSubjectLabels": 3
+    },
+    {
+      "area": "Sistemas de informação",
+      "published": 1,
+      "distinctSubjectLabels": 1
+    }
+  ],
+  "teachingInSociety": 34
+}
