@@ -88,7 +88,8 @@
           } @else if (studyView() === "biblioteca") {
             @defer (on immediate) {
               <app-library (practiceArea)="openPractice('treino')" (flashcards)="openStudy('flashcards')"
-                (question)="openQuestionFromStudy($event)" (practice)="startPractice($event)" />
+                (question)="openQuestionFromStudy($event)" (practice)="startPractice($event)"
+                (generated)="browseGenerated($event)" />
             } @placeholder {
               <p role="status">Carregando a biblioteca…</p>
             }
@@ -175,7 +176,11 @@
             <section class="page-intro catalog-intro">
               <div>
                 <h1>Banco de questões</h1>
-                <p>Escolha uma questão ou filtre por área.</p>
+                @if (origin === "generated") {
+                  <p>Questões geradas por IA para treinar cada área, separadas das provas oficiais. Cada uma explica a resposta e por que as outras estão erradas.</p>
+                } @else {
+                  <p>Escolha uma questão ou filtre por área.</p>
+                }
               </div>
               @if (catalogTotal()) {
                 <p class="catalog-progress">
@@ -199,6 +204,13 @@
                   maxlength="120"
                   placeholder="Título ou trecho do enunciado"
                 />
+              </div>
+              <div>
+                <label for="origin">Origem</label>
+                <select id="origin" name="origin" [(ngModel)]="origin">
+                  <option value="">Provas oficiais e autorais</option>
+                  <option value="generated">Geradas por IA</option>
+                </select>
               </div>
               <div>
                 <label for="area">Área</label>

@@ -116,5 +116,11 @@
         }
       </details>
     } @else {
-      <p class="prompt">{{ question.prompt }}</p>
+      @for (block of promptBlocks(); track $index) {
+        @if (block.code) {
+          <pre class="prompt-code"><code>{{ block.text }}</code></pre>
+        } @else {
+          <p class="prompt">{{ block.text }}</p>
+        }
+      }
     }

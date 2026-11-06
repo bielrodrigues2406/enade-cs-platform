@@ -740,6 +740,19 @@ footer {
   font-size: var(--text-3xl);
   line-height: var(--leading-tight);
 }
+.prompt-code {
+  max-width: var(--measure-reading);
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4);
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+.prompt + .prompt { margin-top: calc(-1 * var(--space-4)); }
 .prompt {
   font-family: var(--font-reading);
   white-space: pre-wrap;

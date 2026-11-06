@@ -17,10 +17,12 @@ export type CoreConcept = {
   id: string; name: string; definition: string; example: string;
   level: 0 | 1 | 2 | null;
   questions: { id: string; year: number; subject: string }[];
+  /** Questões geradas por IA ligadas ao conceito (versão publicada). */
+  generated: { id: string; title: string }[];
 };
 export type CoreArea = {
   slug: string; area: string; title: string; summary: string; deck: string | null; sheet: string | null;
-  history: AreaHistory; confidence: Confidence;
+  history: AreaHistory; confidence: Confidence; generatedTotal: number;
   concepts: CoreConcept[]; facts: string[];
   pairs: { a: string; b: string; difference: string }[];
   cues: { cue: string; concept: string }[];

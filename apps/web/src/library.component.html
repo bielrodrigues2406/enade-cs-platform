@@ -3,7 +3,7 @@
 }
 @if (coreSlug(); as slug) {
   <app-core-area [slug]="slug" (back)="closeCore()" (question)="question.emit($event)" (practice)="practice.emit($event)"
-    (flashcards)="flashcards.emit()" (sheet)="sheetFromCore($event)" />
+    (generated)="generated.emit($event)" (flashcards)="flashcards.emit()" (sheet)="sheetFromCore($event)" />
 } @else if (open(); as sheet) {
   <article class="sheet" aria-labelledby="sheet-title">
     <div class="sheet-bar">

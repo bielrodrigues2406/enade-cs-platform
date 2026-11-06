@@ -21,6 +21,7 @@ export class CoreAreaComponent {
   @Output() practice = new EventEmitter<PracticeRequest>();
   @Output() flashcards = new EventEmitter<void>();
   @Output() sheet = new EventEmitter<string>();
+  @Output() generated = new EventEmitter<string>();
 
   private host: ElementRef<HTMLElement> = inject(ElementRef);
   private injector = inject(Injector);
