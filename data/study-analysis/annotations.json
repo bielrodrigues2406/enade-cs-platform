@@ -1,0 +1,9 @@
+[
+  {
+    "document": "enade-2005-comum-exam",
+    "examSha256": "ba95b66e95b6a4071a970f794e0b0c71aeebf18740b95b6ca02dfcb72d0be76c",
+    "key": "Q70",
+    "code": "ANULADA_OFICIAL",
+    "evidence": "docs/OFFICIAL-SOURCES.md, tabela Conteúdo revisado: Q70 discursiva anulada; docs/reviews/2026-11-02-content-completion.md. Correção do estado bruto da extração apenas para inventário, sem nova conferência do PDF."
+  }
+]
