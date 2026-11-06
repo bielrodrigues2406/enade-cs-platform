@@ -39,6 +39,10 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 **Dudu articulado:** as quatro poses sem acessórios usam seis camadas transparentes. Acena com uma asa, comemora com as duas, inclina a cabeça e pisca; os gestos terminam em 1,1 s. Leitura e ritmo continuam estáticos, com movimento reduzido e preferência de ocultar respeitados. Fontes/proveniência em `design/mascot/articulated/`; implementação lazy, sem biblioteca nova e com pose estática de reserva. Poses com acessórios mantêm a arte anterior. Não há laços de piscada/respiração nem olhos seguindo cursor. Enquadramento e pivôs ficam no CSS.
 
+## Questões geradas por IA (GEN-1, 06/11)
+
+120 questões por área em `data/generated-questions/`, separadas das oficiais (filtro "Origem" no banco, botão no núcleo). Formato, regras de qualidade, conferência e próximos lotes em **`docs/GENERATED-QUESTIONS.md`**.
+
 ## Núcleo por área (NUC-1, 06/11)
 
 A bússola da preparação está em **`docs/CORE-CONCEPTS.md`**: 16 áreas e a Formação Geral com conceitos, fatos que cortam alternativas, pares, pistas e pegadinhas, ligados às questões oficiais, com autoavaliação e confiança por área na Biblioteca. Próximos incrementos para a reta final na seção 7 desse documento.
