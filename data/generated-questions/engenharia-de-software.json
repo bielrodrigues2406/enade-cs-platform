@@ -1,0 +1,141 @@
+{
+  "area": "Engenharia de software",
+  "generator": "claude-geracao",
+  "checker": "claude-resolucao",
+  "questions": [
+    {
+      "id": "gen-es-scrum-pedido",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["es-agil"],
+      "title": "Pedido novo no meio da sprint",
+      "subject": "Scrum: papéis e backlog",
+      "prompt": "Uma equipe Scrum está no quinto dia de uma sprint de duas semanas. A diretora comercial procura diretamente uma desenvolvedora e pede que ela inclua, ainda nesta sprint, um relatório novo para um cliente importante.\n\nDe acordo com o Guia do Scrum, qual é o encaminhamento adequado?",
+      "options": [
+        "A desenvolvedora inclui o relatório, porque a equipe é auto-organizada e decide sozinha o que entra na sprint.",
+        "O Scrum Master avalia o pedido e decide se o relatório entra na sprint atual, por ser quem gerencia a equipe.",
+        "O pedido vai para o Product Owner, que decide se e quando o item entra no backlog do produto; mudanças no escopo da sprint em andamento são negociadas com os desenvolvedores sem comprometer a meta da sprint.",
+        "A sprint é cancelada imediatamente para incorporar o relatório, já que o cliente é prioritário.",
+        "O relatório entra na sprint e a revisão da sprint é adiada até que ele fique pronto."
+      ],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nNo Scrum, o Product Owner é a única pessoa responsável pelo backlog do produto e por sua ordem de prioridade. Pedidos de qualquer parte interessada passam por ele. Durante a sprint, a meta não deve ser posta em risco. O escopo do sprint backlog pode ser renegociado entre o PO e os desenvolvedores à medida que se aprende mais, mas sem trocar a meta por um pedido externo. Se o relatório for realmente mais importante, o PO o prioriza para a próxima sprint, ou, em caso extremo, pode cancelar a sprint se a meta perder o sentido.\n\nAs outras alternativas:\nA) A auto-organização trata de como fazer o trabalho, não de quem prioriza o produto. Aceitar pedidos diretos esvazia o papel do PO.\nB) O Scrum Master cuida do processo e remove impedimentos. Não é gerente da equipe nem decide escopo.\nD) O cancelamento é exceção, decidida pelo PO quando a meta da sprint fica obsoleta. Um pedido novo não basta.\nE) A sprint tem duração fixa e seus eventos não são adiados para acomodar trabalho extra.",
+      "check": "Nova resolução sem o gabarito: responsabilidade do backlog = Product Owner; meta da sprint protegida; SM não decide escopo. Opção C."
+    },
+    {
+      "id": "gen-es-padroes-cenarios",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": ["es-padroes"],
+      "title": "Que padrão de projeto usar",
+      "subject": "Padrões de projeto GoF em cenários",
+      "prompt": "Uma equipe que desenvolve um sistema de comércio eletrônico associou quatro necessidades a padrões de projeto do catálogo GoF.\n\nI. Vários painéis devem ser atualizados automaticamente quando o preço de um produto muda: Observer.\nII. O cálculo do frete deve poder trocar entre transportadoras em tempo de execução, cada uma com seu algoritmo: Strategy.\nIII. A aplicação deve ter um único objeto de configuração, acessível de qualquer ponto: Singleton.\nIV. Uma biblioteca de pagamentos de terceiros tem interface diferente da que o sistema espera, e deve ser usada sem alterar o código dela: Decorator.\n\nEstão corretas apenas as associações",
+      "options": ["I e II.", "II e IV.", "III e IV.", "I, II e IV.", "I, II e III."],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nI está correta. O Observer define uma dependência um-para-muitos: o produto (sujeito) avisa todos os painéis inscritos (observadores) quando muda, sem conhecê-los em detalhe.\n\nII está correta. O Strategy encapsula cada algoritmo de frete numa classe com a mesma interface, e o objeto que calcula o frete recebe a estratégia desejada, podendo trocá-la em execução.\n\nIII está correta. O Singleton garante uma única instância com ponto global de acesso. Vale lembrar o custo: ele cria estado global, que dificulta testes.\n\nIV está errada. Converter uma interface na que o cliente espera é o papel do Adapter. O Decorator acrescenta responsabilidades a um objeto mantendo a mesma interface, por exemplo registrar log em volta de uma chamada.\n\nAs outras alternativas:\nA) Deixa de fora III, que está correta.\nB) Inclui IV, que confunde Adapter com Decorator.\nC) Inclui IV e deixa de fora I e II.\nD) Inclui IV.",
+      "check": "Nova resolução sem o gabarito: Observer, Strategy e Singleton corretos; o cenário IV é Adapter. Opção E."
+    },
+    {
+      "id": "gen-es-ciclomatica",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["es-ciclomatica", "es-testes"],
+      "title": "Complexidade ciclomática de um método",
+      "subject": "Complexidade ciclomática e casos de teste",
+      "prompt": "Considere o método a seguir, que classifica as leituras de um sensor:\n\n```\nint classifica(int[] leituras) {\n    int saldo = 0;\n    for (int x : leituras) {\n        if (x > 100)\n            saldo++;\n        else if (x < 0)\n            saldo--;\n    }\n    return saldo;\n}\n```\n\nQual é a complexidade ciclomática de McCabe desse método, que indica o número de caminhos independentes a cobrir com testes de caminho básico?",
+      "options": ["3", "4", "5", "2", "6"],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nPara um grafo de fluxo de um único componente, V(G) = número de decisões + 1. O método tem três pontos de decisão: o laço for (continuar ou sair), o if (x > 100) e o else if (x < 0). Logo, V(G) = 3 + 1 = 4.\n\nO mesmo valor sai de V(G) = E − N + 2 contando arestas e nós do grafo de fluxo, ou do número de regiões do grafo planar. São necessários pelo menos 4 casos de teste para cobrir os caminhos básicos: vetor vazio (não entra no laço), leitura acima de 100, leitura negativa e leitura entre 0 e 100.\n\nAs outras alternativas:\nA) 3 conta as decisões e esquece o + 1.\nC) 5 conta uma decisão a mais, como se o else fosse outra condição. O else não testa nada: é o caminho em que o if falhou.\nD) 2 corresponde a um único if.\nE) 6 conta cada linha com chave ou comando como decisão.",
+      "check": "Nova resolução sem o gabarito: decisões = for, if, else if = 3; V(G) = 4. Grafo de fluxo montado à mão: 7 nós, 9 arestas, 9 − 7 + 2 = 4."
+    },
+    {
+      "id": "gen-es-entrega-continua",
+      "kind": "QUENTE",
+      "format": "ITENS",
+      "concepts": ["es-testes", "es-gerencia"],
+      "title": "Integração e entrega contínuas",
+      "subject": "CI/CD, pirâmide de testes e feature flags",
+      "prompt": "Uma startup que publica várias versões por dia do seu aplicativo adotou um pipeline automatizado no repositório de código. Avalie as afirmações sobre essas práticas.\n\nI. Em integração contínua, cada alteração enviada ao repositório dispara a compilação e a execução dos testes automatizados, para que defeitos de integração apareçam cedo.\nII. Na pirâmide de testes, os testes de unidade devem ser mais numerosos que os testes de ponta a ponta, porque são mais rápidos e mais baratos de manter.\nIII. Na entrega contínua, toda alteração aprovada nos testes vai automaticamente para produção, enquanto a implantação contínua exige uma aprovação manual antes de cada publicação.\nIV. Feature flags permitem integrar ao código principal uma funcionalidade inacabada, mantendo-a desligada em produção até estar pronta.\n\nÉ correto apenas o que se afirma em",
+      "options": ["I e III.", "II e III.", "I, II e III.", "I, II e IV.", "III e IV."],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nI está correta. É a definição de integração contínua: integrar pequenas mudanças com frequência e validá-las automaticamente.\n\nII está correta. Testes de unidade rodam em milissegundos e apontam o defeito com precisão. Testes de ponta a ponta são lentos e frágeis, então ficam em menor número, no topo da pirâmide.\n\nIII está errada porque inverte os termos. Na entrega contínua (continuous delivery), toda versão está sempre pronta para ir a produção, mas a publicação depende de uma decisão. Na implantação contínua (continuous deployment), o que passa no pipeline vai para produção sem aprovação manual.\n\nIV está correta. Com a flag desligada, o código novo é integrado e implantado sem ser exposto aos usuários. Isso evita branches longos e permite liberar a funcionalidade aos poucos.\n\nAs outras alternativas:\nA) Inclui III, que troca entrega contínua por implantação contínua.\nB) Inclui III e deixa de fora I e IV.\nC) Inclui III e deixa de fora IV.\nE) Inclui III e deixa de fora I e II.",
+      "check": "Nova resolução sem o gabarito: I, II e IV corretas; III inverte continuous delivery e continuous deployment. Opção D."
+    },
+    {
+      "id": "gen-es-requisito-nao-funcional",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["es-requisitos"],
+      "title": "Classificar requisitos de um sistema",
+      "subject": "Requisitos funcionais e não funcionais",
+      "prompt": "Na especificação de um sistema de inscrição para o vestibular aparecem as frases abaixo. Qual delas descreve um requisito não funcional?",
+      "options": [
+        "Durante o período de inscrição, o sistema deve suportar 5 000 usuários simultâneos com tempo de resposta de até 2 segundos.",
+        "O sistema deve permitir que o candidato emita o boleto da taxa de inscrição.",
+        "O sistema deve enviar ao candidato um e-mail de confirmação após o pagamento.",
+        "O sistema deve permitir que o candidato escolha até duas opções de curso.",
+        "O sistema deve gerar a lista de inscritos por curso para a coordenação."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nRequisito funcional diz o que o sistema faz: uma função oferecida ao usuário. Requisito não funcional diz com que qualidade ou sob que restrição o sistema funciona, como desempenho, disponibilidade, segurança ou usabilidade. A alternativa A não descreve uma função nova; fixa capacidade (5 000 usuários) e tempo de resposta (2 segundos). É um requisito de desempenho, mensurável e verificável por teste de carga.\n\nAs outras alternativas:\nB) Emitir boleto é uma função do sistema.\nC) Enviar e-mail de confirmação também é uma função.\nD) Escolher cursos é uma regra de negócio que define um comportamento funcional.\nE) Gerar a lista de inscritos é uma função para outro tipo de usuário.",
+      "check": "Nova resolução sem o gabarito: somente a alternativa A fixa atributo de qualidade (desempenho). Opção A."
+    },
+    {
+      "id": "gen-es-manifesto-documentacao",
+      "kind": "ESPELHO",
+      "format": "ASSERCAO",
+      "concepts": ["es-agil", "es-processos"],
+      "title": "Manifesto ágil e documentação",
+      "subject": "Manifesto ágil: valores e interpretação",
+      "prompt": "Ao propor a adoção de métodos ágeis numa empresa, um gerente afirmou o seguinte.\n\nI. Equipes que seguem o Manifesto Ágil deixam de produzir documentação de requisitos e de arquitetura.\n\nPORQUE\n\nII. O Manifesto Ágil valoriza software em funcionamento mais que documentação abrangente.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
+        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
+        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
+        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
+        "As asserções I e II são proposições falsas."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nII é verdadeira: é um dos quatro valores do manifesto, transcrito quase literalmente.\n\nI é falsa. O manifesto termina dizendo que, embora haja valor nos itens à direita (processos, documentação, contratos, planos), os da esquerda são mais valorizados. Ele não elimina a documentação: pede a documentação suficiente e útil, em vez de documentos extensos que ninguém mantém. Equipes ágeis registram decisões de arquitetura, critérios de aceitação e histórias de usuário.\n\nAs outras alternativas:\nA) Lê a preferência do manifesto como proibição. É o absoluto que a própria frase do manifesto desmente.\nB) Também aceita I como verdadeira.\nC) Inverte: II é a verdadeira.\nE) II é verdadeira.",
+      "check": "Nova resolução sem o gabarito: II reproduz um valor do manifesto (verdadeira); I extrapola para eliminação total (falsa). Opção D."
+    },
+    {
+      "id": "gen-es-teste-unidade",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["es-testes"],
+      "title": "Teste com o banco de dados simulado",
+      "subject": "Testes de unidade e de integração",
+      "prompt": "A classe ServicoDeMatricula usa um RepositorioDeAlunos para consultar o banco de dados. Um desenvolvedor escreve um teste que cria um objeto falso de RepositorioDeAlunos, programado para devolver um aluno com pendência financeira, e verifica se o serviço recusa a matrícula. O banco de dados real não é acessado.\n\nComo se classifica esse teste?",
+      "options": [
+        "Teste de integração, porque envolve duas classes.",
+        "Teste de sistema, porque verifica uma regra de negócio completa.",
+        "Teste de aceitação, porque segue o ponto de vista do usuário.",
+        "Teste de caixa-preta de ponta a ponta, porque não olha o código do repositório.",
+        "Teste de unidade, com um dublê de teste (mock ou stub) no lugar da dependência."
+      ],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nO teste isola uma unidade, o ServicoDeMatricula, e substitui a dependência real por um dublê programado. Assim ele verifica só a lógica do serviço, roda rápido e não depende do estado do banco. Isso é um teste de unidade. Um teste de integração faria o serviço conversar com o repositório real e o banco, para ver se as partes funcionam juntas.\n\nAs outras alternativas:\nA) Haver duas classes não basta para ser integração: uma delas é falsa justamente para evitar a integração.\nB) Teste de sistema exercita o sistema completo, já integrado, num ambiente parecido com o de produção.\nC) Teste de aceitação é feito com ou para o cliente, sobre o sistema integrado, para validar o comportamento esperado.\nD) De ponta a ponta exigiria passar por todas as camadas reais, incluindo o banco.",
+      "check": "Nova resolução sem o gabarito: unidade isolada com dependência substituída por dublê. Opção E."
+    },
+    {
+      "id": "gen-es-caminho-critico",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": ["es-gerencia"],
+      "title": "Caminho crítico de um cronograma",
+      "subject": "Gerência de projetos: caminho crítico e folga",
+      "prompt": "Um projeto tem as atividades abaixo, com duração em dias e dependências:\n\nA: 3 dias, sem dependência\nB: 2 dias, depende de A\nC: 4 dias, depende de A\nD: 2 dias, depende de B e de C\n\nQual é a duração mínima do projeto e a folga da atividade B?",
+      "options": [
+        "11 dias; B não tem folga.",
+        "7 dias; B tem folga de 2 dias.",
+        "9 dias; B tem folga de 2 dias.",
+        "9 dias; B não tem folga.",
+        "6 dias; B tem folga de 4 dias."
+      ],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nHá dois caminhos do início ao fim:\nA → B → D: 3 + 2 + 2 = 7 dias.\nA → C → D: 3 + 4 + 2 = 9 dias.\n\nD só começa quando B e C terminam. C termina no dia 7 e B, no dia 5. O projeto dura o caminho mais longo, 9 dias, e esse é o caminho crítico (A, C, D). B pode atrasar até 7 − 5 = 2 dias sem atrasar D: essa é a folga de B. Atrasar qualquer atividade do caminho crítico atrasa o projeto inteiro.\n\nAs outras alternativas:\nA) 11 dias soma todas as atividades, como se B e C não pudessem ocorrer em paralelo.\nB) 7 dias é o caminho mais curto. O projeto termina pelo mais longo.\nD) A duração está certa, mas B está fora do caminho crítico e tem folga.\nE) 6 dias não corresponde a nenhum caminho completo.",
+      "check": "Nova resolução sem o gabarito: cálculo de início mais cedo e mais tarde em código; duração 9, folga de B = 2."
+    }
+  ]
+}

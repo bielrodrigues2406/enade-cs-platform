@@ -1,0 +1,201 @@
+{
+  "area": "Sistemas operacionais",
+  "generator": "claude-geracao",
+  "checker": "claude-resolucao",
+  "questions": [
+    {
+      "id": "gen-so-condicao-corrida",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": [
+        "so-regiao-critica",
+        "so-processo-thread"
+      ],
+      "title": "Contador compartilhado sem sincronização",
+      "subject": "Condição de corrida em variável compartilhada",
+      "prompt": "Um programa cria duas threads que executam o mesmo trecho sobre uma variável global inteira contador, iniciada em 0:\n\n```\nfor (int i = 0; i < 1000; i++)\n    contador++;\n```\n\nNão há nenhum mecanismo de sincronização. O programa espera as duas threads terminarem e imprime o valor de contador.\n\nQual afirmação sobre o valor impresso está correta?",
+      "options": [
+        "É sempre 2000, porque cada thread completa suas 1000 iterações antes de o programa imprimir.",
+        "É sempre 1000, porque as duas threads escrevem na mesma variável e uma sobrescreve o trabalho da outra.",
+        "Só pode ser diferente de 2000 em processadores de um núcleo; com vários núcleos as threads rodam em paralelo e o resultado é sempre 2000.",
+        "Pode ser menor que 2000, porque contador++ envolve ler, somar e gravar, e as duas threads podem ler o mesmo valor antes que uma delas grave o resultado.",
+        "Declarar contador como variável local de cada thread resolve o problema e garante a impressão de 2000."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nNo código de máquina, contador++ vira três passos: carregar o valor da memória num registrador, somar 1 e gravar de volta. Se a thread T1 lê 41 e, antes de gravar, a T2 também lê 41, as duas gravam 42, e um incremento se perde. Isso é uma condição de corrida numa região crítica sem exclusão mútua. O valor final varia de execução para execução e pode ficar abaixo de 2000. A solução é proteger o incremento com um mutex ou usar uma operação atômica.\n\nAs outras alternativas:\nA) É uma afirmação absoluta: completar as iterações não basta, porque incrementos podem se perder durante a intercalação.\nB) Também é absoluta. Perder incrementos depende da intercalação, que muda a cada execução; o resultado não é fixo em 1000.\nC) Inverte o efeito do paralelismo. Com vários núcleos as threads executam ao mesmo tempo de verdade, e a corrida fica até mais provável.\nE) Variáveis locais ficam na pilha de cada thread: cada uma contaria até 1000 na própria cópia, e a variável global impressa continuaria 0. O problema muda de lugar sem ser resolvido.",
+      "check": "Nova resolução sem o gabarito: incremento não atômico (load, add, store), perda de atualizações possível; resultado não determinístico, menor ou igual a 2000. Opção D."
+    },
+    {
+      "id": "gen-so-deadlock-ordem",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": [
+        "so-deadlock",
+        "so-semaforos"
+      ],
+      "title": "Duas threads e dois locks",
+      "subject": "Deadlock e ordem de aquisição de travas",
+      "prompt": "Num sistema bancário, a thread T1 transfere dinheiro da conta A para a B e a thread T2 transfere da B para a A. Cada transferência trava as duas contas com mutex antes de alterar os saldos:\n\nT1: trava(A); trava(B); transfere; libera(B); libera(A)\nT2: trava(B); trava(A); transfere; libera(A); libera(B)\n\nAvalie as afirmações.\n\nI. O sistema pode entrar em deadlock se T1 obtiver A e T2 obtiver B antes de cada uma pedir a segunda trava.\nII. Fazer as duas threads travarem sempre na mesma ordem, por exemplo A antes de B, elimina a possibilidade de deadlock entre elas.\nIII. Trocar os mutex por semáforos contadores iniciados em 1 elimina o deadlock, porque semáforos não bloqueiam a thread.\nIV. Para haver deadlock basta que os recursos sejam de uso exclusivo.\n\nÉ correto apenas o que se afirma em",
+      "options": [
+        "I e III.",
+        "II e IV.",
+        "I e II.",
+        "III e IV.",
+        "I, II e IV."
+      ],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nI está correta. T1 segura A e espera B; T2 segura B e espera A. Estão presentes as quatro condições de Coffman: exclusão mútua, posse e espera, não preempção e espera circular. Nenhuma das duas avança.\n\nII está correta. Com uma ordem global de aquisição, a thread que obtiver A primeiro também conseguirá B. A espera circular fica impossível, e basta eliminar uma das quatro condições para evitar o deadlock.\n\nIII está errada. Um semáforo iniciado em 1 funciona como um mutex: down() bloqueia quando o contador está em 0. O deadlock continua possível.\n\nIV está errada. Exclusão mútua é só uma das quatro condições, e todas precisam valer ao mesmo tempo.\n\nAs outras alternativas:\nA) Inclui III: semáforos também bloqueiam.\nB) Inclui IV, que reduz o deadlock a uma única condição.\nD) Junta as duas afirmações falsas.\nE) Inclui IV.",
+      "check": "Nova resolução sem o gabarito: ordem cruzada gera espera circular (I verdadeira); ordem global a elimina (II verdadeira); semáforo binário bloqueia (III falsa); deadlock exige as quatro condições (IV falsa)."
+    },
+    {
+      "id": "gen-so-belady",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": [
+        "so-memoria-virtual"
+      ],
+      "title": "FIFO com três e com quatro quadros",
+      "subject": "Substituição de páginas FIFO e anomalia de Belady",
+      "prompt": "Um processo gera a sequência de referências a páginas:\n\n1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5\n\nA memória começa vazia e o sistema usa substituição FIFO (sai a página que entrou há mais tempo).\n\nQuantas faltas de página ocorrem com 3 quadros e com 4 quadros, e o que esse resultado mostra?",
+      "options": [
+        "9 com 3 quadros e 8 com 4 quadros, como se espera ao aumentar a memória.",
+        "9 com 3 quadros e 10 com 4 quadros: mais quadros geraram mais faltas, a anomalia de Belady.",
+        "10 com 3 quadros e 9 com 4 quadros.",
+        "12 nos dois casos, porque toda referência gera falta de página.",
+        "9 com 3 quadros e 10 com 4 quadros, efeito que também ocorre com a política LRU."
+      ],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nCom 3 quadros: 1, 2 e 3 faltam (3). O 4 falta e expulsa o 1 (4). O 1 falta e expulsa o 2 (5). O 2 falta e expulsa o 3 (6). O 5 falta e expulsa o 4 (7). Em seguida, 1 e 2 estão na memória. O 3 falta (8) e o 4 falta (9). O 5 está na memória. Total: 9 faltas.\n\nCom 4 quadros: 1, 2, 3 e 4 faltam (4). Em seguida, 1 e 2 estão na memória. O 5 falta e expulsa o 1 (5). Daí em diante, 1, 2, 3, 4 e 5 faltam todos, cada um expulsando a página mais antiga (10). Total: 10 faltas.\n\nAumentar a memória piorou o resultado: é a anomalia de Belady, que pode ocorrer com FIFO.\n\nAs outras alternativas:\nA) Supõe que mais quadros sempre reduzem as faltas, o que justamente falha com FIFO nesta sequência.\nC) Inverte os dois números.\nD) Ignora os acertos: com 3 quadros, as referências 1, 2 e 5 na segunda metade encontram as páginas na memória.\nE) LRU é uma política de pilha e não sofre a anomalia de Belady. Com LRU, nesta sequência, são 10 faltas com 3 quadros e 8 com 4.",
+      "check": "Nova resolução sem o gabarito: simulação em código, FIFO 3 quadros = 9, FIFO 4 quadros = 10; LRU 3 = 10, LRU 4 = 8."
+    },
+    {
+      "id": "gen-so-sjf-espera",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": [
+        "so-escalonamento"
+      ],
+      "title": "Tempo médio de espera no SJF",
+      "subject": "Escalonamento SJF e FCFS",
+      "prompt": "Quatro processos chegam juntos no instante 0, com os seguintes tempos de CPU:\n\nP1: 6 ms\nP2: 8 ms\nP3: 7 ms\nP4: 3 ms\n\nO sistema usa o escalonamento SJF (menor tarefa primeiro), não preemptivo. Qual é o tempo médio de espera dos processos?",
+      "options": [
+        "10,25 ms",
+        "6 ms",
+        "7 ms",
+        "8 ms",
+        "3 ms"
+      ],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nO SJF executa na ordem crescente de duração: P4 (3), P1 (6), P3 (7), P2 (8). As esperas são:\n\nP4 = 0\nP1 = 3\nP3 = 3 + 6 = 9\nP2 = 9 + 7 = 16\n\nMédia: (0 + 3 + 9 + 16) / 4 = 28 / 4 = 7 ms. Entre os escalonamentos não preemptivos, o SJF dá o menor tempo médio de espera possível; a contrapartida é o risco de inanição dos processos longos.\n\nAs outras alternativas:\nA) 10,25 ms é a média do FCFS na ordem P1, P2, P3, P4: (0 + 6 + 14 + 21) / 4. Troca o SJF pelo FCFS.\nB) 6 ms não corresponde a nenhuma ordem de execução destes processos.\nD) 8 ms é a duração do maior processo, não um tempo de espera.\nE) 3 ms é a duração do menor processo, ou seja, só a espera de P1.",
+      "check": "Nova resolução sem o gabarito: esperas SJF 0, 3, 9, 16, média 7; FCFS 10,25. Conferido em código."
+    },
+    {
+      "id": "gen-so-produtor-consumidor",
+      "kind": "ESPELHO",
+      "format": "ASSERCAO",
+      "concepts": [
+        "so-produtor-consumidor",
+        "so-deadlock"
+      ],
+      "title": "Ordem dos semáforos no buffer limitado",
+      "subject": "Produtor-consumidor: ordem das operações down",
+      "prompt": "Na solução clássica do produtor-consumidor com buffer de N posições, usam-se três semáforos: mutex = 1, vazio = N e cheio = 0. Um programador escreveu o produtor assim:\n\n```\ndown(mutex);\ndown(vazio);\ninsere_item();\nup(mutex);\nup(cheio);\n```\n\nConsidere as asserções.\n\nI. Esse produtor pode levar o sistema a um deadlock.\n\nPORQUE\n\nII. Com o buffer cheio, o produtor bloqueia em down(vazio) depois de já ter obtido o mutex, e o consumidor nunca consegue entrar na região crítica para retirar um item e liberar uma posição.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
+        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
+        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
+        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
+        "As asserções I e II são proposições falsas."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nCom o buffer cheio, vazio vale 0. O produtor faz down(mutex), entra, e então bloqueia em down(vazio) ainda segurando o mutex. O consumidor faz down(cheio), passa, mas bloqueia em down(mutex), porque o produtor não o libera. Um espera o outro para sempre: deadlock. A asserção II descreve exatamente esse mecanismo, por isso justifica a I.\n\nA ordem correta é esperar primeiro pelo contador (down(vazio) no produtor, down(cheio) no consumidor) e só depois pegar o mutex.\n\nAs outras alternativas:\nB) Não reconhece que II é a causa da I: a espera segurando o mutex é o que cria a espera circular.\nC) Considera II falsa, mas a sequência descrita acontece com o buffer cheio.\nD) Considera I falsa, como se trocar a ordem dos down não tivesse efeito.\nE) As duas são verdadeiras.",
+      "check": "Nova resolução sem o gabarito: com vazio = 0 e mutex obtido, o produtor bloqueia e impede o consumidor de entrar; espera circular entre mutex e vazio. Opção A."
+    },
+    {
+      "id": "gen-so-threads-processos",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": [
+        "so-processo-thread",
+        "so-estados"
+      ],
+      "title": "O que as threads compartilham",
+      "subject": "Threads e processos: memória e troca de contexto",
+      "prompt": "Um servidor web cria uma thread por requisição dentro de um único processo. Avalie as afirmações.\n\nI. As threads do processo compartilham o espaço de endereçamento, incluindo as variáveis globais e o heap.\nII. Cada thread tem a própria pilha e o próprio conjunto de registradores, incluindo o contador de programa.\nIII. A troca de contexto entre threads do mesmo processo costuma ser mais barata que entre processos, porque não exige trocar o mapeamento de memória.\nIV. Se uma thread chamar exit(), só ela termina e as demais continuam atendendo requisições.\n\nÉ correto apenas o que se afirma em",
+      "options": [
+        "I e IV.",
+        "II e III.",
+        "I, II e IV.",
+        "II, III e IV.",
+        "I, II e III."
+      ],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nI está correta. É o que torna as threads leves e úteis, e também o que exige sincronização.\n\nII está correta. Cada thread segue um fluxo de execução próprio, então precisa de pilha (variáveis locais e chamadas) e registradores próprios.\n\nIII está correta. Entre threads do mesmo processo, a tabela de páginas continua a mesma, e não é preciso invalidar a TLB nem trocar o espaço de endereçamento.\n\nIV está errada. exit() encerra o processo inteiro, com todas as suas threads. Para encerrar só a thread atual existe, por exemplo, pthread_exit().\n\nAs outras alternativas:\nA) Inclui IV e deixa de fora II e III.\nB) Deixa de fora I, que é a característica central das threads.\nC) Inclui IV.\nD) Inclui IV e deixa de fora I.",
+      "check": "Nova resolução sem o gabarito: I, II e III verdadeiras; IV falsa (exit encerra o processo). Opção E."
+    },
+    {
+      "id": "gen-so-tlb",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": [
+        "so-memoria-virtual",
+        "so-paginacao"
+      ],
+      "title": "Tempo efetivo de acesso com TLB",
+      "subject": "Memória virtual: TLB e tempo efetivo de acesso",
+      "prompt": "Num sistema com paginação de um nível, consultar a TLB leva 20 ns e acessar a memória principal leva 100 ns. Quando a tradução está na TLB, basta um acesso à memória. Quando não está, é preciso um acesso à memória para ler a tabela de páginas e outro para ler o dado. A taxa de acerto da TLB é de 80%.\n\nQual é o tempo efetivo médio de acesso à memória?",
+      "options": [
+        "120 ns",
+        "100 ns",
+        "220 ns",
+        "140 ns",
+        "180 ns"
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nCom acerto na TLB: 20 + 100 = 120 ns.\nCom falha: 20 (consulta à TLB) + 100 (tabela de páginas) + 100 (dado) = 220 ns.\n\nTempo efetivo = 0,8 × 120 + 0,2 × 220 = 96 + 44 = 140 ns. Sem TLB, todo acesso custaria 200 ns; mesmo com 20% de falhas, a TLB reduz o custo em 30%.\n\nAs outras alternativas:\nA) 120 ns é o caso de acerto, como se a TLB acertasse sempre.\nB) 100 ns ignora a tradução de endereço e o tempo da TLB.\nC) 220 ns é o caso de falha, como se a TLB nunca acertasse.\nE) 180 ns usa um peso errado (por exemplo, 50% de acerto) ou soma parcelas de forma inconsistente.",
+      "check": "Nova resolução sem o gabarito: 0,8 × 120 + 0,2 × 220 = 140 ns. Conferido por cálculo."
+    },
+    {
+      "id": "gen-so-fragmentacao-interna",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": [
+        "so-paginacao"
+      ],
+      "title": "Páginas de um processo de 10 KiB",
+      "subject": "Paginação e fragmentação interna",
+      "prompt": "Um sistema usa paginação com páginas de 4 KiB. Um processo precisa de exatamente 10 KiB de memória.\n\nQuantas páginas o processo ocupa e que tipo de desperdício ocorre?",
+      "options": [
+        "2 páginas e nenhum desperdício, porque 10 KiB cabem em duas páginas e meia.",
+        "3 páginas e 2 KiB de fragmentação externa.",
+        "3 páginas e 2 KiB de fragmentação interna, perdidos dentro da última página.",
+        "3 páginas e nenhum desperdício, porque a paginação elimina todo tipo de fragmentação.",
+        "2,5 páginas, porque o sistema aloca exatamente o tamanho do processo."
+      ],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nA memória é alocada em páginas inteiras. São necessárias ⌈10 / 4⌉ = 3 páginas, ou 12 KiB, e 12 − 10 = 2 KiB ficam sem uso dentro da última página. Desperdício dentro de um bloco alocado é fragmentação interna. A paginação elimina a fragmentação externa (buracos entre blocos), porque qualquer quadro livre serve para qualquer página.\n\nAs outras alternativas:\nA) Duas páginas guardam só 8 KiB, e não existe meia página.\nB) A quantidade está certa, mas o tipo não: a sobra fica dentro da página, por isso é interna. Fragmentação externa é típica da segmentação e da alocação contígua.\nD) A paginação elimina a fragmentação externa, não a interna.\nE) A unidade de alocação é a página inteira.",
+      "check": "Nova resolução sem o gabarito: ceil(10/4) = 3 páginas, 12 − 10 = 2 KiB internos. Opção C."
+    },
+    {
+      "id": "gen-so-inode",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": [
+        "so-arquivos"
+      ],
+      "title": "Tamanho máximo de arquivo com i-node",
+      "subject": "Sistema de arquivos: ponteiros diretos e indiretos",
+      "prompt": "Um sistema de arquivos usa blocos de 4 KiB e endereços de bloco de 4 bytes. Cada i-node tem 12 ponteiros diretos e 1 ponteiro indireto simples (aponta para um bloco que contém apenas endereços de blocos de dados). Não há ponteiros indiretos duplos.\n\nQual é o tamanho máximo de um arquivo nesse sistema?",
+      "options": [
+        "48 KiB",
+        "4144 KiB",
+        "4096 KiB",
+        "52 KiB",
+        "1072 KiB"
+      ],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nOs ponteiros diretos cobrem 12 × 4 KiB = 48 KiB.\nO bloco indireto tem 4 KiB = 4096 bytes. Com endereços de 4 bytes, ele guarda 4096 / 4 = 1024 ponteiros, cobrindo 1024 × 4 KiB = 4096 KiB.\nTotal: 48 + 4096 = 4144 KiB, pouco mais de 4 MiB.\n\nAs outras alternativas:\nA) 48 KiB considera só os ponteiros diretos.\nC) 4096 KiB considera só o indireto e esquece os 12 diretos.\nD) 52 KiB conta o bloco indireto como mais um bloco de dados (13 × 4 KiB), sem perceber que ele guarda ponteiros.\nE) 1072 KiB soma 48 KiB com 1024 KiB, contando 1 KiB por ponteiro em vez de um bloco de 4 KiB.",
+      "check": "Nova resolução sem o gabarito: 12 × 4 + (4096 / 4) × 4 = 4144 KiB. Conferido em código."
+    }
+  ]
+}

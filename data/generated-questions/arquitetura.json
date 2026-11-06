@@ -1,0 +1,135 @@
+{
+  "area": "Arquitetura de computadores",
+  "generator": "claude-geracao",
+  "checker": "claude-resolucao",
+  "questions": [
+    {
+      "id": "gen-arq-simplificacao",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["arq-booleana", "arq-formas-canonicas"],
+      "title": "Simplificar uma soma de produtos",
+      "subject": "Álgebra booleana: simplificação",
+      "prompt": "Um alarme deve disparar conforme a função F(A, B) = A·B + A·¬B + ¬A·B, em que A indica porta aberta e B indica movimento detectado.\n\nQual expressão mais simples é equivalente a F?",
+      "options": ["A·B", "A", "¬A + B", "A ⊕ B", "A + B"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nAgrupando os dois primeiros termos: A·B + A·¬B = A·(B + ¬B) = A·1 = A. Fica F = A + ¬A·B. Pela absorção, A + ¬A·B = (A + ¬A)·(A + B) = A + B.\n\nConferindo pela tabela-verdade: F só vale 0 quando A = 0 e B = 0, que é exatamente o OU. O alarme dispara com a porta aberta ou com movimento.\n\nAs outras alternativas:\nA) A·B só vale 1 com as duas condições, mas F também vale 1 com só uma delas.\nB) A ignora o termo ¬A·B: com porta fechada e movimento, F = 1 e A = 0.\nC) ¬A + B vale 1 com A = 0 e B = 0, caso em que F = 0. É a relação invertida em A.\nD) O OU exclusivo vale 0 com A = B = 1, mas F tem o termo A·B e vale 1 nesse caso.",
+      "check": "Nova resolução sem o gabarito: tabela-verdade de F = (0,1,1,1) para AB = 00, 01, 10, 11, igual a A + B."
+    },
+    {
+      "id": "gen-arq-mux-xor",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["arq-combinacionais"],
+      "title": "Função com multiplexador 4×1",
+      "subject": "Multiplexador 4×1 implementando uma função",
+      "prompt": "Um multiplexador 4×1 tem entradas de dados I0, I1, I2 e I3 e linhas de seleção S1 S0. A saída é I0 quando S1S0 = 00, I1 quando 01, I2 quando 10 e I3 quando 11.\n\nPara implementar F(A, B) = A ⊕ B (OU exclusivo), ligam-se A em S1 e B em S0. Que valores constantes devem ser ligados às entradas de dados?",
+      "options": [
+        "I0 = 1, I1 = 0, I2 = 0, I3 = 1",
+        "I0 = 0, I1 = 1, I2 = 1, I3 = 0",
+        "I0 = 0, I1 = 0, I2 = 0, I3 = 1",
+        "I0 = 0, I1 = 1, I2 = 1, I3 = 1",
+        "I0 = A, I1 = B, I2 = A, I3 = B"
+      ],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nCom A em S1 e B em S0, cada combinação de entradas escolhe uma entrada de dados: AB = 00 escolhe I0, 01 escolhe I1, 10 escolhe I2 e 11 escolhe I3. Basta ligar em cada Ii o valor da tabela-verdade de A ⊕ B naquela linha: 0, 1, 1, 0. Esse é o uso clássico do mux como gerador de qualquer função de n variáveis com 2ⁿ entradas.\n\nAs outras alternativas:\nA) É a tabela do XNOR (igualdade), o complemento de A ⊕ B. Relação invertida.\nC) É a tabela do E (A·B).\nD) É a tabela do OU (A + B), que difere do XOR quando A = B = 1.\nE) Não há motivo para ligar as próprias variáveis nas entradas de dados: elas já selecionam a linha. Com AB = 11, por exemplo, a saída seria B = 1, mas A ⊕ B = 0.",
+      "check": "Nova resolução sem o gabarito: saída do mux para as quatro combinações com I = (0, 1, 1, 0) reproduz XOR = (0, 1, 1, 0)."
+    },
+    {
+      "id": "gen-arq-pipeline-conflitos",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": ["arq-pipeline"],
+      "title": "Conflitos no pipeline de 5 estágios",
+      "subject": "Pipeline: conflitos de dados e de controle",
+      "prompt": "Um processador RISC tem pipeline clássico de 5 estágios (busca, decodificação, execução, memória, escrita). Considere o trecho:\n\n```\nADD R1, R2, R3   ; R1 = R2 + R3\nSUB R4, R1, R5   ; R4 = R1 - R5\nBEQ R4, R0, fim  ; desvia se R4 == 0\n```\n\nAvalie as afirmações.\n\nI. ADD e SUB têm uma dependência de dados do tipo leitura após escrita (RAW) em R1.\nII. O adiantamento (forwarding) do resultado da ULA pode eliminar ou reduzir as bolhas entre ADD e SUB.\nIII. Num pipeline ideal de 5 estágios, cada instrução individual executa 5 vezes mais rápido que sem pipeline.\nIV. O BEQ gera um conflito de controle, que a previsão de desvios procura reduzir.\n\nÉ correto apenas o que se afirma em",
+      "options": ["I e II.", "I, II e III.", "III e IV.", "I, II e IV.", "II e IV."],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nI está correta. SUB precisa ler R1, que ADD só grava no último estágio. Ler antes da escrita daria um valor antigo.\n\nII está correta. O resultado de ADD fica pronto ao fim do estágio de execução. O adiantamento leva esse valor direto para a entrada da ULA na instrução seguinte, sem esperar a escrita no banco de registradores.\n\nIII está errada. O pipeline aumenta a vazão: idealmente, conclui uma instrução por ciclo. Cada instrução continua passando pelos 5 estágios, e o tempo de uma instrução isolada não cai; pode até subir um pouco, pelos registradores entre os estágios.\n\nIV está correta. Enquanto o BEQ não é resolvido, o processador não sabe qual instrução buscar. A previsão de desvios aposta num caminho e descarta o trabalho se errar.\n\nAs outras alternativas:\nA) Deixa de fora IV.\nB) Inclui III, que confunde vazão com latência.\nC) Inclui III e deixa de fora I e II.\nE) Deixa de fora I, que é a própria dependência que o adiantamento resolve.",
+      "check": "Nova resolução sem o gabarito: RAW em R1 (I), forwarding ULA→ULA (II), pipeline melhora vazão e não latência (III falsa), desvio = conflito de controle (IV)."
+    },
+    {
+      "id": "gen-arq-amdahl",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": ["arq-paralelismo"],
+      "title": "Lei de Amdahl com quatro núcleos",
+      "subject": "Lei de Amdahl: ganho com paralelismo",
+      "prompt": "Um programa de processamento de imagens gasta 80% do tempo num trecho que pode ser dividido igualmente entre núcleos; os outros 20% são sequenciais. O programa passa de um núcleo para quatro.\n\nPela Lei de Amdahl, qual é o ganho de desempenho (speedup) máximo?",
+      "options": ["4", "3,2", "2,5", "5", "1,25"],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nLei de Amdahl: ganho = 1 / ((1 − f) + f/s), em que f é a fração melhorada e s é o ganho dessa fração. Com f = 0,8 e s = 4:\n\nganho = 1 / (0,2 + 0,8/4) = 1 / (0,2 + 0,2) = 1 / 0,4 = 2,5.\n\nO trecho sequencial limita o ganho. Mesmo com infinitos núcleos, o máximo seria 1 / 0,2 = 5.\n\nAs outras alternativas:\nA) 4 supõe o programa todo paralelizável, ignorando os 20% sequenciais.\nB) 3,2 = 0,8 × 4 multiplica a fração pelo número de núcleos, conta que não aparece na lei.\nD) 5 é o limite com infinitos núcleos, não com quatro.\nE) 1,25 = 1 / 0,8 aplica a lei como se não houvesse paralelismo nenhum.",
+      "check": "Nova resolução sem o gabarito: 1 / (0,2 + 0,8/4) = 2,5. Conferido por cálculo."
+    },
+    {
+      "id": "gen-arq-complemento-dois",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["arq-representacao"],
+      "title": "Menos vinte em complemento de dois",
+      "subject": "Complemento de dois com 8 bits",
+      "prompt": "Um sensor de temperatura envia leituras como inteiros de 8 bits em complemento de dois. Qual é a representação de −20 nesse formato?",
+      "options": ["11101100", "10010100", "11101011", "00010100", "01101100"],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\n20 em binário com 8 bits é 00010100. Para obter −20: inverte-se todos os bits (11101011) e soma-se 1, resultando 11101100. Conferindo: em complemento de dois, o bit mais à esquerda vale −128. Então 11101100 = −128 + 64 + 32 + 8 + 4 = −20.\n\nAs outras alternativas:\nB) 10010100 é sinal e magnitude: só liga o bit de sinal em 20, o que não é complemento de dois.\nC) 11101011 é o complemento de um, que esquece de somar 1.\nD) 00010100 é +20.\nE) 01101100 = 108, positivo, porque o bit mais significativo é 0.",
+      "check": "Nova resolução sem o gabarito: 256 − 20 = 236 = 0b11101100. Conferido em código."
+    },
+    {
+      "id": "gen-arq-localidade",
+      "kind": "LACUNA",
+      "format": "ASSERCAO",
+      "concepts": ["arq-hierarquia"],
+      "title": "Percorrer uma matriz por linhas ou por colunas",
+      "subject": "Cache e localidade espacial",
+      "prompt": "Em C, as matrizes são armazenadas por linhas: os elementos de uma mesma linha ocupam endereços consecutivos. Um programa soma todos os elementos de uma matriz grande de inteiros.\n\nConsidere as asserções.\n\nI. Percorrer a matriz linha por linha (laço externo nas linhas) tende a gerar menos falhas de cache do que percorrê-la coluna por coluna.\n\nPORQUE\n\nII. A cache traz da memória blocos de endereços contíguos, e os elementos vizinhos de uma linha ficam no mesmo bloco.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
+        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
+        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
+        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
+        "As asserções I e II são proposições falsas."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nNuma falha de cache, o processador traz um bloco inteiro (por exemplo, 64 bytes, ou 16 inteiros de 4 bytes). Percorrendo por linhas, os próximos 15 acessos caem no mesmo bloco: localidade espacial, e só uma falha a cada 16 elementos. Percorrendo por colunas, cada acesso salta uma linha inteira na memória e cai em outro bloco. Em matrizes grandes, quase todo acesso falha. II explica o porquê de I.\n\nAs outras alternativas:\nB) Não reconhece que a busca por blocos contíguos é exatamente a causa da diferença.\nC) II é verdadeira: é assim que a cache transfere dados.\nD) I é verdadeira. A ordem de percurso muda o desempenho, mesmo com o mesmo número de operações.\nE) As duas são verdadeiras.",
+      "check": "Nova resolução sem o gabarito: armazenamento por linhas e blocos contíguos favorecem o percurso por linhas; II explica I. Opção A."
+    },
+    {
+      "id": "gen-arq-excecao",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["arq-interrupcoes"],
+      "title": "Interrupção ou exceção",
+      "subject": "Interrupções e exceções",
+      "prompt": "Durante a execução de um programa, ocorrem os eventos abaixo. Qual deles é uma exceção (evento síncrono, causado pela própria instrução em execução), e não uma interrupção?",
+      "options": [
+        "O temporizador do sistema sinaliza o fim da fatia de tempo do processo.",
+        "A placa de rede avisa que chegou um pacote.",
+        "O controlador de disco avisa que terminou uma leitura.",
+        "Uma instrução de divisão inteira tenta dividir por zero.",
+        "O usuário pressiona uma tecla."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nA divisão por zero nasce da instrução que está executando: é síncrona e se repete toda vez que aquela instrução rodar com aqueles dados. Por isso é uma exceção, assim como a falta de página e o acesso a endereço inválido.\n\nAs outras alternativas:\nA) O temporizador é um dispositivo externo à instrução corrente e sinaliza a qualquer momento: interrupção.\nB) A placa de rede gera uma interrupção de E/S, assíncrona em relação ao programa.\nC) O fim da leitura de disco é a interrupção de E/S clássica.\nE) O teclado também gera interrupção de hardware.",
+      "check": "Nova resolução sem o gabarito: único evento síncrono à instrução é a divisão por zero. Opção D."
+    },
+    {
+      "id": "gen-arq-cache-endereco",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": ["arq-hierarquia", "arq-sequenciais"],
+      "title": "Campos do endereço numa cache direta",
+      "subject": "Cache com mapeamento direto: tag, índice e deslocamento",
+      "prompt": "Um processador tem endereços de 32 bits e uma cache de dados de 64 KiB com mapeamento direto e blocos de 64 bytes.\n\nComo o endereço se divide entre tag, índice (linha da cache) e deslocamento dentro do bloco?",
+      "options": [
+        "Tag de 20 bits, índice de 6 bits e deslocamento de 6 bits.",
+        "Tag de 22 bits, índice de 10 bits e nenhum deslocamento.",
+        "Tag de 16 bits, índice de 10 bits e deslocamento de 6 bits.",
+        "Tag de 26 bits e deslocamento de 6 bits, sem índice.",
+        "Tag de 10 bits, índice de 16 bits e deslocamento de 6 bits."
+      ],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nDeslocamento: o bloco tem 64 = 2⁶ bytes, então são 6 bits.\nÍndice: a cache tem 64 KiB / 64 B = 1024 = 2¹⁰ linhas, então são 10 bits.\nTag: o que sobra, 32 − 10 − 6 = 16 bits.\n\nO índice escolhe a linha, a tag confirma se o bloco guardado ali é o procurado e o deslocamento escolhe o byte dentro do bloco.\n\nAs outras alternativas:\nA) Índice de 6 bits daria só 64 linhas, uma cache de 4 KiB.\nB) Sem deslocamento, cada linha guardaria um único byte, mas o bloco tem 64.\nD) Sem índice, a cache seria totalmente associativa, não de mapeamento direto.\nE) Troca o tamanho da tag com o do índice.",
+      "check": "Nova resolução sem o gabarito: offset log2(64) = 6, linhas 65536/64 = 1024, índice 10, tag 32 − 16 = 16."
+    }
+  ]
+}

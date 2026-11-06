@@ -1,0 +1,84 @@
+{
+  "area": "Programação",
+  "generator": "claude-geracao",
+  "checker": "claude-resolucao",
+  "questions": [
+    {
+      "id": "gen-prog-recursao-dupla",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["prog-recursao"],
+      "title": "Rastrear uma recursão dupla",
+      "subject": "Rastreamento de função recursiva",
+      "prompt": "Considere a função em C:\n\n```\nint f(int n) {\n    if (n <= 1)\n        return 1;\n    return f(n - 1) + 2 * f(n - 2);\n}\n```\n\nQual valor a chamada f(4) devolve?",
+      "options": ["9", "16", "11", "7", "13"],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nResolvendo de baixo para cima, para não repetir chamadas:\nf(0) = 1 e f(1) = 1 (casos base, n ≤ 1).\nf(2) = f(1) + 2 · f(0) = 1 + 2 = 3.\nf(3) = f(2) + 2 · f(1) = 3 + 2 = 5.\nf(4) = f(3) + 2 · f(2) = 5 + 6 = 11.\n\nUma observação útil para provas: a versão recursiva recalcula os mesmos valores várias vezes (f(2) é chamada duas vezes dentro de f(4)), e o número de chamadas cresce exponencialmente. Guardar os resultados (memorização) ou calcular num laço deixa o custo linear.\n\nAs outras alternativas:\nA) 9 sai de esquecer o fator 2 em uma das parcelas, por exemplo f(4) = f(3) + f(2) + 1.\nB) 16 = 2⁴ supõe que cada chamada dobra o resultado.\nD) 7 corresponde a f(3) + f(2) − 1, sem a multiplicação por 2.\nE) 13 sai de tratar f(1) como 2 em algum passo.",
+      "check": "Nova resolução sem o gabarito: função executada em código, f(4) = 11."
+    },
+    {
+      "id": "gen-prog-orientacao-objetos",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": ["prog-oo", "prog-visibilidade", "prog-polimorfismo"],
+      "title": "Conta e conta poupança em Java",
+      "subject": "Encapsulamento, sobrecarga e ligação dinâmica",
+      "prompt": "Considere o código Java:\n\n```\npublic abstract class Conta {\n    private double saldo;\n    public void sacar(double v) { saldo -= v; }\n    protected double getSaldo() { return saldo; }\n    public abstract double render();\n}\n\npublic class ContaPoupanca extends Conta {\n    @Override\n    public void sacar(double v) { if (v <= getSaldo()) super.sacar(v); }\n    public double render() { return getSaldo() * 0.005; }\n    public double render(double taxa) { return getSaldo() * taxa; }\n}\n```\n\nAvalie as afirmações.\n\nI. Dentro de ContaPoupanca, escrever saldo -= v diretamente causaria erro de compilação, porque o atributo é private em Conta.\nII. Os dois métodos render de ContaPoupanca são um caso de sobrecarga.\nIII. Com Conta c = new ContaPoupanca(); a chamada c.sacar(100) executa a versão de Conta, porque a variável foi declarada com o tipo Conta.\nIV. Por ser abstrata, Conta não pode ser instanciada, mas pode ter atributos e métodos implementados.\n\nÉ correto apenas o que se afirma em",
+      "options": ["I e III.", "II e III.", "III e IV.", "I, II e IV.", "I, II, III e IV."],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nI está correta. Membros private só são visíveis dentro da própria classe; a subclasse herda o atributo, mas não o enxerga pelo nome. Por isso Conta oferece getSaldo() como protected.\n\nII está correta. Mesmo nome com listas de parâmetros diferentes, na mesma classe, é sobrecarga, resolvida na compilação pela assinatura da chamada.\n\nIII está errada. Em Java, métodos de instância usam ligação dinâmica: vale o tipo do objeto criado (ContaPoupanca), não o tipo declarado da variável (Conta). Executa-se a versão sobrescrita, que confere o saldo antes de sacar. É o polimorfismo de subtipo.\n\nIV está correta. Classe abstrata pode ter estado e métodos concretos; só não pode ser instanciada com new.\n\nAs outras alternativas:\nA) Inclui III, que troca a ligação dinâmica pela estática.\nB) Inclui III e deixa de fora I.\nC) Inclui III.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: código compilado e executado com javac; acesso direto a saldo não compila; c.sacar chama a versão de ContaPoupanca."
+    },
+    {
+      "id": "gen-prog-escopo",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["prog-escopo-tipos"],
+      "title": "Escopo estático e escopo dinâmico",
+      "subject": "Resolução de nomes: escopo estático e dinâmico",
+      "prompt": "Considere o pseudocódigo a seguir, numa linguagem em que funções podem ser declaradas no nível global:\n\n```\nx = 1\n\nfunção g():\n    retorne x\n\nfunção f():\n    local x = 2\n    retorne g()\n\nimprima f()\n```\n\nQue valor é impresso se a linguagem usar escopo estático (léxico) e se usar escopo dinâmico?",
+      "options": [
+        "1 com escopo estático e 2 com escopo dinâmico.",
+        "2 com escopo estático e 1 com escopo dinâmico.",
+        "1 nos dois casos.",
+        "2 nos dois casos.",
+        "Erro nos dois casos, porque g não declara x."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nNo escopo estático, o nome x dentro de g é resolvido pelo lugar onde g foi escrita. Ali, o x visível é o global, que vale 1. Não importa quem chamou g.\n\nNo escopo dinâmico, x é resolvido pela pilha de chamadas em execução. g foi chamada por f, que tem um x local igual a 2, encontrado antes do global. Resultado: 2.\n\nC, Java, Python e a maioria das linguagens atuais usam escopo estático, que permite entender uma função lendo só o código ao redor dela. O escopo dinâmico aparece em Lisps antigos e em variáveis de shell.\n\nAs outras alternativas:\nB) Inverte os dois comportamentos.\nC) Vale só para o escopo estático.\nD) Vale só para o escopo dinâmico.\nE) g não precisa declarar x: nos dois regimes, o nome é procurado nos escopos envolventes.",
+      "check": "Nova resolução sem o gabarito: estático resolve pelo texto (x global = 1); dinâmico resolve pela pilha (x de f = 2). Opção A."
+    },
+    {
+      "id": "gen-prog-ponteiro-pendente",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": ["prog-memoria"],
+      "title": "Função que devolve endereço de variável local",
+      "subject": "Pilha, heap e ponteiro pendente",
+      "prompt": "Um estudante escreveu em C:\n\n```\nint *cria_vetor(void) {\n    int v[3] = {1, 2, 3};\n    return v;\n}\n\nint main(void) {\n    int *p = cria_vetor();\n    printf(\"%d\\n\", p[1]);\n}\n```\n\nÀs vezes o programa imprime 2, às vezes um valor estranho. Qual é o diagnóstico correto?",
+      "options": [
+        "O vetor v deveria ser declarado como int v[]; com o tamanho fixo, o compilador o descarta.",
+        "printf não aceita ponteiros, só vetores.",
+        "O índice 1 está fora dos limites do vetor.",
+        "Falta um free(p) no fim de main, por isso a memória fica corrompida.",
+        "v é uma variável local, alocada na pilha durante a chamada de cria_vetor; quando a função retorna, essa área é liberada e p passa a apontar para memória inválida (ponteiro pendente). A correção é alocar com malloc e liberar com free depois do uso, ou receber o vetor de quem chama."
+      ],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nVariáveis locais vivem no quadro de pilha (stack frame) da função. Ao retornar, esse quadro deixa de pertencer à função e pode ser reaproveitado pela próxima chamada, inclusive pela de printf. O ponteiro devolvido continua guardando o endereço, mas o conteúdo passa a ser indefinido. Funcionar às vezes é típico de comportamento indefinido, e compiladores costumam avisar: \"function returns address of local variable\".\n\nCorreção com heap:\n```\nint *v = malloc(3 * sizeof *v);\n```\nCom isso, a memória sobrevive ao retorno e quem a usa deve chamar free(p) no fim.\n\nAs outras alternativas:\nA) A forma da declaração não muda o fato de v ser local.\nB) printf com %d recebe p[1], que é um int; o problema não está na chamada.\nC) O vetor tem índices 0, 1 e 2; o índice 1 é válido.\nD) free só se aplica a memória obtida com malloc. Chamar free sobre um endereço da pilha também é erro.",
+      "check": "Nova resolução sem o gabarito: compilado com gcc -Wall, que emite aviso de retorno de endereço de variável local; comportamento indefinido confirmado."
+    },
+    {
+      "id": "gen-prog-event-loop",
+      "kind": "QUENTE",
+      "format": "SIMPLES",
+      "concepts": ["prog-paralelismo", "prog-paradigmas"],
+      "title": "Ordem de execução no JavaScript",
+      "subject": "Assincronia: event loop, microtarefas e macrotarefas",
+      "prompt": "Considere o trecho em JavaScript, executado num navegador ou no Node.js:\n\n```\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\nconsole.log(\"D\");\n```\n\nEm que ordem as letras aparecem?",
+      "options": ["A, B, C, D", "A, D, C, B", "A, D, B, C", "A, C, B, D", "B, C, A, D"],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nO JavaScript executa o código numa única thread com um laço de eventos (event loop).\n\n1. O código síncrono roda até o fim: imprime A, agenda o setTimeout, agenda o .then e imprime D.\n2. Ao esvaziar a pilha de chamadas, o motor executa todas as microtarefas pendentes, como as reações de Promises: imprime C.\n3. Só então passa para a próxima macrotarefa, o callback do timer, mesmo com atraso 0: imprime B.\n\nO atraso 0 do setTimeout não significa \"imediatamente\": significa \"assim que possível, na fila de tarefas\". Saber essa ordem evita erros comuns em interfaces e em servidores Node.js.\n\nAs outras alternativas:\nA) Supõe execução na ordem do texto, como se tudo fosse síncrono.\nC) Coloca o timer antes da Promise, invertendo a prioridade entre macrotarefas e microtarefas.\nD) Imprime C e B antes de D, interrompendo o código síncrono, o que não acontece.\nE) Executa os callbacks antes do código síncrono.",
+      "check": "Nova resolução sem o gabarito: trecho executado no Node.js 24; saída A, D, C, B."
+    }
+  ]
+}
