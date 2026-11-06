@@ -39,6 +39,10 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 **Dudu articulado:** as quatro poses sem acessórios usam seis camadas transparentes. Acena com uma asa, comemora com as duas, inclina a cabeça e pisca; os gestos terminam em 1,1 s. Leitura e ritmo continuam estáticos, com movimento reduzido e preferência de ocultar respeitados. Fontes/proveniência em `design/mascot/articulated/`; implementação lazy, sem biblioteca nova e com pose estática de reserva. Poses com acessórios mantêm a arte anterior. Não há laços de piscada/respiração nem olhos seguindo cursor. Enquadramento e pivôs ficam no CSS.
 
+## Núcleo por área (NUC-1, 06/11)
+
+A bússola da preparação está em **`docs/CORE-CONCEPTS.md`**: 16 áreas e a Formação Geral com conceitos, fatos que cortam alternativas, pares, pistas e pegadinhas, ligados às questões oficiais, com autoavaliação e confiança por área na Biblioteca. Próximos incrementos para a reta final na seção 7 desse documento.
+
 ## 5. O que falta (por prioridade)
 
 1. **Preservar a publicação AWS em cadernocc.com.br:** Gabriel relatou funcionamento em 06/11. Conferências operacionais de backups/restauração continuam próprias; não reabrir o diagnóstico CSS como falha atual sem evidência. O mesmo Compose de [`deploy/campus/`](../deploy/campus/README.md) serve como referência; eventual implantação IFSP PEP depende da infraestrutura institucional.
