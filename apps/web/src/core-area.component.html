@@ -1,0 +1,125 @@
+<div class="core-area-bar">
+  <button type="button" class="text-button" (click)="back.emit()"><span aria-hidden="true">←</span> Biblioteca</button>
+</div>
+@if (error()) {
+  <div class="notice" role="alert"><p>{{ error() }}</p>@if (!area()) {<button type="button" class="outline" (click)="load()">Tentar novamente</button>}</div>
+}
+@if (area(); as a) {
+  <article class="core-area" aria-labelledby="core-area-title">
+    <div class="core-area-head">
+      <div>
+        <p class="core-kicker">Núcleo por área</p>
+        <h1 id="core-area-title" tabindex="-1">{{ a.title }}</h1>
+        <p class="core-area-summary">{{ a.summary }}</p>
+      </div>
+      <div [class]="'core-confidence ' + tone(a.confidence.value)" role="group" aria-label="Sua confiança nesta área">
+        <span class="core-confidence-ring" aria-hidden="true" [style.--value]="a.confidence.value / 100"><b>{{ a.confidence.value }}</b></span>
+        <dl>
+          <div><dt>Você diz saber</dt><dd>{{ a.confidence.self }}% <small>({{ rated() }}/{{ a.concepts.length }} marcados)</small></dd></div>
+          <div><dt>Acerto nas questões</dt><dd>@if (a.confidence.answers === null) { ainda sem respostas } @else { {{ a.confidence.answers }}% <small>({{ a.confidence.attempts }} resp.)</small> }</dd></div>
+          @if (a.confidence.cards !== null) { <div><dt>Memória nos flashcards</dt><dd>{{ a.confidence.cards }}%</dd></div> }
+        </dl>
+      </div>
+    </div>
+
+    @if (a.history.total) {
+      <section class="core-history" aria-labelledby="core-history-title">
+        <h2 id="core-history-title">Quanto caiu</h2>
+        <ol class="core-editions">
+          @for (e of a.history.editions; track e.year) {
+            <li [attr.aria-label]="e.year + ': ' + e.count + (e.count === 1 ? ' questão' : ' questões')">
+              <span class="core-edition-bar" aria-hidden="true"><span [style.--value]="e.count / maxEdition()"></span></span>
+              <b aria-hidden="true">{{ e.count }}</b>
+              <span aria-hidden="true">{{ e.year }}</span>
+            </li>
+          }
+        </ol>
+        <p class="core-muted">{{ a.history.total }} questões objetivas oficiais de 2005 a 2021 (Bacharelado e cadernos comuns).</p>
+      </section>
+    }
+
+    <div class="core-actions">
+      @if (publishedCount()) {
+        <button type="button" (click)="train()">Treinar {{ a.area }} <span aria-hidden="true">→</span></button>
+      }
+      @if (a.deck) { <button type="button" class="outline" (click)="flashcards.emit()">Flashcards da área</button> }
+      @if (a.sheet) { <button type="button" class="outline" (click)="sheet.emit(a.sheet)">Ficha de uma página</button> }
+    </div>
+
+    <section class="core-section" aria-labelledby="core-concepts-title">
+      <h2 id="core-concepts-title"><span aria-hidden="true">01</span> Conceitos essenciais</h2>
+      <p class="core-muted">Para cada um: você conseguiria explicar a alguém agora, sem consultar?</p>
+      <ol class="core-concepts">
+        @for (c of a.concepts; track c.id; let i = $index) {
+          <li class="core-concept" [style.--delay]="i" [class.is-known]="c.level === 2" [class.is-weak]="c.level === 0">
+            <h3>{{ c.name }}</h3>
+            <p>{{ c.definition }}</p>
+            <p class="core-example"><span>Exemplo</span>{{ c.example }}</p>
+            <div class="core-rating" role="radiogroup" [attr.aria-label]="'Quanto você sabe de ' + c.name">
+              @for (l of levels; track l.value) {
+                <button type="button" role="radio" [attr.aria-checked]="c.level === l.value" [class]="'core-level level-' + l.value"
+                  [disabled]="saving() !== null && saving() !== c.id" (click)="rate(c, l.value)">{{ l.label }}</button>
+              }
+            </div>
+            @if (c.questions.length) {
+              <details class="core-questions">
+                <summary>Caiu em {{ c.questions.length }} {{ c.questions.length === 1 ? "questão oficial" : "questões oficiais" }}</summary>
+                <ul>
+                  @for (q of c.questions; track q.id) {
+                    <li><button type="button" class="text-button" (click)="question.emit(q.id)"><b>{{ q.year }}</b> {{ q.subject }}</button></li>
+                  }
+                </ul>
+              </details>
+            } @else {
+              <p class="core-fundamental">Fundamento da área: ainda sem questão oficial no acervo.</p>
+            }
+          </li>
+        }
+      </ol>
+    </section>
+
+    <section class="core-section" aria-labelledby="core-facts-title">
+      <h2 id="core-facts-title"><span aria-hidden="true">02</span> Fatos que cortam alternativas</h2>
+      <ul class="core-facts">
+        @for (f of a.facts; track $index) { <li>{{ f }}</li> }
+      </ul>
+    </section>
+
+    <section class="core-section" aria-labelledby="core-pairs-title">
+      <h2 id="core-pairs-title"><span aria-hidden="true">03</span> Pares que confundem</h2>
+      <dl class="core-pairs">
+        @for (p of a.pairs; track $index) {
+          <div><dt>{{ p.a }} <span aria-hidden="true">×</span><span class="visually-hidden"> versus </span> {{ p.b }}</dt><dd>{{ p.difference }}</dd></div>
+        }
+      </dl>
+    </section>
+
+    <section class="core-section" aria-labelledby="core-cues-title">
+      <h2 id="core-cues-title"><span aria-hidden="true">04</span> Pistas do enunciado</h2>
+      <p class="core-muted">Se o enunciado fala disso, pense neste conceito.</p>
+      <ul class="core-cues">
+        @for (cue of a.cues; track $index) {
+          <li><q>{{ cue.cue }}</q> <span aria-hidden="true">→</span><span class="visually-hidden"> leva a </span> <b>{{ conceptName().get(cue.concept) }}</b></li>
+        }
+      </ul>
+    </section>
+
+    <section class="core-section" aria-labelledby="core-traps-title">
+      <h2 id="core-traps-title"><span aria-hidden="true">05</span> Pegadinhas da área</h2>
+      <div class="core-traps">
+        @for (g of trapGroups(); track g.pattern) {
+          <div class="core-trap">
+            <h3>{{ trapLabels[g.pattern].name }}</h3>
+            <p class="core-trap-tip">{{ trapLabels[g.pattern].tip }}</p>
+            <ul>@for (t of g.texts; track $index) { <li>{{ t }}</li> }</ul>
+          </div>
+        }
+      </div>
+    </section>
+
+    <p class="core-refs"><strong>Para aprofundar:</strong> {{ a.references.join(" · ") }}</p>
+    <p class="core-credit">Núcleo escrito por IA (Claude) a partir das questões oficiais de 2005 a 2021 e da bibliografia indicada, sem revisão humana. Na dúvida, confira na fonte.</p>
+  </article>
+} @else if (!error()) {
+  <p role="status">Carregando a área…</p>
+}

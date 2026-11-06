@@ -1,7 +1,10 @@
 @if (error()) {
   <div class="notice" role="alert"><p>{{ error() }}</p><button type="button" class="outline" (click)="retry()" [disabled]="busy()">Tentar novamente</button></div>
 }
-@if (open(); as sheet) {
+@if (coreSlug(); as slug) {
+  <app-core-area [slug]="slug" (back)="closeCore()" (question)="question.emit($event)" (practice)="practice.emit($event)"
+    (flashcards)="flashcards.emit()" (sheet)="sheetFromCore($event)" />
+} @else if (open(); as sheet) {
   <article class="sheet" aria-labelledby="sheet-title">
     <div class="sheet-bar">
       <button type="button" class="text-button" (click)="close()"><span aria-hidden="true">←</span> Biblioteca</button>
@@ -41,8 +44,10 @@
   <section class="page-intro">
     <app-mascot pose="lendo" [size]="72" motion="none" />
     <h1 id="library-title" tabindex="-1">Biblioteca</h1>
-    <p>Fichas de uma página para revisar um assunto antes de treinar. Cada uma traz o essencial, as pegadinhas comuns e onde aprofundar.</p>
+    <p>O núcleo de cada área para saber o que estudar e cortar alternativas com segurança, e fichas de uma página para revisar um assunto antes de treinar.</p>
   </section>
+  <app-core-map (open)="openCore($event)" />
+  <h2 class="library-sheets-title">Fichas de uma página</h2>
   @if (!sheets() && !error()) {
     <p role="status">Carregando as fichas…</p>
   } @else if (sheets()) {
