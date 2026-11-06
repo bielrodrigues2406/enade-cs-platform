@@ -2,6 +2,8 @@ import { createHash } from "node:crypto";
 
 const sha256 = (text) => createHash("sha256").update(text).digest("hex");
 const identity = (document, key) => `${document}:${key}`;
+const matchesSource = (document, hash) => typeof document?.sha256 === "string" &&
+  /^[a-f0-9]{64}$/.test(document.sha256) && document.sha256 === hash;
 
 function reviewIndex(files, discursive) {
   const index = new Map();
@@ -59,14 +61,14 @@ export function buildStudyInventory({ catalog, reports, objectiveReviews, discur
   const scopeIssues = new Map();
   const duplicateLinks = [];
   for (const { data } of analyses) for (const item of data.items ?? []) {
-    if (documents.get(item.examId)?.sha256 !== item.examSha256) throw new Error(`Hash da análise divergente: ${item.examId}`);
+    if (!matchesSource(documents.get(item.examId), item.examSha256)) throw new Error(`Hash da análise divergente: ${item.examId}`);
     scopeIssues.set(identity(item.examId, item.key), (item.issues ?? []).map((i) => i.code));
     if (item.duplicateOf) duplicateLinks.push({
       from: identity(item.examId, item.key), to: identity(item.duplicateOf.examId, item.duplicateOf.key),
     });
   }
   for (const note of annotations) {
-    if (!note.evidence || documents.get(note.document)?.sha256 !== note.examSha256) throw new Error("Anotação sem evidência/hash compatível");
+    if (!note.evidence || !matchesSource(documents.get(note.document), note.examSha256)) throw new Error("Anotação sem evidência/hash compatível");
     const id = identity(note.document, note.key);
     scopeIssues.set(id, [...(scopeIssues.get(id) ?? []), note.code]);
   }
@@ -77,12 +79,13 @@ export function buildStudyInventory({ catalog, reports, objectiveReviews, discur
   for (const { data: report } of reports) {
     const doc = documents.get(report.document);
     if (!doc) throw new Error(`Relatório fora do catálogo: ${report.document}`);
+    if (typeof doc.sha256 !== "string" || !/^[a-f0-9]{64}$/.test(doc.sha256)) throw new Error(`Hash da prova ausente ou inválido: ${doc.id}`);
     if (byDocument.has(doc.id)) throw new Error(`Relatório repetido: ${doc.id}`);
     const items = report.items.map((item) => {
       const id = identity(doc.id, item.key);
       if (seen.has(id)) throw new Error(`Ocorrência repetida: ${id}`);
       seen.add(id);
-      if (item.source?.examSha256 !== doc.sha256) throw new Error(`Hash da extração divergente: ${id}`);
+      if (item.source?.examId !== doc.id || item.source?.examSha256 !== doc.sha256) throw new Error(`Hash/identidade da extração divergente: ${id}`);
       if (!["OBJECTIVE", "DISCURSIVE"].includes(item.kind)) throw new Error(`Tipo inválido: ${id}`);
       const discursiveId = identity(doc.id, String(item.number));
       if (item.kind === "DISCURSIVE") seenDiscursive.add(discursiveId);
@@ -99,8 +102,12 @@ export function buildStudyInventory({ catalog, reports, objectiveReviews, discur
     if (!seenDiscursive.has(id)) throw new Error(`Conferência discursiva sem ocorrência: ${id}`);
   }
   const occurrenceMap = new Map(occurrences.map((item) => [item.id, item]));
+  for (const note of annotations) {
+    if (!seen.has(identity(note.document, note.key))) throw new Error("Anotação sem ocorrência");
+  }
   const links = new Map();
   for (const link of duplicateLinks) {
+    if (links.has(link.from)) throw new Error("Equivalência de origem repetida");
     if (!occurrenceMap.has(link.from) || !occurrenceMap.has(link.to) ||
         occurrenceMap.get(link.from).kind !== occurrenceMap.get(link.to).kind) throw new Error("Equivalência inválida");
     links.set(link.from, link.to);
