@@ -1,0 +1,124 @@
+{
+  "slug": "matematica",
+  "area": "Matemática",
+  "title": "Matemática para Computação",
+  "summary": "Lógica, conjuntos e relações, contagem, probabilidade e estatística, e um pouco de grafos. Caiu em todas as provas, com menos questões nas últimas.",
+  "deck": "matematica",
+  "sheet": "logica-e-matematica-discreta",
+  "concepts": [
+    {
+      "id": "mat-proposicional",
+      "name": "Lógica proposicional",
+      "definition": "Fórmulas com conectivos (¬, ∧, ∨, →, ↔) avaliadas por tabela-verdade; tautologia é sempre verdadeira e contradição, sempre falsa.",
+      "example": "p → q equivale a ¬p ∨ q e à contrapositiva ¬q → ¬p, mas não à recíproca q → p.",
+      "match": ["proposicional", "formalizacao", "validade de argumentos"]
+    },
+    {
+      "id": "mat-inferencia",
+      "name": "Regras de inferência e validade",
+      "definition": "Um argumento é válido se, sempre que as premissas são verdadeiras, a conclusão também é. Modus ponens: p → q, p ⊢ q. Modus tollens: p → q, ¬q ⊢ ¬p.",
+      "example": "'Se chove, a rua molha. A rua não molhou. Logo, não choveu.' é modus tollens: válido.",
+      "match": ["inferencia", "modus", "argumento"]
+    },
+    {
+      "id": "mat-predicados",
+      "name": "Lógica de predicados e quantificadores",
+      "definition": "∀ (para todo) e ∃ (existe) quantificam variáveis; uma fórmula é válida se verdadeira em toda interpretação, e um contraexemplo derruba um ∀.",
+      "example": "A negação de 'todo aluno estudou' é 'existe aluno que não estudou': ¬∀x P(x) ≡ ∃x ¬P(x).",
+      "match": ["predicados", "contraexemplo"]
+    },
+    {
+      "id": "mat-conjuntos",
+      "name": "Conjuntos, partições e enumerabilidade",
+      "definition": "Partição divide um conjunto em blocos não vazios, disjuntos, cuja união é o todo. Um conjunto é enumerável se pode ser posto em correspondência com os naturais.",
+      "example": "ℤ e ℚ são enumeráveis; ℝ e o conjunto das partes de ℕ não são (diagonal de Cantor).",
+      "match": ["conjunto", "particao", "enumerabilidade", "indutivos"]
+    },
+    {
+      "id": "mat-relacoes",
+      "name": "Relações de equivalência e de ordem",
+      "definition": "Equivalência é reflexiva, simétrica e transitiva, e gera classes que particionam o conjunto. Ordem parcial é reflexiva, antissimétrica e transitiva, desenhada no diagrama de Hasse.",
+      "example": "'Ter o mesmo resto na divisão por 3' é equivalência com 3 classes; 'divide' sobre os naturais positivos é ordem parcial.",
+      "match": ["relacoes de equivalencia", "relacao de equivalencia", "ordem parcial", "hasse", "quociente"]
+    },
+    {
+      "id": "mat-contagem",
+      "name": "Análise combinatória",
+      "definition": "Princípio multiplicativo; permutação n!; arranjo n!/(n−k)! quando a ordem importa; combinação C(n,k) = n!/(k!(n−k)!) quando não importa.",
+      "example": "Escolher 3 de 10 pessoas para uma comissão: C(10,3) = 120. Para presidente, vice e secretário: 10·9·8 = 720.",
+      "match": ["combinatoria", "arranjos", "combinac", "full house"]
+    },
+    {
+      "id": "mat-probabilidade",
+      "name": "Probabilidade e distribuição binomial",
+      "definition": "P(A|B) = P(A ∩ B)/P(B). Eventos independentes: P(A ∩ B) = P(A)·P(B). Binomial: P(k sucessos em n) = C(n,k)·pᵏ·(1−p)ⁿ⁻ᵏ.",
+      "example": "Probabilidade de exatamente 1 bit errado em 8, com erro 0,01 por bit: 8·0,01·0,99⁷.",
+      "match": ["probabilidade", "binomial", "contingencia", "paridade"]
+    },
+    {
+      "id": "mat-estatistica",
+      "name": "Estatística descritiva e distribuição normal",
+      "definition": "Média, mediana, moda e desvio-padrão descrevem os dados. Na normal, cerca de 68%, 95% e 99,7% dos valores ficam a 1, 2 e 3 desvios da média.",
+      "example": "Com média 70 e desvio 10, cerca de 95% das notas ficam entre 50 e 90.",
+      "match": ["normal", "empirica", "estatistic"]
+    },
+    {
+      "id": "mat-inferencia-estatistica",
+      "name": "Correlação, regressão e intervalo de confiança",
+      "definition": "O coeficiente r vai de −1 a 1 e mede associação linear; a regressão ajusta a reta y = a + bx. O intervalo de confiança dá uma faixa plausível para a média da população.",
+      "example": "Mais confiança (99% em vez de 95%) alarga o intervalo; amostra maior estreita.",
+      "match": ["regressao", "correlacao", "intervalo de confianca"]
+    },
+    {
+      "id": "mat-grafos",
+      "name": "Teoria dos grafos (fundamentos)",
+      "definition": "Grau é o número de arestas de um vértice; grafo conexo tem caminho entre quaisquer dois vértices; completo Kₙ liga todos os pares.",
+      "example": "A soma dos graus é 2·|E|, logo o número de vértices de grau ímpar é sempre par.",
+      "match": ["grafos", "grau dos vertices", "grafo completo", "conectividade"]
+    },
+    {
+      "id": "mat-inducao",
+      "name": "Indução matemática",
+      "definition": "Prova P(n) para todo n ≥ n₀ mostrando a base P(n₀) e o passo P(k) → P(k+1).",
+      "example": "1 + 2 + … + n = n(n+1)/2: vale para n = 1 e, somando k+1 dos dois lados, vale para k+1.",
+      "match": ["inducao", "indutivo"]
+    }
+  ],
+  "facts": [
+    "p → q ≡ ¬p ∨ q ≡ ¬q → ¬p (contrapositiva). A recíproca (q → p) e a inversa (¬p → ¬q) não são equivalentes.",
+    "De Morgan: ¬(p ∧ q) ≡ ¬p ∨ ¬q e ¬(p ∨ q) ≡ ¬p ∧ ¬q.",
+    "Falácias comuns: afirmar o consequente (p → q, q ⊢ p) e negar o antecedente (p → q, ¬p ⊢ ¬q).",
+    "¬∀x P(x) ≡ ∃x ¬P(x) e ¬∃x P(x) ≡ ∀x ¬P(x).",
+    "Equivalência ⇒ classes que formam uma partição; ordem parcial ⇒ diagrama de Hasse (sem laços nem arestas transitivas).",
+    "Ordem importa: arranjo/permutação. Não importa: combinação.",
+    "Kₙ tem n(n−1)/2 arestas; árvore com n vértices tem n − 1 arestas.",
+    "Caminho euleriano existe em grafo conexo com 0 ou 2 vértices de grau ímpar.",
+    "Normal: 68% em ±1σ, 95% em ±2σ, 99,7% em ±3σ.",
+    "Correlação não implica causalidade; r = 0 indica ausência de relação linear, não de qualquer relação.",
+    "|P(ℕ)| > |ℕ|: o conjunto das partes de um conjunto infinito enumerável não é enumerável."
+  ],
+  "pairs": [
+    { "a": "Contrapositiva", "b": "Recíproca", "difference": "¬q → ¬p equivale a p → q; q → p não equivale." },
+    { "a": "Arranjo", "b": "Combinação", "difference": "No arranjo a ordem conta (pódio); na combinação não (comissão)." },
+    { "a": "Relação de equivalência", "b": "Ordem parcial", "difference": "Equivalência é simétrica; ordem parcial é antissimétrica. A primeira agrupa, a segunda hierarquiza." },
+    { "a": "Eventos independentes", "b": "Eventos mutuamente exclusivos", "difference": "Independentes: P(A∩B) = P(A)P(B). Exclusivos: P(A∩B) = 0. Eventos exclusivos com probabilidades positivas não são independentes." },
+    { "a": "Média", "b": "Mediana", "difference": "A média é puxada por valores extremos; a mediana não." }
+  ],
+  "cues": [
+    { "cue": "se… então, logo, conclui-se, é válido", "concept": "mat-inferencia" },
+    { "cue": "para todo, existe, contraexemplo", "concept": "mat-predicados" },
+    { "cue": "reflexiva, simétrica, transitiva, classes", "concept": "mat-relacoes" },
+    { "cue": "de quantas maneiras, sem importar a ordem", "concept": "mat-contagem" },
+    { "cue": "dado que, sabendo que, condicionado", "concept": "mat-probabilidade" },
+    { "cue": "desvio-padrão, curva em sino, 95%", "concept": "mat-estatistica" }
+  ],
+  "traps": [
+    { "pattern": "INVERTIDA", "text": "Tomar a recíproca como equivalente à condicional: de 'se p então q' não se conclui 'se q então p'." },
+    { "pattern": "CAUSA", "text": "Correlação alta apresentada como prova de que uma variável causa a outra." },
+    { "pattern": "PAR", "text": "Usar arranjo quando a ordem não importa, ou combinação quando importa." },
+    { "pattern": "PAR", "text": "Confundir eventos independentes com mutuamente exclusivos." },
+    { "pattern": "ABSOLUTO", "text": "'Correlação zero significa que as variáveis não têm relação nenhuma': só não há relação linear." },
+    { "pattern": "GRANDEZA", "text": "Aumentar o nível de confiança estreitaria o intervalo: é o contrário, ele alarga." }
+  ],
+  "references": ["Rosen, Matemática Discreta e suas Aplicações", "Gersting, Fundamentos Matemáticos para a Ciência da Computação", "Bussab e Morettin, Estatística Básica"]
+}

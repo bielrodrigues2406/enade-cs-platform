@@ -1,0 +1,110 @@
+{
+  "slug": "programacao",
+  "area": "Programação",
+  "title": "Programação e linguagens",
+  "summary": "Paradigmas, orientação a objetos, escopo e tipos, memória e recursão. Muitas questões de outras áreas também pedem rastrear código.",
+  "deck": "programacao",
+  "concepts": [
+    {
+      "id": "prog-paradigmas",
+      "name": "Paradigmas de programação",
+      "definition": "Imperativo (comandos que mudam estado), orientado a objetos (objetos com estado e comportamento), funcional (funções puras, sem efeitos colaterais) e lógico (fatos e regras, como Prolog).",
+      "example": "Em Haskell, a mesma função com a mesma entrada sempre devolve o mesmo resultado (transparência referencial).",
+      "match": ["paradigmas"]
+    },
+    {
+      "id": "prog-oo",
+      "name": "Orientação a objetos",
+      "definition": "Encapsulamento (esconder o estado), herança (reaproveitar e especializar), polimorfismo (mesma chamada, comportamentos diferentes) e abstração.",
+      "example": "forma.area() chama a implementação de Círculo ou de Quadrado conforme o objeto real (ligação dinâmica).",
+      "match": ["encapsulamento", "subtipos", "tipos de dados abstratos", "visibilidade"]
+    },
+    {
+      "id": "prog-visibilidade",
+      "name": "Modificadores de acesso",
+      "definition": "private: só a própria classe; protected: classe e subclasses (em Java, também o pacote); public: todos; sem modificador (Java): só o pacote.",
+      "example": "Atributo private com getters e setters é o encapsulamento clássico.",
+      "match": ["modificadores", "visibilidade"]
+    },
+    {
+      "id": "prog-escopo-tipos",
+      "name": "Escopo e sistemas de tipos",
+      "definition": "Escopo estático (léxico): a variável é resolvida pelo texto do programa. Escopo dinâmico: pela pilha de chamadas em execução. Tipagem estática verifica tipos na compilação; dinâmica, na execução.",
+      "example": "Com escopo dinâmico, uma função enxerga a variável local de quem a chamou.",
+      "match": ["escopo", "verificacao de tipos"]
+    },
+    {
+      "id": "prog-memoria",
+      "name": "Memória: pilha, heap e ponteiros",
+      "definition": "Variáveis locais vivem na pilha e somem ao fim da função; malloc/new alocam no heap até free/delete. Erros: vazamento, ponteiro pendente, liberar duas vezes.",
+      "example": "Devolver o endereço de uma variável local em C gera ponteiro pendente.",
+      "match": ["malloc", "free", "ponteiro", "pilha em c"]
+    },
+    {
+      "id": "prog-recursao",
+      "name": "Recursão e rastreamento de código",
+      "definition": "Toda função recursiva precisa de caso base e de chamadas que se aproximem dele. Rastrear é simular a pilha de chamadas à mão.",
+      "example": "f(n) = n + f(n−1), f(0) = 0: f(3) = 3 + 2 + 1 + 0 = 6.",
+      "match": ["recursiva", "rastreamento"]
+    },
+    {
+      "id": "prog-passagem",
+      "name": "Passagem de parâmetros",
+      "definition": "Por valor, a função recebe uma cópia; por referência, recebe acesso à própria variável. Em Java, referências a objetos são passadas por valor.",
+      "example": "Trocar dois inteiros (swap) em C só funciona passando ponteiros.",
+      "match": ["passagem de parametro", "referencia"]
+    },
+    {
+      "id": "prog-logica",
+      "name": "Programação em lógica (Prolog)",
+      "definition": "Fatos e regras; consultas resolvidas por unificação e retrocesso (backtracking). Negação por falha: \\+ P vale se P não puder ser provado (hipótese do mundo fechado).",
+      "example": "Se não há o fato voa(pinguim), \\+ voa(pinguim) é verdadeiro, sem que isso seja um fato afirmado.",
+      "match": ["prolog", "negacao por falha", "mundo fechado"]
+    },
+    {
+      "id": "prog-paralelismo",
+      "name": "Paralelismo de laços",
+      "definition": "Iterações independentes podem rodar em paralelo; uma dependência entre iterações (uma usa o resultado da anterior) impede isso sem reescrita.",
+      "example": "C[i][j] = Σ A[i][k]·B[k][j]: cada C[i][j] é independente e pode ser calculado em paralelo.",
+      "match": ["paraleliz", "lacos"]
+    },
+    {
+      "id": "prog-polimorfismo",
+      "name": "Sobrecarga, sobrescrita e classes abstratas",
+      "definition": "Sobrecarga: mesmo nome, parâmetros diferentes (resolvida na compilação). Sobrescrita: a subclasse redefine o método (resolvida na execução). Classe abstrata não é instanciada; interface define só o contrato.",
+      "example": "toString() redefinido numa subclasse é sobrescrita.",
+      "match": ["sobrecarga", "sobrescrita", "abstrata", "interface"]
+    }
+  ],
+  "facts": [
+    "Os quatro pilares da OO: encapsulamento, herança, polimorfismo e abstração.",
+    "Sobrecarga é resolvida na compilação; sobrescrita, na execução (ligação dinâmica).",
+    "Escopo estático é o da maioria das linguagens atuais (C, Java, Python); dinâmico aparece em Lisp antigo e shell.",
+    "Pilha: locais e chamadas, liberadas automaticamente. Heap: alocação dinâmica, liberada pelo programador ou pelo coletor de lixo.",
+    "Prolog: unificação + backtracking; negação por falha assume o mundo fechado.",
+    "Funcional puro: sem efeitos colaterais, imutabilidade, funções de alta ordem.",
+    "Recursão sem caso base alcançável estoura a pilha."
+  ],
+  "pairs": [
+    { "a": "Sobrecarga", "b": "Sobrescrita", "difference": "Mesmo nome com assinaturas diferentes × redefinição na subclasse com a mesma assinatura." },
+    { "a": "Escopo estático", "b": "Escopo dinâmico", "difference": "Resolve pelo lugar onde a função foi escrita × pelo lugar de onde foi chamada." },
+    { "a": "Classe abstrata", "b": "Interface", "difference": "Pode ter estado e métodos implementados × só o contrato (em Java moderno, também métodos default)." },
+    { "a": "Passagem por valor", "b": "Passagem por referência", "difference": "Cópia × a própria variável." },
+    { "a": "Pilha", "b": "Heap", "difference": "Memória automática das chamadas × memória pedida explicitamente, que vive até ser liberada." }
+  ],
+  "cues": [
+    { "cue": "private, protected, acesso fora da classe", "concept": "prog-visibilidade" },
+    { "cue": "qual valor é impresso, chamadas recursivas", "concept": "prog-recursao" },
+    { "cue": "malloc, free, ponteiro", "concept": "prog-memoria" },
+    { "cue": "fatos, regras, consulta, unificação", "concept": "prog-logica" },
+    { "cue": "variável não local, quem chamou", "concept": "prog-escopo-tipos" }
+  ],
+  "traps": [
+    { "pattern": "PAR", "text": "Chamar sobrecarga de polimorfismo de subtipo resolvido em execução, ou vice-versa." },
+    { "pattern": "VIZINHO", "text": "Encapsulamento confundido com herança: esconder dados não é reaproveitar código." },
+    { "pattern": "CONDICAO", "text": "Laço com dependência entre iterações apresentado como trivialmente paralelizável." },
+    { "pattern": "ABSOLUTO", "text": "'Negação por falha prova que o fato é falso': prova só que não foi possível prová-lo." },
+    { "pattern": "INVERTIDA", "text": "Variável local que sobrevive ao fim da função na pilha." }
+  ],
+  "references": ["Sebesta, Conceitos de Linguagens de Programação", "Deitel, Java: como programar", "Kernighan e Ritchie, A Linguagem de Programação C"]
+}

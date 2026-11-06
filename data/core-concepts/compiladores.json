@@ -1,0 +1,87 @@
+{
+  "slug": "compiladores",
+  "area": "Compiladores",
+  "title": "Compiladores",
+  "summary": "Uma questão em quase toda prova: fases do compilador e análise sintática (LL e LR), sempre ligadas a gramáticas.",
+  "deck": "compiladores",
+  "sheet": "compiladores",
+  "concepts": [
+    {
+      "id": "comp-fases",
+      "name": "Fases de um compilador",
+      "definition": "Análise léxica (tokens), sintática (árvore pela gramática), semântica (tipos, escopo), código intermediário, otimização e geração de código; a tabela de símbolos atravessa todas.",
+      "example": "int x = \"a\"; passa na sintática e é barrado na semântica (tipos incompatíveis).",
+      "match": ["fases do compilador", "lexica"]
+    },
+    {
+      "id": "comp-tradutores",
+      "name": "Compiladores, interpretadores e tradutores",
+      "definition": "Compilador traduz o programa inteiro para outra linguagem antes de executar; interpretador executa instrução a instrução; montador traduz assembly para código de máquina. Há esquemas mistos (bytecode e JIT).",
+      "example": "Java compila para bytecode, que a JVM interpreta e compila em tempo de execução (JIT).",
+      "match": ["interpretadores", "tradutores"]
+    },
+    {
+      "id": "comp-lexico",
+      "name": "Análise léxica",
+      "definition": "Agrupa caracteres em tokens descritos por expressões regulares e reconhecidos por autômatos finitos; descarta espaços e comentários.",
+      "example": "contador1 vira o token ID; 3.14, o token NUM_REAL.",
+      "match": ["automatos na analise", "token"]
+    },
+    {
+      "id": "comp-gramaticas",
+      "name": "Gramáticas livres de contexto, BNF e ambiguidade",
+      "definition": "A sintaxe é descrita por GLC, escrita em BNF. Gramática ambígua gera mais de uma árvore para a mesma sentença.",
+      "example": "E → E + E | E * E | id é ambígua para id + id * id; precedência e associatividade resolvem.",
+      "match": ["gramatica", "bnf", "ambiguidade", "expressoes"]
+    },
+    {
+      "id": "comp-descendente",
+      "name": "Análise descendente (LL)",
+      "definition": "Constrói a árvore da raiz para as folhas. LL(1) decide com 1 símbolo de lookahead usando FIRST e FOLLOW; exige gramática sem recursão à esquerda e fatorada.",
+      "example": "A → A a | b tem recursão à esquerda; reescreve-se como A → b A', A' → a A' | ε.",
+      "match": ["top-down", "preditiva", "ll(1)", "descendente"]
+    },
+    {
+      "id": "comp-ascendente",
+      "name": "Análise ascendente (LR)",
+      "definition": "Constrói das folhas para a raiz por empilha-reduz (shift-reduce). LR(0) ⊂ SLR ⊂ LALR ⊂ LR(1) em poder; conflitos shift/reduce e reduce/reduce indicam gramática fora da classe.",
+      "example": "O 'if-else pendente' gera conflito shift/reduce, resolvido associando o else ao if mais próximo.",
+      "match": ["bottom-up", "lr(0)", "shift-reduce", "ascendente"]
+    },
+    {
+      "id": "comp-semantica",
+      "name": "Análise semântica e tabela de símbolos",
+      "definition": "Verifica tipos, declarações e escopos usando a tabela de símbolos; pode anotar a árvore com atributos.",
+      "example": "Usar variável não declarada é erro semântico, não sintático.",
+      "match": ["semantica", "tabela de simbolos"]
+    }
+  ],
+  "facts": [
+    "Léxica usa expressões regulares e autômatos finitos; sintática usa gramáticas livres de contexto.",
+    "LL(1) não aceita recursão à esquerda nem gramática ambígua; fatorar à esquerda ajuda.",
+    "LR é mais poderoso que LL: toda gramática LL(1) é LR(1), mas não o contrário.",
+    "LR(0) ⊂ SLR(1) ⊂ LALR(1) ⊂ LR(1). Yacc e Bison geram analisadores LALR.",
+    "Gramática ambígua não é LL(k) nem LR(k).",
+    "Erros: léxico (símbolo inválido), sintático (estrutura), semântico (tipo, declaração)."
+  ],
+  "pairs": [
+    { "a": "Compilador", "b": "Interpretador", "difference": "Traduz tudo antes × executa enquanto lê." },
+    { "a": "LL (descendente)", "b": "LR (ascendente)", "difference": "Da raiz para as folhas, prevendo × das folhas para a raiz, reduzindo." },
+    { "a": "Erro sintático", "b": "Erro semântico", "difference": "Estrutura inválida (falta ';') × estrutura válida com significado inválido (tipos)." },
+    { "a": "Shift/reduce", "b": "Reduce/reduce", "difference": "Dúvida entre empilhar e reduzir × entre duas reduções." }
+  ],
+  "cues": [
+    { "cue": "tokens, lexema, expressão regular", "concept": "comp-lexico" },
+    { "cue": "FIRST, FOLLOW, lookahead", "concept": "comp-descendente" },
+    { "cue": "itens LR, conflito, empilha-reduz", "concept": "comp-ascendente" },
+    { "cue": "mais de uma árvore de derivação", "concept": "comp-gramaticas" },
+    { "cue": "tipo incompatível, variável não declarada", "concept": "comp-semantica" }
+  ],
+  "traps": [
+    { "pattern": "VIZINHO", "text": "Atribuir à análise léxica a verificação de tipos, ou à sintática a de declarações." },
+    { "pattern": "CONDICAO", "text": "Usar LL(1) com gramática recursiva à esquerda." },
+    { "pattern": "INVERTIDA", "text": "LL descrito como mais poderoso que LR." },
+    { "pattern": "ABSOLUTO", "text": "'Toda gramática livre de contexto tem analisador LL(1)': muitas não têm." }
+  ],
+  "references": ["Aho, Lam, Sethi e Ullman, Compiladores: princípios, técnicas e ferramentas (livro do dragão)", "Louden, Compiladores: princípios e práticas"]
+}

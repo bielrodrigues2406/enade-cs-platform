@@ -1,0 +1,106 @@
+{
+  "slug": "formacao-geral",
+  "area": "Formação Geral",
+  "title": "Formação Geral",
+  "summary": "Em 2026 são 15 questões objetivas, comuns a todos os cursos e balizadas pelos princípios dos direitos humanos. Pedem leitura atenta de textos, gráficos e charges e repertório sobre sociedade, ambiente e cidadania.",
+  "concepts": [
+    {
+      "id": "fg-graficos",
+      "name": "Leitura de gráficos, tabelas e infográficos",
+      "definition": "Identificar o que cada eixo mede, a unidade, a escala e o período antes de comparar; distinguir valor absoluto de percentual.",
+      "example": "Passar de 10% para 15% é aumento de 5 pontos percentuais, mas de 50% em termos relativos.",
+      "match": ["grafico", "graficos", "infografico", "mapa", "porcentagens", "tabela"]
+    },
+    {
+      "id": "fg-calculo",
+      "name": "Proporção e cálculo do cotidiano",
+      "definition": "Regra de três, porcentagem, razão e proporção inversa aplicadas a tarifas, consumo e medidas.",
+      "example": "Consumo em kWh = potência (kW) × horas de uso; multiplique pela tarifa para obter o custo.",
+      "match": ["calculo", "proporcao", "consumo", "tarifa"]
+    },
+    {
+      "id": "fg-texto",
+      "name": "Interpretação de textos, poemas e charges",
+      "definition": "Achar a tese e os argumentos, separar o que o texto diz do que extrapola, perceber ironia e crítica nas charges.",
+      "example": "Alternativa que generaliza além do que o texto afirma ('sempre', 'todos') costuma estar errada.",
+      "match": ["interpretacao", "charges", "poema", "versos", "texto"]
+    },
+    {
+      "id": "fg-direitos-humanos",
+      "name": "Direitos humanos e cidadania",
+      "definition": "Dignidade, igualdade, não discriminação e participação. Base declarada dos itens de Formação Geral: a alternativa que viola direitos ou culpa a vítima não é a esperada.",
+      "example": "Diante de xenofobia contra imigrantes, a resposta coerente reconhece o direito à dignidade e à integração.",
+      "match": ["direitos", "xenofobia", "imigracao", "indigenas", "cidadania", "mulheres", "genero"]
+    },
+    {
+      "id": "fg-desigualdade",
+      "name": "Desigualdade social e econômica",
+      "definition": "Renda, escolaridade, raça, gênero e território; medidas como curva de Lorenz e índice de Gini (0 = igualdade total, 1 = desigualdade máxima).",
+      "example": "Quanto mais a curva de Lorenz se afasta da diagonal, maior a desigualdade.",
+      "match": ["desigualdade", "lorenz", "mobilidade social", "pobreza", "exclusao social", "escolaridade"]
+    },
+    {
+      "id": "fg-sustentabilidade",
+      "name": "Meio ambiente e desenvolvimento sustentável",
+      "definition": "Atender às necessidades de hoje sem comprometer as futuras gerações; Agenda 2030 com 17 Objetivos de Desenvolvimento Sustentável; pegada ecológica e biocapacidade; clima e biodiversidade.",
+      "example": "Pegada ecológica maior que a biocapacidade indica consumo acima do que o ambiente repõe.",
+      "match": ["sustentab", "ods", "biodiversidade", "pegada", "desmatamento", "agua", "agricultura", "alimentos", "ambiental"]
+    },
+    {
+      "id": "fg-trabalho",
+      "name": "Trabalho e economia",
+      "definition": "Informalidade, plataformização (gig economy), jornada, gênero e renda, terceiro setor e responsabilidade social.",
+      "example": "Motorista de aplicativo sem vínculo nem proteção social é um caso de precarização pela plataformização.",
+      "match": ["trabalho", "gig", "jornada", "terceiro setor", "responsabilidade social", "emprego"]
+    },
+    {
+      "id": "fg-tecnologia-sociedade",
+      "name": "Tecnologia, informação e sociedade",
+      "definition": "Inclusão digital, cibercultura, redes sociais, excesso de informação, desinformação e qualidade da informação em saúde.",
+      "example": "Ter acesso à internet não basta para a inclusão digital: é preciso saber usar e avaliar a informação.",
+      "match": ["digital", "cibercultura", "redes sociais", "informacao", "televisao", "producao cultural"]
+    },
+    {
+      "id": "fg-cidades-saude",
+      "name": "Cidades, mobilidade e saúde pública",
+      "definition": "Mobilidade urbana, qualidade de vida, saúde coletiva, vulnerabilidade social e políticas públicas.",
+      "example": "Ciclovias reduzem emissões e melhoram a saúde, mas dependem de segurança e integração ao transporte.",
+      "match": ["mobilidade urbana", "bicicleta", "urbana", "saude", "covid", "suicidio", "seguranca publica", "rurais e urbanas", "cidade"]
+    },
+    {
+      "id": "fg-democracia-cultura",
+      "name": "Democracia, educação, cultura e patrimônio",
+      "definition": "Participação política, transparência, referendo e modelos de democracia; educação como direito; arte, literatura e patrimônio cultural como expressão social e histórica.",
+      "example": "Democracia consensual busca acordos amplos entre muitos grupos; a majoritária dá o governo a quem tem a maioria.",
+      "match": ["democracia", "referendo", "reforma politica", "educacao", "patrimonio", "arte", "expressionismo", "machado", "fotografia", "terrorismo", "inovacao"]
+    }
+  ],
+  "facts": [
+    "2026: 15 questões objetivas de Formação Geral, comuns aos cursos de bacharelado e tecnologia, sem discursiva.",
+    "Os itens de Formação Geral são balizados pelos princípios dos direitos humanos.",
+    "Ponto percentual mede a diferença entre percentuais; variação percentual mede a mudança relativa.",
+    "Gini: 0 = igualdade total, 1 = desigualdade máxima.",
+    "Agenda 2030: 17 Objetivos de Desenvolvimento Sustentável.",
+    "Correlação num gráfico não prova causa."
+  ],
+  "pairs": [
+    { "a": "Ponto percentual", "b": "Variação percentual", "difference": "De 10% para 15%: +5 p.p. × +50%." },
+    { "a": "O que o texto afirma", "b": "O que a alternativa extrapola", "difference": "A correta se apoia no texto; a errada generaliza ou acrescenta." },
+    { "a": "Igualdade", "b": "Equidade", "difference": "Tratar todos igual × tratar de forma diferente para corrigir desvantagens." }
+  ],
+  "cues": [
+    { "cue": "eixo, série histórica, percentual", "concept": "fg-graficos" },
+    { "cue": "a charge critica, o autor sugere", "concept": "fg-texto" },
+    { "cue": "minorias, vulneráveis, discriminação", "concept": "fg-direitos-humanos" },
+    { "cue": "gerações futuras, Agenda 2030", "concept": "fg-sustentabilidade" },
+    { "cue": "renda, concentração, Gini", "concept": "fg-desigualdade" }
+  ],
+  "traps": [
+    { "pattern": "ABSOLUTO", "text": "Alternativas com 'sempre', 'nunca', 'exclusivamente' ou 'todos' raramente se sustentam no texto." },
+    { "pattern": "CAUSA", "text": "Atribuir causa a uma relação que o gráfico só mostra como associação." },
+    { "pattern": "GRANDEZA", "text": "Confundir pontos percentuais com variação percentual, ou ler a escala errada." },
+    { "pattern": "VIZINHO", "text": "Alternativa verdadeira no mundo, mas que não responde ao que o texto ou o comando pede." },
+    { "pattern": "INVERTIDA", "text": "Culpabilizar o indivíduo por um problema estrutural que o texto descreve como social." }
+  ],
+  "references": ["Portaria Inep nº 154/2026 (Formação Geral)", "Declaração Universal dos Direitos Humanos", "ONU, Agenda 2030 e os ODS"]
+}

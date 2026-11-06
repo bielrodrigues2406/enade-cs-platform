@@ -1,0 +1,76 @@
+{
+  "slug": "sociedade-e-etica",
+  "area": "Sociedade e ética",
+  "title": "Computação, sociedade e ética",
+  "summary": "Propriedade intelectual, licenças, proteção de dados (LGPD) e impactos sociais. Conversa direto com a Formação Geral.",
+  "concepts": [
+    {
+      "id": "et-direitos-autorais",
+      "name": "Direitos autorais e pirataria de software",
+      "definition": "Software é protegido por direito autoral (Lei 9.609/1998, do software, e Lei 9.610/1998). Copiar ou distribuir sem licença é pirataria.",
+      "example": "Compartilhar em rede P2P um programa pago infringe direitos autorais, mesmo sem lucro.",
+      "match": ["pirataria", "direitos autorais", "ponto a ponto"]
+    },
+    {
+      "id": "et-licencas",
+      "name": "Licenças: software livre, código aberto e proprietário",
+      "definition": "Software livre garante quatro liberdades: executar, estudar, redistribuir e modificar. GPL é copyleft (derivados mantêm a licença); MIT e BSD são permissivas. Freeware é gratuito, não necessariamente livre.",
+      "example": "Um programa gratuito sem código-fonte disponível é freeware, não software livre.",
+      "match": ["licenc", "software livre"]
+    },
+    {
+      "id": "et-lgpd",
+      "name": "LGPD e proteção de dados pessoais",
+      "definition": "Lei 13.709/2018. Dado pessoal identifica ou pode identificar alguém; dado sensível inclui saúde, origem racial, religião, biometria. Princípios: finalidade, adequação, necessidade (minimização), transparência e segurança. O consentimento é uma das bases legais, não a única. Fiscalização pela ANPD.",
+      "example": "Dado anonimizado de forma irreversível deixa de ser dado pessoal para a LGPD.",
+      "match": ["lgpd", "protecao de dados"]
+    },
+    {
+      "id": "et-marco-civil",
+      "name": "Marco Civil da Internet e crimes cibernéticos",
+      "definition": "Lei 12.965/2014: neutralidade de rede, proteção da privacidade e guarda de registros de acesso. A Lei 12.737/2012 tipifica a invasão de dispositivo informático.",
+      "example": "Provedor não pode tratar de forma diferente o tráfego de um serviço concorrente (neutralidade).",
+      "match": ["marco civil", "crime"]
+    },
+    {
+      "id": "et-etica-profissional",
+      "name": "Ética profissional",
+      "definition": "Códigos de ética (ACM, SBC) pedem honestidade, competência, respeito à privacidade, evitar danos e assumir responsabilidade pelo trabalho.",
+      "example": "Ser pedido para esconder uma falha de segurança conhecida do cliente fere o código de ética.",
+      "match": ["etica"]
+    },
+    {
+      "id": "et-impactos",
+      "name": "Impactos sociais da Computação",
+      "definition": "Inclusão e exclusão digital, viés algorítmico, desinformação, plataformização do trabalho, vigilância, lixo eletrônico e consumo de energia.",
+      "example": "Reconhecimento facial com mais erros para pessoas negras é viés algorítmico com efeito discriminatório.",
+      "match": ["inclusao digital", "impacto"]
+    }
+  ],
+  "facts": [
+    "Lei do software: 9.609/1998. Direitos autorais: 9.610/1998. Marco Civil: 12.965/2014. LGPD: 13.709/2018.",
+    "Software livre ≠ gratuito: livre diz respeito às liberdades, não ao preço.",
+    "LGPD: consentimento é uma entre as bases legais; dado sensível tem proteção reforçada.",
+    "Dado anonimizado (sem possibilidade razoável de reverter) não é dado pessoal; pseudonimizado ainda é.",
+    "ANPD é a autoridade nacional que fiscaliza a LGPD."
+  ],
+  "pairs": [
+    { "a": "Software livre", "b": "Freeware", "difference": "Liberdade de estudar e modificar (com código-fonte) × só gratuito." },
+    { "a": "Copyleft (GPL)", "b": "Permissiva (MIT)", "difference": "Derivados mantêm a mesma licença × derivados podem até virar proprietários." },
+    { "a": "Dado anonimizado", "b": "Dado pseudonimizado", "difference": "Sem como reidentificar (fora da LGPD) × reidentificável com informação adicional (dentro da LGPD)." },
+    { "a": "Controlador", "b": "Operador", "difference": "Decide sobre o tratamento × trata os dados em nome do controlador." }
+  ],
+  "cues": [
+    { "cue": "copiar, distribuir sem licença", "concept": "et-direitos-autorais" },
+    { "cue": "código-fonte, liberdade, copyleft", "concept": "et-licencas" },
+    { "cue": "titular, consentimento, finalidade", "concept": "et-lgpd" },
+    { "cue": "neutralidade, provedor, registros", "concept": "et-marco-civil" }
+  ],
+  "traps": [
+    { "pattern": "PAR", "text": "Software livre tratado como sinônimo de gratuito." },
+    { "pattern": "ABSOLUTO", "text": "'Pela LGPD, basta o consentimento para tratar qualquer dado': há outras bases legais e limites de finalidade." },
+    { "pattern": "ABSOLUTO", "text": "'Sem fins lucrativos, copiar software não é infração'." },
+    { "pattern": "PAR", "text": "Dado pseudonimizado tratado como anonimizado." }
+  ],
+  "references": ["Lei 13.709/2018 (LGPD)", "Lei 12.965/2014 (Marco Civil da Internet)", "Lei 9.609/1998 (Lei do Software)", "Código de Ética da ACM"]
+}
