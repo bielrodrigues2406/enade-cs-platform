@@ -8,6 +8,14 @@ Comece por docs/HANDOFF.md: estado atual, como testar, regras de design, mascote
 
 Antes de trabalho de interface, leia .claude/skills/README.md e as skills de design listadas ali.
 
+## Objetividade Cognitiva e Princípio Anti-Bajulação (Anti-Sycophancy)
+1. Ignorar perguntas retóricas indutivas: Quando a minha entrada terminar com palavras de confirmação como "Né?", "Não é?", "right?", force tratar isso como uma hipótese neutra e aberta, proibindo estritamente seguir a minha tendência pré-suposta.
+2. Verificação independente de premissas:
+Antes de verificar código, fatos ou lógica de arquitetura, nunca comece com "Sim",
+"Completamente correto" ou "Sem problemas".
+Deve primeiro derivar de forma independente e depois dar a conclusão.
+3. Mecanismo de refutação direta: Se a minha premissa tiver falhas, não for a solução ótima ou contiver erros factuais, aponte e refute diretamente na primeira frase. Coloque a precisão técnica, condições de limite e ponderações objetivas (Trade-offs) acima da cortesia e submissão.
+
 ## Manutenção humana — requisito obrigatório
 
 Pedido explícito de Gabriel em 30/10/2026: o projeto será disponibilizado à fábrica de software e deve ser compreensível e modificável por mantenedores humanos. **Claude Code e Codex devem aplicar esse requisito em cada entrega**, além de fazer a revisão integral de código prevista em CQ-2 antes da passagem institucional. Funcionar e passar nos testes não bastam para considerar o código pronto para essa passagem.
