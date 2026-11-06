@@ -1,5 +1,5 @@
 @if (error()) {
-  <div class="notice" role="alert"><p>{{ error() }}</p></div>
+  <div class="notice" role="alert"><p>{{ error() }}</p><button type="button" class="outline" (click)="ngOnInit()">Tentar novamente</button></div>
 }
 @if (data(); as board) {
   <dl class="dash-summary">

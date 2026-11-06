@@ -48,7 +48,7 @@ test("a wrong answer keeps a personal reflection, protects its draft and shows i
     await route.fulfill({ status: 503, json: { message: "Conexão interrompida. Tente novamente." } });
   });
   await page.getByRole("button", { name: "Guardar reflexão" }).click();
-  await expect(page.getByRole("alert")).toContainText("Conexão interrompida");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   await expect(text).toHaveValue("Confundi isolamento com desfazer uma transação incompleta.");
   await page.getByRole("button", { name: "Guardar reflexão" }).click();
   await expect(page.getByText("Reflexão guardada no caderno de erros.", { exact: true })).toBeVisible();

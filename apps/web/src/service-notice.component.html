@@ -1,0 +1,10 @@
+<div aria-live="polite" aria-atomic="true">
+  @if (notice(); as item) {
+    <aside aria-label="Manutenção programada">
+      <strong>Manutenção programada</strong>
+      <p>{{ item.message }}</p>
+      <p class="schedule">De {{ date(item.startsAt) }} a {{ date(item.endsAt) }} · horário de Brasília.</p>
+      <p class="schedule">O serviço pode ficar indisponível nesse período. Salve suas respostas e pause a prova ou o treino antes da manutenção.</p>
+    </aside>
+  }
+</div>

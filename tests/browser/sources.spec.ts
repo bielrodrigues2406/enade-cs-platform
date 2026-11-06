@@ -349,7 +349,7 @@ test("source verification enables official provenance while the definitive key r
       .getByRole("button", { name: "Verificar fonte", exact: true })
       .click();
     await expect(reviewer.getByRole("alert")).toContainText(
-      "Não foi possível confirmar a fonte agora.",
+      "O CadernoCC está temporariamente indisponível.",
     );
     await expect(
       reviewer.getByLabel("Parecer sobre a fonte", { exact: true }),

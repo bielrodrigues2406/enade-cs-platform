@@ -300,7 +300,7 @@ test("authoring, independent rejection/publication, version replacement and hist
       .getByRole("button", { name: "Salvar rascunho", exact: true })
       .click();
     await expect(page.getByRole("alert")).toContainText(
-      "Não foi possível salvar agora.",
+      "O CadernoCC está temporariamente indisponível.",
     );
     await expect(page.getByLabel("Enunciado", { exact: true })).toHaveValue(
       input.prompt,

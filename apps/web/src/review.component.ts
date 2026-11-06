@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { MascotComponent } from "./mascot.component";
 import { Component, EventEmitter, Input, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -98,7 +99,7 @@ export class ReviewComponent {
     this.loading.set(true);
     this.error.set("");
     try {
-      const response = await fetch(
+      const data = await requestJson<Notebook>(
         "/api/review?" +
           new URLSearchParams({
             topic: this.topic,
@@ -106,13 +107,6 @@ export class ReviewComponent {
           }),
         { signal: this.abort.signal },
       );
-      if (!response.ok) {
-        const body = await response.json().catch(() => null);
-        throw new Error(
-          body?.message || "Verifique a conexão e tente novamente.",
-        );
-      }
-      const data: Notebook = await response.json();
       if (!this.active || request !== this.request) return;
       if (!data.items.length && data.offset > 0) {
         const last = Math.max(

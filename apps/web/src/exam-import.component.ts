@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, computed, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
@@ -101,9 +102,7 @@ export class ExamImportComponent {
     data.set("key", this.files.key);
     if (this.files.standard) data.set("standard", this.files.standard);
     await this.attempt(async () => {
-      const res = await fetch("/api/imports", { method: "POST", body: data });
-      if (!res.ok) throw new Error((await res.json().catch(() => null))?.message ?? "Não foi possível enviar.");
-      const { id } = await res.json();
+      const { id } = await requestJson<{ id: string }>("/api/imports", { method: "POST", body: data });
       await this.open(id);
       void this.loadList();
     });
@@ -321,12 +320,10 @@ export class ExamImportComponent {
     }
   }
   private async request<T>(path: string, body?: unknown, method?: string): Promise<T> {
-    const res = await fetch("/api/" + path, {
+    return requestJson<T>("/api/" + path, {
       method: method ?? (body === undefined ? "GET" : "POST"),
       headers: { "Content-Type": "application/json" },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
-    if (!res.ok) throw new Error((await res.json().catch(() => null))?.message ?? "Não foi possível concluir.");
-    return res.json();
   }
 }

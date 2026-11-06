@@ -1,3 +1,4 @@
+import { requestJson, ApiRequestError as PracticeError } from "./api-request";
 import { MascotComponent } from "./mascot.component";
 import {
   afterNextRender, Component, ElementRef, EventEmitter, HostListener, Injector, Input, Output,
@@ -25,9 +26,6 @@ export function clock(ms: number) {
   return `${Math.floor(total / 3600)}:${pad(Math.floor((total % 3600) / 60))}:${pad(total % 60)}`;
 }
 
-class PracticeError extends Error {
-  constructor(message: string, readonly status: number) { super(message); }
-}
 
 @Component({
   selector: "app-exam",
@@ -226,10 +224,7 @@ export class ExamComponent {
   private alive(generation: number) { return !this.destroyed && generation === this.generation; }
   private emitBusy() { this.busyChange.emit(this.protectedState()); }
   private async api<T>(path: string, init: RequestInit = {}, base = "/api/practice"): Promise<T> {
-    const response = await fetch(base + path, { ...init, signal: this.abort.signal, headers: { "Content-Type": "application/json" } });
-    const body = await response.json().catch(() => null);
-    if (!response.ok) throw new PracticeError(body?.message || "Verifique a conexão e tente novamente.", response.status);
-    return body;
+    return requestJson<T>(base + path, { ...init, signal: this.abort.signal, headers: { "Content-Type": "application/json" } });
   }
   private message(error: unknown) { return error instanceof Error ? error.message : "Verifique a conexão e tente novamente."; }
   async loadFormat(generation = this.generation) {

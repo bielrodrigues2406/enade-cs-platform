@@ -162,7 +162,7 @@ test("intake queue recovers from loading failures and supports filtering, pagina
   await openQueue(page);
   await expect(page.getByRole("status")).toContainText("Carregando questões importadas");
   release();
-  await expect(page.getByRole("alert")).toContainText("Falha sintética ao carregar a importação.");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   await page.unroute(listRoute);
   await page.getByRole("button", { name: "Tentar novamente", exact: true }).click();
   await expect(page.getByRole("table", { name: "Questões importadas para conferência" })).toBeVisible();

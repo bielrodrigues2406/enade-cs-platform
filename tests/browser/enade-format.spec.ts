@@ -125,7 +125,7 @@ test("an unsaved free-study essay is guarded and never flushed into the guest af
   await page.route("**/api/discursive/*/response",route=>route.fulfill({status:503,json:{message:"TEST ONLY saving unavailable"}}));
   await body.fill("TEST ONLY private unsaved account essay");
   await navigateTo(page, "Início");
-  await expect(page.getByRole("alert")).toContainText("TEST ONLY saving unavailable");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   await navigateTo(page, "Início");
   const warning=page.getByRole("dialog",{name:"Sair sem guardar o rascunho?"});
   await expect(warning).toBeVisible();

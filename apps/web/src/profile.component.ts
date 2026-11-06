@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, EventEmitter, Output, inject, signal } from "@angular/core";
 import { MascotService } from "./mascot.service";
 import { FormsModule } from "@angular/forms";
@@ -10,14 +11,11 @@ const PASSWORD_RANGE = "A senha deve ter de 12 a 128 caracteres.";
 const ENROLLMENT = /^[A-Z]{2}[0-9]{6,8}X?$/;
 
 async function call<T>(path: string, method: string, body?: unknown): Promise<T> {
-  const response = await fetch("/api/me/" + path, {
+  return requestJson<T>("/api/me/" + path, {
     method,
     headers: { "Content-Type": "application/json" },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
-  const data = await response.json().catch(() => null);
-  if (!response.ok) throw new Error(data?.message || "Não foi possível salvar. Verifique a conexão e tente novamente.");
-  return data as T;
 }
 
 /**

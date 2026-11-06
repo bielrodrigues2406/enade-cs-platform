@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Injectable, computed, signal } from "@angular/core";
 
 // Meta diária, sequência e conquistas (ENG-1). Um único estado para o topo
@@ -16,13 +17,10 @@ export type Engagement = {
 };
 
 async function call<T>(path: string, method = "GET", body?: unknown): Promise<T> {
-  const response = await fetch("/api/" + path, {
+  return requestJson<T>("/api/" + path, {
     method, headers: { "Content-Type": "application/json" },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
-  const data = await response.json().catch(() => null);
-  if (!response.ok) throw new Error(data?.message || "Verifique a conexão e tente novamente.");
-  return data as T;
 }
 
 @Injectable({ providedIn: "root" })

@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import type { ChoiceService } from "./choice-dialog";
 
 /**
@@ -53,12 +54,9 @@ export function attemptLabel(attempt: { area: string | null; focus?: string | nu
 
 /** Cria o treino e devolve o id; erros chegam com a mensagem do servidor. */
 export async function requestPractice(request: PracticeRequest): Promise<{ id: string }> {
-  const response = await fetch("/api/practice", {
+  return requestJson<{ id: string }>("/api/practice", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...request, requestId: crypto.randomUUID() }),
   });
-  const body = await response.json().catch(() => null);
-  if (!response.ok) throw new Error(body?.message || "Não foi possível começar o treino. Verifique a conexão e tente novamente.");
-  return body;
 }

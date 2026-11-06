@@ -1,4 +1,5 @@
 import { Component, Input, computed, signal } from "@angular/core";
+import { requestJson } from "./api-request";
 
 // Painel do professor (PROF-1): presença e desempenho de uma turma. Mostra só
 // a primeira tentativa de cada questão e sempre o tamanho da amostra; abaixo
@@ -47,9 +48,9 @@ export class ClassDashboardComponent {
   });
 
   async ngOnInit() {
-    const res = await fetch(`/api/classes/${this.classId}/dashboard`);
-    if (res.ok) this.data.set(await res.json());
-    else this.error.set((await res.json().catch(() => null))?.message ?? "Não foi possível carregar o painel.");
+    this.error.set("");
+    try { this.data.set(await requestJson<Dashboard>(`/api/classes/${encodeURIComponent(this.classId)}/dashboard`)); }
+    catch (error) { this.error.set(error instanceof Error ? error.message : "Não foi possível carregar o painel. Tente novamente."); }
   }
 
   attendance(student: Student) {

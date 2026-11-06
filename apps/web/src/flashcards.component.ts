@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, ElementRef, HostListener, Injector, afterNextRender, computed, inject, signal } from "@angular/core";
 import { EngagementService } from "./engagement.service";
 import { MascotComponent } from "./mascot.component";
@@ -64,21 +65,23 @@ export class FlashcardsComponent {
 
   async loadDecks() {
     try {
-      const response = await fetch("/api/flashcards");
-      if (!response.ok) throw new Error();
-      const data = await response.json();
+      const data = await requestJson<{ decks: DeckSummary[]; reviewedToday: number }>("/api/flashcards");
       this.decks.set(data.decks);
       this.reviewedToday.set(data.reviewedToday);
-    } catch {
-      this.error.set("Não foi possível carregar os baralhos. Verifique a conexão e tente de novo.");
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : "Não foi possível carregar os baralhos. Tente novamente.");
     }
   }
 
   async start(deck: DeckSummary | null) {
     this.error.set("");
-    const response = await fetch(`/api/flashcards/session${deck ? `?deck=${deck.deck}` : ""}`);
-    if (!response.ok) { this.error.set("Não foi possível abrir a sessão."); return; }
-    const { cards } = await response.json();
+    let cards: Card[];
+    try {
+      ({ cards } = await requestJson<{ cards: Card[] }>(`/api/flashcards/session${deck ? `?deck=${encodeURIComponent(deck.deck)}` : ""}`));
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : "Não foi possível abrir a sessão. Tente novamente.");
+      return;
+    }
     if (!cards.length) { this.error.set("Nada para revisar agora neste baralho. Volte mais tarde."); return; }
     this.tally = [0, 0, 0, 0];
     this.reviewed = new Set();
@@ -98,10 +101,9 @@ export class FlashcardsComponent {
     if (!card || !this.flipped() || this.saving()) return;
     this.saving.set(true);
     try {
-      const response = await fetch(`/api/flashcards/${card.id}/review`, {
+      await requestJson(`/api/flashcards/${card.id}/review`, {
         method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ grade }),
       });
-      if (!response.ok) throw new Error();
       this.tally[grade - 1]++;
       this.reviewed.add(card.id);
       // Errou: o cartão volta no fim desta sessão, já com os prazos de quem errou.
@@ -110,8 +112,8 @@ export class FlashcardsComponent {
       this.flipped.set(false);
       if (!this.queue().length) await this.finish();
       void this.engagement.refresh();
-    } catch {
-      this.error.set("Não foi possível salvar a resposta. Tente de novo.");
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : "Não foi possível confirmar a revisão. Mantenha esta página aberta e tente novamente.");
     } finally {
       this.saving.set(false);
     }
