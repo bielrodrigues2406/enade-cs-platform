@@ -1,7 +1,6 @@
 <section class="core-map" aria-labelledby="core-map-title">
   <div class="core-map-head">
     <div>
-      <p class="core-kicker">Núcleo por área</p>
       <h2 id="core-map-title">O que você precisa saber, área por área</h2>
       <p class="core-lede">
         Os conceitos que mais caíram nas provas de 2005 a 2021, os fatos que cortam alternativas e as pegadinhas de cada área.
@@ -16,7 +15,7 @@
     <p role="status">Carregando o núcleo…</p>
   } @else {
     @if (!started()) {
-      <p class="core-start">Comece pelas áreas marcadas: são as que mais pesam na prova.</p>
+      <p class="core-start">As marcadas com "comece por aqui" são as que mais pesam na prova e onde você ainda tem menos confiança.</p>
     }
     <ol class="core-list" aria-label="Áreas do componente específico, da que mais caiu para a que menos caiu">
       @for (area of specific(); track area.slug; let i = $index) {
@@ -41,7 +40,7 @@
     @if (general(); as fg) {
       <button type="button" class="core-general" (click)="open.emit(fg.slug)" [attr.aria-label]="fg.title + ', confiança ' + fg.confidence.value + ' de 100'">
         <span>
-          <span class="core-kicker">Formação Geral · 15 questões em 2026</span>
+          <span class="core-general-meta">15 questões em 2026, comuns a todos os cursos</span>
           <strong>{{ fg.title }}</strong>
           <span class="core-general-text">Gráficos, textos e charges sobre sociedade, ambiente e direitos humanos.</span>
         </span>
