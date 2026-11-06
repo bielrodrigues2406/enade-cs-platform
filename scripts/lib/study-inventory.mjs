@@ -53,11 +53,7 @@ function componentCoverage(items) {
   };
 }
 
-/** Inventário offline: nunca consulta banco, publica conteúdo ou infere equivalência por texto. */
-export function buildStudyInventory({ catalog, reports, objectiveReviews, discursiveReviews, analyses = [], annotations = [] }) {
-  const documents = new Map(catalog.documents.filter((d) => d.kind === "EXAM").map((d) => [d.id, d]));
-  const reviews = reviewIndex(objectiveReviews, false);
-  const discursive = reviewIndex(discursiveReviews, true);
+function analysisIndex(documents, analyses, annotations) {
   const scopeIssues = new Map();
   const duplicateLinks = [];
   for (const { data } of analyses) for (const item of data.items ?? []) {
@@ -72,6 +68,10 @@ export function buildStudyInventory({ catalog, reports, objectiveReviews, discur
     const id = identity(note.document, note.key);
     scopeIssues.set(id, [...(scopeIssues.get(id) ?? []), note.code]);
   }
+  return { scopeIssues, duplicateLinks };
+}
+
+function collectOccurrences(documents, reports, reviews, discursive, scopeIssues) {
   const occurrences = [];
   const byDocument = new Map();
   const seen = new Set();
@@ -101,9 +101,13 @@ export function buildStudyInventory({ catalog, reports, objectiveReviews, discur
   for (const id of discursive.keys()) {
     if (!seenDiscursive.has(id)) throw new Error(`Conferência discursiva sem ocorrência: ${id}`);
   }
+  return { occurrences, byDocument };
+}
+
+function validateRelations(occurrences, annotations, duplicateLinks) {
   const occurrenceMap = new Map(occurrences.map((item) => [item.id, item]));
   for (const note of annotations) {
-    if (!seen.has(identity(note.document, note.key))) throw new Error("Anotação sem ocorrência");
+    if (!occurrenceMap.has(identity(note.document, note.key))) throw new Error("Anotação sem ocorrência");
   }
   const links = new Map();
   for (const link of duplicateLinks) {
@@ -121,7 +125,10 @@ export function buildStudyInventory({ catalog, reports, objectiveReviews, discur
       current = links.get(current);
     }
   }
-  const editions = [...documents.values()].sort((a, b) => a.id.localeCompare(b.id, "en")).map((doc) => {
+}
+
+function summarizeEditions(documents, byDocument) {
+  return [...documents.values()].sort((a, b) => a.id.localeCompare(b.id, "en")).map((doc) => {
     const report = byDocument.get(doc.id);
     return {
       document: doc.id, family: doc.family, year: doc.year, modality: doc.modality,
@@ -136,12 +143,29 @@ export function buildStudyInventory({ catalog, reports, objectiveReviews, discur
         }))) : null,
     };
   });
+}
+
+function duplicateCandidates(occurrences) {
   const fingerprints = new Map();
   for (const item of occurrences) {
     const group = fingerprints.get(item.textFingerprint) ?? [];
     group.push(item.id);
     fingerprints.set(item.textFingerprint, group);
   }
+  return [...fingerprints.entries()].filter(([, ids]) => ids.length > 1).map(([fingerprint, ids]) => ({
+    fingerprint, occurrences: ids.sort(), status: "NEEDS_VISUAL_AND_KEY_REVIEW",
+  })).sort((a, b) => a.fingerprint.localeCompare(b.fingerprint, "en"));
+}
+
+/** Inventário offline: nunca consulta banco, publica conteúdo ou infere equivalência por texto. */
+export function buildStudyInventory({ catalog, reports, objectiveReviews, discursiveReviews, analyses = [], annotations = [] }) {
+  const documents = new Map(catalog.documents.filter((d) => d.kind === "EXAM").map((d) => [d.id, d]));
+  const reviews = reviewIndex(objectiveReviews, false);
+  const discursive = reviewIndex(discursiveReviews, true);
+  const { scopeIssues, duplicateLinks } = analysisIndex(documents, analyses, annotations);
+  const { occurrences, byDocument } = collectOccurrences(documents, reports, reviews, discursive, scopeIssues);
+  validateRelations(occurrences, annotations, duplicateLinks);
+  const editions = summarizeEditions(documents, byDocument);
   return {
     schemaVersion: 1,
     scope: "REPOSITORY_FILES_ONLY; not a production inventory or proof of publication; no canonical deduplication or reviewed topic classification",
@@ -154,8 +178,6 @@ export function buildStudyInventory({ catalog, reports, objectiveReviews, discur
     annotations,
     documentedDuplicateLinks: duplicateLinks,
     occurrences: occurrences.sort((a, b) => a.id.localeCompare(b.id, "en")),
-    duplicateCandidates: [...fingerprints.entries()].filter(([, ids]) => ids.length > 1).map(([fingerprint, ids]) => ({
-      fingerprint, occurrences: ids.sort(), status: "NEEDS_VISUAL_AND_KEY_REVIEW",
-    })).sort((a, b) => a.fingerprint.localeCompare(b.fingerprint, "en")),
+    duplicateCandidates: duplicateCandidates(occurrences),
   };
 }
