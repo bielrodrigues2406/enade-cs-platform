@@ -29,6 +29,8 @@ Anulações/escopo prevalecem sobre uma aprovação. `annotations.json` registra
 
 As matrizes oficiais específicas ainda estão NOT_ACQUIRED. Em 06/11, a entrada genérica de legislação do Inep respondeu 200 e redirecionou para `https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade`, que carrega os anos por páginas próprias, incluindo `/2026`. Acesso a esse índice não comprova aquisição da matriz de Ciência da Computação.
 
+O [índice oficial de 2026](https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026) respondeu 200 e identifica a [Portaria 157/2026 — Ciência da Computação](https://www.in.gov.br/web/dou/-/portaria-n-157-de-14-de-abril-de-2026-699947879) e a [Portaria 154/2026 — Formação Geral](https://www.in.gov.br/web/dou/-/portaria-n-154-de-14-de-abril-de-2026-699921720), ambas de 14/04. Os dois textos no DOU retornaram HTTP 403 neste ambiente; apenas seus títulos/links foram localizados, sem texto integral obtido nem conteúdo presumido. Não substituir a matriz por outro curso ou por ementa gerada por IA.
+
 ## Próximo incremento
 
 Estabilizar taxonomia numa amostra conferida por dois agentes e classificar os itens por tema/habilidade. Resolver vínculos de identidade restantes, obter a norma pertinente e só então gerar incidência revisada e panorama na Biblioteca. Os guias, dossiês de atualidades e exercícios autorais continuam na sequência; este artefato não os anuncia como disponíveis.
