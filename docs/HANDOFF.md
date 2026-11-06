@@ -4,7 +4,7 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 1. Estado atual
 
-- Gabriel publicou `https://cadernocc.com.br` em Docker Compose numa EC2 dos EUA (04/11). PROD-CSS1 corrige estilos Angular bloqueados pela CSP e cache de chunks; ver [diagnóstico de produção](reviews/2026-11-04-production-css.md). O servidor não foi acessado por SSH nesta revisão; aplicar a imagem corrigida e conferir a rota pública. Não desativar a CSP como contorno.
+- Gabriel publicou `https://cadernocc.com.br` em Docker Compose numa EC2 dos EUA (04/11) e relatou a plataforma online e funcionando em 06/11. PROD-CSS1 corrige estilos Angular bloqueados pela CSP e cache de chunks; ver [diagnóstico de produção](reviews/2026-11-04-production-css.md). O servidor não foi acessado por SSH nesta análise. Não desativar a CSP como contorno.
 - Base do ajuste SIM-UX1: `main` em `c6d6d5c`, com DS-6/7/8 integrados nos PRs #39–#41. A auditoria DS-5 usou `0db9671`; MAS-4 já está integrado no PR #37. Veja MASCOT §10.
 - Gabriel autorizou criar PR e fazer merge após revisão/validação, com commits preservados e descrições curtas. Também pediu o deploy no servidor IFSP PEP; faltam acesso SSH e domínio para concretizá-lo. Não fazer force push. Para atualizar a branch, faça merge da `main` nela.
 - Antes de encerrar: commit, push e entrada no diário do WORKBOARD.
@@ -40,12 +40,13 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 ## 5. O que falta (por prioridade)
 
-1. **Estabilizar a publicação AWS em cadernocc.com.br:** aplicar correção CSS/CSP com nonce, conferir compressão/cache, backups e restauração. A publicação já foi feita por Gabriel. O mesmo Compose de [`deploy/campus/`](../deploy/campus/README.md) serve como referência; eventual implantação IFSP PEP depende da infraestrutura institucional.
+1. **Preservar a publicação AWS em cadernocc.com.br:** Gabriel relatou funcionamento em 06/11. Conferências operacionais de backups/restauração continuam próprias; não reabrir o diagnóstico CSS como falha atual sem evidência. O mesmo Compose de [`deploy/campus/`](../deploy/campus/README.md) serve como referência; eventual implantação IFSP PEP depende da infraestrutura institucional.
 2. **Design aplicado (DS-6/7/8):** [implementação e validação](reviews/2026-11-03-design-implementation.md). PRs #39–#42 integrados. Preservar o nome Questões, escolhido por Gabriel.
 3. **Revisão humana** dos 135 flashcards e 12 fichas (escritos por IA) por um professor; depois, trocar o selo para "Revisado por …".
 4. **CQ-2**: revisão integral do código para a Fábrica de Software (obrigatória antes da passagem institucional definitiva).
 5. **Conteúdo:** 33 PDFs recentes, cinco padrões antigos de FG e fonte legível para 2005 Q60.
    Plano de expansão proposto em [CONTENT-EXPANSION-PLAN.md](CONTENT-EXPANSION-PLAN.md): inventário local de cobertura, matérias prioritárias, pesquisa ENADE SI/ADS e piloto de 20–30 candidatas. Na fase inicial, origem ENADE; PND/POSCOMP separados. Pesquisa, taxonomia e publicação são tarefas futuras, não questões novas já importadas. Gate antes de outro curso: curso/cobertura visíveis e elegibilidade de edições e do formato 2026 preservada.
+   **Guia ENADE experimental (EST-EXP1):** [proposta e prompt expandido](ENADE-STUDY-LAB.md) para histórico por tema/edição, guias aprofundados, pesquisa de temas atuais e exercícios autorais, dentro da Biblioteca. Seis edições não justificam chances de cair; usar estatística descritiva e separar atualidade, matriz e evidência histórica. Funcionalidade ainda não implementada. Primeiro incremento deve tratar taxonomia/cobertura e obter matriz; pilotos com dois guias e três dossiês. Corrigir no incremento funcional a perda do contexto da área no CTA de treino e retirar/fundamentar “Cai todo ano” na ficha de complexidade.
 6. **Operação/acessibilidade:** revisão institucional do texto de privacidade (LGL-1) e auditoria com leitor de tela. Pacote inicial em ~435,8 kB; preservar carregamento lazy.
 
 **Depois do essencial, sem bloquear o próximo lote:** Plano e Materiais, hoje "Em breve" na Biblioteca. Validar necessidade antes de adicionar migration, upload ou fluxos novos. Poses do mascote com acessórios/cenas exigem artes próprias; MAS-4 básico já está integrado e não exige nova biblioteca de animação.

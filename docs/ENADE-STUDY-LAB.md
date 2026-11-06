@@ -37,6 +37,7 @@ Achados por leitura do repositório, sem novo teste de navegador nesta proposta:
 1. Criar matriz por família do exame, curso, edição, modalidade, componente e tipo de item. Registrar quantidades previstas, válidas, anuladas, disponíveis, classificadas e pendentes, com justificativa. Não limitar o universo silenciosamente ao que passou pelo filtro editorial de publicação.
 2. Separar **questão canônica** de **ocorrência na prova**. Na leitura de uma prova, um item comum conta naquela prova; ao agregar modalidades ou itens distintos, a repetição não vira observação independente. Tipos de caderno e alternativas reordenadas precisam de correspondência conferida.
 3. Classificar todos os itens disponíveis pertinentes à série: matéria principal, temas secundários, pré-requisitos e habilidade exigida. Habilidades incluem recordar, interpretar código/diagrama, calcular, comparar soluções e argumentar. Guardar trecho/recorte de evidência, autor, conferente, versão e dúvidas.
+   Antes de ampliar a classificação, usar uma amostra de diferentes edições/tipos com dois conferentes para resolver divergências e estabilizar a taxonomia.
 4. Manter FG, específico de CC e formação docente identificados. Nos cadernos comuns antigos, selecionar os blocos pertinentes, em vez de atribuir todo o documento a CC.
 5. Aproveitar a conferência de fidelidade já feita. A nova tarefa é de classificação/análise; não repetir toda a extração e revisão de gabaritos sem achado que a justifique. Casos ambíguos passam por conferência independente.
 
@@ -91,7 +92,7 @@ Começar pelas pautas abaixo como **candidatas de curadoria**, não como previs�
 | Acessibilidade e inclusão digital | IHC, semântica, teclado, contraste, avaliação e restrições de acesso | Avaliar interface ou serviço usado com leitor de tela/conexão limitada e justificar correções |
 | Impactos sociais e ambientais da Computação | Ética, desinformação, discriminação, eficiência e responsabilidade | Argumentar sobre um caso com evidências e trade-offs; diferenciar questão técnica de FG conforme a matriz |
 
-Cada dossiê tem: pergunta central; fonte e data de publicação/atualização; data de consulta; fatos verificáveis; ligação curricular; pré-requisitos; ligação histórica quando existir; conceitos para recordar; caso resolvido; exercício autoral; referências e estado de revisão. Registrar também quando não há evidência histórica ou quando a fonte/matriz ainda está pendente.
+Cada dossiê tem: pergunta central; fonte e data de publicação/atualização; data de consulta; próxima data de revisão e responsável; fatos verificáveis; ligação curricular; pré-requisitos; ligação histórica quando existir; conceitos para recordar; caso resolvido; exercício autoral; referências e estado de revisão. Registrar também quando não há evidência histórica ou quando a fonte/matriz ainda está pendente.
 
 Manter estados separados de **força da evidência histórica**, **pertinência curricular conferida** e **fonte de atualidade obtida/revisada**. Usar expressões descritivas, como “documentado em três edições” ou “contexto recente a estudar”. Não criar um placar opaco que misture esses sinais e vire probabilidade de cobrança.
 
