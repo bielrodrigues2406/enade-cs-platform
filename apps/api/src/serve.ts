@@ -1,5 +1,6 @@
 import { ConfigError, createApp, db } from "./main.js";
 import { purgeOldActivity } from "./activity.js";
+import { ServiceNoticeConfigError } from "./service-notice.js";
 try {
   const app = await createApp();
   app.enableShutdownHooks();
@@ -23,7 +24,7 @@ try {
     });
 } catch (err) {
   console.error(
-    err instanceof ConfigError
+    err instanceof ConfigError || err instanceof ServiceNoticeConfigError
       ? err.message
       : "Não foi possível iniciar a API. Confira banco e configuração.",
   );
