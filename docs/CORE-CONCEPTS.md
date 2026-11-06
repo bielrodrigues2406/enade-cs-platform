@@ -78,7 +78,7 @@ O núcleo foi escrito pelo Claude a partir das questões oficiais e da bibliogra
 ## 7. Próximos incrementos (reta final até 29/11)
 
 1. **Treino de eliminação.** Nas questões de itens e de asserção-razão, a pessoa marca V ou F em cada item, vê quais alternativas sobram e, depois do gabarito, qual conceito do núcleo resolveria.
-2. **Questões geradas por IA**, autorizadas por Gabriel em 06/11.
+2. **Questões geradas por IA**, autorizadas por Gabriel em 06/11. **Feito (lote 1, 120 questões)**: ver [GENERATED-QUESTIONS.md](GENERATED-QUESTIONS.md).
    - **Origem:** nova origem na curadoria, com o rótulo "Gerada por IA", fora das estatísticas oficiais e das provas.
    - **Tipos:** "espelho" (o mesmo conceito de uma questão oficial, em contexto novo) e "tema quente".
    - **Construção:** as alternativas erradas seguem os sete padrões de propósito.

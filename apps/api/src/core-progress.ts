@@ -60,6 +60,20 @@ async function publishedVersions(ids: string[]) {
   )).rows.map((r) => [r.id, r.version]));
 }
 
+/** Questões geradas por IA publicadas, por conceito do núcleo (versão atual). */
+async function generatedByConcept(conceptIds: string[]) {
+  const rows = (await db.query<{ id: string; title: string; concepts: string[] }>(
+    `SELECT v.id,v.title,g.concept_ids AS concepts FROM editorial_question c
+     JOIN question_version v ON v.id=c.current_version_id AND v.editorial_status='PUBLISHED'
+     JOIN generated_question g ON g.version_id=v.id
+     WHERE g.concept_ids && $1::text[] ORDER BY v.id`, [conceptIds],
+  )).rows;
+  const byConcept = new Map<string, { id: string; title: string }[]>();
+  for (const row of rows) for (const c of row.concepts)
+    byConcept.set(c, [...(byConcept.get(c) ?? []), { id: row.id, title: row.title }]);
+  return { byConcept, total: rows.length };
+}
+
 async function snapshot(owner: string) {
   const [core, ratings, progress, memory] = await Promise.all([loadCore(), ratingsOf(owner), areaProgress(owner), deckMemory(owner)]);
   const byArea = new Map(progress.map((p) => [p.area, p]));
@@ -95,18 +109,23 @@ export class CoreConceptsController {
     const { core, ratings, of } = await snapshot(user.id);
     const area = core.areas.find((a) => a.slug === slug) ?? fail("Área não encontrada.", 404);
     const linked = area.concepts.flatMap((c) => core.links.get(c.id) ?? []);
-    const published = await publishedVersions([...new Set(linked.map((q) => q.id))]);
+    const [published, generated] = await Promise.all([
+      publishedVersions([...new Set(linked.map((q) => q.id))]),
+      generatedByConcept(area.concepts.map((c) => c.id)),
+    ]);
     const { concepts, ...rest } = area;
     return {
       ...rest,
       history: core.history.get(area.slug),
       confidence: of(area),
+      generatedTotal: generated.total,
       concepts: concepts.map(({ match: _match, ...c }) => ({
         ...c,
         level: ratings.get(c.id) ?? null,
         // O estudo abre a questão pela versão publicada.
         questions: (core.links.get(c.id) ?? []).filter((q) => published.has(q.id))
           .map((q) => ({ ...q, id: published.get(q.id)! })),
+        generated: generated.byConcept.get(c.id) ?? [],
       })),
     };
   }

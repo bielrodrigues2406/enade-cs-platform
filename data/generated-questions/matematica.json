@@ -1,0 +1,154 @@
+{
+  "area": "Matemática",
+  "generator": "claude-geracao",
+  "checker": "claude-resolucao",
+  "questions": [
+    {
+      "id": "gen-mat-contrapositiva",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["mat-proposicional"],
+      "title": "Equivalente a uma condicional",
+      "subject": "Lógica proposicional: contrapositiva",
+      "prompt": "A documentação de um serviço afirma: \"Se o serviço está no ar, então o painel de monitoramento fica verde.\"\n\nQual frase é logicamente equivalente a essa afirmação?",
+      "options": [
+        "Se o painel fica verde, então o serviço está no ar.",
+        "Se o painel não fica verde, então o serviço não está no ar.",
+        "Se o serviço não está no ar, então o painel não fica verde.",
+        "O serviço está no ar e o painel fica verde.",
+        "O serviço está no ar ou o painel não fica verde."
+      ],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nSendo p = \"o serviço está no ar\" e q = \"o painel fica verde\", a frase é p → q. A contrapositiva ¬q → ¬p tem a mesma tabela-verdade: as duas só são falsas quando p é verdadeira e q é falsa. É a alternativa B.\n\nAs outras alternativas:\nA) É a recíproca, q → p. O painel pode ficar verde por outro motivo, com o serviço fora do ar.\nC) É a inversa, ¬p → ¬q, que equivale à recíproca e não à frase original.\nD) A conjunção afirma que as duas coisas acontecem. A condicional não garante que o serviço esteja no ar.\nE) p ∨ ¬q equivale a q → p, a recíproca. A forma correta com ou seria ¬p ∨ q.",
+      "check": "Nova resolução sem o gabarito: tabela-verdade de p → q igual à de ¬q → ¬p; diferente das demais."
+    },
+    {
+      "id": "gen-mat-validade",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": ["mat-inferencia"],
+      "title": "Quais argumentos são válidos",
+      "subject": "Regras de inferência e falácias",
+      "prompt": "Avalie a validade dos argumentos a seguir.\n\nI. Se o código compila, os testes rodam. Os testes rodaram. Logo, o código compilou.\nII. Se o código compila, os testes rodam. O código não compilou. Logo, os testes não rodaram.\nIII. Se o código compila, os testes rodam. Os testes não rodaram. Logo, o código não compilou.\nIV. O erro está no front-end ou no back-end. O erro não está no front-end. Logo, está no back-end.\n\nSão argumentos válidos apenas",
+      "options": ["I e II.", "I e III.", "II e IV.", "III e IV.", "I, III e IV."],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nUm argumento é válido quando não existe situação com as premissas verdadeiras e a conclusão falsa.\n\nI é inválido. É a falácia de afirmar o consequente: os testes podem ter rodado por outro motivo, por exemplo um script que roda testes já compilados.\nII é inválido. É a falácia de negar o antecedente, pelo mesmo motivo.\nIII é válido. É modus tollens: de p → q e ¬q, conclui-se ¬p.\nIV é válido. É o silogismo disjuntivo: de p ∨ q e ¬p, conclui-se q.\n\nAs outras alternativas:\nA) Escolhe as duas falácias.\nB) Inclui I, que afirma o consequente.\nC) Inclui II, que nega o antecedente.\nE) Inclui I.",
+      "check": "Nova resolução sem o gabarito: busca de contraexemplo por tabela-verdade; I e II têm contraexemplo (p falsa, q verdadeira); III e IV não têm."
+    },
+    {
+      "id": "gen-mat-negacao-quantificador",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["mat-predicados"],
+      "title": "Negar uma frase com \"todo\"",
+      "subject": "Negação de quantificadores",
+      "prompt": "O relatório de integração contínua afirma: \"Todo teste da suíte passou.\"\n\nQual frase é a negação lógica dessa afirmação?",
+      "options": [
+        "Nenhum teste da suíte passou.",
+        "Todo teste da suíte falhou.",
+        "Existe pelo menos um teste da suíte que não passou.",
+        "Existe pelo menos um teste da suíte que passou.",
+        "A maioria dos testes da suíte não passou."
+      ],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nA afirmação é ∀x P(x). Sua negação é ¬∀x P(x) ≡ ∃x ¬P(x): basta um teste ter falhado para a frase \"todo teste passou\" ser falsa.\n\nAs outras alternativas:\nA) \"Nenhum passou\" (∀x ¬P(x)) é muito mais forte que a negação. Se 99 passaram e 1 falhou, a frase original é falsa, mas esta também é.\nB) Equivale à A: todo teste falhou.\nD) É compatível com a frase original e não a nega.\nE) Exige mais da metade das falhas, o que a negação não exige.",
+      "check": "Nova resolução sem o gabarito: ¬∀x P(x) ≡ ∃x ¬P(x). Opção C."
+    },
+    {
+      "id": "gen-mat-classes-equivalencia",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["mat-relacoes", "mat-conjuntos"],
+      "title": "Classes de equivalência módulo 3",
+      "subject": "Relação de equivalência e partição",
+      "prompt": "No conjunto A = {1, 2, 3, 4, 5, 6}, defina a relação R por: a R b se e somente se a − b é múltiplo de 3.\n\nQual afirmação está correta?",
+      "options": [
+        "R é uma relação de equivalência, e suas classes são {1, 4}, {2, 5} e {3, 6}.",
+        "R é uma relação de equivalência, e suas classes são {1, 2, 3} e {4, 5, 6}.",
+        "R não é simétrica, porque 4 − 1 = 3, mas 1 − 4 = −3.",
+        "R é uma ordem parcial, porque é reflexiva, antissimétrica e transitiva.",
+        "R não é reflexiva, porque a − a = 0 não é múltiplo de 3."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nR é reflexiva (a − a = 0 é múltiplo de 3), simétrica (se a − b = 3k, então b − a = 3(−k)) e transitiva (somando a − b = 3k com b − c = 3m, a − c = 3(k + m)). É uma relação de equivalência. Suas classes agrupam os números com o mesmo resto na divisão por 3: {1, 4} (resto 1), {2, 5} (resto 2) e {3, 6} (resto 0). As classes formam uma partição de A.\n\nAs outras alternativas:\nB) 1 e 2 não estão relacionados: 1 − 2 = −1 não é múltiplo de 3.\nC) −3 também é múltiplo de 3 (−3 = 3 × (−1)), então a simetria vale.\nD) R não é antissimétrica: 1 R 4 e 4 R 1 com 1 ≠ 4. Confunde equivalência com ordem parcial.\nE) 0 = 3 × 0 é múltiplo de 3.",
+      "check": "Nova resolução sem o gabarito: classes pelo resto mod 3 calculadas em código: {1,4}, {2,5}, {3,6}."
+    },
+    {
+      "id": "gen-mat-combinacao",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["mat-contagem"],
+      "title": "Comissão com uma pessoa fixa",
+      "subject": "Combinações com restrição",
+      "prompt": "Um laboratório com 10 estudantes, entre eles Ana, vai formar uma comissão de 3 pessoas, sem cargos. Quantas comissões diferentes incluem Ana?",
+      "options": ["120", "72", "45", "84", "36"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nCom Ana já na comissão, faltam 2 vagas para os outros 9 estudantes. Como não há cargos, a ordem não importa: C(9, 2) = 9 × 8 / 2 = 36.\n\nAs outras alternativas:\nA) 120 = C(10, 3) conta todas as comissões possíveis, com ou sem Ana.\nB) 72 = 9 × 8 é um arranjo: trata as duas vagas como distintas, como se a ordem importasse.\nC) 45 = C(10, 2) escolhe as outras duas vagas entre os 10, incluindo Ana de novo.\nD) 84 = C(9, 3) conta as comissões sem Ana.",
+      "check": "Nova resolução sem o gabarito: C(9,2) = 36; conferido também por enumeração em código."
+    },
+    {
+      "id": "gen-mat-condicional",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["mat-probabilidade"],
+      "title": "Probabilidade condicional numa turma",
+      "subject": "Probabilidade condicional com tabela",
+      "prompt": "Numa turma de 200 estudantes que fizeram uma prova:\n\n120 usaram uma plataforma de estudos, e 90 deles foram aprovados;\n80 não usaram, e 40 deles foram aprovados.\n\nSorteando um estudante aprovado, qual é a probabilidade aproximada de que ele tenha usado a plataforma?",
+      "options": ["75%", "69%", "45%", "60%", "65%"],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nO evento dado é \"aprovado\": são 90 + 40 = 130 estudantes. Destes, 90 usaram a plataforma. P(usou | aprovado) = 90 / 130 ≈ 0,692, cerca de 69%.\n\nAs outras alternativas:\nA) 75% = 90 / 120 é P(aprovado | usou): inverte a condição.\nC) 45% = 90 / 200 é P(usou e aprovado), sem condicionar.\nD) 60% = 120 / 200 é a proporção de quem usou a plataforma, sem olhar a aprovação.\nE) 65% = 130 / 200 é a proporção de aprovados.",
+      "check": "Nova resolução sem o gabarito: 90 / 130 = 0,6923. Conferido por cálculo."
+    },
+    {
+      "id": "gen-mat-binomial",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["mat-probabilidade"],
+      "title": "Exatamente um bit errado",
+      "subject": "Distribuição binomial em transmissão",
+      "prompt": "Um canal de comunicação inverte cada bit com probabilidade 0,1, de forma independente. Um pacote de 4 bits é transmitido.\n\nQual é a probabilidade de exatamente um bit chegar errado?",
+      "options": ["0,1", "0,0729", "0,6561", "0,2916", "0,4"],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nO número de bits errados segue uma binomial com n = 4 e p = 0,1. P(X = 1) = C(4, 1) × 0,1¹ × 0,9³ = 4 × 0,1 × 0,729 = 0,2916.\n\nO fator C(4, 1) = 4 conta em qual das quatro posições está o erro.\n\nAs outras alternativas:\nA) 0,1 é a probabilidade de um bit específico errar, sem exigir que os outros três estejam certos.\nB) 0,0729 = 0,1 × 0,9³ é a probabilidade de um padrão específico, por exemplo só o primeiro bit errado. Esquece as 4 posições possíveis.\nC) 0,6561 = 0,9⁴ é a probabilidade de nenhum erro.\nE) 0,4 = 4 × 0,1 soma as probabilidades sem considerar que os outros bits precisam estar corretos.",
+      "check": "Nova resolução sem o gabarito: 4 × 0,1 × 0,9^3 = 0,2916; conferido por enumeração dos 16 padrões em código."
+    },
+    {
+      "id": "gen-mat-correlacao",
+      "kind": "ESPELHO",
+      "format": "ASSERCAO",
+      "concepts": ["mat-inferencia-estatistica"],
+      "title": "Correlação e causa",
+      "subject": "Correlação de Pearson e causalidade",
+      "prompt": "Uma pesquisa com estudantes encontrou correlação de Pearson r = 0,9 entre horas semanais de estudo e nota no ENADE.\n\nConsidere as asserções.\n\nI. Esse resultado permite concluir que estudar mais causa notas maiores.\n\nPORQUE\n\nII. Um valor de r próximo de 1 indica forte associação linear positiva entre as duas variáveis.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
+        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
+        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
+        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
+        "As asserções I e II são proposições falsas."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nII é verdadeira: r varia de −1 a 1, e 0,9 indica que, quando uma variável cresce, a outra tende a crescer de forma aproximadamente linear.\n\nI é falsa: correlação não basta para afirmar causa. Pode haver uma terceira variável por trás das duas, como motivação ou base anterior, ou causalidade no sentido contrário. Para concluir causa seria preciso, por exemplo, um experimento com grupos sorteados.\n\nAs outras alternativas:\nA) Trata associação como prova de causa. É a armadilha de causa trocada.\nB) Também considera I verdadeira.\nC) Inverte: II é a afirmação verdadeira.\nE) II é verdadeira.",
+      "check": "Nova resolução sem o gabarito: r = 0,9 indica associação linear forte (II verdadeira); correlação não implica causalidade (I falsa). Opção D."
+    },
+    {
+      "id": "gen-mat-soma-graus",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["mat-grafos"],
+      "title": "Cinco vértices de grau três",
+      "subject": "Teoria dos grafos: soma dos graus",
+      "prompt": "Uma rede de 5 servidores deve ser ligada de modo que cada servidor tenha exatamente 3 conexões diretas com outros servidores, sem conexões repetidas nem de um servidor com ele mesmo (grafo simples).\n\nÉ possível montar essa rede?",
+      "options": [
+        "Sim, ligando os servidores em anel e acrescentando as diagonais.",
+        "Sim, porque 3 é menor que 5 − 1 = 4, o grau máximo possível.",
+        "Sim, com exatamente 15 conexões.",
+        "Não, porque um grafo com 5 vértices não pode ter ciclos.",
+        "Não, porque a soma dos graus seria 15, um número ímpar, e a soma dos graus de qualquer grafo é o dobro do número de arestas."
+      ],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nCada aresta liga dois vértices e conta uma vez no grau de cada um. Por isso a soma dos graus é sempre 2|E|, um número par. Com 5 vértices de grau 3, a soma seria 15, ímpar. Logo, esse grafo não existe. Uma consequência útil: todo grafo tem um número par de vértices de grau ímpar.\n\nAs outras alternativas:\nA) Anel com todas as diagonais é o grafo completo K₅, em que cada vértice tem grau 4, não 3.\nB) Respeitar o grau máximo é necessário, mas não suficiente. Esquece a condição de paridade.\nC) 15 é a soma dos graus; o número de arestas seria 15 / 2, que não é inteiro.\nD) Grafos com 5 vértices podem ter ciclos; o K₅ tem vários.",
+      "check": "Nova resolução sem o gabarito: soma dos graus 15 ímpar contradiz o lema do aperto de mãos; busca exaustiva em código não encontra grafo 3-regular com 5 vértices."
+    }
+  ]
+}

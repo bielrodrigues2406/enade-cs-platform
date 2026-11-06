@@ -9,7 +9,7 @@ import { AREAS } from "./question-areas.js";
 /** Sugestões do início: oficiais antes das autorais, demonstrações por último, provas recentes primeiro. */
 const SUGGESTION_ORDER = `(origin='OFFICIAL') DESC,demonstration,year DESC NULLS LAST,"questionNumber" NULLS LAST,id`;
 const CATALOG_ORDER = `year DESC NULLS FIRST,modality,"questionNumber" NULLS FIRST,id`;
-const FILTERS = new Set(["q", "topic", "area", "year", "limit", "offset"]);
+const FILTERS = new Set(["q", "topic", "area", "year", "origin", "limit", "offset"]);
 function text(value: unknown, max: number): string {
   if (value === undefined) return "";
   if (typeof value !== "string" || value.length > max)
@@ -40,6 +40,9 @@ export class CatalogController {
     if (yearText && (!/^\d{4}$/.test(yearText) || Number(yearText) < 2000 || Number(yearText) > 2100))
       fail("Ano inválido.", 400);
     const year = yearText ? Number(yearText) : null;
+    // As geradas por IA ficam fora do banco padrão; só aparecem pedidas (origin=generated).
+    const origin = text(query.origin, 12);
+    if (origin && origin !== "generated") fail("Origem inválida.", 400);
     const limit = integer(query.limit, 20, 1, 50);
     const offset = integer(query.offset, 0, 0, 1000000);
 
@@ -56,6 +59,7 @@ export class CatalogController {
         JOIN question_version q ON q.id=c.current_version_id
         LEFT JOIN source_document s ON s.id=q.exam_source_id AND s.kind='EXAM'
         WHERE q.editorial_status='PUBLISHED'
+          AND (q.origin='AI_GENERATED')=($9='generated')
       ), filtered AS (
         SELECT * FROM published
         WHERE ($2='' OR strpos(lower(title),lower($2))>0 OR strpos(lower(prompt),lower($2))>0
@@ -107,7 +111,7 @@ export class CatalogController {
           ) y),'[]'::json)
         )
       ) AS catalog`,
-      [user.id, search, topic, area, year, limit, offset, [...AREAS]],
+      [user.id, search, topic, area, year, limit, offset, [...AREAS], origin],
     );
     return result.rows[0].catalog;
   }

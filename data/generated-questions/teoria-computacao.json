@@ -1,0 +1,128 @@
+{
+  "area": "Teoria da computação",
+  "generator": "claude-geracao",
+  "checker": "claude-resolucao",
+  "questions": [
+    {
+      "id": "gen-tc-paridade-uns",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["tc-automatos-finitos", "tc-regulares"],
+      "title": "Número par de uns",
+      "subject": "Expressão regular para paridade",
+      "prompt": "Um protocolo aceita apenas mensagens binárias com quantidade par de bits 1 (incluindo zero bits 1 e a cadeia vazia). Um autômato finito determinístico de dois estados reconhece essa linguagem.\n\nQual expressão regular descreve exatamente a mesma linguagem?",
+      "options": ["(0 | 1)*1(0 | 1)*1", "(11)*", "1*0*1*", "(0*10*1)*0*", "0*(11)*0*"],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nUma cadeia com quantidade par de 1s pode ser lida como uma sequência de blocos, cada um com exatamente dois 1s, separados por quantos 0s se queira, seguida de 0s finais. O bloco 0*10*1 tem zeros quaisquer, um 1, zeros quaisquer e outro 1. O fecho (0*10*1)* repete esses blocos zero ou mais vezes, e o 0* final aceita zeros depois do último 1. A cadeia vazia e 000 também são aceitas, com zero bits 1.\n\nO AFD equivalente tem os estados \"par\" (inicial e de aceitação) e \"ímpar\": um 1 troca de estado, um 0 mantém.\n\nAs outras alternativas:\nA) Exige pelo menos dois 1s e aceita 111 (três 1s).\nB) Só aceita cadeias de 1s seguidos, sem nenhum 0, como 11 ou 1111. Recusa 0110.\nC) Aceita 1 (um único 1) e recusa 0101.\nE) Exige que os 1s estejam todos juntos no meio e recusa 1001.",
+      "check": "Nova resolução sem o gabarito: comparação em código das expressões com o AFD de paridade em todas as cadeias até 10 bits; só a D coincide."
+    },
+    {
+      "id": "gen-tc-classes-linguagens",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": ["tc-chomsky", "tc-nao-regulares", "tc-livres-contexto"],
+      "title": "Em que classe está cada linguagem",
+      "subject": "Hierarquia de Chomsky: exemplos clássicos",
+      "prompt": "Avalie as afirmações sobre linguagens formais.\n\nI. A linguagem {aⁿbⁿ | n ≥ 0} é livre de contexto e não é regular.\nII. A linguagem {aⁿbⁿcⁿ | n ≥ 0} é livre de contexto.\nIII. Toda linguagem regular é também livre de contexto.\nIV. A linguagem das cadeias binárias com a mesma quantidade de 0s e de 1s é regular.\n\nÉ correto apenas o que se afirma em",
+      "options": ["I e II.", "I e III.", "II e IV.", "III e IV.", "I, II e III."],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nI está correta. A gramática S → aSb | ε gera a linguagem, e um autômato com pilha empilha os a e desempilha um para cada b. Ela não é regular: pelo lema do bombeamento, bombear dentro do bloco de a quebra a igualdade de quantidades.\n\nII está errada. Com três blocos iguais, uma única pilha não basta: depois de comparar a com b, a contagem se perde. Pelo lema do bombeamento para linguagens livres de contexto, {aⁿbⁿcⁿ} não é livre de contexto. É sensível ao contexto.\n\nIII está correta. Na hierarquia de Chomsky, regulares ⊂ livres de contexto: um autômato finito é um autômato com pilha que não usa a pilha.\n\nIV está errada. Contar 0s e 1s sem limite exige memória ilimitada, o que um autômato finito não tem. A linguagem é livre de contexto, mas não regular.\n\nAs outras alternativas:\nA) Inclui II.\nC) Inclui II e IV, as duas que superestimam o poder dos modelos.\nD) Inclui IV.\nE) Inclui II.",
+      "check": "Nova resolução sem o gabarito: I verdadeira, II falsa (não LC), III verdadeira, IV falsa (não regular). Opção B."
+    },
+    {
+      "id": "gen-tc-direcao-reducao",
+      "kind": "ESPELHO",
+      "format": "ASSERCAO",
+      "concepts": ["tc-reducao", "tc-p-np"],
+      "title": "Direção da redução para NP-dificuldade",
+      "subject": "Redução polinomial e NP-completude",
+      "prompt": "Uma pesquisadora suspeita que um problema novo de alocação de turmas, chamado X, seja NP-difícil.\n\nI. Para provar que X é NP-difícil, basta mostrar uma redução polinomial de X para o problema SAT.\n\nPORQUE\n\nII. O problema SAT é NP-completo.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
+        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
+        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
+        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
+        "As asserções I e II são proposições falsas."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nII é verdadeira: pelo teorema de Cook-Levin, SAT é NP-completo.\n\nI é falsa porque a redução está na direção errada. Reduzir X a SAT (X ≤ₚ SAT) mostra que X não é mais difícil que SAT, ou seja, que X está em NP se a redução e a verificação forem polinomiais. Para mostrar que X é NP-difícil, a pesquisadora precisa do contrário: reduzir SAT, ou outro problema NP-completo conhecido, a X (SAT ≤ₚ X). Assim, um algoritmo rápido para X resolveria SAT rapidamente.\n\nAs outras alternativas:\nA) Aceita a redução na direção invertida, o erro mais comum nesse tema.\nB) Também considera I verdadeira.\nC) Inverte: II é a verdadeira.\nE) II é verdadeira.",
+      "check": "Nova resolução sem o gabarito: NP-dificuldade exige SAT ≤p X; X ≤p SAT não serve. I falsa, II verdadeira. Opção D."
+    },
+    {
+      "id": "gen-tc-detector-lacos",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["tc-decidibilidade", "tc-turing"],
+      "title": "Detector universal de laços infinitos",
+      "subject": "Problema da parada e analisadores de código",
+      "prompt": "Uma empresa anuncia uma ferramenta de análise estática que, segundo o material de divulgação, recebe qualquer programa em Python e qualquer entrada e informa, sempre com acerto e em tempo finito, se o programa vai terminar ou ficar em laço infinito.\n\nDo ponto de vista da teoria da computação, qual avaliação é correta?",
+      "options": [
+        "A promessa é impossível em geral, porque o problema da parada é indecidível; a ferramenta pode acertar muitos casos particulares, mas não todos.",
+        "A promessa é possível, desde que a ferramenta execute o programa e aguarde ele terminar.",
+        "A promessa é possível, porque Python não é Turing-completo.",
+        "A promessa só é impossível para programas com recursão; para laços while e for ela é viável.",
+        "A promessa é possível, mas o problema pertence à classe NP e exige tempo exponencial."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nTuring provou que não existe algoritmo que decida, para todo par (programa, entrada), se o programa para. Se existisse esse decisor H, seria possível construir um programa D que chama H sobre si mesmo e faz o contrário da resposta: se H diz que D para, D entra em laço, e vice-versa. A contradição mostra que H não existe. Como Python é Turing-completo, a impossibilidade vale para ele. Ferramentas reais detectam padrões específicos, como laços com condição constante, e em outros casos respondem \"não sei\".\n\nAs outras alternativas:\nB) Executar e esperar funciona quando o programa para. Quando ele não para, a ferramenta espera para sempre e nunca responde \"não para\". O problema é semidecidível, não decidível.\nC) Python é Turing-completo.\nD) Laços while já bastam para simular uma máquina de Turing; a recursão não é o que cria a indecidibilidade.\nE) O problema não é \"difícil, mas solúvel\": ele não tem solução algorítmica, qualquer que seja o tempo. Confundir indecidível com intratável é um erro comum.",
+      "check": "Nova resolução sem o gabarito: parada indecidível para linguagens Turing-completas; semidecidível. Opção A."
+    },
+    {
+      "id": "gen-tc-p-np-consequencia",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["tc-p-np"],
+      "title": "O que muda se um NP-completo cair em P",
+      "subject": "Classes P, NP e NP-completo",
+      "prompt": "Verificar se uma grade de Sudoku generalizada (n² × n²) está preenchida corretamente é rápido, mas não se conhece algoritmo polinomial para preenchê-la a partir de uma grade parcial. O problema de decisão do Sudoku generalizado é NP-completo.\n\nQual afirmação sobre as classes P e NP está correta?",
+      "options": [
+        "NP significa \"não polinomial\", então nenhum problema de NP pode ser resolvido em tempo polinomial.",
+        "Já foi provado que P ≠ NP, por isso o Sudoku generalizado nunca terá algoritmo polinomial.",
+        "Todo problema de NP é NP-completo.",
+        "Problemas em P não estão em NP, porque já têm algoritmo rápido.",
+        "Se alguém encontrar um algoritmo polinomial para o Sudoku generalizado, todos os problemas de NP passam a ter algoritmo polinomial, ou seja, P = NP."
+      ],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nUm problema NP-completo está em NP e todo problema de NP se reduz a ele em tempo polinomial. Se ele tiver algoritmo polinomial, qualquer problema de NP pode ser resolvido em tempo polinomial: transforma-se a instância e resolve-se o Sudoku. Isso daria P = NP.\n\nAs outras alternativas:\nA) NP significa polinomial não determinístico: problemas cujas soluções podem ser verificadas em tempo polinomial. Todo problema de P está em NP.\nB) P versus NP é um problema em aberto, um dos Problemas do Milênio. Não há prova de P ≠ NP.\nC) Ordenar uma lista está em NP (e em P) e não é NP-completo, a menos que P = NP.\nD) P ⊆ NP: se dá para resolver rápido, dá para verificar rápido.",
+      "check": "Nova resolução sem o gabarito: propriedade de NP-completude implica P = NP com algoritmo polinomial; demais afirmações falsas. Opção E."
+    },
+    {
+      "id": "gen-tc-regex-parenteses",
+      "kind": "QUENTE",
+      "format": "ASSERCAO",
+      "concepts": ["tc-nao-regulares", "tc-automatos-finitos"],
+      "title": "Expressão regular para fórmulas de planilha",
+      "subject": "Limites das linguagens regulares na prática",
+      "prompt": "Um desenvolvedor tenta validar fórmulas digitadas numa planilha on-line usando apenas uma expressão regular, no sentido da teoria de linguagens formais (sem recursos extras como recursão ou retrorreferência).\n\nI. Nenhuma expressão regular desse tipo reconhece exatamente as fórmulas com parênteses corretamente balanceados, em qualquer profundidade.\n\nPORQUE\n\nII. Um autômato finito tem um número fixo de estados e não consegue contar quantos parênteses estão abertos quando essa quantidade não tem limite.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
+        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
+        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
+        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
+        "As asserções I e II são proposições falsas."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nExpressões regulares e autômatos finitos descrevem a mesma classe de linguagens. A linguagem dos parênteses balanceados contém, por exemplo, (ⁿ)ⁿ para todo n. Um autômato com k estados, lendo k + 1 parênteses abertos, repete algum estado pelo princípio da casa dos pombos e não distingue quantos abriu. Por isso aceitaria cadeias desbalanceadas ou recusaria balanceadas. II explica exatamente por que I acontece.\n\nNa prática, analisadores de fórmulas usam uma gramática livre de contexto e um analisador sintático (com pilha), não uma expressão regular. Uma expressão regular serve para os tokens: números, referências a células, operadores.\n\nAs outras alternativas:\nB) Não reconhece que a memória finita é a causa da limitação.\nC) II é verdadeira: é a característica que define o autômato finito.\nD) I é verdadeira. Expressões regulares de bibliotecas com recursão vão além da teoria, mas o enunciado as exclui.\nE) As duas são verdadeiras.",
+      "check": "Nova resolução sem o gabarito: parênteses balanceados é não regular (bombeamento); memória finita justifica. Opção A."
+    },
+    {
+      "id": "gen-tc-subconjuntos",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": ["tc-automatos-finitos"],
+      "title": "De AFN para AFD",
+      "subject": "Construção de subconjuntos",
+      "prompt": "Um autômato finito não determinístico (AFN) com 3 estados reconhece uma linguagem L. Aplica-se a construção de subconjuntos para obter um autômato finito determinístico (AFD) equivalente.\n\nQual afirmação sobre o AFD resultante está correta?",
+      "options": [
+        "Ele tem exatamente 3 estados, um para cada estado do AFN.",
+        "Ele pode ter até 6 estados, o dobro do AFN.",
+        "Ele pode ter até 2³ = 8 estados, um para cada subconjunto dos estados do AFN, e reconhece exatamente L.",
+        "Ele pode ter até 9 estados, um para cada par de estados do AFN.",
+        "Ele reconhece uma linguagem maior que L, porque o determinismo aceita mais cadeias."
+      ],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nNa construção de subconjuntos, cada estado do AFD representa o conjunto de estados em que o AFN pode estar depois de ler o mesmo prefixo. Com 3 estados no AFN, há 2³ = 8 subconjuntos possíveis, incluindo o vazio. Na prática, muitos podem ser inalcançáveis, por isso \"até 8\". O AFD reconhece exatamente L: AFN e AFD têm o mesmo poder de reconhecimento.\n\nAs outras alternativas:\nA) O AFD pode precisar de mais estados que o AFN; o não determinismo permite descrições mais compactas.\nB) O limite é exponencial (2ⁿ), não linear.\nD) 9 = 3² conta pares, mas os estados do AFD são subconjuntos de qualquer tamanho.\nE) A construção preserva a linguagem. Determinismo não aumenta nem reduz o poder dos autômatos finitos.",
+      "check": "Nova resolução sem o gabarito: limite superior 2^n = 8, equivalência de linguagem garantida pela construção. Opção C."
+    }
+  ]
+}

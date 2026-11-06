@@ -24,6 +24,7 @@ export class LibraryComponent {
   @Output() flashcards = new EventEmitter<void>();
   @Output() question = new EventEmitter<string>();
   @Output() practice = new EventEmitter<PracticeRequest>();
+  @Output() generated = new EventEmitter<string>();
   /** Área do núcleo aberta; a ficha aberta a partir dela volta para ela. */
   coreSlug = signal<string | null>(null);
   private sheetReturn: string | null = null;

@@ -2,6 +2,7 @@ import { requestJson } from "./api-request";
 import { MascotComponent } from "./mascot.component";
 import { Component, EventEmitter, Input, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { originLabel } from "./origin-label";
 
 export type ReviewItem = {
   id: string;
@@ -72,11 +73,7 @@ export class ReviewComponent {
     return Math.ceil(data.total / data.pageSize);
   }
   origin(row: ReviewItem) {
-    return row.origin === "OFFICIAL"
-      ? "Oficial · Inep"
-      : row.demonstration
-        ? "Autoral demonstrativa"
-        : "Autoral";
+    return originLabel(row.origin, row.demonstration);
   }
   date(value: string) {
     return new Intl.DateTimeFormat("pt-BR", {

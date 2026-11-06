@@ -38,6 +38,7 @@ import {
   type Credentials,
   type SessionStatus,
 } from "./account.component";
+import { originLabel } from "./origin-label";
 type Summary = {
   id: string;
   title: string;
@@ -51,7 +52,8 @@ type Summary = {
   modality?: string | null;
   questionNumber?: number | null;
 };
-type CatalogFilters = { q: string; topic: string; area: string; year: string };
+/** origin: vazio = provas e autorais; "generated" = só as geradas por IA. */
+type CatalogFilters = { q: string; topic: string; area: string; year: string; origin: string };
 type Catalog = {
   items: Summary[];
   total: number;
@@ -210,7 +212,7 @@ class App {
   catalogAnswered = signal(0);
   catalogOffset = signal(0);
   readonly catalogPageSize = CATALOG_PAGE_SIZE;
-  private appliedFilters: CatalogFilters = { q: "", topic: "", area: "", year: "" };
+  private appliedFilters: CatalogFilters = { q: "", topic: "", area: "", year: "", origin: "" };
   private currentAddress = location.pathname + location.search;
   private lastCatalogRequest: { filters: CatalogFilters; offset: number; navigation: "push" | "replace" | "none" } | null = null;
   question = signal<Question | null>(null);
@@ -224,6 +226,7 @@ class App {
   topic = "";
   area = "";
   year = "";
+  origin = "";
   selected = "";
   session = signal<SessionStatus>({ mode: "guest" });
   accountView = signal<AccountMode | null>(null);
@@ -400,6 +403,13 @@ class App {
   }
   browseYear(year: number) {
     history.pushState(null, "", `/questoes?year=${year}`);
+    void this.restoreCatalogNavigation();
+  }
+  /** Banco filtrado nas questões geradas por IA de uma área (a partir do núcleo). */
+  browseGenerated(area: string) {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    this.studyView.set(null);
+    history.pushState(null, "", `/questoes?${new URLSearchParams({ origin: "generated", area })}`);
     void this.restoreCatalogNavigation();
   }
   /** Nome da seção atual (o banco de questões usa para saber se está ativo). */
@@ -579,7 +589,7 @@ class App {
     if (location.pathname === "/questoes") this.writeCatalogAddress(navigation);
   }
   private filterValues(): CatalogFilters {
-    return { q: this.search, topic: this.topic, area: this.area, year: this.year };
+    return { q: this.search, topic: this.topic, area: this.area, year: this.year, origin: this.origin };
   }
   async retryCatalog() {
     const pending = this.lastCatalogRequest;
@@ -768,6 +778,7 @@ class App {
     this.topic = this.appliedFilters.topic;
     this.area = this.appliedFilters.area;
     this.year = this.appliedFilters.year;
+    this.origin = this.appliedFilters.origin;
   }
   private readCatalogAddress() {
     const params = new URLSearchParams(location.search);
@@ -777,8 +788,9 @@ class App {
     };
     const year = value("year", 4);
     this.appliedFilters = location.pathname === "/questoes"
-      ? { q: value("q", 120), topic: value("topic", 80), area: value("area", 80), year: /^(20[0-9]{2}|2100)$/.test(year) ? year : "" }
-      : { q: "", topic: "", area: "", year: "" };
+      ? { q: value("q", 120), topic: value("topic", 80), area: value("area", 80), year: /^(20[0-9]{2}|2100)$/.test(year) ? year : "",
+          origin: value("origin", 12) === "generated" ? "generated" : "" }
+      : { q: "", topic: "", area: "", year: "", origin: "" };
     this.restoreFilterFields();
     const page = value("page", 6);
     const number = /^[1-9][0-9]{0,5}$/.test(page) ? Number(page) : 1;
@@ -1136,11 +1148,7 @@ class App {
     }
   }
   originLabel(origin: string, demonstration = false) {
-    return origin === "OFFICIAL"
-      ? "Oficial · Inep"
-      : demonstration
-        ? "Autoral demonstrativa"
-        : "Autoral";
+    return originLabel(origin, demonstration);
   }
   modalityLabel(modality: string) {
     return (

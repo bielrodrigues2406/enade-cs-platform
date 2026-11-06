@@ -306,3 +306,12 @@ Detalhes em [CORE-CONCEPTS.md](CORE-CONCEPTS.md). Rotas de quem está na sessão
 | PUT /core/concepts/:id | `{level}` (0 não sei, 1 mais ou menos, 2 sei explicar, `null` apaga) | `{slug,level,confidence}`; 400 para nível inválido, 404 para conceito inexistente |
 
 `confidence` = `{value, self, rated, answers, attempts, cards}`; `answers` é `null` sem respostas na área e `cards` é `null` em área sem baralho.
+
+## Questões geradas por IA (GEN-1)
+
+Detalhes em [GENERATED-QUESTIONS.md](GENERATED-QUESTIONS.md).
+
+- `GET /catalog` aceita `origin=generated`. Sem o parâmetro, o catálogo continua só com oficiais e autorais (itens, contagens, sugestões e facetas). Com ele, mostra apenas as questões `AI_GENERATED`. Qualquer outro valor devolve 400.
+- `GET /questions/:id` funciona igual para as geradas; `origin` é `AI_GENERATED` e `authorCredit` traz "Gerada por IA (Claude) …".
+- `GET /core/:slug` traz `generatedTotal` e, em cada conceito, `generated[]{id,title}` com a versão publicada.
+- `GET /me/progress` ignora respostas a questões geradas.

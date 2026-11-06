@@ -2,7 +2,8 @@
 // repositório (DEP-2): baixa a prova e o gabarito de cada conferência em
 // data/agent-reviews, confere o SHA-256 do catálogo, importa as fontes e
 // publica as conferências; depois, as discursivas de data/discursive-reviews
-// (com o padrão de resposta). Pode rodar de novo: o que já existe é mantido.
+// (com o padrão de resposta) e as questões geradas por IA de
+// data/generated-questions. Pode rodar de novo: o que já existe é mantido.
 //   node dist/admin/bootstrap-content.mjs        (na imagem)
 //   npm run bootstrap:content                    (local)
 import { execFile } from "node:child_process";
@@ -16,6 +17,7 @@ import { importDocument, validateMirrorUrl, validateOfficialUrl } from "../apps/
 import { downloadPdf } from "./lib/source-download.mjs";
 import { describe, publishReview, reviewDocument } from "./lib/publish-review.js";
 import { describeDiscursive, discursiveReviewFiles, publishDiscursiveFile, readDiscursiveReview } from "./lib/publish-discursive.js";
+import { describeGenerated, generatedFiles, publishGeneratedFile } from "../apps/api/src/generated-publication.js";
 
 const run = promisify(execFile);
 const REVIEWS = "data/agent-reviews";
@@ -97,6 +99,7 @@ async function main() {
     console.log(describe(summary));
   }
   for (const file of discursiveFiles) console.log(describeDiscursive(await publishDiscursiveFile(file)));
+  for (const file of await generatedFiles()) console.log(describeGenerated(await publishGeneratedFile(file)));
   if (rejected) process.exitCode = 1;
 }
 

@@ -8,6 +8,7 @@ import { ELIGIBLE } from "./practice-eligibility.js";
 // primeira resposta a cada questão — no estudo livre ou em treino/prova
 // finalizados — para que refazer até acertar não infle o acerto. Também traz o
 // que está pendente: erros prontos para revisar e o treino em andamento.
+// Questões geradas por IA não entram: o desempenho mede as provas reais.
 
 export type AreaProgress = {
   area: string;
@@ -22,7 +23,7 @@ export type AreaProgress = {
 const FIRST_ANSWERS = `
   WITH answers AS (
     SELECT v.question_id,v.topic,e.correct,e.answered_at AS at,e.id AS ord
-    FROM answer_event e JOIN question_version v ON v.id=e.version_id WHERE e.owner_id=$1
+    FROM answer_event e JOIN question_version v ON v.id=e.version_id WHERE e.owner_id=$1 AND v.origin<>'AI_GENERATED'
     UNION ALL
     SELECT v.question_id,v.topic,i.option_id=v.correct_option_id,p.finished_at,0
     FROM practice_item i JOIN practice_attempt p ON p.id=i.attempt_id

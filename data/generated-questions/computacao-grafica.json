@@ -1,0 +1,77 @@
+{
+  "area": "Computação gráfica",
+  "generator": "claude-geracao",
+  "checker": "claude-resolucao",
+  "questions": [
+    {
+      "id": "gen-cg-mediana",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["cg-filtros"],
+      "title": "Filtro da mediana num pixel com ruído",
+      "subject": "Filtro da mediana e ruído sal e pimenta",
+      "prompt": "Uma câmera de inspeção industrial gera imagens em tons de cinza (0 a 255) com ruído impulsivo, do tipo sal e pimenta. A vizinhança 3 × 3 de um pixel, lida linha a linha, é:\n\n10  12  11\n255 13   0\n12  11  10\n\nAplica-se um filtro da mediana 3 × 3. Qual é o novo valor do pixel central e por que esse filtro é indicado nesse caso?",
+      "options": [
+        "37, porque a mediana suaviza o ruído espalhando-o pela vizinhança.",
+        "11, porque a mediana descarta os valores extremos (0 e 255) e preserva melhor as bordas que o filtro da média.",
+        "13, porque o filtro mantém o valor original quando ele está entre o mínimo e o máximo.",
+        "255, porque o filtro realça os pixels mais claros da vizinhança.",
+        "0, porque o filtro da mediana escurece pixels vizinhos a ruído."
+      ],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nOrdenando os 9 valores: 0, 10, 10, 11, 11, 12, 12, 13, 255. A mediana é o 5º valor: 11.\n\nO ruído sal e pimenta cria valores extremos isolados (0 e 255). A mediana não é afetada por eles, porque depende da posição na ordem e não do valor. Num degrau de borda, a mediana também escolhe um valor de um dos lados, sem criar tons intermediários, por isso preserva as bordas. A média, ao contrário, incorpora os extremos e borra: aqui daria 334 / 9 ≈ 37.\n\nAs outras alternativas:\nA) 37 é o resultado do filtro da média, que espalha o ruído.\nC) 13 é o valor original do pixel. O filtro substitui o pixel pela mediana, sem regra de manter o original.\nD) 255 é o ruído de sal; ele seria o máximo, não a mediana.\nE) 0 é o ruído de pimenta; ele seria o mínimo.",
+      "check": "Nova resolução sem o gabarito: valores ordenados em código, mediana 11, média 37,1."
+    },
+    {
+      "id": "gen-cg-ordem-transformacoes",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": ["cg-transformacoes"],
+      "title": "Rotacionar e depois transladar",
+      "subject": "Composição de transformações em 2D",
+      "prompt": "Num editor 2D, o ponto P = (1, 0) passa por duas transformações, nesta ordem: uma rotação de 90° no sentido anti-horário em torno da origem e, em seguida, uma translação de (2, 0).\n\nQual é a posição final de P, e o que aconteceria se a ordem das transformações fosse invertida?",
+      "options": [
+        "(2, 1); invertendo a ordem, o resultado seria o mesmo, porque transformações sempre comutam.",
+        "(3, 0); invertendo a ordem, o resultado seria (0, 3).",
+        "(0, 3); invertendo a ordem, o resultado seria (2, 1).",
+        "(2, 1); invertendo a ordem (transladar e depois rotacionar), o resultado seria (0, 3), porque a composição de matrizes não é comutativa.",
+        "(1, 2); invertendo a ordem, o resultado seria (2, 1)."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nRotação de 90° anti-horária: (x, y) → (−y, x). Então (1, 0) → (0, 1). A translação de (2, 0) leva a (2, 1).\n\nNa ordem inversa: (1, 0) + (2, 0) = (3, 0), que rotacionado vira (0, 3).\n\nEm coordenadas homogêneas, cada transformação é uma matriz 3 × 3, e aplicar R e depois T equivale a multiplicar T · R · P. Produto de matrizes não é comutativo: T · R ≠ R · T. Por isso, para girar um objeto em torno do próprio centro, faz-se transladar para a origem, rotacionar e transladar de volta.\n\nAs outras alternativas:\nA) A posição está certa, mas rotação e translação não comutam.\nB) (3, 0) é o resultado intermediário de transladar primeiro.\nC) Troca os dois resultados.\nE) (1, 2) não resulta de nenhuma das duas ordens.",
+      "check": "Nova resolução sem o gabarito: matrizes aplicadas em código; R depois T = (2, 1); T depois R = (0, 3)."
+    },
+    {
+      "id": "gen-cg-sombreamento",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": ["cg-iluminacao"],
+      "title": "Modelos de sombreamento",
+      "subject": "Sombreamento constante, Gouraud e Phong",
+      "prompt": "Num visualizador 3D, uma esfera modelada com poucos polígonos é iluminada por uma luz pontual forte, com brilho especular. Avalie as afirmações.\n\nI. No sombreamento de Gouraud, a iluminação é calculada nos vértices e as cores resultantes são interpoladas no interior de cada polígono.\nII. No sombreamento de Phong, as normais são interpoladas no interior do polígono e a iluminação é calculada por pixel.\nIII. O sombreamento constante (flat) produz um brilho especular suave no meio de faces grandes.\nIV. A componente difusa do modelo de Lambert depende do ângulo entre a normal da superfície e a direção da luz.\n\nÉ correto apenas o que se afirma em",
+      "options": ["I e III.", "II e III.", "I, II e IV.", "III e IV.", "I, II, III e IV."],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nI está correta. Gouraud é barato: ilumina poucos pontos (os vértices) e interpola cores. Se o brilho especular cair no meio de uma face, entre vértices, ele some ou fica borrado.\n\nII está correta. Phong interpola a normal e calcula a iluminação em cada pixel. É mais caro e captura o brilho especular onde quer que ele caia.\n\nIII está errada. No sombreamento constante, cada face recebe uma única cor, calculada uma vez. Não há variação dentro da face, e o resultado é a aparência facetada, sem brilho suave.\n\nIV está correta. A intensidade difusa é proporcional a cos θ = N · L (normal e direção da luz normalizadas): máxima com a luz perpendicular à superfície e nula com luz rasante.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nD) Inclui III e deixa de fora I e II.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: definições de Gouraud, Phong, flat e Lambert. Opção C."
+    },
+    {
+      "id": "gen-cg-ray-tracing-tempo-real",
+      "kind": "QUENTE",
+      "format": "SIMPLES",
+      "concepts": ["cg-ray-tracing", "cg-pipeline"],
+      "title": "Traçado de raios em jogos atuais",
+      "subject": "Renderização híbrida: rasterização e ray tracing",
+      "prompt": "Jogos lançados nos últimos anos anunciam \"ray tracing em tempo real\". Ainda assim, a maior parte das cenas é desenhada a 60 quadros por segundo em placas de vídeo de consumo.\n\nQual descrição corresponde ao que esses jogos fazem?",
+      "options": [
+        "Toda a cena é gerada só por traçado de raios, com centenas de raios por pixel, sem nenhum uso de rasterização.",
+        "O traçado de raios substitui o z-buffer, que deixou de existir nas placas de vídeo.",
+        "Os raios são traçados uma vez na instalação do jogo e guardados como texturas, sem cálculo durante a partida.",
+        "Combinam rasterização, que desenha a cena principal com z-buffer, com traçado de raios usado só em efeitos específicos (reflexos, sombras, iluminação indireta), com poucos raios por pixel, hardware dedicado e filtros de redução de ruído.",
+        "Usam o traçado de raios apenas para detectar colisões entre personagens, sem efeito visual."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nO traçado de raios completo, com muitos raios por pixel e vários reflexos, ainda é caro demais para 60 quadros por segundo em cenas complexas. A solução atual é híbrida:\n- a rasterização com z-buffer resolve a visibilidade principal de forma barata;\n- raios são lançados só onde a rasterização é fraca, como reflexos fora da tela, sombras suaves e luz rebatida;\n- usa-se poucos raios por pixel, o que gera imagem ruidosa;\n- filtros de redução de ruído (denoising), muitas vezes com redes neurais, e técnicas de reconstrução temporal limpam o resultado;\n- as placas trazem unidades dedicadas para testar a interseção de raios com estruturas de aceleração.\n\nAs outras alternativas:\nA) Descreve o traçado de raios completo, como em filmes renderizados offline, inviável em tempo real nessas condições.\nB) A rasterização com z-buffer continua sendo a base da maioria dos jogos.\nC) Iluminação pré-calculada (lightmaps) existe, mas é outra técnica e não acompanha objetos que se movem.\nE) Testes de colisão com raios existem na física dos jogos, mas o termo, nesse contexto, se refere a efeitos visuais.",
+      "check": "Nova resolução sem o gabarito: descrição do pipeline híbrido de renderização em tempo real. Opção D."
+    }
+  ]
+}

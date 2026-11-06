@@ -41,6 +41,9 @@
       @if (publishedCount()) {
         <button type="button" (click)="train()">Treinar {{ a.area }}</button>
       }
+      @if (a.generatedTotal) {
+        <button type="button" class="outline" (click)="generated.emit(a.area)">Praticar questões geradas ({{ a.generatedTotal }})</button>
+      }
       @if (a.deck) { <button type="button" class="outline" (click)="flashcards.emit()">Flashcards da área</button> }
       @if (a.sheet) { <button type="button" class="outline" (click)="sheet.emit(a.sheet)">Ficha de uma página</button> }
     </div>
@@ -60,6 +63,16 @@
                   [disabled]="saving() !== null && saving() !== c.id" (click)="rate(c, l.value)">{{ l.label }}</button>
               }
             </div>
+            @if (c.generated.length) {
+              <details class="core-questions">
+                <summary>{{ c.generated.length }} {{ c.generated.length === 1 ? "questão gerada" : "questões geradas" }} para praticar</summary>
+                <ul>
+                  @for (g of c.generated; track g.id) {
+                    <li><button type="button" class="text-button" (click)="question.emit(g.id)">{{ g.title }}</button></li>
+                  }
+                </ul>
+              </details>
+            }
             @if (c.questions.length) {
               <details class="core-questions">
                 <summary>Caiu em {{ c.questions.length }} {{ c.questions.length === 1 ? "questão oficial" : "questões oficiais" }}</summary>

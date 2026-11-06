@@ -1,0 +1,135 @@
+{
+  "area": "Sistemas distribuídos",
+  "generator": "claude-geracao",
+  "checker": "claude-resolucao",
+  "questions": [
+    {
+      "id": "gen-sd-pix-idempotencia",
+      "kind": "QUENTE",
+      "format": "SIMPLES",
+      "concepts": [
+        "sd-rpc",
+        "sd-caracteristicas"
+      ],
+      "title": "Pagamento repetido após tempo esgotado",
+      "subject": "Idempotência e semânticas de invocação em pagamentos",
+      "prompt": "O aplicativo de uma loja envia ao servidor de pagamentos a ordem \"transferir R$ 120 via Pix para a conta X\". Às vezes a resposta não chega em 10 segundos por instabilidade na rede móvel, e o aplicativo reenvia automaticamente a mesma ordem. Clientes reclamaram de cobranças em dobro.\n\nQual solução trata a causa do problema?",
+      "options": [
+        "Aumentar o tempo de espera para 60 segundos, o que elimina os reenvios.",
+        "Desativar os reenvios automáticos; se a resposta não chegar, o cliente deve refazer a compra manualmente.",
+        "Trocar o protocolo de transporte de TCP para UDP, que é mais rápido.",
+        "Enviar cada ordem com uma chave de idempotência única gerada pelo aplicativo; o servidor guarda as chaves já processadas e, ao receber uma repetida, devolve o resultado anterior sem executar a transferência de novo.",
+        "Fazer o servidor confirmar a transferência antes de executá-la, para que a confirmação chegue mais rápido."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nQuando a resposta não chega, o cliente não sabe se a ordem foi executada (e a resposta se perdeu) ou se nem chegou ao servidor. Reenviar dá a semântica pelo menos uma vez, segura só para operações idempotentes, e uma transferência não é idempotente: executar duas vezes cobra duas vezes.\n\nA chave de idempotência torna a operação idempotente do ponto de vista do cliente. O servidor registra a chave na mesma transação da transferência e, diante de uma repetição, devolve a resposta original. O resultado é a semântica no máximo uma vez, com os reenvios ainda permitidos. APIs de pagamento usam exatamente esse padrão.\n\nAs outras alternativas:\nA) Reduz a frequência, mas qualquer espera pode estourar; a duplicação continua possível.\nB) Joga o problema para o cliente, que também não sabe se a primeira compra passou e pode pagar duas vezes do mesmo jeito.\nC) UDP não garante entrega e piora o cenário; a duplicação acontece na camada de aplicação.\nE) Confirmar antes de executar mente para o cliente quando a execução falha depois, e não resolve a repetição.",
+      "check": "Nova resolução sem o gabarito: operação não idempotente com retentativa; chave de idempotência dá efeito no máximo uma vez. Opção D."
+    },
+    {
+      "id": "gen-sd-modelos-nuvem",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": [
+        "sd-nuvem"
+      ],
+      "title": "Que modelo de serviço de nuvem é cada caso",
+      "subject": "IaaS, PaaS e SaaS",
+      "prompt": "Uma universidade usa três serviços em nuvem:\n\n1. um serviço de e-mail institucional pronto, acessado pelo navegador, sem nada para instalar;\n2. máquinas virtuais alugadas por hora, nas quais a equipe instala o sistema operacional, o banco de dados e o sistema acadêmico;\n3. uma plataforma em que a equipe envia o código do aplicativo de matrículas, e o provedor cuida do sistema operacional, da escala e das atualizações do ambiente de execução.\n\nQual classificação está correta, na ordem 1, 2 e 3?",
+      "options": [
+        "IaaS, PaaS e SaaS.",
+        "SaaS, PaaS e IaaS.",
+        "PaaS, IaaS e SaaS.",
+        "SaaS, IaaS e IaaS.",
+        "SaaS, IaaS e PaaS."
+      ],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nO critério é até onde o provedor administra a pilha:\n- SaaS (software como serviço): o provedor entrega a aplicação pronta. Caso 1.\n- IaaS (infraestrutura como serviço): o provedor entrega máquinas virtuais, rede e armazenamento, e o cliente cuida do sistema operacional para cima. Caso 2.\n- PaaS (plataforma como serviço): o provedor entrega o ambiente de execução, e o cliente só envia o código e as configurações. Caso 3.\n\nAs outras alternativas:\nA) Põe o e-mail pronto como infraestrutura e a máquina virtual como plataforma.\nB) Troca a máquina virtual (IaaS) pela plataforma (PaaS).\nC) Classifica o e-mail pronto como plataforma.\nD) Classifica o caso 3 como IaaS, mas ali a equipe não administra sistema operacional nem escala.",
+      "check": "Nova resolução sem o gabarito: classificação pelo nível de gerenciamento do provedor (definição NIST SP 800-145). Opção E."
+    },
+    {
+      "id": "gen-sd-cap-regioes",
+      "kind": "QUENTE",
+      "format": "ASSERCAO",
+      "concepts": [
+        "sd-consistencia"
+      ],
+      "title": "Banco de dados em duas regiões durante uma partição",
+      "subject": "Teorema CAP e replicação geográfica",
+      "prompt": "Um aplicativo de transporte mantém réplicas do seu banco de dados em São Paulo e em Fortaleza. Um rompimento de cabos interrompe por 20 minutos a comunicação entre as duas regiões, mas cada uma continua acessível aos usuários próximos.\n\nI. Durante a interrupção, o sistema precisa escolher entre continuar aceitando escritas nas duas regiões, aceitando que os dados divirjam temporariamente, ou recusar escritas em pelo menos uma delas.\n\nPORQUE\n\nII. Pelo teorema CAP, quando há partição de rede, não é possível garantir ao mesmo tempo consistência forte e disponibilidade em todas as réplicas.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "options": [
+        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
+        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
+        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
+        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
+        "As asserções I e II são proposições falsas."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nCom a partição, uma escrita em São Paulo não chega a Fortaleza. Há duas saídas:\n- priorizar a disponibilidade: as duas regiões aceitam escritas, e os dados divergem até a reconciliação. Uma corrida pode, por exemplo, ser aceita por dois motoristas;\n- priorizar a consistência: só uma região, ou só a que alcança a maioria das réplicas, aceita escritas, e a outra recusa ou fica só para leitura.\n\nNão há opção que mantenha as duas propriedades enquanto a partição durar. É o que o teorema CAP afirma, por isso II justifica I. Fora de partições, o desenho ainda pesa outro equilíbrio, entre latência e consistência (formalização PACELC).\n\nAs outras alternativas:\nB) Não reconhece que a escolha de I decorre do teorema.\nC) II é verdadeira.\nD) I é verdadeira: a escolha é obrigatória durante a partição.\nE) As duas são verdadeiras.",
+      "check": "Nova resolução sem o gabarito: partição entre réplicas impõe escolha C ou A (Brewer, Gilbert e Lynch). Opção A."
+    },
+    {
+      "id": "gen-sd-conteineres",
+      "kind": "ESPELHO",
+      "format": "SIMPLES",
+      "concepts": [
+        "sd-virtualizacao"
+      ],
+      "title": "Contêineres e máquinas virtuais",
+      "subject": "Virtualização e conteinerização",
+      "prompt": "Uma equipe migrou 30 microsserviços de máquinas virtuais para contêineres Docker no mesmo servidor físico, com Linux. Os serviços passaram a iniciar em segundos, e cabem mais serviços no mesmo hardware.\n\nQual explicação técnica está correta?",
+      "options": [
+        "Os contêineres emulam o hardware completo, de forma mais eficiente que o hipervisor.",
+        "Os contêineres compartilham o kernel do sistema operacional hospedeiro e isolam processos com recursos do próprio kernel (namespaces e cgroups), sem iniciar um sistema operacional por serviço; o isolamento é mais leve, e por isso também mais fraco, que o de uma máquina virtual.",
+        "Cada contêiner tem o próprio kernel, mas menor que o de uma máquina virtual.",
+        "Contêineres só funcionam em nuvem pública, onde o provedor otimiza o hardware.",
+        "Contêineres executam o código de forma interpretada, o que reduz o tempo de inicialização."
+      ],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nUma máquina virtual roda um sistema operacional convidado completo sobre hardware virtualizado pelo hipervisor: tem kernel próprio, boot próprio e memória reservada. Um contêiner é um processo, ou grupo de processos, do hospedeiro, isolado por namespaces (visão própria de processos, rede e sistema de arquivos) e limitado por cgroups (CPU, memória). Sem boot de sistema operacional, inicia em segundos e ocupa pouca memória.\n\nA contrapartida é que todos dependem do mesmo kernel. Uma falha no kernel afeta todos, e não se roda, nativamente, um contêiner de outro sistema operacional. Por isso, em ambientes com vários clientes, provedores costumam colocar contêineres dentro de máquinas virtuais.\n\nAs outras alternativas:\nA) Quem emula ou virtualiza hardware é o hipervisor, nas máquinas virtuais.\nC) Contêineres não têm kernel próprio.\nD) Contêineres rodam em qualquer Linux, inclusive no notebook do desenvolvedor.\nE) O código dentro do contêiner roda nativamente; a velocidade vem de não iniciar um sistema operacional.",
+      "check": "Nova resolução sem o gabarito: características de contêiner (kernel compartilhado, namespaces e cgroups) versus máquina virtual. Opção B."
+    },
+    {
+      "id": "gen-sd-lamport",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": [
+        "sd-tempo"
+      ],
+      "title": "Relógio lógico de Lamport",
+      "subject": "Relógios lógicos e ordem causal",
+      "prompt": "Dois processos usam relógios lógicos de Lamport, ambos começando em 0. A regra é: antes de cada evento local ou envio, o relógio é incrementado em 1, e o envio carrega o valor do relógio; ao receber uma mensagem com valor t, o processo faz relógio = max(relógio, t) + 1.\n\nP1: evento a, depois envia a mensagem m para P2.\nP2: evento b, depois evento c, e então recebe m.\n\nQual é o valor do relógio de P2 no evento de recebimento de m?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "1"
+      ],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nP1: o evento a recebe 1; o envio de m recebe 2, e m carrega t = 2.\nP2: o evento b recebe 1 e o evento c recebe 2. No recebimento, relógio = max(2, 2) + 1 = 3.\n\nA regra garante que, se um evento causou outro (a → b, por exemplo o envio e o recebimento da mesma mensagem), o relógio do primeiro é menor que o do segundo. O contrário não vale: relógios menores não provam causa, e para detectar eventos concorrentes usam-se relógios vetoriais.\n\nAs outras alternativas:\nA) 2 é o valor de c, ou o valor que chegou na mensagem, sem o + 1 do recebimento.\nC) 4 somaria o valor recebido com o relógio local (2 + 2), mas a regra usa o máximo, não a soma.\nD) 5 acumula incrementos a mais, como se o recebimento contasse duas vezes.\nE) 1 ignora os eventos anteriores de P2 e a mensagem recebida.",
+      "check": "Nova resolução sem o gabarito: simulação dos relógios em código, recebimento em P2 = 3."
+    },
+    {
+      "id": "gen-sd-escalabilidade",
+      "kind": "ESPELHO",
+      "format": "ITENS",
+      "concepts": [
+        "sd-escalabilidade",
+        "sd-arquiteturas"
+      ],
+      "title": "Escalar o sistema de inscrições",
+      "subject": "Escalabilidade horizontal, elasticidade e estado",
+      "prompt": "No período de inscrição do vestibular, o acesso ao sistema de uma universidade aumenta 20 vezes por poucos dias. Avalie as afirmações sobre como lidar com esse pico.\n\nI. Escalar horizontalmente significa acrescentar mais instâncias do serviço, em vez de trocar o servidor por um maior.\nII. Elasticidade é a capacidade de aumentar e reduzir automaticamente os recursos conforme a demanda, pagando só pelo período de uso.\nIII. Um serviço que guarda a sessão do usuário só na memória da instância em que ele entrou pode ser replicado atrás de um balanceador de carga sem nenhuma mudança.\nIV. Um balanceador de carga distribui as requisições entre as réplicas do serviço.\n\nÉ correto apenas o que se afirma em",
+      "options": [
+        "I e III.",
+        "II e III.",
+        "III e IV.",
+        "I, II e IV.",
+        "I, II, III e IV."
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nI está correta. Horizontal é aumentar o número de máquinas; vertical é aumentar a máquina.\n\nII está correta. É o que torna a nuvem econômica para picos sazonais: sobe instâncias na inscrição e desliga depois.\n\nIII está errada. Se a sessão vive na memória de uma instância, a próxima requisição do mesmo usuário pode cair em outra réplica, que não conhece a sessão, e o usuário parece deslogado. É preciso tornar o serviço sem estado, guardando a sessão num armazenamento compartilhado (Redis, banco) ou num token assinado, ou usar afinidade de sessão (sticky sessions), que tem limitações.\n\nIV está correta. O balanceador espalha a carga e retira de circulação as réplicas com falha.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: I, II e IV corretas; estado local impede replicação transparente (III falsa). Opção D."
+    }
+  ]
+}

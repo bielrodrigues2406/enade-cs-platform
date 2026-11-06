@@ -6,6 +6,7 @@ import type { ReviewItem } from "./review.component";
 import { AREA_SIMULATION_LIMIT, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 import { ChoiceService } from "./choice-dialog";
 import { EngagementService } from "./engagement.service";
+import { originLabel } from "./origin-label";
 
 type CatalogRow = {
   id: string;
@@ -267,11 +268,7 @@ export class HomeComponent {
     return whole ? Math.min(1, part / whole) : 0;
   }
   originLabel(origin: string, demonstration: boolean) {
-    return origin === "OFFICIAL"
-      ? "Oficial · Inep"
-      : demonstration
-        ? "Autoral demonstrativa"
-        : "Autoral";
+    return originLabel(origin, demonstration);
   }
   shortDate(iso: string) {
     const date = new Date(iso);
