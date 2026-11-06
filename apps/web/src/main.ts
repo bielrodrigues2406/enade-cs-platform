@@ -18,6 +18,8 @@ import { ExamComponent } from "./exam.component";
 import { ProfileComponent } from "./profile.component";
 import { firstName, initials } from "./initials";
 import { EngagementService } from "./engagement.service";
+import { requestJson } from "./api-request";
+import { ServiceNoticeComponent } from "./service-notice.component";
 import { GoalRingComponent } from "./goal-ring.component";
 import { AchievementToastComponent } from "./achievement-toast.component";
 import { ProgressComponent } from "./progress.component";
@@ -117,6 +119,7 @@ type Question = Summary & {
     "[class.account-mode]": "!!accountView()",
   },
   imports: [
+    ServiceNoticeComponent,
     StudyNavigationComponent,
     AnswerReflectionComponent,
     MascotComponent,
@@ -289,18 +292,10 @@ class App {
     this.identityChannel?.close();
   }
   async api<T>(path: string, init?: RequestInit): Promise<T> {
-    const res = await fetch("/api/" + path, {
+    return requestJson<T>("/api/" + path, {
       ...init,
       headers: { "Content-Type": "application/json" },
     });
-    if (!res.ok) {
-      const data = await res.json().catch(() => null);
-      throw new Error(
-        data?.message ||
-          "Não foi possível confirmar a operação. Verifique a conexão e tente novamente.",
-      );
-    }
-    return res.json();
   }
   async boot() {
     await this.refreshIdentity(false);

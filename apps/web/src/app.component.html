@@ -38,6 +38,7 @@
         <app-study-navigation [active]="destination()" [disabled]="navigationBusy()" [account]="session().mode === 'account'" [curator]="canCurate()" [admin]="roles().includes('ADMIN')" (navigate)="navigate($event)" />
       }
       <main id="content" tabindex="-1">
+        <app-service-notice />
         @if (booting()) {
           <app-mascot pose="boiando" [size]="64" motion="bob" />
           <p role="status">Preparando seu caderno…</p>

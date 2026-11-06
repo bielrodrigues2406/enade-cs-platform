@@ -142,7 +142,7 @@ test("a student takes the full edition exam with a countdown, pauses, leaves saf
   await page.route("**/api/discursive/*/response", route => route.fulfill({ status: 503, json: { message: "TEST ONLY falha ao salvar" } }));
   await body.fill("TEST ONLY resposta da discursiva 1.");
   await footer.getByRole("button", { name: "Próxima questão" }).click();
-  await expect(page.getByRole("alert")).toContainText("TEST ONLY falha ao salvar");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   await expect(footer.getByRole("status")).toContainText("Sua resposta continua aqui");
   await expect(page.getByRole("heading", { name: "ENADE 2096 · Discursiva 1" })).toBeVisible();
   await expect(body).toHaveValue("TEST ONLY resposta da discursiva 1.");

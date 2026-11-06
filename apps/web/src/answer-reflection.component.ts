@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, EventEmitter, HostListener, Input, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MascotComponent } from "./mascot.component";
@@ -34,13 +35,10 @@ export class AnswerReflectionComponent {
   }
 
   private async call(method: "GET" | "PUT", body?: Reflection): Promise<Reflection> {
-    const response = await fetch(`/api/review/${encodeURIComponent(this.versionId)}/reflection`, {
+    return requestJson<Reflection>(`/api/review/${encodeURIComponent(this.versionId)}/reflection`, {
       method, headers: { "Content-Type": "application/json" },
       body: body ? JSON.stringify(body) : undefined,
     });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message ?? "Não foi possível confirmar a reflexão.");
-    return data;
   }
 
   async load() {

@@ -204,7 +204,7 @@ test("saved answer returns to its page and next question crosses the page bounda
     body: JSON.stringify({ message: "TEST ONLY falha ao abrir a próxima questão." }),
   }));
   await page.getByRole("button", { name: /Próxima questão/ }).click();
-  await expect(page.getByRole("alert")).toContainText("falha ao abrir");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   await expect(page.getByRole("heading", { name: title(20), exact: true })).toBeVisible();
   await expect(page.locator(".resolution-position")).toContainText("Questão 20 de 62");
   expect(new URL(page.url()).searchParams.has("page")).toBe(false);
@@ -234,7 +234,7 @@ test("catalog failure can retry without dropping the applied filters or page", a
     await route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ message: "TEST ONLY falha temporária. Tente novamente." }) });
   });
   await pager(page).getByRole("button", { name: "Próxima", exact: true }).click();
-  await expect(page.getByRole("alert")).toContainText("falha temporária");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   await page.getByRole("button", { name: "Tentar novamente", exact: true }).click();
   await expect(pager(page)).toContainText("Página 3 de 4");
   await expect(page.getByLabel("Buscar questão")).toHaveValue(marker);

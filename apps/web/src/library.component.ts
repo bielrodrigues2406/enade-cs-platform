@@ -1,4 +1,5 @@
 import { MascotComponent } from "./mascot.component";
+import { requestJson } from "./api-request";
 import { Component, ElementRef, EventEmitter, Output, afterNextRender, inject, Injector, signal } from "@angular/core";
 
 // Biblioteca (LIB-1): fichas de uma página por assunto, lidas do repositório.
@@ -22,24 +23,36 @@ export class LibraryComponent {
   sheets = signal<SheetSummary[] | null>(null);
   open = signal<Sheet | null>(null);
   error = signal("");
-  async ngOnInit() {
+  busy = signal(false);
+  private retrySlug: string | null = null;
+  retry() { return this.retrySlug ? this.read(this.retrySlug) : this.load(); }
+  ngOnInit() { void this.load(); }
+  async load() {
+    if (this.busy()) return;
+    this.busy.set(true);
+    this.retrySlug = null;
+    this.error.set("");
     try {
-      const response = await fetch("/api/sheets");
-      if (!response.ok) throw new Error();
-      this.sheets.set(await response.json());
-    } catch {
-      this.error.set("Não foi possível carregar as fichas. Verifique a conexão e tente de novo.");
-    }
+      this.sheets.set(await requestJson<SheetSummary[]>("/api/sheets"));
+    } catch (error) { this.error.set(error instanceof Error ? error.message : "Não foi possível carregar as fichas. Tente novamente."); }
+    finally { this.busy.set(false); }
   }
 
   async read(slug: string) {
-    const response = await fetch(`/api/sheets/${slug}`);
-    if (!response.ok) { this.error.set("Ficha não encontrada."); return; }
-    this.open.set(await response.json());
-    this.focus("#sheet-title");
+    if (this.busy()) return;
+    this.busy.set(true);
+    this.retrySlug = slug;
+    this.error.set("");
+    try {
+      this.open.set(await requestJson<Sheet>(`/api/sheets/${encodeURIComponent(slug)}`));
+      this.focus("#sheet-title");
+    } catch (error) { this.error.set(error instanceof Error ? error.message : "Não foi possível abrir a ficha. Tente novamente."); }
+    finally { this.busy.set(false); }
   }
 
   close() {
+    this.retrySlug = null;
+    this.error.set("");
     this.open.set(null);
     this.focus("#library-title");
   }

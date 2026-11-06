@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, EventEmitter, HostListener, Output, signal } from "@angular/core";
 import { FormsModule, type NgForm } from "@angular/forms";
 import { SourcesComponent, type OfficialSource } from "./sources.component";
@@ -135,19 +136,11 @@ export class CurationComponent {
     this.busyChange.emit(this.busy() || this.sourceBusy() || this.hasUnsavedChanges());
   }
   private async api<T>(path: string, init?: RequestInit): Promise<T> {
-    const response = await fetch("/api/curation/" + path, {
+    return requestJson<T>("/api/curation/" + path, {
       ...init,
       headers: { "Content-Type": "application/json" },
       signal: this.abort.signal,
     });
-    if (!response.ok) {
-      const error = await response.json().catch(() => null);
-      throw new Error(
-        error?.message ||
-          "Não foi possível confirmar a operação. Tente novamente.",
-      );
-    }
-    return response.json();
   }
   statusLabel(status: EditorialStatus) {
     return {

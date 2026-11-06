@@ -69,7 +69,7 @@ test("filter, keyboard response, persistence, failure and retry", async ({
     }),
   );
   await page.getByRole("button", { name: "Confirmar resposta" }).click();
-  await expect(page.getByRole("alert")).toContainText("Falha temporária");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   await expect(correct).toBeChecked();
   await expect(page.getByText("RESPOSTA SALVA", { exact: true })).toHaveCount(
     0,

@@ -171,7 +171,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
   );
   await logout(page);
   await expect(page.getByRole("alert")).toContainText(
-    "Não foi possível sair agora.",
+    "O CadernoCC está temporariamente indisponível.",
   );
   await expect(page.locator("header .account-chip")).toHaveAttribute("title", accountEmail);
   await expect(page).toHaveURL(/\/perfil$/);

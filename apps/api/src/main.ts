@@ -17,6 +17,7 @@ import type { NestExpressApplication } from "@nestjs/platform-express";
 import { db, type Answer, type Question } from "./database.js";
 export { db } from "./database.js";
 import { fail } from "./api-error.js";
+import { readServiceNotice, serviceNoticeRoute } from "./service-notice.js";
 import { webContentPolicy, webShell } from "./web-shell.js";
 import { requireIdentity } from "./session.js";
 import { AuthController } from "./auth.js";
@@ -289,6 +290,7 @@ function webRoot() {
   return root;
 }
 export async function createApp() {
+  const notice = readServiceNotice(process.env);
   const production = process.env.NODE_ENV === "production";
   if (production && !/^https:\/\/[^/]+$/.test(process.env.APP_ORIGIN || ""))
     throw new ConfigError(
@@ -347,6 +349,7 @@ export async function createApp() {
     }
     next();
   });
+  app.use(serviceNoticeRoute(notice));
   app.useBodyParser("json", {
     limit: "64kb",
     type: (req: any) =>

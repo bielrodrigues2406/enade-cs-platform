@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
@@ -63,10 +64,7 @@ export class ActivityComponent {
     this.error.set("");
     try {
       const params = new URLSearchParams({ category: this.category, q: this.search.trim(), page: String(page) });
-      const res = await fetch(`/api/admin/activity?${params}`);
-      const body = await res.json().catch(() => null);
-      if (!res.ok) throw new Error(body?.message || "Não foi possível carregar o registro.");
-      this.data.set(body);
+      this.data.set(await requestJson<ActivityPage>(`/api/admin/activity?${params}`));
     } catch (error) {
       this.error.set(error instanceof Error ? error.message : "Não foi possível carregar o registro.");
     } finally {

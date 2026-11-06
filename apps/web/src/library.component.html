@@ -1,3 +1,6 @@
+@if (error()) {
+  <div class="notice" role="alert"><p>{{ error() }}</p><button type="button" class="outline" (click)="retry()" [disabled]="busy()">Tentar novamente</button></div>
+}
 @if (open(); as sheet) {
   <article class="sheet" aria-labelledby="sheet-title">
     <div class="sheet-bar">
@@ -40,15 +43,13 @@
     <h1 id="library-title" tabindex="-1">Biblioteca</h1>
     <p>Fichas de uma página para revisar um assunto antes de treinar. Cada uma traz o essencial, as pegadinhas comuns e onde aprofundar.</p>
   </section>
-  @if (error()) {
-    <p class="notice" role="alert">{{ error() }}</p>
-  } @else if (!sheets()) {
+  @if (!sheets() && !error()) {
     <p role="status">Carregando as fichas…</p>
-  } @else {
+  } @else if (sheets()) {
     <ul class="sheet-grid" aria-label="Fichas por assunto">
       @for (sheet of sheets(); track sheet.slug) {
         <li>
-          <button type="button" class="sheet-card" (click)="read(sheet.slug)">
+          <button type="button" class="sheet-card" (click)="read(sheet.slug)" [disabled]="busy()">
             <span class="sheet-card-kicker">{{ sheet.area }}</span>
             <strong>{{ sheet.title }}</strong>
             <span>{{ sheet.summary }}</span>

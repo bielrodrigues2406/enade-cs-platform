@@ -5,6 +5,7 @@ REST JSON, prefixo `/api`, sem CORS entre origens; a web usa proxy na mesma orig
 | Método e caminho | Entrada | Retorno / regra |
 | --- | --- | --- |
 | GET /health | nenhuma | 200 `{status:"ok",database:"ok"}` após consulta real ao banco |
+| GET /service-status | nenhuma; público, sem sessão/banco | 200 `{notice:null}` ou `{notice:{message,startsAt,endsAt}}`, datas ISO; no-store; aviso expirado não é retornado. Ver [operação](SERVICE-MESSAGES.md) |
 | POST /session | JSON; cookie opcional | 201 `{mode:"guest"}` ou `{mode:"account",email}`; cookie HttpOnly/SameSite Strict de 30 dias; sessão válida existente é reutilizada |
 | GET /auth/me | cookie | 200 com modo e e-mail da própria conta quando autenticada; 401 se expirado |
 | POST /auth/register | cookie anônimo; JSON `{email,password}` | 201 conta; preserva respostas da identidade atual e rotaciona token; duplicata 409 |

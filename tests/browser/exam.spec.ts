@@ -278,7 +278,7 @@ test("a lost save acknowledgement stays protected until retry confirms the same 
     await route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ message: "TEST ONLY resposta perdida após gravar." }) });
   });
   await radio(page, item, "A").check();
-  await expect(page.getByRole("alert")).toContainText("resposta perdida após gravar");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   expect((await currentView(page)).items[0].answer.optionId).toBe("A");
   await expect(page.getByRole("button", { name: "Limpar resposta", exact: true })).toBeDisabled();
   await expect(page.getByRole("button", { name: "Revisar e finalizar", exact: true })).toBeDisabled();
@@ -301,7 +301,7 @@ test("a lost save acknowledgement stays protected until retry confirms the same 
   });
   await page.getByRole("button", { name: "Revisar e finalizar", exact: true }).click();
   await page.getByRole("dialog", { name: "Finalizar este treino?" }).getByRole("button", { name: "Finalizar treino", exact: true }).click();
-  await expect(page.getByRole("alert")).toContainText("confirmação final perdida");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   expect((await currentView(page)).state).toBe("COMPLETED");
   await page.getByRole("button", { name: "Tentar novamente", exact: true }).click();
   await expect(page.locator(".practice-score")).toContainText("0 de 10");

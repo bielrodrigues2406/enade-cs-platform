@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, EventEmitter, Output, signal } from "@angular/core";
 import { FormsModule, type NgForm } from "@angular/forms";
 
@@ -61,19 +62,11 @@ export class SourcesComponent {
     this.busyChange.emit(false);
   }
   private async api<T>(path = "", init?: RequestInit): Promise<T> {
-    const response = await fetch("/api/curation/sources" + path, {
+    return requestJson<T>("/api/curation/sources" + path, {
       ...init,
       headers: { "Content-Type": "application/json" },
       signal: this.abort.signal,
     });
-    if (!response.ok) {
-      const error = await response.json().catch(() => null);
-      throw new Error(
-        error?.message ||
-          "Não foi possível confirmar a operação. Tente novamente.",
-      );
-    }
-    return response.json();
   }
   kindLabel(kind: OfficialSource["kind"]) {
     return {

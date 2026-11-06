@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { MascotComponent } from "./mascot.component";
 import { Component, EventEmitter, HostListener, Input, Output, computed, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -211,12 +212,10 @@ export class DiscursiveComponent {
     }
   }
   private async request<T>(path: string, body?: unknown, method?: string): Promise<T> {
-    const res = await fetch("/api/" + path, {
+    return requestJson<T>("/api/" + path, {
       method: method ?? (body === undefined ? "GET" : "POST"),
       headers: { "Content-Type": "application/json" },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
-    if (!res.ok) throw new Error((await res.json().catch(() => null))?.message ?? "Não foi possível concluir.");
-    return res.json();
   }
 }

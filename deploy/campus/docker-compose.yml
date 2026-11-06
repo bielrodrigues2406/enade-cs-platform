@@ -58,6 +58,9 @@ services:
       APP_ORIGIN: ${APP_ORIGIN:?defina APP_ORIGIN com https:// no arquivo .env}
       TRUST_PROXY: "${TRUST_PROXY:-1}"
       BOOTSTRAP_CONTENT: "${BOOTSTRAP_CONTENT:-1}"
+      SERVICE_NOTICE_MESSAGE: "${SERVICE_NOTICE_MESSAGE:-}"
+      SERVICE_NOTICE_START: "${SERVICE_NOTICE_START:-}"
+      SERVICE_NOTICE_END: "${SERVICE_NOTICE_END:-}"
     volumes:
       - data:/data
     tmpfs:

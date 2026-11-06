@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, EventEmitter, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ExamImportComponent } from "./exam-import.component";
@@ -361,16 +362,11 @@ export class AdminComponent {
     }
   }
   private async request<T>(path: string, body?: unknown, method?: "GET" | "POST" | "PUT"): Promise<T> {
-    const res = await fetch("/api/" + path, {
+    return requestJson<T>("/api/" + path, {
       method: method ?? (body === undefined ? "GET" : "POST"),
       headers: { "Content-Type": "application/json" },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
-    if (!res.ok) {
-      const data = await res.json().catch(() => null);
-      throw new Error(data?.message || "Não foi possível concluir. Tente novamente.");
-    }
-    return res.json();
   }
   private message(error: unknown) {
     return error instanceof Error ? error.message : "Não foi possível concluir. Tente novamente.";

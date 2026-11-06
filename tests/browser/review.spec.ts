@@ -127,7 +127,7 @@ test("the error notebook supports retry, confirmed correction, filters, reload a
   await page
     .getByRole("button", { name: "Atualizar caderno", exact: true })
     .click();
-  await expect(page.getByRole("alert")).toContainText("Falha temporária");
+  await expect(page.getByRole("alert")).toContainText("O CadernoCC está temporariamente indisponível.");
   await expect(
     page.getByRole("heading", { name: "Ainda não há respostas salvas" }),
   ).toHaveCount(0);
@@ -159,7 +159,7 @@ test("the error notebook supports retry, confirmed correction, filters, reload a
     .getByRole("button", { name: "Confirmar resposta", exact: true })
     .click();
   await expect(page.getByRole("alert")).toContainText(
-    "Falha temporária ao salvar.",
+    "O CadernoCC está temporariamente indisponível.",
   );
   await expect(correct).toBeChecked();
   expect((await (await context.request.get("/api/review")).json()).total).toBe(

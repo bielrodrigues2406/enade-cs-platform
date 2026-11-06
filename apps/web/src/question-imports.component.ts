@@ -1,3 +1,4 @@
+import { requestJson } from "./api-request";
 import { Component, EventEmitter, HostListener, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import type { OfficialSource } from "./sources.component";
@@ -96,12 +97,7 @@ export class QuestionImportsComponent {
   @HostListener("window:beforeunload", ["$event"])
   beforeUnload(event: BeforeUnloadEvent) { if (this.dirty() || this.busy()) event.preventDefault(); }
   private async api<T>(path = "", init?: RequestInit): Promise<T> {
-    const response = await fetch("/api/curation/imports" + path, { ...init, headers: { "Content-Type": "application/json" }, signal: this.abort.signal });
-    if (!response.ok) {
-      const data = await response.json().catch(() => null);
-      throw new Error(data?.message || "Não foi possível confirmar a operação. Tente novamente.");
-    }
-    return response.json();
+    return requestJson<T>("/api/curation/imports" + path, { ...init, headers: { "Content-Type": "application/json" }, signal: this.abort.signal });
   }
   async load(offset: number) {
     const seq = ++this.sequence;
