@@ -38,6 +38,10 @@ test("aborto de navegação é preservado e resposta HTML não vira mensagem té
   const aborted = new DOMException("cancelado", "AbortError");
   const mocked = t.mock.method(globalThis, "fetch", async () => { throw aborted; });
   await assert.rejects(requestJson("/api/test"), (error) => error === aborted);
+  const bodyAborted = new Response("{}");
+  t.mock.method(bodyAborted, "json", async () => { throw aborted; });
+  mocked.mock.mockImplementation(async () => bodyAborted);
+  await assert.rejects(requestJson("/api/test"), (error) => error === aborted);
   mocked.mock.mockImplementation(async () => new Response("<html>proxy failure</html>", { status: 502 }));
   await assert.rejects(requestJson("/api/test"), /temporariamente indisponível/);
   mocked.mock.mockImplementation(async () => new Response("not json"));

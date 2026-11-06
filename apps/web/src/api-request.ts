@@ -49,7 +49,10 @@ export async function requestJson<T>(url: string, init?: RequestInit): Promise<T
       "Não foi possível confirmar a operação. Mantenha esta página aberta, verifique a conexão e tente novamente." :
       "Não foi possível conectar ao CadernoCC. Verifique a conexão e tente novamente.", 0);
   }
-  const data: unknown = await response.json().catch(() => null);
+  const data: unknown = await response.json().catch((error: unknown) => {
+    if (error instanceof Error && error.name === "AbortError") throw error;
+    return null;
+  });
   if (!response.ok) throw responseError(response, data);
   if (data === null) throw new ApiRequestError("O serviço enviou uma resposta inesperada. Tente novamente em instantes.", response.status);
   return data as T;
