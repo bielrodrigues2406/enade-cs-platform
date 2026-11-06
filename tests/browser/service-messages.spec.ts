@@ -69,10 +69,15 @@ test("falha de rede no login mantém o e-mail e não repete a autenticação", a
 test("aviso programado informa horário sem modal, roubo de foco ou overflow", async ({ page }) => {
   const start = new Date(Date.now() + 3_600_000).toISOString();
   const end = new Date(Date.now() + 7_200_000).toISOString();
-  await page.route("**/api/service-status", (route) => route.fulfill({
-    json: { notice: { message: "Atualização TEST ONLY do CadernoCC.", startsAt: start, endsAt: end } },
-  }));
+  let release!: () => void;
+  const pending = new Promise<void>((resolve) => { release = resolve; });
+  await page.route("**/api/service-status", async (route) => {
+    await pending;
+    await route.fulfill({ json: { notice: { message: "Atualização TEST ONLY do CadernoCC.", startsAt: start, endsAt: end } } });
+  });
   await catalog(page);
+  await page.getByLabel("Buscar questão", { exact: true }).focus();
+  release();
   const notice = page.getByRole("complementary", { name: "Manutenção programada", exact: true });
   await expect(notice).toContainText("Atualização TEST ONLY do CadernoCC.");
   const format = new Intl.DateTimeFormat("pt-BR", { timeZone: "America/Sao_Paulo", dateStyle: "short", timeStyle: "short" });
@@ -81,7 +86,7 @@ test("aviso programado informa horário sem modal, roubo de foco ou overflow", a
   await expect(notice).toContainText("horário de Brasília");
   await expect(page.locator("app-service-notice [aria-live='polite']")).toBeVisible();
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await page.getByLabel("Buscar questão", { exact: true }).focus();
+  await expect(page.getByLabel("Buscar questão", { exact: true })).toBeFocused();
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await expect(notice).toBeVisible();
