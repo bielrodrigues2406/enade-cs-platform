@@ -113,7 +113,10 @@ Gabriel dispensou o segundo agente. O que substitui essa revisão:
 - **Lote 1:** 120 questões nas 16 áreas mais a Formação Geral.
   - Tipos: 79 espelho, 14 lacuna e 27 tema quente.
   - Formatos: 80 simples, 24 de itens e 16 de asserção-razão.
-- **Próximos lotes:**
-  - mais questões nas áreas de maior peso (Algoritmos, Matemática, Arquitetura, SO), sobretudo nos conceitos marcados como "ainda não caiu";
+- **Próximos lotes** (base em [ENADE-EVOLUTION.md](ENADE-EVOLUTION.md)):
+  - texto-base de 120 a 200 palavras com referência, como a prova desde 2014 (o lote 1 tem mediana de 58 palavras, contra 214 em 2021);
+  - mais comandos "Considerando…, avalie";
+  - mais questões nas áreas de maior peso e em alta (Algoritmos, Arquitetura, SO e a lógica da Matemática), sobretudo nos conceitos marcados como "ainda não caiu";
   - mais asserção-razão com a resposta B (duas verdades sem relação de causa), o padrão mais difícil;
   - equilibrar as letras do gabarito (no lote 1, a letra E é a menos frequente).
+- **Imagens:** diagramas exatos em SVG e ilustrações no GPT Image, conforme [IMAGE-PROMPTS.md](IMAGE-PROMPTS.md).

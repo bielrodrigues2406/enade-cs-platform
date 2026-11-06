@@ -47,6 +47,10 @@ Leia antes: `AGENTS.md`, `docs/WORKBOARD.md` (diário no fim, reservas de migrat
 
 A bússola da preparação está em **`docs/CORE-CONCEPTS.md`**: 16 áreas e a Formação Geral com conceitos, fatos que cortam alternativas, pares, pistas e pegadinhas, ligados às questões oficiais, com autoavaliação e confiança por área na Biblioteca. Próximos incrementos para a reta final na seção 7 desse documento.
 
+## Evolução da prova e imagens (06/11)
+
+[ENADE-EVOLUTION.md](ENADE-EVOLUTION.md) mede como formato e áreas mudaram de 2005 a 2021 e o que muda na geração. [IMAGE-PROMPTS.md](IMAGE-PROMPTS.md) lista as imagens: SVG para diagramas exatos (o agente faz) e prompts de GPT Image para ilustrações (Gabriel gera e envia).
+
 ## 5. O que falta (por prioridade)
 
 1. **Preservar a publicação AWS em cadernocc.com.br:** Gabriel relatou funcionamento em 06/11. Conferências operacionais de backups/restauração continuam próprias; não reabrir o diagnóstico CSS como falha atual sem evidência. O mesmo Compose de [`deploy/campus/`](../deploy/campus/README.md) serve como referência; eventual implantação IFSP PEP depende da infraestrutura institucional.
