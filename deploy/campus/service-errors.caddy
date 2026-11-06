@@ -1,0 +1,33 @@
+# Importe este arquivo fora do bloco do domínio. Dentro dele, use:
+# import cadernocc_service_errors /srv/cadernocc-status 60
+# Segundo argumento: intervalo sugerido para tentar novamente, não previsão de retorno.
+(cadernocc_service_errors) {
+    handle /_service/* {
+        root * {args[0]}
+        uri strip_prefix /_service
+        header Cache-Control "no-store"
+        header X-Content-Type-Options "nosniff"
+        file_server
+    }
+    handle_errors {
+        @temporary expression {err.status_code} in [502, 503, 504]
+        handle @temporary {
+            header Cache-Control "no-store"
+            header Retry-After {args[1]}
+            header X-Content-Type-Options "nosniff"
+            header Content-Security-Policy "default-src 'none'; style-src 'self'; base-uri 'none'; frame-ancestors 'none'"
+            @api path /api /api/*
+            handle @api {
+                header Content-Type "application/json; charset=utf-8"
+                respond `{"code":"SERVICE_UNAVAILABLE","message":"O CadernoCC está temporariamente indisponível. Tente novamente em instantes."}` 503
+            }
+            handle {
+                root * {args[0]}
+                rewrite * /unavailable.html
+                file_server {
+                    status 503
+                }
+            }
+        }
+    }
+}
