@@ -1,0 +1,112 @@
+{
+  "slug": "seguranca",
+  "area": "Segurança",
+  "title": "Segurança da informação",
+  "summary": "Passou a cair em 2017 e 2021. Criptografia, assinatura e hash, ataques comuns e engenharia social. Tema quente para 2026.",
+  "deck": "seguranca",
+  "sheet": "seguranca",
+  "concepts": [
+    {
+      "id": "seg-pilares",
+      "name": "Pilares da segurança",
+      "definition": "Confidencialidade (só quem pode lê), integridade (não foi alterado), disponibilidade (está acessível), além de autenticidade e não repúdio.",
+      "example": "Um ataque de negação de serviço (DDoS) atinge a disponibilidade, não a confidencialidade.",
+      "match": ["seguranca da informacao"]
+    },
+    {
+      "id": "seg-simetrica",
+      "name": "Criptografia simétrica",
+      "definition": "A mesma chave cifra e decifra (AES). É rápida; o problema é distribuir a chave com segurança.",
+      "example": "Com n pessoas conversando aos pares, são necessárias n(n−1)/2 chaves.",
+      "match": ["criptografia"]
+    },
+    {
+      "id": "seg-assimetrica",
+      "name": "Criptografia assimétrica e assinatura digital",
+      "definition": "Par de chaves (RSA, curvas elípticas). Cifrar com a pública do destinatário dá confidencialidade; assinar com a privada do remetente dá autenticidade, integridade e não repúdio.",
+      "example": "Para provar que você escreveu a mensagem, assine com a sua chave privada; quem tem a sua pública verifica.",
+      "match": ["assinatura", "criptografia"]
+    },
+    {
+      "id": "seg-hash",
+      "name": "Funções hash e senhas",
+      "definition": "Resumo de tamanho fixo, unidirecional e sem chave, que detecta alteração. Senhas guardam-se com hash lento e sal (bcrypt, Argon2). MD5 e SHA-1 não servem mais contra colisões.",
+      "example": "Mudar um único caractere da mensagem muda completamente o SHA-256.",
+      "match": ["hash"]
+    },
+    {
+      "id": "seg-iv",
+      "name": "Vetor de inicialização e modos de operação",
+      "definition": "O IV faz a mesma mensagem cifrada duas vezes com a mesma chave gerar textos diferentes. Não precisa ser secreto, mas não pode se repetir com a mesma chave.",
+      "example": "Reusar IV em modos como CTR ou GCM expõe relações entre as mensagens.",
+      "match": ["iv"]
+    },
+    {
+      "id": "seg-certificados",
+      "name": "Certificados, ICP e TLS",
+      "definition": "A autoridade certificadora assina o certificado que liga uma chave pública a uma identidade. O TLS (HTTPS) usa isso para autenticar o servidor e combinar uma chave simétrica de sessão.",
+      "example": "O cadeado do navegador indica conexão cifrada com servidor autenticado, não que o site seja honesto.",
+      "match": ["certificado", "tls"]
+    },
+    {
+      "id": "seg-mitm",
+      "name": "Homem no meio e redes sem fio",
+      "definition": "O atacante se coloca entre as partes e lê ou altera o tráfego. Autenticação mútua, certificados e cifragem forte mitigam. Em Wi-Fi, WEP é inseguro; use WPA2 ou WPA3.",
+      "example": "Rede Wi-Fi aberta falsa com o nome do café captura o tráfego de quem se conecta.",
+      "match": ["homem no meio", "wi-fi"]
+    },
+    {
+      "id": "seg-engenharia-social",
+      "name": "Engenharia social e phishing",
+      "definition": "Explora pessoas em vez de falhas técnicas: phishing, pretexto, isca. Defesas: conscientização, verificação por outro canal e autenticação em múltiplos fatores.",
+      "example": "Ligação de 'suporte técnico' pedindo a senha é engenharia social.",
+      "match": ["engenharia social"]
+    },
+    {
+      "id": "seg-ataques-web",
+      "name": "Ataques a aplicações",
+      "definition": "Injeção de SQL (use consultas parametrizadas), XSS (escape a saída), força bruta (limite tentativas, MFA), ransomware (backup isolado, atualização), ataque à cadeia de dependências.",
+      "example": "' OR '1'='1 numa consulta montada por concatenação libera o login.",
+      "match": ["injecao", "xss", "ransomware"]
+    },
+    {
+      "id": "seg-defesas",
+      "name": "Defesas de rede e controle de acesso",
+      "definition": "Firewall filtra tráfego; IDS detecta e IPS bloqueia intrusões; VPN cria túnel cifrado; menor privilégio, MFA e segmentação limitam danos.",
+      "example": "MFA impede o login mesmo com a senha vazada, se o segundo fator não estiver com o atacante.",
+      "match": ["firewall", "vpn", "autenticacao"]
+    }
+  ],
+  "facts": [
+    "Confidencialidade: cifrar com a chave pública do destinatário.",
+    "Autenticidade e não repúdio: assinar com a chave privada do remetente.",
+    "Hash não usa chave e não pode ser 'decifrado'; garante integridade, não confidencialidade.",
+    "HMAC = hash com chave simétrica: integridade e autenticidade, mas sem não repúdio (os dois lados têm a chave).",
+    "IV não é segredo, mas não pode repetir com a mesma chave.",
+    "Senha: hash lento com sal; nunca cifrada de forma reversível nem em texto puro.",
+    "TLS: assimétrica para autenticar e combinar a chave; simétrica para os dados (mais rápida).",
+    "DDoS ataca a disponibilidade."
+  ],
+  "pairs": [
+    { "a": "Simétrica", "b": "Assimétrica", "difference": "Uma chave compartilhada, rápida × par pública/privada, mais lenta, resolve a distribuição de chaves." },
+    { "a": "Hash", "b": "Cifra", "difference": "Resumo irreversível sem chave (integridade) × transformação reversível com chave (confidencialidade)." },
+    { "a": "Assinatura digital", "b": "HMAC", "difference": "Chave privada, dá não repúdio × chave compartilhada, não dá não repúdio." },
+    { "a": "IDS", "b": "IPS", "difference": "Detecta e alerta × detecta e bloqueia." },
+    { "a": "Autenticação", "b": "Autorização", "difference": "Quem é você × o que você pode fazer." }
+  ],
+  "cues": [
+    { "cue": "provar a autoria, não repúdio", "concept": "seg-assimetrica" },
+    { "cue": "verificar se o arquivo foi alterado", "concept": "seg-hash" },
+    { "cue": "interceptar, ponto de acesso falso", "concept": "seg-mitm" },
+    { "cue": "enganar o usuário, e-mail falso", "concept": "seg-engenharia-social" },
+    { "cue": "mesma mensagem, cifras diferentes", "concept": "seg-iv" }
+  ],
+  "traps": [
+    { "pattern": "INVERTIDA", "text": "Assinar com a chave pública ou cifrar para o destinatário com a chave privada do remetente." },
+    { "pattern": "PAR", "text": "Hash apresentado como cifra que garante confidencialidade." },
+    { "pattern": "ABSOLUTO", "text": "'HTTPS garante que o site é confiável': garante canal cifrado e servidor autenticado, não honestidade." },
+    { "pattern": "CONDICAO", "text": "IV tratado como segredo, ou reutilizado como se não houvesse problema." },
+    { "pattern": "VIZINHO", "text": "Firewall apresentado como defesa contra phishing ou engenharia social." }
+  ],
+  "references": ["Stallings, Criptografia e Segurança de Redes", "Cartilha de Segurança para Internet (CERT.br)", "OWASP Top 10"]
+}

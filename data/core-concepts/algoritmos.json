@@ -1,0 +1,144 @@
+{
+  "slug": "algoritmos",
+  "area": "Algoritmos",
+  "title": "Algoritmos e estruturas de dados",
+  "summary": "A área que mais cai: complexidade, ordenação, árvores, grafos e as estratégias de projeto (guloso, divisão e conquista, programação dinâmica).",
+  "deck": "algoritmos",
+  "sheet": "complexidade-e-ordenacao",
+  "concepts": [
+    {
+      "id": "alg-complexidade",
+      "name": "Complexidade assintótica",
+      "definition": "Mede como o custo cresce com o tamanho n da entrada, ignorando constantes: O é limite superior, Ω inferior e Θ justo.",
+      "example": "Dois laços aninhados até n fazem n² operações: Θ(n²).",
+      "match": ["complexidade", "avaliar polinomios", "comparacoes"]
+    },
+    {
+      "id": "alg-recorrencia",
+      "name": "Recursão e recorrências",
+      "definition": "O custo de um algoritmo recursivo é uma recorrência; o Teorema Mestre resolve T(n) = a·T(n/b) + f(n).",
+      "example": "Merge sort: T(n) = 2T(n/2) + n, logo Θ(n log n). Fibonacci ingênuo: T(n) = T(n−1) + T(n−2) + 1, exponencial.",
+      "match": ["recurs", "recorrencia", "fibonacci", "hanoi"]
+    },
+    {
+      "id": "alg-busca",
+      "name": "Busca sequencial e binária",
+      "definition": "A sequencial testa um a um, O(n). A binária divide o intervalo ao meio a cada passo, O(log n), e exige vetor ordenado com acesso direto.",
+      "example": "Em 1000 elementos ordenados, a binária faz no máximo ⌊log₂ 1000⌋ + 1 = 10 comparações.",
+      "match": ["busca sequencial", "busca binaria", "pesquisa binaria"]
+    },
+    {
+      "id": "alg-ordenacao",
+      "name": "Algoritmos de ordenação",
+      "definition": "Inserção, seleção e bolha são O(n²); merge sort e heapsort são O(n log n); quicksort é O(n log n) em média e O(n²) no pior caso.",
+      "example": "Inserção num vetor já ordenado faz n−1 comparações: O(n), seu melhor caso.",
+      "match": ["ordenacao", "quicksort", "insercao"]
+    },
+    {
+      "id": "alg-lineares",
+      "name": "Pilha, fila, deque e lista ligada",
+      "definition": "Pilha é LIFO (último a entrar, primeiro a sair); fila é FIFO; deque insere e remove nas duas pontas; lista ligada encadeia nós por ponteiros.",
+      "example": "Desempilhar tudo de uma pilha e empilhar em outra inverte a ordem dos elementos.",
+      "match": ["pilha", "fila", "deque", "lista ligada", "estruturas de dados"]
+    },
+    {
+      "id": "alg-arvores",
+      "name": "Árvores binárias de busca e percursos",
+      "definition": "Na ABB, à esquerda ficam chaves menores e à direita maiores; busca, inserção e remoção custam O(h), onde h é a altura.",
+      "example": "O percurso em ordem (esquerda, raiz, direita) de uma ABB lista as chaves em ordem crescente.",
+      "match": ["arvore binaria", "arvores binarias", "preordem", "percurso"]
+    },
+    {
+      "id": "alg-balanceadas",
+      "name": "Árvores balanceadas (AVL)",
+      "definition": "Na AVL, a diferença de altura entre as subárvores de cada nó é no máximo 1; rotações simples ou duplas restauram o equilíbrio e mantêm a altura em O(log n).",
+      "example": "Inserir 1, 2, 3 em sequência desequilibra a raiz; uma rotação simples à esquerda deixa 2 na raiz.",
+      "match": ["avl", "rotacao"]
+    },
+    {
+      "id": "alg-heap",
+      "name": "Heap e fila de prioridade",
+      "definition": "Árvore binária completa em que cada pai é maior (ou menor) que os filhos; guardada num vetor, com filhos de i em 2i e 2i+1.",
+      "example": "Inserir e remover o máximo custam O(log n); consultar o máximo custa O(1); construir o heap a partir de um vetor custa O(n).",
+      "match": ["heap", "prioridade"]
+    },
+    {
+      "id": "alg-grafos",
+      "name": "Grafos: busca em largura e profundidade",
+      "definition": "BFS visita por camadas com uma fila; DFS vai fundo com uma pilha ou recursão. Ambas custam O(V + E) com lista de adjacência.",
+      "example": "Em grafo sem pesos, a BFS encontra o caminho com menos arestas.",
+      "match": ["grafo", "digrafo"]
+    },
+    {
+      "id": "alg-caminho-minimo",
+      "name": "Caminho mínimo (Dijkstra)",
+      "definition": "Dijkstra escolhe sempre o vértice não visitado de menor distância; é guloso e só é correto com pesos não negativos.",
+      "example": "Com peso negativo, use Bellman-Ford, que também detecta ciclo negativo, em O(V·E).",
+      "match": ["dijkstra", "caminho minimo", "caminhos minimos"]
+    },
+    {
+      "id": "alg-agm",
+      "name": "Árvore geradora mínima (Kruskal e Prim)",
+      "definition": "Conecta todos os vértices com custo total mínimo e sem ciclos. Kruskal ordena as arestas e evita ciclos com união-busca; Prim cresce a partir de um vértice.",
+      "example": "Toda árvore geradora de um grafo com V vértices tem exatamente V − 1 arestas.",
+      "match": ["kruskal", "arvore geradora", "geradora minima"]
+    },
+    {
+      "id": "alg-paradigmas",
+      "name": "Paradigmas de projeto: guloso, divisão e conquista, programação dinâmica",
+      "definition": "Guloso faz a melhor escolha local; divisão e conquista quebra em subproblemas independentes; programação dinâmica guarda soluções de subproblemas que se repetem.",
+      "example": "Troco guloso funciona com moedas 1, 5, 10, 25, 50, mas falha com {1, 3, 4} para 6: dá 4+1+1, e o ótimo é 3+3.",
+      "match": ["paradigma", "guloso", "programacao dinamica", "troco"]
+    },
+    {
+      "id": "alg-intrataveis",
+      "name": "Problemas difíceis e heurísticas",
+      "definition": "Para problemas NP-difíceis, como o caixeiro viajante, não se conhece algoritmo polinomial; usam-se heurísticas, aproximações ou busca exaustiva em instâncias pequenas.",
+      "example": "Testar todas as rotas do caixeiro viajante com n cidades custa da ordem de n!.",
+      "match": ["caixeiro", "sequenciamento"]
+    }
+  ],
+  "facts": [
+    "Busca binária: O(log n), só em vetor ordenado com acesso direto; no máximo ⌊log₂ n⌋ + 1 comparações.",
+    "Inserção: O(n²) no pior caso, O(n) no melhor (já ordenado); estável e sem memória extra.",
+    "Merge sort: O(n log n) sempre, estável, usa O(n) de memória extra.",
+    "Quicksort: O(n log n) em média, O(n²) no pior caso (pivô ruim); não é estável; usa pilha de recursão O(log n) em média.",
+    "Heapsort: O(n log n) sempre, sem memória extra, não estável.",
+    "Nenhuma ordenação por comparação vence Ω(n log n) no pior caso; counting e radix sort são lineares porque não comparam.",
+    "Heap: inserir e remover o topo O(log n); ver o topo O(1); construir O(n).",
+    "ABB balanceada: operações O(log n); ABB degenerada (inserção em ordem) vira lista: O(n).",
+    "BFS e DFS: O(V + E) com lista de adjacência, O(V²) com matriz.",
+    "Dijkstra com heap: O((V + E) log V); exige pesos ≥ 0. Floyd-Warshall (todos os pares): O(V³).",
+    "Torre de Hanói com n discos: 2ⁿ − 1 movimentos.",
+    "Fibonacci recursivo ingênuo é exponencial; com memorização ou laço, O(n).",
+    "Tabela hash: busca O(1) em média e O(n) no pior caso (todas as chaves colidem)."
+  ],
+  "pairs": [
+    { "a": "Pilha", "b": "Fila", "difference": "Pilha tira o último que entrou (LIFO); fila tira o primeiro (FIFO). BFS usa fila; DFS usa pilha." },
+    { "a": "Merge sort", "b": "Quicksort", "difference": "Merge garante O(n log n) e é estável, mas gasta memória extra; quick é in-place e rápido na média, mas tem pior caso O(n²)." },
+    { "a": "Dijkstra", "b": "Kruskal/Prim", "difference": "Dijkstra dá o caminho mais curto a partir de uma origem; Kruskal e Prim dão a árvore de menor custo total ligando todos. A AGM não contém necessariamente os caminhos mínimos." },
+    { "a": "Guloso", "b": "Programação dinâmica", "difference": "O guloso decide sem voltar atrás e pode errar; a PD considera todas as escolhas dos subproblemas e garante o ótimo quando há subestrutura ótima." },
+    { "a": "Árvore binária de busca", "b": "Heap", "difference": "ABB ordena esquerda < raiz < direita (boa para buscar qualquer chave); heap só garante pai ≥ filhos (bom para pegar o máximo)." },
+    { "a": "Pré-ordem", "b": "Em ordem e pós-ordem", "difference": "Pré: raiz antes dos filhos. Em ordem: entre eles. Pós: depois deles. Só a em ordem lista uma ABB ordenada." }
+  ],
+  "cues": [
+    { "cue": "vetor ordenado, metade, log", "concept": "alg-busca" },
+    { "cue": "último a entrar, desfazer, chamadas de função", "concept": "alg-lineares" },
+    { "cue": "ligar todas as cidades com custo mínimo, sem ciclos", "concept": "alg-agm" },
+    { "cue": "menor distância a partir de uma origem", "concept": "alg-caminho-minimo" },
+    { "cue": "subproblemas que se repetem, tabela, memorização", "concept": "alg-paradigmas" },
+    { "cue": "T(n) = aT(n/b) + f(n), chamadas recursivas", "concept": "alg-recorrencia" },
+    { "cue": "fator de balanceamento, rotação", "concept": "alg-balanceadas" },
+    { "cue": "maior prioridade primeiro, escalonamento por prioridade", "concept": "alg-heap" }
+  ],
+  "traps": [
+    { "pattern": "CONDICAO", "text": "Busca binária em lista não ordenada ou em lista ligada (sem acesso direto) não tem custo O(log n)." },
+    { "pattern": "CONDICAO", "text": "Dijkstra com aresta de peso negativo pode dar resposta errada." },
+    { "pattern": "GRANDEZA", "text": "Alternativa com quicksort O(n log n) no pior caso, ou com ordenação por comparação em O(n) no caso geral, está errada." },
+    { "pattern": "ABSOLUTO", "text": "'O algoritmo guloso sempre encontra o ótimo' é falso em geral; vale só para problemas com propriedade gulosa (AGM, troco canônico)." },
+    { "pattern": "PAR", "text": "Trocar a AGM pela árvore de caminhos mínimos: as duas existem, mas resolvem problemas diferentes." },
+    { "pattern": "GRANDEZA", "text": "ABB sem balanceamento não garante O(log n): inserir chaves já ordenadas gera altura n." },
+    { "pattern": "INVERTIDA", "text": "Percursos trocados: a pré-ordem visita a raiz primeiro, não por último." }
+  ],
+  "references": ["Cormen et al., Algoritmos: teoria e prática", "Ziviani, Projeto de Algoritmos", "Szwarcfiter e Markenzon, Estruturas de Dados e seus Algoritmos"]
+}

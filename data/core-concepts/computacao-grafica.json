@@ -1,0 +1,94 @@
+{
+  "slug": "computacao-grafica",
+  "area": "Computação gráfica",
+  "title": "Computação gráfica e processamento de imagens",
+  "summary": "Metade síntese de imagens (pipeline, iluminação, ray tracing), metade processamento de imagens (filtros, quantização, Hough).",
+  "deck": "computacao-grafica",
+  "concepts": [
+    {
+      "id": "cg-pipeline",
+      "name": "Pipeline gráfico",
+      "definition": "Modelagem, transformações de modelo e câmera, projeção, recorte (clipping), rasterização, teste de visibilidade (z-buffer) e tonalização.",
+      "example": "O recorte descarta o que está fora do volume de visão antes de rasterizar.",
+      "match": ["pipeline de visualizacao", "recorte"]
+    },
+    {
+      "id": "cg-transformacoes",
+      "name": "Transformações geométricas e coordenadas homogêneas",
+      "definition": "Translação, rotação e escala viram matrizes (3×3 em 2D, 4×4 em 3D) com coordenadas homogêneas; compõem-se multiplicando, e a ordem importa.",
+      "example": "Girar e depois transladar dá resultado diferente de transladar e depois girar.",
+      "match": ["transformac", "homogeneas"]
+    },
+    {
+      "id": "cg-visibilidade",
+      "name": "Remoção de superfícies ocultas",
+      "definition": "Back-face culling descarta faces de costas para a câmera; z-buffer guarda a profundidade de cada pixel; o algoritmo do pintor desenha do fundo para a frente.",
+      "example": "Z-buffer resolve interseções entre polígonos que o pintor não resolve sem dividir faces.",
+      "match": ["remocao de faces", "faces"]
+    },
+    {
+      "id": "cg-iluminacao",
+      "name": "Iluminação e sombreamento",
+      "definition": "Modelo de Phong: ambiente + difusa (Lambert) + especular. Sombreamento constante (uma cor por face), Gouraud (interpola cores dos vértices) e Phong (interpola normais).",
+      "example": "Brilho especular no meio de uma face grande some no Gouraud e aparece no Phong.",
+      "match": ["sombreamento", "phong", "iluminac"]
+    },
+    {
+      "id": "cg-ray-tracing",
+      "name": "Traçado de raios",
+      "definition": "Lança raios do observador por cada pixel e segue reflexões, refrações e sombras; muito realista e caro. A rasterização é mais rápida e domina o tempo real.",
+      "example": "Espelhos e vidro com refração saem naturalmente no ray tracing.",
+      "match": ["ray tracing", "tracado de raios", "realismo"]
+    },
+    {
+      "id": "cg-imagem-digital",
+      "name": "Imagem digital, quantização e cores",
+      "definition": "Amostragem define a resolução; quantização, os níveis de intensidade (2^bits). RGB é aditivo (telas); CMY(K) é subtrativo (impressão).",
+      "example": "Reduzir de 8 para 2 bits deixa só 4 níveis de cinza e cria faixas visíveis (falso contorno).",
+      "match": ["quantizacao", "niveis de cinza"]
+    },
+    {
+      "id": "cg-filtros",
+      "name": "Filtros e convolução",
+      "definition": "Passa-baixa (média, gaussiano) suaviza e borra; mediana remove ruído impulsivo (sal e pimenta) preservando bordas; passa-alta (Sobel, Laplaciano) realça bordas.",
+      "example": "Ruído sal e pimenta: a mediana resolve bem; a média só espalha o ruído.",
+      "match": ["filtro", "filtros", "sal e pimenta"]
+    },
+    {
+      "id": "cg-hough",
+      "name": "Transformada de Hough",
+      "definition": "Detecta formas paramétricas (retas, círculos): cada ponto de borda vota nos parâmetros das retas que passam por ele; picos no espaço de parâmetros são as retas.",
+      "example": "Usa-se ρ = x·cos θ + y·sen θ para evitar a inclinação infinita das retas verticais.",
+      "match": ["hough"]
+    }
+  ],
+  "facts": [
+    "Composição de transformações não é comutativa: a ordem das matrizes importa.",
+    "Coordenadas homogêneas permitem representar a translação como multiplicação de matrizes.",
+    "Constante < Gouraud < Phong em qualidade e custo de sombreamento.",
+    "Mediana: melhor contra sal e pimenta, preserva bordas. Média: borra.",
+    "Níveis de quantização = 2^bits.",
+    "RGB aditivo; CMY(K) subtrativo.",
+    "Ray tracing: reflexão, refração e sombra por natureza; rasterização com z-buffer: tempo real."
+  ],
+  "pairs": [
+    { "a": "Gouraud", "b": "Phong (sombreamento)", "difference": "Interpola cores calculadas nos vértices × interpola normais e calcula a luz em cada pixel." },
+    { "a": "Filtro da média", "b": "Filtro da mediana", "difference": "Linear, borra e espalha o ruído × não linear, remove ruído impulsivo e mantém bordas." },
+    { "a": "Projeção perspectiva", "b": "Projeção ortográfica", "difference": "Objetos distantes ficam menores × tamanho preservado (desenho técnico)." },
+    { "a": "Ray tracing", "b": "Rasterização", "difference": "Segue raios por pixel (realista, caro) × projeta polígonos na tela (rápido)." }
+  ],
+  "cues": [
+    { "cue": "pixels brancos e pretos espalhados", "concept": "cg-filtros" },
+    { "cue": "detectar retas, espaço de parâmetros", "concept": "cg-hough" },
+    { "cue": "reflexão, refração, realismo", "concept": "cg-ray-tracing" },
+    { "cue": "normal, especular, brilho", "concept": "cg-iluminacao" },
+    { "cue": "bits por pixel, níveis", "concept": "cg-imagem-digital" }
+  ],
+  "traps": [
+    { "pattern": "PAR", "text": "Atribuir à média a remoção limpa de sal e pimenta, ou à mediana o realce de bordas." },
+    { "pattern": "PAR", "text": "Trocar Gouraud por Phong." },
+    { "pattern": "ABSOLUTO", "text": "'A ordem das transformações não altera o resultado'." },
+    { "pattern": "INVERTIDA", "text": "Ray tracing descrito como mais rápido que a rasterização em tempo real." }
+  ],
+  "references": ["Foley et al., Computer Graphics: Principles and Practice", "Gonzalez e Woods, Processamento Digital de Imagens", "Azevedo e Conci, Computação Gráfica: teoria e prática"]
+}

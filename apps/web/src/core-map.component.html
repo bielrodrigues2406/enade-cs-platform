@@ -1,0 +1,55 @@
+<section class="core-map" aria-labelledby="core-map-title">
+  <div class="core-map-head">
+    <div>
+      <h2 id="core-map-title">O que você precisa saber, área por área</h2>
+      <p class="core-lede">
+        Os conceitos que mais caíram nas provas de 2005 a 2021, os fatos que cortam alternativas e as pegadinhas de cada área.
+        Marque o que você sabe: a confiança junta isso ao seu acerto nas questões e à memória dos flashcards.
+      </p>
+    </div>
+  </div>
+
+  @if (error()) {
+    <div class="notice" role="alert"><p>{{ error() }}</p><button type="button" class="outline" (click)="load()">Tentar novamente</button></div>
+  } @else if (!areas()) {
+    <p role="status">Carregando o núcleo…</p>
+  } @else {
+    @if (!started()) {
+      <p class="core-start">As marcadas com "comece por aqui" são as que mais pesam na prova e onde você ainda tem menos confiança.</p>
+    }
+    <ol class="core-list" aria-label="Áreas do componente específico, da que mais caiu para a que menos caiu">
+      @for (area of specific(); track area.slug; let i = $index) {
+        <li [style.--delay]="i">
+          <button type="button" class="core-row" (click)="open.emit(area.slug)" [attr.aria-label]="rowLabel(area)">
+            <span class="core-row-name">
+              <strong>{{ area.area }}</strong>
+              @if (firstSlugs().has(area.slug)) { <em class="core-first">comece por aqui</em> }
+            </span>
+            <span class="core-row-weight">
+              <span class="core-weight-bar" aria-hidden="true"><span [style.--value]="(area.share ?? 0) / maxShare()"></span></span>
+              <span class="core-weight-label">{{ pct(area.share) }}% · {{ editionsWith(area) }}/6 provas</span>
+            </span>
+            <span [class]="'core-row-confidence ' + tone(area.confidence.value)">
+              <span class="core-dial" aria-hidden="true" [style.--value]="area.confidence.value / 100"></span>
+              <span>{{ area.confidence.value }}</span>
+            </span>
+          </button>
+        </li>
+      }
+    </ol>
+    @if (general(); as fg) {
+      <button type="button" class="core-general" (click)="open.emit(fg.slug)" [attr.aria-label]="fg.title + ', confiança ' + fg.confidence.value + ' de 100'">
+        <span>
+          <span class="core-general-meta">15 questões em 2026, comuns a todos os cursos</span>
+          <strong>{{ fg.title }}</strong>
+          <span class="core-general-text">Gráficos, textos e charges sobre sociedade, ambiente e direitos humanos.</span>
+        </span>
+        <span [class]="'core-row-confidence ' + tone(fg.confidence.value)">
+          <span class="core-dial" aria-hidden="true" [style.--value]="fg.confidence.value / 100"></span>
+          <span>{{ fg.confidence.value }}</span>
+        </span>
+      </button>
+    }
+    <p class="core-note">O peso é histórico, não previsão: mostra quanto cada área caiu nas seis provas anteriores.</p>
+  }
+</section>

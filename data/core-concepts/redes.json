@@ -1,0 +1,116 @@
+{
+  "slug": "redes",
+  "area": "Redes",
+  "title": "Redes de computadores",
+  "summary": "Camadas e protocolos TCP/IP, endereçamento, dispositivos e acesso ao meio. Caiu muito em 2008 e menos depois, mas segue presente.",
+  "deck": "redes",
+  "sheet": "redes-tcp-ip",
+  "concepts": [
+    {
+      "id": "red-camadas",
+      "name": "Modelos em camadas (TCP/IP e OSI)",
+      "definition": "TCP/IP (Kurose): aplicação, transporte, rede, enlace e física. OSI acrescenta sessão e apresentação (7 camadas). Cada camada usa o serviço da de baixo.",
+      "example": "HTTP (aplicação) usa TCP (transporte), que usa IP (rede), que usa Ethernet (enlace).",
+      "match": ["camadas", "arquitetura tcp/ip"]
+    },
+    {
+      "id": "red-transporte",
+      "name": "TCP e UDP",
+      "definition": "TCP: orientado a conexão, entrega confiável e ordenada, controle de fluxo e de congestionamento. UDP: sem conexão, sem garantias, cabeçalho pequeno.",
+      "example": "DNS e voz/vídeo em tempo real costumam usar UDP; HTTP, e-mail e SSH usam TCP.",
+      "match": ["tcp e udp", "transporte", "orientados a conexao"]
+    },
+    {
+      "id": "red-enderecamento",
+      "name": "Endereçamento IP, sub-redes e NAT",
+      "definition": "IPv4 tem 32 bits, IPv6 128. Em /n, sobram 32 − n bits para hosts: 2^(32−n) − 2 endereços úteis. O NAT traduz endereços privados para um público.",
+      "example": "/26 tem 64 endereços e 62 hosts. 192.168.0.0/16 e 10.0.0.0/8 são privados.",
+      "match": ["enderecamento ip", "nat"]
+    },
+    {
+      "id": "red-roteamento",
+      "name": "Roteamento",
+      "definition": "Estado de enlace (cada roteador conhece o mapa e roda Dijkstra; OSPF) e vetor de distâncias (troca de tabelas com vizinhos; Bellman-Ford; RIP). BGP liga sistemas autônomos.",
+      "example": "O roteador decide o próximo salto pelo maior prefixo que casa com o destino.",
+      "match": ["roteamento"]
+    },
+    {
+      "id": "red-icmp",
+      "name": "ICMP, ping e traceroute",
+      "definition": "ICMP leva mensagens de controle e erro do IP. O traceroute envia pacotes com TTL crescente e recebe 'tempo excedido' de cada roteador do caminho.",
+      "example": "TTL = 3 chega ao terceiro roteador, que devolve ICMP tempo excedido e revela seu endereço.",
+      "match": ["icmp", "traceroute"]
+    },
+    {
+      "id": "red-aplicacao",
+      "name": "Acessar uma página web, passo a passo",
+      "definition": "DHCP dá o IP; ARP descobre o MAC do roteador; DNS traduz o nome em IP; TCP abre a conexão (three-way handshake); TLS, se HTTPS; HTTP faz a requisição.",
+      "example": "Sem DNS, o navegador não sabe para qual IP mandar a requisição de www.exemplo.com.",
+      "match": ["pagina web", "sequencia de protocolos"]
+    },
+    {
+      "id": "red-dispositivos",
+      "name": "Dispositivos de interconexão",
+      "definition": "Hub repete bits (física); switch encaminha quadros por MAC (enlace) e separa domínios de colisão; roteador encaminha pacotes por IP (rede) e separa domínios de broadcast.",
+      "example": "Ligar duas redes IP diferentes exige roteador, não switch.",
+      "match": ["dispositivos de interconexao"]
+    },
+    {
+      "id": "red-acesso-meio",
+      "name": "Acesso ao meio: Ethernet e Wi-Fi",
+      "definition": "Ethernet cabeada clássica usa CSMA/CD (detecta colisão); Wi-Fi 802.11 usa CSMA/CA (evita colisão, com confirmação e RTS/CTS opcional), porque não consegue ouvir enquanto transmite.",
+      "example": "Terminal oculto: duas estações não se ouvem, mas atrapalham o mesmo ponto de acesso. RTS/CTS ajuda.",
+      "match": ["csma", "802.11", "sem fio", "multiplo acesso"]
+    },
+    {
+      "id": "red-fisica",
+      "name": "Camada física: modulação e multiplexação",
+      "definition": "ASK varia a amplitude, FSK a frequência e PSK a fase da portadora. FDMA divide frequência, TDMA divide tempo e CDMA usa códigos.",
+      "example": "No 4G e no Wi-Fi atuais, combinações de fase e amplitude (QAM) levam vários bits por símbolo.",
+      "match": ["modulacao", "ask", "psk"]
+    },
+    {
+      "id": "red-fluxo-congestionamento",
+      "name": "Controle de fluxo e de congestionamento",
+      "definition": "Fluxo protege o receptor (janela anunciada). Congestionamento protege a rede (partida lenta, prevenção de congestionamento, redução da janela ao perder pacotes).",
+      "example": "Perda detectada por três ACKs duplicados reduz a janela à metade no TCP Reno.",
+      "match": ["congestionamento", "controle de fluxo"]
+    }
+  ],
+  "facts": [
+    "TCP/IP (Kurose): 5 camadas. OSI: 7 (física, enlace, rede, transporte, sessão, apresentação, aplicação).",
+    "Portas: HTTP 80, HTTPS 443, DNS 53, SSH 22, SMTP 25.",
+    "Hosts em /n: 2^(32−n) − 2 (descontam-se rede e broadcast).",
+    "Switch: camada de enlace, endereço MAC. Roteador: camada de rede, endereço IP. Hub: física.",
+    "ARP: IP → MAC na rede local. DNS: nome → IP. DHCP: configuração automática de IP.",
+    "Traceroute usa TTL crescente e respostas ICMP 'tempo excedido'.",
+    "CSMA/CD: Ethernet cabeada (detecção). CSMA/CA: Wi-Fi (evitação).",
+    "OSPF: estado de enlace (Dijkstra). RIP: vetor de distâncias (Bellman-Ford). BGP: entre sistemas autônomos.",
+    "Three-way handshake: SYN, SYN-ACK, ACK."
+  ],
+  "pairs": [
+    { "a": "TCP", "b": "UDP", "difference": "Confiável e ordenado com conexão × rápido e simples, sem garantias." },
+    { "a": "Switch", "b": "Roteador", "difference": "Switch encaminha dentro da rede por MAC; roteador liga redes diferentes por IP." },
+    { "a": "Controle de fluxo", "b": "Controle de congestionamento", "difference": "Não afogar o receptor × não afogar a rede." },
+    { "a": "CSMA/CD", "b": "CSMA/CA", "difference": "Detectar a colisão (cabo) × evitar a colisão (sem fio)." },
+    { "a": "ARP", "b": "DNS", "difference": "IP para MAC na rede local × nome para IP na internet." },
+    { "a": "Estado de enlace", "b": "Vetor de distâncias", "difference": "Mapa completo e Dijkstra × só as distâncias dos vizinhos (Bellman-Ford), sujeito a contagem ao infinito." }
+  ],
+  "cues": [
+    { "cue": "confiável, ordenado, retransmissão", "concept": "red-transporte" },
+    { "cue": "máscara, /24, quantos hosts", "concept": "red-enderecamento" },
+    { "cue": "TTL, tempo excedido, caminho até o destino", "concept": "red-icmp" },
+    { "cue": "digitar o endereço no navegador", "concept": "red-aplicacao" },
+    { "cue": "colisão, meio compartilhado, sem fio", "concept": "red-acesso-meio" },
+    { "cue": "domínio de colisão, domínio de broadcast", "concept": "red-dispositivos" }
+  ],
+  "traps": [
+    { "pattern": "VIZINHO", "text": "Switch tradicional decidindo por IP ou roteador decidindo por MAC." },
+    { "pattern": "PAR", "text": "Atribuir ao UDP confirmação de entrega, ordenação ou controle de congestionamento." },
+    { "pattern": "PAR", "text": "Trocar controle de fluxo por controle de congestionamento." },
+    { "pattern": "INVERTIDA", "text": "Wi-Fi usando CSMA/CD e Ethernet usando CSMA/CA." },
+    { "pattern": "GRANDEZA", "text": "Hosts de uma /n sem descontar rede e broadcast, ou contando bits errado." },
+    { "pattern": "VIZINHO", "text": "Protocolo na camada errada: ARP e ICMP não são de transporte; DNS é de aplicação." }
+  ],
+  "references": ["Kurose e Ross, Redes de Computadores e a Internet", "Tanenbaum, Redes de Computadores"]
+}

@@ -1,0 +1,109 @@
+{
+  "slug": "teoria-computacao",
+  "area": "Teoria da computação",
+  "title": "Teoria da computação",
+  "summary": "Linguagens formais e autômatos, computabilidade e complexidade (P, NP). Caiu em todas as provas e responde por boa parte dos 'cortes' certeiros.",
+  "deck": "teoria-computacao",
+  "sheet": "automatos-e-computabilidade",
+  "concepts": [
+    {
+      "id": "tc-automatos-finitos",
+      "name": "Autômatos finitos (AFD e AFN)",
+      "definition": "Máquinas sem memória além do estado atual que reconhecem exatamente as linguagens regulares. AFN e AFD têm o mesmo poder: todo AFN vira AFD pela construção de subconjuntos.",
+      "example": "Um AFD com 2 estados reconhece cadeias binárias com número par de 1s.",
+      "match": ["automato", "automatos finitos"]
+    },
+    {
+      "id": "tc-regulares",
+      "name": "Expressões e gramáticas regulares",
+      "definition": "Expressão regular, gramática regular e autômato finito descrevem a mesma classe de linguagens.",
+      "example": "(0|1)*1 descreve as cadeias binárias terminadas em 1.",
+      "match": ["regular", "regulares", "expressoes regulares", "gramaticas"]
+    },
+    {
+      "id": "tc-nao-regulares",
+      "name": "Linguagens não regulares e lema do bombeamento",
+      "definition": "Linguagens que exigem contar sem limite não são regulares. O lema do bombeamento serve para provar que uma linguagem NÃO é regular.",
+      "example": "aⁿbⁿ (mesmo número de a e b) não é regular, mas é livre de contexto.",
+      "match": ["nao regulares"]
+    },
+    {
+      "id": "tc-livres-contexto",
+      "name": "Gramáticas livres de contexto e autômatos com pilha",
+      "definition": "GLCs geram as linguagens livres de contexto, reconhecidas por autômatos com pilha não determinísticos.",
+      "example": "Palíndromos e parênteses balanceados são livres de contexto e não regulares.",
+      "match": ["pilha", "palindromo", "livre de contexto"]
+    },
+    {
+      "id": "tc-chomsky",
+      "name": "Hierarquia de Chomsky",
+      "definition": "Regulares ⊂ livres de contexto ⊂ sensíveis ao contexto ⊂ recursivamente enumeráveis; cada classe tem sua máquina: autômato finito, autômato com pilha, autômato linearmente limitado e máquina de Turing.",
+      "example": "aⁿbⁿcⁿ é sensível ao contexto, mas não livre de contexto.",
+      "match": ["hierarquia", "chomsky"]
+    },
+    {
+      "id": "tc-turing",
+      "name": "Máquina de Turing",
+      "definition": "Fita infinita, cabeçote que lê e escreve e se move nos dois sentidos, e função de transição. Modelo de tudo o que é computável (tese de Church-Turing).",
+      "example": "Uma MT reconhece palíndromos apagando o primeiro e o último símbolo e repetindo.",
+      "match": ["maquina de turing"]
+    },
+    {
+      "id": "tc-decidibilidade",
+      "name": "Decidibilidade e problema da parada",
+      "definition": "Um problema é decidível se uma MT sempre para com sim ou não. O problema da parada é indecidível (prova por diagonalização), mas é semidecidível: dá para reconhecer os casos que param.",
+      "example": "Não existe programa que, para todo programa e entrada, diga se ele termina.",
+      "match": ["parada", "indecidibilidade", "decidib"]
+    },
+    {
+      "id": "tc-p-np",
+      "name": "Classes P, NP e NP-completo",
+      "definition": "P: resolvível em tempo polinomial. NP: solução verificável em tempo polinomial. NP-completo: está em NP e todo problema de NP se reduz a ele. P ⊆ NP; se P = NP é questão aberta.",
+      "example": "SAT, 3-SAT, clique, ciclo hamiltoniano, coloração de grafos e a versão de decisão do caixeiro viajante são NP-completos.",
+      "match": ["classes p", "np-completo", "np-dificil"]
+    },
+    {
+      "id": "tc-reducao",
+      "name": "Redução polinomial",
+      "definition": "A ≤ₚ B: uma instância de A vira instância de B em tempo polinomial. Para provar que B é NP-difícil, reduza um problema NP-completo conhecido A a B.",
+      "example": "Reduzir 3-SAT a clique mostra que clique é NP-difícil; reduzir clique a 3-SAT não mostraria isso.",
+      "match": ["reducao"]
+    }
+  ],
+  "facts": [
+    "Regulares ⊂ livres de contexto ⊂ sensíveis ao contexto ⊂ recursivamente enumeráveis.",
+    "AFN ≡ AFD em poder (o AFD pode precisar de até 2ⁿ estados).",
+    "Autômato com pilha determinístico reconhece menos que o não determinístico (palíndromos sem marcador de meio exigem não determinismo).",
+    "Regulares são fechadas sob união, interseção, complemento, concatenação e estrela; livres de contexto não são fechadas sob interseção nem complemento.",
+    "aⁿbⁿ: livre de contexto, não regular. aⁿbⁿcⁿ: não livre de contexto.",
+    "O lema do bombeamento só prova que uma linguagem não é regular (ou não é livre de contexto).",
+    "Problema da parada: indecidível, mas recursivamente enumerável.",
+    "P ⊆ NP. NP-completo = NP ∩ NP-difícil. NP-difícil pode não estar em NP (a parada é NP-difícil).",
+    "Ordenação, caminho mínimo, árvore geradora mínima e 2-SAT estão em P.",
+    "Se um único problema NP-completo estiver em P, então P = NP."
+  ],
+  "pairs": [
+    { "a": "Decidível", "b": "Reconhecível (RE)", "difference": "Decidível: a MT sempre para. Reconhecível: para e aceita nas instâncias 'sim', mas pode rodar para sempre nas 'não'." },
+    { "a": "NP-completo", "b": "NP-difícil", "difference": "NP-completo precisa estar em NP; NP-difícil só precisa ser pelo menos tão difícil quanto todo NP." },
+    { "a": "A ≤ₚ B", "b": "B ≤ₚ A", "difference": "Para provar que B é difícil, reduza o conhecido A a B. Reduzir B a A só mostra que B não é mais difícil que A." },
+    { "a": "Autômato finito", "b": "Autômato com pilha", "difference": "A pilha permite contar sem limite (aⁿbⁿ); o finito só lembra o estado." },
+    { "a": "NP", "b": "'Não polinomial'", "difference": "NP significa polinomial não determinístico (verificável em tempo polinomial), não 'não polinomial'." }
+  ],
+  "cues": [
+    { "cue": "mesmo número de a e de b, parênteses balanceados", "concept": "tc-livres-contexto" },
+    { "cue": "fita, cabeçote, estado de aceitação", "concept": "tc-turing" },
+    { "cue": "não existe algoritmo que decida", "concept": "tc-decidibilidade" },
+    { "cue": "verificar uma solução em tempo polinomial", "concept": "tc-p-np" },
+    { "cue": "transformar uma instância em outra", "concept": "tc-reducao" },
+    { "cue": "conjunto de estados, alfabeto, transição", "concept": "tc-automatos-finitos" }
+  ],
+  "traps": [
+    { "pattern": "INVERTIDA", "text": "Direção da redução trocada: para mostrar que X é NP-difícil, reduza um NP-completo conhecido a X." },
+    { "pattern": "INVERTIDA", "text": "'NP ⊆ P foi provado' ou 'P ≠ NP foi provado': a questão está em aberto." },
+    { "pattern": "PAR", "text": "Ler NP como 'não polinomial'." },
+    { "pattern": "GRANDEZA", "text": "AFN reconhecendo linguagens que nenhum AFD reconhece: os dois têm o mesmo poder." },
+    { "pattern": "CONDICAO", "text": "Usar o lema do bombeamento para provar que uma linguagem é regular: ele só prova que não é." },
+    { "pattern": "ABSOLUTO", "text": "'O problema da parada é indecidível, logo não pode ser reconhecido': ele é semidecidível." }
+  ],
+  "references": ["Sipser, Introdução à Teoria da Computação", "Hopcroft, Motwani e Ullman, Introdução à Teoria de Autômatos, Linguagens e Computação", "Menezes, Linguagens Formais e Autômatos"]
+}

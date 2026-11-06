@@ -1,0 +1,118 @@
+{
+  "slug": "sistemas-operacionais",
+  "area": "Sistemas operacionais",
+  "title": "Sistemas operacionais",
+  "summary": "Concorrência (semáforos, produtor-consumidor, deadlock) cai em quase toda prova; memória, threads e escalonamento completam o núcleo.",
+  "deck": "sistemas-operacionais",
+  "sheet": "processos-e-memoria",
+  "concepts": [
+    {
+      "id": "so-processo-thread",
+      "name": "Processos e threads",
+      "definition": "Processo é um programa em execução com espaço de endereçamento próprio. Threads de um mesmo processo compartilham código, dados e arquivos abertos, mas cada uma tem sua pilha, registradores e contador de programa.",
+      "example": "Duas threads alteram a mesma variável global; dois processos, não (cada um tem a sua cópia).",
+      "match": ["threads", "processos e threads", "espaco de enderecamento", "multicore", "ciclo de vida"]
+    },
+    {
+      "id": "so-estados",
+      "name": "Estados do processo e troca de contexto",
+      "definition": "Novo, pronto, executando, bloqueado (esperando E/S ou evento) e terminado. A troca de contexto salva o estado de um e restaura o de outro.",
+      "example": "Ao pedir leitura do disco, o processo vai de executando para bloqueado; quando a leitura termina, vai para pronto, não direto para executando.",
+      "match": ["ciclo de vida", "migracao"]
+    },
+    {
+      "id": "so-escalonamento",
+      "name": "Escalonamento de CPU",
+      "definition": "Decide quem usa a CPU: FCFS (ordem de chegada), SJF (menor primeiro), Round Robin (fatias de tempo) e prioridade. Pode ser preemptivo ou não.",
+      "example": "SJF minimiza o tempo médio de espera, mas pode causar inanição (starvation) dos processos longos.",
+      "match": ["escalonamento"]
+    },
+    {
+      "id": "so-regiao-critica",
+      "name": "Região crítica e exclusão mútua",
+      "definition": "Trecho que acessa dado compartilhado. Uma solução correta garante exclusão mútua, progresso e espera limitada.",
+      "example": "contador++ não é atômico (ler, somar, gravar): duas threads sem trava podem perder incrementos (condição de corrida).",
+      "match": ["exclusao mutua", "regioes criticas", "locks", "sem sincronizacao", "variaveis compartilhadas"]
+    },
+    {
+      "id": "so-semaforos",
+      "name": "Semáforos, mutex e monitores",
+      "definition": "Semáforo é um contador com operações atômicas down/P/wait (decrementa ou bloqueia) e up/V/signal (incrementa ou acorda). Mutex é a trava binária; monitor encapsula a sincronização.",
+      "example": "Semáforo iniciado em 3 deixa até 3 threads usarem um recurso ao mesmo tempo.",
+      "match": ["semaforo", "semaforos"]
+    },
+    {
+      "id": "so-produtor-consumidor",
+      "name": "Produtor-consumidor (buffer limitado)",
+      "definition": "Usa três semáforos: mutex (1), vazio (N) e cheio (0). O produtor faz down(vazio) antes de down(mutex); o consumidor faz down(cheio) antes de down(mutex).",
+      "example": "Inverter a ordem (pegar mutex e depois esperar vazio) pode travar tudo: deadlock com buffer cheio.",
+      "match": ["produtor", "buffer limitado"]
+    },
+    {
+      "id": "so-deadlock",
+      "name": "Deadlock",
+      "definition": "Exige as 4 condições de Coffman ao mesmo tempo: exclusão mútua, posse e espera, não preempção e espera circular. Quebrar qualquer uma evita o deadlock.",
+      "example": "T1 pega A e espera B; T2 pega B e espera A. Impor a todos a mesma ordem de aquisição (A antes de B) elimina a espera circular.",
+      "match": ["deadlock", "ordem de aquisicao"]
+    },
+    {
+      "id": "so-paginacao",
+      "name": "Paginação, segmentação e fragmentação",
+      "definition": "Paginação divide a memória em quadros de tamanho fixo: não tem fragmentação externa, só interna (sobra na última página). Segmentação usa blocos de tamanho variável: tem fragmentação externa.",
+      "example": "Processo de 10 KiB com páginas de 4 KiB ocupa 3 páginas e desperdiça 2 KiB.",
+      "match": ["paginacao", "fragmentacao"]
+    },
+    {
+      "id": "so-memoria-virtual",
+      "name": "Memória virtual e substituição de páginas",
+      "definition": "Só parte do processo fica na RAM; acessar página ausente gera falta de página. Políticas: FIFO, LRU (menos usada recentemente), ótima (teórica, olha o futuro) e relógio.",
+      "example": "Só a FIFO sofre a anomalia de Belady: mais quadros podem gerar mais faltas.",
+      "match": ["substituicao de paginas", "fifo e lru", "memoria virtual"]
+    },
+    {
+      "id": "so-arquivos",
+      "name": "Sistemas de arquivos e alocação em disco",
+      "definition": "Alocação contígua (rápida, mas com fragmentação externa), encadeada (sem acesso direto eficiente) e indexada (i-node aponta os blocos).",
+      "example": "No i-node do Unix, ponteiros diretos e indiretos permitem arquivos grandes com acesso direto.",
+      "match": ["alocacao de espaco", "sistemas de arquivos", "disco"]
+    }
+  ],
+  "facts": [
+    "Deadlock exige as 4 condições juntas (exclusão mútua, posse e espera, não preempção, espera circular).",
+    "Ordem global de aquisição de travas elimina espera circular.",
+    "Produtor-consumidor: mutex = 1, vazio = N, cheio = 0; espere pelo contador antes do mutex.",
+    "Solução de região crítica: exclusão mútua + progresso + espera limitada.",
+    "Round Robin com quantum muito grande vira FCFS; quantum muito pequeno gasta tudo em troca de contexto.",
+    "SJF dá o menor tempo médio de espera, mas pode causar inanição; envelhecimento (aging) resolve inanição na prioridade.",
+    "Paginação: fragmentação interna. Segmentação e alocação contígua: externa.",
+    "LRU e a ótima não sofrem anomalia de Belady; FIFO sofre.",
+    "Threads compartilham heap e variáveis globais; cada uma tem pilha e registradores próprios.",
+    "Bloqueado → pronto (nunca direto para executando)."
+  ],
+  "pairs": [
+    { "a": "Processo", "b": "Thread", "difference": "Processos têm memória separada; threads do mesmo processo compartilham memória." },
+    { "a": "Deadlock", "b": "Inanição (starvation)", "difference": "No deadlock ninguém avança (espera circular); na inanição o sistema anda, mas um processo nunca é atendido." },
+    { "a": "Semáforo", "b": "Mutex", "difference": "Semáforo conta (pode deixar N entrarem); mutex é binário e pertence a quem trancou." },
+    { "a": "Fragmentação interna", "b": "Fragmentação externa", "difference": "Interna: sobra dentro do bloco alocado (paginação). Externa: buracos livres entre blocos, nenhum grande o bastante." },
+    { "a": "Paginação", "b": "Segmentação", "difference": "Páginas têm tamanho fixo e não refletem a estrutura do programa; segmentos têm tamanho variável (código, pilha, dados)." },
+    { "a": "Preemptivo", "b": "Não preemptivo", "difference": "No preemptivo o SO pode tirar a CPU do processo; no não preemptivo ele só sai quando termina ou bloqueia." }
+  ],
+  "cues": [
+    { "cue": "variável compartilhada, resultado inesperado, contador", "concept": "so-regiao-critica" },
+    { "cue": "buffer, produtor, consumidor", "concept": "so-produtor-consumidor" },
+    { "cue": "dois recursos, cada um esperando o outro", "concept": "so-deadlock" },
+    { "cue": "quantum, tempo médio de espera, ordem de chegada", "concept": "so-escalonamento" },
+    { "cue": "falta de página, quadros, sequência de referências", "concept": "so-memoria-virtual" },
+    { "cue": "P(), V(), wait, signal", "concept": "so-semaforos" }
+  ],
+  "traps": [
+    { "pattern": "CONDICAO", "text": "Deadlock com só três das quatro condições: impossível; basta quebrar uma." },
+    { "pattern": "PAR", "text": "Chamar inanição de deadlock, ou paginação de segmentação." },
+    { "pattern": "VIZINHO", "text": "O escalonador não resolve deadlock nem condição de corrida: isso é papel da sincronização." },
+    { "pattern": "INVERTIDA", "text": "Paginação com fragmentação externa: é a interna." },
+    { "pattern": "ABSOLUTO", "text": "'Threads não precisam de sincronização porque compartilham memória': é justamente por compartilharem que precisam." },
+    { "pattern": "INVERTIDA", "text": "Processo saindo de bloqueado direto para executando: ele passa por pronto." },
+    { "pattern": "ABSOLUTO", "text": "'LRU sofre a anomalia de Belady': só a FIFO, entre as clássicas." }
+  ],
+  "references": ["Silberschatz, Galvin e Gagne, Fundamentos de Sistemas Operacionais", "Tanenbaum, Sistemas Operacionais Modernos"]
+}

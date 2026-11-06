@@ -294,3 +294,15 @@ Este modo combina questões históricas publicadas de Ciência da Computação, 
 - `GET /api/practice/:id/discursive/images/:sha256.webp`: exige o proprietário da tentativa; padrão apenas após concluir. URL de outro proprietário ou padrão ainda fechado retorna 404. As imagens usam `Cache-Control: private, no-store`.
 
 A configuração e os 45 itens mais uma discursiva são conferidos também pela migration 029. Repetir uma tentativa não reaproveita o texto discursivo anterior nem concede acesso ao resultado de outra identidade.
+
+## Núcleo por área (NUC-1)
+
+Detalhes em [CORE-CONCEPTS.md](CORE-CONCEPTS.md). Rotas de quem está na sessão (visitante ou conta):
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /core | — | `{areas[]{slug,area,title,summary,history{editions[]{year,count},total},share,concepts,confidence,priority}}`; `share` e `priority` são `null` na Formação Geral |
+| GET /core/:slug | — | área completa: `concepts[]{id,name,definition,example,level,questions[]{id,year,subject}}`, `facts`, `pairs`, `cues`, `traps[]{pattern,text}`, `references`, `deck`, `sheet`, `history`, `confidence`; `questions[].id` é a versão publicada neste banco; 404 se não existe |
+| PUT /core/concepts/:id | `{level}` (0 não sei, 1 mais ou menos, 2 sei explicar, `null` apaga) | `{slug,level,confidence}`; 400 para nível inválido, 404 para conceito inexistente |
+
+`confidence` = `{value, self, rated, answers, attempts, cards}`; `answers` é `null` sem respostas na área e `cards` é `null` em área sem baralho.

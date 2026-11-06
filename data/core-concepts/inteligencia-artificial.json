@@ -1,0 +1,121 @@
+{
+  "slug": "inteligencia-artificial",
+  "area": "Inteligência artificial",
+  "title": "Inteligência artificial",
+  "summary": "Caiu em todas as provas e mudou de cara: de busca heurística e representação de conhecimento para aprendizado de máquina e redes neurais.",
+  "deck": "inteligencia-artificial",
+  "sheet": "inteligencia-artificial",
+  "concepts": [
+    {
+      "id": "ia-agentes",
+      "name": "Agentes inteligentes e ambientes",
+      "definition": "Agente percebe o ambiente por sensores e age por atuadores; o racional escolhe a ação que maximiza a medida de desempenho. Ambientes podem ser observáveis ou não, determinísticos ou estocásticos, estáticos ou dinâmicos.",
+      "example": "O aspirador de pó de Russell e Norvig: percebe local e sujeira e decide aspirar ou mover.",
+      "match": ["agentes", "aspirador"]
+    },
+    {
+      "id": "ia-busca-cega",
+      "name": "Busca sem informação",
+      "definition": "Largura (completa; ótima com custos iguais; usa muita memória), profundidade (pouca memória; não ótima; pode não terminar), custo uniforme e aprofundamento iterativo.",
+      "example": "Aprofundamento iterativo combina a memória pequena da profundidade com a completude da largura.",
+      "match": ["busca cega"]
+    },
+    {
+      "id": "ia-busca-heuristica",
+      "name": "Busca heurística e A*",
+      "definition": "Gulosa usa f(n) = h(n) e não garante o ótimo. A* usa f(n) = g(n) + h(n) e é ótima se h for admissível (nunca superestima o custo real).",
+      "example": "Distância em linha reta é heurística admissível para rotas em estrada.",
+      "match": ["heuristica", "a*", "f(x)", "gulosa"]
+    },
+    {
+      "id": "ia-busca-local",
+      "name": "Busca local e metaheurísticas",
+      "definition": "Subida de encosta (hill climbing) pode parar em máximo local; simulated annealing aceita pioras com probabilidade que diminui com a temperatura; algoritmos genéticos evoluem populações.",
+      "example": "Annealing escapa de máximos locais porque às vezes aceita um vizinho pior.",
+      "match": ["simulated annealing", "hill climbing", "genetic"]
+    },
+    {
+      "id": "ia-conhecimento",
+      "name": "Representação de conhecimento",
+      "definition": "Lógica, regras de produção (se-então), redes semânticas (conceitos ligados por relações) e frames (estruturas com atributos e valores padrão).",
+      "example": "Sistema especialista médico: base de regras + motor de inferência.",
+      "match": ["representacao de conhecimento", "frames", "regras"]
+    },
+    {
+      "id": "ia-aprendizado",
+      "name": "Tipos de aprendizado de máquina",
+      "definition": "Supervisionado aprende com exemplos rotulados (classificação e regressão); não supervisionado acha estrutura sem rótulos (agrupamento); por reforço aprende por recompensa.",
+      "example": "Agrupar clientes por comportamento sem categorias prévias é não supervisionado (k-means).",
+      "match": ["supervisionado", "aprendizado"]
+    },
+    {
+      "id": "ia-arvore-decisao",
+      "name": "Árvores de decisão",
+      "definition": "Classificam por perguntas sucessivas sobre atributos; o atributo de cada nó é escolhido pelo ganho de informação (redução de entropia) ou índice Gini.",
+      "example": "Primeiro pergunta-se o atributo que melhor separa as classes.",
+      "match": ["arvore de decisao"]
+    },
+    {
+      "id": "ia-avaliacao",
+      "name": "Avaliação de modelos e sobreajuste",
+      "definition": "Separe treino, validação e teste. Sobreajuste: ótimo no treino, ruim em dados novos. Em classes desbalanceadas, acurácia engana: use precisão, revocação (recall), F1 e matriz de confusão.",
+      "example": "Com 99% de casos negativos, um modelo que sempre diz 'negativo' tem 99% de acurácia e recall zero.",
+      "match": ["acuracia", "treinamento"]
+    },
+    {
+      "id": "ia-redes-neurais",
+      "name": "Redes neurais e aprendizado profundo",
+      "definition": "Neurônios com pesos e função de ativação não linear, organizados em camadas e treinados por retropropagação e gradiente descendente. Redes profundas têm muitas camadas ocultas.",
+      "example": "Um perceptron de uma camada não resolve o XOR (não linearmente separável); uma camada oculta resolve.",
+      "match": ["redes neurais", "neural", "profundas"]
+    },
+    {
+      "id": "ia-generativa",
+      "name": "IA generativa e grandes modelos de linguagem",
+      "definition": "Modelos treinados em grandes volumes de texto que preveem a próxima palavra (transformers com mecanismo de atenção). Podem 'alucinar' respostas plausíveis e falsas e reproduzir vieses dos dados.",
+      "example": "RAG (geração aumentada por recuperação) busca documentos e os entrega ao modelo para reduzir alucinações.",
+      "match": ["generativa", "linguagem natural", "llm"]
+    },
+    {
+      "id": "ia-aplicacoes",
+      "name": "Aplicações e ética da IA",
+      "definition": "Visão computacional, linguagem natural, recomendação, educação adaptativa. Riscos: viés e discriminação, privacidade, explicabilidade, responsabilidade.",
+      "example": "Sistema de crédito treinado com dados históricos enviesados reproduz a discriminação.",
+      "match": ["aplicac", "adaptativa"]
+    }
+  ],
+  "facts": [
+    "A*: f = g + h; ótima se h for admissível (nunca superestima). Com h = 0, vira busca de custo uniforme.",
+    "Busca gulosa (f = h) é rápida, mas não garante o ótimo.",
+    "Largura é completa e ótima com custos iguais, mas tem memória exponencial; profundidade usa memória linear e não é ótima.",
+    "Supervisionado: dados com rótulo. Não supervisionado: sem rótulo. Reforço: recompensa.",
+    "Sobreajuste: erro baixo no treino e alto no teste. Remédios: mais dados, regularização, validação cruzada, modelo mais simples.",
+    "Precisão = VP/(VP+FP). Revocação = VP/(VP+FN).",
+    "Perceptron simples só separa classes linearmente separáveis (não resolve XOR).",
+    "Avaliar no conjunto de treino superestima o desempenho."
+  ],
+  "pairs": [
+    { "a": "Busca gulosa", "b": "A*", "difference": "Gulosa olha só h (estimativa até o objetivo); A* soma g (custo já gasto) + h e garante o ótimo com h admissível." },
+    { "a": "Supervisionado", "b": "Não supervisionado", "difference": "Com rótulos (classificar, prever) × sem rótulos (agrupar, descobrir estrutura)." },
+    { "a": "Classificação", "b": "Regressão", "difference": "Prever uma categoria × prever um número." },
+    { "a": "Precisão", "b": "Revocação", "difference": "Dos que o modelo disse positivo, quantos são × dos positivos reais, quantos o modelo achou." },
+    { "a": "Sobreajuste", "b": "Subajuste", "difference": "Decora o treino e erra no novo × não aprende nem o treino." }
+  ],
+  "cues": [
+    { "cue": "g(n) + h(n), heurística admissível", "concept": "ia-busca-heuristica" },
+    { "cue": "dados rotulados, classes, rótulo", "concept": "ia-aprendizado" },
+    { "cue": "acerta no treino e erra no teste", "concept": "ia-avaliacao" },
+    { "cue": "sensores, atuadores, medida de desempenho", "concept": "ia-agentes" },
+    { "cue": "camadas ocultas, pesos, retropropagação", "concept": "ia-redes-neurais" },
+    { "cue": "texto gerado, alucinação, modelo de linguagem", "concept": "ia-generativa" }
+  ],
+  "traps": [
+    { "pattern": "CONDICAO", "text": "A* ótima com qualquer heurística: só se ela for admissível." },
+    { "pattern": "PAR", "text": "Agrupamento (k-means) apresentado como aprendizado supervisionado." },
+    { "pattern": "GRANDEZA", "text": "Acurácia alta em dados desbalanceados apresentada como prova de bom modelo." },
+    { "pattern": "ABSOLUTO", "text": "'Mais camadas ou mais treino sempre melhoram o modelo': podem causar sobreajuste." },
+    { "pattern": "INVERTIDA", "text": "Sobreajuste descrito como erro alto no treino e baixo no teste: é o contrário." },
+    { "pattern": "ABSOLUTO", "text": "'O modelo de linguagem responde só fatos verdadeiros porque aprendeu de muitos textos': ele pode alucinar." }
+  ],
+  "references": ["Russell e Norvig, Inteligência Artificial", "Faceli et al., Inteligência Artificial: uma abordagem de aprendizado de máquina", "Goodfellow, Bengio e Courville, Deep Learning"]
+}

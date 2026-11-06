@@ -1,0 +1,122 @@
+{
+  "slug": "engenharia-de-software",
+  "area": "Engenharia de software",
+  "title": "Engenharia de software",
+  "summary": "Exatamente duas questões em cada prova desde 2005. Processos (ágil, Scrum, RUP), padrões de projeto, testes, requisitos e gerência.",
+  "deck": "engenharia-de-software",
+  "sheet": "engenharia-de-software",
+  "concepts": [
+    {
+      "id": "es-processos",
+      "name": "Modelos de processo",
+      "definition": "Cascata (fases em sequência), incremental e iterativo (entregas em ciclos), espiral (ciclos guiados por risco), RUP e ágeis.",
+      "example": "Requisitos instáveis pedem processo iterativo: o cliente vê partes funcionando cedo e corrige o rumo.",
+      "match": ["iterativo", "evolutivo", "processo unificado", "rup"]
+    },
+    {
+      "id": "es-rup",
+      "name": "Processo Unificado (RUP)",
+      "definition": "Iterativo, guiado por casos de uso e centrado na arquitetura, com quatro fases: concepção, elaboração, construção e transição.",
+      "example": "A arquitetura base é estabilizada na elaboração; a maior parte do código, na construção.",
+      "match": ["processo unificado", "rup"]
+    },
+    {
+      "id": "es-agil",
+      "name": "Manifesto ágil e Scrum",
+      "definition": "Manifesto: indivíduos e interações, software funcionando, colaboração com o cliente e resposta a mudanças valem mais que o lado direito, sem desprezá-lo. Scrum: Product Owner, Scrum Master e Developers; sprint, planning, daily, review e retrospectiva.",
+      "example": "Quem prioriza o backlog do produto é o Product Owner; o Scrum Master remove impedimentos e cuida do processo, mas não é chefe da equipe.",
+      "match": ["scrum", "agil", "manifesto"]
+    },
+    {
+      "id": "es-requisitos",
+      "name": "Requisitos funcionais e não funcionais",
+      "definition": "Funcionais dizem o que o sistema faz; não funcionais dizem como e com que qualidade (desempenho, segurança, usabilidade, disponibilidade).",
+      "example": "'Emitir boleto' é funcional; 'responder em até 2 s' é não funcional.",
+      "match": ["requisitos", "elicitacao"]
+    },
+    {
+      "id": "es-uml",
+      "name": "Modelagem UML e casos de uso",
+      "definition": "Diagramas de casos de uso (atores e objetivos), classes (estrutura), sequência (troca de mensagens no tempo), atividades e estados.",
+      "example": "Para mostrar a ordem das chamadas entre objetos num cenário, use o diagrama de sequência.",
+      "match": ["uml", "casos de uso", "diagrama de classes"]
+    },
+    {
+      "id": "es-padroes",
+      "name": "Padrões de projeto (GoF)",
+      "definition": "Soluções reutilizáveis: criacionais (Singleton, Factory, Prototype, Builder), estruturais (Adapter, Decorator, Facade, Composite) e comportamentais (Observer, Strategy, Template Method, Command).",
+      "example": "Observer: vários objetos são avisados quando outro muda de estado (o assinante de uma planilha que atualiza gráficos).",
+      "match": ["padrao de projeto", "padroes de projeto", "observer", "singleton", "prototype", "template method"]
+    },
+    {
+      "id": "es-qualidade-projeto",
+      "name": "Coesão, acoplamento e SOLID",
+      "definition": "Bom projeto tem alta coesão (cada módulo faz uma coisa) e baixo acoplamento (módulos pouco dependentes). SOLID resume princípios de orientação a objetos.",
+      "example": "Uma classe que lê arquivo, calcula imposto e envia e-mail tem baixa coesão.",
+      "match": ["acoplamento", "coesao", "solid"]
+    },
+    {
+      "id": "es-testes",
+      "name": "Níveis e técnicas de teste",
+      "definition": "Unidade, integração, sistema e aceitação. Caixa-preta testa pela especificação; caixa-branca, pelo código. Teste de regressão repete testes após mudanças.",
+      "example": "Testar uma função isolada com dublês (mocks) é teste de unidade; testar a função chamando o banco real é integração.",
+      "match": ["teste", "testes"]
+    },
+    {
+      "id": "es-ciclomatica",
+      "name": "Complexidade ciclomática",
+      "definition": "V(G) = E − N + 2 = número de decisões + 1 = número de caminhos independentes, o mínimo de casos de teste para cobrir os caminhos básicos.",
+      "example": "Um método com dois if e um while tem V(G) = 4.",
+      "match": ["ciclomatica", "caminhos basicos"]
+    },
+    {
+      "id": "es-gerencia",
+      "name": "Gerência de projetos, estimativas e configuração",
+      "definition": "Cronograma e caminho crítico, estimativas (pontos de função, COCOMO, story points) e gerência de configuração (versões, baselines e controle de mudanças).",
+      "example": "Atrasar uma tarefa do caminho crítico atrasa o projeto inteiro; uma tarefa com folga, não.",
+      "match": ["gerenciamento", "gerencia", "configuracao", "estimativa", "cronograma"]
+    },
+    {
+      "id": "es-qualidade",
+      "name": "Qualidade de software",
+      "definition": "Garantia (processo) e controle (produto) de qualidade; modelos de maturidade (CMMI, MPS.BR) e características de qualidade de produto (ISO/IEC 25010).",
+      "example": "Revisões e inspeções de código são garantia de qualidade aplicada antes do teste.",
+      "match": ["qualidade"]
+    }
+  ],
+  "facts": [
+    "Engenharia de software caiu exatamente 2 vezes em cada prova de 2005 a 2021.",
+    "RUP: concepção → elaboração → construção → transição; é iterativo dentro de cada fase.",
+    "Scrum tem 3 responsabilidades (Product Owner, Scrum Master, Developers), 5 eventos (sprint, planning, daily, review, retrospectiva) e 3 artefatos (product backlog, sprint backlog, incremento).",
+    "Manifesto ágil: o lado direito (processos, documentação, contrato, plano) também tem valor; o esquerdo vale mais.",
+    "V(G) = E − N + 2P (P = componentes conexos, normalmente 1) = decisões + 1.",
+    "Alta coesão e baixo acoplamento.",
+    "Teste mostra a presença de defeitos, nunca a ausência (Dijkstra).",
+    "Singleton garante uma única instância; Prototype cria por clonagem; Template Method fixa o esqueleto e deixa passos para as subclasses."
+  ],
+  "pairs": [
+    { "a": "Product Owner", "b": "Scrum Master", "difference": "PO decide o quê e em que ordem (backlog); SM cuida do processo e remove impedimentos." },
+    { "a": "Requisito funcional", "b": "Requisito não funcional", "difference": "Função oferecida × atributo de qualidade ou restrição." },
+    { "a": "Caixa-preta", "b": "Caixa-branca", "difference": "Pela especificação, sem ver o código × pela estrutura interna do código." },
+    { "a": "Verificação", "b": "Validação", "difference": "Verificação: construímos o produto corretamente? Validação: construímos o produto certo?" },
+    { "a": "Teste de unidade", "b": "Teste de integração", "difference": "Uma parte isolada × partes conversando entre si." },
+    { "a": "Iterativo", "b": "Incremental", "difference": "Iterativo refina em ciclos; incremental entrega pedaços novos a cada ciclo. Os dois costumam andar juntos." }
+  ],
+  "cues": [
+    { "cue": "sprint, backlog, daily", "concept": "es-agil" },
+    { "cue": "concepção, elaboração, construção, transição", "concept": "es-rup" },
+    { "cue": "notificar vários objetos quando um muda", "concept": "es-padroes" },
+    { "cue": "número mínimo de casos de teste, grafo de fluxo", "concept": "es-ciclomatica" },
+    { "cue": "desempenho, segurança, tempo de resposta", "concept": "es-requisitos" },
+    { "cue": "versão, baseline, solicitação de mudança", "concept": "es-gerencia" }
+  ],
+  "traps": [
+    { "pattern": "PAR", "text": "Atribuir ao Scrum Master a priorização do backlog (é do Product Owner) ou um papel de gerente que manda na equipe." },
+    { "pattern": "ABSOLUTO", "text": "'O manifesto ágil dispensa documentação e planejamento': ele valoriza mais o outro lado, não elimina." },
+    { "pattern": "PAR", "text": "Trocar requisito funcional por não funcional, ou verificação por validação." },
+    { "pattern": "ABSOLUTO", "text": "'Testes garantem a ausência de defeitos': mostram só a presença." },
+    { "pattern": "VIZINHO", "text": "Padrão de projeto confundido com padrão de arquitetura (MVC, camadas) ou com padrão de codificação." },
+    { "pattern": "INVERTIDA", "text": "Baixa coesão e alto acoplamento apresentados como boas práticas." }
+  ],
+  "references": ["Sommerville, Engenharia de Software", "Pressman, Engenharia de Software: uma abordagem profissional", "Gamma et al., Padrões de Projeto", "Schwaber e Sutherland, Guia do Scrum"]
+}

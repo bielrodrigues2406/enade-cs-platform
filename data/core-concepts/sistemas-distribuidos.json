@@ -1,0 +1,94 @@
+{
+  "slug": "sistemas-distribuidos",
+  "area": "Sistemas distribuídos",
+  "title": "Sistemas distribuídos e nuvem",
+  "summary": "Duas questões em 2021 e em alta: nuvem, escalabilidade, comunicação remota e consistência.",
+  "deck": "sistemas-distribuidos",
+  "concepts": [
+    {
+      "id": "sd-caracteristicas",
+      "name": "Características e transparências",
+      "definition": "Componentes em máquinas diferentes que cooperam por mensagens, sem relógio global e com falhas parciais. Transparências: de acesso, localização, replicação, falha, concorrência.",
+      "example": "Abrir um arquivo do Google Drive como se fosse local é transparência de acesso e de localização.",
+      "match": ["caracteristicas de sistemas distribuidos"]
+    },
+    {
+      "id": "sd-escalabilidade",
+      "name": "Escalabilidade e elasticidade",
+      "definition": "Escalar verticalmente é usar uma máquina maior; horizontalmente, mais máquinas. Elasticidade é ajustar recursos à demanda automaticamente.",
+      "example": "Balanceador de carga distribuindo requisições entre réplicas é escalabilidade horizontal.",
+      "match": ["escalabilidade"]
+    },
+    {
+      "id": "sd-rpc",
+      "name": "RPC, RMI e semânticas de invocação",
+      "definition": "Chamada remota com aparência de local. Sem garantia do transporte, a semântica pode ser talvez, pelo menos uma vez (retransmite; seguro só para operações idempotentes) ou no máximo uma vez (filtra duplicatas).",
+      "example": "Sobre UDP, retransmitir 'depositar 100' pode depositar duas vezes: precisa de no máximo uma vez.",
+      "match": ["rpc", "rmi", "semanticas de invocacao"]
+    },
+    {
+      "id": "sd-nuvem",
+      "name": "Computação em nuvem",
+      "definition": "Serviço: IaaS (máquinas virtuais e rede), PaaS (plataforma para implantar código), SaaS (software pronto). Implantação: pública, privada, híbrida, comunitária.",
+      "example": "Gmail é SaaS; uma VM na AWS EC2 é IaaS; Heroku é PaaS.",
+      "match": ["nuvem"]
+    },
+    {
+      "id": "sd-virtualizacao",
+      "name": "Virtualização e contêineres",
+      "definition": "Máquina virtual emula hardware e roda um sistema operacional completo; contêiner compartilha o kernel do hospedeiro e isola processos, sendo mais leve.",
+      "example": "Docker sobe em segundos porque não inicia outro sistema operacional.",
+      "match": ["virtualizacao", "conteiner"]
+    },
+    {
+      "id": "sd-consistencia",
+      "name": "Replicação, consistência e teorema CAP",
+      "definition": "Replicar aumenta disponibilidade e desempenho, mas exige manter cópias coerentes. CAP: diante de partição de rede, escolhe-se entre consistência e disponibilidade.",
+      "example": "Consistência eventual: a curtida aparece para alguns usuários antes de outros.",
+      "match": ["replicacao", "consistencia", "cap"]
+    },
+    {
+      "id": "sd-tempo",
+      "name": "Tempo, ordem e coordenação",
+      "definition": "Sem relógio global, relógios lógicos de Lamport ordenam eventos causalmente; relógios vetoriais detectam concorrência. Coordenação: exclusão mútua distribuída, eleição de líder, consenso (Paxos, Raft).",
+      "example": "Se a → b (a causou b), então L(a) < L(b); o contrário não vale.",
+      "match": ["relogio", "lamport", "consenso", "eleicao"]
+    },
+    {
+      "id": "sd-arquiteturas",
+      "name": "Arquiteturas: cliente-servidor, P2P e microsserviços",
+      "definition": "Cliente-servidor centraliza o serviço; P2P distribui papéis entre pares; microsserviços dividem a aplicação em serviços pequenos e independentes que conversam pela rede.",
+      "example": "BitTorrent é P2P; o sistema de um banco dividido em serviços de conta, cartão e Pix é de microsserviços.",
+      "match": ["cliente-servidor", "p2p", "microsservic"]
+    }
+  ],
+  "facts": [
+    "Sem relógio global e com falhas parciais: o que distingue o sistema distribuído do centralizado.",
+    "Pelo menos uma vez é seguro só para operações idempotentes; no máximo uma vez exige filtrar duplicatas.",
+    "IaaS < PaaS < SaaS: quanto mais alto, menos o cliente administra.",
+    "Contêiner compartilha o kernel; máquina virtual tem o seu.",
+    "CAP: com partição, consistência ou disponibilidade, não as duas.",
+    "Lamport: a → b ⇒ L(a) < L(b), mas L(a) < L(b) não implica a → b."
+  ],
+  "pairs": [
+    { "a": "Escalar verticalmente", "b": "Escalar horizontalmente", "difference": "Máquina maior × mais máquinas." },
+    { "a": "IaaS", "b": "SaaS", "difference": "Você recebe infraestrutura e cuida do resto × você só usa o software." },
+    { "a": "Máquina virtual", "b": "Contêiner", "difference": "Sistema operacional completo × processo isolado no kernel compartilhado." },
+    { "a": "Consistência forte", "b": "Consistência eventual", "difference": "Todos veem o mesmo valor imediatamente × as cópias convergem com o tempo." },
+    { "a": "Pelo menos uma vez", "b": "No máximo uma vez", "difference": "Pode repetir × nunca repete (pode não executar)." }
+  ],
+  "cues": [
+    { "cue": "retransmissão, duplicata, idempotente", "concept": "sd-rpc" },
+    { "cue": "infraestrutura, plataforma, software como serviço", "concept": "sd-nuvem" },
+    { "cue": "aumentar a carga, mais servidores", "concept": "sd-escalabilidade" },
+    { "cue": "partição de rede, réplicas", "concept": "sd-consistencia" },
+    { "cue": "ordem dos eventos sem relógio comum", "concept": "sd-tempo" }
+  ],
+  "traps": [
+    { "pattern": "CONDICAO", "text": "Semântica pelo menos uma vez apresentada como segura para qualquer operação." },
+    { "pattern": "PAR", "text": "Trocar IaaS, PaaS e SaaS entre si." },
+    { "pattern": "ABSOLUTO", "text": "'Sistema distribuído garante consistência e disponibilidade em qualquer falha de rede' (contradiz o CAP)." },
+    { "pattern": "VIZINHO", "text": "Contêiner descrito como máquina virtual com sistema operacional próprio." }
+  ],
+  "references": ["Coulouris et al., Sistemas Distribuídos: conceitos e projeto", "Tanenbaum e van Steen, Sistemas Distribuídos: princípios e paradigmas", "NIST SP 800-145, definição de computação em nuvem"]
+}

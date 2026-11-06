@@ -1,0 +1,91 @@
+{
+  "slug": "ihc",
+  "area": "Interação humano-computador",
+  "title": "Interação humano-computador",
+  "summary": "Usabilidade, avaliação, personas e interfaces adaptativas. Duas questões em 2021 e com ligação forte a acessibilidade.",
+  "concepts": [
+    {
+      "id": "ihc-usabilidade",
+      "name": "Usabilidade",
+      "definition": "Grau em que usuários específicos atingem objetivos com eficácia, eficiência e satisfação num contexto de uso (ISO 9241-11). Inclui facilidade de aprender, de lembrar e poucos erros.",
+      "example": "Um formulário que exige 12 cliques para uma tarefa simples tem baixa eficiência.",
+      "match": ["usabilidade"]
+    },
+    {
+      "id": "ihc-heuristicas",
+      "name": "Heurísticas de Nielsen",
+      "definition": "Dez princípios: visibilidade do estado, correspondência com o mundo real, controle e liberdade, consistência e padrões, prevenção de erros, reconhecer em vez de lembrar, flexibilidade, design minimalista, ajuda a recuperar de erros, ajuda e documentação.",
+      "example": "Um 'desfazer' após apagar atende ao controle e à liberdade do usuário.",
+      "match": ["heuristica", "avaliacao de interfaces"]
+    },
+    {
+      "id": "ihc-avaliacao",
+      "name": "Métodos de avaliação",
+      "definition": "Por inspeção, sem usuários (avaliação heurística, percurso cognitivo), e com usuários (teste de usabilidade, observação, questionários). A inspeção é barata; o teste revela o uso real.",
+      "example": "Três a cinco avaliadores encontram a maior parte dos problemas numa avaliação heurística.",
+      "match": ["avaliacao"]
+    },
+    {
+      "id": "ihc-personas",
+      "name": "Personas e cenários",
+      "definition": "Persona é um usuário fictício e arquetípico, construído a partir de dados reais; cenário é uma narrativa de uso concreta. Apoiam a elicitação de requisitos e o design centrado no usuário.",
+      "example": "'Ana, 52 anos, professora, usa o celular com fonte ampliada e conexão instável.'",
+      "match": ["personas", "cenarios"]
+    },
+    {
+      "id": "ihc-adaptativas",
+      "name": "Interfaces adaptativas e adaptáveis",
+      "definition": "Adaptativa: o sistema se ajusta sozinho ao usuário (por modelo de usuário). Adaptável: o usuário personaliza manualmente.",
+      "example": "Menu que reordena itens pelo uso é adaptativo; tema escolhido nas configurações é adaptável.",
+      "match": ["adaptativa", "adaptativas"]
+    },
+    {
+      "id": "ihc-acessibilidade",
+      "name": "Acessibilidade digital",
+      "definition": "WCAG organiza critérios em perceptível, operável, compreensível e robusto: texto alternativo, contraste, navegação por teclado, legendas, rótulos em formulários.",
+      "example": "Imagem informativa sem texto alternativo é invisível para quem usa leitor de tela.",
+      "match": ["acessibilidade"]
+    },
+    {
+      "id": "ihc-design",
+      "name": "Design centrado no usuário e prototipação",
+      "definition": "Ciclo de entender o contexto, especificar requisitos, produzir soluções e avaliar, com protótipos de baixa (papel) a alta fidelidade.",
+      "example": "Um protótipo em papel testado com usuários no início evita retrabalho caro depois.",
+      "match": ["prototip", "design centrado"]
+    },
+    {
+      "id": "ihc-semiotica",
+      "name": "Engenharia semiótica e comunicabilidade",
+      "definition": "Vê a interface como uma mensagem do designer ao usuário; a comunicabilidade avalia se essa mensagem é entendida (método de avaliação de comunicabilidade, com etiquetas como 'Cadê?', 'Ué, o que houve?').",
+      "example": "Usuário que procura a função e não acha: ruptura de comunicação 'Cadê?'.",
+      "match": ["semiotica", "comunicabilidade"]
+    }
+  ],
+  "facts": [
+    "Usabilidade (ISO 9241-11): eficácia, eficiência e satisfação num contexto de uso.",
+    "Avaliação heurística e percurso cognitivo não envolvem usuários; teste de usabilidade envolve.",
+    "Persona é fictícia, mas baseada em dados de usuários reais.",
+    "Adaptativa = o sistema muda sozinho; adaptável = o usuário configura.",
+    "WCAG: perceptível, operável, compreensível, robusto."
+  ],
+  "pairs": [
+    { "a": "Interface adaptativa", "b": "Interface adaptável", "difference": "Adaptação automática pelo sistema × personalização feita pelo usuário." },
+    { "a": "Avaliação heurística", "b": "Teste de usabilidade", "difference": "Especialistas inspecionam × usuários reais executam tarefas." },
+    { "a": "Persona", "b": "Cenário", "difference": "Quem é o usuário × o que ele faz numa situação concreta." },
+    { "a": "Usabilidade", "b": "Acessibilidade", "difference": "Facilidade de uso para os usuários-alvo × possibilidade de uso por pessoas com deficiência ou limitações." }
+  ],
+  "cues": [
+    { "cue": "eficácia, eficiência, satisfação", "concept": "ihc-usabilidade" },
+    { "cue": "especialistas, princípios, sem usuários", "concept": "ihc-heuristicas" },
+    { "cue": "usuário fictício, perfil", "concept": "ihc-personas" },
+    { "cue": "o sistema se ajusta ao usuário", "concept": "ihc-adaptativas" },
+    { "cue": "leitor de tela, contraste, teclado", "concept": "ihc-acessibilidade" }
+  ],
+  "traps": [
+    { "pattern": "PAR", "text": "Trocar interface adaptativa por adaptável." },
+    { "pattern": "VIZINHO", "text": "Avaliação heurística descrita como teste com usuários reais." },
+    { "pattern": "ABSOLUTO", "text": "'Persona representa um usuário real específico': é um arquétipo." },
+    { "pattern": "PAR", "text": "Usabilidade e acessibilidade tratadas como sinônimos." }
+  ],
+  "references": ["Barbosa e Silva, Interação Humano-Computador", "Rogers, Sharp e Preece, Design de Interação", "Nielsen, Usability Engineering", "W3C, WCAG 2.2"]
+}

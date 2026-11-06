@@ -642,6 +642,7 @@ class App {
       this.reviewView.set(false);
       this.homeView.set(false);
       this.practiceView.set(false);
+      this.studyView.set(null);
       this.question.set(q);
       this.selected = retry ? "" : q.answer?.optionId || "";
       this.editing.set(retry);
@@ -936,6 +937,11 @@ class App {
     });
     this.setPath(SECTION_PATHS[view]);
     this.focusMain();
+  }
+  /** Questão oficial aberta a partir do núcleo por área: sai da Biblioteca para o banco. */
+  openQuestionFromStudy(id: string) {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy()) return;
+    void this.open(id);
   }
   /** Meu perfil: dados e senha da própria conta. */
   openProfile() {

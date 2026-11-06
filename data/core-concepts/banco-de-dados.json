@@ -1,0 +1,105 @@
+{
+  "slug": "banco-de-dados",
+  "area": "Banco de dados",
+  "title": "Banco de dados",
+  "summary": "SQL, modelagem ER e relacional, normalização, transações e índices.",
+  "deck": "banco-de-dados",
+  "sheet": "modelagem-e-sql",
+  "concepts": [
+    {
+      "id": "bd-modelo-er",
+      "name": "Modelo entidade-relacionamento",
+      "definition": "Entidades, atributos e relacionamentos com cardinalidade (1:1, 1:N, N:N). Atributos multivalorados e relacionamentos N:N viram tabelas próprias no relacional.",
+      "example": "Aluno N:N Disciplina vira a tabela Matrícula(aluno_id, disciplina_id, nota).",
+      "match": ["modelo er", "mapeamento", "entidade"]
+    },
+    {
+      "id": "bd-chaves",
+      "name": "Chaves e integridade",
+      "definition": "Chave primária identifica a linha (única e não nula); chave candidata é qualquer identificador mínimo; chave estrangeira referencia a primária de outra tabela (integridade referencial).",
+      "example": "Não é possível inserir uma matrícula de aluno_id inexistente se houver FK para Aluno.",
+      "match": ["chaves", "integridade referencial", "chave primaria"]
+    },
+    {
+      "id": "bd-sql",
+      "name": "Consultas SQL",
+      "definition": "SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER BY. Ordem lógica: FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY. WHERE filtra linhas; HAVING filtra grupos.",
+      "example": "Departamentos com mais de 5 funcionários: GROUP BY depto HAVING COUNT(*) > 5.",
+      "match": ["sql", "consulta"]
+    },
+    {
+      "id": "bd-juncoes",
+      "name": "Junções e subconsultas",
+      "definition": "INNER JOIN mantém só pares que casam; LEFT JOIN mantém todas as linhas da esquerda, com NULL onde não há par. Subconsultas com IN, NOT IN e EXISTS.",
+      "example": "NOT IN contra uma subconsulta que contém NULL não devolve nenhuma linha; NOT EXISTS não tem esse problema.",
+      "match": ["junc", "join", "not in", "subconsulta"]
+    },
+    {
+      "id": "bd-normalizacao",
+      "name": "Dependências funcionais e normalização",
+      "definition": "1FN: atributos atômicos. 2FN: sem dependência parcial da chave composta. 3FN: sem dependência transitiva (não chave dependendo de não chave). BCNF: todo determinante é chave candidata.",
+      "example": "Pedido(id, cliente_id, cliente_nome): cliente_nome depende de cliente_id, não da chave; violação da 3FN.",
+      "match": ["normalizacao", "1fn", "dependencia funcional"]
+    },
+    {
+      "id": "bd-transacoes",
+      "name": "Transações e ACID",
+      "definition": "Atomicidade (tudo ou nada), consistência (de um estado válido a outro), isolamento (transações concorrentes não se enxergam pela metade) e durabilidade (o que foi confirmado sobrevive a falhas).",
+      "example": "Transferência bancária: debitar e creditar têm de acontecer juntos ou nenhum dos dois.",
+      "match": ["acid", "transac"]
+    },
+    {
+      "id": "bd-concorrencia",
+      "name": "Concorrência e níveis de isolamento",
+      "definition": "Anomalias: leitura suja, leitura não repetível e fantasma. Níveis: read uncommitted, read committed, repeatable read e serializable. Bloqueio em duas fases (2PL) garante serializabilidade.",
+      "example": "Read committed evita leitura suja, mas permite leitura não repetível.",
+      "match": ["isolamento", "concorrencia", "bloqueio"]
+    },
+    {
+      "id": "bd-indices",
+      "name": "Índices",
+      "definition": "Árvore B+ serve a igualdade, intervalos e ordenação; índice hash serve só a igualdade. Índices aceleram leituras e pesam nas escritas.",
+      "example": "WHERE preco BETWEEN 10 AND 20 usa B+; hash não ajuda.",
+      "match": ["indice", "indices", "hash"]
+    },
+    {
+      "id": "bd-algebra",
+      "name": "Álgebra relacional e otimização",
+      "definition": "Seleção σ (linhas), projeção π (colunas), junção ⋈, união, diferença. O otimizador aplica seleções e projeções o mais cedo possível e escolhe a ordem das junções.",
+      "example": "σ antes da junção reduz o volume que será combinado.",
+      "match": ["otimizacao", "plano de avaliacao", "algebra relacional"]
+    }
+  ],
+  "facts": [
+    "Ordem lógica do SQL: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY.",
+    "Funções de agregação ignoram NULL; COUNT(*) conta linhas.",
+    "x NOT IN (lista com NULL) nunca é verdadeiro: a consulta volta vazia.",
+    "LEFT JOIN + condição na tabela da direita no WHERE vira, na prática, INNER JOIN.",
+    "1FN atômico; 2FN só importa com chave composta; 3FN elimina dependência transitiva.",
+    "N:N vira tabela associativa; 1:N põe a chave estrangeira do lado N.",
+    "B+: igualdade e intervalo. Hash: só igualdade.",
+    "2PL (bloqueio em duas fases) garante serializabilidade, mas pode gerar deadlock."
+  ],
+  "pairs": [
+    { "a": "WHERE", "b": "HAVING", "difference": "Filtra linhas antes de agrupar × filtra grupos depois de agregar." },
+    { "a": "INNER JOIN", "b": "LEFT JOIN", "difference": "Só pares que casam × todas as linhas da esquerda, com NULL sem par." },
+    { "a": "2FN", "b": "3FN", "difference": "Remove dependência de parte da chave × remove dependência entre atributos não chave." },
+    { "a": "Chave primária", "b": "Chave estrangeira", "difference": "Identifica a linha na própria tabela × aponta para a primária de outra tabela." },
+    { "a": "Índice B+", "b": "Índice hash", "difference": "Ordenado (intervalos) × só igualdade." }
+  ],
+  "cues": [
+    { "cue": "contar por grupo, mais de N", "concept": "bd-sql" },
+    { "cue": "mesmo quando não há correspondente", "concept": "bd-juncoes" },
+    { "cue": "redundância, anomalia de atualização", "concept": "bd-normalizacao" },
+    { "cue": "tudo ou nada, falha no meio", "concept": "bd-transacoes" },
+    { "cue": "cardinalidade, entidade associativa", "concept": "bd-modelo-er" }
+  ],
+  "traps": [
+    { "pattern": "PAR", "text": "Usar WHERE para filtrar agregados (WHERE COUNT(*) > 5): é HAVING." },
+    { "pattern": "CONDICAO", "text": "NOT IN com NULL na subconsulta: o resultado esperado na alternativa não aparece." },
+    { "pattern": "PAR", "text": "Trocar 2FN por 3FN, ou dizer que tabela com chave simples pode violar a 2FN." },
+    { "pattern": "VIZINHO", "text": "Atribuir ao índice a garantia de integridade, ou à chave estrangeira o ganho de desempenho." },
+    { "pattern": "ABSOLUTO", "text": "'Índices sempre melhoram o desempenho': pesam nas inserções e atualizações." }
+  ],
+  "references": ["Elmasri e Navathe, Sistemas de Banco de Dados", "Silberschatz, Korth e Sudarshan, Sistema de Banco de Dados", "Heuser, Projeto de Banco de Dados"]
+}

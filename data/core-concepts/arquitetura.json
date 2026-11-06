@@ -1,0 +1,132 @@
+{
+  "slug": "arquitetura",
+  "area": "Arquitetura de computadores",
+  "title": "Arquitetura e organização de computadores",
+  "summary": "Circuitos e álgebra booleana caem quase todo ano; pipeline, memória e o modelo de Von Neumann completam o núcleo.",
+  "deck": "arquitetura",
+  "sheet": "arquitetura-e-memoria",
+  "concepts": [
+    {
+      "id": "arq-booleana",
+      "name": "Álgebra booleana e simplificação",
+      "definition": "Expressões com E, OU e NÃO simplificadas por leis (De Morgan, absorção, distributiva) ou por mapa de Karnaugh.",
+      "example": "A + A·B = A (absorção). ¬(A·B) = ¬A + ¬B (De Morgan).",
+      "match": ["booleana", "boolean", "venn", "soma de produtos"]
+    },
+    {
+      "id": "arq-formas-canonicas",
+      "name": "Mintermos e maxtermos",
+      "definition": "Mintermo é um produto que vale 1 em uma única linha da tabela-verdade; a soma dos mintermos das linhas com saída 1 é a forma canônica SOP. Maxtermos formam a POS com as linhas de saída 0.",
+      "example": "Para F = 1 só em A=0, B=1: F = ¬A·B (um mintermo).",
+      "match": ["mintermo", "maxtermo"]
+    },
+    {
+      "id": "arq-portas",
+      "name": "Portas lógicas e portas universais",
+      "definition": "NAND e NOR sozinhas implementam qualquer função booleana: são universais.",
+      "example": "NÃO com NAND: ligue A nas duas entradas, NAND(A, A) = ¬A.",
+      "match": ["nand", "nor", "circuito", "circuitos logicos", "diagrama de tempo"]
+    },
+    {
+      "id": "arq-combinacionais",
+      "name": "Multiplexador, decodificador e circuitos combinacionais",
+      "definition": "Combinacional depende só das entradas atuais. Multiplexador de 2ⁿ entradas usa n linhas de seleção; decodificador de n entradas ativa uma de 2ⁿ saídas.",
+      "example": "Mux 4×1: 2 bits de seleção escolhem qual das 4 entradas vai para a saída.",
+      "match": ["multiplexador", "decodificador", "combinacionais"]
+    },
+    {
+      "id": "arq-sequenciais",
+      "name": "Circuitos sequenciais e memória",
+      "definition": "Sequenciais dependem também do estado guardado (flip-flops, registradores, contadores). Uma memória com n bits de endereço tem 2ⁿ posições.",
+      "example": "RAM de 1 KiB com palavras de 1 byte precisa de 10 bits de endereço.",
+      "match": ["memoria de acesso aleatorio", "enderecos e celulas", "celulas"]
+    },
+    {
+      "id": "arq-von-neumann",
+      "name": "Arquitetura de Von Neumann e ciclo de instrução",
+      "definition": "Programa e dados na mesma memória, buscados pelo mesmo barramento; a CPU repete busca, decodificação e execução. Harvard separa memória de instruções e de dados.",
+      "example": "O gargalo de Von Neumann é o barramento único entre CPU e memória.",
+      "match": ["von neumann"]
+    },
+    {
+      "id": "arq-isa",
+      "name": "Conjunto de instruções (ISA), RISC e CISC",
+      "definition": "A ISA é o contrato entre hardware e software: instruções, registradores e modos de endereçamento. Um executável roda em processadores com a mesma ISA.",
+      "example": "Um binário x86-64 não roda num ARM sem recompilar ou emular, mesmo com o mesmo sistema operacional.",
+      "match": ["isa", "portabilidade de executavel", "registradores"]
+    },
+    {
+      "id": "arq-pipeline",
+      "name": "Pipeline e conflitos",
+      "definition": "Sobrepõe as etapas de várias instruções; o ideal é concluir uma por ciclo. Conflitos estruturais, de dados e de controle geram bolhas.",
+      "example": "ADD R1… seguido de SUB …R1 tem dependência de dados (RAW): resolve-se com adiantamento (forwarding), bolha ou reordenação.",
+      "match": ["pipeline", "bolhas", "desvio"]
+    },
+    {
+      "id": "arq-hierarquia",
+      "name": "Hierarquia de memória e cache",
+      "definition": "Registradores, cache, RAM e disco: cada nível é maior, mais lento e mais barato que o anterior. Funciona por localidade temporal e espacial.",
+      "example": "Tempo médio de acesso = tempo da cache + taxa de falha × penalidade. Com 2 ns, 5% e 100 ns: 7 ns.",
+      "match": ["hierarquia de memoria", "tempos de acesso", "cache"]
+    },
+    {
+      "id": "arq-interrupcoes",
+      "name": "Interrupções e exceções",
+      "definition": "Interrupção é assíncrona e vem de fora (E/S, temporizador); exceção é síncrona e causada pela própria instrução (divisão por zero, falta de página).",
+      "example": "Terminar a leitura do disco gera interrupção; acessar endereço inválido gera exceção.",
+      "match": ["interrupc", "excec"]
+    },
+    {
+      "id": "arq-paralelismo",
+      "name": "Multiprocessadores, multicore e clusters",
+      "definition": "SMP e multicore compartilham a memória; clusters são computadores independentes ligados por rede, cada um com sua memória.",
+      "example": "Lei de Amdahl: se 90% do programa é paralelo, o ganho máximo com infinitos núcleos é 1/0,1 = 10×.",
+      "match": ["multiprocessador", "smp", "cluster", "nucleos"]
+    },
+    {
+      "id": "arq-representacao",
+      "name": "Representação de números",
+      "definition": "Binário, hexadecimal e complemento de dois para inteiros com sinal; com n bits, a faixa é de −2ⁿ⁻¹ a 2ⁿ⁻¹ − 1.",
+      "example": "Com 8 bits: de −128 a 127; −1 é 11111111.",
+      "match": ["complemento de dois", "representacao numerica"]
+    }
+  ],
+  "facts": [
+    "NAND e NOR são universais.",
+    "De Morgan: ¬(A·B) = ¬A + ¬B; ¬(A + B) = ¬A·¬B.",
+    "Mux com 2ⁿ entradas tem n bits de seleção; decodificador n → 2ⁿ.",
+    "n bits de endereço ⇒ 2ⁿ posições de memória.",
+    "Pipeline de k estágios: ganho ideal de até k vezes; conflitos reduzem esse ganho.",
+    "Conflitos: estrutural (recurso disputado), de dados (dependência entre instruções), de controle (desvios).",
+    "Tempo médio de acesso = acerto + taxa de falha × penalidade.",
+    "Localidade temporal: o que foi usado volta a ser usado. Espacial: os vizinhos também serão usados.",
+    "Complemento de dois com n bits: de −2ⁿ⁻¹ a 2ⁿ⁻¹ − 1.",
+    "Lei de Amdahl: ganho = 1 / ((1 − f) + f/s), onde f é a fração melhorada e s o ganho dela.",
+    "Interrupção é assíncrona (externa); exceção é síncrona (da própria instrução)."
+  ],
+  "pairs": [
+    { "a": "Combinacional", "b": "Sequencial", "difference": "Combinacional não tem memória; sequencial guarda estado (flip-flops)." },
+    { "a": "Multiplexador", "b": "Decodificador", "difference": "Mux escolhe uma entrada para uma saída; decodificador ativa uma saída entre muitas." },
+    { "a": "Von Neumann", "b": "Harvard", "difference": "Von Neumann usa memória única para dados e instruções; Harvard separa as duas." },
+    { "a": "Interrupção", "b": "Exceção", "difference": "Interrupção vem de fora, a qualquer momento; exceção nasce da instrução em execução." },
+    { "a": "RISC", "b": "CISC", "difference": "RISC: poucas instruções simples e de tamanho fixo, fáceis de pôr em pipeline. CISC: instruções complexas e variadas." },
+    { "a": "Multicore/SMP", "b": "Cluster", "difference": "Multicore compartilha memória; cluster tem memórias separadas e conversa por rede." }
+  ],
+  "cues": [
+    { "cue": "tabela-verdade, expressão equivalente, simplificar", "concept": "arq-booleana" },
+    { "cue": "linhas de seleção, uma entrada vai para a saída", "concept": "arq-combinacionais" },
+    { "cue": "dependência entre instruções, estágios, bolha", "concept": "arq-pipeline" },
+    { "cue": "taxa de acerto, penalidade, localidade", "concept": "arq-hierarquia" },
+    { "cue": "mesmo binário em outro processador", "concept": "arq-isa" },
+    { "cue": "programa e dados na mesma memória", "concept": "arq-von-neumann" }
+  ],
+  "traps": [
+    { "pattern": "GRANDEZA", "text": "Pipeline acelerando cada instrução individualmente: ele aumenta a vazão; o tempo de uma instrução não diminui (pode até aumentar)." },
+    { "pattern": "ABSOLUTO", "text": "'Mais estágios sempre aumentam o desempenho': conflitos, desvios e sobrecarga entre estágios limitam o ganho." },
+    { "pattern": "PAR", "text": "Trocar interrupção por exceção, ou mux por decodificador." },
+    { "pattern": "CONDICAO", "text": "Portabilidade de executável depende da ISA (e do sistema operacional), não da frequência nem do número de núcleos." },
+    { "pattern": "INVERTIDA", "text": "Hierarquia de memória com o nível mais rápido sendo o maior: é o contrário." },
+    { "pattern": "GRANDEZA", "text": "Paralelizar dá ganho linear ilimitado: a Lei de Amdahl limita pelo trecho sequencial." }
+  ],
+  "references": ["Patterson e Hennessy, Organização e Projeto de Computadores", "Stallings, Arquitetura e Organização de Computadores", "Tocci, Sistemas Digitais"]
+}
