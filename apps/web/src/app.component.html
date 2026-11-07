@@ -705,12 +705,6 @@
                 <button type="button" class="text-button" [attr.aria-pressed]="mascot.enabled()" (click)="mascot.set(!mascot.enabled())">{{ mascot.enabled() ? 'Ocultar Dudu' : 'Mostrar Dudu' }}</button>
               }
             </div>
-            <div class="theme-switch" role="group" aria-label="Tema da tela">
-              <span class="site-footer-title">Tema</span>
-              @for (option of themes; track option.value) {
-                <button type="button" class="text-button" [attr.aria-pressed]="theme.theme() === option.value" (click)="theme.set(option.value)">{{ option.label }}</button>
-              }
-            </div>
             <p class="site-footer-base">{{ upcomingExamFooter() ? 'ENADE 2026 · domingo, 29 de novembro' : 'Preparação ENADE · Ciência da Computação' }} · <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade" target="_blank" rel="noopener noreferrer">cronograma no Inep</a></p>
           </footer>
         }

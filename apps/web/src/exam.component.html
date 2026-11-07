@@ -41,6 +41,12 @@
                 <div><dt>Componente específico</dt><dd><strong>{{ blocks.specific.correct }}</strong> de {{ blocks.specific.total }}</dd></div>
               </dl>
             }
+            @if (data.source === 'MIXED' && result.byOrigin; as origin) {
+              <dl class="practice-blocks" aria-label="Acertos por origem">
+                <div><dt>Oficiais (Inep)</dt><dd><strong>{{ origin.official.correct }}</strong> de {{ origin.official.total }}</dd></div>
+                <div><dt>Geradas por IA</dt><dd><strong>{{ origin.generated.correct }}</strong> de {{ origin.generated.total }}</dd></div>
+              </dl>
+            }
             @if (data.discursive?.length) {
               <p>
                 @if (data.kind === 'FORMAT') {
@@ -364,7 +370,20 @@
           </section>
         } @else {
           <form class="practice-setup" (ngSubmit)="start()">
-            <div><label for="practice-area">Área do treino</label><select id="practice-area" name="area" [(ngModel)]="area" (ngModelChange)="area = $event; areaChanged()" [disabled]="saving()"><option value="">Assuntos mistos</option>@for (row of data.areas; track row.name) { <option [value]="row.name">{{ row.name }} ({{ row.count }})</option> }</select></div>
+            <fieldset class="practice-source" [disabled]="saving()"><legend>Origem das questões</legend>
+              <div class="practice-source-options">
+                @for (option of sourceOptions; track option.value) {
+                  <label [class.is-chosen]="source === option.value">
+                    <input type="radio" name="source" [value]="option.value" [(ngModel)]="source" (ngModelChange)="source = $event; sourceChanged()" />
+                    <span><strong>{{ option.label }}</strong> <small>{{ countFor(null, 'count', option.value) }} questões</small><span class="practice-source-hint">{{ option.hint }}</span></span>
+                  </label>
+                }
+              </div>
+              @if (source !== 'OFFICIAL') {
+                <p class="practice-source-notice" role="note"><strong>{{ source === 'MIXED' ? 'Treino misturado.' : 'Treino só com questões geradas por IA.' }}</strong> As geradas por IA não são da prova do Inep, foram escritas e conferidas por IA, sem revisão humana, e aparecem com o selo "Gerada por IA" em cada questão.</p>
+              }
+            </fieldset>
+            <div><label for="practice-area">Área do treino</label><select id="practice-area" name="area" [(ngModel)]="area" (ngModelChange)="area = $event; areaChanged()" [disabled]="saving()"><option value="">Assuntos mistos</option>@for (row of data.areas; track row.name) { <option [value]="row.name">{{ row.name }} ({{ countFor(row.name, 'count') }})</option> }</select></div>
             <fieldset [disabled]="saving()" aria-describedby="practice-availability"><legend>Quantidade de questões</legend><div class="practice-sizes">@for (option of sizeOptions(); track option.value) { <label><input type="radio" name="size" [value]="option.value" [(ngModel)]="size" [disabled]="eligibleCount() < option.value" /> {{ option.label }}</label> }</div></fieldset>
             <p class="muted" id="practice-availability">{{ eligibleCount() }} questões disponíveis · {{ unseenCount() }} inéditas, que vêm primeiro.</p>
             @if (eligibleCount() < size) { <p>Faltam {{ size - eligibleCount() }} questões para {{ size }}. Escolha um tamanho menor.</p> }
@@ -388,14 +407,14 @@
           }
           <section class="practice-areas" aria-labelledby="practice-areas-title">
             <h2 id="practice-areas-title">Simulado por área</h2>
-            <p class="muted">Até 30 questões da área. Ao começar, você escolhe com ou sem cronômetro ({{ data.minutesPerQuestion }} min por questão).</p>
+            <p class="muted">Até 30 questões da área{{ source === 'OFFICIAL' ? '' : source === 'MIXED' ? ', oficiais e geradas por IA' : ', só geradas por IA' }} (a origem escolhida acima vale aqui). Ao começar, você escolhe com ou sem cronômetro ({{ data.minutesPerQuestion }} min por questão).</p>
             <ol>
               @for (row of data.areas; track row.name) {
-                @if (row.count) {
+                @if (countFor(row.name, 'count')) {
                   <li>
                     <div>
                       <strong>{{ row.name }}</strong>
-                      <span>{{ simulationSize(row.count) }} {{ simulationSize(row.count) === 1 ? 'questão' : 'questões' }} · {{ simulationSize(row.count) * data.minutesPerQuestion }} min · {{ row.unseen }} {{ row.unseen === 1 ? 'inédita' : 'inéditas' }}</span>
+                      <span>{{ simulationSize(countFor(row.name, 'count')) }} {{ simulationSize(countFor(row.name, 'count')) === 1 ? 'questão' : 'questões' }} · {{ simulationSize(countFor(row.name, 'count')) * data.minutesPerQuestion }} min · {{ countFor(row.name, 'unseen') }} {{ countFor(row.name, 'unseen') === 1 ? 'inédita' : 'inéditas' }}</span>
                     </div>
                     <button class="outline" (click)="simulateArea(row)" [disabled]="saving()" [attr.aria-label]="'Simular ' + row.name">Simular</button>
                   </li>

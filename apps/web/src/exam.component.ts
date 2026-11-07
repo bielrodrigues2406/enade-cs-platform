@@ -11,7 +11,7 @@ import { EngagementService } from "./engagement.service";
 import { QuestionContentComponent } from "./question-content.component";
 import { DiscursiveComponent } from "./discursive.component";
 import type {
-  Edition, EditionList, FormatAvailability, PracticeAvailability, PracticeView, PracticeItem, PracticeAnswer,
+  Edition, EditionList, FormatAvailability, PracticeAvailability, PracticeView, PracticeItem, PracticeAnswer, PracticeSource,
 } from "./exam.types";
 import { AREA_SIMULATION_LIMIT, attemptLabel, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 
@@ -83,6 +83,13 @@ export class ExamComponent {
   private wideViewport = window.innerWidth > 1000;
   size = 20;
   area = "";
+  /** Origem das questões: oficiais (padrão), só geradas por IA ou misturadas. */
+  source: PracticeSource = "OFFICIAL";
+  readonly sourceOptions: { value: PracticeSource; label: string; hint: string }[] = [
+    { value: "OFFICIAL", label: "Só oficiais", hint: "Questões das provas do Inep (2005 a 2021)." },
+    { value: "MIXED", label: "Oficiais + geradas por IA", hint: "Mistura as duas. Cada questão gerada vem marcada e o resultado separa os acertos." },
+    { value: "GENERATED", label: "Só geradas por IA", hint: "Questões novas no estilo do ENADE, escritas por IA. Não são da prova oficial." },
+  ];
   /** Treino com tempo (minutos por questão vêm da API). */
   timed = false;
   // Prova completa da edição (SIM-1).
@@ -195,9 +202,18 @@ export class ExamComponent {
     this.discursiveState.set(state); this.emitBusy();
   }
   current() { return this.attempt()?.items.find((item) => item.position === this.position()) ?? null; }
-  eligibleCount() { return this.areaRow()?.count ?? (this.area ? 0 : this.availability()?.total ?? 0); }
-  unseenCount() { return this.areaRow()?.unseen ?? (this.area ? 0 : this.availability()?.unseen ?? 0); }
-  private areaRow() { return this.area ? this.availability()?.areas.find((row) => row.name === this.area) : undefined; }
+  eligibleCount() { return this.countFor(this.area || null, "count"); }
+  unseenCount() { return this.countFor(this.area || null, "unseen"); }
+  /** Questões disponíveis na origem escolhida; o misturado soma oficiais e geradas. */
+  countFor(area: string | null, field: "count" | "unseen", source = this.source) {
+    const data = this.availability();
+    if (!data) return 0;
+    const official = area ? data.areas.find((row) => row.name === area)?.[field] ?? 0 : field === "count" ? data.total : data.unseen;
+    const gen = data.generated;
+    const generated = !gen ? 0 : area ? gen.areas?.find((row) => row.name === area)?.[field] ?? 0 : field === "count" ? gen.total : gen.unseen;
+    return source === "OFFICIAL" ? official : source === "GENERATED" ? generated : official + generated;
+  }
+  sourceChanged() { this.areaChanged(); }
   /** Com área: 5/10/20/30 que caibam e, se o total for outro número, "todas". Sem área: 10/20/30. */
   sizeOptions(): { value: number; label: string }[] {
     const data = this.availability();
@@ -295,11 +311,11 @@ export class ExamComponent {
   /** Treino montado no formulário: área, quantidade e cronômetro. */
   start() {
     if (this.eligibleCount() < this.size) return;
-    void this.begin({ area: this.area || null, size: this.size, timed: this.timed });
+    void this.begin({ area: this.area || null, size: this.size, timed: this.timed, ...(this.source === "OFFICIAL" ? {} : { source: this.source }) });
   }
   /** Simulado de uma área: até 30 questões; a pessoa escolhe se corre o cronômetro. */
   async simulateArea(row: { name: string; count: number }) {
-    const request = await chooseAreaSimulation(this.choice, row.name, row.count, this.availability()?.minutesPerQuestion);
+    const request = await chooseAreaSimulation(this.choice, row.name, this.countFor(row.name, "count"), this.availability()?.minutesPerQuestion, this.source);
     if (request) void this.begin(request);
   }
   /** Erros do estudo livre que já passaram do intervalo de revisão. */

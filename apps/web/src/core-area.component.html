@@ -58,7 +58,8 @@
         <button type="button" (click)="train()">Treinar {{ a.area }}</button>
       }
       @if (a.generatedTotal) {
-        <button type="button" class="outline" (click)="generated.emit(a.area)">Praticar questões geradas ({{ a.generatedTotal }})</button>
+        <button type="button" class="outline" (click)="train('MIXED')">Treino misturado: oficiais + IA</button>
+        <button type="button" class="outline" (click)="generated.emit(a.area)">Ver as {{ a.generatedTotal }} questões geradas</button>
       }
       @if (lessons().length) {
         <button type="button" class="outline" (click)="read(lessons()[0])">Ler as {{ lessons().length }} lições</button>

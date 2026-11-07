@@ -12,7 +12,7 @@ test.beforeAll(() => {
 test("the core links to generated practice, which opens labelled questions with code and explanations", async ({ page }) => {
   await page.goto("/biblioteca");
   await page.getByRole("button", { name: /^Sistemas operacionais: / }).click();
-  await page.getByRole("button", { name: /^Praticar questões geradas \(\d+\)$/ }).click();
+  await page.getByRole("button", { name: /^Ver as \d+ questões geradas$/ }).click();
 
   await expect(page).toHaveURL(/\/questoes\?/);
   const params = new URL(page.url()).searchParams;
@@ -63,4 +63,16 @@ test("figures appear where the prompt marks them, with alt text and the AI capti
   await page.goto("/questoes?origin=generated&area=Forma%C3%A7%C3%A3o%20Geral");
   await page.getByRole("button", { name: /Vídeo manipulado às vésperas da eleição/ }).click();
   await expect(page.locator(".prompt-figure figcaption")).toHaveText("Ilustração gerada por IA");
+});
+
+// Treino com geradas (07/11): a origem é escolhida com aviso, e cada gerada vem com o selo.
+test("practice can be set to generated questions only, with the AI notice and badge", async ({ page }) => {
+  await page.goto("/treino");
+  await page.getByRole("radio", { name: /Só geradas por IA/ }).check();
+  await expect(page.getByRole("note")).toContainText("Treino só com questões geradas por IA.");
+  await page.getByLabel("Área do treino").selectOption("Algoritmos");
+  await page.getByRole("radio", { name: "5 questões" }).check();
+  await page.getByRole("button", { name: "Começar treino" }).click();
+  await expect(page.locator(".ai-flag").first()).toContainText("Gerada por IA");
+  await expect(page.locator(".ai-flag").first()).toContainText("Não é da prova do Inep.");
 });

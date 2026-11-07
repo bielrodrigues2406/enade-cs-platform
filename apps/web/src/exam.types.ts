@@ -1,3 +1,5 @@
+/** OFFICIAL: provas e autorais; GENERATED: só geradas por IA; MIXED: as duas. */
+export type PracticeSource = "OFFICIAL" | "GENERATED" | "MIXED";
 import type { QuestionContent } from "./question-content.component";
 
 export type AttemptSummary = {
@@ -12,6 +14,8 @@ export type AttemptSummary = {
   formatYear?: number | null;
   /** Treino montado com os erros prontos (ERRORS) ou com as erradas de um treino (RETRY). */
   focus?: "ERRORS" | "RETRY" | null;
+  /** Origem das questões do treino parcial (07/11). */
+  source?: PracticeSource;
   /** Prova da edição: prazo do servidor; o cronômetro só o exibe. */
   deadlineAt?: string | null;
   /** Pausada desde; null quando o cronômetro corre. */
@@ -38,6 +42,8 @@ export type PracticeAvailability = {
   /** Ainda não vistas pela pessoa (estudo, treino ou prova); o sorteio começa por elas. */
   unseen: number;
   areas: { name: string; count: number; unseen: number }[];
+  /** Geradas por IA publicadas, para o treino só de IA ou misturado. */
+  generated?: { total: number; unseen: number; areas: { name: string; count: number; unseen: number }[] | null };
   /** Erros do estudo livre; os prontos já passaram do intervalo de revisão. */
   errors: { total: number; ready: number };
   active: AttemptSummary | null;
@@ -65,6 +71,9 @@ export type PracticeView = AttemptSummary & {
     official: number;
     author: number;
     demonstration: number;
+    /** Ausentes em resultados anteriores ao treino com questões geradas (07/11). */
+    generated?: number;
+    byOrigin?: { official: PracticeTotals; generated: PracticeTotals };
     byTopic: (PracticeTotals & { topic: string })[];
     /** Ausente em resultados anteriores à prova completa. */
     byBlock?: { general: PracticeTotals; specific: PracticeTotals };

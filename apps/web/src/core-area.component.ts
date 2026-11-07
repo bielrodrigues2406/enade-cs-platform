@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Injector, Input, Output, afterNext
 import { requestJson } from "./api-request";
 import { ChoiceService } from "./choice-dialog";
 import { availableInArea, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
+import type { PracticeSource } from "./exam.types";
 import { CoreLessonComponent } from "./core-lesson.component";
 import { ResumeService } from "./resume.service";
 import { LEVELS, TRAP_LABELS, type Confidence, type CoreArea, type CoreConcept, type TrapPattern } from "./core.types";
@@ -141,16 +142,17 @@ export class CoreAreaComponent {
     if (current !== this.levels[next].value) void this.rate({ ...concept, level: current }, this.levels[next].value, false);
   }
 
-  async train() {
+  /** Simulado da área: só oficiais ou misturado com as geradas por IA (marcadas). */
+  async train(source: PracticeSource = "OFFICIAL") {
     const area = this.area();
-    if (!area || !this.publishedCount()) return;
+    if (!area) return;
     let count: number;
-    try { count = await availableInArea(area.area); } catch (error) {
+    try { count = await availableInArea(area.area, source); } catch (error) {
       this.error.set(error instanceof Error ? error.message : "Não foi possível preparar o treino. Tente novamente.");
       return;
     }
     if (!count) { this.error.set("Ainda não há questões publicadas desta área para treinar."); return; }
-    const request = await chooseAreaSimulation(this.choice, area.area, count);
+    const request = await chooseAreaSimulation(this.choice, area.area, count, undefined, source);
     if (request) this.practice.emit(request);
   }
 

@@ -11,7 +11,7 @@
       "id": "2026-11-questoes-formato-enade",
       "date": "2026-11-07",
       "title": "163 questões geradas no formato do ENADE",
-      "summary": "Itens, asserção-razão, ordem, cálculo, código nas alternativas e associação, com figuras e textos-base. A alternativa certa não se entrega mais pelo tamanho. Ficam separadas das oficiais e marcadas como geradas por IA.",
+      "summary": "Itens, asserção-razão, ordem, cálculo, código nas alternativas e associação, com figuras e textos-base. Ficam separadas das oficiais e marcadas como geradas por IA.",
       "action": { "label": "Ver as questões geradas", "destination": "geradas" }
     },
     {
