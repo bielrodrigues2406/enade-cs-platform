@@ -120,12 +120,18 @@ Branch `claude/confident-cray-ndnwmk`, refeita a partir da `main` após o PR #52
      - "Você também pode continuar estudando sem criar uma conta." vira o botão "Estudar sem conta";
      - o rodapé diz "conferidos por outro agente", o que não vale para as questões geradas; encurtar e corrigir.
 10. **NEWS-1, imagem do aviso:** o Dudu articulado acenando, que já existe, sem arte nova. Ilustração opcional por novidade (prompt em [IMAGE-PROMPTS.md](IMAGE-PROMPTS.md)).
-11. **Funções sugeridas, em ordem, até a prova de 29/11:**
-    1. Plano até a prova, montado pelo mapa de confiança.
-    2. "Continuar de onde parou" no início.
-    3. Recuperação de senha por e-mail (precisa de serviço de envio, como o Amazon SES, no servidor da AWS).
-    4. App instalável no celular (PWA) com lembrete diário.
-    5. Modo escuro.
+11. **Prioridades confirmadas por Gabriel (07/11).**
+    - **Foco:** novas questões (itens 1 a 3) e **Biblioteca com material denso e completo**, cobrindo todos os tópicos de cada área: teoria, exemplo resolvido, erro comum e ligação com as questões.
+    - **Depois, simples:**
+      - "Continuar de onde parou" no início;
+      - modo escuro (os tokens já existem em `styles.css`);
+      - Plano até a prova, montado pelo mapa de confiança.
+    - **Fora por ora:** recuperação de senha por e-mail. O público é a turma do câmpus; volta numa edição futura.
+12. **MAS-5, Dudu** (análise em `MASCOT.md`, seção "Análise da animação"):
+    - reduzir as camadas de 656 kB para cerca de 38 kB;
+    - novo aceno com a asa acima da cabeça e duas oscilações;
+    - pulo em porcentagem;
+    - poses novas (novidade, plano, dar força) quando Gabriel gerar as artes.
 
 ## 5. O que falta (por prioridade)
 

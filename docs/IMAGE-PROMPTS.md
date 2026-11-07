@@ -215,6 +215,16 @@ O modal usa o Dudu articulado que já existe. A ilustração abaixo é opcional,
 Usando a imagem anexada como referência exata do personagem (mesmas cores, proporções, traço e rosto), desenhe o mesmo mascote segurando com as duas asas um caderno aberto do qual sai uma pequena folha nova destacada em azul (#1649ae), como quem mostra uma página recém-escrita. Expressão contente e calma. Estilo ilustração plana com traço de tinta azul-escuro (#151e2f), papel creme (#f4f3ef) ao fundo ou fundo transparente. Sem texto, letras, números, confete ou brilhos.
 ```
 
+**MAS-PLANO. Dudu com o plano até a prova** (1024×1536, fundo transparente)
+```
+Usando a imagem anexada como referência exata do personagem, desenhe o mesmo mascote em pé, de frente, segurando com uma asa um calendário de mesa pequeno com alguns dias marcados por traços azuis (#1649ae), sem números nem letras, e com a outra asa apontando para ele. Expressão confiante. Mesmo estilo, iluminação e proporções da referência. Fundo transparente. Sem texto.
+```
+
+**MAS-FORCA. Dudu dando força** (1024×1536, fundo transparente)
+```
+Usando a imagem anexada como referência exata do personagem, desenhe o mesmo mascote em pé, de frente, com uma asa erguida no gesto de "joinha" e um sorriso acolhedor, transmitindo "vamos de novo". Mesmo estilo, iluminação e proporções da referência. Fundo transparente. Sem texto.
+```
+
 ## 6. Ordem sugerida
 
 1. Ilustrações de Formação Geral (Q-FG-01 a 06): a charge é comum na prova.

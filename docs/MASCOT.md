@@ -230,3 +230,41 @@ os casos cobrem espera/erro de camada, asas/cabeça/piscada, preferência, movim
 teclado e fila de conquistas. Capturas de acesso em 320/390/768/1440 px sem overflow.
 O CI completo do HEAD final permanece condição de merge. Demonstração ampliada separada
 do produto usa os mesmos ativos e CSS; não é gravação de uma conta de aluno real.
+
+## Análise da animação (MAS-5, 07/11/2026)
+
+Feita quadro a quadro: página isolada com o CSS de `dudu-figure`, animações pausadas a cada 50 ms com Playwright.
+
+**O que está bom:**
+- **Montagem:** a asa gira no ombro por trás do corpo, sem emenda aparente.
+- **Gestos finitos e acessíveis:** terminam em 1,1 s, respeitam `prefers-reduced-motion` e mostram a pose estática enquanto as camadas não chegam.
+- **Piscada:** 176 ms com os olhos fechados, natural.
+- **Comemorar:** as duas asas a 120° leem bem como vibração.
+
+**O que deixa o aceno "travado":**
+- **Ângulo e curva:** a asa sobe até 90° (fica na horizontal, parece apontar, não acenar), parada de 38% a 70%, com um único recuo para 65°.
+- **Falta de vida:** sem antecipação nem segunda oscilação.
+- **Proposta, testada em quadro:**
+  - recuo de -10° antes de subir;
+  - asa acima da cabeça a 145°;
+  - duas oscilações (145, 118, 145, 120);
+  - volta suave, na mesma duração.
+- **Aceno de cabeça:** 5° é quase invisível a 64 px. Usar 7° com leve inclinação de volta.
+- **Pulo do comemorar:** `translateY(-5px)` fixo pesa diferente em cada tamanho. Trocar por porcentagem e dar uma agachada antes do pulo.
+
+**Peso (o maior problema):**
+- **Tamanho:** as seis camadas são telas cheias de 1024×1536 e somam 656 kB para um Dudu de 56 a 64 px.
+- **Memória:** decodificadas, ocupam cerca de 37 MB no celular.
+- **Correção:** reduzir para 384×576, mesma proporção, sem mudar o CSS. O total cai para cerca de 38 kB (medido com WebP qualidade 88).
+- **Fontes:** os PNGs em `design/mascot/articulated/` continuam como originais.
+
+**Poses que valem a pena:**
+1. **Dudu com o caderno aberto e uma folha nova:** novidades (prompt NEWS-01 em `IMAGE-PROMPTS.md`).
+2. **Dudu com calendário ou plano:** para o "Plano até a prova".
+3. **Dudu dando força, asa erguida em "joinha":** resultado baixo em prova ou treino, no lugar de "ouvindo".
+4. **Gesto novo, "entrar":** sobe da borda inferior do modal de novidades, uma vez.
+
+**Regras mantidas:**
+- sem laço, exceto boiar enquanto carrega;
+- sem seguir o cursor;
+- nunca durante a resolução nem com dica da resposta.
