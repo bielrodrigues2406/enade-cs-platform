@@ -360,3 +360,5 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
 
 - **07/11/2026 · Claude · PR G (continuar de onde parou):** o início ganha "Continuar de onde parou" com a última questão aberta fora de treino ou a última lição lida, que reabre a área e a lição. Guardado só no navegador (`localStorage`), separado por conta ou visitante, sem migration; treinos e provas em andamento continuam vindo do servidor ("Em andamento"). E2E em `tests/browser/resume.spec.ts`.
 
+- **07/11/2026 · Claude · PR G (modo escuro):** só os tokens semânticos mudam (`:root[data-theme="dark"]` e a mesma lista sob `prefers-color-scheme: dark`). Rodapé com Tema: Sistema, Claro ou Escuro (`theme.service.ts`, guardado no navegador). Contraste: texto 14,5:1, secundário 7,5:1, ação 7,8:1, estados 7,9:1 ou mais, borda de controle 3,7:1. Marca-texto continua amarelo com tinta por cima; âmbar "mais ou menos" e degradê da apresentação passaram para tokens. E2E em `tests/browser/theme.spec.ts`. PR G completo.
+

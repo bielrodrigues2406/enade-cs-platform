@@ -179,7 +179,7 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ### PR G. Novidades, continuar de onde parou, modo escuro
 
-**Estado (07/11):** Novidades feitas (migration 033, ver [NEWS.md](NEWS.md)) e "continuar de onde parou" feito: o início mostra a última questão aberta ou a última lição lida, guardadas neste navegador por conta ou visitante (`resume.service.ts`); treinos e provas em andamento já vinham do servidor. Falta o modo escuro.
+**Estado (07/11):** Novidades feitas (migration 033, ver [NEWS.md](NEWS.md)) e "continuar de onde parou" feito: o início mostra a última questão aberta ou a última lição lida, guardadas neste navegador por conta ou visitante (`resume.service.ts`); treinos e provas em andamento já vinham do servidor. Modo escuro feito: tokens escuros em `styles.css` (sistema, claro ou escuro, escolha no rodapé, `theme.service.ts`), contraste conferido (texto 14,5:1, ação 7,8:1), marca-texto mantido amarelo e figuras com fundo de papel como moldura. PR G completo.
 
 - **Novidades:** cartão no início, marca "Novo" no topo e aviso uma vez por novidade com a pose `novidade`. O que cada conta já viu fica no servidor (migration 033).
   - Primeiras entradas: Biblioteca completa, questões novas, núcleo e confiança.
