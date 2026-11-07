@@ -20,25 +20,26 @@ Nome: **Dudu**. Alternativa: "Bit".
 | --- | --- |
 | `design/mascot/turnaround.jpg` | vistas de frente, 3/4, lado e costas (referência de forma; a fileira apagada no alto é defeito da geração) |
 | `design/mascot/poses-sheet.jpg` | folha original das 14 poses, gerada no Gemini |
-| `apps/web/public/mascot/<pose>.webp` | poses recortadas, fundo transparente, ~300×400 px, ~15 kB cada |
-| `scripts/crop-mascot.py` | recorte da folha (Pillow + numpy) |
+| `apps/web/public/mascot/<pose>.webp` | 17 poses em alta (versão 2, 07/11/2026), fundo transparente real, 480 px de altura, 24 a 34 kB cada; geradas uma a uma no GPT Image |
+| `scripts/prepare-dudu.py` | gera poses, camadas e repouso a partir dos 24 PNGs originais (fora do Git; SHA-256 em `design/mascot/v2/provenance.json`) |
+| `scripts/crop-mascot.py` | recorte da folha antiga (versão 1, histórico) |
 | `design/mascot/scene-wide.jpg`, `scene-mobile.jpg` → `apps/web/public/mascot/scene-*.webp` | cena da página pública (seção "Explique para o pato") |
 | `design/mascot/icon-navy-head.jpg` → `apps/web/public/icons/` | favicon 32/48, apple-touch-icon 180, ícones 192/512 do `manifest.webmanifest` |
 | `design/mascot/icons-three-backgrounds.jpg` | ícones alternativos (papel e azul), ainda sem uso |
 | `design/mascot/poses-magenta-lowres.jpg` | folha com fundo magenta para recorte limpo, **mas é captura de tela (1179 px, ~110 px por pose)**: baixa demais. Pedir a Gabriel o arquivo original em alta e recortar por chroma key |
 | `apps/web/src/mascot.component.*` | `<app-mascot pose="…" [size]="96" motion="pop|greet|celebrate|listen|bob|none" [decorative]="true">` |
-| `apps/web/src/dudu-figure.component.*` | montagem articulada, carregada sob demanda nas quatro poses sem acessórios |
-| `design/mascot/articulated/` | sete PNGs de autoria e proveniência das quatro remoções de fundo |
-| `apps/web/public/mascot/articulated/` | seis WebPs sem perdas; receita em `scripts/prepare-mascot-assets.mjs` |
+| `apps/web/src/dudu-figure.component.*` | montagem articulada (pés, tronco, asas, cabeça, três olhos), carregada sob demanda nas quatro poses sem acessórios |
+| `design/mascot/articulated/` | camadas da versão 1 (histórico); a versão 2 tem só a proveniência em `design/mascot/v2/` |
+| `apps/web/public/mascot/articulated/` | nove camadas de 384×512 (~50 kB no total) e `rest-open`/`rest-happy`, o repouso já montado |
 | `apps/web/src/mascot.service.ts` | preferência "mostrar o mascote" (conta no servidor; visitante neste navegador) |
 
 Poses: `acenando`, `comemorando`, `sequencia` (chama), `medalha`, `ouvindo`, `contente`,
 `lupa`, `relogio`, `cartoes`, `dormindo`, `lendo` (óculos), `em-obras` (capacete),
 `boiando`, `bug` (besourinho na cabeça). Textos alternativos em `MASCOT_ALT`.
 
-Limitação dos recortes atuais: vieram de um JPG com fundo papel. A sombra sob os pés ficou
-como mancha clara, invisível sobre `#f4f3ef`/branco e feia sobre fundo escuro. **Use o
-mascote só sobre fundo claro** até existir uma versão em PNG com transparência real.
+Poses novas (07/11): `novidade` (caderno aberto), `plano` (calendário) e `forca` (joinha, no
+resultado abaixo de 40%). Desde a versão 2 as poses têm transparência real e funcionam também
+sobre fundo escuro.
 
 ## 3. Regras
 
@@ -268,3 +269,20 @@ Feita quadro a quadro: página isolada com o CSS de `dudu-figure`, animações p
 - sem laço, exceto boiar enquanto carrega;
 - sem seguir o cursor;
 - nunca durante a resolução nem com dica da resposta.
+
+## Versão 2 (07/11/2026)
+
+- **Origem:** 24 PNGs de 1024×1536 gerados por Gabriel com [DUDU-REQUESTS.md](DUDU-REQUESTS.md): base, 9 camadas e 14 poses, uma imagem por geração.
+- **Palco:** as camadas vieram já no lugar da base. Todas cobrem o mesmo palco 3:4, recortado de (40,160) a (984,1418) e reduzido a 384×512, então não há caixas por peça.
+  - Os olhos fechados descem 40 px e vão 11 px para a esquerda, e os felizes 5 px para a esquerda, medidos contra os olhos abertos (`EYE_SHIFT` no script).
+- **Repouso pré-montado:** `rest-open` e `rest-happy` são as mesmas camadas compostas. Servem de imagem provisória no `@defer` e no próprio componente.
+  - Corrige o "Dudu congelado" na primeira entrada: antes, a provisória era a pose estática (asa erguida, em "acenando"), trocada pelo repouso quando as camadas chegavam.
+- **Pivôs (% do palco):** ombro esquerdo 21% 54,5%; direito 76,4% 54,5%; pescoço 50,8% 48,9%; base do tronco 48,2% 89,4%.
+- **Gestos (1,1 s, uma vez):**
+  - acenar: prepara a -10°, ergue a 132°, oscila duas vezes, olhos felizes e aceno de cabeça de 7°;
+  - comemorar: agacha e estica com os pés no chão, asas a 110° e olhos felizes;
+  - ouvir: inclina 6° e pisca.
+- **Olhos no repouso:** `contente` e `comemorando` ficam com os olhos felizes.
+- **Pendências:**
+  - a cena da página pública e os ícones ainda são da versão 1;
+  - um aceno com olhos que acompanham o cursor continua fora, pelas regras da seção 3.

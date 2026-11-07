@@ -20,7 +20,7 @@ async function sampleGesture(image: Locator) {
   });
 }
 
-test("Dudu waits for every layer, waves, nods and blinks without blocking the form", async ({ page }) => {
+test("Dudu waits for every layer, starts from the same resting frame, waves with happy eyes and keeps the form usable", async ({ page }) => {
   let pendingImage: Route | undefined;
   await page.route("**/mascot/articulated/head.webp", route => { pendingImage = route; });
   await page.goto("/questoes");
@@ -29,6 +29,8 @@ test("Dudu waits for every layer, waves, nods and blinks without blocking the fo
   const wing = figure.locator(".wing-left");
   await expect.poll(() => !!pendingImage).toBe(true);
   await expect(figure.locator(".fallback")).toBeVisible();
+  // O provisório é o repouso montado com as mesmas camadas: a troca não pula a asa.
+  await expect(figure.locator(".fallback")).toHaveAttribute("src", /\/mascot\/articulated\/rest-open\.webp$/);
   expect(await figure.locator(".layers").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
   expect(await wing.evaluate(el => getComputedStyle(el).animationName)).toBe("none");
   const email = page.getByRole("textbox", { name: "E-mail", exact: true });
@@ -52,22 +54,21 @@ test("Dudu waits for every layer, waves, nods and blinks without blocking the fo
     animation.pause(); animation.currentTime = Number(animation.effect!.getComputedTiming().duration) * 0.7;
   }));
   expect(await figure.locator(".eyes-open").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
-  expect(await figure.locator(".eyes-closed").evaluate(el => getComputedStyle(el).opacity)).toBe("1");
-  expect(await figure.locator(".eyes-closed").evaluate(el => {
-    const box = el.getBoundingClientRect();
-    const topImage = document.elementsFromPoint(box.x + box.width / 2, box.y + box.height / 2)
-      .find(candidate => candidate instanceof HTMLImageElement && el.closest("app-dudu-figure")!.contains(candidate));
-    return !!topImage?.closest(".eyes-closed");
+  expect(await figure.locator(".eyes-happy").evaluate(el => getComputedStyle(el).opacity)).toBe("1");
+  // Todas as camadas cobrem o palco: a ordem de pintura põe os olhos sobre a cabeça.
+  expect(await figure.locator(".head").evaluate(head => {
+    const eyes = head.parentElement!.querySelector(".eyes-happy")!;
+    return !!(head.compareDocumentPosition(eyes) & Node.DOCUMENT_POSITION_FOLLOWING);
   })).toBe(true);
   await page.emulateMedia({ reducedMotion: "reduce" });
   expect(await figure.evaluate(el => el.getAnimations({ subtree: true }).length)).toBe(0);
   expect(await figure.locator(".eyes-open").evaluate(el => getComputedStyle(el).opacity)).toBe("1");
-  expect(await figure.locator(".eyes-closed").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
+  expect(await figure.locator(".eyes-happy").evaluate(el => getComputedStyle(el).opacity)).toBe("0");
   await expect(email).toHaveValue("aluno@example.invalid");
 });
 
 test("a missing layer preserves the static duck and the account controls", async ({ page }) => {
-  await page.route("**/mascot/articulated/left-wing.webp", route => route.fulfill({ status: 503, body: "" }));
+  await page.route("**/mascot/articulated/wing-left.webp", route => route.fulfill({ status: 503, body: "" }));
   await page.goto("/questoes");
   await page.getByRole("button", { name: "Entrar", exact: true }).first().click();
   const figure = page.locator("app-account app-dudu-figure");
@@ -137,7 +138,7 @@ test("consecutive medals each get a gesture without losing the close button's ke
   await expect(toast).toContainText("Meta do dia batida");
   const figure = toast.locator("app-dudu-figure");
   await expect(figure).toHaveClass(/ready/);
-  for (const selector of [".wing-left", ".wing-right", ".layers"]) {
+  for (const selector of [".wing-left", ".wing-right", ".upper"]) {
     const gesture = await sampleGesture(figure.locator(selector));
     expect(gesture.iterations).toBe(1);
     expect(gesture.moving).not.toBe(gesture.resting);

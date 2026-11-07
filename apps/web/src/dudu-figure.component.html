@@ -1,30 +1,20 @@
 <div class="figure">
-  <img class="fallback" [src]="fallback" alt="" loading="lazy" decoding="async" draggable="false" />
+  <img class="fallback" [src]="restSrc" alt="" decoding="async" draggable="false" />
   <div class="layers" aria-hidden="true">
-    <div class="wing wing-left">
-      <img src="/mascot/articulated/left-wing.webp" alt="" loading="lazy" decoding="async" draggable="false"
-        (load)="layerLoaded('left-wing', $event)" (error)="layerFailed()" />
-    </div>
-    <div class="wing wing-right">
-      <img src="/mascot/articulated/right-wing.webp" alt="" loading="lazy" decoding="async" draggable="false"
-        (load)="layerLoaded('right-wing', $event)" (error)="layerFailed()" />
-    </div>
-    <div class="part body">
-      <img src="/mascot/articulated/body.webp" alt="" loading="lazy" decoding="async" draggable="false"
-        (load)="layerLoaded('body', $event)" (error)="layerFailed()" />
-    </div>
-    <div class="head-group">
-      <div class="part head">
-        <img src="/mascot/articulated/head.webp" alt="" loading="lazy" decoding="async" draggable="false"
-          (load)="layerLoaded('head', $event)" (error)="layerFailed()" />
-      </div>
-      <div class="part eyes eyes-open">
-        <img src="/mascot/articulated/open-eyes.webp" alt="" loading="lazy" decoding="async" draggable="false"
-          (load)="layerLoaded('open-eyes', $event)" (error)="layerFailed()" />
-      </div>
-      <div class="part eyes eyes-closed">
-        <img src="/mascot/articulated/closed-eyes.webp" alt="" loading="lazy" decoding="async" draggable="false"
-          (load)="layerLoaded('closed-eyes', $event)" (error)="layerFailed()" />
+    @for (layer of feet; track layer) {
+      <img class="layer" [src]="layerSrc(layer)" alt="" decoding="async" draggable="false"
+        (load)="layerLoaded(layer, $event)" (error)="layerFailed()" />
+    }
+    <div class="upper">
+      @for (layer of upper; track layer) {
+        <img [class]="'layer ' + layer" [src]="layerSrc(layer)" alt="" decoding="async" draggable="false"
+          (load)="layerLoaded(layer, $event)" (error)="layerFailed()" />
+      }
+      <div class="head-group">
+        @for (layer of face; track layer) {
+          <img [class]="'layer ' + layer" [src]="layerSrc(layer)" alt="" decoding="async" draggable="false"
+            (load)="layerLoaded(layer, $event)" (error)="layerFailed()" />
+        }
       </div>
     </div>
   </div>

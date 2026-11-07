@@ -87,6 +87,8 @@ export class LandingComponent {
   catalog = signal<Catalog | null>(null);
   editions = signal<Edition[]>([]);
   sheets = signal<Sheet[]>([]);
+  /** Só mostra folhas em branco se a busca falhar: nunca anima um cartão vazio. */
+  sheetsFailed = signal(false);
   demoStep = signal(0);
   private host = inject(ElementRef<HTMLElement>);
   private observer: IntersectionObserver | null = null;
@@ -190,7 +192,10 @@ export class LandingComponent {
   }
   private async load() {
     const catalog = await this.get<Catalog>("catalog?limit=12");
-    if (!catalog) return;
+    if (!catalog) {
+      this.sheetsFailed.set(!this.sheets().length);
+      return;
+    }
     const years = [...catalog.facets.years].sort((a, b) => b - a);
     const byYear = await Promise.all(
       years.map((year) => this.get<{ total: number; items: Catalog["items"] }>(`catalog?year=${year}&limit=1`)),
@@ -206,10 +211,20 @@ export class LandingComponent {
       picks.map((item) => this.get<{ title: string; images?: { url: string }[] }>(`questions/${encodeURIComponent(item.id)}`)),
     );
     const sheets = details.flatMap((d) => (d?.images?.[0] ? [{ url: d.images[0].url, title: d.title }] : []));
+    // As folhas entram já com a imagem pronta; a animação de entrada mostra o conteúdo, não um cartão vazio.
+    await Promise.all(sheets.map((sheet) => decodeImage(sheet.url)));
     // Mantém as folhas já mostradas se a nova busca falhar.
     if (sheets.length || !this.sheets().length) this.sheets.set(sheets);
+    this.sheetsFailed.set(!this.sheets().length);
     lastSnapshot = { catalog, editions, sheets: this.sheets() };
     // Linhas que chegaram depois do primeiro desenho também se revelam.
     queueMicrotask(() => setTimeout(() => this.observeReveals(), 0));
   }
+}
+
+/** Baixa e decodifica a imagem antes de exibi-la; falha não impede as outras folhas. */
+async function decodeImage(url: string) {
+  const image = new Image();
+  image.src = url;
+  try { await image.decode(); } catch { /* a folha aparece mesmo assim, com o carregamento normal */ }
 }

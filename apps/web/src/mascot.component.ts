@@ -1,7 +1,7 @@
 import { Component, Input, computed, inject, signal } from "@angular/core";
 import { MascotService } from "./mascot.service";
 import { DuduFigureComponent } from "./dudu-figure.component";
-import type { MascotMotion } from "./mascot.types";
+import type { MascotEyes, MascotMotion } from "./mascot.types";
 
 // Mascote Dudu, o pato de borracha (ver docs/MASCOT.md). Uma pose por
 // momento: comemorar, telas vazias, carregar, erro. Nunca durante a
@@ -9,7 +9,8 @@ import type { MascotMotion } from "./mascot.types";
 
 export type MascotPose =
   | "acenando" | "comemorando" | "sequencia" | "medalha" | "ouvindo" | "contente" | "lupa"
-  | "relogio" | "cartoes" | "dormindo" | "lendo" | "em-obras" | "boiando" | "bug";
+  | "relogio" | "cartoes" | "dormindo" | "lendo" | "em-obras" | "boiando" | "bug"
+  | "novidade" | "plano" | "forca";
 
 /** Texto alternativo de cada pose, para quando a imagem não é só decoração. */
 export const MASCOT_ALT: Record<MascotPose, string> = {
@@ -27,6 +28,9 @@ export const MASCOT_ALT: Record<MascotPose, string> = {
   "em-obras": "Dudu de capacete, em obras",
   boiando: "Dudu boiando na água",
   bug: "Dudu com um besourinho na cabeça",
+  novidade: "Dudu mostrando um caderno aberto",
+  plano: "Dudu apontando para um calendário",
+  forca: "Dudu fazendo sinal de positivo",
 };
 
 @Component({
@@ -58,4 +62,8 @@ export class MascotComponent {
   visible = this.prefs.enabled;
   readonly articulated = computed(() => this.visible()
     && ["acenando", "contente", "ouvindo", "comemorando"].includes(this._pose()));
+  /** Contente e comemorando ficam com os olhos fechados de alegria no repouso. */
+  readonly eyes = computed<MascotEyes>(() => (["contente", "comemorando"].includes(this._pose()) ? "happy" : "open"));
+  /** Mesmo quadro de repouso das camadas: enquanto o gesto carrega, nada pula. */
+  readonly restSrc = computed(() => `/mascot/articulated/rest-${this.eyes()}.webp`);
 }

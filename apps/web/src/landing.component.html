@@ -36,10 +36,12 @@
           <img [src]="sheet.url" alt="" decoding="async" />
         </figure>
       } @empty {
-        @for (i of [0, 1, 2]; track i) {
-          <div class="lp-sheet lp-sheet-blank" [style.--i]="i">
-            <span></span><span></span><span></span><span></span>
-          </div>
+        @if (sheetsFailed()) {
+          @for (i of [0, 1, 2]; track i) {
+            <div class="lp-sheet lp-sheet-blank" [style.--i]="i">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          }
         }
       }
     </div>

@@ -1,0 +1,52 @@
+{
+ "received": "DUDU-01-BASE-E-CAMADAS.zip e DUDU-02-POSES.zip, enviados por Gabriel em 07/11/2026",
+ "generator": "GPT Image, prompts de docs/DUDU-REQUESTS.md",
+ "stage": {
+  "crop": [
+   40,
+   160,
+   984,
+   1418
+  ],
+  "size": [
+   384,
+   512
+  ]
+ },
+ "eyeShift": {
+  "camada-olhos-fechados": [
+   -11,
+   -40
+  ],
+  "camada-olhos-felizes": [
+   -5,
+   0
+  ]
+ },
+ "sources": {
+  "camada-asa-direita.png": "3f47d7b99b4060889fffb4b61edb9c7240cb28aad0f6ef4f1bcfe1d1aebb7f5d",
+  "camada-asa-esquerda.png": "2e08ddd0a69952b4c51be07a5433d70ed71ef0b87c2ef5686f485fa81a8df268",
+  "camada-cabeca.png": "686313405068366307620943d905cd3fb4e267ec6050afecb9f579aa1245c45d",
+  "camada-corpo.png": "83ac22468cdb5f35781489b5c38a4d0379bb871f2ac5d0ede99d76b4dd6af5d3",
+  "camada-olhos-abertos.png": "740ee18c3831325c1cb02aa6959b8e7c95fc29f9c55c0b818a78039b41dc9c5a",
+  "camada-olhos-fechados.png": "61ba70ece4bd2655d9d7bda58b3c42844d738a37a66ab0ac138a52a2406ec914",
+  "camada-olhos-felizes.png": "96790ade299ae53fb61992c5a23921c13ef4f0034eb1f998246dbed14b152c65",
+  "camada-pe-direito.png": "b20a917421f38813474a3d7954e0f402fb60de0586ab34d3200478f8747bc179",
+  "camada-pe-esquerdo.png": "deecd8f856a38983f4f4bb0764ebea2485d1968b604deadb6fc8ef5c1f2c1000",
+  "dudu-base.png": "341f062e412ddaaf6ded162f521cef89b6c558de1342f6723471180db121d1f8",
+  "pose-acenando.png": "b968a981dc636b638ab85a75aedd310d1f838ff4d7e2667d24a14e2f5898348c",
+  "pose-boiando.png": "86e805eb20fea89186cd81596fe2c396d0ec05b7b60b858d4a94cf61bfb1eef0",
+  "pose-bug.png": "35040365b7a9f3426cbb39b067a749166a42da45d6939ada0a3b0a43e6efb380",
+  "pose-cartoes.png": "bb550b1a0ef72a0fa34a47b78736cc24a4219000da6ec62ba8b853e8cbe4a4da",
+  "pose-comemorando.png": "b124621cf31058e52ffaf4ab1cb96cfefb805ae2852ad2eba83f679b862417d3",
+  "pose-contente.png": "96a2adc1d66f711510b169a4726eaf341c925e94334e56fcc22f2b6f962ae001",
+  "pose-dormindo.png": "5c17ae0989acea2f2870790acd64e831812db8fa03e9af3837370b06f7b09acd",
+  "pose-em-obras.png": "9834c3ac5fade15e5cc8880b1d33a500988be3b9b03162e5885bb265e8585ff1",
+  "pose-lendo.png": "65d614758b13f19b5c6082d281c2398db2e202552ddfbded993a378675f5e366",
+  "pose-lupa.png": "2596af43a26cdcdee957322eaca264f2817f1997c84a6072123f0dc40166832c",
+  "pose-medalha.png": "8895a9ae8e1149b88c6dedd83176f859102cfd5e4ec1454c3326a7908eb6d517",
+  "pose-ouvindo.png": "cb59a8129234b1c4947f21415ea0dcf5ccb5f95e070f72181ff34519f9750e56",
+  "pose-relogio.png": "080576642733ff95551524eade6ad7003bcb8867a76295d14f5fae16dac8fb0c",
+  "pose-sequencia.png": "7e8192fb3214e50f56b42f231b816c4c6fb054ef87970483d267d1ff9348595c"
+ }
+}

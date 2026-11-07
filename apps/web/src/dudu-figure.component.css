@@ -1,110 +1,91 @@
-:host { display: block; width: 100%; line-height: 0; --dudu-gesture-duration: 1100ms; }
+/* Palco 3:4 com origem (40,160) e 944×1258 px dos PNGs de 1024×1536 (scripts/prepare-dudu.py).
+ * Toda camada cobre o palco inteiro; pivôs e ombros ficam em % do palco. */
+:host { display: block; width: 100%; line-height: 0; --dudu-gesture: 1100ms; --dudu-ease: cubic-bezier(0.37, 0, 0.29, 1); }
 .figure { position: relative; width: 100%; aspect-ratio: 3 / 4; }
 img { display: block; user-select: none; }
-.fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 1; transition: opacity 160ms var(--ease-out), visibility 0s 160ms; }
-.layers { position: absolute; inset: 0; opacity: 0; transform-origin: 50% 100%; transition: opacity 160ms var(--ease-out); }
+.fallback, .layer, .layers, .upper, .head-group { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fallback { transition: opacity 160ms var(--ease-out), visibility 0s 160ms; }
+.layers { opacity: 0; transition: opacity 160ms var(--ease-out); }
 :host(.ready) .layers { opacity: 1; }
 :host(.ready) .fallback { opacity: 0; visibility: hidden; }
 
-/* Referência de 900×1200: origem (60,180) na arte de 1024×1536.
- * Cada caixa isola sua peça no navegador, preservando os PNGs de autoria. */
-.part, .wing { position: absolute; overflow: hidden; }
-.part img, .wing img {
-  position: absolute;
-  max-width: none;
-  width: calc(1024 / var(--source-width) * 100%);
-  height: calc(1536 / var(--source-height) * 100%);
-  left: calc(-1 * var(--source-x) / var(--source-width) * 100%);
-  top: calc(-1 * var(--source-y) / var(--source-height) * 100%);
-}
-.body {
-  z-index: 1;
-  left: 9.89%; top: 44%; width: 79.67%; height: 53.42%;
-  --source-x: 149; --source-y: 708; --source-width: 717; --source-height: 641;
-}
-.head-group { position: absolute; z-index: 2; left: 12.11%; top: 2.67%; width: 82.56%; height: 51.58%; transform-origin: 46% 96%; }
-.head {
-  inset: 0; z-index: 0;
-  --source-x: 169; --source-y: 461; --source-width: 743; --source-height: 619;
-}
-.eyes-open {
-  z-index: 1;
-  left: 16.42%; top: 35.86%; width: 56.53%; height: 20.36%;
-  --source-x: 279; --source-y: 656; --source-width: 460; --source-height: 138;
-}
-.eyes-closed {
-  z-index: 1;
-  left: 16.42%; top: 42%; width: 56.53%; height: 8.08%; opacity: 0;
-  --source-x: 269; --source-y: 696; --source-width: 481; --source-height: 57;
-}
-.wing { top: 53.33%; height: 25%; }
-.wing-left {
-  left: 2.22%; width: 20.89%; transform-origin: 80% 6%;
-  --source-x: 90; --source-y: 841; --source-width: 188; --source-height: 300;
-}
-.wing-right {
-  left: 75%; width: 20.22%; transform-origin: 20% 6%;
-  --source-x: 718; --source-y: 842; --source-width: 182; --source-height: 300;
-}
+/* Pivôs medidos na arte: ombros, pescoço e base do tronco. */
+.wing-left { transform-origin: 21% 54.5%; }
+.wing-right { transform-origin: 76.4% 54.5%; }
+.head-group { transform-origin: 50.8% 48.9%; }
+.upper { transform-origin: 48.2% 89.4%; }
+.eyes-happy, .eyes-closed { opacity: 0; }
+:host(.rest-happy) .eyes-open { opacity: 0; }
+:host(.rest-happy) .eyes-happy { opacity: 1; }
 
-:host(.ready.dudu-greet) .wing-left {
-  animation: dudu-wave var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-:host(.ready.dudu-greet) .head-group,
-:host(.ready.dudu-listen) .head-group {
-  animation: dudu-nod var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-:host(.ready.dudu-celebrate) .layers {
-  animation: dudu-hop var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-:host(.ready.dudu-celebrate) .wing-left {
-  animation: dudu-cheer-left var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-:host(.ready.dudu-celebrate) .wing-right {
-  animation: dudu-cheer-right var(--dudu-gesture-duration) cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-:host(.ready.dudu-greet) .eyes-open,
-:host(.ready.dudu-celebrate) .eyes-open,
-:host(.ready.dudu-listen) .eyes-open {
-  animation: dudu-blink-open var(--dudu-gesture-duration) steps(1, end) both;
-}
-:host(.ready.dudu-greet) .eyes-closed,
-:host(.ready.dudu-celebrate) .eyes-closed,
-:host(.ready.dudu-listen) .eyes-closed {
-  animation: dudu-blink-closed var(--dudu-gesture-duration) steps(1, end) both;
-}
+/* Acenar: prepara, ergue a asa acima da cabeça, duas oscilações, volta. */
+:host(.ready.dudu-greet) .wing-left { animation: dudu-wave var(--dudu-gesture) var(--dudu-ease) both; }
+:host(.ready.dudu-greet) .head-group { animation: dudu-nod var(--dudu-gesture) var(--dudu-ease) both; }
+:host(.ready.dudu-greet:not(.rest-happy)) .eyes-open { animation: dudu-eyes-away var(--dudu-gesture) steps(1, end) both; }
+:host(.ready.dudu-greet:not(.rest-happy)) .eyes-happy { animation: dudu-eyes-in var(--dudu-gesture) steps(1, end) both; }
+
+/* Comemorar: agacha e estica com os pés no chão, asas para o alto, olhos felizes. */
+:host(.ready.dudu-celebrate) .upper { animation: dudu-bounce var(--dudu-gesture) var(--dudu-ease) both; }
+:host(.ready.dudu-celebrate) .wing-left { animation: dudu-cheer-left var(--dudu-gesture) var(--dudu-ease) both; }
+:host(.ready.dudu-celebrate) .wing-right { animation: dudu-cheer-right var(--dudu-gesture) var(--dudu-ease) both; }
+:host(.ready.dudu-celebrate:not(.rest-happy)) .eyes-open { animation: dudu-eyes-away var(--dudu-gesture) steps(1, end) both; }
+:host(.ready.dudu-celebrate:not(.rest-happy)) .eyes-happy { animation: dudu-eyes-in var(--dudu-gesture) steps(1, end) both; }
+
+/* Ouvir: inclina a cabeça, segura e pisca uma vez. */
+:host(.ready.dudu-listen) .head-group { animation: dudu-tilt var(--dudu-gesture) var(--dudu-ease) both; }
+:host(.ready.dudu-listen:not(.rest-happy)) .eyes-open { animation: dudu-blink-away var(--dudu-gesture) steps(1, end) both; }
+:host(.ready.dudu-listen:not(.rest-happy)) .eyes-closed { animation: dudu-blink-in var(--dudu-gesture) steps(1, end) both; }
+
 @keyframes dudu-wave {
-  0%, 12%, 100% { transform: none; }
-  38%, 70% { transform: rotate(90deg); }
-  54% { transform: rotate(65deg); }
+  0%, 100% { transform: none; }
+  12% { transform: rotate(-10deg); }
+  30%, 58% { transform: rotate(132deg); }
+  44% { transform: rotate(104deg); }
+  72% { transform: rotate(110deg); }
 }
 @keyframes dudu-nod {
-  0%, 12%, 100% { transform: none; }
-  50% { transform: rotate(5deg); }
+  0%, 18%, 100% { transform: none; }
+  42% { transform: rotate(7deg); }
+  64% { transform: rotate(-2deg); }
 }
-@keyframes dudu-hop {
+@keyframes dudu-bounce {
   0%, 100% { transform: none; }
-  25% { transform: scale(1.03, 0.97); }
-  52% { transform: translateY(-5px); }
-  78% { transform: scale(1.02, 0.98); }
+  16% { transform: scale(1.05, 0.9); }
+  36% { transform: scale(0.96, 1.06); }
+  56% { transform: scale(1.03, 0.95); }
+  76% { transform: scale(0.99, 1.01); }
 }
 @keyframes dudu-cheer-left {
-  0%, 100% { transform: none; }
-  30%, 65% { transform: rotate(120deg); }
+  0%, 10%, 100% { transform: none; }
+  32%, 66% { transform: rotate(110deg); }
 }
 @keyframes dudu-cheer-right {
+  0%, 10%, 100% { transform: none; }
+  32%, 66% { transform: rotate(-110deg); }
+}
+@keyframes dudu-tilt {
   0%, 100% { transform: none; }
-  30%, 65% { transform: rotate(-120deg); }
+  30%, 72% { transform: rotate(-6deg); }
 }
-@keyframes dudu-blink-open {
+@keyframes dudu-eyes-away {
   0%, 100% { opacity: 1; }
-  62% { opacity: 0; }
-  78% { opacity: 1; }
+  24% { opacity: 0; }
+  82% { opacity: 1; }
 }
-@keyframes dudu-blink-closed {
+@keyframes dudu-eyes-in {
   0%, 100% { opacity: 0; }
-  62% { opacity: 1; }
+  24% { opacity: 1; }
+  82% { opacity: 0; }
+}
+@keyframes dudu-blink-away {
+  0%, 100% { opacity: 1; }
   78% { opacity: 0; }
+  90% { opacity: 1; }
+}
+@keyframes dudu-blink-in {
+  0%, 100% { opacity: 0; }
+  78% { opacity: 1; }
+  90% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
