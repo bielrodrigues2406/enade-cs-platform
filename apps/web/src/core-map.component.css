@@ -85,3 +85,16 @@
   .core-list li { animation: none; }
   .core-weight-bar span { transition: none; }
 }
+
+/* Áreas com lições em destaque (07/11): capa inteira, sem corte, e um caminho direto. */
+.core-featured { margin: 0 0 var(--space-8); }
+.core-featured-title { margin: 0; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+.core-featured-lede { max-width: 62ch; margin: var(--space-2) 0 var(--space-4); color: var(--color-text-muted); font-size: var(--text-sm); }
+.core-featured-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+.core-featured-card { display: flex; flex-direction: column; height: 100%; overflow: hidden; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.core-featured-card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; border-bottom: 1px solid var(--color-border); }
+.core-featured-body { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: var(--space-2); padding: var(--space-4); }
+.core-featured-meta { margin: 0; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; color: var(--color-accent); }
+.core-featured-body h4 { margin: 0 0 var(--space-2); font-family: var(--font-reading); font-size: 1.35rem; line-height: 1.2; }
+.core-featured-body button { margin-top: auto; }
+.core-has-lessons { padding: 1px var(--space-2); border: 1px solid var(--color-accent); border-radius: 999px; font-size: var(--text-xs); font-style: normal; font-weight: 600; color: var(--color-accent); }

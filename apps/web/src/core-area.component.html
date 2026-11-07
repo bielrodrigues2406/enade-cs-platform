@@ -16,17 +16,18 @@
 }
 @if (area(); as a) {
   <article class="core-area" aria-labelledby="core-area-title">
-    @if (a.cover) {
-      <figure class="core-cover">
-        <img [src]="a.cover" alt="" width="1200" height="800" decoding="async" />
-        <figcaption>Ilustração gerada por IA</figcaption>
-      </figure>
-    }
-    <div class="core-area-head">
+    <div class="core-area-head" [class.has-cover]="!!a.cover">
       <div>
         <h1 id="core-area-title" tabindex="-1">{{ a.title }}</h1>
         <p class="core-area-summary">{{ a.summary }}</p>
       </div>
+      @if (a.cover) {
+        <!-- Capa inteira, sem corte (antes ficava espremida em 240 px de altura). -->
+        <figure class="core-cover">
+          <img [src]="a.cover" alt="" width="1200" height="800" decoding="async" />
+          <figcaption>Ilustração gerada por IA</figcaption>
+        </figure>
+      }
       <div [class]="'core-confidence ' + tone(a.confidence.value)" role="group" aria-label="Sua confiança nesta área">
         <span class="core-confidence-ring" aria-hidden="true" [style.--value]="a.confidence.value / 100"><b>{{ a.confidence.value }}</b></span>
         <dl>
@@ -58,7 +59,8 @@
         <button type="button" (click)="train()">Treinar {{ a.area }}</button>
       }
       @if (a.generatedTotal) {
-        <button type="button" class="outline" (click)="generated.emit(a.area)">Praticar questões geradas ({{ a.generatedTotal }})</button>
+        <button type="button" class="outline" (click)="train('MIXED')">Treino misturado: oficiais + IA</button>
+        <button type="button" class="outline" (click)="generated.emit(a.area)">Ver as {{ a.generatedTotal }} questões geradas</button>
       }
       @if (lessons().length) {
         <button type="button" class="outline" (click)="read(lessons()[0])">Ler as {{ lessons().length }} lições</button>
@@ -66,6 +68,18 @@
       @if (a.deck) { <button type="button" class="outline" (click)="flashcards.emit(a.area)">Flashcards da área</button> }
       @if (a.sheet) { <button type="button" class="outline" (click)="sheet.emit(a.sheet)">Ficha de uma página</button> }
     </div>
+
+    @if (lessons().length) {
+      <section class="core-section core-lessons" aria-labelledby="core-lessons-title">
+        <h2 id="core-lessons-title">Lições desta área</h2>
+        <p class="core-muted">Na ordem do núcleo. Cada uma tem exemplo conferido, armadilhas, como caiu no ENADE e perguntas para fixar.</p>
+        <ol class="core-lesson-index">
+          @for (c of lessons(); track c.id; let i = $index) {
+            <li><button type="button" class="core-lesson-link" (click)="read(c)"><span class="core-lesson-n" aria-hidden="true">{{ (i + 1).toString().padStart(2, "0") }}</span>{{ c.name }}</button></li>
+          }
+        </ol>
+      </section>
+    }
 
     <section class="core-section" aria-labelledby="core-concepts-title">
       <h2 id="core-concepts-title">Conceitos essenciais</h2>

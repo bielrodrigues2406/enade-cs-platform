@@ -6,6 +6,7 @@
   <div class="notice" role="alert"><p>{{ error() }}</p><button type="button" class="outline" (click)="load()">Tentar novamente</button></div>
 }
 @if (lesson(); as l) {
+  <div class="lesson-shell">
   <article class="lesson" aria-labelledby="lesson-title">
     <div class="lesson-head">
       <p class="metadata">{{ area }} · Lição</p>
@@ -31,7 +32,7 @@
     </div>
 
     <div class="lesson-layout">
-      <section class="lesson-body" aria-label="Explicação">
+      <section class="lesson-body" id="lesson-body" aria-label="Explicação">
         @for (p of l.body; track $index) { <p>{{ p }}</p> }
       </section>
       @if (l.figure; as f) {
@@ -137,6 +138,16 @@
       <p>Escrita por IA (Claude). Contas e código conferidos executando, como em "Conferido". Sem revisão humana.</p>
     </footer>
   </article>
+  <!-- Índice da lição em telas largas: botões que rolam até a seção (âncoras # mexeriam no histórico). -->
+  <nav class="lesson-toc" aria-label="Nesta lição">
+    <p class="lesson-toc-title">Nesta lição</p>
+    <ol>
+      @for (s of toc(l); track s.id) {
+        <li><button type="button" class="text-button" (click)="jump(s.id)">{{ s.label }}</button></li>
+      }
+    </ol>
+  </nav>
+  </div>
 } @else if (!error()) {
   <p role="status">Carregando a lição…</p>
 }

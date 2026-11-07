@@ -9,7 +9,7 @@ test("the library shows the confidence map and an area page updates confidence o
   await expect(map).toBeVisible();
   const rows = map.getByRole("list", { name: /Áreas do componente específico/ }).getByRole("button");
   await expect(rows).toHaveCount(16);
-  await expect(rows.first()).toHaveAccessibleName(/^Algoritmos, comece por aqui: 15,1% das questões específicas, em 6 de 6 provas; confiança 0 de 100$/);
+  await expect(rows.first()).toHaveAccessibleName(/^Algoritmos, comece por aqui: 15,1% das questões específicas, em 6 de 6 provas; confiança 0 de 100; 13 lições$/);
   await expect(map.getByRole("button", { name: /^Formação Geral, confiança 0 de 100$/ })).toBeVisible();
 
   await map.getByRole("button", { name: /^Sistemas operacionais/ }).click();
@@ -36,7 +36,7 @@ test("the library shows the confidence map and an area page updates confidence o
   await expect(deadlock.getByRole("radio", { name: "Sei explicar" })).toHaveAttribute("aria-checked", "true");
 
   await page.locator("app-core-area").getByRole("button", { name: "Biblioteca" }).click();
-  await expect(map.getByRole("button", { name: /^Sistemas operacionais.*confiança [1-9]\d? de 100$/ })).toBeVisible();
+  await expect(map.getByRole("button", { name: /^Sistemas operacionais.*confiança [1-9]\d? de 100; 10 lições$/ })).toBeVisible();
 });
 
 test("an area page reflows on a small phone without horizontal scroll", async ({ page }) => {

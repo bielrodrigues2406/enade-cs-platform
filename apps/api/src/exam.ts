@@ -8,7 +8,7 @@ import { AREAS } from "./question-areas.js";
 import { imageView, type QuestionImage } from "./question-images.js";
 import { publicExam, sourceFields, type Source } from "./source-store.js";
 import { errorCounts } from "./progress.js";
-import { ELIGIBLE } from "./practice-eligibility.js";
+import { ELIGIBLE, eligible, PRACTICE_SOURCES, type PracticeSource } from "./practice-eligibility.js";
 import { formatDiscursiveSummary } from "./practice-discursive.js";
 
 const UUID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/i;
@@ -29,10 +29,15 @@ export type Attempt = {
   pausedAt: Date | null; remainingMs: number | null;
   /** ERRORS: erros do caderno prontos para revisão; RETRY: erradas de outro treino. */
   focus: "ERRORS" | "RETRY" | null;
+  /** De onde vêm as questões do treino parcial: oficiais, geradas por IA ou misturadas. */
+  source: PracticeSource;
 };
 type Counts = { total: number; correct: number; incorrect: number; unanswered: number };
 type Result = Counts & {
   official: number; author: number; demonstration: number;
+  /** Questões geradas por IA no treino; no misturado, o acerto aparece separado. */
+  generated: number;
+  byOrigin?: { official: Counts; generated: Counts };
   byTopic: (Counts & { topic: string })[];
   /** Formação Geral e componente específico, como no boletim do ENADE. */
   byBlock: { general: Counts; specific: Counts };
@@ -50,7 +55,7 @@ type Item = {
 // Tolerância para a última gravação feita no limite do prazo chegar ao servidor.
 const DEADLINE_GRACE = "15 seconds";
 export const ATTEMPT_FIELDS = `p.id,p.size,p.area,p.state,p.created_at AS "createdAt",p.finished_at AS "finishedAt",p.summary,
-  p.kind,p.format_year AS "formatYear",p.focus,p.exam_source_id AS "examSourceId",p.paused_at AS "pausedAt",
+  p.kind,p.format_year AS "formatYear",p.focus,p.source,p.exam_source_id AS "examSourceId",p.paused_at AS "pausedAt",
   p.deadline_at + p.paused_ms * interval '1 millisecond' AS "deadlineAt",
   CASE WHEN p.deadline_at IS NOT NULL AND p.state='IN_PROGRESS' THEN GREATEST(0, extract(epoch FROM
     p.deadline_at + p.paused_ms * interval '1 millisecond' - COALESCE(p.paused_at, clock_timestamp())) * 1000)::integer END AS "remainingMs",
@@ -72,7 +77,7 @@ function attemptSummary(row: Attempt) {
   return {
     id: row.id, state: row.state, size: row.size, area: row.area,
     createdAt: row.createdAt, finishedAt: row.finishedAt, answered: row.answered,
-    kind: row.kind, formatYear: row.formatYear, focus: row.focus, deadlineAt: row.deadlineAt, pausedAt: row.pausedAt, remainingMs: row.remainingMs,
+    kind: row.kind, formatYear: row.formatYear, focus: row.focus, source: row.source, deadlineAt: row.deadlineAt, pausedAt: row.pausedAt, remainingMs: row.remainingMs,
   };
 }
 export async function owned(client: PoolClient, id: string, owner: string, lock = false) {
@@ -98,7 +103,8 @@ async function items(client: PoolClient, id: string): Promise<Item[]> {
 }
 function result(rows: Item[]): Result {
   const counts = (): Counts => ({ total: 0, correct: 0, incorrect: 0, unanswered: 0 });
-  const summary = { ...counts(), official: 0, author: 0, demonstration: 0 };
+  const summary = { ...counts(), official: 0, author: 0, demonstration: 0, generated: 0 };
+  const byOrigin = { official: counts(), generated: counts() };
   const topics = new Map<string, Counts>();
   const byBlock = { general: counts(), specific: counts() };
   for (const row of rows) {
@@ -107,12 +113,16 @@ function result(rows: Item[]): Result {
     const outcome = row.optionId === null ? "unanswered" : row.optionId === row.correctOptionId ? "correct" : "incorrect";
     summary.total++; summary[outcome]++; topic.total++; topic[outcome]++; block.total++; block[outcome]++;
     topics.set(row.topic, topic);
+    const origin = byOrigin[row.origin === "AI_GENERATED" ? "generated" : "official"];
+    origin.total++; origin[outcome]++;
     if (row.origin === "OFFICIAL") summary.official++;
+    else if (row.origin === "AI_GENERATED") summary.generated++;
     else if (row.demonstration) summary.demonstration++;
     else summary.author++;
   }
   return {
     ...summary,
+    byOrigin,
     byBlock,
     byTopic: [...topics].sort(([a], [b]) => a.localeCompare(b, "pt-BR"))
       .map(([topic, values]) => ({ topic, ...values })),
@@ -177,8 +187,9 @@ async function focusSelection(client: PoolClient, owner: string, focus: "ERRORS"
        SELECT e.id,e.question_id FROM eligible e JOIN latest l ON l.question_id=e.question_id
        WHERE NOT l.correct AND l.updated_at <= now() - interval '1 day' ORDER BY l.updated_at,e.id LIMIT 30`, [owner],
     )).rows;
+  // Refazer as erradas inclui as geradas de um treino misturado ou só de IA.
   return (await client.query<{ id: string; question_id: string }>(
-    `WITH eligible AS (${ELIGIBLE})
+    `WITH eligible AS (${eligible("MIXED")})
      SELECT e.id,e.question_id FROM practice_item i
      JOIN practice_attempt p ON p.id=i.attempt_id
      JOIN question_version v ON v.id=i.version_id
@@ -286,7 +297,7 @@ export class PracticeController {
   async availability(@Req() req: any) {
     const user = await requireIdentity(req); noQuery(req);
     const data = (await db.query(
-      `WITH eligible AS (${ELIGIBLE}), owned AS (
+      `WITH eligible AS (${ELIGIBLE}), generated AS (${eligible("GENERATED")}), owned AS (
         SELECT ${ATTEMPT_FIELDS} FROM practice_attempt p WHERE p.owner_id=$1
       )
       SELECT json_build_object(
@@ -299,9 +310,18 @@ export class PracticeController {
           (SELECT count(*)::integer FROM eligible e WHERE e.topic=a.name AND NOT ${SEEN.replaceAll("$OWNER", "$1")}))
           ORDER BY a.ordinality)
           FROM unnest($2::text[]) WITH ORDINALITY a(name,ordinality)),
-        'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,kind,"formatYear",focus,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
+        -- Geradas por IA, para o treino só de IA ou misturado (o misturado soma as duas).
+        'generated',json_build_object(
+          'total',(SELECT count(*)::integer FROM generated),
+          'unseen',(SELECT count(*)::integer FROM generated e WHERE NOT ${SEEN.replaceAll("$OWNER", "$1")}),
+          'areas',(SELECT json_agg(json_build_object('name',a.name,'count',
+            (SELECT count(*)::integer FROM generated e WHERE e.topic=a.name),'unseen',
+            (SELECT count(*)::integer FROM generated e WHERE e.topic=a.name AND NOT ${SEEN.replaceAll("$OWNER", "$1")}))
+            ORDER BY a.ordinality)
+            FROM unnest($2::text[]) WITH ORDINALITY a(name,ordinality))),
+        'active',(SELECT row_to_json(a) FROM (SELECT id,state,size,area,kind,"formatYear",focus,source,"createdAt","finishedAt",answered FROM owned WHERE state='IN_PROGRESS') a),
         'recent',COALESCE((SELECT json_agg(a ORDER BY a."finishedAt" DESC,a.id DESC) FROM (
-          SELECT id,state,size,area,kind,"formatYear",focus,"createdAt","finishedAt",answered FROM owned
+          SELECT id,state,size,area,kind,"formatYear",focus,source,"createdAt","finishedAt",answered FROM owned
           WHERE state='COMPLETED' ORDER BY "finishedAt" DESC,id DESC LIMIT 5
         ) a),'[]'::json)
       ) AS availability`, [user.id, [...AREAS]],
@@ -313,12 +333,16 @@ export class PracticeController {
   @Post()
   async start(@Req() req: any, @Body() body: unknown) {
     await requireIdentity(req); noQuery(req);
-    const data = closed(body, ["requestId", "size", "area", "timed", "focus", "retryOf"]);
+    const data = closed(body, ["requestId", "size", "area", "timed", "focus", "retryOf", "source"]);
     const timed = data.timed === true;
+    if (!(data.source === undefined || (PRACTICE_SOURCES as readonly unknown[]).includes(data.source)))
+      fail("Origem das questões inválida.", 400);
+    const source = (data.source ?? "OFFICIAL") as PracticeSource;
     const focus = data.focus === "ERRORS" || data.focus === "RETRY" ? data.focus : null;
     if (data.focus !== undefined && (!focus || data.area !== null
       || (focus === "RETRY") !== (typeof data.retryOf === "string" && UUID.test(data.retryOf))))
       fail("Treino de erros inválido.", 400);
+    if (focus && source !== "OFFICIAL") fail("Treino de erros usa as questões em que você errou.", 400);
     if (focus) data.size = 1; // o tamanho vem da seleção
     if (typeof data.requestId !== "string" || !UUID.test(data.requestId)
       || typeof data.size !== "number" || !Number.isInteger(data.size) || data.size < 1 || data.size > 30
@@ -336,7 +360,7 @@ export class PracticeController {
       )).rows[0];
       if (previous) {
         if ((!focus && (previous.size !== data.size || previous.area !== data.area))
-          || previous.focus !== focus || Boolean(previous.deadlineAt) !== timed)
+          || previous.focus !== focus || previous.source !== source || Boolean(previous.deadlineAt) !== timed)
           fail("Esta solicitação já iniciou um treino com outra configuração.", 409);
         const dto = await view(client, previous);
         await client.query("COMMIT");
@@ -347,13 +371,13 @@ export class PracticeController {
       const size = data.size as number;
       if (!focus && data.area !== null && !AREA_SIZES.includes(size)) {
         // Fora de 5/10/20/30, só vale "todas da área": o tamanho é o total publicado dela.
-        const available = (await client.query(`WITH eligible AS (${ELIGIBLE}) SELECT count(*)::integer AS n FROM eligible WHERE topic=$1`,
+        const available = (await client.query(`WITH eligible AS (${eligible(source)}) SELECT count(*)::integer AS n FROM eligible WHERE topic=$1`,
           [data.area])).rows[0].n;
         if (size !== available) fail("Escolha 5, 10, 20, 30 ou todas as questões da área.", 400);
       }
       // Inéditas para a pessoa primeiro; depois as já vistas, em ordem aleatória.
       const selected = focus ? await focusSelection(client, user.id, focus, (data.retryOf as string) ?? null) : (await client.query<{ id: string; question_id: string }>(
-        `WITH eligible AS (${ELIGIBLE}) SELECT e.id,e.question_id FROM eligible e
+        `WITH eligible AS (${eligible(source)}) SELECT e.id,e.question_id FROM eligible e
           WHERE ($1::text IS NULL OR e.topic=$1) ORDER BY ${SEEN.replaceAll("$OWNER", "$3")},random() LIMIT $2`,
         [data.area, data.size, user.id],
       )).rows;
@@ -364,9 +388,9 @@ export class PracticeController {
         fail("Ainda não há questões publicadas suficientes para esse tamanho. Escolha outra quantidade ou área.", 409);
       const id = randomUUID();
       await client.query(
-        `INSERT INTO practice_attempt(id,owner_id,request_id,size,area,deadline_at,focus,retry_of)
-         VALUES($1,$2,$3,$4,$5,CASE WHEN $6::boolean THEN clock_timestamp() + make_interval(mins => $4::integer * $7::integer) END,$8,$9)`,
-        [id, user.id, data.requestId, data.size, data.area, timed, MINUTES_PER_QUESTION, focus, focus === "RETRY" ? data.retryOf : null]);
+        `INSERT INTO practice_attempt(id,owner_id,request_id,size,area,deadline_at,focus,retry_of,source)
+         VALUES($1,$2,$3,$4,$5,CASE WHEN $6::boolean THEN clock_timestamp() + make_interval(mins => $4::integer * $7::integer) END,$8,$9,$10)`,
+        [id, user.id, data.requestId, data.size, data.area, timed, MINUTES_PER_QUESTION, focus, focus === "RETRY" ? data.retryOf : null, source]);
       for (const [index, row] of selected.entries()) {
         await client.query("INSERT INTO practice_item(attempt_id,position,question_id,version_id) VALUES($1,$2,$3,$4)", [id, index + 1, row.question_id, row.id]);
       }

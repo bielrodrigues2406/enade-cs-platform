@@ -36,7 +36,7 @@ test("after studying, a non-blocking nudge offers the news once and they lead to
   await page.goto("/questoes");
   const dialog = page.getByRole("dialog", { name: "Novidades" });
   const nudge = page.locator(".news-nudge");
-  await expect(nudge).toContainText("Lições na Biblioteca");
+  await expect(nudge).toContainText("Treino com questões geradas por IA");
   await expect(dialog).toBeHidden();
   await expect(page.getByRole("button", { name: /^Resolver: / }).first()).toBeEnabled();
   await nudge.getByRole("button", { name: /^Ver novidades/ }).click();

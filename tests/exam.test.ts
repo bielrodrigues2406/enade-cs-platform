@@ -221,6 +221,8 @@ test("practice finalization produces one persisted result with independently cho
     total:10,correct:3,incorrect:1,unanswered:6,official:0,author:0,demonstration:10,
     byTopic:[{topic:area,total:10,correct:3,incorrect:1,unanswered:6}],
     byBlock:{general:{total:0,correct:0,incorrect:0,unanswered:0},specific:{total:10,correct:3,incorrect:1,unanswered:6}},
+    // Treino com geradas (07/11): o resumo separa a origem; aqui todas são autorais.
+    generated:0,byOrigin:{official:{total:10,correct:3,incorrect:1,unanswered:6},generated:{total:0,correct:0,incorrect:0,unanswered:0}},
   });
   assert.deepEqual(finished.items.map((i: any) => i.result.correct), [true,true,true,false,null,null,null,null,null,null]);
   assert.ok(finished.items.every((i: any) => i.result.correctOptionId === `${i.question.id}-A`));

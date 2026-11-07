@@ -164,3 +164,34 @@ test("publishing is idempotent and generated questions stay out of the official 
   const busca = area.concepts.find((c: any) => c.id === "alg-busca");
   assert.ok(busca.generated.some((g: any) => g.id === item.id && g.title === "Comparações da busca binária"));
 });
+
+// Treino com geradas (07/11): só de IA ou misturado, com a origem guardada e
+// o acerto separado; o padrão continua só com oficiais.
+test("practice can draw only generated questions or mix them with the official ones", async () => {
+  await publishGeneratedFile(ALGORITMOS);
+  const cookie = await guest();
+  const availability = await (await call("practice", cookie)).json();
+  const generatedAlg = availability.generated.areas.find((a: any) => a.name === "Algoritmos");
+  assert.ok(generatedAlg.count >= 12, "geradas de Algoritmos contadas à parte");
+
+  assert.equal((await call("practice", cookie, "POST", { requestId: crypto.randomUUID(), area: "Algoritmos", size: 5, source: "OUTRA" })).status, 400);
+  assert.equal((await call("practice", cookie, "POST", { requestId: crypto.randomUUID(), area: null, size: 1, focus: "ERRORS", source: "MIXED" })).status, 400);
+
+  const requestId = crypto.randomUUID();
+  const started = await call("practice", cookie, "POST", { requestId, area: "Algoritmos", size: 5, source: "GENERATED" });
+  assert.equal(started.status, 201);
+  const attempt = await started.json();
+  assert.equal(attempt.source, "GENERATED");
+  assert.equal(attempt.items.length, 5);
+  assert.ok(attempt.items.every((i: any) => i.question.origin === "AI_GENERATED"), "só geradas");
+  const repeated = await call("practice", cookie, "POST", { requestId, area: "Algoritmos", size: 5, source: "MIXED" });
+  assert.equal(repeated.status, 409, "a mesma solicitação não troca de origem");
+
+  assert.equal((await call(`practice/${attempt.id}/cancel`, cookie, "POST")).status, 200);
+  const mixed = await (await call("practice", cookie, "POST", { requestId: crypto.randomUUID(), area: "Algoritmos", size: 5, source: "MIXED" })).json();
+  assert.equal(mixed.source, "MIXED");
+
+  // A correção da questão gerada aponta o conceito e a lição (Biblioteca).
+  const concepts = await (await call(`core/question/${attempt.items[0].question.id}`, cookie)).json();
+  assert.ok(concepts.concepts.length >= 1 && concepts.concepts.every((c: any) => c.slug === "algoritmos" && c.lesson === true));
+});

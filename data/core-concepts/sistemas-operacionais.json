@@ -2,7 +2,7 @@
   "slug": "sistemas-operacionais",
   "area": "Sistemas operacionais",
   "title": "Sistemas operacionais",
-  "summary": "Concorrência (semáforos, produtor-consumidor, deadlock) cai em quase toda prova; memória, threads e escalonamento completam o núcleo.",
+  "summary": "Concorrência (semáforos, produtor-consumidor, deadlock) caiu em 4 das 6 provas de 2005 a 2021; memória, threads e escalonamento completam o núcleo.",
   "deck": "sistemas-operacionais",
   "sheet": "processos-e-memoria",
   "concepts": [

@@ -1,0 +1,13 @@
+@if (concepts().length) {
+  <aside class="question-concepts" aria-label="Conceito cobrado">
+    <p class="question-concepts-label">{{ concepts().length === 1 ? "Conceito cobrado" : "Conceitos cobrados" }}</p>
+    <ul>
+      @for (c of concepts(); track c.id) {
+        <li>
+          <span><strong>{{ c.name }}</strong> <small>· {{ c.area }}</small></span>
+          <button type="button" class="text-button" (click)="go(c)">{{ c.lesson ? "Ler a lição" : "Ver na Biblioteca" }} <span aria-hidden="true">→</span></button>
+        </li>
+      }
+    </ul>
+  </aside>
+}

@@ -36,9 +36,12 @@ export function libraryPath(address: LibraryAddress): string {
 export function sectionPathOf(path: string): string {
   return path !== "/biblioteca" && parseLibraryPath(path) ? "/biblioteca" : path;
 }
+// A Biblioteca (núcleo, lições e fichas por área) abre o menu: é por onde o
+// estudo começa; antes ficava escondida em "Apoio", que abre fechado.
 export const STUDY_GROUPS: { name: string; items: { id: Destination; label: string }[] }[] = [
+  { name: "Estudar", items: [{ id: "biblioteca", label: "Biblioteca" }] },
   { name: "Questões", items: [{ id: "questoes", label: "Banco de questões" }, { id: "discursivas", label: "Discursivas" }] },
   { name: "Treinar", items: [{ id: "treino", label: "Treino parcial" }, { id: "provas", label: "Provas completas" }] },
   { name: "Revisar", items: [{ id: "caderno", label: "Caderno de erros" }, { id: "flashcards", label: "Flashcards" }] },
-  { name: "Apoio", items: [{ id: "biblioteca", label: "Biblioteca" }, { id: "conquistas", label: "Conquistas" }, { id: "aulas", label: "Aulas" }] },
+  { name: "Apoio", items: [{ id: "conquistas", label: "Conquistas" }, { id: "aulas", label: "Aulas" }] },
 ];

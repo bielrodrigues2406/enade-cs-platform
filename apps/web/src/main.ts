@@ -20,7 +20,6 @@ import { firstName, initials } from "./initials";
 import { EngagementService } from "./engagement.service";
 import { NewsService, type NewsDestination } from "./news.service";
 import { ResumeService } from "./resume.service";
-import { ThemeService, type Theme } from "./theme.service";
 import { NewsDialogComponent } from "./news-dialog.component";
 import { requestJson } from "./api-request";
 import { ServiceNoticeComponent } from "./service-notice.component";
@@ -28,6 +27,7 @@ import { GoalRingComponent } from "./goal-ring.component";
 import { AchievementToastComponent } from "./achievement-toast.component";
 import { ProgressComponent } from "./progress.component";
 import { LibraryComponent } from "./library.component";
+import { QuestionConceptsComponent } from "./question-concepts.component";
 import { FlashcardsComponent } from "./flashcards.component";
 import { ChoiceDialogComponent, ChoiceService } from "./choice-dialog";
 import { requestPractice, type PracticeRequest } from "./practice-request";
@@ -147,6 +147,7 @@ type Question = Summary & {
     NewsDialogComponent,
     ProgressComponent,
     LibraryComponent,
+    QuestionConceptsComponent,
     FlashcardsComponent,
   ],
   templateUrl: "./app.component.html",
@@ -271,10 +272,6 @@ class App {
   readonly engagement = inject(EngagementService);
   readonly news = inject(NewsService);
   readonly resume = inject(ResumeService);
-  readonly theme = inject(ThemeService);
-  readonly themes: { value: Theme; label: string }[] = [
-    { value: "system", label: "Sistema" }, { value: "light", label: "Claro" }, { value: "dark", label: "Escuro" },
-  ];
   /** "Continuar de onde parou" acompanha quem está na sessão: conta ou visitante deste navegador. */
   private readonly resumeOwner = effect(() => {
     const session = this.session();
@@ -435,6 +432,10 @@ class App {
   /** "Continuar de onde parou" numa lição: a Biblioteca abre a área e a lição. */
   continueLesson(target: { slug: string; concept: string }) {
     this.openStudy("biblioteca", libraryPath({ area: target.slug, lesson: target.concept, sheet: null }));
+  }
+  /** A correção de uma questão leva à lição (ou área) do conceito cobrado. */
+  openLibraryPath(path: string) {
+    if (sectionPathOf(path) === "/biblioteca") this.openStudy("biblioteca", path);
   }
   /** A Biblioteca pede outro ponto dela: vira uma entrada no histórico do navegador. */
   libraryNavigate(target: { path: string; replace?: boolean }) {

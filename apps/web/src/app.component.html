@@ -130,6 +130,7 @@
                 (busyChange)="practiceBusy.set($event)"
                 (examRunningChange)="examRunning.set($event)"
                 (browse)="back()"
+                (library)="openLibraryPath($event)"
                 (discursiveStudy)="openDiscursive()"
               />
             } @placeholder {
@@ -173,6 +174,7 @@
               (editionsHub)="openPractice('provas')"
               (progressHub)="openStudy('conquistas')"
               (lesson)="continueLesson($event)"
+              (library)="openLibraryPath($event)"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
@@ -654,6 +656,7 @@
                       </p>
                     }
                   }
+                  <app-question-concepts [versionId]="question()!.id" (open)="openLibraryPath($event)" />
                   @if (!question()!.answer!.correct) {
                     @defer (on immediate) {
                       <app-answer-reflection [versionId]="question()!.id" (stateChange)="reflectionState.set($event)" />
@@ -700,12 +703,6 @@
               <p>Questões e gabaritos oficiais do Inep, com a página da prova de origem. Explicações, classificação e questões extras são feitas por IA e sinalizadas, sem revisão humana; na dúvida, vale a prova original. Projeto independente, sem vínculo com o Inep ou o MEC.</p>
               @if (session().mode === 'guest') {
                 <button type="button" class="text-button" [attr.aria-pressed]="mascot.enabled()" (click)="mascot.set(!mascot.enabled())">{{ mascot.enabled() ? 'Ocultar Dudu' : 'Mostrar Dudu' }}</button>
-              }
-            </div>
-            <div class="theme-switch" role="group" aria-label="Tema da tela">
-              <span class="site-footer-title">Tema</span>
-              @for (option of themes; track option.value) {
-                <button type="button" class="text-button" [attr.aria-pressed]="theme.theme() === option.value" (click)="theme.set(option.value)">{{ option.label }}</button>
               }
             </div>
             <p class="site-footer-base">{{ upcomingExamFooter() ? 'ENADE 2026 · domingo, 29 de novembro' : 'Preparação ENADE · Ciência da Computação' }} · <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade" target="_blank" rel="noopener noreferrer">cronograma no Inep</a></p>

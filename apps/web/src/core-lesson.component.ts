@@ -61,6 +61,26 @@ export class CoreLessonComponent {
 
   isIllustration(src: string) { return src.startsWith("/illustrations/"); }
 
+  /** Seções presentes na lição, para o índice lateral. */
+  toc(l: Lesson) {
+    return [
+      { id: "lesson-body", label: "Explicação" },
+      { id: "lesson-example-title", label: "Exemplo resolvido" },
+      { id: "lesson-mistake-title", label: "Armadilhas" },
+      { id: "lesson-enade-title", label: "Como cai no ENADE" },
+      { id: "lesson-recall-title", label: "Para fixar" },
+      ...(l.transfer ? [{ id: "lesson-transfer-title", label: "Agora sozinho" }] : []),
+    ];
+  }
+  jump(id: string) {
+    const target = this.host.nativeElement.querySelector<HTMLElement>(`#${id}`);
+    if (!target) return;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduce ? "instant" : "smooth", block: "start" });
+    target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+  }
+
   prerequisite(id: string) { return this.concepts.find((c) => c.id === id) ?? null; }
 
   /** Seções numeradas na ordem da página; as do modelo novo só contam quando existem. */

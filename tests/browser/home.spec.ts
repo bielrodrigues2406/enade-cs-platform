@@ -209,3 +209,20 @@ test("home reflows without horizontal scrolling", async ({ page }) => {
     expect(await noHorizontalScroll(page), `largura ${width}`).toBe(true);
   }
 });
+
+// A Biblioteca abre o menu e o início sugere a área prioritária (peso na prova x confiança).
+test("the library leads the menu and the home suggests where to study", async ({ page }) => {
+  await page.goto("/");
+  const card = page.locator(".todo-group").filter({ has: page.getByRole("heading", { name: "Estudar na Biblioteca" }) });
+  await expect(card).toContainText("Área prioritária");
+  await expect(card).toContainText("Algoritmos");
+  await card.getByRole("button", { name: "Ler as lições" }).click();
+  await expect(page).toHaveURL(/\/biblioteca\/algoritmos$/);
+  await expect(page.getByRole("heading", { name: "Algoritmos", level: 1 })).toBeVisible();
+
+  await page.goto("/questoes");
+  await page.setViewportSize({ width: 1280, height: 900 });
+  // Visível sem abrir "Apoio": é o primeiro grupo do menu.
+  const estudar = page.getByRole("navigation", { name: "Estudo" }).getByRole("region", { name: "Estudar" });
+  await expect(estudar.getByRole("link", { name: "Biblioteca", exact: true })).toBeVisible();
+});

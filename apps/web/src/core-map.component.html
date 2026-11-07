@@ -14,6 +14,28 @@
   } @else if (!areas()) {
     <p role="status">Carregando o núcleo…</p>
   } @else {
+    @if (withLessons().length) {
+      <section class="core-featured" aria-labelledby="core-featured-title">
+        <h3 id="core-featured-title" class="core-featured-title">Áreas com lições</h3>
+        <p class="core-featured-lede">Uma lição por conceito: explicação, exemplo resolvido e conferido, armadilhas, como caiu no ENADE e perguntas para fixar. As outras áreas ganham lições aos poucos.</p>
+        <ul class="core-featured-list">
+          @for (area of withLessons(); track area.slug) {
+            <li>
+              <article class="core-featured-card">
+                @if (area.cover) {
+                  <img [src]="area.cover" alt="" width="1200" height="800" loading="lazy" decoding="async" />
+                }
+                <div class="core-featured-body">
+                  <p class="core-featured-meta">{{ area.lessons }} lições · {{ pct(area.share) }}% das questões específicas</p>
+                  <h4>{{ area.title }}</h4>
+                  <button type="button" (click)="open.emit(area.slug)" [attr.aria-label]="'Ler as ' + area.lessons + ' lições de ' + area.area">Ler as lições <span aria-hidden="true">→</span></button>
+                </div>
+              </article>
+            </li>
+          }
+        </ul>
+      </section>
+    }
     @if (!started()) {
       <p class="core-start">As marcadas com "comece por aqui" são as que mais pesam na prova e onde você ainda tem menos confiança.</p>
     }
@@ -24,6 +46,7 @@
             <span class="core-row-name">
               <strong>{{ area.area }}</strong>
               @if (firstSlugs().has(area.slug)) { <em class="core-first">comece por aqui</em> }
+              @if (area.lessons) { <em class="core-has-lessons">{{ area.lessons }} lições</em> }
             </span>
             <span class="core-row-weight">
               <span class="core-weight-bar" aria-hidden="true"><span [style.--value]="(area.share ?? 0) / maxShare()"></span></span>

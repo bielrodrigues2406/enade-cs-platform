@@ -132,6 +132,22 @@
               </article>
             </section>
           }
+          @if (studyArea(); as a) {
+            <section class="todo-group" aria-labelledby="home-library">
+              <h3 id="home-library" class="group-title">Estudar na Biblioteca</h3>
+              <article class="todo-card">
+                <div class="todo-text">
+                  <span class="todo-meta">Área prioritária · {{ a.share }}% das questões específicas</span>
+                  <strong>{{ a.title }}</strong>
+                  <span class="todo-status">
+                    Peso na prova e sua confiança ({{ a.confidence.value }}%) colocam esta área na frente.
+                    @if (a.lessons) { {{ a.lessons }} lições, com exemplos conferidos e questões ligadas. } @else { Núcleo, pegadinhas e questões ligadas; lições em preparação. }
+                  </span>
+                </div>
+                <button (click)="openStudyArea(a)">{{ a.lessons ? "Ler as lições" : "Abrir a área" }}</button>
+              </article>
+            </section>
+          }
           @if (retryItems().length) {
             <section class="todo-group" aria-labelledby="home-retry">
               <h3 id="home-retry" class="group-title is-danger">
