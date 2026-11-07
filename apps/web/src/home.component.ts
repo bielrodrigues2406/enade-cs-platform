@@ -1,3 +1,5 @@
+import type { CoreAreaSummary } from "./core.types";
+import { libraryPath } from "./study-navigation";
 import { FormsModule } from "@angular/forms";
 import { MascotComponent, type MascotPose } from "./mascot.component";
 import { MascotService } from "./mascot.service";
@@ -150,6 +152,7 @@ export class HomeComponent {
       this.progress.set(lastHome.progress);
     }
     void this.load();
+    void this.loadStudyArea();
   }
   ngOnDestroy() {
     this.abort.abort();
@@ -335,6 +338,23 @@ export class HomeComponent {
     this.introPose.set(this.active() ? "relogio" : this.readyErrors() ? "lupa" : "contente");
     if (catalog && notebook && progress) lastHome = { catalog, notebook, progress };
   }
+
+  /**
+   * Área para estudar na Biblioteca: a de maior prioridade do núcleo (peso na
+   * prova vezes o quanto falta de confiança). Carrega à parte, sem atrasar o início.
+   */
+  readonly studyArea = signal<CoreAreaSummary | null>(null);
+  @Output() library = new EventEmitter<string>();
+  private async loadStudyArea() {
+    try {
+      const res = await fetch("/api/core", { signal: this.abort.signal });
+      if (!res.ok) return;
+      const { areas } = (await res.json()) as { areas: CoreAreaSummary[] };
+      const ranked = areas.filter((a) => a.priority !== null).sort((a, b) => b.priority! - a.priority!);
+      if (!this.abort.signal.aborted) this.studyArea.set(ranked[0] ?? null);
+    } catch { /* o cartão é um atalho; sem ele o início continua igual */ }
+  }
+  openStudyArea(area: CoreAreaSummary) { this.library.emit(libraryPath({ area: area.slug, lesson: null, sheet: null })); }
 
   /** Volta ao último lugar: a questão aberta ou a lição lida. */
   continueFrom(place: ResumePlace) {

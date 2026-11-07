@@ -38,5 +38,5 @@ export class StudyNavigationComponent {
     this.close();
     this.navigate.emit(destination);
   }
-  supportActive() { return ["biblioteca", "conquistas", "aulas"].includes(this.active()); }
+  supportActive() { return ["conquistas", "aulas"].includes(this.active()); }
 }

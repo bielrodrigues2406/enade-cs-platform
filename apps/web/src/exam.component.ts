@@ -1,3 +1,4 @@
+import { QuestionConceptsComponent } from "./question-concepts.component";
 import { requestJson, ApiRequestError as PracticeError } from "./api-request";
 import { MascotComponent } from "./mascot.component";
 import {
@@ -29,7 +30,7 @@ export function clock(ms: number) {
 
 @Component({
   selector: "app-exam",
-  imports: [MascotComponent, FormsModule, QuestionContentComponent, DiscursiveComponent],
+  imports: [MascotComponent, FormsModule, QuestionContentComponent, DiscursiveComponent, QuestionConceptsComponent],
   templateUrl: "./exam.component.html",
   styleUrl: "./exam.component.css",
 })
@@ -41,6 +42,8 @@ export class ExamComponent {
   @Output() locationChange = new EventEmitter<{ attemptId: string | null; position: number }>();
   @Output() busyChange = new EventEmitter<boolean>();
   @Output() browse = new EventEmitter<void>();
+  /** Caminho da Biblioteca (lição ou área) pedido pela correção. */
+  @Output() library = new EventEmitter<string>();
   /** Depois da prova completa: ver o padrão de resposta e se autoavaliar. */
   @Output() discursiveStudy = new EventEmitter<void>();
   /** Prova completa com o cronômetro correndo (o shell pede confirmação para sair). */

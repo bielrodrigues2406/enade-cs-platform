@@ -28,6 +28,7 @@ import { GoalRingComponent } from "./goal-ring.component";
 import { AchievementToastComponent } from "./achievement-toast.component";
 import { ProgressComponent } from "./progress.component";
 import { LibraryComponent } from "./library.component";
+import { QuestionConceptsComponent } from "./question-concepts.component";
 import { FlashcardsComponent } from "./flashcards.component";
 import { ChoiceDialogComponent, ChoiceService } from "./choice-dialog";
 import { requestPractice, type PracticeRequest } from "./practice-request";
@@ -147,6 +148,7 @@ type Question = Summary & {
     NewsDialogComponent,
     ProgressComponent,
     LibraryComponent,
+    QuestionConceptsComponent,
     FlashcardsComponent,
   ],
   templateUrl: "./app.component.html",
@@ -435,6 +437,10 @@ class App {
   /** "Continuar de onde parou" numa lição: a Biblioteca abre a área e a lição. */
   continueLesson(target: { slug: string; concept: string }) {
     this.openStudy("biblioteca", libraryPath({ area: target.slug, lesson: target.concept, sheet: null }));
+  }
+  /** A correção de uma questão leva à lição (ou área) do conceito cobrado. */
+  openLibraryPath(path: string) {
+    if (sectionPathOf(path) === "/biblioteca") this.openStudy("biblioteca", path);
   }
   /** A Biblioteca pede outro ponto dela: vira uma entrada no histórico do navegador. */
   libraryNavigate(target: { path: string; replace?: boolean }) {

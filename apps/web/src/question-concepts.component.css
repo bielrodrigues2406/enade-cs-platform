@@ -1,0 +1,5 @@
+.question-concepts { margin: var(--space-4) 0; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); }
+.question-concepts-label { margin: 0 0 var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.question-concepts ul { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.question-concepts li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-4); }
+.question-concepts small { color: var(--color-text-muted); }

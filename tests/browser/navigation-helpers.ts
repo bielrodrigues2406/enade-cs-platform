@@ -14,7 +14,7 @@ export async function navigateTo(page: Page, label: string) {
   if (await trigger.isVisible() && !await page.locator(".navigation-drawer[open]").count()) await trigger.click();
   await expect(nav).toBeVisible();
   const link = nav.getByRole("link", { name: label, exact: true });
-  if (["Biblioteca", "Conquistas", "Aulas"].includes(label) && !await link.isVisible()) await nav.getByText("Apoio", { exact: true }).click();
+  if (["Conquistas", "Aulas"].includes(label) && !await link.isVisible()) await nav.getByText("Apoio", { exact: true }).click();
   await link.click();
 }
 export async function openAccountMenu(page: Page) {

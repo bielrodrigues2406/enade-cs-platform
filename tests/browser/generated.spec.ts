@@ -28,6 +28,14 @@ test("the core links to generated practice, which opens labelled questions with 
   await page.getByRole("button", { name: "Confirmar resposta" }).click();
   await expect(page.getByText(/Resposta: D\./)).toBeVisible();
   await expect(page.getByText(/^E\) Variáveis locais ficam na pilha/m)).toBeVisible();
+
+  // A correção leva à lição do conceito cobrado (Biblioteca como centro do estudo).
+  const concepts = page.getByRole("complementary", { name: "Conceito cobrado" });
+  await expect(concepts).toContainText("Conceitos cobrados");
+  const item = concepts.getByRole("listitem").filter({ hasText: "Região crítica e exclusão mútua" });
+  await item.getByRole("button", { name: /Ler a lição/ }).click();
+  await expect(page).toHaveURL(/\/biblioteca\/sistemas-operacionais\/so-regiao-critica$/);
+  await expect(page.getByRole("heading", { name: "Região crítica e exclusão mútua", level: 1 })).toBeVisible();
 });
 
 test("the default question bank does not mix generated questions with the official ones", async ({ page }) => {

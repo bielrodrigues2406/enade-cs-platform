@@ -130,6 +130,7 @@
                 (busyChange)="practiceBusy.set($event)"
                 (examRunningChange)="examRunning.set($event)"
                 (browse)="back()"
+                (library)="openLibraryPath($event)"
                 (discursiveStudy)="openDiscursive()"
               />
             } @placeholder {
@@ -173,6 +174,7 @@
               (editionsHub)="openPractice('provas')"
               (progressHub)="openStudy('conquistas')"
               (lesson)="continueLesson($event)"
+              (library)="openLibraryPath($event)"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
@@ -654,6 +656,7 @@
                       </p>
                     }
                   }
+                  <app-question-concepts [versionId]="question()!.id" (open)="openLibraryPath($event)" />
                   @if (!question()!.answer!.correct) {
                     @defer (on immediate) {
                       <app-answer-reflection [versionId]="question()!.id" (stateChange)="reflectionState.set($event)" />

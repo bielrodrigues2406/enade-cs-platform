@@ -100,6 +100,7 @@ export class CoreConceptsController {
   @Get() async areas(@Req() req: any) {
     const user = await requireIdentity(req);
     const { core, of } = await snapshot(user.id);
+    const lessons = await loadLessons(core.areas).catch(() => new Map() as Awaited<ReturnType<typeof loadLessons>>);
     const specificTotal = core.areas.filter((a) => a.area !== FORMACAO_GERAL)
       .reduce((s, a) => s + core.history.get(a.slug)!.total, 0);
     return {
@@ -110,11 +111,32 @@ export class CoreConceptsController {
         return {
           slug: area.slug, area: area.area, title: area.title, summary: area.summary,
           history, share: share === null ? null : Math.round(1000 * share) / 10,
-          concepts: area.concepts.length, confidence: conf,
+          concepts: area.concepts.length, lessons: lessons.get(area.slug)?.lessons.size ?? 0, confidence: conf,
           priority: share === null ? null : Math.round(1000 * share * (1 - conf.value / 100)) / 10,
         };
       }),
     };
+  }
+
+  /**
+   * Conceitos que uma questão publicada cobra, para a correção levar à lição.
+   * Oficial: ligação conferida (concept-links.json, R4). Gerada: conceitos do gerador.
+   */
+  @Get("question/:version") async questionConcepts(@Req() req: any, @Param("version") version: string) {
+    await requireIdentity(req);
+    if (!/^[A-Za-z0-9._:-]{1,160}$/.test(version)) fail("Questão não encontrada.", 404);
+    const row = (await db.query<{ question: string; generated: string[] | null }>(
+      `SELECT q.id AS question,g.concept_ids AS generated FROM editorial_question q
+       JOIN question_version v ON v.id=q.current_version_id AND v.editorial_status='PUBLISHED'
+       LEFT JOIN generated_question g ON g.version_id=v.id WHERE v.id=$1`, [version],
+    )).rows[0];
+    if (!row) return { concepts: [] };
+    const core = await loadCore();
+    const lessons = await loadLessons(core.areas).catch(() => new Map() as Awaited<ReturnType<typeof loadLessons>>);
+    const concepts = core.areas.flatMap((area) => area.concepts
+      .filter((c) => row.generated ? row.generated.includes(c.id) : (core.links.get(c.id) ?? []).some((q) => q.id === row.question))
+      .map((c) => ({ id: c.id, name: c.name, area: area.area, slug: area.slug, lesson: Boolean(lessons.get(area.slug)?.lessons.has(c.id)) })));
+    return { concepts };
   }
 
   @Get(":slug") async area(@Req() req: any, @Param("slug") slug: string) {
