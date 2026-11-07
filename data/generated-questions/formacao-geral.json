@@ -10,17 +10,18 @@
       "concepts": ["fg-graficos", "fg-calculo"],
       "title": "Acesso à internet em duas regiões",
       "subject": "Pontos percentuais e variação relativa",
-      "prompt": "A tabela a seguir, com dados ilustrativos, mostra a proporção de domicílios com acesso à internet em duas regiões:\n\nRegião A: 60% em 2019 e 75% em 2025\nRegião B: 40% em 2019 e 58% em 2025\n\nQual leitura dos dados está correta?",
+      "prompt": "O acesso à internet em casa passou a ser condição para estudar, procurar emprego, marcar consultas e usar serviços públicos digitais. Por isso, políticas de inclusão digital costumam ser acompanhadas pela evolução da proporção de domicílios conectados em cada região. Ao comparar regiões que partem de patamares diferentes, porém, é preciso escolher bem a medida: o avanço pode ser expresso em pontos percentuais, a diferença simples entre duas porcentagens, ou em variação relativa, que compara essa diferença com o valor inicial.\n\nA tabela a seguir, com dados ilustrativos, mostra a proporção de domicílios com acesso à internet em duas regiões:\n\nRegião A: 60% em 2019 e 75% em 2025\nRegião B: 40% em 2019 e 58% em 2025\n\nQual leitura dos dados está correta?",
       "options": [
-        "A Região A cresceu mais, porque chegou a um percentual maior em 2025.",
-        "As duas regiões cresceram 15%, porque a diferença entre elas se manteve.",
-        "A Região B cresceu 18%, e a A cresceu 15%; em termos relativos, as duas cresceram igualmente.",
-        "A Região B cresceu 18 pontos percentuais (45% em termos relativos), mais que a A, que cresceu 15 pontos (25%); ainda assim, a diferença entre as duas é de 17 pontos percentuais em 2025.",
-        "A desigualdade entre as regiões aumentou, porque a Região B ainda não alcançou 60%."
+        "A Região A cresceu mais, porque chegou a 75% em 2025, percentual maior que o alcançado pela Região B.",
+        "As duas regiões cresceram 15%, porque a distância entre elas se manteve igual de 2019 a 2025.",
+        "A Região B cresceu 18% e a A cresceu 15%, o que em termos relativos dá o mesmo crescimento.",
+        "B subiu 18 pontos percentuais (45%) e A subiu 15 (25%); a distância entre elas caiu de 20 para 17 pontos.",
+        "A desigualdade entre as regiões aumentou, porque a Região B ainda não alcançou os 60% que A tinha em 2019."
       ],
       "answer": "D",
       "explanation": "Resposta: D.\n\nPontos percentuais (p.p.) medem a diferença entre duas porcentagens; a variação relativa mede essa diferença em proporção ao valor inicial.\n\nRegião A: 75 − 60 = 15 p.p.; 15 / 60 = 25% de aumento relativo.\nRegião B: 58 − 40 = 18 p.p.; 18 / 40 = 45% de aumento relativo.\n\nA Região B avançou mais pelas duas medidas. A distância entre as regiões caiu de 20 p.p. (60 − 40) para 17 p.p. (75 − 58): a desigualdade diminuiu, mas persiste, e cerca de 4 em cada 10 domicílios da Região B seguem sem acesso.\n\nAs outras alternativas:\nA) Confunde nível com crescimento: estar acima não significa ter crescido mais.\nB) A diferença entre as regiões mudou (de 20 para 17 p.p.), e os crescimentos foram 15 e 18 p.p.\nC) Chama de % o que são pontos percentuais e erra a conclusão relativa (25% e 45% não são iguais).\nE) A distância diminuiu; o fato de B estar abaixo de 60% não indica aumento da desigualdade.",
-      "check": "Nova resolução sem o gabarito: 15 e 18 p.p.; 25% e 45% relativos; diferença de 20 para 17 p.p. Conferido por cálculo."
+      "check": "Nova resolução sem o gabarito: 15 e 18 p.p.; 25% e 45% relativos; diferença de 20 para 17 p.p. Conferido por cálculo.",
+      "stimulus": ["TEXTO_BASE", "TABELA"]
     },
     {
       "id": "gen-fg-desinformacao",
@@ -29,17 +30,22 @@
       "concepts": ["fg-tecnologia-sociedade", "fg-democracia-cultura"],
       "title": "Vídeo manipulado às vésperas da eleição",
       "subject": "Desinformação, tecnologia e democracia",
-      "prompt": "Leia o texto.\n\n\"Às vésperas de uma eleição, circula em grupos de mensagens um vídeo em que um candidato aparece dizendo frases que nunca disse. O vídeo foi produzido com ferramentas de inteligência artificial e tem aparência realista. Em poucas horas, é compartilhado milhares de vezes, muitas delas por pessoas que concordam com a crítica feita ao candidato.\"\n\nConsiderando o texto e o papel da informação numa sociedade democrática, qual atitude é mais adequada a um cidadão que recebe o vídeo?",
+      "prompt": "Texto I\n\n\"Às vésperas de uma eleição, circula em grupos de mensagens um vídeo em que um candidato aparece dizendo frases que nunca disse. O vídeo foi produzido com ferramentas de inteligência artificial e tem aparência realista. Em poucas horas, é compartilhado milhares de vezes, muitas delas por pessoas que concordam com a crítica feita ao candidato.\"\n\n[figura]\n\nTexto II\n\n\"Conteúdos sintéticos, como vídeos e áudios gerados por inteligência artificial, ficaram baratos e convincentes. A Justiça Eleitoral brasileira passou a proibir, na propaganda eleitoral, conteúdo fabricado ou manipulado para difundir fatos falsos sobre candidatos, e as plataformas mantêm canais de denúncia. Pesquisas sobre desinformação mostram que conteúdos que confirmam o que a pessoa já pensa são repassados com menos checagem.\"\n\nConsiderando os textos e o papel da informação numa sociedade democrática, qual atitude é mais adequada a um cidadão que recebe o vídeo?",
       "options": [
-        "Compartilhar o vídeo, porque, se concorda com a crítica, o conteúdo é verdadeiro na essência.",
-        "Compartilhar o vídeo com o aviso \"não sei se é verdade\", deixando que cada um decida.",
-        "Exigir que as plataformas apaguem automaticamente qualquer vídeo político durante o período eleitoral.",
-        "Verificar a origem do conteúdo em fontes independentes, como veículos jornalísticos e agências de checagem, não repassá-lo enquanto houver dúvida e, constatada a manipulação, denunciá-lo nos canais da plataforma e da Justiça Eleitoral.",
-        "Ignorar o vídeo, já que a desinformação não tem efeito real sobre o resultado de eleições."
+        "Compartilhar o vídeo, porque, se a crítica ao candidato é justa, o conteúdo é verdadeiro na essência.",
+        "Compartilhar o vídeo com o aviso \"não sei se é verdade\", deixando que cada pessoa decida por si.",
+        "Exigir que as plataformas apaguem automaticamente todo vídeo político publicado durante o período eleitoral.",
+        "Checar a origem em fontes independentes, não repassar enquanto houver dúvida e denunciar se houver manipulação.",
+        "Ignorar o vídeo, já que conteúdos desse tipo não têm efeito real sobre o resultado de eleições."
       ],
       "answer": "D",
-      "explanation": "Resposta: D.\n\nO voto livre depende de informação confiável. Conteúdos fabricados para enganar ferem o direito do eleitor à informação e podem atingir a honra de pessoas. A alternativa D combina responsabilidade individual (verificar antes de repassar) com os mecanismos institucionais disponíveis (denúncia à plataforma e à Justiça Eleitoral), sem defender censura ampla.\n\nAs outras alternativas:\nA) Concordar com uma opinião não torna verdadeiro um fato fabricado. É o mecanismo de viés de confirmação que favorece a desinformação.\nB) O aviso não impede o dano: o vídeo continua circulando e sendo usado como se fosse verdadeiro.\nC) Remover todo conteúdo político violaria a liberdade de expressão e o debate público, que é parte da eleição.\nE) Contradiz o próprio texto, que descreve alcance rápido e massivo. Desinformação pode influenciar percepções e decisões.",
-      "check": "Nova resolução sem o gabarito: atitude coerente com direito à informação, liberdade de expressão e responsabilidade. Opção D."
+      "explanation": "Resposta: D.\n\nO voto livre depende de informação confiável. Conteúdos fabricados para enganar ferem o direito do eleitor à informação e podem atingir a honra de pessoas. A alternativa D combina, como sugere o texto II, responsabilidade individual (verificar antes de repassar) com os mecanismos institucionais disponíveis (denúncia à plataforma e à Justiça Eleitoral), sem defender censura ampla.\n\nAs outras alternativas:\nA) Concordar com uma opinião não torna verdadeiro um fato fabricado. É o mecanismo de viés de confirmação que favorece a desinformação.\nB) O aviso não impede o dano: o vídeo continua circulando e sendo usado como se fosse verdadeiro.\nC) Remover todo conteúdo político violaria a liberdade de expressão e o debate público, que é parte da eleição.\nE) Contradiz o próprio texto, que descreve alcance rápido e massivo. Desinformação pode influenciar percepções e decisões.",
+      "check": "Nova resolução sem o gabarito: atitude coerente com direito à informação, liberdade de expressão e responsabilidade. Opção D.",
+      "figure": {
+        "src": "/illustrations/Q-FG-01.webp",
+        "alt": "Pessoa idosa no sofá observa um vídeo no celular. Uma linha atravessa o rosto do personagem na tela, e setas conectam o aparelho a outros celulares."
+      },
+      "stimulus": ["DOIS_TEXTOS", "CHARGE"]
     },
     {
       "id": "gen-fg-clima-mitigacao",
@@ -48,11 +54,16 @@
       "concepts": ["fg-sustentabilidade"],
       "title": "Mitigação e adaptação às mudanças climáticas",
       "subject": "Mudança do clima: mitigação e adaptação",
-      "prompt": "Em novembro de 2025, Belém sediou a 30ª Conferência das Partes da Convenção-Quadro das Nações Unidas sobre Mudança do Clima (COP30). As políticas climáticas costumam ser divididas em mitigação, que reduz as emissões de gases de efeito estufa ou aumenta sua remoção, e adaptação, que reduz a vulnerabilidade aos impactos das mudanças climáticas.\n\nAvalie as afirmações.\n\nI. Reduzir o desmatamento e recuperar florestas são medidas de mitigação.\nII. Construir sistemas de drenagem para enfrentar chuvas mais intensas é uma medida de adaptação.\nIII. Populações mais pobres tendem a ser mais afetadas por eventos climáticos extremos, por morarem em áreas de maior risco e terem menos recursos para se recuperar.\nIV. Investir em adaptação torna a mitigação desnecessária, porque as cidades passam a suportar qualquer nível de aquecimento.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: D.\n\nI está correta. Florestas armazenam carbono; derrubá-las libera esse carbono, e recuperá-las o retira da atmosfera.\nII está correta. A drenagem não reduz emissões; prepara a cidade para um impacto que já ocorre.\nIII está correta. É o conceito de justiça climática: quem menos contribuiu para as emissões frequentemente mora em encostas, várzeas ou periferias sem infraestrutura e sofre mais.\nIV está errada. Adaptação tem limites físicos e econômicos: há impactos que não se contornam com obras, como a perda de ecossistemas e a elevação do mar. As duas estratégias são complementares.\n\nAs outras alternativas:\nA) Inclui IV.\nB) Inclui IV.\nC) Inclui IV.\nE) Inclui IV.",
-      "check": "Nova resolução sem o gabarito: definições de mitigação e adaptação (IPCC) e justiça climática; IV contraria os limites da adaptação. Opção D.",
-      "truth": ["I", "II", "III"],
-      "combos": [["I", "IV"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"], ["I", "II", "III", "IV"]]
+      "prompt": "Em novembro de 2025, Belém sediou a 30ª Conferência das Partes da Convenção-Quadro das Nações Unidas sobre Mudança do Clima (COP30), a primeira realizada na Amazônia. As políticas climáticas costumam ser divididas em dois grupos. A mitigação reduz as emissões de gases de efeito estufa ou aumenta sua remoção da atmosfera. A adaptação reduz a vulnerabilidade de pessoas, cidades e ecossistemas aos impactos que já acontecem ou vão acontecer, como chuvas extremas, secas e ondas de calor. No Brasil, a mudança no uso da terra, sobretudo o desmatamento, está entre as maiores fontes de emissões, o que dá às florestas um papel central nas metas do país.\n\n[figura]\n\nAvalie as afirmações.\n\nI. Construir sistemas de drenagem para enfrentar chuvas mais intensas é uma medida de mitigação, porque evita perdas.\nII. Reduzir o desmatamento e recuperar florestas são medidas de mitigação.\nIII. Investir em adaptação torna a mitigação desnecessária, porque as cidades passam a suportar qualquer nível de aquecimento.\nIV. Populações mais pobres tendem a ser mais afetadas por eventos climáticos extremos, por morarem em áreas de maior risco e terem menos recursos para se recuperar.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: B.\n\nI está errada. A drenagem não reduz emissões: prepara a cidade para um impacto que já ocorre. É adaptação. Evitar perdas é o objetivo da adaptação, não da mitigação.\n\nII está correta. Florestas armazenam carbono; derrubá-las libera esse carbono, e recuperá-las o retira da atmosfera.\n\nIII está errada. Adaptação tem limites físicos e econômicos: há impactos que não se contornam com obras, como a perda de ecossistemas e a elevação do mar. As duas estratégias são complementares.\n\nIV está correta. É o conceito de justiça climática: quem menos contribuiu para as emissões frequentemente mora em encostas, várzeas ou periferias sem infraestrutura e sofre mais.\n\nAs outras alternativas:\nA) Escolhe só I, que chama de mitigação uma medida de adaptação.\nC) Inclui III e deixa de fora II.\nD) Inclui I.\nE) Inclui I e III.",
+      "check": "Nova resolução sem o gabarito: definições de mitigação e adaptação do IPCC; drenagem é adaptação (I falsa), adaptação tem limites (III falsa); II e IV corretas. Opção B.",
+      "truth": ["II", "IV"],
+      "combos": [["I"], ["II", "IV"], ["III", "IV"], ["I", "II", "IV"], ["I", "III", "IV"]],
+      "figure": {
+        "src": "/illustrations/Q-FG-04.webp",
+        "alt": "Vista aérea de uma cidade amazônica junto a um rio, com mudas em fileiras à esquerda, casas sobre palafitas à direita e floresta ao fundo."
+      },
+      "stimulus": ["TEXTO_BASE", "FIGURA"]
     },
     {
       "id": "gen-fg-envelhecimento",
@@ -61,17 +72,18 @@
       "concepts": ["fg-cidades-saude", "fg-graficos"],
       "title": "Uma população que envelhece",
       "subject": "Envelhecimento populacional e políticas públicas",
-      "prompt": "Uma projeção demográfica, com dados ilustrativos, mostra que a pirâmide etária de um país deixará de ter a base larga e o topo estreito: a proporção de pessoas com 60 anos ou mais passará de 15% para 30% da população em três décadas, enquanto a de crianças diminuirá.\n\nQual consequência é coerente com essa mudança?",
+      "prompt": "Texto I\n\nUma projeção demográfica, com dados ilustrativos, mostra que a pirâmide etária de um país deixará de ter a base larga e o topo estreito: a proporção de pessoas com 60 anos ou mais passará de 15% para 30% da população em três décadas, enquanto a de crianças diminuirá. A queda da fecundidade e o aumento da expectativa de vida explicam a mudança.\n\nTexto II\n\nO Estatuto da Pessoa Idosa (Lei 10.741/2003) assegura às pessoas com 60 anos ou mais o direito à saúde, à convivência familiar e comunitária, à acessibilidade e à proteção do Estado e da sociedade, e prevê atendimento prioritário em serviços públicos e privados. Garantir esses direitos exige planejamento de longo prazo, porque o número de pessoas que precisam de cuidados cresce mais rápido que o de pessoas que podem oferecê-los.\n\nConsiderando os textos, qual consequência é coerente com a mudança descrita?",
       "options": [
-        "A demanda por serviços de saúde tende a cair, porque haverá menos crianças.",
-        "As políticas para crianças e jovens deixam de ser necessárias.",
-        "O envelhecimento elimina a necessidade de debater a previdência, porque haverá mais pessoas aposentadas contribuindo.",
-        "Tende a crescer a demanda por cuidado de longa duração, tratamento de doenças crônicas, acessibilidade urbana e reorganização da previdência, ao mesmo tempo que a proporção de pessoas em idade de trabalhar diminui.",
-        "O país passará a ter crescimento populacional acelerado."
+        "A demanda por serviços de saúde tende a cair, porque haverá menos crianças para atender nas unidades públicas.",
+        "As políticas para crianças e jovens deixam de ser necessárias, porque esse grupo encolhe na população do país.",
+        "O debate sobre a previdência perde força, porque haverá mais aposentados contribuindo para o sistema.",
+        "Cresce a demanda por cuidados de longa duração e por ajustes na previdência, com menos gente em idade ativa.",
+        "O país passará a ter crescimento populacional acelerado, porque a expectativa de vida continua aumentando ano após ano."
       ],
       "answer": "D",
       "explanation": "Resposta: D.\n\nCom mais idosos, aumentam as doenças crônicas, a necessidade de cuidadores, que hoje recai muitas vezes sobre mulheres da família, e a importância de cidades acessíveis, com calçadas, transporte e serviços adequados. Com menos pessoas em idade ativa por idoso, o financiamento da previdência e da saúde precisa ser repensado. É um tema de direitos: envelhecer com dignidade é previsto no Estatuto da Pessoa Idosa.\n\nAs outras alternativas:\nA) Idosos usam mais serviços de saúde; a menor proporção de crianças não compensa.\nB) Políticas para crianças e jovens continuam essenciais, inclusive para formar a força de trabalho futura.\nC) Aposentados em geral recebem benefícios, não financiam o sistema na mesma proporção dos ativos. O debate se intensifica.\nE) A mudança descrita, com menos crianças, indica crescimento mais lento, não acelerado.",
-      "check": "Nova resolução sem o gabarito: efeitos da transição demográfica sobre saúde, cuidado, previdência e cidades. Opção D."
+      "check": "Nova resolução sem o gabarito: efeitos da transição demográfica sobre saúde, cuidado, previdência e cidades. Opção D.",
+      "stimulus": ["DOIS_TEXTOS"]
     },
     {
       "id": "gen-fg-ia-trabalho",
@@ -80,14 +92,15 @@
       "concepts": ["fg-trabalho", "fg-desigualdade"],
       "title": "Inteligência artificial e renda do trabalho",
       "subject": "Automação, produtividade e desigualdade",
-      "prompt": "Estudos sobre a adoção de inteligência artificial nas empresas discutem seus efeitos sobre o emprego e a renda.\n\nI. A adoção de inteligência artificial pode ampliar a desigualdade de renda se os ganhos de produtividade se concentrarem nos donos das empresas e nos trabalhadores mais qualificados.\n\nPORQUE\n\nII. Modelos de inteligência artificial generativa produzem textos, imagens e código a partir de instruções em linguagem natural.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "prompt": "Ferramentas de inteligência artificial passaram a redigir textos, resumir documentos, gerar código e atender clientes. Estudos sobre a adoção dessas ferramentas nas empresas discutem seus efeitos sobre o emprego e a renda: algumas tarefas são automatizadas, outras ganham produtividade, e surgem ocupações novas. O resultado para os trabalhadores não é determinado só pela tecnologia. Depende de como os ganhos são divididos, de quem tem acesso à formação para usar as ferramentas e das regras de proteção social e de negociação coletiva de cada país.\n\nI. A adoção de inteligência artificial pode ampliar a desigualdade de renda se os ganhos de produtividade se concentrarem nos donos das empresas e nos trabalhadores mais qualificados.\n\nPORQUE\n\nII. Modelos de inteligência artificial generativa produzem textos, imagens e código a partir de instruções em linguagem natural.\n\nA respeito dessas asserções, assinale a opção correta.",
       "explanation": "Resposta: B.\n\nI é verdadeira. O efeito distributivo da tecnologia depende de quem se apropria dos ganhos. Se a automação substitui tarefas de trabalhadores menos qualificados e o lucro fica com poucos, a desigualdade cresce. Políticas de formação, proteção social e negociação coletiva influenciam esse resultado.\n\nII também é verdadeira: descreve o que os modelos generativos fazem.\n\nMas II não justifica I. Saber o que a tecnologia produz não explica por que ela aumentaria a desigualdade; a explicação estaria na distribuição dos ganhos e na substituição de tarefas, o que II não menciona. Esse é o padrão de alternativa mais difícil da asserção-razão: duas verdades sem relação de causa.\n\nAs outras alternativas:\nA) Trata uma descrição técnica como causa do efeito social.\nC) II é verdadeira.\nD) I é verdadeira; a desigualdade é uma possibilidade reconhecida.\nE) As duas são verdadeiras.",
       "check": "Nova resolução sem o gabarito: I e II verdadeiras; II descreve capacidade técnica e não explica o efeito distributivo. Opção B.",
       "assertion": {
         "first": true,
         "second": true,
         "justifies": false
-      }
+      },
+      "stimulus": ["TEXTO_BASE"]
     },
     {
       "id": "gen-fg-fome-producao",
@@ -96,17 +109,22 @@
       "concepts": ["fg-desigualdade", "fg-direitos-humanos"],
       "title": "Safras recordes e insegurança alimentar",
       "subject": "Segurança alimentar e acesso à renda",
-      "prompt": "Leia o texto.\n\n\"O país colheu safras recordes de grãos nos últimos anos e é um dos maiores exportadores de alimentos do mundo. No mesmo período, pesquisas registraram milhões de famílias em situação de insegurança alimentar, sem acesso regular a comida em quantidade e qualidade suficientes.\"\n\nQual conclusão é coerente com o texto?",
+      "prompt": "Texto I\n\n\"O país colheu safras recordes de grãos nos últimos anos e é um dos maiores exportadores de alimentos do mundo. No mesmo período, pesquisas registraram milhões de famílias em situação de insegurança alimentar, sem acesso regular a comida em quantidade e qualidade suficientes.\"\n\n[figura]\n\nTexto II\n\nA Constituição Federal inclui a alimentação entre os direitos sociais (art. 6º). A segurança alimentar é a garantia de acesso regular e permanente a alimentos de qualidade, em quantidade suficiente, sem comprometer o acesso a outras necessidades básicas. Por isso, além da produção, são acompanhados indicadores de renda das famílias, preço dos alimentos e alcance de programas como a alimentação escolar.\n\nConsiderando os textos, qual conclusão é coerente?",
       "options": [
-        "A insegurança alimentar é causada principalmente pela falta de produção, e a solução é ampliar a área plantada.",
-        "A insegurança alimentar está mais ligada ao acesso, que depende de renda, preços, emprego e políticas públicas, do que à quantidade total produzida; a alimentação adequada é um direito social.",
-        "Os dados são contraditórios, e um deles está necessariamente errado.",
-        "A insegurança alimentar é resultado de escolhas individuais de consumo das famílias.",
-        "Exportar alimentos é a causa direta da fome, e a solução é proibir as exportações."
+        "A insegurança alimentar vem da falta de produção, e a solução é ampliar a área plantada de grãos no país.",
+        "O problema está mais no acesso, que depende de renda e preços, do que na quantidade total produzida.",
+        "Os dados são contraditórios, e um deles está necessariamente errado, porque fome e safra recorde não convivem.",
+        "A insegurança alimentar resulta de escolhas individuais de consumo das famílias, e não de condições econômicas.",
+        "Exportar alimentos é a causa direta da fome, e a solução é proibir as exportações de grãos do país."
       ],
       "answer": "B",
       "explanation": "Resposta: B.\n\nProdução recorde e fome convivem quando o problema é o acesso: famílias sem renda suficiente não compram o alimento disponível, especialmente com preços em alta. Por isso, programas de transferência de renda, alimentação escolar, apoio à agricultura familiar e estoques reguladores aparecem nas políticas de combate à fome. A Constituição inclui a alimentação entre os direitos sociais (art. 6º).\n\nAs outras alternativas:\nA) O próprio texto mostra produção abundante; mais produção não chega a quem não pode comprar.\nC) Os dados não se contradizem: medem coisas diferentes (produção agregada e acesso das famílias).\nD) Culpabiliza o indivíduo por um problema estrutural de renda e preços.\nE) Simplifica uma relação complexa e propõe uma medida que o texto não sustenta.",
-      "check": "Nova resolução sem o gabarito: distinção entre disponibilidade e acesso a alimentos (conceito de segurança alimentar da FAO); direito à alimentação (CF, art. 6º). Opção B."
+      "check": "Nova resolução sem o gabarito: distinção entre disponibilidade e acesso a alimentos (conceito de segurança alimentar da FAO); direito à alimentação (CF, art. 6º). Opção B.",
+      "figure": {
+        "src": "/illustrations/Q-FG-06.webp",
+        "alt": "À esquerda, silos e um navio carregado de grãos; à direita, uma cozinha simples com geladeira aberta quase vazia e uma pequena panela no fogão."
+      },
+      "stimulus": ["DOIS_TEXTOS", "FIGURA"]
     },
     {
       "id": "gen-fg-texto-mobilidade",
@@ -115,17 +133,22 @@
       "concepts": ["fg-texto", "fg-cidades-saude"],
       "title": "Tese de um texto sobre mobilidade",
       "subject": "Interpretação de texto: tese e argumento",
-      "prompt": "Leia o texto.\n\n\"Alargar avenidas costuma ser apresentado como solução para o trânsito. Os primeiros meses confirmam a promessa: o fluxo melhora. Mas a facilidade atrai novos motoristas, viagens antes feitas de ônibus passam a ser feitas de carro, e em poucos anos o congestionamento volta, agora com mais veículos. Cidades que reduziram o tempo de deslocamento fizeram outra escolha: investiram em transporte coletivo frequente, calçadas contínuas e ciclovias conectadas.\"\n\nQual é a tese defendida no texto?",
+      "prompt": "Leia o texto e observe a ilustração.\n\n\"Alargar avenidas costuma ser apresentado como solução para o trânsito. Os primeiros meses confirmam a promessa: o fluxo melhora. Mas a facilidade atrai novos motoristas, viagens antes feitas de ônibus passam a ser feitas de carro, e em poucos anos o congestionamento volta, agora com mais veículos. Cidades que reduziram o tempo de deslocamento fizeram outra escolha: investiram em transporte coletivo frequente, calçadas contínuas e ciclovias conectadas.\"\n\n[figura]\n\nQual é a tese defendida no texto?",
       "options": [
-        "Ampliar avenidas tende a gerar mais tráfego no longo prazo, e a melhora duradoura da mobilidade depende de priorizar o transporte coletivo e os deslocamentos a pé e de bicicleta.",
-        "Os motoristas são os únicos responsáveis pelos congestionamentos.",
-        "Toda obra viária é inútil e deve ser proibida.",
-        "Os ônibus são a principal causa do trânsito nas grandes cidades.",
-        "Alargar avenidas resolve definitivamente o congestionamento, como mostram os primeiros meses."
+        "Alargar avenidas tende a atrair mais tráfego, e a melhora duradoura vem de priorizar ônibus, pedestres e bicicletas.",
+        "Os motoristas são os únicos responsáveis pelos congestionamentos, porque escolhem usar o carro mesmo com avenidas largas.",
+        "Toda obra viária é inútil e deveria ser proibida, porque qualquer aumento de capacidade é ocupado em poucos anos.",
+        "Os ônibus são a principal causa do trânsito nas grandes cidades, porque ocupam faixas inteiras nas avenidas.",
+        "Alargar avenidas resolve o congestionamento de forma definitiva, como mostram os resultados dos primeiros meses."
       ],
       "answer": "A",
       "explanation": "Resposta: A.\n\nO texto apresenta uma solução comum, mostra seu efeito de curto prazo, explica por que ele se desfaz (mais capacidade atrai mais carros, efeito conhecido como demanda induzida) e contrasta com a experiência de cidades que priorizaram outros meios. A tese é a da alternativa A.\n\nAs outras alternativas:\nB) O texto não culpa indivíduos; descreve um efeito de incentivos da política urbana.\nC) Generaliza além do texto, que trata de alargar avenidas como solução para o trânsito, não de toda obra viária.\nD) O texto sugere o contrário: viagens migraram do ônibus para o carro.\nE) Toma o efeito inicial como conclusão, ignorando o argumento central sobre o médio prazo.",
-      "check": "Nova resolução sem o gabarito: identificação da tese (argumento de demanda induzida e alternativa de priorizar o transporte coletivo). Opção A."
+      "check": "Nova resolução sem o gabarito: identificação da tese (argumento de demanda induzida e alternativa de priorizar o transporte coletivo). Opção A.",
+      "figure": {
+        "src": "/illustrations/Q-FG-02.webp",
+        "alt": "Dois quadros mostram a mesma avenida alargada: primeiro com poucos carros e equipamentos de obra; depois com congestionamento e um ponto de ônibus vazio."
+      },
+      "stimulus": ["TEXTO_BASE", "CHARGE"]
     },
     {
       "id": "gen-fg-redes-saude-mental",
@@ -134,17 +157,22 @@
       "concepts": ["fg-graficos", "fg-tecnologia-sociedade"],
       "title": "Tempo de tela e bem-estar de adolescentes",
       "subject": "Leitura de pesquisa: associação e causalidade",
-      "prompt": "Uma pesquisa com 5 000 adolescentes, com dados ilustrativos, mostra que, entre os que passam mais de 5 horas por dia em redes sociais, 32% relatam sintomas de ansiedade; entre os que passam menos de 1 hora, 18%.\n\nQual conclusão os dados permitem?",
+      "prompt": "Pesquisadores e escolas discutem o efeito do uso intenso de redes sociais sobre o bem-estar de adolescentes. Parte das propostas em debate envolve limitar o uso de celulares na escola, orientar as famílias e cobrar das plataformas mudanças no design que prende a atenção. Para orientar essas decisões, é preciso ler com cuidado o que os dados disponíveis mostram e o que eles ainda não mostram.\n\n[figura]\n\nUma pesquisa feita num único momento com 5 000 adolescentes, com dados ilustrativos, mostra que, entre os que passam mais de 5 horas por dia em redes sociais, 32% relatam sintomas de ansiedade; entre os que passam menos de 1 hora, 18%.\n\nQual conclusão os dados permitem?",
       "options": [
-        "As redes sociais causam ansiedade em adolescentes, o que está provado pelos números.",
-        "A ansiedade faz os adolescentes usarem mais redes sociais, e não o contrário.",
-        "Há associação entre maior tempo em redes sociais e maior relato de ansiedade, mas os dados não estabelecem a direção da causa nem descartam outros fatores, como isolamento, sono, conflitos familiares ou o conteúdo consumido.",
-        "Não há relação entre as variáveis, porque a maioria dos usuários intensos não relata ansiedade.",
-        "Proibir o uso de celulares eliminaria a ansiedade entre adolescentes."
+        "As redes sociais causam ansiedade em adolescentes, e a diferença entre 32% e 18% basta para comprovar isso.",
+        "A ansiedade leva os adolescentes a usar mais redes sociais, e os dados mostram que o contrário não ocorre.",
+        "Há associação entre mais tempo nas redes e mais ansiedade, mas a causa e outros fatores ficam em aberto.",
+        "Não há relação entre as variáveis, porque a maioria dos usuários intensos, 68% deles, não relata sintomas de ansiedade.",
+        "Proibir o uso de celulares por adolescentes eliminaria a ansiedade, como indicam os números da pesquisa."
       ],
       "answer": "C",
       "explanation": "Resposta: C.\n\nOs dados mostram uma diferença entre grupos: 32% contra 18%. Isso é uma associação. Uma pesquisa desse tipo, que observa as pessoas num momento, não diz o que veio primeiro: o uso intenso pode piorar o bem-estar, a ansiedade pode levar ao uso intenso, ou um terceiro fator, como pouco sono ou solidão, pode influenciar os dois. Uma conclusão responsável reconhece a associação e os limites, sem minimizar o tema.\n\nAs outras alternativas:\nA) Transforma associação em prova de causa.\nB) Afirma uma direção causal que os dados também não permitem.\nD) Uma diferença de 14 pontos percentuais entre grupos indica associação, mesmo que a maioria dos usuários intensos não relate sintomas.\nE) Propõe uma solução única e absoluta que os dados não sustentam.",
-      "check": "Nova resolução sem o gabarito: estudo transversal permite associação, não causalidade. Opção C."
+      "check": "Nova resolução sem o gabarito: estudo transversal permite associação, não causalidade. Opção C.",
+      "figure": {
+        "src": "/illustrations/Q-FG-05.webp",
+        "alt": "Quatro familiares sentados à mesa olham cada um para seu celular. A comida permanece intocada no centro."
+      },
+      "stimulus": ["TEXTO_BASE", "CHARGE"]
     },
     {
       "id": "gen-fg-concentracao-renda",
@@ -153,11 +181,12 @@
       "concepts": ["fg-desigualdade", "fg-calculo"],
       "title": "Quanto os mais ricos ganham a mais",
       "subject": "Concentração de renda por grupos da população",
-      "prompt": "Num país, com dados ilustrativos, os 10% mais ricos da população recebem 40% de toda a renda, e os 40% mais pobres recebem 10%.\n\nQuantas vezes a renda média de uma pessoa do grupo mais rico é maior que a renda média de uma pessoa do grupo mais pobre?",
+      "prompt": "A concentração de renda costuma ser descrita pela fatia da renda total recebida por cada parte da população. A curva de Lorenz ordena as pessoas da mais pobre para a mais rica e mostra, para cada fração da população, que fração da renda ela acumula; quanto mais a curva se afasta da linha de igualdade, maior a concentração, que o índice de Gini resume num número entre 0 e 1. Comparar a renda média de grupos diferentes ajuda a dar dimensão concreta a essas fatias.\n\nNum país, com dados ilustrativos, os 10% mais ricos da população recebem 40% de toda a renda, e os 40% mais pobres recebem 10%.\n\nQuantas vezes a renda média de uma pessoa do grupo mais rico é maior que a renda média de uma pessoa do grupo mais pobre?",
       "options": ["4 vezes", "10 vezes", "16 vezes", "30 vezes", "40 vezes"],
       "answer": "C",
       "explanation": "Resposta: C.\n\nA renda média de cada grupo é a fatia da renda dividida pela fatia da população.\n\nGrupo mais rico: 40% da renda para 10% das pessoas, ou 4 vezes a média do país.\nGrupo mais pobre: 10% da renda para 40% das pessoas, ou 0,25 da média do país.\n\nRazão: 4 / 0,25 = 16. Na curva de Lorenz, uma distribuição assim fica bem afastada da linha de igualdade, e o índice de Gini é elevado.\n\nAs outras alternativas:\nA) 4 é a renda do grupo mais rico em relação à média do país, não em relação ao grupo mais pobre.\nB) 10 compara as porcentagens de população, não as rendas médias.\nD) 30 é a diferença entre 40% e 10%, em pontos percentuais, tratada como razão.\nE) 40 multiplica as fatias sem dividir pelo tamanho dos grupos.",
-      "check": "Nova resolução sem o gabarito: (40/10) / (10/40) = 16. Conferido por cálculo."
+      "check": "Nova resolução sem o gabarito: (40/10) / (10/40) = 16. Conferido por cálculo.",
+      "stimulus": ["TEXTO_BASE"]
     },
     {
       "id": "gen-fg-inclusao-deficiencia",
@@ -166,11 +195,16 @@
       "concepts": ["fg-direitos-humanos", "fg-tecnologia-sociedade"],
       "title": "Lei Brasileira de Inclusão e acessibilidade",
       "subject": "Pessoa com deficiência, barreiras e acessibilidade",
-      "prompt": "A Lei Brasileira de Inclusão da Pessoa com Deficiência (Lei 13.146/2015) define deficiência a partir da interação entre impedimentos de longo prazo e as barreiras presentes no ambiente. Avalie as afirmações.\n\nI. Pela lei, a deficiência não é vista apenas como característica do corpo da pessoa, mas como resultado da interação entre o impedimento e as barreiras que dificultam a participação plena na sociedade.\nII. Sites e aplicativos sem recursos de acessibilidade, como textos alternativos em imagens e navegação por teclado, constituem barreiras.\nIII. Garantir acessibilidade é responsabilidade exclusiva do Estado, sem obrigações para empresas privadas.\nIV. Atitudes preconceituosas que impedem ou dificultam a participação de pessoas com deficiência são uma das formas de barreira previstas na lei.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: D.\n\nI está correta. É o chamado modelo social, adotado pela lei em sintonia com a Convenção da ONU sobre os Direitos das Pessoas com Deficiência: a mesma limitação pesa mais ou menos conforme o ambiente oferece ou nega condições.\nII está correta. A lei prevê barreiras nas comunicações e na informação e barreiras tecnológicas. Interfaces inacessíveis impedem o acesso a serviços, educação e trabalho, um ponto em que profissionais de Computação atuam diretamente.\nIII está errada. A lei impõe obrigações também a empresas, por exemplo a de manter sites acessíveis.\nIV está correta. As barreiras atitudinais estão entre as categorias de barreira definidas na lei.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: Lei 13.146/2015, art. 2º (conceito), art. 3º, IV (barreiras, incluindo comunicações, tecnológicas e atitudinais) e art. 63 (sítios acessíveis). Opção D.",
-      "truth": ["I", "II", "IV"],
-      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
+      "prompt": "A Lei Brasileira de Inclusão da Pessoa com Deficiência (Lei 13.146/2015) define deficiência a partir da interação entre impedimentos de longo prazo e as barreiras presentes no ambiente. Entre as barreiras previstas na lei estão as urbanísticas e arquitetônicas, as de transporte, as de comunicação e informação, as atitudinais e as tecnológicas. A lei também trata de sites e aplicativos, que devem ser acessíveis.\n\n[figura]\n\nAvalie as afirmações.\n\nI. Garantir acessibilidade é responsabilidade exclusiva do Estado, sem obrigações para empresas privadas.\nII. Pela lei, só contam como barreiras os obstáculos físicos, como escadas e calçadas irregulares.\nIII. Pela lei, a deficiência não é vista apenas como característica do corpo da pessoa, mas como resultado da interação entre o impedimento e as barreiras que dificultam a participação plena na sociedade.\nIV. Sites e aplicativos sem recursos de acessibilidade, como textos alternativos em imagens e navegação por teclado, constituem barreiras.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: B.\n\nI está errada. A lei impõe obrigações também a empresas, por exemplo a de manter sites acessíveis e a de garantir acessibilidade em estabelecimentos abertos ao público.\n\nII está errada. A lei define várias categorias de barreira, entre elas as de comunicação e informação, as tecnológicas e as atitudinais, como o preconceito que impede ou dificulta a participação.\n\nIII está correta. É o chamado modelo social, adotado pela lei em sintonia com a Convenção da ONU sobre os Direitos das Pessoas com Deficiência: a mesma limitação pesa mais ou menos conforme o ambiente oferece ou nega condições.\n\nIV está correta. Interfaces inacessíveis impedem o acesso a serviços, educação e trabalho, um ponto em que profissionais de Computação atuam diretamente.\n\nAs outras alternativas:\nA) Escolhe só I, que isenta as empresas.\nC) Inclui I e II e deixa de fora IV.\nD) Inclui I e II e deixa de fora III.\nE) Inclui II, que reduz as barreiras às físicas.",
+      "check": "Nova resolução sem o gabarito: Lei 13.146/2015, art. 2º (modelo social), art. 3º, IV (tipos de barreira) e art. 63 (sítios acessíveis); I e II falsas. Opção B.",
+      "truth": ["III", "IV"],
+      "combos": [["I"], ["III", "IV"], ["I", "II", "III"], ["I", "II", "IV"], ["II", "III", "IV"]],
+      "figure": {
+        "src": "/illustrations/Q-FG-03.webp",
+        "alt": "Pessoa em cadeira de rodas diante de uma escadaria e pessoa com bengala branca diante de uma calçada esburacada. As barreiras do ambiente aparecem em azul."
+      },
+      "stimulus": ["TEXTO_BASE", "FIGURA"]
     }
   ]
 }
