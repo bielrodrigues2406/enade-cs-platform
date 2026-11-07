@@ -171,6 +171,20 @@
       "explanation": "Resposta: C.\n\nI está correta. São 2¹²⁸ endereços, e uma rede local recebe em geral um prefixo /64 inteiro.\n\nII está correta. O IPv6 eliminou o broadcast. A descoberta de vizinhos (NDP), que substitui o ARP, usa endereços multicast, como o de nó solicitado.\n\nIII está errada. Com endereços de sobra, o NAT deixa de ser necessário. A proteção que se atribuía ao NAT vem de um firewall com estado.\n\nAs outras alternativas:\nA) Deixa de fora II.\nB) Só III, que é a falsa.\nD) Inclui III.\nE) Inclui III.",
       "check": "Nova resolução sem o gabarito, conferida com as RFCs 8200 (IPv6) e 4861 (NDP): I e II corretas.",
       "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-red-janela-vazao",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["red-fluxo-congestionamento", "red-transporte"],
+      "title": "Janela limitando a transferência",
+      "subject": "Vazão máxima com janela fixa e RTT",
+      "prompt": "No TCP, o emissor pode ter no máximo uma janela de dados enviados e ainda não confirmados. Quando o enlace é rápido e a distância grande, quem limita a vazão deixa de ser a largura de banda e passa a ser a janela: no máximo uma janela por tempo de ida e volta (RTT).\n\nUm laboratório envia dados de um sensor para um servidor em outro continente por um enlace de 1 Gbit/s. O RTT é de 100 ms, e o receptor anuncia janela fixa de 64 KiB, sem a opção de escala de janela. Não há perdas.\n\nQual é a vazão máxima aproximada dessa conexão?",
+      "options": ["640 kbit/s", "2,6 Mbit/s", "5,2 Mbit/s", "52,4 Mbit/s", "1 Gbit/s"],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nUma janela por RTT: 64 KiB = 65 536 bytes a cada 0,1 s, ou 655 360 bytes/s. Em bits: 655 360 × 8 ≈ 5,24 Mbit/s. A largura de banda de 1 Gbit/s fica quase toda ociosa; a escala de janela (RFC 7323) resolve, permitindo janelas maiores.\n\nAs outras alternativas:\nA) 640 kbit/s divide os bytes por segundo por 1024, sem multiplicar por 8.\nB) 2,6 Mbit/s usa o dobro do RTT, como se a janela levasse 200 ms.\nD) 52,4 Mbit/s usa RTT de 10 ms, um erro na conversão de milissegundos.\nE) Ignora o limite da janela: o enlace nunca é preenchido.",
+      "check": "Executado em Python 3: 65 536 / 0,1 = 655 360 B/s = 5,24 Mbit/s; com RTT de 0,2 s, 2,62 Mbit/s; com 0,01 s, 52,4 Mbit/s.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

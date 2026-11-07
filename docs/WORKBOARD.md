@@ -354,3 +354,5 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
 
 - **07/11/2026 · Claude · PR E (parte 2):** 15 questões geradas novas, priorizando as áreas com menos questões. Banco com 151; auditoria dentro das travas (única mais longa 6%, chutador 22%, item I verdadeiro 64%, letras A 25, B 32, C 34, D 32, E 28; mediana do enunciado 80 palavras). Conferência por execução (javac, Python 3) e pelo texto das normas. Corrigido antes do commit um distrator de contagem que não batia com a conta executada.
 
+- **07/11/2026 · Claude · PR E (parte 3):** 12 questões geradas novas nas áreas com menos questões. Banco com 163; auditoria dentro das travas (única mais longa 6%, chutador 22%, item I verdadeiro 63%, letras A 30, B 32, C 37, D 32, E 32; mediana do enunciado 83 palavras). Conferência por execução (clang, gcc, Python 3) e pelo texto das leis e licenças.
+

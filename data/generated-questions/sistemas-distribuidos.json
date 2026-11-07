@@ -134,6 +134,20 @@
       "explanation": "Resposta: C.\n\nI está errada. W + R = 5, que não é maior que N = 5. Uma leitura pode consultar exatamente as três réplicas que não receberam a escrita.\n\nII está correta. W + R = 6 > 5, e com duas réplicas fora ainda restam três, o suficiente para W = 3 e R = 3.\n\nIII está correta. W + R = 6 > 5, e a leitura de uma réplica basta. Mas a escrita exige as cinco, e uma réplica fora a bloqueia.\n\nIV está errada. W + R = 2, e a leitura pode cair numa réplica desatualizada: a consistência é eventual.\n\nAs outras alternativas:\nA) Inclui I.\nB) Junta as duas afirmações falsas.\nD) Inclui IV.\nE) Inclui I.",
       "check": "Nova resolução sem o gabarito: W + R > N vale para (3, 3) e (5, 1), não para (2, 3) e (1, 1); disponibilidade conferida contando réplicas fora.",
       "stimulus": ["TEXTO_BASE", "CENARIO"]
+    },
+    {
+      "id": "gen-sd-relogios-vetoriais",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["sd-tempo"],
+      "title": "Relógio vetorial depois de duas mensagens",
+      "subject": "Relógios vetoriais e causalidade",
+      "prompt": "Relógios vetoriais capturam a causalidade entre eventos de processos distribuídos. Cada processo Pi mantém um vetor com uma posição por processo. Antes de cada evento local ou envio, Pi soma 1 à sua própria posição e envia o vetor junto com a mensagem. Ao receber, Pi faz o máximo posição a posição entre o seu vetor e o recebido e, em seguida, soma 1 à sua posição.\n\nTrês serviços, P1, P2 e P3, começam com (0, 0, 0) e executam:\n\nP1: evento local; envia m1 para P2\nP2: evento local; recebe m1; envia m2 para P3\nP3: evento local; recebe m2\n\nQual é o vetor de P3 depois de receber m2?",
+      "options": ["(1, 3, 2)", "(2, 3, 1)", "(2, 3, 2)", "(0, 3, 2)", "(3, 3, 2)"],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nP1: evento local (1, 0, 0); envio de m1 (2, 0, 0).\nP2: evento local (0, 1, 0); recebe m1: máximo (2, 1, 0), depois soma 1 em P2: (2, 2, 0); envio de m2 (2, 3, 0).\nP3: evento local (0, 0, 1); recebe m2: máximo (2, 3, 1), depois soma 1 em P3: (2, 3, 2).\n\nO vetor mostra que a recepção em P3 depende causalmente dos dois eventos de P1 e dos três de P2.\n\nAs outras alternativas:\nA) Conta só o evento local de P1, esquecendo o envio de m1.\nB) Esquece de somar 1 na própria posição ao receber.\nD) Ignora a informação de P1 que chegou a P3 por meio de P2.\nE) Soma 1 à posição de P1 ao passar por P2, mas só o próprio processo incrementa a sua posição.",
+      "check": "Executado em Python 3 com as regras do enunciado: P3 termina em (2, 3, 2).",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

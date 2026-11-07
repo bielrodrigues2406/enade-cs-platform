@@ -138,6 +138,10 @@ Gabriel dispensou o segundo agente. O que substitui essa revisão:
   - Formas: 6 de cálculo, 6 de itens, 1 de associação, 1 de asserção (D) e 1 simples.
   - Temas: associatividade na gramática, framebuffer com buffer duplo, acessibilidade de formulário, registros no Marco Civil, sobrecarga e sobrescrita em Java, IPv6, quórum de réplicas, parada semidecidível, altura máxima de AVL, ganho de informação, assinatura e sigilo, contagem pelo complementar, diagramas UML, IEEE 754 e níveis de isolamento.
   - Conferência: Java com javac, contas em Python 3 (IEEE 754 com struct), leis e normas pelo texto (Marco Civil, WCAG 2.2, RFCs).
+- **Lote 2, terceira parte (07/11/2026):** 12 questões, de novo nas áreas com menos questões (Computação gráfica, Sociedade e ética, Compiladores, IHC, Programação, Sistemas distribuídos e Redes).
+  - Formas: 6 de cálculo, 1 de ordem, 1 de associação, 2 de itens, 1 de asserção (A) e 1 simples.
+  - Temas: pipeline gráfico, z-buffer, LGPD em dados de saúde, licenças, contagem de tokens, fases dos erros de compilação, avaliação heurística, lei de Fitts, closures e argumento padrão mutável em Python, relógios vetoriais e vazão limitada pela janela do TCP.
+  - Conferência: tokens com clang -dump-tokens, erros com gcc, Python 3 para código e contas, leis e licenças pelo texto.
 - **Pistas da resposta:** resultado da revisão e travas em [GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md#5-resultado-da-revisão-07112026).
 - **Próximos lotes** (base em [ENADE-EVOLUTION.md](ENADE-EVOLUTION.md)):
   - texto-base de 120 a 200 palavras com referência, como a prova desde 2014 (o lote 1 tem mediana de 60 palavras, contra 214 em 2021);

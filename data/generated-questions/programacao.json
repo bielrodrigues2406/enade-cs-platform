@@ -107,6 +107,34 @@
       "explanation": "Resposta: A.\n\nEm a.f(s), o tipo declarado de s é Object, então o compilador escolhe f(Object). Em tempo de execução, o objeto é um B, que sobrescreve f(Object): imprime B.obj. Em a.f(\"y\"), o argumento é String, e o compilador escolhe f(String). B não sobrescreve essa versão, e roda a de A: imprime A.str.\n\nAs outras alternativas:\nB) Supõe que a sobrecarga olha o tipo real de s (String), mas ela usa o tipo declarado.\nC) Supõe que B.f(Object) atende também à chamada com String, mas a versão mais específica, f(String), vence.\nD) Ignora a sobrescrita: o objeto é um B.\nE) Inverte as duas escolhas.",
       "check": "Compilado com javac e executado: imprime B.obj A.str.",
       "stimulus": ["TEXTO_BASE", "CODIGO"]
+    },
+    {
+      "id": "gen-prog-closure-laco",
+      "kind": "LACUNA",
+      "format": "CALCULO",
+      "concepts": ["prog-escopo-tipos", "prog-paradigmas"],
+      "title": "Funções criadas dentro de um laço",
+      "subject": "Closures e associação tardia de variáveis em Python",
+      "prompt": "Em Python, uma função criada dentro de outra captura as variáveis do escopo externo pela referência ao nome, e não pelo valor que ele tinha na hora em que a função foi criada. O valor é procurado só quando a função é chamada. Esse comportamento surpreende quem cria funções dentro de laços.\n\nUma desenvolvedora quer criar três funções de callback, cada uma devolvendo o número do botão a que pertence, e escreve:\n\n```\nfs = [lambda: i for i in range(3)]\nprint([f() for f in fs])\n```\n\nO que o programa imprime?",
+      "options": ["[0, 1, 2]", "[0, 0, 0]", "[3, 3, 3]", "[1, 2, 3]", "[2, 2, 2]"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nAs três funções usam a mesma variável i, a da compreensão de lista. Elas só procuram o valor de i quando são chamadas, depois que o laço terminou, e aí i vale 2, o último valor de range(3). Cada chamada devolve 2.\n\nPara capturar o valor de cada volta, usa-se um parâmetro com valor padrão, avaliado na criação: lambda i=i: i.\n\nAs outras alternativas:\nA) Seria o resultado se o valor fosse capturado na criação de cada função.\nB) Supõe que a função guarda o primeiro valor de i.\nC) range(3) para em 2; o valor 3 nunca é atribuído a i.\nD) Soma 1 a cada valor, como se range começasse em 1.",
+      "check": "Executado em Python 3: imprime [2, 2, 2]; com lambda i=i: i imprime [0, 1, 2].",
+      "stimulus": ["TEXTO_BASE", "CODIGO"]
+    },
+    {
+      "id": "gen-prog-default-mutavel",
+      "kind": "LACUNA",
+      "format": "CALCULO",
+      "concepts": ["prog-memoria", "prog-passagem"],
+      "title": "Lista padrão que lembra das chamadas",
+      "subject": "Argumento padrão mutável em Python",
+      "prompt": "Em Python, o valor padrão de um parâmetro é avaliado uma única vez, quando a função é definida, e não a cada chamada. Se o padrão for um objeto mutável, como uma lista, todas as chamadas que usam o padrão compartilham o mesmo objeto.\n\nUm sistema de pedidos tem a função:\n\n```\ndef adiciona(item, carrinho=[]):\n    carrinho.append(item)\n    return carrinho\n\nadiciona(\"arroz\")\nadiciona(\"feijão\")\nprint(adiciona(\"café\"))\n```\n\nO que o programa imprime?",
+      "options": ["['arroz', 'feijão', 'café']", "['café']", "['arroz']", "[]", "['café', 'feijão', 'arroz']"],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nA lista padrão é criada uma vez, na definição da função. As três chamadas sem o segundo argumento usam a mesma lista, que vai acumulando: arroz, depois feijão, depois café. Imprime ['arroz', 'feijão', 'café'].\n\nA forma segura é usar None como padrão e criar a lista dentro da função: if carrinho is None: carrinho = [].\n\nAs outras alternativas:\nB) Seria o resultado se cada chamada recebesse uma lista nova.\nC) Supõe que a lista fica com o primeiro item e ignora os demais.\nD) A lista recebe três itens; não fica vazia.\nE) append acrescenta no fim; a ordem é a das chamadas.",
+      "check": "Executado em Python 3: imprime ['arroz', 'feijão', 'café'].",
+      "stimulus": ["TEXTO_BASE", "CODIGO"]
     }
   ]
 }

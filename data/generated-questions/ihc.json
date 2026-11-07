@@ -106,6 +106,43 @@
       "explanation": "Resposta: E.\n\nI está errada. A WCAG proíbe usar a cor como único meio de transmitir informação (critério 1.4.1). Quem não distingue o vermelho, ou usa leitor de tela, não sabe quais campos são obrigatórios. O certo é um texto ou símbolo, como \"(obrigatório)\".\n\nII está correta. Imagens que transmitem informação precisam de alternativa em texto que diga sua função (critério 1.1.1).\n\nIII está correta. Toda funcionalidade deve funcionar pelo teclado (2.1.1), e o foco deve ser visível (2.4.7).\n\nIV está correta. Identificar o erro e sugerir a correção atende aos critérios 3.3.1 e 3.3.3, e anunciar a mensagem permite que o leitor de tela a perceba.\n\nAs outras alternativas:\nA) Inclui I e deixa de fora III e IV.\nB) Inclui I.\nC) Deixa de fora IV.\nD) Deixa de fora II.",
       "check": "Nova resolução sem o gabarito, conferida com os critérios 1.1.1, 1.4.1, 2.1.1, 2.4.7, 3.3.1 e 3.3.3 da WCAG 2.2: II, III e IV corretas.",
       "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-ihc-avaliacao-heuristica",
+      "kind": "ESPELHO",
+      "format": "ASSERCAO",
+      "concepts": ["ihc-avaliacao", "ihc-heuristicas"],
+      "title": "Avaliar sem chamar usuários",
+      "subject": "Avaliação heurística como método de inspeção",
+      "prompt": "Os métodos de avaliação de interfaces se dividem em métodos de inspeção, em que especialistas examinam a interface, e métodos de observação ou teste, em que usuários reais realizam tarefas. Uma startup com pouco tempo e orçamento precisa avaliar o protótipo de um aplicativo de finanças antes da próxima rodada de desenvolvimento e decide começar por uma avaliação heurística.\n\nConsidere as asserções a seguir.\n\nI. Na avaliação heurística, especialistas examinam a interface sem a participação de usuários, o que a torna rápida e barata para uma primeira rodada.\n\nPORQUE\n\nII. A avaliação heurística é um método de inspeção, em que avaliadores comparam a interface com princípios de usabilidade reconhecidos, e não um método de observação do uso.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": true
+      },
+      "explanation": "Resposta: A.\n\nI é verdadeira. Três a cinco avaliadores percorrem a interface e registram violações das heurísticas, sem recrutar usuários.\n\nII é verdadeira e explica I. É por ser inspeção, baseada em princípios, que o método dispensa usuários e fica rápido e barato. A limitação também vem daí: ele não mostra como pessoas reais se comportam, e por isso costuma ser complementado por testes com usuários.\n\nAs outras alternativas:\nB) A II explica a I: a ausência de usuários decorre de o método ser de inspeção.\nC) Considera II falsa, mas é a definição do método.\nD) Considera I falsa, mas a avaliação heurística de fato dispensa usuários.\nE) As duas são verdadeiras.",
+      "check": "Nova resolução sem o gabarito: avaliação heurística é inspeção sem usuários (Nielsen e Molich); a natureza de inspeção explica a ausência de usuários. Opção A.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
+    },
+    {
+      "id": "gen-ihc-lei-fitts",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": ["ihc-design", "ihc-usabilidade"],
+      "title": "Botão de emergência difícil de acertar",
+      "subject": "Lei de Fitts no tamanho e na posição dos alvos",
+      "prompt": "A lei de Fitts descreve o tempo para apontar um alvo: ele cresce com a distância até o alvo e diminui com o tamanho do alvo na direção do movimento. É uma das poucas leis quantitativas da IHC e orienta o tamanho e a posição de botões em telas de toque e com mouse.\n\nNum aplicativo de mobilidade urbana, o botão \"Compartilhar viagem em emergência\" é um ícone de 24 × 24 pixels no canto superior, longe de onde o polegar descansa. Em testes, passageiros sob estresse demoraram e erraram ao tentar tocá-lo.\n\nQual mudança é a mais coerente com a lei de Fitts?",
+      "options": [
+        "Aumentar a área de toque do botão e aproximá-lo da região que o polegar alcança com facilidade.",
+        "Manter o tamanho e trocar o ícone por um vermelho, porque a cor chama mais atenção na tela.",
+        "Mover o botão para um menu, onde fica organizado junto com as outras opções de segurança.",
+        "Reduzir o botão para liberar espaço, porque alvos menores exigem movimentos mais precisos.",
+        "Pedir uma confirmação de duas etapas antes de compartilhar, para evitar toques acidentais."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nPela lei de Fitts, o tempo de apontamento cai quando o alvo fica maior e mais perto. Uma área de toque maior, perto da zona natural do polegar, torna o botão mais rápido e com menos erros, o que importa numa emergência.\n\nAs outras alternativas:\nB) A cor ajuda a encontrar o botão, mas não muda o tempo de apontar, que depende de tamanho e distância.\nC) Um menu acrescenta um passo e aumenta o tempo total.\nD) Alvos menores aumentam o tempo e os erros, ao contrário do que diz a lei.\nE) A confirmação previne acionamento acidental, mas atrasa ainda mais a ação numa emergência e não resolve a dificuldade de acertar o alvo.",
+      "check": "Nova resolução sem o gabarito: tempo de apontamento proporcional a log₂(1 + D/W); aumentar W e reduzir D é a única opção que atua nos dois termos.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }
