@@ -9,3 +9,22 @@
 .news-list p { margin: 0 0 var(--space-2); line-height: 1.55; }
 .news-meta { display: flex; gap: var(--space-2); align-items: center; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-muted); }
 .news-list .text-button { min-height: 44px; font-weight: 600; }
+
+/* Aviso discreto, no canto inferior esquerdo (o de conquista fica à direita); não bloqueia a tela. */
+.news-nudge-region { position: fixed; left: max(var(--space-4), env(safe-area-inset-left)); bottom: max(var(--space-4), env(safe-area-inset-bottom)); z-index: 49; pointer-events: none; }
+.news-nudge {
+  display: flex; gap: var(--space-3); align-items: center;
+  width: min(23rem, calc(100vw - 2 * var(--space-4)));
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  border: var(--border-thin) solid var(--color-border); border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-raised);
+  pointer-events: auto; animation: nudge-in var(--duration-base) var(--ease-out) both;
+}
+.news-nudge-text { flex: 1; min-width: 0; }
+.news-nudge-eyebrow { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); }
+.news-nudge-title { margin: 2px 0 0; font-weight: 600; line-height: 1.35; }
+.news-nudge .text-button { min-height: 44px; font-weight: 600; }
+.news-nudge-close { flex: none; align-self: flex-start; width: 44px; height: 44px; padding: 0; background: transparent; color: var(--color-text); border: 0; }
+.news-nudge-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+@keyframes nudge-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .news-nudge { animation: none; } }

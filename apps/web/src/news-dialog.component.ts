@@ -3,7 +3,10 @@ import { MascotComponent } from "./mascot.component";
 import { NewsService, type NewsDestination, type NewsItem } from "./news.service";
 
 // Diálogo de novidades (NEWS-1), com o Dudu mostrando o caderno. Abre pelo
-// botão do topo, pelo cartão do início ou sozinho, uma vez, para quem já estudou.
+// botão do topo, pelo cartão do início ou pelo aviso discreto, que aparece
+// uma vez para quem já estudou e some sozinho sem bloquear a tela.
+
+const NUDGE_MS = 10_000;
 
 @Component({
   selector: "app-news-dialog",
@@ -17,7 +20,13 @@ export class NewsDialogComponent {
   @ViewChild("dialog", { static: true }) dialog!: ElementRef<HTMLDialogElement>;
   private readonly dates = new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "long", timeZone: "UTC" });
 
+  private timer: ReturnType<typeof setTimeout> | null = null;
+
   constructor() {
+    effect(() => {
+      if (this.timer) clearTimeout(this.timer);
+      this.timer = this.news.nudge() ? setTimeout(() => this.news.dismissNudge(), NUDGE_MS) : null;
+    });
     effect(() => {
       const element = this.dialog?.nativeElement;
       if (!element) return;
@@ -26,6 +35,8 @@ export class NewsDialogComponent {
     });
   }
 
+  /** A novidade mais recente ainda não vista, para o aviso. */
+  firstUnseen() { return this.news.state()?.items.find((n) => !n.seen) ?? null; }
   date(item: NewsItem) { return this.dates.format(new Date(`${item.date}T12:00:00Z`)); }
   /** Esc, o X ou o botão fecham e marcam as novas como vistas. */
   closed() { if (this.news.open()) void this.news.close(); }

@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 // Novidades (NEWS-1): marca "Novo" no topo, diálogo com o Dudu, marcar como
-// visto no servidor e aviso automático só para quem já estudou.
+// visto no servidor e aviso discreto, sem bloquear, só para quem já estudou.
 
 test("a newcomer sees the New mark but no popup, reads the news and the mark goes away for good", async ({ page }) => {
   await page.goto("/questoes");
@@ -25,7 +25,7 @@ test("a newcomer sees the New mark but no popup, reads the news and the mark goe
   await expect(page.locator("header .news-badge")).toHaveCount(0);
 });
 
-test("after studying, the news open once by themselves and lead to the section", async ({ page }) => {
+test("after studying, a non-blocking nudge offers the news once and they lead to the section", async ({ page }) => {
   await page.goto("/questoes");
   await page.getByRole("button", { name: /^Resolver: / }).first().click();
   await page.getByRole("radio").first().check();
@@ -35,12 +35,18 @@ test("after studying, the news open once by themselves and lead to the section",
 
   await page.goto("/questoes");
   const dialog = page.getByRole("dialog", { name: "Novidades" });
+  const nudge = page.locator(".news-nudge");
+  await expect(nudge).toContainText("Lições na Biblioteca");
+  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("button", { name: /^Resolver: / }).first()).toBeEnabled();
+  await nudge.getByRole("button", { name: /^Ver novidades/ }).click();
   await expect(dialog).toBeVisible();
+  await expect(nudge).toHaveCount(0);
   await dialog.getByRole("button", { name: /^Abrir a Biblioteca/ }).click();
   await expect(dialog).toBeHidden();
   await expect(page).toHaveURL(/\/biblioteca$/);
 
   await page.goto("/questoes");
   await expect(page.getByRole("button", { name: "Novidades", exact: true })).toBeVisible();
-  await expect(dialog).toBeHidden();
+  await expect(nudge).toHaveCount(0);
 });

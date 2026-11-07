@@ -17,7 +17,7 @@ Pedido de Gabriel em 07/11/2026: avisar quem estuda sobre o que mudou na platafo
 - **Topo:** botão "Novidades" com a marca "Novo" enquanto houver novidade não vista. No celular fica só a estrela e a marca.
 - **Início:** cartão com os três títulos mais recentes e o botão "Ver as novidades".
 - **Diálogo:** Dudu na pose `novidade`, a lista com data, título, resumo e um botão que leva à seção. Fechar (Entendi, X ou Esc) marca as novas como vistas no servidor.
-- **Aviso automático:** abre sozinho uma vez por carga, só se houver novidade não vista **e** a pessoa já tiver respondido alguma questão. Quem acabou de chegar vê só a marca e o cartão. Também não abre na apresentação, numa questão aberta, em treino, em prova nem nas áreas de gestão.
+- **Aviso automático:** um cartão discreto no canto inferior esquerdo, com o Dudu, o título da novidade mais recente e "Ver novidades". Não bloqueia a tela e some em 10 segundos. Aparece uma vez por carga, só se houver novidade não vista **e** a pessoa já tiver respondido alguma questão, e nunca na apresentação, numa questão aberta, em treino, em prova ou nas áreas de gestão. A primeira versão abria o diálogo sozinho, e o modal travava quem voltava a uma questão; por isso virou cartão.
 - Visitantes sem conta também têm o que viram guardado, pela identidade da sessão.
 
 ## 3. Como publicar uma novidade

@@ -3,6 +3,7 @@ import { requestJson } from "./api-request";
 
 // Novidades (NEWS-1): o que mudou na plataforma, com o que esta identidade já
 // viu guardado no servidor. Falha silenciosa: é aviso, não bloqueia o estudo.
+// O aviso automático é um cartão que some sozinho; o diálogo só abre a pedido.
 
 export type NewsDestination = "inicio" | "questoes" | "geradas" | "biblioteca" | "flashcards" | "conquistas" | "provas" | "treino";
 export type NewsItem = {
@@ -15,6 +16,8 @@ type NewsState = { items: NewsItem[]; unseen: number; autoOpen: boolean };
 export class NewsService {
   readonly state = signal<NewsState | null>(null);
   readonly open = signal(false);
+  /** Aviso discreto, sem bloquear a tela, que oferece abrir as novidades. */
+  readonly nudge = signal(false);
   readonly unseen = computed(() => this.state()?.unseen ?? 0);
   /** O aviso automático abre no máximo uma vez por carga da identidade. */
   private autoShown = false;
@@ -28,14 +31,15 @@ export class NewsService {
       .catch(() => undefined);
   }
 
-  show() { this.open.set(true); }
+  show() { this.nudge.set(false); this.open.set(true); }
 
-  /** Chamado pelo shell no início: abre sozinho se há novidade e a pessoa já estudou. */
+  /** Chamado pelo shell: mostra o aviso uma vez se há novidade e a pessoa já estudou. */
   offerOnce() {
     if (this.autoShown || !this.state()?.autoOpen) return;
     this.autoShown = true;
-    this.open.set(true);
+    this.nudge.set(true);
   }
+  dismissNudge() { this.nudge.set(false); }
 
   /** Ao fechar, as que estavam marcadas como novas passam a vistas. */
   async close() {
