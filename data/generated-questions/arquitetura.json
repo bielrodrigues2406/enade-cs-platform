@@ -159,6 +159,20 @@
       "explanation": "Resposta: A.\n\nAntes: 0,4 × 1 + 0,2 × 2 + 0,3 × 3 + 0,1 × 4 = 0,4 + 0,4 + 0,9 + 0,4 = 2,1.\nDepois: 0,4 + 0,4 + 0,3 × 2 + 0,4 = 1,8.\n\nCom o mesmo número de instruções e o mesmo relógio, o ganho é a razão dos tempos: 2,1 / 1,8 ≈ 1,17. Melhorar 30% das instruções em um terço rende cerca de 17% no total, como prevê a lei de Amdahl.\n\nAs outras alternativas:\nB) 2,5 é a média simples dos CPIs, sem ponderar pela frequência.\nC) 1,5 = 3 / 2 é o ganho só das instruções de memória, aplicado ao programa inteiro.\nD) 0,86 = 1,8 / 2,1 é a razão invertida: ganho menor que 1 seria piora.\nE) 1,8 é o CPI depois da melhoria, não antes.",
       "check": "Executado em Python 3: CPI antes 2,1, depois 1,8, razão 1,1667.",
       "stimulus": ["TEXTO_BASE", "TABELA"]
+    },
+    {
+      "id": "gen-arq-ieee754",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["arq-representacao"],
+      "title": "−6,25 em ponto flutuante",
+      "subject": "Representação IEEE 754 de precisão simples",
+      "prompt": "No padrão IEEE 754 de precisão simples, um número ocupa 32 bits: 1 bit de sinal (1 para negativo), 8 bits de expoente com excesso de 127 e 23 bits de fração. O número é normalizado na forma 1,f × 2^e: o 1 antes da vírgula não é armazenado, e o campo de expoente guarda e + 127.\n\nUm sensor de temperatura envia leituras em ponto flutuante de precisão simples, e um técnico precisa conferir no analisador de protocolo o valor −6,25 °C.\n\nQual é a representação de −6,25, em hexadecimal?",
+      "options": ["C0C80000", "40C80000", "C1480000", "C0A40000", "BEC80000"],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\n6,25 em binário é 110,01 = 1,1001 × 2². Sinal 1 (negativo). Expoente: 2 + 127 = 129 = 10000001. Fração: 1001 seguido de 19 zeros. Juntando: 1 10000001 10010000000000000000000 = 1100 0000 1100 1000 0000 … = C0C80000.\n\nAs outras alternativas:\nB) 40C80000 é +6,25: o bit de sinal ficou em 0.\nC) C1480000 usa expoente 130, o que dá −12,5.\nD) C0A40000 guarda a fração com o 1 escondido incluído (11001…), o que dá −5,125.\nE) BEC80000 usa expoente 125, ou seja, 2⁻² em vez de 2², o que dá −0,390625.",
+      "check": "Executado em Python 3 com struct.pack('>f', ...): −6,25 = c0c80000, 6,25 = 40c80000, −12,5 = c1480000, −5,125 = c0a40000, −0,390625 = bec80000.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

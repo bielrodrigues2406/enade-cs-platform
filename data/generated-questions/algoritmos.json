@@ -237,6 +237,20 @@
       "explanation": "Resposta: A.\n\nNo início, não têm pré-requisito ALG1 e ARQ. Sai ALG1, primeira em ordem alfabética, o que libera ALG2 e ED. O conjunto fica {ALG2, ARQ, ED}: saem ALG2, depois ARQ (SO ainda espera ED) e depois ED, que libera BD e SO. Saem BD e SO, e por fim RED.\n\nAs outras alternativas:\nB) É uma ordenação topológica válida, mas não respeita o desempate: depois de ALG1, o menor código disponível é ALG2, e não ARQ.\nC) Também é válida, mas tira ED antes de ALG2 e ARQ, contrariando a ordem alfabética.\nD) Começa por ARQ, mas ALG1 vem antes em ordem alfabética.\nE) Não é uma ordenação topológica: coloca SO antes de ARQ, que é seu pré-requisito.",
       "check": "Nova resolução sem o gabarito: Kahn com fila de prioridade alfabética. Executado em Python 3 com heapq: ALG1, ALG2, ARQ, ED, BD, SO, RED.",
       "stimulus": ["TEXTO_BASE", "CENARIO"]
+    },
+    {
+      "id": "gen-alg-avl-altura-maxima",
+      "kind": "LACUNA",
+      "format": "CALCULO",
+      "concepts": ["alg-balanceadas"],
+      "title": "Até onde uma AVL de 20 nós pode crescer",
+      "subject": "Número mínimo de nós de uma AVL por altura",
+      "prompt": "A árvore AVL garante que, em cada nó, as alturas das subárvores esquerda e direita diferem de no máximo 1. Para saber o pior caso de uma busca, interessa a maior altura possível com n nós. Ela sai da árvore AVL mais \"magra\" de cada altura: a de altura h tem uma subárvore de altura h − 1 e outra de altura h − 2, ambas também mínimas. Assim, o número mínimo de nós segue N(h) = N(h − 1) + N(h − 2) + 1, com N(0) = 1 e N(1) = 2, contando a altura em arestas.\n\nUm índice em memória guarda 20 chaves numa árvore AVL.\n\nQual é a maior altura que essa árvore pode ter?",
+      "options": ["4", "5", "6", "9", "19"],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nN(2) = 2 + 1 + 1 = 4; N(3) = 4 + 2 + 1 = 7; N(4) = 7 + 4 + 1 = 12; N(5) = 12 + 7 + 1 = 20; N(6) = 20 + 12 + 1 = 33. Com 20 nós dá para montar a AVL mínima de altura 5, mas não a de altura 6, que exige 33. A altura máxima é 5, perto de 1,44·log₂ 20 ≈ 6,2, o limite teórico.\n\nAs outras alternativas:\nA) 4 é ⌊log₂ 20⌋, a altura mínima de uma árvore binária com 20 nós, e não a máxima de uma AVL.\nC) 6 exigiria pelo menos 33 nós.\nD) 9 não corresponde a nenhuma árvore AVL de 20 nós.\nE) 19 é a altura de uma ABB degenerada, que a AVL impede.",
+      "check": "Executado em Python 3: N(h) para h de 0 a 7 = 1, 2, 4, 7, 12, 20, 33, 54; altura máxima com 20 nós = 5.",
+      "stimulus": ["TEXTO_BASE"]
     }
   ]
 }

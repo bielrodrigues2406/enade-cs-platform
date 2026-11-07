@@ -160,6 +160,20 @@
       "explanation": "Resposta: C.\n\nRepetir a bateria depois de uma correção, para ver se algo deixou de funcionar, é teste de regressão (3). A decisão do cliente com cenários combinados é teste de aceitação (4). A função testada sozinha é teste de unidade (1). Dois módulos rodando juntos para conferir a troca de dados é teste de integração (2).\n\nAs outras alternativas:\nA) Repete a ordem da lista de tipos, sem relação com as situações.\nB) Chama de integração a execução da bateria e de regressão a conversa entre módulos.\nD) Troca aceitação e unidade: a secretaria não testa uma função isolada.\nE) Inverte a lista e chama de unidade a conversa entre módulos.",
       "check": "Nova resolução sem o gabarito: regressão, aceitação, unidade, integração = 3, 4, 1, 2.",
       "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-es-uml-diagramas",
+      "kind": "ESPELHO",
+      "format": "ASSOCIACAO",
+      "concepts": ["es-uml"],
+      "title": "Que diagrama UML usar",
+      "subject": "Diagramas UML e o que cada um modela",
+      "prompt": "A UML oferece diagramas estruturais, que mostram as partes do sistema, e comportamentais, que mostram como ele age. Escolher o diagrama certo para cada pergunta da equipe evita modelos longos que não respondem nada.\n\nUma equipe que constrói um aplicativo de delivery precisa documentar quatro aspectos.\n\nDiagramas:\n\n1. Casos de uso\n2. Classes\n3. Sequência\n4. Máquina de estados\n\nAspectos:\n\n( ) Como um pedido passa de \"recebido\" a \"em preparo\", \"a caminho\" e \"entregue\", e o que dispara cada mudança.\n( ) Que funcionalidades o cliente, o entregador e o restaurante usam no sistema.\n( ) A ordem das mensagens trocadas entre o aplicativo, a API de pagamento e o restaurante ao confirmar um pedido.\n( ) Que entidades existem (Pedido, Cliente, Item), seus atributos e como se relacionam.\n\nA sequência correta, de cima para baixo, é",
+      "options": ["1, 4, 3, 2", "3, 1, 4, 2", "4, 2, 1, 3", "4, 1, 3, 2", "2, 1, 3, 4"],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nOs estados de um objeto ao longo da vida e os eventos que mudam o estado são o assunto da máquina de estados (4). As funcionalidades vistas por cada ator são casos de uso (1). A ordem das mensagens entre participantes é o diagrama de sequência (3). Entidades, atributos e relações são o diagrama de classes (2).\n\nAs outras alternativas:\nA) Usa casos de uso para os estados do pedido.\nB) Usa o diagrama de sequência para os estados do pedido.\nC) Troca casos de uso e classes, e sequência e casos de uso.\nE) Usa o diagrama de classes para os estados e a máquina de estados para as entidades.",
+      "check": "Nova resolução sem o gabarito: estados, casos de uso, sequência, classes = 4, 1, 3, 2.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

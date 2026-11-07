@@ -159,6 +159,19 @@
       "explanation": "Resposta: B.\n\nI está errada. COUNT(*) conta linhas, inclusive as que têm colunas nulas: são 5. Quem ignora o nulo é COUNT(valor), que daria 4.\n\nII está correta. AVG soma os valores não nulos (50 + 30 + 20 + 15 = 115) e divide pela quantidade deles (4): 28,75.\n\nIII está errada. NULL <> 50 é desconhecido, e o WHERE descarta a linha. Sobram 30, 20 e 15: o resultado é 3.\n\nAs outras alternativas:\nA) Inclui só I, que confunde COUNT(*) com COUNT(valor).\nC) Junta as duas afirmações falsas.\nD) Inclui III, que trata NULL como um valor comum na comparação.\nE) Inclui I e III.",
       "check": "Nova resolução sem o gabarito: COUNT(*) = 5, AVG = 28,75, WHERE valor <> 50 = 3. Executado no PostgreSQL 17 com as cinco linhas do enunciado.",
       "stimulus": ["TEXTO_BASE", "TABELA"]
+    },
+    {
+      "id": "gen-bd-niveis-isolamento",
+      "kind": "ESPELHO",
+      "format": "ITENS3",
+      "concepts": ["bd-transacoes", "bd-concorrencia"],
+      "title": "Relatório lendo enquanto o caixa grava",
+      "subject": "Níveis de isolamento e anomalias de leitura",
+      "prompt": "O padrão SQL define níveis de isolamento pelas anomalias que cada um impede. Na leitura suja, uma transação lê dados ainda não confirmados de outra. Na leitura não repetível, a mesma linha lida duas vezes muda entre as leituras. No fantasma, uma consulta repetida passa a trazer linhas novas que satisfazem a condição.\n\nNum supermercado, um relatório de vendas roda em uma transação demorada enquanto os caixas registram vendas em outras transações.\n\nAvalie as afirmações sobre os níveis do padrão.\n\nI. No nível READ COMMITTED, o relatório nunca lê uma venda que depois é desfeita com ROLLBACK.\nII. No nível READ COMMITTED, se o relatório ler duas vezes o total de um caixa, os dois valores serão sempre iguais.\nIII. No nível SERIALIZABLE, a execução concorrente equivale a alguma execução em série das transações, e os fantasmas não ocorrem.\n\nÉ correto o que se afirma em",
+      "truth": ["I", "III"],
+      "explanation": "Resposta: C.\n\nI está correta. READ COMMITTED só deixa ler dados confirmados: impede a leitura suja.\n\nII está errada. Entre as duas leituras, outra transação pode confirmar uma venda, e a segunda leitura vê o valor novo. É a leitura não repetível, que só o REPEATABLE READ impede.\n\nIII está correta. SERIALIZABLE garante resultado equivalente a uma execução em série, o que exclui as três anomalias.\n\nAs outras alternativas:\nA) Deixa de fora III.\nB) Só II, que é a falsa.\nD) Inclui II.\nE) Inclui II.",
+      "check": "Nova resolução sem o gabarito, conferida com a tabela de níveis do padrão SQL: I e III corretas.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

@@ -352,3 +352,5 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
 
 - **07/11/2026 · Claude · PR E (parte 1):** 16 questões geradas novas em 13 áreas, nas formas que faltavam: `CALCULO` (4), `CODIGO_OPCOES` (2), `ORDEM` (2), `ASSOCIACAO` (1), itens (4) e asserção (2, gabaritos B e E). Banco com 136; auditoria dentro das travas (única mais longa 6%, chutador 23%, item I verdadeiro 63%, letras A 22, B 29, C 30, D 30, E 25). Conferência por execução (PostgreSQL 17, gcc, Python 3). Falta o restante do lote e o alongamento dos enunciados.
 
+- **07/11/2026 · Claude · PR E (parte 2):** 15 questões geradas novas, priorizando as áreas com menos questões. Banco com 151; auditoria dentro das travas (única mais longa 6%, chutador 22%, item I verdadeiro 64%, letras A 25, B 32, C 34, D 32, E 28; mediana do enunciado 80 palavras). Conferência por execução (javac, Python 3) e pelo texto das normas. Corrigido antes do commit um distrator de contagem que não batia com a conta executada.
+

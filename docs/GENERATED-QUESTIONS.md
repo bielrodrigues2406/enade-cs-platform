@@ -134,6 +134,10 @@ Gabriel dispensou o segundo agente. O que substitui essa revisão:
   - Formas: 4 de cálculo, 2 de código nas alternativas (SQL e expressão regular), 2 de ordem, 1 de associação, 4 de itens (duas com 1 verdadeira e uma com 3), 2 de asserção (B e E) e 1 simples.
   - Temas: laço com soma harmônica, ordenação topológica, GROUP BY e HAVING, NULL em agregações, Scrum, tipos de teste, modus tollens, Round Robin com chegadas, regularização, heurísticas de Nielsen, CEP com expressão regular, CPI médio, DHCP, sessão em nuvem elástica, XSS e passagem de parâmetros em C.
   - Conferência: SQL no PostgreSQL 17, C com gcc, contas e simulações em Python 3, registradas no `check` de cada uma.
+- **Lote 2, segunda parte (07/11/2026):** 15 questões, priorizando as áreas com menos questões (Compiladores, Computação gráfica, IHC, Sociedade e ética).
+  - Formas: 6 de cálculo, 6 de itens, 1 de associação, 1 de asserção (D) e 1 simples.
+  - Temas: associatividade na gramática, framebuffer com buffer duplo, acessibilidade de formulário, registros no Marco Civil, sobrecarga e sobrescrita em Java, IPv6, quórum de réplicas, parada semidecidível, altura máxima de AVL, ganho de informação, assinatura e sigilo, contagem pelo complementar, diagramas UML, IEEE 754 e níveis de isolamento.
+  - Conferência: Java com javac, contas em Python 3 (IEEE 754 com struct), leis e normas pelo texto (Marco Civil, WCAG 2.2, RFCs).
 - **Pistas da resposta:** resultado da revisão e travas em [GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md#5-resultado-da-revisão-07112026).
 - **Próximos lotes** (base em [ENADE-EVOLUTION.md](ENADE-EVOLUTION.md)):
   - texto-base de 120 a 200 palavras com referência, como a prova desde 2014 (o lote 1 tem mediana de 60 palavras, contra 214 em 2021);

@@ -77,6 +77,20 @@
       "answer": "D",
       "explanation": "Resposta: D.\n\nO traçado de raios completo, com muitos raios por pixel e vários reflexos, ainda é caro demais para 60 quadros por segundo em cenas complexas. A solução atual é híbrida:\n- a rasterização com z-buffer resolve a visibilidade principal de forma barata;\n- raios são lançados só onde a rasterização é fraca, como reflexos fora da tela, sombras suaves e luz rebatida;\n- usa-se poucos raios por pixel, o que gera imagem ruidosa;\n- filtros de redução de ruído (denoising), muitas vezes com redes neurais, e técnicas de reconstrução temporal limpam o resultado;\n- as placas trazem unidades dedicadas para testar a interseção de raios com estruturas de aceleração.\n\nAs outras alternativas:\nA) Descreve o traçado de raios completo, como em filmes renderizados offline, inviável em tempo real nessas condições.\nB) A rasterização com z-buffer continua sendo a base da maioria dos jogos.\nC) Iluminação pré-calculada (lightmaps) existe, mas é outra técnica e não acompanha objetos que se movem.\nE) Testes de colisão com raios existem na física dos jogos, mas o termo, nesse contexto, se refere a efeitos visuais.",
       "check": "Nova resolução sem o gabarito: descrição do pipeline híbrido de renderização em tempo real. Opção D."
+    },
+    {
+      "id": "gen-cg-framebuffer",
+      "kind": "LACUNA",
+      "format": "CALCULO",
+      "concepts": ["cg-imagem-digital"],
+      "title": "Memória para dois quadros em Full HD",
+      "subject": "Tamanho do framebuffer com buffer duplo",
+      "prompt": "Uma imagem digital é uma matriz de pixels, e o framebuffer guarda a cor de cada pixel da tela. Com cor verdadeira, cada pixel usa 8 bits para o vermelho, 8 para o verde e 8 para o azul. Para evitar que o usuário veja o quadro sendo desenhado, muitos sistemas usam buffer duplo: um quadro é exibido enquanto o próximo é desenhado no outro, e os dois trocam de papel.\n\nUm painel de informações num terminal rodoviário usa tela de 1920 × 1080 pixels, cor verdadeira sem canal alfa e buffer duplo.\n\nQuanta memória os dois buffers ocupam juntos, aproximadamente?",
+      "options": ["1,98 MiB", "3,96 MiB", "5,93 MiB", "7,91 MiB", "11,87 MiB"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nUm quadro: 1920 × 1080 = 2 073 600 pixels × 3 bytes = 6 220 800 bytes, que dividido por 2²⁰ dá cerca de 5,93 MiB. Com buffer duplo, são dois quadros: cerca de 11,87 MiB.\n\nAs outras alternativas:\nA) 1,98 MiB é um quadro com 1 byte por pixel, como numa imagem em tons de cinza.\nB) 3,96 MiB é o buffer duplo com 1 byte por pixel.\nC) 5,93 MiB é um quadro só, sem o buffer duplo.\nD) 7,91 MiB é um quadro com 4 bytes por pixel, como se houvesse canal alfa.",
+      "check": "Executado em Python 3: 1920 × 1080 × 3 = 6 220 800 bytes = 5,93 MiB; o dobro, 11,87 MiB.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

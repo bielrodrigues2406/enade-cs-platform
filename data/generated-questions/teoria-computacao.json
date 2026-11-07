@@ -134,6 +134,22 @@
       "explanation": "Resposta: C.\n\nAs âncoras ^ e $ obrigam o padrão a cobrir o texto inteiro. \\d{5} exige cinco dígitos, -? aceita o hífen ou a falta dele, e \\d{3} exige os três dígitos finais. 12345-678 e 12345678 passam; 1234-5678, 12345-67 e 123456789 são recusados.\n\nAs outras alternativas:\nA) Exige o hífen e recusa 12345678.\nB) Torna opcional todo o trecho final: aceita 12345 e recusa 12345678.\nD) Sem âncoras, a busca encontra o padrão dentro de 123456789 e de \" 12345-678\", que deveriam ser recusados.\nE) Aceita qualquer mistura de dígitos e hífens com 8 ou 9 caracteres, como 1234-5678.",
       "check": "Executado em Python 3 com re.search: só C aceita os dois formatos e recusa 1234-5678, 12345-67, 123456789, 12a45-678 e \" 12345-678\"; A e B recusam 12345678; D aceita 123456789; E aceita 1234-5678.",
       "stimulus": ["TEXTO_BASE", "CENARIO"]
+    },
+    {
+      "id": "gen-tc-parada-semidecidivel",
+      "kind": "ESPELHO",
+      "format": "ASSERCAO",
+      "concepts": ["tc-decidibilidade", "tc-turing"],
+      "title": "Simular a máquina resolve?",
+      "subject": "Problema da parada, decidibilidade e reconhecimento",
+      "prompt": "Uma ferramenta de análise estática promete avisar quando um programa entra em laço infinito. Para discutir os limites desse tipo de ferramenta, um professor de Teoria da Computação lembra que um problema é decidível quando existe uma máquina de Turing que sempre para e responde sim ou não, e é semidecidível (Turing-reconhecível) quando existe uma máquina que para e aceita toda instância cuja resposta é sim, podendo rodar para sempre nas demais.\n\nConsidere as asserções a seguir.\n\nI. Decidir se uma máquina de Turing para quando começa com a fita vazia é um problema decidível, porque basta simular a máquina e esperar.\n\nPORQUE\n\nII. O problema da parada é semidecidível: simulando a máquina, aceita-se toda entrada em que ela para.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "assertion": {
+        "first": false,
+        "second": true
+      },
+      "explanation": "Resposta: D.\n\nI é falsa. A parada com fita vazia é indecidível: o problema da parada se reduz a ele. Simular e esperar não decide nada, porque, se a máquina não para, a simulação também não termina e nunca responde \"não\".\n\nII é verdadeira. A simulação aceita sempre que a máquina para, então a linguagem da parada é Turing-reconhecível. O que falta é o complemento, que não é reconhecível; por isso o problema não é decidível.\n\nAs outras alternativas:\nA) Exige as duas verdadeiras, com a II justificando a I.\nB) Exige as duas verdadeiras.\nC) Inverte os valores das duas asserções.\nE) II é verdadeira.",
+      "check": "Nova resolução sem o gabarito: parada com fita vazia indecidível por redução da parada; parada semidecidível por simulação. I falsa, II verdadeira: D.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

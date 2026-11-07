@@ -146,6 +146,20 @@
       "explanation": "Resposta: E.\n\nI é falsa. O HTTPS protege o transporte contra escuta e alteração, mas entrega ao navegador exatamente o comentário armazenado, com o script. É XSS armazenado, e a defesa é escapar a saída conforme o contexto (HTML, atributo, JavaScript), junto com uma política de segurança de conteúdo e cookies HttpOnly.\n\nII é falsa. Consultas parametrizadas impedem a injeção de SQL, no banco. O texto continua sendo gravado e devolvido igual, e o navegador o interpreta da mesma forma.\n\nAs outras alternativas:\nA) Exige as duas verdadeiras, com a II justificando a I.\nB) Exige as duas verdadeiras.\nC) Considera I verdadeira, confundindo segurança do transporte com segurança do conteúdo.\nD) Considera II verdadeira, confundindo a defesa contra injeção de SQL com a defesa contra XSS.",
       "check": "Nova resolução sem o gabarito: HTTPS não altera o conteúdo entregue; parametrização atua no SQL, não na saída HTML. As duas falsas: E.",
       "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-seg-assinatura-sigilo",
+      "kind": "ESPELHO",
+      "format": "ITENS4",
+      "concepts": ["seg-assimetrica", "seg-hash"],
+      "title": "Assinar e cifrar um contrato",
+      "subject": "Chave pública e privada em assinatura e confidencialidade",
+      "prompt": "Na criptografia assimétrica, cada pessoa tem um par de chaves: a privada, que só ela conhece, e a pública, que qualquer um pode obter, por exemplo num certificado digital. O que uma chave cifra, só a outra do par decifra.\n\nAna vai enviar a Bruno um contrato. Ela quer que só Bruno consiga ler o conteúdo e que Bruno possa comprovar, inclusive diante de terceiros, que foi ela quem o enviou.\n\nAvalie as afirmações.\n\nI. Bruno verifica a assinatura de Ana usando a chave pública de Ana.\nII. Para garantir que só Bruno leia o contrato, Ana o cifra com a sua própria chave privada.\nIII. A assinatura digital oferece não repúdio, o que um código de autenticação de mensagem (HMAC) com chave compartilhada não oferece.\nIV. Para garantir o sigilo, Ana cifra o contrato com a chave pública de Bruno (na prática, cifra uma chave de sessão simétrica).\n\nÉ correto apenas o que se afirma em",
+      "truth": ["I", "III", "IV"],
+      "combos": [["I", "II"], ["II", "III"], ["I", "IV"], ["III", "IV"], ["I", "III", "IV"]],
+      "explanation": "Resposta: E.\n\nI está correta. Ana assina com a chave privada dela (em geral, o resumo criptográfico do contrato), e qualquer um verifica com a chave pública de Ana.\n\nII está errada. O que Ana cifra com a chave privada dela qualquer um decifra com a pública. Isso serve para assinar, não para dar sigilo.\n\nIII está correta. Só Ana tem a chave privada, então ela não pode negar a assinatura. No HMAC, Ana e Bruno têm a mesma chave, e qualquer um dos dois poderia ter gerado o código.\n\nIV está correta. Só Bruno tem a chave privada que decifra o que foi cifrado com a pública dele. Na prática, cifra-se uma chave de sessão simétrica, que cifra o contrato.\n\nAs outras alternativas:\nA) Inclui II.\nB) Inclui II.\nC) Deixa de fora III.\nD) Deixa de fora I.",
+      "check": "Nova resolução sem o gabarito: assinatura com a privada do remetente, sigilo com a pública do destinatário, não repúdio só na assinatura. I, III e IV corretas.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }
