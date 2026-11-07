@@ -20,6 +20,7 @@ import { firstName, initials } from "./initials";
 import { EngagementService } from "./engagement.service";
 import { NewsService, type NewsDestination } from "./news.service";
 import { ResumeService } from "./resume.service";
+import { ThemeService, type Theme } from "./theme.service";
 import { NewsDialogComponent } from "./news-dialog.component";
 import { requestJson } from "./api-request";
 import { ServiceNoticeComponent } from "./service-notice.component";
@@ -268,6 +269,10 @@ class App {
   readonly engagement = inject(EngagementService);
   readonly news = inject(NewsService);
   readonly resume = inject(ResumeService);
+  readonly theme = inject(ThemeService);
+  readonly themes: { value: Theme; label: string }[] = [
+    { value: "system", label: "Sistema" }, { value: "light", label: "Claro" }, { value: "dark", label: "Escuro" },
+  ];
   /** "Continuar de onde parou" acompanha quem está na sessão: conta ou visitante deste navegador. */
   private readonly resumeOwner = effect(() => {
     const session = this.session();

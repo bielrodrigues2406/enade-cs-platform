@@ -216,6 +216,83 @@
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+
+/*
+ * Modo escuro (PR G): só os tokens semânticos mudam; as telas não precisam
+ * saber do tema. "Sistema" segue o aparelho; "Claro" e "Escuro" vêm do
+ * seletor do rodapé (theme.service.ts, atributo data-theme em <html>).
+ * O bloco se repete porque o CSS não junta seletor e media query numa regra.
+ * Contraste conferido sobre o fundo escuro: texto 14,5:1; secundário 7,5:1;
+ * ação 7,8:1 (texto sobre ação 8,7:1); estados 7,9:1 ou mais; borda de
+ * controle 3,7:1; foco 9,2:1. O marca-texto continua amarelo, com tinta por
+ * cima. Figuras e ilustrações mantêm o fundo de papel, que vira uma moldura clara.
+ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #12161f;
+  --color-surface: #1a202b;
+  --color-surface-sunken: #151a24;
+  --color-surface-selected: #252c3a;
+  --color-cover: #0b1a3a;
+  --color-text: #e8e6e0;
+  --color-text-muted: #a9b0bd;
+  --color-on-cover: #f4f3ef;
+  --color-on-cover-muted: #bccfef;
+  --color-border: #2c3442;
+  --color-border-control: #6f7889;
+  --color-border-strong: #e8e6e0;
+  --color-accent: #8fb3ff;
+  --color-accent-hover: #adc8ff;
+  --color-accent-pressed: #7aa2f5;
+  --color-accent-soft: #1b2a47;
+  --color-accent-tint: #22355c;
+  --color-on-accent: #0f1625;
+  --color-success-bg: #123222;
+  --color-success-border: #3f9b65;
+  --color-success-text: #7fdca6;
+  --color-danger-bg: #3a1715;
+  --color-danger-border: #d24d45;
+  --color-danger-text: #ff9b93;
+  --color-warning-bg: #33270f;
+  --color-warning-border: #b77b29;
+  --color-warning-text: #f2c46d;
+  --color-focus: #ffa45c;
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.35);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #12161f;
+    --color-surface: #1a202b;
+    --color-surface-sunken: #151a24;
+    --color-surface-selected: #252c3a;
+    --color-cover: #0b1a3a;
+    --color-text: #e8e6e0;
+    --color-text-muted: #a9b0bd;
+    --color-on-cover: #f4f3ef;
+    --color-on-cover-muted: #bccfef;
+    --color-border: #2c3442;
+    --color-border-control: #6f7889;
+    --color-border-strong: #e8e6e0;
+    --color-accent: #8fb3ff;
+    --color-accent-hover: #adc8ff;
+    --color-accent-pressed: #7aa2f5;
+    --color-accent-soft: #1b2a47;
+    --color-accent-tint: #22355c;
+    --color-on-accent: #0f1625;
+      --color-success-bg: #123222;
+    --color-success-border: #3f9b65;
+    --color-success-text: #7fdca6;
+    --color-danger-bg: #3a1715;
+    --color-danger-border: #d24d45;
+    --color-danger-text: #ff9b93;
+    --color-warning-bg: #33270f;
+    --color-warning-border: #b77b29;
+    --color-warning-text: #f2c46d;
+    --color-focus: #ffa45c;
+    --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.35);
+  }
+}
 @supports not (transition-timing-function: linear(0, 1)) {
   :root {
     --spring-snappy: cubic-bezier(0.25, 1, 0.5, 1);
@@ -238,7 +315,8 @@ textarea {
 }
 ::selection {
   background: var(--color-highlight);
-  color: var(--color-text);
+  /* O marca-texto é amarelo nos dois temas: o texto por cima é sempre tinta. */
+  color: var(--ink-900);
 }
 
 /* Ações */
@@ -625,6 +703,7 @@ select:disabled {
   select option:hover,
   select option:focus-visible {
     background: var(--color-highlight);
+    color: var(--ink-900);
     outline: none;
   }
   select option:checked {
@@ -2448,7 +2527,7 @@ app-home h2 {
 .cover-primary:active:not(:disabled) {
   background: var(--color-highlight);
   border-color: var(--color-highlight);
-  color: var(--color-text);
+  color: var(--ink-900);
 }
 .cover-secondary {
   background: transparent;
