@@ -18,7 +18,7 @@ test("a lesson opens from its concept, shows every section and leads to the next
   const figure = page.getByRole("img", { name: /^Quatro carros ocupam um cruzamento/ });
   await expect(figure).toBeVisible();
   await expect(page.locator(".lesson-figure figcaption")).toHaveText("Ilustração gerada por IA");
-  await expect(page.locator(".lesson-check")).toContainText("Conferido: Executado em Python 3");
+  await expect(page.locator(".lesson-example .lesson-check")).toContainText("Conferido: Executado em Python 3");
   // Caiu em 2017; não pode aparecer como "ainda não caiu", publicada ou não neste banco.
   await expect(page.locator(".lesson-questions").first()).toContainText("2017 Deadlock e ordem de aquisição de semáforos");
   await expect(page.getByText("Sem questão ligada neste recorte")).toHaveCount(0);
@@ -92,4 +92,34 @@ test("a one-page sheet also lives in the address and Back returns to the list", 
   await page.goBack();
   await expect(page).toHaveURL(/\/biblioteca$/);
   await expect(page.getByRole("heading", { name: "Biblioteca", exact: true, level: 1 })).toBeVisible();
+});
+
+// Modelo novo de lição (revisão do Codex, §4) nas três lições piloto.
+test("a pilot lesson shows objective, prerequisites, counterexample, transfer and an honest source note", async ({ page }) => {
+  await page.goto("/biblioteca/sistemas-operacionais/so-deadlock");
+  await expect(page.getByRole("heading", { name: "Deadlock", level: 1 })).toBeVisible();
+  await expect(page.locator(".lesson-goal")).toContainText("Ao terminar, você consegue");
+  await expect(page.getByRole("heading", { name: "Quando a regra não vale", level: 2 })).toBeVisible();
+  await expect(page.locator(".lesson-claim")).toContainText("Todo ciclo no grafo de alocação");
+
+  const transfer = page.locator(".lesson-transfer details");
+  await expect(transfer.getByText("A correção quebra a espera circular.")).toBeHidden();
+  await transfer.locator("summary").click();
+  await expect(transfer.getByText(/A correção quebra a espera circular\./)).toBeVisible();
+  await expect(transfer.locator(".lesson-check")).toContainText("busca exaustiva");
+
+  await expect(page.locator(".lesson-review")).toContainText("Nenhuma registrada para esta lição");
+  await expect(page.locator(".lesson-review")).toContainText("Revisão humanaAinda não.");
+
+  await page.locator(".lesson-prereq").getByRole("button", { name: "Semáforos, mutex e monitores" }).click();
+  await expect(page).toHaveURL(/\/biblioteca\/sistemas-operacionais\/so-semaforos$/);
+  await expect(page.getByRole("heading", { name: "Quando a regra não vale", level: 2 })).toHaveCount(0);
+});
+
+test("a pilot lesson fits a 320 px screen", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/biblioteca/algoritmos/alg-ordenacao");
+  await expect(page.getByRole("heading", { name: "Agora sozinho", level: 2 })).toBeVisible();
+  await page.locator(".lesson-transfer summary").click();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

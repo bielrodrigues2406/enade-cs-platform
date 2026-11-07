@@ -20,6 +20,17 @@ export type Lesson = {
   example: { title: string; code: string | null; steps: string[]; check: string };
   mistake: string;
   recall: { q: string; a: string }[];
+  /**
+   * Modelo novo (revisão do Codex, §4), opcional enquanto as lições antigas não
+   * forem refeitas: objetivo verificável, pré-requisitos, contraexemplo,
+   * exercício de transferência com solução conferida e fontes realmente consultadas.
+   */
+  objective: string | null;
+  prerequisites: string[];
+  counterexample: { claim: string; why: string } | null;
+  transfer: { prompt: string; steps: string[]; check: string } | null;
+  /** Só o que foi aberto e lido para escrever a lição, com edição e seção; nunca a bibliografia recomendada. */
+  sources: { title: string; edition: string; locator: string; url: string | null }[];
 };
 export type AreaLessons = { slug: string; cover: string | null; lessons: Map<string, Lesson> };
 
@@ -39,6 +50,11 @@ function image(src: unknown, where: string) {
   if (typeof src !== "string" || !FIGURE.test(src)) throw new Error(`${where}: caminho de imagem inválido.`);
   if (!publicAssetExists(src)) throw new Error(`${where}: ${src} não encontrado.`);
   return src;
+}
+
+function sourceUrl(value: unknown, where: string) {
+  if (typeof value !== "string" || value.length > 300 || !/^https:\/\/[^\s]+$/.test(value)) throw new Error(`${where}: endereço https inválido.`);
+  return value;
 }
 
 export function parseLessons(data: any, area: CoreArea, where: string): AreaLessons {
@@ -61,6 +77,26 @@ export function parseLessons(data: any, area: CoreArea, where: string): AreaLess
       },
       mistake: text(l.mistake, `${w}.mistake`, 40, 600),
       recall: list(l.recall, `${w}.recall`, 2, 3, (r, rw) => ({ q: text(r?.q, `${rw}.q`, 10, 200), a: text(r?.a, `${rw}.a`, 2, 300) })),
+      objective: l.objective === undefined ? null : text(l.objective, `${w}.objective`, 20, 300),
+      prerequisites: l.prerequisites === undefined ? [] : list(l.prerequisites, `${w}.prerequisites`, 1, 4, (id, pw) => {
+        if (typeof id !== "string" || !concepts.has(id) || id === l.concept) throw new Error(`${pw}: pré-requisito fora do núcleo da área.`);
+        return id;
+      }),
+      counterexample: l.counterexample === undefined ? null : {
+        claim: text(l.counterexample?.claim, `${w}.counterexample.claim`, 10, 200),
+        why: text(l.counterexample?.why, `${w}.counterexample.why`, 40, 900),
+      },
+      transfer: l.transfer === undefined ? null : {
+        prompt: text(l.transfer?.prompt, `${w}.transfer.prompt`, 40, 900),
+        steps: list(l.transfer?.steps, `${w}.transfer.steps`, 2, 6, (s, sw) => text(s, sw, 10, 500)),
+        check: text(l.transfer?.check, `${w}.transfer.check`, 20, 300),
+      },
+      sources: l.sources === undefined ? [] : list(l.sources, `${w}.sources`, 1, 5, (r, rw) => ({
+        title: text(r?.title, `${rw}.title`, 5, 200),
+        edition: text(r?.edition, `${rw}.edition`, 2, 120),
+        locator: text(r?.locator, `${rw}.locator`, 2, 200),
+        url: r?.url === undefined ? null : sourceUrl(r.url, `${rw}.url`),
+      })),
     });
   });
   return { slug: area.slug, cover: data.cover === undefined ? null : image(data.cover, `${where}.cover`), lessons };

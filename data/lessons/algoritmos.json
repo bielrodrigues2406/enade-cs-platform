@@ -82,6 +82,11 @@
     },
     {
       "concept": "alg-ordenacao",
+      "objective": "Comparar melhor, médio e pior caso das ordenações clássicas, dizer quais são estáveis e escolher a adequada para uma entrada descrita no enunciado.",
+      "prerequisites": [
+        "alg-complexidade",
+        "alg-recorrencia"
+      ],
       "body": [
         "Os algoritmos simples, bolha, seleção e inserção, são O(n²) no pior caso. A inserção é a mais útil: com o vetor já ordenado faz n − 1 comparações, O(n), e é rápida em vetores quase ordenados. A seleção faz sempre cerca de n²/2 comparações, mas no máximo n − 1 trocas.",
         "O merge sort divide ao meio, ordena cada metade recursivamente e intercala. Custa Θ(n log n) em todos os casos, é estável e usa O(n) de memória extra para a intercalação.",
@@ -101,11 +106,25 @@
         ],
         "check": "Executado em Python 3, com contagem das comparações: 12."
       },
+      "counterexample": {
+        "claim": "O quicksort é O(n log n).",
+        "why": "Só no caso médio, ou no valor esperado com pivô aleatório. Com o primeiro elemento como pivô e o vetor já ordenado, cada partição separa 0 elementos de um lado e todos os outros do outro. São (n − 1) + (n − 2) + ... + 1 = n(n − 1)/2 comparações: 28 para n = 8, contra 13 no vetor [5, 2, 7, 1, 8, 3, 6, 4]. No pior caso, o quicksort é Θ(n²)."
+      },
       "mistake": "Dizer que o quicksort é sempre O(n log n), ou que o merge sort ordena sem memória extra. Outro erro: achar que um algoritmo O(n²) nunca supera um O(n log n). Para vetores pequenos, a inserção costuma ser mais rápida, e bibliotecas a usam abaixo de algumas dezenas de elementos.",
       "recall": [
         { "q": "Qual é o melhor caso da inserção e quando ele ocorre?", "a": "O(n), com o vetor já ordenado." },
         { "q": "Por que o counting sort pode ser linear?", "a": "Não compara chaves: conta as ocorrências usando o valor como índice, o que exige inteiros num intervalo pequeno." }
-      ]
+      ],
+      "transfer": {
+        "prompt": "Um sistema guarda 1 milhão de pedidos já ordenados por data. (a) É preciso ordená-los por cliente, mantendo a ordem de data dentro de cada cliente. Qual algoritmo da lição você usa e por quê? (b) Noutro dia, a lista está ordenada por cliente, mas cada pedido pode estar até 3 posições fora do lugar. O que muda?",
+        "steps": [
+          "(a) É preciso um algoritmo estável: pedidos do mesmo cliente devem sair na ordem em que entraram, que é a de data. O merge sort é estável e Θ(n log n). O quicksort e o heapsort, na forma usual, não são estáveis e podem trocar a ordem de dois pedidos do mesmo cliente.",
+          "Exemplo: (Ana, 01/03), (Bia, 02/03), (Ana, 03/03), (Caio, 04/03), (Bia, 05/03) ordenados de forma estável por cliente dão Ana 01/03, Ana 03/03, Bia 02/03, Bia 05/03, Caio 04/03.",
+          "(b) Com cada elemento a no máximo k posições do lugar, a inserção desloca cada um no máximo cerca de k vezes: custa O(n·k), linear para k fixo. Com n = 1 000 e k = 3, foram no máximo 1 819 comparações em 200 vetores, contra cerca de 500 mil no pior caso da inserção.",
+          "A inserção também é estável, então serve para (b) sem perder a ordem de data."
+        ],
+        "check": "Executado em Python 3: contagem de comparações do quicksort com o primeiro pivô (28 e 13), ordenação estável do exemplo e inserção em 200 vetores de 1 000 elementos com deslocamento de até 3."
+      }
     },
     {
       "concept": "alg-lineares",
@@ -124,7 +143,7 @@
           "Ao ler o último ), o topo é (: casa. A pilha termina vazia, então a expressão está balanceada.",
           "Em ( [ ) ], ao ler ) o topo é [: não casa, e a expressão está desbalanceada."
         ],
-        "check": "Simulação feita à mão e conferida passo a passo; o algoritmo é o da conferência de parênteses com pilha."
+        "check": "Executado em Python 3 com uma pilha: ( [ ] { ( ) } ) termina com a pilha vazia; em ( [ ) ] o ) encontra [ no topo."
       },
       "mistake": "Trocar LIFO e FIFO nas questões de simulação, ou supor que a lista ligada tem acesso por índice O(1). Também é comum esquecer que remover o último de uma lista simplesmente ligada custa O(n).",
       "recall": [

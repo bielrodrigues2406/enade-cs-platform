@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Injector, Input, Output, afterNextRender, inject, signal } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Injector, Input, Output, afterNextRender, inject, signal, type SimpleChanges } from "@angular/core";
 import { requestJson } from "./api-request";
 import type { CoreConcept, Lesson } from "./core.types";
 
@@ -19,6 +19,8 @@ export class CoreLessonComponent {
   @Input() previous: CoreConcept | null = null;
   @Input() next: CoreConcept | null = null;
   @Input() references: string[] = [];
+  /** Conceitos da área, para dar nome (e link, quando há lição) aos pré-requisitos. */
+  @Input() concepts: CoreConcept[] = [];
   @Output() back = new EventEmitter<void>();
   @Output() go = new EventEmitter<CoreConcept>();
   @Output() question = new EventEmitter<string>();
@@ -29,7 +31,10 @@ export class CoreLessonComponent {
   error = signal("");
 
   /** A mesma instância serve à anterior e à próxima: recarrega quando o conceito muda. */
-  ngOnChanges() { void this.load(); }
+  ngOnChanges(changes: SimpleChanges) {
+    const concept = changes["concept"];
+    if (changes["slug"] || !concept || concept.previousValue?.id !== concept.currentValue?.id) void this.load();
+  }
 
   async load() {
     this.lesson.set(null);
@@ -47,4 +52,12 @@ export class CoreLessonComponent {
   }
 
   isIllustration(src: string) { return src.startsWith("/illustrations/"); }
+
+  prerequisite(id: string) { return this.concepts.find((c) => c.id === id) ?? null; }
+
+  /** Seções numeradas na ordem da página; as do modelo novo só contam quando existem. */
+  number(section: "example" | "counter" | "mistake" | "enade" | "recall" | "transfer" | "source", l: Lesson) {
+    const order = ["example", ...(l.counterexample ? ["counter"] : []), "mistake", "enade", "recall", ...(l.transfer ? ["transfer"] : []), "source"];
+    return String(order.indexOf(section) + 1).padStart(2, "0");
+  }
 }
