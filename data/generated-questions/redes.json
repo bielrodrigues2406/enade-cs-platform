@@ -137,6 +137,26 @@
       "answer": "A",
       "explanation": "Resposta: A.\n\nO controle de fluxo protege o receptor. Cada segmento enviado pelo receptor traz o campo janela, com o espaço livre no buffer de recepção. Se o aplicativo lê devagar, o buffer enche, a janela anunciada diminui e pode chegar a zero, e o emissor para até receber uma janela maior.\n\nO controle de congestionamento protege a rede. Ele age com base em perdas e atrasos na rede, que aqui não existem. A taxa efetiva do TCP é limitada pela menor das duas janelas.\n\nAs outras alternativas:\nB) Confunde os dois controles. A partida lenta e a redução da janela respondem a sinais da rede, não ao ritmo do aplicativo receptor.\nC) O handshake sincroniza números de sequência e troca parâmetros iniciais, mas não fixa uma taxa para a conexão inteira.\nD) O checksum detecta corrupção, não lentidão.\nE) O ICMP source quench foi abandonado e não é o mecanismo do TCP.",
       "check": "Nova resolução sem o gabarito: receptor lento com rede livre = controle de fluxo por janela anunciada. Opção A."
+    },
+    {
+      "id": "gen-red-dhcp-ordem",
+      "kind": "ESPELHO",
+      "format": "ORDEM",
+      "concepts": ["red-enderecamento", "red-aplicacao"],
+      "title": "Notebook pedindo endereço na rede",
+      "subject": "Troca de mensagens do DHCP",
+      "prompt": "Ao abrir o notebook na biblioteca do câmpus, uma estudante se conecta à rede sem fio. O notebook ainda não tem endereço IP, não sabe qual é o servidor DHCP e, por isso, começa a conversa por broadcast. O servidor reserva um endereço do conjunto disponível, oferece-o ao cliente, o cliente aceita uma das ofertas recebidas e o servidor confirma a concessão, com o prazo de validade, a máscara, o gateway e o servidor DNS.\n\nQual é a ordem das mensagens DHCP nessa concessão?",
+      "options": [
+        "DHCPDISCOVER, DHCPREQUEST, DHCPOFFER, DHCPACK",
+        "DHCPOFFER, DHCPDISCOVER, DHCPREQUEST, DHCPACK",
+        "DHCPREQUEST, DHCPOFFER, DHCPDISCOVER, DHCPACK",
+        "DHCPDISCOVER, DHCPOFFER, DHCPREQUEST, DHCPACK",
+        "DHCPDISCOVER, DHCPOFFER, DHCPACK, DHCPREQUEST"
+      ],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nO cliente procura servidores com DHCPDISCOVER em broadcast. Cada servidor responde com DHCPOFFER, propondo um endereço. O cliente escolhe uma oferta e envia DHCPREQUEST, também em broadcast, para que os outros servidores saibam que suas ofertas foram recusadas. O servidor escolhido confirma com DHCPACK, e a concessão começa a valer.\n\nAs outras alternativas:\nA) O cliente não pode pedir um endereço antes de alguém oferecê-lo.\nB) O servidor não oferece endereço sem antes receber a descoberta do cliente.\nC) Começa pelo pedido, sem descoberta nem oferta.\nE) A confirmação vem depois do pedido, e não antes.",
+      "check": "Nova resolução sem o gabarito, conferida com a RFC 2131: DISCOVER, OFFER, REQUEST, ACK.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

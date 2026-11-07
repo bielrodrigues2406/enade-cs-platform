@@ -203,6 +203,40 @@
       "answer": "B",
       "explanation": "Resposta: B.\n\nA solução descrita gera a recorrência M(n) = 2M(n − 1) + 1, com M(1) = 1. Calculando: M(2) = 3, M(3) = 7, M(4) = 15, M(5) = 31. A forma fechada é M(n) = 2ⁿ − 1, e 2⁵ − 1 = 31. Esse número também é o mínimo possível.\n\nAs outras alternativas:\nA) 25 = 5² supõe crescimento quadrático. O número de movimentos dobra a cada disco: crescimento exponencial.\nC) 32 = 2⁵ esquece o − 1 da forma fechada.\nD) 16 = 2⁴ é M(4) + 1, a resposta para um disco a menos com o mesmo erro.\nE) 10 = 2 × 5 trata a recorrência como linear.",
       "check": "Nova resolução sem o gabarito: recorrência calculada em código, M(5) = 31 = 2^5 − 1."
+    },
+    {
+      "id": "gen-alg-laco-harmonico",
+      "kind": "LACUNA",
+      "format": "CALCULO",
+      "concepts": ["alg-complexidade"],
+      "title": "Quantas vezes o laço interno roda",
+      "subject": "Contagem de iterações e soma harmônica",
+      "prompt": "Ao analisar um algoritmo, contar quantas vezes a operação mais interna executa costuma ser mais seguro que olhar só o número de laços. Dois laços aninhados nem sempre custam n²: o custo depende de quanto a variável do laço interno avança a cada passo. Quando o passo depende do laço externo, a contagem vira uma soma que precisa ser feita com cuidado.\n\nUm sistema de reservas usa o trecho a seguir para marcar, para cada intervalo i de 1 a n, todos os horários múltiplos de i:\n\n```\ncont = 0\nfor i in range(1, n + 1):\n    j = i\n    while j <= n:\n        cont += 1\n        j += i\n```\n\nPara n = 12, qual é o valor final de cont?",
+      "options": ["12", "35", "48", "78", "144"],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\nPara cada i, o laço interno visita i, 2i, 3i, … até n, ou seja, ⌊n/i⌋ vezes. Para n = 12: 12 + 6 + 4 + 3 + 2 + 2 + 1 + 1 + 1 + 1 + 1 + 1 = 35.\n\nEm geral, a soma de ⌊n/i⌋ para i de 1 a n fica perto de n·(1 + 1/2 + … + 1/n), a soma harmônica, que cresce como n·ln n. O trecho é Θ(n log n), e não Θ(n²).\n\nAs outras alternativas:\nA) 12 conta só as iterações do laço externo.\nC) 48 é n·⌈log₂ n⌉ = 12 × 4, uma estimativa da ordem de grandeza, e não a contagem exata.\nD) 78 = n(n + 1)/2 supõe que o laço interno avança de 1 em 1, de i até n.\nE) 144 = n² supõe que o laço interno sempre percorre os n valores.",
+      "check": "Nova resolução sem o gabarito: soma de ⌊12/i⌋ = 35. Executado em Python 3: cont = 35 para n = 12.",
+      "stimulus": ["TEXTO_BASE", "CODIGO"]
+    },
+    {
+      "id": "gen-alg-ordem-topologica",
+      "kind": "ESPELHO",
+      "format": "ORDEM",
+      "concepts": ["alg-grafos"],
+      "title": "Ordem das disciplinas por pré-requisito",
+      "subject": "Ordenação topológica com o algoritmo de Kahn",
+      "prompt": "A coordenação de um curso modela os pré-requisitos como um grafo dirigido acíclico: uma aresta X → Y significa que X precisa ser cursada antes de Y. Para sugerir uma ordem de matrícula, o sistema usa o algoritmo de Kahn. Ele mantém o conjunto das disciplinas sem pré-requisito pendente; a cada passo, retira desse conjunto a disciplina de menor código em ordem alfabética, coloca-a na sequência e remove as arestas que saem dela, liberando as disciplinas que ficarem sem pendência.\n\nPré-requisitos:\n\nALG1 → ALG2\nALG1 → ED\nED → BD\nED → SO\nARQ → SO\nSO → RED\n\nQual sequência o sistema sugere?",
+      "options": [
+        "ALG1, ALG2, ARQ, ED, BD, SO, RED",
+        "ALG1, ARQ, ED, ALG2, SO, BD, RED",
+        "ALG1, ED, ALG2, BD, ARQ, SO, RED",
+        "ARQ, ALG1, ALG2, ED, SO, BD, RED",
+        "ALG1, ALG2, ED, BD, SO, ARQ, RED"
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nNo início, não têm pré-requisito ALG1 e ARQ. Sai ALG1, primeira em ordem alfabética, o que libera ALG2 e ED. O conjunto fica {ALG2, ARQ, ED}: saem ALG2, depois ARQ (SO ainda espera ED) e depois ED, que libera BD e SO. Saem BD e SO, e por fim RED.\n\nAs outras alternativas:\nB) É uma ordenação topológica válida, mas não respeita o desempate: depois de ALG1, o menor código disponível é ALG2, e não ARQ.\nC) Também é válida, mas tira ED antes de ALG2 e ARQ, contrariando a ordem alfabética.\nD) Começa por ARQ, mas ALG1 vem antes em ordem alfabética.\nE) Não é uma ordenação topológica: coloca SO antes de ARQ, que é seu pré-requisito.",
+      "check": "Nova resolução sem o gabarito: Kahn com fila de prioridade alfabética. Executado em Python 3 com heapq: ALG1, ALG2, ARQ, ED, BD, SO, RED.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

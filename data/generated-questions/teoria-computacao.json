@@ -120,6 +120,20 @@
       "answer": "C",
       "explanation": "Resposta: C.\n\nNa construção de subconjuntos, cada estado do AFD representa o conjunto de estados em que o AFN pode estar depois de ler o mesmo prefixo. Com 3 estados no AFN, há 2³ = 8 subconjuntos possíveis, incluindo o vazio. Na prática, muitos podem ser inalcançáveis, por isso \"até 8\". O AFD reconhece exatamente L: AFN e AFD têm o mesmo poder de reconhecimento.\n\nAs outras alternativas:\nA) O AFD pode precisar de mais estados que o AFN; o não determinismo permite descrições mais compactas.\nB) O limite é exponencial (2ⁿ), não linear.\nD) 9 = 3² conta pares, mas os estados do AFD são subconjuntos de qualquer tamanho.\nE) A construção preserva a linguagem. Determinismo não aumenta nem reduz o poder dos autômatos finitos.",
       "check": "Nova resolução sem o gabarito: limite superior 2^n = 8, equivalência de linguagem garantida pela construção. Opção C."
+    },
+    {
+      "id": "gen-tc-regex-cep",
+      "kind": "QUENTE",
+      "format": "CODIGO_OPCOES",
+      "concepts": ["tc-regulares"],
+      "title": "Validando o CEP num formulário",
+      "subject": "Expressão regular com âncoras e repetição",
+      "prompt": "Um formulário de cadastro precisa aceitar o CEP brasileiro em dois formatos: cinco dígitos, um hífen e três dígitos (12345-678) ou os oito dígitos juntos (12345678). Qualquer outro texto deve ser recusado, inclusive com espaços antes ou depois, letras ou dígitos a mais. A validação usa uma expressão regular aplicada ao texto inteiro com a função de busca da linguagem, que encontra o padrão em qualquer posição se não houver âncoras. Na notação usada, \\d é um dígito, {n} repete n vezes, ? torna o elemento anterior opcional, ^ marca o início e $ o fim do texto.\n\nQual expressão aceita exatamente os dois formatos?",
+      "options": ["^\\d{5}-\\d{3}$", "^\\d{5}(-\\d{3})?$", "^\\d{5}-?\\d{3}$", "\\d{5}-?\\d{3}", "^[0-9-]{8,9}$"],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nAs âncoras ^ e $ obrigam o padrão a cobrir o texto inteiro. \\d{5} exige cinco dígitos, -? aceita o hífen ou a falta dele, e \\d{3} exige os três dígitos finais. 12345-678 e 12345678 passam; 1234-5678, 12345-67 e 123456789 são recusados.\n\nAs outras alternativas:\nA) Exige o hífen e recusa 12345678.\nB) Torna opcional todo o trecho final: aceita 12345 e recusa 12345678.\nD) Sem âncoras, a busca encontra o padrão dentro de 123456789 e de \" 12345-678\", que deveriam ser recusados.\nE) Aceita qualquer mistura de dígitos e hífens com 8 ou 9 caracteres, como 1234-5678.",
+      "check": "Executado em Python 3 com re.search: só C aceita os dois formatos e recusa 1234-5678, 12345-67, 123456789, 12a45-678 e \" 12345-678\"; A e B recusam 12345678; D aceita 123456789; E aceita 1234-5678.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

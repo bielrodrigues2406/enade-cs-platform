@@ -126,6 +126,39 @@
         "first": true,
         "second": false
       }
+    },
+    {
+      "id": "gen-bd-having-total",
+      "kind": "ESPELHO",
+      "format": "CODIGO_OPCOES",
+      "concepts": ["bd-sql", "bd-juncoes"],
+      "title": "Clientes com total de pedidos acima de 40",
+      "subject": "Agregação com GROUP BY e HAVING",
+      "prompt": "Uma loja guarda os clientes e os pedidos em duas tabelas. O valor de um pedido pode estar nulo enquanto o orçamento não é fechado.\n\ncliente(id, nome): (1, 'Ana'), (2, 'Bruno'), (3, 'Carla'), (4, 'Davi')\npedido(id, cliente_id, valor): (1, 1, 30), (2, 1, 30), (3, 2, 50), (4, 3, 20), (5, 3, 10), (6, 4, NULL), (7, 4, 45)\n\nO setor financeiro quer o nome de cada cliente cuja soma dos valores dos pedidos passa de 40, junto com essa soma. O resultado esperado é Ana com 60, Bruno com 50 e Davi com 45.\n\nQual consulta produz exatamente esse resultado?",
+      "options": [
+        "SELECT c.nome, SUM(p.valor) FROM cliente c JOIN pedido p ON p.cliente_id = c.id WHERE SUM(p.valor) > 40 GROUP BY c.nome;",
+        "SELECT c.nome, SUM(p.valor) FROM cliente c JOIN pedido p ON p.cliente_id = c.id WHERE p.valor > 40 GROUP BY c.nome;",
+        "SELECT c.nome, SUM(p.valor) FROM cliente c JOIN pedido p ON p.cliente_id = c.id GROUP BY c.nome HAVING AVG(p.valor) > 40;",
+        "SELECT c.nome, SUM(p.valor) FROM cliente c, pedido p GROUP BY c.nome HAVING SUM(p.valor) > 40;",
+        "SELECT c.nome, SUM(p.valor) FROM cliente c JOIN pedido p ON p.cliente_id = c.id GROUP BY c.nome HAVING SUM(p.valor) > 40;"
+      ],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nA junção liga cada pedido ao seu cliente, o GROUP BY forma um grupo por cliente e o HAVING filtra os grupos depois da agregação. SUM ignora o valor nulo de Davi: 45. Ana soma 60, Bruno 50 e Carla 30, que fica de fora.\n\nAs outras alternativas:\nA) Função de agregação não pode aparecer no WHERE, que filtra linhas antes de agrupar; o PostgreSQL recusa a consulta.\nB) O WHERE p.valor > 40 descarta os pedidos de 30, 20 e 10 antes de somar: sobram Bruno com 50 e Davi com 45, e Ana some.\nC) Filtra pela média, e não pela soma: Ana tem média 30 e sai do resultado.\nD) Sem condição de junção, cada cliente é combinado com todos os pedidos: os quatro aparecem com soma 185.",
+      "check": "Nova resolução sem o gabarito: HAVING sobre SUM após a junção. Executado no PostgreSQL 17 com os dados do enunciado: E devolve Ana 60, Bruno 50, Davi 45; A dá erro; B e C devolvem só Bruno e Davi; D devolve os quatro com 185.",
+      "stimulus": ["TABELA", "CENARIO"]
+    },
+    {
+      "id": "gen-bd-nulos-agregacao",
+      "kind": "ESPELHO",
+      "format": "ITENS3",
+      "concepts": ["bd-sql"],
+      "title": "Valores nulos em contagens e filtros",
+      "subject": "NULL em COUNT, AVG e comparações",
+      "prompt": "Em SQL, NULL representa um valor ausente ou desconhecido. Comparações com NULL não resultam em verdadeiro nem em falso, mas em desconhecido, e o WHERE só mantém as linhas em que a condição é verdadeira. As funções de agregação também tratam NULL de forma própria.\n\nA tabela pedido de uma loja tem cinco linhas:\n\npedido(id, cliente_id, valor): (10, 1, 50), (11, 1, 30), (12, 3, NULL), (13, 3, 20), (14, NULL, 15)\n\nAvalie as afirmações.\n\nI. SELECT COUNT(*) FROM pedido devolve 4, porque a linha com valor nulo não é contada.\nII. SELECT AVG(valor) FROM pedido devolve 28,75, porque as funções de agregação desconsideram os valores nulos.\nIII. SELECT COUNT(*) FROM pedido WHERE valor <> 50 devolve 4, porque NULL é diferente de 50.\n\nÉ correto o que se afirma em",
+      "truth": ["II"],
+      "explanation": "Resposta: B.\n\nI está errada. COUNT(*) conta linhas, inclusive as que têm colunas nulas: são 5. Quem ignora o nulo é COUNT(valor), que daria 4.\n\nII está correta. AVG soma os valores não nulos (50 + 30 + 20 + 15 = 115) e divide pela quantidade deles (4): 28,75.\n\nIII está errada. NULL <> 50 é desconhecido, e o WHERE descarta a linha. Sobram 30, 20 e 15: o resultado é 3.\n\nAs outras alternativas:\nA) Inclui só I, que confunde COUNT(*) com COUNT(valor).\nC) Junta as duas afirmações falsas.\nD) Inclui III, que trata NULL como um valor comum na comparação.\nE) Inclui I e III.",
+      "check": "Nova resolução sem o gabarito: COUNT(*) = 5, AVG = 28,75, WHERE valor <> 50 = 3. Executado no PostgreSQL 17 com as cinco linhas do enunciado.",
+      "stimulus": ["TEXTO_BASE", "TABELA"]
     }
   ]
 }

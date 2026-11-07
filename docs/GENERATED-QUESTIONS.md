@@ -130,6 +130,10 @@ Gabriel dispensou o segundo agente. O que substitui essa revisão:
   - Formatos: 80 simples, 23 de itens (22 com IV), 16 de asserção-razão e 1 de ordenação.
   - Figuras: 21, sendo 12 diagramas e gráficos em SVG (`scripts/draw-figures.py`) e 9 ilustrações geradas no GPT Image (`data/illustrations/catalog.json`).
   - Banco: migration `032_generated_formats.sql` (formatos novos, `stimulus`, `figure_src`, `figure_alt`).
+- **Lote 2, primeira parte (07/11/2026):** 16 questões, priorizando as formas que faltavam.
+  - Formas: 4 de cálculo, 2 de código nas alternativas (SQL e expressão regular), 2 de ordem, 1 de associação, 4 de itens (duas com 1 verdadeira e uma com 3), 2 de asserção (B e E) e 1 simples.
+  - Temas: laço com soma harmônica, ordenação topológica, GROUP BY e HAVING, NULL em agregações, Scrum, tipos de teste, modus tollens, Round Robin com chegadas, regularização, heurísticas de Nielsen, CEP com expressão regular, CPI médio, DHCP, sessão em nuvem elástica, XSS e passagem de parâmetros em C.
+  - Conferência: SQL no PostgreSQL 17, C com gcc, contas e simulações em Python 3, registradas no `check` de cada uma.
 - **Pistas da resposta:** resultado da revisão e travas em [GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md#5-resultado-da-revisão-07112026).
 - **Próximos lotes** (base em [ENADE-EVOLUTION.md](ENADE-EVOLUTION.md)):
   - texto-base de 120 a 200 palavras com referência, como a prova desde 2014 (o lote 1 tem mediana de 60 palavras, contra 214 em 2021);

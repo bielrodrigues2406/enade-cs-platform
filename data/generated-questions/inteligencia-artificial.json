@@ -144,6 +144,20 @@
         "first": false,
         "second": false
       }
+    },
+    {
+      "id": "gen-ia-regularizacao",
+      "kind": "ESPELHO",
+      "format": "ITENS4",
+      "concepts": ["ia-aprendizado", "ia-avaliacao"],
+      "title": "Ajustando um modelo de evasão",
+      "subject": "Viés, variância, regularização e uso do conjunto de teste",
+      "prompt": "Uma universidade treina um modelo para prever quais estudantes têm risco de evadir. Os dados foram divididos em treino, validação e teste. A equipe compara versões do modelo variando a regularização L2, o número de camadas da rede e outros hiperparâmetros, e discute como interpretar os erros observados em cada conjunto antes de levar o modelo para produção.\n\nAvalie as afirmações da equipe.\n\nI. Aumentar a regularização L2 tende a reduzir a variância do modelo, com o risco de aumentar o viés.\nII. Se os erros de treino e de validação estão ambos altos e próximos, o modelo sofre de sobreajuste.\nIII. Escolher os hiperparâmetros pelo desempenho no conjunto de teste dá uma estimativa sem viés do erro em produção.\nIV. Acrescentar camadas a uma rede neural sempre reduz o erro no conjunto de validação.\n\nÉ correto apenas o que se afirma em",
+      "truth": ["I"],
+      "combos": [["I"], ["IV"], ["I", "III"], ["II", "III"], ["II", "IV"]],
+      "explanation": "Resposta: A.\n\nI está correta. A regularização L2 penaliza pesos grandes e deixa o modelo mais simples: a variância cai, e, se for forte demais, o viés sobe.\n\nII está errada. Erros altos e próximos indicam subajuste (viés alto). Sobreajuste aparece como erro de treino baixo e de validação bem maior.\n\nIII está errada. Usar o teste para escolher hiperparâmetros faz o modelo se ajustar a ele, e a estimativa fica otimista. A escolha é feita na validação, e o teste fica para o fim.\n\nIV está errada. Mais capacidade pode levar a sobreajuste e piorar a validação; o \"sempre\" é falso.\n\nAs outras alternativas:\nB) IV é um absoluto falso.\nC) Inclui III, que vaza informação do teste.\nD) Junta duas afirmações falsas.\nE) Junta duas afirmações falsas.",
+      "check": "Nova resolução sem o gabarito: trade-off viés-variância e protocolo treino/validação/teste. Só I é verdadeira.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

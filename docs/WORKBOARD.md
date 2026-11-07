@@ -349,3 +349,6 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
   - **Falta:** enunciados longos (77 questões ainda com até 80 palavras), que vão para o PR E.
 
 - **07/11/2026 · Claude · PR D (LIB-2), piloto da Biblioteca:** 23 lições (13 de Algoritmos e 10 de SO), uma por conceito do núcleo, em `data/lessons/`, com rota `GET /api/core/:slug/lessons/:concept` e tela `core-lesson` sob demanda. Exemplos executados (Python 3 e gcc). Capa na página da área, "Ler a lição" em cada conceito, anterior e próxima. Corrigido no núcleo de SO: o relógio também sofre a anomalia de Belady. Sem migration. Aguarda a leitura de Gabriel antes do PR F. Ver `docs/LIBRARY-LESSONS.md`.
+
+- **07/11/2026 · Claude · PR E (parte 1):** 16 questões geradas novas em 13 áreas, nas formas que faltavam: `CALCULO` (4), `CODIGO_OPCOES` (2), `ORDEM` (2), `ASSOCIACAO` (1), itens (4) e asserção (2, gabaritos B e E). Banco com 136; auditoria dentro das travas (única mais longa 6%, chutador 23%, item I verdadeiro 63%, letras A 22, B 29, C 30, D 30, E 25). Conferência por execução (PostgreSQL 17, gcc, Python 3). Falta o restante do lote e o alongamento dos enunciados.
+
