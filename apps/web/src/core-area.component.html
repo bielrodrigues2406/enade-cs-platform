@@ -31,8 +31,8 @@
         <span class="core-confidence-ring" aria-hidden="true" [style.--value]="a.confidence.value / 100"><b>{{ a.confidence.value }}</b></span>
         <dl>
           <div><dt>Você diz saber</dt><dd>{{ a.confidence.self }}% <small>({{ rated() }}/{{ a.concepts.length }} marcados)</small></dd></div>
-          <div><dt>Acerto nas questões</dt><dd>@if (a.confidence.answers === null) { ainda sem respostas } @else { {{ a.confidence.answers }}% <small>({{ a.confidence.attempts }} resp.)</small> }</dd></div>
-          @if (a.confidence.cards !== null) { <div><dt>Memória nos flashcards</dt><dd>{{ a.confidence.cards }}%</dd></div> }
+          <div><dt>Acerto na 1ª resposta</dt><dd>@if (a.confidence.observed === null) { ainda sem respostas } @else { {{ a.confidence.observed }}% <small>({{ a.confidence.attempts }} {{ a.confidence.attempts === 1 ? "resposta" : "respostas" }}{{ a.confidence.attempts < 5 ? "; pesa menos até 5" : "" }})</small> }</dd></div>
+          @if (a.confidence.cards !== null) { <div><dt>Lembrança estimada nos flashcards</dt><dd>{{ a.confidence.cards }}%</dd></div> }
         </dl>
       </div>
     </div>
@@ -80,9 +80,10 @@
               <button type="button" class="text-button core-read" [attr.data-lesson]="c.id" [attr.aria-label]="'Ler a lição: ' + c.name" (click)="read(c)">Ler a lição <span aria-hidden="true">→</span></button>
             }
             <div class="core-rating" role="radiogroup" [attr.aria-label]="'Quanto você sabe de ' + c.name">
-              @for (l of levels; track l.value) {
+              @for (l of levels; track l.value; let li = $index) {
                 <button type="button" role="radio" [attr.aria-checked]="c.level === l.value" [class]="'core-level level-' + l.value"
-                  [disabled]="saving() !== null && saving() !== c.id" (click)="rate(c, l.value)">{{ l.label }}</button>
+                  [attr.tabindex]="(c.level ?? levels[0].value) === l.value ? 0 : -1"
+                  [disabled]="saving() !== null && saving() !== c.id" (click)="rate(c, l.value)" (keydown)="ratingKey($event, c, li)">{{ l.label }}</button>
               }
             </div>
             @if (c.generated.length) {
@@ -111,7 +112,7 @@
                 </ul>
               </details>
             } @else {
-              <p class="core-fundamental">Ainda não caiu nas provas de 2005 a 2021.</p>
+              <p class="core-fundamental">Sem questão ligada neste recorte do acervo (2005 a 2021).</p>
             }
           </li>
         }

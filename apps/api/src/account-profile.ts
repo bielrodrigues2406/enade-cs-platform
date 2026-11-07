@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, Post, Put, Req, Res } from "@nestjs/common";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
-import { requireNewPassword } from "./password-policy.js";
+import { passwordOwnerOf, requireNewPassword } from "./password-policy.js";
 import { requireIdentity, sessionHash } from "./session.js";
 import { hashPassword, verifyPassword } from "./password.js";
 import { AuthThrottle, credentials, emailAddress, profile } from "./auth.js";
@@ -97,7 +97,8 @@ export class AccountProfileController {
     await checkPassword(req, user.id, body?.currentPassword);
     this.throttle.refund(req, user.email!);
     const { password } = credentials({ email: user.email, password: body?.newPassword });
-    requireNewPassword(password, { email: user.email });
+    // Nome e prontuário guardados também valem, como no cadastro (revisão do Codex, R8).
+    requireNewPassword(password, await passwordOwnerOf(db, user.id));
     const encoded = await hashPassword(password);
     const client = await db.connect();
     try {

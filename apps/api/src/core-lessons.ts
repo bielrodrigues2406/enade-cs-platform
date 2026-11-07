@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import type { CoreArea } from "./core-concepts.js";
+import { publicAssetExists } from "./public-assets.js";
 
 // Lições da Biblioteca (LIB-2, ver docs/LIBRARY-LESSONS.md): uma por conceito do
 // núcleo, com explicação, exemplo resolvido e conferido, erro comum e
@@ -9,7 +10,6 @@ import type { CoreArea } from "./core-concepts.js";
 // questões que o núcleo já liga ao conceito.
 
 const ROOT = process.env.STUDY_CONTENT_DIR || path.resolve("data");
-const PUBLIC = path.resolve("apps/web/public");
 const FIGURE = /^\/(figures|illustrations)\/[A-Za-z0-9-]+\.(svg|webp)$/;
 
 export type Figure = { src: string; alt: string };
@@ -34,10 +34,10 @@ const list = <T>(value: unknown, where: string, min: number, max: number, item: 
   return value.map((v, i) => item(v, `${where}[${i}]`));
 };
 
-/** A imagem precisa existir em apps/web/public, ou a tela mostraria um quadro vazio. */
+/** A imagem precisa existir onde a tela a busca, ou apareceria um quadro vazio. */
 function image(src: unknown, where: string) {
   if (typeof src !== "string" || !FIGURE.test(src)) throw new Error(`${where}: caminho de imagem inválido.`);
-  if (!existsSync(path.join(PUBLIC, src))) throw new Error(`${where}: ${src} não encontrado.`);
+  if (!publicAssetExists(src)) throw new Error(`${where}: ${src} não encontrado.`);
   return src;
 }
 

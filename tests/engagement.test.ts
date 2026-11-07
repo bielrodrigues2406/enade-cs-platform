@@ -150,3 +150,10 @@ test("the constancy ranking lists only accounts that stay visible, by days studi
   assert.equal((await json("ranking", visitor)).canJoin, false);
   assert.equal((await call("me/ranking", visitor, "PUT", { visible: true })).status, 403);
 });
+
+test("recall on cards falls with the time since the last review", async () => {
+  const { retrievability } = await import("../apps/api/src/fsrs.js");
+  // Revisão do Codex (R6): estabilidade alta não vale 100% para sempre; um ano sem revisar derruba a lembrança.
+  assert.equal(retrievability(0, 30), 1);
+  assert.ok(retrievability(365, 30) < 0.7);
+});

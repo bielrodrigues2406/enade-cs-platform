@@ -63,3 +63,9 @@ export function requireNewPassword(password: unknown, owner: PasswordOwner = {})
   if (problem) fail(problem, 400);
   return password as string;
 }
+
+/** Dados guardados da conta, para a política comparar com a senha nova (troca e reset). */
+export async function passwordOwnerOf(db: { query: (sql: string, args: unknown[]) => Promise<{ rows: any[] }> }, identityId: string): Promise<PasswordOwner> {
+  const row = (await db.query("SELECT email, display_name, enrollment FROM account WHERE identity_id=$1", [identityId])).rows[0];
+  return row ? { email: row.email, name: row.display_name, enrollment: row.enrollment } : {};
+}

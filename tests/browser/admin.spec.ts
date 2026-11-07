@@ -145,7 +145,7 @@ test("an admin registers a professor account, who then updates profile and passw
   await expect(professor.getByText("Dados salvos.")).toBeVisible();
   await expect(professor.getByLabel("Prontuário IFSP")).toHaveValue("PE3007777");
 
-  const newPassword = "Nova senha teste 2026!";
+  const newPassword = "Nova senha girassol 2026!";
   await professor.getByLabel("Senha atual", { exact: true }).fill("errada errada 1");
   await professor.getByLabel("Nova senha", { exact: true }).fill(newPassword);
   await professor.getByLabel("Repita a nova senha").fill(newPassword);

@@ -4,6 +4,7 @@ import { fail } from "./api-error.js";
 import { requireIdentity } from "./session.js";
 import { areaProgress, type AreaProgress } from "./progress.js";
 import { loadDecks } from "./study-content.js";
+import { retrievability } from "./fsrs.js";
 import { FORMACAO_GERAL, loadCore, type CoreArea } from "./core-concepts.js";
 import { loadLessons } from "./core-lessons.js";
 
@@ -11,14 +12,17 @@ import { loadLessons } from "./core-lessons.js";
 // A confiança junta três sinais independentes e mostra cada um separado:
 // o que a pessoa diz saber, o que ela acerta e o que ela lembra nos cartões.
 
-const STABLE_DAYS = 21;
 /** A partir de 5 respostas o acerto da área conta inteiro; antes, proporcionalmente. */
 const ENOUGH_ANSWERS = 5;
 
 export type Confidence = {
   value: number;
   self: number; rated: number;
-  answers: number | null; attempts: number;
+  /** Sinal usado no índice: o acerto pesa menos até 5 respostas. */
+  answers: number | null;
+  /** Taxa observada de acerto na primeira resposta, sem atenuação (revisão do Codex, R5). */
+  observed: number | null;
+  attempts: number;
   cards: number | null;
 };
 
@@ -33,7 +37,10 @@ export function confidence(area: CoreArea, ratings: Map<string, number>, progres
   const weight = parts.reduce((s, [w]) => s + w, 0);
   const value = Math.round((100 * parts.reduce((s, [w, v]) => s + w * v, 0)) / weight);
   const pct = (v: number) => Math.round(100 * v);
-  return { value, self: pct(self), rated, answers: answers === null ? null : pct(answers), attempts, cards: cards === null ? null : pct(cards) };
+  return {
+    value, self: pct(self), rated, answers: answers === null ? null : pct(answers),
+    observed: attempts ? pct(progress!.firstCorrect / attempts) : null, attempts, cards: cards === null ? null : pct(cards),
+  };
 }
 
 async function ratingsOf(owner: string) {
@@ -42,15 +49,20 @@ async function ratingsOf(owner: string) {
   )).rows.map((r) => [r.concept_id, r.level]));
 }
 
-/** Memória média do baralho da área: estabilidade/21 dias, limitada a 1; cartão nunca visto conta 0. */
+/**
+ * Lembrança estimada no baralho da área: a recuperabilidade do FSRS hoje, que cai com o
+ * tempo desde a última revisão (revisão do Codex, R6). Cartão nunca visto conta 0.
+ */
 async function deckMemory(owner: string): Promise<Map<string, number>> {
   const [decks, rows] = await Promise.all([
     loadDecks(),
-    db.query<{ card_id: string; stability: number }>("SELECT card_id,stability FROM flashcard_state WHERE identity_id=$1", [owner]),
+    db.query<{ card_id: string; stability: number; last_review: Date | null }>(
+      "SELECT card_id,stability,last_review FROM flashcard_state WHERE identity_id=$1", [owner]),
   ]);
-  const stability = new Map(rows.rows.map((r) => [r.card_id, r.stability]));
-  return new Map(decks.map((d) => [d.deck,
-    d.cards.reduce((sum, c) => sum + Math.min(1, (stability.get(c.id) ?? 0) / STABLE_DAYS), 0) / d.cards.length]));
+  const now = Date.now();
+  const recall = new Map(rows.rows.map((r) => [r.card_id,
+    r.last_review ? retrievability(Math.max(0, (now - r.last_review.getTime()) / 86_400_000), r.stability) : 0]));
+  return new Map(decks.map((d) => [d.deck, d.cards.reduce((sum, c) => sum + (recall.get(c.id) ?? 0), 0) / d.cards.length]));
 }
 
 /** Versão publicada de cada questão neste banco (o acervo pode estar incompleto num ambiente). */
@@ -113,7 +125,11 @@ export class CoreConceptsController {
     const [published, generated, lessons] = await Promise.all([
       publishedVersions([...new Set(linked.map((q) => q.id))]),
       generatedByConcept(area.concepts.map((c) => c.id)),
-      loadLessons(core.areas),
+      // As lições são um complemento: se o conteúdo delas falhar, a área abre sem elas (e o erro fica no log).
+      loadLessons(core.areas).catch((error) => {
+        console.error("Lições indisponíveis:", error instanceof Error ? error.message : error);
+        return new Map() as Awaited<ReturnType<typeof loadLessons>>;
+      }),
     ]);
     const ofArea = lessons.get(area.slug);
     const { concepts, ...rest } = area;

@@ -166,11 +166,11 @@
       "concepts": ["ia-arvore-decisao"],
       "title": "Ganho de informação de um atributo",
       "subject": "Entropia e ganho na indução de árvores de decisão",
-      "prompt": "Na indução de árvores de decisão (ID3, C4.5), cada nó escolhe o atributo de maior ganho de informação: a entropia do conjunto antes da divisão menos a média ponderada das entropias dos subconjuntos. Para duas classes com proporção p e 1 − p, a entropia é H = −p·log₂ p − (1 − p)·log₂(1 − p).\n\nUm banco treina um classificador de aprovação de crédito com 16 pedidos: 8 aprovados e 8 recusados. O atributo \"tem renda comprovada\" divide os pedidos em dois grupos de 8:\n\nCom renda comprovada: 6 aprovados e 2 recusados\nSem renda comprovada: 2 aprovados e 6 recusados\n\nUse H(0,25) = H(0,75) ≈ 0,811.\n\nQual é o ganho de informação desse atributo, aproximadamente?",
+      "prompt": "No algoritmo ID3 de indução de árvores de decisão, cada nó escolhe o atributo de maior ganho de informação (o C4.5 usa uma variação, a razão de ganho, que penaliza atributos com muitos valores). O ganho é a entropia do conjunto antes da divisão menos a média ponderada das entropias dos subconjuntos. Para duas classes com proporção p e 1 − p, a entropia é H = −p·log₂ p − (1 − p)·log₂(1 − p).\n\nUm banco treina um classificador de aprovação de crédito com 16 pedidos: 8 aprovados e 8 recusados. O atributo \"tem renda comprovada\" divide os pedidos em dois grupos de 8:\n\nCom renda comprovada: 6 aprovados e 2 recusados\nSem renda comprovada: 2 aprovados e 6 recusados\n\nUse H(0,25) = H(0,75) ≈ 0,811.\n\nQual é o ganho de informação desse atributo, aproximadamente?",
       "options": ["0,000", "0,189", "0,500", "0,811", "1,000"],
       "answer": "B",
       "explanation": "Resposta: B.\n\nAntes da divisão, 8 aprovados e 8 recusados: H = 1. Cada grupo tem 8 pedidos (peso 0,5) com proporções 0,75 e 0,25: entropia de cerca de 0,811. A média ponderada é 0,5 × 0,811 + 0,5 × 0,811 = 0,811. O ganho é 1 − 0,811 = 0,189.\n\nAs outras alternativas:\nA) Zero seria um atributo que não separa nada, com as mesmas proporções em cada grupo.\nC) 0,5 não sai das entropias do problema; é só o peso de cada grupo.\nD) 0,811 é a entropia depois da divisão, e não o ganho.\nE) 1,000 é a entropia antes da divisão; o ganho seria 1 só se os grupos ficassem puros.",
-      "check": "Executado em Python 3: H(0,5) = 1, H(0,75) = 0,8113, ganho = 0,189.",
+      "check": "Executado em Python 3: H(0,5) = 1, H(0,75) = 0,8113, ganho = 0,189. Revisão do Codex (R3): a introdução deixou de atribuir ao C4.5 o critério de maior ganho; ele usa a razão de ganho.",
       "stimulus": ["TEXTO_BASE", "TABELA"]
     }
   ]
