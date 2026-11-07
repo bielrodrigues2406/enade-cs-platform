@@ -199,7 +199,7 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ## 4. Pendências do lado de Gabriel
 
-- **Folha original das 14 poses do Dudu**, em tamanho cheio, se ainda existir. As poses atuais ficam visivelmente menos nítidas que as três novas.
+- **Dudu refeito em alta**, conforme [DUDU-REQUESTS.md](DUDU-REQUESTS.md): imagem-base, 9 camadas (agora com pés separados e olhos felizes) e as 14 poses. Quando chegar, entra no PR A se for a tempo; senão, num PR próprio logo depois, sem bloquear as questões.
 - **Revisão de professor** do núcleo, das lições e das questões geradas, quando possível (recomendado, não bloqueia).
 - **Nome da marca:** manter "Preparação ENADE" ou trocar para "Caderno CC", de acordo com o domínio.
 
