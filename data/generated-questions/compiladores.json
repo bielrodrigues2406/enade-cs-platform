@@ -10,11 +10,11 @@
       "concepts": ["comp-fases", "comp-semantica", "comp-lexico"],
       "title": "Em que fase cada erro aparece",
       "subject": "Fases do compilador e tipos de erro",
-      "prompt": "Um compilador para uma linguagem parecida com C, com tipagem estática, organiza a análise em três fases: léxica, sintática e semântica. Avalie as afirmações sobre onde cada erro é detectado.\n\nI. Um caractere que não pertence a nenhum token da linguagem, como @ fora de uma cadeia de caracteres, é detectado na análise léxica.\nII. A falta do ponto e vírgula ao fim de um comando é detectada na análise sintática.\nIII. Usar uma variável que nunca foi declarada é detectado na análise sintática, porque o nome não aparece na gramática.\nIV. Atribuir uma cadeia de caracteres a uma variável do tipo int é detectado na análise semântica.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: D.\n\nI está correta. O analisador léxico agrupa caracteres em tokens descritos por expressões regulares. Um símbolo que não inicia nenhum token válido é erro léxico.\n\nII está correta. A gramática exige o ; ao fim do comando. A sequência de tokens não se encaixa em nenhuma regra, e isso é erro sintático.\n\nIII está errada. A gramática fala de identificadores em geral (o token ID), não de nomes específicos. A frase x = 1; é sintaticamente válida mesmo sem declaração. Saber se x foi declarado exige a tabela de símbolos, consultada na análise semântica, que trata de contexto: declarações, escopos e tipos.\n\nIV está correta. Verificar tipos é a tarefa típica da análise semântica.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III e deixa de fora I.",
-      "check": "Nova resolução sem o gabarito: classificação clássica das fases (léxica: tokens; sintática: estrutura; semântica: declarações e tipos). Opção D.",
-      "truth": ["I", "II", "IV"],
-      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["II", "III", "IV"]]
+      "prompt": "Um compilador para uma linguagem parecida com C, com tipagem estática, organiza a análise em três fases: léxica, sintática e semântica. Avalie as afirmações sobre onde cada erro é detectado.\n\nI. A falta do ponto e vírgula ao fim de um comando é detectada na análise léxica, porque o ; é um caractere da entrada.\nII. Usar uma variável que nunca foi declarada é detectado na análise sintática, porque o nome não aparece na gramática.\nIII. Um caractere que não pertence a nenhum token da linguagem, como @ fora de uma cadeia de caracteres, é detectado na análise léxica.\nIV. Atribuir uma cadeia de caracteres a uma variável do tipo int é detectado na análise semântica.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: D.\n\nI está errada. O analisador léxico reconhece o ; como um token válido. O que falta é o token no lugar em que a gramática o exige: a sequência de tokens não se encaixa em nenhuma regra, e isso é erro sintático.\n\nII está errada. A gramática fala de identificadores em geral (o token ID), não de nomes específicos. A frase x = 1; é sintaticamente válida mesmo sem declaração. Saber se x foi declarado exige a tabela de símbolos, consultada na análise semântica, que trata de contexto: declarações, escopos e tipos.\n\nIII está correta. O analisador léxico agrupa caracteres em tokens descritos por expressões regulares. Um símbolo que não inicia nenhum token válido é erro léxico.\n\nIV está correta. Verificar tipos é a tarefa típica da análise semântica.\n\nAs outras alternativas:\nA) Deixa de fora IV, que também está correta.\nB) Deixa de fora III, que também está correta.\nC) Inclui I e deixa de fora III.\nE) Inclui I e II, que põem erros de sintaxe e de contexto na fase errada.",
+      "check": "Nova resolução sem o gabarito: ; ausente é erro sintático (I falsa); declaração é verificada na semântica (II falsa); @ é erro léxico (III); tipos na semântica (IV). Opção D.",
+      "truth": ["III", "IV"],
+      "combos": [["III"], ["IV"], ["I", "IV"], ["III", "IV"], ["I", "II", "III"]]
     },
     {
       "id": "gen-comp-recursao-esquerda",
@@ -26,14 +26,14 @@
       "prompt": "Uma equipe quer escrever à mão um analisador descendente recursivo, LL(1), para expressões de soma. A gramática original é:\n\nE → E + T | T\nT → id\n\nO analisador entra em laço infinito ao tentar expandir E. Qual gramática equivalente resolve o problema e serve para análise LL(1)?",
       "options": [
         "E → T E'; E' → + T E' | ε; T → id",
-        "E → E + T; T → id",
-        "E → + T E | T; T → id",
+        "E → E' T; E' → E' + | ε; T → id",
+        "E → T E'; E' → E + T | ε; T → id",
         "E → T | E + T; T → id",
         "E → T + E | T; T → id"
       ],
       "answer": "A",
-      "explanation": "Resposta: A.\n\nNa regra E → E + T, o analisador descendente, para reconhecer E, chama de novo E sem consumir nenhum token, e entra em recursão infinita. A transformação padrão troca a recursão à esquerda por recursão à direita com um não terminal auxiliar:\n\nA → A α | β vira A → β A' e A' → α A' | ε.\n\nAqui, α = + T e β = T, o que dá E → T E' e E' → + T E' | ε. A linguagem gerada é a mesma: T seguido de zero ou mais \"+ T\". A escolha em E' fica decidida por um símbolo de lookahead: se o próximo token é +, usa-se + T E'; caso contrário, ε.\n\nAs outras alternativas:\nB) Mantém a recursão à esquerda e perde a alternativa T, sem caso base.\nC) Gera cadeias que começam com +, outra linguagem.\nD) Só muda a ordem das alternativas; a recursão à esquerda continua.\nE) Gera a mesma linguagem, mas as duas alternativas começam com T, então com um só símbolo de lookahead o analisador não sabe qual escolher. Seria preciso fatorar à esquerda: E → T E'', E'' → + E | ε.",
-      "check": "Nova resolução sem o gabarito: transformação padrão de eliminação de recursão à esquerda; FIRST(+ T E') = {+} e FOLLOW(E') disjuntos. Opção A."
+      "explanation": "Resposta: A.\n\nNa regra E → E + T, o analisador descendente, para reconhecer E, chama de novo E sem consumir nenhum token, e entra em recursão infinita. A transformação padrão troca a recursão à esquerda por recursão à direita com um não terminal auxiliar:\n\nA → A α | β vira A → β A' e A' → α A' | ε.\n\nAqui, α = + T e β = T, o que dá E → T E' e E' → + T E' | ε. A linguagem gerada é a mesma: T seguido de zero ou mais \"+ T\". A escolha em E' fica decidida por um símbolo de lookahead: se o próximo token é +, usa-se + T E'; caso contrário, ε.\n\nAs outras alternativas:\nB) Troca a recursão de lugar sem eliminá-la: E' → E' + continua recursiva à esquerda, e o analisador entra em laço ao expandir E'.\nC) Não há recursão à esquerda direta, mas E' → E + T muda a linguagem: E ⇒ T E' ⇒ id E + T ⇒ id T E' + T ⇒ id id + id, cadeia que a gramática original não gera.\nD) Só muda a ordem das alternativas; a recursão à esquerda continua.\nE) Gera a mesma linguagem, mas as duas alternativas começam com T, então com um só símbolo de lookahead o analisador não sabe qual escolher. Seria preciso fatorar à esquerda: E → T E'', E'' → + E | ε.",
+      "check": "Nova resolução sem o gabarito: transformação A → βA', A' → αA' | ε com α = + T e β = T; derivação de id id + id conferida à mão para a alternativa C. Opção A."
     },
     {
       "id": "gen-comp-ambiguidade",
@@ -42,13 +42,13 @@
       "concepts": ["comp-gramaticas", "comp-ascendente"],
       "title": "Gramática ambígua de expressões",
       "subject": "Ambiguidade, precedência e árvores de derivação",
-      "prompt": "Uma linguagem de consultas usa, para expressões aritméticas, a gramática:\n\nE → E + E | E * E | id\n\nI. Essa gramática é ambígua.\n\nPORQUE\n\nII. A cadeia id + id * id tem duas árvores de derivação diferentes: uma agrupa (id + id) * id e a outra, id + (id * id).\n\nA respeito dessas asserções, assinale a opção correta.",
-      "explanation": "Resposta: A.\n\nUma gramática é ambígua quando alguma cadeia tem mais de uma árvore de derivação, ou mais de uma derivação mais à esquerda. II mostra exatamente isso para id + id * id, então prova I.\n\nA ambiguidade importa porque cada árvore dá um significado diferente: (2 + 3) * 4 = 20, mas 2 + (3 * 4) = 14. Há duas formas de resolver:\n- reescrever a gramática em níveis de precedência: E → E + T | T; T → T * F | F; F → id;\n- informar ao gerador de analisadores (Yacc, Bison) a precedência e a associatividade dos operadores, o que resolve os conflitos empilha-reduz.\n\nAs outras alternativas:\nB) Não reconhece que exibir duas árvores para a mesma cadeia é a própria definição de ambiguidade.\nC) II é verdadeira: as duas árvores existem.\nD) I é verdadeira.\nE) As duas são verdadeiras.",
-      "check": "Nova resolução sem o gabarito: duas derivações mais à esquerda distintas construídas para id + id * id. Opção A.",
+      "prompt": "Uma linguagem de consultas usa, para expressões aritméticas, a gramática:\n\nE → E + E | E * E | id\n\nI. Essa gramática é ambígua.\n\nPORQUE\n\nII. Geradores de analisadores como Yacc e Bison permitem declarar a precedência e a associatividade dos operadores.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "explanation": "Resposta: B.\n\nI é verdadeira. Uma gramática é ambígua quando alguma cadeia tem mais de uma árvore de derivação. A cadeia id + id * id tem duas: uma agrupa (id + id) * id e a outra, id + (id * id). Cada árvore dá um significado diferente: (2 + 3) * 4 = 20, mas 2 + (3 * 4) = 14.\n\nII também é verdadeira: as declarações %left e %right do Yacc e do Bison dizem ao gerador como resolver os conflitos empilha-reduz que a ambiguidade cria. Mas II não explica I. Ela descreve uma forma de lidar com gramáticas ambíguas, não o motivo de esta gramática ser ambígua. O motivo é a existência de duas árvores para a mesma cadeia.\n\nOutra forma de resolver é reescrever a gramática em níveis de precedência: E → E + T | T; T → T * F | F; F → id.\n\nAs outras alternativas:\nA) Trata o recurso do gerador como causa da ambiguidade. A gramática seria ambígua mesmo sem nenhum gerador.\nC) II é verdadeira: esses geradores aceitam declarações de precedência e associatividade.\nD) I é verdadeira: id + id * id tem duas árvores de derivação.\nE) As duas asserções são verdadeiras.",
+      "check": "Nova resolução sem o gabarito: duas derivações mais à esquerda distintas construídas para id + id * id (I verdadeira); %left/%right conferidos na documentação do Bison (II verdadeira, sem relação de causa). Opção B.",
       "assertion": {
         "first": true,
         "second": true,
-        "justifies": true
+        "justifies": false
       }
     },
     {
@@ -73,11 +73,11 @@
       "subject": "Interpretação, compilação antecipada e JIT",
       "prompt": "Motores de JavaScript atuais, como o V8, começam interpretando o código e, enquanto o programa roda, compilam para código de máquina os trechos executados com frequência, usando informações observadas em execução (por exemplo, os tipos que uma função costuma receber).\n\nQual afirmação sobre essa compilação just-in-time (JIT) está correta?",
       "options": [
-        "O JIT elimina a necessidade de análise léxica e sintática, porque trabalha direto sobre o código de máquina.",
-        "Um programa com JIT é sempre mais rápido que o mesmo programa compilado antecipadamente, em qualquer cenário.",
-        "O JIT concentra o custo de compilar nos trechos mais executados e pode otimizá-los com base no comportamento real, como especializar uma função para os tipos que ela de fato recebe; se a suposição falhar, o motor volta a uma versão menos otimizada.",
-        "O JIT só funciona em linguagens com tipagem estática, porque precisa conhecer os tipos antes da execução.",
-        "A interpretação inicial é desnecessária; o motor poderia compilar todo o programa com otimização máxima sem custo extra."
+        "O JIT dispensa a análise léxica e sintática do código-fonte, porque o motor trabalha direto sobre código de máquina já pronto.",
+        "Um programa com JIT é sempre mais rápido que o mesmo programa compilado antecipadamente, porque o JIT conhece os dados reais.",
+        "O JIT compila só os trechos mais executados e pode especializá-los para os tipos observados, desotimizando se a suposição falhar.",
+        "O JIT só funciona em linguagens de tipagem estática, porque precisa conhecer os tipos de cada variável antes de executar.",
+        "A interpretação inicial é desperdício: compilar o programa inteiro com otimização máxima logo na carga não teria custo extra."
       ],
       "answer": "C",
       "explanation": "Resposta: C.\n\nO JIT combina interpretação e compilação. Interpretar começa rápido; compilar com otimização custa tempo, então só compensa para código executado muitas vezes (hot code). Em execução, o motor observa, por exemplo, que soma(a, b) sempre recebe inteiros e gera código de máquina especializado para inteiros. Se um dia chegar uma string, a suposição falha e o motor desotimiza, voltando ao interpretador ou a uma versão genérica. Essa especialização por perfil é algo que um compilador antecipado, sem informação de execução, tem dificuldade de fazer.\n\nAs outras alternativas:\nA) O código-fonte continua passando pelas análises léxica e sintática antes de qualquer execução ou compilação.\nB) Não há garantia absoluta: o JIT tem custo de aquecimento e pode perder em programas curtos ou previsíveis.\nD) O JIT é especialmente útil em linguagens dinâmicas, justamente porque descobre os tipos durante a execução.\nE) Compilar tudo com otimização máxima atrasaria o início e gastaria tempo com código que talvez rode uma única vez.",
