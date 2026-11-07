@@ -95,12 +95,18 @@
                 </ul>
               </details>
             }
-            @if (c.questions.length) {
+            @if (c.appearances.length) {
               <details class="core-questions">
-                <summary>Caiu em {{ c.questions.length }} {{ c.questions.length === 1 ? "questão oficial" : "questões oficiais" }}</summary>
+                <summary>Caiu em {{ c.appearances.length }} {{ c.appearances.length === 1 ? "questão oficial" : "questões oficiais" }}</summary>
                 <ul>
-                  @for (q of c.questions; track q.id) {
-                    <li><button type="button" class="text-button" (click)="question.emit(q.id)"><b>{{ q.year }}</b> {{ q.subject }}</button></li>
+                  @for (q of c.appearances; track $index) {
+                    <li>
+                      @if (q.id) {
+                        <button type="button" class="text-button" (click)="question.emit(q.id!)"><b>{{ q.year }}</b> {{ q.subject }}</button>
+                      } @else {
+                        <span class="core-unpublished"><b>{{ q.year }}</b> {{ q.subject }} <small>(ainda não disponível para resolver aqui)</small></span>
+                      }
+                    </li>
                   }
                 </ul>
               </details>

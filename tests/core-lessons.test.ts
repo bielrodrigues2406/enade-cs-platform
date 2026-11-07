@@ -70,6 +70,10 @@ test("the area page flags concepts with a lesson, and the lesson route serves it
   const area = await (await fetch(`${base}/api/core/sistemas-operacionais`, { headers: { Cookie: cookie } })).json();
   assert.equal(area.cover, "/illustrations/CAPA-SO.webp");
   assert.ok(area.concepts.every((c: any) => c.lesson === true));
+  // Deadlock caiu em 2017 (Q35): aparece mesmo quando a questão não está publicada neste banco.
+  const deadlock = area.concepts.find((c: any) => c.id === "so-deadlock");
+  assert.ok(deadlock.appearances.some((q: any) => q.year === 2017 && /^Deadlock/.test(q.subject)));
+  for (const c of area.concepts) assert.ok(c.appearances.length >= c.questions.length, c.id);
   const response = await fetch(`${base}/api/core/sistemas-operacionais/lessons/so-deadlock`, { headers: { Cookie: cookie } });
   assert.equal(response.status, 200);
   const lesson = await response.json();

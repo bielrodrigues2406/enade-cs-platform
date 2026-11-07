@@ -306,7 +306,7 @@ Detalhes em [CORE-CONCEPTS.md](CORE-CONCEPTS.md). Rotas de quem está na sessão
 | GET /core/:slug/lessons/:concept | — | lição do conceito (LIB-2): `{concept,body[],figure{src,alt}\|null,example{title,code,steps[],check},mistake,recall[]{q,a}}`; 404 se a área ou o conceito não tem lição |
 | PUT /core/concepts/:id | `{level}` (0 não sei, 1 mais ou menos, 2 sei explicar, `null` apaga) | `{slug,level,confidence}`; 400 para nível inválido, 404 para conceito inexistente |
 
-`GET /core/:slug` também traz `cover` (capa da área ou `null`) e, em cada conceito, `lesson` (`true` quando há lição). Detalhes das lições em [LIBRARY-LESSONS.md](LIBRARY-LESSONS.md).
+`GET /core/:slug` também traz `cover` (capa da área ou `null`) e, em cada conceito, `lesson` (`true` quando há lição) e `appearances[]{id,year,subject}`: todas as vezes que o conceito caiu, com `id` da versão publicada ou `null` quando a questão não está publicada neste banco. `questions[]` continua só com as publicadas. Detalhes das lições em [LIBRARY-LESSONS.md](LIBRARY-LESSONS.md).
 
 `confidence` = `{value, self, rated, answers, attempts, cards}`; `answers` é `null` sem respostas na área e `cards` é `null` em área sem baralho.
 

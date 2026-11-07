@@ -130,6 +130,8 @@ export class CoreConceptsController {
         // O estudo abre a questão pela versão publicada.
         questions: (core.links.get(c.id) ?? []).filter((q) => published.has(q.id))
           .map((q) => ({ ...q, id: published.get(q.id)! })),
+        // Toda vez que o conceito caiu, publicada ou não neste banco: "nunca caiu" só quando a lista é vazia.
+        appearances: (core.links.get(c.id) ?? []).map((q) => ({ year: q.year, subject: q.subject, id: published.get(q.id) ?? null })),
         generated: generated.byConcept.get(c.id) ?? [],
       })),
     };
