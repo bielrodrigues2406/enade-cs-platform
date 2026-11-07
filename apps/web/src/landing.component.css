@@ -18,7 +18,7 @@
   position: absolute;
   inset: 0;
   border-radius: 24px;
-  background: linear-gradient(90deg, rgb(244 243 239 / 0.94) 0%, rgb(244 243 239 / 0.82) 30%, rgb(244 243 239 / 0) 52%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--color-bg) 94%, transparent) 0%, color-mix(in srgb, var(--color-bg) 82%, transparent) 30%, transparent 52%);
   pointer-events: none;
 }
 .lp-duck-art img {

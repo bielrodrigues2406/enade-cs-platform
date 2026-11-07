@@ -81,5 +81,5 @@ O plano completo, com a ordem dos PRs (A a H), metas até 29/11 e o critério de
 - Conquistas: medalhas por área e por prova completa por edição; compartilhar medalha como imagem.
 - Ranking por turma (professor vê a constância da turma no painel).
 - PWA (instalar no celular, lembrete diário por notificação) — o ícone do mascote serve aqui.
-- Modo escuro (tokens já existem em `styles.css`, falta a variante).
+- Modo escuro: feito em 07/11 (tokens em `styles.css`, escolha no rodapé). Ao criar cor nova, use um token semântico, ou ela não muda no escuro.
 - Acessibilidade: auditoria WCAG 2.2 com leitor de tela nas telas novas.

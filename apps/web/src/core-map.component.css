@@ -51,7 +51,7 @@
   -webkit-mask: radial-gradient(circle, transparent 52%, #000 54%);
   mask: radial-gradient(circle, transparent 52%, #000 54%);
 }
-.is-mid .core-dial { --tone: #a16207; }
+.is-mid .core-dial { --tone: var(--color-warning-border); }
 .is-high .core-dial { --tone: var(--color-success-text); }
 
 .core-general {
