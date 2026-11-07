@@ -6,7 +6,7 @@
       @if (data.state === 'COMPLETED' && !reviewing()) {
         <section class="page-intro">
           @if (data.summary; as result) {
-            <app-mascot [pose]="result.correct / result.total >= 0.7 ? 'comemorando' : result.correct / result.total >= 0.4 ? 'contente' : 'ouvindo'" [size]="80"
+            <app-mascot [pose]="result.correct / result.total >= 0.7 ? 'comemorando' : result.correct / result.total >= 0.4 ? 'contente' : 'forca'" [size]="80"
               [motion]="result.correct / result.total >= 0.7 ? 'celebrate' : 'none'" />
           }
           @if (data.kind === 'FORMAT') {

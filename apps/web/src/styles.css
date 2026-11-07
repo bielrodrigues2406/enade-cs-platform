@@ -3920,7 +3920,8 @@ app-landing [data-reveal] {
     animation: lp-fade 700ms var(--ease-out) both;
     animation-delay: 220ms;
   }
-  .lp-sheet {
+  /* Só folhas reais caem na mesa; as em branco (busca falhou) aparecem paradas. */
+  .lp-sheet:not(.lp-sheet-blank) {
     animation: lp-drop 900ms var(--spring-gentle) both;
     animation-delay: calc(260ms + var(--i) * 120ms);
   }

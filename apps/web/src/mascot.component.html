@@ -1,8 +1,8 @@
 @if (articulated()) {
   @defer (on immediate) {
-    <app-dudu-figure [gesture]="motion" [fallback]="src()" [label]="alt()" />
+    <app-dudu-figure [gesture]="motion" [eyes]="eyes()" [label]="alt()" />
   } @placeholder {
-    <img [src]="src()" [alt]="alt()" loading="lazy" decoding="async" draggable="false" />
+    <img [src]="restSrc()" [alt]="alt()" decoding="async" draggable="false" />
   } @error {
     <img [src]="src()" [alt]="alt()" loading="lazy" decoding="async" draggable="false" />
   }

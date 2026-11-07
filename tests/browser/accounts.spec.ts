@@ -207,7 +207,7 @@ test("signup preserves guest answers; logout isolates; another browser resumes a
     const login = other.locator("app-account form");
     await expect(login).toBeVisible();
     await expect(
-      other.getByText(/não passam para a conta ao entrar/),
+      other.getByText(/não passa para a conta ao entrar/),
     ).toBeVisible();
     await login.getByLabel("E-mail", { exact: true }).fill(accountEmail);
     await login.getByLabel("Senha", { exact: true }).fill("Senha errada 2026!");
@@ -319,7 +319,7 @@ test("account forms validate and reflow at 320/390/768/1440 CSS pixels", async (
     page.getByText("Informe um e-mail válido.", { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByText("A senha deve ter de 12 a 128 caracteres.", { exact: true }),
+    page.getByText("A senha deve ter de 8 a 128 caracteres.", { exact: true }),
   ).toBeVisible();
   await form.getByLabel("Senha", { exact: true }).fill(password);
   await page

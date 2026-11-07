@@ -120,3 +120,5 @@ Gabriel dispensou o segundo agente. O que substitui essa revisão:
   - mais asserção-razão com a resposta B (duas verdades sem relação de causa), o padrão mais difícil;
   - equilibrar as letras do gabarito (no lote 1, a letra E é a menos frequente).
 - **Imagens:** diagramas exatos em SVG e ilustrações no GPT Image, conforme [IMAGE-PROMPTS.md](IMAGE-PROMPTS.md).
+- **Pistas da resposta (GEN-3):** no lote 1 a certa se entrega pelo tamanho e pela combinação de itens. Medição, regras e travas em [GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md); a revisão vem antes de novos lotes.
+- **Formatos do ENADE (GEN-4):** moldes fixos de itens e asserção, formas que faltam (ordem, cálculo, código nas alternativas, associação, dois textos) e mistura alvo em [ENADE-ITEM-FORMATS.md](ENADE-ITEM-FORMATS.md).

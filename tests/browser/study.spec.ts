@@ -133,6 +133,8 @@ test("feedback leads to the next question of the current selection", async ({
   page,
 }) => {
   await page.goto("/questoes");
+  // A lista chega depois do evento load; lê os títulos só quando já há pelo menos dois.
+  await expect(page.locator(".question-list h3").nth(1)).toBeVisible();
   const titles = await page.locator(".question-list h3").allTextContents();
   expect(titles.length).toBeGreaterThan(1);
   const [first, second] = titles.map((title) => title.trim());

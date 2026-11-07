@@ -43,3 +43,21 @@ test("the public page reflows without horizontal scrolling", async ({ page }) =>
     expect(await noHorizontalScroll(page), `largura ${width}`).toBe(true);
   }
 });
+
+test("the hero never animates empty sheets while the exam pages are still loading", async ({ page }) => {
+  let release: () => void = () => {};
+  const held = new Promise<void>((resolve) => { release = resolve; });
+  // Segura a busca do acervo como numa primeira visita lenta.
+  await page.route("**/api/catalog?limit=12", async (route) => { await held; await route.continue(); });
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Preparação ENADE");
+  await page.waitForTimeout(600);
+  await expect(page.locator(".lp-sheet")).toHaveCount(0);
+  release();
+  await expect(page.locator(".lp-sheet").first()).toBeVisible();
+  // Folhas reais chegam com a imagem decodificada; em branco só se não houver página, e sem animação.
+  for (const image of await page.locator("figure.lp-sheet img").all())
+    expect(await image.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
+  for (const blank of await page.locator(".lp-sheet-blank").all())
+    expect(await blank.evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
+});

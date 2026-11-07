@@ -51,6 +51,15 @@ A bússola da preparação está em **`docs/CORE-CONCEPTS.md`**: 16 áreas e a F
 
 [ENADE-EVOLUTION.md](ENADE-EVOLUTION.md) mede como formato e áreas mudaram de 2005 a 2021 e o que muda na geração. [IMAGE-PROMPTS.md](IMAGE-PROMPTS.md) lista as imagens: SVG para diagramas exatos (o agente faz) e prompts de GPT Image para ilustrações (Gabriel gera e envia).
 
+## Próxima sessão: plano da reta final (07/11)
+
+O plano completo, com a ordem dos PRs (A a H), metas até 29/11 e o critério de "pronto" de cada etapa, está em **[PLANO-RETA-FINAL.md](PLANO-RETA-FINAL.md)**. Comece pelo PR A (ajustes rápidos) e depois pelo PR B (base das questões).
+
+- **Material pronto:**
+  - 41 ilustrações em `apps/web/public/illustrations/`, com catálogo em `data/illustrations/catalog.json`;
+  - poses novas do Dudu (`novidade`, `plano`, `forca`).
+- **Migrations reservadas:** 032 (GEN-4) e 033 (NEWS-1).
+
 ## 5. O que falta (por prioridade)
 
 1. **Preservar a publicação AWS em cadernocc.com.br:** Gabriel relatou funcionamento em 06/11. Conferências operacionais de backups/restauração continuam próprias; não reabrir o diagnóstico CSS como falha atual sem evidência. O mesmo Compose de [`deploy/campus/`](../deploy/campus/README.md) serve como referência; eventual implantação IFSP PEP depende da infraestrutura institucional.

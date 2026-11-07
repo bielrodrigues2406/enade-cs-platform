@@ -50,8 +50,10 @@ test("the optimized build styles navigation, lazy exam and articulated Dudu unde
   expect(await figure.locator(".wing-left").evaluate(el => getComputedStyle(el).position)).toBe("absolute");
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
-    const parent = (await figure.boundingBox())!, wing = (await figure.locator(".wing-left").boundingBox())!;
-    expect(wing.width).toBeLessThan(parent.width);
+    // Camadas cobrem o palco 3:4: com o CSS aplicado, o grupo do corpo tem o tamanho da figura, não o do arquivo (384 px).
+    const stage = (await figure.locator(".figure").boundingBox())!, upper = (await figure.locator(".upper").boundingBox())!;
+    expect(Math.abs(upper.width - stage.width)).toBeLessThan(1);
+    expect(upper.width).toBeLessThan(200);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: `test-results/production-login-${width}.png`, fullPage: true });
   }

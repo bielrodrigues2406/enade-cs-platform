@@ -158,7 +158,9 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 029 | SIM26-1 — tentativa no formato de 2026, sem editar migrations aplicadas | Codex |
 | 030 | NUC-1 — núcleo por área: autoavaliação de conceitos e confiança | Claude |
 | 031 | GEN-1 — questões geradas por IA (review_origin GENERATED, metadados) | Claude |
-| 032 | próxima livre — reserve aqui antes do primeiro commit | |
+| 032 | GEN-4 — formatos e estímulos das questões geradas (`ITENS3`/`ITENS4`, ordem, cálculo…) | Claude |
+| 033 | NEWS-1 — novidades vistas por conta | Claude |
+| 034 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 
@@ -329,3 +331,14 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
 - **06/11/2026 · Codex · EST-BASE1 · PR #49:** inventário offline determinístico com hashes de entrada, 30 documentos/9 relatórios/460 ocorrências, 246 aprovações objetivas e39discursivas em arquivos ativos. Lê somente nível principal, preserva Qn discursivo antigo, escopo/anulações e área/assunto legados; taxonomia e incidência permanecem pendentes/nulas. Conserva30 vínculos duplicateOf e71 grupos candidatos sem declarar deduplicação integral. Revisão independente corrigiu dois P2 de hashes/referências e equivalências contraditórias; sete testes focados finais passaram, incluindo reprodução exata. Build e suíte API local (203 casos na versão intermediária) passaram; E2E/CI final são condição para integrar. Índice Inep2026 acessível identifica portarias157/154; DOU403 impede considerar texto obtido. Sem banco/rotas/UI/dependências/migrations/publicação/deploy. Próximo incremento é classificação analítica conferida e aquisição das matrizes, seguido do panorama/guia/atualidades. PR #48 do plano integrado em56befb1.
 
 - **06/11/2026 · ERR-UX1 · Codex:** pedido adicional de Gabriel durante EST-BASE1. Branch codex/feat-service-messages baseada em60ca53a (PR49 integrado após revisão e CI verde). Mensagens HTTP tipadas preservam abortos/status/Retry-After e não repetem escritas; aviso público sem banco/sessão, expiração e horário de Brasília; fallback Caddy independente do app. Build/210API/seis testes unitários novos passaram; 103Chromium em execução, revisão independente e CI final antes de integrar. Proxy Caddy2.10.2 com checksum SHA512 conferido, validado localmente para HTML503/APIJSON503/CSS200/no-store/CSP/Retry-After/404 preservado. Instalação do host ainda pelo operador; nenhum SSH/deploy. Classificação analítica/guia/atualidades continuam na sequência do inventário, não implementados nesta tarefa.
+
+- **07/11/2026 · Claude · PR A (parte) + Dudu v2:** branch `claude/confident-cray-ndnwmk`.
+  - **Dudu v2:** 24 PNGs de Gabriel, uma imagem por geração. Poses nítidas e camadas de 656 kB para cerca de 50 kB, com pés separados e olhos felizes. O repouso pré-montado (`rest-open`/`rest-happy`) é a imagem provisória, o que corrige o pato "congelado" na primeira entrada. Aceno com a asa ao lado da cabeça e comemoração com os pés no chão. Ver `MASCOT.md`, seção "Versão 2".
+  - **Página pública:** as folhas do herói só entram com a imagem decodificada; as em branco aparecem só se a busca falhar, e sem animação.
+  - **Senha:** mínimo de 8 com política (`password-policy.ts`, lista `data/security/`) e medidor `app-password-meter` no cadastro, em Meu perfil e no admin.
+  - **Topo:** "Conta" só com as iniciais no celular; "Criar conta" sai do topo abaixo de 600 px; selo discreto nas discursivas.
+  - **Textos:** frase da senha removida, aviso de entrada encurtado, botão "Estudar sem conta" e rodapé corrigido.
+  - **Plano:** `docs/PLANO-RETA-FINAL.md`, com as conquistas novas no PR G2.
+  - **Ilustrações:** 41 em `apps/web/public/illustrations/`, ainda não ligadas às telas (PRs C, D e F).
+  - Migrations reservadas continuam 032 (GEN-4) e 033 (NEWS-1).
+

@@ -10,6 +10,7 @@ import {
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
 import { hashPassword, verifyPassword } from "./password.js";
+import { PASSWORD_MAX, PASSWORD_MIN, requireNewPassword } from "./password-policy.js";
 import { applyInvitations } from "./roles.js";
 import { logActivity, recordActivity, requestIp } from "./activity.js";
 import {
@@ -131,10 +132,10 @@ export function credentials(body: unknown) {
   const email = emailAddress(input);
   if (
     typeof password !== "string" ||
-    [...password].length < 12 ||
-    [...password].length > 128
+    [...password].length < PASSWORD_MIN ||
+    [...password].length > PASSWORD_MAX
   )
-    fail("A senha deve ter de 12 a 128 caracteres.", 400);
+    fail(`A senha deve ter de ${PASSWORD_MIN} a ${PASSWORD_MAX} caracteres.`, 400);
   return { email, password: password as string };
 }
 // O nome é obrigatório: aparece no topo, na turma e para quem corrige.
@@ -187,6 +188,7 @@ export class AuthController {
   ) {
     const { email, password } = credentials(body);
     const { name, enrollment } = profile(body);
+    requireNewPassword(password, { email, name, enrollment });
     this.throttle.check(req, res, email);
     const current = await requireIdentity(req);
     if (current.email)

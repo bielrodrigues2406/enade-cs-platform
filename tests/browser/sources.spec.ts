@@ -16,7 +16,7 @@ import {
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const archiveDirectory =
   process.env.SOURCE_ARCHIVE_DIR || path.resolve(".local/sources");
-const password = "Fontes teste 2026!";
+const password = "Fontes sinteticas 2026!";
 type FixtureSource = {
   id: string;
   title: string;

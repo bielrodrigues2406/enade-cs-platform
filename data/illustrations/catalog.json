@@ -1,0 +1,661 @@
+{
+ "note": "Ilustrações geradas no GPT Image por Gabriel (06/11/2026) a partir de docs/IMAGE-PROMPTS.md. PNGs originais fora do Git; o sha256 identifica cada um. Vínculos vazios são definidos na integração.",
+ "images": [
+  {
+   "code": "Q-FG-01",
+   "group": "QUESTION",
+   "title": "Desinformação",
+   "file": "/illustrations/Q-FG-01.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Pessoa idosa no sofá observa um vídeo no celular. Uma linha atravessa o rosto do personagem na tela, e setas conectam o aparelho a outros celulares.",
+   "link": "gen-fg-desinformacao",
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "a11a115409dae22f3a700e1f2bcd8a9c0a1f5b2d6670ca3271eaae88e757ff6f"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "Q-FG-02",
+   "group": "QUESTION",
+   "title": "Mobilidade urbana",
+   "file": "/illustrations/Q-FG-02.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Dois quadros mostram a mesma avenida alargada: primeiro com poucos carros e equipamentos de obra; depois com congestionamento e um ponto de ônibus vazio.",
+   "link": "gen-fg-texto-mobilidade",
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "00ce22becfef1cc493175567fbbc5aa4292d757f2bd315246e647b1ccdf81984"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "Q-FG-03",
+   "group": "QUESTION",
+   "title": "Inclusão e deficiência",
+   "file": "/illustrations/Q-FG-03.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Pessoa em cadeira de rodas diante de uma escadaria e pessoa com bengala branca diante de uma calçada esburacada. As barreiras do ambiente aparecem em azul.",
+   "link": "gen-fg-inclusao-deficiencia",
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "36f8a1d279264dca60f23883d6546afefe886bef32c850f3494ee4f9be3ef0ec"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "Q-FG-04",
+   "group": "QUESTION",
+   "title": "Clima e mitigação",
+   "file": "/illustrations/Q-FG-04.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Vista aérea de uma cidade amazônica junto a um rio, com mudas em fileiras à esquerda, casas sobre palafitas à direita e floresta ao fundo.",
+   "link": "gen-fg-clima-mitigacao",
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "36cbc1f181f74907bebd8bf31fa73b4984719b0ba5ed9858820a0e156205add4"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "Q-FG-05",
+   "group": "QUESTION",
+   "title": "Redes e saúde mental",
+   "file": "/illustrations/Q-FG-05.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Quatro familiares sentados à mesa olham cada um para seu celular. A comida permanece intocada no centro.",
+   "link": "gen-fg-redes-saude-mental",
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "65d404667fc57724a71a2b44bbf217917377a60a36dfbd74b9e9c28d7ab70737"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "Q-FG-06",
+   "group": "QUESTION",
+   "title": "Fome e produção",
+   "file": "/illustrations/Q-FG-06.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "À esquerda, silos e um navio carregado de grãos; à direita, uma cozinha simples com geladeira aberta quase vazia e uma pequena panela no fogão.",
+   "link": "gen-fg-fome-producao",
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "c29d06d91b014d7edbe41ee60e0b370db8b879778e70493244cc41607845e38a"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "Q-SEG-01",
+   "group": "QUESTION",
+   "title": "Aviso de certificado",
+   "file": "/illustrations/Q-SEG-01.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Pessoa usa um notebook no saguão de aeroporto, com um cadeado aberto na tela. Ao fundo, outra pessoa utiliza notebook junto a um roteador portátil.",
+   "link": "gen-seg-aviso-certificado",
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "bee4005080e4a66bba9ac2ff97f2931d80af6c067166bd2f305b204cb7c1867a"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "Q-IA-01",
+   "group": "QUESTION",
+   "title": "Injeção de prompt",
+   "file": "/illustrations/Q-IA-01.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Pequeno robô lê uma carta com um bilhete azul escondido entre as linhas. Uma gaveta aberta ao lado contém envelopes e uma chave.",
+   "link": "gen-ia-injecao-prompt",
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "2170569deea43b9968c9b210d5c2bcb4287edb2eb625b5a0371d41cdc38d6f2f"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "Q-SD-01",
+   "group": "QUESTION",
+   "title": "PIX e idempotência",
+   "file": "/illustrations/Q-SD-01.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Mão segura um celular com indicador de carregamento e botão sem texto. O polegar se aproxima do botão, enquanto duas moedas iguais seguem para lados opostos.",
+   "link": "gen-sd-pix-idempotencia",
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "90b7856ca8467d0f454128044d6e3d4c4048f4e3a40f6a5c1138db53f03fa654"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-ALG",
+   "group": "AREA_COVER",
+   "title": "Algoritmos",
+   "file": "/illustrations/CAPA-ALG.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com uma pequena árvore de galhos binários feita de clipes e fio, com nós redondos na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "def63e638fc2295b7e6669a41c6d30282e762131732e26721345ec140b38826d"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-MAT",
+   "group": "AREA_COVER",
+   "title": "Matemática",
+   "file": "/illustrations/CAPA-MAT.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com dois dados, um baralho em leque e um diagrama de Venn desenhado a lápis na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "c61f8186175f27cab528cfedb367529cead171ac34f2206932fd69b621251b0c"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-ARQ",
+   "group": "AREA_COVER",
+   "title": "Arquitetura",
+   "file": "/illustrations/CAPA-ARQ.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com um chip de processador visto de cima, com trilhas que se espalham como ruas na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "c507860a6e5963b191b7a680b87d294257aef4d5d08a4be245e545d190f91cf2"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-SO",
+   "group": "AREA_COVER",
+   "title": "Sistemas operacionais",
+   "file": "/illustrations/CAPA-SO.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com um semáforo de trânsito de mesa ao lado de várias fichas de papel em fila na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "5113fc25a064eaa6e03e44c3db0c4c02f915441f447dbd52073961b7fdf13a55"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-ES",
+   "group": "AREA_COVER",
+   "title": "Engenharia de software",
+   "file": "/illustrations/CAPA-ES.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com um quadro de cartões adesivos em três colunas, sem escrita na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "0b16bfbcaa15a95cb3e3bd50e4338764ac7d9c14a8b569e0a08439854abc1c69"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-TC",
+   "group": "AREA_COVER",
+   "title": "Teoria da computação",
+   "file": "/illustrations/CAPA-TC.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com uma fita de papel longa com quadradinhos e uma pequena cabeça de leitura de metal na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "fd81547e47730bae353ed972bd0cd82aa4ece6d9bf257885b2dbcddac761d572"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-RED",
+   "group": "AREA_COVER",
+   "title": "Redes",
+   "file": "/illustrations/CAPA-RED.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com envelopes encaixados uns dentro dos outros, do maior para o menor na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "af5dd7736a1864cf7aeaf5af400dc61b88a04aeee15c40a2e14234246f4d7538"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-IA",
+   "group": "AREA_COVER",
+   "title": "Inteligência artificial",
+   "file": "/illustrations/CAPA-IA.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com uma rede de pinos ligados por fios em camadas, como um tear na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "90352e6d1d2a43464a889e2f819e8b92ed2ab9d6babc52d2e6078c9fc111d1ed"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-PROG",
+   "group": "AREA_COVER",
+   "title": "Programação",
+   "file": "/illustrations/CAPA-PROG.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com blocos de montar encaixados formando uma escada na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "8b531083b5cb7b8816b4073494d4bb0c94cb456f498862b871432791084d7ccd"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-BD",
+   "group": "AREA_COVER",
+   "title": "Banco de dados",
+   "file": "/illustrations/CAPA-BD.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com um fichário de gavetas com fichas e algumas fichas ligadas por barbante na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "881b56971fcbc5bac83d001cfa37f3499614335c8da09ab47ea3113bd1ee5b6e"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-CG",
+   "group": "AREA_COVER",
+   "title": "Computação gráfica",
+   "file": "/illustrations/CAPA-CG.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com um prisma de vidro decompondo um feixe de luz sobre uma grade de pixels na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "d75a717f1aae994db6130ecf3ecbeb0141ddd5a599447fdc9f92bda976d3ae33"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-COMP",
+   "group": "AREA_COVER",
+   "title": "Compiladores",
+   "file": "/illustrations/CAPA-COMP.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com um funil que recebe tiras de papel e solta peças de engrenagem na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "a0b4a8766447b28c018462c845cdc1342c20b3cd49a5f9ab91c415bfd10cbaca"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-SOC",
+   "group": "AREA_COVER",
+   "title": "Sociedade e ética",
+   "file": "/illustrations/CAPA-SOC.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com uma balança de pratos com um celular num prato e um pequeno livro no outro na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "855482643c5bdf49e86741d4c7fa2389d7c8f2b256476ee28fb55d8df61840ea"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-SD",
+   "group": "AREA_COVER",
+   "title": "Sistemas distribuídos",
+   "file": "/illustrations/CAPA-SD.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com três relógios de mesa iguais marcando horas levemente diferentes na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "ba1335fc160b00d89999eb52d13e58d6f4786bfbee0cf34349ea4b0aef52c267"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-IHC",
+   "group": "AREA_COVER",
+   "title": "IHC",
+   "file": "/illustrations/CAPA-IHC.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com uma mão tocando um grande botão redondo de um protótipo de papel na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "e117be144462852466d4e33a22eb2dfa50d5f19a2bcf4929c8a29d0161196da2"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-SEG",
+   "group": "AREA_COVER",
+   "title": "Segurança",
+   "file": "/illustrations/CAPA-SEG.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com um cadeado aberto ao lado de uma chave e de um envelope lacrado com cera na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "c8dc554b43eee0a3b54fb668ec2f73e488e1f50c03d1bb25527d2db73702e18a"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "CAPA-FG",
+   "group": "AREA_COVER",
+   "title": "Formação Geral",
+   "file": "/illustrations/CAPA-FG.webp",
+   "width": 1200,
+   "height": 800,
+   "alt": "Caderno aberto visto de cima, com um jornal dobrado, um gráfico de barras recortado e um globo pequeno na página direita. Lápis e régua abaixo; espaço livre à esquerda da composição.",
+   "link": null,
+   "sourcePng": {
+    "width": 1536,
+    "height": 1024,
+    "sha256": "3c01ec91410726517541ec2b2d72fa71f6e6d2a1dae274c05b44be7ea6f414da"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-01",
+   "group": "CONCEPT",
+   "title": "Condição de corrida",
+   "file": "/illustrations/MET-01.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Duas mãos escrevem na mesma linha de um caderno, com os traços sobrepostos e embaralhados no centro. Uma das mãos é azul.",
+   "link": "so-regiao-critica",
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "8a478b9d8cb67b710cfe9fec0435b3633f497f457a7420bd1b20b49bf6b00e77"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-02",
+   "group": "CONCEPT",
+   "title": "Deadlock",
+   "file": "/illustrations/MET-02.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Quatro carros ocupam um cruzamento em um ciclo de bloqueio, com a frente de cada um encostada no próximo.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "192be732393296134a34a093e4d4d6e22f3cb74e310a4cbcfc36058e08e7be0e"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-03",
+   "group": "CONCEPT",
+   "title": "Pipeline",
+   "file": "/illustrations/MET-03.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Quatro cestos de roupa ocupam simultaneamente as estações de lavar, secar, dobrar e guardar, em alturas crescentes.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "ab9f196d552b89528d93b55d1f70c1b2f68aaa3cf61b3934cb1e07d3f1ab9bd1"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-04",
+   "group": "CONCEPT",
+   "title": "Localidade e cache",
+   "file": "/illustrations/MET-04.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Livros azuis retirados juntos de uma prateleira estão em uma mesa próxima. Uma lacuna aparece na estante ao fundo.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "00561708ffb59fce8e12f7df35deb9002ee151554605b9ceaa758fe41a06b083"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-05",
+   "group": "CONCEPT",
+   "title": "Tabela hash com encadeamento",
+   "file": "/illustrations/MET-05.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Caixas de correio identificadas por formas geométricas têm correntes de envelopes de comprimentos diferentes.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "49ced0523c7757946c5a0803e1e954a2428d1332c483f1934b41066df2e41bc6"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-06",
+   "group": "CONCEPT",
+   "title": "Heap",
+   "file": "/illustrations/MET-06.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Caixas em três níveis de uma árvore binária diminuem de tamanho do topo para a base. A maior caixa, no topo, é azul.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "bf7ccbdd16669657e3f2a57e77b28a598f05f31e2c1eaa98bf5ab9803b9e96f7"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-07",
+   "group": "CONCEPT",
+   "title": "Sobreajuste",
+   "file": "/illustrations/MET-07.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Alfaiate ajusta um terno às irregularidades de um manequim, enquanto três pessoas de corpos diferentes observam com dúvida.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "dda6621179048a7b32cc79323ba20ab33ce3d03c3313abd96e52a4d1531e870b"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-08",
+   "group": "CONCEPT",
+   "title": "Precisão e revocação",
+   "file": "/illustrations/MET-08.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Rede retirada da água contém peixes azuis, uma bota e uma lata; outros peixes azuis permanecem fora da rede.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "adbc39a81f354e3b13b2a179ac7caa0e2e3fdcc0edf696864a155c039ebeb03a"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-09",
+   "group": "CONCEPT",
+   "title": "Encapsulamento em camadas de rede",
+   "file": "/illustrations/MET-09.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Carta azul entra em um envelope pequeno, acompanhado por um envelope maior e uma caixa aberta.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "bb809dc86de5253646afbaf40d1dba0ec4353da165b432d4efbafb7dbdd7159d"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-10",
+   "group": "CONCEPT",
+   "title": "NAT e CGNAT",
+   "file": "/illustrations/MET-10.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Porteiro distribui cartas entre apartamentos que compartilham uma caixa de correio. Ao fundo, vários prédios compartilham um único portão.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "727f261ef95881167b67f6d77fa8196f845f26ea2231bac8387580379d9e1c08"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-11",
+   "group": "CONCEPT",
+   "title": "Partição na rede (CAP)",
+   "file": "/illustrations/MET-11.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Duas agências em margens opostas de um rio mantêm livros abertos em seus balcões. Uma ponte quebrada interrompe a ligação entre elas.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "e6b861cab83b8b925424bb5b7a73cc4d0c9ee0f1e4ba182f1e6205c7f135f7a7"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-12",
+   "group": "CONCEPT",
+   "title": "Idempotência",
+   "file": "/illustrations/MET-12.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Dedo pressiona repetidamente o botão de um elevador. Uma única luz azul permanece acesa acima da porta.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "45279c4f5b91b4c25267bbff0d58effcdbf1b7c4b94aa6ba8d9f32e55caa5d39"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-13",
+   "group": "CONCEPT",
+   "title": "Homem no meio",
+   "file": "/illustrations/MET-13.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Duas pessoas usam um tubo pneumático para trocar cartas, enquanto uma terceira abre um envelope no trecho intermediário.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "e71d209fc63bdab24c529927c2054823676845ea28b2110c31cfa3b18b22cf0a"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-14",
+   "group": "CONCEPT",
+   "title": "Redução entre problemas",
+   "file": "/illustrations/MET-14.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Parafuso de formato irregular, adaptador e parafuso comum compatível com uma chave de fenda aparecem alinhados.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "799411445c55da37d1beb1e5cf7fced686be6dc2c201ea2cc001ea9a3c701454"
+   },
+   "aiGenerated": true
+  },
+  {
+   "code": "MET-15",
+   "group": "CONCEPT",
+   "title": "Ataque à cadeia de dependências",
+   "file": "/illustrations/MET-15.webp",
+   "width": 800,
+   "height": 800,
+   "alt": "Uma mão se aproxima de uma caixa azul entre várias embalagens semelhantes. O rótulo da caixa tem um pequeno recorte diferente.",
+   "link": null,
+   "sourcePng": {
+    "width": 1024,
+    "height": 1024,
+    "sha256": "fee5fab6e2f4c8b1de361a19f92e8dbebfd23930546dbec6b3630fd3cedc0661"
+   },
+   "aiGenerated": true
+  }
+ ]
+}

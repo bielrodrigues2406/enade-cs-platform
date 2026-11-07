@@ -21,10 +21,7 @@
       </p>
     } @else {
       <p class="account-intro">Continue de onde parou.</p>
-      <p class="account-help">
-        Respostas feitas sem conta não passam para a conta ao entrar; para
-        guardá-las, crie uma conta.
-      </p>
+      <p class="account-help">O que você respondeu sem conta não passa para a conta ao entrar.</p>
     }
     <form #accountForm="ngForm" (ngSubmit)="submit(accountForm)" novalidate>
       <fieldset [disabled]="busy">
@@ -97,9 +94,7 @@
             </button>
           </div>
           @if (mode === "register") {
-            <p id="password-help" class="account-help">
-              Pelo menos 12 caracteres. Uma frase fácil de lembrar funciona bem.
-            </p>
+            <app-password-meter id="password-help" [password]="password" [owner]="{ email, name, enrollment }" />
           }
           <p id="password-error" class="field-error">
             @if (submitted && passwordError()) {
@@ -173,9 +168,7 @@
         {{ mode === "register" ? "Entrar" : "Criar conta" }}
       </button>
     </p>
-    <p class="account-help">
-      Você também pode continuar estudando sem criar uma conta.
-    </p>
+    <button type="button" class="text-button account-guest" (click)="cancel.emit()" [disabled]="busy">Estudar sem conta</button>
   </div>
   <aside class="account-cover" aria-hidden="true">
     <p class="account-cover-mark"><svg class="brand-mark is-large" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect width="34" height="34" rx="8" /><circle cx="9.5" cy="17" r="3.6" class="brand-bubble" /><circle cx="17" cy="17" r="3.6" class="brand-bubble is-marked" /><circle cx="24.5" cy="17" r="3.6" class="brand-bubble" /></svg></p>
