@@ -348,3 +348,4 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
   - **Figuras:** 12 SVGs (`scripts/draw-figures.py`) e 9 cenas ligadas às questões.
   - **Falta:** enunciados longos (77 questões ainda com até 80 palavras), que vão para o PR E.
 
+- **07/11/2026 · Claude · PR D (LIB-2), piloto da Biblioteca:** 23 lições (13 de Algoritmos e 10 de SO), uma por conceito do núcleo, em `data/lessons/`, com rota `GET /api/core/:slug/lessons/:concept` e tela `core-lesson` sob demanda. Exemplos executados (Python 3 e gcc). Capa na página da área, "Ler a lição" em cada conceito, anterior e próxima. Corrigido no núcleo de SO: o relógio também sofre a anomalia de Belady. Sem migration. Aguarda a leitura de Gabriel antes do PR F. Ver `docs/LIBRARY-LESSONS.md`.

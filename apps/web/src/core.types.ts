@@ -19,10 +19,23 @@ export type CoreConcept = {
   questions: { id: string; year: number; subject: string }[];
   /** Questões geradas por IA ligadas ao conceito (versão publicada). */
   generated: { id: string; title: string }[];
+  /** Há lição da Biblioteca para o conceito (LIB-2). */
+  lesson: boolean;
+};
+/** Lição de um conceito, espelhando /api/core/:slug/lessons/:concept. */
+export type Lesson = {
+  concept: string;
+  body: string[];
+  figure: { src: string; alt: string } | null;
+  example: { title: string; code: string | null; steps: string[]; check: string };
+  mistake: string;
+  recall: { q: string; a: string }[];
 };
 export type CoreArea = {
   slug: string; area: string; title: string; summary: string; deck: string | null; sheet: string | null;
   history: AreaHistory; confidence: Confidence; generatedTotal: number;
+  /** Capa ilustrada da área, quando ela já tem lições. */
+  cover: string | null;
   concepts: CoreConcept[]; facts: string[];
   pairs: { a: string; b: string; difference: string }[];
   cues: { cue: string; concept: string }[];

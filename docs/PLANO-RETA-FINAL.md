@@ -117,6 +117,8 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ### PR D. Biblioteca: piloto (Algoritmos e Sistemas operacionais)
 
+**Estado (07/11):** feito; aguarda a leitura de Gabriel. 23 lições, capas e cinco figuras, em [LIBRARY-LESSONS.md](LIBRARY-LESSONS.md). Os flashcards de cada lição ficaram como perguntas para fixar dentro da própria lição; o baralho da área continua no botão da página.
+
 **Uma lição por conceito do núcleo** (23 conceitos nas duas áreas). Cada lição tem:
 1. **Explicação aprofundada:** de 4 a 8 parágrafos curtos, com definição, como funciona, por que importa e limites.
 2. **Exemplo resolvido passo a passo:** com código ou conta executados de verdade.

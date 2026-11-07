@@ -1,0 +1,258 @@
+{
+  "slug": "sistemas-operacionais",
+  "cover": "/illustrations/CAPA-SO.webp",
+  "author": "claude-geracao",
+  "lessons": [
+    {
+      "concept": "so-processo-thread",
+      "body": [
+        "Processo é um programa em execução. Ele tem espaço de endereçamento próprio (código, dados, heap e pilha), registradores, contador de programa e recursos como arquivos abertos. O sistema guarda tudo isso no bloco de controle do processo (PCB), junto com o estado e a prioridade.",
+        "Threads são fluxos de execução dentro de um processo. As threads de um mesmo processo compartilham código, dados globais, heap e arquivos abertos; cada uma tem sua pilha, seus registradores e seu contador de programa. Criar e trocar threads é mais barato que criar e trocar processos, e elas se comunicam pela memória compartilhada, o que exige sincronização.",
+        "No Unix, fork() cria um processo filho como cópia do pai. O filho recebe 0 como retorno, e o pai recebe o PID do filho. A partir daí os espaços de endereçamento são separados: o sistema usa cópia na escrita (copy-on-write) para não duplicar a memória na hora, mas uma variável alterada no filho não muda no pai. A família exec troca o programa do processo por outro.",
+        "Threads podem ser do núcleo ou de usuário. No modelo N:1, várias threads de usuário rodam sobre uma do núcleo: uma chamada bloqueante para todas, e não há paralelismo entre núcleos. No modelo 1:1, adotado pelo Linux e pelo Windows, cada thread de usuário tem uma do núcleo. O modelo N:M mistura os dois.",
+        "Concorrência é ter várias tarefas em andamento, intercaladas; paralelismo é executá-las ao mesmo tempo em núcleos diferentes. O ganho do paralelismo é limitado pela parte sequencial do programa, como diz a lei de Amdahl."
+      ],
+      "example": {
+        "title": "O que o pai imprime depois do fork?",
+        "code": "#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\n\nint x = 10;\n\nint main(void) {\n    if (fork() == 0) { x = 20; return 0; }\n    wait(NULL);\n    printf(\"%d\\n\", x);\n    return 0;\n}",
+        "steps": [
+          "O filho recebe 0 do fork, muda a sua cópia de x para 20 e termina.",
+          "O pai espera o filho com wait e imprime a sua própria cópia de x: 10.",
+          "Três fork() seguidos, sem if, deixam 2³ = 8 processos, contando o original: cada fork dobra o número de processos."
+        ],
+        "check": "Compilado com gcc e executado no Linux: o programa imprime 10; a versão com três fork() imprime 8 linhas."
+      },
+      "mistake": "Achar que as threads de um processo compartilham a pilha, ou que a variável alterada pelo filho do fork muda no pai. Outro erro: dizer que threads de usuário no modelo N:1 aproveitam vários núcleos.",
+      "recall": [
+        { "q": "O que fork() devolve ao filho? E ao pai?", "a": "0 ao filho; ao pai, o PID do filho, ou −1 se falhar." },
+        { "q": "O que cada thread tem só para si?", "a": "Pilha, registradores e contador de programa." }
+      ]
+    },
+    {
+      "concept": "so-estados",
+      "body": [
+        "Um processo passa pelos estados novo, pronto, executando, bloqueado (ou em espera) e terminado. Pronto significa que só falta a CPU; bloqueado significa que espera um evento, como o fim de uma leitura de disco ou um semáforo.",
+        "As transições válidas: novo → pronto, quando é admitido; pronto → executando, quando o escalonador o despacha; executando → pronto, por preempção ou fim da fatia de tempo; executando → bloqueado, ao pedir E/S ou esperar um evento; bloqueado → pronto, quando o evento acontece; executando → terminado.",
+        "Não existe bloqueado → executando: ao fim da E/S, o processo volta para a fila de prontos e espera o escalonador. Também não existe pronto → bloqueado, porque só quem está executando pode pedir E/S.",
+        "Na troca de contexto, o sistema salva os registradores e o contador de programa do processo que sai no seu PCB e restaura os do que entra. Se os processos forem diferentes, troca também o mapa de memória, e a TLB perde validade. Esse tempo é sobrecarga pura. Entre threads do mesmo processo a troca é mais barata, porque o espaço de endereçamento é o mesmo.",
+        "Uma chamada de sistema troca o modo da CPU, de usuário para núcleo, mas não necessariamente o processo. Dois estados especiais aparecem em provas: o zumbi, que terminou mas cujo pai ainda não leu o estado com wait; e o órfão, cujo pai terminou antes e que é adotado pelo processo inicial do sistema."
+      ],
+      "example": {
+        "title": "Acompanhando dois processos",
+        "steps": [
+          "P1 executa; P2 está pronto.",
+          "P1 pede a leitura de um arquivo: P1 vai para bloqueado, e o escalonador despacha P2, que passa a executando.",
+          "O disco termina e gera uma interrupção: P1 vai para pronto. P2 continua executando até a fatia acabar.",
+          "A fatia de P2 acaba: P2 vai para pronto, e o escalonador escolhe P1, que volta a executar."
+        ],
+        "check": "Sequência conferida contra o diagrama de cinco estados de Silberschatz e Tanenbaum."
+      },
+      "mistake": "Marcar que o processo, ao terminar a E/S, volta direto a executar. Ele vai para pronto. Outro erro é confundir troca de modo, numa chamada de sistema, com troca de contexto.",
+      "recall": [
+        { "q": "Que transição ocorre quando a fatia de tempo do Round Robin acaba?", "a": "Executando → pronto." },
+        { "q": "O que é um processo zumbi?", "a": "Um processo que terminou, mas cujo pai ainda não leu o seu estado com wait." }
+      ]
+    },
+    {
+      "concept": "so-escalonamento",
+      "body": [
+        "O escalonador decide qual processo pronto usa a CPU. Os critérios: utilização da CPU, vazão, tempo de retorno (término menos chegada), tempo de espera (retorno menos execução) e tempo de resposta (do pedido até a primeira resposta). No escalonamento preemptivo, o sistema pode tirar a CPU de um processo; no não preemptivo, o processo só sai quando termina ou bloqueia.",
+        "FCFS atende por ordem de chegada, sem preempção. É simples, mas sofre o efeito comboio: um processo longo na frente faz todos os curtos esperarem.",
+        "SJF executa primeiro o de menor duração e minimiza o tempo médio de espera quando todos estão disponíveis. A versão preemptiva é o SRTF, que troca quando chega um processo com tempo restante menor. O problema prático é que a duração precisa ser estimada, em geral por média exponencial das anteriores, e os processos longos podem sofrer inanição.",
+        "Round Robin dá a cada processo uma fatia de tempo (quantum) em rodízio. Com quantum muito grande, vira FCFS; com quantum muito pequeno, o tempo se perde em trocas de contexto. Tem bom tempo de resposta, o que o torna comum em sistemas interativos.",
+        "Por prioridade, executa primeiro o de maior prioridade. A inanição dos de baixa prioridade se resolve com envelhecimento: a prioridade de quem espera aumenta com o tempo. Filas múltiplas com realimentação combinam as ideias, movendo processos entre filas conforme o comportamento."
+      ],
+      "example": {
+        "title": "P1 (8), P2 (4) e P3 (2), todos chegando no instante 0",
+        "steps": [
+          "FCFS, na ordem P1, P2, P3: esperas 0, 8 e 12. Média 20/3 ≈ 6,67.",
+          "SJF: P3, P2, P1. Esperas: P3 0, P2 2 e P1 6. Média 8/3 ≈ 2,67.",
+          "Round Robin com quantum 2: P1 0–2, P2 2–4, P3 4–6 (termina), P1 6–8, P2 8–10 (termina), P1 10–14.",
+          "No Round Robin, as esperas são término menos execução: P1 14 − 8 = 6, P2 10 − 4 = 6, P3 6 − 2 = 4. Média 16/3 ≈ 5,33."
+        ],
+        "check": "Executado em Python 3: simulação de FCFS, SJF e Round Robin com quantum 2."
+      },
+      "mistake": "Calcular a espera como o instante de término, esquecendo de subtrair a execução e a chegada. Outro erro é achar o SJF justo: processos longos podem esperar indefinidamente se chegarem curtos o tempo todo.",
+      "recall": [
+        { "q": "Com quantum muito grande, o Round Robin vira o quê?", "a": "FCFS." },
+        { "q": "Como evitar a inanição no escalonamento por prioridade?", "a": "Com envelhecimento: aumentar a prioridade de quem espera há muito tempo." }
+      ]
+    },
+    {
+      "concept": "so-regiao-critica",
+      "body": [
+        "Condição de corrida acontece quando o resultado depende da ordem em que threads ou processos intercalam o acesso a um dado compartilhado. O exemplo clássico é contador++, que parece uma operação só, mas vira três: ler o valor, somar 1 e gravar. Se duas threads leem o mesmo valor antes de qualquer uma gravar, um incremento se perde.",
+        "Região crítica é o trecho de código que acessa o dado compartilhado. Uma solução correta precisa garantir três coisas: exclusão mútua (no máximo um dentro), progresso (se ninguém está dentro, quem quer entrar não espera para sempre por causa de quem não quer) e espera limitada (ninguém é passado para trás indefinidamente).",
+        "Soluções por software, como a de Peterson para dois processos, mostram as ideias, mas em processadores modernos exigem barreiras de memória. Desabilitar interrupções só funciona num processador e só dentro do núcleo. Uma variável \"ocupado\" comum não resolve: dois processos podem ler \"livre\" antes de qualquer um gravar \"ocupado\".",
+        "Na prática, usam-se instruções atômicas do hardware, como test-and-set e compare-and-swap. Elas permitem montar o spinlock, que fica em espera ocupada e serve a trechos curtos em multiprocessadores, e o mutex, que bloqueia a thread e libera a CPU enquanto ela espera.",
+        "Boa prática: deixar a região crítica o menor possível e, para contadores, usar operações atômicas da linguagem."
+      ],
+      "figure": { "src": "/illustrations/MET-01.webp", "alt": "Duas mãos escrevem na mesma linha de um caderno, com os traços sobrepostos e embaralhados no centro. Uma das mãos é azul." },
+      "example": {
+        "title": "Duas threads somando 1 000 000 cada uma, sem trava",
+        "code": "long contador = 0;\n\nvoid *soma(void *arg) {\n    for (int i = 0; i < 1000000; i++) contador++;\n    return NULL;\n}",
+        "steps": [
+          "O esperado seria 2 000 000.",
+          "Uma intercalação que perde um incremento: T1 lê 5; T2 lê 5; T1 grava 6; T2 grava 6.",
+          "Em cinco execuções num processador de 4 núcleos, os totais ficaram entre cerca de 1 024 000 e 1 170 000, diferentes a cada vez.",
+          "Com um mutex em volta de contador++, ou com incremento atômico, o total é sempre 2 000 000."
+        ],
+        "check": "Compilado com gcc -O0 -pthread e executado cinco vezes no Linux, em 4 núcleos: 1 069 191, 1 024 102, 1 169 553, 1 044 713 e 1 048 887."
+      },
+      "mistake": "Achar que uma linha de código de alto nível é atômica, ou que uma variável booleana resolve a exclusão mútua sem instrução atômica. Outro erro é supor que desabilitar interrupções funciona em multiprocessador.",
+      "recall": [
+        { "q": "Quais são os três requisitos de uma solução para a região crítica?", "a": "Exclusão mútua, progresso e espera limitada." },
+        { "q": "Quando o spinlock é preferível ao mutex que bloqueia?", "a": "Em trechos muito curtos num multiprocessador, em que esperar girando custa menos que bloquear e trocar de contexto." }
+      ]
+    },
+    {
+      "concept": "so-semaforos",
+      "body": [
+        "Semáforo é um contador inteiro com uma fila de espera e duas operações atômicas, propostas por Dijkstra. down (também P ou wait): se o valor é positivo, decrementa e segue; se é zero, bloqueia. up (também V ou signal): se há alguém bloqueado, acorda um; senão, incrementa.",
+        "O valor inicial diz quantas threads passam sem esperar. Para exclusão mútua, começa em 1. Para limitar o uso de um recurso com k unidades, começa em k. Para impor ordem entre threads (B só depois de A), começa em 0.",
+        "Mutex é a trava binária com dono: só quem trancou pode destrancar. Um semáforo não tem dono: qualquer thread pode fazer up, e é isso que permite usá-lo para sinalização.",
+        "Monitor é uma construção da linguagem: os procedimentos executam em exclusão mútua automática, e as variáveis de condição permitem esperar (wait) e avisar (signal). Em Java, synchronized com wait e notify faz esse papel. Na semântica usual, quem é acordado não ganha o monitor na hora, então a condição deve ser testada de novo, num while.",
+        "Erros comuns de uso: trocar a ordem de dois down pode causar deadlock; esquecer um up trava quem espera; um up a mais deixa entrar mais threads que o permitido."
+      ],
+      "example": {
+        "title": "Semáforo de sinalização e semáforo de recurso",
+        "code": "s = Semaforo(0)\n\n# thread 1          # thread 2\nA()                 down(s)\nup(s)               B()",
+        "steps": [
+          "Se a thread 2 chega primeiro, o down encontra 0 e bloqueia até a thread 1 terminar A e fazer up. B nunca roda antes de A.",
+          "Com o semáforo começando em 1, B poderia rodar antes de A: a ordem não seria garantida.",
+          "Num semáforo iniciado em 3, se cinco threads chamam down, três passam e duas esperam até alguém fazer up."
+        ],
+        "check": "Executado em Python 3 com threading.Semaphore(3) e cinco threads: no máximo 3 dentro ao mesmo tempo."
+      },
+      "mistake": "Iniciar o semáforo de sinalização em 1, o que deixa B rodar antes de A, ou o de exclusão mútua em 0, o que impede todos de entrar.",
+      "recall": [
+        { "q": "Um semáforo para garantir que B rode depois de A começa com que valor?", "a": "0." },
+        { "q": "Qual a diferença essencial entre mutex e semáforo?", "a": "O mutex tem dono: só quem trancou destranca. O semáforo é um contador sem dono." }
+      ]
+    },
+    {
+      "concept": "so-produtor-consumidor",
+      "body": [
+        "No problema do produtor-consumidor, produtores colocam itens num buffer de tamanho N e consumidores os retiram. É preciso impedir que o produtor escreva com o buffer cheio, que o consumidor leia com o buffer vazio e que os dois mexam no buffer ao mesmo tempo.",
+        "A solução clássica usa três semáforos: mutex, iniciado em 1, protege o buffer; vazio, iniciado em N, conta as posições livres; cheio, iniciado em 0, conta os itens disponíveis.",
+        "A ordem dos down importa. O produtor faz down(vazio) antes de down(mutex). Se fizer ao contrário com o buffer cheio, ele pega o mutex e dorme em vazio; o consumidor, para liberar uma posição, precisa do mutex, que nunca será solto. É um deadlock. A ordem dos up não causa deadlock.",
+        "Outros dois problemas clássicos aparecem junto. Leitores e escritores: vários leitores podem ler ao mesmo tempo, mas o escritor precisa de acesso exclusivo; dar prioridade aos leitores pode deixar o escritor em inanição. Jantar dos filósofos: cinco filósofos e cinco garfos; se todos pegarem o garfo da esquerda ao mesmo tempo, ninguém pega o da direita, e há deadlock."
+      ],
+      "example": {
+        "title": "A ordem certa e a ordem invertida",
+        "code": "produtor:                consumidor:\n  down(vazio)              down(cheio)\n  down(mutex)              down(mutex)\n  insere(item)             item = retira()\n  up(mutex)                up(mutex)\n  up(cheio)                up(vazio)",
+        "steps": [
+          "Com essa ordem, o produtor só pega o mutex quando já tem uma posição livre garantida.",
+          "Invertendo os dois down do produtor, com o buffer cheio: o produtor tem o mutex e espera vazio; o consumidor espera o mutex. Nenhum dos dois avança.",
+          "Numa execução com buffer de 2 posições e 10 itens, a versão certa terminou; a invertida ficou parada até o tempo limite."
+        ],
+        "check": "Executado em Python 3 com threading.Semaphore e consumidor mais lento: a ordem certa termina, a invertida trava."
+      },
+      "mistake": "Inverter a ordem dos down no produtor ou no consumidor. Outro erro é achar que trocar a ordem dos up também trava.",
+      "recall": [
+        { "q": "Quais são os valores iniciais de mutex, vazio e cheio?", "a": "1, N e 0." },
+        { "q": "Com prioridade aos leitores, quem pode sofrer inanição?", "a": "Os escritores." }
+      ]
+    },
+    {
+      "concept": "so-deadlock",
+      "body": [
+        "Deadlock é um conjunto de processos em que cada um espera um recurso preso por outro do mesmo conjunto. Ele só acontece com as quatro condições de Coffman ao mesmo tempo: exclusão mútua, posse e espera, não preempção e espera circular. Basta quebrar uma para evitá-lo.",
+        "Prevenção nega uma condição: uma ordem global de aquisição dos recursos quebra a espera circular; pedir todos os recursos de uma vez quebra a posse e espera; permitir tomar recursos quebra a não preempção.",
+        "Evitação decide cada pedido em tempo de execução. O algoritmo do banqueiro só concede um recurso se o estado continua seguro, isto é, se existe uma ordem em que todos os processos conseguem terminar. Estado inseguro não é deadlock: só significa que ele pode acontecer.",
+        "Detecção e recuperação deixam acontecer e depois corrigem. Com recursos de instância única, um ciclo no grafo de alocação significa deadlock. Com várias instâncias, o ciclo é necessário, mas não suficiente. A recuperação mata processos ou toma recursos. Muitos sistemas de uso geral simplesmente ignoram o problema (a estratégia do avestruz).",
+        "Não confunda com livelock, em que os processos mudam de estado sem progredir, nem com inanição, em que um processo espera indefinidamente enquanto os outros avançam."
+      ],
+      "figure": { "src": "/illustrations/MET-02.webp", "alt": "Quatro carros ocupam um cruzamento em um ciclo de bloqueio, com a frente de cada um encostada no próximo." },
+      "example": {
+        "title": "Algoritmo do banqueiro com 12 unidades",
+        "steps": [
+          "P0 tem 5 e pode pedir até 10; P1 tem 2, máximo 4; P2 tem 2, máximo 9. Estão livres 12 − 9 = 3.",
+          "Faltam: P0 5, P1 2, P2 7. P1 pode terminar (2 ≤ 3) e devolve, ficando 5 livres; então P0 (5 ≤ 5), ficando 10; então P2 (7 ≤ 10). Estado seguro, com a ordem P1, P0, P2.",
+          "Se P2 pedir mais 1: ficam 2 livres e P2 passa a precisar de 6. P1 termina e deixa 4 livres, mas P0 precisa de 5 e P2 de 6. Estado inseguro: o pedido é negado e P2 espera."
+        ],
+        "check": "Executado em Python 3 com a verificação de segurança do banqueiro para um tipo de recurso."
+      },
+      "mistake": "Achar que basta uma das quatro condições para haver deadlock, ou que estado inseguro é o mesmo que deadlock. Também cai: \"todo ciclo no grafo de alocação indica deadlock\", o que só vale com uma instância por recurso.",
+      "recall": [
+        { "q": "Que condição de Coffman a ordem global de aquisição quebra?", "a": "A espera circular." },
+        { "q": "Num grafo de alocação com uma instância por recurso, o que um ciclo indica?", "a": "Deadlock." }
+      ]
+    },
+    {
+      "concept": "so-paginacao",
+      "body": [
+        "Na paginação, a memória lógica é dividida em páginas e a física em quadros do mesmo tamanho, uma potência de 2. Um endereço lógico tem duas partes: número da página e deslocamento. Com páginas de 2^d bytes, os d bits menos significativos são o deslocamento.",
+        "A tabela de páginas de cada processo diz em que quadro está cada página. O endereço físico é o número do quadro vezes o tamanho da página, mais o deslocamento.",
+        "A paginação não tem fragmentação externa, porque qualquer quadro livre serve. Tem fragmentação interna: a última página do processo pode ficar parcialmente vazia. A segmentação divide o programa em blocos lógicos de tamanho variável (código, pilha, dados), com base e limite; ela tem fragmentação externa, que pode exigir compactação.",
+        "Cada acesso exigiria ir duas vezes à memória: uma na tabela e outra no dado. A TLB, uma pequena memória associativa, guarda traduções recentes. O tempo efetivo de acesso é a média entre acertos e falhas na TLB.",
+        "Tabelas grandes são um problema: com endereços de 32 bits e páginas de 4 KiB, são 2^20 entradas por processo, cerca de 4 MiB com entradas de 4 bytes. Por isso existem tabelas hierárquicas, em vários níveis, e tabelas invertidas, com uma entrada por quadro."
+      ],
+      "example": {
+        "title": "Traduzindo o endereço 0x1A3F com páginas de 1 KiB",
+        "steps": [
+          "Com páginas de 1 KiB, o deslocamento usa 10 bits. 0x1A3F = 6719.",
+          "Página = 6719 div 1024 = 6; deslocamento = 6719 − 6·1024 = 575.",
+          "Se a página 6 está no quadro 2, o endereço físico é 2·1024 + 575 = 2623 = 0x0A3F.",
+          "TLB com 10 ns, memória com 100 ns e 90% de acerto: 0,9 × 110 + 0,1 × 210 = 120 ns por acesso."
+        ],
+        "check": "Executado em Python 3: divmod(0x1A3F, 1024) = (6, 575) e 2·1024 + 575 = 0xA3F; tempo efetivo de 120 ns."
+      },
+      "mistake": "Dizer que a paginação tem fragmentação externa (quem tem é a segmentação), ou somar o deslocamento ao número da página em vez de somá-lo ao início do quadro.",
+      "recall": [
+        { "q": "Páginas de 4 KiB usam quantos bits de deslocamento?", "a": "12." },
+        { "q": "Que tipo de fragmentação a paginação tem?", "a": "Só interna, na última página do processo." }
+      ]
+    },
+    {
+      "concept": "so-memoria-virtual",
+      "body": [
+        "Memória virtual deixa um processo rodar com só parte das páginas na RAM. A tabela de páginas tem um bit de presença. Acessar uma página ausente gera uma falta de página: o sistema escolhe um quadro (livre ou de uma vítima, gravando a vítima no disco se ela foi modificada), traz a página, atualiza a tabela e reexecuta a instrução.",
+        "Funciona por causa da localidade de referência: os programas tendem a acessar de novo o que acessaram há pouco (localidade temporal) e o que está perto (localidade espacial).",
+        "As políticas de substituição: a ótima substitui a página que será usada mais tarde no futuro; não é implementável, mas serve de referência. FIFO tira a mais antiga na memória. LRU tira a usada há mais tempo; é boa, mas cara de implementar exatamente. O relógio (segunda chance) aproxima a LRU com um bit de referência: a página com bit 1 ganha uma segunda chance e tem o bit zerado.",
+        "Anomalia de Belady: na FIFO, aumentar o número de quadros pode aumentar as faltas. LRU e ótima são algoritmos de pilha e nunca sofrem a anomalia. O relógio não é algoritmo de pilha e também pode sofrer.",
+        "Thrashing é quando o sistema passa mais tempo trocando páginas que executando, em geral porque há processos demais para a memória. Responde-se reduzindo o grau de multiprogramação ou controlando o conjunto de trabalho de cada processo."
+      ],
+      "example": {
+        "title": "Contando faltas de página",
+        "steps": [
+          "Referências 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1, com 3 quadros vazios no início.",
+          "FIFO: 15 faltas. LRU: 12 faltas. Ótima: 9 faltas.",
+          "Anomalia de Belady, com 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5: a FIFO tem 9 faltas com 3 quadros e 10 com 4.",
+          "Na mesma sequência, a LRU cai de 10 para 8 faltas e a ótima de 7 para 6. O relógio repete a FIFO: 9 e 10."
+        ],
+        "check": "Executado em Python 3: simulação de FIFO, LRU, ótima e relógio nas duas sequências."
+      },
+      "mistake": "Dizer que mais quadros sempre reduzem as faltas (falso na FIFO), que a LRU sofre a anomalia de Belady, ou que a política ótima pode ser implementada: ela precisa conhecer o futuro.",
+      "recall": [
+        { "q": "Quantas faltas a FIFO tem em 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5 com 3 e com 4 quadros?", "a": "9 e 10: a anomalia de Belady." },
+        { "q": "O que é thrashing?", "a": "O sistema gasta mais tempo trocando páginas do que executando, porque os processos não cabem na memória." }
+      ]
+    },
+    {
+      "concept": "so-arquivos",
+      "body": [
+        "O sistema de arquivos organiza os dados em arquivos e diretórios e guarda os metadados de cada arquivo: tamanho, dono, permissões, datas e onde estão os blocos no disco.",
+        "Na alocação contígua, o arquivo ocupa blocos seguidos: a leitura sequencial e o acesso direto são rápidos, mas há fragmentação externa e o arquivo tem dificuldade para crescer. Na encadeada, cada bloco aponta o próximo: não há fragmentação externa, mas o acesso direto exige percorrer a cadeia, e um ponteiro corrompido perde o resto. A FAT leva esses ponteiros para uma tabela, que pode ficar na memória.",
+        "Na indexada, um bloco de índice lista os blocos do arquivo. O i-node do Unix tem 12 ponteiros diretos e ponteiros indiretos simples, duplos e triplos: arquivos pequenos são acessados direto, e os grandes ainda têm acesso direto em poucos passos.",
+        "O espaço livre é controlado por mapa de bits, um bit por bloco, ou por lista de blocos livres. Para não corromper a estrutura numa queda de energia, os sistemas com journaling registram a operação num diário antes de executá-la.",
+        "Um hard link é outro nome para o mesmo i-node: o arquivo só some quando o contador de links chega a zero, e o link não atravessa sistemas de arquivos. Um link simbólico é um arquivo que guarda um caminho: se o original for apagado, ele fica pendurado."
+      ],
+      "example": {
+        "title": "Tamanho máximo de arquivo com i-node",
+        "steps": [
+          "Blocos de 4 KiB e ponteiros de 4 bytes: cada bloco de índice guarda 4096/4 = 1024 ponteiros.",
+          "12 ponteiros diretos: 12 × 4 KiB = 48 KiB.",
+          "Indireto simples: 1024 × 4 KiB = 4 MiB. Duplo: 1024² × 4 KiB = 4 GiB. Triplo: 1024³ × 4 KiB = 4 TiB.",
+          "Máximo: cerca de 4 TiB + 4 GiB + 4 MiB + 48 KiB, dominado pelo indireto triplo."
+        ],
+        "check": "Executado em Python 3: 1024 ponteiros por bloco e as quatro parcelas em KiB, MiB, GiB e TiB."
+      },
+      "mistake": "Achar que apagar um hard link apaga os dados (só quando o contador chega a zero) ou que a alocação encadeada permite acesso direto eficiente.",
+      "recall": [
+        { "q": "Quantos ponteiros de 4 bytes cabem num bloco de 4 KiB?", "a": "1024." },
+        { "q": "Apagar o arquivo original quebra o hard link ou o link simbólico?", "a": "O simbólico; o hard link continua dando acesso aos dados." }
+      ]
+    }
+  ]
+}

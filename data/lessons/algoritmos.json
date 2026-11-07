@@ -1,0 +1,335 @@
+{
+  "slug": "algoritmos",
+  "cover": "/illustrations/CAPA-ALG.webp",
+  "author": "claude-geracao",
+  "lessons": [
+    {
+      "concept": "alg-complexidade",
+      "body": [
+        "Complexidade assintótica descreve como o custo de um algoritmo cresce quando o tamanho n da entrada cresce. O custo pode ser tempo, contado em operações básicas, ou espaço, a memória extra. Constantes e termos menores são descartados porque, para n grande, quem manda é o termo de maior crescimento: 3n² + 100n + 7 cresce como n².",
+        "As três notações têm papéis diferentes. f(n) = O(g(n)) diz que, a partir de algum n₀, f(n) ≤ c·g(n) para alguma constante c: é um limite superior. Ω(g(n)) é o limite inferior. Θ(g(n)) vale quando os dois valem ao mesmo tempo, ou seja, o crescimento é exatamente da ordem de g.",
+        "O é limite superior, não sinônimo de pior caso. Pior caso, melhor caso e caso médio são situações da entrada; O, Ω e Θ são formas de limitar uma função. Dá para dizer que o pior caso da ordenação por inserção é Θ(n²) e que o melhor caso é Θ(n). Também é verdade, embora pouco informativo, que a busca binária é O(n).",
+        "A hierarquia que mais aparece na prova: 1 < log n < √n < n < n log n < n² < n³ < 2ⁿ < n!. A base do logaritmo não importa na notação assintótica, porque log₂ n e log₁₀ n diferem por uma constante.",
+        "Para contar, olhe os laços. Laços em sequência somam; laços aninhados multiplicam. Um laço em que a variável dobra a cada passo roda cerca de log₂ n vezes. Um laço interno que vai de i até n, dentro de outro que vai de 1 até n, faz n(n + 1)/2 iterações: ainda Θ(n²)."
+      ],
+      "example": {
+        "title": "Contando as iterações de dois laços",
+        "code": "for i in range(n):\n    j = 1\n    while j < n:\n        j *= 2",
+        "steps": [
+          "O laço externo roda n vezes.",
+          "O interno dobra j a partir de 1 até alcançar n: roda ⌈log₂ n⌉ vezes.",
+          "Total: n·⌈log₂ n⌉, isto é, Θ(n log n). Para n = 1024, são 1024 × 10 = 10 240 iterações."
+        ],
+        "check": "Executado em Python 3: 10 240 iterações para n = 1024 e 10 000 para n = 1000."
+      },
+      "mistake": "Achar que O(n²) significa \"sempre faz n² operações\" ou que é o mesmo que pior caso. O dá só um teto: um algoritmo Θ(n) também é O(n²). Desconfie da alternativa que diz que um algoritmo O(n²) é mais lento que um O(n log n) para toda entrada: a notação ignora constantes e só vale para n grande.",
+      "recall": [
+        { "q": "log₂ n ou log₁₀ n: qual cresce mais rápido na notação assintótica?", "a": "Os dois são Θ(log n). Diferem por uma constante: log₂ n = log₁₀ n / log₁₀ 2." },
+        { "q": "Um laço que divide n por 2 até chegar a 1 roda quantas vezes?", "a": "Cerca de log₂ n vezes." }
+      ]
+    },
+    {
+      "concept": "alg-recorrencia",
+      "body": [
+        "Um algoritmo recursivo resolve o problema chamando a si mesmo em entradas menores até chegar a um caso base, resolvido direto. Sem caso base, ou com chamadas que não diminuem a entrada, a recursão não termina e estoura a pilha.",
+        "O custo é escrito como recorrência: T(n) em função de T de entradas menores, mais o trabalho feito fora das chamadas. O merge sort divide em duas metades, ordena cada uma e intercala em tempo linear: T(n) = 2T(n/2) + n.",
+        "O Teorema Mestre resolve recorrências da forma T(n) = a·T(n/b) + f(n), com a ≥ 1 e b > 1. Compare f(n) com n^(log_b a). Se f cresce polinomialmente mais devagar, T(n) = Θ(n^(log_b a)). Se cresce igual, T(n) = Θ(n^(log_b a) · log n). Se cresce polinomialmente mais rápido, e vale a condição de regularidade, T(n) = Θ(f(n)).",
+        "Exemplos rápidos: a busca binária, T(n) = T(n/2) + 1, dá Θ(log n), pelo segundo caso. O merge sort, também pelo segundo caso, dá Θ(n log n). T(n) = 8T(n/2) + n², a multiplicação de matrizes por blocos, dá Θ(n³), pelo primeiro caso. Strassen reduz para 7 chamadas: Θ(n^(log₂ 7)), cerca de Θ(n^2,81).",
+        "Recorrências que diminuem n de uma unidade não entram no Teorema Mestre. T(n) = T(n − 1) + 1 é Θ(n), e T(n) = T(n − 1) + n é Θ(n²). T(n) = T(n − 1) + T(n − 2) + 1, o Fibonacci ingênuo, é exponencial, perto de 1,618ⁿ, porque recalcula os mesmos valores muitas vezes. Guardar os resultados (memoização) derruba o custo para Θ(n).",
+        "A recursão também gasta memória: cada chamada ativa guarda parâmetros e endereço de retorno na pilha. A profundidade máxima da recursão define o espaço extra. Uma recursão de cauda, em que a chamada é a última operação, pode ser convertida em laço."
+      ],
+      "example": {
+        "title": "Quantas chamadas faz o Fibonacci ingênuo?",
+        "code": "def fib(n):\n    if n < 2:\n        return n\n    return fib(n - 1) + fib(n - 2)",
+        "steps": [
+          "Seja C(n) o número de chamadas para calcular fib(n): C(0) = C(1) = 1 e C(n) = 1 + C(n − 1) + C(n − 2).",
+          "Daí, C(2) = 3, C(3) = 5, C(4) = 9, C(5) = 15, C(10) = 177 e C(20) = 21 891.",
+          "Em fórmula fechada, C(n) = 2·fib(n + 1) − 1. Para n = 30 são 2 692 537 chamadas, para um valor que um laço calcula em 30 passos."
+        ],
+        "check": "Executado em Python 3: contagem recursiva de C(n) para n de 0 a 5, 10 e 20, e 2·fib(31) − 1 = 2 692 537."
+      },
+      "mistake": "Aplicar o Teorema Mestre a T(n) = T(n − 1) + n. Ele só vale quando a entrada é dividida por uma constante b > 1. Outro erro comum é comparar f(n) com n em vez de n^(log_b a): em T(n) = 4T(n/2) + n, a comparação é com n², e o resultado é Θ(n²).",
+      "recall": [
+        { "q": "T(n) = 2T(n/2) + n resulta em quê?", "a": "Θ(n log n): f(n) = n cresce igual a n^(log₂ 2) = n, segundo caso." },
+        { "q": "Por que o Fibonacci com memoização é linear?", "a": "Cada fib(k) é calculado uma vez e depois lido da tabela; são n + 1 valores." }
+      ]
+    },
+    {
+      "concept": "alg-busca",
+      "body": [
+        "A busca sequencial percorre os elementos do início ao fim comparando cada um com a chave. Funciona em qualquer vetor ou lista, ordenado ou não. Custa O(n) no pior caso, com a chave ausente ou na última posição, e cerca de n/2 comparações em média quando a chave está presente em posição aleatória.",
+        "A busca binária exige duas condições: dados ordenados e acesso direto a qualquer posição em tempo constante, como num vetor. Ela compara a chave com o elemento do meio e descarta a metade em que a chave não pode estar. Cada passo reduz o intervalo à metade, então o número de comparações no pior caso é ⌊log₂ n⌋ + 1.",
+        "Em lista ligada, a binária perde a vantagem: chegar ao meio exige percorrer metade da lista, O(n). Por isso a afirmação \"busca binária em lista encadeada ordenada é O(log n)\" é falsa.",
+        "Os detalhes de implementação são fonte de erro: a condição de parada (ini ≤ fim), a atualização dos limites (fim = meio − 1 ou ini = meio + 1) e o cálculo do meio. Esquecer o ±1 pode gerar laço infinito. Em linguagens com inteiros de tamanho fixo, ini + (fim − ini)/2 evita o estouro de (ini + fim)/2.",
+        "A tabela hash é a terceira opção: busca média O(1), mas sem ordem entre as chaves e com pior caso O(n) quando muitas chaves colidem no mesmo balde. A escolha depende do uso: muitas buscas num conjunto que muda pouco favorecem ordenar uma vez e usar a binária; inserções frequentes favorecem hash ou árvore balanceada."
+      ],
+      "figure": { "src": "/illustrations/MET-05.webp", "alt": "Caixas de correio identificadas por formas geométricas têm correntes de envelopes de comprimentos diferentes, como os baldes de uma tabela hash com encadeamento." },
+      "example": {
+        "title": "Busca binária de 23 em [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]",
+        "steps": [
+          "ini = 0, fim = 9, meio = 4: o valor 16 é menor que 23, então ini = 5.",
+          "ini = 5, fim = 9, meio = 7: o valor 56 é maior que 23, então fim = 6.",
+          "ini = 5, fim = 6, meio = 5: o valor é 23. Achou com 3 comparações.",
+          "No pior caso, com 10 elementos, são ⌊log₂ 10⌋ + 1 = 4 comparações."
+        ],
+        "check": "Executado em Python 3: os três passos acima e o máximo de 4 comparações para todas as chaves presentes e algumas ausentes."
+      },
+      "mistake": "Usar a binária sem verificar se o vetor está ordenado, ou supor que ela vale em lista ligada. Em questões numéricas, contar log₂ n comparações em vez de ⌊log₂ n⌋ + 1 muda a alternativa.",
+      "recall": [
+        { "q": "Quantas comparações a binária faz no máximo em 1 000 000 de elementos?", "a": "⌊log₂ 1 000 000⌋ + 1 = 19 + 1 = 20." },
+        { "q": "Que duas condições a busca binária exige?", "a": "Dados ordenados e acesso direto por índice em tempo constante." }
+      ]
+    },
+    {
+      "concept": "alg-ordenacao",
+      "body": [
+        "Os algoritmos simples, bolha, seleção e inserção, são O(n²) no pior caso. A inserção é a mais útil: com o vetor já ordenado faz n − 1 comparações, O(n), e é rápida em vetores quase ordenados. A seleção faz sempre cerca de n²/2 comparações, mas no máximo n − 1 trocas.",
+        "O merge sort divide ao meio, ordena cada metade recursivamente e intercala. Custa Θ(n log n) em todos os casos, é estável e usa O(n) de memória extra para a intercalação.",
+        "O quicksort escolhe um pivô, particiona o vetor (menores de um lado, maiores do outro) e ordena as partes. Custa O(n log n) em média e O(n²) no pior caso, que ocorre quando o pivô é sempre o menor ou o maior, por exemplo, o primeiro elemento como pivô num vetor já ordenado. Pivô aleatório ou mediana de três tornam o pior caso improvável. Ordena no próprio vetor e não é estável.",
+        "O heapsort monta um heap e retira o máximo n vezes: Θ(n log n) no pior caso, no próprio vetor, sem ser estável.",
+        "Um algoritmo é estável quando elementos com chaves iguais saem na mesma ordem relativa da entrada. Isso importa ao ordenar por mais de um critério, como primeiro por nome e depois por turma. Inserção, bolha e merge sort são estáveis; seleção, quicksort e heapsort, na forma usual, não são.",
+        "Qualquer ordenação baseada em comparações precisa de Ω(n log n) comparações no pior caso. Counting sort e radix sort escapam desse limite porque não comparam: usam o valor da chave como índice, em O(n + k), quando as chaves são inteiros num intervalo pequeno."
+      ],
+      "example": {
+        "title": "Ordenação por inserção de [5, 2, 4, 6, 1, 3]",
+        "steps": [
+          "Insere 2: [2, 5, 4, 6, 1, 3].",
+          "Insere 4: [2, 4, 5, 6, 1, 3].",
+          "Insere 6: nada se move, [2, 4, 5, 6, 1, 3].",
+          "Insere 1: desloca quatro elementos, [1, 2, 4, 5, 6, 3].",
+          "Insere 3: [1, 2, 3, 4, 5, 6]. Foram 12 comparações no total."
+        ],
+        "check": "Executado em Python 3, com contagem das comparações: 12."
+      },
+      "mistake": "Dizer que o quicksort é sempre O(n log n), ou que o merge sort ordena sem memória extra. Outro erro: achar que um algoritmo O(n²) nunca supera um O(n log n). Para vetores pequenos, a inserção costuma ser mais rápida, e bibliotecas a usam abaixo de algumas dezenas de elementos.",
+      "recall": [
+        { "q": "Qual é o melhor caso da inserção e quando ele ocorre?", "a": "O(n), com o vetor já ordenado." },
+        { "q": "Por que o counting sort pode ser linear?", "a": "Não compara chaves: conta as ocorrências usando o valor como índice, o que exige inteiros num intervalo pequeno." }
+      ]
+    },
+    {
+      "concept": "alg-lineares",
+      "body": [
+        "Na pilha, a inserção e a remoção acontecem na mesma ponta, o topo: o último a entrar é o primeiro a sair (LIFO). Usos típicos: chamadas de função, desfazer, avaliação de expressões pós-fixas, conferência de parênteses e busca em profundidade iterativa.",
+        "Na fila, insere-se no fim e remove-se do início: o primeiro a entrar é o primeiro a sair (FIFO). Usos: buffers, atendimento por ordem de chegada e busca em largura. Num vetor, a fila circular evita deslocar elementos: os índices de início e fim avançam módulo o tamanho.",
+        "O deque insere e remove nas duas pontas e serve tanto como pilha quanto como fila. A fila de prioridade não é uma fila FIFO: remove o elemento de maior prioridade e costuma ser implementada com heap.",
+        "A lista ligada guarda nós com o valor e um ponteiro para o próximo, e também para o anterior na lista duplamente ligada. Inserir ou remover num ponto já localizado custa O(1), sem deslocar nada; mas acessar o i-ésimo elemento custa O(i), porque é preciso percorrer. O vetor é o oposto: acesso por índice O(1) e inserção no meio O(n).",
+        "Custos que caem na prova: inserir no início de uma lista simplesmente ligada é O(1); inserir no fim é O(1) só se houver ponteiro para o último; remover o último é O(n), porque é preciso achar o penúltimo. No vetor dinâmico, inserir no fim custa O(1) amortizado: quando enche, a capacidade dobra e tudo é copiado, mas isso acontece raramente."
+      ],
+      "example": {
+        "title": "Conferindo parênteses com uma pilha: ( [ ] { ( ) } )",
+        "steps": [
+          "Empilha ( e [. Ao ler ], o topo é [: casa e desempilha.",
+          "Empilha { e (. Ao ler ), o topo é (: casa. Ao ler }, o topo é {: casa.",
+          "Ao ler o último ), o topo é (: casa. A pilha termina vazia, então a expressão está balanceada.",
+          "Em ( [ ) ], ao ler ) o topo é [: não casa, e a expressão está desbalanceada."
+        ],
+        "check": "Simulação feita à mão e conferida passo a passo; o algoritmo é o da conferência de parênteses com pilha."
+      },
+      "mistake": "Trocar LIFO e FIFO nas questões de simulação, ou supor que a lista ligada tem acesso por índice O(1). Também é comum esquecer que remover o último de uma lista simplesmente ligada custa O(n).",
+      "recall": [
+        { "q": "Que estrutura a busca em largura usa? E a busca em profundidade iterativa?", "a": "Fila e pilha, respectivamente." },
+        { "q": "Quanto custa inserir no fim de um vetor dinâmico?", "a": "O(1) amortizado; a cópia O(n) só acontece quando a capacidade dobra." }
+      ]
+    },
+    {
+      "concept": "alg-arvores",
+      "body": [
+        "Numa árvore binária, cada nó tem no máximo dois filhos. A altura é o número de arestas do caminho mais longo da raiz até uma folha. Na árvore binária de busca (ABB), toda chave da subárvore esquerda é menor que a do nó, e toda chave da direita é maior.",
+        "Busca, inserção e remoção descem um nível por comparação e custam O(h), em que h é a altura. Se a árvore está equilibrada, h fica perto de log₂ n. Se as chaves chegam em ordem, ela vira uma linha e h = n − 1, como mostra a figura.",
+        "A remoção tem três casos. Folha: remove direto. Um filho: o filho ocupa o lugar do nó. Dois filhos: troca-se a chave pelo sucessor (o menor da subárvore direita) ou pelo predecessor, e remove-se esse nó, que tem no máximo um filho.",
+        "Os percursos: pré-ordem (raiz, esquerda, direita), em ordem (esquerda, raiz, direita), pós-ordem (esquerda, direita, raiz) e em largura, por níveis, com uma fila. Em ordem, uma ABB lista as chaves em ordem crescente. A pré-ordem serve para copiar a árvore; a pós-ordem, para liberar memória ou avaliar uma árvore de expressão.",
+        "Com n nós, a altura mínima é ⌊log₂ n⌋ e a máxima é n − 1. Uma árvore binária cheia de altura h tem 2^(h + 1) − 1 nós. Com chaves distintas, a pré-ordem e a em ordem juntas determinam a árvore; só a pré-ordem basta numa ABB, porque a em ordem é a lista ordenada."
+      ],
+      "figure": { "src": "/figures/gen-alg-abb-degenerada.svg", "alt": "Árvore binária em que o nó 1 é a raiz, 2 é filho direito de 1, 3 é filho direito de 2, e assim por diante até o nó n, formando uma única linha descendente para a direita." },
+      "example": {
+        "title": "Inserir 50, 30, 70, 20, 40, 60, 80 e percorrer",
+        "steps": [
+          "50 vira a raiz; 30 e 70 são seus filhos; 20 e 40 ficam sob 30; 60 e 80 sob 70. A árvore fica cheia, com altura 2.",
+          "Pré-ordem: 50, 30, 20, 40, 70, 60, 80.",
+          "Em ordem: 20, 30, 40, 50, 60, 70, 80.",
+          "Pós-ordem: 20, 40, 30, 60, 80, 70, 50."
+        ],
+        "check": "Executado em Python 3: inserção na ABB e os três percursos recursivos."
+      },
+      "mistake": "Supor que toda ABB tem busca O(log n): sem balanceamento, a altura pode chegar a n − 1. Outro erro, na remoção com dois filhos: subir o filho esquerdo para o lugar do nó, o que pode quebrar a propriedade de busca.",
+      "recall": [
+        { "q": "Qual percurso de uma ABB dá as chaves em ordem crescente?", "a": "O percurso em ordem: esquerda, raiz, direita." },
+        { "q": "Quantos nós tem uma árvore binária cheia de altura 3?", "a": "2⁴ − 1 = 15." }
+      ]
+    },
+    {
+      "concept": "alg-balanceadas",
+      "body": [
+        "A árvore AVL é uma ABB que guarda, em cada nó, o fator de balanceamento: altura da subárvore esquerda menos a da direita. Ele precisa ficar em −1, 0 ou 1. Depois de uma inserção ou remoção, os fatores são atualizados no caminho de volta até a raiz, e o primeiro nó com fator ±2 é corrigido por rotação.",
+        "São quatro casos. Esquerda-esquerda: rotação simples à direita no nó. Direita-direita: rotação simples à esquerda. Esquerda-direita (zigue-zague): primeiro rotação à esquerda no filho, depois à direita no nó. Direita-esquerda: o espelho. A rotação muda quem é pai de quem, mas preserva o percurso em ordem.",
+        "A altura de uma AVL fica abaixo de cerca de 1,44·log₂ n, então busca, inserção e remoção custam O(log n). Uma inserção exige no máximo uma correção (simples ou dupla); uma remoção pode exigir rotações em vários níveis, até O(log n).",
+        "A árvore rubro-negra usa cores nos nós e regras mais frouxas: a altura chega a 2·log₂(n + 1), mas faz menos rotações. É a estrutura por trás de muitos mapas ordenados de bibliotecas padrão. As árvores B guardam muitas chaves por nó e servem a bancos de dados e sistemas de arquivos, que leem blocos inteiros do disco.",
+        "A AVL não é perfeitamente balanceada: só exige que as alturas das subárvores de cada nó difiram de no máximo 1."
+      ],
+      "example": {
+        "title": "Inserir 10, 20, 30, 25, 28 numa AVL",
+        "steps": [
+          "Depois de 10, 20 e 30, o nó 10 fica com fator −2 (caso direita-direita). Rotação simples à esquerda: 20 vira raiz, com 10 e 30 como filhos.",
+          "25 entra como filho esquerdo de 30. Os fatores continuam válidos.",
+          "28 entra como filho direito de 25. O nó 30 fica com fator +2, e seu filho 25 pende para a direita: caso esquerda-direita.",
+          "Rotação dupla: à esquerda em 25 e depois à direita em 30. Resultado: 20 na raiz, 10 à esquerda e 28 à direita, com 25 e 30 como filhos de 28."
+        ],
+        "check": "Executado em Python 3 com uma AVL recursiva: pré-ordem final 20, 10, 28, 25, 30, com as rotações direita-direita em 10 e esquerda-direita em 30."
+      },
+      "mistake": "Aplicar rotação simples no caso em zigue-zague (esquerda-direita ou direita-esquerda): a árvore continua desbalanceada. Outro erro é achar que toda inserção causa rotação.",
+      "recall": [
+        { "q": "Quantas correções no máximo uma inserção na AVL exige?", "a": "Uma: simples ou dupla, no primeiro nó desbalanceado acima da inserção." },
+        { "q": "Qual a altura máxima aproximada de uma AVL com n nós?", "a": "Cerca de 1,44·log₂ n." }
+      ]
+    },
+    {
+      "concept": "alg-heap",
+      "body": [
+        "Heap é uma árvore binária completa, com todos os níveis cheios menos o último, preenchido da esquerda para a direita, que respeita a propriedade de heap. No heap de máximo, cada pai é maior ou igual aos filhos, então a raiz guarda o máximo. Não é uma ABB: entre irmãos não há ordem.",
+        "Por ser completa, a árvore cabe num vetor sem ponteiros. Com índices a partir de 1, os filhos de i ficam em 2i e 2i + 1, e o pai em ⌊i/2⌋. Com índices a partir de 0, os filhos ficam em 2i + 1 e 2i + 2, e o pai em ⌊(i − 1)/2⌋.",
+        "Inserir: coloca no fim e sobe trocando com o pai enquanto for maior, O(log n). Remover o máximo: leva o último elemento para a raiz e desce trocando com o maior filho, O(log n). Consultar o máximo: O(1). Buscar um valor qualquer: O(n), porque o heap não orienta a busca.",
+        "Construir um heap a partir de um vetor qualquer custa O(n), não O(n log n), quando se aplica a descida de baixo para cima, a partir do último nó interno: a maioria dos nós está perto das folhas e desce pouco.",
+        "O heap implementa a fila de prioridade usada no Dijkstra, no Prim e em escalonadores. Também resolve os k maiores de n elementos com um heap de mínimo de tamanho k, em O(n log k), e é a base do heapsort."
+      ],
+      "figure": { "src": "/illustrations/MET-06.webp", "alt": "Caixas em três níveis de uma árvore binária diminuem de tamanho do topo para a base. A maior caixa, no topo, é azul." },
+      "example": {
+        "title": "Inserir 60 e depois remover o máximo de [50, 30, 40, 10, 20, 35]",
+        "steps": [
+          "60 entra no índice 6. O pai, no índice 2, vale 40: troca. Vetor: [50, 30, 60, 10, 20, 35, 40].",
+          "Agora no índice 2, o pai, no índice 0, vale 50: troca. Vetor: [60, 30, 50, 10, 20, 35, 40].",
+          "Remover o máximo: sai 60, e o último (40) vai para a raiz: [40, 30, 50, 10, 20, 35].",
+          "40 desce trocando com o maior filho, 50: [50, 30, 40, 10, 20, 35]. No índice 2, o único filho é 35, menor que 40: para."
+        ],
+        "check": "Executado em Python 3 com subida e descida em heap de máximo de base 0."
+      },
+      "mistake": "Supor que o heap é ordenado ou que permite buscar qualquer valor em O(log n). Também cai a afirmação \"construir um heap custa Θ(n log n) mesmo no melhor algoritmo\", que é falsa.",
+      "recall": [
+        { "q": "Num heap de base 0, quem é o pai do índice 9?", "a": "O índice ⌊(9 − 1)/2⌋ = 4." },
+        { "q": "Quanto custa construir um heap a partir de um vetor qualquer?", "a": "O(n), com a descida de baixo para cima." }
+      ]
+    },
+    {
+      "concept": "alg-grafos",
+      "body": [
+        "Um grafo tem vértices e arestas, que podem ser dirigidas e ter pesos. Duas representações: a matriz de adjacência, com espaço V² e teste de aresta em O(1), boa para grafos densos; e a lista de adjacência, com espaço O(V + E), boa para grafos esparsos.",
+        "A busca em largura (BFS) parte de uma origem e visita por camadas, usando uma fila: primeiro os vizinhos, depois os vizinhos dos vizinhos. Num grafo sem pesos, ela encontra o caminho com menos arestas. Custa O(V + E) com listas e O(V²) com matriz.",
+        "A busca em profundidade (DFS) vai o mais fundo possível antes de voltar, com pilha ou recursão. Os tempos de descoberta e término resolvem vários problemas: uma aresta de retorno indica ciclo; a ordem decrescente de término dá a ordenação topológica de um grafo dirigido acíclico; duas DFS encontram os componentes fortemente conexos.",
+        "Fatos que cortam alternativas: a soma dos graus é 2E; uma árvore com V vértices tem V − 1 arestas; um grafo é bipartido se e só se não tem ciclo de tamanho ímpar, o que uma BFS com duas cores verifica. A ordenação topológica só existe em grafos dirigidos acíclicos e, em geral, não é única.",
+        "A ordem de visita depende da ordem dos vizinhos na lista. Por isso, questões de simulação costumam fixar a ordem alfabética ou numérica."
+      ],
+      "example": {
+        "title": "BFS e DFS a partir de A",
+        "steps": [
+          "Grafo dirigido, com vizinhos em ordem alfabética: A → B, C; B → D; C → D, E; D → F; E → F.",
+          "BFS: A, B, C, D, E, F. Distâncias em arestas: A 0, B 1, C 1, D 2, E 2, F 3.",
+          "DFS recursiva: A, B, D, F, depois volta e visita C e E. Ordem: A, B, D, F, C, E."
+        ],
+        "check": "Executado em Python 3 com fila para a BFS e recursão para a DFS."
+      },
+      "mistake": "Usar a BFS para achar o caminho de menor custo num grafo com pesos diferentes: ela minimiza o número de arestas, não a soma dos pesos. Outro erro é supor que a ordem de visita é única.",
+      "recall": [
+        { "q": "Quanto custa a BFS com matriz de adjacência?", "a": "O(V²): cada linha da matriz é percorrida inteira." },
+        { "q": "Quantas arestas tem uma árvore com 12 vértices?", "a": "11." }
+      ]
+    },
+    {
+      "concept": "alg-caminho-minimo",
+      "body": [
+        "O algoritmo de Dijkstra calcula as menores distâncias de uma origem a todos os vértices quando os pesos não são negativos. Ele guarda uma distância provisória para cada vértice, fecha sempre o vértice aberto de menor distância e relaxa as arestas que saem dele. Uma vez fechado, o vértice não muda mais. É um algoritmo guloso.",
+        "Com fila de prioridade em heap binário, custa O((V + E) log V). Com um vetor simples, custa O(V²), o que é melhor em grafos densos.",
+        "Com peso negativo, a decisão gulosa falha: o vértice é fechado achando que a distância é definitiva, e uma aresta negativa encontrada depois poderia diminuí-la. O exemplo abaixo mostra o erro.",
+        "O Bellman-Ford relaxa todas as arestas V − 1 vezes, em O(V·E). Aceita pesos negativos e, se uma rodada a mais ainda melhorar alguma distância, há um ciclo negativo alcançável, e o caminho mínimo não está definido.",
+        "Para todos os pares, o Floyd-Warshall usa programação dinâmica em O(V³) e aceita pesos negativos sem ciclo negativo. Num grafo sem pesos, a BFS já resolve em O(V + E)."
+      ],
+      "example": {
+        "title": "Onde o Dijkstra erra com peso negativo",
+        "steps": [
+          "Arestas: A → B com peso 2, A → C com peso 3 e C → B com peso −2. Origem A.",
+          "O Dijkstra fecha A (0), depois B (2), por ser a menor distância aberta, e só então C (3). Quando relaxa C → B, B já está fechado: a resposta fica B = 2.",
+          "O caminho A → C → B custa 3 − 2 = 1. O Bellman-Ford encontra B = 1."
+        ],
+        "check": "Executado em Python 3: Dijkstra com heap fecha B com 2; Bellman-Ford devolve B = 1."
+      },
+      "mistake": "Achar que somar a mesma constante a todos os pesos elimina o problema dos negativos. Isso penaliza mais os caminhos com mais arestas e pode mudar o caminho mínimo: de S a T, o direto custa 3 e o caminho por A custa 1 + 1 = 2; somando 2 a cada aresta, o direto passa a 5 e o outro a 6.",
+      "recall": [
+        { "q": "Que algoritmo calcula todos os pares num grafo denso?", "a": "Floyd-Warshall, em O(V³)." },
+        { "q": "O que uma rodada extra do Bellman-Ford detecta?", "a": "Um ciclo negativo alcançável a partir da origem." }
+      ]
+    },
+    {
+      "concept": "alg-agm",
+      "body": [
+        "Uma árvore geradora de um grafo conexo e não dirigido liga todos os vértices sem formar ciclo e tem exatamente V − 1 arestas. A árvore geradora mínima (AGM) é a de menor soma de pesos. Num grafo desconexo, o resultado é uma floresta geradora mínima.",
+        "O Kruskal ordena as arestas por peso e adiciona cada uma se ela não fechar ciclo. A verificação usa a estrutura união-busca. O custo é dominado pela ordenação: O(E log E).",
+        "O Prim cresce a árvore a partir de um vértice, sempre pela aresta mais leve que sai da árvore. Com heap, custa O(E log V).",
+        "Os dois são gulosos e corretos pela propriedade do corte: a aresta mais leve que cruza um corte pertence a alguma AGM. Pela propriedade do ciclo, a aresta estritamente mais pesada de um ciclo não pertence a nenhuma. Se todos os pesos são distintos, a AGM é única. Pesos negativos não atrapalham.",
+        "AGM e caminho mínimo são problemas diferentes. A árvore de caminhos mínimos a partir de uma origem pode ser bem diferente da AGM."
+      ],
+      "example": {
+        "title": "Kruskal com cinco vértices",
+        "steps": [
+          "Arestas em ordem de peso: A–B 1, C–D 2, A–C 3, B–C 4, D–E 5, B–E 6 e C–E 7.",
+          "Entram A–B, C–D e A–C, que liga {A, B} a {C, D}.",
+          "B–C fecharia o ciclo A–B–C: descartada. D–E entra. Com 4 arestas para 5 vértices, a árvore está completa.",
+          "Custo total: 1 + 2 + 3 + 5 = 11."
+        ],
+        "check": "Executado em Python 3 com união-busca: AGM {A–B, C–D, A–C, D–E}, custo 11."
+      },
+      "mistake": "Confundir AGM com caminho mínimo. E, ao contrário do caminho mínimo, somar a mesma constante a todos os pesos não muda a AGM, porque toda árvore geradora tem o mesmo número de arestas, V − 1.",
+      "recall": [
+        { "q": "Qual dos dois usa união-busca: Kruskal ou Prim?", "a": "Kruskal, para saber se a aresta fecha ciclo." },
+        { "q": "Com pesos todos distintos, quantas AGMs existem?", "a": "Uma só." }
+      ]
+    },
+    {
+      "concept": "alg-paradigmas",
+      "body": [
+        "O algoritmo guloso faz, a cada passo, a melhor escolha local e nunca volta atrás. Ele é correto quando o problema tem a propriedade da escolha gulosa e subestrutura ótima. Exemplos corretos: Kruskal, Prim, Dijkstra, código de Huffman e a seleção de atividades pela que termina primeiro. Exemplos em que falha: troco com moedas {1, 3, 4} e a mochila 0/1.",
+        "A divisão e conquista quebra o problema em subproblemas independentes, resolve cada um e combina os resultados: merge sort, quicksort, busca binária e Strassen. O custo sai de uma recorrência.",
+        "A programação dinâmica serve quando os subproblemas se repetem e há subestrutura ótima. Cada subproblema é resolvido uma vez e guardado numa tabela, de cima para baixo (memoização) ou de baixo para cima. Exemplos: maior subsequência comum em O(m·n), mochila 0/1 em O(n·W), troco mínimo, Floyd-Warshall e Bellman-Ford.",
+        "Força bruta e backtracking testam as possibilidades, e o backtracking abandona um ramo assim que ele não pode levar a uma solução. Servem a problemas pequenos ou sem estrutura melhor.",
+        "Para identificar na prova: se os subproblemas se repetem, é programação dinâmica; se são disjuntos, divisão e conquista; se uma escolha local nunca é revista, guloso."
+      ],
+      "example": {
+        "title": "Troco de 6 com moedas {1, 3, 4}",
+        "steps": [
+          "Guloso: pega a maior moeda possível, 4, e completa com 1 + 1. São 3 moedas.",
+          "Programação dinâmica: m[x] = 1 + min(m[x − c]) para cada moeda c ≤ x, com m[0] = 0.",
+          "A tabela fica m[0..6] = 0, 1, 2, 1, 1, 2, 2. O ótimo é 2 moedas: 3 + 3."
+        ],
+        "check": "Executado em Python 3: tabela [0, 1, 2, 1, 1, 2, 2]."
+      },
+      "mistake": "Chamar de programação dinâmica qualquer recursão, ou de guloso qualquer algoritmo rápido. O merge sort não é programação dinâmica, porque as metades não se repetem.",
+      "recall": [
+        { "q": "Na mochila fracionária, o guloso funciona?", "a": "Sim, escolhendo pela razão valor/peso. Na mochila 0/1, não." },
+        { "q": "O que a programação dinâmica exige do problema?", "a": "Subproblemas que se repetem e subestrutura ótima." }
+      ]
+    },
+    {
+      "concept": "alg-intrataveis",
+      "body": [
+        "P é a classe dos problemas de decisão resolvidos em tempo polinomial. NP é a dos problemas cuja solução, dada pronta como certificado, pode ser verificada em tempo polinomial. Todo problema de P está em NP. Se P = NP é uma questão em aberto. NP significa \"polinomial não determinístico\", não \"não polinomial\".",
+        "Um problema é NP-difícil quando todo problema de NP se reduz a ele em tempo polinomial; é NP-completo quando, além disso, está em NP. O SAT foi o primeiro (Cook e Levin). Outros: 3-SAT, clique, cobertura de vértices, ciclo hamiltoniano, coloração com 3 cores e as versões de decisão do caixeiro viajante e da mochila.",
+        "A direção da redução é a pegadinha mais cobrada. Para provar que um problema novo X é difícil, reduz-se um problema difícil conhecido a X. Reduzir X a um problema fácil prova que X é fácil. Reduzir X ao SAT só mostra que X não é mais difícil que o SAT.",
+        "Problemas parecidos podem estar em lados opostos: caminho mínimo, AGM, ciclo euleriano, 2-SAT e emparelhamento estão em P; caminho mais longo, ciclo hamiltoniano e 3-SAT são NP-completos.",
+        "Na prática, usam-se heurísticas como o vizinho mais próximo, aproximações com garantia (2-aproximação para cobertura de vértices; caixeiro métrico via AGM), algoritmos exatos exponenciais para n pequeno, branch and bound e solvers. A mochila em O(n·W) não contradiz a NP-completude: é pseudopolinomial, porque W pode ser exponencial no número de bits da entrada."
+      ],
+      "figure": { "src": "/illustrations/MET-14.webp", "alt": "Parafuso de formato irregular, adaptador e parafuso comum compatível com uma chave de fenda aparecem alinhados, como numa redução de um problema a outro." },
+      "example": {
+        "title": "Por que testar todas as rotas do caixeiro viajante não escala",
+        "steps": [
+          "Com n cidades, partida fixa e distâncias simétricas, há (n − 1)!/2 rotas diferentes.",
+          "n = 5: 12 rotas. n = 10: 181 440 rotas.",
+          "n = 20: cerca de 6,08 × 10¹⁶ rotas. A um bilhão de rotas por segundo, seriam quase dois anos."
+        ],
+        "check": "Executado em Python 3: (n − 1)!/2 para n = 5, 10 e 20."
+      },
+      "mistake": "Inverter a redução: \"reduzir o problema novo ao SAT prova que ele é NP-difícil\" é falso. Outro erro é ler NP como \"não polinomial\" e concluir que nenhum problema de NP tem algoritmo polinomial.",
+      "recall": [
+        { "q": "Para provar que X é NP-difícil, reduz-se o quê a quê?", "a": "Um problema NP-difícil conhecido a X." },
+        { "q": "Ciclo euleriano é NP-completo?", "a": "Não. Decide-se em tempo linear: grafo conexo com todos os graus pares." }
+      ]
+    }
+  ]
+}

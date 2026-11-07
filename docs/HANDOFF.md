@@ -53,7 +53,7 @@ A bússola da preparação está em **`docs/CORE-CONCEPTS.md`**: 16 áreas e a F
 
 ## Próxima sessão: plano da reta final (07/11)
 
-O plano completo, com a ordem dos PRs (A a H), metas até 29/11 e o critério de "pronto" de cada etapa, está em **[PLANO-RETA-FINAL.md](PLANO-RETA-FINAL.md)**. Os PRs A, B e C estão feitos (o C em parte: faltam enunciados longos, que passam ao PR E). Siga pelo PR D (Biblioteca piloto).
+O plano completo, com a ordem dos PRs (A a H), metas até 29/11 e o critério de "pronto" de cada etapa, está em **[PLANO-RETA-FINAL.md](PLANO-RETA-FINAL.md)**. Os PRs A, B, C e D estão feitos (o C em parte: faltam enunciados longos, que passam ao PR E). O PR D, piloto das lições da Biblioteca ([LIBRARY-LESSONS.md](LIBRARY-LESSONS.md)), aguarda a leitura de Gabriel antes do PR F. Siga pelo PR E (lote 2 de questões).
 
 - **Material pronto:**
   - 41 ilustrações em `apps/web/public/illustrations/`, com catálogo em `data/illustrations/catalog.json`;

@@ -5,6 +5,7 @@ import { requireIdentity } from "./session.js";
 import { areaProgress, type AreaProgress } from "./progress.js";
 import { loadDecks } from "./study-content.js";
 import { FORMACAO_GERAL, loadCore, type CoreArea } from "./core-concepts.js";
+import { loadLessons } from "./core-lessons.js";
 
 // Núcleo por área (NUC-1): conteúdo, autoavaliação e confiança por área.
 // A confiança junta três sinais independentes e mostra cada um separado:
@@ -109,18 +110,22 @@ export class CoreConceptsController {
     const { core, ratings, of } = await snapshot(user.id);
     const area = core.areas.find((a) => a.slug === slug) ?? fail("Área não encontrada.", 404);
     const linked = area.concepts.flatMap((c) => core.links.get(c.id) ?? []);
-    const [published, generated] = await Promise.all([
+    const [published, generated, lessons] = await Promise.all([
       publishedVersions([...new Set(linked.map((q) => q.id))]),
       generatedByConcept(area.concepts.map((c) => c.id)),
+      loadLessons(core.areas),
     ]);
+    const ofArea = lessons.get(area.slug);
     const { concepts, ...rest } = area;
     return {
       ...rest,
       history: core.history.get(area.slug),
       confidence: of(area),
       generatedTotal: generated.total,
+      cover: ofArea?.cover ?? null,
       concepts: concepts.map(({ match: _match, ...c }) => ({
         ...c,
+        lesson: ofArea?.lessons.has(c.id) ?? false,
         level: ratings.get(c.id) ?? null,
         // O estudo abre a questão pela versão publicada.
         questions: (core.links.get(c.id) ?? []).filter((q) => published.has(q.id))
@@ -128,6 +133,14 @@ export class CoreConceptsController {
         generated: generated.byConcept.get(c.id) ?? [],
       })),
     };
+  }
+
+  /** Lição de um conceito (LIB-2); as questões ligadas já vêm na página da área. */
+  @Get(":slug/lessons/:concept") async lesson(@Req() req: any, @Param("slug") slug: string, @Param("concept") concept: string) {
+    await requireIdentity(req);
+    const core = await loadCore();
+    const lesson = (await loadLessons(core.areas)).get(slug)?.lessons.get(concept) ?? fail("Lição não encontrada.", 404);
+    return lesson;
   }
 
   /** Autoavaliação: 0 não sei, 1 mais ou menos, 2 sei explicar; null apaga. */

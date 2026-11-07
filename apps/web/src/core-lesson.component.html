@@ -1,0 +1,90 @@
+<div class="lesson-bar">
+  <button type="button" class="text-button" (click)="back.emit()"><span aria-hidden="true">←</span> {{ area }}</button>
+  <span class="lesson-count">Lição {{ position.index + 1 }} de {{ position.total }}</span>
+</div>
+@if (error()) {
+  <div class="notice" role="alert"><p>{{ error() }}</p><button type="button" class="outline" (click)="load()">Tentar novamente</button></div>
+}
+@if (lesson(); as l) {
+  <article class="lesson" aria-labelledby="lesson-title">
+    <div class="lesson-head">
+      <p class="metadata">{{ area }} · Lição</p>
+      <h1 id="lesson-title" tabindex="-1">{{ concept.name }}</h1>
+      <p class="lesson-lead">{{ concept.definition }}</p>
+      <p class="lesson-ai">Texto gerado por IA, sem revisão humana</p>
+    </div>
+
+    <div class="lesson-layout">
+      <section class="lesson-body" aria-label="Explicação">
+        @for (p of l.body; track $index) { <p>{{ p }}</p> }
+      </section>
+      @if (l.figure; as f) {
+        <figure class="lesson-figure">
+          <img [src]="f.src" [alt]="f.alt" loading="lazy" decoding="async" />
+          @if (isIllustration(f.src)) { <figcaption>Ilustração gerada por IA</figcaption> }
+        </figure>
+      }
+    </div>
+
+    <section class="lesson-section lesson-example" aria-labelledby="lesson-example-title">
+      <h2 id="lesson-example-title"><span aria-hidden="true">01</span>Exemplo resolvido</h2>
+      <h3>{{ l.example.title }}</h3>
+      @if (l.example.code) { <pre class="prompt-code"><code>{{ l.example.code }}</code></pre> }
+      <ol>@for (s of l.example.steps; track $index) { <li>{{ s }}</li> }</ol>
+      <p class="lesson-check"><strong>Conferido:</strong> {{ l.example.check }}</p>
+    </section>
+
+    <section class="lesson-section lesson-mistake" aria-labelledby="lesson-mistake-title">
+      <h2 id="lesson-mistake-title"><span aria-hidden="true">02</span>Erro comum</h2>
+      <p>{{ l.mistake }}</p>
+    </section>
+
+    <section class="lesson-section" aria-labelledby="lesson-enade-title">
+      <h2 id="lesson-enade-title"><span aria-hidden="true">03</span>Como cai no ENADE</h2>
+      @if (concept.questions.length) {
+        <p class="lesson-muted">Questões oficiais de 2005 a 2021 que cobraram o conceito:</p>
+        <ul class="lesson-questions">
+          @for (q of concept.questions; track q.id) {
+            <li><button type="button" class="text-button" (click)="question.emit(q.id)"><b>{{ q.year }}</b> {{ q.subject }}</button></li>
+          }
+        </ul>
+      } @else {
+        <p class="lesson-muted">Ainda não caiu nas provas de 2005 a 2021. É fundamento da área e aparece dentro de outros assuntos.</p>
+      }
+      @if (concept.generated.length) {
+        <p class="lesson-muted">Para treinar, questões geradas por IA:</p>
+        <ul class="lesson-questions">
+          @for (g of concept.generated; track g.id) {
+            <li><button type="button" class="text-button" (click)="question.emit(g.id)">{{ g.title }}</button></li>
+          }
+        </ul>
+      }
+    </section>
+
+    <section class="lesson-section" aria-labelledby="lesson-recall-title">
+      <h2 id="lesson-recall-title"><span aria-hidden="true">04</span>Para fixar</h2>
+      <p class="lesson-muted">Responda de cabeça antes de abrir.</p>
+      <div class="lesson-recall">
+        @for (r of l.recall; track $index) {
+          <details><summary>{{ r.q }}</summary><p>{{ r.a }}</p></details>
+        }
+      </div>
+    </section>
+
+    <nav class="lesson-nav" aria-label="Outras lições da área">
+      @if (previous) {
+        <button type="button" class="outline" (click)="go.emit(previous)"><span aria-hidden="true">←</span> {{ previous.name }}</button>
+      }
+      @if (next) {
+        <button type="button" (click)="go.emit(next)">{{ next.name }} <span aria-hidden="true">→</span></button>
+      } @else {
+        <button type="button" (click)="back.emit()">Voltar para {{ area }}</button>
+      }
+    </nav>
+
+    @if (references.length) { <p class="lesson-refs"><strong>Para aprofundar:</strong> {{ references.join(" · ") }}</p> }
+    <p class="lesson-credit">Lição escrita por IA (Claude) a partir da bibliografia indicada, com exemplos executados para conferência, sem revisão humana. Na dúvida, confira na fonte.</p>
+  </article>
+} @else if (!error()) {
+  <p role="status">Carregando a lição…</p>
+}
