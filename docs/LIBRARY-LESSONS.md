@@ -66,7 +66,15 @@ O shell (`main.ts`) é o dono do histórico: a Biblioteca recebe o caminho em `a
 | `transfer` `{prompt, steps, check}` | "Agora sozinho", solução fechada até a pessoa abrir | situação nova; solução comentada e conferida como o exemplo |
 | `sources` `[{title, edition, locator, url?}]` | "Fonte e conferência" | **só o que foi aberto e lido** para escrever a lição, com edição e seção; `url` só https |
 
-Sem `sources`, a tela diz "Nenhuma registrada para esta lição" e que a bibliografia da área é recomendação, não consulta. A seção "Fonte e conferência" mostra também a conferência do exemplo e "Revisão humana: Ainda não". Pilotos com o modelo completo, menos fontes: `so-deadlock`, `so-memoria-virtual` e `alg-ordenacao`. As fontes ficaram vazias porque a rede desta sessão bloqueia os sites dos livros e documentações abertos; não se preenche de memória.
+Sem `sources`, a tela diz "Nenhuma registrada para esta lição" e que a bibliografia da área é recomendação, não consulta. A seção "Fonte e conferência" mostra também a conferência do exemplo e "Revisão humana: Ainda não". Pilotos com o modelo completo: `so-deadlock`, `so-memoria-virtual` e `alg-ordenacao`. Fontes de fato abertas e lidas em 07/11/2026, comparadas com o texto:
+
+| Lição | Fonte | O que confirma |
+| --- | --- | --- |
+| Deadlock | OSTEP, cap. 32 (versão 1.20), seção 32.3 | quatro condições e "basta uma faltar"; ordem total ou parcial de aquisição; posse e espera; evitação e banqueiro; detecção e recuperação |
+| Memória virtual | OSTEP, cap. 22 (versão 1.10), 22.2 a 22.5, 22.8, 22.11 | anomalia de Belady na FIFO de 3 para 4 quadros; propriedade de pilha da LRU; FIFO e aleatória sem ela; relógio; thrashing e controle de admissão |
+| Ordenação | Python 3.13.18, Sorting Techniques, Sort Stability and Complex Sorts | ordenação estável e a técnica do exercício (chave secundária primeiro, depois a primária) |
+
+O que a fonte não cobre continua conferido por execução: o grafo com recurso de duas instâncias, o relógio com a anomalia, o pior caso do quicksort e a inserção com deslocamento limitado. Nada foi preenchido de memória; o site do livro de algoritmos de Jeff Erickson pede verificação anti-robô e ficou de fora.
 
 **O validador recusa:**
 - conceito que não existe no núcleo da mesma área, ou lição repetida;
@@ -90,6 +98,6 @@ A simulação mostrou que o relógio também sofre a anomalia de Belady (9 e 10 
 ## 5. Próximos passos
 
 - Gabriel lê os três pilotos do modelo novo e aprova ou pede ajustes.
-- Registrar em `sources` as fontes de fato consultadas, quando a rede permitir abrir livros e documentações livres (por exemplo, os capítulos de concorrência e de substituição de páginas de um livro aberto de SO).
+- Para as próximas lições, registrar em `sources` o que for aberto e lido. O ambiente pessoal `enade-cs-platform` libera OSTEP, documentação do Python e do PostgreSQL e as RFCs; outro host precisa ser pedido.
 - Refazer as outras 20 lições no modelo novo antes de ampliar.
 - Depois, o PR F leva as lições às outras 15 áreas, na ordem do plano.

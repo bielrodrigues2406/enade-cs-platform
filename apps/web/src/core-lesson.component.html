@@ -120,6 +120,7 @@
         <div><dt>Conferência</dt><dd>{{ l.transfer ? "O exemplo resolvido e o exercício foram conferidos" : "O exemplo resolvido foi conferido" }} como descrito em "Conferido".</dd></div>
         <div><dt>Fonte consultada</dt><dd>
           @if (l.sources.length) {
+            <p class="lesson-muted">Aberta e lida para conferir o texto desta lição:</p>
             <ul>
               @for (s of l.sources; track $index) {
                 <li>@if (s.url) { <a [href]="s.url" target="_blank" rel="noopener">{{ s.title }}</a> } @else { {{ s.title }} }, {{ s.edition }}, {{ s.locator }}</li>

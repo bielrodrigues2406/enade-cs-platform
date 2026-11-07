@@ -108,12 +108,16 @@ test("a pilot lesson shows objective, prerequisites, counterexample, transfer an
   await expect(transfer.getByText(/A correção quebra a espera circular\./)).toBeVisible();
   await expect(transfer.locator(".lesson-check")).toContainText("busca exaustiva");
 
-  await expect(page.locator(".lesson-review")).toContainText("Nenhuma registrada para esta lição");
-  await expect(page.locator(".lesson-review")).toContainText("Revisão humanaAinda não.");
+  const review = page.locator(".lesson-review");
+  await expect(review.getByRole("link", { name: /Operating Systems: Three Easy Pieces/ })).toHaveAttribute("href", /threads-bugs\.pdf$/);
+  await expect(review).toContainText("seção 32.3");
+  await expect(review).toContainText("Revisão humanaAinda não.");
 
   await page.locator(".lesson-prereq").getByRole("button", { name: "Semáforos, mutex e monitores" }).click();
   await expect(page).toHaveURL(/\/biblioteca\/sistemas-operacionais\/so-semaforos$/);
   await expect(page.getByRole("heading", { name: "Quando a regra não vale", level: 2 })).toHaveCount(0);
+  // Lição ainda no modelo antigo: a tela não finge que houve consulta.
+  await expect(page.locator(".lesson-review")).toContainText("Nenhuma registrada para esta lição");
 });
 
 test("a pilot lesson fits a 320 px screen", async ({ page }) => {

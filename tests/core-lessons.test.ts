@@ -97,7 +97,7 @@ test("the three pilot lessons use the full template", async () => {
   const lessons = await loadLessons(core.areas);
   for (const [slug, concept] of [["sistemas-operacionais", "so-deadlock"], ["sistemas-operacionais", "so-memoria-virtual"], ["algoritmos", "alg-ordenacao"]]) {
     const l = lessons.get(slug)!.lessons.get(concept)!;
-    assert.ok(l.objective && l.prerequisites.length && l.counterexample && l.transfer, concept);
+    assert.ok(l.objective && l.prerequisites.length && l.counterexample && l.transfer && l.sources.length, concept);
   }
 });
 

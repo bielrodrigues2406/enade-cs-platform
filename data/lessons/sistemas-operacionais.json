@@ -195,7 +195,15 @@
           "A correção quebra a espera circular. As outras três condições continuam valendo, e não precisam ser quebradas: basta uma."
         ],
         "check": "Executado em Python 3: busca exaustiva de todas as intercalações dos dois programas. Com ordens opostas existe um estado travado; com a mesma ordem, nenhum."
-      }
+      },
+      "sources": [
+        {
+          "title": "Operating Systems: Three Easy Pieces (Arpaci-Dusseau e Arpaci-Dusseau), cap. 32, Common Concurrency Problems",
+          "edition": "versão 1.20 do capítulo, lida em 07/11/2026",
+          "locator": "seção 32.3: condições do deadlock, prevenção (espera circular por ordem de aquisição, posse e espera), evitação por escalonamento e banqueiro, detecção e recuperação",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-bugs.pdf"
+        }
+      ]
     },
     {
       "concept": "so-paginacao",
@@ -262,7 +270,15 @@
           "(c) Com n + 1 quadros, a LRU guarda as n + 1 páginas usadas mais recentemente; com n, as n mais recentes, que são parte delas. Toda página que acerta com n quadros também acerta com n + 1, então as faltas não podem aumentar."
         ],
         "check": "Executado em Python 3: simulação de FIFO, LRU e ótima com 2, 3 e 4 quadros e conferência da inclusão em cada passo."
-      }
+      },
+      "sources": [
+        {
+          "title": "Operating Systems: Three Easy Pieces (Arpaci-Dusseau e Arpaci-Dusseau), cap. 22, Beyond Physical Memory: Policies",
+          "edition": "versão 1.10 do capítulo, lida em 07/11/2026",
+          "locator": "seções 22.2 a 22.5 e o quadro Belady's Anomaly (FIFO de 3 para 4 quadros, propriedade de pilha da LRU); 22.8 (relógio); 22.11 (thrashing)",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-beyondphys-policy.pdf"
+        }
+      ]
     },
     {
       "concept": "so-arquivos",

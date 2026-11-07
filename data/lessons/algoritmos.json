@@ -124,7 +124,15 @@
           "A inserção também é estável, então serve para (b) sem perder a ordem de data."
         ],
         "check": "Executado em Python 3: contagem de comparações do quicksort com o primeiro pivô (28 e 13), ordenação estável do exemplo e inserção em 200 vetores de 1 000 elementos com deslocamento de até 3."
-      }
+      },
+      "sources": [
+        {
+          "title": "Documentação do Python, Sorting Techniques (Andrew Dalke e Raymond Hettinger)",
+          "edition": "Python 3.13.18, lida em 07/11/2026",
+          "locator": "seção Sort Stability and Complex Sorts: ordenação estável e ordenar primeiro pela chave secundária, depois pela primária",
+          "url": "https://docs.python.org/3.13/howto/sorting.html"
+        }
+      ]
     },
     {
       "concept": "alg-lineares",
