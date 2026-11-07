@@ -206,7 +206,16 @@ Cada uma acompanha a definição do conceito no núcleo. Tamanho 1024×1024.
 [estilo comum] Prateleira de supermercado com dezenas de caixas iguais; uma delas tem a embalagem quase idêntica, diferindo só por um detalhe na forma do rótulo, destacada em azul. Uma mão está prestes a pegá-la.
 ```
 
-## 5. Ordem sugerida
+## 5. Novidades (modal e cartão)
+
+O modal usa o Dudu articulado que já existe. A ilustração abaixo é opcional, para a página de novidades. Anexe ao GPT uma pose do Dudu (`design/mascot/`) como referência de personagem.
+
+**NEWS-01. Dudu com novidade** (1536×1024, fundo transparente se possível)
+```
+Usando a imagem anexada como referência exata do personagem (mesmas cores, proporções, traço e rosto), desenhe o mesmo mascote segurando com as duas asas um caderno aberto do qual sai uma pequena folha nova destacada em azul (#1649ae), como quem mostra uma página recém-escrita. Expressão contente e calma. Estilo ilustração plana com traço de tinta azul-escuro (#151e2f), papel creme (#f4f3ef) ao fundo ou fundo transparente. Sem texto, letras, números, confete ou brilhos.
+```
+
+## 6. Ordem sugerida
 
 1. Ilustrações de Formação Geral (Q-FG-01 a 06): a charge é comum na prova.
 2. Metáforas MET-01 a MET-08, das áreas de maior peso.

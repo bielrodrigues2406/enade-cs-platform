@@ -93,6 +93,40 @@ Branch `claude/confident-cray-ndnwmk`, refeita a partir da `main` após o PR #52
      - questões geradas por IA para treinar cada área;
      - meta diária e flashcards, se ainda não anunciados.
 
+7. **UX-1, ajustes vistos no celular por Gabriel (07/11).**
+   - **Botão "Conta" no celular:**
+     - **Causa:** o botão tem 3 px de recuo à esquerda reservados para o avatar, e o avatar some abaixo de 768 px (`app-shell.css`). O texto encosta na borda.
+     - **Correção:** no celular, mostrar só o avatar com as iniciais num alvo de 44 px. O texto fica no `aria-label`, que já existe.
+   - **Topo deslogado no celular:** só "Entrar". "Criar conta" fica na tela de entrada (troca de aba) e no início. No computador, os dois.
+   - **Menu e Conta ao mesmo tempo:** com o Menu aberto, o logo aparece duas vezes e o popover da conta abre por cima do menu. Abrir um deve fechar o outro.
+   - **Status das discursivas:** "NÃO COMEÇADA" em mono maiúsculo espaçado vira selo discreto em texto normal ("Não começada").
+   - **Marca:** o topo diz "Preparação ENADE" e o domínio é cadernocc.com.br. Gabriel decide se o nome vira "Caderno CC".
+8. **AUTH-PW8, medidor de força da senha.**
+   - **Medidor:** barra de 4 partes que vai do vermelho ao verde, com rótulo "Fraca", "Razoável", "Boa" ou "Forte".
+   - **Lista com quadradinhos que ficam verdes:**
+     - 8 ou mais caracteres;
+     - não está entre as senhas comuns;
+     - não usa seu nome ou e-mail;
+     - mistura letras e números ou símbolos (só aumenta a força, não é exigido).
+   - **Regras:**
+     - o servidor continua decidindo;
+     - texto da força em `aria-live="polite"`, nunca `role="status"`;
+     - nas telas de cadastro, troca de senha e senha provisória do admin;
+     - sai a frase "Uma frase fácil de lembrar funciona bem".
+9. **COPY-1, revisão de textos do sistema inteiro.**
+   - Cortar frases redundantes e explicações que a tela já mostra; quebrar linha onde ajuda a leitura (`text-wrap: balance` e `pretty` já estão no `styles.css`).
+   - **Exemplos encontrados:**
+     - na entrada, "Respostas feitas sem conta não passam para a conta ao entrar; para guardá-las, crie uma conta." vira uma frase curta;
+     - "Você também pode continuar estudando sem criar uma conta." vira o botão "Estudar sem conta";
+     - o rodapé diz "conferidos por outro agente", o que não vale para as questões geradas; encurtar e corrigir.
+10. **NEWS-1, imagem do aviso:** o Dudu articulado acenando, que já existe, sem arte nova. Ilustração opcional por novidade (prompt em [IMAGE-PROMPTS.md](IMAGE-PROMPTS.md)).
+11. **Funções sugeridas, em ordem, até a prova de 29/11:**
+    1. Plano até a prova, montado pelo mapa de confiança.
+    2. "Continuar de onde parou" no início.
+    3. Recuperação de senha por e-mail (precisa de serviço de envio, como o Amazon SES, no servidor da AWS).
+    4. App instalável no celular (PWA) com lembrete diário.
+    5. Modo escuro.
+
 ## 5. O que falta (por prioridade)
 
 1. **Preservar a publicação AWS em cadernocc.com.br:** Gabriel relatou funcionamento em 06/11. Conferências operacionais de backups/restauração continuam próprias; não reabrir o diagnóstico CSS como falha atual sem evidência. O mesmo Compose de [`deploy/campus/`](../deploy/campus/README.md) serve como referência; eventual implantação IFSP PEP depende da infraestrutura institucional.
