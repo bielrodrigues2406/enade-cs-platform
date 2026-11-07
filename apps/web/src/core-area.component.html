@@ -1,6 +1,6 @@
 @if (reading(); as concept) {
   @defer {
-    <app-core-lesson [slug]="slug" [area]="area()!.area" [concept]="concept" [references]="area()!.references"
+    <app-core-lesson [slug]="slug" [area]="area()!.area" [concept]="concept" [references]="area()!.references" [concepts]="area()!.concepts"
       [position]="{ index: readingAt(), total: lessons().length }"
       [previous]="lessons()[readingAt() - 1] ?? null" [next]="lessons()[readingAt() + 1] ?? null"
       (back)="closeLesson()" (go)="read($event)" (question)="question.emit($event)" />

@@ -90,7 +90,8 @@
             }
           } @else if (studyView() === "biblioteca") {
             @defer (on immediate) {
-              <app-library (practiceArea)="openPractice('treino')" (flashcards)="openStudy('flashcards')"
+              <app-library [address]="libraryAddress()" (navigate)="libraryNavigate($event)"
+                (practiceArea)="openPractice('treino')" (flashcards)="openStudy('flashcards')"
                 (question)="openQuestionFromStudy($event)" (practice)="startPractice($event)"
                 (generated)="browseGenerated($event)" />
             } @placeholder {

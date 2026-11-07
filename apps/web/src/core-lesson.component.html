@@ -12,6 +12,22 @@
       <h1 id="lesson-title" tabindex="-1">{{ concept.name }}</h1>
       <p class="lesson-lead">{{ concept.definition }}</p>
       <p class="lesson-ai">Texto gerado por IA, sem revisão humana</p>
+      @if (l.objective || l.prerequisites.length) {
+        <dl class="lesson-goal">
+          @if (l.objective) { <div><dt>Ao terminar, você consegue</dt><dd>{{ l.objective }}</dd></div> }
+          @if (l.prerequisites.length) {
+            <div><dt>Antes, revise</dt><dd>
+              <ul class="lesson-prereq">
+                @for (id of l.prerequisites; track id) {
+                  @if (prerequisite(id); as p) {
+                    <li>@if (p.lesson) { <button type="button" class="text-button" (click)="go.emit(p)">{{ p.name }}</button> } @else { {{ p.name }} }</li>
+                  }
+                }
+              </ul>
+            </dd></div>
+          }
+        </dl>
+      }
     </div>
 
     <div class="lesson-layout">
@@ -27,20 +43,28 @@
     </div>
 
     <section class="lesson-section lesson-example" aria-labelledby="lesson-example-title">
-      <h2 id="lesson-example-title"><span aria-hidden="true">01</span>Exemplo resolvido</h2>
+      <h2 id="lesson-example-title"><span aria-hidden="true">{{ number("example", l) }}</span>Exemplo resolvido</h2>
       <h3>{{ l.example.title }}</h3>
       @if (l.example.code) { <pre class="prompt-code"><code>{{ l.example.code }}</code></pre> }
       <ol>@for (s of l.example.steps; track $index) { <li>{{ s }}</li> }</ol>
       <p class="lesson-check"><strong>Conferido:</strong> {{ l.example.check }}</p>
     </section>
 
+    @if (l.counterexample; as c) {
+      <section class="lesson-section lesson-counter" aria-labelledby="lesson-counter-title">
+        <h2 id="lesson-counter-title"><span aria-hidden="true">{{ number("counter", l) }}</span>Quando a regra não vale</h2>
+        <p class="lesson-claim"><span class="lesson-claim-tag">Parece certo</span> {{ c.claim }}</p>
+        <p>{{ c.why }}</p>
+      </section>
+    }
+
     <section class="lesson-section lesson-mistake" aria-labelledby="lesson-mistake-title">
-      <h2 id="lesson-mistake-title"><span aria-hidden="true">02</span>Erro comum</h2>
+      <h2 id="lesson-mistake-title"><span aria-hidden="true">{{ number("mistake", l) }}</span>Erro comum</h2>
       <p>{{ l.mistake }}</p>
     </section>
 
     <section class="lesson-section" aria-labelledby="lesson-enade-title">
-      <h2 id="lesson-enade-title"><span aria-hidden="true">03</span>Como cai no ENADE</h2>
+      <h2 id="lesson-enade-title"><span aria-hidden="true">{{ number("enade", l) }}</span>Como cai no ENADE</h2>
       @if (concept.appearances.length) {
         <p class="lesson-muted">Questões oficiais de 2005 a 2021 que cobraram o conceito:</p>
         <ul class="lesson-questions">
@@ -68,13 +92,46 @@
     </section>
 
     <section class="lesson-section" aria-labelledby="lesson-recall-title">
-      <h2 id="lesson-recall-title"><span aria-hidden="true">04</span>Para fixar</h2>
+      <h2 id="lesson-recall-title"><span aria-hidden="true">{{ number("recall", l) }}</span>Para fixar</h2>
       <p class="lesson-muted">Responda de cabeça antes de abrir.</p>
       <div class="lesson-recall">
         @for (r of l.recall; track $index) {
           <details><summary>{{ r.q }}</summary><p>{{ r.a }}</p></details>
         }
       </div>
+    </section>
+
+    @if (l.transfer; as t) {
+      <section class="lesson-section lesson-transfer" aria-labelledby="lesson-transfer-title">
+        <h2 id="lesson-transfer-title"><span aria-hidden="true">{{ number("transfer", l) }}</span>Agora sozinho</h2>
+        <p class="lesson-muted">Uma situação nova. Resolva no papel e justifique antes de abrir a solução.</p>
+        <p class="lesson-prompt">{{ t.prompt }}</p>
+        <details>
+          <summary>Ver a solução comentada</summary>
+          <ol>@for (s of t.steps; track $index) { <li>{{ s }}</li> }</ol>
+          <p class="lesson-check"><strong>Conferido:</strong> {{ t.check }}</p>
+        </details>
+      </section>
+    }
+
+    <section class="lesson-section lesson-source" aria-labelledby="lesson-source-title">
+      <h2 id="lesson-source-title"><span aria-hidden="true">{{ number("source", l) }}</span>Fonte e conferência</h2>
+      <dl class="lesson-review">
+        <div><dt>Conferência</dt><dd>{{ l.transfer ? "O exemplo resolvido e o exercício foram conferidos" : "O exemplo resolvido foi conferido" }} como descrito em "Conferido".</dd></div>
+        <div><dt>Fonte consultada</dt><dd>
+          @if (l.sources.length) {
+            <p class="lesson-muted">Aberta e lida para conferir o texto desta lição:</p>
+            <ul>
+              @for (s of l.sources; track $index) {
+                <li>@if (s.url) { <a [href]="s.url" target="_blank" rel="noopener">{{ s.title }}</a> } @else { {{ s.title }} }, {{ s.edition }}, {{ s.locator }}</li>
+              }
+            </ul>
+          } @else {
+            Nenhuma registrada para esta lição. O texto vem do conhecimento geral do modelo; a bibliografia abaixo é recomendação de leitura, não algo consultado.
+          }
+        </dd></div>
+        <div><dt>Revisão humana</dt><dd>Ainda não.</dd></div>
+      </dl>
     </section>
 
     <nav class="lesson-nav" aria-label="Outras lições da área">
@@ -88,8 +145,8 @@
       }
     </nav>
 
-    @if (references.length) { <p class="lesson-refs"><strong>Para aprofundar:</strong> {{ references.join(" · ") }}</p> }
-    <p class="lesson-credit">Lição escrita por IA (Claude) a partir da bibliografia indicada, com exemplos executados para conferência, sem revisão humana. Na dúvida, confira na fonte.</p>
+    @if (references.length) { <p class="lesson-refs"><strong>Para aprofundar (bibliografia da área, recomendada):</strong> {{ references.join(" · ") }}</p> }
+    <p class="lesson-credit">Lição escrita por IA (Claude), com exemplos executados para conferência, sem revisão humana. Na dúvida, confira num dos livros acima.</p>
   </article>
 } @else if (!error()) {
   <p role="status">Carregando a lição…</p>

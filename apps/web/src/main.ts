@@ -1,5 +1,5 @@
 import { StudyNavigationComponent } from "./study-navigation.component";
-import { destinationFromPath, SECTION_PATHS, type Destination } from "./study-navigation";
+import { destinationFromPath, libraryPath, sectionPathOf, SECTION_PATHS, type Destination } from "./study-navigation";
 import { MascotService } from "./mascot.service";
 import { AnswerReflectionComponent } from "./answer-reflection.component";
 import { MascotComponent } from "./mascot.component";
@@ -247,6 +247,8 @@ class App {
   discursiveView = signal(false);
   /** Seções de estudo complementar: conquistas, biblioteca e flashcards. */
   studyView = signal<StudyView | null>(null);
+  /** Caminho dentro da Biblioteca (área, lição ou ficha); a Biblioteca só o lê (R9). */
+  libraryAddress = signal(location.pathname);
   profileView = signal(false);
   curationView = signal(false);
   curationBusy = signal(false);
@@ -432,8 +434,12 @@ class App {
   }
   /** "Continuar de onde parou" numa lição: a Biblioteca abre a área e a lição. */
   continueLesson(target: { slug: string; concept: string }) {
-    this.resume.pendingLesson.set(target);
-    this.openStudy("biblioteca");
+    this.openStudy("biblioteca", libraryPath({ area: target.slug, lesson: target.concept, sheet: null }));
+  }
+  /** A Biblioteca pede outro ponto dela: vira uma entrada no histórico do navegador. */
+  libraryNavigate(target: { path: string; replace?: boolean }) {
+    if (this.studyView() !== "biblioteca" || sectionPathOf(target.path) !== "/biblioteca") return;
+    this.setPath(target.path, target.replace ? "replace" : "push");
   }
   /** Ação de uma novidade: abre a seção; "geradas" é o banco filtrado pelas questões geradas. */
   followNews(destination: NewsDestination) {
@@ -773,6 +779,7 @@ class App {
       else history.replaceState(null, "", path);
     }
     this.destination.set(destinationFromPath(path));
+    this.libraryAddress.set(location.pathname);
     this.currentAddress = location.pathname + location.search;
   }
   private leaveHomePath() {
@@ -783,7 +790,8 @@ class App {
   }
   /** O endereço é revalidado após obter a sessão e os papéis do servidor. */
   private readSectionAddress() {
-    if (!Object.values(SECTION_PATHS).includes(location.pathname)) this.setPath("/questoes", "replace");
+    if (!Object.values(SECTION_PATHS).includes(sectionPathOf(location.pathname))) this.setPath("/questoes", "replace");
+    this.libraryAddress.set(location.pathname);
     let destination = destinationFromPath(location.pathname);
     const accountRequired = ["perfil", "aulas", "curadoria", "administracao"].includes(destination);
     const denied = (destination === "administracao" && !this.roles().includes("ADMIN")) ||
@@ -974,8 +982,8 @@ class App {
     this.focusMain();
   }
   /** Conquistas, biblioteca e flashcards: mesmo fluxo das discursivas. */
-  openStudy(view: StudyView) {
-    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openStudy(view))) return;
+  openStudy(view: StudyView, path: string = SECTION_PATHS[view]) {
+    if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openStudy(view, path))) return;
     this.beginSectionChange();
     this.swapView(() => {
       this.question.set(null);
@@ -986,7 +994,7 @@ class App {
       this.practiceView.set(false);
       this.studyView.set(view);
     });
-    this.setPath(SECTION_PATHS[view]);
+    this.setPath(path);
     this.focusMain();
   }
   /** Questão oficial aberta a partir do núcleo por área: sai da Biblioteca para o banco. */

@@ -3,8 +3,8 @@ import { CoreMapComponent } from "./core-map.component";
 import { CoreAreaComponent } from "./core-area.component";
 import type { PracticeRequest } from "./practice-request";
 import { requestJson } from "./api-request";
-import { ResumeService } from "./resume.service";
-import { Component, ElementRef, EventEmitter, Output, afterNextRender, inject, Injector, signal } from "@angular/core";
+import { libraryPath, parseLibraryPath, type LibraryAddress } from "./study-navigation";
+import { Component, ElementRef, EventEmitter, Output, afterNextRender, computed, effect, inject, Injector, input, signal, untracked } from "@angular/core";
 
 // Biblioteca (LIB-1): o núcleo por área (NUC-1) no topo e as fichas de uma
 // página por assunto, lidas do repositório.
@@ -21,13 +21,19 @@ type Sheet = SheetSummary & { sections: { title: string; points: string[] }[]; p
   styleUrl: "./library.component.css",
 })
 export class LibraryComponent {
+  /** Caminho atual (/biblioteca, /biblioteca/<área>[/<lição>], /biblioteca/fichas/<ficha>); vem do shell. */
+  address = input("/biblioteca");
+  /** Pede outro ponto da Biblioteca; o shell grava no histórico e devolve em `address`. */
+  @Output() navigate = new EventEmitter<{ path: string; replace?: boolean }>();
   @Output() practiceArea = new EventEmitter<string>();
   @Output() flashcards = new EventEmitter<void>();
   @Output() question = new EventEmitter<string>();
   @Output() practice = new EventEmitter<PracticeRequest>();
   @Output() generated = new EventEmitter<string>();
-  /** Área do núcleo aberta; a ficha aberta a partir dela volta para ela. */
-  coreSlug = signal<string | null>(null);
+  private place = computed<LibraryAddress>(() => parseLibraryPath(this.address()) ?? { area: null, lesson: null, sheet: null });
+  /** Área do núcleo aberta e lição lida nela; a ficha aberta a partir da área volta para ela. */
+  coreSlug = computed(() => this.place().area);
+  lessonId = computed(() => this.place().lesson);
   private sheetReturn: string | null = null;
   private host: ElementRef<HTMLElement> = inject(ElementRef);
   private injector = inject(Injector);
@@ -35,14 +41,22 @@ export class LibraryComponent {
   open = signal<Sheet | null>(null);
   error = signal("");
   busy = signal(false);
+  sheetBusy = signal(false);
   private retrySlug: string | null = null;
   retry() { return this.retrySlug ? this.read(this.retrySlug) : this.load(); }
-  private resume = inject(ResumeService);
-  ngOnInit() {
-    void this.load();
-    // "Continuar de onde parou" pede uma lição: a área abre e mostra a lição.
-    const pending = this.resume.pendingLesson();
-    if (pending) this.coreSlug.set(pending.slug);
+  constructor() {
+    // A ficha do endereço abre (ou fecha) quando o caminho muda, inclusive por Voltar/Avançar.
+    effect(() => {
+      const slug = this.place().sheet;
+      untracked(() => {
+        if (!slug) { this.open.set(null); return; }
+        if (this.open()?.slug !== slug) void this.read(slug);
+      });
+    });
+  }
+  ngOnInit() { void this.load(); }
+  private go(address: LibraryAddress, replace = false) {
+    this.navigate.emit({ path: libraryPath(address), replace });
   }
   async load() {
     if (this.busy()) return;
@@ -55,41 +69,46 @@ export class LibraryComponent {
     finally { this.busy.set(false); }
   }
 
+  /** Abre uma ficha pelo endereço; o efeito do construtor carrega o conteúdo. */
+  openSheet(slug: string) { this.go({ area: null, lesson: null, sheet: slug }); }
+
   async read(slug: string) {
-    if (this.busy()) return;
-    this.busy.set(true);
+    this.sheetBusy.set(true);
     this.retrySlug = slug;
     this.error.set("");
     try {
-      this.open.set(await requestJson<Sheet>(`/api/sheets/${encodeURIComponent(slug)}`));
+      const sheet = await requestJson<Sheet>(`/api/sheets/${encodeURIComponent(slug)}`);
+      // O endereço pode ter mudado enquanto a ficha carregava.
+      if (this.place().sheet !== slug) return;
+      this.open.set(sheet);
       this.focus("#sheet-title");
     } catch (error) { this.error.set(error instanceof Error ? error.message : "Não foi possível abrir a ficha. Tente novamente."); }
-    finally { this.busy.set(false); }
+    finally { this.sheetBusy.set(false); }
   }
 
   close() {
     this.retrySlug = null;
     this.error.set("");
-    this.open.set(null);
-    if (this.sheetReturn) {
-      this.coreSlug.set(this.sheetReturn);
-      this.sheetReturn = null;
-      return;
-    }
-    this.focus("#library-title");
+    const area = this.sheetReturn;
+    this.sheetReturn = null;
+    this.go({ area, lesson: null, sheet: null });
+    if (!area) this.focus("#library-title");
   }
 
   openCore(slug: string) {
-    this.coreSlug.set(slug);
+    this.go({ area: slug, lesson: null, sheet: null });
   }
   closeCore() {
-    this.coreSlug.set(null);
+    this.go({ area: null, lesson: null, sheet: null });
     this.focus("#library-title");
+  }
+  /** A área abre ou fecha uma lição; `replace` corrige um endereço com lição que não existe. */
+  lessonChange(change: { concept: string | null; replace?: boolean }) {
+    this.go({ area: this.coreSlug(), lesson: change.concept, sheet: null }, change.replace);
   }
   sheetFromCore(slug: string) {
     this.sheetReturn = this.coreSlug();
-    this.coreSlug.set(null);
-    void this.read(slug);
+    this.openSheet(slug);
   }
 
   print() {

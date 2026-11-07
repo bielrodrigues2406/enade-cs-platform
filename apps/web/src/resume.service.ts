@@ -14,8 +14,6 @@ const PREFIX = "enade:resume:";
 @Injectable({ providedIn: "root" })
 export class ResumeService {
   readonly last = signal<ResumePlace | null>(null);
-  /** Lição pedida pelo início; a Biblioteca abre a área e a lição e limpa o pedido. */
-  readonly pendingLesson = signal<{ slug: string; concept: string } | null>(null);
   private key: string | null = null;
 
   /** Troca o dono (conta ou visitante) e lê o que ele deixou neste navegador. */

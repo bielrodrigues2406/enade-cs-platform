@@ -36,6 +36,12 @@ export type Lesson = {
   example: { title: string; code: string | null; steps: string[]; check: string };
   mistake: string;
   recall: { q: string; a: string }[];
+  /** Modelo novo (revisão do Codex, §4); lições antigas vêm com null ou vazio. */
+  objective: string | null;
+  prerequisites: string[];
+  counterexample: { claim: string; why: string } | null;
+  transfer: { prompt: string; steps: string[]; check: string } | null;
+  sources: { title: string; edition: string; locator: string; url: string | null }[];
 };
 export type CoreArea = {
   slug: string; area: string; title: string; summary: string; deck: string | null; sheet: string | null;

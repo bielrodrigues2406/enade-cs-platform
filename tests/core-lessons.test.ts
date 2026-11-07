@@ -65,6 +65,42 @@ test("a lesson file is rejected when it breaks the format", async () => {
   assert.throws(() => parseLessons({ ...file({}), lessons: [lesson, lesson] }, area, "t"), /repetida/);
 });
 
+test("the new lesson template fields are optional, and checked when present", async () => {
+  const area = (await loadCore()).areas.find((a) => a.slug === "algoritmos")!;
+  const paragraph = "Um parágrafo de explicação com tamanho suficiente para passar.";
+  const lesson = {
+    concept: "alg-busca", body: [paragraph, paragraph, paragraph, paragraph],
+    example: { title: "Exemplo", steps: ["Primeiro passo.", "Segundo passo."], check: "Executado em Python 3 para conferir." },
+    mistake: "Um erro comum descrito com detalhe suficiente para o validador.",
+    recall: [{ q: "Pergunta para fixar?", a: "Resposta." }, { q: "Outra pergunta?", a: "Outra." }],
+  };
+  const file = (l: object) => ({ slug: "algoritmos", lessons: [{ ...lesson, ...l }] });
+  const plain = parseLessons(file({}), area, "t").lessons.get("alg-busca")!;
+  assert.deepEqual([plain.objective, plain.prerequisites, plain.counterexample, plain.transfer, plain.sources], [null, [], null, null, []]);
+  const full = parseLessons(file({
+    objective: "Decidir quando a busca binária se aplica e contar seus passos.",
+    prerequisites: ["alg-complexidade"],
+    counterexample: { claim: "A busca binária serve para qualquer vetor.", why: "Só para vetor ordenado; num vetor desordenado ela pode não achar um elemento presente." },
+    transfer: { prompt: "Um vetor ordenado de 1 000 elementos: quantas comparações a busca binária faz no pior caso, e por quê?", steps: ["Cada passo divide o intervalo ao meio.", "São 10 passos, porque 2^10 = 1024."], check: "Executado em Python 3 com contagem dos passos." },
+    sources: [{ title: "Documentação do módulo bisect", edition: "Python 3.12", locator: "bisect.bisect_left", url: "https://docs.python.org/3.12/library/bisect.html" }],
+  }), area, "t").lessons.get("alg-busca")!;
+  assert.equal(full.prerequisites[0], "alg-complexidade");
+  assert.equal(full.sources[0].url, "https://docs.python.org/3.12/library/bisect.html");
+  assert.throws(() => parseLessons(file({ prerequisites: ["so-deadlock"] }), area, "t"), /pré-requisito/);
+  assert.throws(() => parseLessons(file({ prerequisites: ["alg-busca"] }), area, "t"), /pré-requisito/);
+  assert.throws(() => parseLessons(file({ sources: [{ title: "Um livro qualquer", edition: "3ª", locator: "cap. 1", url: "http://inseguro" }] }), area, "t"), /https/);
+  assert.throws(() => parseLessons(file({ transfer: { prompt: "curto", steps: [], check: "x" } }), area, "t"), /transfer/);
+});
+
+test("the three pilot lessons use the full template", async () => {
+  const core = await loadCore();
+  const lessons = await loadLessons(core.areas);
+  for (const [slug, concept] of [["sistemas-operacionais", "so-deadlock"], ["sistemas-operacionais", "so-memoria-virtual"], ["algoritmos", "alg-ordenacao"]]) {
+    const l = lessons.get(slug)!.lessons.get(concept)!;
+    assert.ok(l.objective && l.prerequisites.length && l.counterexample && l.transfer && l.sources.length, concept);
+  }
+});
+
 test("the area page flags concepts with a lesson, and the lesson route serves it", async () => {
   const cookie = await guest();
   const area = await (await fetch(`${base}/api/core/sistemas-operacionais`, { headers: { Cookie: cookie } })).json();

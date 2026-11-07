@@ -45,7 +45,7 @@
           "O disco termina e gera uma interrupção: P1 vai para pronto. P2 continua executando até a fatia acabar.",
           "A fatia de P2 acaba: P2 vai para pronto, e o escalonador escolhe P1, que volta a executar."
         ],
-        "check": "Sequência conferida contra o diagrama de cinco estados de Silberschatz e Tanenbaum."
+        "check": "Executado em Python 3: cada mudança de estado conferida contra as transições do modelo de cinco estados (novo, pronto, executando, bloqueado, terminado), com no máximo um processo executando."
       },
       "mistake": "Marcar que o processo, ao terminar a E/S, volta direto a executar. Ele vai para pronto. Outro erro é confundir troca de modo, numa chamada de sistema, com troca de contexto.",
       "recall": [
@@ -156,6 +156,11 @@
     },
     {
       "concept": "so-deadlock",
+      "objective": "Explicar por que as quatro condições de Coffman precisam valer juntas, dizer qual delas cada técnica de prevenção quebra e decidir se um estado do algoritmo do banqueiro é seguro.",
+      "prerequisites": [
+        "so-regiao-critica",
+        "so-semaforos"
+      ],
       "body": [
         "Deadlock é um conjunto de processos em que cada um espera um recurso preso por outro do mesmo conjunto. Ele só acontece com as quatro condições de Coffman ao mesmo tempo: exclusão mútua, posse e espera, não preempção e espera circular. Basta quebrar uma para evitá-lo.",
         "Prevenção nega uma condição: uma ordem global de aquisição dos recursos quebra a espera circular; pedir todos os recursos de uma vez quebra a posse e espera; permitir tomar recursos quebra a não preempção.",
@@ -173,10 +178,31 @@
         ],
         "check": "Executado em Python 3 com a verificação de segurança do banqueiro para um tipo de recurso."
       },
+      "counterexample": {
+        "claim": "Todo ciclo no grafo de alocação de recursos indica deadlock.",
+        "why": "Só vale quando cada recurso tem uma instância. Exemplo com R1 de duas instâncias e R2 de uma: P1 tem uma instância de R1 e pede R2; P2 tem R2 e pede R1; P3 tem a outra instância de R1 e não pede nada. Existe o ciclo P1 → R2 → P2 → R1 → P1, mas P3 termina e devolve R1; P2 recebe R1, termina e devolve R2; então P1 também termina. O ciclo é necessário para deadlock, não suficiente."
+      },
       "mistake": "Achar que basta uma das quatro condições para haver deadlock, ou que estado inseguro é o mesmo que deadlock. Também cai: \"todo ciclo no grafo de alocação indica deadlock\", o que só vale com uma instância por recurso.",
       "recall": [
         { "q": "Que condição de Coffman a ordem global de aquisição quebra?", "a": "A espera circular." },
         { "q": "Num grafo de alocação com uma instância por recurso, o que um ciclo indica?", "a": "Deadlock." }
+      ],
+      "transfer": {
+        "prompt": "Duas threads usam os mutexes A e B. A thread 1 executa lock(A); lock(B); unlock(B); unlock(A). A thread 2 executa lock(B); lock(A); unlock(A); unlock(B). (a) Mostre uma intercalação que trava as duas. (b) Corrija sem tirar nenhum dos dois locks e diga qual condição de Coffman a correção quebra.",
+        "steps": [
+          "(a) A thread 1 trava A; a thread 2 trava B; a thread 1 pede B e espera; a thread 2 pede A e espera. Cada uma segura o que a outra quer: espera circular, com exclusão mútua, posse e espera e sem preempção.",
+          "(b) As duas threads passam a pedir na mesma ordem, A antes de B. Quem segura B já segura A, então ninguém pode segurar B esperando por A. O ciclo fica impossível.",
+          "A correção quebra a espera circular. As outras três condições continuam valendo, e não precisam ser quebradas: basta uma."
+        ],
+        "check": "Executado em Python 3: busca exaustiva de todas as intercalações dos dois programas. Com ordens opostas existe um estado travado; com a mesma ordem, nenhum."
+      },
+      "sources": [
+        {
+          "title": "Operating Systems: Three Easy Pieces (Arpaci-Dusseau e Arpaci-Dusseau), cap. 32, Common Concurrency Problems",
+          "edition": "versão 1.20 do capítulo, lida em 07/11/2026",
+          "locator": "seção 32.3: condições do deadlock, prevenção (espera circular por ordem de aquisição, posse e espera), evitação por escalonamento e banqueiro, detecção e recuperação",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-bugs.pdf"
+        }
       ]
     },
     {
@@ -206,6 +232,10 @@
     },
     {
       "concept": "so-memoria-virtual",
+      "objective": "Simular FIFO, LRU e ótima numa sequência de referências, explicar com a propriedade de pilha por que a LRU não sofre a anomalia de Belady e reconhecer thrashing.",
+      "prerequisites": [
+        "so-paginacao"
+      ],
       "body": [
         "Memória virtual deixa um processo rodar com só parte das páginas na RAM. A tabela de páginas tem um bit de presença. Acessar uma página ausente gera uma falta de página: o sistema escolhe um quadro (livre ou de uma vítima, gravando a vítima no disco se ela foi modificada), traz a página, atualiza a tabela e reexecuta a instrução.",
         "Funciona por causa da localidade de referência: os programas tendem a acessar de novo o que acessaram há pouco (localidade temporal) e o que está perto (localidade espacial).",
@@ -223,10 +253,31 @@
         ],
         "check": "Executado em Python 3: simulação de FIFO, LRU, ótima e relógio nas duas sequências."
       },
+      "counterexample": {
+        "claim": "Dar mais quadros a um processo nunca aumenta as faltas de página.",
+        "why": "Falso para a FIFO. Na sequência 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5 ela tem 9 faltas com 3 quadros e 10 com 4. Depois do acesso à página 5, a memória com 3 quadros guarda {1, 2, 5} e a com 4 guarda {2, 3, 4, 5}: a página 1 está na menor e não na maior. A afirmação só vale para algoritmos de pilha, como LRU e ótima, em que o conteúdo com n quadros está sempre contido no conteúdo com n + 1."
+      },
       "mistake": "Dizer que mais quadros sempre reduzem as faltas (falso na FIFO), que a LRU sofre a anomalia de Belady, ou que a política ótima pode ser implementada: ela precisa conhecer o futuro.",
       "recall": [
         { "q": "Quantas faltas a FIFO tem em 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5 com 3 e com 4 quadros?", "a": "9 e 10: a anomalia de Belady." },
         { "q": "O que é thrashing?", "a": "O sistema gasta mais tempo trocando páginas do que executando, porque os processos não cabem na memória." }
+      ],
+      "transfer": {
+        "prompt": "Sequência 1, 2, 3, 1, 4, 1, 5, 2, 1, 4. (a) Conte as faltas da LRU com 2, 3 e 4 quadros. (b) Acompanhe a memória com 3 e com 4 quadros, passo a passo, e confira que a primeira está sempre contida na segunda. (c) Explique por que essa inclusão impede a anomalia de Belady.",
+        "steps": [
+          "(a) LRU: 9 faltas com 2 quadros, 7 com 3 e 6 com 4. A FIFO na mesma sequência dá 9, 8 e 6; a ótima, 7, 6 e 5.",
+          "(b) Depois do acesso a 4: {1, 3, 4} e {1, 2, 3, 4}. Depois de 5: {1, 4, 5} e {1, 3, 4, 5}. Depois de 2: {1, 2, 5} e {1, 2, 4, 5}. No fim: {1, 2, 4} e {1, 2, 4, 5}. Em todos os passos, a de 3 quadros está contida na de 4.",
+          "(c) Com n + 1 quadros, a LRU guarda as n + 1 páginas usadas mais recentemente; com n, as n mais recentes, que são parte delas. Toda página que acerta com n quadros também acerta com n + 1, então as faltas não podem aumentar."
+        ],
+        "check": "Executado em Python 3: simulação de FIFO, LRU e ótima com 2, 3 e 4 quadros e conferência da inclusão em cada passo."
+      },
+      "sources": [
+        {
+          "title": "Operating Systems: Three Easy Pieces (Arpaci-Dusseau e Arpaci-Dusseau), cap. 22, Beyond Physical Memory: Policies",
+          "edition": "versão 1.10 do capítulo, lida em 07/11/2026",
+          "locator": "seções 22.2 a 22.5 e o quadro Belady's Anomaly (FIFO de 3 para 4 quadros, propriedade de pilha da LRU); 22.8 (relógio); 22.11 (thrashing)",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-beyondphys-policy.pdf"
+        }
       ]
     },
     {
