@@ -305,6 +305,19 @@
           </button>
         </section>
 
+        @if (news.state()?.items?.length) {
+          <section class="panel home-news" aria-labelledby="home-news-title">
+            <span class="panel-meta">O que mudou</span>
+            <h2 id="home-news-title">Novidades</h2>
+            <ul>
+              @for (item of news.state()!.items.slice(0, 3); track item.id) {
+                <li>@if (!item.seen) { <span class="news-badge">Novo</span> } {{ item.title }}</li>
+              }
+            </ul>
+            <button class="outline" (click)="news.show()">Ver as novidades <span aria-hidden="true">→</span></button>
+          </section>
+        }
+
       </div>
     </div>
 

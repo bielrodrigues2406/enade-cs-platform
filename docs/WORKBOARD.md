@@ -159,7 +159,7 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 030 | NUC-1 — núcleo por área: autoavaliação de conceitos e confiança | Claude |
 | 031 | GEN-1 — questões geradas por IA (review_origin GENERATED, metadados) | Claude |
 | 032 | GEN-4 — formatos e estímulos das questões geradas (`ITENS3`/`ITENS4`, ordem, cálculo…) | Claude |
-| 033 | NEWS-1 — novidades vistas por conta | Claude |
+| 033 | NEWS-1 — novidades vistas por identidade (usada) | Claude |
 | 034 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
@@ -355,4 +355,6 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
 - **07/11/2026 · Claude · PR E (parte 2):** 15 questões geradas novas, priorizando as áreas com menos questões. Banco com 151; auditoria dentro das travas (única mais longa 6%, chutador 22%, item I verdadeiro 64%, letras A 25, B 32, C 34, D 32, E 28; mediana do enunciado 80 palavras). Conferência por execução (javac, Python 3) e pelo texto das normas. Corrigido antes do commit um distrator de contagem que não batia com a conta executada.
 
 - **07/11/2026 · Claude · PR E (parte 3):** 12 questões geradas novas nas áreas com menos questões. Banco com 163; auditoria dentro das travas (única mais longa 6%, chutador 22%, item I verdadeiro 63%, letras A 30, B 32, C 37, D 32, E 32; mediana do enunciado 83 palavras). Conferência por execução (clang, gcc, Python 3) e pelo texto das leis e licenças.
+
+- **07/11/2026 · Claude · PR G (Novidades, NEWS-1):** migration 033 usada (`news_seen`). Texto em `data/news/news.json`, rotas `GET /api/news` e `POST /api/news/seen`, botão "Novidades" com a marca "Novo" no topo, cartão no início e diálogo com o Dudu `novidade` carregado sob demanda. O aviso abre sozinho uma vez, só para quem já respondeu alguma questão e fora de questão, treino ou prova. Ver `docs/NEWS.md`. Próxima migration livre: 034.
 

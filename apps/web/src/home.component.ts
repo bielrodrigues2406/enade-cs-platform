@@ -6,6 +6,7 @@ import type { ReviewItem } from "./review.component";
 import { AREA_SIMULATION_LIMIT, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 import { ChoiceService } from "./choice-dialog";
 import { EngagementService } from "./engagement.service";
+import { NewsService } from "./news.service";
 import { originLabel } from "./origin-label";
 
 type CatalogRow = {
@@ -98,6 +99,7 @@ export class HomeComponent {
   /** Abre Conquistas (meta, sequência, medalhas). */
   @Output() progressHub = new EventEmitter<void>();
   readonly engagement = inject(EngagementService);
+  readonly news = inject(NewsService);
   /** Abre a seção Provas completas. */
   @Output() editionsHub = new EventEmitter<void>();
 

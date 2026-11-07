@@ -4614,3 +4614,18 @@ button.danger:hover {
 .landing-placeholder {
   min-height: 100vh;
 }
+
+/* Marca "Novo" das novidades (NEWS-1): no topo, no diálogo e no início. */
+.news-badge {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-on-cover, #fff);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}

@@ -179,6 +179,8 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ### PR G. Novidades, continuar de onde parou, modo escuro
 
+**Estado (07/11):** Novidades feitas (migration 033, ver [NEWS.md](NEWS.md)). Faltam "continuar de onde parou" e o modo escuro.
+
 - **Novidades:** cartão no início, marca "Novo" no topo e aviso uma vez por novidade com a pose `novidade`. O que cada conta já viu fica no servidor (migration 033).
   - Primeiras entradas: Biblioteca completa, questões novas, núcleo e confiança.
 - **Continuar de onde parou:** a última questão, prova ou lição aberta, no início.

@@ -18,6 +18,8 @@ import { ExamComponent } from "./exam.component";
 import { ProfileComponent } from "./profile.component";
 import { firstName, initials } from "./initials";
 import { EngagementService } from "./engagement.service";
+import { NewsService, type NewsDestination } from "./news.service";
+import { NewsDialogComponent } from "./news-dialog.component";
 import { requestJson } from "./api-request";
 import { ServiceNoticeComponent } from "./service-notice.component";
 import { GoalRingComponent } from "./goal-ring.component";
@@ -140,6 +142,7 @@ type Question = Summary & {
     ReviewComponent,
     GoalRingComponent,
     AchievementToastComponent,
+    NewsDialogComponent,
     ProgressComponent,
     LibraryComponent,
     FlashcardsComponent,
@@ -262,6 +265,7 @@ class App {
   private appRef = inject(ApplicationRef);
   private choice = inject(ChoiceService);
   readonly engagement = inject(EngagementService);
+  readonly news = inject(NewsService);
   private identityGeneration = 0;
   private identityTransition = 0;
   private requestNumber = 0;
@@ -320,6 +324,8 @@ class App {
       this.session.set(session);
       void this.mascot.sync(session.mode);
       void this.engagement.refresh();
+      // O aviso de novidades abre sozinho uma vez, para quem já estudou, fora de questão, treino ou prova.
+      void this.news.refresh().then(() => { if (transition === this.identityTransition && this.calmMoment()) this.news.offerOnce(); });
       await this.loadCurationAccess(transition);
       if (transition !== this.identityTransition) return;
       if (fromOtherTab) this.setPath("/questoes", "replace");
@@ -403,6 +409,21 @@ class App {
   }
   browseYear(year: number) {
     history.pushState(null, "", `/questoes?year=${year}`);
+    void this.restoreCatalogNavigation();
+  }
+  /** Momento em que um aviso não atrapalha: nem apresentação, nem questão, treino, prova ou áreas de gestão. */
+  private calmMoment() {
+    return !this.landingMode() && !this.accountView() && !this.adminView() && !this.curationView() && !this.lessonsView()
+      && !this.question() && !this.practiceAttemptId() && !this.examRunning()
+      // No boot, a questão do endereço pode ainda não ter carregado.
+      && !/^\/questoes\/./.test(location.pathname);
+  }
+  /** Ação de uma novidade: abre a seção; "geradas" é o banco filtrado pelas questões geradas. */
+  followNews(destination: NewsDestination) {
+    if (destination !== "geradas") return this.navigate(destination);
+    if (this.navigationBusy()) return;
+    this.studyView.set(null);
+    history.pushState(null, "", "/questoes?origin=generated");
     void this.restoreCatalogNavigation();
   }
   /** Banco filtrado nas questões geradas por IA de uma área (a partir do núcleo). */
