@@ -3,7 +3,7 @@
 }
 @if (coreSlug(); as slug) {
   <app-core-area [slug]="slug" [lesson]="lessonId()" (lessonChange)="lessonChange($event)" (back)="closeCore()" (question)="question.emit($event)" (practice)="practice.emit($event)"
-    (generated)="generated.emit($event)" (flashcards)="flashcards.emit()" (sheet)="sheetFromCore($event)" />
+    (generated)="generated.emit($event)" (flashcards)="flashcards.emit($event)" (sheet)="sheetFromCore($event)" />
 } @else if (open(); as sheet) {
   <article class="sheet" aria-labelledby="sheet-title">
     <div class="sheet-bar">
@@ -32,8 +32,8 @@
       </section>
     }
     <div class="sheet-actions">
-      <button type="button" (click)="practiceArea.emit(sheet.area)">Treinar {{ sheet.area }} <span aria-hidden="true">→</span></button>
-      <button type="button" class="outline" (click)="flashcards.emit()">Revisar com flashcards</button>
+      <button type="button" (click)="trainArea(sheet.area)">Treinar {{ sheet.area }} <span aria-hidden="true">→</span></button>
+      <button type="button" class="outline" (click)="flashcards.emit(sheet.area)">Revisar com flashcards</button>
     </div>
     @if (sheet.references.length) {
       <p class="sheet-refs"><strong>Para aprofundar:</strong> {{ sheet.references.join(" · ") }}</p>

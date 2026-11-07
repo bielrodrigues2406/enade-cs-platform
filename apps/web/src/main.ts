@@ -981,9 +981,17 @@ class App {
     this.setPath("/discursivas");
     this.focusMain();
   }
+  /** Área cujo baralho os flashcards abrem direto; só vale para a abertura vinda da Biblioteca. */
+  flashcardsArea = signal<string | null>(null);
+  openFlashcards(area: string | null) {
+    this.openStudy("flashcards");
+    // openStudy pode esperar uma confirmação (prova em andamento); só marca a área se a troca aconteceu.
+    if (location.pathname === SECTION_PATHS.flashcards) this.flashcardsArea.set(area);
+  }
   /** Conquistas, biblioteca e flashcards: mesmo fluxo das discursivas. */
   openStudy(view: StudyView, path: string = SECTION_PATHS[view]) {
     if (this.saving() || this.authBusy() || this.curationBusy() || this.practiceBusy() || !this.leaveExam(() => this.openStudy(view, path))) return;
+    this.flashcardsArea.set(null);
     this.beginSectionChange();
     this.swapView(() => {
       this.question.set(null);

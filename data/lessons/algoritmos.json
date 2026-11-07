@@ -110,7 +110,7 @@
         "claim": "O quicksort é O(n log n).",
         "why": "Só no caso médio, ou no valor esperado com pivô aleatório. Com o primeiro elemento como pivô e o vetor já ordenado, cada partição separa 0 elementos de um lado e todos os outros do outro. São (n − 1) + (n − 2) + ... + 1 = n(n − 1)/2 comparações: 28 para n = 8, contra 13 no vetor [5, 2, 7, 1, 8, 3, 6, 4]. No pior caso, o quicksort é Θ(n²)."
       },
-      "mistake": "Dizer que o quicksort é sempre O(n log n), ou que o merge sort ordena sem memória extra. Outro erro: achar que um algoritmo O(n²) nunca supera um O(n log n). Para vetores pequenos, a inserção costuma ser mais rápida, e bibliotecas a usam abaixo de algumas dezenas de elementos.",
+      "mistake": "Dizer que o merge sort ordena sem memória extra: na forma usual, a intercalação usa O(n). Outro erro é achar que um algoritmo O(n²) nunca supera um O(n log n). Para vetores pequenos, a inserção costuma ser mais rápida, e bibliotecas a usam abaixo de algumas dezenas de elementos.",
       "recall": [
         { "q": "Qual é o melhor caso da inserção e quando ele ocorre?", "a": "O(n), com o vetor já ordenado." },
         { "q": "Por que o counting sort pode ser linear?", "a": "Não compara chaves: conta as ocorrências usando o valor como índice, o que exige inteiros num intervalo pequeno." }
@@ -338,7 +338,7 @@
       "body": [
         "P é a classe dos problemas de decisão resolvidos em tempo polinomial. NP é a dos problemas cuja solução, dada pronta como certificado, pode ser verificada em tempo polinomial. Todo problema de P está em NP. Se P = NP é uma questão em aberto. NP significa \"polinomial não determinístico\", não \"não polinomial\".",
         "Um problema é NP-difícil quando todo problema de NP se reduz a ele em tempo polinomial; é NP-completo quando, além disso, está em NP. O SAT foi o primeiro (Cook e Levin). Outros: 3-SAT, clique, cobertura de vértices, ciclo hamiltoniano, coloração com 3 cores e as versões de decisão do caixeiro viajante e da mochila.",
-        "A direção da redução é a pegadinha mais cobrada. Para provar que um problema novo X é difícil, reduz-se um problema difícil conhecido a X. Reduzir X a um problema fácil prova que X é fácil. Reduzir X ao SAT só mostra que X não é mais difícil que o SAT.",
+        "A armadilha do tema está na direção da redução. Para provar que um problema novo X é difícil, reduz-se um problema difícil conhecido a X. Reduzir X a um problema fácil prova que X é fácil. Reduzir X ao SAT só mostra que X não é mais difícil que o SAT.",
         "Problemas parecidos podem estar em lados opostos: caminho mínimo, AGM, ciclo euleriano, 2-SAT e emparelhamento estão em P; caminho mais longo, ciclo hamiltoniano e 3-SAT são NP-completos.",
         "Na prática, usam-se heurísticas como o vizinho mais próximo, aproximações com garantia (2-aproximação para cobertura de vértices; caixeiro métrico via AGM), algoritmos exatos exponenciais para n pequeno, branch and bound e solvers. A mochila em O(n·W) não contradiz a NP-completude: é pseudopolinomial, porque W pode ser exponencial no número de bits da entrada."
       ],

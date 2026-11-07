@@ -13,7 +13,7 @@ test("a lesson opens from its concept, shows every section and leads to the next
   await expect(page.getByRole("heading", { name: "Deadlock", level: 1 })).toBeFocused();
   await expect(page.getByText("Lição 7 de 10")).toBeVisible();
   await expect(page.getByText("Texto gerado por IA, sem revisão humana")).toBeVisible();
-  for (const title of ["Exemplo resolvido", "Erro comum", "Como cai no ENADE", "Para fixar"])
+  for (const title of ["Exemplo resolvido", "Armadilhas", "Como cai no ENADE", "Para fixar"])
     await expect(page.getByRole("heading", { name: title, level: 2 })).toBeVisible();
   const figure = page.getByRole("img", { name: /^Quatro carros ocupam um cruzamento/ });
   await expect(figure).toBeVisible();
@@ -99,8 +99,11 @@ test("a pilot lesson shows objective, prerequisites, counterexample, transfer an
   await page.goto("/biblioteca/sistemas-operacionais/so-deadlock");
   await expect(page.getByRole("heading", { name: "Deadlock", level: 1 })).toBeVisible();
   await expect(page.locator(".lesson-goal")).toContainText("Ao terminar, você consegue");
-  await expect(page.getByRole("heading", { name: "Quando a regra não vale", level: 2 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Armadilhas", level: 2 })).toBeVisible();
+  await expect(page.locator(".lesson-claim")).toContainText("Parece certo, mas não é");
   await expect(page.locator(".lesson-claim")).toContainText("Todo ciclo no grafo de alocação");
+  // Contraexemplo e erro comum na mesma seção, sem repetir o ciclo no grafo.
+  await expect(page.locator(".lesson-mistake-text")).not.toContainText("ciclo");
 
   const transfer = page.locator(".lesson-transfer details");
   await expect(transfer.getByText("A correção quebra a espera circular.")).toBeHidden();
@@ -108,16 +111,18 @@ test("a pilot lesson shows objective, prerequisites, counterexample, transfer an
   await expect(transfer.getByText(/A correção quebra a espera circular\./)).toBeVisible();
   await expect(transfer.locator(".lesson-check")).toContainText("busca exaustiva");
 
-  const review = page.locator(".lesson-review");
-  await expect(review.getByRole("link", { name: /Operating Systems: Three Easy Pieces/ })).toHaveAttribute("href", /threads-bugs\.pdf$/);
-  await expect(review).toContainText("seção 32.3");
-  await expect(review).toContainText("Revisão humanaAinda não.");
+  const provenance = page.locator(".lesson-provenance");
+  await expect(provenance.getByRole("link", { name: /Operating Systems: Three Easy Pieces/ })).toHaveAttribute("href", /threads-bugs\.pdf$/);
+  await expect(provenance).toContainText("seção 32.3");
+  await expect(provenance).toContainText("Sem revisão humana.");
+  await expect(page.getByRole("heading", { name: "Fonte e conferência" })).toHaveCount(0);
 
   await page.locator(".lesson-prereq").getByRole("button", { name: "Semáforos, mutex e monitores" }).click();
   await expect(page).toHaveURL(/\/biblioteca\/sistemas-operacionais\/so-semaforos$/);
-  await expect(page.getByRole("heading", { name: "Quando a regra não vale", level: 2 })).toHaveCount(0);
+  await expect(page.locator(".lesson-counter")).toHaveCount(0);
   // Lição ainda no modelo antigo: a tela não finge que houve consulta.
-  await expect(page.locator(".lesson-review")).toContainText("Nenhuma registrada para esta lição");
+  await expect(page.locator(".lesson-provenance")).toContainText("nenhuma consultada para esta lição");
+  await expect(page.locator(".lesson-provenance")).toContainText("recomendação, não consulta");
 });
 
 test("a pilot lesson fits a 320 px screen", async ({ page }) => {
@@ -126,4 +131,21 @@ test("a pilot lesson fits a 320 px screen", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Agora sozinho", level: 2 })).toBeVisible();
   await page.locator(".lesson-transfer summary").click();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+// Revisão EST-EXP1 do Codex: os atalhos da Biblioteca levam a área junto.
+test("library shortcuts keep the area: sheet training and area flashcards", async ({ page }) => {
+  await page.goto("/biblioteca/fichas/grafos");
+  await page.getByRole("button", { name: "Treinar Algoritmos" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toContainText("Simulado por área");
+  await expect(dialog.getByRole("heading", { name: "Algoritmos" })).toBeVisible();
+  await dialog.getByRole("button", { name: "Sem cronômetro" }).click();
+  await expect(page).toHaveURL(/\/treino/);
+  await expect(page.getByText("Algoritmos").first()).toBeVisible();
+
+  await page.goto("/biblioteca/sistemas-operacionais");
+  await page.getByRole("button", { name: "Flashcards da área" }).click();
+  await expect(page).toHaveURL(/\/flashcards$/);
+  await expect(page.locator("#flash-session-title")).toContainText("Sistemas operacionais");
 });

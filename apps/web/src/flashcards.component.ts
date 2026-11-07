@@ -1,5 +1,5 @@
 import { requestJson } from "./api-request";
-import { Component, ElementRef, HostListener, Injector, afterNextRender, computed, inject, signal } from "@angular/core";
+import { Component, ElementRef, HostListener, Injector, Input, afterNextRender, computed, inject, signal } from "@angular/core";
 import { EngagementService } from "./engagement.service";
 import { MascotComponent } from "./mascot.component";
 
@@ -59,8 +59,13 @@ export class FlashcardsComponent {
     return total ? this.reviewed.size / total : 0;
   });
 
+  /** Área pedida pela Biblioteca: abre direto o baralho dela, se houver. */
+  @Input() area: string | null = null;
+
   async ngOnInit() {
     await this.loadDecks();
+    const deck = this.area ? this.decks()?.find((d) => d.area === this.area) : null;
+    if (deck) await this.start(deck);
   }
 
   async loadDecks() {

@@ -2,7 +2,7 @@
   "slug": "complexidade-e-ordenacao",
   "area": "Algoritmos",
   "title": "Complexidade e ordenação",
-  "summary": "Como medir o custo de um algoritmo e escolher a ordenação certa. Cai todo ano, em geral pedindo a ordem de crescimento de um trecho de código ou comparando algoritmos.",
+  "summary": "Como medir o custo de um algoritmo e escolher a ordenação certa. No acervo, complexidade ou ordenação aparece em 5 das 6 edições (todas de 2005 a 2021, menos 2008), em geral pedindo a ordem de crescimento de um trecho de código ou comparando algoritmos.",
   "sections": [
     {
       "title": "Notação assintótica",

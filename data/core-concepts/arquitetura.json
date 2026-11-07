@@ -2,7 +2,7 @@
   "slug": "arquitetura",
   "area": "Arquitetura de computadores",
   "title": "Arquitetura e organização de computadores",
-  "summary": "Circuitos e álgebra booleana caem quase todo ano; pipeline, memória e o modelo de Von Neumann completam o núcleo.",
+  "summary": "Circuitos e álgebra booleana aparecem em 5 das 6 edições do acervo (de 2008 a 2021); pipeline, memória e o modelo de Von Neumann completam o núcleo.",
   "deck": "arquitetura",
   "sheet": "arquitetura-e-memoria",
   "concepts": [

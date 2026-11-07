@@ -63,7 +63,7 @@
       @if (lessons().length) {
         <button type="button" class="outline" (click)="read(lessons()[0])">Ler as {{ lessons().length }} lições</button>
       }
-      @if (a.deck) { <button type="button" class="outline" (click)="flashcards.emit()">Flashcards da área</button> }
+      @if (a.deck) { <button type="button" class="outline" (click)="flashcards.emit(a.area)">Flashcards da área</button> }
       @if (a.sheet) { <button type="button" class="outline" (click)="sheet.emit(a.sheet)">Ficha de uma página</button> }
     </div>
 

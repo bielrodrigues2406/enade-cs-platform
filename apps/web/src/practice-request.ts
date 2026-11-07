@@ -44,6 +44,15 @@ export async function chooseAreaSimulation(
   return answer ? areaSimulation(area, count, answer === "timed") : null;
 }
 
+/**
+ * Questões publicadas de uma área que o treino aceita, como o servidor conta
+ * (GET /api/practice). O tamanho "todas da área" precisa bater com este número.
+ */
+export async function availableInArea(area: string): Promise<number> {
+  const data = await requestJson<{ areas: { name: string; count: number }[] | null }>("/api/practice");
+  return data.areas?.find((a) => a.name === area)?.count ?? 0;
+}
+
 /** Rótulo de um treino na lista e no resultado. */
 export function attemptLabel(attempt: { area: string | null; focus?: string | null; kind?: string; formatYear?: number | null }) {
   if (attempt.kind === "FORMAT") return `Formato ENADE ${attempt.formatYear ?? 2026}`;
