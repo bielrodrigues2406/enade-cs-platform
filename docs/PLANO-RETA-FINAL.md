@@ -27,7 +27,7 @@ Cada etapa sai num PR próprio, com testes, revisão e conferência no celular a
 | D | Biblioteca: piloto em 2 áreas | Gabriel aprova o formato antes de escrever as 163 lições | 12/11 |
 | E | Lote 2 de questões (formatos novos) | Variedade no padrão da prova | 16/11 |
 | F | Biblioteca: as outras 15 áreas | O maior volume; segue o modelo aprovado | 21/11 |
-| G | Novidades, continuar de onde parou, modo escuro | Acabamento, depois do conteúdo | 23/11 |
+| G | Novidades, continuar de onde parou, modo escuro, conquistas novas (G2) | Acabamento, depois do conteúdo | 23/11 |
 | H | Plano até a prova | Usa o núcleo, a Biblioteca e a confiança prontos | 25/11 |
 | | Congelamento, só correções | Estabilidade na semana da prova | 26/11 em diante |
 
@@ -174,6 +174,44 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 - **Continuar de onde parou:** a última questão, prova ou lição aberta, no início.
 - **Modo escuro:** com os tokens que já existem. Conferir o contraste das ilustrações sobre o papel escuro; se ficarem claras demais, vão numa moldura creme.
 
+### PR G2. Conquistas que acompanham o estudo
+
+**Hoje:** são 14 conquistas, quase todas de volume e constância (questões respondidas, dias seguidos, provas). A expansão premia o que mais ajuda na prova e leva às funções novas. Não há ranking de nota, só de constância, como hoje.
+
+| Conquista | Regra | Nível | Dado que já existe |
+| --- | --- | --- | --- |
+| **Mapa traçado** | Avaliar todos os conceitos de uma área no núcleo | Bronze | `core_concept_rating` |
+| **Bússola** | Avaliar conceitos nas 16 áreas e na Formação Geral | Prata | `core_concept_rating` |
+| **Área firme** | Confiança de 70 ou mais numa área | Prata | Confiança do núcleo |
+| **Cinco áreas firmes** | Confiança de 70 ou mais em 5 áreas | Ouro | Confiança do núcleo |
+| **Domínio** | 80% de acerto na primeira resposta, com pelo menos 10 questões oficiais de uma área. Medalha mostra a área. | Prata | "Meu desempenho" |
+| **Explique para o pato** | Escrever 10 autoexplicações depois de errar | Bronze | Reflexões (migration 028) |
+| **Erro corrigido** | Acertar de novo 10 questões que estavam no caderno de erros | Prata | Caderno de erros |
+| **Formatos do ENADE** | Acertar uma questão de cada forma: itens, asserção, ordem, cálculo, código nas alternativas | Prata | `generated_question.format` (PR B) |
+| **Nem toda verdade explica** | Acertar 5 asserções-razão com resposta B (duas verdades sem relação de causa) | Ouro | Formato e gabarito |
+| **Treino extra** | Responder 30 questões geradas | Bronze | Origem `AI_GENERATED` |
+| **Três edições** | Finalizar provas completas de 3 edições diferentes | Ouro | Tentativas de prova |
+| **Formato 2026** | Finalizar o simulado no formato de 2026 | Prata | SIM26 (migration 029) |
+| **Padrão comparado** | Autoavaliar 5 discursivas com o padrão do Inep | Prata | Discursivas |
+| **Memória firme** | 20 flashcards com estabilidade de 21 dias ou mais | Prata | `flashcard_review` |
+| **Leitor da Biblioteca** | Ler as lições de uma área inteira | Bronze | **Novo:** registrar lição lida (migration nova, depois do PR D) |
+
+**Tela:**
+- conquistas agrupadas por tema (constância, núcleo, questões, provas, memória), com barra de progresso nas bloqueadas, como já existe em `progressOf`;
+- medalhas por área com o nome da área;
+- ícones novos em SVG próprio (mapa, balão de fala, laço de correção, livro);
+- aviso com o Dudu `medalha`, como hoje.
+
+**Fica de fora:**
+- conquistas por velocidade;
+- conquistas por número de horas;
+- qualquer coisa que incentive chutar ou responder sem ler.
+
+**Pronto quando:**
+- as regras novas têm teste de unidade com dados de exemplo;
+- as conquistas já cumpridas antes do deploy são concedidas na primeira carga (cálculo retroativo, como o atual);
+- conferido a 320 px.
+
 ### PR H. Plano até a prova
 
 - **Roteiro de cada dia até 29/11**, montado pelo mapa de confiança (peso da área × falta de confiança):
@@ -199,7 +237,7 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ## 4. Pendências do lado de Gabriel
 
-- **Dudu refeito em alta**, conforme [DUDU-REQUESTS.md](DUDU-REQUESTS.md): imagem-base, 9 camadas (agora com pés separados e olhos felizes) e as 14 poses. Quando chegar, entra no PR A se for a tempo; senão, num PR próprio logo depois, sem bloquear as questões.
+- ~~Dudu refeito em alta~~: recebido e integrado em 07/11 (commits `9646068` e `d69b58b`).
 - **Revisão de professor** do núcleo, das lições e das questões geradas, quando possível (recomendado, não bloqueia).
 - **Nome da marca:** manter "Preparação ENADE" ou trocar para "Caderno CC", de acordo com o domínio.
 
