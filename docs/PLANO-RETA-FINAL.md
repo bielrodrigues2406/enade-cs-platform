@@ -117,6 +117,8 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ### PR D. Biblioteca: piloto (Algoritmos e Sistemas operacionais)
 
+**Estado (07/11):** feito; aguarda a leitura de Gabriel. 23 lições, capas e cinco figuras, em [LIBRARY-LESSONS.md](LIBRARY-LESSONS.md). Os flashcards de cada lição ficaram como perguntas para fixar dentro da própria lição; o baralho da área continua no botão da página.
+
 **Uma lição por conceito do núcleo** (23 conceitos nas duas áreas). Cada lição tem:
 1. **Explicação aprofundada:** de 4 a 8 parágrafos curtos, com definição, como funciona, por que importa e limites.
 2. **Exemplo resolvido passo a passo:** com código ou conta executados de verdade.
@@ -138,6 +140,8 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 **Pronto quando:** Gabriel lê as duas áreas e aprova ou pede ajustes no formato. **Só depois começa o PR F.**
 
 ### PR E. Lote 2 de questões
+
+**Estado (07/11):** primeira parte feita, com 16 questões nas formas que faltavam (cálculo, código nas alternativas, ordem, associação, itens com 1 e 3 verdadeiras, asserção B e E). O banco tem 136 questões, todas dentro das travas. Falta o restante, cerca de 64, e o alongamento dos enunciados (mediana de 70 palavras).
 
 - **Quantidade:** cerca de 80 questões, na mistura alvo de 2017 e 2021:
   - itens: 40%;

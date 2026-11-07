@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Injector, Input, Output, afterNext
 import { requestJson } from "./api-request";
 import { ChoiceService } from "./choice-dialog";
 import { chooseAreaSimulation, type PracticeRequest } from "./practice-request";
+import { CoreLessonComponent } from "./core-lesson.component";
 import { LEVELS, TRAP_LABELS, type Confidence, type CoreArea, type CoreConcept, type TrapPattern } from "./core.types";
 
 // Página de uma área do núcleo (NUC-1): conceitos com autoavaliação e as
@@ -10,6 +11,7 @@ import { LEVELS, TRAP_LABELS, type Confidence, type CoreArea, type CoreConcept, 
 // para a questão, o treino da área, os flashcards ou a ficha.
 
 @Component({
+  imports: [CoreLessonComponent],
   selector: "app-core-area",
   templateUrl: "./core-area.component.html",
   styleUrl: "./core-area.component.css",
@@ -32,6 +34,11 @@ export class CoreAreaComponent {
   area = signal<CoreArea | null>(null);
   error = signal("");
   saving = signal<string | null>(null);
+  /** Lição aberta (LIB-2); fechar volta ao cartão do conceito. */
+  reading = signal<CoreConcept | null>(null);
+  /** Conceitos com lição, na ordem do núcleo: a sequência de leitura. */
+  lessons = computed(() => (this.area()?.concepts ?? []).filter((c) => c.lesson));
+  readingAt = computed(() => this.lessons().findIndex((c) => c.id === this.reading()?.id));
 
   conceptName = computed(() => new Map((this.area()?.concepts ?? []).map((c) => [c.id, c.name])));
   /** Pegadinhas agrupadas por padrão, na ordem em que aparecem. */
@@ -85,6 +92,18 @@ export class CoreAreaComponent {
     if (!area || !this.publishedCount()) return;
     const request = await chooseAreaSimulation(this.choice, area.area, this.publishedCount());
     if (request) this.practice.emit(request);
+  }
+
+  read(concept: CoreConcept) { this.reading.set(concept); }
+
+  closeLesson() {
+    const id = this.reading()?.id;
+    this.reading.set(null);
+    afterNextRender(() => {
+      const button = this.host.nativeElement.querySelector<HTMLElement>(`[data-lesson="${id}"]`);
+      button?.scrollIntoView({ block: "center", behavior: "instant" });
+      button?.focus({ preventScroll: true });
+    }, { injector: this.injector });
   }
 
   rated() { return (this.area()?.concepts ?? []).filter((c) => c.level !== null).length; }

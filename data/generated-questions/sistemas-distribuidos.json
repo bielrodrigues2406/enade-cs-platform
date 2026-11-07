@@ -100,6 +100,26 @@
       "check": "Nova resolução sem o gabarito: definições de escala horizontal e vertical e de elasticidade; sessão em memória local impede replicação transparente (III falsa); I troca os termos. Opção A.",
       "truth": ["II", "IV"],
       "combos": [["II", "IV"], ["III", "IV"], ["I", "II", "IV"], ["I", "III", "IV"], ["II", "III", "IV"]]
+    },
+    {
+      "id": "gen-sd-sessao-autoscaling",
+      "kind": "QUENTE",
+      "format": "SIMPLES",
+      "concepts": ["sd-escalabilidade", "sd-nuvem"],
+      "title": "Sessões perdidas no pico de inscrições",
+      "subject": "Elasticidade horizontal e serviços sem estado",
+      "prompt": "O portal de inscrições de um vestibular roda numa nuvem pública, atrás de um balanceador de carga, num grupo de máquinas virtuais com escalonamento automático: quando o uso médio de CPU passa de 70%, o grupo cria instâncias; quando cai abaixo de 30%, remove. A sessão de cada candidato, com os dados do formulário ainda não enviados, fica guardada na memória da instância que o atendeu.\n\nNo último dia de inscrições, depois do pico, o grupo removeu instâncias e muitos candidatos foram desconectados no meio do preenchimento, perdendo os dados digitados.\n\nQual mudança resolve o problema sem abrir mão da elasticidade horizontal?",
+      "options": [
+        "Guardar a sessão num armazenamento compartilhado, como um cache distribuído, deixando as instâncias sem estado.",
+        "Trocar as instâncias por máquinas maiores e desligar o escalonamento, mantendo uma só máquina durante o dia.",
+        "Ativar a afinidade de sessão no balanceador, que garante a sessão mesmo quando a instância é removida.",
+        "Fixar o grupo no número de instâncias do pico até o fim das inscrições, sem nunca remover nenhuma delas.",
+        "Substituir o balanceador por registros DNS, um por instância, e deixar o navegador escolher a sua instância."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nO problema é o estado preso à instância: quando ela é removida, a sessão vai junto. Com a sessão num armazenamento compartilhado (um cache distribuído ou um banco), qualquer instância atende qualquer requisição, e o grupo pode crescer e encolher sem perder dados. É a base da escalabilidade horizontal.\n\nAs outras alternativas:\nB) Escala verticalmente e abandona a elasticidade: a máquina única vira gargalo e ponto único de falha.\nC) A afinidade de sessão manda o candidato sempre para a mesma instância, mas não salva nada quando ela é removida.\nD) Evita a perda pagando pelo pico o tempo todo, o que abre mão da elasticidade pedida.\nE) Tira o balanceamento por saúde e por carga, e o estado continua preso a cada instância.",
+      "check": "Nova resolução sem o gabarito: serviço sem estado com sessão externa é a única opção que mantém a elasticidade e não perde dados na remoção de instâncias.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

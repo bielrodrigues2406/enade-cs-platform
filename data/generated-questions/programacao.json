@@ -79,6 +79,20 @@
       "answer": "B",
       "explanation": "Resposta: B.\n\nO JavaScript executa o código numa única thread com um laço de eventos (event loop).\n\n1. O código síncrono roda até o fim: imprime A, agenda o setTimeout, agenda o .then e imprime D.\n2. Ao esvaziar a pilha de chamadas, o motor executa todas as microtarefas pendentes, como as reações de Promises: imprime C.\n3. Só então passa para a próxima macrotarefa, o callback do timer, mesmo com atraso 0: imprime B.\n\nO atraso 0 do setTimeout não significa \"imediatamente\": significa \"assim que possível, na fila de tarefas\". Saber essa ordem evita erros comuns em interfaces e em servidores Node.js.\n\nAs outras alternativas:\nA) Supõe execução na ordem do texto, como se tudo fosse síncrono.\nC) Coloca o timer antes da Promise, invertendo a prioridade entre macrotarefas e microtarefas.\nD) Imprime C e B antes de D, interrompendo o código síncrono, o que não acontece.\nE) Executa os callbacks antes do código síncrono.",
       "check": "Nova resolução sem o gabarito: trecho executado no Node.js 24; saída A, D, C, B."
+    },
+    {
+      "id": "gen-prog-passagem-ponteiros",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["prog-passagem", "prog-memoria"],
+      "title": "Valor, ponteiro e troca que não troca",
+      "subject": "Passagem por valor e por ponteiro em C",
+      "prompt": "Em C, todo argumento é passado por valor: a função recebe uma cópia. Para alterar uma variável de quem chamou, passa-se o endereço dela, e a função altera o conteúdo apontado. Mudar a cópia do ponteiro dentro da função, porém, não muda nada fora dela.\n\nConsidere o programa:\n\n```\n#include <stdio.h>\n\nvoid dobra(int x) { x = 2 * x; }\nvoid incrementa(int *p) { *p = *p + 1; }\nvoid troca(int *a, int *b) { int *t = a; a = b; b = t; }\n\nint main(void) {\n    int m = 5, n = 9;\n    dobra(m);\n    incrementa(&m);\n    troca(&m, &n);\n    printf(\"%d %d\\n\", m, n);\n    return 0;\n}\n```\n\nO que o programa imprime?",
+      "options": ["5 9", "6 9", "9 6", "9 11", "11 9"],
+      "answer": "B",
+      "explanation": "Resposta: B.\n\ndobra recebe uma cópia de m e altera só a cópia: m continua 5. incrementa recebe o endereço de m e altera o conteúdo: m passa a 6. troca recebe cópias dos dois ponteiros e troca as cópias entre si, sem tocar nos inteiros apontados: m e n não mudam. Imprime 6 9.\n\nPara trocar de fato, a função precisaria trocar os conteúdos: int t = *a; *a = *b; *b = t;\n\nAs outras alternativas:\nA) Ignora o incremento feito pelo ponteiro.\nC) Supõe que troca funciona, depois do incremento.\nD) Supõe que dobra altera m (10, depois 11) e que troca funciona.\nE) Supõe que dobra altera m, de 5 para 10 e depois 11.",
+      "check": "Compilado com gcc -Wall e executado: imprime 6 9.",
+      "stimulus": ["TEXTO_BASE", "CODIGO"]
     }
   ]
 }

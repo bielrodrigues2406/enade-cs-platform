@@ -66,7 +66,7 @@
       "id": "so-memoria-virtual",
       "name": "Memória virtual e substituição de páginas",
       "definition": "Só parte do processo fica na RAM; acessar página ausente gera falta de página. Políticas: FIFO, LRU (menos usada recentemente), ótima (teórica, olha o futuro) e relógio.",
-      "example": "Só a FIFO sofre a anomalia de Belady: mais quadros podem gerar mais faltas.",
+      "example": "Na FIFO, mais quadros podem gerar mais faltas (anomalia de Belady); LRU e ótima nunca sofrem a anomalia.",
       "match": ["substituicao de paginas", "fifo e lru", "memoria virtual"]
     },
     {
@@ -112,7 +112,7 @@
     { "pattern": "INVERTIDA", "text": "Paginação com fragmentação externa: é a interna." },
     { "pattern": "ABSOLUTO", "text": "'Threads não precisam de sincronização porque compartilham memória': é justamente por compartilharem que precisam." },
     { "pattern": "INVERTIDA", "text": "Processo saindo de bloqueado direto para executando: ele passa por pronto." },
-    { "pattern": "ABSOLUTO", "text": "'LRU sofre a anomalia de Belady': só a FIFO, entre as clássicas." }
+    { "pattern": "ABSOLUTO", "text": "'LRU sofre a anomalia de Belady': LRU e ótima nunca sofrem; a FIFO sofre." }
   ],
   "references": ["Silberschatz, Galvin e Gagne, Fundamentos de Sistemas Operacionais", "Tanenbaum, Sistemas Operacionais Modernos"]
 }

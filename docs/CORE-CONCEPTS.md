@@ -12,6 +12,7 @@ O que é preciso saber em cada área do ENADE de Ciência da Computação para *
 | Autoavaliação | migration `030_core_concepts.sql` (`core_concept_rating`) |
 | Telas | `core-map.component.*` (mapa na Biblioteca) e `core-area.component.*` (página da área) |
 | Testes | `tests/core-concepts.test.ts`, `tests/browser/core.spec.ts` |
+| Lições por conceito (LIB-2) | `data/lessons/`, ver [LIBRARY-LESSONS.md](LIBRARY-LESSONS.md) |
 
 ## 2. Formato de uma área
 

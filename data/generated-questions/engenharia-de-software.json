@@ -132,6 +132,34 @@
       "answer": "C",
       "explanation": "Resposta: C.\n\nHá dois caminhos do início ao fim:\nA → B → D: 3 + 2 + 2 = 7 dias.\nA → C → D: 3 + 4 + 2 = 9 dias.\n\nD só começa quando B e C terminam. C termina no dia 7 e B, no dia 5. O projeto dura o caminho mais longo, 9 dias, e esse é o caminho crítico (A, C, D). B pode atrasar até 7 − 5 = 2 dias sem atrasar D: essa é a folga de B. Atrasar qualquer atividade do caminho crítico atrasa o projeto inteiro.\n\nAs outras alternativas:\nA) 11 dias soma todas as atividades, como se B e C não pudessem ocorrer em paralelo.\nB) 7 dias é o caminho mais curto. O projeto termina pelo mais longo.\nD) A duração está certa, mas B está fora do caminho crítico e tem folga.\nE) 6 dias não corresponde a nenhum caminho completo.",
       "check": "Nova resolução sem o gabarito: cálculo de início mais cedo e mais tarde em código; duração 9, folga de B = 2."
+    },
+    {
+      "id": "gen-es-scrum-responsabilidades",
+      "kind": "ESPELHO",
+      "format": "ITENS4",
+      "concepts": ["es-agil"],
+      "title": "Responsabilidades e eventos no Scrum",
+      "subject": "Papéis e eventos do Guia do Scrum",
+      "prompt": "Uma fintech adotou Scrum há três meses. Na retrospectiva, a equipe percebeu que cada pessoa tinha uma ideia diferente sobre quem decide o quê. Para alinhar, a agilista do time preparou um resumo baseado no Guia do Scrum de 2020, que define três responsabilidades (Product Owner, Scrum Master e Developers) e cinco eventos (a Sprint, o Planejamento, a Daily Scrum, a Revisão e a Retrospectiva).\n\nAvalie as afirmações do resumo.\n\nI. O Product Owner responde pela ordenação do Product Backlog; pode delegar esse trabalho, mas continua responsável por ele.\nII. O Scrum Master distribui as tarefas da Sprint entre os Developers e acompanha a execução de cada uma.\nIII. A Daily Scrum é um evento de 15 minutos em que os Developers inspecionam o progresso em direção à Meta da Sprint.\nIV. A Retrospectiva da Sprint serve para planejar formas de aumentar a qualidade e a eficácia do trabalho.\n\nÉ correto apenas o que se afirma em",
+      "truth": ["I", "III", "IV"],
+      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["I", "III", "IV"]],
+      "explanation": "Resposta: E.\n\nI está correta. O guia diz que o Product Owner pode fazer o trabalho ou delegá-lo, mas continua responsável pelo Product Backlog.\n\nII está errada. Os Developers se autogerenciam e decidem como transformar os itens em incremento. O Scrum Master serve à equipe e à organização, sem distribuir tarefas.\n\nIII está correta. A Daily Scrum tem 15 minutos e é dos Developers, para inspecionar o progresso rumo à Meta da Sprint e adaptar o plano.\n\nIV está correta. É o propósito da Retrospectiva no guia de 2020.\n\nAs outras alternativas:\nA) Inclui II, o Scrum Master como gerente de tarefas.\nB) Deixa de fora IV, que também está correta.\nC) Inclui II.\nD) Deixa de fora I, que também está correta.",
+      "check": "Nova resolução sem o gabarito, conferida contra o texto do Guia do Scrum de 2020: I, III e IV correspondem ao guia; II contraria a autogestão dos Developers.",
+      "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-es-tipos-teste",
+      "kind": "ESPELHO",
+      "format": "ASSOCIACAO",
+      "concepts": ["es-testes"],
+      "title": "Cada teste no seu nível",
+      "subject": "Testes de unidade, integração, regressão e aceitação",
+      "prompt": "Uma equipe que mantém o sistema de matrículas de uma universidade organizou a estratégia de testes em quatro tipos. Cada tipo responde a uma pergunta diferente: se uma parte isolada faz o que deve, se as partes conversam bem entre si, se uma mudança quebrou o que já funcionava e se o sistema atende ao que o cliente pediu.\n\nTipos de teste:\n\n1. Unidade\n2. Integração\n3. Regressão\n4. Aceitação\n\nSituações:\n\n( ) Depois de corrigir um defeito no cálculo de créditos, toda a bateria de testes automatizados é executada de novo.\n( ) A secretaria acadêmica executa os cenários combinados no contrato para decidir se recebe a nova versão.\n( ) A função que valida o número de matrícula é testada sozinha, com entradas válidas e inválidas.\n( ) O módulo de matrícula e o de cobrança rodam juntos, com um banco de testes, para conferir os dados trocados.\n\nA sequência correta, de cima para baixo, é",
+      "options": ["1, 2, 3, 4", "2, 4, 1, 3", "3, 4, 1, 2", "3, 1, 4, 2", "4, 3, 2, 1"],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nRepetir a bateria depois de uma correção, para ver se algo deixou de funcionar, é teste de regressão (3). A decisão do cliente com cenários combinados é teste de aceitação (4). A função testada sozinha é teste de unidade (1). Dois módulos rodando juntos para conferir a troca de dados é teste de integração (2).\n\nAs outras alternativas:\nA) Repete a ordem da lista de tipos, sem relação com as situações.\nB) Chama de integração a execução da bateria e de regressão a conversa entre módulos.\nD) Troca aceitação e unidade: a secretaria não testa uma função isolada.\nE) Inverte a lista e chama de unidade a conversa entre módulos.",
+      "check": "Nova resolução sem o gabarito: regressão, aceitação, unidade, integração = 3, 4, 1, 2.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

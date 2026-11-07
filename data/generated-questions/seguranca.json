@@ -130,6 +130,22 @@
         "src": "/illustrations/Q-SEG-01.webp",
         "alt": "Pessoa usa um notebook no saguão de aeroporto, com um cadeado aberto na tela. Ao fundo, outra pessoa utiliza notebook junto a um roteador portátil."
       }
+    },
+    {
+      "id": "gen-seg-xss-https",
+      "kind": "ESPELHO",
+      "format": "ASSERCAO",
+      "concepts": ["seg-ataques-web", "seg-defesas"],
+      "title": "Script num comentário do fórum",
+      "subject": "XSS armazenado e defesas que não o resolvem",
+      "prompt": "O fórum de uma disciplina exibe os comentários dos alunos exatamente como foram digitados, sem nenhum tratamento. Um aluno publica um comentário com um trecho <script> que envia o cookie de quem o lê para um servidor externo. A equipe de TI se reúne e surgem duas propostas: migrar todo o fórum para HTTPS e trocar as consultas ao banco por consultas parametrizadas.\n\nConsidere as asserções a seguir.\n\nI. Servir todas as páginas do fórum por HTTPS impede que o comentário com <script> seja executado no navegador de quem o lê.\n\nPORQUE\n\nII. Consultas parametrizadas no banco de dados impedem que o navegador interprete como código o texto enviado pelo usuário.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "assertion": {
+        "first": false,
+        "second": false
+      },
+      "explanation": "Resposta: E.\n\nI é falsa. O HTTPS protege o transporte contra escuta e alteração, mas entrega ao navegador exatamente o comentário armazenado, com o script. É XSS armazenado, e a defesa é escapar a saída conforme o contexto (HTML, atributo, JavaScript), junto com uma política de segurança de conteúdo e cookies HttpOnly.\n\nII é falsa. Consultas parametrizadas impedem a injeção de SQL, no banco. O texto continua sendo gravado e devolvido igual, e o navegador o interpreta da mesma forma.\n\nAs outras alternativas:\nA) Exige as duas verdadeiras, com a II justificando a I.\nB) Exige as duas verdadeiras.\nC) Considera I verdadeira, confundindo segurança do transporte com segurança do conteúdo.\nD) Considera II verdadeira, confundindo a defesa contra injeção de SQL com a defesa contra XSS.",
+      "check": "Nova resolução sem o gabarito: HTTPS não altera o conteúdo entregue; parametrização atua no SQL, não na saída HTML. As duas falsas: E.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

@@ -1,3 +1,13 @@
+@if (reading(); as concept) {
+  @defer {
+    <app-core-lesson [slug]="slug" [area]="area()!.area" [concept]="concept" [references]="area()!.references"
+      [position]="{ index: readingAt(), total: lessons().length }"
+      [previous]="lessons()[readingAt() - 1] ?? null" [next]="lessons()[readingAt() + 1] ?? null"
+      (back)="closeLesson()" (go)="read($event)" (question)="question.emit($event)" />
+  } @loading (minimum 200ms) {
+    <p role="status">Carregando a lição…</p>
+  }
+} @else {
 <div class="core-area-bar">
   <button type="button" class="text-button" (click)="back.emit()"><span aria-hidden="true">←</span> Biblioteca</button>
 </div>
@@ -6,6 +16,12 @@
 }
 @if (area(); as a) {
   <article class="core-area" aria-labelledby="core-area-title">
+    @if (a.cover) {
+      <figure class="core-cover">
+        <img [src]="a.cover" alt="" width="1200" height="800" decoding="async" />
+        <figcaption>Ilustração gerada por IA</figcaption>
+      </figure>
+    }
     <div class="core-area-head">
       <div>
         <h1 id="core-area-title" tabindex="-1">{{ a.title }}</h1>
@@ -44,6 +60,9 @@
       @if (a.generatedTotal) {
         <button type="button" class="outline" (click)="generated.emit(a.area)">Praticar questões geradas ({{ a.generatedTotal }})</button>
       }
+      @if (lessons().length) {
+        <button type="button" class="outline" (click)="read(lessons()[0])">Ler as {{ lessons().length }} lições</button>
+      }
       @if (a.deck) { <button type="button" class="outline" (click)="flashcards.emit()">Flashcards da área</button> }
       @if (a.sheet) { <button type="button" class="outline" (click)="sheet.emit(a.sheet)">Ficha de uma página</button> }
     </div>
@@ -57,6 +76,9 @@
             <h3>{{ c.name }}</h3>
             <p>{{ c.definition }}</p>
             <p class="core-example"><strong>Exemplo:</strong> {{ c.example }}</p>
+            @if (c.lesson) {
+              <button type="button" class="text-button core-read" [attr.data-lesson]="c.id" [attr.aria-label]="'Ler a lição: ' + c.name" (click)="read(c)">Ler a lição <span aria-hidden="true">→</span></button>
+            }
             <div class="core-rating" role="radiogroup" [attr.aria-label]="'Quanto você sabe de ' + c.name">
               @for (l of levels; track l.value) {
                 <button type="button" role="radio" [attr.aria-checked]="c.level === l.value" [class]="'core-level level-' + l.value"
@@ -134,4 +156,5 @@
   </article>
 } @else if (!error()) {
   <p role="status">Carregando a área…</p>
+}
 }

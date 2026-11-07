@@ -139,6 +139,26 @@
       "explanation": "Resposta: C.\n\nDeslocamento: o bloco tem 64 = 2⁶ bytes, então são 6 bits.\nÍndice: a cache tem 64 KiB / 64 B = 1024 = 2¹⁰ linhas, então são 10 bits.\nTag: o que sobra, 32 − 10 − 6 = 16 bits.\n\nO índice escolhe a linha, a tag confirma se o bloco guardado ali é o procurado e o deslocamento escolhe o byte dentro do bloco.\n\nAs outras alternativas:\nA) Índice de 6 bits daria só 64 linhas, uma cache de 4 KiB.\nB) Sem deslocamento, cada linha guardaria um único byte, mas o bloco tem 64.\nD) Sem índice, a cache seria totalmente associativa, não de mapeamento direto.\nE) Troca o tamanho da tag com o do índice.",
       "check": "Nova resolução sem o gabarito: offset log2(64) = 6, linhas 65536/64 = 1024, índice 10, tag 32 − 16 = 16.",
       "stimulus": ["TEXTO_BASE"]
+    },
+    {
+      "id": "gen-arq-cpi-medio",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["arq-isa", "arq-hierarquia"],
+      "title": "CPI médio e ganho de uma melhoria",
+      "subject": "Ciclos por instrução e desempenho",
+      "prompt": "O tempo de execução de um programa é o número de instruções vezes o número médio de ciclos por instrução (CPI) vezes a duração do ciclo. O CPI médio é a média dos CPIs de cada classe de instrução, ponderada pela frequência de cada classe no programa.\n\nUm processador de 2 GHz executa um programa de análise de dados com esta mistura:\n\nClasse | Frequência | CPI\nAritmética e lógica | 40% | 1\nDesvio | 20% | 2\nLeitura e escrita na memória | 30% | 3\nMultiplicação | 10% | 4\n\nUma nova cache reduz o CPI das instruções de leitura e escrita de 3 para 2, sem mudar o resto. Qual é o CPI médio antes da melhoria e qual é o ganho de desempenho obtido?",
+      "options": [
+        "CPI de 2,1 e ganho de cerca de 1,17 vez",
+        "CPI de 2,5 e ganho de cerca de 1,17 vez",
+        "CPI de 2,1 e ganho de cerca de 1,50 vez",
+        "CPI de 2,1 e ganho de cerca de 0,86 vez",
+        "CPI de 1,8 e ganho de cerca de 1,17 vez"
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nAntes: 0,4 × 1 + 0,2 × 2 + 0,3 × 3 + 0,1 × 4 = 0,4 + 0,4 + 0,9 + 0,4 = 2,1.\nDepois: 0,4 + 0,4 + 0,3 × 2 + 0,4 = 1,8.\n\nCom o mesmo número de instruções e o mesmo relógio, o ganho é a razão dos tempos: 2,1 / 1,8 ≈ 1,17. Melhorar 30% das instruções em um terço rende cerca de 17% no total, como prevê a lei de Amdahl.\n\nAs outras alternativas:\nB) 2,5 é a média simples dos CPIs, sem ponderar pela frequência.\nC) 1,5 = 3 / 2 é o ganho só das instruções de memória, aplicado ao programa inteiro.\nD) 0,86 = 1,8 / 2,1 é a razão invertida: ganho menor que 1 seria piora.\nE) 1,8 é o CPI depois da melhoria, não antes.",
+      "check": "Executado em Python 3: CPI antes 2,1, depois 1,8, razão 1,1667.",
+      "stimulus": ["TEXTO_BASE", "TABELA"]
     }
   ]
 }

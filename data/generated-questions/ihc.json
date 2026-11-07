@@ -78,6 +78,20 @@
       "answer": "B",
       "explanation": "Resposta: B.\n\nPersonas sintetizam padrões encontrados em entrevistas e observações: \"Dona Lúcia, 67 anos, usa o celular da neta, tem dificuldade com letras pequenas e precisa marcar retorno para o marido\". São fictícias, para não expor pessoas reais, mas fundamentadas em dados, e ajudam a equipe a perguntar \"isso funcionaria para ela?\". Costumam vir acompanhadas de cenários, que narram uma situação concreta de uso.\n\nAs outras alternativas:\nA) Usar uma pessoa real expõe dados pessoais e pega suas particularidades, não o padrão.\nC) Em IHC, a persona representa quem usa, que nem sempre é quem compra.\nD) Requisitos técnicos não descrevem objetivos nem contexto humano.\nE) Médias geram um usuário que não existe e apagam grupos importantes, como idosos ou pessoas com deficiência. Costuma-se ter algumas personas distintas.",
       "check": "Nova resolução sem o gabarito: definição de persona (Cooper; Barbosa e Silva). Opção B."
+    },
+    {
+      "id": "gen-ihc-agendamento-ubs",
+      "kind": "ESPELHO",
+      "format": "ITENS3",
+      "concepts": ["ihc-heuristicas", "ihc-avaliacao"],
+      "title": "Avaliação heurística de um app de agendamento",
+      "subject": "Heurísticas de Nielsen aplicadas",
+      "prompt": "Uma prefeitura vai lançar um aplicativo para marcar consultas nas unidades básicas de saúde. Antes do teste com usuários, três especialistas fazem uma avaliação heurística, conferindo cada tela contra as dez heurísticas de Nielsen. Muitos usuários são idosos e usam o celular com pouca frequência, então a equipe dá atenção especial a mensagens, termos e caminhos de volta.\n\nAvalie as conclusões dos especialistas.\n\nI. Mostrar \"Enviando…\" ao tocar em Confirmar e depois \"Consulta marcada para 12/11, às 9h\" atende à heurística de visibilidade do estado do sistema.\nII. Pedir confirmação antes de cancelar uma consulta e oferecer \"Desfazer\" por alguns segundos atende à prevenção de erros e ao controle e liberdade do usuário.\nIII. Usar \"slot\" e o código \"AGD-07\" nos botões atende à correspondência entre o sistema e o mundo real, porque são os termos técnicos usados pela equipe.\n\nÉ correto o que se afirma em",
+      "truth": ["I", "II"],
+      "combos": [["I"], ["III"], ["I", "II"], ["II", "III"], ["I", "II", "III"]],
+      "explanation": "Resposta: C.\n\nI está correta. O sistema informa o que está fazendo e o resultado, em tempo razoável.\n\nII está correta. A confirmação previne um erro de consequência séria, e o Desfazer dá uma saída de emergência.\n\nIII está errada. A heurística pede a linguagem do usuário, com palavras e conceitos familiares a ele. Termos internos da equipe a violam.\n\nAs outras alternativas:\nA) Deixa de fora II, que também está correta.\nB) Só III, que é a falsa.\nD) Inclui III.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: I e II atendem às heurísticas citadas; III viola a correspondência com o mundo real.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

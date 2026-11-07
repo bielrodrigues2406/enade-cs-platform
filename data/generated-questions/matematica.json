@@ -145,6 +145,23 @@
       "answer": "E",
       "explanation": "Resposta: E.\n\nCada aresta liga dois vértices e conta uma vez no grau de cada um. Por isso a soma dos graus é sempre 2|E|, um número par. Com 5 vértices de grau 3, a soma seria 15, ímpar. Logo, esse grafo não existe. Uma consequência útil: todo grafo tem um número par de vértices de grau ímpar.\n\nAs outras alternativas:\nA) Anel com todas as diagonais é o grafo completo K₅, em que cada vértice tem grau 4, não 3.\nB) Respeitar o grau máximo é necessário, mas não suficiente. Esquece a condição de paridade.\nC) 15 é a soma dos graus; o número de arestas seria 15 / 2, que não é inteiro.\nD) Grafos com 5 vértices podem ter ciclos; o K₅ tem vários.",
       "check": "Nova resolução sem o gabarito: soma dos graus 15 ímpar contradiz o lema do aperto de mãos; busca exaustiva em código não encontra grafo 3-regular com 5 vértices."
+    },
+    {
+      "id": "gen-mat-modus-tollens",
+      "kind": "ESPELHO",
+      "format": "ASSERCAO",
+      "concepts": ["mat-inferencia", "mat-proposicional"],
+      "title": "Painel fora do ar",
+      "subject": "Modus tollens e tabela da disjunção",
+      "prompt": "Uma equipe de operações registra no manual a regra: \"se o servidor está no ar, o painel de monitoramento responde\". Numa madrugada, o plantonista verifica que o painel não responde e precisa decidir o que concluir. Antes de agir, ele revisa as regras de inferência da lógica proposicional e as tabelas-verdade dos conectivos.\n\nConsidere as asserções a seguir.\n\nI. Das premissas \"se o servidor está no ar, o painel responde\" e \"o painel não responde\", conclui-se validamente que o servidor não está no ar.\n\nPORQUE\n\nII. A proposição \"o servidor está no ar ou o painel responde\" só é falsa quando as duas partes são falsas.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": false
+      },
+      "explanation": "Resposta: B.\n\nI é verdadeira. É o modus tollens: de p → q e ¬q, conclui-se ¬p. A validade vem de p → q ser equivalente à contrapositiva ¬q → ¬p.\n\nII é verdadeira. A disjunção p ∨ q só é falsa com p e q falsas.\n\nII não justifica I. A validade do modus tollens depende da tabela da implicação, e não da tabela da disjunção p ∨ q. As duas afirmações estão certas, mas tratam de coisas diferentes.\n\nAs outras alternativas:\nA) Liga as asserções por uma relação de causa que não existe.\nC) Considera II falsa, mas é a definição da disjunção.\nD) Considera I falsa, confundindo o modus tollens com a falácia da afirmação do consequente (de p → q e q, concluir p).\nE) As duas são verdadeiras.",
+      "check": "Nova resolução sem o gabarito: tabela-verdade de ((p → q) ∧ ¬q) → ¬p é tautologia; p ∨ q falsa só em F, F. Relação: nenhuma. Opção B.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

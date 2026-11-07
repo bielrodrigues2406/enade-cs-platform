@@ -140,6 +140,20 @@
       "answer": "B",
       "explanation": "Resposta: B.\n\nOs ponteiros diretos cobrem 12 × 4 KiB = 48 KiB.\nO bloco indireto tem 4 KiB = 4096 bytes. Com endereços de 4 bytes, ele guarda 4096 / 4 = 1024 ponteiros, cobrindo 1024 × 4 KiB = 4096 KiB.\nTotal: 48 + 4096 = 4144 KiB, pouco mais de 4 MiB.\n\nAs outras alternativas:\nA) 48 KiB considera só os ponteiros diretos.\nC) 4096 KiB considera só o indireto e esquece os 12 diretos.\nD) 52 KiB conta o bloco indireto como mais um bloco de dados (13 × 4 KiB), sem perceber que ele guarda ponteiros.\nE) 1072 KiB soma 48 KiB com 1024 KiB, contando 1 KiB por ponteiro em vez de um bloco de 4 KiB.",
       "check": "Nova resolução sem o gabarito: 12 × 4 + (4096 / 4) × 4 = 4144 KiB. Conferido em código."
+    },
+    {
+      "id": "gen-so-round-robin-chegadas",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["so-escalonamento"],
+      "title": "Round Robin com chegadas em tempos diferentes",
+      "subject": "Tempo médio de retorno no Round Robin",
+      "prompt": "Um servidor de compilação atende os pedidos dos alunos com escalonamento Round Robin e quantum de 3 unidades de tempo. Quando um processo usa todo o quantum e ainda não terminou, ele volta para o fim da fila de prontos; se outro processo chegar no mesmo instante, o que chegou entra na fila antes do que foi interrompido. A troca de contexto é desprezada. O tempo de retorno de um processo é o instante em que ele termina menos o instante em que chegou.\n\nProcesso | Chegada | Duração\nP1 | 0 | 5\nP2 | 1 | 3\nP3 | 2 | 8\nP4 | 4 | 2\n\nQual é o tempo médio de retorno?",
+      "options": ["5,75", "8,25", "10,00", "10,25", "12,00"],
+      "answer": "D",
+      "explanation": "Resposta: D.\n\nLinha do tempo: P1 de 0 a 3; P2 de 3 a 6 (termina); P3 de 6 a 9; P1 de 9 a 11 (termina); P4 de 11 a 13 (termina); P3 de 13 a 18 (termina).\n\nRetornos: P1 11 − 0 = 11; P2 6 − 1 = 5; P3 18 − 2 = 16; P4 13 − 4 = 9. Média: 41 / 4 = 10,25.\n\nAs outras alternativas:\nA) 5,75 é o tempo médio de espera (retorno menos duração), e não de retorno.\nB) 8,25 é o retorno médio do SJF não preemptivo.\nC) 10,00 é o retorno médio do FCFS.\nE) 12,00 é a média dos instantes de término, sem descontar a chegada.",
+      "check": "Nova resolução sem o gabarito: simulação em Python 3 com a regra de desempate do enunciado: retornos 11, 5, 16 e 9, média 10,25. FCFS dá 10,00 e SJF 8,25.",
+      "stimulus": ["CENARIO", "TABELA"]
     }
   ]
 }
