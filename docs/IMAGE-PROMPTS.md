@@ -212,7 +212,7 @@ O modal usa o Dudu articulado que já existe. A ilustração abaixo é opcional,
 
 **NEWS-01. Dudu com novidade** (1536×1024, fundo transparente se possível)
 ```
-Usando a imagem anexada como referência exata do personagem (mesmas cores, proporções, traço e rosto), desenhe o mesmo mascote segurando com as duas asas um caderno aberto do qual sai uma pequena folha nova destacada em azul (#1649ae), como quem mostra uma página recém-escrita. Expressão contente e calma. Estilo ilustração plana com traço de tinta azul-escuro (#151e2f), papel creme (#f4f3ef) ao fundo ou fundo transparente. Sem texto, letras, números, confete ou brilhos.
+Usando a imagem anexada como referência exata do personagem (mesmas cores, proporções, traço e rosto), desenhe o mesmo mascote segurando com as duas asas um caderno aberto do qual sai uma pequena folha nova destacada em azul (#1649ae), como quem mostra uma página recém-escrita. Expressão contente e calma. Mesmo estilo de renderização, iluminação e proporções da referência (não transformar em desenho plano). Fundo transparente. Sem texto, letras, números, confete ou brilhos.
 ```
 
 **MAS-PLANO. Dudu com o plano até a prova** (1024×1536, fundo transparente)
