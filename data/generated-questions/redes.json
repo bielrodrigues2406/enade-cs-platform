@@ -30,7 +30,7 @@
         "Máscara /25, com 4 sub-redes de 126 hosts cada.",
         "Máscara /27, com 4 sub-redes de 30 hosts cada.",
         "Máscara /24, com 4 sub-redes de 254 hosts cada.",
-        "Máscara /26, com 4 sub-redes de 62 hosts cada, por exemplo 192.168.10.0, .64, .128 e .192.",
+        "Máscara /26, com 4 sub-redes de 62 hosts cada.",
         "Máscara /28, com 16 sub-redes de 14 hosts cada."
       ],
       "answer": "D",
@@ -40,15 +40,22 @@
     {
       "id": "gen-red-abrir-pagina",
       "kind": "ESPELHO",
-      "format": "ITENS4",
+      "format": "ORDEM",
       "concepts": ["red-aplicacao", "red-transporte"],
       "title": "O que acontece ao abrir uma página",
       "subject": "Sequência de protocolos ao acessar um site",
-      "prompt": "Um notebook recém-conectado ao Wi-Fi de uma biblioteca, já configurado por DHCP, acessa https://www.exemplo.com.br pela primeira vez. O cache de DNS e a tabela ARP estão vazios.\n\nAvalie as afirmações sobre essa sequência.\n\nI. A consulta DNS para descobrir o IP do servidor normalmente usa UDP na porta 53.\nII. O notebook usa ARP para descobrir o endereço MAC do roteador da rede local, que é o próximo salto para fora da rede.\nIII. O handshake TCP com o servidor web acontece antes da consulta DNS, porque o DNS depende de uma conexão já aberta.\nIV. Por ser HTTPS, o handshake do TLS negocia as chaves depois do handshake TCP e antes do envio da requisição HTTP.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: D.\n\nA ordem típica é: ARP para achar o MAC do roteador (necessário para mandar qualquer pacote para fora); DNS para traduzir o nome em IP; handshake TCP (SYN, SYN-ACK, ACK) com o IP obtido; handshake TLS para autenticar o servidor e combinar as chaves; requisição HTTP.\n\nI está correta: consultas DNS comuns cabem num datagrama UDP para a porta 53.\nII está correta: sem o MAC do roteador, o quadro Ethernet ou Wi-Fi não pode ser endereçado.\nIII está errada: para abrir a conexão TCP é preciso saber o IP do servidor, que só o DNS fornece. A ordem está invertida.\nIV está correta: o TLS roda sobre a conexão TCP já aberta e precisa terminar antes de qualquer dado HTTP, que vai cifrado.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III e deixa de fora I e II.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: ordem ARP, DNS (UDP/53), TCP, TLS, HTTP; III inverte DNS e TCP. Opção D.",
-      "truth": ["I", "II", "IV"],
-      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
+      "prompt": "Um notebook recém-conectado ao Wi-Fi de uma biblioteca, já configurado por DHCP, acessa https://www.exemplo.com.br pela primeira vez. O cache de DNS e a tabela ARP estão vazios, e o servidor DNS configurado fica fora da rede local. Uma ferramenta de captura de pacotes registra o tráfego enviado pelo notebook a partir desse momento.\n\nEm que ordem aparecem, pela primeira vez, as mensagens de cada protocolo?",
+      "explanation": "Resposta: D.\n\nARP: para mandar qualquer pacote para fora da rede local, inclusive a consulta DNS, o notebook precisa do endereço MAC do roteador, o próximo salto. Com a tabela ARP vazia, ele pergunta primeiro.\n\nDNS: em seguida, a consulta para traduzir www.exemplo.com.br em endereço IP, normalmente num datagrama UDP para a porta 53.\n\nTCP: com o IP do servidor, o notebook abre a conexão (SYN, SYN-ACK, ACK) na porta 443.\n\nTLS: sobre a conexão TCP já aberta, o handshake do TLS autentica o servidor e combina as chaves.\n\nHTTP: só então vai a requisição, já cifrada pelo TLS.\n\nAs outras alternativas:\nA) Põe o DNS antes do ARP. Sem o MAC do roteador, o quadro com a consulta DNS não pode ser endereçado para sair da rede.\nB) Abre a conexão TCP antes do DNS, mas é o DNS que fornece o IP do servidor.\nC) Começa pelo DNS e põe o HTTP antes do TLS: no HTTPS, nenhum dado HTTP sai antes de o TLS combinar as chaves.\nE) Põe o TLS antes do TCP. O TLS roda sobre uma conexão TCP já estabelecida.",
+      "check": "Nova resolução sem o gabarito pelas dependências entre protocolos: o MAC do roteador é necessário antes de qualquer pacote para fora (ARP), o IP vem do DNS antes do SYN, o TLS roda sobre o TCP e o HTTP vai cifrado depois do TLS. Opção D.",
+      "stimulus": ["CENARIO"],
+      "options": [
+        "DNS, ARP, TCP, TLS e HTTP.",
+        "ARP, TCP, DNS, TLS e HTTP.",
+        "DNS, TCP, ARP, HTTP e TLS.",
+        "ARP, DNS, TCP, TLS e HTTP.",
+        "ARP, DNS, TLS, TCP e HTTP."
+      ],
+      "answer": "D"
     },
     {
       "id": "gen-red-dominio-broadcast",
@@ -59,11 +66,11 @@
       "subject": "Hub, switch e roteador",
       "prompt": "Um laboratório e a secretaria de uma escola estão ligados ao mesmo switch. As mensagens de broadcast geradas pelos 40 computadores do laboratório chegam também aos computadores da secretaria, e a direção quer separar as duas redes, permitindo que elas ainda se comuniquem por IP. Não há VLANs configuradas.\n\nQual equipamento, colocado entre as duas redes, atende a isso?",
       "options": [
-        "Um hub, porque repete os sinais apenas para as portas ativas.",
-        "Um roteador, porque encaminha pacotes por endereço IP e não repassa broadcasts de uma rede para a outra.",
-        "Outro switch, porque cada porta de switch é um domínio de broadcast separado.",
-        "Um repetidor, porque regenera o sinal e filtra quadros desnecessários.",
-        "Um ponto de acesso Wi-Fi, porque isola os clientes sem fio dos cabeados."
+        "Um hub, porque repete os sinais apenas para as portas que estão ativas no momento.",
+        "Um roteador, porque encaminha pacotes por IP e não repassa os broadcasts de uma rede à outra.",
+        "Outro switch, porque cada porta de switch forma um domínio de broadcast separado dos demais.",
+        "Um repetidor, porque regenera o sinal e descarta os quadros de broadcast desnecessários na rede.",
+        "Um ponto de acesso Wi-Fi, porque isola os clientes sem fio dos computadores ligados por cabo."
       ],
       "answer": "B",
       "explanation": "Resposta: B.\n\nUm roteador atua na camada de rede: liga redes IP diferentes e decide o encaminhamento pelo endereço IP de destino. Broadcasts de camada 2 não atravessam o roteador. Com as duas redes em sub-redes distintas, cada lado vira um domínio de broadcast próprio, e a comunicação entre elas continua via roteamento.\n\nAs outras alternativas:\nA) O hub trabalha na camada física e repete tudo para todas as portas. Não separa nem colisão nem broadcast.\nC) Cada porta de switch é um domínio de colisão separado, mas o switch repassa broadcasts para todas as portas. Esse é o par confundido clássico.\nD) O repetidor só regenera sinal, na camada física.\nE) Um ponto de acesso funciona como uma ponte entre o meio sem fio e o cabeado e repassa broadcasts.",
@@ -78,10 +85,10 @@
       "subject": "ICMP, TTL e traceroute",
       "prompt": "Um técnico usa o traceroute para descobrir por quais roteadores passam os pacotes até um servidor. A saída lista, em ordem, o endereço de cada roteador do caminho e o tempo de resposta.\n\nComo o traceroute obtém essa informação?",
       "options": [
-        "Cada roteador do caminho registra o próprio endereço no cabeçalho do pacote, e o servidor devolve a lista completa.",
-        "O traceroute consulta o DNS reverso de cada salto, que guarda o caminho até o destino.",
-        "O traceroute lê a tabela de roteamento de cada roteador por meio do protocolo OSPF.",
-        "O traceroute envia pacotes com TTL igual a 1, 2, 3 e assim por diante; o roteador que decrementa o TTL a zero descarta o pacote e responde com uma mensagem ICMP de tempo excedido, revelando seu endereço.",
+        "Cada roteador do caminho anota o próprio endereço no cabeçalho, e o servidor devolve a lista completa.",
+        "O traceroute consulta o DNS reverso de cada salto, que guarda o caminho completo até o destino.",
+        "O traceroute lê, via OSPF, a tabela de roteamento de cada roteador no caminho até o servidor.",
+        "Envia pacotes com TTL 1, 2, 3...; cada roteador que zera o TTL responde com ICMP de tempo excedido.",
         "O traceroute abre uma conexão TCP com cada roteador, e o handshake informa a posição dele no caminho."
       ],
       "answer": "D",
@@ -97,11 +104,11 @@
       "subject": "NAT de operadora e IPv6",
       "prompt": "Um estudante quer hospedar em casa um servidor de jogos para os colegas. A operadora de internet usa CGNAT (NAT em larga escala): vários clientes compartilham o mesmo endereço IPv4 público, e o roteador doméstico recebe um endereço privado da faixa 100.64.0.0/10. Mesmo configurando o redirecionamento de portas no roteador de casa, os colegas não conseguem se conectar.\n\nQual é a explicação técnica mais adequada?",
       "options": [
-        "O servidor está com o firewall do sistema operacional desligado, o que bloqueia conexões de entrada.",
-        "O protocolo UDP, usado por jogos, não atravessa nenhum tipo de NAT.",
-        "O endereço 100.64.0.0/10 é reservado para multicast e não pode receber tráfego comum.",
-        "O redirecionamento de portas só funciona com cabos de rede, não com Wi-Fi.",
-        "Conexões iniciadas de fora chegam ao NAT da operadora, que compartilha o IP público entre muitos clientes e não tem uma regra indicando para qual cliente encaminhá-las; a configuração no roteador de casa não altera esse NAT. Um endereço IPv6 global para o servidor, com o firewall liberado, evitaria o problema."
+        "O firewall do sistema operacional do servidor está desligado, o que bloqueia todas as conexões de entrada.",
+        "O protocolo UDP, usado pela maioria dos jogos, não consegue atravessar nenhum tipo de NAT.",
+        "O endereço 100.64.0.0/10 é reservado para multicast e por isso não pode receber tráfego comum.",
+        "O redirecionamento de portas só funciona em computadores ligados por cabo, e não pelo Wi-Fi.",
+        "A conexão vinda de fora para no NAT da operadora, que não sabe a qual cliente entregá-la."
       ],
       "answer": "E",
       "explanation": "Resposta: E.\n\nCom CGNAT há dois NATs em sequência: o do roteador doméstico e o da operadora. O redirecionamento de portas configurado em casa só vale para o primeiro. Uma conexão vinda da internet chega ao endereço público da operadora, e o NAT dela só sabe encaminhar respostas a conexões que saíram de dentro. Para conexões novas vindas de fora, não há mapeamento. No IPv6, o espaço de 128 bits permite endereços globais para cada dispositivo, sem NAT. Basta liberar a porta no firewall.\n\nAs outras alternativas:\nA) Firewall desligado não bloqueia nada. O problema está antes, no NAT da operadora.\nB) UDP atravessa NAT normalmente para tráfego iniciado de dentro, e é usado em técnicas como o hole punching.\nC) 100.64.0.0/10 é o espaço compartilhado reservado justamente para CGNAT, não para multicast (224.0.0.0/4).\nD) O meio físico do enlace local não influencia o NAT.",
@@ -116,11 +123,11 @@
       "subject": "Controle de fluxo e de congestionamento",
       "prompt": "Um servidor envia um arquivo grande por TCP para um celular antigo. A rede entre os dois tem banda sobrando e nenhuma perda de pacotes, mas o aplicativo do celular lê os dados do buffer bem devagar.\n\nQual mecanismo do TCP evita que o servidor sobrecarregue o celular nessa situação?",
       "options": [
-        "O controle de fluxo: o celular anuncia em cada ACK quanto espaço livre tem no buffer de recepção (a janela de recepção), e o servidor não envia mais do que isso.",
+        "O controle de fluxo: cada ACK anuncia o espaço livre no buffer de recepção, e o servidor respeita esse limite.",
         "O controle de congestionamento: a partida lenta reduz a taxa sempre que o receptor é mais lento que o emissor.",
-        "O three-way handshake, que fixa no início a taxa de envio pela velocidade do receptor.",
-        "O checksum do TCP, que descarta os segmentos que o receptor não consegue processar a tempo.",
-        "O protocolo ICMP, que avisa o servidor para diminuir a velocidade."
+        "O three-way handshake, que fixa logo no início a taxa de envio de acordo com a velocidade do receptor.",
+        "O checksum do TCP, que descarta os segmentos que o receptor não consegue processar a tempo de ler.",
+        "O protocolo ICMP, que avisa o servidor para diminuir a velocidade sempre que o receptor fica lento."
       ],
       "answer": "A",
       "explanation": "Resposta: A.\n\nO controle de fluxo protege o receptor. Cada segmento enviado pelo receptor traz o campo janela, com o espaço livre no buffer de recepção. Se o aplicativo lê devagar, o buffer enche, a janela anunciada diminui e pode chegar a zero, e o emissor para até receber uma janela maior.\n\nO controle de congestionamento protege a rede. Ele age com base em perdas e atrasos na rede, que aqui não existem. A taxa efetiva do TCP é limitada pela menor das duas janelas.\n\nAs outras alternativas:\nB) Confunde os dois controles. A partida lenta e a redução da janela respondem a sinais da rede, não ao ritmo do aplicativo receptor.\nC) O handshake sincroniza números de sequência e troca parâmetros iniciais, mas não fixa uma taxa para a conexão inteira.\nD) O checksum detecta corrupção, não lentidão.\nE) O ICMP source quench foi abandonado e não é o mecanismo do TCP.",

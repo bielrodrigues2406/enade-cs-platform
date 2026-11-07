@@ -44,10 +44,10 @@
       "subject": "Negação de quantificadores",
       "prompt": "O relatório de integração contínua afirma: \"Todo teste da suíte passou.\"\n\nQual frase é a negação lógica dessa afirmação?",
       "options": [
-        "Nenhum teste da suíte passou.",
-        "Todo teste da suíte falhou.",
-        "Existe pelo menos um teste da suíte que não passou.",
-        "Existe pelo menos um teste da suíte que passou.",
+        "Nenhum dos testes da suíte passou nesta execução.",
+        "Todos os testes da suíte falharam nesta execução.",
+        "Pelo menos um teste da suíte não passou.",
+        "Pelo menos um teste da suíte passou.",
         "A maioria dos testes da suíte não passou."
       ],
       "answer": "C",
@@ -136,11 +136,11 @@
       "subject": "Teoria dos grafos: soma dos graus",
       "prompt": "Uma rede de 5 servidores deve ser ligada de modo que cada servidor tenha exatamente 3 conexões diretas com outros servidores, sem conexões repetidas nem de um servidor com ele mesmo (grafo simples).\n\nÉ possível montar essa rede?",
       "options": [
-        "Sim, ligando os servidores em anel e acrescentando as diagonais.",
-        "Sim, porque 3 é menor que 5 − 1 = 4, o grau máximo possível.",
-        "Sim, com exatamente 15 conexões.",
-        "Não, porque um grafo com 5 vértices não pode ter ciclos.",
-        "Não, porque a soma dos graus seria 15, um número ímpar, e a soma dos graus de qualquer grafo é o dobro do número de arestas."
+        "Sim, ligando os servidores em anel e acrescentando as diagonais do pentágono formado.",
+        "Sim, porque o grau pedido, 3, é menor que o grau máximo possível num grafo de 5 vértices, que é 4.",
+        "Sim, usando exatamente 15 conexões, uma para cada par formado por servidor e porta de rede.",
+        "Não, porque um grafo simples com 5 vértices não pode conter nenhum ciclo.",
+        "Não, porque a soma dos graus seria 15, ímpar, e essa soma é sempre o dobro do número de arestas."
       ],
       "answer": "E",
       "explanation": "Resposta: E.\n\nCada aresta liga dois vértices e conta uma vez no grau de cada um. Por isso a soma dos graus é sempre 2|E|, um número par. Com 5 vértices de grau 3, a soma seria 15, ímpar. Logo, esse grafo não existe. Uma consequência útil: todo grafo tem um número par de vértices de grau ímpar.\n\nAs outras alternativas:\nA) Anel com todas as diagonais é o grafo completo K₅, em que cada vértice tem grau 4, não 3.\nB) Respeitar o grau máximo é necessário, mas não suficiente. Esquece a condição de paridade.\nC) 15 é a soma dos graus; o número de arestas seria 15 / 2, que não é inteiro.\nD) Grafos com 5 vértices podem ter ciclos; o K₅ tem vários.",
