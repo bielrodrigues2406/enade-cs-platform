@@ -94,6 +94,18 @@
         @if (!catalog()) {
           <p class="todo-loading" role="status">Carregando suas questões…</p>
         } @else {
+          @if (!active() && resumePlace.last(); as place) {
+            <section class="todo-group" aria-labelledby="home-continue">
+              <h3 id="home-continue" class="group-title">Continuar de onde parou</h3>
+              <article class="todo-card">
+                <div class="todo-text">
+                  <span class="todo-meta">{{ place.kind === "lesson" ? "Lição · " + place.area : "Questão" }}</span>
+                  <strong>{{ place.title }}</strong>
+                </div>
+                <button (click)="continueFrom(place)">Continuar</button>
+              </article>
+            </section>
+          }
           @if (active(); as attempt) {
             <section class="todo-group" aria-labelledby="home-active">
               <h3 id="home-active" class="group-title">Em andamento</h3>
@@ -304,6 +316,19 @@
             Fazer uma prova completa <span aria-hidden="true">→</span>
           </button>
         </section>
+
+        @if (news.state()?.items?.length) {
+          <section class="panel home-news" aria-labelledby="home-news-title">
+            <span class="panel-meta">O que mudou</span>
+            <h2 id="home-news-title">Novidades</h2>
+            <ul>
+              @for (item of news.state()!.items.slice(0, 3); track item.id) {
+                <li>@if (!item.seen) { <span class="news-badge">Novo</span> } {{ item.title }}</li>
+              }
+            </ul>
+            <button class="outline" (click)="news.show()">Ver as novidades <span aria-hidden="true">→</span></button>
+          </section>
+        }
 
       </div>
     </div>

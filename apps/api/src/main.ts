@@ -1,6 +1,7 @@
 import { EngagementController } from "./engagement.js";
 import { FlashcardsController } from "./flashcards.js";
 import { CoreConceptsController } from "./core-progress.js";
+import { NewsController } from "./news.js";
 import "reflect-metadata";
 import "dotenv/config";
 import {
@@ -242,6 +243,7 @@ class StudyController {
 @Module({
   controllers: [
     AuthController,
+    NewsController,
     ActivityController,
     StudyController,
     CurationController,

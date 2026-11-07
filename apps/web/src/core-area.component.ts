@@ -3,6 +3,7 @@ import { requestJson } from "./api-request";
 import { ChoiceService } from "./choice-dialog";
 import { chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 import { CoreLessonComponent } from "./core-lesson.component";
+import { ResumeService } from "./resume.service";
 import { LEVELS, TRAP_LABELS, type Confidence, type CoreArea, type CoreConcept, type TrapPattern } from "./core.types";
 
 // Página de uma área do núcleo (NUC-1): conceitos com autoavaliação e as
@@ -28,6 +29,7 @@ export class CoreAreaComponent {
   private host: ElementRef<HTMLElement> = inject(ElementRef);
   private injector = inject(Injector);
   private choice = inject(ChoiceService);
+  private resume = inject(ResumeService);
   readonly levels = LEVELS;
   readonly trapLabels = TRAP_LABELS;
 
@@ -57,6 +59,13 @@ export class CoreAreaComponent {
     this.error.set("");
     try {
       this.area.set(await requestJson<CoreArea>(`/api/core/${encodeURIComponent(this.slug)}`));
+      // Vindo de "Continuar de onde parou": abre direto a lição pedida.
+      const pending = this.resume.pendingLesson();
+      if (pending?.slug === this.slug) {
+        this.resume.pendingLesson.set(null);
+        const concept = this.area()!.concepts.find((c) => c.id === pending.concept && c.lesson);
+        if (concept) return this.read(concept);
+      }
       afterNextRender(() => {
         window.scrollTo({ top: 0, behavior: "instant" });
         this.host.nativeElement.querySelector<HTMLElement>("#core-area-title")?.focus({ preventScroll: true });
@@ -94,7 +103,11 @@ export class CoreAreaComponent {
     if (request) this.practice.emit(request);
   }
 
-  read(concept: CoreConcept) { this.reading.set(concept); }
+  read(concept: CoreConcept) {
+    this.reading.set(concept);
+    const area = this.area();
+    if (area) this.resume.record({ kind: "lesson", slug: this.slug, concept: concept.id, title: concept.name, area: area.area });
+  }
 
   closeLesson() {
     const id = this.reading()?.id;

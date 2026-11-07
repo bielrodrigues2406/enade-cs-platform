@@ -1,0 +1,44 @@
+<dialog #dialog class="sheet-dialog news-dialog" aria-labelledby="news-title" (close)="closed()">
+  <div class="sheet-dialog-head">
+    <div class="news-head">
+      @if (news.open()) { <app-mascot pose="novidade" [size]="76" motion="none" /> }
+      <div>
+        <p class="sheet-dialog-eyebrow">O que mudou</p>
+        <h2 id="news-title">Novidades</h2>
+      </div>
+    </div>
+    <button type="button" class="sheet-close" (click)="news.close()" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button>
+  </div>
+  <div class="sheet-dialog-body">
+    <div class="sheet-dialog-content">
+    <ol class="news-list">
+      @for (item of news.state()?.items ?? []; track item.id) {
+        <li [class.is-new]="!item.seen">
+          <p class="news-meta"><time [attr.datetime]="item.date">{{ date(item) }}</time>@if (!item.seen) { <span class="news-badge">Novo</span> }</p>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.summary }}</p>
+          @if (item.action) {
+            <button type="button" class="text-button" (click)="follow(item)">{{ item.action.label }} <span aria-hidden="true">→</span></button>
+          }
+        </li>
+      }
+    </ol>
+    </div>
+    <div class="sheet-dialog-actions">
+      <button type="button" (click)="news.close()" autofocus>Entendi</button>
+    </div>
+  </div>
+</dialog>
+<div class="news-nudge-region" aria-live="polite">
+  @if (news.nudge() && firstUnseen(); as item) {
+    <div class="news-nudge">
+      <app-mascot pose="novidade" [size]="56" motion="none" />
+      <div class="news-nudge-text">
+        <p class="news-nudge-eyebrow"><span class="news-badge">Novo</span> na plataforma</p>
+        <p class="news-nudge-title">{{ item.title }}</p>
+        <button type="button" class="text-button" (click)="news.show()">Ver novidades <span aria-hidden="true">→</span></button>
+      </div>
+      <button type="button" class="news-nudge-close" (click)="news.dismissNudge()" aria-label="Fechar aviso de novidades"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button>
+    </div>
+  }
+</div>

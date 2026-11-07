@@ -318,3 +318,13 @@ Detalhes em [GENERATED-QUESTIONS.md](GENERATED-QUESTIONS.md).
 - `GET /questions/:id` funciona igual para as geradas; `origin` é `AI_GENERATED` e `authorCredit` traz "Gerada por IA (Claude) …".
 - `GET /core/:slug` traz `generatedTotal` e, em cada conceito, `generated[]{id,title}` com a versão publicada.
 - `GET /me/progress` ignora respostas a questões geradas.
+
+## Novidades (NEWS-1)
+
+Detalhes em [NEWS.md](NEWS.md). Rotas de quem está na sessão (visitante ou conta):
+
+| Método e caminho (prefixo /api) | Entrada | Retorno |
+| --- | --- | --- |
+| GET /news | — | `{items[]{id,date,title,summary,action{label,destination}\|null,seen},unseen,autoOpen}`; mais recentes primeiro; `autoOpen` só é `true` com novidade não vista e pelo menos uma resposta da identidade |
+| POST /news/seen | `{ids[]}` (1 a 50 ids existentes) | o mesmo de `GET /news`; repetir não muda nada; 400 para lista vazia ou id desconhecido |
+

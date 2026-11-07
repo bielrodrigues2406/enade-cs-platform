@@ -13,6 +13,9 @@
       <div class="header-actions">
         @if (!booting() && !bootError()) {
           @if (!landingMode() && !accountView()) {
+            <button type="button" class="text-button news-trigger" (click)="news.show()" [attr.aria-label]="news.unseen() ? 'Novidades, ' + news.unseen() + (news.unseen() === 1 ? ' nova' : ' novas') : 'Novidades'">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.6L12 15l-1.8-4.4L5.5 9l4.7-1.4z" /><path d="M18.5 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" /></svg><span class="news-trigger-label">Novidades</span>@if (news.unseen()) {<span class="news-badge" aria-hidden="true">Novo</span>}
+            </button>
             <button type="button" class="outline study-menu-trigger" (click)="openNavigation()" [disabled]="navigationBusy()" aria-haspopup="dialog">Menu</button>
           }
           @if (session().mode === "account") {
@@ -168,6 +171,7 @@
               (practiceHub)="openPractice()"
               (editionsHub)="openPractice('provas')"
               (progressHub)="openStudy('conquistas')"
+              (lesson)="continueLesson($event)"
             />
             @if (error()) {
               <p class="notice" role="alert">{{ error() }}</p>
@@ -701,6 +705,8 @@
           </footer>
         }
         <app-choice-dialog />
+        <!-- Novidades: o diálogo só entra no pacote quando a página fica ociosa. -->
+        @defer (on idle) { <app-news-dialog (go)="followNews($event)" /> }
         <!-- Aviso de conquista: carregado quando a página fica ociosa, fora do pacote inicial. -->
         @defer (on idle) {
           @if (!adminView() && !curationView() && !lessonsView()) {

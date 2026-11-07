@@ -1,0 +1,25 @@
+{
+  "news": [
+    {
+      "id": "2026-11-licoes-biblioteca",
+      "date": "2026-11-07",
+      "title": "Lições na Biblioteca",
+      "summary": "Algoritmos e Sistemas operacionais ganharam uma lição por conceito: explicação, exemplo resolvido e conferido, erro comum, como caiu no ENADE e perguntas para fixar. As outras áreas vêm em seguida.",
+      "action": { "label": "Abrir a Biblioteca", "destination": "biblioteca" }
+    },
+    {
+      "id": "2026-11-questoes-formato-enade",
+      "date": "2026-11-07",
+      "title": "163 questões geradas no formato do ENADE",
+      "summary": "Itens, asserção-razão, ordem, cálculo, código nas alternativas e associação, com figuras e textos-base. A alternativa certa não se entrega mais pelo tamanho. Ficam separadas das oficiais e marcadas como geradas por IA.",
+      "action": { "label": "Ver as questões geradas", "destination": "geradas" }
+    },
+    {
+      "id": "2026-11-nucleo-confianca",
+      "date": "2026-11-06",
+      "title": "Núcleo e confiança por área",
+      "summary": "Na Biblioteca, cada área mostra o que é preciso saber, quanto caiu em cada prova e a sua confiança, que junta o que você diz saber, o acerto nas questões e a memória nos flashcards.",
+      "action": { "label": "Ver o mapa de confiança", "destination": "biblioteca" }
+    }
+  ]
+}

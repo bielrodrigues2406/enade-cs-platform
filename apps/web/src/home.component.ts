@@ -6,6 +6,8 @@ import type { ReviewItem } from "./review.component";
 import { AREA_SIMULATION_LIMIT, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 import { ChoiceService } from "./choice-dialog";
 import { EngagementService } from "./engagement.service";
+import { NewsService } from "./news.service";
+import { ResumeService, type ResumePlace } from "./resume.service";
 import { originLabel } from "./origin-label";
 
 type CatalogRow = {
@@ -98,6 +100,10 @@ export class HomeComponent {
   /** Abre Conquistas (meta, sequência, medalhas). */
   @Output() progressHub = new EventEmitter<void>();
   readonly engagement = inject(EngagementService);
+  readonly news = inject(NewsService);
+  readonly resumePlace = inject(ResumeService);
+  /** Abre uma lição da Biblioteca ("Continuar de onde parou"). */
+  @Output() lesson = new EventEmitter<{ slug: string; concept: string }>();
   /** Abre a seção Provas completas. */
   @Output() editionsHub = new EventEmitter<void>();
 
@@ -328,5 +334,11 @@ export class HomeComponent {
     // Escolhe a pose com os dados resolvidos, antes do primeiro gesto.
     this.introPose.set(this.active() ? "relogio" : this.readyErrors() ? "lupa" : "contente");
     if (catalog && notebook && progress) lastHome = { catalog, notebook, progress };
+  }
+
+  /** Volta ao último lugar: a questão aberta ou a lição lida. */
+  continueFrom(place: ResumePlace) {
+    if (place.kind === "question") this.openQuestion.emit(place.id);
+    else this.lesson.emit({ slug: place.slug, concept: place.concept });
   }
 }

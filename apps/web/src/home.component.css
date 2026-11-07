@@ -209,3 +209,7 @@
 .area-practice select { width: 100%; }
 .areas-start { max-width: 64ch; color: var(--color-text-muted); }
 @media (max-width: 600px) { .area-practice { align-items: stretch; flex-direction: column; } .area-practice button { align-self: flex-start; } }
+
+/* Novidades no início: até três títulos, o novo com a marca. */
+.home-news ul { display: grid; gap: var(--space-2); margin: var(--space-3) 0 var(--space-4); padding: 0; list-style: none; }
+.home-news li { display: flex; gap: var(--space-2); align-items: baseline; line-height: 1.45; }
