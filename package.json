@@ -25,7 +25,8 @@
     "publish:assisted": "tsx scripts/publish-assisted.ts",
     "bootstrap:content": "tsx scripts/bootstrap-content.ts",
     "admin:role": "tsx scripts/admin-role.ts",
-    "publish:generated": "tsx scripts/publish-generated.ts"
+    "publish:generated": "tsx scripts/publish-generated.ts",
+    "audit:generated": "tsx scripts/audit-generated.ts"
   },
   "dependencies": {
     "@angular/common": "22.2.3",

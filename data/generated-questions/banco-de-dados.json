@@ -7,10 +7,7 @@
       "id": "gen-bd-not-in-null",
       "kind": "ESPELHO",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-juncoes",
-        "bd-sql"
-      ],
+      "concepts": ["bd-juncoes", "bd-sql"],
       "title": "NOT IN com valor nulo",
       "subject": "SQL: NOT IN, NOT EXISTS e NULL",
       "prompt": "Considere as tabelas:\n\nalunos(id, nome): (1, 'Ana'), (2, 'Bruno'), (3, 'Carla')\nbolsas(aluno_id, tipo): (1, 'PIBIC'), (NULL, 'Monitoria')\n\nO registro de monitoria ainda não foi associado a nenhum aluno. Uma analista quer listar os alunos sem bolsa e escreve:\n\n```\nSELECT nome FROM alunos\nWHERE id NOT IN (SELECT aluno_id FROM bolsas);\n```\n\nQual é o resultado da consulta?",
@@ -29,10 +26,7 @@
       "id": "gen-bd-reserva-concorrente",
       "kind": "QUENTE",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-concorrencia",
-        "bd-transacoes"
-      ],
+      "concepts": ["bd-concorrencia", "bd-transacoes"],
       "title": "Dois compradores para o mesmo assento",
       "subject": "Concorrência: atualização perdida e bloqueio",
       "prompt": "Um sistema de venda de ingressos para um show esgotado em minutos faz, para cada compra:\n\n```\n1. SELECT status FROM assentos WHERE id = 42;\n2. se status = 'livre':\n3.     UPDATE assentos SET status = 'vendido', comprador = :cliente WHERE id = 42;\n```\n\nAs duas instruções rodam numa transação com o nível de isolamento padrão (READ COMMITTED). Na noite da venda, o mesmo assento foi vendido a duas pessoas.\n\nQual alteração impede esse problema de forma correta?",
@@ -50,33 +44,21 @@
     {
       "id": "gen-bd-normalizacao-pedido",
       "kind": "ESPELHO",
-      "format": "ITENS",
-      "concepts": [
-        "bd-normalizacao",
-        "bd-chaves"
-      ],
+      "format": "ITENS4",
+      "concepts": ["bd-normalizacao", "bd-chaves"],
       "title": "Normalizar a tabela de itens de pedido",
       "subject": "Dependências funcionais, 2FN e 3FN",
       "prompt": "Uma loja guarda os itens dos pedidos numa única tabela:\n\nitem_pedido(pedido_id, produto_id, quantidade, nome_produto, preco_tabela, cliente_id, nome_cliente)\n\nA chave primária é (pedido_id, produto_id). Valem as dependências: produto_id → nome_produto, preco_tabela; pedido_id → cliente_id; cliente_id → nome_cliente; (pedido_id, produto_id) → quantidade. Todos os atributos são atômicos.\n\nAvalie as afirmações.\n\nI. nome_produto depende de apenas parte da chave, o que viola a segunda forma normal (2FN).\nII. cliente_id depende só de pedido_id, parte da chave, o que também viola a 2FN.\nIII. A tabela está na primeira forma normal (1FN).\nIV. Para chegar à 3FN, basta retirar a coluna quantidade da tabela.\n\nÉ correto apenas o que se afirma em",
-      "options": [
-        "I e IV.",
-        "I, II e III.",
-        "II e IV.",
-        "III e IV.",
-        "I, II e IV."
-      ],
-      "answer": "B",
-      "explanation": "Resposta: B.\n\nI está correta. Com chave composta, a 2FN exige que todo atributo não chave dependa da chave inteira. nome_produto depende só de produto_id.\nII está correta, pelo mesmo motivo: cliente_id depende só de pedido_id. Além disso, nome_cliente depende de cliente_id, uma dependência transitiva que viola a 3FN.\nIII está correta: os atributos são atômicos e há chave primária, o que basta para a 1FN.\nIV está errada. quantidade é justamente o único atributo que depende da chave inteira, e precisa ficar. A decomposição adequada é: produto(produto_id, nome_produto, preco_tabela), cliente(cliente_id, nome_cliente), pedido(pedido_id, cliente_id) e item_pedido(pedido_id, produto_id, quantidade).\n\nAs outras alternativas:\nA) Inclui IV e deixa de fora II e III.\nC) Inclui IV.\nD) Inclui IV e deixa de fora I e II.\nE) Inclui IV e deixa de fora III.",
-      "check": "Nova resolução sem o gabarito: dependências parciais de produto_id e pedido_id (I, II); 1FN atendida (III); quantidade é dependência total (IV falsa). Opção B."
+      "explanation": "Resposta: D.\n\nI está correta. Com chave composta, a 2FN exige que todo atributo não chave dependa da chave inteira. nome_produto depende só de produto_id.\nII está correta, pelo mesmo motivo: cliente_id depende só de pedido_id. Além disso, nome_cliente depende de cliente_id, uma dependência transitiva que viola a 3FN.\nIII está correta: os atributos são atômicos e há chave primária, o que basta para a 1FN.\nIV está errada. quantidade é justamente o único atributo que depende da chave inteira, e precisa ficar. A decomposição adequada é: produto(produto_id, nome_produto, preco_tabela), cliente(cliente_id, nome_cliente), pedido(pedido_id, cliente_id) e item_pedido(pedido_id, produto_id, quantidade).\n\nAs outras alternativas:\nA) Inclui IV e deixa de fora II e III.\nB) Inclui IV.\nC) Inclui IV e deixa de fora I e II.\nE) Inclui IV e deixa de fora III.",
+      "check": "Nova resolução sem o gabarito: dependências parciais de produto_id e pedido_id (I, II); 1FN atendida (III); quantidade é dependência total (IV falsa). Opção D.",
+      "truth": ["I", "II", "III"],
+      "combos": [["I", "IV"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"], ["I", "II", "IV"]]
     },
     {
       "id": "gen-bd-left-join-where",
       "kind": "ESPELHO",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-juncoes",
-        "bd-sql"
-      ],
+      "concepts": ["bd-juncoes", "bd-sql"],
       "title": "LEFT JOIN que vira INNER JOIN",
       "subject": "Junção externa e filtro no WHERE",
       "prompt": "Uma coordenadora quer listar todos os alunos e, para quem tiver, a matrícula de 2026. Ela escreve:\n\n```\nSELECT a.nome, m.disciplina\nFROM alunos a\nLEFT JOIN matriculas m ON m.aluno_id = a.id\nWHERE m.ano = 2026;\n```\n\nHá alunos sem nenhuma matrícula em 2026. Qual afirmação sobre a consulta está correta?",
@@ -95,10 +77,7 @@
       "id": "gen-bd-er-n-n",
       "kind": "ESPELHO",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-modelo-er",
-        "bd-chaves"
-      ],
+      "concepts": ["bd-modelo-er", "bd-chaves"],
       "title": "Relacionamento muitos-para-muitos no modelo relacional",
       "subject": "Mapeamento ER para relacional",
       "prompt": "No modelo entidade-relacionamento de um sistema acadêmico, Estudante e Projeto de Extensão têm um relacionamento N:N chamado Participa, com o atributo carga_horaria (horas de cada estudante em cada projeto).\n\nQual mapeamento para o modelo relacional é adequado?",
@@ -117,9 +96,7 @@
       "id": "gen-bd-indice-composto",
       "kind": "LACUNA",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-indices"
-      ],
+      "concepts": ["bd-indices"],
       "title": "Índice composto e ordem das colunas",
       "subject": "Índices B+ compostos",
       "prompt": "A tabela entregas, com milhões de linhas, tem um índice B+ composto sobre (cidade, data_entrega), nessa ordem. Considere as consultas:\n\nQ1: WHERE cidade = 'Presidente Epitácio' AND data_entrega >= '2026-11-01'\nQ2: WHERE data_entrega >= '2026-11-01'\nQ3: WHERE cidade = 'Presidente Epitácio'\n\nEm quais delas o índice pode ser usado para localizar as linhas diretamente, sem percorrer o índice ou a tabela inteiros?",
@@ -138,22 +115,16 @@
       "id": "gen-bd-atomicidade",
       "kind": "ESPELHO",
       "format": "ASSERCAO",
-      "concepts": [
-        "bd-transacoes"
-      ],
+      "concepts": ["bd-transacoes"],
       "title": "Queda do servidor no meio da transferência",
       "subject": "ACID: atomicidade e durabilidade",
       "prompt": "Uma transação bancária debita R$ 500 da conta A e credita R$ 500 na conta B. O servidor perde energia depois do débito e antes do crédito, sem que a transação tenha sido confirmada (COMMIT).\n\nI. Ao reiniciar, o SGBD desfaz o débito na conta A, e o saldo volta ao valor anterior à transação.\n\nPORQUE\n\nII. A propriedade de durabilidade garante que as alterações de transações não confirmadas sobrevivam a falhas.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "C",
       "explanation": "Resposta: C.\n\nI é verdadeira. Pela atomicidade, uma transação acontece por inteiro ou não acontece. Na recuperação, o SGBD usa o log para desfazer (undo) o que transações não confirmadas fizeram, e o débito sem o crédito correspondente é revertido.\n\nII é falsa. A durabilidade vale para transações confirmadas: depois do COMMIT, as alterações sobrevivem a falhas, porque o log já foi gravado em disco. Ela não preserva o que não foi confirmado; se preservasse, o débito ficaria e o dinheiro sumiria. A propriedade que explica I é a atomicidade.\n\nAs outras alternativas:\nA) Usa a durabilidade para explicar algo que a atomicidade explica, e com uma definição errada.\nB) Também considera II verdadeira.\nD) I é a verdadeira.\nE) I é verdadeira.",
-      "check": "Nova resolução sem o gabarito: undo de transação não confirmada = atomicidade (I verdadeira); durabilidade vale após COMMIT (II falsa). Opção C."
+      "check": "Nova resolução sem o gabarito: undo de transação não confirmada = atomicidade (I verdadeira); durabilidade vale após COMMIT (II falsa). Opção C.",
+      "assertion": {
+        "first": true,
+        "second": false
+      }
     }
   ]
 }

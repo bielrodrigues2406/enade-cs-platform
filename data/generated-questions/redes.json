@@ -11,16 +11,12 @@
       "title": "HTTP/3 sobre QUIC",
       "subject": "HTTP/3, QUIC e UDP",
       "prompt": "Navegadores e grandes serviços web passaram a usar o HTTP/3, que roda sobre o protocolo QUIC. O QUIC oferece fluxos independentes dentro da mesma conexão, criptografia integrada (TLS 1.3) e retransmissão de dados perdidos.\n\nI. O HTTP/3 transporta suas mensagens sobre UDP, e não sobre TCP.\n\nPORQUE\n\nII. O UDP oferece entrega confiável e ordenada, o que dispensa mecanismos de retransmissão na camada superior.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "C",
       "explanation": "Resposta: C.\n\nI é verdadeira. O QUIC é implementado sobre UDP, e o HTTP/3 usa o QUIC.\n\nII é falsa. O UDP não garante entrega nem ordem: só multiplexa por portas e confere a integridade com o checksum. Justamente por isso o QUIC implementa, acima do UDP, a confiabilidade, a ordenação por fluxo, o controle de congestionamento e a criptografia.\n\nPor que não usar TCP? O TCP entrega um único fluxo de bytes em ordem. Uma perda trava tudo que vem depois, inclusive dados de outros recursos da página (bloqueio de cabeça de fila). Com fluxos independentes no QUIC, a perda de um pacote atrasa só o fluxo dele. Usar UDP também permite evoluir o protocolo no espaço do usuário e manter a conexão ao trocar de rede, por exemplo do Wi-Fi para o 4G.\n\nAs outras alternativas:\nA) Atribui ao UDP garantias que ele não tem.\nB) Também considera II verdadeira.\nD) I é a verdadeira.\nE) I é verdadeira: o HTTP/3 usa UDP.",
-      "check": "Nova resolução sem o gabarito: HTTP/3 = QUIC sobre UDP (I verdadeira); UDP não é confiável (II falsa). Opção C."
+      "check": "Nova resolução sem o gabarito: HTTP/3 = QUIC sobre UDP (I verdadeira); UDP não é confiável (II falsa). Opção C.",
+      "assertion": {
+        "first": true,
+        "second": false
+      }
     },
     {
       "id": "gen-red-sub-redes",
@@ -44,15 +40,15 @@
     {
       "id": "gen-red-abrir-pagina",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["red-aplicacao", "red-transporte"],
       "title": "O que acontece ao abrir uma página",
       "subject": "Sequência de protocolos ao acessar um site",
       "prompt": "Um notebook recém-conectado ao Wi-Fi de uma biblioteca, já configurado por DHCP, acessa https://www.exemplo.com.br pela primeira vez. O cache de DNS e a tabela ARP estão vazios.\n\nAvalie as afirmações sobre essa sequência.\n\nI. A consulta DNS para descobrir o IP do servidor normalmente usa UDP na porta 53.\nII. O notebook usa ARP para descobrir o endereço MAC do roteador da rede local, que é o próximo salto para fora da rede.\nIII. O handshake TCP com o servidor web acontece antes da consulta DNS, porque o DNS depende de uma conexão já aberta.\nIV. Por ser HTTPS, o handshake do TLS negocia as chaves depois do handshake TCP e antes do envio da requisição HTTP.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e III.", "II e III.", "I, II e IV.", "III e IV.", "I, II, III e IV."],
-      "answer": "C",
-      "explanation": "Resposta: C.\n\nA ordem típica é: ARP para achar o MAC do roteador (necessário para mandar qualquer pacote para fora); DNS para traduzir o nome em IP; handshake TCP (SYN, SYN-ACK, ACK) com o IP obtido; handshake TLS para autenticar o servidor e combinar as chaves; requisição HTTP.\n\nI está correta: consultas DNS comuns cabem num datagrama UDP para a porta 53.\nII está correta: sem o MAC do roteador, o quadro Ethernet ou Wi-Fi não pode ser endereçado.\nIII está errada: para abrir a conexão TCP é preciso saber o IP do servidor, que só o DNS fornece. A ordem está invertida.\nIV está correta: o TLS roda sobre a conexão TCP já aberta e precisa terminar antes de qualquer dado HTTP, que vai cifrado.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nD) Inclui III e deixa de fora I e II.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: ordem ARP, DNS (UDP/53), TCP, TLS, HTTP; III inverte DNS e TCP. Opção C."
+      "explanation": "Resposta: D.\n\nA ordem típica é: ARP para achar o MAC do roteador (necessário para mandar qualquer pacote para fora); DNS para traduzir o nome em IP; handshake TCP (SYN, SYN-ACK, ACK) com o IP obtido; handshake TLS para autenticar o servidor e combinar as chaves; requisição HTTP.\n\nI está correta: consultas DNS comuns cabem num datagrama UDP para a porta 53.\nII está correta: sem o MAC do roteador, o quadro Ethernet ou Wi-Fi não pode ser endereçado.\nIII está errada: para abrir a conexão TCP é preciso saber o IP do servidor, que só o DNS fornece. A ordem está invertida.\nIV está correta: o TLS roda sobre a conexão TCP já aberta e precisa terminar antes de qualquer dado HTTP, que vai cifrado.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III e deixa de fora I e II.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: ordem ARP, DNS (UDP/53), TCP, TLS, HTTP; III inverte DNS e TCP. Opção D.",
+      "truth": ["I", "II", "IV"],
+      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
     },
     {
       "id": "gen-red-dominio-broadcast",

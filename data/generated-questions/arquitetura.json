@@ -38,15 +38,15 @@
     {
       "id": "gen-arq-pipeline-conflitos",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["arq-pipeline"],
       "title": "Conflitos no pipeline de 5 estágios",
       "subject": "Pipeline: conflitos de dados e de controle",
       "prompt": "Um processador RISC tem pipeline clássico de 5 estágios (busca, decodificação, execução, memória, escrita). Considere o trecho:\n\n```\nADD R1, R2, R3   ; R1 = R2 + R3\nSUB R4, R1, R5   ; R4 = R1 - R5\nBEQ R4, R0, fim  ; desvia se R4 == 0\n```\n\nAvalie as afirmações.\n\nI. ADD e SUB têm uma dependência de dados do tipo leitura após escrita (RAW) em R1.\nII. O adiantamento (forwarding) do resultado da ULA pode eliminar ou reduzir as bolhas entre ADD e SUB.\nIII. Num pipeline ideal de 5 estágios, cada instrução individual executa 5 vezes mais rápido que sem pipeline.\nIV. O BEQ gera um conflito de controle, que a previsão de desvios procura reduzir.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e II.", "I, II e III.", "III e IV.", "I, II e IV.", "II e IV."],
-      "answer": "D",
-      "explanation": "Resposta: D.\n\nI está correta. SUB precisa ler R1, que ADD só grava no último estágio. Ler antes da escrita daria um valor antigo.\n\nII está correta. O resultado de ADD fica pronto ao fim do estágio de execução. O adiantamento leva esse valor direto para a entrada da ULA na instrução seguinte, sem esperar a escrita no banco de registradores.\n\nIII está errada. O pipeline aumenta a vazão: idealmente, conclui uma instrução por ciclo. Cada instrução continua passando pelos 5 estágios, e o tempo de uma instrução isolada não cai; pode até subir um pouco, pelos registradores entre os estágios.\n\nIV está correta. Enquanto o BEQ não é resolvido, o processador não sabe qual instrução buscar. A previsão de desvios aposta num caminho e descarta o trabalho se errar.\n\nAs outras alternativas:\nA) Deixa de fora IV.\nB) Inclui III, que confunde vazão com latência.\nC) Inclui III e deixa de fora I e II.\nE) Deixa de fora I, que é a própria dependência que o adiantamento resolve.",
-      "check": "Nova resolução sem o gabarito: RAW em R1 (I), forwarding ULA→ULA (II), pipeline melhora vazão e não latência (III falsa), desvio = conflito de controle (IV)."
+      "explanation": "Resposta: E.\n\nI está correta. SUB precisa ler R1, que ADD só grava no último estágio. Ler antes da escrita daria um valor antigo.\n\nII está correta. O resultado de ADD fica pronto ao fim do estágio de execução. O adiantamento leva esse valor direto para a entrada da ULA na instrução seguinte, sem esperar a escrita no banco de registradores.\n\nIII está errada. O pipeline aumenta a vazão: idealmente, conclui uma instrução por ciclo. Cada instrução continua passando pelos 5 estágios, e o tempo de uma instrução isolada não cai; pode até subir um pouco, pelos registradores entre os estágios.\n\nIV está correta. Enquanto o BEQ não é resolvido, o processador não sabe qual instrução buscar. A previsão de desvios aposta num caminho e descarta o trabalho se errar.\n\nAs outras alternativas:\nA) Deixa de fora IV.\nB) Deixa de fora I, que é a própria dependência que o adiantamento resolve.\nC) Inclui III e deixa de fora I e II.\nD) Inclui III, que confunde vazão com latência.",
+      "check": "Nova resolução sem o gabarito: RAW em R1 (I), forwarding ULA→ULA (II), pipeline melhora vazão e não latência (III falsa), desvio = conflito de controle (IV).",
+      "truth": ["I", "II", "IV"],
+      "combos": [["I", "II"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"], ["I", "II", "IV"]]
     },
     {
       "id": "gen-arq-amdahl",
@@ -82,16 +82,13 @@
       "title": "Percorrer uma matriz por linhas ou por colunas",
       "subject": "Cache e localidade espacial",
       "prompt": "Em C, as matrizes são armazenadas por linhas: os elementos de uma mesma linha ocupam endereços consecutivos. Um programa soma todos os elementos de uma matriz grande de inteiros.\n\nConsidere as asserções.\n\nI. Percorrer a matriz linha por linha (laço externo nas linhas) tende a gerar menos falhas de cache do que percorrê-la coluna por coluna.\n\nPORQUE\n\nII. A cache traz da memória blocos de endereços contíguos, e os elementos vizinhos de uma linha ficam no mesmo bloco.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "A",
       "explanation": "Resposta: A.\n\nNuma falha de cache, o processador traz um bloco inteiro (por exemplo, 64 bytes, ou 16 inteiros de 4 bytes). Percorrendo por linhas, os próximos 15 acessos caem no mesmo bloco: localidade espacial, e só uma falha a cada 16 elementos. Percorrendo por colunas, cada acesso salta uma linha inteira na memória e cai em outro bloco. Em matrizes grandes, quase todo acesso falha. II explica o porquê de I.\n\nAs outras alternativas:\nB) Não reconhece que a busca por blocos contíguos é exatamente a causa da diferença.\nC) II é verdadeira: é assim que a cache transfere dados.\nD) I é verdadeira. A ordem de percurso muda o desempenho, mesmo com o mesmo número de operações.\nE) As duas são verdadeiras.",
-      "check": "Nova resolução sem o gabarito: armazenamento por linhas e blocos contíguos favorecem o percurso por linhas; II explica I. Opção A."
+      "check": "Nova resolução sem o gabarito: armazenamento por linhas e blocos contíguos favorecem o percurso por linhas; II explica I. Opção A.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": true
+      }
     },
     {
       "id": "gen-arq-excecao",

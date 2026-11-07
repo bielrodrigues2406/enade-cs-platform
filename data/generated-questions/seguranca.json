@@ -44,15 +44,15 @@
     {
       "id": "gen-seg-hibrida",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["seg-assimetrica", "seg-simetrica"],
       "title": "Alice manda um contrato para Bob",
       "subject": "Confidencialidade, assinatura e criptografia híbrida",
       "prompt": "Alice precisa enviar um contrato a Bob de modo que só ele possa ler e que ele tenha como provar, depois, que foi ela quem enviou. Cada um tem um par de chaves (pública e privada), e as chaves públicas foram trocadas com segurança.\n\nAvalie as afirmações.\n\nI. Para que só Bob consiga ler, o conteúdo deve ser cifrado de forma que só a chave privada de Bob o decifre, ou seja, usando a chave pública de Bob.\nII. Para provar a autoria, Alice assina o resumo (hash) do contrato com a chave privada dela, e Bob verifica com a chave pública de Alice.\nIII. Assinar o contrato com a chave pública de Bob garante o não repúdio por parte de Alice.\nIV. Na prática, cifra-se o contrato com uma chave simétrica de sessão gerada na hora e cifra-se essa chave com a chave pública de Bob, porque a criptografia assimétrica é bem mais lenta.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e III.", "I, II e IV.", "II e III.", "III e IV.", "I, II, III e IV."],
-      "answer": "B",
-      "explanation": "Resposta: B.\n\nI está correta. Qualquer um pode cifrar com a chave pública de Bob, mas só ele, com a privada, decifra. Isso dá confidencialidade.\n\nII está correta. Só Alice tem a chave privada dela, e qualquer um verifica com a pública. Isso dá autenticidade, integridade e não repúdio. Assina-se o hash por eficiência.\n\nIII está errada. A chave pública de Bob é conhecida por todos, então qualquer pessoa poderia ter produzido essa \"assinatura\", que não prova nada sobre Alice.\n\nIV está correta. É a criptografia híbrida, usada no TLS e no e-mail cifrado: a simétrica (AES) cifra o volume de dados rapidamente, e a assimétrica resolve a troca da chave.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nC) Inclui III.\nD) Inclui III.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: regras de uso das chaves pública e privada e esquema híbrido. Opção B."
+      "explanation": "Resposta: D.\n\nI está correta. Qualquer um pode cifrar com a chave pública de Bob, mas só ele, com a privada, decifra. Isso dá confidencialidade.\n\nII está correta. Só Alice tem a chave privada dela, e qualquer um verifica com a pública. Isso dá autenticidade, integridade e não repúdio. Assina-se o hash por eficiência.\n\nIII está errada. A chave pública de Bob é conhecida por todos, então qualquer pessoa poderia ter produzido essa \"assinatura\", que não prova nada sobre Alice.\n\nIV está correta. É a criptografia híbrida, usada no TLS e no e-mail cifrado: a simétrica (AES) cifra o volume de dados rapidamente, e a assimétrica resolve a troca da chave.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: regras de uso das chaves pública e privada e esquema híbrido. Opção D.",
+      "truth": ["I", "II", "IV"],
+      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
     },
     {
       "id": "gen-seg-injecao-sql",
@@ -100,16 +100,12 @@
       "title": "HMAC e não repúdio",
       "subject": "HMAC versus assinatura digital",
       "prompt": "Uma API de pagamentos envia notificações (webhooks) a uma loja. Cada mensagem traz um HMAC-SHA256 calculado com uma chave secreta que a operadora e a loja compartilham.\n\nI. Esse HMAC permite à loja provar a terceiros, num processo judicial, que foi a operadora quem gerou a mensagem.\n\nPORQUE\n\nII. O HMAC é calculado com uma chave secreta conhecida pelas duas partes.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "D",
       "explanation": "Resposta: D.\n\nII é verdadeira: o HMAC usa uma chave simétrica compartilhada.\n\nI é falsa justamente por causa de II. Como a loja também conhece a chave, ela mesma poderia ter gerado a mensagem e o HMAC. Perante um terceiro, nada distingue as duas origens. O HMAC garante integridade e autenticidade entre as duas partes (a loja sabe que veio de quem tem a chave), mas não dá não repúdio. Para isso é preciso assinatura digital, feita com uma chave privada que só a operadora possui.\n\nAs outras alternativas:\nA) Usa II como justificativa, mas II é o motivo pelo qual I é falsa.\nB) Também considera I verdadeira.\nC) Inverte: II é a verdadeira.\nE) II é verdadeira.",
-      "check": "Nova resolução sem o gabarito: chave compartilhada impede não repúdio; HMAC dá integridade e autenticidade entre as partes. Opção D."
+      "check": "Nova resolução sem o gabarito: chave compartilhada impede não repúdio; HMAC dá integridade e autenticidade entre as partes. Opção D.",
+      "assertion": {
+        "first": false,
+        "second": true
+      }
     },
     {
       "id": "gen-seg-aviso-certificado",

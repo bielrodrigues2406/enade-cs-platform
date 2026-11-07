@@ -19,15 +19,15 @@
     {
       "id": "gen-tc-classes-linguagens",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["tc-chomsky", "tc-nao-regulares", "tc-livres-contexto"],
       "title": "Em que classe está cada linguagem",
       "subject": "Hierarquia de Chomsky: exemplos clássicos",
       "prompt": "Avalie as afirmações sobre linguagens formais.\n\nI. A linguagem {aⁿbⁿ | n ≥ 0} é livre de contexto e não é regular.\nII. A linguagem {aⁿbⁿcⁿ | n ≥ 0} é livre de contexto.\nIII. Toda linguagem regular é também livre de contexto.\nIV. A linguagem das cadeias binárias com a mesma quantidade de 0s e de 1s é regular.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e II.", "I e III.", "II e IV.", "III e IV.", "I, II e III."],
-      "answer": "B",
       "explanation": "Resposta: B.\n\nI está correta. A gramática S → aSb | ε gera a linguagem, e um autômato com pilha empilha os a e desempilha um para cada b. Ela não é regular: pelo lema do bombeamento, bombear dentro do bloco de a quebra a igualdade de quantidades.\n\nII está errada. Com três blocos iguais, uma única pilha não basta: depois de comparar a com b, a contagem se perde. Pelo lema do bombeamento para linguagens livres de contexto, {aⁿbⁿcⁿ} não é livre de contexto. É sensível ao contexto.\n\nIII está correta. Na hierarquia de Chomsky, regulares ⊂ livres de contexto: um autômato finito é um autômato com pilha que não usa a pilha.\n\nIV está errada. Contar 0s e 1s sem limite exige memória ilimitada, o que um autômato finito não tem. A linguagem é livre de contexto, mas não regular.\n\nAs outras alternativas:\nA) Inclui II.\nC) Inclui II e IV, as duas que superestimam o poder dos modelos.\nD) Inclui IV.\nE) Inclui II.",
-      "check": "Nova resolução sem o gabarito: I verdadeira, II falsa (não LC), III verdadeira, IV falsa (não regular). Opção B."
+      "check": "Nova resolução sem o gabarito: I verdadeira, II falsa (não LC), III verdadeira, IV falsa (não regular). Opção B.",
+      "truth": ["I", "III"],
+      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"]]
     },
     {
       "id": "gen-tc-direcao-reducao",
@@ -37,16 +37,12 @@
       "title": "Direção da redução para NP-dificuldade",
       "subject": "Redução polinomial e NP-completude",
       "prompt": "Uma pesquisadora suspeita que um problema novo de alocação de turmas, chamado X, seja NP-difícil.\n\nI. Para provar que X é NP-difícil, basta mostrar uma redução polinomial de X para o problema SAT.\n\nPORQUE\n\nII. O problema SAT é NP-completo.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "D",
       "explanation": "Resposta: D.\n\nII é verdadeira: pelo teorema de Cook-Levin, SAT é NP-completo.\n\nI é falsa porque a redução está na direção errada. Reduzir X a SAT (X ≤ₚ SAT) mostra que X não é mais difícil que SAT, ou seja, que X está em NP se a redução e a verificação forem polinomiais. Para mostrar que X é NP-difícil, a pesquisadora precisa do contrário: reduzir SAT, ou outro problema NP-completo conhecido, a X (SAT ≤ₚ X). Assim, um algoritmo rápido para X resolveria SAT rapidamente.\n\nAs outras alternativas:\nA) Aceita a redução na direção invertida, o erro mais comum nesse tema.\nB) Também considera I verdadeira.\nC) Inverte: II é a verdadeira.\nE) II é verdadeira.",
-      "check": "Nova resolução sem o gabarito: NP-dificuldade exige SAT ≤p X; X ≤p SAT não serve. I falsa, II verdadeira. Opção D."
+      "check": "Nova resolução sem o gabarito: NP-dificuldade exige SAT ≤p X; X ≤p SAT não serve. I falsa, II verdadeira. Opção D.",
+      "assertion": {
+        "first": false,
+        "second": true
+      }
     },
     {
       "id": "gen-tc-detector-lacos",
@@ -94,16 +90,13 @@
       "title": "Expressão regular para fórmulas de planilha",
       "subject": "Limites das linguagens regulares na prática",
       "prompt": "Um desenvolvedor tenta validar fórmulas digitadas numa planilha on-line usando apenas uma expressão regular, no sentido da teoria de linguagens formais (sem recursos extras como recursão ou retrorreferência).\n\nI. Nenhuma expressão regular desse tipo reconhece exatamente as fórmulas com parênteses corretamente balanceados, em qualquer profundidade.\n\nPORQUE\n\nII. Um autômato finito tem um número fixo de estados e não consegue contar quantos parênteses estão abertos quando essa quantidade não tem limite.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "A",
       "explanation": "Resposta: A.\n\nExpressões regulares e autômatos finitos descrevem a mesma classe de linguagens. A linguagem dos parênteses balanceados contém, por exemplo, (ⁿ)ⁿ para todo n. Um autômato com k estados, lendo k + 1 parênteses abertos, repete algum estado pelo princípio da casa dos pombos e não distingue quantos abriu. Por isso aceitaria cadeias desbalanceadas ou recusaria balanceadas. II explica exatamente por que I acontece.\n\nNa prática, analisadores de fórmulas usam uma gramática livre de contexto e um analisador sintático (com pilha), não uma expressão regular. Uma expressão regular serve para os tokens: números, referências a células, operadores.\n\nAs outras alternativas:\nB) Não reconhece que a memória finita é a causa da limitação.\nC) II é verdadeira: é a característica que define o autômato finito.\nD) I é verdadeira. Expressões regulares de bibliotecas com recursão vão além da teoria, mas o enunciado as exclui.\nE) As duas são verdadeiras.",
-      "check": "Nova resolução sem o gabarito: parênteses balanceados é não regular (bombeamento); memória finita justifica. Opção A."
+      "check": "Nova resolução sem o gabarito: parênteses balanceados é não regular (bombeamento); memória finita justifica. Opção A.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": true
+      }
     },
     {
       "id": "gen-tc-subconjuntos",

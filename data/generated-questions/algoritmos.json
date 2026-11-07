@@ -19,15 +19,15 @@
     {
       "id": "gen-alg-ordenacao-propriedades",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["alg-ordenacao", "alg-complexidade"],
       "title": "Propriedades dos algoritmos de ordenação",
       "subject": "Ordenação: custo, estabilidade e limite inferior",
       "prompt": "Uma equipe precisa escolher um algoritmo de ordenação para uma biblioteca de uso geral. Os critérios são o tempo no pior caso, o uso de memória e a estabilidade (manter a ordem relativa de elementos com a mesma chave).\n\nAvalie as afirmações a seguir.\n\nI. O merge sort executa em O(n log n) no pior caso, mas usa memória auxiliar proporcional a n.\nII. O quicksort com o pivô sempre no primeiro elemento executa em O(n log n) mesmo quando o vetor de entrada já está ordenado.\nIII. A ordenação por inserção é estável e executa em tempo linear quando o vetor já está ordenado.\nIV. Nenhum algoritmo consegue ordenar n inteiros em tempo O(n), porque toda ordenação exige Ω(n log n) comparações.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e II.", "I e III.", "II e IV.", "III e IV.", "I, III e IV."],
-      "answer": "B",
       "explanation": "Resposta: B.\n\nI está correta. O merge sort divide o vetor ao meio, ordena as duas partes e as intercala. A recorrência T(n) = 2T(n/2) + n dá Θ(n log n) em qualquer caso, e a intercalação precisa de um vetor auxiliar de tamanho n.\n\nII está errada. Com o pivô no primeiro elemento e o vetor já ordenado, cada partição separa só o pivô e deixa n − 1 elementos do outro lado. São n − 1 níveis de recursão, com custo total da ordem de n²/2, ou seja, O(n²).\n\nIII está correta. A inserção só move um elemento para a esquerda enquanto ele for estritamente menor que o vizinho, por isso preserva a ordem de chaves iguais. Num vetor já ordenado, cada elemento é comparado uma vez com o anterior: n − 1 comparações, tempo O(n).\n\nIV está errada. O limite Ω(n log n) vale só para ordenação por comparação. Counting sort e radix sort não comparam elementos e ordenam inteiros de faixa limitada em tempo linear.\n\nAs outras alternativas:\nA) Inclui II, que esquece a condição do pior caso do quicksort (pivô ruim em vetor ordenado).\nC) Inclui II e IV. Em IV, o limite inferior só vale para algoritmos baseados em comparação.\nD) Inclui IV e deixa de fora I, que está correta.\nE) Inclui IV, que generaliza um limite que só vale para ordenação por comparação.",
-      "check": "Nova resolução sem o gabarito: I verdadeira (merge sort Θ(n log n) e O(n) extra); II falsa (pior caso O(n²)); III verdadeira; IV falsa (counting/radix). Conjunto correto {I, III}."
+      "check": "Nova resolução sem o gabarito: I verdadeira (merge sort Θ(n log n) e O(n) extra); II falsa (pior caso O(n²)); III verdadeira; IV falsa (counting/radix). Conjunto correto {I, III}.",
+      "truth": ["I", "III"],
+      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["I", "III", "IV"]]
     },
     {
       "id": "gen-alg-abb-degenerada",
@@ -37,16 +37,12 @@
       "title": "Árvore binária de busca construída com chaves em ordem",
       "subject": "Árvore binária de busca: altura e ordem de inserção",
       "prompt": "Um programa insere as chaves 1, 2, 3, …, n, nessa ordem, em uma árvore binária de busca sem nenhum mecanismo de balanceamento.\n\nConsidere as asserções a seguir.\n\nI. Nessa árvore, buscar uma chave custa O(n) no pior caso.\n\nPORQUE\n\nII. A altura de uma árvore binária de busca com n nós é sempre ⌈log₂(n + 1)⌉, qualquer que seja a ordem de inserção.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "C",
       "explanation": "Resposta: C.\n\nAo inserir 1, 2, 3, … em ordem crescente, cada nova chave é maior que todas as anteriores e vai sempre para a direita do último nó. A árvore vira uma lista encadeada com altura n. Buscar a chave n percorre todos os nós: O(n). A asserção I é verdadeira.\n\nA asserção II é falsa. ⌈log₂(n + 1)⌉ é a altura mínima, alcançada só por árvores balanceadas. A altura de uma ABB depende da ordem de inserção e pode chegar a n. É por isso que existem as árvores AVL e rubro-negras, que fazem rotações para manter a altura em O(log n).\n\nAs outras alternativas:\nA) Trata II como verdadeira. Se a altura fosse sempre logarítmica, a busca seria O(log n), e a própria I seria falsa.\nB) Também considera II verdadeira, o que contradiz o exemplo do enunciado.\nD) Inverte as duas: I é a afirmação verdadeira.\nE) Considera I falsa, mas a árvore degenerada do enunciado faz a busca percorrer até n nós.",
-      "check": "Nova resolução sem o gabarito: inserção crescente gera árvore com altura n, busca O(n) (I verdadeira); a altura logarítmica só vale para árvore balanceada (II falsa). Opção C."
+      "check": "Nova resolução sem o gabarito: inserção crescente gera árvore com altura n, busca O(n) (I verdadeira); a altura logarítmica só vale para árvore balanceada (II falsa). Opção C.",
+      "assertion": {
+        "first": true,
+        "second": false
+      }
     },
     {
       "id": "gen-alg-dijkstra-ordem",
@@ -89,15 +85,15 @@
     {
       "id": "gen-alg-recorrencias",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["alg-recorrencia", "alg-complexidade"],
       "title": "Recorrências e suas soluções",
       "subject": "Recorrências: Teorema Mestre e casos clássicos",
       "prompt": "O custo de algoritmos recursivos costuma ser descrito por recorrências. Considere T(1) = 1 em todos os casos e avalie as afirmações.\n\nI. T(n) = T(n/2) + 1 tem solução Θ(log n), como a busca binária.\nII. T(n) = 2T(n/2) + n tem solução Θ(n²), porque o problema é dividido em dois subproblemas.\nIII. T(n) = T(n − 1) + n tem solução Θ(n²), como a ordenação por seleção.\nIV. T(n) = 2T(n/2) + 1 tem solução Θ(n log n).\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e II.", "II e IV.", "III e IV.", "I e III.", "I, II e III."],
-      "answer": "D",
-      "explanation": "Resposta: D.\n\nI está correta. Cada chamada faz trabalho constante e reduz o problema à metade; há log₂ n níveis até chegar a 1.\n\nII está errada. Esta é a recorrência do merge sort. Pelo Teorema Mestre, com a = 2, b = 2 e f(n) = n, temos n^(log_b a) = n, igual a f(n). Caso 2: Θ(n log n). Ter dois subproblemas não leva a n², porque cada um tem metade do tamanho.\n\nIII está correta. Abrindo a recorrência: T(n) = n + (n − 1) + … + 1 = n(n + 1)/2, que é Θ(n²).\n\nIV está errada. Com a = 2, b = 2 e f(n) = 1, temos n^(log_b a) = n, que domina f(n). Caso 1: Θ(n). Intuitivamente, a árvore de recursão tem cerca de 2n nós, cada um com custo constante.\n\nAs outras alternativas:\nA) Inclui II: o resultado do merge sort é n log n, não n².\nB) Inclui II e IV, as duas que erram a ordem de grandeza.\nC) Inclui IV e deixa de fora I, que é o caso clássico da busca binária.\nE) Inclui II.",
-      "check": "Nova resolução sem o gabarito: I Θ(log n); II Θ(n log n) (falsa); III Θ(n²); IV Θ(n) (falsa). Conferido somando as recorrências numericamente para n = 2^k."
+      "explanation": "Resposta: B.\n\nI está correta. Cada chamada faz trabalho constante e reduz o problema à metade; há log₂ n níveis até chegar a 1.\n\nII está errada. Esta é a recorrência do merge sort. Pelo Teorema Mestre, com a = 2, b = 2 e f(n) = n, temos n^(log_b a) = n, igual a f(n). Caso 2: Θ(n log n). Ter dois subproblemas não leva a n², porque cada um tem metade do tamanho.\n\nIII está correta. Abrindo a recorrência: T(n) = n + (n − 1) + … + 1 = n(n + 1)/2, que é Θ(n²).\n\nIV está errada. Com a = 2, b = 2 e f(n) = 1, temos n^(log_b a) = n, que domina f(n). Caso 1: Θ(n). Intuitivamente, a árvore de recursão tem cerca de 2n nós, cada um com custo constante.\n\nAs outras alternativas:\nA) Inclui II: o resultado do merge sort é n log n, não n².\nC) Inclui II e IV, as duas que erram a ordem de grandeza.\nD) Inclui IV e deixa de fora I, que é o caso clássico da busca binária.\nE) Inclui II.",
+      "check": "Nova resolução sem o gabarito: I Θ(log n); II Θ(n log n) (falsa); III Θ(n²); IV Θ(n) (falsa). Conferido somando as recorrências numericamente para n = 2^k.",
+      "truth": ["I", "III"],
+      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"]]
     },
     {
       "id": "gen-alg-lcs",
@@ -121,15 +117,15 @@
     {
       "id": "gen-alg-heap-insercao",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["alg-heap"],
       "title": "Heap de máximo em vetor",
       "subject": "Heap: validade, inserção e custos",
       "prompt": "Um escalonador guarda as prioridades das tarefas num heap de máximo armazenado em vetor, com índices a partir de 0 (os filhos do índice i ficam em 2i + 1 e 2i + 2). O vetor atual é:\n\n[50, 30, 40, 10, 20, 35]\n\nAvalie as afirmações.\n\nI. O vetor é um heap de máximo válido.\nII. Após inserir a prioridade 45, o vetor fica [50, 30, 45, 10, 20, 35, 40].\nIII. Remover a tarefa de maior prioridade custa O(1), porque ela está na primeira posição do vetor.\nIV. Construir um heap a partir de um vetor qualquer com n elementos custa Θ(n log n) mesmo no melhor algoritmo conhecido.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e II.", "I e III.", "II e IV.", "I, II e III.", "III e IV."],
-      "answer": "A",
-      "explanation": "Resposta: A.\n\nI está correta. 50 é maior que os filhos 30 e 40; 30 é maior que os filhos 10 e 20; 40 é maior que o filho 35. Todo pai é maior que seus filhos.\n\nII está correta. O 45 entra no fim (índice 6), cujo pai é o índice 2 (40). Como 45 > 40, eles trocam: [50, 30, 45, 10, 20, 35, 40]. O novo pai é o índice 0 (50); como 45 < 50, a subida para.\n\nIII está errada. Consultar o máximo custa O(1), mas removê-lo exige pôr o último elemento na raiz e descê-lo até restaurar a propriedade do heap: O(log n).\n\nIV está errada. A construção de baixo para cima (heapify a partir do último pai) custa O(n), porque a maioria dos nós está perto das folhas e desce pouco.\n\nAs outras alternativas:\nB) Inclui III, que confunde consultar o máximo com removê-lo.\nC) Inclui IV e deixa de fora I, que está correta.\nD) Inclui III.\nE) Junta as duas afirmações erradas sobre custo.",
-      "check": "Nova resolução sem o gabarito: propriedade de heap conferida nó a nó; inserção de 45 simulada em código, resultado [50, 30, 45, 10, 20, 35, 40]; remoção O(log n) e construção O(n)."
+      "explanation": "Resposta: A.\n\nI está correta. 50 é maior que os filhos 30 e 40; 30 é maior que os filhos 10 e 20; 40 é maior que o filho 35. Todo pai é maior que seus filhos.\n\nII está correta. O 45 entra no fim (índice 6), cujo pai é o índice 2 (40). Como 45 > 40, eles trocam: [50, 30, 45, 10, 20, 35, 40]. O novo pai é o índice 0 (50); como 45 < 50, a subida para.\n\nIII está errada. Consultar o máximo custa O(1), mas removê-lo exige pôr o último elemento na raiz e descê-lo até restaurar a propriedade do heap: O(log n).\n\nIV está errada. A construção de baixo para cima (heapify a partir do último pai) custa O(n), porque a maioria dos nós está perto das folhas e desce pouco.\n\nAs outras alternativas:\nB) Inclui III, que confunde consultar o máximo com removê-lo.\nC) Inclui IV e deixa de fora I, que está correta.\nD) Junta as duas afirmações erradas sobre custo.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: propriedade de heap conferida nó a nó; inserção de 45 simulada em código, resultado [50, 30, 45, 10, 20, 35, 40]; remoção O(log n) e construção O(n).",
+      "truth": ["I", "II"],
+      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"]]
     },
     {
       "id": "gen-alg-agm-ou-caminho",
@@ -158,29 +154,26 @@
       "title": "Troco guloso com moedas incomuns",
       "subject": "Algoritmo guloso: quando falha",
       "prompt": "Um caixa automático usa um algoritmo guloso para dar troco: escolhe sempre a maior moeda que não ultrapassa o valor restante. Em um país fictício, as moedas valem 1, 3 e 4.\n\nConsidere as asserções a seguir.\n\nI. Para esse sistema de moedas, o algoritmo guloso não garante o troco com o menor número de moedas.\n\nPORQUE\n\nII. Para um troco de 6, o algoritmo guloso entrega 4 + 1 + 1, três moedas, enquanto 3 + 3 resolve com duas.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "A",
       "explanation": "Resposta: A.\n\nII é verdadeira: para 6, o guloso pega 4 (maior moeda até 6), sobra 2, pega 1, sobra 1, pega 1. São três moedas, e 3 + 3 usa só duas.\n\nI é verdadeira, e II a justifica: para mostrar que um algoritmo não garante o ótimo, basta um contraexemplo, e II é exatamente um contraexemplo. O guloso só acerta sempre em sistemas com a propriedade de escolha gulosa, como as moedas brasileiras (1, 5, 10, 25, 50 centavos e 1 real).\n\nAs outras alternativas:\nB) Reconhece as duas verdades, mas não percebe que o contraexemplo é exatamente o que prova I.\nC) Considera II falsa, mas a conta do guloso para 6 está certa.\nD) Considera I falsa. Um único caso em que o guloso perde já mostra que ele não garante o ótimo.\nE) Nenhuma das duas é falsa.",
-      "check": "Nova resolução sem o gabarito: guloso para 6 com {1,3,4} = 4+1+1 (3 moedas); ótimo por programação dinâmica = 2 moedas (3+3). Conferido em código."
+      "check": "Nova resolução sem o gabarito: guloso para 6 com {1,3,4} = 4+1+1 (3 moedas); ótimo por programação dinâmica = 2 moedas (3+3). Conferido em código.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": true
+      }
     },
     {
       "id": "gen-alg-pilha-fila",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS3",
       "concepts": ["alg-lineares"],
       "title": "Pilha e fila em sequência",
       "subject": "Pilhas e filas: efeito de transferir elementos",
       "prompt": "Uma pilha P e uma fila F começam vazias. Um programa executa, em ordem:\n\n1. empilha 1, 2 e 3 em P;\n2. desempilha todos os elementos de P, enfileirando cada um em F na ordem em que sai;\n3. desenfileira um elemento de F e o empilha em P.\n\nAvalie as afirmações sobre o estado final.\n\nI. O primeiro elemento de F (o próximo a sair) é 2.\nII. O topo de P é 3.\nIII. A transferência do passo 2 preservou em F a ordem original de inserção, 1, 2, 3.\n\nÉ correto o que se afirma em",
-      "options": ["I, apenas.", "III, apenas.", "I e II, apenas.", "I e III, apenas.", "II e III, apenas."],
-      "answer": "C",
       "explanation": "Resposta: C.\n\nPasso 1: P = [1, 2, 3], com 3 no topo.\nPasso 2: a pilha devolve primeiro o último que entrou. Saem 3, 2, 1, e F = [3, 2, 1], com 3 na frente.\nPasso 3: sai o 3 da frente de F e vai para P. Fica P = [3] e F = [2, 1].\n\nI está correta: a frente de F agora é 2. II está correta: o único elemento de P, e portanto o topo, é 3. III está errada: a pilha inverte a ordem, por isso F recebeu 3, 2, 1. Esse é o motivo de se usar uma pilha para inverter sequências.\n\nAs outras alternativas:\nA) Deixa de fora II, que também é verdadeira.\nB) Escolhe a única afirmação falsa: troca o comportamento da pilha (LIFO) pelo da fila (FIFO).\nD) Inclui III.\nE) Inclui III e deixa de fora I.",
-      "check": "Nova resolução sem o gabarito: simulação em código com list/deque, P = [3], F = [2, 1]. Conjunto correto {I, II}."
+      "check": "Nova resolução sem o gabarito: simulação em código com list/deque, P = [3], F = [2, 1]. Conjunto correto {I, II}.",
+      "truth": ["I", "II"],
+      "combos": [["I"], ["III"], ["I", "II"], ["I", "III"], ["II", "III"]]
     },
     {
       "id": "gen-alg-hanoi",

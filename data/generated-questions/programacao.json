@@ -19,15 +19,15 @@
     {
       "id": "gen-prog-orientacao-objetos",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["prog-oo", "prog-visibilidade", "prog-polimorfismo"],
       "title": "Conta e conta poupança em Java",
       "subject": "Encapsulamento, sobrecarga e ligação dinâmica",
       "prompt": "Considere o código Java:\n\n```\npublic abstract class Conta {\n    private double saldo;\n    public void sacar(double v) { saldo -= v; }\n    protected double getSaldo() { return saldo; }\n    public abstract double render();\n}\n\npublic class ContaPoupanca extends Conta {\n    @Override\n    public void sacar(double v) { if (v <= getSaldo()) super.sacar(v); }\n    public double render() { return getSaldo() * 0.005; }\n    public double render(double taxa) { return getSaldo() * taxa; }\n}\n```\n\nAvalie as afirmações.\n\nI. Dentro de ContaPoupanca, escrever saldo -= v diretamente causaria erro de compilação, porque o atributo é private em Conta.\nII. Os dois métodos render de ContaPoupanca são um caso de sobrecarga.\nIII. Com Conta c = new ContaPoupanca(); a chamada c.sacar(100) executa a versão de Conta, porque a variável foi declarada com o tipo Conta.\nIV. Por ser abstrata, Conta não pode ser instanciada, mas pode ter atributos e métodos implementados.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e III.", "II e III.", "III e IV.", "I, II e IV.", "I, II, III e IV."],
-      "answer": "D",
       "explanation": "Resposta: D.\n\nI está correta. Membros private só são visíveis dentro da própria classe; a subclasse herda o atributo, mas não o enxerga pelo nome. Por isso Conta oferece getSaldo() como protected.\n\nII está correta. Mesmo nome com listas de parâmetros diferentes, na mesma classe, é sobrecarga, resolvida na compilação pela assinatura da chamada.\n\nIII está errada. Em Java, métodos de instância usam ligação dinâmica: vale o tipo do objeto criado (ContaPoupanca), não o tipo declarado da variável (Conta). Executa-se a versão sobrescrita, que confere o saldo antes de sacar. É o polimorfismo de subtipo.\n\nIV está correta. Classe abstrata pode ter estado e métodos concretos; só não pode ser instanciada com new.\n\nAs outras alternativas:\nA) Inclui III, que troca a ligação dinâmica pela estática.\nB) Inclui III e deixa de fora I.\nC) Inclui III.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: código compilado e executado com javac; acesso direto a saldo não compila; c.sacar chama a versão de ContaPoupanca."
+      "check": "Nova resolução sem o gabarito: código compilado e executado com javac; acesso direto a saldo não compila; c.sacar chama a versão de ContaPoupanca.",
+      "truth": ["I", "II", "IV"],
+      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
     },
     {
       "id": "gen-prog-escopo",

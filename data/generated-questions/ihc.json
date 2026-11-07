@@ -44,15 +44,15 @@
     {
       "id": "gen-ihc-metodos-avaliacao",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["ihc-avaliacao", "ihc-heuristicas"],
       "title": "Como avaliar a nova versão do aplicativo",
       "subject": "Avaliação por inspeção e com usuários",
       "prompt": "Uma equipe vai avaliar a usabilidade da nova versão do aplicativo do restaurante universitário. Avalie as afirmações.\n\nI. A avaliação heurística é feita por especialistas, que inspecionam a interface com base em princípios, sem a participação de usuários.\nII. No teste de usabilidade, usuários representativos executam tarefas reais enquanto são observados, o que revela dificuldades que especialistas podem não prever.\nIII. O percurso cognitivo exige a participação de usuários finais, que narram em voz alta o que pensam.\nIV. Na avaliação heurística, três a cinco avaliadores costumam encontrar boa parte dos problemas, com custo bem menor que o de um único avaliador muito demorado.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e III.", "II e III.", "III e IV.", "I, II e IV.", "I, II, III e IV."],
-      "answer": "D",
       "explanation": "Resposta: D.\n\nI está correta: é um método de inspeção, barato e rápido.\n\nII está correta: observar usuários reais mostra caminhos, termos e erros inesperados.\n\nIII está errada. O percurso cognitivo também é um método de inspeção: especialistas percorrem passo a passo uma tarefa, perguntando se o usuário saberia o que fazer em cada ponto. Usuários pensando em voz alta (think aloud) são uma técnica usada em testes com usuários.\n\nIV está correta. Nielsen observou que cada avaliador encontra uma parte dos problemas e que, a partir de cinco, o ganho por avaliador extra cai bastante.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: classificação dos métodos de avaliação (inspeção versus teste com usuários). Opção D."
+      "check": "Nova resolução sem o gabarito: classificação dos métodos de avaliação (inspeção versus teste com usuários). Opção D.",
+      "truth": ["I", "II", "IV"],
+      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
     },
     {
       "id": "gen-ihc-persona",

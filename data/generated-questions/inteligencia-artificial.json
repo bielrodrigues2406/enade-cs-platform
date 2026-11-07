@@ -44,15 +44,15 @@
     {
       "id": "gen-ia-rag",
       "kind": "QUENTE",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["ia-generativa"],
       "title": "Assistente com recuperação de documentos",
       "subject": "RAG, ajuste fino e alucinação",
       "prompt": "Uma universidade criou um assistente que responde dúvidas sobre o regulamento acadêmico. Ele usa geração aumentada por recuperação (RAG): a pergunta do estudante é usada para buscar trechos do regulamento numa base vetorial, e os trechos encontrados são enviados ao modelo de linguagem junto com a pergunta.\n\nAvalie as afirmações.\n\nI. No RAG, os trechos recuperados entram no contexto do modelo no momento da pergunta, sem alterar os pesos da rede.\nII. O RAG elimina a possibilidade de o modelo produzir respostas falsas, porque ele passa a consultar o regulamento.\nIII. Se a busca não recuperar o trecho relevante, o modelo pode responder com base apenas no que aprendeu no treino, inclusive de forma incorreta.\nIV. Diferentemente do RAG, o ajuste fino (fine-tuning) altera os pesos do modelo com novos exemplos de treino.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e II.", "II e III.", "I, II e IV.", "II, III e IV.", "I, III e IV."],
-      "answer": "E",
-      "explanation": "Resposta: E.\n\nI está correta. O RAG muda a entrada, não o modelo: os trechos viram parte do prompt. Por isso basta atualizar a base de documentos quando o regulamento mudar.\n\nII está errada. O RAG reduz alucinações quando a busca traz o trecho certo, mas não as elimina. O modelo ainda pode interpretar mal o trecho, misturá-lo com conhecimento prévio ou inventar detalhes. Por isso sistemas sérios citam a fonte usada e avaliam as respostas.\n\nIII está correta. Esse é o modo de falha mais comum: recuperação ruim, por pergunta mal formulada, documento mal dividido em trechos ou busca vetorial imprecisa. A qualidade do RAG depende tanto da busca quanto do modelo.\n\nIV está correta. O ajuste fino continua o treino com novos dados e muda os pesos. Serve bem para estilo e formato, e é mais caro de atualizar que uma base de documentos.\n\nAs outras alternativas:\nA) Inclui II, que transforma \"reduz\" em \"elimina\".\nB) Inclui II e deixa de fora I e IV.\nC) Inclui II e deixa de fora III.\nD) Inclui II e deixa de fora I.",
-      "check": "Nova resolução sem o gabarito: I, III e IV corretas; II é absoluta e falsa. Opção E."
+      "explanation": "Resposta: D.\n\nI está correta. O RAG muda a entrada, não o modelo: os trechos viram parte do prompt. Por isso basta atualizar a base de documentos quando o regulamento mudar.\n\nII está errada. O RAG reduz alucinações quando a busca traz o trecho certo, mas não as elimina. O modelo ainda pode interpretar mal o trecho, misturá-lo com conhecimento prévio ou inventar detalhes. Por isso sistemas sérios citam a fonte usada e avaliam as respostas.\n\nIII está correta. Esse é o modo de falha mais comum: recuperação ruim, por pergunta mal formulada, documento mal dividido em trechos ou busca vetorial imprecisa. A qualidade do RAG depende tanto da busca quanto do modelo.\n\nIV está correta. O ajuste fino continua o treino com novos dados e muda os pesos. Serve bem para estilo e formato, e é mais caro de atualizar que uma base de documentos.\n\nAs outras alternativas:\nA) Inclui II, que transforma \"reduz\" em \"elimina\".\nB) Inclui II e deixa de fora I e IV.\nC) Inclui II e deixa de fora III.\nE) Inclui II e deixa de fora I.",
+      "check": "Nova resolução sem o gabarito: I, III e IV corretas; II é absoluta e falsa. Opção D.",
+      "truth": ["I", "III", "IV"],
+      "combos": [["I", "II"], ["II", "III"], ["I", "II", "IV"], ["I", "III", "IV"], ["II", "III", "IV"]]
     },
     {
       "id": "gen-ia-injecao-prompt",
@@ -114,15 +114,15 @@
     {
       "id": "gen-ia-tipos-aprendizado",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["ia-aprendizado"],
       "title": "Que tipo de aprendizado é cada caso",
       "subject": "Aprendizado supervisionado, não supervisionado e por reforço",
       "prompt": "Avalie as associações entre problemas e tipos de aprendizado de máquina.\n\nI. Agrupar clientes de uma loja por padrão de compra, sem categorias definidas previamente: aprendizado não supervisionado.\nII. Prever o preço de imóveis a partir de milhares de vendas anteriores com o preço registrado: aprendizado supervisionado (regressão).\nIII. Um robô aprende a se equilibrar recebendo recompensa quando fica de pé e penalidade quando cai: aprendizado por reforço.\nIV. Separar e-mails em spam e não spam aplicando k-means com k = 2, sem nenhum e-mail rotulado: aprendizado supervisionado (classificação).\n\nEstão corretas apenas as associações",
-      "options": ["I, II e III.", "I e IV.", "II e IV.", "I, II e IV.", "III e IV."],
-      "answer": "A",
-      "explanation": "Resposta: A.\n\nI está correta: sem rótulos, o objetivo é descobrir grupos. É agrupamento, uma tarefa não supervisionada.\nII está correta: há exemplos com a resposta (o preço), e a saída é um número. É regressão supervisionada.\nIII está correta: o agente aprende por tentativa e erro com um sinal de recompensa, sem exemplos rotulados de ação correta.\nIV está errada. O k-means é agrupamento não supervisionado. Ele forma dois grupos, mas nada garante que eles correspondam a spam e não spam, e ninguém forneceu rótulos. Classificação supervisionada exigiria e-mails já marcados.\n\nAs outras alternativas:\nB) Inclui IV e deixa de fora II e III.\nC) Inclui IV.\nD) Inclui IV.\nE) Inclui IV e deixa de fora I e II.",
-      "check": "Nova resolução sem o gabarito: I não supervisionado, II regressão supervisionada, III reforço; IV é agrupamento, não classificação supervisionada. Opção A."
+      "explanation": "Resposta: D.\n\nI está correta: sem rótulos, o objetivo é descobrir grupos. É agrupamento, uma tarefa não supervisionada.\nII está correta: há exemplos com a resposta (o preço), e a saída é um número. É regressão supervisionada.\nIII está correta: o agente aprende por tentativa e erro com um sinal de recompensa, sem exemplos rotulados de ação correta.\nIV está errada. O k-means é agrupamento não supervisionado. Ele forma dois grupos, mas nada garante que eles correspondam a spam e não spam, e ninguém forneceu rótulos. Classificação supervisionada exigiria e-mails já marcados.\n\nAs outras alternativas:\nA) Inclui IV e deixa de fora II e III.\nB) Inclui IV.\nC) Inclui IV e deixa de fora I e II.\nE) Inclui IV.",
+      "check": "Nova resolução sem o gabarito: I não supervisionado, II regressão supervisionada, III reforço; IV é agrupamento, não classificação supervisionada. Opção D.",
+      "truth": ["I", "II", "III"],
+      "combos": [["I", "IV"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"], ["I", "II", "IV"]]
     },
     {
       "id": "gen-ia-perceptron-xor",
@@ -132,16 +132,13 @@
       "title": "Perceptron e a função XOR",
       "subject": "Separabilidade linear e redes de múltiplas camadas",
       "prompt": "Em 1969, Minsky e Papert analisaram as limitações do perceptron de uma camada, um dos primeiros modelos de rede neural.\n\nI. Um perceptron de uma única camada, com função degrau, não consegue implementar a função XOR de duas entradas.\n\nPORQUE\n\nII. Na função XOR, os pontos de saída 1, (0, 1) e (1, 0), e os de saída 0, (0, 0) e (1, 1), não podem ser separados por uma única reta no plano.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "A",
       "explanation": "Resposta: A.\n\nUm perceptron de uma camada calcula se w₁x₁ + w₂x₂ + b ≥ 0. A fronteira entre as saídas 0 e 1 é uma reta, então ele só separa classes linearmente separáveis. No XOR, os pontos de saída 1 estão em cantos opostos do quadrado, e os de saída 0 nos outros dois cantos. Nenhuma reta deixa os dois primeiros de um lado e os dois últimos do outro. Por isso II justifica I.\n\nCom uma camada oculta, a rede combina duas fronteiras lineares (por exemplo, OU e NÃO-E) e resolve o XOR. Esse é o motivo das redes de múltiplas camadas e de funções de ativação não lineares.\n\nAs outras alternativas:\nB) Não reconhece que a separabilidade linear é a causa da limitação.\nC) II é verdadeira, como mostra a disposição dos quatro pontos.\nD) I é verdadeira; o resultado é clássico.\nE) As duas são verdadeiras.",
-      "check": "Nova resolução sem o gabarito: busca em grade de pesos em código não encontra separador linear para XOR; II é a razão. Opção A."
+      "check": "Nova resolução sem o gabarito: busca em grade de pesos em código não encontra separador linear para XOR; II é a razão. Opção A.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": true
+      }
     }
   ]
 }

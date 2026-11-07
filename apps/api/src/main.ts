@@ -48,6 +48,7 @@ import {
   imageView,
   versionImages,
 } from "./question-images.js";
+import { generatedFigure } from "./generated-publication.js";
 import { sourceById, publicExam } from "./source-store.js";
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -159,6 +160,7 @@ class StudyController {
       options: q.options.map(({ id, text }) => ({ id, text })),
       presentation: q.presentation,
       images: (await versionImages(q.id)).map(imageView),
+      figure: q.origin === "AI_GENERATED" ? await generatedFigure(q.id) : null,
       reviewOrigin: q.reviewOrigin,
       provenance: q.examSourceId
         ? {

@@ -25,15 +25,15 @@
     {
       "id": "gen-mat-validade",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["mat-inferencia"],
       "title": "Quais argumentos são válidos",
       "subject": "Regras de inferência e falácias",
       "prompt": "Avalie a validade dos argumentos a seguir.\n\nI. Se o código compila, os testes rodam. Os testes rodaram. Logo, o código compilou.\nII. Se o código compila, os testes rodam. O código não compilou. Logo, os testes não rodaram.\nIII. Se o código compila, os testes rodam. Os testes não rodaram. Logo, o código não compilou.\nIV. O erro está no front-end ou no back-end. O erro não está no front-end. Logo, está no back-end.\n\nSão argumentos válidos apenas",
-      "options": ["I e II.", "I e III.", "II e IV.", "III e IV.", "I, III e IV."],
-      "answer": "D",
       "explanation": "Resposta: D.\n\nUm argumento é válido quando não existe situação com as premissas verdadeiras e a conclusão falsa.\n\nI é inválido. É a falácia de afirmar o consequente: os testes podem ter rodado por outro motivo, por exemplo um script que roda testes já compilados.\nII é inválido. É a falácia de negar o antecedente, pelo mesmo motivo.\nIII é válido. É modus tollens: de p → q e ¬q, conclui-se ¬p.\nIV é válido. É o silogismo disjuntivo: de p ∨ q e ¬p, conclui-se q.\n\nAs outras alternativas:\nA) Escolhe as duas falácias.\nB) Inclui I, que afirma o consequente.\nC) Inclui II, que nega o antecedente.\nE) Inclui I.",
-      "check": "Nova resolução sem o gabarito: busca de contraexemplo por tabela-verdade; I e II têm contraexemplo (p falsa, q verdadeira); III e IV não têm."
+      "check": "Nova resolução sem o gabarito: busca de contraexemplo por tabela-verdade; I e II têm contraexemplo (p falsa, q verdadeira); III e IV não têm.",
+      "truth": ["III", "IV"],
+      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["I", "III", "IV"]]
     },
     {
       "id": "gen-mat-negacao-quantificador",
@@ -120,16 +120,12 @@
       "title": "Correlação e causa",
       "subject": "Correlação de Pearson e causalidade",
       "prompt": "Uma pesquisa com estudantes encontrou correlação de Pearson r = 0,9 entre horas semanais de estudo e nota no ENADE.\n\nConsidere as asserções.\n\nI. Esse resultado permite concluir que estudar mais causa notas maiores.\n\nPORQUE\n\nII. Um valor de r próximo de 1 indica forte associação linear positiva entre as duas variáveis.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "D",
       "explanation": "Resposta: D.\n\nII é verdadeira: r varia de −1 a 1, e 0,9 indica que, quando uma variável cresce, a outra tende a crescer de forma aproximadamente linear.\n\nI é falsa: correlação não basta para afirmar causa. Pode haver uma terceira variável por trás das duas, como motivação ou base anterior, ou causalidade no sentido contrário. Para concluir causa seria preciso, por exemplo, um experimento com grupos sorteados.\n\nAs outras alternativas:\nA) Trata associação como prova de causa. É a armadilha de causa trocada.\nB) Também considera I verdadeira.\nC) Inverte: II é a afirmação verdadeira.\nE) II é verdadeira.",
-      "check": "Nova resolução sem o gabarito: r = 0,9 indica associação linear forte (II verdadeira); correlação não implica causalidade (I falsa). Opção D."
+      "check": "Nova resolução sem o gabarito: r = 0,9 indica associação linear forte (II verdadeira); correlação não implica causalidade (I falsa). Opção D.",
+      "assertion": {
+        "first": false,
+        "second": true
+      }
     },
     {
       "id": "gen-mat-soma-graus",

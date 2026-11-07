@@ -6,34 +6,21 @@
     {
       "id": "gen-comp-fase-erro",
       "kind": "ESPELHO",
-      "format": "ITENS",
-      "concepts": [
-        "comp-fases",
-        "comp-semantica",
-        "comp-lexico"
-      ],
+      "format": "ITENS4",
+      "concepts": ["comp-fases", "comp-semantica", "comp-lexico"],
       "title": "Em que fase cada erro aparece",
       "subject": "Fases do compilador e tipos de erro",
       "prompt": "Um compilador para uma linguagem parecida com C, com tipagem estática, organiza a análise em três fases: léxica, sintática e semântica. Avalie as afirmações sobre onde cada erro é detectado.\n\nI. Um caractere que não pertence a nenhum token da linguagem, como @ fora de uma cadeia de caracteres, é detectado na análise léxica.\nII. A falta do ponto e vírgula ao fim de um comando é detectada na análise sintática.\nIII. Usar uma variável que nunca foi declarada é detectado na análise sintática, porque o nome não aparece na gramática.\nIV. Atribuir uma cadeia de caracteres a uma variável do tipo int é detectado na análise semântica.\n\nÉ correto apenas o que se afirma em",
-      "options": [
-        "I e III.",
-        "II e III.",
-        "III e IV.",
-        "II, III e IV.",
-        "I, II e IV."
-      ],
-      "answer": "E",
-      "explanation": "Resposta: E.\n\nI está correta. O analisador léxico agrupa caracteres em tokens descritos por expressões regulares. Um símbolo que não inicia nenhum token válido é erro léxico.\n\nII está correta. A gramática exige o ; ao fim do comando. A sequência de tokens não se encaixa em nenhuma regra, e isso é erro sintático.\n\nIII está errada. A gramática fala de identificadores em geral (o token ID), não de nomes específicos. A frase x = 1; é sintaticamente válida mesmo sem declaração. Saber se x foi declarado exige a tabela de símbolos, consultada na análise semântica, que trata de contexto: declarações, escopos e tipos.\n\nIV está correta. Verificar tipos é a tarefa típica da análise semântica.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nD) Inclui III e deixa de fora I.",
-      "check": "Nova resolução sem o gabarito: classificação clássica das fases (léxica: tokens; sintática: estrutura; semântica: declarações e tipos). Opção E."
+      "explanation": "Resposta: D.\n\nI está correta. O analisador léxico agrupa caracteres em tokens descritos por expressões regulares. Um símbolo que não inicia nenhum token válido é erro léxico.\n\nII está correta. A gramática exige o ; ao fim do comando. A sequência de tokens não se encaixa em nenhuma regra, e isso é erro sintático.\n\nIII está errada. A gramática fala de identificadores em geral (o token ID), não de nomes específicos. A frase x = 1; é sintaticamente válida mesmo sem declaração. Saber se x foi declarado exige a tabela de símbolos, consultada na análise semântica, que trata de contexto: declarações, escopos e tipos.\n\nIV está correta. Verificar tipos é a tarefa típica da análise semântica.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III e deixa de fora I.",
+      "check": "Nova resolução sem o gabarito: classificação clássica das fases (léxica: tokens; sintática: estrutura; semântica: declarações e tipos). Opção D.",
+      "truth": ["I", "II", "IV"],
+      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["II", "III", "IV"]]
     },
     {
       "id": "gen-comp-recursao-esquerda",
       "kind": "ESPELHO",
       "format": "SIMPLES",
-      "concepts": [
-        "comp-descendente",
-        "comp-gramaticas"
-      ],
+      "concepts": ["comp-descendente", "comp-gramaticas"],
       "title": "Eliminar recursão à esquerda",
       "subject": "Análise LL(1) e recursão à esquerda",
       "prompt": "Uma equipe quer escrever à mão um analisador descendente recursivo, LL(1), para expressões de soma. A gramática original é:\n\nE → E + T | T\nT → id\n\nO analisador entra em laço infinito ao tentar expandir E. Qual gramática equivalente resolve o problema e serve para análise LL(1)?",
@@ -52,41 +39,27 @@
       "id": "gen-comp-ambiguidade",
       "kind": "ESPELHO",
       "format": "ASSERCAO",
-      "concepts": [
-        "comp-gramaticas",
-        "comp-ascendente"
-      ],
+      "concepts": ["comp-gramaticas", "comp-ascendente"],
       "title": "Gramática ambígua de expressões",
       "subject": "Ambiguidade, precedência e árvores de derivação",
       "prompt": "Uma linguagem de consultas usa, para expressões aritméticas, a gramática:\n\nE → E + E | E * E | id\n\nI. Essa gramática é ambígua.\n\nPORQUE\n\nII. A cadeia id + id * id tem duas árvores de derivação diferentes: uma agrupa (id + id) * id e a outra, id + (id * id).\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "A",
       "explanation": "Resposta: A.\n\nUma gramática é ambígua quando alguma cadeia tem mais de uma árvore de derivação, ou mais de uma derivação mais à esquerda. II mostra exatamente isso para id + id * id, então prova I.\n\nA ambiguidade importa porque cada árvore dá um significado diferente: (2 + 3) * 4 = 20, mas 2 + (3 * 4) = 14. Há duas formas de resolver:\n- reescrever a gramática em níveis de precedência: E → E + T | T; T → T * F | F; F → id;\n- informar ao gerador de analisadores (Yacc, Bison) a precedência e a associatividade dos operadores, o que resolve os conflitos empilha-reduz.\n\nAs outras alternativas:\nB) Não reconhece que exibir duas árvores para a mesma cadeia é a própria definição de ambiguidade.\nC) II é verdadeira: as duas árvores existem.\nD) I é verdadeira.\nE) As duas são verdadeiras.",
-      "check": "Nova resolução sem o gabarito: duas derivações mais à esquerda distintas construídas para id + id * id. Opção A."
+      "check": "Nova resolução sem o gabarito: duas derivações mais à esquerda distintas construídas para id + id * id. Opção A.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": true
+      }
     },
     {
       "id": "gen-comp-first",
       "kind": "LACUNA",
       "format": "SIMPLES",
-      "concepts": [
-        "comp-descendente"
-      ],
+      "concepts": ["comp-descendente"],
       "title": "Conjunto FIRST com produção vazia",
       "subject": "Cálculo de FIRST com ε",
       "prompt": "Considere a gramática, em que S é o símbolo inicial, a, b e c são terminais e ε é a cadeia vazia:\n\nS → A b | c\nA → a A | ε\n\nQual é o conjunto FIRST(S)?",
-      "options": [
-        "{a}",
-        "{a, c}",
-        "{a, b, c, ε}",
-        "{a, b, c}",
-        "{b, c}"
-      ],
+      "options": ["{a}", "{a, c}", "{a, b, c, ε}", "{a, b, c}", "{b, c}"],
       "answer": "D",
       "explanation": "Resposta: D.\n\nFIRST(A) = {a, ε}: A começa com a ou é vazio.\n\nPara S → A b: FIRST(A b) inclui FIRST(A) sem o ε, ou seja {a}. Como A pode ser vazio, o que vem depois dele também pode iniciar a cadeia, e b entra no conjunto. Logo, FIRST(A b) = {a, b}.\n\nPara S → c: FIRST = {c}.\n\nFIRST(S) = {a, b, c}. O ε não entra, porque nenhuma alternativa de S deriva a cadeia vazia: as duas terminam num terminal.\n\nAs outras alternativas:\nA) Olha só o primeiro símbolo de A e ignora a alternativa c.\nB) Esquece que A pode ser vazio, caso em que S começa com b.\nC) Inclui ε, mas S nunca gera a cadeia vazia.\nE) Esquece o caso em que A começa com a.",
       "check": "Nova resolução sem o gabarito: algoritmo de FIRST aplicado; FIRST(A) = {a, ε}, FIRST(S) = {a, b, c}. Opção D."
@@ -95,9 +68,7 @@
       "id": "gen-comp-jit",
       "kind": "QUENTE",
       "format": "SIMPLES",
-      "concepts": [
-        "comp-tradutores"
-      ],
+      "concepts": ["comp-tradutores"],
       "title": "Por que o JIT acelera o JavaScript",
       "subject": "Interpretação, compilação antecipada e JIT",
       "prompt": "Motores de JavaScript atuais, como o V8, começam interpretando o código e, enquanto o programa roda, compilam para código de máquina os trechos executados com frequência, usando informações observadas em execução (por exemplo, os tipos que uma função costuma receber).\n\nQual afirmação sobre essa compilação just-in-time (JIT) está correta?",

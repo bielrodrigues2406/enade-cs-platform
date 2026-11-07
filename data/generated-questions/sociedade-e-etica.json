@@ -44,15 +44,15 @@
     {
       "id": "gen-et-lgpd-principios",
       "kind": "QUENTE",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["et-lgpd"],
       "title": "LGPD num aplicativo de academia",
       "subject": "LGPD: bases legais, dados sensíveis e direitos",
       "prompt": "Um aplicativo de academia coleta nome, e-mail, peso, frequência cardíaca do relógio inteligente, localização contínua e a lista de contatos do celular. Avalie as afirmações à luz da LGPD (Lei 13.709/2018).\n\nI. O consentimento é a única base legal que permite tratar dados pessoais.\nII. Dados de saúde, como a frequência cardíaca, são dados pessoais sensíveis.\nIII. O usuário tem direito de pedir acesso aos dados que o aplicativo mantém sobre ele.\nIV. Pelo princípio da necessidade, coletar a lista de contatos e a localização contínua só se justifica se forem indispensáveis à finalidade informada.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e II.", "I e IV.", "II, III e IV.", "I, II e III.", "III e IV."],
-      "answer": "C",
-      "explanation": "Resposta: C.\n\nI está errada. A LGPD lista várias bases legais além do consentimento, como cumprimento de obrigação legal, execução de contrato e legítimo interesse (para dados não sensíveis). Tratar o consentimento como única base é um equívoco comum.\n\nII está correta. Dado referente à saúde é dado pessoal sensível, e só pode ser tratado nas hipóteses mais restritas da lei.\n\nIII está correta. O acesso está entre os direitos do titular, junto de correção, eliminação, portabilidade e informação sobre compartilhamento.\n\nIV está correta. O princípio da necessidade limita a coleta ao mínimo para a finalidade. Contatos e localização contínua dificilmente são necessários para registrar treinos.\n\nAs outras alternativas:\nA) Inclui I e deixa de fora III e IV.\nB) Inclui I.\nD) Inclui I e deixa de fora IV.\nE) Deixa de fora II.",
-      "check": "Nova resolução sem o gabarito: LGPD art. 7º (bases legais), art. 5º, II (dado sensível), art. 18 (direitos), art. 6º, III (necessidade). Opção C."
+      "explanation": "Resposta: E.\n\nI está errada. A LGPD lista várias bases legais além do consentimento, como cumprimento de obrigação legal, execução de contrato e legítimo interesse (para dados não sensíveis). Tratar o consentimento como única base é um equívoco comum.\n\nII está correta. Dado referente à saúde é dado pessoal sensível, e só pode ser tratado nas hipóteses mais restritas da lei.\n\nIII está correta. O acesso está entre os direitos do titular, junto de correção, eliminação, portabilidade e informação sobre compartilhamento.\n\nIV está correta. O princípio da necessidade limita a coleta ao mínimo para a finalidade. Contatos e localização contínua dificilmente são necessários para registrar treinos.\n\nAs outras alternativas:\nA) Inclui I e deixa de fora III e IV.\nB) Inclui I.\nC) Deixa de fora II.\nD) Inclui I e deixa de fora IV.",
+      "check": "Nova resolução sem o gabarito: LGPD art. 7º (bases legais), art. 5º, II (dado sensível), art. 18 (direitos), art. 6º, III (necessidade). Opção E.",
+      "truth": ["II", "III", "IV"],
+      "combos": [["I", "II"], ["I", "IV"], ["III", "IV"], ["I", "II", "III"], ["II", "III", "IV"]]
     },
     {
       "id": "gen-et-vies-proxy",
@@ -62,16 +62,13 @@
       "title": "Triagem de currículos sem o campo gênero",
       "subject": "Viés algorítmico e variáveis substitutas",
       "prompt": "Uma empresa treinou um modelo de triagem de currículos com as contratações dos últimos dez anos, num setor em que a maioria dos contratados era homem. Para evitar discriminação, a equipe retirou o campo gênero dos dados.\n\nI. Mesmo sem o campo gênero, o modelo pode continuar desfavorecendo candidatas.\n\nPORQUE\n\nII. Outros atributos correlacionados ao gênero, como o nome de certos cursos, escolas, associações esportivas ou a escolha de palavras, podem funcionar como substitutos (proxies), e o modelo aprende o padrão histórico das contratações.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "A",
       "explanation": "Resposta: A.\n\nO modelo aprende a reproduzir as decisões passadas. Se elas favoreceram homens, qualquer atributo que se correlacione com o gênero ajuda o modelo a acertar o padrão histórico, e passa a funcionar como o campo retirado. II explica por que I acontece. Casos reais de sistemas de recrutamento penalizaram termos associados a mulheres justamente assim.\n\nRetirar o atributo sensível (\"justiça por desconhecimento\") é insuficiente. Práticas mais adequadas:\n- medir as taxas de seleção por grupo;\n- auditar os atributos usados;\n- rever os dados e a definição do que é um \"bom candidato\";\n- manter supervisão humana sobre decisões que afetam pessoas.\n\nAs outras alternativas:\nB) Não reconhece que os substitutos são o mecanismo da discriminação.\nC) II é verdadeira: correlações desse tipo são comuns em dados reais.\nD) I é verdadeira; retirar o campo não garante neutralidade.\nE) As duas são verdadeiras.",
-      "check": "Nova resolução sem o gabarito: viés por proxies em dados históricos (literatura de fairness em aprendizado de máquina). Opção A."
+      "check": "Nova resolução sem o gabarito: viés por proxies em dados históricos (literatura de fairness em aprendizado de máquina). Opção A.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": true
+      }
     }
   ]
 }

@@ -44,15 +44,15 @@
     {
       "id": "gen-cg-sombreamento",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["cg-iluminacao"],
       "title": "Modelos de sombreamento",
       "subject": "Sombreamento constante, Gouraud e Phong",
       "prompt": "Num visualizador 3D, uma esfera modelada com poucos polígonos é iluminada por uma luz pontual forte, com brilho especular. Avalie as afirmações.\n\nI. No sombreamento de Gouraud, a iluminação é calculada nos vértices e as cores resultantes são interpoladas no interior de cada polígono.\nII. No sombreamento de Phong, as normais são interpoladas no interior do polígono e a iluminação é calculada por pixel.\nIII. O sombreamento constante (flat) produz um brilho especular suave no meio de faces grandes.\nIV. A componente difusa do modelo de Lambert depende do ângulo entre a normal da superfície e a direção da luz.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e III.", "II e III.", "I, II e IV.", "III e IV.", "I, II, III e IV."],
-      "answer": "C",
-      "explanation": "Resposta: C.\n\nI está correta. Gouraud é barato: ilumina poucos pontos (os vértices) e interpola cores. Se o brilho especular cair no meio de uma face, entre vértices, ele some ou fica borrado.\n\nII está correta. Phong interpola a normal e calcula a iluminação em cada pixel. É mais caro e captura o brilho especular onde quer que ele caia.\n\nIII está errada. No sombreamento constante, cada face recebe uma única cor, calculada uma vez. Não há variação dentro da face, e o resultado é a aparência facetada, sem brilho suave.\n\nIV está correta. A intensidade difusa é proporcional a cos θ = N · L (normal e direção da luz normalizadas): máxima com a luz perpendicular à superfície e nula com luz rasante.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nD) Inclui III e deixa de fora I e II.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: definições de Gouraud, Phong, flat e Lambert. Opção C."
+      "explanation": "Resposta: D.\n\nI está correta. Gouraud é barato: ilumina poucos pontos (os vértices) e interpola cores. Se o brilho especular cair no meio de uma face, entre vértices, ele some ou fica borrado.\n\nII está correta. Phong interpola a normal e calcula a iluminação em cada pixel. É mais caro e captura o brilho especular onde quer que ele caia.\n\nIII está errada. No sombreamento constante, cada face recebe uma única cor, calculada uma vez. Não há variação dentro da face, e o resultado é a aparência facetada, sem brilho suave.\n\nIV está correta. A intensidade difusa é proporcional a cos θ = N · L (normal e direção da luz normalizadas): máxima com a luz perpendicular à superfície e nula com luz rasante.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III e deixa de fora I e II.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: definições de Gouraud, Phong, flat e Lambert. Opção D.",
+      "truth": ["I", "II", "IV"],
+      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
     },
     {
       "id": "gen-cg-ray-tracing-tempo-real",

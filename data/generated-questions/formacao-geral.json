@@ -44,15 +44,15 @@
     {
       "id": "gen-fg-clima-mitigacao",
       "kind": "QUENTE",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["fg-sustentabilidade"],
       "title": "Mitigação e adaptação às mudanças climáticas",
       "subject": "Mudança do clima: mitigação e adaptação",
       "prompt": "Em novembro de 2025, Belém sediou a 30ª Conferência das Partes da Convenção-Quadro das Nações Unidas sobre Mudança do Clima (COP30). As políticas climáticas costumam ser divididas em mitigação, que reduz as emissões de gases de efeito estufa ou aumenta sua remoção, e adaptação, que reduz a vulnerabilidade aos impactos das mudanças climáticas.\n\nAvalie as afirmações.\n\nI. Reduzir o desmatamento e recuperar florestas são medidas de mitigação.\nII. Construir sistemas de drenagem para enfrentar chuvas mais intensas é uma medida de adaptação.\nIII. Populações mais pobres tendem a ser mais afetadas por eventos climáticos extremos, por morarem em áreas de maior risco e terem menos recursos para se recuperar.\nIV. Investir em adaptação torna a mitigação desnecessária, porque as cidades passam a suportar qualquer nível de aquecimento.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e IV.", "II e IV.", "I, II e III.", "III e IV.", "I, II, III e IV."],
-      "answer": "C",
-      "explanation": "Resposta: C.\n\nI está correta. Florestas armazenam carbono; derrubá-las libera esse carbono, e recuperá-las o retira da atmosfera.\nII está correta. A drenagem não reduz emissões; prepara a cidade para um impacto que já ocorre.\nIII está correta. É o conceito de justiça climática: quem menos contribuiu para as emissões frequentemente mora em encostas, várzeas ou periferias sem infraestrutura e sofre mais.\nIV está errada. Adaptação tem limites físicos e econômicos: há impactos que não se contornam com obras, como a perda de ecossistemas e a elevação do mar. As duas estratégias são complementares.\n\nAs outras alternativas:\nA) Inclui IV.\nB) Inclui IV.\nD) Inclui IV.\nE) Inclui IV.",
-      "check": "Nova resolução sem o gabarito: definições de mitigação e adaptação (IPCC) e justiça climática; IV contraria os limites da adaptação. Opção C."
+      "explanation": "Resposta: D.\n\nI está correta. Florestas armazenam carbono; derrubá-las libera esse carbono, e recuperá-las o retira da atmosfera.\nII está correta. A drenagem não reduz emissões; prepara a cidade para um impacto que já ocorre.\nIII está correta. É o conceito de justiça climática: quem menos contribuiu para as emissões frequentemente mora em encostas, várzeas ou periferias sem infraestrutura e sofre mais.\nIV está errada. Adaptação tem limites físicos e econômicos: há impactos que não se contornam com obras, como a perda de ecossistemas e a elevação do mar. As duas estratégias são complementares.\n\nAs outras alternativas:\nA) Inclui IV.\nB) Inclui IV.\nC) Inclui IV.\nE) Inclui IV.",
+      "check": "Nova resolução sem o gabarito: definições de mitigação e adaptação (IPCC) e justiça climática; IV contraria os limites da adaptação. Opção D.",
+      "truth": ["I", "II", "III"],
+      "combos": [["I", "IV"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"], ["I", "II", "III", "IV"]]
     },
     {
       "id": "gen-fg-envelhecimento",
@@ -81,16 +81,13 @@
       "title": "Inteligência artificial e renda do trabalho",
       "subject": "Automação, produtividade e desigualdade",
       "prompt": "Estudos sobre a adoção de inteligência artificial nas empresas discutem seus efeitos sobre o emprego e a renda.\n\nI. A adoção de inteligência artificial pode ampliar a desigualdade de renda se os ganhos de produtividade se concentrarem nos donos das empresas e nos trabalhadores mais qualificados.\n\nPORQUE\n\nII. Modelos de inteligência artificial generativa produzem textos, imagens e código a partir de instruções em linguagem natural.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "B",
       "explanation": "Resposta: B.\n\nI é verdadeira. O efeito distributivo da tecnologia depende de quem se apropria dos ganhos. Se a automação substitui tarefas de trabalhadores menos qualificados e o lucro fica com poucos, a desigualdade cresce. Políticas de formação, proteção social e negociação coletiva influenciam esse resultado.\n\nII também é verdadeira: descreve o que os modelos generativos fazem.\n\nMas II não justifica I. Saber o que a tecnologia produz não explica por que ela aumentaria a desigualdade; a explicação estaria na distribuição dos ganhos e na substituição de tarefas, o que II não menciona. Esse é o padrão de alternativa mais difícil da asserção-razão: duas verdades sem relação de causa.\n\nAs outras alternativas:\nA) Trata uma descrição técnica como causa do efeito social.\nC) II é verdadeira.\nD) I é verdadeira; a desigualdade é uma possibilidade reconhecida.\nE) As duas são verdadeiras.",
-      "check": "Nova resolução sem o gabarito: I e II verdadeiras; II descreve capacidade técnica e não explica o efeito distributivo. Opção B."
+      "check": "Nova resolução sem o gabarito: I e II verdadeiras; II descreve capacidade técnica e não explica o efeito distributivo. Opção B.",
+      "assertion": {
+        "first": true,
+        "second": true,
+        "justifies": false
+      }
     },
     {
       "id": "gen-fg-fome-producao",
@@ -165,15 +162,15 @@
     {
       "id": "gen-fg-inclusao-deficiencia",
       "kind": "QUENTE",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["fg-direitos-humanos", "fg-tecnologia-sociedade"],
       "title": "Lei Brasileira de Inclusão e acessibilidade",
       "subject": "Pessoa com deficiência, barreiras e acessibilidade",
       "prompt": "A Lei Brasileira de Inclusão da Pessoa com Deficiência (Lei 13.146/2015) define deficiência a partir da interação entre impedimentos de longo prazo e as barreiras presentes no ambiente. Avalie as afirmações.\n\nI. Pela lei, a deficiência não é vista apenas como característica do corpo da pessoa, mas como resultado da interação entre o impedimento e as barreiras que dificultam a participação plena na sociedade.\nII. Sites e aplicativos sem recursos de acessibilidade, como textos alternativos em imagens e navegação por teclado, constituem barreiras.\nIII. Garantir acessibilidade é responsabilidade exclusiva do Estado, sem obrigações para empresas privadas.\nIV. Atitudes preconceituosas que impedem ou dificultam a participação de pessoas com deficiência são uma das formas de barreira previstas na lei.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e III.", "II e III.", "III e IV.", "I, II e IV.", "I, II, III e IV."],
-      "answer": "D",
       "explanation": "Resposta: D.\n\nI está correta. É o chamado modelo social, adotado pela lei em sintonia com a Convenção da ONU sobre os Direitos das Pessoas com Deficiência: a mesma limitação pesa mais ou menos conforme o ambiente oferece ou nega condições.\nII está correta. A lei prevê barreiras nas comunicações e na informação e barreiras tecnológicas. Interfaces inacessíveis impedem o acesso a serviços, educação e trabalho, um ponto em que profissionais de Computação atuam diretamente.\nIII está errada. A lei impõe obrigações também a empresas, por exemplo a de manter sites acessíveis.\nIV está correta. As barreiras atitudinais estão entre as categorias de barreira definidas na lei.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: Lei 13.146/2015, art. 2º (conceito), art. 3º, IV (barreiras, incluindo comunicações, tecnológicas e atitudinais) e art. 63 (sítios acessíveis). Opção D."
+      "check": "Nova resolução sem o gabarito: Lei 13.146/2015, art. 2º (conceito), art. 3º, IV (barreiras, incluindo comunicações, tecnológicas e atitudinais) e art. 63 (sítios acessíveis). Opção D.",
+      "truth": ["I", "II", "IV"],
+      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
     }
   ]
 }
