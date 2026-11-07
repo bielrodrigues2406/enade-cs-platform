@@ -102,6 +102,33 @@
       "explanation": "Resposta: A.\n\nCom E → T − E, o primeiro número fica à esquerda e todo o resto vira a subárvore da direita. A árvore de 10 − 4 − 3 é 10 − (4 − 3) = 10 − 1 = 9. A subtração da aritmética é associativa à esquerda, (10 − 4) − 3 = 3, então a gramática mudou o significado. A forma clássica de manter a associatividade num analisador descendente é usar E → T E', com E' → − T E' | ε, e avaliar acumulando da esquerda para a direita.\n\nAs outras alternativas:\nB) A ordem de leitura não define o agrupamento; quem define é a forma da árvore.\nC) É a gramática que define a associatividade, e esta a define à direita.\nD) A gramática não é ambígua: cada expressão tem uma única árvore.\nE) Nenhuma regra troca sinais; o 11 não sai de nenhum agrupamento.",
       "check": "Nova resolução sem o gabarito: árvore única 10 − (4 − 3) = 9, contra 3 da aritmética usual.",
       "stimulus": ["TEXTO_BASE", "CODIGO"]
+    },
+    {
+      "id": "gen-comp-tokens",
+      "kind": "LACUNA",
+      "format": "CALCULO",
+      "concepts": ["comp-lexico"],
+      "title": "Quantos tokens tem a linha",
+      "subject": "Análise léxica e formação de tokens",
+      "prompt": "O analisador léxico lê os caracteres do programa e os agrupa em tokens: palavras reservadas, identificadores, constantes, operadores e pontuação. Espaços e comentários são descartados. Pela regra do casamento mais longo, o analisador forma o maior token possível a cada passo, então >= é um único operador, e não > seguido de =.\n\nNum compilador de C, o analisador léxico recebe a linha:\n\n```\nif (x1 >= 10) y = x1 * 2;\n```\n\nQuantos tokens ele produz?",
+      "options": ["9", "10", "11", "13", "12"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nOs tokens são: if, (, x1, >=, 10, ), y, =, x1, *, 2 e ;. São 12. O identificador x1 é um token só, porque letras e dígitos formam o identificador inteiro, e >= é um operador só, pelo casamento mais longo.\n\nAs outras alternativas:\nA) 9 conta só os tokens distintos, mas x1 aparece duas vezes e cada ocorrência é um token.\nB) 10 esquece os parênteses, que também são tokens.\nC) 11 esquece o ponto e vírgula.\nD) 13 separa >= em dois tokens, contrariando o casamento mais longo.",
+      "check": "Executado com clang -Xclang -dump-tokens: 12 tokens de if até semi, com >= como um único token (greaterequal).",
+      "stimulus": ["TEXTO_BASE", "CODIGO"]
+    },
+    {
+      "id": "gen-comp-erros-semanticos",
+      "kind": "ESPELHO",
+      "format": "ITENS3",
+      "concepts": ["comp-semantica", "comp-fases"],
+      "title": "Em que fase cada erro aparece",
+      "subject": "Erros detectados na análise semântica",
+      "prompt": "Um compilador detecta erros em fases diferentes. A análise léxica recusa caracteres que não formam token válido; a sintática, sequências de tokens que a gramática não aceita; a semântica, programas bem formados que violam regras de significado, como declaração antes do uso e compatibilidade de tipos, consultando a tabela de símbolos.\n\nUma professora mostra três trechos com erro, escritos em C, e pede que a turma diga em que fase cada um é detectado.\n\nI. Usar a variável total sem tê-la declarado é detectado na análise semântica.\nII. Esquecer o ponto e vírgula no fim de um comando é detectado na análise semântica.\nIII. Somar um inteiro a uma variável do tipo struct é detectado na análise semântica.\n\nÉ correto o que se afirma em",
+      "truth": ["I", "III"],
+      "explanation": "Resposta: C.\n\nI está correta. A sequência de tokens é válida; a falta de declaração só aparece quando o compilador consulta a tabela de símbolos, na análise semântica.\n\nII está errada. Sem o ponto e vírgula, a sequência de tokens não casa com a gramática: é erro sintático.\n\nIII está correta. A expressão é sintaticamente válida, mas os tipos dos operandos são incompatíveis: a verificação de tipos faz parte da análise semântica.\n\nAs outras alternativas:\nA) Deixa de fora III.\nB) Só II, que é a falsa.\nD) Inclui II.\nE) Inclui II.",
+      "check": "Compilado com gcc: variável não declarada e soma com struct geram erros de semântica (undeclared, invalid operands); ponto e vírgula ausente gera erro de sintaxe (expected ',' or ';' before 'return').",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

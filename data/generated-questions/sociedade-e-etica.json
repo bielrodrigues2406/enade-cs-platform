@@ -83,6 +83,34 @@
       "explanation": "Resposta: B.\n\nI está correta. O artigo 13 obriga o provedor de conexão a manter os registros de conexão, sob sigilo e em ambiente controlado, por um ano.\n\nII está errada. O artigo 14 proíbe o provedor de conexão de guardar os registros de acesso a aplicações.\n\nIII está correta. O artigo 15 obriga o provedor de aplicações constituído como pessoa jurídica, com fins econômicos, a manter os registros de acesso por seis meses.\n\nIV está errada. A neutralidade (artigo 9) exige tratar os pacotes de forma isonômica, sem distinção por conteúdo, origem ou serviço. Aviso no contrato não autoriza a discriminação.\n\nAs outras alternativas:\nA) Inclui II.\nC) Junta as duas afirmações falsas.\nD) Inclui IV e deixa de fora I.\nE) Inclui IV.",
       "check": "Nova resolução sem o gabarito, conferida com os artigos 9, 13, 14 e 15 da Lei 12.965/2014: I e III corretas.",
       "stimulus": ["TEXTO_BASE", "CENARIO"]
+    },
+    {
+      "id": "gen-et-lgpd-titular",
+      "kind": "ESPELHO",
+      "format": "ITENS4",
+      "concepts": ["et-lgpd"],
+      "title": "Dados de pacientes num aplicativo de clínica",
+      "subject": "Dados sensíveis, bases legais e direitos do titular na LGPD",
+      "prompt": "Uma rede de clínicas lança um aplicativo para marcar consultas e ver resultados de exames. A equipe de produto quer usar os dados também para pesquisa interna e campanhas. Antes do lançamento, a encarregada de proteção de dados prepara um parecer com base na Lei Geral de Proteção de Dados (Lei 13.709/2018).\n\nAvalie as afirmações do parecer.\n\nI. O consentimento é a única base legal que permite tratar dados pessoais no Brasil.\nII. Resultados de exames são dados pessoais sensíveis, porque se referem à saúde do titular.\nIII. O paciente pode pedir a eliminação dos dados tratados com base no seu consentimento, ressalvadas as hipóteses de conservação previstas na lei.\nIV. Dados anonimizados de forma que não possam ser revertidos com esforços razoáveis não são considerados dados pessoais pela lei.\n\nÉ correto apenas o que se afirma em",
+      "truth": ["II", "III", "IV"],
+      "combos": [["I", "II"], ["I", "IV"], ["II", "III"], ["III", "IV"], ["II", "III", "IV"]],
+      "explanation": "Resposta: E.\n\nI está errada. O artigo 7 lista várias bases legais além do consentimento, como cumprimento de obrigação legal, execução de contrato, tutela da saúde e legítimo interesse.\n\nII está correta. O artigo 5, inciso II, inclui o dado referente à saúde entre os dados pessoais sensíveis.\n\nIII está correta. O artigo 18, inciso VI, dá ao titular o direito de pedir a eliminação dos dados tratados com o seu consentimento, exceto nas hipóteses de conservação do artigo 16.\n\nIV está correta. Pelo artigo 12, o dado anonimizado não é dado pessoal, salvo quando a anonimização puder ser revertida com esforços razoáveis.\n\nAs outras alternativas:\nA) Inclui I.\nB) Inclui I.\nC) Deixa de fora IV.\nD) Deixa de fora II.",
+      "check": "Nova resolução sem o gabarito, conferida com os artigos 5, 7, 12, 16 e 18 da Lei 13.709/2018: II, III e IV corretas.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
+    },
+    {
+      "id": "gen-et-licencas-associacao",
+      "kind": "ESPELHO",
+      "format": "ASSOCIACAO",
+      "concepts": ["et-licencas", "et-direitos-autorais"],
+      "title": "Licença certa para cada material",
+      "subject": "Licenças de software livre e Creative Commons",
+      "prompt": "Licenças dizem o que outras pessoas podem fazer com uma obra protegida por direito autoral. No software livre, as licenças copyleft exigem que as versões modificadas e distribuídas mantenham a mesma licença; as permissivas deixam incorporar o código em produtos fechados. Para textos, imagens e aulas, as licenças Creative Commons combinam condições como atribuição e uso não comercial.\n\nUm grupo de extensão universitária vai publicar quatro materiais.\n\nLicenças:\n\n1. GPL v3\n2. LGPL v3\n3. MIT\n4. Creative Commons BY-NC\n\nIntenções do grupo:\n\n( ) Uma biblioteca de leitura de arquivos que empresas possam ligar a programas proprietários, mas cujas melhorias na própria biblioteca continuem livres.\n( ) Um aplicativo completo cujas versões modificadas e distribuídas por terceiros tenham obrigatoriamente o código aberto sob a mesma licença.\n( ) Videoaulas que qualquer um pode copiar e adaptar com crédito ao grupo, mas sem fins comerciais.\n( ) Um pequeno utilitário que qualquer pessoa ou empresa pode usar, modificar e fechar, desde que mantenha o aviso de autoria.\n\nA sequência correta, de cima para baixo, é",
+      "options": ["2, 1, 4, 3", "1, 2, 4, 3", "2, 3, 4, 1", "3, 1, 2, 4", "1, 2, 3, 4"],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nA LGPL (2) permite ligar a biblioteca a programas proprietários, mas mantém livres as modificações da própria biblioteca. A GPL (1) é copyleft forte: obras derivadas distribuídas mantêm a GPL. A CC BY-NC (4) exige atribuição e proíbe uso comercial, e serve a conteúdo, não a software. A MIT (3) é permissiva e só exige manter o aviso de autoria e a licença.\n\nAs outras alternativas:\nB) Troca GPL e LGPL: a GPL não permite ligar a biblioteca a programa proprietário distribuído.\nC) Põe a MIT no aplicativo, que não exigiria código aberto, e a GPL no utilitário, que não poderia ser fechado.\nD) Põe a MIT na biblioteca e a LGPL nas videoaulas.\nE) Repete a ordem das licenças, sem relação com as intenções.",
+      "check": "Nova resolução sem o gabarito, conferida com os termos das licenças GPL v3, LGPL v3, MIT e CC BY-NC 4.0: 2, 1, 4, 3.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

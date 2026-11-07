@@ -91,6 +91,40 @@
       "explanation": "Resposta: E.\n\nUm quadro: 1920 × 1080 = 2 073 600 pixels × 3 bytes = 6 220 800 bytes, que dividido por 2²⁰ dá cerca de 5,93 MiB. Com buffer duplo, são dois quadros: cerca de 11,87 MiB.\n\nAs outras alternativas:\nA) 1,98 MiB é um quadro com 1 byte por pixel, como numa imagem em tons de cinza.\nB) 3,96 MiB é o buffer duplo com 1 byte por pixel.\nC) 5,93 MiB é um quadro só, sem o buffer duplo.\nD) 7,91 MiB é um quadro com 4 bytes por pixel, como se houvesse canal alfa.",
       "check": "Executado em Python 3: 1920 × 1080 × 3 = 6 220 800 bytes = 5,93 MiB; o dobro, 11,87 MiB.",
       "stimulus": ["TEXTO_BASE", "CENARIO"]
+    },
+    {
+      "id": "gen-cg-pipeline-ordem",
+      "kind": "ESPELHO",
+      "format": "ORDEM",
+      "concepts": ["cg-pipeline"],
+      "title": "Do vértice ao pixel na placa de vídeo",
+      "subject": "Etapas do pipeline gráfico de rasterização",
+      "prompt": "Jogos e interfaces 3D usam o pipeline de rasterização das placas de vídeo. Os vértices de cada triângulo chegam em coordenadas do modelo e saem como pixels coloridos na tela. Algumas etapas são programáveis, como os sombreadores de vértices e de fragmentos; outras são fixas, como o recorte do que fica fora do volume de visão e o teste que decide qual fragmento fica na frente.\n\nUm estudante montou a ordem das etapas para a apresentação de um trabalho de Computação Gráfica.\n\nQual é a ordem correta?",
+      "options": [
+        "sombreador de vértices, recorte, rasterização, sombreador de fragmentos, teste de profundidade",
+        "rasterização, sombreador de vértices, recorte, sombreador de fragmentos, teste de profundidade",
+        "sombreador de vértices, rasterização, recorte, teste de profundidade, sombreador de fragmentos",
+        "recorte, sombreador de vértices, sombreador de fragmentos, rasterização, teste de profundidade",
+        "sombreador de vértices, sombreador de fragmentos, recorte, rasterização, teste de profundidade"
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nO sombreador de vértices transforma cada vértice até as coordenadas de recorte. O recorte descarta ou corta o que fica fora do volume de visão. A rasterização converte cada triângulo nos fragmentos que ele cobre. O sombreador de fragmentos calcula a cor de cada um, e o teste de profundidade (z-buffer) decide se o fragmento substitui o que já está no pixel.\n\nAs outras alternativas:\nB) A rasterização precisa dos vértices já transformados.\nC) Recorta depois de rasterizar, gerando fragmentos que seriam descartados, e testa a profundidade antes de calcular a cor.\nD) Não há o que recortar antes de transformar os vértices, e os fragmentos só existem depois da rasterização.\nE) O sombreador de fragmentos não pode rodar antes de existirem fragmentos.",
+      "check": "Nova resolução sem o gabarito, conferida com a ordem das etapas do pipeline do OpenGL: vértices, recorte, rasterização, fragmentos, testes por amostra.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
+    },
+    {
+      "id": "gen-cg-zbuffer",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["cg-visibilidade"],
+      "title": "Quem fica na frente no z-buffer",
+      "subject": "Teste de profundidade com z-buffer",
+      "prompt": "O algoritmo do z-buffer resolve a visibilidade pixel a pixel. Cada pixel guarda a cor e a profundidade do fragmento mais próximo visto até agora, e a profundidade começa em 1,0, o fundo. Quando chega um fragmento novo, ele só substitui o que está no pixel se for mais próximo; com o teste configurado como \"menor que\", um fragmento com a mesma profundidade é descartado.\n\nNum jogo, quatro triângulos cobrem o mesmo pixel e são desenhados nesta ordem, com profundidades normalizadas (0 é o mais perto):\n\nVermelho: 0,7\nAzul: 0,4\nVerde: 0,5\nAmarelo: 0,4\n\nQual cor aparece no pixel ao final?",
+      "options": ["Vermelho", "Verde", "Amarelo", "Uma mistura de azul e amarelo", "Azul"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nO pixel começa com profundidade 1,0. O vermelho (0,7 < 1,0) entra. O azul (0,4 < 0,7) entra. O verde (0,5) não é menor que 0,4 e é descartado. O amarelo (0,4) não é menor que 0,4 e também é descartado. Fica o azul.\n\nAs outras alternativas:\nA) O vermelho é só o primeiro a ser desenhado e logo é coberto.\nB) O verde está atrás do azul.\nC) O amarelo empata com o azul, e o teste \"menor que\" descarta o empate. Com \"menor ou igual\", ficaria o amarelo.\nD) O z-buffer não mistura cores; mistura é transparência, outra etapa.",
+      "check": "Simulação em Python 3 do teste \"menor que\" com os quatro fragmentos: azul, profundidade 0,4.",
+      "stimulus": ["TEXTO_BASE", "TABELA"]
     }
   ]
 }
