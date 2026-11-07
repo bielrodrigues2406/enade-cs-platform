@@ -36,17 +36,25 @@ export class CoreLessonComponent {
     if (changes["slug"] || !concept || concept.previousValue?.id !== concept.currentValue?.id) void this.load();
   }
 
+  private generation = 0;
+
+  ngOnDestroy() { this.generation++; }
+
   async load() {
+    const generation = ++this.generation;
     this.lesson.set(null);
     this.error.set("");
     try {
       const url = `/api/core/${encodeURIComponent(this.slug)}/lessons/${encodeURIComponent(this.concept.id)}`;
-      this.lesson.set(await requestJson<Lesson>(url));
+      const lesson = await requestJson<Lesson>(url);
+      if (generation !== this.generation) return;
+      this.lesson.set(lesson);
       afterNextRender(() => {
         window.scrollTo({ top: 0, behavior: "instant" });
         this.host.nativeElement.querySelector<HTMLElement>("#lesson-title")?.focus({ preventScroll: true });
       }, { injector: this.injector });
     } catch (error) {
+      if (generation !== this.generation) return;
       this.error.set(error instanceof Error ? error.message : "Não foi possível abrir a lição. Tente novamente.");
     }
   }

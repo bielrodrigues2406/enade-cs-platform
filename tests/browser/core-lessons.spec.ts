@@ -149,3 +149,30 @@ test("library shortcuts keep the area: sheet training and area flashcards", asyn
   await expect(page).toHaveURL(/\/flashcards$/);
   await expect(page.locator("#flash-session-title")).toContainText("Sistemas operacionais");
 });
+
+// Uma resposta lenta não pode trocar o conteúdo da lição que o histórico reabriu.
+test("a delayed lesson cannot overwrite the lesson restored by Back", async ({ page }) => {
+  await page.goto("/biblioteca/sistemas-operacionais/so-semaforos");
+  const example = page.locator(".lesson-example h3");
+  await expect(example).toHaveText("Semáforo de sinalização e semáforo de recurso");
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => { release = resolve; });
+  let arrived!: () => void;
+  const pending = new Promise<void>((resolve) => { arrived = resolve; });
+  await page.route("**/api/core/sistemas-operacionais/lessons/so-produtor-consumidor", async (route) => {
+    const response = await route.fetch();
+    arrived();
+    await gate;
+    await route.fulfill({ response });
+  });
+  await page.getByRole("button", { name: /^Produtor-consumidor/ }).click();
+  await pending;
+  await page.goBack();
+  await expect(example).toHaveText("Semáforo de sinalização e semáforo de recurso");
+  const delivered = page.waitForEvent("requestfinished", (request) => request.url().endsWith("/lessons/so-produtor-consumidor"));
+  release();
+  await delivered;
+  await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+  await expect(page.getByRole("heading", { name: "Semáforos, mutex e monitores", level: 1 })).toBeVisible();
+  await expect(example).toHaveText("Semáforo de sinalização e semáforo de recurso");
+});
