@@ -70,7 +70,7 @@
         "Um roteador, porque encaminha pacotes por IP e não repassa os broadcasts de uma rede à outra.",
         "Outro switch, porque cada porta de switch forma um domínio de broadcast separado dos demais.",
         "Um repetidor, porque regenera o sinal e descarta os quadros de broadcast desnecessários na rede.",
-        "Um ponto de acesso Wi-Fi, porque isola os clientes sem fio dos computadores ligados por cabo."
+        "Um ponto de acesso Wi-Fi, porque isola automaticamente os clientes sem fio dos computadores ligados por cabo ao switch."
       ],
       "answer": "B",
       "explanation": "Resposta: B.\n\nUm roteador atua na camada de rede: liga redes IP diferentes e decide o encaminhamento pelo endereço IP de destino. Broadcasts de camada 2 não atravessam o roteador. Com as duas redes em sub-redes distintas, cada lado vira um domínio de broadcast próprio, e a comunicação entre elas continua via roteamento.\n\nAs outras alternativas:\nA) O hub trabalha na camada física e repete tudo para todas as portas. Não separa nem colisão nem broadcast.\nC) Cada porta de switch é um domínio de colisão separado, mas o switch repassa broadcasts para todas as portas. Esse é o par confundido clássico.\nD) O repetidor só regenera sinal, na camada física.\nE) Um ponto de acesso funciona como uma ponte entre o meio sem fio e o cabeado e repassa broadcasts.",
@@ -85,7 +85,7 @@
       "subject": "ICMP, TTL e traceroute",
       "prompt": "Um técnico usa o traceroute para descobrir por quais roteadores passam os pacotes até um servidor. A saída lista, em ordem, o endereço de cada roteador do caminho e o tempo de resposta.\n\nComo o traceroute obtém essa informação?",
       "options": [
-        "Cada roteador do caminho anota o próprio endereço no cabeçalho, e o servidor devolve a lista completa.",
+        "Cada roteador do caminho anota o próprio endereço no cabeçalho do pacote, e o servidor de destino devolve a lista completa.",
         "O traceroute consulta o DNS reverso de cada salto, que guarda o caminho completo até o destino.",
         "O traceroute lê, via OSPF, a tabela de roteamento de cada roteador no caminho até o servidor.",
         "Envia pacotes com TTL 1, 2, 3...; cada roteador que zera o TTL responde com ICMP de tempo excedido.",
@@ -108,7 +108,7 @@
         "O protocolo UDP, usado pela maioria dos jogos, não consegue atravessar nenhum tipo de NAT.",
         "O endereço 100.64.0.0/10 é reservado para multicast e por isso não pode receber tráfego comum.",
         "O redirecionamento de portas só funciona em computadores ligados por cabo, e não pelo Wi-Fi.",
-        "A conexão vinda de fora para no NAT da operadora, que não sabe a qual cliente entregá-la."
+        "A conexão vinda de fora para no NAT da operadora, que não sabe a qual dos clientes entregá-la."
       ],
       "answer": "E",
       "explanation": "Resposta: E.\n\nCom CGNAT há dois NATs em sequência: o do roteador doméstico e o da operadora. O redirecionamento de portas configurado em casa só vale para o primeiro. Uma conexão vinda da internet chega ao endereço público da operadora, e o NAT dela só sabe encaminhar respostas a conexões que saíram de dentro. Para conexões novas vindas de fora, não há mapeamento. No IPv6, o espaço de 128 bits permite endereços globais para cada dispositivo, sem NAT. Basta liberar a porta no firewall.\n\nAs outras alternativas:\nA) Firewall desligado não bloqueia nada. O problema está antes, no NAT da operadora.\nB) UDP atravessa NAT normalmente para tráfego iniciado de dentro, e é usado em técnicas como o hole punching.\nC) 100.64.0.0/10 é o espaço compartilhado reservado justamente para CGNAT, não para multicast (224.0.0.0/4).\nD) O meio físico do enlace local não influencia o NAT.",

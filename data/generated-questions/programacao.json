@@ -38,7 +38,7 @@
       "subject": "Resolução de nomes: escopo estático e dinâmico",
       "prompt": "Considere o pseudocódigo a seguir, numa linguagem em que funções podem ser declaradas no nível global:\n\n```\nx = 1\n\nfunção g():\n    retorne x\n\nfunção f():\n    local x = 2\n    retorne g()\n\nimprima f()\n```\n\nQue valor é impresso se a linguagem usar escopo estático (léxico) e se usar escopo dinâmico?",
       "options": [
-        "1 com escopo estático e 2 com escopo dinâmico.",
+        "1 com escopo estático e 2 com o escopo dinâmico.",
         "2 com escopo estático e 1 com escopo dinâmico.",
         "1 nos dois casos.",
         "2 nos dois casos.",

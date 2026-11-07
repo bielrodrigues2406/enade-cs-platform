@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { createApp, db } from "../apps/api/src/main.js";
+import { auditGenerated } from "../apps/api/src/generated-audit.js";
 import {
   generatedFiles, parseGeneratedQuestion, publishGeneratedFile, readGeneratedFile,
 } from "../apps/api/src/generated-publication.js";
@@ -114,6 +115,25 @@ test("sequence options reuse the same steps and figures need a file, alt text an
   assert.throws(() => parseGeneratedQuestion({ ...sample, figure: { ...figure, src: "/illustrations/nao-existe.webp" } }, "q"), /não encontrado/);
   assert.throws(() => parseGeneratedQuestion({ ...sample, figure: { ...figure, alt: "Figura." } }, "q"), /alternativo/);
   assert.throws(() => parseGeneratedQuestion({ ...sample, stimulus: ["VIDEO"] }, "q"), /estímulo/);
+});
+
+test("the bank does not give the answer away by length, statement pattern or letter", async () => {
+  // Limites de docs/GENERATED-QUALITY-AUDIT.md, perto do que se mede nas 203 objetivas oficiais.
+  const questions = [];
+  for (const file of await generatedFiles()) questions.push(...(await readGeneratedFile(file)).questions);
+  const report = auditGenerated(questions);
+  assert.deepEqual(report.simple.overLength, [], "certa mais de 15% maior que a maior errada");
+  assert.ok(report.simple.uniqueLongest <= 0.15, `certa única mais longa em ${report.simple.uniqueLongest}`);
+  assert.ok(report.simple.guesser <= 0.25, `chutador acerta ${report.simple.guesser}`);
+  assert.ok(report.items.firstTrue >= 0.4 && report.items.firstTrue <= 0.75, `item I verdadeiro em ${report.items.firstTrue}`);
+  const trueCounts = Object.values(report.items.byTrueCount);
+  assert.ok(Object.keys(report.items.byTrueCount).length >= 3 && Math.max(...trueCounts) / report.items.count <= 0.85, "número de afirmações verdadeiras variado");
+  const assertion = report.assertion;
+  assert.ok((assertion.byAnswer.A ?? 0) / assertion.count <= 0.35 && (assertion.byAnswer.B ?? 0) / assertion.count >= 0.15 && (assertion.byAnswer.E ?? 0) >= 1, "asserção-razão equilibrada");
+  for (const letter of "ABCDE") {
+    const share = (report.letters[letter] ?? 0) / report.total;
+    assert.ok(share >= 0.12 && share <= 0.26, `letra ${letter} em ${share}`);
+  }
 });
 
 test("publishing is idempotent and generated questions stay out of the official bank and progress", async () => {

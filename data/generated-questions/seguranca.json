@@ -84,7 +84,7 @@
       "options": [
         "Exigir senhas com mais de 20 caracteres, mais difíceis de descobrir em vazamentos de bases.",
         "Remover o segundo fator, já que ele foi contornado e só incomoda os funcionários da empresa.",
-        "Enviar o código do segundo fator por e-mail, em vez de usar uma notificação no celular.",
+        "Enviar o código do segundo fator por e-mail, em vez de usar uma notificação com botões no celular da funcionária.",
         "Exigir que o usuário digite no celular o número mostrado no login e limitar as notificações seguidas.",
         "Bloquear o acesso à conta apenas durante a madrugada, quando as tentativas costumam acontecer."
       ],
@@ -116,7 +116,7 @@
       "subject": "Certificados, TLS e ataque do homem no meio",
       "prompt": "Conectado ao Wi-Fi aberto de um aeroporto, um estudante acessa o site do banco e o navegador mostra: \"Sua conexão não é particular: o certificado não é válido para este domínio\". Ele clica em \"Avançar mesmo assim\".\n\nQual é o risco dessa decisão?",
       "options": [
-        "Nenhum, porque a conexão continua cifrada com HTTPS do começo ao fim do acesso.",
+        "Nenhum, porque a conexão continua cifrada com HTTPS do começo ao fim, mesmo que o certificado seja de outro domínio.",
         "Apenas a velocidade cai, porque o navegador precisa recalcular o certificado a cada nova página visitada.",
         "O site pode exibir anúncios indesejados, mas os dados digitados continuam protegidos pelo TLS.",
         "Alguém na rede pode estar no meio da conexão com um certificado próprio, lendo senhas e dados.",

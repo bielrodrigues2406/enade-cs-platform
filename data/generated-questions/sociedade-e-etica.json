@@ -12,11 +12,11 @@
       "subject": "Anonimização, pseudonimização e reidentificação",
       "prompt": "Um hospital quer publicar, para pesquisa, uma base com diagnósticos de pacientes. A equipe removeu nome e CPF, mas manteve CEP completo, data de nascimento e sexo, e afirmou que a base estava anonimizada e, portanto, fora da LGPD.\n\nQual avaliação é correta?",
       "options": [
-        "A base está anonimizada, porque sem nome e CPF não é possível identificar ninguém.",
-        "A base está anonimizada, desde que o hospital não divulgue o nome do hospital.",
-        "A base não pode ser considerada anonimizada: a combinação de CEP, data de nascimento e sexo identifica de forma única grande parte das pessoas, e cruzá-la com outras bases públicas permite reidentificar pacientes. Os dados continuam sendo pessoais, e sensíveis, por serem de saúde.",
-        "A LGPD não se aplica a dados de saúde usados em pesquisa, em nenhuma hipótese.",
-        "Basta pedir que os pesquisadores assinem um termo prometendo não tentar identificar os pacientes para a base deixar de conter dados pessoais."
+        "A base está anonimizada, porque sem nome e CPF não é possível identificar nenhum dos pacientes.",
+        "A base está anonimizada, desde que o hospital não divulgue em que instituição os dados foram coletados.",
+        "Não está anonimizada: CEP, nascimento e sexo juntos permitem reidentificar pacientes, e os dados são sensíveis.",
+        "A LGPD não se aplica, em nenhuma hipótese, a dados de saúde usados em pesquisa científica.",
+        "Basta que os pesquisadores assinem um termo prometendo não identificar ninguém para a base deixar de ter dados pessoais."
       ],
       "answer": "C",
       "explanation": "Resposta: C.\n\nAtributos que não identificam sozinhos podem identificar quando combinados (quase-identificadores). Pesquisas clássicas mostraram que CEP, data de nascimento e sexo bastam para identificar de forma única a maioria das pessoas numa população. Com uma base eleitoral ou de redes sociais, o pesquisador malicioso liga o diagnóstico à pessoa.\n\nA LGPD considera anonimizado o dado que não pode ser associado ao titular, considerados os meios técnicos razoáveis. Se a reversão é razoável, o dado continua pessoal, e dados de saúde são sensíveis, com proteção reforçada. Técnicas como generalizar (só os três primeiros dígitos do CEP, só o ano de nascimento), suprimir registros raros e medir o k-anonimato reduzem o risco.\n\nAs outras alternativas:\nA) Retirar identificadores diretos não basta: é exatamente o erro que leva à reidentificação.\nB) O risco vem dos atributos mantidos, não do nome da instituição.\nD) A LGPD prevê bases legais específicas para pesquisa, mas não deixa de se aplicar, e recomenda anonimizar quando possível.\nE) Um termo de compromisso é uma medida contratual útil, mas não transforma dado reidentificável em anônimo.",
@@ -31,14 +31,14 @@
       "subject": "Licenças copyleft e distribuição",
       "prompt": "Uma empresa alterou uma biblioteca licenciada sob a GPL versão 3 e a incorporou ao programa de controle de estoque que vende, instalado nos computadores dos clientes.\n\nQual obrigação decorre da licença?",
       "options": [
-        "Nenhuma, porque software livre significa software sem regras de uso.",
-        "Apenas citar o nome dos autores originais no manual.",
-        "Pagar royalties aos autores da biblioteca por cópia vendida.",
-        "Ao distribuir o programa, a empresa deve oferecer aos clientes o código-fonte da obra derivada, sob a mesma licença GPL, com as mesmas liberdades de estudar, modificar e redistribuir.",
-        "A empresa pode fechar o código desde que a alteração na biblioteca tenha mais de cem linhas."
+        "Nenhuma, porque software livre significa software sem regras de uso, cópia ou distribuição.",
+        "Apenas citar no manual do programa o nome dos autores originais da biblioteca alterada.",
+        "Pagar royalties aos autores da biblioteca a cada cópia vendida do programa de estoque.",
+        "Oferecer aos clientes o código-fonte da obra derivada, sob a mesma GPL, ao distribuir o programa.",
+        "Nenhuma, desde que a alteração na biblioteca tenha mais de cem linhas, o que a torna uma obra nova."
       ],
       "answer": "D",
-      "explanation": "Resposta: D.\n\nA GPL é uma licença copyleft: quem distribui uma obra derivada deve distribuí-la sob a mesma licença e dar acesso ao código-fonte correspondente. Vender o programa não é proibido; software livre se refere a liberdade, não a preço. O que não pode é retirar dos clientes as liberdades que a licença garante. Se o uso fosse apenas interno, sem distribuição, a obrigação de fornecer o código não seria acionada (para sistemas oferecidos pela rede, a AGPL trata desse caso).\n\nAs outras alternativas:\nA) Software livre tem licença, com condições, e a GPL é das mais exigentes quanto a obras derivadas.\nB) Atribuição é exigida, mas não basta: o ponto central é o código-fonte sob a mesma licença.\nC) A GPL não cobra royalties; é permitido cobrar pela distribuição.\nE) Não há limite de linhas: qualquer obra derivada distribuída fica sujeita à licença.",
+      "explanation": "Resposta: D.\n\nA GPL é uma licença copyleft: quem distribui uma obra derivada deve distribuí-la sob a mesma licença e dar acesso ao código-fonte correspondente. Vender o programa não é proibido; software livre se refere a liberdade, não a preço. O que não pode é retirar dos clientes as liberdades que a licença garante. Se o uso fosse apenas interno, sem distribuição, a obrigação de fornecer o código não seria acionada (para sistemas oferecidos pela rede, a AGPL trata desse caso).\n\nAs outras alternativas:\nA) Software livre tem licença, com condições, e a GPL é das mais exigentes quanto a obras derivadas.\nB) Atribuição é exigida, mas não basta: o ponto central é o código-fonte sob a mesma licença.\nC) A GPL não cobra royalties; é permitido cobrar pela distribuição.\nE) Não há limite de linhas nem \"obra nova\" por tamanho da alteração: qualquer obra derivada distribuída fica sujeita à licença.",
       "check": "Nova resolução sem o gabarito: obrigação de copyleft na distribuição de obra derivada (GPLv3, seções 5 e 6). Opção D."
     },
     {
@@ -48,11 +48,11 @@
       "concepts": ["et-lgpd"],
       "title": "LGPD num aplicativo de academia",
       "subject": "LGPD: bases legais, dados sensíveis e direitos",
-      "prompt": "Um aplicativo de academia coleta nome, e-mail, peso, frequência cardíaca do relógio inteligente, localização contínua e a lista de contatos do celular. Avalie as afirmações à luz da LGPD (Lei 13.709/2018).\n\nI. O consentimento é a única base legal que permite tratar dados pessoais.\nII. Dados de saúde, como a frequência cardíaca, são dados pessoais sensíveis.\nIII. O usuário tem direito de pedir acesso aos dados que o aplicativo mantém sobre ele.\nIV. Pelo princípio da necessidade, coletar a lista de contatos e a localização contínua só se justifica se forem indispensáveis à finalidade informada.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: E.\n\nI está errada. A LGPD lista várias bases legais além do consentimento, como cumprimento de obrigação legal, execução de contrato e legítimo interesse (para dados não sensíveis). Tratar o consentimento como única base é um equívoco comum.\n\nII está correta. Dado referente à saúde é dado pessoal sensível, e só pode ser tratado nas hipóteses mais restritas da lei.\n\nIII está correta. O acesso está entre os direitos do titular, junto de correção, eliminação, portabilidade e informação sobre compartilhamento.\n\nIV está correta. O princípio da necessidade limita a coleta ao mínimo para a finalidade. Contatos e localização contínua dificilmente são necessários para registrar treinos.\n\nAs outras alternativas:\nA) Inclui I e deixa de fora III e IV.\nB) Inclui I.\nC) Deixa de fora II.\nD) Inclui I e deixa de fora IV.",
-      "check": "Nova resolução sem o gabarito: LGPD art. 7º (bases legais), art. 5º, II (dado sensível), art. 18 (direitos), art. 6º, III (necessidade). Opção E.",
-      "truth": ["II", "III", "IV"],
-      "combos": [["I", "II"], ["I", "IV"], ["III", "IV"], ["I", "II", "III"], ["II", "III", "IV"]]
+      "prompt": "Um aplicativo de academia coleta nome, e-mail, peso, frequência cardíaca do relógio inteligente, localização contínua e a lista de contatos do celular. Avalie as afirmações à luz da LGPD (Lei 13.709/2018).\n\nI. O consentimento é a única base legal que permite tratar dados pessoais.\nII. Dados de saúde, como a frequência cardíaca, são dados pessoais sensíveis.\nIII. O usuário só pode pedir acesso aos dados que o aplicativo mantém sobre ele depois de encerrar a conta.\nIV. Pelo princípio da necessidade, coletar a lista de contatos e a localização contínua só se justifica se forem indispensáveis à finalidade informada.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: C.\n\nI está errada. A LGPD lista várias bases legais além do consentimento, como cumprimento de obrigação legal, execução de contrato e legítimo interesse (para dados não sensíveis). Tratar o consentimento como única base é um equívoco comum.\n\nII está correta. Dado referente à saúde é dado pessoal sensível, e só pode ser tratado nas hipóteses mais restritas da lei.\n\nIII está errada. O acesso aos dados está entre os direitos do titular e pode ser pedido a qualquer momento, sem encerrar a conta, junto de correção, eliminação, portabilidade e informação sobre compartilhamento.\n\nIV está correta. O princípio da necessidade limita a coleta ao mínimo para a finalidade. Contatos e localização contínua dificilmente são necessários para registrar treinos.\n\nAs outras alternativas:\nA) Inclui I e deixa de fora IV.\nB) Inclui I e deixa de fora II.\nD) Inclui III, que condiciona o acesso ao encerramento da conta.\nE) Inclui I e III.",
+      "check": "Nova resolução sem o gabarito: LGPD art. 7º (bases legais além do consentimento, I falsa), art. 5º, II (dado sensível), art. 18 (acesso a qualquer momento, III falsa), art. 6º, III (necessidade). Opção C.",
+      "truth": ["II", "IV"],
+      "combos": [["I", "II"], ["I", "IV"], ["II", "IV"], ["III", "IV"], ["I", "II", "III"]]
     },
     {
       "id": "gen-et-vies-proxy",

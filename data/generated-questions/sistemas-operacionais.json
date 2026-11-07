@@ -62,9 +62,9 @@
       "title": "Tempo médio de espera no SJF",
       "subject": "Escalonamento SJF e FCFS",
       "prompt": "Quatro processos chegam juntos no instante 0, com os seguintes tempos de CPU:\n\nP1: 6 ms\nP2: 8 ms\nP3: 7 ms\nP4: 3 ms\n\nO sistema usa o escalonamento SJF (menor tarefa primeiro), não preemptivo. Qual é o tempo médio de espera dos processos?",
-      "options": ["10,25 ms", "6 ms", "7 ms", "8 ms", "3 ms"],
-      "answer": "C",
-      "explanation": "Resposta: C.\n\nO SJF executa na ordem crescente de duração: P4 (3), P1 (6), P3 (7), P2 (8). As esperas são:\n\nP4 = 0\nP1 = 3\nP3 = 3 + 6 = 9\nP2 = 9 + 7 = 16\n\nMédia: (0 + 3 + 9 + 16) / 4 = 28 / 4 = 7 ms. Entre os escalonamentos não preemptivos, o SJF dá o menor tempo médio de espera possível; a contrapartida é o risco de inanição dos processos longos.\n\nAs outras alternativas:\nA) 10,25 ms é a média do FCFS na ordem P1, P2, P3, P4: (0 + 6 + 14 + 21) / 4. Troca o SJF pelo FCFS.\nB) 6 ms não corresponde a nenhuma ordem de execução destes processos.\nD) 8 ms é a duração do maior processo, não um tempo de espera.\nE) 3 ms é a duração do menor processo, ou seja, só a espera de P1.",
+      "options": ["10,25 ms", "6 ms", "3 ms", "8 ms", "7 ms"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nO SJF executa na ordem crescente de duração: P4 (3), P1 (6), P3 (7), P2 (8). As esperas são:\n\nP4 = 0\nP1 = 3\nP3 = 3 + 6 = 9\nP2 = 9 + 7 = 16\n\nMédia: (0 + 3 + 9 + 16) / 4 = 28 / 4 = 7 ms. Entre os escalonamentos não preemptivos, o SJF dá o menor tempo médio de espera possível; a contrapartida é o risco de inanição dos processos longos.\n\nAs outras alternativas:\nA) 10,25 ms é a média do FCFS na ordem P1, P2, P3, P4: (0 + 6 + 14 + 21) / 4. Troca o SJF pelo FCFS.\nB) 6 ms não corresponde a nenhuma ordem de execução destes processos.\nC) 3 ms é a duração do menor processo, ou seja, só a espera de P1.\nD) 8 ms é a duração do maior processo, não um tempo de espera.",
       "check": "Nova resolução sem o gabarito: esperas SJF 0, 3, 9, 16, média 7; FCFS 10,25. Conferido em código."
     },
     {

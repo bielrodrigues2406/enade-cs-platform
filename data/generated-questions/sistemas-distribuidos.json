@@ -83,9 +83,9 @@
       "title": "Relógio lógico de Lamport",
       "subject": "Relógios lógicos e ordem causal",
       "prompt": "Dois processos usam relógios lógicos de Lamport, ambos começando em 0. A regra é: antes de cada evento local ou envio, o relógio é incrementado em 1, e o envio carrega o valor do relógio; ao receber uma mensagem com valor t, o processo faz relógio = max(relógio, t) + 1.\n\nP1: evento a, depois envia a mensagem m para P2.\nP2: evento b, depois evento c, e então recebe m.\n\nQual é o valor do relógio de P2 no evento de recebimento de m?",
-      "options": ["2", "3", "4", "5", "1"],
-      "answer": "B",
-      "explanation": "Resposta: B.\n\nP1: o evento a recebe 1; o envio de m recebe 2, e m carrega t = 2.\nP2: o evento b recebe 1 e o evento c recebe 2. No recebimento, relógio = max(2, 2) + 1 = 3.\n\nA regra garante que, se um evento causou outro (a → b, por exemplo o envio e o recebimento da mesma mensagem), o relógio do primeiro é menor que o do segundo. O contrário não vale: relógios menores não provam causa, e para detectar eventos concorrentes usam-se relógios vetoriais.\n\nAs outras alternativas:\nA) 2 é o valor de c, ou o valor que chegou na mensagem, sem o + 1 do recebimento.\nC) 4 somaria o valor recebido com o relógio local (2 + 2), mas a regra usa o máximo, não a soma.\nD) 5 acumula incrementos a mais, como se o recebimento contasse duas vezes.\nE) 1 ignora os eventos anteriores de P2 e a mensagem recebida.",
+      "options": ["2", "1", "4", "5", "3"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nP1: o evento a recebe 1; o envio de m recebe 2, e m carrega t = 2.\nP2: o evento b recebe 1 e o evento c recebe 2. No recebimento, relógio = max(2, 2) + 1 = 3.\n\nA regra garante que, se um evento causou outro (a → b, por exemplo o envio e o recebimento da mesma mensagem), o relógio do primeiro é menor que o do segundo. O contrário não vale: relógios menores não provam causa, e para detectar eventos concorrentes usam-se relógios vetoriais.\n\nAs outras alternativas:\nA) 2 é o valor de c, ou o valor que chegou na mensagem, sem o + 1 do recebimento.\nB) 1 ignora os eventos anteriores de P2 e a mensagem recebida.\nC) 4 somaria o valor recebido com o relógio local (2 + 2), mas a regra usa o máximo, não a soma.\nD) 5 acumula incrementos a mais, como se o recebimento contasse duas vezes.",
       "check": "Nova resolução sem o gabarito: simulação dos relógios em código, recebimento em P2 = 3."
     },
     {
