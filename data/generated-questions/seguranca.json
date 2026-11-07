@@ -12,11 +12,11 @@
       "subject": "Ataque à cadeia de dependências",
       "prompt": "Um desenvolvedor digitou npm install expresss (com três letras s) em vez de express. O pacote existia no registro público, tinha uma versão funcional da biblioteca e um script de pós-instalação que enviava as variáveis de ambiente da máquina, incluindo chaves de nuvem, para um servidor externo.\n\nQual conjunto de medidas mais reduz esse tipo de risco?",
       "options": [
-        "Usar HTTPS no site da empresa, porque o ataque depende de tráfego sem criptografia.",
-        "Trocar todas as senhas dos funcionários a cada 30 dias.",
-        "Instalar um antivírus nos servidores de produção, já que o código malicioso só roda em produção.",
-        "Desativar o firewall do ambiente de desenvolvimento para não bloquear o npm.",
-        "Conferir nome e reputação de cada dependência nova, versionar o arquivo de travamento (lockfile) com os hashes de integridade, restringir scripts de instalação, manter um inventário das dependências (SBOM) e guardar segredos fora das variáveis de ambiente da máquina de desenvolvimento, com credenciais de menor privilégio."
+        "Usar HTTPS em todos os sites da empresa, porque o ataque depende de dados trafegando sem criptografia.",
+        "Trocar todas as senhas dos funcionários a cada 30 dias, para que credenciais roubadas expirem logo.",
+        "Instalar antivírus nos servidores de produção, já que o código malicioso só é executado em produção.",
+        "Desativar o firewall do ambiente de desenvolvimento, para que ele não bloqueie as instalações do npm.",
+        "Conferir cada dependência nova, travar versões e hashes no lockfile, restringir scripts de instalação e isolar segredos."
       ],
       "answer": "E",
       "explanation": "Resposta: E.\n\nÉ um ataque de typosquatting à cadeia de suprimentos de software: o atacante publica um pacote com nome parecido com um popular e espera um erro de digitação. Cada medida da alternativa E corta um pedaço do caminho do ataque:\n- revisar dependências novas evita instalar o pacote errado;\n- o lockfile com hashes impede trocas silenciosas de versão ou de conteúdo;\n- restringir scripts de instalação (por exemplo, npm install --ignore-scripts, liberando só o necessário) impede que o código rode ao instalar;\n- o SBOM permite saber rapidamente quem usa o pacote comprometido;\n- segredos fora do ambiente, com menor privilégio, limitam o estrago se algo vazar.\n\nAs outras alternativas:\nA) HTTPS protege a comunicação do site, mas o pacote malicioso foi baixado e executado pelo próprio desenvolvedor.\nB) Trocar senhas periodicamente não impede o roubo de chaves de nuvem do ambiente e cria outros problemas.\nC) O código rodou na máquina de desenvolvimento, durante a instalação, e antivírus raramente detecta scripts novos desse tipo.\nD) Desativar o firewall facilita o envio dos dados para fora.",
@@ -31,11 +31,11 @@
       "subject": "Hash de senhas com sal e custo",
       "prompt": "A base de usuários de um sistema acadêmico vazou. A equipe avalia como as senhas deveriam estar guardadas para resistir a quem tem a base em mãos e tenta descobri-las.\n\nQual forma de armazenamento é a mais adequada?",
       "options": [
-        "Hash SHA-256 de cada senha, sem sal, porque SHA-256 não tem colisões conhecidas.",
-        "Senhas cifradas com AES-256, com a chave guardada no mesmo servidor do banco.",
-        "Hash com função lenta e configurável para senhas, como bcrypt, scrypt ou Argon2, com um sal aleatório diferente por usuário guardado junto do hash.",
-        "Hash MD5 aplicado duas vezes seguidas, para dobrar a segurança.",
-        "Senhas em texto puro, protegidas apenas pelas permissões do banco de dados."
+        "Hash SHA-256 de cada senha, sem sal, porque o SHA-256 não tem nenhuma colisão conhecida até hoje.",
+        "Senhas cifradas com AES-256, com a chave de decifração guardada no mesmo servidor do banco de dados.",
+        "Hash com função lenta própria para senhas, como bcrypt ou Argon2, e um sal aleatório por usuário.",
+        "Hash MD5 aplicado duas vezes seguidas sobre cada senha, para dobrar a segurança contra ataques.",
+        "Senhas em texto puro, protegidas apenas pelas permissões de acesso configuradas no banco de dados."
       ],
       "answer": "C",
       "explanation": "Resposta: C.\n\nQuem tem a base pode testar bilhões de senhas candidatas por segundo e comparar os resultados com os hashes guardados. A defesa tem duas partes:\n- o sal aleatório por usuário faz senhas iguais gerarem hashes diferentes e inutiliza tabelas pré-computadas (rainbow tables);\n- uma função propositalmente lenta e com parâmetro de custo torna cada tentativa cara. O Argon2 e o scrypt também gastam memória, o que dificulta usar GPUs.\n\nO sal não precisa ser secreto: fica guardado junto do hash.\n\nAs outras alternativas:\nA) SHA-256 é rápido demais para senhas, e sem sal senhas iguais aparecem iguais na base. Não ter colisões não ajuda contra adivinhação.\nB) Cifra é reversível: quem obtiver a chave, no mesmo servidor, recupera todas as senhas de uma vez. Senha não precisa ser recuperada, só verificada.\nD) MD5 é rápido e quebrado; aplicar duas vezes quase não muda o custo de cada tentativa.\nE) Texto puro expõe todas as senhas imediatamente, e muitos usuários as repetem em outros serviços.",
@@ -48,11 +48,11 @@
       "concepts": ["seg-assimetrica", "seg-simetrica"],
       "title": "Alice manda um contrato para Bob",
       "subject": "Confidencialidade, assinatura e criptografia híbrida",
-      "prompt": "Alice precisa enviar um contrato a Bob de modo que só ele possa ler e que ele tenha como provar, depois, que foi ela quem enviou. Cada um tem um par de chaves (pública e privada), e as chaves públicas foram trocadas com segurança.\n\nAvalie as afirmações.\n\nI. Para que só Bob consiga ler, o conteúdo deve ser cifrado de forma que só a chave privada de Bob o decifre, ou seja, usando a chave pública de Bob.\nII. Para provar a autoria, Alice assina o resumo (hash) do contrato com a chave privada dela, e Bob verifica com a chave pública de Alice.\nIII. Assinar o contrato com a chave pública de Bob garante o não repúdio por parte de Alice.\nIV. Na prática, cifra-se o contrato com uma chave simétrica de sessão gerada na hora e cifra-se essa chave com a chave pública de Bob, porque a criptografia assimétrica é bem mais lenta.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: D.\n\nI está correta. Qualquer um pode cifrar com a chave pública de Bob, mas só ele, com a privada, decifra. Isso dá confidencialidade.\n\nII está correta. Só Alice tem a chave privada dela, e qualquer um verifica com a pública. Isso dá autenticidade, integridade e não repúdio. Assina-se o hash por eficiência.\n\nIII está errada. A chave pública de Bob é conhecida por todos, então qualquer pessoa poderia ter produzido essa \"assinatura\", que não prova nada sobre Alice.\n\nIV está correta. É a criptografia híbrida, usada no TLS e no e-mail cifrado: a simétrica (AES) cifra o volume de dados rapidamente, e a assimétrica resolve a troca da chave.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: regras de uso das chaves pública e privada e esquema híbrido. Opção D.",
-      "truth": ["I", "II", "IV"],
-      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
+      "prompt": "Alice precisa enviar um contrato a Bob de modo que só ele possa ler e que ele tenha como provar, depois, que foi ela quem enviou. Cada um tem um par de chaves (pública e privada), e as chaves públicas foram trocadas com segurança.\n\nAvalie as afirmações.\n\nI. Para que só Bob consiga ler, Alice deve cifrar o conteúdo com a chave privada dela.\nII. Para provar a autoria, Alice assina o resumo (hash) do contrato com a chave privada dela, e Bob verifica com a chave pública de Alice.\nIII. Assinar o contrato com a chave pública de Bob garante o não repúdio por parte de Alice.\nIV. Na prática, cifra-se o contrato com uma chave simétrica de sessão gerada na hora e cifra-se essa chave com a chave pública de Bob, porque a criptografia assimétrica é bem mais lenta.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: E.\n\nI está errada. O que Alice cifra com a chave privada dela qualquer pessoa decifra com a chave pública de Alice, que é conhecida. Isso serve para assinar, não para esconder. Para que só Bob leia, o conteúdo deve ser cifrado com a chave pública de Bob, que só a privada dele decifra.\n\nII está correta. Só Alice tem a chave privada dela, e qualquer um verifica com a pública. Isso dá autenticidade, integridade e não repúdio. Assina-se o hash por eficiência.\n\nIII está errada. A chave pública de Bob é conhecida por todos, então qualquer pessoa poderia ter produzido essa \"assinatura\", que não prova nada sobre Alice.\n\nIV está correta. É a criptografia híbrida, usada no TLS e no e-mail cifrado: a simétrica (AES) cifra o volume de dados rapidamente, e a assimétrica resolve a troca da chave.\n\nAs outras alternativas:\nA) Escolhe só I, que usa a chave de assinatura para dar sigilo.\nB) Escolhe só III, que assina com uma chave pública.\nC) Inclui I e deixa de fora IV.\nD) Inclui I e deixa de fora II.",
+      "check": "Nova resolução sem o gabarito: papéis das chaves (cifrar com a pública do destinatário, assinar com a privada do remetente) e esquema híbrido; I e III falsas. Opção E.",
+      "truth": ["II", "IV"],
+      "combos": [["I"], ["III"], ["I", "II"], ["I", "IV"], ["II", "IV"]]
     },
     {
       "id": "gen-seg-injecao-sql",
@@ -63,11 +63,11 @@
       "subject": "Injeção de SQL e consultas parametrizadas",
       "prompt": "O login de um sistema monta a consulta assim:\n\n```\nsql = \"SELECT id FROM usuarios WHERE login = '\" + login +\n      \"' AND senha_hash = '\" + hash(senha) + \"'\";\n```\n\nNo campo de login, um atacante digita: admin' --\n\nO que acontece e qual é a correção adequada?",
       "options": [
-        "Nada acontece, porque a senha passa por uma função de hash.",
-        "O banco rejeita a consulta por erro de sintaxe; basta mostrar uma mensagem de erro genérica.",
-        "A consulta vira ... WHERE login = 'admin' -- ..., o restante vira comentário e a conferência da senha some; o atacante entra como admin. A correção é usar consultas parametrizadas (prepared statements), em que o valor nunca é interpretado como SQL.",
-        "O ataque só funciona em bancos MySQL; em PostgreSQL a concatenação é segura.",
-        "A correção é bloquear o caractere de aspas no navegador com JavaScript."
+        "Nada acontece, porque a senha digitada passa por uma função de hash antes de entrar na consulta.",
+        "O banco rejeita a consulta por erro de sintaxe, e basta exibir uma mensagem de erro genérica ao usuário.",
+        "O -- comenta o teste da senha e o atacante entra como admin; a correção são consultas parametrizadas.",
+        "O ataque só funciona em bancos MySQL, porque no PostgreSQL a concatenação de texto é segura.",
+        "A correção é bloquear o caractere de aspas no navegador, com uma validação em JavaScript no formulário."
       ],
       "answer": "C",
       "explanation": "Resposta: C.\n\nCom a entrada admin' --, a cadeia fica:\nSELECT id FROM usuarios WHERE login = 'admin' --' AND senha_hash = '...'\n\nO apóstrofo fecha a cadeia, e -- inicia um comentário em SQL. O teste da senha desaparece, e a consulta devolve o id do admin. O problema de fundo é misturar dados com código.\n\nNa consulta parametrizada, o SQL é enviado com marcadores (WHERE login = $1 AND senha_hash = $2) e os valores seguem separados. O banco trata o valor apenas como dado, qualquer que seja o seu conteúdo.\n\nAs outras alternativas:\nA) O hash protege a senha, mas o ataque vem pelo campo de login e anula a comparação.\nB) A consulta resultante é sintaticamente válida, justamente por causa do comentário.\nD) A injeção depende de concatenar texto em SQL, em qualquer banco.\nE) A validação no navegador é contornada enviando a requisição diretamente ao servidor. Validar entradas ajuda, mas não substitui a parametrização.",
@@ -82,14 +82,14 @@
       "subject": "Autenticação em múltiplos fatores e ataques de fadiga",
       "prompt": "Um atacante obteve a senha de uma funcionária num vazamento. A conta exige um segundo fator: uma notificação no celular com os botões \"Aprovar\" e \"Negar\". Durante a madrugada, o atacante tenta entrar dezenas de vezes, e a funcionária, irritada com as notificações, aperta \"Aprovar\".\n\nQual mudança torna esse ataque muito mais difícil?",
       "options": [
-        "Exigir senhas com mais de 20 caracteres.",
-        "Remover o segundo fator, já que ele foi contornado.",
-        "Enviar o código do segundo fator por e-mail, em vez de notificação.",
-        "Trocar a aprovação simples por correspondência de número (o usuário digita no celular o número mostrado na tela de login), limitar a quantidade de notificações e, de preferência, adotar chaves de acesso FIDO2 (passkeys), que dependem do domínio do site e resistem a phishing.",
-        "Bloquear o acesso à conta apenas durante a madrugada."
+        "Exigir senhas com mais de 20 caracteres, mais difíceis de descobrir em vazamentos de bases.",
+        "Remover o segundo fator, já que ele foi contornado e só incomoda os funcionários da empresa.",
+        "Enviar o código do segundo fator por e-mail, em vez de usar uma notificação no celular.",
+        "Exigir que o usuário digite no celular o número mostrado no login e limitar as notificações seguidas.",
+        "Bloquear o acesso à conta apenas durante a madrugada, quando as tentativas costumam acontecer."
       ],
       "answer": "D",
-      "explanation": "Resposta: D.\n\nO ataque se chama fadiga de MFA (MFA bombing): o segundo fator existe, mas depende de um clique que a vítima dá sem saber o que aprova. As medidas de D atacam a causa:\n- na correspondência de número, só quem está na tela de login vê o número, então aprovar às cegas não basta;\n- o limite de tentativas corta a avalanche de notificações;\n- as chaves FIDO2 fazem o próprio dispositivo assinar um desafio ligado ao domínio verdadeiro, sem nada para a pessoa aprovar por engano nem digitar num site falso.\n\nAs outras alternativas:\nA) O atacante já tem a senha; o tamanho dela não importa neste ponto.\nB) Sem segundo fator, a senha vazada bastaria.\nC) Código por e-mail é mais fraco, porque a caixa de e-mail costuma ser o alvo seguinte, e não resolve aprovar sem atenção.\nE) O ataque pode ocorrer em qualquer horário; a medida só muda a hora do incômodo.",
+      "explanation": "Resposta: D.\n\nO ataque se chama fadiga de MFA (MFA bombing): o segundo fator existe, mas depende de um clique que a vítima dá sem saber o que aprova. As medidas de D atacam a causa, e as chaves de acesso FIDO2 (passkeys) vão além:\n- na correspondência de número, só quem está na tela de login vê o número, então aprovar às cegas não basta;\n- o limite de tentativas corta a avalanche de notificações;\n- as chaves FIDO2 fazem o próprio dispositivo assinar um desafio ligado ao domínio verdadeiro, sem nada para a pessoa aprovar por engano nem digitar num site falso.\n\nAs outras alternativas:\nA) O atacante já tem a senha; o tamanho dela não importa neste ponto.\nB) Sem segundo fator, a senha vazada bastaria.\nC) Código por e-mail é mais fraco, porque a caixa de e-mail costuma ser o alvo seguinte, e não resolve aprovar sem atenção.\nE) O ataque pode ocorrer em qualquer horário; a medida só muda a hora do incômodo.",
       "check": "Nova resolução sem o gabarito: MFA fatigue mitigado por number matching, limite de tentativas e FIDO2. Opção D."
     },
     {
@@ -116,15 +116,20 @@
       "subject": "Certificados, TLS e ataque do homem no meio",
       "prompt": "Conectado ao Wi-Fi aberto de um aeroporto, um estudante acessa o site do banco e o navegador mostra: \"Sua conexão não é particular: o certificado não é válido para este domínio\". Ele clica em \"Avançar mesmo assim\".\n\nQual é o risco dessa decisão?",
       "options": [
-        "Nenhum, porque a conexão continua cifrada com HTTPS.",
-        "Apenas a velocidade cai, porque o navegador precisa recalcular o certificado.",
-        "O site pode exibir anúncios indesejados, mas os dados continuam protegidos.",
-        "O aviso indica que não foi possível confirmar a identidade do servidor; alguém na rede pode estar no meio da conexão com um certificado próprio, decifrando e lendo senhas e dados antes de repassá-los ao banco.",
-        "O risco só existe se o computador estiver sem antivírus."
+        "Nenhum, porque a conexão continua cifrada com HTTPS do começo ao fim do acesso.",
+        "Apenas a velocidade cai, porque o navegador precisa recalcular o certificado a cada nova página visitada.",
+        "O site pode exibir anúncios indesejados, mas os dados digitados continuam protegidos pelo TLS.",
+        "Alguém na rede pode estar no meio da conexão com um certificado próprio, lendo senhas e dados.",
+        "O risco só existe se o computador do estudante estiver sem um antivírus atualizado instalado."
       ],
       "answer": "D",
       "explanation": "Resposta: D.\n\nO TLS faz duas coisas: cifra a conexão e autentica o servidor. A autenticação vem do certificado, assinado por uma autoridade certificadora confiável e emitido para aquele domínio. Se o certificado não confere, a conexão pode estar cifrada com o atacante, e não com o banco: ele se passa pelo banco para o estudante e pelo estudante para o banco (homem no meio), lendo tudo no caminho. Ignorar o aviso desliga exatamente a proteção contra esse ataque.\n\nAs outras alternativas:\nA) Estar cifrado não basta: é preciso saber com quem.\nB) O aviso não tem relação com desempenho.\nC) O risco é a interceptação de credenciais, não anúncios.\nE) O ataque acontece na rede, e um antivírus no computador não o detecta.",
-      "check": "Nova resolução sem o gabarito: falha na validação do certificado elimina a autenticação do servidor e abre caminho para MITM. Opção D."
+      "check": "Nova resolução sem o gabarito: falha na validação do certificado elimina a autenticação do servidor e abre caminho para MITM. Opção D.",
+      "figure": {
+        "src": "/illustrations/Q-SEG-01.webp",
+        "alt": "Pessoa usa um notebook no saguão de aeroporto, com um cadeado aberto na tela. Ao fundo, outra pessoa utiliza notebook junto a um roteador portátil."
+      },
+      "stimulus": ["CENARIO", "FIGURA"]
     }
   ]
 }

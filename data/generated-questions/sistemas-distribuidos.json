@@ -12,15 +12,20 @@
       "subject": "Idempotência e semânticas de invocação em pagamentos",
       "prompt": "O aplicativo de uma loja envia ao servidor de pagamentos a ordem \"transferir R$ 120 via Pix para a conta X\". Às vezes a resposta não chega em 10 segundos por instabilidade na rede móvel, e o aplicativo reenvia automaticamente a mesma ordem. Clientes reclamaram de cobranças em dobro.\n\nQual solução trata a causa do problema?",
       "options": [
-        "Aumentar o tempo de espera para 60 segundos, o que elimina os reenvios.",
-        "Desativar os reenvios automáticos; se a resposta não chegar, o cliente deve refazer a compra manualmente.",
-        "Trocar o protocolo de transporte de TCP para UDP, que é mais rápido.",
-        "Enviar cada ordem com uma chave de idempotência única gerada pelo aplicativo; o servidor guarda as chaves já processadas e, ao receber uma repetida, devolve o resultado anterior sem executar a transferência de novo.",
+        "Aumentar o tempo de espera para 60 segundos, o que elimina os reenvios automáticos do aplicativo.",
+        "Desativar os reenvios automáticos e pedir que o cliente refaça a compra quando a resposta não chegar.",
+        "Trocar o protocolo de transporte de TCP para UDP, que é mais rápido e evita o tempo esgotado.",
+        "Mandar cada ordem com uma chave de idempotência única, e o servidor ignora a repetição já processada.",
         "Fazer o servidor confirmar a transferência antes de executá-la, para que a confirmação chegue mais rápido."
       ],
       "answer": "D",
-      "explanation": "Resposta: D.\n\nQuando a resposta não chega, o cliente não sabe se a ordem foi executada (e a resposta se perdeu) ou se nem chegou ao servidor. Reenviar dá a semântica pelo menos uma vez, segura só para operações idempotentes, e uma transferência não é idempotente: executar duas vezes cobra duas vezes.\n\nA chave de idempotência torna a operação idempotente do ponto de vista do cliente. O servidor registra a chave na mesma transação da transferência e, diante de uma repetição, devolve a resposta original. O resultado é a semântica no máximo uma vez, com os reenvios ainda permitidos. APIs de pagamento usam exatamente esse padrão.\n\nAs outras alternativas:\nA) Reduz a frequência, mas qualquer espera pode estourar; a duplicação continua possível.\nB) Joga o problema para o cliente, que também não sabe se a primeira compra passou e pode pagar duas vezes do mesmo jeito.\nC) UDP não garante entrega e piora o cenário; a duplicação acontece na camada de aplicação.\nE) Confirmar antes de executar mente para o cliente quando a execução falha depois, e não resolve a repetição.",
-      "check": "Nova resolução sem o gabarito: operação não idempotente com retentativa; chave de idempotência dá efeito no máximo uma vez. Opção D."
+      "explanation": "Resposta: D.\n\nQuando a resposta não chega, o cliente não sabe se a ordem foi executada (e a resposta se perdeu) ou se nem chegou ao servidor. Reenviar dá a semântica pelo menos uma vez, segura só para operações idempotentes, e uma transferência não é idempotente: executar duas vezes cobra duas vezes.\n\nA chave de idempotência torna a operação idempotente do ponto de vista do cliente. O servidor registra a chave na mesma transação da transferência e, diante de uma repetição, não executa de novo: devolve a resposta original. O resultado é a semântica no máximo uma vez, com os reenvios ainda permitidos. APIs de pagamento usam exatamente esse padrão.\n\nAs outras alternativas:\nA) Reduz a frequência, mas qualquer espera pode estourar; a duplicação continua possível.\nB) Joga o problema para o cliente, que também não sabe se a primeira compra passou e pode pagar duas vezes do mesmo jeito.\nC) UDP não garante entrega e piora o cenário; a duplicação acontece na camada de aplicação.\nE) Confirmar antes de executar mente para o cliente quando a execução falha depois, e não resolve a repetição.",
+      "check": "Nova resolução sem o gabarito: operação não idempotente com retentativa; chave de idempotência dá efeito no máximo uma vez. Opção D.",
+      "figure": {
+        "src": "/illustrations/Q-SD-01.webp",
+        "alt": "Mão segura um celular com indicador de carregamento e botão sem texto. O polegar se aproxima do botão, enquanto duas moedas iguais seguem para lados opostos."
+      },
+      "stimulus": ["CENARIO", "FIGURA"]
     },
     {
       "id": "gen-sd-modelos-nuvem",
@@ -60,11 +65,11 @@
       "subject": "Virtualização e conteinerização",
       "prompt": "Uma equipe migrou 30 microsserviços de máquinas virtuais para contêineres Docker no mesmo servidor físico, com Linux. Os serviços passaram a iniciar em segundos, e cabem mais serviços no mesmo hardware.\n\nQual explicação técnica está correta?",
       "options": [
-        "Os contêineres emulam o hardware completo, de forma mais eficiente que o hipervisor.",
-        "Os contêineres compartilham o kernel do sistema operacional hospedeiro e isolam processos com recursos do próprio kernel (namespaces e cgroups), sem iniciar um sistema operacional por serviço; o isolamento é mais leve, e por isso também mais fraco, que o de uma máquina virtual.",
-        "Cada contêiner tem o próprio kernel, mas menor que o de uma máquina virtual.",
-        "Contêineres só funcionam em nuvem pública, onde o provedor otimiza o hardware.",
-        "Contêineres executam o código de forma interpretada, o que reduz o tempo de inicialização."
+        "Os contêineres emulam o hardware completo, de forma mais eficiente que um hipervisor tradicional.",
+        "Compartilham o kernel do hospedeiro e se isolam por namespaces e cgroups, sem iniciar um sistema operacional.",
+        "Cada contêiner tem o próprio kernel, só que menor e mais rápido de carregar que o de uma máquina virtual.",
+        "Contêineres só funcionam em nuvem pública, onde o provedor otimiza o hardware para esse uso.",
+        "Contêineres executam o código de forma interpretada, o que reduz o tempo de inicialização dos serviços."
       ],
       "answer": "B",
       "explanation": "Resposta: B.\n\nUma máquina virtual roda um sistema operacional convidado completo sobre hardware virtualizado pelo hipervisor: tem kernel próprio, boot próprio e memória reservada. Um contêiner é um processo, ou grupo de processos, do hospedeiro, isolado por namespaces (visão própria de processos, rede e sistema de arquivos) e limitado por cgroups (CPU, memória). Sem boot de sistema operacional, inicia em segundos e ocupa pouca memória.\n\nA contrapartida é que todos dependem do mesmo kernel. Uma falha no kernel afeta todos, e não se roda, nativamente, um contêiner de outro sistema operacional. Por isso, em ambientes com vários clientes, provedores costumam colocar contêineres dentro de máquinas virtuais.\n\nAs outras alternativas:\nA) Quem emula ou virtualiza hardware é o hipervisor, nas máquinas virtuais.\nC) Contêineres não têm kernel próprio.\nD) Contêineres rodam em qualquer Linux, inclusive no notebook do desenvolvedor.\nE) O código dentro do contêiner roda nativamente; a velocidade vem de não iniciar um sistema operacional.",
@@ -90,11 +95,11 @@
       "concepts": ["sd-escalabilidade", "sd-arquiteturas"],
       "title": "Escalar o sistema de inscrições",
       "subject": "Escalabilidade horizontal, elasticidade e estado",
-      "prompt": "No período de inscrição do vestibular, o acesso ao sistema de uma universidade aumenta 20 vezes por poucos dias. Avalie as afirmações sobre como lidar com esse pico.\n\nI. Escalar horizontalmente significa acrescentar mais instâncias do serviço, em vez de trocar o servidor por um maior.\nII. Elasticidade é a capacidade de aumentar e reduzir automaticamente os recursos conforme a demanda, pagando só pelo período de uso.\nIII. Um serviço que guarda a sessão do usuário só na memória da instância em que ele entrou pode ser replicado atrás de um balanceador de carga sem nenhuma mudança.\nIV. Um balanceador de carga distribui as requisições entre as réplicas do serviço.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: D.\n\nI está correta. Horizontal é aumentar o número de máquinas; vertical é aumentar a máquina.\n\nII está correta. É o que torna a nuvem econômica para picos sazonais: sobe instâncias na inscrição e desliga depois.\n\nIII está errada. Se a sessão vive na memória de uma instância, a próxima requisição do mesmo usuário pode cair em outra réplica, que não conhece a sessão, e o usuário parece deslogado. É preciso tornar o serviço sem estado, guardando a sessão num armazenamento compartilhado (Redis, banco) ou num token assinado, ou usar afinidade de sessão (sticky sessions), que tem limitações.\n\nIV está correta. O balanceador espalha a carga e retira de circulação as réplicas com falha.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: I, II e IV corretas; estado local impede replicação transparente (III falsa). Opção D.",
-      "truth": ["I", "II", "IV"],
-      "combos": [["I", "III"], ["II", "III"], ["III", "IV"], ["I", "II", "IV"], ["I", "II", "III", "IV"]]
+      "prompt": "No período de inscrição do vestibular, o acesso ao sistema de uma universidade aumenta 20 vezes por poucos dias. Avalie as afirmações sobre como lidar com esse pico.\n\nI. Escalar horizontalmente significa trocar o servidor por um maior, com mais processadores e memória.\nII. Elasticidade é a capacidade de aumentar e reduzir automaticamente os recursos conforme a demanda, pagando só pelo período de uso.\nIII. Um serviço que guarda a sessão do usuário só na memória da instância em que ele entrou pode ser replicado atrás de um balanceador de carga sem nenhuma mudança.\nIV. Um balanceador de carga distribui as requisições entre as réplicas do serviço.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: A.\n\nI está errada porque troca os termos. Escalar horizontalmente é acrescentar mais instâncias do serviço; trocar o servidor por um maior é escalar verticalmente, o que tem limite físico e exige parar a máquina.\n\nII está correta. É o que torna a nuvem econômica para picos sazonais: sobe instâncias na inscrição e desliga depois.\n\nIII está errada. Se a sessão vive na memória de uma instância, a próxima requisição do mesmo usuário pode cair em outra réplica, que não conhece a sessão, e o usuário parece deslogado. É preciso tornar o serviço sem estado, guardando a sessão num armazenamento compartilhado (Redis, banco) ou num token assinado, ou usar afinidade de sessão (sticky sessions), que tem limitações.\n\nIV está correta. O balanceador espalha a carga e retira de circulação as réplicas com falha.\n\nAs outras alternativas:\nB) Inclui III e deixa de fora II.\nC) Inclui I, que confunde escala horizontal com vertical.\nD) Inclui I e III e deixa de fora II.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: definições de escala horizontal e vertical e de elasticidade; sessão em memória local impede replicação transparente (III falsa); I troca os termos. Opção A.",
+      "truth": ["II", "IV"],
+      "combos": [["II", "IV"], ["III", "IV"], ["I", "II", "IV"], ["I", "III", "IV"], ["II", "III", "IV"]]
     }
   ]
 }
