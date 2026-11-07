@@ -20,10 +20,10 @@
               <span class="account-avatar" aria-hidden="true">{{ accountInitials() }}</span><span>Conta</span>
             </button>
             <div #accountPopover id="account-menu" popover="auto" class="account-menu" role="dialog" aria-labelledby="account-menu-title">
-              <h2 id="account-menu-title">Sua conta</h2>
+              <h2 id="account-menu-title" tabindex="-1" autofocus>Sua conta</h2>
               <p class="account-menu-name">{{ accountLabel() }}</p>
               @defer (on idle) { <app-goal-ring (open)="accountAction('progress')" /> }
-              <button type="button" class="text-button" (click)="accountAction('profile')" [disabled]="navigationBusy()" autofocus>Meu perfil</button>
+              <button type="button" class="text-button" (click)="accountAction('profile')" [disabled]="navigationBusy()">Meu perfil</button>
               <button type="button" class="text-button" (click)="accountAction('logout')" [disabled]="navigationBusy()">Sair da conta</button>
             </div>
           } @else {
