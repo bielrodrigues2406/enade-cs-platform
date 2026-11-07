@@ -47,7 +47,6 @@
       "prompt": "Um notebook recém-conectado ao Wi-Fi de uma biblioteca, já configurado por DHCP, acessa https://www.exemplo.com.br pela primeira vez. O cache de DNS e a tabela ARP estão vazios, e o servidor DNS configurado fica fora da rede local. Uma ferramenta de captura de pacotes registra o tráfego enviado pelo notebook a partir desse momento.\n\nEm que ordem aparecem, pela primeira vez, as mensagens de cada protocolo?",
       "explanation": "Resposta: D.\n\nARP: para mandar qualquer pacote para fora da rede local, inclusive a consulta DNS, o notebook precisa do endereço MAC do roteador, o próximo salto. Com a tabela ARP vazia, ele pergunta primeiro.\n\nDNS: em seguida, a consulta para traduzir www.exemplo.com.br em endereço IP, normalmente num datagrama UDP para a porta 53.\n\nTCP: com o IP do servidor, o notebook abre a conexão (SYN, SYN-ACK, ACK) na porta 443.\n\nTLS: sobre a conexão TCP já aberta, o handshake do TLS autentica o servidor e combina as chaves.\n\nHTTP: só então vai a requisição, já cifrada pelo TLS.\n\nAs outras alternativas:\nA) Põe o DNS antes do ARP. Sem o MAC do roteador, o quadro com a consulta DNS não pode ser endereçado para sair da rede.\nB) Abre a conexão TCP antes do DNS, mas é o DNS que fornece o IP do servidor.\nC) Começa pelo DNS e põe o HTTP antes do TLS: no HTTPS, nenhum dado HTTP sai antes de o TLS combinar as chaves.\nE) Põe o TLS antes do TCP. O TLS roda sobre uma conexão TCP já estabelecida.",
       "check": "Nova resolução sem o gabarito pelas dependências entre protocolos: o MAC do roteador é necessário antes de qualquer pacote para fora (ARP), o IP vem do DNS antes do SYN, o TLS roda sobre o TCP e o HTTP vai cifrado depois do TLS. Opção D.",
-      "stimulus": ["CENARIO"],
       "options": [
         "DNS, ARP, TCP, TLS e HTTP.",
         "ARP, TCP, DNS, TLS e HTTP.",
@@ -55,7 +54,8 @@
         "ARP, DNS, TCP, TLS e HTTP.",
         "ARP, DNS, TLS, TCP e HTTP."
       ],
-      "answer": "D"
+      "answer": "D",
+      "stimulus": ["CENARIO"]
     },
     {
       "id": "gen-red-dominio-broadcast",
@@ -74,7 +74,12 @@
       ],
       "answer": "B",
       "explanation": "Resposta: B.\n\nUm roteador atua na camada de rede: liga redes IP diferentes e decide o encaminhamento pelo endereço IP de destino. Broadcasts de camada 2 não atravessam o roteador. Com as duas redes em sub-redes distintas, cada lado vira um domínio de broadcast próprio, e a comunicação entre elas continua via roteamento.\n\nAs outras alternativas:\nA) O hub trabalha na camada física e repete tudo para todas as portas. Não separa nem colisão nem broadcast.\nC) Cada porta de switch é um domínio de colisão separado, mas o switch repassa broadcasts para todas as portas. Esse é o par confundido clássico.\nD) O repetidor só regenera sinal, na camada física.\nE) Um ponto de acesso funciona como uma ponte entre o meio sem fio e o cabeado e repassa broadcasts.",
-      "check": "Nova resolução sem o gabarito: separar domínios de broadcast mantendo comunicação IP exige roteamento. Opção B."
+      "check": "Nova resolução sem o gabarito: separar domínios de broadcast mantendo comunicação IP exige roteamento. Opção B.",
+      "stimulus": ["FIGURA"],
+      "figure": {
+        "src": "/figures/gen-red-dominio-broadcast.svg",
+        "alt": "Um único switch ligado a três computadores que representam os 40 do laboratório e a três computadores da secretaria. Uma seta tracejada indica que o broadcast do laboratório chega à secretaria."
+      }
     },
     {
       "id": "gen-red-traceroute",

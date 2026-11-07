@@ -23,7 +23,7 @@
       "concepts": ["arq-combinacionais"],
       "title": "Função com multiplexador 4×1",
       "subject": "Multiplexador 4×1 implementando uma função",
-      "prompt": "Um multiplexador 2ⁿ×1 escolhe, pelas n linhas de seleção, qual das 2ⁿ entradas de dados vai para a saída. Por isso ele pode gerar qualquer função lógica de n variáveis: basta ligar as variáveis nas linhas de seleção e, em cada entrada de dados, a constante que a função deve valer na combinação correspondente.\n\nUm multiplexador 4×1 tem entradas de dados I0, I1, I2 e I3 e linhas de seleção S1 S0. A saída é I0 quando S1S0 = 00, I1 quando 01, I2 quando 10 e I3 quando 11.\n\nPara implementar F(A, B) = A ⊕ B (OU exclusivo), ligam-se A em S1 e B em S0. Que valores constantes devem ser ligados às entradas de dados?",
+      "prompt": "Um multiplexador 2ⁿ×1 escolhe, pelas n linhas de seleção, qual das 2ⁿ entradas de dados vai para a saída. Por isso ele pode gerar qualquer função lógica de n variáveis: basta ligar as variáveis nas linhas de seleção e, em cada entrada de dados, a constante que a função deve valer na combinação correspondente.\n\nUm multiplexador 4×1 tem entradas de dados I0, I1, I2 e I3 e linhas de seleção S1 S0. A saída é I0 quando S1S0 = 00, I1 quando 01, I2 quando 10 e I3 quando 11.\n\n[figura]\n\nPara implementar F(A, B) = A ⊕ B (OU exclusivo), ligam-se A em S1 e B em S0. Que valores constantes devem ser ligados às entradas de dados?",
       "options": [
         "I0 = 1, I1 = 0, I2 = 0, I3 = 1",
         "I0 = 0, I1 = 1, I2 = 1, I3 = 0",
@@ -34,7 +34,11 @@
       "answer": "B",
       "explanation": "Resposta: B.\n\nCom A em S1 e B em S0, cada combinação de entradas escolhe uma entrada de dados: AB = 00 escolhe I0, 01 escolhe I1, 10 escolhe I2 e 11 escolhe I3. Basta ligar em cada Ii o valor da tabela-verdade de A ⊕ B naquela linha: 0, 1, 1, 0. Esse é o uso clássico do mux como gerador de qualquer função de n variáveis com 2ⁿ entradas.\n\nAs outras alternativas:\nA) É a tabela do XNOR (igualdade), o complemento de A ⊕ B. Relação invertida.\nC) É a tabela do E (A·B).\nD) É a tabela do OU (A + B), que difere do XOR quando A = B = 1.\nE) Não há motivo para ligar as próprias variáveis nas entradas de dados: elas já selecionam a linha. Com AB = 11, por exemplo, a saída seria B = 1, mas A ⊕ B = 0.",
       "check": "Nova resolução sem o gabarito: saída do mux para as quatro combinações com I = (0, 1, 1, 0) reproduz XOR = (0, 1, 1, 0).",
-      "stimulus": ["TEXTO_BASE"]
+      "stimulus": ["TEXTO_BASE", "FIGURA"],
+      "figure": {
+        "src": "/figures/gen-arq-mux-xor.svg",
+        "alt": "Multiplexador 4×1 desenhado como trapézio. À esquerda, as entradas de dados I0, I1, I2 e I3, todas marcadas com ponto de interrogação. Embaixo, as linhas de seleção S1, ligada a A, e S0, ligada a B. À direita, a saída F."
+      }
     },
     {
       "id": "gen-arq-pipeline-conflitos",
@@ -43,12 +47,16 @@
       "concepts": ["arq-pipeline"],
       "title": "Conflitos no pipeline de 5 estágios",
       "subject": "Pipeline: conflitos de dados e de controle",
-      "prompt": "Um processador RISC tem pipeline clássico de 5 estágios: busca (IF), decodificação (ID), execução na ULA (EX), acesso à memória (MEM) e escrita no banco de registradores (WB). Cada estágio tem seu próprio hardware, e uma instrução nova entra no pipeline a cada ciclo. Três tipos de conflito podem obrigar o processador a inserir bolhas: de dados, quando uma instrução precisa de um valor que outra ainda não gravou; de controle, quando não se sabe qual instrução vem depois de um desvio; e estruturais, quando duas instruções disputam o mesmo recurso no mesmo ciclo.\n\nConsidere o trecho:\n\n```\nADD R1, R2, R3   ; R1 = R2 + R3\nSUB R4, R1, R5   ; R4 = R1 - R5\nBEQ R4, R0, fim  ; desvia se R4 == 0\n```\n\nAvalie as afirmações.\n\nI. Num pipeline ideal de 5 estágios, cada instrução individual executa 5 vezes mais rápido que sem pipeline.\nII. O BEQ gera um conflito de controle, que a previsão de desvios procura reduzir.\nIII. ADD e SUB têm uma dependência de dados do tipo leitura após escrita (RAW) em R1.\nIV. O adiantamento (forwarding) do resultado da ULA pode eliminar ou reduzir as bolhas entre ADD e SUB.\n\nÉ correto apenas o que se afirma em",
+      "prompt": "Um processador RISC tem pipeline clássico de 5 estágios: busca (IF), decodificação (ID), execução na ULA (EX), acesso à memória (MEM) e escrita no banco de registradores (WB). Cada estágio tem seu próprio hardware, e uma instrução nova entra no pipeline a cada ciclo. Três tipos de conflito podem obrigar o processador a inserir bolhas: de dados, quando uma instrução precisa de um valor que outra ainda não gravou; de controle, quando não se sabe qual instrução vem depois de um desvio; e estruturais, quando duas instruções disputam o mesmo recurso no mesmo ciclo.\n\nConsidere o trecho:\n\n```\nADD R1, R2, R3   ; R1 = R2 + R3\nSUB R4, R1, R5   ; R4 = R1 - R5\nBEQ R4, R0, fim  ; desvia se R4 == 0\n```\n\n[figura]\n\nAvalie as afirmações.\n\nI. Num pipeline ideal de 5 estágios, cada instrução individual executa 5 vezes mais rápido que sem pipeline.\nII. O BEQ gera um conflito de controle, que a previsão de desvios procura reduzir.\nIII. ADD e SUB têm uma dependência de dados do tipo leitura após escrita (RAW) em R1.\nIV. O adiantamento (forwarding) do resultado da ULA pode eliminar ou reduzir as bolhas entre ADD e SUB.\n\nÉ correto apenas o que se afirma em",
       "explanation": "Resposta: D.\n\nI está errada. O pipeline aumenta a vazão: idealmente, conclui uma instrução por ciclo. Cada instrução continua passando pelos 5 estágios, e o tempo de uma instrução isolada não cai; pode até subir um pouco, pelos registradores entre os estágios.\n\nII está correta. Enquanto o desvio não é resolvido, o processador não sabe qual instrução buscar. A previsão de desvios aposta num caminho e descarta o trabalho se errar. Não é conflito estrutural: o BEQ entra no estágio de execução um ciclo depois do SUB, sem disputar a ULA.\n\nIII está correta. SUB precisa ler R1, que ADD só grava no último estágio. Ler antes da escrita daria um valor antigo.\n\nIV está correta. O resultado de ADD fica pronto ao fim do estágio de execução. O adiantamento leva esse valor direto para a entrada da ULA na instrução seguinte, sem esperar a escrita no banco de registradores.\n\nAs outras alternativas:\nA) Deixa de fora IV, que também está correta.\nB) Deixa de fora II, que também está correta.\nC) Inclui I, que confunde vazão com latência, e deixa de fora II.\nE) Inclui I.",
       "check": "Nova resolução sem o gabarito: diagrama de ciclos montado à mão (ADD EX no ciclo 3, SUB EX no 4, BEQ EX no 5); RAW em R1 resolvido por adiantamento EX→EX; BEQ é conflito de controle; pipeline não reduz latência. II, III e IV corretas. Opção D.",
       "truth": ["II", "III", "IV"],
       "combos": [["II", "III"], ["III", "IV"], ["I", "III", "IV"], ["II", "III", "IV"], ["I", "II", "III", "IV"]],
-      "stimulus": ["TEXTO_BASE", "CODIGO"]
+      "stimulus": ["TEXTO_BASE", "CODIGO", "FIGURA"],
+      "figure": {
+        "src": "/figures/gen-arq-pipeline-conflitos.svg",
+        "alt": "Diagrama de ciclos de um pipeline de 5 estágios. ADD R1, R2, R3 ocupa IF, ID, EX, MEM e WB nos ciclos 1 a 5; SUB R4, R1, R5 ocupa os mesmos estágios nos ciclos 2 a 6; BEQ R4, R0, fim, nos ciclos 3 a 7. O diagrama não mostra bolhas."
+      }
     },
     {
       "id": "gen-arq-amdahl",

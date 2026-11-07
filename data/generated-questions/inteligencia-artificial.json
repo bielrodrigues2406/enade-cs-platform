@@ -73,11 +73,11 @@
       "answer": "B",
       "explanation": "Resposta: B.\n\nNa injeção de prompt indireta, o atacante não fala com o modelo diretamente: planta instruções num conteúdo que o modelo vai ler. Como o modelo recebe instruções e dados no mesmo canal de texto, não há garantia de que ele distinga um do outro. A defesa eficaz é de arquitetura:\n- tratar o conteúdo externo como dado não confiável;\n- aplicar o princípio do menor privilégio (quem só resume não precisa enviar);\n- pôr confirmação humana antes de ações com efeito externo;\n- registrar as ações do agente para auditoria.\n\nAs outras alternativas:\nA) Instruções de bloqueio no prompt ajudam pouco e são contornadas com variações do texto. Elas não são uma barreira confiável.\nC) Modelos maiores continuam sujeitos ao mesmo problema, porque ele vem de misturar dado e instrução.\nD) A criptografia em repouso protege contra roubo do armazenamento. O assistente lê os e-mails já decifrados.\nE) O texto escondido é só um disfarce. A mesma instrução pode vir visível, num anexo ou numa página web.",
       "check": "Nova resolução sem o gabarito: mitigação estrutural (dado não confiável, menor privilégio, confirmação humana) é a única efetiva entre as opções. Opção B.",
+      "stimulus": ["CENARIO", "FIGURA"],
       "figure": {
         "src": "/illustrations/Q-IA-01.webp",
         "alt": "Pequeno robô lê uma carta com um bilhete azul escondido entre as linhas. Uma gaveta aberta ao lado contém envelopes e uma chave."
-      },
-      "stimulus": ["CENARIO", "FIGURA"]
+      }
     },
     {
       "id": "gen-ia-heuristica-admissivel",

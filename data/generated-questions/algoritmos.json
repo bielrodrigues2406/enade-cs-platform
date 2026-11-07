@@ -36,14 +36,18 @@
       "concepts": ["alg-arvores", "alg-balanceadas"],
       "title": "Árvore binária de busca construída com chaves em ordem",
       "subject": "Árvore binária de busca: altura e ordem de inserção",
-      "prompt": "Em uma árvore binária de busca (ABB), cada nó guarda uma chave maior que todas as da sua subárvore esquerda e menor que todas as da subárvore direita. A busca começa na raiz e desce um nível a cada comparação, por isso o custo depende da altura da árvore. Árvores AVL e rubro-negras fazem rotações depois de inserções e remoções para manter a altura em O(log n). Uma ABB simples não faz ajuste nenhum e fica com a forma que a ordem de inserção produzir.\n\nUm programa insere as chaves 1, 2, 3, …, n, nessa ordem, em uma ABB sem nenhum mecanismo de balanceamento.\n\nConsidere as asserções a seguir.\n\nI. Nessa árvore, buscar uma chave custa O(n) no pior caso.\n\nPORQUE\n\nII. A altura de uma árvore binária de busca com n nós é sempre ⌈log₂(n + 1)⌉, qualquer que seja a ordem de inserção.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "prompt": "Em uma árvore binária de busca (ABB), cada nó guarda uma chave maior que todas as da sua subárvore esquerda e menor que todas as da subárvore direita. A busca começa na raiz e desce um nível a cada comparação, por isso o custo depende da altura da árvore. Árvores AVL e rubro-negras fazem rotações depois de inserções e remoções para manter a altura em O(log n). Uma ABB simples não faz ajuste nenhum e fica com a forma que a ordem de inserção produzir.\n\nUm programa insere as chaves 1, 2, 3, …, n, nessa ordem, em uma ABB sem nenhum mecanismo de balanceamento.\n\n[figura]\n\nConsidere as asserções a seguir.\n\nI. Nessa árvore, buscar uma chave custa O(n) no pior caso.\n\nPORQUE\n\nII. A altura de uma árvore binária de busca com n nós é sempre ⌈log₂(n + 1)⌉, qualquer que seja a ordem de inserção.\n\nA respeito dessas asserções, assinale a opção correta.",
       "explanation": "Resposta: C.\n\nAo inserir 1, 2, 3, … em ordem crescente, cada nova chave é maior que todas as anteriores e vai sempre para a direita do último nó. A árvore vira uma lista encadeada com altura n. Buscar a chave n percorre todos os nós: O(n). A asserção I é verdadeira.\n\nA asserção II é falsa. ⌈log₂(n + 1)⌉ é a altura mínima, alcançada só por árvores balanceadas. A altura de uma ABB depende da ordem de inserção e pode chegar a n. É por isso que existem as árvores AVL e rubro-negras, que fazem rotações para manter a altura em O(log n).\n\nAs outras alternativas:\nA) Trata II como verdadeira. Se a altura fosse sempre logarítmica, a busca seria O(log n), e a própria I seria falsa.\nB) Também considera II verdadeira, o que contradiz o exemplo do enunciado.\nD) Inverte as duas: I é a afirmação verdadeira.\nE) Considera I falsa, mas a árvore degenerada do enunciado faz a busca percorrer até n nós.",
       "check": "Nova resolução sem o gabarito: inserção crescente gera árvore com altura n, busca O(n) (I verdadeira); a altura logarítmica só vale para árvore balanceada (II falsa). Opção C.",
       "assertion": {
         "first": true,
         "second": false
       },
-      "stimulus": ["TEXTO_BASE"]
+      "stimulus": ["TEXTO_BASE", "FIGURA"],
+      "figure": {
+        "src": "/figures/gen-alg-abb-degenerada.svg",
+        "alt": "Árvore binária em que o nó 1 é a raiz, 2 é filho direito de 1, 3 é filho direito de 2, e assim por diante até o nó n, formando uma única linha descendente para a direita."
+      }
     },
     {
       "id": "gen-alg-dijkstra-ordem",
@@ -52,7 +56,7 @@
       "concepts": ["alg-caminho-minimo", "alg-grafos"],
       "title": "Dijkstra num grafo pequeno",
       "subject": "Algoritmo de Dijkstra: distâncias e ordem de visita",
-      "prompt": "O algoritmo de Dijkstra calcula os caminhos mínimos a partir de uma origem em grafos com pesos não negativos. Ele guarda, para cada vértice, a menor distância conhecida até o momento. A cada passo, fecha o vértice aberto de menor distância e relaxa as arestas que saem dele: se passar pelo vértice recém-fechado encurta o caminho até um vizinho, a distância desse vizinho é atualizada. Depois de fechado, um vértice não muda mais de distância.\n\nUm aplicativo de entregas modela os pontos de uma cidade como um grafo dirigido. Os pesos são os minutos de deslocamento:\n\nA → B: 4\nA → C: 1\nC → B: 2\nB → D: 1\nC → D: 5\nD → E: 3\nB → E: 6\n\nO aplicativo roda o algoritmo de Dijkstra a partir de A. Qual é o tempo mínimo de A até E e a ordem em que os vértices são retirados da fila de prioridade (fechados)?",
+      "prompt": "O algoritmo de Dijkstra calcula os caminhos mínimos a partir de uma origem em grafos com pesos não negativos. Ele guarda, para cada vértice, a menor distância conhecida até o momento. A cada passo, fecha o vértice aberto de menor distância e relaxa as arestas que saem dele: se passar pelo vértice recém-fechado encurta o caminho até um vizinho, a distância desse vizinho é atualizada. Depois de fechado, um vértice não muda mais de distância.\n\nUm aplicativo de entregas modela os pontos de uma cidade como um grafo dirigido. Os pesos são os minutos de deslocamento, como mostra a figura.\n\n[figura]\n\nO aplicativo roda o algoritmo de Dijkstra a partir de A. Qual é o tempo mínimo de A até E e a ordem em que os vértices são retirados da fila de prioridade (fechados)?",
       "options": [
         "7 minutos; A, C, B, D, E.",
         "8 minutos; A, B, D, E, C.",
@@ -63,7 +67,11 @@
       "answer": "A",
       "explanation": "Resposta: A.\n\nDijkstra fecha, a cada passo, o vértice aberto de menor distância e relaxa as arestas que saem dele.\n\n1. Fecha A (0). Atualiza B = 4 e C = 1.\n2. Fecha C (1). Por C, B passa a 1 + 2 = 3 (melhor que 4) e D = 1 + 5 = 6.\n3. Fecha B (3). Por B, D passa a 3 + 1 = 4 e E = 3 + 6 = 9.\n4. Fecha D (4). Por D, E passa a 4 + 3 = 7.\n5. Fecha E (7).\n\nO caminho mínimo é A → C → B → D → E, com 7 minutos, e a ordem de fechamento é A, C, B, D, E.\n\nAs outras alternativas:\nB) 8 minutos é o caminho A → B → D → E, que usa a aresta direta A → B (4) sem perceber que A → C → B custa 3. Essa ordem segue os vizinhos diretos, não as menores distâncias.\nC) A distância está certa, mas a ordem é alfabética. Dijkstra fecha pela menor distância: C (1) sai antes de B (3).\nD) 9 minutos corresponde a A → C → D → E ou A → C → B → E, caminhos válidos mas não mínimos.\nE) Nenhum caminho de A a E custa 6, e E só é fechado depois de D, porque D tem distância 4 e E tem 7.",
       "check": "Nova resolução sem o gabarito, simulando a fila: dist final A0 C1 B3 D4 E7; ordem de fechamento A, C, B, D, E. Conferido com implementação de Dijkstra.",
-      "stimulus": ["TEXTO_BASE", "CENARIO"]
+      "stimulus": ["TEXTO_BASE", "CENARIO", "FIGURA"],
+      "figure": {
+        "src": "/figures/gen-alg-dijkstra-ordem.svg",
+        "alt": "Grafo dirigido com os vértices A, B, C, D e E. Arestas e pesos em minutos: A para B, 4; A para C, 1; C para B, 2; B para D, 1; C para D, 5; D para E, 3; B para E, 6."
+      }
     },
     {
       "id": "gen-alg-hash-encadeamento",
@@ -124,11 +132,16 @@
       "concepts": ["alg-heap"],
       "title": "Heap de máximo em vetor",
       "subject": "Heap: validade, inserção e custos",
-      "prompt": "Um escalonador guarda as prioridades das tarefas num heap de máximo armazenado em vetor, com índices a partir de 0 (os filhos do índice i ficam em 2i + 1 e 2i + 2). O vetor atual é:\n\n[50, 30, 40, 10, 20, 35]\n\nAvalie as afirmações.\n\nI. O vetor é um heap de máximo válido.\nII. Construir um heap a partir de um vetor qualquer com n elementos custa Θ(n log n) mesmo no melhor algoritmo conhecido.\nIII. Remover a tarefa de maior prioridade custa O(1), porque ela está na primeira posição do vetor.\nIV. Após inserir a prioridade 45, o vetor fica [50, 30, 45, 10, 20, 35, 40].\n\nÉ correto apenas o que se afirma em",
+      "prompt": "Um escalonador guarda as prioridades das tarefas num heap de máximo armazenado em vetor, com índices a partir de 0 (os filhos do índice i ficam em 2i + 1 e 2i + 2). O vetor atual é:\n\n[50, 30, 40, 10, 20, 35]\n\n[figura]\n\nAvalie as afirmações.\n\nI. O vetor é um heap de máximo válido.\nII. Construir um heap a partir de um vetor qualquer com n elementos custa Θ(n log n) mesmo no melhor algoritmo conhecido.\nIII. Remover a tarefa de maior prioridade custa O(1), porque ela está na primeira posição do vetor.\nIV. Após inserir a prioridade 45, o vetor fica [50, 30, 45, 10, 20, 35, 40].\n\nÉ correto apenas o que se afirma em",
       "explanation": "Resposta: B.\n\nI está correta. 50 é maior que os filhos 30 e 40; 30 é maior que os filhos 10 e 20; 40 é maior que o filho 35. Todo pai é maior que seus filhos.\n\nII está errada. A construção de baixo para cima (heapify a partir do último pai) custa O(n), porque a maioria dos nós está perto das folhas e desce pouco.\n\nIII está errada. Consultar o máximo custa O(1), mas removê-lo exige pôr o último elemento na raiz e descê-lo até restaurar a propriedade do heap: O(log n).\n\nIV está correta. O 45 entra no fim (índice 6), cujo pai é o índice 2 (40). Como 45 > 40, eles trocam: [50, 30, 45, 10, 20, 35, 40]. O novo pai é o índice 0 (50); como 45 < 50, a subida para.\n\nAs outras alternativas:\nA) Inclui III, que confunde consultar o máximo com removê-lo.\nC) Junta as duas afirmações erradas sobre custo.\nD) Inclui II e deixa de fora I, que está correta.\nE) Inclui III.",
       "check": "Nova resolução sem o gabarito: propriedade de heap conferida nó a nó; inserção de 45 simulada em código, resultado [50, 30, 45, 10, 20, 35, 40]; remoção O(log n) e construção O(n).",
       "truth": ["I", "IV"],
-      "combos": [["I", "III"], ["I", "IV"], ["II", "III"], ["II", "IV"], ["I", "III", "IV"]]
+      "combos": [["I", "III"], ["I", "IV"], ["II", "III"], ["II", "IV"], ["I", "III", "IV"]],
+      "stimulus": ["FIGURA"],
+      "figure": {
+        "src": "/figures/gen-alg-heap-insercao.svg",
+        "alt": "O vetor 50, 30, 40, 10, 20, 35, com índices de 0 a 5, desenhado também como árvore: 50 na raiz; 30 e 40 como filhos da raiz; 10 e 20 como filhos de 30; 35 como filho esquerdo de 40."
+      }
     },
     {
       "id": "gen-alg-agm-ou-caminho",

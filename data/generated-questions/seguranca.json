@@ -125,11 +125,11 @@
       "answer": "D",
       "explanation": "Resposta: D.\n\nO TLS faz duas coisas: cifra a conexão e autentica o servidor. A autenticação vem do certificado, assinado por uma autoridade certificadora confiável e emitido para aquele domínio. Se o certificado não confere, a conexão pode estar cifrada com o atacante, e não com o banco: ele se passa pelo banco para o estudante e pelo estudante para o banco (homem no meio), lendo tudo no caminho. Ignorar o aviso desliga exatamente a proteção contra esse ataque.\n\nAs outras alternativas:\nA) Estar cifrado não basta: é preciso saber com quem.\nB) O aviso não tem relação com desempenho.\nC) O risco é a interceptação de credenciais, não anúncios.\nE) O ataque acontece na rede, e um antivírus no computador não o detecta.",
       "check": "Nova resolução sem o gabarito: falha na validação do certificado elimina a autenticação do servidor e abre caminho para MITM. Opção D.",
+      "stimulus": ["CENARIO", "FIGURA"],
       "figure": {
         "src": "/illustrations/Q-SEG-01.webp",
         "alt": "Pessoa usa um notebook no saguão de aeroporto, com um cadeado aberto na tela. Ao fundo, outra pessoa utiliza notebook junto a um roteador portátil."
-      },
-      "stimulus": ["CENARIO", "FIGURA"]
+      }
     }
   ]
 }

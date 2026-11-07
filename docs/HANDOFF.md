@@ -53,12 +53,12 @@ A bússola da preparação está em **`docs/CORE-CONCEPTS.md`**: 16 áreas e a F
 
 ## Próxima sessão: plano da reta final (07/11)
 
-O plano completo, com a ordem dos PRs (A a H), metas até 29/11 e o critério de "pronto" de cada etapa, está em **[PLANO-RETA-FINAL.md](PLANO-RETA-FINAL.md)**. Comece pelo PR A (ajustes rápidos) e depois pelo PR B (base das questões).
+O plano completo, com a ordem dos PRs (A a H), metas até 29/11 e o critério de "pronto" de cada etapa, está em **[PLANO-RETA-FINAL.md](PLANO-RETA-FINAL.md)**. Os PRs A, B e C estão feitos (o C em parte: faltam enunciados longos, que passam ao PR E). Siga pelo PR D (Biblioteca piloto).
 
 - **Material pronto:**
   - 41 ilustrações em `apps/web/public/illustrations/`, com catálogo em `data/illustrations/catalog.json`;
   - poses novas do Dudu (`novidade`, `plano`, `forca`).
-- **Migrations reservadas:** 032 (GEN-4) e 033 (NEWS-1).
+- **Migrations:** 032 usada (GEN-4); 033 reservada (NEWS-1).
 
 ## 5. O que falta (por prioridade)
 

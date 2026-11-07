@@ -14,7 +14,12 @@
       "options": ["(0 | 1)*1(0 | 1)*1", "(11)*", "1*0*1*", "(0*10*1)*0*", "0*(11)*0*"],
       "answer": "D",
       "explanation": "Resposta: D.\n\nUma cadeia com quantidade par de 1s pode ser lida como uma sequência de blocos, cada um com exatamente dois 1s, separados por quantos 0s se queira, seguida de 0s finais. O bloco 0*10*1 tem zeros quaisquer, um 1, zeros quaisquer e outro 1. O fecho (0*10*1)* repete esses blocos zero ou mais vezes, e o 0* final aceita zeros depois do último 1. A cadeia vazia e 000 também são aceitas, com zero bits 1.\n\nO AFD equivalente tem os estados \"par\" (inicial e de aceitação) e \"ímpar\": um 1 troca de estado, um 0 mantém.\n\nAs outras alternativas:\nA) Exige pelo menos dois 1s e aceita 111 (três 1s).\nB) Só aceita cadeias de 1s seguidos, sem nenhum 0, como 11 ou 1111. Recusa 0110.\nC) Aceita 1 (um único 1) e recusa 0101.\nE) Exige que os 1s estejam todos juntos no meio e recusa 1001.",
-      "check": "Nova resolução sem o gabarito: comparação em código das expressões com o AFD de paridade em todas as cadeias até 10 bits; só a D coincide."
+      "check": "Nova resolução sem o gabarito: comparação em código das expressões com o AFD de paridade em todas as cadeias até 10 bits; só a D coincide.",
+      "stimulus": ["FIGURA"],
+      "figure": {
+        "src": "/figures/gen-tc-paridade-uns.svg",
+        "alt": "Autômato com os estados par, inicial e de aceitação, e ímpar. Em cada estado, o símbolo 0 mantém o estado. O símbolo 1 leva de par para ímpar e de ímpar para par."
+      }
     },
     {
       "id": "gen-tc-classes-linguagens",

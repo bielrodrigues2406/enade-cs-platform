@@ -35,3 +35,24 @@ test("the default question bank does not mix generated questions with the offici
   await expect(page.getByRole("combobox", { name: "Origem" })).toHaveValue("");
   await expect(page.getByRole("button", { name: /Contador compartilhado sem sincronização/ })).toHaveCount(0);
 });
+
+test("figures appear where the prompt marks them, with alt text and the AI caption only on illustrations", async ({ page }) => {
+  await page.goto("/questoes?origin=generated&area=Algoritmos");
+  await page.getByRole("button", { name: /Dijkstra num grafo pequeno/ }).click();
+  const graph = page.getByRole("img", { name: /^Grafo dirigido com os vértices A, B, C, D e E/ });
+  await expect(graph).toBeVisible();
+  await expect.poll(() => graph.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+  // O marcador [figura] põe o grafo entre a frase dos pesos e a pergunta.
+  const blocks = await page.locator(".prompt, .prompt-figure").evaluateAll((nodes) =>
+    nodes.map((node) => (node.tagName === "FIGURE" ? "[figura]" : node.textContent!.trim())),
+  );
+  expect(blocks).toHaveLength(3);
+  expect(blocks[0]).toMatch(/como mostra a figura\.$/);
+  expect(blocks[1]).toBe("[figura]");
+  expect(blocks[2]).toMatch(/^O aplicativo roda o algoritmo de Dijkstra/);
+  await expect(page.locator(".prompt-figure figcaption")).toHaveCount(0);
+
+  await page.goto("/questoes?origin=generated&area=Forma%C3%A7%C3%A3o%20Geral");
+  await page.getByRole("button", { name: /Vídeo manipulado às vésperas da eleição/ }).click();
+  await expect(page.locator(".prompt-figure figcaption")).toHaveText("Ilustração gerada por IA");
+});

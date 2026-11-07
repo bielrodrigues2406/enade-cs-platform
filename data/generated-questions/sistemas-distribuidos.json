@@ -21,11 +21,11 @@
       "answer": "D",
       "explanation": "Resposta: D.\n\nQuando a resposta não chega, o cliente não sabe se a ordem foi executada (e a resposta se perdeu) ou se nem chegou ao servidor. Reenviar dá a semântica pelo menos uma vez, segura só para operações idempotentes, e uma transferência não é idempotente: executar duas vezes cobra duas vezes.\n\nA chave de idempotência torna a operação idempotente do ponto de vista do cliente. O servidor registra a chave na mesma transação da transferência e, diante de uma repetição, não executa de novo: devolve a resposta original. O resultado é a semântica no máximo uma vez, com os reenvios ainda permitidos. APIs de pagamento usam exatamente esse padrão.\n\nAs outras alternativas:\nA) Reduz a frequência, mas qualquer espera pode estourar; a duplicação continua possível.\nB) Joga o problema para o cliente, que também não sabe se a primeira compra passou e pode pagar duas vezes do mesmo jeito.\nC) UDP não garante entrega e piora o cenário; a duplicação acontece na camada de aplicação.\nE) Confirmar antes de executar mente para o cliente quando a execução falha depois, e não resolve a repetição.",
       "check": "Nova resolução sem o gabarito: operação não idempotente com retentativa; chave de idempotência dá efeito no máximo uma vez. Opção D.",
+      "stimulus": ["CENARIO", "FIGURA"],
       "figure": {
         "src": "/illustrations/Q-SD-01.webp",
         "alt": "Mão segura um celular com indicador de carregamento e botão sem texto. O polegar se aproxima do botão, enquanto duas moedas iguais seguem para lados opostos."
-      },
-      "stimulus": ["CENARIO", "FIGURA"]
+      }
     },
     {
       "id": "gen-sd-modelos-nuvem",

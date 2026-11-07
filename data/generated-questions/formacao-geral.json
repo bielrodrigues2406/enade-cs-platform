@@ -10,7 +10,7 @@
       "concepts": ["fg-graficos", "fg-calculo"],
       "title": "Acesso à internet em duas regiões",
       "subject": "Pontos percentuais e variação relativa",
-      "prompt": "O acesso à internet em casa passou a ser condição para estudar, procurar emprego, marcar consultas e usar serviços públicos digitais. Por isso, políticas de inclusão digital costumam ser acompanhadas pela evolução da proporção de domicílios conectados em cada região. Ao comparar regiões que partem de patamares diferentes, porém, é preciso escolher bem a medida: o avanço pode ser expresso em pontos percentuais, a diferença simples entre duas porcentagens, ou em variação relativa, que compara essa diferença com o valor inicial.\n\nA tabela a seguir, com dados ilustrativos, mostra a proporção de domicílios com acesso à internet em duas regiões:\n\nRegião A: 60% em 2019 e 75% em 2025\nRegião B: 40% em 2019 e 58% em 2025\n\nQual leitura dos dados está correta?",
+      "prompt": "O acesso à internet em casa passou a ser condição para estudar, procurar emprego, marcar consultas e usar serviços públicos digitais. Por isso, políticas de inclusão digital costumam ser acompanhadas pela evolução da proporção de domicílios conectados em cada região. Ao comparar regiões que partem de patamares diferentes, porém, é preciso escolher bem a medida: o avanço pode ser expresso em pontos percentuais, a diferença simples entre duas porcentagens, ou em variação relativa, que compara essa diferença com o valor inicial.\n\nO gráfico a seguir, com dados ilustrativos, mostra a proporção de domicílios com acesso à internet em duas regiões.\n\n[figura]\n\nQual leitura dos dados está correta?",
       "options": [
         "A Região A cresceu mais, porque chegou a 75% em 2025, percentual maior que o alcançado pela Região B.",
         "As duas regiões cresceram 15%, porque a distância entre elas se manteve igual de 2019 a 2025.",
@@ -21,7 +21,11 @@
       "answer": "D",
       "explanation": "Resposta: D.\n\nPontos percentuais (p.p.) medem a diferença entre duas porcentagens; a variação relativa mede essa diferença em proporção ao valor inicial.\n\nRegião A: 75 − 60 = 15 p.p.; 15 / 60 = 25% de aumento relativo.\nRegião B: 58 − 40 = 18 p.p.; 18 / 40 = 45% de aumento relativo.\n\nA Região B avançou mais pelas duas medidas. A distância entre as regiões caiu de 20 p.p. (60 − 40) para 17 p.p. (75 − 58): a desigualdade diminuiu, mas persiste, e cerca de 4 em cada 10 domicílios da Região B seguem sem acesso.\n\nAs outras alternativas:\nA) Confunde nível com crescimento: estar acima não significa ter crescido mais.\nB) A diferença entre as regiões mudou (de 20 para 17 p.p.), e os crescimentos foram 15 e 18 p.p.\nC) Chama de % o que são pontos percentuais e erra a conclusão relativa (25% e 45% não são iguais).\nE) A distância diminuiu; o fato de B estar abaixo de 60% não indica aumento da desigualdade.",
       "check": "Nova resolução sem o gabarito: 15 e 18 p.p.; 25% e 45% relativos; diferença de 20 para 17 p.p. Conferido por cálculo.",
-      "stimulus": ["TEXTO_BASE", "TABELA"]
+      "stimulus": ["TEXTO_BASE", "GRAFICO"],
+      "figure": {
+        "src": "/figures/gen-fg-pontos-percentuais.svg",
+        "alt": "Gráfico de barras com dados ilustrativos da proporção de domicílios com acesso à internet. Região A: 60% em 2019 e 75% em 2025. Região B: 40% em 2019 e 58% em 2025."
+      }
     },
     {
       "id": "gen-fg-desinformacao",
@@ -41,11 +45,11 @@
       "answer": "D",
       "explanation": "Resposta: D.\n\nO voto livre depende de informação confiável. Conteúdos fabricados para enganar ferem o direito do eleitor à informação e podem atingir a honra de pessoas. A alternativa D combina, como sugere o texto II, responsabilidade individual (verificar antes de repassar) com os mecanismos institucionais disponíveis (denúncia à plataforma e à Justiça Eleitoral), sem defender censura ampla.\n\nAs outras alternativas:\nA) Concordar com uma opinião não torna verdadeiro um fato fabricado. É o mecanismo de viés de confirmação que favorece a desinformação.\nB) O aviso não impede o dano: o vídeo continua circulando e sendo usado como se fosse verdadeiro.\nC) Remover todo conteúdo político violaria a liberdade de expressão e o debate público, que é parte da eleição.\nE) Contradiz o próprio texto, que descreve alcance rápido e massivo. Desinformação pode influenciar percepções e decisões.",
       "check": "Nova resolução sem o gabarito: atitude coerente com direito à informação, liberdade de expressão e responsabilidade. Opção D.",
+      "stimulus": ["DOIS_TEXTOS", "CHARGE"],
       "figure": {
         "src": "/illustrations/Q-FG-01.webp",
         "alt": "Pessoa idosa no sofá observa um vídeo no celular. Uma linha atravessa o rosto do personagem na tela, e setas conectam o aparelho a outros celulares."
-      },
-      "stimulus": ["DOIS_TEXTOS", "CHARGE"]
+      }
     },
     {
       "id": "gen-fg-clima-mitigacao",
@@ -59,11 +63,11 @@
       "check": "Nova resolução sem o gabarito: definições de mitigação e adaptação do IPCC; drenagem é adaptação (II falsa), adaptação tem limites (III falsa); I e IV corretas. Opção B.",
       "truth": ["I", "IV"],
       "combos": [["II"], ["I", "IV"], ["III", "IV"], ["I", "II", "IV"], ["II", "III", "IV"]],
+      "stimulus": ["TEXTO_BASE", "FIGURA"],
       "figure": {
         "src": "/illustrations/Q-FG-04.webp",
         "alt": "Vista aérea de uma cidade amazônica junto a um rio, com mudas em fileiras à esquerda, casas sobre palafitas à direita e floresta ao fundo."
-      },
-      "stimulus": ["TEXTO_BASE", "FIGURA"]
+      }
     },
     {
       "id": "gen-fg-envelhecimento",
@@ -72,7 +76,7 @@
       "concepts": ["fg-cidades-saude", "fg-graficos"],
       "title": "Uma população que envelhece",
       "subject": "Envelhecimento populacional e políticas públicas",
-      "prompt": "Texto I\n\nUma projeção demográfica, com dados ilustrativos, mostra que a pirâmide etária de um país deixará de ter a base larga e o topo estreito: a proporção de pessoas com 60 anos ou mais passará de 15% para 30% da população em três décadas, enquanto a de crianças diminuirá. A queda da fecundidade e o aumento da expectativa de vida explicam a mudança.\n\nTexto II\n\nO Estatuto da Pessoa Idosa (Lei 10.741/2003) assegura às pessoas com 60 anos ou mais o direito à saúde, à convivência familiar e comunitária, à acessibilidade e à proteção do Estado e da sociedade, e prevê atendimento prioritário em serviços públicos e privados. Garantir esses direitos exige planejamento de longo prazo, porque o número de pessoas que precisam de cuidados cresce mais rápido que o de pessoas que podem oferecê-los.\n\nConsiderando os textos, qual consequência é coerente com a mudança descrita?",
+      "prompt": "Texto I\n\nUma projeção demográfica, com dados ilustrativos, mostra que a pirâmide etária de um país deixará de ter a base larga e o topo estreito: a proporção de pessoas com 60 anos ou mais passará de 15% para 30% da população em três décadas, enquanto a de crianças diminuirá. A queda da fecundidade e o aumento da expectativa de vida explicam a mudança.\n\n[figura]\n\nTexto II\n\nO Estatuto da Pessoa Idosa (Lei 10.741/2003) assegura às pessoas com 60 anos ou mais o direito à saúde, à convivência familiar e comunitária, à acessibilidade e à proteção do Estado e da sociedade, e prevê atendimento prioritário em serviços públicos e privados. Garantir esses direitos exige planejamento de longo prazo, porque o número de pessoas que precisam de cuidados cresce mais rápido que o de pessoas que podem oferecê-los.\n\nConsiderando os textos, qual consequência é coerente com a mudança descrita?",
       "options": [
         "A demanda por serviços de saúde tende a cair, porque haverá menos crianças para atender nas unidades públicas de saúde.",
         "As políticas para crianças e jovens deixam de ser necessárias, porque esse grupo encolhe na população do país.",
@@ -83,7 +87,11 @@
       "answer": "D",
       "explanation": "Resposta: D.\n\nCom mais idosos, aumentam as doenças crônicas, a necessidade de cuidadores, que hoje recai muitas vezes sobre mulheres da família, e a importância de cidades acessíveis, com calçadas, transporte e serviços adequados. Com menos pessoas em idade ativa por idoso, o financiamento da previdência e da saúde precisa ser repensado. É um tema de direitos: envelhecer com dignidade é previsto no Estatuto da Pessoa Idosa.\n\nAs outras alternativas:\nA) Idosos usam mais serviços de saúde; a menor proporção de crianças não compensa.\nB) Políticas para crianças e jovens continuam essenciais, inclusive para formar a força de trabalho futura.\nC) Aposentados em geral recebem benefícios, não financiam o sistema na mesma proporção dos ativos. O debate se intensifica.\nE) A mudança descrita, com menos crianças, indica crescimento mais lento, não acelerado.",
       "check": "Nova resolução sem o gabarito: efeitos da transição demográfica sobre saúde, cuidado, previdência e cidades. Opção D.",
-      "stimulus": ["DOIS_TEXTOS"]
+      "stimulus": ["DOIS_TEXTOS", "GRAFICO"],
+      "figure": {
+        "src": "/figures/gen-fg-envelhecimento.svg",
+        "alt": "Duas pirâmides etárias lado a lado, com dados ilustrativos. Hoje: 25% de 0 a 14 anos, 60% de 15 a 59 anos e 15% com 60 anos ou mais. Projeção: 15% de 0 a 14 anos, 55% de 15 a 59 anos e 30% com 60 anos ou mais."
+      }
     },
     {
       "id": "gen-fg-ia-trabalho",
@@ -120,11 +128,11 @@
       "answer": "B",
       "explanation": "Resposta: B.\n\nProdução recorde e fome convivem quando o problema é o acesso: famílias sem renda suficiente não compram o alimento disponível, especialmente com preços em alta. Por isso, programas de transferência de renda, alimentação escolar, apoio à agricultura familiar e estoques reguladores aparecem nas políticas de combate à fome. A Constituição inclui a alimentação entre os direitos sociais (art. 6º).\n\nAs outras alternativas:\nA) O próprio texto mostra produção abundante; mais produção não chega a quem não pode comprar.\nC) Os dados não se contradizem: medem coisas diferentes (produção agregada e acesso das famílias).\nD) Culpabiliza o indivíduo por um problema estrutural de renda e preços.\nE) Simplifica uma relação complexa e propõe uma medida que o texto não sustenta.",
       "check": "Nova resolução sem o gabarito: distinção entre disponibilidade e acesso a alimentos (conceito de segurança alimentar da FAO); direito à alimentação (CF, art. 6º). Opção B.",
+      "stimulus": ["DOIS_TEXTOS", "FIGURA"],
       "figure": {
         "src": "/illustrations/Q-FG-06.webp",
         "alt": "À esquerda, silos e um navio carregado de grãos; à direita, uma cozinha simples com geladeira aberta quase vazia e uma pequena panela no fogão."
-      },
-      "stimulus": ["DOIS_TEXTOS", "FIGURA"]
+      }
     },
     {
       "id": "gen-fg-texto-mobilidade",
@@ -144,11 +152,11 @@
       "answer": "A",
       "explanation": "Resposta: A.\n\nO texto apresenta uma solução comum, mostra seu efeito de curto prazo, explica por que ele se desfaz (mais capacidade atrai mais carros, efeito conhecido como demanda induzida) e contrasta com a experiência de cidades que priorizaram outros meios. A tese é a da alternativa A.\n\nAs outras alternativas:\nB) O texto não culpa indivíduos; descreve um efeito de incentivos da política urbana.\nC) Generaliza além do texto, que trata de alargar avenidas como solução para o trânsito, não de toda obra viária.\nD) O texto sugere o contrário: viagens migraram do ônibus para o carro.\nE) Toma o efeito inicial como conclusão, ignorando o argumento central sobre o médio prazo.",
       "check": "Nova resolução sem o gabarito: identificação da tese (argumento de demanda induzida e alternativa de priorizar o transporte coletivo). Opção A.",
+      "stimulus": ["TEXTO_BASE", "CHARGE"],
       "figure": {
         "src": "/illustrations/Q-FG-02.webp",
         "alt": "Dois quadros mostram a mesma avenida alargada: primeiro com poucos carros e equipamentos de obra; depois com congestionamento e um ponto de ônibus vazio."
-      },
-      "stimulus": ["TEXTO_BASE", "CHARGE"]
+      }
     },
     {
       "id": "gen-fg-redes-saude-mental",
@@ -168,11 +176,11 @@
       "answer": "C",
       "explanation": "Resposta: C.\n\nOs dados mostram uma diferença entre grupos: 32% contra 18%. Isso é uma associação. Uma pesquisa desse tipo, que observa as pessoas num momento, não diz o que veio primeiro: o uso intenso pode piorar o bem-estar, a ansiedade pode levar ao uso intenso, ou um terceiro fator, como pouco sono ou solidão, pode influenciar os dois. Uma conclusão responsável reconhece a associação e os limites, sem minimizar o tema.\n\nAs outras alternativas:\nA) Transforma associação em prova de causa.\nB) Afirma uma direção causal que os dados também não permitem.\nD) Uma diferença de 14 pontos percentuais entre grupos indica associação, mesmo que a maioria dos usuários intensos não relate sintomas.\nE) Propõe uma solução única e absoluta que os dados não sustentam.",
       "check": "Nova resolução sem o gabarito: estudo transversal permite associação, não causalidade. Opção C.",
+      "stimulus": ["TEXTO_BASE", "CHARGE"],
       "figure": {
         "src": "/illustrations/Q-FG-05.webp",
         "alt": "Quatro familiares sentados à mesa olham cada um para seu celular. A comida permanece intocada no centro."
-      },
-      "stimulus": ["TEXTO_BASE", "CHARGE"]
+      }
     },
     {
       "id": "gen-fg-concentracao-renda",
@@ -181,12 +189,16 @@
       "concepts": ["fg-desigualdade", "fg-calculo"],
       "title": "Quanto os mais ricos ganham a mais",
       "subject": "Concentração de renda por grupos da população",
-      "prompt": "A concentração de renda costuma ser descrita pela fatia da renda total recebida por cada parte da população. A curva de Lorenz ordena as pessoas da mais pobre para a mais rica e mostra, para cada fração da população, que fração da renda ela acumula; quanto mais a curva se afasta da linha de igualdade, maior a concentração, que o índice de Gini resume num número entre 0 e 1. Comparar a renda média de grupos diferentes ajuda a dar dimensão concreta a essas fatias.\n\nNum país, com dados ilustrativos, os 10% mais ricos da população recebem 40% de toda a renda, e os 40% mais pobres recebem 10%.\n\nQuantas vezes a renda média de uma pessoa do grupo mais rico é maior que a renda média de uma pessoa do grupo mais pobre?",
+      "prompt": "A concentração de renda costuma ser descrita pela fatia da renda total recebida por cada parte da população. A curva de Lorenz ordena as pessoas da mais pobre para a mais rica e mostra, para cada fração da população, que fração da renda ela acumula; quanto mais a curva se afasta da linha de igualdade, maior a concentração, que o índice de Gini resume num número entre 0 e 1. Comparar a renda média de grupos diferentes ajuda a dar dimensão concreta a essas fatias.\n\nNum país, com dados ilustrativos, os 10% mais ricos da população recebem 40% de toda a renda, e os 40% mais pobres recebem 10%.\n\n[figura]\n\nQuantas vezes a renda média de uma pessoa do grupo mais rico é maior que a renda média de uma pessoa do grupo mais pobre?",
       "options": ["4 vezes", "10 vezes", "40 vezes", "30 vezes", "16 vezes"],
       "answer": "E",
       "explanation": "Resposta: E.\n\nA renda média de cada grupo é a fatia da renda dividida pela fatia da população.\n\nGrupo mais rico: 40% da renda para 10% das pessoas, ou 4 vezes a média do país.\nGrupo mais pobre: 10% da renda para 40% das pessoas, ou 0,25 da média do país.\n\nRazão: 4 / 0,25 = 16. Na curva de Lorenz, uma distribuição assim fica bem afastada da linha de igualdade, e o índice de Gini é elevado.\n\nAs outras alternativas:\nA) 4 é a renda do grupo mais rico em relação à média do país, não em relação ao grupo mais pobre.\nB) 10 compara as porcentagens de população, não as rendas médias.\nC) 40 multiplica as fatias sem dividir pelo tamanho dos grupos.\nD) 30 é a diferença entre 40% e 10%, em pontos percentuais, tratada como razão.",
       "check": "Nova resolução sem o gabarito: (40/10) / (10/40) = 16. Conferido por cálculo.",
-      "stimulus": ["TEXTO_BASE"]
+      "stimulus": ["TEXTO_BASE", "GRAFICO"],
+      "figure": {
+        "src": "/figures/gen-fg-concentracao-renda.svg",
+        "alt": "Duas barras horizontais divididas em três faixas, com dados ilustrativos. População: 40% mais pobres, 50% do meio e 10% mais ricos. Renda: os 40% mais pobres ficam com 10%, os 50% do meio com 50% e os 10% mais ricos com 40%."
+      }
     },
     {
       "id": "gen-fg-inclusao-deficiencia",
@@ -200,11 +212,11 @@
       "check": "Nova resolução sem o gabarito: Lei 13.146/2015, art. 2º (modelo social), art. 3º, IV (tipos de barreira) e art. 63 (sítios acessíveis); III e II falsas. Opção B.",
       "truth": ["I", "IV"],
       "combos": [["III"], ["I", "IV"], ["I", "II", "III"], ["I", "II", "IV"], ["II", "III", "IV"]],
+      "stimulus": ["TEXTO_BASE", "FIGURA"],
       "figure": {
         "src": "/illustrations/Q-FG-03.webp",
         "alt": "Pessoa em cadeira de rodas diante de uma escadaria e pessoa com bengala branca diante de uma calçada esburacada. As barreiras do ambiente aparecem em azul."
-      },
-      "stimulus": ["TEXTO_BASE", "FIGURA"]
+      }
     }
   ]
 }

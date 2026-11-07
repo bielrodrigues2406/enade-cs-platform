@@ -10,7 +10,7 @@
       "concepts": ["cg-filtros"],
       "title": "Filtro da mediana num pixel com ruído",
       "subject": "Filtro da mediana e ruído sal e pimenta",
-      "prompt": "Uma câmera de inspeção industrial gera imagens em tons de cinza (0 a 255) com ruído impulsivo, do tipo sal e pimenta. A vizinhança 3 × 3 de um pixel, lida linha a linha, é:\n\n10  12  11\n255 13   0\n12  11  10\n\nAplica-se um filtro da mediana 3 × 3. Qual é o novo valor do pixel central e por que esse filtro é indicado nesse caso?",
+      "prompt": "Uma câmera de inspeção industrial gera imagens em tons de cinza (0 a 255) com ruído impulsivo, do tipo sal e pimenta. A figura mostra a vizinhança 3 × 3 de um pixel.\n\n[figura]\n\nAplica-se um filtro da mediana 3 × 3. Qual é o novo valor do pixel central e por que esse filtro é indicado nesse caso?",
       "options": [
         "37, porque a mediana suaviza o ruído ao espalhar o valor 255 pelos pixels da vizinhança.",
         "0, porque o filtro da mediana escurece os pixels vizinhos a um ruído para compensar o brilho.",
@@ -20,7 +20,12 @@
       ],
       "answer": "E",
       "explanation": "Resposta: E.\n\nOrdenando os 9 valores: 0, 10, 10, 11, 11, 12, 12, 13, 255. A mediana é o 5º valor: 11.\n\nO ruído sal e pimenta cria valores extremos isolados (0 e 255). A mediana não é afetada por eles, porque depende da posição na ordem e não do valor. Num degrau de borda, a mediana também escolhe um valor de um dos lados, sem criar tons intermediários, por isso preserva as bordas. A média, ao contrário, incorpora os extremos e borra: aqui daria 334 / 9 ≈ 37.\n\nAs outras alternativas:\nA) 37 é o resultado do filtro da média, que espalha o ruído.\nB) 0 é o ruído de pimenta; ele seria o mínimo.\nC) 13 é o valor original do pixel. O filtro substitui o pixel pela mediana, sem regra de manter o original.\nD) 255 é o ruído de sal; ele seria o máximo, não a mediana.",
-      "check": "Nova resolução sem o gabarito: valores ordenados em código, mediana 11, média 37,1."
+      "check": "Nova resolução sem o gabarito: valores ordenados em código, mediana 11, média 37,1.",
+      "stimulus": ["FIGURA"],
+      "figure": {
+        "src": "/figures/gen-cg-mediana.svg",
+        "alt": "Grade 3 × 3 de pixels em tons de cinza. Primeira linha: 10, 12, 11. Segunda linha: 255, 13 (o pixel central, com borda mais grossa), 0. Terceira linha: 12, 11, 10."
+      }
     },
     {
       "id": "gen-cg-ordem-transformacoes",

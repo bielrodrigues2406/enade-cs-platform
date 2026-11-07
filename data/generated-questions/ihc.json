@@ -20,7 +20,12 @@
       ],
       "answer": "C",
       "explanation": "Resposta: C.\n\nA WCAG define a razão de contraste como (L1 + 0,05) / (L2 + 0,05), com L1 e L2 as luminâncias relativas da cor mais clara e da mais escura. O branco tem L = 1, e o cinza #777777 tem L ≈ 0,184, o que dá (1,05) / (0,234) ≈ 4,48. O limite é aplicado sem arredondar, e 4,48 < 4,5: o texto normal falha no critério 1.4.3 (contraste mínimo). Para texto grande, o limite é 3:1, que é atendido. Escurecer uma unidade, para #767676, leva a cerca de 4,54:1, aprovado.\n\nO contraste afeta pessoas com baixa visão, daltonismo, idosos e qualquer pessoa usando o celular sob sol forte.\n\nAs outras alternativas:\nA) Os limites da WCAG não são arredondados.\nB) Contraste é crítico para quem enxerga com limitação, não para quem usa leitor de tela.\nD) A norma fixa razões mínimas, não cores proibidas.\nE) Só o negrito em tamanho a partir de 14 pt muda a categoria para texto grande. Engrossar um texto pequeno não basta, e a cor continua abaixo do limite para texto normal.",
-      "check": "Nova resolução sem o gabarito: luminância relativa calculada em código pela fórmula da WCAG; #777777 = 4,48:1, #767676 = 4,54:1."
+      "check": "Nova resolução sem o gabarito: luminância relativa calculada em código pela fórmula da WCAG; #777777 = 4,48:1, #767676 = 4,54:1.",
+      "stimulus": ["FIGURA"],
+      "figure": {
+        "src": "/figures/gen-ihc-contraste-wcag.svg",
+        "alt": "Duas amostras de texto em cinza #777777 sobre fundo branco: uma linha de texto de corpo em 16 pixels e um título em negrito de 24 pixels."
+      }
     },
     {
       "id": "gen-ihc-heuristica-erro",
