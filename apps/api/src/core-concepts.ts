@@ -45,6 +45,25 @@ const optionalSlug = (value: unknown, where: string) => {
 export const normalize = (value: string) => value.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 /** Palavra-chave casa quando começa no início de uma palavra do assunto. */
+/**
+ * Ligações conferidas (data/study-analysis/concept-links.json): questão oficial ->
+ * conceitos que ela cobra. Recusa questão ou conceito desconhecido e questão sem conceito.
+ */
+export function parseConceptLinks(data: any, itemIds: Set<string>, conceptIds: Set<string>) {
+  const links = new Map<string, string[]>();
+  if (!data?.links || typeof data.links !== "object") throw new Error("concept-links: falta links.");
+  for (const [id, entry] of Object.entries<any>(data.links)) {
+    if (!itemIds.has(id)) throw new Error(`concept-links: questão desconhecida ${id}.`);
+    const concepts = entry?.concepts;
+    if (!Array.isArray(concepts) || !concepts.length) throw new Error(`concept-links: ${id} sem conceito.`);
+    for (const c of concepts) if (!conceptIds.has(c)) throw new Error(`concept-links: ${id} cita conceito desconhecido ${c}.`);
+    if (new Set(concepts).size !== concepts.length) throw new Error(`concept-links: ${id} repete conceito.`);
+    links.set(id, concepts);
+  }
+  return links;
+}
+
+/** Sugestão por palavra-chave para ligar uma questão nova; a ligação valendo é a conferida. */
 export function matches(concept: Concept, subject: string) {
   const target = normalize(subject);
   return concept.match.some((key) => new RegExp(`(?<![a-z0-9])${normalize(key).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`).test(target));
@@ -136,12 +155,16 @@ async function buildCore(): Promise<CoreCatalog> {
     seen.add(c.id);
   }
   const items = await officialItems();
+  const verified = parseConceptLinks(
+    JSON.parse(await readFile(path.join(ROOT, "study-analysis", "concept-links.json"), "utf8")),
+    new Set(items.map((i) => i.id)), seen);
   const links = new Map<string, LinkedQuestion[]>();
   const history = new Map<string, AreaHistory>();
   for (const area of areas) {
     const ofArea = items.filter((i) => i.area === area.area);
+    // Ligações conferidas item a item (R4); podem atravessar áreas, como FG em Sociedade e ética.
     for (const concept of area.concepts) {
-      links.set(concept.id, ofArea.filter((i) => matches(concept, i.subject))
+      links.set(concept.id, items.filter((i) => verified.get(i.id)?.includes(concept.id))
         .map(({ id, year, subject }) => ({ id, year, subject })).sort((a, b) => b.year - a.year));
     }
     const years = [...new Set(items.map((i) => i.year))].sort();

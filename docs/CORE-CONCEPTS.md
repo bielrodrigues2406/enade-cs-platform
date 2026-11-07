@@ -21,7 +21,7 @@ Cada arquivo traz:
 - `concepts`: de 6 a 13 conceitos essenciais. Cada um tem:
   - `definition`, a definição em uma linha;
   - `example`, um exemplo mínimo;
-  - `match`, palavras-chave que ligam o conceito às questões oficiais.
+  - `match`, palavras-chave que sugerem conceitos para uma questão nova; a ligação que vale está em `data/study-analysis/concept-links.json`.
 - `facts`: fatos de referência que cortam alternativas (complexidades, hierarquias, fórmulas).
 - `pairs`: pares que se confundem, com a diferença em uma frase.
 - `cues`: pistas do enunciado, de palavra-chave para conceito (o `concept` precisa existir).
@@ -53,11 +53,11 @@ Contexto medido no acervo de 246 objetivas:
   - Entram as de Bacharelado e de cadernos comuns, válidas, de escopo CC e conferidas.
   - O id é `official-<sha12 da prova>-<qN>`, o mesmo da publicação assistida.
   - A tela recebe o id da versão publicada, porque é por ele que o estudo abre a questão.
-- **Como casam:** um conceito casa com a questão quando uma das suas palavras-chave aparece no **início de uma palavra** do assunto conferido, sem acento e sem diferenciar maiúsculas.
-- **O que o teste garante:** toda questão oficial da área cai em pelo menos um conceito. Hoje são 206 de 206.
-  - Se o acervo ganhar questões, rode `npm test`. Se aparecer questão sem conceito, acrescente uma palavra-chave ou um conceito.
-- **Conceito sem questão ligada:** a tela diz "sem questão ligada neste recorte do acervo", e não "nunca caiu": a ligação é por palavra-chave no assunto e só dentro da área.
-- **Limite do casamento por palavra (revisão do Codex, R4):** cobrir 206 de 206 questões prova que toda questão encontrou uma palavra, não que a ligação esteja certa. Em 07/11 saíram "inserção" de ordenação (ligava a rotação de AVL de 2017 Q9) e "dígrafo" de grafos (ligava o Dijkstra de 2021 Q34, que já está em caminho mínimo). O próximo passo é conferir os vínculos item a item.
+- **Ligação conferida (revisão do Codex, R4):** `data/study-analysis/concept-links.json` diz, questão por questão, quais conceitos ela cobra. Foi conferida em 07/11/2026 pelo assunto e pelo início da explicação já conferida de cada uma das 206 questões: 24 ajustes sobre o casamento por palavra (290 ligações no total). Exemplos: heap deixou de contar como pilha e fila; a máquina de Turing de 2021 deixou "autômatos finitos"; a pintura de Ouro Preto foi de "cidades" para "patrimônio"; quatro questões de Formação Geral sobre inclusão digital e plataformas passaram a contar também em "Impactos sociais da Computação".
+  - O validador recusa questão fora do inventário, conceito inexistente, questão sem conceito e conceito repetido.
+  - O teste garante que toda questão oficial tem ao menos um conceito da própria área, além dos casos acima.
+- **Palavra-chave é sugestão:** um conceito casa com o assunto quando uma das suas palavras-chave aparece no **início de uma palavra**, sem acento e sem diferenciar maiúsculas. Serve para propor a ligação de uma questão nova; a ligação só vale depois de entrar no arquivo conferido.
+- **Conceito sem questão ligada:** a tela diz "sem questão ligada neste recorte do acervo", e não "nunca caiu": uma cobrança indireta pode ter ficado de fora, e o acervo não tem as discursivas nem os itens pendentes.
 - **Caiu, mas não está publicada neste banco:** a tela mostra o ano e o assunto sem link (`appearances` com `id` nulo). "Ainda não caiu" aparece só quando o inventário não tem nenhuma questão do conceito. Antes de 07/11 a tela confundia os dois casos: num banco sem as oficiais publicadas, o deadlock (2017, Q35) aparecia como "ainda não caiu".
 
 ## 5. Confiança

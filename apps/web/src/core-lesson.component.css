@@ -55,7 +55,9 @@
 /* Modelo novo de lição (revisão do Codex, §4): objetivo, pré-requisitos, contraexemplo, transferência e fonte. */
 .lesson-goal { display: grid; gap: var(--space-3); max-width: 64ch; margin: var(--space-5) 0 0; padding: var(--space-4) 0 0; border-top: 1px solid var(--color-border); }
 .lesson-goal div { display: grid; grid-template-columns: minmax(9rem, 12rem) 1fr; gap: var(--space-3); }
-.lesson-goal dt, .lesson-goal dd, .lesson-prereq { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin: 0; padding: 0; list-style: none; }
+.lesson-goal dt { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); padding-top: 0.2em; }
+.lesson-goal dd { margin: 0; line-height: 1.55; }
+.lesson-prereq { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin: 0; padding: 0; list-style: none; }
 .lesson-counter { margin-bottom: var(--space-5); }
 .lesson-counter p { margin: 0 0 var(--space-3); line-height: 1.6; max-width: 70ch; }
 .lesson-claim { font-weight: 600; }
@@ -67,7 +69,8 @@
 .lesson-transfer details ol, .lesson-transfer details .lesson-check { margin: 0; padding: 0 var(--space-4) var(--space-4) calc(var(--space-4) + 1.2em); line-height: 1.6; }
 .lesson-transfer details .lesson-check { padding-left: var(--space-4); }
 @media (max-width: 560px) {
-  .lesson-goal div, }
+  .lesson-goal div { grid-template-columns: 1fr; gap: var(--space-1); }
+}
 .lesson-provenance { margin-top: var(--space-8); padding-top: var(--space-4); border-top: 1px solid var(--color-border); font-size: var(--text-sm); line-height: 1.55; color: var(--color-text-muted); }
 .lesson-provenance p { margin: 0 0 var(--space-2); max-width: 80ch; }
 .lesson-provenance strong { color: var(--color-text); font-weight: 600; }
