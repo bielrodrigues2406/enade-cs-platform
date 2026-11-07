@@ -16,6 +16,8 @@ export type CoreAreaSummary = {
   history: AreaHistory; share: number | null; concepts: number;
   /** Lições da Biblioteca já escritas para a área. */
   lessons: number;
+  /** Capa ilustrada (só nas áreas com lições). */
+  cover: string | null;
   confidence: Confidence; priority: number | null;
 };
 export type TrapPattern = "VIZINHO" | "PAR" | "INVERTIDA" | "GRANDEZA" | "CONDICAO" | "ABSOLUTO" | "CAUSA";

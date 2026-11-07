@@ -111,7 +111,7 @@ export class CoreConceptsController {
         return {
           slug: area.slug, area: area.area, title: area.title, summary: area.summary,
           history, share: share === null ? null : Math.round(1000 * share) / 10,
-          concepts: area.concepts.length, lessons: lessons.get(area.slug)?.lessons.size ?? 0, confidence: conf,
+          concepts: area.concepts.length, lessons: lessons.get(area.slug)?.lessons.size ?? 0, cover: lessons.get(area.slug)?.cover ?? null, confidence: conf,
           priority: share === null ? null : Math.round(1000 * share * (1 - conf.value / 100)) / 10,
         };
       }),

@@ -2,7 +2,7 @@
   "slug": "redes",
   "area": "Redes",
   "title": "Redes de computadores",
-  "summary": "Camadas e protocolos TCP/IP, endereçamento, dispositivos e acesso ao meio. Caiu muito em 2008 e menos depois, mas segue presente.",
+  "summary": "Camadas e protocolos TCP/IP, endereçamento, dispositivos e acesso ao meio. Foram 5 questões em 2008, nenhuma em 2014 e de 1 a 3 nas outras edições.",
   "deck": "redes",
   "sheet": "redes-tcp-ip",
   "concepts": [

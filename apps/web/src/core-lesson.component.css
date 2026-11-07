@@ -74,3 +74,17 @@
 .lesson-provenance { margin-top: var(--space-8); padding-top: var(--space-4); border-top: 1px solid var(--color-border); font-size: var(--text-sm); line-height: 1.55; color: var(--color-text-muted); }
 .lesson-provenance p { margin: 0 0 var(--space-2); max-width: 80ch; }
 .lesson-provenance strong { color: var(--color-text); font-weight: 600; }
+
+/* Índice lateral (07/11): só em telas largas; no celular a lição segue em coluna única. */
+.lesson-shell { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+.lesson-toc { display: none; }
+.lesson-toc-title { margin: 0 0 var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); }
+.lesson-toc ol { margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--color-border); }
+.lesson-toc li .text-button { display: block; min-height: 36px; padding: var(--space-1) var(--space-3); text-align: left; font-size: var(--text-sm); text-decoration: none; color: var(--color-text-muted); }
+.lesson-toc li .text-button:hover { color: var(--color-accent); }
+.lesson-section, .lesson-body { scroll-margin-top: calc(var(--header-height, 64px) + var(--space-4)); }
+.lesson-section h2 { scroll-margin-top: calc(var(--header-height, 64px) + var(--space-4)); }
+@media (min-width: 1240px) {
+  .lesson-shell { grid-template-columns: minmax(0, 1fr) 12rem; }
+  .lesson-toc { display: block; position: sticky; top: calc(var(--header-height, 64px) + var(--space-6)); align-self: start; }
+}

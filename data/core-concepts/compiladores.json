@@ -2,7 +2,7 @@
   "slug": "compiladores",
   "area": "Compiladores",
   "title": "Compiladores",
-  "summary": "Uma questão em quase toda prova: fases do compilador e análise sintática (LL e LR), sempre ligadas a gramáticas.",
+  "summary": "Caiu nas 6 provas de 2005 a 2021: fases do compilador e análise sintática (LL e LR), ligadas a gramáticas.",
   "deck": "compiladores",
   "sheet": "compiladores",
   "concepts": [

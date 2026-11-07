@@ -24,6 +24,9 @@ export class CoreMapComponent {
   firstSlugs = computed(() => new Set([...this.specific()]
     .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0)).slice(0, FIRST).map((a) => a.slug)));
   maxShare = computed(() => Math.max(1, ...this.specific().map((a) => a.share ?? 0)));
+  /** Áreas que já têm lições: ficam em destaque no topo (pedido de Gabriel, 07/11). */
+  withLessons = computed(() => (this.areas() ?? []).filter((a) => a.lessons > 0)
+    .sort((a, b) => (b.share ?? 0) - (a.share ?? 0)));
   started = computed(() => this.specific().some((a) => a.confidence.value > 0));
 
   ngOnInit() { void this.load(); }
@@ -46,7 +49,8 @@ export class CoreMapComponent {
   }
   rowLabel(area: CoreAreaSummary) {
     const first = this.firstSlugs().has(area.slug) ? ", comece por aqui" : "";
-    return `${area.area}${first}: ${this.pct(area.share)}% das questões específicas, em ${this.editionsWith(area)} de 6 provas; confiança ${area.confidence.value} de 100`;
+    const lessons = area.lessons ? `; ${area.lessons} lições` : "";
+    return `${area.area}${first}: ${this.pct(area.share)}% das questões específicas, em ${this.editionsWith(area)} de 6 provas; confiança ${area.confidence.value} de 100${lessons}`;
   }
   tone(value: number) {
     return value >= 70 ? "is-high" : value >= 40 ? "is-mid" : "is-low";
