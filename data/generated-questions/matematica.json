@@ -25,15 +25,15 @@
     {
       "id": "gen-mat-validade",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["mat-inferencia"],
       "title": "Quais argumentos são válidos",
       "subject": "Regras de inferência e falácias",
-      "prompt": "Avalie a validade dos argumentos a seguir.\n\nI. Se o código compila, os testes rodam. Os testes rodaram. Logo, o código compilou.\nII. Se o código compila, os testes rodam. O código não compilou. Logo, os testes não rodaram.\nIII. Se o código compila, os testes rodam. Os testes não rodaram. Logo, o código não compilou.\nIV. O erro está no front-end ou no back-end. O erro não está no front-end. Logo, está no back-end.\n\nSão argumentos válidos apenas",
-      "options": ["I e II.", "I e III.", "II e IV.", "III e IV.", "I, III e IV."],
-      "answer": "D",
-      "explanation": "Resposta: D.\n\nUm argumento é válido quando não existe situação com as premissas verdadeiras e a conclusão falsa.\n\nI é inválido. É a falácia de afirmar o consequente: os testes podem ter rodado por outro motivo, por exemplo um script que roda testes já compilados.\nII é inválido. É a falácia de negar o antecedente, pelo mesmo motivo.\nIII é válido. É modus tollens: de p → q e ¬q, conclui-se ¬p.\nIV é válido. É o silogismo disjuntivo: de p ∨ q e ¬p, conclui-se q.\n\nAs outras alternativas:\nA) Escolhe as duas falácias.\nB) Inclui I, que afirma o consequente.\nC) Inclui II, que nega o antecedente.\nE) Inclui I.",
-      "check": "Nova resolução sem o gabarito: busca de contraexemplo por tabela-verdade; I e II têm contraexemplo (p falsa, q verdadeira); III e IV não têm."
+      "prompt": "Avalie a validade dos argumentos a seguir.\n\nI. Se o código compila, os testes rodam. Os testes não rodaram. Logo, o código não compilou.\nII. Se o código compila, os testes rodam. O código não compilou. Logo, os testes não rodaram.\nIII. Se o código compila, os testes rodam. Os testes rodaram. Logo, o código compilou.\nIV. O erro está no front-end ou no back-end. O erro está no front-end. Logo, não está no back-end.\n\nSão argumentos válidos apenas",
+      "explanation": "Resposta: A.\n\nUm argumento é válido quando não existe situação com as premissas verdadeiras e a conclusão falsa.\n\nI é válido. É modus tollens: de p → q e ¬q, conclui-se ¬p.\n\nII é inválido. É a falácia de negar o antecedente: os testes podem rodar por outro motivo, por exemplo um script que roda testes já compilados.\n\nIII é inválido. É a falácia de afirmar o consequente, pelo mesmo motivo.\n\nIV é inválido. Em lógica, \"ou\" é inclusivo: o erro pode estar nos dois lugares. Saber que está no front-end não exclui o back-end. Válido seria o silogismo disjuntivo: de p ∨ q e ¬p, concluir q.\n\nAs outras alternativas:\nB) Escolhe só II, que nega o antecedente.\nC) Inclui III, que afirma o consequente.\nD) Inclui IV, que trata o \"ou\" como exclusivo.\nE) Junta as duas falácias da condicional.",
+      "check": "Nova resolução sem o gabarito: tabelas-verdade montadas em código para cada forma; só modus tollens não tem linha com premissas verdadeiras e conclusão falsa. Opção A.",
+      "truth": ["I"],
+      "combos": [["I"], ["II"], ["I", "III"], ["I", "IV"], ["II", "III"]]
     },
     {
       "id": "gen-mat-negacao-quantificador",
@@ -44,10 +44,10 @@
       "subject": "Negação de quantificadores",
       "prompt": "O relatório de integração contínua afirma: \"Todo teste da suíte passou.\"\n\nQual frase é a negação lógica dessa afirmação?",
       "options": [
-        "Nenhum teste da suíte passou.",
-        "Todo teste da suíte falhou.",
-        "Existe pelo menos um teste da suíte que não passou.",
-        "Existe pelo menos um teste da suíte que passou.",
+        "Nenhum dos testes da suíte passou nesta execução.",
+        "Todos os testes da suíte falharam nesta execução.",
+        "Pelo menos um teste da suíte não passou.",
+        "Pelo menos um teste da suíte passou.",
         "A maioria dos testes da suíte não passou."
       ],
       "answer": "C",
@@ -63,7 +63,7 @@
       "subject": "Relação de equivalência e partição",
       "prompt": "No conjunto A = {1, 2, 3, 4, 5, 6}, defina a relação R por: a R b se e somente se a − b é múltiplo de 3.\n\nQual afirmação está correta?",
       "options": [
-        "R é uma relação de equivalência, e suas classes são {1, 4}, {2, 5} e {3, 6}.",
+        "R é uma relação de equivalência, e suas classes são exatamente {1, 4}, {2, 5} e {3, 6}.",
         "R é uma relação de equivalência, e suas classes são {1, 2, 3} e {4, 5, 6}.",
         "R não é simétrica, porque 4 − 1 = 3, mas 1 − 4 = −3.",
         "R é uma ordem parcial, porque é reflexiva, antissimétrica e transitiva.",
@@ -94,9 +94,9 @@
       "title": "Probabilidade condicional numa turma",
       "subject": "Probabilidade condicional com tabela",
       "prompt": "Numa turma de 200 estudantes que fizeram uma prova:\n\n120 usaram uma plataforma de estudos, e 90 deles foram aprovados;\n80 não usaram, e 40 deles foram aprovados.\n\nSorteando um estudante aprovado, qual é a probabilidade aproximada de que ele tenha usado a plataforma?",
-      "options": ["75%", "69%", "45%", "60%", "65%"],
-      "answer": "B",
-      "explanation": "Resposta: B.\n\nO evento dado é \"aprovado\": são 90 + 40 = 130 estudantes. Destes, 90 usaram a plataforma. P(usou | aprovado) = 90 / 130 ≈ 0,692, cerca de 69%.\n\nAs outras alternativas:\nA) 75% = 90 / 120 é P(aprovado | usou): inverte a condição.\nC) 45% = 90 / 200 é P(usou e aprovado), sem condicionar.\nD) 60% = 120 / 200 é a proporção de quem usou a plataforma, sem olhar a aprovação.\nE) 65% = 130 / 200 é a proporção de aprovados.",
+      "options": ["75%", "65%", "45%", "60%", "69%"],
+      "answer": "E",
+      "explanation": "Resposta: E.\n\nO evento dado é \"aprovado\": são 90 + 40 = 130 estudantes. Destes, 90 usaram a plataforma. P(usou | aprovado) = 90 / 130 ≈ 0,692, cerca de 69%.\n\nAs outras alternativas:\nA) 75% = 90 / 120 é P(aprovado | usou): inverte a condição.\nB) 65% = 130 / 200 é a proporção de aprovados.\nC) 45% = 90 / 200 é P(usou e aprovado), sem condicionar.\nD) 60% = 120 / 200 é a proporção de quem usou a plataforma, sem olhar a aprovação.",
       "check": "Nova resolução sem o gabarito: 90 / 130 = 0,6923. Conferido por cálculo."
     },
     {
@@ -120,16 +120,12 @@
       "title": "Correlação e causa",
       "subject": "Correlação de Pearson e causalidade",
       "prompt": "Uma pesquisa com estudantes encontrou correlação de Pearson r = 0,9 entre horas semanais de estudo e nota no ENADE.\n\nConsidere as asserções.\n\nI. Esse resultado permite concluir que estudar mais causa notas maiores.\n\nPORQUE\n\nII. Um valor de r próximo de 1 indica forte associação linear positiva entre as duas variáveis.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "D",
       "explanation": "Resposta: D.\n\nII é verdadeira: r varia de −1 a 1, e 0,9 indica que, quando uma variável cresce, a outra tende a crescer de forma aproximadamente linear.\n\nI é falsa: correlação não basta para afirmar causa. Pode haver uma terceira variável por trás das duas, como motivação ou base anterior, ou causalidade no sentido contrário. Para concluir causa seria preciso, por exemplo, um experimento com grupos sorteados.\n\nAs outras alternativas:\nA) Trata associação como prova de causa. É a armadilha de causa trocada.\nB) Também considera I verdadeira.\nC) Inverte: II é a afirmação verdadeira.\nE) II é verdadeira.",
-      "check": "Nova resolução sem o gabarito: r = 0,9 indica associação linear forte (II verdadeira); correlação não implica causalidade (I falsa). Opção D."
+      "check": "Nova resolução sem o gabarito: r = 0,9 indica associação linear forte (II verdadeira); correlação não implica causalidade (I falsa). Opção D.",
+      "assertion": {
+        "first": false,
+        "second": true
+      }
     },
     {
       "id": "gen-mat-soma-graus",
@@ -140,11 +136,11 @@
       "subject": "Teoria dos grafos: soma dos graus",
       "prompt": "Uma rede de 5 servidores deve ser ligada de modo que cada servidor tenha exatamente 3 conexões diretas com outros servidores, sem conexões repetidas nem de um servidor com ele mesmo (grafo simples).\n\nÉ possível montar essa rede?",
       "options": [
-        "Sim, ligando os servidores em anel e acrescentando as diagonais.",
-        "Sim, porque 3 é menor que 5 − 1 = 4, o grau máximo possível.",
-        "Sim, com exatamente 15 conexões.",
-        "Não, porque um grafo com 5 vértices não pode ter ciclos.",
-        "Não, porque a soma dos graus seria 15, um número ímpar, e a soma dos graus de qualquer grafo é o dobro do número de arestas."
+        "Sim, ligando os servidores em anel e acrescentando as diagonais do pentágono formado.",
+        "Sim, porque o grau pedido, 3, é menor que o grau máximo possível num grafo de 5 vértices, que é 4.",
+        "Sim, usando exatamente 15 conexões, uma para cada par formado por servidor e porta de rede.",
+        "Não, porque um grafo simples com 5 vértices não pode conter nenhum ciclo.",
+        "Não, porque a soma dos graus seria 15, ímpar, e essa soma é sempre o dobro do número de arestas."
       ],
       "answer": "E",
       "explanation": "Resposta: E.\n\nCada aresta liga dois vértices e conta uma vez no grau de cada um. Por isso a soma dos graus é sempre 2|E|, um número par. Com 5 vértices de grau 3, a soma seria 15, ímpar. Logo, esse grafo não existe. Uma consequência útil: todo grafo tem um número par de vértices de grau ímpar.\n\nAs outras alternativas:\nA) Anel com todas as diagonais é o grafo completo K₅, em que cada vértice tem grau 4, não 3.\nB) Respeitar o grau máximo é necessário, mas não suficiente. Esquece a condição de paridade.\nC) 15 é a soma dos graus; o número de arestas seria 15 / 2, que não é inteiro.\nD) Grafos com 5 vértices podem ter ciclos; o K₅ tem vários.",

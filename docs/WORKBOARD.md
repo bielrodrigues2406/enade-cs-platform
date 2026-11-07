@@ -342,3 +342,9 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
   - **Ilustrações:** 41 em `apps/web/public/illustrations/`, ainda não ligadas às telas (PRs C, D e F).
   - Migrations reservadas continuam 032 (GEN-4) e 033 (NEWS-1).
 
+- **07/11/2026 · Claude · PR B + C (GEN-3, GEN-4):** branch `claude/confident-cray-ndnwmk`, migration 032 usada.
+  - **Formatos:** `ITENS3`, `ITENS4` e `ASSERCAO` saem do molde da prova, com a letra calculada; `ORDEM`, `CALCULO`, `CODIGO_OPCOES` e `ASSOCIACAO` conferidos na forma. Campo `stimulus` e `figure` (SVG ou ilustração, `alt` obrigatório, marcador `[figura]`).
+  - **Lote 1 revisado:** as 120 questões, sem mudar `id`. Certa única mais longa de 58% para 6% nas simples, chutador de 66% para 23%, item I verdadeiro de 92% para 61%, asserção com B e E. Travas no `npm test`.
+  - **Figuras:** 12 SVGs (`scripts/draw-figures.py`) e 9 cenas ligadas às questões.
+  - **Falta:** enunciados longos (77 questões ainda com até 80 palavras), que vão para o PR E.
+

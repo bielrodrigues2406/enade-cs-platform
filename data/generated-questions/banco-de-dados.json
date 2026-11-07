@@ -7,10 +7,7 @@
       "id": "gen-bd-not-in-null",
       "kind": "ESPELHO",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-juncoes",
-        "bd-sql"
-      ],
+      "concepts": ["bd-juncoes", "bd-sql"],
       "title": "NOT IN com valor nulo",
       "subject": "SQL: NOT IN, NOT EXISTS e NULL",
       "prompt": "Considere as tabelas:\n\nalunos(id, nome): (1, 'Ana'), (2, 'Bruno'), (3, 'Carla')\nbolsas(aluno_id, tipo): (1, 'PIBIC'), (NULL, 'Monitoria')\n\nO registro de monitoria ainda não foi associado a nenhum aluno. Uma analista quer listar os alunos sem bolsa e escreve:\n\n```\nSELECT nome FROM alunos\nWHERE id NOT IN (SELECT aluno_id FROM bolsas);\n```\n\nQual é o resultado da consulta?",
@@ -29,63 +26,49 @@
       "id": "gen-bd-reserva-concorrente",
       "kind": "QUENTE",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-concorrencia",
-        "bd-transacoes"
-      ],
+      "concepts": ["bd-concorrencia", "bd-transacoes"],
       "title": "Dois compradores para o mesmo assento",
       "subject": "Concorrência: atualização perdida e bloqueio",
       "prompt": "Um sistema de venda de ingressos para um show esgotado em minutos faz, para cada compra:\n\n```\n1. SELECT status FROM assentos WHERE id = 42;\n2. se status = 'livre':\n3.     UPDATE assentos SET status = 'vendido', comprador = :cliente WHERE id = 42;\n```\n\nAs duas instruções rodam numa transação com o nível de isolamento padrão (READ COMMITTED). Na noite da venda, o mesmo assento foi vendido a duas pessoas.\n\nQual alteração impede esse problema de forma correta?",
       "options": [
-        "Aumentar o número de conexões do banco, para que cada compra termine mais rápido.",
-        "Criar um índice na coluna status.",
-        "Trocar o SELECT por uma consulta com cache no servidor de aplicação.",
-        "Fazer a reserva numa única instrução condicional, UPDATE assentos SET status = 'vendido', comprador = :cliente WHERE id = 42 AND status = 'livre', e verificar se uma linha foi afetada; ou usar SELECT … FOR UPDATE antes de alterar.",
-        "Executar o SELECT duas vezes antes do UPDATE, para confirmar que o assento continua livre."
+        "Aumentar o número de conexões do banco, para que cada compra termine antes de a próxima começar.",
+        "Criar um índice na coluna status, para que a leitura do passo 1 encontre o assento mais depressa.",
+        "Ler o status de um cache no servidor de aplicação, atualizado a cada compra que o banco de dados confirmar com sucesso.",
+        "Trocar os passos por UPDATE … WHERE id = 42 AND status = 'livre' e conferir se uma linha mudou.",
+        "Executar o SELECT duas vezes antes do UPDATE, para confirmar que o assento continua livre de fato."
       ],
       "answer": "D",
-      "explanation": "Resposta: D.\n\nO problema é uma corrida do tipo ler-verificar-escrever. As duas transações leem 'livre' no passo 1, antes que qualquer uma grave, e as duas executam o UPDATE. No READ COMMITTED, cada SELECT vê só o que foi confirmado até então, e nada impede essa intercalação.\n\nA atualização condicional junta verificação e escrita numa operação atômica: a segunda transação espera a trava da linha, reavalia a condição status = 'livre', não a encontra mais e afeta zero linhas. A aplicação então informa que o assento foi vendido. O SELECT … FOR UPDATE resolve de outro modo: trava a linha na leitura, e a outra transação espera até o fim da primeira.\n\nAs outras alternativas:\nA) Velocidade diminui a janela, mas não elimina a corrida.\nB) Índice acelera a busca e não tem relação com isolamento.\nC) Um cache torna a leitura ainda mais desatualizada e piora o problema.\nE) Ler duas vezes continua sendo ler sem travar; a outra transação pode gravar entre a segunda leitura e o UPDATE.",
+      "explanation": "Resposta: D.\n\nO problema é uma corrida do tipo ler-verificar-escrever. As duas transações leem 'livre' no passo 1, antes que qualquer uma grave, e as duas executam o UPDATE. No READ COMMITTED, cada SELECT vê só o que foi confirmado até então, e nada impede essa intercalação.\n\nA atualização condicional (UPDATE assentos SET status = 'vendido', comprador = :cliente WHERE id = 42 AND status = 'livre') junta verificação e escrita numa operação atômica: a segunda transação espera a trava da linha, reavalia a condição status = 'livre', não a encontra mais e afeta zero linhas. A aplicação então informa que o assento foi vendido. Outra forma correta é o SELECT … FOR UPDATE: trava a linha na leitura, e a outra transação espera até o fim da primeira.\n\nAs outras alternativas:\nA) Velocidade diminui a janela, mas não elimina a corrida.\nB) Índice acelera a busca e não tem relação com isolamento.\nC) Um cache torna a leitura ainda mais desatualizada e piora o problema.\nE) Ler duas vezes continua sendo ler sem travar; a outra transação pode gravar entre a segunda leitura e o UPDATE.",
       "check": "Nova resolução sem o gabarito: corrida ler-verificar-escrever. Executado em PostgreSQL 17 de teste: o UPDATE condicional rodado duas vezes afeta 1 linha e depois 0. Opção D."
     },
     {
       "id": "gen-bd-normalizacao-pedido",
       "kind": "ESPELHO",
-      "format": "ITENS",
-      "concepts": [
-        "bd-normalizacao",
-        "bd-chaves"
-      ],
+      "format": "ITENS4",
+      "concepts": ["bd-normalizacao", "bd-chaves"],
       "title": "Normalizar a tabela de itens de pedido",
       "subject": "Dependências funcionais, 2FN e 3FN",
-      "prompt": "Uma loja guarda os itens dos pedidos numa única tabela:\n\nitem_pedido(pedido_id, produto_id, quantidade, nome_produto, preco_tabela, cliente_id, nome_cliente)\n\nA chave primária é (pedido_id, produto_id). Valem as dependências: produto_id → nome_produto, preco_tabela; pedido_id → cliente_id; cliente_id → nome_cliente; (pedido_id, produto_id) → quantidade. Todos os atributos são atômicos.\n\nAvalie as afirmações.\n\nI. nome_produto depende de apenas parte da chave, o que viola a segunda forma normal (2FN).\nII. cliente_id depende só de pedido_id, parte da chave, o que também viola a 2FN.\nIII. A tabela está na primeira forma normal (1FN).\nIV. Para chegar à 3FN, basta retirar a coluna quantidade da tabela.\n\nÉ correto apenas o que se afirma em",
-      "options": [
-        "I e IV.",
-        "I, II e III.",
-        "II e IV.",
-        "III e IV.",
-        "I, II e IV."
-      ],
-      "answer": "B",
-      "explanation": "Resposta: B.\n\nI está correta. Com chave composta, a 2FN exige que todo atributo não chave dependa da chave inteira. nome_produto depende só de produto_id.\nII está correta, pelo mesmo motivo: cliente_id depende só de pedido_id. Além disso, nome_cliente depende de cliente_id, uma dependência transitiva que viola a 3FN.\nIII está correta: os atributos são atômicos e há chave primária, o que basta para a 1FN.\nIV está errada. quantidade é justamente o único atributo que depende da chave inteira, e precisa ficar. A decomposição adequada é: produto(produto_id, nome_produto, preco_tabela), cliente(cliente_id, nome_cliente), pedido(pedido_id, cliente_id) e item_pedido(pedido_id, produto_id, quantidade).\n\nAs outras alternativas:\nA) Inclui IV e deixa de fora II e III.\nC) Inclui IV.\nD) Inclui IV e deixa de fora I e II.\nE) Inclui IV e deixa de fora III.",
-      "check": "Nova resolução sem o gabarito: dependências parciais de produto_id e pedido_id (I, II); 1FN atendida (III); quantidade é dependência total (IV falsa). Opção B."
+      "prompt": "Uma loja guarda os itens dos pedidos numa única tabela:\n\nitem_pedido(pedido_id, produto_id, quantidade, nome_produto, preco_tabela, cliente_id, nome_cliente)\n\nA chave primária é (pedido_id, produto_id). Valem as dependências: produto_id → nome_produto, preco_tabela; pedido_id → cliente_id; cliente_id → nome_cliente; (pedido_id, produto_id) → quantidade. Todos os atributos são atômicos.\n\nAvalie as afirmações.\n\nI. nome_produto depende de apenas parte da chave, o que viola a segunda forma normal (2FN).\nII. A tabela não está na primeira forma normal (1FN), porque sua chave primária é composta.\nIII. Para chegar à 3FN, basta retirar a coluna quantidade da tabela.\nIV. cliente_id depende só de pedido_id, parte da chave, o que também viola a 2FN.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: C.\n\nI está correta. Com chave composta, a 2FN exige que todo atributo não chave dependa da chave inteira, e nome_produto depende só de produto_id.\n\nII está errada. A 1FN pede atributos atômicos e uma chave que identifique cada linha; nada impede que essa chave seja composta. Como todos os atributos são atômicos, a tabela está na 1FN.\n\nIII está errada. quantidade é justamente o único atributo que depende da chave inteira, e precisa ficar. A decomposição adequada é: produto(produto_id, nome_produto, preco_tabela), cliente(cliente_id, nome_cliente), pedido(pedido_id, cliente_id) e item_pedido(pedido_id, produto_id, quantidade).\n\nIV está correta, pelo mesmo motivo de I: cliente_id depende só de pedido_id. Além disso, nome_cliente depende de cliente_id, uma dependência transitiva que viola a 3FN.\n\nAs outras alternativas:\nA) Inclui II: chave composta não impede a 1FN.\nB) Inclui III, que retiraria o único atributo que depende da chave inteira, e deixa de fora IV.\nD) Inclui II.\nE) Inclui II e III e deixa de fora I.",
+      "check": "Nova resolução sem o gabarito: dependências parciais de produto_id e pedido_id (I e IV verdadeiras), 1FN atendida apesar da chave composta (II falsa), quantidade depende da chave inteira (III falsa). Opção C.",
+      "truth": ["I", "IV"],
+      "combos": [["I", "II"], ["I", "III"], ["I", "IV"], ["I", "II", "IV"], ["II", "III", "IV"]],
+      "stimulus": ["CENARIO", "TABELA"]
     },
     {
       "id": "gen-bd-left-join-where",
       "kind": "ESPELHO",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-juncoes",
-        "bd-sql"
-      ],
+      "concepts": ["bd-juncoes", "bd-sql"],
       "title": "LEFT JOIN que vira INNER JOIN",
       "subject": "Junção externa e filtro no WHERE",
       "prompt": "Uma coordenadora quer listar todos os alunos e, para quem tiver, a matrícula de 2026. Ela escreve:\n\n```\nSELECT a.nome, m.disciplina\nFROM alunos a\nLEFT JOIN matriculas m ON m.aluno_id = a.id\nWHERE m.ano = 2026;\n```\n\nHá alunos sem nenhuma matrícula em 2026. Qual afirmação sobre a consulta está correta?",
       "options": [
-        "Alunos sem matrícula em 2026 não aparecem, porque nas linhas sem par m.ano é NULL e o WHERE as descarta; para mantê-los, a condição m.ano = 2026 deve ir para a cláusula ON.",
-        "Todos os alunos aparecem, porque o LEFT JOIN sempre preserva as linhas da tabela da esquerda, qualquer que seja o WHERE.",
-        "A consulta dá erro, porque não é permitido usar no WHERE uma coluna da tabela da direita de um LEFT JOIN.",
-        "Alunos sem matrícula em 2026 aparecem com disciplina igual a 2026.",
-        "O resultado é igual ao de um RIGHT JOIN, porque o filtro inverte o lado preservado."
+        "Alunos sem matrícula em 2026 somem, porque o WHERE descarta as linhas com m.ano nulo; o filtro deveria ir para o ON.",
+        "Todos os alunos aparecem, porque o LEFT JOIN preserva as linhas da tabela da esquerda qualquer que seja o WHERE.",
+        "A consulta dá erro de sintaxe, porque o WHERE não pode citar uma coluna da tabela da direita de um LEFT JOIN.",
+        "Alunos sem matrícula em 2026 aparecem com a disciplina preenchida pelo valor 2026, que veio do filtro do WHERE.",
+        "O resultado é igual ao de um RIGHT JOIN, porque o filtro sobre m inverte qual tabela tem as linhas preservadas."
       ],
       "answer": "A",
       "explanation": "Resposta: A.\n\nA ordem lógica é: primeiro a junção, depois o WHERE. O LEFT JOIN gera, para alunos sem matrícula correspondente, linhas com NULL nas colunas de m. Em seguida, WHERE m.ano = 2026 avalia NULL = 2026 como desconhecido e descarta essas linhas. Na prática, a consulta vira um INNER JOIN.\n\nA forma correta é filtrar durante a junção:\n```\nLEFT JOIN matriculas m ON m.aluno_id = a.id AND m.ano = 2026\n```\nAssim, todos os alunos aparecem, com disciplina NULL para quem não tem matrícula em 2026.\n\nAs outras alternativas:\nB) O LEFT JOIN preserva a tabela da esquerda na junção, mas o WHERE vem depois e pode remover essas linhas.\nC) É permitido; só o efeito não é o desejado.\nD) As colunas sem par ficam NULL; o valor do filtro não é copiado.\nE) O RIGHT JOIN preservaria as matrículas sem aluno, outra coisa.",
@@ -95,31 +78,26 @@
       "id": "gen-bd-er-n-n",
       "kind": "ESPELHO",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-modelo-er",
-        "bd-chaves"
-      ],
+      "concepts": ["bd-modelo-er", "bd-chaves"],
       "title": "Relacionamento muitos-para-muitos no modelo relacional",
       "subject": "Mapeamento ER para relacional",
       "prompt": "No modelo entidade-relacionamento de um sistema acadêmico, Estudante e Projeto de Extensão têm um relacionamento N:N chamado Participa, com o atributo carga_horaria (horas de cada estudante em cada projeto).\n\nQual mapeamento para o modelo relacional é adequado?",
       "options": [
-        "Acrescentar a coluna projeto_id à tabela estudante.",
-        "Acrescentar a coluna estudante_id à tabela projeto, com carga_horaria ao lado.",
-        "Guardar em projeto uma coluna com a lista dos ids dos estudantes separados por vírgula.",
-        "Juntar estudante e projeto numa só tabela, repetindo os dados de cada um por participação.",
-        "Criar a tabela participa(estudante_id, projeto_id, carga_horaria), com chave primária composta (estudante_id, projeto_id) e chaves estrangeiras para estudante e projeto."
+        "Acrescentar projeto_id e carga_horaria à tabela estudante, como chave estrangeira para projeto.",
+        "Acrescentar estudante_id à tabela projeto, com carga_horaria ao lado, como chave estrangeira para estudante.",
+        "Guardar em projeto uma coluna com a lista dos ids dos estudantes participantes, separados por vírgula.",
+        "Juntar estudante e projeto numa só tabela, repetindo os dados dos dois a cada participação registrada.",
+        "Criar participa(estudante_id, projeto_id, carga_horaria), com chave primária composta pelos dois ids."
       ],
       "answer": "E",
-      "explanation": "Resposta: E.\n\nUm relacionamento N:N não cabe como chave estrangeira em nenhuma das duas tabelas, porque cada linha de um lado se liga a várias do outro. Ele vira uma tabela associativa com as chaves dos dois lados e os atributos do próprio relacionamento. carga_horaria pertence ao par (estudante, projeto), não a um dos dois isoladamente. A chave composta impede duplicar a mesma participação, e as chaves estrangeiras garantem a integridade referencial.\n\nAs outras alternativas:\nA) Com projeto_id em estudante, cada estudante participaria de um só projeto: isso é 1:N.\nB) É o mesmo problema no outro sentido: cada projeto teria um único estudante.\nC) Uma lista numa coluna viola a 1FN (atributo não atômico) e impede chave estrangeira e consultas eficientes.\nD) Juntar tudo repete dados e cria anomalias de atualização, contrariando a normalização.",
+      "explanation": "Resposta: E.\n\nUm relacionamento N:N não cabe como chave estrangeira em nenhuma das duas tabelas, porque cada linha de um lado se liga a várias do outro. Ele vira uma tabela associativa com as chaves dos dois lados e os atributos do próprio relacionamento. carga_horaria pertence ao par (estudante, projeto), não a um dos dois isoladamente. A chave composta impede duplicar a mesma participação, e as chaves estrangeiras garantem a integridade referencial.\n\nAs outras alternativas:\nA) Com projeto_id em estudante, cada estudante participaria de um só projeto: isso é 1:N, e carga_horaria ficaria presa ao estudante.\nB) É o mesmo problema no outro sentido: cada projeto teria um único estudante.\nC) Uma lista numa coluna viola a 1FN (atributo não atômico) e impede chave estrangeira e consultas eficientes.\nD) Juntar tudo repete dados e cria anomalias de atualização, contrariando a normalização.",
       "check": "Nova resolução sem o gabarito: regra de mapeamento N:N para tabela associativa com chave composta. Opção E."
     },
     {
       "id": "gen-bd-indice-composto",
       "kind": "LACUNA",
       "format": "SIMPLES",
-      "concepts": [
-        "bd-indices"
-      ],
+      "concepts": ["bd-indices"],
       "title": "Índice composto e ordem das colunas",
       "subject": "Índices B+ compostos",
       "prompt": "A tabela entregas, com milhões de linhas, tem um índice B+ composto sobre (cidade, data_entrega), nessa ordem. Considere as consultas:\n\nQ1: WHERE cidade = 'Presidente Epitácio' AND data_entrega >= '2026-11-01'\nQ2: WHERE data_entrega >= '2026-11-01'\nQ3: WHERE cidade = 'Presidente Epitácio'\n\nEm quais delas o índice pode ser usado para localizar as linhas diretamente, sem percorrer o índice ou a tabela inteiros?",
@@ -138,22 +116,16 @@
       "id": "gen-bd-atomicidade",
       "kind": "ESPELHO",
       "format": "ASSERCAO",
-      "concepts": [
-        "bd-transacoes"
-      ],
+      "concepts": ["bd-transacoes"],
       "title": "Queda do servidor no meio da transferência",
       "subject": "ACID: atomicidade e durabilidade",
       "prompt": "Uma transação bancária debita R$ 500 da conta A e credita R$ 500 na conta B. O servidor perde energia depois do débito e antes do crédito, sem que a transação tenha sido confirmada (COMMIT).\n\nI. Ao reiniciar, o SGBD desfaz o débito na conta A, e o saldo volta ao valor anterior à transação.\n\nPORQUE\n\nII. A propriedade de durabilidade garante que as alterações de transações não confirmadas sobrevivam a falhas.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "options": [
-        "As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.",
-        "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa correta da I.",
-        "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa.",
-        "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira.",
-        "As asserções I e II são proposições falsas."
-      ],
-      "answer": "C",
       "explanation": "Resposta: C.\n\nI é verdadeira. Pela atomicidade, uma transação acontece por inteiro ou não acontece. Na recuperação, o SGBD usa o log para desfazer (undo) o que transações não confirmadas fizeram, e o débito sem o crédito correspondente é revertido.\n\nII é falsa. A durabilidade vale para transações confirmadas: depois do COMMIT, as alterações sobrevivem a falhas, porque o log já foi gravado em disco. Ela não preserva o que não foi confirmado; se preservasse, o débito ficaria e o dinheiro sumiria. A propriedade que explica I é a atomicidade.\n\nAs outras alternativas:\nA) Usa a durabilidade para explicar algo que a atomicidade explica, e com uma definição errada.\nB) Também considera II verdadeira.\nD) I é a verdadeira.\nE) I é verdadeira.",
-      "check": "Nova resolução sem o gabarito: undo de transação não confirmada = atomicidade (I verdadeira); durabilidade vale após COMMIT (II falsa). Opção C."
+      "check": "Nova resolução sem o gabarito: undo de transação não confirmada = atomicidade (I verdadeira); durabilidade vale após COMMIT (II falsa). Opção C.",
+      "assertion": {
+        "first": true,
+        "second": false
+      }
     }
   ]
 }

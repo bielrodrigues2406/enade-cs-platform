@@ -117,7 +117,12 @@
       </details>
     } @else {
       @for (block of promptBlocks(); track $index) {
-        @if (block.code) {
+        @if (block.figure && question.figure; as figure) {
+          <figure class="prompt-figure">
+            <img [src]="figure.src" [alt]="figure.alt" loading="lazy" decoding="async" />
+            @if (isIllustration()) { <figcaption>Ilustração gerada por IA</figcaption> }
+          </figure>
+        } @else if (block.code) {
           <pre class="prompt-code"><code>{{ block.text }}</code></pre>
         } @else {
           <p class="prompt">{{ block.text }}</p>

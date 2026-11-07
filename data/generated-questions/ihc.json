@@ -12,15 +12,20 @@
       "subject": "Contraste de cores pela WCAG",
       "prompt": "O portal de uma prefeitura usa texto de corpo cinza #777777 sobre fundo branco #FFFFFF. Pela fórmula da WCAG, a razão de contraste entre essas cores é de aproximadamente 4,48:1. A WCAG 2.2, no nível AA, exige 4,5:1 para texto normal e 3:1 para texto grande (a partir de 18 pt, ou 14 pt em negrito).\n\nQual avaliação está correta?",
       "options": [
-        "O texto está aprovado no nível AA, porque 4,48 arredondado dá 4,5.",
-        "O contraste só importa para pessoas cegas, que usam leitor de tela; para os demais usuários não há problema.",
-        "O texto de corpo não atende ao nível AA para texto normal, porque 4,48:1 fica abaixo de 4,5:1, embora a mesma cor atenda ao critério para texto grande; um cinza um pouco mais escuro, como #767676, já passa.",
-        "A WCAG proíbe qualquer tom de cinza em texto, que deve ser sempre preto.",
-        "Basta aumentar a espessura da fonte do texto normal, sem mudar a cor, para cumprir o nível AA."
+        "O texto está aprovado no nível AA, porque 4,48 arredondado para uma casa decimal dá exatamente 4,5.",
+        "O contraste só importa para pessoas cegas, que usam leitor de tela, e não afeta os demais usuários.",
+        "O texto normal reprova no nível AA, pois 4,48:1 < 4,5:1, mas a mesma cor serve para texto grande.",
+        "A WCAG proíbe qualquer tom de cinza em texto de corpo, que deve ser sempre preto sobre branco.",
+        "Basta deixar o texto normal em negrito, sem mudar a cor e o tamanho, para cumprir o nível AA."
       ],
       "answer": "C",
       "explanation": "Resposta: C.\n\nA WCAG define a razão de contraste como (L1 + 0,05) / (L2 + 0,05), com L1 e L2 as luminâncias relativas da cor mais clara e da mais escura. O branco tem L = 1, e o cinza #777777 tem L ≈ 0,184, o que dá (1,05) / (0,234) ≈ 4,48. O limite é aplicado sem arredondar, e 4,48 < 4,5: o texto normal falha no critério 1.4.3 (contraste mínimo). Para texto grande, o limite é 3:1, que é atendido. Escurecer uma unidade, para #767676, leva a cerca de 4,54:1, aprovado.\n\nO contraste afeta pessoas com baixa visão, daltonismo, idosos e qualquer pessoa usando o celular sob sol forte.\n\nAs outras alternativas:\nA) Os limites da WCAG não são arredondados.\nB) Contraste é crítico para quem enxerga com limitação, não para quem usa leitor de tela.\nD) A norma fixa razões mínimas, não cores proibidas.\nE) Só o negrito em tamanho a partir de 14 pt muda a categoria para texto grande. Engrossar um texto pequeno não basta, e a cor continua abaixo do limite para texto normal.",
-      "check": "Nova resolução sem o gabarito: luminância relativa calculada em código pela fórmula da WCAG; #777777 = 4,48:1, #767676 = 4,54:1."
+      "check": "Nova resolução sem o gabarito: luminância relativa calculada em código pela fórmula da WCAG; #777777 = 4,48:1, #767676 = 4,54:1.",
+      "stimulus": ["FIGURA"],
+      "figure": {
+        "src": "/figures/gen-ihc-contraste-wcag.svg",
+        "alt": "Duas amostras de texto em cinza #777777 sobre fundo branco: uma linha de texto de corpo em 16 pixels e um título em negrito de 24 pixels."
+      }
     },
     {
       "id": "gen-ihc-heuristica-erro",
@@ -31,11 +36,11 @@
       "subject": "Heurísticas de Nielsen",
       "prompt": "Ao enviar o formulário de matrícula, se a senha não segue a regra de segurança, o sistema apaga todos os campos já preenchidos e mostra apenas: \"Erro 0x80041. Operação inválida.\"\n\nQual heurística de Nielsen é mais diretamente violada?",
       "options": [
-        "Estética e design minimalista.",
-        "Flexibilidade e eficiência de uso.",
-        "Ajudar os usuários a reconhecer, diagnosticar e se recuperar de erros.",
-        "Correspondência entre o sistema e o mundo real, apenas.",
-        "Consistência e padrões."
+        "Estética e design minimalista: a tela deve mostrar só a informação relevante para a tarefa.",
+        "Flexibilidade e eficiência de uso: o sistema deve oferecer atalhos para quem já é experiente.",
+        "Recuperação de erros: mensagens em linguagem simples, que digam o problema e como resolvê-lo.",
+        "Correspondência com o mundo real: o sistema deve usar a linguagem e os conceitos do usuário.",
+        "Consistência e padrões: as mesmas palavras e ações devem significar sempre a mesma coisa."
       ],
       "answer": "C",
       "explanation": "Resposta: C.\n\nA heurística pede mensagens de erro em linguagem simples, que indiquem o problema com precisão e sugiram como resolvê-lo. \"Erro 0x80041\" não diz o que aconteceu nem o que fazer, e apagar os campos impede a recuperação. Uma versão adequada mantém os dados, marca o campo de senha e diz: \"A senha precisa ter pelo menos 8 caracteres, com uma letra e um número\". A heurística de prevenção de erros também se aplica: a regra deveria aparecer antes do envio, junto do campo.\n\nAs outras alternativas:\nA) O problema não é excesso de elementos na tela.\nB) Atalhos para usuários experientes não são o ponto central.\nD) O código técnico fere também a correspondência com o mundo real, mas apagar os dados e não orientar a correção é o centro do problema, e isso é tratado pela heurística de recuperação de erros.\nE) Nada no caso indica incoerência com outras telas ou convenções.",
@@ -44,15 +49,16 @@
     {
       "id": "gen-ihc-metodos-avaliacao",
       "kind": "ESPELHO",
-      "format": "ITENS",
+      "format": "ITENS4",
       "concepts": ["ihc-avaliacao", "ihc-heuristicas"],
       "title": "Como avaliar a nova versão do aplicativo",
       "subject": "Avaliação por inspeção e com usuários",
-      "prompt": "Uma equipe vai avaliar a usabilidade da nova versão do aplicativo do restaurante universitário. Avalie as afirmações.\n\nI. A avaliação heurística é feita por especialistas, que inspecionam a interface com base em princípios, sem a participação de usuários.\nII. No teste de usabilidade, usuários representativos executam tarefas reais enquanto são observados, o que revela dificuldades que especialistas podem não prever.\nIII. O percurso cognitivo exige a participação de usuários finais, que narram em voz alta o que pensam.\nIV. Na avaliação heurística, três a cinco avaliadores costumam encontrar boa parte dos problemas, com custo bem menor que o de um único avaliador muito demorado.\n\nÉ correto apenas o que se afirma em",
-      "options": ["I e III.", "II e III.", "III e IV.", "I, II e IV.", "I, II, III e IV."],
-      "answer": "D",
-      "explanation": "Resposta: D.\n\nI está correta: é um método de inspeção, barato e rápido.\n\nII está correta: observar usuários reais mostra caminhos, termos e erros inesperados.\n\nIII está errada. O percurso cognitivo também é um método de inspeção: especialistas percorrem passo a passo uma tarefa, perguntando se o usuário saberia o que fazer em cada ponto. Usuários pensando em voz alta (think aloud) são uma técnica usada em testes com usuários.\n\nIV está correta. Nielsen observou que cada avaliador encontra uma parte dos problemas e que, a partir de cinco, o ganho por avaliador extra cai bastante.\n\nAs outras alternativas:\nA) Inclui III e deixa de fora II e IV.\nB) Inclui III.\nC) Inclui III.\nE) Inclui III.",
-      "check": "Nova resolução sem o gabarito: classificação dos métodos de avaliação (inspeção versus teste com usuários). Opção D."
+      "prompt": "Uma equipe vai avaliar a usabilidade da nova versão do aplicativo do restaurante universitário. Há dois grandes grupos de métodos: os de inspeção, em que especialistas examinam a interface sem a participação de usuários, e os empíricos, em que usuários reais executam tarefas enquanto são observados. Avalie as afirmações.\n\nI. A avaliação heurística é feita por especialistas, que inspecionam a interface com base em princípios, sem a participação de usuários.\nII. O percurso cognitivo exige a participação de usuários finais, que narram em voz alta o que pensam.\nIII. No teste de usabilidade, usuários representativos executam tarefas reais enquanto são observados, o que revela dificuldades que especialistas podem não prever.\nIV. Na avaliação heurística, um único avaliador experiente encontra praticamente todos os problemas, e mais avaliadores só repetem os achados.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: B.\n\nI está correta: é um método de inspeção, barato e rápido.\n\nII está errada. O percurso cognitivo também é um método de inspeção: especialistas percorrem passo a passo uma tarefa, perguntando se o usuário saberia o que fazer em cada ponto. Usuários pensando em voz alta (think aloud) são uma técnica usada em testes com usuários.\n\nIII está correta: observar usuários reais mostra caminhos, termos e erros inesperados.\n\nIV está errada. Nielsen observou que cada avaliador encontra só uma parte dos problemas, e que avaliadores diferentes acham problemas diferentes. Por isso se recomendam de três a cinco avaliadores; a partir daí, o ganho por avaliador extra cai bastante.\n\nAs outras alternativas:\nA) Inclui II e deixa de fora III.\nC) Inclui IV e deixa de fora I.\nD) Inclui II, que trata o percurso cognitivo como teste com usuários.\nE) Inclui IV.",
+      "check": "Nova resolução sem o gabarito: classificação dos métodos (inspeção versus teste com usuários) e curva de Nielsen e Landauer para número de avaliadores; I e III corretas. Opção B.",
+      "truth": ["I", "III"],
+      "combos": [["I", "II"], ["I", "III"], ["III", "IV"], ["I", "II", "III"], ["I", "III", "IV"]],
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     },
     {
       "id": "gen-ihc-persona",
@@ -64,10 +70,10 @@
       "prompt": "Para redesenhar o sistema de agendamento de consultas de uma unidade de saúde, a equipe precisa criar personas. Qual descrição está de acordo com o uso de personas em IHC?",
       "options": [
         "Uma persona é o perfil de um usuário real específico, com nome e dados verdadeiros, escolhido para representar todos.",
-        "Uma persona é um personagem fictício e arquetípico, construído a partir de dados de pesquisa com usuários reais, com objetivos, contexto e limitações, usado para orientar decisões de projeto.",
-        "Uma persona descreve o comprador do sistema, como a secretaria de saúde, e não quem usa o sistema.",
-        "Uma persona é uma lista de requisitos técnicos, como navegador e resolução de tela.",
-        "Uma persona deve representar o usuário médio, com idade, renda e escolaridade calculadas pela média de todos os usuários."
+        "Uma persona é um personagem fictício, construído com dados de pesquisa com usuários reais, com objetivos e contexto de uso.",
+        "Uma persona descreve o comprador do sistema, como a secretaria de saúde, e não as pessoas que vão usá-lo.",
+        "Uma persona é uma lista de requisitos técnicos do usuário, como navegador, sistema operacional e resolução de tela.",
+        "Uma persona representa o usuário médio, com idade, renda e escolaridade calculadas pela média de todos os usuários."
       ],
       "answer": "B",
       "explanation": "Resposta: B.\n\nPersonas sintetizam padrões encontrados em entrevistas e observações: \"Dona Lúcia, 67 anos, usa o celular da neta, tem dificuldade com letras pequenas e precisa marcar retorno para o marido\". São fictícias, para não expor pessoas reais, mas fundamentadas em dados, e ajudam a equipe a perguntar \"isso funcionaria para ela?\". Costumam vir acompanhadas de cenários, que narram uma situação concreta de uso.\n\nAs outras alternativas:\nA) Usar uma pessoa real expõe dados pessoais e pega suas particularidades, não o padrão.\nC) Em IHC, a persona representa quem usa, que nem sempre é quem compra.\nD) Requisitos técnicos não descrevem objetivos nem contexto humano.\nE) Médias geram um usuário que não existe e apagam grupos importantes, como idosos ou pessoas com deficiência. Costuma-se ter algumas personas distintas.",

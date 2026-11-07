@@ -9,7 +9,10 @@ Autorizadas por Gabriel em 06/11/2026: "pode criar. … quero várias. Por área
 | Questões (uma área por arquivo) | `data/generated-questions/<área>.json` |
 | Validação e publicação | `apps/api/src/generated-publication.ts` |
 | Publicar só as geradas | `npm run publish:generated` (também roda no `bootstrap-content` do deploy) |
-| Banco | migration `031_generated_questions.sql`: caminho `review_origin = GENERATED` e tabela `generated_question` |
+| Banco | migration `031_generated_questions.sql` (caminho `review_origin = GENERATED` e tabela `generated_question`) e `032_generated_formats.sql` (formatos, estímulos e figura) |
+| Moldes de itens e asserção | `apps/api/src/generated-formats.ts` |
+| Auditoria de pistas | `npm run audit:generated` (`apps/api/src/generated-audit.ts`) |
+| Figuras SVG | `scripts/draw-figures.py` gera `apps/web/public/figures/` |
 | Testes | `tests/generated-questions.test.ts`, `tests/browser/generated.spec.ts` |
 
 ## 2. Separação das oficiais
@@ -30,12 +33,13 @@ Autorizadas por Gabriel em 06/11/2026: "pode criar. … quero várias. Por área
 - `LACUNA`: fundamento da área que nunca caiu no acervo;
 - `QUENTE`: tema atual ligado a fundamentos.
 
-**Formatos:**
-- `SIMPLES`;
-- `ITENS`, com afirmações I, II, III e as combinações;
-- `ASSERCAO`, a asserção-razão com as 5 alternativas padrão.
+**Formatos** (detalhes e mistura alvo em [ENADE-ITEM-FORMATS.md](ENADE-ITEM-FORMATS.md)):
+- `SIMPLES`: enunciado e cinco alternativas escritas no arquivo;
+- `ITENS3` e `ITENS4`: afirmações I a III ou I a IV; o arquivo diz quais são verdadeiras (`truth`) e quais combinações oferecer (`combos`, obrigatório em `ITENS4`; em `ITENS3` o padrão é I; II; I e III; II e III; I, II e III). As alternativas e a letra são calculadas no molde da prova;
+- `ASSERCAO`: asserção-razão; o arquivo guarda `assertion: {first, second, justifies}` e as 5 alternativas padrão saem do molde;
+- `ORDEM`, `CALCULO`, `CODIGO_OPCOES`, `ASSOCIACAO`: alternativas escritas no arquivo, com a forma conferida (por exemplo, `ORDEM` exige cinco sequências da mesma lista).
 
-Cerca de um terço das questões usa os dois últimos, como no ENADE.
+O campo `stimulus` diz o que o enunciado traz: `TEXTO_BASE`, `CENARIO`, `CODIGO`, `TABELA`, `FIGURA`, `GRAFICO`, `DOIS_TEXTOS` ou `CHARGE`.
 
 **Molde do ENADE:**
 - texto-base com situação profissional concreta: código, tabela, cenário de sistema;
@@ -74,9 +78,11 @@ Gabriel dispensou o segundo agente. O que substitui essa revisão:
    - 5 alternativas distintas;
    - gabarito válido;
    - explicação que começa pela resposta e comenta cada alternativa errada;
-   - itens I e II presentes quando o formato pede;
+   - itens e asserção no molde, com a letra calculada;
+   - figura existente em `apps/web/public` e marcador `[figura]` só com figura;
    - sem travessão;
-   - conceitos existentes no núcleo da mesma área.
+   - conceitos existentes no núcleo da mesma área;
+   - pistas da resposta no banco todo, pelas travas de [GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md#5-resultado-da-revisão-07112026).
 2. **Nova resolução sem o gabarito**, registrada no campo `check`. Contas, consultas e código foram executados de verdade:
    - Python para Dijkstra, LCS, heap, FIFO e LRU, SJF, binomial, Amdahl e contraste WCAG;
    - PostgreSQL 17 para NOT IN com NULL, LEFT JOIN, UPDATE condicional, EXPLAIN do índice e injeção de SQL;
@@ -99,26 +105,36 @@ Gabriel dispensou o segundo agente. O que substitui essa revisão:
     "title": "…", "subject": "…", "prompt": "… ```código``` …",
     "options": ["…", "…", "…", "…", "…"], "answer": "D",
     "explanation": "Resposta: D.\n\n…\n\nAs outras alternativas:\nA) …\nB) …\nC) …\nE) …",
-    "check": "Nova resolução sem o gabarito: …"
+    "check": "Nova resolução sem o gabarito: …",
+    "stimulus": ["TEXTO_BASE", "FIGURA"],
+    "figure": { "src": "/figures/gen-so-….svg", "alt": "Descrição completa, sem entregar a resposta" }
+  }, {
+    "id": "gen-so-…", "format": "ITENS4", "truth": ["II", "IV"],
+    "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["II", "III", "IV"]],
+    "prompt": "…\n\nI. …\nII. …\nIII. …\nIV. …\n\nÉ correto apenas o que se afirma em", "…": "…"
   }]
 }
 ```
 
 - No enunciado, trechos entre ``` aparecem como código.
+- **Figura:** `src` aponta para `/figures/*.svg` ou `/illustrations/*.webp` (o banco recusa outro caminho), e o `alt` de 20 a 600 caracteres descreve tudo o que a figura mostra, porque é o que o leitor de tela lê. Uma linha `[figura]` no enunciado marca onde ela entra; sem o marcador, entra depois do primeiro parágrafo. As ilustrações de `/illustrations/` levam a legenda "Ilustração gerada por IA".
+- **Formatação:** depois de editar, rode `python3 scripts/format-generated.py` para manter o JSON compacto e legível.
+- **Auditoria:** `npm run audit:generated` mostra as medidas de pista da resposta e de tamanho.
 - Mudar o conteúdo de uma questão já publicada cria uma versão nova (as publicadas são imutáveis); publicar de novo sem mudança não faz nada.
 - **Não mude o `id`** de uma questão existente, porque isso apaga a ligação com as respostas já dadas.
 
 ## 6. Estado e próximos lotes
 
-- **Lote 1:** 120 questões nas 16 áreas mais a Formação Geral.
+- **Lote 1:** 120 questões nas 16 áreas mais a Formação Geral, revisadas em 07/11/2026 (GEN-3 e GEN-4).
   - Tipos: 79 espelho, 14 lacuna e 27 tema quente.
-  - Formatos: 80 simples, 24 de itens e 16 de asserção-razão.
+  - Formatos: 80 simples, 23 de itens (22 com IV), 16 de asserção-razão e 1 de ordenação.
+  - Figuras: 21, sendo 12 diagramas e gráficos em SVG (`scripts/draw-figures.py`) e 9 ilustrações geradas no GPT Image (`data/illustrations/catalog.json`).
+  - Banco: migration `032_generated_formats.sql` (formatos novos, `stimulus`, `figure_src`, `figure_alt`).
+- **Pistas da resposta:** resultado da revisão e travas em [GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md#5-resultado-da-revisão-07112026).
 - **Próximos lotes** (base em [ENADE-EVOLUTION.md](ENADE-EVOLUTION.md)):
-  - texto-base de 120 a 200 palavras com referência, como a prova desde 2014 (o lote 1 tem mediana de 58 palavras, contra 214 em 2021);
+  - texto-base de 120 a 200 palavras com referência, como a prova desde 2014 (o lote 1 tem mediana de 60 palavras, contra 214 em 2021);
   - mais comandos "Considerando…, avalie";
   - mais questões nas áreas de maior peso e em alta (Algoritmos, Arquitetura, SO e a lógica da Matemática), sobretudo nos conceitos marcados como "ainda não caiu";
-  - mais asserção-razão com a resposta B (duas verdades sem relação de causa), o padrão mais difícil;
-  - equilibrar as letras do gabarito (no lote 1, a letra E é a menos frequente).
+  - as formas `CALCULO`, `CODIGO_OPCOES` e `ASSOCIACAO`, ainda sem questões;
+  - itens com 1 e com 3 verdadeiros, ainda abaixo das oficiais.
 - **Imagens:** diagramas exatos em SVG e ilustrações no GPT Image, conforme [IMAGE-PROMPTS.md](IMAGE-PROMPTS.md).
-- **Pistas da resposta (GEN-3):** no lote 1 a certa se entrega pelo tamanho e pela combinação de itens. Medição, regras e travas em [GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md); a revisão vem antes de novos lotes.
-- **Formatos do ENADE (GEN-4):** moldes fixos de itens e asserção, formas que faltam (ordem, cálculo, código nas alternativas, associação, dois textos) e mistura alvo em [ENADE-ITEM-FORMATS.md](ENADE-ITEM-FORMATS.md).

@@ -70,6 +70,8 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ### PR B. Base das questões (GEN-3 e GEN-4)
 
+**Estado (07/11):** feito, junto com o PR C. Migration 032, moldes, figura e `npm run audit:generated` entregues.
+
 **Modelo ([ENADE-ITEM-FORMATS.md](ENADE-ITEM-FORMATS.md)):**
 - **Forma de responder (`format`):** `SIMPLES`, `ITENS3`, `ITENS4`, `ASSERCAO`, `ORDEM`, `CALCULO`, `CODIGO_OPCOES` e `ASSOCIACAO`.
 - **Estímulo (`stimulus`):** `TEXTO_BASE`, `CENARIO`, `CODIGO`, `TABELA`, `FIGURA`, `GRAFICO`, `DOIS_TEXTOS` e `CHARGE`.
@@ -91,6 +93,8 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 - o novo validador recusa os exemplos ruins dos testes.
 
 ### PR C. Revisão do lote 1
+
+**Estado (07/11):** feito em parte, junto com o PR B. Pistas abaixo das travas (certa única mais longa 6%, chutador 23%) e 21 figuras ligadas (12 SVGs e 9 cenas). O aumento de tamanho ficou na Formação Geral e em cerca de 8 específicas; o resto passa para o PR E. Três SVGs da lista (subconjuntos, transformações e localidade) não foram feitos, porque o texto e o código já bastam nessas questões. Resultado em [GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md#5-resultado-da-revisão-07112026).
 
 **Alternativas:**
 - **Simples (80):** reescrever no mesmo molde (mesmo tamanho, mesmo nível de detalhe, ressalvas nos dois lados), sem mudar o conceito cobrado.

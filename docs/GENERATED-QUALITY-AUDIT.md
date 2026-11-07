@@ -205,3 +205,42 @@ Da literatura sobre falhas de redação de itens (Haladyna e Downing; lista do N
 - O `id` não muda.
 - O conteúdo novo vira versão nova, e as respostas antigas ficam ligadas.
 - Cada questão reescrita refaz a resolução sem gabarito e a execução do código ou da conta.
+
+## 5. Resultado da revisão (07/11/2026)
+
+A revisão do lote 1 foi feita nas 120 questões, sem mudar nenhum `id`. As medidas abaixo saem de `npm run audit:generated` (`apps/api/src/generated-audit.ts`), o mesmo cálculo que o teste usa como trava.
+
+| Medida | Antes | Depois | Oficiais |
+| --- | ---: | ---: | ---: |
+| Certa única mais longa (simples) | 58% | **6%** | 3% |
+| Acerto do "chutador esperto" (simples) | 66% | **23%** | 15% |
+| Certa mais de 15% maior que a maior errada | várias | **nenhuma** | |
+| Item I verdadeiro (itens) | 92% | **61%** | 65% |
+| Itens verdadeiros na certa (1 / 2 / 3) | 0 / 7 / 17 | **2 / 18 / 3** | 16% / 51% / 25% |
+| Asserção A / B / C ou D / E | 8 / 1 / 7 / 0 | **3 / 4 / 7 / 2** | 33% de A, 27% de E |
+| Letras A / B / C / D / E | 22 / 24 / 28 / 31 / 15 | **18 / 25 / 27 / 28 / 22** | |
+| Enunciado, mediana de palavras | 58 | **60** | 214 (CE 2021) |
+
+**O que mudou:**
+- **Alternativas no mesmo molde:** as cinco têm o mesmo tamanho e a mesma estrutura, cada uma com seu motivo. Em 5 questões a certa continua a mais longa, para a pista não virar o contrário.
+- **Itens e asserção pelo molde da prova** ([ENADE-ITEM-FORMATS.md](ENADE-ITEM-FORMATS.md)): o arquivo guarda só quais itens são verdadeiros, e as alternativas e a letra são calculadas. Assim não há como escrever uma combinação fora do padrão.
+- **Asserções reescritas para B e E:** guloso, ambiguidade no compilador e produtor-consumidor passaram a ter duas verdades sem relação de causa (B); perceptron e regex de parênteses passaram a ter as duas falsas (E).
+- **Formas novas:** `gen-red-abrir-pagina` virou ordenação de etapas (`ORDEM`).
+- **Figuras:** 12 diagramas e gráficos em SVG desenhados por `scripts/draw-figures.py` e 9 ilustrações (seção 6 de [GENERATED-QUESTIONS.md](GENERATED-QUESTIONS.md)).
+
+**Travas no `npm test`** (`tests/generated-questions.test.ts`), que falham se uma questão nova trouxer a pista de volta:
+
+| Medida | Limite |
+| --- | --- |
+| Certa mais de 15% maior que a maior errada (simples) | nenhuma |
+| Certa única mais longa (simples) | até 15% |
+| Acerto do "chutador esperto" (simples) | até 25% |
+| Item I verdadeiro | de 40% a 75% |
+| Quantidade de itens verdadeiros na certa | pelo menos 3 valores diferentes, nenhum acima de 85% |
+| Asserção | A até 35%, B pelo menos 15%, pelo menos uma E |
+| Cada letra do gabarito | de 12% a 26% |
+
+**O que falta:**
+- **Tamanho do enunciado.** A Formação Geral e cerca de 8 questões específicas ganharam texto-base, mas o banco ainda tem 77 questões com até 80 palavras e só 3 com 160 ou mais. A meta de um terço de longas (seção 4.3) fica para o lote 2, junto com as candidatas da lista acima.
+- **Itens com 1 e 3 verdadeiros** ainda abaixo das oficiais (2 e 3 de 23).
+- **Chutador em 23%**, perto do limite de 25%. Questões novas precisam vir abaixo disso.
