@@ -91,7 +91,7 @@
           } @else if (studyView() === "biblioteca") {
             @defer (on immediate) {
               <app-library [address]="libraryAddress()" (navigate)="libraryNavigate($event)"
-                (practiceArea)="openPractice('treino')" (flashcards)="openStudy('flashcards')"
+                (flashcards)="openFlashcards($event)"
                 (question)="openQuestionFromStudy($event)" (practice)="startPractice($event)"
                 (generated)="browseGenerated($event)" />
             } @placeholder {
@@ -99,7 +99,7 @@
             }
           } @else if (studyView() === "flashcards") {
             @defer (on immediate) {
-              <app-flashcards />
+              <app-flashcards [area]="flashcardsArea()" />
             } @placeholder {
               <p role="status">Carregando os flashcards…</p>
             }

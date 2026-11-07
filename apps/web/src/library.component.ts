@@ -1,7 +1,8 @@
 import { MascotComponent } from "./mascot.component";
 import { CoreMapComponent } from "./core-map.component";
 import { CoreAreaComponent } from "./core-area.component";
-import type { PracticeRequest } from "./practice-request";
+import { availableInArea, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
+import { ChoiceService } from "./choice-dialog";
 import { requestJson } from "./api-request";
 import { libraryPath, parseLibraryPath, type LibraryAddress } from "./study-navigation";
 import { Component, ElementRef, EventEmitter, Output, afterNextRender, computed, effect, inject, Injector, input, signal, untracked } from "@angular/core";
@@ -25,8 +26,8 @@ export class LibraryComponent {
   address = input("/biblioteca");
   /** Pede outro ponto da Biblioteca; o shell grava no histórico e devolve em `address`. */
   @Output() navigate = new EventEmitter<{ path: string; replace?: boolean }>();
-  @Output() practiceArea = new EventEmitter<string>();
-  @Output() flashcards = new EventEmitter<void>();
+  /** Flashcards abertos no baralho da área (ou todos, com null). */
+  @Output() flashcards = new EventEmitter<string | null>();
   @Output() question = new EventEmitter<string>();
   @Output() practice = new EventEmitter<PracticeRequest>();
   @Output() generated = new EventEmitter<string>();
@@ -109,6 +110,23 @@ export class LibraryComponent {
   sheetFromCore(slug: string) {
     this.sheetReturn = this.coreSlug();
     this.openSheet(slug);
+  }
+
+  private choice = inject(ChoiceService);
+  /**
+   * "Treinar <área>" da ficha: simulado só daquela área, como na página do núcleo
+   * (antes o treino abria sem a área; revisão EST-EXP1 do Codex).
+   */
+  async trainArea(area: string) {
+    this.error.set("");
+    let count: number;
+    try { count = await availableInArea(area); } catch (error) {
+      this.error.set(error instanceof Error ? error.message : "Não foi possível preparar o treino. Tente novamente.");
+      return;
+    }
+    if (!count) { this.error.set("Ainda não há questões publicadas desta área para treinar."); return; }
+    const request = await chooseAreaSimulation(this.choice, area, count);
+    if (request) this.practice.emit(request);
   }
 
   print() {

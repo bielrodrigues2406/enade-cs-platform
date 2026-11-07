@@ -2,7 +2,7 @@ import { after, before, test } from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createApp, db } from "../apps/api/src/main.js";
-import { loadCore, matches, officialItems, parseCoreArea, FORMACAO_GERAL } from "../apps/api/src/core-concepts.js";
+import { loadCore, matches, officialItems, parseConceptLinks, parseCoreArea, FORMACAO_GERAL } from "../apps/api/src/core-concepts.js";
 import { confidence } from "../apps/api/src/core-progress.js";
 import { loadDecks } from "../apps/api/src/study-content.js";
 
@@ -42,13 +42,15 @@ const call = (path: string, cookie: string, method = "GET", body?: unknown) => f
   body: body === undefined ? undefined : JSON.stringify(body),
 });
 
-test("every official question of an area is linked to at least one of its concepts", async () => {
+test("every official question has a verified link to a concept of its own area", async () => {
   const [core, items] = await Promise.all([loadCore(), officialItems()]);
   assert.equal(core.areas.length, 17, "16 áreas específicas e a Formação Geral");
+  const linkedTo = (id: string) => core.areas.flatMap((a) => a.concepts).filter((c) => core.links.get(c.id)!.some((q) => q.id === id));
   for (const area of core.areas) {
     const ofArea = items.filter((i) => i.area === area.area);
-    const orphans = ofArea.filter((i) => !area.concepts.some((c) => matches(c, i.subject)));
-    assert.deepEqual(orphans.map((o) => o.subject), [], `${area.area}: questões sem conceito`);
+    const own = new Set(area.concepts.map((c) => c.id));
+    const orphans = ofArea.filter((i) => !linkedTo(i.id).some((c) => own.has(c.id)));
+    assert.deepEqual(orphans.map((o) => o.subject), [], `${area.area}: questões sem conceito conferido`);
     assert.equal(core.history.get(area.slug)!.total, ofArea.length);
   }
   const specific = items.filter((i) => i.area !== FORMACAO_GERAL);
@@ -121,4 +123,24 @@ test("a visitor reads the confidence map and an area, and rates concepts", async
   assert.equal((await call("core/concepts/so-deadlock", cookie, "PUT", { level: 3 })).status, 400);
   assert.equal((await call("core/concepts/nao-existe", cookie, "PUT", { level: 1 })).status, 404);
   assert.equal((await call("core/nao-existe", cookie)).status, 404);
+});
+
+// Revisão do Codex (R4): a ligação vale pelo que foi conferido, não pela palavra do assunto.
+test("verified links fix the keyword mistakes the review found", async () => {
+  const core = await loadCore();
+  const ids = (concept: string) => core.links.get(concept)!.map((q) => q.subject);
+  assert.ok(!ids("alg-ordenacao").some((s) => /AVL/.test(s)), "rotação de AVL não é ordenação");
+  assert.ok(!ids("alg-grafos").some((s) => /Dijkstra/.test(s)), "Dijkstra fica em caminho mínimo");
+  assert.ok(!ids("alg-lineares").some((s) => /Heaps/.test(s)), "heap não é pilha nem fila");
+  assert.ok(ids("et-impactos").includes("Inclusão digital e exclusão social"), "FG de 2005 conta para impactos sociais");
+  assert.ok(ids("alg-heap").includes("Heaps (filas de prioridade) e custos de operações"));
+});
+
+test("the verified links file rejects unknown questions and concepts", () => {
+  const items = new Set(["official-aaaaaaaaaaaa-q1"]);
+  const concepts = new Set(["alg-busca"]);
+  assert.equal(parseConceptLinks({ links: { "official-aaaaaaaaaaaa-q1": { concepts: ["alg-busca"] } } }, items, concepts).size, 1);
+  assert.throws(() => parseConceptLinks({ links: { "official-bbbbbbbbbbbb-q1": { concepts: ["alg-busca"] } } }, items, concepts), /desconhecida/);
+  assert.throws(() => parseConceptLinks({ links: { "official-aaaaaaaaaaaa-q1": { concepts: ["alg-nada"] } } }, items, concepts), /conceito desconhecido/);
+  assert.throws(() => parseConceptLinks({ links: { "official-aaaaaaaaaaaa-q1": { concepts: [] } } }, items, concepts), /sem conceito/);
 });

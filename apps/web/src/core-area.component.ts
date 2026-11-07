@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Injector, Input, Output, afterNextRender, computed, inject, signal, type SimpleChanges } from "@angular/core";
 import { requestJson } from "./api-request";
 import { ChoiceService } from "./choice-dialog";
-import { chooseAreaSimulation, type PracticeRequest } from "./practice-request";
+import { availableInArea, chooseAreaSimulation, type PracticeRequest } from "./practice-request";
 import { CoreLessonComponent } from "./core-lesson.component";
 import { ResumeService } from "./resume.service";
 import { LEVELS, TRAP_LABELS, type Confidence, type CoreArea, type CoreConcept, type TrapPattern } from "./core.types";
@@ -26,7 +26,8 @@ export class CoreAreaComponent {
   @Output() back = new EventEmitter<void>();
   @Output() question = new EventEmitter<string>();
   @Output() practice = new EventEmitter<PracticeRequest>();
-  @Output() flashcards = new EventEmitter<void>();
+  /** Pede os flashcards já abertos no baralho desta área. */
+  @Output() flashcards = new EventEmitter<string>();
   @Output() sheet = new EventEmitter<string>();
   @Output() generated = new EventEmitter<string>();
 
@@ -143,7 +144,13 @@ export class CoreAreaComponent {
   async train() {
     const area = this.area();
     if (!area || !this.publishedCount()) return;
-    const request = await chooseAreaSimulation(this.choice, area.area, this.publishedCount());
+    let count: number;
+    try { count = await availableInArea(area.area); } catch (error) {
+      this.error.set(error instanceof Error ? error.message : "Não foi possível preparar o treino. Tente novamente.");
+      return;
+    }
+    if (!count) { this.error.set("Ainda não há questões publicadas desta área para treinar."); return; }
+    const request = await chooseAreaSimulation(this.choice, area.area, count);
     if (request) this.practice.emit(request);
   }
 

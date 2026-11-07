@@ -162,7 +162,7 @@
         "so-semaforos"
       ],
       "body": [
-        "Deadlock é um conjunto de processos em que cada um espera um recurso preso por outro do mesmo conjunto. Ele só acontece com as quatro condições de Coffman ao mesmo tempo: exclusão mútua, posse e espera, não preempção e espera circular. Basta quebrar uma para evitá-lo.",
+        "Deadlock é um conjunto de processos em que cada um espera um recurso preso por outro do mesmo conjunto. Cada condição de Coffman descreve uma parte disso: exclusão mútua (o recurso não é compartilhado), posse e espera (o processo segura um recurso e pede outro), não preempção (ninguém tira o recurso à força) e espera circular (a cadeia de esperas se fecha).",
         "Prevenção nega uma condição: uma ordem global de aquisição dos recursos quebra a espera circular; pedir todos os recursos de uma vez quebra a posse e espera; permitir tomar recursos quebra a não preempção.",
         "Evitação decide cada pedido em tempo de execução. O algoritmo do banqueiro só concede um recurso se o estado continua seguro, isto é, se existe uma ordem em que todos os processos conseguem terminar. Estado inseguro não é deadlock: só significa que ele pode acontecer.",
         "Detecção e recuperação deixam acontecer e depois corrigem. Com recursos de instância única, um ciclo no grafo de alocação significa deadlock. Com várias instâncias, o ciclo é necessário, mas não suficiente. A recuperação mata processos ou toma recursos. Muitos sistemas de uso geral simplesmente ignoram o problema (a estratégia do avestruz).",
@@ -182,7 +182,7 @@
         "claim": "Todo ciclo no grafo de alocação de recursos indica deadlock.",
         "why": "Só vale quando cada recurso tem uma instância. Exemplo com R1 de duas instâncias e R2 de uma: P1 tem uma instância de R1 e pede R2; P2 tem R2 e pede R1; P3 tem a outra instância de R1 e não pede nada. Existe o ciclo P1 → R2 → P2 → R1 → P1, mas P3 termina e devolve R1; P2 recebe R1, termina e devolve R2; então P1 também termina. O ciclo é necessário para deadlock, não suficiente."
       },
-      "mistake": "Achar que basta uma das quatro condições para haver deadlock, ou que estado inseguro é o mesmo que deadlock. Também cai: \"todo ciclo no grafo de alocação indica deadlock\", o que só vale com uma instância por recurso.",
+      "mistake": "Achar que basta uma das quatro condições para haver deadlock: são necessárias as quatro juntas. Outro erro frequente é tratar estado inseguro como deadlock; no banqueiro, inseguro só quer dizer que o deadlock pode acontecer.",
       "recall": [
         { "q": "Que condição de Coffman a ordem global de aquisição quebra?", "a": "A espera circular." },
         { "q": "Num grafo de alocação com uma instância por recurso, o que um ciclo indica?", "a": "Deadlock." }
@@ -257,7 +257,7 @@
         "claim": "Dar mais quadros a um processo nunca aumenta as faltas de página.",
         "why": "Falso para a FIFO. Na sequência 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5 ela tem 9 faltas com 3 quadros e 10 com 4. Depois do acesso à página 5, a memória com 3 quadros guarda {1, 2, 5} e a com 4 guarda {2, 3, 4, 5}: a página 1 está na menor e não na maior. A afirmação só vale para algoritmos de pilha, como LRU e ótima, em que o conteúdo com n quadros está sempre contido no conteúdo com n + 1."
       },
-      "mistake": "Dizer que mais quadros sempre reduzem as faltas (falso na FIFO), que a LRU sofre a anomalia de Belady, ou que a política ótima pode ser implementada: ela precisa conhecer o futuro.",
+      "mistake": "Dizer que a LRU sofre a anomalia de Belady, ou que a política ótima pode ser implementada: ela precisa conhecer o futuro e só serve de referência. Outro erro é achar que thrashing se resolve com um processador mais rápido; o gargalo é a memória, e a saída é reduzir o número de processos ativos.",
       "recall": [
         { "q": "Quantas faltas a FIFO tem em 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5 com 3 e com 4 quadros?", "a": "9 e 10: a anomalia de Belady." },
         { "q": "O que é thrashing?", "a": "O sistema gasta mais tempo trocando páginas do que executando, porque os processos não cabem na memória." }

@@ -56,8 +56,8 @@ export class CoreLessonComponent {
   prerequisite(id: string) { return this.concepts.find((c) => c.id === id) ?? null; }
 
   /** Seções numeradas na ordem da página; as do modelo novo só contam quando existem. */
-  number(section: "example" | "counter" | "mistake" | "enade" | "recall" | "transfer" | "source", l: Lesson) {
-    const order = ["example", ...(l.counterexample ? ["counter"] : []), "mistake", "enade", "recall", ...(l.transfer ? ["transfer"] : []), "source"];
+  number(section: "example" | "mistake" | "enade" | "recall" | "transfer", l: Lesson) {
+    const order = ["example", "mistake", "enade", "recall", ...(l.transfer ? ["transfer"] : [])];
     return String(order.indexOf(section) + 1).padStart(2, "0");
   }
 }
