@@ -17,6 +17,8 @@ export type CoreConcept = {
   id: string; name: string; definition: string; example: string;
   level: 0 | 1 | 2 | null;
   questions: { id: string; year: number; subject: string }[];
+  /** Todas as vezes que o conceito caiu (2005 a 2021); id é null se a questão não está publicada neste banco. */
+  appearances: { id: string | null; year: number; subject: string }[];
   /** Questões geradas por IA ligadas ao conceito (versão publicada). */
   generated: { id: string; title: string }[];
   /** Há lição da Biblioteca para o conceito (LIB-2). */

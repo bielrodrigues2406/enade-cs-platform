@@ -41,11 +41,17 @@
 
     <section class="lesson-section" aria-labelledby="lesson-enade-title">
       <h2 id="lesson-enade-title"><span aria-hidden="true">03</span>Como cai no ENADE</h2>
-      @if (concept.questions.length) {
+      @if (concept.appearances.length) {
         <p class="lesson-muted">Questões oficiais de 2005 a 2021 que cobraram o conceito:</p>
         <ul class="lesson-questions">
-          @for (q of concept.questions; track q.id) {
-            <li><button type="button" class="text-button" (click)="question.emit(q.id)"><b>{{ q.year }}</b> {{ q.subject }}</button></li>
+          @for (q of concept.appearances; track $index) {
+            <li>
+              @if (q.id) {
+                <button type="button" class="text-button" (click)="question.emit(q.id!)"><b>{{ q.year }}</b> {{ q.subject }}</button>
+              } @else {
+                <span class="lesson-unpublished"><b>{{ q.year }}</b> {{ q.subject }} <small>(ainda não disponível para resolver aqui)</small></span>
+              }
+            </li>
           }
         </ul>
       } @else {

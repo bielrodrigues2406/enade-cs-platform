@@ -34,6 +34,9 @@
 .lesson-questions .text-button { min-height: 44px; text-align: left; }
 .lesson-questions b { margin-right: var(--space-1); font-variant-numeric: tabular-nums; }
 
+.lesson-unpublished { display: block; padding: var(--space-2) 0; }
+.lesson-unpublished small { color: var(--color-text-muted); }
+
 .lesson-recall { display: grid; gap: var(--space-2); }
 .lesson-recall details { border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); }
 .lesson-recall summary { min-height: 44px; padding: var(--space-3) var(--space-4); cursor: pointer; font-weight: 600; }

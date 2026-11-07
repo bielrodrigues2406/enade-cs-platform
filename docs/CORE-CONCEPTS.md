@@ -57,6 +57,7 @@ Contexto medido no acervo de 246 objetivas:
 - **O que o teste garante:** toda questão oficial da área cai em pelo menos um conceito. Hoje são 206 de 206.
   - Se o acervo ganhar questões, rode `npm test`. Se aparecer questão sem conceito, acrescente uma palavra-chave ou um conceito.
 - **Conceito sem questão no acervo:** aparece como "fundamento da área", sem fingir que caiu.
+- **Caiu, mas não está publicada neste banco:** a tela mostra o ano e o assunto sem link (`appearances` com `id` nulo). "Ainda não caiu" aparece só quando o inventário não tem nenhuma questão do conceito. Antes de 07/11 a tela confundia os dois casos: num banco sem as oficiais publicadas, o deadlock (2017, Q35) aparecia como "ainda não caiu".
 
 ## 5. Confiança
 
