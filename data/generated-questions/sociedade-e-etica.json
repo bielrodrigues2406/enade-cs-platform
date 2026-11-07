@@ -69,6 +69,20 @@
         "second": true,
         "justifies": true
       }
+    },
+    {
+      "id": "gen-et-marco-civil-registros",
+      "kind": "ESPELHO",
+      "format": "ITENS4",
+      "concepts": ["et-marco-civil"],
+      "title": "Registros de conexão e de acesso",
+      "subject": "Guarda de registros e neutralidade no Marco Civil da Internet",
+      "prompt": "O Marco Civil da Internet (Lei 12.965/2014) diferencia o provedor de conexão, que dá acesso à internet, do provedor de aplicações, que oferece serviços como redes sociais e lojas virtuais. A lei define o que cada um deve guardar sobre os usuários, e por quanto tempo, e estabelece a neutralidade da rede.\n\nUma operadora regional de internet e uma startup de comércio eletrônico procuram uma consultoria para adequar suas práticas.\n\nAvalie as orientações da consultoria.\n\nI. A operadora deve guardar os registros de conexão, em sigilo e em ambiente controlado, pelo prazo de um ano.\nII. A operadora pode guardar também os registros de acesso dos clientes às aplicações, para oferecer anúncios mais relevantes.\nIII. A startup, como provedor de aplicações com fins econômicos, deve guardar os registros de acesso à aplicação pelo prazo de seis meses.\nIV. A operadora pode reduzir a velocidade dos pacotes de vídeo de serviços concorrentes, desde que avise no contrato.\n\nÉ correto apenas o que se afirma em",
+      "truth": ["I", "III"],
+      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["I", "III", "IV"]],
+      "explanation": "Resposta: B.\n\nI está correta. O artigo 13 obriga o provedor de conexão a manter os registros de conexão, sob sigilo e em ambiente controlado, por um ano.\n\nII está errada. O artigo 14 proíbe o provedor de conexão de guardar os registros de acesso a aplicações.\n\nIII está correta. O artigo 15 obriga o provedor de aplicações constituído como pessoa jurídica, com fins econômicos, a manter os registros de acesso por seis meses.\n\nIV está errada. A neutralidade (artigo 9) exige tratar os pacotes de forma isonômica, sem distinção por conteúdo, origem ou serviço. Aviso no contrato não autoriza a discriminação.\n\nAs outras alternativas:\nA) Inclui II.\nC) Junta as duas afirmações falsas.\nD) Inclui IV e deixa de fora I.\nE) Inclui IV.",
+      "check": "Nova resolução sem o gabarito, conferida com os artigos 9, 13, 14 e 15 da Lei 12.965/2014: I e III corretas.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

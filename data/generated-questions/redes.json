@@ -157,6 +157,20 @@
       "explanation": "Resposta: D.\n\nO cliente procura servidores com DHCPDISCOVER em broadcast. Cada servidor responde com DHCPOFFER, propondo um endereço. O cliente escolhe uma oferta e envia DHCPREQUEST, também em broadcast, para que os outros servidores saibam que suas ofertas foram recusadas. O servidor escolhido confirma com DHCPACK, e a concessão começa a valer.\n\nAs outras alternativas:\nA) O cliente não pode pedir um endereço antes de alguém oferecê-lo.\nB) O servidor não oferece endereço sem antes receber a descoberta do cliente.\nC) Começa pelo pedido, sem descoberta nem oferta.\nE) A confirmação vem depois do pedido, e não antes.",
       "check": "Nova resolução sem o gabarito, conferida com a RFC 2131: DISCOVER, OFFER, REQUEST, ACK.",
       "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-red-ipv6",
+      "kind": "ESPELHO",
+      "format": "ITENS3",
+      "concepts": ["red-enderecamento"],
+      "title": "Migrando o câmpus para IPv6",
+      "subject": "Endereçamento IPv6, multicast e NAT",
+      "prompt": "Os endereços IPv4 públicos se esgotaram, e provedores usam NAT em larga escala para atender novos clientes. Um câmpus universitário decidiu ativar o IPv6 em toda a rede e preparou um material para os técnicos, comparando as duas versões do protocolo.\n\nAvalie as afirmações do material.\n\nI. O endereço IPv6 tem 128 bits, o que permite dar endereço global a cada dispositivo da rede.\nII. O IPv6 não tem endereço de broadcast; funções como a descoberta de vizinhos usam multicast.\nIII. No IPv6, o NAT continua obrigatório para que os dispositivos internos acessem a internet.\n\nÉ correto o que se afirma em",
+      "truth": ["I", "II"],
+      "combos": [["I"], ["III"], ["I", "II"], ["II", "III"], ["I", "II", "III"]],
+      "explanation": "Resposta: C.\n\nI está correta. São 2¹²⁸ endereços, e uma rede local recebe em geral um prefixo /64 inteiro.\n\nII está correta. O IPv6 eliminou o broadcast. A descoberta de vizinhos (NDP), que substitui o ARP, usa endereços multicast, como o de nó solicitado.\n\nIII está errada. Com endereços de sobra, o NAT deixa de ser necessário. A proteção que se atribuía ao NAT vem de um firewall com estado.\n\nAs outras alternativas:\nA) Deixa de fora II.\nB) Só III, que é a falsa.\nD) Inclui III.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito, conferida com as RFCs 8200 (IPv6) e 4861 (NDP): I e II corretas.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

@@ -93,6 +93,20 @@
       "explanation": "Resposta: B.\n\ndobra recebe uma cópia de m e altera só a cópia: m continua 5. incrementa recebe o endereço de m e altera o conteúdo: m passa a 6. troca recebe cópias dos dois ponteiros e troca as cópias entre si, sem tocar nos inteiros apontados: m e n não mudam. Imprime 6 9.\n\nPara trocar de fato, a função precisaria trocar os conteúdos: int t = *a; *a = *b; *b = t;\n\nAs outras alternativas:\nA) Ignora o incremento feito pelo ponteiro.\nC) Supõe que troca funciona, depois do incremento.\nD) Supõe que dobra altera m (10, depois 11) e que troca funciona.\nE) Supõe que dobra altera m, de 5 para 10 e depois 11.",
       "check": "Compilado com gcc -Wall e executado: imprime 6 9.",
       "stimulus": ["TEXTO_BASE", "CODIGO"]
+    },
+    {
+      "id": "gen-prog-sobrecarga-sobrescrita",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["prog-polimorfismo", "prog-oo"],
+      "title": "Sobrecarga escolhida na compilação",
+      "subject": "Sobrecarga e sobrescrita em Java",
+      "prompt": "Em Java, a sobrecarga e a sobrescrita são resolvidas em momentos diferentes. Entre métodos sobrecarregados, o compilador escolhe a assinatura pelo tipo declarado dos argumentos. Entre métodos sobrescritos, a versão executada é a da classe do objeto, decidida em tempo de execução.\n\nConsidere o programa:\n\n```\nclass A {\n    void f(Object o) { System.out.print(\"A.obj \"); }\n    void f(String s) { System.out.print(\"A.str \"); }\n}\nclass B extends A {\n    @Override void f(Object o) { System.out.print(\"B.obj \"); }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A a = new B();\n        Object s = \"x\";\n        a.f(s);\n        a.f(\"y\");\n    }\n}\n```\n\nO que o programa imprime?",
+      "options": ["B.obj A.str", "A.str A.str", "B.obj B.obj", "A.obj A.str", "A.str B.obj"],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nEm a.f(s), o tipo declarado de s é Object, então o compilador escolhe f(Object). Em tempo de execução, o objeto é um B, que sobrescreve f(Object): imprime B.obj. Em a.f(\"y\"), o argumento é String, e o compilador escolhe f(String). B não sobrescreve essa versão, e roda a de A: imprime A.str.\n\nAs outras alternativas:\nB) Supõe que a sobrecarga olha o tipo real de s (String), mas ela usa o tipo declarado.\nC) Supõe que B.f(Object) atende também à chamada com String, mas a versão mais específica, f(String), vence.\nD) Ignora a sobrescrita: o objeto é um B.\nE) Inverte as duas escolhas.",
+      "check": "Compilado com javac e executado: imprime B.obj A.str.",
+      "stimulus": ["TEXTO_BASE", "CODIGO"]
     }
   ]
 }

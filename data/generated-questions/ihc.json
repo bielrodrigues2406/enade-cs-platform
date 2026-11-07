@@ -92,6 +92,20 @@
       "explanation": "Resposta: C.\n\nI está correta. O sistema informa o que está fazendo e o resultado, em tempo razoável.\n\nII está correta. A confirmação previne um erro de consequência séria, e o Desfazer dá uma saída de emergência.\n\nIII está errada. A heurística pede a linguagem do usuário, com palavras e conceitos familiares a ele. Termos internos da equipe a violam.\n\nAs outras alternativas:\nA) Deixa de fora II, que também está correta.\nB) Só III, que é a falsa.\nD) Inclui III.\nE) Inclui III.",
       "check": "Nova resolução sem o gabarito: I e II atendem às heurísticas citadas; III viola a correspondência com o mundo real.",
       "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-ihc-acessibilidade-formulario",
+      "kind": "QUENTE",
+      "format": "ITENS4",
+      "concepts": ["ihc-acessibilidade"],
+      "title": "Formulário de inscrição acessível",
+      "subject": "Critérios da WCAG em um formulário",
+      "prompt": "A Lei Brasileira de Inclusão exige que os sites de órgãos públicos sejam acessíveis, e a WCAG 2.2 é a referência técnica usada para avaliar isso. Uma universidade revisou o formulário de inscrição no vestibular, testando-o com leitor de tela, só com o teclado e com ampliação de 200%.\n\nAvalie as decisões da equipe.\n\nI. Os campos obrigatórios são indicados apenas pela cor vermelha do rótulo, o que basta para quem enxerga cores.\nII. A foto do documento, enviada pelo candidato, tem um texto alternativo que descreve sua função: \"pré-visualização da foto enviada\".\nIII. Todos os campos e botões podem ser alcançados e acionados com a tecla Tab e a tecla Enter, com o foco sempre visível.\nIV. As mensagens de erro dizem qual campo está errado e como corrigir, e são anunciadas pelo leitor de tela.\n\nÉ correto apenas o que se afirma em",
+      "truth": ["II", "III", "IV"],
+      "combos": [["I", "II"], ["I", "IV"], ["II", "III"], ["III", "IV"], ["II", "III", "IV"]],
+      "explanation": "Resposta: E.\n\nI está errada. A WCAG proíbe usar a cor como único meio de transmitir informação (critério 1.4.1). Quem não distingue o vermelho, ou usa leitor de tela, não sabe quais campos são obrigatórios. O certo é um texto ou símbolo, como \"(obrigatório)\".\n\nII está correta. Imagens que transmitem informação precisam de alternativa em texto que diga sua função (critério 1.1.1).\n\nIII está correta. Toda funcionalidade deve funcionar pelo teclado (2.1.1), e o foco deve ser visível (2.4.7).\n\nIV está correta. Identificar o erro e sugerir a correção atende aos critérios 3.3.1 e 3.3.3, e anunciar a mensagem permite que o leitor de tela a perceba.\n\nAs outras alternativas:\nA) Inclui I e deixa de fora III e IV.\nB) Inclui I.\nC) Deixa de fora IV.\nD) Deixa de fora II.",
+      "check": "Nova resolução sem o gabarito, conferida com os critérios 1.1.1, 1.4.1, 2.1.1, 2.4.7, 3.3.1 e 3.3.3 da WCAG 2.2: II, III e IV corretas.",
+      "stimulus": ["CENARIO"]
     }
   ]
 }

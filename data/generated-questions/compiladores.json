@@ -82,6 +82,26 @@
       "answer": "C",
       "explanation": "Resposta: C.\n\nO JIT combina interpretação e compilação. Interpretar começa rápido; compilar com otimização custa tempo, então só compensa para código executado muitas vezes (hot code). Em execução, o motor observa, por exemplo, que soma(a, b) sempre recebe inteiros e gera código de máquina especializado para inteiros. Se um dia chegar uma string, a suposição falha e o motor desotimiza, voltando ao interpretador ou a uma versão genérica. Essa especialização por perfil é algo que um compilador antecipado, sem informação de execução, tem dificuldade de fazer.\n\nAs outras alternativas:\nA) O código-fonte continua passando pelas análises léxica e sintática antes de qualquer execução ou compilação.\nB) Não há garantia absoluta: o JIT tem custo de aquecimento e pode perder em programas curtos ou previsíveis.\nD) O JIT é especialmente útil em linguagens dinâmicas, justamente porque descobre os tipos durante a execução.\nE) Compilar tudo com otimização máxima atrasaria o início e gastaria tempo com código que talvez rode uma única vez.",
       "check": "Nova resolução sem o gabarito: características de JIT com especialização especulativa e desotimização. Opção C."
+    },
+    {
+      "id": "gen-comp-associatividade",
+      "kind": "LACUNA",
+      "format": "SIMPLES",
+      "concepts": ["comp-gramaticas", "comp-descendente"],
+      "title": "Gramática que muda o resultado da subtração",
+      "subject": "Associatividade na gramática e na árvore sintática",
+      "prompt": "A árvore sintática que o analisador constrói define a ordem em que o compilador avalia uma expressão. Por isso a gramática não serve só para aceitar ou recusar programas: ela também fixa a precedência e a associatividade dos operadores. Ao remover a recursão à esquerda para usar um analisador descendente, é preciso cuidar para não mudar esse significado.\n\nUma equipe escreveu, para expressões com subtração de números, a gramática:\n\nE → T − E | T\nT → número\n\nO tradutor avalia cada nó da árvore aplicando o operador aos valores das subárvores, da esquerda para a direita.\n\nQue valor esse tradutor calcula para 10 − 4 − 3, e por quê?",
+      "options": [
+        "9, porque a gramática é recursiva à direita e agrupa a expressão como 10 − (4 − 3).",
+        "3, porque o analisador lê os números da esquerda para a direita e subtrai na ordem lida.",
+        "3, porque toda gramática livre de contexto define a associatividade à esquerda da subtração.",
+        "9, porque a gramática é ambígua e o analisador escolhe uma das árvores possíveis ao acaso.",
+        "11, porque a regra E → T − E troca o sinal do segundo operando ao montar cada subárvore."
+      ],
+      "answer": "A",
+      "explanation": "Resposta: A.\n\nCom E → T − E, o primeiro número fica à esquerda e todo o resto vira a subárvore da direita. A árvore de 10 − 4 − 3 é 10 − (4 − 3) = 10 − 1 = 9. A subtração da aritmética é associativa à esquerda, (10 − 4) − 3 = 3, então a gramática mudou o significado. A forma clássica de manter a associatividade num analisador descendente é usar E → T E', com E' → − T E' | ε, e avaliar acumulando da esquerda para a direita.\n\nAs outras alternativas:\nB) A ordem de leitura não define o agrupamento; quem define é a forma da árvore.\nC) É a gramática que define a associatividade, e esta a define à direita.\nD) A gramática não é ambígua: cada expressão tem uma única árvore.\nE) Nenhuma regra troca sinais; o 11 não sai de nenhum agrupamento.",
+      "check": "Nova resolução sem o gabarito: árvore única 10 − (4 − 3) = 9, contra 3 da aritmética usual.",
+      "stimulus": ["TEXTO_BASE", "CODIGO"]
     }
   ]
 }

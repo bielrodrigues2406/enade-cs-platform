@@ -162,6 +162,20 @@
       "explanation": "Resposta: B.\n\nI é verdadeira. É o modus tollens: de p → q e ¬q, conclui-se ¬p. A validade vem de p → q ser equivalente à contrapositiva ¬q → ¬p.\n\nII é verdadeira. A disjunção p ∨ q só é falsa com p e q falsas.\n\nII não justifica I. A validade do modus tollens depende da tabela da implicação, e não da tabela da disjunção p ∨ q. As duas afirmações estão certas, mas tratam de coisas diferentes.\n\nAs outras alternativas:\nA) Liga as asserções por uma relação de causa que não existe.\nC) Considera II falsa, mas é a definição da disjunção.\nD) Considera I falsa, confundindo o modus tollens com a falácia da afirmação do consequente (de p → q e q, concluir p).\nE) As duas são verdadeiras.",
       "check": "Nova resolução sem o gabarito: tabela-verdade de ((p → q) ∧ ¬q) → ¬p é tautologia; p ∨ q falsa só em F, F. Relação: nenhuma. Opção B.",
       "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-mat-senhas-digito",
+      "kind": "ESPELHO",
+      "format": "CALCULO",
+      "concepts": ["mat-contagem"],
+      "title": "Senhas com pelo menos um dígito",
+      "subject": "Contagem pelo complementar",
+      "prompt": "Quando um problema de contagem pede \"pelo menos um\", costuma ser mais fácil contar o complementar: o total menos os casos que não têm nenhum. Somar caso a caso (exatamente um, exatamente dois…) também funciona, mas exige mais contas e abre espaço para erro.\n\nUm sistema de armários inteligentes da biblioteca usa códigos de 4 caracteres. Cada caractere é uma das 26 letras minúsculas ou um dos 10 dígitos, e pode haver repetição. Para evitar códigos fáceis de confundir com palavras, o sistema exige pelo menos um dígito no código.\n\nQuantos códigos válidos existem?",
+      "options": ["10 000", "456 976", "1 222 640", "1 679 616", "1 866 240"],
+      "answer": "C",
+      "explanation": "Resposta: C.\n\nTotal de códigos com 36 símbolos: 36⁴ = 1 679 616. Códigos sem nenhum dígito, só com letras: 26⁴ = 456 976. Com pelo menos um dígito: 1 679 616 − 456 976 = 1 222 640.\n\nAs outras alternativas:\nA) 10 000 = 10⁴ conta só os códigos formados apenas por dígitos.\nB) 456 976 = 26⁴ são os códigos sem dígito, justamente os recusados.\nD) 1 679 616 é o total, sem aplicar a exigência.\nE) 1 866 240 = 4 × 10 × 36³ fixa um dígito numa das quatro posições e completa as outras livremente, contando várias vezes os códigos com mais de um dígito.",
+      "check": "Executado em Python 3: 36⁴ = 1 679 616, 26⁴ = 456 976, diferença 1 222 640; 4 × 10 × 36³ = 1 866 240.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

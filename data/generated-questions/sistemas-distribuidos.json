@@ -120,6 +120,20 @@
       "explanation": "Resposta: A.\n\nO problema é o estado preso à instância: quando ela é removida, a sessão vai junto. Com a sessão num armazenamento compartilhado (um cache distribuído ou um banco), qualquer instância atende qualquer requisição, e o grupo pode crescer e encolher sem perder dados. É a base da escalabilidade horizontal.\n\nAs outras alternativas:\nB) Escala verticalmente e abandona a elasticidade: a máquina única vira gargalo e ponto único de falha.\nC) A afinidade de sessão manda o candidato sempre para a mesma instância, mas não salva nada quando ela é removida.\nD) Evita a perda pagando pelo pico o tempo todo, o que abre mão da elasticidade pedida.\nE) Tira o balanceamento por saúde e por carga, e o estado continua preso a cada instância.",
       "check": "Nova resolução sem o gabarito: serviço sem estado com sessão externa é a única opção que mantém a elasticidade e não perde dados na remoção de instâncias.",
       "stimulus": ["CENARIO"]
+    },
+    {
+      "id": "gen-sd-quorum",
+      "kind": "ESPELHO",
+      "format": "ITENS4",
+      "concepts": ["sd-consistencia"],
+      "title": "Quóruns de leitura e escrita",
+      "subject": "Replicação com quórum e consistência",
+      "prompt": "Bancos de dados distribuídos guardam cada dado em N réplicas. Uma escrita só é confirmada quando W réplicas a gravam, e uma leitura consulta R réplicas e devolve a versão mais recente entre as respondidas. Se W + R > N, todo conjunto de leitura cruza com todo conjunto de escrita, e a leitura sempre encontra a última escrita confirmada.\n\nUm serviço de carteira digital usa N = 5 réplicas e avalia configurações para o saldo dos clientes.\n\nI. Com W = 2 e R = 3, toda leitura encontra a última escrita confirmada.\nII. Com W = 3 e R = 3, toda leitura encontra a última escrita confirmada, e o sistema tolera duas réplicas fora do ar para ler e para escrever.\nIII. Com W = 5 e R = 1, as leituras são rápidas e consistentes, mas basta uma réplica fora do ar para impedir as escritas.\nIV. Com W = 1 e R = 1, a consistência é forte, porque cada operação espera apenas uma réplica e não há conflito.\n\nÉ correto apenas o que se afirma em",
+      "truth": ["II", "III"],
+      "combos": [["I", "II"], ["I", "IV"], ["II", "III"], ["III", "IV"], ["I", "II", "III"]],
+      "explanation": "Resposta: C.\n\nI está errada. W + R = 5, que não é maior que N = 5. Uma leitura pode consultar exatamente as três réplicas que não receberam a escrita.\n\nII está correta. W + R = 6 > 5, e com duas réplicas fora ainda restam três, o suficiente para W = 3 e R = 3.\n\nIII está correta. W + R = 6 > 5, e a leitura de uma réplica basta. Mas a escrita exige as cinco, e uma réplica fora a bloqueia.\n\nIV está errada. W + R = 2, e a leitura pode cair numa réplica desatualizada: a consistência é eventual.\n\nAs outras alternativas:\nA) Inclui I.\nB) Junta as duas afirmações falsas.\nD) Inclui IV.\nE) Inclui I.",
+      "check": "Nova resolução sem o gabarito: W + R > N vale para (3, 3) e (5, 1), não para (2, 3) e (1, 1); disponibilidade conferida contando réplicas fora.",
+      "stimulus": ["TEXTO_BASE", "CENARIO"]
     }
   ]
 }

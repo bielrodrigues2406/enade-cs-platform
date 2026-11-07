@@ -141,7 +141,7 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ### PR E. Lote 2 de questões
 
-**Estado (07/11):** primeira parte feita, com 16 questões nas formas que faltavam (cálculo, código nas alternativas, ordem, associação, itens com 1 e 3 verdadeiras, asserção B e E). O banco tem 136 questões, todas dentro das travas. Falta o restante, cerca de 64, e o alongamento dos enunciados (mediana de 70 palavras).
+**Estado (07/11):** duas partes feitas, com 31 questões nas formas que faltavam (cálculo, código nas alternativas, ordem, associação, itens com 1 e 3 verdadeiras, asserção B, D e E). O banco tem 151 questões, todas dentro das travas. Falta o restante, cerca de 49, e o alongamento dos enunciados antigos (mediana de 80 palavras).
 
 - **Quantidade:** cerca de 80 questões, na mistura alvo de 2017 e 2021:
   - itens: 40%;
