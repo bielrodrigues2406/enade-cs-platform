@@ -12,10 +12,10 @@
       "subject": "Condição de corrida em variável compartilhada",
       "prompt": "Um programa cria duas threads que executam o mesmo trecho sobre uma variável global inteira contador, iniciada em 0:\n\n```\nfor (int i = 0; i < 1000; i++)\n    contador++;\n```\n\nNão há nenhum mecanismo de sincronização. O programa espera as duas threads terminarem e imprime o valor de contador.\n\nQual afirmação sobre o valor impresso está correta?",
       "options": [
-        "É sempre 2000, porque cada thread completa suas 1000 iterações antes de o programa imprimir.",
-        "É sempre 1000, porque as duas threads escrevem na mesma variável e uma sobrescreve o trabalho da outra.",
-        "Só pode ser diferente de 2000 em processadores de um núcleo; com vários núcleos as threads rodam em paralelo e o resultado é sempre 2000.",
-        "Pode ser menor que 2000, porque contador++ envolve ler, somar e gravar, e as duas threads podem ler o mesmo valor antes que uma delas grave o resultado.",
+        "É sempre 2000, porque cada thread completa suas 1000 iterações antes de o programa imprimir o valor.",
+        "É sempre 1000, porque as duas threads escrevem na mesma variável e uma apaga o trabalho da outra.",
+        "Só pode ser menor que 2000 com um núcleo; com vários núcleos as threads rodam juntas e dá sempre 2000.",
+        "Pode ser menor que 2000, porque contador++ lê, soma e grava, e as duas threads podem ler o mesmo valor.",
         "Declarar contador como variável local de cada thread resolve o problema e garante a impressão de 2000."
       ],
       "answer": "D",
@@ -29,11 +29,11 @@
       "concepts": ["so-deadlock", "so-semaforos"],
       "title": "Duas threads e dois locks",
       "subject": "Deadlock e ordem de aquisição de travas",
-      "prompt": "Num sistema bancário, a thread T1 transfere dinheiro da conta A para a B e a thread T2 transfere da B para a A. Cada transferência trava as duas contas com mutex antes de alterar os saldos:\n\nT1: trava(A); trava(B); transfere; libera(B); libera(A)\nT2: trava(B); trava(A); transfere; libera(A); libera(B)\n\nAvalie as afirmações.\n\nI. O sistema pode entrar em deadlock se T1 obtiver A e T2 obtiver B antes de cada uma pedir a segunda trava.\nII. Fazer as duas threads travarem sempre na mesma ordem, por exemplo A antes de B, elimina a possibilidade de deadlock entre elas.\nIII. Trocar os mutex por semáforos contadores iniciados em 1 elimina o deadlock, porque semáforos não bloqueiam a thread.\nIV. Para haver deadlock basta que os recursos sejam de uso exclusivo.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: A.\n\nI está correta. T1 segura A e espera B; T2 segura B e espera A. Estão presentes as quatro condições de Coffman: exclusão mútua, posse e espera, não preempção e espera circular. Nenhuma das duas avança.\n\nII está correta. Com uma ordem global de aquisição, a thread que obtiver A primeiro também conseguirá B. A espera circular fica impossível, e basta eliminar uma das quatro condições para evitar o deadlock.\n\nIII está errada. Um semáforo iniciado em 1 funciona como um mutex: down() bloqueia quando o contador está em 0. O deadlock continua possível.\n\nIV está errada. Exclusão mútua é só uma das quatro condições, e todas precisam valer ao mesmo tempo.\n\nAs outras alternativas:\nB) Inclui III: semáforos também bloqueiam.\nC) Inclui IV, que reduz o deadlock a uma única condição.\nD) Junta as duas afirmações falsas.\nE) Inclui IV.",
-      "check": "Nova resolução sem o gabarito: ordem cruzada gera espera circular (I verdadeira); ordem global a elimina (II verdadeira); semáforo binário bloqueia (III falsa); deadlock exige as quatro condições (IV falsa).",
-      "truth": ["I", "II"],
-      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["I", "II", "IV"]]
+      "prompt": "Num sistema bancário, a thread T1 transfere dinheiro da conta A para a B e a thread T2 transfere da B para a A. Cada transferência trava as duas contas com mutex antes de alterar os saldos:\n\nT1: trava(A); trava(B); transfere; libera(B); libera(A)\nT2: trava(B); trava(A); transfere; libera(A); libera(B)\n\nAvalie as afirmações.\n\nI. Trocar os mutex por semáforos contadores iniciados em 1 elimina o deadlock, porque semáforos não bloqueiam a thread.\nII. O sistema pode entrar em deadlock se T1 obtiver A e T2 obtiver B antes de cada uma pedir a segunda trava.\nIII. Para haver deadlock basta que os recursos sejam de uso exclusivo.\nIV. Fazer as duas threads travarem sempre na mesma ordem, por exemplo A antes de B, elimina a possibilidade de deadlock entre elas.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: C.\n\nI está errada. Um semáforo iniciado em 1 funciona como um mutex: down() bloqueia quando o contador está em 0. O deadlock continua possível.\n\nII está correta. T1 segura A e espera B; T2 segura B e espera A. Estão presentes as quatro condições de Coffman: exclusão mútua, posse e espera, não preempção e espera circular. Nenhuma das duas avança.\n\nIII está errada. Exclusão mútua é só uma das quatro condições, e todas precisam valer ao mesmo tempo.\n\nIV está correta. Com uma ordem global de aquisição, a thread que obtiver A primeiro também conseguirá B. A espera circular fica impossível, e basta eliminar uma das quatro condições para evitar o deadlock.\n\nAs outras alternativas:\nA) Inclui I: semáforos também bloqueiam.\nB) Junta as duas afirmações falsas.\nD) Inclui III, que reduz o deadlock a uma única condição.\nE) Inclui III.",
+      "check": "Nova resolução sem o gabarito: ordem cruzada gera espera circular (II verdadeira); ordem global a elimina (IV verdadeira); semáforo binário bloqueia (I falsa); deadlock exige as quatro condições (III falsa).",
+      "truth": ["II", "IV"],
+      "combos": [["I", "II"], ["I", "III"], ["II", "IV"], ["III", "IV"], ["II", "III", "IV"]]
     },
     {
       "id": "gen-so-belady",
@@ -48,7 +48,7 @@
         "9 com 3 quadros e 10 com 4 quadros: mais quadros geraram mais faltas, a anomalia de Belady.",
         "10 com 3 quadros e 9 com 4 quadros.",
         "12 nos dois casos, porque toda referência gera falta de página.",
-        "9 com 3 quadros e 10 com 4 quadros, efeito que também ocorre com a política LRU."
+        "9 com 3 quadros e 10 com 4 quadros, efeito que também ocorre com a política de substituição LRU."
       ],
       "answer": "B",
       "explanation": "Resposta: B.\n\nCom 3 quadros: 1, 2 e 3 faltam (3). O 4 falta e expulsa o 1 (4). O 1 falta e expulsa o 2 (5). O 2 falta e expulsa o 3 (6). O 5 falta e expulsa o 4 (7). Em seguida, 1 e 2 estão na memória. O 3 falta (8) e o 4 falta (9). O 5 está na memória. Total: 9 faltas.\n\nCom 4 quadros: 1, 2, 3 e 4 faltam (4). Em seguida, 1 e 2 estão na memória. O 5 falta e expulsa o 1 (5). Daí em diante, 1, 2, 3, 4 e 5 faltam todos, cada um expulsando a página mais antiga (10). Total: 10 faltas.\n\nAumentar a memória piorou o resultado: é a anomalia de Belady, que pode ocorrer com FIFO.\n\nAs outras alternativas:\nA) Supõe que mais quadros sempre reduzem as faltas, o que justamente falha com FIFO nesta sequência.\nC) Inverte os dois números.\nD) Ignora os acertos: com 3 quadros, as referências 1, 2 e 5 na segunda metade encontram as páginas na memória.\nE) LRU é uma política de pilha e não sofre a anomalia de Belady. Com LRU, nesta sequência, são 10 faltas com 3 quadros e 8 com 4.",
@@ -74,13 +74,13 @@
       "concepts": ["so-produtor-consumidor", "so-deadlock"],
       "title": "Ordem dos semáforos no buffer limitado",
       "subject": "Produtor-consumidor: ordem das operações down",
-      "prompt": "Na solução clássica do produtor-consumidor com buffer de N posições, usam-se três semáforos: mutex = 1, vazio = N e cheio = 0. Um programador escreveu o produtor assim:\n\n```\ndown(mutex);\ndown(vazio);\ninsere_item();\nup(mutex);\nup(cheio);\n```\n\nConsidere as asserções.\n\nI. Esse produtor pode levar o sistema a um deadlock.\n\nPORQUE\n\nII. Com o buffer cheio, o produtor bloqueia em down(vazio) depois de já ter obtido o mutex, e o consumidor nunca consegue entrar na região crítica para retirar um item e liberar uma posição.\n\nA respeito dessas asserções, assinale a opção correta.",
-      "explanation": "Resposta: A.\n\nCom o buffer cheio, vazio vale 0. O produtor faz down(mutex), entra, e então bloqueia em down(vazio) ainda segurando o mutex. O consumidor faz down(cheio), passa, mas bloqueia em down(mutex), porque o produtor não o libera. Um espera o outro para sempre: deadlock. A asserção II descreve exatamente esse mecanismo, por isso justifica a I.\n\nA ordem correta é esperar primeiro pelo contador (down(vazio) no produtor, down(cheio) no consumidor) e só depois pegar o mutex.\n\nAs outras alternativas:\nB) Não reconhece que II é a causa da I: a espera segurando o mutex é o que cria a espera circular.\nC) Considera II falsa, mas a sequência descrita acontece com o buffer cheio.\nD) Considera I falsa, como se trocar a ordem dos down não tivesse efeito.\nE) As duas são verdadeiras.",
-      "check": "Nova resolução sem o gabarito: com vazio = 0 e mutex obtido, o produtor bloqueia e impede o consumidor de entrar; espera circular entre mutex e vazio. Opção A.",
+      "prompt": "Na solução clássica do produtor-consumidor com buffer de N posições, usam-se três semáforos: mutex = 1, vazio = N e cheio = 0. Um programador escreveu o produtor assim:\n\n```\ndown(mutex);\ndown(vazio);\ninsere_item();\nup(mutex);\nup(cheio);\n```\n\nConsidere as asserções.\n\nI. Esse produtor pode levar o sistema a um deadlock.\n\nPORQUE\n\nII. Um semáforo contador pode assumir valores maiores que 1, ao contrário de um semáforo usado como mutex.\n\nA respeito dessas asserções, assinale a opção correta.",
+      "explanation": "Resposta: B.\n\nI é verdadeira. Com o buffer cheio, vazio vale 0. O produtor faz down(mutex), entra, e então bloqueia em down(vazio) ainda segurando o mutex. O consumidor faz down(cheio), passa, mas bloqueia em down(mutex), porque o produtor não o libera. Um espera o outro para sempre: deadlock.\n\nII também é verdadeira: vazio começa em N e cheio pode chegar a N, enquanto o mutex só vale 0 ou 1. Mas II não explica I. O deadlock não vem de os semáforos contarem acima de 1, e sim da ordem das operações: o produtor espera por vazio depois de já ter pego o mutex.\n\nA ordem correta é esperar primeiro pelo contador (down(vazio) no produtor, down(cheio) no consumidor) e só depois pegar o mutex.\n\nAs outras alternativas:\nA) Trata uma propriedade geral dos semáforos contadores como causa. A mesma propriedade vale na versão correta, que não trava.\nC) Considera II falsa, mas vazio e cheio de fato contam até N.\nD) Considera I falsa, como se trocar a ordem dos down não tivesse efeito.\nE) As duas asserções são verdadeiras.",
+      "check": "Nova resolução sem o gabarito: simulação em Python com threading.Semaphore, N = 2 e buffer cheio: o produtor com down(mutex) antes de down(vazio) trava junto com o consumidor; na ordem correta, termina. II é propriedade geral dos semáforos contadores. Opção B.",
       "assertion": {
         "first": true,
         "second": true,
-        "justifies": true
+        "justifies": false
       }
     },
     {
@@ -90,11 +90,11 @@
       "concepts": ["so-processo-thread", "so-estados"],
       "title": "O que as threads compartilham",
       "subject": "Threads e processos: memória e troca de contexto",
-      "prompt": "Um servidor web cria uma thread por requisição dentro de um único processo. Avalie as afirmações.\n\nI. As threads do processo compartilham o espaço de endereçamento, incluindo as variáveis globais e o heap.\nII. Cada thread tem a própria pilha e o próprio conjunto de registradores, incluindo o contador de programa.\nIII. A troca de contexto entre threads do mesmo processo costuma ser mais barata que entre processos, porque não exige trocar o mapeamento de memória.\nIV. Se uma thread chamar exit(), só ela termina e as demais continuam atendendo requisições.\n\nÉ correto apenas o que se afirma em",
-      "explanation": "Resposta: C.\n\nI está correta. É o que torna as threads leves e úteis, e também o que exige sincronização.\n\nII está correta. Cada thread segue um fluxo de execução próprio, então precisa de pilha (variáveis locais e chamadas) e registradores próprios.\n\nIII está correta. Entre threads do mesmo processo, a tabela de páginas continua a mesma, e não é preciso invalidar a TLB nem trocar o espaço de endereçamento.\n\nIV está errada. exit() encerra o processo inteiro, com todas as suas threads. Para encerrar só a thread atual existe, por exemplo, pthread_exit().\n\nAs outras alternativas:\nA) Inclui IV e deixa de fora II e III.\nB) Deixa de fora I, que é a característica central das threads.\nD) Inclui IV.\nE) Inclui IV e deixa de fora I.",
-      "check": "Nova resolução sem o gabarito: I, II e III verdadeiras; IV falsa (exit encerra o processo). Opção C.",
-      "truth": ["I", "II", "III"],
-      "combos": [["I", "IV"], ["II", "III"], ["I", "II", "III"], ["I", "II", "IV"], ["II", "III", "IV"]]
+      "prompt": "Um servidor web cria uma thread por requisição dentro de um único processo. Avalie as afirmações.\n\nI. A troca de contexto entre threads do mesmo processo costuma ser mais cara que entre processos, porque exige trocar o mapeamento de memória.\nII. Se uma thread chamar exit(), só ela termina e as demais continuam atendendo requisições.\nIII. As threads do processo compartilham o espaço de endereçamento, incluindo as variáveis globais e o heap.\nIV. Cada thread tem a própria pilha e o próprio conjunto de registradores, incluindo o contador de programa.\n\nÉ correto apenas o que se afirma em",
+      "explanation": "Resposta: B.\n\nI está errada porque inverte a comparação. Entre threads do mesmo processo, a tabela de páginas continua a mesma, e não é preciso trocar o espaço de endereçamento nem invalidar a TLB. Por isso a troca entre threads costuma ser mais barata que entre processos.\n\nII está errada. exit() encerra o processo inteiro, com todas as suas threads. Para encerrar só a thread atual existe, por exemplo, pthread_exit().\n\nIII está correta. É o que torna as threads leves e úteis, e também o que exige sincronização.\n\nIV está correta. Cada thread segue um fluxo de execução próprio, então precisa de pilha (variáveis locais e chamadas) e registradores próprios.\n\nAs outras alternativas:\nA) Escolhe só II, que confunde encerrar a thread com encerrar o processo.\nC) Inclui I, que inverte o custo da troca de contexto.\nD) Inclui II.\nE) Inclui I e II.",
+      "check": "Nova resolução sem o gabarito: compartilhamento de memória e pilha própria (III e IV); troca entre threads mantém a tabela de páginas (I falsa); exit() termina o processo, conferido com um programa em C com pthreads (II falsa). Opção B.",
+      "truth": ["III", "IV"],
+      "combos": [["II"], ["III", "IV"], ["I", "III", "IV"], ["II", "III", "IV"], ["I", "II", "III", "IV"]]
     },
     {
       "id": "gen-so-tlb",
