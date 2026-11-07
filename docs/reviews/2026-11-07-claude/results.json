@@ -1,0 +1,307 @@
+{
+  "runtime": {
+    "python": "3.12.14",
+    "system": "Linux"
+  },
+  "scope": "13 recomputations from prompt inputs; not an exhaustive or blind review of the163-item bank",
+  "git_head": "e3538df450c459b02aea0fd4997f0dab6cca5be3",
+  "checks": [
+    {
+      "id": "gen-alg-laco-harmonico",
+      "inputs_from_prompt": {
+        "n": 12
+      },
+      "computation": "sum(n // i for i in range(1,n+1))",
+      "result": 35,
+      "formatted_result": "35",
+      "marked_letter": "B",
+      "marked_option": "35",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-alg-avl-altura-maxima",
+      "inputs_from_prompt": {
+        "nodes": 20,
+        "N0": 1,
+        "N1": 2
+      },
+      "computation": "N(h)=N(h-1)+N(h-2)+1; max h with N(h)<=20",
+      "result": 5,
+      "formatted_result": "5",
+      "marked_letter": "B",
+      "marked_option": "5",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-arq-cache-endereco",
+      "inputs_from_prompt": {
+        "address_bits": 32,
+        "cache_bytes": 65536,
+        "block_bytes": 64
+      },
+      "computation": "offset=log2(block); index=log2(cache/block); tag=address-index-offset",
+      "result": [
+        16,
+        10,
+        6
+      ],
+      "formatted_result": "Tag de 16 bits, índice de 10 bits e deslocamento de 6 bits.",
+      "marked_letter": "C",
+      "marked_option": "Tag de 16 bits, índice de 10 bits e deslocamento de 6 bits.",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-arq-cpi-medio",
+      "inputs_from_prompt": {
+        "frequencies": [
+          0.4,
+          0.2,
+          0.3,
+          0.1
+        ],
+        "before_cpi": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "after_cpi": [
+          1,
+          2,
+          2,
+          4
+        ]
+      },
+      "computation": "weighted CPI before / weighted CPI after",
+      "result": {
+        "before": 2.1,
+        "after": 1.8,
+        "speedup": 1.1666666666666667
+      },
+      "formatted_result": "CPI de 2,1 e ganho de cerca de 1,17 vez",
+      "marked_letter": "A",
+      "marked_option": "CPI de 2,1 e ganho de cerca de 1,17 vez",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-arq-ieee754",
+      "inputs_from_prompt": {
+        "temperature": -6.25
+      },
+      "computation": "struct.pack('>f', -6.25).hex().upper()",
+      "result": "C0C80000",
+      "formatted_result": "C0C80000",
+      "marked_letter": "A",
+      "marked_option": "C0C80000",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-ia-ganho-informacao",
+      "inputs_from_prompt": {
+        "before_classes": [
+          8,
+          8
+        ],
+        "groups": [
+          [
+            6,
+            2
+          ],
+          [
+            2,
+            6
+          ]
+        ]
+      },
+      "computation": "H(.5)-[.5*H(.75)+.5*H(.25)]",
+      "result": 0.18872187554086717,
+      "formatted_result": "0,189",
+      "marked_letter": "B",
+      "marked_option": "0,189",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-red-janela-vazao",
+      "inputs_from_prompt": {
+        "window_bytes": 65536,
+        "rtt_seconds": 0.1
+      },
+      "computation": "window_bytes*8/rtt_seconds/1e6",
+      "result": 5.24288,
+      "formatted_result": "5,2 Mbit/s",
+      "marked_letter": "C",
+      "marked_option": "5,2 Mbit/s",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-cg-framebuffer",
+      "inputs_from_prompt": {
+        "width": 1920,
+        "height": 1080,
+        "bytes_per_pixel": 3,
+        "buffers": 2
+      },
+      "computation": "width*height*bytes_per_pixel*buffers/2**20",
+      "result": 11.865234375,
+      "formatted_result": "11,87 MiB",
+      "marked_letter": "E",
+      "marked_option": "11,87 MiB",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-mat-senhas-digito",
+      "inputs_from_prompt": {
+        "letters": 26,
+        "digits": 10,
+        "length": 4,
+        "repetition": true
+      },
+      "computation": "36**4 - 26**4",
+      "result": 1222640,
+      "formatted_result": "1 222 640",
+      "marked_letter": "C",
+      "marked_option": "1 222 640",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-mat-binomial",
+      "inputs_from_prompt": {
+        "n": 4,
+        "p_error": 0.1,
+        "errors": 1
+      },
+      "computation": "comb(4,1)*.1*.9**3",
+      "result": 0.2916,
+      "formatted_result": "0,2916",
+      "marked_letter": "D",
+      "marked_option": "0,2916",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-so-tlb",
+      "inputs_from_prompt": {
+        "tlb_ns": 20,
+        "memory_ns": 100,
+        "hit_rate": 0.8
+      },
+      "computation": ".8*(20+100)+.2*(20+100+100)",
+      "result": 140.0,
+      "formatted_result": "140 ns",
+      "marked_letter": "D",
+      "marked_option": "140 ns",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-so-inode",
+      "inputs_from_prompt": {
+        "block_bytes": 4096,
+        "pointer_bytes": 4,
+        "direct_pointers": 12
+      },
+      "computation": "(12+4096//4)*4096//1024",
+      "result": 4144,
+      "formatted_result": "4144 KiB",
+      "marked_letter": "B",
+      "marked_option": "4144 KiB",
+      "matches_marked_option": true
+    },
+    {
+      "id": "gen-mat-condicional",
+      "inputs_from_prompt": {
+        "approved_used": 90,
+        "approved_not_used": 40
+      },
+      "computation": "90/(90+40)",
+      "result": 0.6923076923076923,
+      "formatted_result": "69%",
+      "marked_letter": "E",
+      "marked_option": "69%",
+      "matches_marked_option": true
+    }
+  ],
+  "passed": 13,
+  "total": 13,
+  "regex_counterexample": {
+    "id": "gen-tc-regex-cep",
+    "engine": "Python3 re.search",
+    "pattern": "^\\d{5}-?\\d{3}$",
+    "input_repr": "'12345-678\\n'",
+    "accepted": true,
+    "matched_span": [
+      0,
+      9
+    ],
+    "input_length": 10,
+    "problem": "A quebra de linha final fica fora da correspondência, mas re.search aceita o texto."
+  },
+  "sources": [
+    {
+      "file": "data/generated-questions/algoritmos.json",
+      "sha256": "4c3d93ca9c6cd1d052ab40bb5e09617f2c5f3a7b863537099fa07b9e18479c2b"
+    },
+    {
+      "file": "data/generated-questions/arquitetura.json",
+      "sha256": "4ed52422917b2d6365a9de572361672ce0f29a07c9efb13bc38c6000762fe513"
+    },
+    {
+      "file": "data/generated-questions/banco-de-dados.json",
+      "sha256": "1077d46fb3d1e9b60a23611776e5ed822ec1060fc7a6cbc1dc2f2e3e895ed1fb"
+    },
+    {
+      "file": "data/generated-questions/compiladores.json",
+      "sha256": "b32283ca9dbb7624ce5fb28db975f6ea31540c2aceba4cfe61faec82820e21fd"
+    },
+    {
+      "file": "data/generated-questions/computacao-grafica.json",
+      "sha256": "78de83453509d595f6a80dc8dd1ebbb263ceef38719d757d641b7d7261dec04d"
+    },
+    {
+      "file": "data/generated-questions/engenharia-de-software.json",
+      "sha256": "77ac59cf682edd308a190dd8246ecb093cbfa4c6a99a67649fcd66c151ff964c"
+    },
+    {
+      "file": "data/generated-questions/formacao-geral.json",
+      "sha256": "7d2cebc16e6dae0e5b811b548f2cf9d575b7813ad0e1488e72184d3aa696d2c1"
+    },
+    {
+      "file": "data/generated-questions/ihc.json",
+      "sha256": "22ba484186525dfa9e75647fda26715d6d57ad89c976eb6f8749b3fdbfc3288f"
+    },
+    {
+      "file": "data/generated-questions/inteligencia-artificial.json",
+      "sha256": "70afda325ce533aec5c816b2ce2499c8a8121a0fff572580e79f829863277e6d"
+    },
+    {
+      "file": "data/generated-questions/matematica.json",
+      "sha256": "d9ac94c56b83d71e9ca550e13bd55cd53469174b3dd41b8efff181cf50a1d491"
+    },
+    {
+      "file": "data/generated-questions/programacao.json",
+      "sha256": "e6e8e0ff58d865d1023e8dc2c85abf7093e32c78d832fd45ca1c3edbe73b4550"
+    },
+    {
+      "file": "data/generated-questions/redes.json",
+      "sha256": "ecb1b4791c7514c185b881576e8760368be9214b685a5502f3779da3f9f00e85"
+    },
+    {
+      "file": "data/generated-questions/seguranca.json",
+      "sha256": "43778128646f773bb539321b901c07e7f277c94ede4074d9274c82d18970165e"
+    },
+    {
+      "file": "data/generated-questions/sistemas-distribuidos.json",
+      "sha256": "2db10933aed572c388d4f08f4e6d10ed03754631e24bf83da2cc63f98ba0d0b8"
+    },
+    {
+      "file": "data/generated-questions/sistemas-operacionais.json",
+      "sha256": "e7e239bdb9e5156d8248e564ba8a2bef4a1cfd9a24f049d1ea581924de53c9e9"
+    },
+    {
+      "file": "data/generated-questions/sociedade-e-etica.json",
+      "sha256": "d057071691a54c1275b9f62c831da212dc4ac3b239037f3b945573e57150ddfb"
+    },
+    {
+      "file": "data/generated-questions/teoria-computacao.json",
+      "sha256": "edec54d29f7e453ef2c951ec060d36a7642b13e1536b45de8e19f8a02f8e309c"
+    }
+  ]
+}
