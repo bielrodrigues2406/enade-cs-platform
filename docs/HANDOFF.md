@@ -51,6 +51,48 @@ A bússola da preparação está em **`docs/CORE-CONCEPTS.md`**: 16 áreas e a F
 
 [ENADE-EVOLUTION.md](ENADE-EVOLUTION.md) mede como formato e áreas mudaram de 2005 a 2021 e o que muda na geração. [IMAGE-PROMPTS.md](IMAGE-PROMPTS.md) lista as imagens: SVG para diagramas exatos (o agente faz) e prompts de GPT Image para ilustrações (Gabriel gera e envia).
 
+## Próxima sessão (plano combinado com Gabriel em 07/11)
+
+Branch `claude/confident-cray-ndnwmk`, refeita a partir da `main` após o PR #52; abrir PR ao implementar. Ordem:
+
+1. **GEN-4, formatos ([ENADE-ITEM-FORMATS.md](ENADE-ITEM-FORMATS.md)).**
+   - Itens e asserção com o molde oficial de alternativas e a letra calculada pelo validador.
+   - Campos `format` (`ITENS3`, `ITENS4`, `ORDEM`, `CALCULO`, `CODIGO_OPCOES`, `ASSOCIACAO`) e `stimulus`, na migration 032.
+2. **GEN-3, pistas da resposta ([GENERATED-QUALITY-AUDIT.md](GENERATED-QUALITY-AUDIT.md)).**
+   - Reescrever as alternativas das questões simples.
+   - Travas no `npm test`: tamanho da certa e "chutador esperto" até 25%.
+3. **Aumentar cerca de 45 questões** e escrever um novo lote com as formas que faltam, na mistura da seção 5.3 do documento de formatos.
+4. **Imagens:** SVGs exatos e ligação das ilustrações que Gabriel enviar ([IMAGE-PROMPTS.md](IMAGE-PROMPTS.md)).
+5. **AUTH-PW8, senha mínima de 8 caracteres (pedido de Gabriel).**
+   - **Onde muda:**
+     - `credentials()` em `apps/api/src/auth.ts` e a mensagem;
+     - `account.component.ts`;
+     - a ajuda do formulário de criação de conta pelo admin;
+     - testes e textos de segurança que citam 12.
+   - **Contexto:** a ASVS 5.0 aceita 8 como mínimo e recomenda 15; a NIST 800-63B-4 pede 15 quando a senha é o único fator, como aqui.
+   - **Compensações, junto com a mudança:**
+     - recusar senhas comuns (lista embutida com as 10 mil mais usadas);
+     - recusar senha igual ou contida no e-mail, no nome, no prontuário, "enade" ou "cadernocc";
+     - manter o limite de tentativas e o scrypt atuais;
+     - sem regra de símbolos obrigatórios.
+   - Senhas antigas continuam valendo.
+6. **NEWS-1, novidades.**
+   - **Conteúdo:** `data/news/*.json`, uma entrada por novidade, com data, título, resumo de uma ou duas frases, link para a tela e ilustração opcional. Publicado por PR, sem editor.
+   - **Onde aparece:**
+     - **início logado:** cartão "O que há de novo";
+     - **topo:** marca discreta "Novo" enquanto houver novidade não vista;
+     - **uma vez por novidade:** modal leve ao entrar, com o Dudu acenando (gesto de 1,1 s, uma vez). Fecha com Esc e devolve o foco.
+   - **Visto por conta:** registrado no servidor, na migration 033, e não em `localStorage`, para valer no celular e no computador.
+   - **Regras do projeto:**
+     - nada de `role="status"` fixo (os E2E usam `getByRole('status')`);
+     - respeitar `prefers-reduced-motion`;
+     - conferir a 320 e a 390 px;
+     - carregamento sob demanda.
+   - **Primeiras entradas:**
+     - núcleo por área com confiança;
+     - questões geradas por IA para treinar cada área;
+     - meta diária e flashcards, se ainda não anunciados.
+
 ## 5. O que falta (por prioridade)
 
 1. **Preservar a publicação AWS em cadernocc.com.br:** Gabriel relatou funcionamento em 06/11. Conferências operacionais de backups/restauração continuam próprias; não reabrir o diagnóstico CSS como falha atual sem evidência. O mesmo Compose de [`deploy/campus/`](../deploy/campus/README.md) serve como referência; eventual implantação IFSP PEP depende da infraestrutura institucional.

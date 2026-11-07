@@ -158,7 +158,9 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 029 | SIM26-1 — tentativa no formato de 2026, sem editar migrations aplicadas | Codex |
 | 030 | NUC-1 — núcleo por área: autoavaliação de conceitos e confiança | Claude |
 | 031 | GEN-1 — questões geradas por IA (review_origin GENERATED, metadados) | Claude |
-| 032 | próxima livre — reserve aqui antes do primeiro commit | |
+| 032 | GEN-4 — formatos e estímulos das questões geradas (`ITENS3`/`ITENS4`, ordem, cálculo…) | Claude |
+| 033 | NEWS-1 — novidades vistas por conta | Claude |
+| 034 | próxima livre — reserve aqui antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 
