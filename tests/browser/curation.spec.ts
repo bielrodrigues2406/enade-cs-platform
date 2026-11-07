@@ -10,7 +10,7 @@ import {
 } from "@playwright/test";
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const password = "Curadoria teste 2026!";
+const password = "Curadoria sintetica 2026!";
 type Fixtures = {
   provision: (context: BrowserContext, curator?: boolean) => Promise<string>;
   questions: Set<string>;

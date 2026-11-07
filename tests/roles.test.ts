@@ -8,7 +8,7 @@ import { authorize } from "../apps/api/src/roles.js";
 let app: Awaited<ReturnType<typeof createApp>>;
 let base: string;
 const emails = new Set<string>();
-const password = "Papel teste 2026!";
+const password = "Papel sintetico 2026!";
 
 before(async () => {
   app = await createApp();

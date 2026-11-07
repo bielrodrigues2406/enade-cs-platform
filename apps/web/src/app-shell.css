@@ -36,12 +36,15 @@
   .brand-mark { width: 28px; height: 28px; }
   .brand-sub { display: none; }
   .header-actions button { padding-inline: var(--space-3); font-size: var(--text-md); }
-  .header-actions .account-menu-trigger { padding-right: var(--space-2); }
-  .header-actions .account-menu-trigger .account-avatar { display: none; }
+  /* No celular, só o círculo com as iniciais: o nome fica no aria-label do botão. */
+  .header-actions .account-menu-trigger { justify-content: center; min-width: 44px; padding: 3px; }
+  .header-actions .account-chip-label { display: none; }
   .catalog-intro { display: block; }
   .catalog-progress { margin-top: var(--space-3); }
 }
 @media (max-width: 600px) {
+  /* Sem conta, no celular, o topo leva só a "Entrar"; criar conta fica na própria tela de entrada. */
+  .header-actions .header-register { display: none; }
   .catalog-filters, .catalog-extra-fields { grid-template-columns: minmax(0, 1fr); }
   .catalog-intro h1 { margin-bottom: var(--space-2); }
   .catalog-intro > div p { font-size: var(--text-md); }

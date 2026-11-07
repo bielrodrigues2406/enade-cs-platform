@@ -1,3 +1,5 @@
+import { PasswordMeterComponent } from "./password-meter.component";
+import { PASSWORD_MAX, PASSWORD_MIN } from "./password-rules";
 import { requestJson } from "./api-request";
 import { Component, EventEmitter, Output, inject, signal } from "@angular/core";
 import { MascotService } from "./mascot.service";
@@ -7,7 +9,7 @@ import { initials } from "./initials";
 type Profile = { email: string; name: string | null; enrollment: string | null; createdAt?: string };
 type Status = { kind: "success" | "error"; text: string } | null;
 
-const PASSWORD_RANGE = "A senha deve ter de 12 a 128 caracteres.";
+const PASSWORD_RANGE = `A senha deve ter de ${PASSWORD_MIN} a ${PASSWORD_MAX} caracteres.`;
 const ENROLLMENT = /^[A-Z]{2}[0-9]{6,8}X?$/;
 
 async function call<T>(path: string, method: string, body?: unknown): Promise<T> {
@@ -25,7 +27,7 @@ async function call<T>(path: string, method: string, body?: unknown): Promise<T>
  */
 @Component({
   selector: "app-profile",
-  imports: [FormsModule],
+  imports: [FormsModule, PasswordMeterComponent],
   templateUrl: "./profile.component.html",
   styleUrl: "./profile.component.css",
 })
@@ -146,7 +148,7 @@ export class ProfileComponent {
 
   newPasswordError() {
     const length = [...this.newPassword].length;
-    if (length < 12 || length > 128) return PASSWORD_RANGE;
+    if (length < PASSWORD_MIN || length > PASSWORD_MAX) return PASSWORD_RANGE;
     if (this.newPassword !== this.confirmPassword) return "A confirmação não é igual à nova senha.";
     return "";
   }

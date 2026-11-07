@@ -59,7 +59,8 @@
               <input id="new-account-password" name="password" type="text" maxlength="128" [(ngModel)]="newAccount.password" autocomplete="new-password" spellcheck="false" aria-describedby="new-account-password-help" />
               <button type="button" class="text-button" (click)="suggestPassword()">Gerar</button>
             </div>
-            <p id="new-account-password-help" class="account-help">De 12 a 128 caracteres. Entregue à pessoa e peça que troque em Meu perfil no primeiro acesso.</p>
+            <app-password-meter [password]="newAccount.password" [owner]="newAccount" />
+            <p id="new-account-password-help" class="account-help">Entregue à pessoa e peça que troque em Meu perfil no primeiro acesso.</p>
           </div>
         </div>
         @if (createError()) {
@@ -403,7 +404,8 @@
                         />
                         <button type="button" class="text-button" (click)="suggestResetPassword()">Gerar</button>
                       </div>
-                      <p id="reset-new-password-help" class="account-help">De 12 a 128 caracteres. Peça que a pessoa troque em Meu perfil ao entrar.</p>
+                      <app-password-meter [password]="resetForm.newPassword" />
+                      <p id="reset-new-password-help" class="account-help">Peça que a pessoa troque em Meu perfil ao entrar.</p>
                     </div>
                     <div class="admin-field-wide">
                       <label for="reset-admin-password">Sua senha de administrador</label>

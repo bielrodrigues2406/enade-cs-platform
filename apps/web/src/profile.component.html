@@ -120,7 +120,7 @@
             aria-describedby="profile-new-help profile-new-error"
             [attr.aria-invalid]="passwordSubmitted && newPasswordError() ? true : null"
           />
-          <p id="profile-new-help" class="account-help">De 12 a 128 caracteres. Espaços são permitidos.</p>
+          <app-password-meter id="profile-new-help" [password]="newPassword" [owner]="{ email, name, enrollment }" />
         </div>
         <div class="account-field">
           <label for="profile-confirm">Repita a nova senha</label>

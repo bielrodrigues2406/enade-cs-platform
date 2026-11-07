@@ -37,6 +37,8 @@ As datas são metas. Se o conteúdo atrasar, G e H encolhem; as questões e a Bi
 
 ### PR A. Ajustes rápidos de experiência
 
+**Estado em 07/11:** feito, exceto o peso e o aceno do Dudu, que entraram com a versão 2. Correção do plano: o "logo duas vezes" era o rodapé do site com a página rolada até o fim, não um problema do menu.
+
 **Topo e conta:**
 - **Botão "Conta" no celular:** só o círculo com as iniciais, com 44 px de toque.
 - **Topo sem login no celular:** só "Entrar"; "Criar conta" fica na tela de entrada e no início.

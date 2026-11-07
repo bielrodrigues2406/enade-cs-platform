@@ -17,7 +17,7 @@
           }
           @if (session().mode === "account") {
             <button type="button" class="account-chip account-menu-trigger" popovertarget="account-menu" [attr.aria-label]="'Abrir conta, ' + accountLabel()" [attr.title]="accountEmail()" [disabled]="navigationBusy()">
-              <span class="account-avatar" aria-hidden="true">{{ accountInitials() }}</span><span>Conta</span>
+              <span class="account-avatar" aria-hidden="true">{{ accountInitials() }}</span><span class="account-chip-label">Conta</span>
             </button>
             <div #accountPopover id="account-menu" popover="auto" class="account-menu" role="dialog" aria-labelledby="account-menu-title">
               <h2 id="account-menu-title" tabindex="-1" autofocus>Sua conta</h2>
@@ -28,7 +28,7 @@
             </div>
           } @else {
             <button class="text-button" (click)="openAccount('login')" [disabled]="navigationBusy()">Entrar</button>
-            <button class="outline" (click)="openAccount('register')" [disabled]="navigationBusy()">Criar conta</button>
+            <button class="outline header-register" (click)="openAccount('register')" [disabled]="navigationBusy()">Criar conta</button>
           }
         }
       </div>
@@ -692,7 +692,7 @@
             </nav>
             <div class="site-footer-note">
               <p class="site-footer-title">Sobre o conteúdo</p>
-              <p>Questões e gabaritos oficiais do Inep, com a página da prova de origem. Recortes, classificação e explicações são feitos por IA e conferidos por outro agente, sem revisão humana; na dúvida, vale a prova original. Projeto independente, sem vínculo com o Inep ou o MEC.</p>
+              <p>Questões e gabaritos oficiais do Inep, com a página da prova de origem. Explicações, classificação e questões extras são feitas por IA e sinalizadas, sem revisão humana; na dúvida, vale a prova original. Projeto independente, sem vínculo com o Inep ou o MEC.</p>
               @if (session().mode === 'guest') {
                 <button type="button" class="text-button" [attr.aria-pressed]="mascot.enabled()" (click)="mascot.set(!mascot.enabled())">{{ mascot.enabled() ? 'Ocultar Dudu' : 'Mostrar Dudu' }}</button>
               }

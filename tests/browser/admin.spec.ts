@@ -8,7 +8,7 @@ import { test, expect, type Page } from "@playwright/test";
 // comando `admin:role` faz no servidor.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const emails: string[] = [];
-const password = "Admin teste 2026!";
+const password = "Gestao sintetica 2026!";
 const email = (label: string) => {
   const value = `${label}-${randomUUID()}@example.invalid`;
   emails.push(value);
@@ -269,7 +269,7 @@ test("an admin edits student profile and email, resets password, and revokes act
   const tempField = resetSection.getByLabel("Nova senha provisória");
   await expect(tempField).toHaveValue(/^[a-z2-9]{4}(-[a-z2-9]{4}){3}$/);
   await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => setTimeout(done))));
-  const tempPassword = "Provisoria teste 2026";
+  const tempPassword = "Provisoria sintetica 2026";
   await tempField.fill(tempPassword);
   await expect(tempField).toHaveValue(tempPassword);
   await resetSection.getByLabel("Sua senha de administrador").fill(password);

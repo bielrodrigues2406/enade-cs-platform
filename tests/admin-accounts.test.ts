@@ -12,8 +12,8 @@ const run = promisify(execFile);
 let app: Awaited<ReturnType<typeof createApp>>;
 let base: string;
 const emails = new Set<string>();
-const adminSecret = "Admin manutencao 2026!";
-const studentSecret = "Aluno inicial 2026!";
+const adminSecret = "Gestao manutencao 2026!";
+const studentSecret = "Estudo inicial 2026!";
 
 before(async () => {
   app = await createApp();
@@ -264,7 +264,7 @@ test("other admin accounts are protected from panel takeover and recover via ser
   );
   assert.equal(
     (await call(`admin/accounts/${second.id}/reset-password`, first.cookie, "POST", {
-      newPassword: "Outra-senha-admin-2026!",
+      newPassword: "Outra-senha-gestao-2026!",
       adminPassword: adminSecret,
     })).status,
     409,

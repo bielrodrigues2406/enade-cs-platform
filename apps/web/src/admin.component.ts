@@ -1,3 +1,5 @@
+import { PasswordMeterComponent } from "./password-meter.component";
+import { PASSWORD_MAX, PASSWORD_MIN } from "./password-rules";
 import { requestJson } from "./api-request";
 import { Component, EventEmitter, Output, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -43,7 +45,7 @@ export const ROLE_LABEL: Record<Role, string> = { ADMIN: "Administração", PROF
 
 @Component({
   selector: "app-admin",
-  imports: [FormsModule, ExamImportComponent, ActivityComponent],
+  imports: [FormsModule, ExamImportComponent, ActivityComponent, PasswordMeterComponent],
   templateUrl: "./admin.component.html",
   styleUrl: "./admin.component.css",
 })
@@ -226,8 +228,8 @@ export class AdminComponent {
     if (!user) return;
     this.resetError.set("");
     const length = [...this.resetForm.newPassword].length;
-    if (length < 12 || length > 128) {
-      return this.resetError.set("A senha provisória deve ter de 12 a 128 caracteres.");
+    if (length < PASSWORD_MIN || length > PASSWORD_MAX) {
+      return this.resetError.set(`A senha provisória deve ter de ${PASSWORD_MIN} a ${PASSWORD_MAX} caracteres.`);
     }
     if (!this.resetForm.adminPassword) {
       return this.resetError.set("Confirme sua senha de administrador para redefinir a senha.");
@@ -322,7 +324,7 @@ export class AdminComponent {
       return;
     }
     if (!account.email.trim()) return this.createError.set("Informe o e-mail.");
-    if (length < 12 || length > 128) return this.createError.set("A senha inicial deve ter de 12 a 128 caracteres.");
+    if (length < PASSWORD_MIN || length > PASSWORD_MAX) return this.createError.set(`A senha inicial deve ter de ${PASSWORD_MIN} a ${PASSWORD_MAX} caracteres.`);
     this.creating.set(true);
     this.createError.set("");
     try {

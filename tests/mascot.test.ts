@@ -31,7 +31,7 @@ async function actor(account = false): Promise<Actor> {
   owners.push(id);
   if (account) {
     const registered = await request("auth/register", { cookie, id }, "POST", {
-      name: "Pessoa TEST ONLY", email: `mascot-${randomUUID()}@example.invalid`, password: `TEST ONLY ${randomUUID()}`,
+      name: "Pessoa TEST ONLY", email: `mascot-${randomUUID()}@example.invalid`, password: `Pato ${randomUUID()}`,
     });
     assert.equal(registered.status, 201, await registered.text());
     cookie = registered.headers.get("set-cookie")!.split(";")[0];

@@ -93,7 +93,7 @@ test("signup preserves guest study, goal, achievements, flashcards, practice and
   assert.ok(before.engagement.achievements.some((row: any) => row.unlockedAt));
   assert.equal(before.cards.reviewedToday, 1);
 
-  const credentials = { email: `signup-progress-${randomUUID()}@example.invalid`, password: `TEST ONLY ${randomUUID()}`, name: "TEST ONLY visitor" };
+  const credentials = { email: `signup-progress-${randomUUID()}@example.invalid`, password: `Pato ${randomUUID()}`, name: "TEST ONLY visitor" };
   const registered = await request("auth/register", visitor, "POST", credentials);
   assert.equal(registered.status, 201, await registered.clone().text());
   const account = await actorFrom(registered);

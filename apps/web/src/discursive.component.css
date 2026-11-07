@@ -182,14 +182,16 @@
   grid-column: 1;
   font-size: var(--text-sm);
 }
+/* Selo discreto em texto normal: em maiúsculas espaçadas pesava mais que o título. */
 .disc-status {
   grid-column: 2;
   grid-row: 1 / span 2;
   align-self: center;
-  font-family: var(--font-mono);
+  padding: 2px 10px;
+  border: var(--border-thin) solid var(--color-border);
+  border-radius: 999px;
   font-size: var(--text-xs);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  white-space: nowrap;
   color: var(--color-text-muted);
 }
 .disc-status[data-status="DRAFT"] {

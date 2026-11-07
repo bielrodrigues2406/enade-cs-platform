@@ -12,7 +12,7 @@
             "browser": "apps/web/src/main.ts",
             "index": "apps/web/src/index.html",
             "tsConfig": "apps/web/tsconfig.json",
-            "assets": [{ "glob": "**/*", "input": "apps/web/public" }],
+            "assets": [{ "glob": "**/*", "input": "apps/web/public" }, { "glob": "common-passwords.txt", "input": "data/security", "output": "security" }],
             "styles": [
               "node_modules/@fontsource-variable/figtree/index.css",
               "node_modules/@fontsource-variable/source-serif-4/opsz.css",

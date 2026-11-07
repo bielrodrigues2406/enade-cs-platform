@@ -2,6 +2,7 @@ import { Body, Controller, Get, HttpCode, Post, Query, Req } from "@nestjs/commo
 import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
+import { requireNewPassword } from "./password-policy.js";
 import { requireIdentity } from "./session.js";
 import { randomUUID } from "node:crypto";
 import { credentials, profile } from "./auth.js";
@@ -175,6 +176,7 @@ export class RolesController {
     const admin = await requireRole(req, "ADMIN");
     const { email, password } = credentials(body);
     const { name, enrollment } = profile({ name: body?.name ?? "", enrollment: body?.enrollment ?? "" });
+    requireNewPassword(password, { email, name, enrollment });
     const role = body?.role ? parseRole(body.role) : null;
     const encoded = await hashPassword(password);
     return inTransaction(async (client) => {

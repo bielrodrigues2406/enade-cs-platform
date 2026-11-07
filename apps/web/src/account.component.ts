@@ -1,4 +1,6 @@
 import { MascotComponent } from "./mascot.component";
+import { PasswordMeterComponent } from "./password-meter.component";
+import { PASSWORD_MAX, PASSWORD_MIN } from "./password-rules";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
 
@@ -15,7 +17,7 @@ export type Credentials = {
 
 @Component({
   selector: "app-account",
-  imports: [MascotComponent, FormsModule],
+  imports: [MascotComponent, FormsModule, PasswordMeterComponent],
   templateUrl: "./account.component.html",
   styleUrl: "./account.component.css",
 })
@@ -41,8 +43,8 @@ export class AccountComponent {
   }
   passwordError() {
     const length = [...this.password].length;
-    return length < 12 || length > 128
-      ? "A senha deve ter de 12 a 128 caracteres."
+    return length < PASSWORD_MIN || length > PASSWORD_MAX
+      ? `A senha deve ter de ${PASSWORD_MIN} a ${PASSWORD_MAX} caracteres.`
       : "";
   }
   nameError() {
