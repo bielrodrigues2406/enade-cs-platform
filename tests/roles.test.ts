@@ -162,7 +162,10 @@ test("people edit their profile and password; admins can create an account with 
   assert.equal(other.status, 200);
   const otherCookie = other.cookie;
   assert.equal((await call("me/password", person.cookie, "POST", { currentPassword: password, newPassword: "curta" })).status, 400);
-  const changed = await call("me/password", person.cookie, "POST", { currentPassword: password, newPassword: "Senha nova TEST 2026!" });
+  // Nome e prontuário guardados também barram a senha nova (revisão do Codex, R8).
+  for (const newPassword of ["Editada-2026!x", "PE3077777 segura!"])
+    assert.equal((await call("me/password", person.cookie, "POST", { currentPassword: password, newPassword })).status, 400, newPassword);
+  const changed = await call("me/password", person.cookie, "POST", { currentPassword: password, newPassword: "Senha nova Girassol 2026!" });
   assert.deepEqual(await changed.json(), { status: "CHANGED" });
   assert.equal((await call("me/profile", person.cookie)).status, 200); // esta sessão continua
   assert.equal((await call("me/profile", otherCookie)).status, 401); // a outra saiu

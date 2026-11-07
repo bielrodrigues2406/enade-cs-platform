@@ -85,12 +85,14 @@ test("confidence weighs self-assessment, answers and cards, and scales answers u
   const area = (await loadCore()).areas.find((a) => a.slug === "sistemas-operacionais")!;
   const all = new Map(area.concepts.map((c) => [c.id, 2]));
   const progress = (attempts: number, correct: number) => ({ area: area.area, published: 13, firstAttempts: attempts, firstCorrect: correct });
-  assert.deepEqual(confidence(area, new Map(), undefined, null), { value: 0, self: 0, rated: 0, answers: null, attempts: 0, cards: null });
+  assert.deepEqual(confidence(area, new Map(), undefined, null), { value: 0, self: 0, rated: 0, answers: null, observed: null, attempts: 0, cards: null });
   // Sem baralho: autoavaliação e acerto valem metade cada.
   assert.equal(confidence(area, all, progress(10, 10), null).value, 100);
   assert.equal(confidence(area, all, undefined, null).value, 50);
   // Uma resposta certa só conta 1/5 até haver cinco respostas.
   assert.equal(confidence(area, new Map(), progress(1, 1), null).answers, 20);
+  // A tela mostra a taxa observada: 1 de 1 é 100%, com a amostra ao lado (revisão do Codex, R5).
+  assert.deepEqual([confidence(area, new Map(), progress(1, 1), null).observed, confidence(area, new Map(), progress(4, 3), null).observed], [100, 75]);
   assert.equal(confidence(area, all, progress(5, 5), 0.5).value, 90);
 });
 

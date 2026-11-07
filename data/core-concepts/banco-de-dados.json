@@ -37,7 +37,7 @@
     {
       "id": "bd-normalizacao",
       "name": "Dependências funcionais e normalização",
-      "definition": "1FN: atributos atômicos. 2FN: sem dependência parcial da chave composta. 3FN: sem dependência transitiva (não chave dependendo de não chave). BCNF: todo determinante é chave candidata.",
+      "definition": "1FN: atributos atômicos. 2FN: nenhum atributo não chave depende de parte de uma chave candidata. 3FN: sem dependência transitiva (não chave dependendo de não chave). BCNF: em toda dependência funcional não trivial, o determinante é superchave.",
       "example": "Pedido(id, cliente_id, cliente_nome): cliente_nome depende de cliente_id, não da chave; violação da 3FN.",
       "match": ["normalizacao", "1fn", "dependencia funcional"]
     },
@@ -74,8 +74,8 @@
     "Ordem lógica do SQL: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY.",
     "Funções de agregação ignoram NULL; COUNT(*) conta linhas.",
     "x NOT IN (lista com NULL) nunca é verdadeiro: a consulta volta vazia.",
-    "LEFT JOIN + condição na tabela da direita no WHERE vira, na prática, INNER JOIN.",
-    "1FN atômico; 2FN só importa com chave composta; 3FN elimina dependência transitiva.",
+    "LEFT JOIN + condição no WHERE que rejeita NULL na tabela da direita (como direita.ano = 2026) descarta as linhas sem par e age como INNER JOIN; já WHERE direita.id IS NULL mantém só as sem par (anti-junção).",
+    "1FN atômico; a 2FN só pode ser violada quando há chave candidata composta (considere todas, não só a primária); 3FN elimina dependência transitiva.",
     "N:N vira tabela associativa; 1:N põe a chave estrangeira do lado N.",
     "B+: igualdade e intervalo. Hash: só igualdade.",
     "2PL (bloqueio em duas fases) garante serializabilidade, mas pode gerar deadlock."
@@ -83,7 +83,7 @@
   "pairs": [
     { "a": "WHERE", "b": "HAVING", "difference": "Filtra linhas antes de agrupar × filtra grupos depois de agregar." },
     { "a": "INNER JOIN", "b": "LEFT JOIN", "difference": "Só pares que casam × todas as linhas da esquerda, com NULL sem par." },
-    { "a": "2FN", "b": "3FN", "difference": "Remove dependência de parte da chave × remove dependência entre atributos não chave." },
+    { "a": "2FN", "b": "3FN", "difference": "Remove dependência de parte de uma chave candidata × remove dependência entre atributos não chave." },
     { "a": "Chave primária", "b": "Chave estrangeira", "difference": "Identifica a linha na própria tabela × aponta para a primária de outra tabela." },
     { "a": "Índice B+", "b": "Índice hash", "difference": "Ordenado (intervalos) × só igualdade." }
   ],

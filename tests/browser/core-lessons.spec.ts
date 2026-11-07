@@ -21,7 +21,7 @@ test("a lesson opens from its concept, shows every section and leads to the next
   await expect(page.locator(".lesson-check")).toContainText("Conferido: Executado em Python 3");
   // Caiu em 2017; não pode aparecer como "ainda não caiu", publicada ou não neste banco.
   await expect(page.locator(".lesson-questions").first()).toContainText("2017 Deadlock e ordem de aquisição de semáforos");
-  await expect(page.getByText("Ainda não caiu nas provas")).toHaveCount(0);
+  await expect(page.getByText("Sem questão ligada neste recorte")).toHaveCount(0);
 
   const recall = page.locator(".lesson-recall details").first();
   await recall.locator("summary").click();

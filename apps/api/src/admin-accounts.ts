@@ -3,7 +3,7 @@ import { Body, Controller, HttpCode, Param, Post, Put, Req, Res } from "@nestjs/
 import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { fail } from "./api-error.js";
-import { requireNewPassword } from "./password-policy.js";
+import { passwordOwnerOf, requireNewPassword } from "./password-policy.js";
 import { requireIdentity, sessionHash } from "./session.js";
 import { hashPassword, verifyPassword } from "./password.js";
 import { AuthThrottle, credentials, emailAddress, profile } from "./auth.js";
@@ -267,7 +267,8 @@ export class AdminAccountsController {
     const id = parseAccountId(rawId);
     const reason = parseReason(body?.reason);
     const { password } = credentials({ email: admin.email, password: body?.newPassword });
-    requireNewPassword(password);
+    // A senha provisória é da pessoa cuja conta muda: compara com os dados dela (revisão do Codex, R8).
+    requireNewPassword(password, await passwordOwnerOf(db, id));
     await verifyAdminPassword(req, res, admin.id, admin.email!, body?.adminPassword, this.throttle);
     const encoded = await hashPassword(password);
 

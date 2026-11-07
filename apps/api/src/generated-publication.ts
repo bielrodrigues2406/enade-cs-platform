@@ -1,10 +1,10 @@
 import { createHash } from "node:crypto";
-import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import type { PoolClient } from "pg";
 import { db } from "./database.js";
 import { AREAS } from "./question-areas.js";
+import { publicAssetExists } from "./public-assets.js";
 import { loadCore } from "./core-concepts.js";
 import {
   FORMATS, LETTERS, STIMULI, TEMPLATED, assertionOptions, checkPromptShape, checkSequence, itemsOptions,
@@ -96,8 +96,7 @@ function figureOf(value: any, where: string): GeneratedFigure | null {
   if (!/^\/(figures|illustrations)\/[A-Za-z0-9-]+\.(svg|webp)$/.test(value?.src)) throw new Error(`${where}: figura inválida.`);
   const alt = text(value.alt, `${where}.figure.alt`, 600);
   if (alt.length < 20) throw new Error(`${where}: o texto alternativo da figura descreve o que ela mostra.`);
-  const file = path.resolve("apps/web/public", value.src.slice(1));
-  if (!existsSync(file)) throw new Error(`${where}: arquivo da figura não encontrado (${value.src}).`);
+  if (!publicAssetExists(value.src)) throw new Error(`${where}: arquivo da figura não encontrado (${value.src}).`);
   return { src: value.src, alt };
 }
 

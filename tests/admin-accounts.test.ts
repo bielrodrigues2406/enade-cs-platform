@@ -206,6 +206,14 @@ test("admin resets student password, revokes active sessions and preserves study
   const listedBefore = await (await call(`admin/users?q=${encodeURIComponent(studentEmail)}`, admin.cookie)).json();
   assert.equal(listedBefore.items[0].activeSessions, 2);
 
+  // A senha provisória não pode conter o nome da pessoa cuja conta muda (revisão do Codex, R8).
+  assert.equal(
+    (await call(`admin/accounts/${student.id}/reset-password`, admin.cookie, "POST", {
+      newPassword: "Reset da aluna 2026!", adminPassword: adminSecret,
+    })).status,
+    400,
+  );
+
   // Senha do admin errada é recusada.
   const tempPassword = "Temp-acesso-2026!";
   assert.equal(

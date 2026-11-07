@@ -46,3 +46,27 @@ test("an area page reflows on a small phone without horizontal scroll", async ({
   await expect(page.getByRole("heading", { name: "Teoria da computação", level: 1 })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
+
+test("self-assessment follows the radio group pattern: arrows move and select, one tab stop", async ({ page }) => {
+  // Revisão do Codex (R10).
+  await page.goto("/biblioteca");
+  await page.getByRole("button", { name: /^Sistemas operacionais: / }).click();
+  const group = page.getByRole("radiogroup", { name: "Quanto você sabe de Deadlock" });
+  const [none, some, sure] = ["Não sei", "Mais ou menos", "Sei explicar"].map((name) => group.getByRole("radio", { name }));
+  await expect(none).toHaveAttribute("tabindex", "0");
+  await expect(some).toHaveAttribute("tabindex", "-1");
+  await none.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(some).toBeFocused();
+  await expect(some).toHaveAttribute("aria-checked", "true");
+  await expect(some).toHaveAttribute("tabindex", "0");
+  await page.keyboard.press("End");
+  await expect(sure).toBeFocused();
+  await expect(sure).toHaveAttribute("aria-checked", "true");
+  await page.keyboard.press("ArrowRight");
+  await expect(none).toBeFocused();
+  await expect(none).toHaveAttribute("aria-checked", "true");
+  // Teclas rápidas não perdem a escolha: o servidor fica com o último nível.
+  await expect.poll(async () => (await (await page.request.get("/api/core/sistemas-operacionais")).json())
+    .concepts.find((c: { id: string }) => c.id === "so-deadlock").level).toBe(0);
+});

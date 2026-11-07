@@ -76,24 +76,58 @@ export class CoreAreaComponent {
   }
 
   /** Marca na hora; se o servidor recusar, volta ao que era e avisa. */
-  async rate(concept: CoreConcept, value: 0 | 1 | 2) {
-    if (this.saving()) return;
-    const level = concept.level === value ? null : value;
+  /** Nível escolhido pelo teclado enquanto outro ainda era gravado; vale o último. */
+  private queued: { id: string; level: 0 | 1 | 2 } | null = null;
+
+  /** Clique alterna (clicar no marcado desmarca); pelo teclado (`toggle` falso) só marca. */
+  async rate(concept: CoreConcept, value: 0 | 1 | 2, toggle = true) {
+    if (this.saving()) {
+      if (!toggle && this.saving() === concept.id) {
+        this.queued = { id: concept.id, level: value };
+        this.patch(concept.id, value);
+      }
+      return;
+    }
+    const level = toggle && concept.level === value ? null : value;
     const previous = concept.level;
     this.patch(concept.id, level);
     this.saving.set(concept.id);
+    /** O que o servidor guarda depois desta chamada: o nível novo, ou o anterior se falhar. */
+    let confirmed = previous;
     this.error.set("");
     try {
       const result = await requestJson<{ confidence: Confidence }>(`/api/core/concepts/${concept.id}`, {
         method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ level }),
       });
       this.area.update((a) => a && { ...a, confidence: result.confidence });
+      confirmed = level;
     } catch (error) {
       this.patch(concept.id, previous);
       this.error.set(error instanceof Error ? error.message : "Não foi possível guardar. Tente novamente.");
     } finally {
       this.saving.set(null);
+      const queued = this.queued;
+      this.queued = null;
+      const target = queued && this.area()?.concepts.find((c) => c.id === queued.id);
+      // A tela já mostra o último nível; grava-o agora (o anterior pode ter mudado o servidor).
+      if (target && queued.level !== confirmed) void this.rate({ ...target, level: confirmed }, queued.level, false);
     }
+  }
+
+  /**
+   * Padrão de grupo de rádio (revisão do Codex, R10): setas, Home e End movem o foco
+   * e marcam o nível; só o marcado (ou o primeiro) entra na ordem do Tab.
+   */
+  ratingKey(event: KeyboardEvent, concept: CoreConcept, index: number) {
+    const last = this.levels.length - 1;
+    const target = ({ ArrowRight: index + 1, ArrowDown: index + 1, ArrowLeft: index - 1, ArrowUp: index - 1, Home: 0, End: last } as Record<string, number>)[event.key];
+    if (target === undefined) return;
+    event.preventDefault();
+    const next = target < 0 ? last : target > last ? 0 : target;
+    const group = (event.currentTarget as HTMLElement).parentElement;
+    (group?.children[next] as HTMLElement | undefined)?.focus();
+    const current = this.area()?.concepts.find((c) => c.id === concept.id)?.level ?? null;
+    if (current !== this.levels[next].value) void this.rate({ ...concept, level: current }, this.levels[next].value, false);
   }
 
   async train() {

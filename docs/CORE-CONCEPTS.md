@@ -56,7 +56,8 @@ Contexto medido no acervo de 246 objetivas:
 - **Como casam:** um conceito casa com a questão quando uma das suas palavras-chave aparece no **início de uma palavra** do assunto conferido, sem acento e sem diferenciar maiúsculas.
 - **O que o teste garante:** toda questão oficial da área cai em pelo menos um conceito. Hoje são 206 de 206.
   - Se o acervo ganhar questões, rode `npm test`. Se aparecer questão sem conceito, acrescente uma palavra-chave ou um conceito.
-- **Conceito sem questão no acervo:** aparece como "fundamento da área", sem fingir que caiu.
+- **Conceito sem questão ligada:** a tela diz "sem questão ligada neste recorte do acervo", e não "nunca caiu": a ligação é por palavra-chave no assunto e só dentro da área.
+- **Limite do casamento por palavra (revisão do Codex, R4):** cobrir 206 de 206 questões prova que toda questão encontrou uma palavra, não que a ligação esteja certa. Em 07/11 saíram "inserção" de ordenação (ligava a rotação de AVL de 2017 Q9) e "dígrafo" de grafos (ligava o Dijkstra de 2021 Q34, que já está em caminho mínimo). O próximo passo é conferir os vínculos item a item.
 - **Caiu, mas não está publicada neste banco:** a tela mostra o ano e o assunto sem link (`appearances` com `id` nulo). "Ainda não caiu" aparece só quando o inventário não tem nenhuma questão do conceito. Antes de 07/11 a tela confundia os dois casos: num banco sem as oficiais publicadas, o deadlock (2017, Q35) aparecia como "ainda não caiu".
 
 ## 5. Confiança
@@ -65,13 +66,15 @@ A confiança vai de 0 a 100 e soma três sinais, cada um mostrado separado na te
 
 - **40%, autoavaliação:** não sei = 0, mais ou menos = 1, sei explicar = 2. Conceito não marcado conta como 0.
 - **40%, acerto na primeira resposta** às questões da área, a mesma contagem do "Meu desempenho".
-  - Até 5 respostas, o acerto conta proporcionalmente (1 resposta certa vale 20%), para um acerto isolado não dar confiança alta.
-- **20%, memória nos flashcards da área:** a estabilidade de cada cartão dividida por 21 dias, limitada a 1. Cartão nunca visto conta 0.
+  - Até 5 respostas, o acerto entra no índice proporcionalmente (1 resposta certa vale 20%), para um acerto isolado não dar confiança alta.
+  - A tela mostra a taxa observada, sem essa atenuação, com o número de respostas ao lado (`observed` na API). Antes de 07/11 mostrava o valor atenuado com o nome "acerto", o que a revisão do Codex (R5) apontou como enganoso.
+- **20%, lembrança estimada nos flashcards da área:** a recuperabilidade do FSRS hoje para cada cartão, que cai com o tempo desde a última revisão (`retrievability` em `fsrs.ts`). Cartão nunca visto conta 0.
+  - Antes de 07/11 era a estabilidade dividida por 21 dias, que não caía com o tempo sem revisar (revisão do Codex, R6).
   - Área sem baralho: a autoavaliação e o acerto valem 50% cada.
 
 **Prioridade no mapa:** peso histórico da área × (1 − confiança). As três maiores aparecem como "comece por aqui".
 
-O peso é histórico (2005 a 2021), não previsão. A Formação Geral aparece à parte, sem prioridade, porque vale para todos os cursos e em 2026 tem 15 questões.
+O índice é uma heurística para orientar o estudo, não uma previsão calibrada de desempenho. O peso é histórico (2005 a 2021), não previsão. A Formação Geral aparece à parte, sem prioridade, porque vale para todos os cursos e em 2026 tem 15 questões.
 
 ## 6. Conteúdo escrito por IA
 

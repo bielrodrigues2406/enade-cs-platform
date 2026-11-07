@@ -23,6 +23,7 @@ export class NewsService {
   private autoShown = false;
   private generation = 0;
 
+  /** Recarrega para a identidade atual; respostas pendentes de antes ficam obsoletas. */
   refresh() {
     const generation = ++this.generation;
     this.autoShown = false;
@@ -47,10 +48,14 @@ export class NewsService {
     const ids = (this.state()?.items ?? []).filter((n) => !n.seen).map((n) => n.id);
     if (!ids.length) return;
     this.state.update((s) => s && { items: s.items.map((n) => ({ ...n, seen: true })), unseen: 0, autoOpen: false });
+    // Se a identidade mudar enquanto a resposta não chega, ela é de outra pessoa e não pode
+    // sobrescrever o estado novo (revisão do Codex, R7).
+    const generation = this.generation;
     try {
-      this.state.set(await requestJson<NewsState>("/api/news/seen", {
+      const data = await requestJson<NewsState>("/api/news/seen", {
         method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ids }),
-      }));
+      });
+      if (generation === this.generation) this.state.set(data);
     } catch { /* Se não gravou, volta a aparecer na próxima carga. */ }
   }
 }

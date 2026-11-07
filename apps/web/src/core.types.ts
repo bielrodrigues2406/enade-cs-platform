@@ -3,7 +3,11 @@
 export type Confidence = {
   value: number;
   self: number; rated: number;
-  answers: number | null; attempts: number;
+  /** Sinal atenuado usado no índice; a tela mostra `observed`. */
+  answers: number | null;
+  /** Acerto observado na primeira resposta, com `attempts` como amostra. */
+  observed: number | null;
+  attempts: number;
   cards: number | null;
 };
 export type AreaHistory = { editions: { year: number; count: number }[]; total: number };

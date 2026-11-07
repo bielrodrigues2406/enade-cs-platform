@@ -32,7 +32,7 @@
       "name": "Algoritmos de ordenação",
       "definition": "Inserção, seleção e bolha são O(n²); merge sort e heapsort são O(n log n); quicksort é O(n log n) em média e O(n²) no pior caso.",
       "example": "Inserção num vetor já ordenado faz n−1 comparações: O(n), seu melhor caso.",
-      "match": ["ordenacao", "quicksort", "insercao"]
+      "match": ["ordenacao", "quicksort"]
     },
     {
       "id": "alg-lineares",
@@ -67,7 +67,7 @@
       "name": "Grafos: busca em largura e profundidade",
       "definition": "BFS visita por camadas com uma fila; DFS vai fundo com uma pilha ou recursão. Ambas custam O(V + E) com lista de adjacência.",
       "example": "Em grafo sem pesos, a BFS encontra o caminho com menos arestas.",
-      "match": ["grafo", "digrafo"]
+      "match": ["grafo"]
     },
     {
       "id": "alg-caminho-minimo",
