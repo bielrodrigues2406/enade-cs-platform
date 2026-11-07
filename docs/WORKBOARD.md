@@ -374,3 +374,5 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
   - **R7:** resposta atrasada de Novidades não sobrescreve outra identidade. **R8:** troca e reset de senha usam nome e prontuário guardados. **R10:** autoavaliação com setas, Home e End e um ponto de Tab; teclas rápidas não perdem a escolha.
   - **Falta:** R9 (endereço da lição na URL). Conquistas G2 adiadas, como a revisão recomendou.
 
+- **07/11/2026 · Claude · R9 da revisão AUD-C1:** área, lição e ficha da Biblioteca no endereço (`/biblioteca/<área>/<conceito>`, `/biblioteca/fichas/<ficha>`). Recarregar mantém a lição; Voltar/Avançar passam por lição, área e mapa; conceito sem lição volta para a área com `replace`. "Continuar de onde parou" abre direto o endereço da lição (sai o `pendingLesson`). Teste unitário do analisador de caminho e 3 E2E novos; 25 E2E da Biblioteca, navegação, Novidades e retomada passaram localmente, mais o E2E de produção. Falta de AUD-C1: vínculos de R4 item a item.
+

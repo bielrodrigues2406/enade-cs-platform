@@ -27,6 +27,17 @@ Cada lição corresponde a um conceito de [CORE-CONCEPTS.md](CORE-CONCEPTS.md) e
 
 A área ganha a capa do catálogo (`cover`), o botão "Ler as N lições" e um "Ler a lição" em cada conceito. A lição tem anterior e próxima, na ordem do núcleo, e volta ao cartão do conceito.
 
+**Endereço (R9 da revisão do Codex):** a Biblioteca guarda o lugar no caminho, então recarregar, compartilhar o link e usar Voltar/Avançar não perdem a leitura.
+
+| Caminho | Mostra |
+| --- | --- |
+| `/biblioteca` | mapa do núcleo e fichas |
+| `/biblioteca/<área>` | página da área, por exemplo `/biblioteca/sistemas-operacionais` |
+| `/biblioteca/<área>/<conceito>` | lição, por exemplo `/biblioteca/sistemas-operacionais/so-deadlock` |
+| `/biblioteca/fichas/<ficha>` | ficha de uma página, por exemplo `/biblioteca/fichas/grafos` |
+
+O shell (`main.ts`) é o dono do histórico: a Biblioteca recebe o caminho em `address` e pede mudanças por `navigate`; `parseLibraryPath`/`libraryPath` ficam em `study-navigation.ts`. Conceito sem lição no endereço volta para a área sem criar entrada no histórico. Testes: `tests/library-address.test.ts` e os casos de endereço em `tests/browser/core-lessons.spec.ts`.
+
 ## 3. Formato do arquivo
 
 ```json

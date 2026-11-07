@@ -2,7 +2,7 @@
   <div class="notice" role="alert"><p>{{ error() }}</p><button type="button" class="outline" (click)="retry()" [disabled]="busy()">Tentar novamente</button></div>
 }
 @if (coreSlug(); as slug) {
-  <app-core-area [slug]="slug" (back)="closeCore()" (question)="question.emit($event)" (practice)="practice.emit($event)"
+  <app-core-area [slug]="slug" [lesson]="lessonId()" (lessonChange)="lessonChange($event)" (back)="closeCore()" (question)="question.emit($event)" (practice)="practice.emit($event)"
     (generated)="generated.emit($event)" (flashcards)="flashcards.emit()" (sheet)="sheetFromCore($event)" />
 } @else if (open(); as sheet) {
   <article class="sheet" aria-labelledby="sheet-title">
@@ -54,7 +54,7 @@
     <ul class="sheet-grid" aria-label="Fichas por assunto">
       @for (sheet of sheets(); track sheet.slug) {
         <li>
-          <button type="button" class="sheet-card" (click)="read(sheet.slug)" [disabled]="busy()">
+          <button type="button" class="sheet-card" (click)="openSheet(sheet.slug)" [disabled]="busy() || sheetBusy()">
             <span class="sheet-card-kicker">{{ sheet.area }}</span>
             <strong>{{ sheet.title }}</strong>
             <span>{{ sheet.summary }}</span>

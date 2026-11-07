@@ -45,3 +45,51 @@ test("a lesson fits a 320 px screen without sideways scrolling", async ({ page }
   await expect(page.locator("pre.prompt-code")).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+// Revisão do Codex (R9): a lição e a área ficam no endereço; recarregar e
+// Voltar/Avançar não perdem o lugar, e um endereço sem lição volta para a área.
+test("the open lesson lives in the address: reload, Back and Forward keep the place", async ({ page }) => {
+  await page.goto("/biblioteca");
+  await page.getByRole("button", { name: /^Sistemas operacionais: / }).click();
+  await expect(page).toHaveURL(/\/biblioteca\/sistemas-operacionais$/);
+  await page.getByRole("button", { name: "Ler a lição: Deadlock" }).click();
+  await expect(page.getByRole("heading", { name: "Deadlock", level: 1 })).toBeFocused();
+  await expect(page).toHaveURL(/\/biblioteca\/sistemas-operacionais\/so-deadlock$/);
+
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Deadlock", level: 1 })).toBeVisible();
+  await expect(page.getByText("Lição 7 de 10")).toBeVisible();
+
+  await page.getByRole("button", { name: /Paginação, segmentação e fragmentação/ }).click();
+  await expect(page.getByRole("heading", { name: "Paginação, segmentação e fragmentação", level: 1 })).toBeFocused();
+  await page.goBack();
+  await expect(page.getByRole("heading", { name: "Deadlock", level: 1 })).toBeVisible();
+  await page.goBack();
+  await expect(page).toHaveURL(/\/biblioteca\/sistemas-operacionais$/);
+  await expect(page.getByRole("heading", { name: "Sistemas operacionais", level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Deadlock", level: 1 })).toHaveCount(0);
+  await page.goForward();
+  await expect(page.getByRole("heading", { name: "Deadlock", level: 1 })).toBeVisible();
+  await page.goBack();
+  await page.goBack();
+  await expect(page).toHaveURL(/\/biblioteca$/);
+  await expect(page.getByRole("heading", { name: "Biblioteca", exact: true, level: 1 })).toBeVisible();
+});
+
+test("an address with a concept that has no lesson falls back to the area", async ({ page }) => {
+  await page.goto("/biblioteca/sistemas-operacionais/nao-existe");
+  await expect(page.getByRole("heading", { name: "Sistemas operacionais", level: 1 })).toBeVisible();
+  await expect(page).toHaveURL(/\/biblioteca\/sistemas-operacionais$/);
+});
+
+test("a one-page sheet also lives in the address and Back returns to the list", async ({ page }) => {
+  await page.goto("/biblioteca");
+  await page.getByRole("button", { name: /Grafos e seus algoritmos/ }).click();
+  await expect(page.getByRole("heading", { name: "Grafos e seus algoritmos", level: 1 })).toBeFocused();
+  await expect(page).toHaveURL(/\/biblioteca\/fichas\/grafos$/);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Grafos e seus algoritmos", level: 1 })).toBeVisible();
+  await page.goBack();
+  await expect(page).toHaveURL(/\/biblioteca$/);
+  await expect(page.getByRole("heading", { name: "Biblioteca", exact: true, level: 1 })).toBeVisible();
+});

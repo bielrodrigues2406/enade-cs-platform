@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Injector, Input, Output, afterNextRender, computed, inject, signal } from "@angular/core";
+import { Component, ElementRef, EventEmitter, Injector, Input, Output, afterNextRender, computed, inject, signal, type SimpleChanges } from "@angular/core";
 import { requestJson } from "./api-request";
 import { ChoiceService } from "./choice-dialog";
 import { chooseAreaSimulation, type PracticeRequest } from "./practice-request";
@@ -19,6 +19,10 @@ import { LEVELS, TRAP_LABELS, type Confidence, type CoreArea, type CoreConcept, 
 })
 export class CoreAreaComponent {
   @Input({ required: true }) slug!: string;
+  /** Lição pedida pelo endereço (/biblioteca/<área>/<conceito>); null mostra a área. */
+  @Input() lesson: string | null = null;
+  /** Abrir ou fechar uma lição muda o endereço; a Biblioteca devolve em `lesson`. */
+  @Output() lessonChange = new EventEmitter<{ concept: string | null; replace?: boolean }>();
   @Output() back = new EventEmitter<void>();
   @Output() question = new EventEmitter<string>();
   @Output() practice = new EventEmitter<PracticeRequest>();
@@ -54,18 +58,24 @@ export class CoreAreaComponent {
   maxEdition = computed(() => Math.max(1, ...(this.area()?.history.editions ?? []).map((e) => e.count)));
 
   ngOnInit() { void this.load(); }
+  ngOnChanges(changes: SimpleChanges) {
+    // Voltar/Avançar pode trocar a área com este componente aberto.
+    if (changes["slug"] && !changes["slug"].firstChange) {
+      this.area.set(null);
+      this.reading.set(null);
+      void this.load();
+    } else if (changes["lesson"] && !changes["lesson"].firstChange) this.showLesson();
+  }
 
   async load() {
     this.error.set("");
     try {
-      this.area.set(await requestJson<CoreArea>(`/api/core/${encodeURIComponent(this.slug)}`));
-      // Vindo de "Continuar de onde parou": abre direto a lição pedida.
-      const pending = this.resume.pendingLesson();
-      if (pending?.slug === this.slug) {
-        this.resume.pendingLesson.set(null);
-        const concept = this.area()!.concepts.find((c) => c.id === pending.concept && c.lesson);
-        if (concept) return this.read(concept);
-      }
+      const slug = this.slug;
+      const area = await requestJson<CoreArea>(`/api/core/${encodeURIComponent(slug)}`);
+      if (slug !== this.slug) return;
+      this.area.set(area);
+      // Endereço com lição (recarga, link ou "Continuar de onde parou"): abre direto nela.
+      if (this.lesson) return this.showLesson();
       afterNextRender(() => {
         window.scrollTo({ top: 0, behavior: "instant" });
         this.host.nativeElement.querySelector<HTMLElement>("#core-area-title")?.focus({ preventScroll: true });
@@ -138,14 +148,28 @@ export class CoreAreaComponent {
   }
 
   read(concept: CoreConcept) {
-    this.reading.set(concept);
-    const area = this.area();
-    if (area) this.resume.record({ kind: "lesson", slug: this.slug, concept: concept.id, title: concept.name, area: area.area });
+    if (concept.id !== this.lesson) this.lessonChange.emit({ concept: concept.id });
   }
 
   closeLesson() {
-    const id = this.reading()?.id;
-    this.reading.set(null);
+    this.lessonChange.emit({ concept: null });
+  }
+
+  /** Mostra a lição do endereço; um conceito sem lição corrige o endereço para a área. */
+  private showLesson() {
+    const area = this.area();
+    if (!area) return;
+    const concept = this.lesson ? area.concepts.find((c) => c.id === this.lesson && c.lesson) ?? null : null;
+    if (this.lesson && !concept) return this.lessonChange.emit({ concept: null, replace: true });
+    const previous = this.reading()?.id;
+    if (previous === concept?.id) return;
+    this.reading.set(concept);
+    if (concept) {
+      this.resume.record({ kind: "lesson", slug: this.slug, concept: concept.id, title: concept.name, area: area.area });
+      return;
+    }
+    // Voltou para a área: o foco vai para o botão da lição que estava aberta.
+    const id = previous;
     afterNextRender(() => {
       const button = this.host.nativeElement.querySelector<HTMLElement>(`[data-lesson="${id}"]`);
       button?.scrollIntoView({ block: "center", behavior: "instant" });
