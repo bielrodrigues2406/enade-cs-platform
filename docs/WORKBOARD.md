@@ -358,3 +358,5 @@ Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit 
 
 - **07/11/2026 · Claude · PR G (Novidades, NEWS-1):** migration 033 usada (`news_seen`). Texto em `data/news/news.json`, rotas `GET /api/news` e `POST /api/news/seen`, botão "Novidades" com a marca "Novo" no topo, cartão no início e diálogo com o Dudu `novidade` carregado sob demanda. O aviso automático é um cartão discreto que some em 10 s (não modal), só para quem já respondeu alguma questão e fora de questão, treino ou prova. Ver `docs/NEWS.md`. Próxima migration livre: 034.
 
+- **07/11/2026 · Claude · PR G (continuar de onde parou):** o início ganha "Continuar de onde parou" com a última questão aberta fora de treino ou a última lição lida, que reabre a área e a lição. Guardado só no navegador (`localStorage`), separado por conta ou visitante, sem migration; treinos e provas em andamento continuam vindo do servidor ("Em andamento"). E2E em `tests/browser/resume.spec.ts`.
+

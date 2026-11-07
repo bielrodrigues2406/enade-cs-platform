@@ -19,6 +19,7 @@ import { ProfileComponent } from "./profile.component";
 import { firstName, initials } from "./initials";
 import { EngagementService } from "./engagement.service";
 import { NewsService, type NewsDestination } from "./news.service";
+import { ResumeService } from "./resume.service";
 import { NewsDialogComponent } from "./news-dialog.component";
 import { requestJson } from "./api-request";
 import { ServiceNoticeComponent } from "./service-notice.component";
@@ -266,6 +267,12 @@ class App {
   private choice = inject(ChoiceService);
   readonly engagement = inject(EngagementService);
   readonly news = inject(NewsService);
+  readonly resume = inject(ResumeService);
+  /** "Continuar de onde parou" acompanha quem está na sessão: conta ou visitante deste navegador. */
+  private readonly resumeOwner = effect(() => {
+    const session = this.session();
+    this.resume.scope(session.mode === "account" ? `account:${session.email}` : "guest");
+  });
   private identityGeneration = 0;
   private identityTransition = 0;
   private requestNumber = 0;
@@ -417,6 +424,11 @@ class App {
       && !this.question() && !this.practiceAttemptId() && !this.examRunning()
       // No boot, a questão do endereço pode ainda não ter carregado.
       && !/^\/questoes\/./.test(location.pathname);
+  }
+  /** "Continuar de onde parou" numa lição: a Biblioteca abre a área e a lição. */
+  continueLesson(target: { slug: string; concept: string }) {
+    this.resume.pendingLesson.set(target);
+    this.openStudy("biblioteca");
   }
   /** Ação de uma novidade: abre a seção; "geradas" é o banco filtrado pelas questões geradas. */
   followNews(destination: NewsDestination) {
@@ -691,6 +703,7 @@ class App {
       const q = await this.api<Question>("questions/" + encodeURIComponent(id));
       if (request !== this.requestNumber) return;
       this.showQuestion(q, retry, request);
+      this.resume.record({ kind: "question", id: q.id, title: q.title });
     } catch (err) {
       if (request === this.requestNumber) this.error.set(this.message(err));
     } finally {

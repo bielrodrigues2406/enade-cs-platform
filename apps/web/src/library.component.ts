@@ -3,6 +3,7 @@ import { CoreMapComponent } from "./core-map.component";
 import { CoreAreaComponent } from "./core-area.component";
 import type { PracticeRequest } from "./practice-request";
 import { requestJson } from "./api-request";
+import { ResumeService } from "./resume.service";
 import { Component, ElementRef, EventEmitter, Output, afterNextRender, inject, Injector, signal } from "@angular/core";
 
 // Biblioteca (LIB-1): o núcleo por área (NUC-1) no topo e as fichas de uma
@@ -36,7 +37,13 @@ export class LibraryComponent {
   busy = signal(false);
   private retrySlug: string | null = null;
   retry() { return this.retrySlug ? this.read(this.retrySlug) : this.load(); }
-  ngOnInit() { void this.load(); }
+  private resume = inject(ResumeService);
+  ngOnInit() {
+    void this.load();
+    // "Continuar de onde parou" pede uma lição: a área abre e mostra a lição.
+    const pending = this.resume.pendingLesson();
+    if (pending) this.coreSlug.set(pending.slug);
+  }
   async load() {
     if (this.busy()) return;
     this.busy.set(true);
