@@ -68,7 +68,7 @@ Nenhuma dessas linhas autoriza framework genérico, microserviços, ranking gera
 
 ## 6. Sequência operacional e comercial
 
-1. **Agora:** começar POS-INV1/POS-IMP1 na trilha própria e preparar os dossiês das outras frentes em tarefas pequenas; um executor reserva cada tarefa antes de alterar arquivos.
+1. **Agora:** começar POS-INV1 e preparar POS-IMP1 conforme as fontes confirmadas, na trilha própria e preparar os dossiês das outras frentes em tarefas pequenas; um executor reserva cada tarefa antes de alterar arquivos.
 2. **Próxima entrega de POSCOMP:** inventário com situação por edição e primeiro lote de duas edições confirmadas. O lote de 20–50 itens é teste do processo; o objetivo de acervo continua sendo todas as edições disponíveis e conferidas.
 3. **Em paralelo, sem novos módulos:** coletar evidência de problemas e canais nas outras frentes; produzir parecer sobre dependências do código para exame/instituição e propostas pequenas. Aguardar o parecer de Claude não bloqueia POSCOMP.
 4. **Depois do primeiro aprendizado:** escolher a próxima frente para implementação com base em público acessível, especialista, fontes, custo e compromisso do comprador. As demais continuam preparadas, sem promessa de data de lançamento.
