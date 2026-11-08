@@ -205,7 +205,6 @@ Cada dossiê deve trazer evidência, público/comprador, fontes/condições de u
 | D15 | **Decidida por Gabriel em 30/10:** só fidelidade bloqueia publicação (recorte incompleto, número, gabarito ou alternativas errados, ilegível). Ressalva de conteúdo do próprio Inep vira nota visível ao estudante. Instâncias separadas de agentes conferem em paralelo, nunca quem extraiu nem quem explicou | Libera CNT-ALL; altera o publicador (PUB-A2) |
 | D16 | **Decidida por Gabriel em 30/10:** hospedagem no Render | Resolve D1 |
 | D17 | **Decidida por Gabriel em 03/11:** descartar VPS compartilhada + Caddy; operar no servidor institucional do câmpus IFSP durante novembro (`deploy/campus/` com Docker e Nginx do câmpus), com scripts documentados de atualização, backup, desligamento limpo ao fim do mês 11 e restauração integral para próximas equipes | Atualiza D16 e define DEP-4 |
-
 | D18 | **Confirmada por Gabriel após o PR #67:** POSCOMP aprovado para execução; preparar agora o panorama das outras frentes (ENEM/vestibulares, concursos TI, outros ENADE, Medicina e oferta para professores/cursinhos) | POS-INV1/POS-IMP1 seguem sem nova autorização comercial; demais frentes entram em preparação, não lançamento simultâneo |
 
 ## Diário (handoffs)
