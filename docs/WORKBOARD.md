@@ -18,8 +18,9 @@ Sem lote oficial conferido, R1 sai com conteúdo autoral identificado como tal. 
 
 | ID | Tarefa | Dono | Status | Depende de | Branch / PR | Arquivos principais |
 | --- | --- | --- | --- | --- | --- | --- |
-| PROD-EXP1 | Pesquisar mercado e planejar expansão POSCOMP, ENEM e verticais com professores | Codex | em revisão; proposta, sem implementação | pedido de Gabriel | [#67](https://github.com/bielrodrigues2406/enade-cs-platform/pull/67), `codex/docs-market-expansion` | PRODUCT-EXPANSION.md; perguntas para Claude |
-| EXP-QA1 | Conferir últimos PRs do Claude e fechar versão para teste local | Codex | em revisão; integração após CI e navegador | pedido de Gabriel | `codex/fix-experimental-readiness` | lições, regressão de navegação e roteiro local |
+| PROD-PAN1 | Consolidar panorama das outras frentes, analisar referências enviadas e registrar POSCOMP aprovado | Codex | panorama entregue junto ao merge após CI final; tarefas de execução separadas | pedido direto de Gabriel | [#68](https://github.com/bielrodrigues2406/enade-cs-platform/pull/68), `codex/docs-expansion-panorama` | PRODUCT-EXPANSION-PANORAMA.md, PRODUCT-EXPANSION.md e quadro |
+| PROD-EXP1 | Pesquisar mercado e planejar expansão POSCOMP, ENEM e verticais com professores | Codex | plano entregue no PR #67, merge `539e795`; POSCOMP aprovado depois por Gabriel | pedido de Gabriel | [#67](https://github.com/bielrodrigues2406/enade-cs-platform/pull/67), `codex/docs-market-expansion` | PRODUCT-EXPANSION.md; perguntas para Claude |
+| EXP-QA1 | Conferir últimos PRs do Claude e fechar versão para teste local | Codex | entregue no PR #65, merge `400b54c`; CI verde e 17 Chromium focados | pedido de Gabriel | [#65](https://github.com/bielrodrigues2406/enade-cs-platform/pull/65), `codex/fix-experimental-readiness` | lições, regressão de navegação e roteiro local |
 | AUD-C1 | Avaliar mudanças do Claude após PR #50: conteúdo, núcleo/lições, publicação, segurança e telas | Codex | revisão concluída; entrega junto ao merge após CI final; correções R1–R10 pendentes | pedido de Gabriel em 07/11 | [#61](https://github.com/bielrodrigues2406/enade-cs-platform/pull/61), `codex/review-claude-2026-11-07` | [relatório e prioridades](reviews/2026-11-07-claude-review.md), script/recibo de cálculos; aplicação intacta |
 | ERR-UX1 | Melhorar mensagens de erro e avisos de manutenção, preservando respostas e rascunhos | Codex | entregue junto ao merge do PR #50, condicionado às verificações finais | pedido de Gabriel durante EST-BASE1 | [#50](https://github.com/bielrodrigues2406/enade-cs-platform/pull/50), `codex/feat-service-messages` | HTTP frontend, aviso operacional, fallback do proxy e testes |
 | COORD-0 | Protocolo de colaboração, quadro e avaliação de design | Claude | entregue | — | [#7](https://github.com/bielrodrigues2406/enade-cs-platform/pull/7), `59425c0` | `docs/COLLABORATION.md`, `docs/WORKBOARD.md`, `docs/DESIGN-QUALITY.md`, `AGENTS.md` |
@@ -131,6 +132,23 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | PRT-1 | Exportar simulado para impressão (PDF) com folha de respostas | Treino no papel, como na prova | SIM-1 | depois de R1 |
 | GUI-1 | Guia por assunto das diretrizes de Computação, ligado às questões | Estudar o conceito, não só a questão | taxonomia revisada | incremento E |
 
+## Panorama de expansão
+
+**Decisão de Gabriel:** POSCOMP já deve seguir para execução. Preparar agora as demais frentes; elas não são lançamentos simultâneos nem dependem de esperar POSCOMP para começar pesquisa. [Panorama e análise das referências enviadas](PRODUCT-EXPANSION-PANORAMA.md); [pesquisa de mercado e modelo de negócio](PRODUCT-EXPANSION.md). O panorama foi entregue; as tarefas abaixo registram próximos trabalhos, ainda não executados. Uma tarefa, um dono e uma reserva antes de editar/importar. Transferências para Claude devem ser registradas aqui.
+
+| ID | Frente / próxima entrega concreta | Dono | Estado | Dependência / critério |
+| --- | --- | --- | --- | --- |
+| POS-INV1 | POSCOMP: inventário de todas as edições disponíveis, prova/gabarito/retificações, fonte, hash e situação; distinguir ano sem aplicação de documento não localizado | Codex | **pronta para execução; aprovada por Gabriel** | não depende de nova validação comercial; não prometer completude sem conferir fontes |
+| POS-IMP1 | POSCOMP: adaptar o mínimo para formato/origem/taxonomia e publicar primeiro lote conferido de duas edições; continuar por ano até cobrir as disponíveis | Codex | planejada; execução aprovada | POS-INV1; preservar tentativas/IDs e ENADE; registrar próxima etapa por lote, sem misturar provas |
+| PAN-TI1 | Concursos TI: dossiê com banca/cargo, duas provas candidatas, programa, formatos e pontuação; concorrentes e canal de usuários | Codex | pronta para preparação | fontes e regras da edição conferidas; nenhum acervo novo publicado por este plano |
+| PAN-ENADE1 | Outros ENADE: escolher curso candidato, matriz/edições, lacunas e possibilidade de professor parceiro fora ou dentro do IFSP | Codex | pronta para preparação | público e tarefa explícitos; instituição não é restrição; não declarar parceria antes de contato |
+| PAN-ENEM1 | ENEM/vestibulares: dossiê da matriz, cadernos/idiomas, disciplina piloto, gerador de lista e oferta para aluno/professor | Codex | pronta para preparação | origem e variantes; redação e TRI são contratos próprios, fora do primeiro lote de objetivas |
+| PAN-MED1 | Medicina: delimitar ENAMED/ENADE Medicina, ENARE/residência e Revalida; fontes, atualização e curadoria especializada possível | Codex | pronta para preparação | exames separados; não atribuir revisão médica sem ocorrência real; confirmar regras e edição |
+| PAN-PROF1 | Professores/cursinhos: mapear montagem de atividade, material próprio/compartilhado, acompanhamento e comprador; avaliar oferta sob marca do parceiro | Codex | pronta para preparação | parceiros ainda não contatados; autorização entre organizações, licença e suporte antes de oferta comercial |
+| PAN-CORE1 | Parecer técnico para as frentes: dependências de ENADE/IFSP, menor adaptação POSCOMP e contratos de origem/caderno/questão/pontuação/turma | Claude | proposta de entrega; **sem reserva de execução recebida** | responder no quadro com arquivos e evidência; não bloqueia POS-INV1 e não autoriza refatoração geral |
+
+Cada dossiê deve trazer evidência, público/comprador, fontes/condições de uso, formato/taxonomia, amostra candidata, especialista/canal possível, custos a medir e próximo experimento. O estudo das capturas de Pazzei/Ferretto/Resmedica/MedQ e do Reddit está no panorama; recursos aparentes não equivalem a fluxo atual testado. **Fora do escopo automático:** copiar menus, gráficos de radar sem amostra, tutor universal, vídeos de todas as questões, marketplace e forks por cliente.
+
 ## Reservas de migration
 
 | Número | Tarefa | Dono |
@@ -163,7 +181,8 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | 031 | GEN-1 — questões geradas por IA (review_origin GENERATED, metadados) | Claude |
 | 032 | GEN-4 — formatos e estímulos das questões geradas (`ITENS3`/`ITENS4`, ordem, cálculo…) | Claude |
 | 033 | NEWS-1 — novidades vistas por identidade (usada) | Claude |
-| 034 | próxima livre — reserve aqui antes do primeiro commit | |
+| 034 | origem do treino (`practice_source`), integrada na main pelo PR #66 | Claude |
+| 035 | próxima livre — conferir branches e reservar antes do primeiro commit | |
 
 ## Decisões pendentes (Gabriel)
 
@@ -186,10 +205,13 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 | D15 | **Decidida por Gabriel em 30/10:** só fidelidade bloqueia publicação (recorte incompleto, número, gabarito ou alternativas errados, ilegível). Ressalva de conteúdo do próprio Inep vira nota visível ao estudante. Instâncias separadas de agentes conferem em paralelo, nunca quem extraiu nem quem explicou | Libera CNT-ALL; altera o publicador (PUB-A2) |
 | D16 | **Decidida por Gabriel em 30/10:** hospedagem no Render | Resolve D1 |
 | D17 | **Decidida por Gabriel em 03/11:** descartar VPS compartilhada + Caddy; operar no servidor institucional do câmpus IFSP durante novembro (`deploy/campus/` com Docker e Nginx do câmpus), com scripts documentados de atualização, backup, desligamento limpo ao fim do mês 11 e restauração integral para próximas equipes | Atualiza D16 e define DEP-4 |
+| D18 | **Confirmada por Gabriel após o PR #67:** POSCOMP aprovado para execução; preparar agora o panorama das outras frentes (ENEM/vestibulares, concursos TI, outros ENADE, Medicina e oferta para professores/cursinhos) | POS-INV1/POS-IMP1 seguem sem nova autorização comercial; demais frentes entram em preparação, não lançamento simultâneo |
 
 ## Diário (handoffs)
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
+
+- **Codex · PROD-PAN1 · PR #68:** Gabriel confirmou POSCOMP aprovado para execução (D18) e preparação imediata das outras frentes. [Panorama](PRODUCT-EXPANSION-PANORAMA.md) analisa as sete capturas e fontes públicas (Pazzei limitado ao título/captura; navegador falhou TLS), com limites de evidência do Reddit, métricas e custo de IA. POS-INV1/POS-IMP1 separados da pesquisa comercial; PAN-TI1/ENADE1/ENEM1/MED1/PROF1 prontos para preparação; PAN-CORE1 proposto a Claude, ainda sem resposta/reserva. Revisão independente aprovada; links locais e diff conferidos. Commits de conteúdo `9305cf2` e organização `5d3c47d` enviados; integração autorizada condicionada à CI final, com commits preservados. PRs #65/#67 marcados entregues e reserva 034 alinhada ao arquivo já integrado (não é conferência do banco). Nenhum arquivo da aplicação, questão, migration ou deploy alterado; inventário POSCOMP não iniciado por esta entrega documental.
 
 - **06/11/2026 · Claude → Codex · GEN-1 questões geradas por IA** · Autorizado por Gabriel (sem segundo agente). Migration 031 (`review_origin` GENERATED, tabela `generated_question`), `generated-publication.ts`, `npm run publish:generated` e publicação no `bootstrap-content`. 120 questões em `data/generated-questions/` (16 áreas + FG; espelho, lacuna e tema quente; itens e asserção-razão; explicação que comenta cada alternativa). Separadas das oficiais: fora do banco padrão (filtro `origin=generated`), do treino, das provas e do desempenho; o núcleo leva a elas. Rótulo de origem centralizado em `origin-label.ts`; enunciado em texto aceita blocos de código entre ```. Conferência por nova resolução com contas, SQL e código executados (registrado no campo `check`). Ver `docs/GENERATED-QUESTIONS.md`. Migration livre: 032.
 - **06/11/2026 · Claude → Codex · NUC-1 núcleo por área** · Pedido de Gabriel ("bora"). 16 áreas + Formação Geral em `data/core-concepts/` (conceitos, fatos que cortam alternativas, pares, pistas do enunciado e pegadinhas nos 7 padrões). Ligação reproduzível às 206 objetivas oficiais do inventário (teste garante 100%). Migration 030 (autoavaliação), `/api/core` com confiança (autoavaliação 40%, acerto 40%, flashcards 20%) e mapa de confiança + página da área na Biblioteca. Corrigido: abrir uma questão a partir de uma tela de estudo agora sai da tela de estudo (`showQuestion`). Conteúdo escrito por IA, sem revisão humana. Detalhes e próximos incrementos (treino de eliminação, questões geradas por IA autorizadas por Gabriel, temas quentes, plano até a prova) em `docs/CORE-CONCEPTS.md`. **Codex:** o núcleo usa os rótulos `catalogArea/catalogSubject` do seu inventário; ao trocar a taxonomia, mantenha o teste de cobertura de `tests/core-concepts.test.ts` verde. Migration livre: 031.

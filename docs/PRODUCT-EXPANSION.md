@@ -4,6 +4,8 @@ Proposta por pedido de Gabriel. Base técnica observada: main `75828bb`, com PR 
 
 ## 1. Parecer
 
+**Decisão posterior de Gabriel:** POSCOMP está aprovado para execução. Preparar agora o panorama das outras frentes, conforme [plano complementar](PRODUCT-EXPANSION-PANORAMA.md) e tarefas do WORKBOARD. As hipóteses comerciais abaixo permanecem a validar, mas não bloqueiam começar POSCOMP.
+
 É tecnicamente viável reaproveitar a plataforma para POSCOMP, outros ENADE, ENEM e concursos. A hipótese de mercado desocupado não se confirma: banco de questões, professores, comentários, simulados, teoria e revisão já são produtos consolidados. Design bom e importação por PDF ajudam a operar, mas não demonstram demanda, disposição de pagar ou vantagem defensável.
 
 A melhor próxima hipótese é **preparação em Computação, começando por POSCOMP**, aproveitando repertório, acervo e possíveis professores. Em paralelo, testar se um professor ou cursinho pequeno paga para usar o sistema com seu próprio conteúdo. ENEM e Medicina ficam como pilotos posteriores, dependentes de canal de distribuição e especialista, não como lançamento horizontal simultâneo.
@@ -28,7 +30,7 @@ Fontes oficiais consultadas: [SBC/POSCOMP](https://www.sbc.org.br/poscomp/), [In
 
 | Vertical | Reaproveitamento | Trabalho novo principal | Recomendação |
 | --- | --- | --- | --- |
-| POSCOMP | alto em conteúdo e público de Computação | inventário anual, importador, taxonomia e formato próprios | próximo piloto de produto |
+| POSCOMP | alto em conteúdo e público de Computação | inventário anual, importador, taxonomia e formato próprios | execução aprovada; inventário e adaptação em trilha própria |
 | Concursos de TI | alto em matérias, menor no contexto de prova | bancas, editais, certo/errado, penalidades e legislação versionada | próximo adjacente se houver demanda |
 | Outros ENADE | alto no motor, menor no conteúdo | especialistas de cada curso, matrizes/edições e explicações | parceria por curso, sem prometer todos |
 | ENEM | alto em funções básicas; baixo em conteúdo e distribuição atual | competências/habilidades, idiomas, redação e interpretação de notas | testar com professor/cursinho parceiro |
