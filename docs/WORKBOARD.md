@@ -18,6 +18,7 @@ Sem lote oficial conferido, R1 sai com conteúdo autoral identificado como tal. 
 
 | ID | Tarefa | Dono | Status | Depende de | Branch / PR | Arquivos principais |
 | --- | --- | --- | --- | --- | --- | --- |
+| PROD-EXP1 | Pesquisar mercado e planejar expansão POSCOMP, ENEM e verticais com professores | Codex | em andamento; proposta, sem implementação | pedido de Gabriel | `codex/docs-market-expansion` | PRODUCT-EXPANSION.md; perguntas para Claude |
 | EXP-QA1 | Conferir últimos PRs do Claude e fechar versão para teste local | Codex | em revisão; integração após CI e navegador | pedido de Gabriel | `codex/fix-experimental-readiness` | lições, regressão de navegação e roteiro local |
 | AUD-C1 | Avaliar mudanças do Claude após PR #50: conteúdo, núcleo/lições, publicação, segurança e telas | Codex | revisão concluída; entrega junto ao merge após CI final; correções R1–R10 pendentes | pedido de Gabriel em 07/11 | [#61](https://github.com/bielrodrigues2406/enade-cs-platform/pull/61), `codex/review-claude-2026-11-07` | [relatório e prioridades](reviews/2026-11-07-claude-review.md), script/recibo de cálculos; aplicação intacta |
 | ERR-UX1 | Melhorar mensagens de erro e avisos de manutenção, preservando respostas e rascunhos | Codex | entregue junto ao merge do PR #50, condicionado às verificações finais | pedido de Gabriel durante EST-BASE1 | [#50](https://github.com/bielrodrigues2406/enade-cs-platform/pull/50), `codex/feat-service-messages` | HTTP frontend, aviso operacional, fallback do proxy e testes |
