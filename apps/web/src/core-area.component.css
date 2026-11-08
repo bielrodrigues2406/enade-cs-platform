@@ -68,51 +68,49 @@
 .core-cover figcaption { margin-top: var(--space-2); font-size: var(--text-xs); color: var(--color-text-muted); }
 .core-read { align-self: flex-start; min-height: 44px; font-weight: 600; }
 
-/* Conceitos: cartões com a autoavaliação em três botões. */
-.core-concepts {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
-  gap: var(--space-3);
-  margin: var(--space-4) 0 0;
-  padding: 0;
-  list-style: none;
-}
-.core-concept {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-5);
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  background: var(--color-surface);
-  transition: border-color 250ms ease-out;
-  animation: core-rise 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--delay, 0) * 30ms);
-}
-.core-concept h3 { margin: 0; font-size: 1.05rem; }
-.core-concept p { margin: 0; line-height: 1.55; }
-.core-example { font-size: var(--text-sm); color: var(--color-text-muted); }
-.core-example strong { font-weight: 600; color: var(--color-text); }
-.core-rating { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: auto; padding-top: var(--space-2); }
+/* Conceitos (08/11): lista numerada em linhas, como um índice de caderno. Exemplo e questões abrem sob a linha. */
+.core-concepts { margin: var(--space-4) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--color-border); }
+.core-concept { border-bottom: 1px solid var(--color-border); animation: core-rise 420ms cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--delay, 0) * 24ms); }
+.core-concept-row { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr) auto; gap: var(--space-2) var(--space-4); align-items: start; padding: var(--space-4) 0 var(--space-2); }
+.core-concept-n { padding-top: 0.2em; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent); }
+.core-concept-main h3 { margin: 0; font-size: 1.05rem; line-height: 1.3; }
+.core-concept-def { max-width: 64ch; margin: var(--space-1) 0 0; line-height: 1.5; color: var(--color-text-muted); }
+.core-concept-meta { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); margin: var(--space-2) 0 0; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.02em; color: var(--color-text-muted); }
+.core-hits { color: var(--color-accent); font-weight: 600; }
+.core-concept-actions { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2); }
+/* Autoavaliação como controle segmentado: um grupo só, três partes. */
+.core-rating { display: inline-flex; border: 1px solid var(--color-border-control); border-radius: 999px; overflow: hidden; background: var(--color-surface); }
 .core-level {
-  min-height: 44px;
+  min-height: 36px;
   margin: 0;
-  padding: 6px 8px;
-  border: 1px solid var(--color-border-control);
-  border-radius: 10px;
-  background: var(--color-surface);
+  padding: 4px 12px;
+  border: 0;
+  border-right: 1px solid var(--color-border);
+  border-radius: 0;
+  background: transparent;
   color: var(--color-text);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   font-weight: 500;
-  transition: background-color 180ms ease-out, border-color 180ms ease-out, transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+  transition: background-color 180ms ease-out, color 180ms ease-out;
 }
+.core-level:last-child { border-right: 0; }
 .core-level:hover:not(:disabled) { background: var(--color-accent-soft); }
-.core-level[aria-checked="true"] { transform: scale(1.03); }
-.level-0[aria-checked="true"] { border-color: var(--color-danger-text); background: color-mix(in srgb, var(--color-danger-text) 12%, var(--color-surface)); color: var(--color-danger-text); }
-.level-1[aria-checked="true"] { border-color: var(--color-warning-border); background: var(--color-warning-bg); color: var(--color-warning-text); }
-.level-2[aria-checked="true"] { border-color: var(--color-success-text); background: color-mix(in srgb, var(--color-success-text) 12%, var(--color-surface)); color: var(--color-success-text); }
-.core-questions summary { cursor: pointer; font-size: var(--text-sm); font-weight: 600; color: var(--color-accent); }
-.core-questions ul { display: grid; gap: 2px; margin: var(--space-2) 0 0; padding: 0; list-style: none; }
+.level-0[aria-checked="true"] { background: color-mix(in srgb, var(--color-danger-text) 14%, var(--color-surface)); color: var(--color-danger-text); font-weight: 700; }
+.level-1[aria-checked="true"] { background: var(--color-warning-bg); color: var(--color-warning-text); font-weight: 700; }
+.level-2[aria-checked="true"] { background: color-mix(in srgb, var(--color-success-text) 14%, var(--color-surface)); color: var(--color-success-text); font-weight: 700; }
+/* Marca lateral com o que a pessoa disse saber. */
+.core-concept[data-level="0"] .core-concept-n, .core-concept[data-level="1"] .core-concept-n, .core-concept[data-level="2"] .core-concept-n { font-weight: 700; }
+.core-concept[data-level="0"] .core-concept-n { color: var(--color-danger-text); }
+.core-concept[data-level="1"] .core-concept-n { color: var(--color-warning-text); }
+.core-concept[data-level="2"] .core-concept-n { color: var(--color-success-text); }
+.core-concept-more { margin: 0 0 var(--space-3) calc(2.25rem + var(--space-4)); }
+.core-concept-more summary { min-height: 32px; cursor: pointer; font-size: var(--text-sm); font-weight: 600; color: var(--color-accent); }
+.core-concept-more[open] { padding-bottom: var(--space-2); }
+.core-example { max-width: 64ch; margin: var(--space-2) 0; font-size: var(--text-sm); line-height: 1.55; color: var(--color-text-muted); }
+.core-example strong { font-weight: 600; color: var(--color-text); }
+.core-more-title { margin: var(--space-3) 0 var(--space-1); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.core-questions { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
 .core-questions .text-button { text-align: left; font-size: var(--text-sm); }
 .core-questions b { margin-right: var(--space-1); font-variant-numeric: tabular-nums; }
 .core-unpublished { display: block; padding: 6px 0; font-size: var(--text-sm); }
@@ -155,7 +153,12 @@
   .core-confidence dl { flex: 1; }
 }
 @media (max-width: 380px) {
-  .core-rating { grid-template-columns: 1fr; }
+  .core-concept-row { grid-template-columns: 1.75rem minmax(0, 1fr); }
+  .core-concept-actions { grid-column: 1 / -1; align-items: stretch; }
+  .core-rating { display: flex; width: 100%; }
+  .core-level { flex: 1; padding: 4px 6px; white-space: normal; line-height: 1.2; }
+  .core-read { align-self: flex-start; }
+  .core-concept-more { margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .core-concept, .core-edition-bar span { animation: none; }

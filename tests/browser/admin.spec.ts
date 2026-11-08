@@ -32,7 +32,7 @@ async function register(page: Page, address: string, extra: { name?: string; enr
   await page.goto("/");
   await page.getByRole("button", { name: "Criar conta" }).first().click();
   await page.getByLabel("Nome").fill(extra.name ?? "Pessoa Teste");
-  if (extra.enrollment) await page.getByLabel("Prontuário IFSP").fill(extra.enrollment);
+  if (extra.enrollment) await page.getByLabel("Matrícula").fill(extra.enrollment);
   await page.getByLabel("E-mail").fill(address);
   await page.getByLabel("Senha", { exact: true }).fill(password);
   await page.locator("form").getByRole("button", { name: "Criar conta" }).click();
@@ -140,10 +140,10 @@ test("an admin registers a professor account, who then updates profile and passw
   await openProfile(professor);
   await expect(professor.getByRole("heading", { name: "Meu perfil", level: 1 })).toBeVisible();
   await expect(professor.getByLabel("Nome")).toHaveValue("Prof Manual TEST ONLY");
-  await professor.getByLabel("Prontuário IFSP").fill("pe3007777");
+  await professor.getByLabel("Matrícula").fill("pe3007777");
   await professor.getByRole("button", { name: "Salvar dados" }).click();
   await expect(professor.getByText("Dados salvos.")).toBeVisible();
-  await expect(professor.getByLabel("Prontuário IFSP")).toHaveValue("PE3007777");
+  await expect(professor.getByLabel("Matrícula")).toHaveValue("PE3007777");
 
   const newPassword = "Nova senha girassol 2026!";
   await professor.getByLabel("Senha atual", { exact: true }).fill("errada errada 1");
@@ -204,7 +204,7 @@ test("account and admin screens reflow without horizontal scrolling", async ({ p
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
     await page.getByRole("button", { name: "Criar conta" }).first().click();
-    await expect(page.getByLabel("Prontuário IFSP")).toBeVisible();
+    await expect(page.getByLabel("Matrícula")).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `largura ${width}`).toBe(true);
   }
 });
@@ -240,7 +240,7 @@ test("an admin edits student profile and email, resets password, and revokes act
   // Atualiza nome, prontuário e e-mail (exige senha do admin).
   const profileForm = dialog.locator("form").first();
   await profileForm.getByLabel("Nome").fill("Estudante Corrigido TEST ONLY");
-  await profileForm.getByLabel(/Prontuário IFSP/).fill("pe3022222");
+  await profileForm.getByLabel(/Matrícula/).fill("pe3022222");
   await profileForm.getByLabel("E-mail").fill(studentUpdatedEmail);
   await expect(profileForm.getByLabel("Sua senha de administrador")).toBeVisible();
   await profileForm.getByLabel("Sua senha de administrador").fill("senha errada 123");

@@ -21,7 +21,7 @@ async function call<T>(path: string, method: string, body?: unknown): Promise<T>
 }
 
 /**
- * Meu perfil: a pessoa corrige nome, prontuário e e-mail e troca a senha.
+ * Meu perfil: a pessoa corrige nome, matrícula e e-mail e troca a senha.
  * Mudar o e-mail ou a senha pede a senha atual; trocar a senha encerra as
  * sessões dos outros aparelhos.
  */
@@ -108,7 +108,7 @@ export class ProfileComponent {
   }
   enrollmentError() {
     const value = this.enrollment.trim().toUpperCase();
-    return value && !ENROLLMENT.test(value) ? "Use o formato do prontuário IFSP, por exemplo PE3012345." : "";
+    return value && !ENROLLMENT.test(value) ? "Use duas letras e os números da matrícula, por exemplo PE3012345." : "";
   }
   memberSince() {
     const created = this.loaded()?.createdAt;

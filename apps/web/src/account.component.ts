@@ -55,7 +55,7 @@ export class AccountComponent {
   enrollmentError() {
     const value = this.enrollment.trim().toUpperCase();
     return value && !/^[A-Z]{2}[0-9]{6,8}X?$/.test(value)
-      ? "Use o formato do prontuário IFSP, por exemplo PE3012345."
+      ? "Use duas letras e os números da matrícula, por exemplo PE3012345."
       : "";
   }
   submit(form: NgForm) {

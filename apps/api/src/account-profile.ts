@@ -7,7 +7,7 @@ import { hashPassword, verifyPassword } from "./password.js";
 import { AuthThrottle, credentials, emailAddress, profile } from "./auth.js";
 import { logActivity, recordActivity, requestIp } from "./activity.js";
 
-// Meu perfil: a própria pessoa vê e altera nome, prontuário e e-mail e troca a
+// Meu perfil: a própria pessoa vê e altera nome, matrícula e e-mail e troca a
 // senha. E-mail e senha exigem a senha atual; trocar a senha encerra as outras
 // sessões da conta.
 
@@ -36,8 +36,8 @@ export class AccountProfileController {
     )).rows[0];
   }
 
-  // Definir prontuário pela primeira vez é livre; alterar um prontuário já salvo
-  // ou trocar o e-mail exige a senha atual (evita varredura de prontuários alheios).
+  // Definir matrícula pela primeira vez é livre; alterar uma matrícula já salva
+  // ou trocar o e-mail exige a senha atual (evita varredura de matrículas alheias).
   @Put("profile") async update(@Req() req: any, @Res({ passthrough: true }) res: any, @Body() body: any) {
     const user = await requireAccount(req);
     const current = (
@@ -67,7 +67,7 @@ export class AccountProfileController {
     try {
       await client.query("BEGIN");
       if (enrollment && (await client.query("SELECT 1 FROM account WHERE enrollment=$1 AND identity_id<>$2", [enrollment, user.id])).rowCount)
-        fail("Esse prontuário já está ligado a outra conta.", 409);
+        fail("Essa matrícula já está ligada a outra conta.", 409);
       if (changingEmail && (await client.query("SELECT 1 FROM account WHERE email=$1 AND identity_id<>$2", [email, user.id])).rowCount)
         fail("Esse e-mail já é de outra conta.", 409);
       await client.query("UPDATE account SET display_name=$2,enrollment=$3,email=$4 WHERE identity_id=$1", [user.id, name, enrollment, email]);
@@ -78,13 +78,13 @@ export class AccountProfileController {
             action: "PROFILE_UPDATED",
             actorId: user.id,
             subject: email,
-            detail: changingExistingEnrollment ? `Prontuário: ${current.enrollment} -> ${enrollment ?? "removido"}` : null,
+            detail: changingExistingEnrollment ? `Matrícula: ${current.enrollment} -> ${enrollment ?? "removido"}` : null,
           });
       await client.query("COMMIT");
       return { email, name, enrollment };
     } catch (error: any) {
       await client.query("ROLLBACK");
-      if (error?.code === "23505") fail("Esse e-mail ou prontuário já está ligado a outra conta.", 409);
+      if (error?.code === "23505") fail("Esse e-mail ou matrícula já está em uso por outra conta.", 409);
       throw error;
     } finally {
       client.release();
@@ -97,7 +97,7 @@ export class AccountProfileController {
     await checkPassword(req, user.id, body?.currentPassword);
     this.throttle.refund(req, user.email!);
     const { password } = credentials({ email: user.email, password: body?.newPassword });
-    // Nome e prontuário guardados também valem, como no cadastro (revisão do Codex, R8).
+    // Nome e matrícula guardados também valem, como no cadastro (revisão do Codex, R8).
     requireNewPassword(password, await passwordOwnerOf(db, user.id));
     const encoded = await hashPassword(password);
     const client = await db.connect();
