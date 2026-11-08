@@ -28,18 +28,17 @@ test.afterAll(async () => {
   await pool.end();
 });
 
-async function register(page: Page, address: string, extra: { name?: string; enrollment?: string } = {}) {
+async function register(page: Page, address: string, extra: { name?: string } = {}) {
   await page.goto("/");
   await page.getByRole("button", { name: "Criar conta" }).first().click();
   await page.getByLabel("Nome").fill(extra.name ?? "Pessoa Teste");
-  if (extra.enrollment) await page.getByLabel("Matrícula").fill(extra.enrollment);
   await page.getByLabel("E-mail").fill(address);
   await page.getByLabel("Senha", { exact: true }).fill(password);
   await page.locator("form").getByRole("button", { name: "Criar conta" }).click();
   await expect(page.getByRole("button", { name: `Abrir conta, ${extra.name ?? "Pessoa Teste"}` })).toBeVisible();
 }
 
-test("sign-up takes name and enrollment, and an admin authorizes a professor", async ({ page, browser }) => {
+test("sign-up takes a name without enrollment, and an admin authorizes a professor", async ({ page, browser }) => {
   const adminEmail = email("admin");
   await register(page, adminEmail, { name: "Admin TEST ONLY" });
   await pool.query("INSERT INTO account_role(identity_id,role) SELECT identity_id,'ADMIN' FROM account WHERE email=$1", [adminEmail]);
@@ -71,29 +70,28 @@ test("sign-up takes name and enrollment, and an admin authorizes a professor", a
   await expect(page.getByRole("status")).toContainText("ainda não tem conta");
   await expect(page.getByRole("region", { name: "Autorizações aguardando cadastro" })).toContainText(professorEmail);
 
-  // A pessoa se cadastra com o prontuário; o papel só vale depois da confirmação.
+  // A pessoa se cadastra; o papel só vale depois da confirmação.
   const other = await browser.newContext();
   const professor = await other.newPage();
-  await register(professor, professorEmail, { name: "Prof TEST ONLY", enrollment: "pe3009999" });
+  await register(professor, professorEmail, { name: "Prof TEST ONLY" });
   await other.close();
   await page.reload();
   await navigateTo(page, "Administração");
   const claims = page.getByRole("region", { name: "Cadastros aguardando sua confirmação" });
   await expect(claims).toContainText("Prof TEST ONLY");
-  await expect(claims).toContainText("PE3009999");
   await claims.getByRole("button", { name: "Confirmar" }).click();
   await expect(page.getByRole("status")).toContainText("agora tem o papel Professor");
   const stored = (await pool.query(
     `SELECT a.enrollment,r.role FROM account a JOIN account_role r ON r.identity_id=a.identity_id WHERE a.email=$1`,
     [professorEmail],
   )).rows;
-  expect(stored).toEqual([{ enrollment: "PE3009999", role: "PROFESSOR" }]);
+  // O cadastro não pede matrícula desde 08/11.
+  expect(stored).toEqual([{ enrollment: null, role: "PROFESSOR" }]);
 
   await page.getByLabel("Buscar contas").fill(professorEmail);
   await page.getByRole("button", { name: "Buscar" }).click();
   const row = page.getByRole("row", { name: new RegExp(professorEmail) });
   await expect(row).toContainText("Professor");
-  await expect(row).toContainText("PE3009999");
   await row.getByRole("button", { name: `Remover papel de professor de ${professorEmail}` }).click();
   await expect(page.getByRole("status")).toContainText("removido");
   await expect(row).toContainText("Aluno");
@@ -140,10 +138,7 @@ test("an admin registers a professor account, who then updates profile and passw
   await openProfile(professor);
   await expect(professor.getByRole("heading", { name: "Meu perfil", level: 1 })).toBeVisible();
   await expect(professor.getByLabel("Nome")).toHaveValue("Prof Manual TEST ONLY");
-  await professor.getByLabel("Matrícula").fill("pe3007777");
-  await professor.getByRole("button", { name: "Salvar dados" }).click();
-  await expect(professor.getByText("Dados salvos.")).toBeVisible();
-  await expect(professor.getByLabel("Matrícula")).toHaveValue("PE3007777");
+  await expect(professor.getByLabel("Matrícula")).toHaveCount(0);
 
   const newPassword = "Nova senha girassol 2026!";
   await professor.getByLabel("Senha atual", { exact: true }).fill("errada errada 1");
@@ -204,7 +199,8 @@ test("account and admin screens reflow without horizontal scrolling", async ({ p
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
     await page.getByRole("button", { name: "Criar conta" }).first().click();
-    await expect(page.getByLabel("Matrícula")).toBeVisible();
+    await expect(page.getByLabel("Nome")).toBeVisible();
+    await expect(page.getByLabel("Matrícula")).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `largura ${width}`).toBe(true);
   }
 });
@@ -218,7 +214,7 @@ test("an admin edits student profile and email, resets password, and revokes act
   const studentUpdatedEmail = email("aluno-novo");
   const studentCtx = await browser.newContext();
   const studentPage = await studentCtx.newPage();
-  await register(studentPage, studentInitialEmail, { name: "Estudante Inicial TEST ONLY", enrollment: "pe3011111" });
+  await register(studentPage, studentInitialEmail, { name: "Estudante Inicial TEST ONLY" });
 
   await page.reload();
   await navigateTo(page, "Administração");
@@ -237,10 +233,9 @@ test("an admin edits student profile and email, resets password, and revokes act
   }
   await page.setViewportSize({ width: 1280, height: 900 });
 
-  // Atualiza nome, prontuário e e-mail (exige senha do admin).
+  // Atualiza nome e e-mail (exige senha do admin).
   const profileForm = dialog.locator("form").first();
   await profileForm.getByLabel("Nome").fill("Estudante Corrigido TEST ONLY");
-  await profileForm.getByLabel(/Matrícula/).fill("pe3022222");
   await profileForm.getByLabel("E-mail").fill(studentUpdatedEmail);
   await expect(profileForm.getByLabel("Sua senha de administrador")).toBeVisible();
   await profileForm.getByLabel("Sua senha de administrador").fill("senha errada 123");
@@ -257,7 +252,6 @@ test("an admin edits student profile and email, resets password, and revokes act
   await page.getByRole("button", { name: "Buscar" }).click();
   const updatedRow = page.getByRole("row", { name: new RegExp(studentUpdatedEmail) });
   await expect(updatedRow).toContainText("Estudante Corrigido TEST ONLY");
-  await expect(updatedRow).toContainText("PE3022222");
 
   // Redefine a senha e encerra a sessão aberta da estudante.
   await updatedRow.getByRole("button", { name: `Gerenciar conta de ${studentUpdatedEmail}` }).click();

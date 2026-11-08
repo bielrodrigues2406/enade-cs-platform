@@ -44,7 +44,6 @@
               <p id="new-account-name-error" class="field-error" role="alert">{{ accountNameError() }}</p>
             }
           </div>
-          <div><label for="new-account-enrollment">Matrícula <span class="optional">opcional</span></label><input id="new-account-enrollment" name="enrollment" maxlength="12" [(ngModel)]="newAccount.enrollment" placeholder="PE3012345" autocapitalize="characters" spellcheck="false" autocomplete="off" /></div>
           <div><label for="new-account-email">E-mail</label><input id="new-account-email" name="email" type="email" maxlength="254" [(ngModel)]="newAccount.email" placeholder="nome@exemplo.com" required autocomplete="off" /></div>
           <div><label for="new-account-role">Papel</label>
             <select id="new-account-role" name="role" [(ngModel)]="newAccount.role">
@@ -110,11 +109,11 @@
   @if (claimed().length) {
     <section class="admin-claims" aria-labelledby="admin-claims">
       <h2 id="admin-claims">Cadastros aguardando sua confirmação</h2>
-      <p class="muted">O e-mail não é confirmado pelo sistema. Confira se o nome e a matrícula são da pessoa que você autorizou antes de confirmar.</p>
+      <p class="muted">O e-mail não é confirmado pelo sistema. Confira se o nome e o e-mail são da pessoa que você autorizou antes de confirmar.</p>
       <ul class="admin-pending">
         @for (invitation of claimed(); track invitation.email + invitation.role) {
           <li>
-            <span><strong>{{ invitation.claimedName ?? "Sem nome" }}</strong> · {{ invitation.claimedEnrollment ?? "sem matrícula" }}</span>
+            <span><strong>{{ invitation.claimedName ?? "Sem nome" }}</strong></span>
             <span>{{ invitation.email }}</span>
             <span class="admin-role">{{ roleLabel[invitation.role] }}</span>
             <span class="muted">cadastro em {{ date(invitation.claimedAt!) }}</span>
@@ -162,7 +161,7 @@
           name="search"
           [(ngModel)]="search"
           maxlength="120"
-          placeholder="Nome, e-mail ou matrícula"
+          placeholder="Nome ou e-mail"
         />
         <button type="submit" class="outline">Buscar</button>
       </form>
@@ -175,7 +174,6 @@
           <thead>
             <tr>
               <th scope="col">Pessoa</th>
-              <th scope="col">Matrícula</th>
               <th scope="col">Papéis</th>
               <th scope="col">Respostas</th>
               <th scope="col">Desde</th>
@@ -189,7 +187,6 @@
                   <strong>{{ user.name || "Sem nome" }}</strong>
                   <span class="admin-email">{{ user.email }}</span>
                 </td>
-                <td>{{ user.enrollment || "—" }}</td>
                 <td>
                   @for (role of user.roles; track role) {
                     <span class="admin-role">{{ roleLabel[role] }}</span>
@@ -282,7 +279,7 @@
           <form class="admin-manage-section" (ngSubmit)="saveManagedProfile(manageDialog)" aria-labelledby="manage-profile-title" novalidate>
             <h3 id="manage-profile-title">Dados cadastrais</h3>
             <p class="admin-manage-note">
-              Corrija nome, matrícula ou e-mail mantendo todo o histórico de estudo da conta.
+              Corrija nome ou e-mail mantendo todo o histórico de estudo da conta.
             </p>
             <fieldset [disabled]="savingEdit()">
               <div class="admin-manage-fields">
@@ -303,19 +300,6 @@
                   @if (editNameChecked() && managedNameError()) {
                     <p id="manage-account-name-error" class="field-error" role="alert">{{ managedNameError() }}</p>
                   }
-                </div>
-                <div>
-                  <label for="manage-account-enrollment">Matrícula <span class="optional">opcional</span></label>
-                  <input
-                    id="manage-account-enrollment"
-                    name="manageEnrollment"
-                    maxlength="12"
-                    [(ngModel)]="editForm.enrollment"
-                    placeholder="PE3012345"
-                    autocapitalize="characters"
-                    spellcheck="false"
-                    autocomplete="off"
-                  />
                 </div>
                 <div class="admin-field-wide">
                   <label for="manage-account-email">E-mail</label>
@@ -362,7 +346,7 @@
                     name="manageReason"
                     maxlength="160"
                     [(ngModel)]="editForm.reason"
-                    placeholder="Ex.: matrícula corrigida a pedido da coordenação"
+                    placeholder="Ex.: e-mail corrigido a pedido da pessoa"
                     autocomplete="off"
                   />
                 </div>

@@ -103,42 +103,18 @@
           </p>
         </div>
         @if (mode === "register") {
-          <div class="account-field">
-            <label for="account-enrollment"
-              >Matrícula <span class="optional">opcional</span></label
-            >
-            <input
-              id="account-enrollment"
-              name="enrollment"
-              [(ngModel)]="enrollment"
-              maxlength="12"
-              autocapitalize="characters"
-              spellcheck="false"
-              placeholder="PE3012345"
-              aria-describedby="enrollment-help enrollment-error"
-              [attr.aria-invalid]="submitted && enrollmentError() ? true : null"
-            />
-            <p id="enrollment-help" class="account-help">
-              Para quem está na turma de preparação: liga a conta à chamada.
-            </p>
-            <p id="enrollment-error" class="field-error">
-              @if (submitted && enrollmentError()) {
-                {{ enrollmentError() }}
-              }
-            </p>
-          </div>
           <p class="account-limit">
             Ainda não há recuperação de senha por e-mail: guarde a sua ou peça redefinição à administração.
           </p>
           <details class="account-privacy">
             <summary>Como usamos seus dados</summary>
             <ul>
-              <li>Guardamos seu e-mail, a senha (só em forma cifrada, sem como recuperá-la), o nome e a matrícula, se você informar, e o seu estudo: respostas, treinos, provas e discursivas.</li>
-              <li>Isso serve para salvar seu progresso. Se a sua matrícula estiver na lista de uma turma de preparação, os professores e a administração veem sua presença e seu desempenho por área.</li>
-              <li>A administração vê a lista de contas: nome, e-mail, matrícula, papéis e quantidade de respostas.</li>
+              <li>Guardamos seu e-mail, a senha (só em forma cifrada, sem como recuperá-la), o nome e o seu estudo: respostas, treinos, provas e discursivas.</li>
+              <li>Isso serve para salvar seu progresso.</li>
+              <li>A administração vê a lista de contas: nome, e-mail, papéis e quantidade de respostas.</li>
               <li>Para segurança, registramos entradas, tentativas com senha errada e mudanças na conta, com data e endereço IP. A administração consulta esse registro, que é apagado depois de 180 dias.</li>
               <li>Não usamos seus dados para publicidade e não os enviamos a outros serviços.</li>
-              <li>Você corrige nome, matrícula, e-mail e senha em Meu perfil (clique no seu e-mail no topo). Se esquecer a senha ou quiser excluir a conta, peça à administração da plataforma.</li>
+              <li>Você corrige nome, e-mail e senha em Meu perfil (clique no seu e-mail no topo). Se esquecer a senha ou quiser excluir a conta, peça à administração da plataforma.</li>
             </ul>
           </details>
         }

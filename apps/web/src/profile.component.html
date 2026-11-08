@@ -15,7 +15,6 @@
       <p class="profile-name">{{ loaded()!.name || "Sem nome" }}</p>
       <dl class="profile-facts">
         <div><dt>E-mail</dt><dd>{{ loaded()!.email }}</dd></div>
-        <div><dt>Matrícula</dt><dd>{{ loaded()!.enrollment || "não informado" }}</dd></div>
         @if (memberSince()) {
           <div><dt>Desde</dt><dd>{{ memberSince() }}</dd></div>
         }
@@ -44,21 +43,6 @@
           <p id="profile-name-error" class="field-error">{{ profileSubmitted ? nameError() : "" }}</p>
         </div>
         <div class="account-field">
-          <label for="profile-enrollment">Matrícula <span class="optional">opcional</span></label>
-          <input
-            id="profile-enrollment"
-            name="enrollment"
-            [(ngModel)]="enrollment"
-            maxlength="12"
-            autocapitalize="characters"
-            spellcheck="false"
-            placeholder="PE3012345"
-            aria-describedby="profile-enrollment-error"
-            [attr.aria-invalid]="enrollmentError() ? true : null"
-          />
-          <p id="profile-enrollment-error" class="field-error">{{ enrollmentError() }}</p>
-        </div>
-        <div class="account-field">
           <label for="profile-email">E-mail</label>
           <input
             id="profile-email"
@@ -83,7 +67,7 @@
               maxlength="256"
               autocomplete="current-password"
             />
-            <p class="account-help">{{ emailChanged() ? "Você passa a entrar com o novo e-mail." : "Exigida ao alterar uma matrícula já salva." }}</p>
+            <p class="account-help">{{ emailChanged() ? "Você passa a entrar com o novo e-mail." : "Exigida ao alterar o e-mail." }}</p>
           </div>
         }
         <button type="submit">{{ savingProfile() ? "Salvando…" : "Salvar dados" }}</button>
