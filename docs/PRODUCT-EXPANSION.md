@@ -18,11 +18,11 @@ A melhor próxima hipótese é **preparação em Computação, começando por PO
 | ENEM/vestibulares | [Professor Ferretto](https://www.professorferretto.com.br/) | questões resolvidas em vídeo, filtros, revisão dos erros, aulas, prática e planejamento | não presumir que uma plataforma grande precise do nosso motor |
 | Medicina | [MedQ](https://medq.com.br/) | questões comentadas, agenda adaptativa e revisão espaçada para residência/Revalida | revisão inteligente também não é novidade exclusiva |
 | Medicina | [Medway](https://www.medway.com.br/) | questões comentadas alternativa a alternativa, professores, aulas e preparação por prova | exige competir com conteúdo especializado e distribuição |
-| Escolas | [Estuda Escolas](https://estudaescolas.com.br/) | página institucional específica para escolas, a aprofundar em demonstração comercial | B2B também tem concorrentes; não declarar white label ou integração disponível sem conferir contrato |
+| Escolas | [Estuda Escolas](https://estudaescolas.com.br/) | banco para escolas, criação/importação de questões por professores, listas e simulados; fluxo autenticado não testado | B2B também tem concorrentes; não declarar white label ou integração disponível sem conferir contrato |
 
 Números de usuários/aprovações e tamanho de bancos nessas páginas são publicidade dos fornecedores, não medidas auditadas por nós. Não foram comparados preços de checkout, contratos, suporte ou qualidade de correção. A página tentada de Estratégia Questões não forneceu conteúdo legível nesta coleta e não sustenta conclusões.
 
-Fontes oficiais consultadas: [SBC/POSCOMP](https://www.sbc.org.br/poscomp/), [Inep: provas do ENEM](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos), [Inep: ENAMED](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enamed). Confirmam referências públicas para aquisição; não fiz download nem inventário integral de todos os anos. A página atual do ENAMED descreve mudanças de integração/periodicidade: conferir regulamento e edição antes de implementar, preservando ENADE Medicina, ENAMED, ENARE e Revalida como origens distintas.
+Fontes oficiais consultadas: [SBC/POSCOMP](https://www.sbc.org.br/poscomp/), [Inep: provas do ENEM](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos), [Inep: ENAMED](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enamed). O [arquivo público de ENAMED](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enamed/provas-e-gabaritos) exibe abas 2025/2026; os PDFs dessas abas não foram conferidos. Os índices confirmam referências públicas para aquisição; não fiz download nem inventário integral de todos os anos. A página atual do ENAMED descreve mudanças de integração/periodicidade: conferir regulamento e edição antes de implementar, preservando ENADE Medicina, ENAMED, ENARE e Revalida como origens distintas.
 
 ## 3. Prioridade por vertical
 
@@ -68,6 +68,8 @@ Contratos a desenhar: família de exame → edição/aplicação → caderno →
 Taxonomias por domínio/exame com vínculos explícitos, evitando transformar todas as matérias numa lista universal. Regras de montagem, elegibilidade e pontuação por formato. Acertos percentuais não são nota oficial TRI; estimativas exigem método validado, dados e rótulo apropriados. A correção de redação exige rubrica e processo próprios.
 
 Instituições/turmas não devem depender do IFSP. Se vender a organizações, definir escopo de propriedade, compartilhamento e autorização no servidor antes de abrir acesso; não oferecer isolamento comercial sem testes. Material global e material privado do parceiro exigem contratos distintos. Conta única entre produtos é possibilidade, não autorização para compartilhar histórico com qualquer escola.
+
+Escala de acervo e escala de clientes são problemas diferentes. Manter paginação e índices adequados no PostgreSQL, ativos em armazenamento de objetos/CDN quando compensar, processamento de importações em segundo plano e backups verificáveis. Medir latência, custo e concorrência reais antes de separar serviços. Não foi executado benchmark de carga nesta pesquisa.
 
 Domínio `cadernocc.com.br` combina com Computação. Se a expansão geral se provar, decidir marca guarda-chuva depois; não renomear agora nem criar vários deploys apenas para ter subdomínios.
 
