@@ -79,6 +79,8 @@ A principal variável inicial é custo de conteúdo confiável e distribuição,
 
 Margem de contribuição = receita líquida − custos variáveis de uso, curadoria/atendimento e canal atribuíveis ao cliente. Separar custo de criar acervo de custo recorrente de mantê-lo. Comparar essa margem com desenvolvimento, manutenção e despesas fixas. Registrar retenção por ciclo de prova e renovação, não presumir assinatura anual a partir de teste gratuito.
 
+Antes de comercializar ou licenciar a plataforma, confirmar também a titularidade/licença do próprio software e eventuais acordos com IFSP/Fábrica de Software. A menção institucional não demonstra propriedade nem impedimento comercial; é uma pendência a esclarecer com os envolvidos.
+
 Antes de comercializar, confirmar condições de reutilização comercial das fontes e de textos/imagens nelas incluídos. PDF público não comprova licença irrestrita; comentários e vídeos de concorrentes não podem virar nosso acervo. Contratos com professores devem definir autoria/licença, atualização, uso de IA, remuneração e correção de erros. No ENEM, considerar usuários menores e o tratamento de dados no desenho comercial. Estas são pendências concretas de diligência, não parecer jurídico feito nesta pesquisa.
 
 ## 8. Experimentos e critérios de decisão
@@ -87,7 +89,7 @@ Antes de comercializar, confirmar condições de reutilização comercial das fo
 
 **Piloto POSCOMP:** inventariar todos os anos disponíveis; adquirir inicialmente duas edições confirmadas e publicar um lote pequeno (20–50 questões) cobrindo diagrama, fórmula e texto longo. Conferir 100% das associações item/alternativas/gabarito desse lote; erro conhecido de chave/corte impede publicar o item. Depois ampliar por ano com recibos de cobertura, sem prometer acervo completo antes da conferência.
 
-**Piloto comercial:** um professor com audiência própria e uma turma pequena usando o produto por um ciclo curto acordado. Verificar uso recorrente, erros encontrados, horas de curadoria/suporte e compromisso real de pagamento/renovação. Elogio ou cadastro não contam como validação financeira.
+**Piloto comercial:** escolher antes quem compra (aluno B2C ou professor/cursinho B2B), qual tarefa e qual oferta serão testadas. Não misturar disposição do aluno de usar com disposição do professor de pagar. Na hipótese B2B, um professor com audiência própria e uma turma pequena usando o produto por um ciclo curto acordado. Verificar uso recorrente, erros encontrados, horas de curadoria/suporte e compromisso real de pagamento/renovação. Elogio ou cadastro não contam como validação financeira.
 
 **Continuar:** demanda recorrente, conteúdo confiável e custo sustentável com parceiro disposto a pagar. **Reformular:** público usa, mas valor está em outra tarefa ou formato. **Pausar vertical:** não há parceiro competente, fontes utilizáveis ou motivo verificável para trocar a solução atual. Não há meta numérica de retenção validada; defini-la antes do piloto a partir do canal e da oferta.
 
