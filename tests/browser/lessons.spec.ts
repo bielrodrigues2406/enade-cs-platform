@@ -73,7 +73,7 @@ test("a professor creates a class, pastes the roster, schedules a lesson, takes 
   await expect(page.locator(".dash-areas")).toContainText("Banco de dados");
   await expect(page.locator(".dash-areas")).toContainText("amostra pequena");
   await expect(summary).toContainText("Abaixo de 75%1 aluno");
-  await expect(page.getByRole("row", { name: /Bruno TEST ONLY/ })).toContainText("Sem conta com este prontuário");
+  await expect(page.getByRole("row", { name: /Bruno TEST ONLY/ })).toContainText("Sem conta com esta matrícula");
   for (const width of [390, 1280]) {
     await page.setViewportSize({ width, height: 900 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `largura ${width}`).toBe(true);

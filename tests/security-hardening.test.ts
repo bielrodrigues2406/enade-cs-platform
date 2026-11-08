@@ -54,7 +54,7 @@ async function registerUser(opts: { name?: string; enrollment?: string; password
   });
   let cookie = guest.headers.get("set-cookie")!.split(";")[0];
   const email = `sec-${randomUUID().slice(0, 8)}@example.invalid`;
-  const password = opts.password ?? "Seguranca campus 2026!";
+  const password = opts.password ?? "Seguranca estudo 2026!";
   createdEmails.push(email);
   const res = await fetch(`${base}/api/auth/register`, {
     method: "POST",
@@ -203,7 +203,7 @@ test("profile preserves omitted enrollment, requires currentPassword to change e
     method: "POST",
     headers: { Cookie: admin.cookie, "Content-Type": "application/json" },
     body: JSON.stringify({
-      text: `=HYPERLINK("http://evil.invalid");${enrollment};titular.real@aluno.ifsp.edu.br`,
+      text: `=HYPERLINK("http://evil.invalid");${enrollment};titular.real@aluno.exemplo.edu.br`,
     }),
   });
   assert.equal(rosterRes.status, 200);

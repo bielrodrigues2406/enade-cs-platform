@@ -11,7 +11,7 @@ import { applyInvitations, requireRole, rolesOf, type Role } from "./roles.js";
 import { logActivity, recordActivity, requestIp } from "./activity.js";
 
 // Manutenção administrativa de contas (ADM-2): correção cadastral (nome,
-// prontuário e e-mail), redefinição de senha com encerramento de sessões e
+// matrícula e e-mail), redefinição de senha com encerramento de sessões e
 // revogação avulsa de sessões ativas. Tudo revalida o papel ADMIN na transação
 // e registra auditoria sem guardar senhas ou tokens.
 
@@ -168,7 +168,7 @@ async function inTransaction<T>(work: (client: PoolClient) => Promise<T>): Promi
     return result;
   } catch (error: any) {
     await client.query("ROLLBACK");
-    if (error?.code === "23505") fail("Esse e-mail ou prontuário já está ligado a outra conta.", 409);
+    if (error?.code === "23505") fail("Esse e-mail ou matrícula já está em uso por outra conta.", 409);
     throw error;
   } finally {
     client.release();
@@ -219,7 +219,7 @@ export class AdminAccountsController {
         enrollment &&
         (await client.query("SELECT 1 FROM account WHERE enrollment=$1 AND identity_id<>$2", [enrollment, id])).rowCount
       ) {
-        fail("Esse prontuário já está ligado a outra conta.", 409);
+        fail("Essa matrícula já está ligada a outra conta.", 409);
       }
       if (
         nextEmail !== target.email &&
@@ -248,7 +248,7 @@ export class AdminAccountsController {
           action: "ADMIN_PROFILE_UPDATED",
           actorId: actor.id,
           subject: nextEmail,
-          detail: withReason(enrollment ? `Prontuário: ${enrollment}` : "Sem prontuário", reason),
+          detail: withReason(enrollment ? `Matrícula: ${enrollment}` : "Sem matrícula", reason),
         });
       }
       return { id, email: nextEmail, name, enrollment };

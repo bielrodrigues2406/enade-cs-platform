@@ -55,9 +55,9 @@ const call = (cookie: string, path: string, method = "GET", body?: unknown) => f
 });
 
 test("the roster parser reads pasted spreadsheet rows in any column order and skips headers", () => {
-  const { rows, skipped } = parseRoster("Nome\tProntuário\tE-mail\nAna Souza\tpe3012345\tana@ifsp.edu.br\nPE3099999;Bruno Lima\nsem prontuário\n");
+  const { rows, skipped } = parseRoster("Nome\tProntuário\tE-mail\nAna Souza\tpe3012345\tana@exemplo.edu.br\nPE3099999;Bruno Lima\nsem prontuário\n");
   assert.deepEqual(rows, [
-    { name: "Ana Souza", enrollment: "PE3012345", email: "ana@ifsp.edu.br" },
+    { name: "Ana Souza", enrollment: "PE3012345", email: "ana@exemplo.edu.br" },
     { name: "Bruno Lima", enrollment: "PE3099999", email: null },
   ]);
   assert.equal(skipped, 2);
@@ -103,7 +103,7 @@ test("professors run classes, roll calls and exports; students see only their ow
   })).status, 400);
 
   const csv = await (await call(professor.cookie, `classes/${id}/attendance.csv`)).text();
-  assert.match(csv, /Nome;Prontuário;\d{2}\/\d{2}\/\d{4};Presenças;%/);
+  assert.match(csv, /Nome;Matrícula;\d{2}\/\d{2}\/\d{4};Presenças;%/);
   assert.match(csv, new RegExp(`${linked};(P|J);`));
 
   // O aluno que cria conta com o prontuário da lista vê a aula e a presença.

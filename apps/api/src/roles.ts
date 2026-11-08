@@ -181,7 +181,7 @@ export class RolesController {
     const encoded = await hashPassword(password);
     return inTransaction(async (client) => {
       if (enrollment && (await client.query("SELECT 1 FROM account WHERE enrollment=$1", [enrollment])).rowCount)
-        fail("Esse prontuário já está ligado a outra conta.", 409);
+        fail("Essa matrícula já está ligada a outra conta.", 409);
       if ((await client.query("SELECT 1 FROM account WHERE email=$1", [email])).rowCount)
         fail("Esse e-mail já tem conta. Use Autorizar e-mail para dar o papel.", 409);
       const id = randomUUID();

@@ -24,7 +24,7 @@ test("common passwords, sequences and repeated characters are refused regardless
 
 test("the owner's name, e-mail, enrollment and the site name are refused inside the password", () => {
   for (const password of ["maria2026!", "Souza#2026", "pe3012345x", "Enade2026!", "meu cadernocc"])
-    assert.match(passwordProblem(password, owner)!, /nome, e-mail, prontuário/, password);
+    assert.match(passwordProblem(password, owner)!, /nome, e-mail, matrícula/, password);
   // Partes curtas do nome (menos de 4 letras) não bloqueiam senhas comuns de uma pessoa chamada "Ana".
   assert.equal(passwordProblem("ana-viaja-9", { name: "Ana Lu" }), null);
 });

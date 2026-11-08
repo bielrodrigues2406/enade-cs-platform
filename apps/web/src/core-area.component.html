@@ -83,37 +83,43 @@
 
     <section class="core-section" aria-labelledby="core-concepts-title">
       <h2 id="core-concepts-title">Conceitos essenciais</h2>
-      <p class="core-muted">Para cada um: você conseguiria explicar a alguém agora, sem consultar?</p>
+      <p class="core-muted">Para cada um: você conseguiria explicar a alguém agora, sem consultar? Marque e acompanhe a confiança da área.</p>
       <ol class="core-concepts">
         @for (c of a.concepts; track c.id; let i = $index) {
-          <li class="core-concept" [style.--delay]="i">
-            <h3>{{ c.name }}</h3>
-            <p>{{ c.definition }}</p>
-            <p class="core-example"><strong>Exemplo:</strong> {{ c.example }}</p>
-            @if (c.lesson) {
-              <button type="button" class="text-button core-read" [attr.data-lesson]="c.id" [attr.aria-label]="'Ler a lição: ' + c.name" (click)="read(c)">Ler a lição <span aria-hidden="true">→</span></button>
-            }
-            <div class="core-rating" role="radiogroup" [attr.aria-label]="'Quanto você sabe de ' + c.name">
-              @for (l of levels; track l.value; let li = $index) {
-                <button type="button" role="radio" [attr.aria-checked]="c.level === l.value" [class]="'core-level level-' + l.value"
-                  [attr.tabindex]="(c.level ?? levels[0].value) === l.value ? 0 : -1"
-                  [disabled]="saving() !== null && saving() !== c.id" (click)="rate(c, l.value)" (keydown)="ratingKey($event, c, li)">{{ l.label }}</button>
-              }
-            </div>
-            @if (c.generated.length) {
-              <details class="core-questions">
-                <summary>{{ c.generated.length }} {{ c.generated.length === 1 ? "questão gerada" : "questões geradas" }} para praticar</summary>
-                <ul>
-                  @for (g of c.generated; track g.id) {
-                    <li><button type="button" class="text-button" (click)="question.emit(g.id)">{{ g.title }}</button></li>
+          <li class="core-concept" [style.--delay]="i" [attr.data-level]="c.level">
+            <div class="core-concept-row">
+              <span class="core-concept-n" aria-hidden="true">{{ (i + 1).toString().padStart(2, "0") }}</span>
+              <div class="core-concept-main">
+                <h3>{{ c.name }}</h3>
+                <p class="core-concept-def">{{ c.definition }}</p>
+                <p class="core-concept-meta">
+                  @if (c.appearances.length) {
+                    <span class="core-hits">Caiu {{ c.appearances.length }}× · {{ yearsOf(c) }}</span>
+                  } @else {
+                    <span>Sem questão ligada neste recorte do acervo (2005 a 2021)</span>
                   }
-                </ul>
-              </details>
-            }
-            @if (c.appearances.length) {
-              <details class="core-questions">
-                <summary>Caiu em {{ c.appearances.length }} {{ c.appearances.length === 1 ? "questão oficial" : "questões oficiais" }}</summary>
-                <ul>
+                  @if (c.generated.length) { <span>{{ c.generated.length }} {{ c.generated.length === 1 ? "gerada" : "geradas" }} para treinar</span> }
+                </p>
+              </div>
+              <div class="core-concept-actions">
+                <div class="core-rating" role="radiogroup" [attr.aria-label]="'Quanto você sabe de ' + c.name">
+                  @for (l of levels; track l.value; let li = $index) {
+                    <button type="button" role="radio" [attr.aria-checked]="c.level === l.value" [class]="'core-level level-' + l.value"
+                      [attr.tabindex]="(c.level ?? levels[0].value) === l.value ? 0 : -1"
+                      [disabled]="saving() !== null && saving() !== c.id" (click)="rate(c, l.value)" (keydown)="ratingKey($event, c, li)">{{ l.label }}</button>
+                  }
+                </div>
+                @if (c.lesson) {
+                  <button type="button" class="text-button core-read" [attr.data-lesson]="c.id" [attr.aria-label]="'Ler a lição: ' + c.name" (click)="read(c)">Ler a lição <span aria-hidden="true">→</span></button>
+                }
+              </div>
+            </div>
+            <details class="core-concept-more">
+              <summary>Exemplo e questões</summary>
+              <p class="core-example"><strong>Exemplo:</strong> {{ c.example }}</p>
+              @if (c.appearances.length) {
+                <p class="core-more-title">Questões oficiais</p>
+                <ul class="core-questions">
                   @for (q of c.appearances; track $index) {
                     <li>
                       @if (q.id) {
@@ -124,10 +130,16 @@
                     </li>
                   }
                 </ul>
-              </details>
-            } @else {
-              <p class="core-fundamental">Sem questão ligada neste recorte do acervo (2005 a 2021).</p>
-            }
+              }
+              @if (c.generated.length) {
+                <p class="core-more-title">Geradas por IA, para treinar</p>
+                <ul class="core-questions">
+                  @for (g of c.generated; track g.id) {
+                    <li><button type="button" class="text-button" (click)="question.emit(g.id)">{{ g.title }}</button></li>
+                  }
+                </ul>
+              }
+            </details>
           </li>
         }
       </ol>

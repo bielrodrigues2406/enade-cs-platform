@@ -186,6 +186,9 @@ export class CoreAreaComponent {
     }, { injector: this.injector });
   }
 
+  /** Anos em que o conceito caiu, sem repetir, do mais antigo ao mais recente. */
+  yearsOf(c: CoreConcept) { return [...new Set(c.appearances.map((q) => q.year))].sort().join(", "); }
+
   rated() { return (this.area()?.concepts ?? []).filter((c) => c.level !== null).length; }
   tone(value: number) { return value >= 70 ? "is-high" : value >= 40 ? "is-mid" : "is-low"; }
 

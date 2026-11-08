@@ -7,7 +7,7 @@ import { rolesOf } from "./roles.js";
 import { recordActivity } from "./activity.js";
 
 // Turmas, aulas e presença (AULA-1, D13). Professores e administração
-// gerenciam; o aluno vê as aulas da turma em que seu prontuário está.
+// gerenciam; o aluno vê as aulas da turma em que sua matrícula está.
 
 const ID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 const ENROLLMENT = /^[A-Z]{2}[0-9]{6,8}X?$/;
@@ -29,9 +29,9 @@ function text(value: unknown, label: string, min: number, max: number) {
 
 export type RosterRow = { name: string; enrollment: string; email: string | null };
 /**
- * Lê a lista colada da planilha: uma pessoa por linha, com nome e prontuário
+ * Lê a lista colada da planilha: uma pessoa por linha, com nome e matrícula
  * (e-mail opcional), separados por tabulação, ponto e vírgula ou vírgula. A
- * ordem das colunas não importa; linhas sem prontuário (cabeçalho) são puladas.
+ * ordem das colunas não importa; linhas sem matrícula (cabeçalho) são puladas.
  */
 export function parseRoster(input: string): { rows: RosterRow[]; skipped: number } {
   const rows: RosterRow[] = [];
@@ -76,7 +76,7 @@ export class LessonsController {
     uuid(id, "Turma");
     const info = (await db.query(`SELECT id,name,edition_year AS "editionYear" FROM study_class WHERE id=$1`, [id])).rows[0];
     if (!info) fail("Turma não encontrada.", 404);
-    // Presença de cada aluno e se já tem conta (mesmo prontuário e, quando informado na lista, mesmo e-mail).
+    // Presença de cada aluno e se já tem conta (mesma matrícula e, quando informado na lista, mesmo e-mail).
     const members = (await db.query(
       `SELECT m.id,m.name,m.enrollment,m.email,(a.identity_id IS NOT NULL) AS "hasAccount",
          count(t.*) FILTER (WHERE t.status IN ('PRESENT','LATE'))::int AS present,
@@ -111,7 +111,7 @@ export class LessonsController {
     uuid(id, "Turma");
     if (typeof body?.text !== "string" || body.text.length > 60000) fail("Cole a lista da planilha.", 400);
     const { rows, skipped } = parseRoster(body.text);
-    if (!rows.length) fail("Nenhuma linha com nome e prontuário foi encontrada.", 400);
+    if (!rows.length) fail("Nenhuma linha com nome e matrícula foi encontrada.", 400);
     if (rows.length > 300) fail("Importe no máximo 300 alunos por vez.", 400);
     const client = await db.connect();
     let added = 0, updated = 0;
@@ -229,7 +229,7 @@ export class LessonsController {
       return /[;",\r\n]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
     };
     const date = (d: Date) => d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
-    const lines = [["Nome", "Prontuário", ...lessons.map((l) => date(l.starts_at)), "Presenças", "%"].join(";")];
+    const lines = [["Nome", "Matrícula", ...lessons.map((l) => date(l.starts_at)), "Presenças", "%"].join(";")];
     for (const member of members) {
       const row = lessons.map((l) => status.get(`${l.id}:${member.id}`) ?? "");
       const present = row.filter((s) => s === "P" || s === "A").length;
@@ -241,7 +241,7 @@ export class LessonsController {
     res.end("﻿" + lines.join("\r\n") + "\r\n");
   }
 
-  // Aluno: aulas da(s) turma(s) do seu prontuário e a própria presença.
+  // Aluno: aulas da(s) turma(s) da sua matrícula e a própria presença.
   @Get("my/lessons") async myLessons(@Req() req: any) {
     const user = await requireIdentity(req);
     if (!user.email) return { lessons: [] };

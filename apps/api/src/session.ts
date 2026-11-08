@@ -72,7 +72,7 @@ export function setSessionCookie(res: any, token: string) {
     sameSite: "strict",
     secure: production,
     maxAge: 30 * 86400000,
-    // __Host- exige Path=/ e proíbe Domain no navegador, impedindo subdomínios vizinhos (*.ifsp.edu.br) de forjar o cookie.
+    // __Host- exige Path=/ e proíbe Domain no navegador, impedindo subdomínios vizinhos (outros subdomínios do mesmo domínio) de forjar o cookie.
     path: production ? "/" : "/api",
   });
 }

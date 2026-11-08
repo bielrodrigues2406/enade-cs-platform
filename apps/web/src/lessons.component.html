@@ -9,7 +9,7 @@
   @if (!staff) {
     <h1 id="lessons-title">Minhas aulas</h1>
     <p class="admin-intro">
-      Aulas de preparação da sua turma. Elas aparecem quando o seu prontuário
+      Aulas de preparação da sua turma. Elas aparecem quando a sua matrícula
       está na lista da turma e na sua conta.
     </p>
     @if (mine(); as lessons) {
@@ -29,7 +29,7 @@
       } @else {
         <p class="muted">
           Nenhuma aula para você ainda. Se você participa da preparação,
-          confira se informou o prontuário no cadastro.
+          confira se informou a matrícula no cadastro.
         </p>
       }
     }
@@ -142,12 +142,12 @@
         <button type="button" class="outline" (click)="rosterDialog.showModal()">Adicionar alunos</button>
       </div>
       @if (!cls.members.length) {
-        <p class="muted">Ninguém na lista ainda. Cole os nomes e prontuários da planilha em "Adicionar alunos".</p>
+        <p class="muted">Ninguém na lista ainda. Cole os nomes e matrículas da planilha em "Adicionar alunos".</p>
       }
       @if (cls.members.length) {
         <div class="admin-table-wrap">
           <table class="admin-table">
-            <thead><tr><th scope="col">Nome</th><th scope="col">Prontuário</th><th scope="col">Conta</th><th scope="col">Presença</th><th scope="col"><span class="visually-hidden">Ações</span></th></tr></thead>
+            <thead><tr><th scope="col">Nome</th><th scope="col">Matrícula</th><th scope="col">Conta</th><th scope="col">Presença</th><th scope="col"><span class="visually-hidden">Ações</span></th></tr></thead>
             <tbody>
               @for (member of cls.members; track member.id) {
                 <tr>
@@ -166,7 +166,7 @@
         <div class="sheet-dialog-head"><div><p class="sheet-dialog-eyebrow">{{ cls.name }}</p><h2 id="roster-import-title">Adicionar alunos</h2></div><button type="button" class="sheet-close" (click)="rosterDialog.close()" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></button></div>
         <form class="sheet-dialog-body" (ngSubmit)="importRoster(rosterDialog)">
           <div class="sheet-dialog-content">
-          <label for="roster-text">Copie da planilha as colunas de nome e prontuário (e-mail opcional) e cole aqui. A ordem das colunas não importa.</label>
+          <label for="roster-text">Copie da planilha as colunas de nome e matrícula (e-mail opcional) e cole aqui. A ordem das colunas não importa.</label>
           <textarea id="roster-text" name="rosterText" rows="8" [(ngModel)]="rosterText" placeholder="Ana Souza	PE3012345&#10;Bruno Lima	PE3012346" autofocus></textarea>
           </div>
           <div class="sheet-dialog-actions">

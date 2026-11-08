@@ -27,7 +27,7 @@ export function normalizePassword(text: string) {
   return text.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
 }
 
-/** Partes com 4 ou mais letras do e-mail, do nome e o prontuário. */
+/** Partes com 4 ou mais letras do e-mail, do nome e a matrícula. */
 function personalWords(owner: PasswordOwner) {
   const local = owner.email?.split("@")[0] ?? "";
   return [...local.split(/[._+-]+/), ...(owner.name ?? "").split(/\s+/), owner.enrollment ?? "", ...SITE_WORDS]
@@ -52,7 +52,7 @@ export function passwordProblem(password: string, owner: PasswordOwner = {}): st
     return "Essa senha está entre as mais usadas. Escolha outra.";
   if (new Set(text).size < 4) return "Use caracteres mais variados.";
   if (personalWords(owner).some((word) => text.includes(word)))
-    return "A senha não pode conter seu nome, e-mail, prontuário ou o nome do site.";
+    return "A senha não pode conter seu nome, e-mail, matrícula ou o nome do site.";
   return null;
 }
 

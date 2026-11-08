@@ -112,7 +112,7 @@ export class LessonsComponent {
     await this.attempt(async () => {
       const result = await this.request<{ added: number; updated: number; skipped: number }>(`classes/${detail.id}/members`, { text: this.rosterText });
       dialog.close();
-      this.notice.set(`${result.added} adicionadas, ${result.updated} atualizadas` + (result.skipped ? `, ${result.skipped} linhas ignoradas (sem nome ou prontuário).` : "."));
+      this.notice.set(`${result.added} adicionadas, ${result.updated} atualizadas` + (result.skipped ? `, ${result.skipped} linhas ignoradas (sem nome ou matrícula).` : "."));
       this.rosterText = "";
       await this.openClass(detail.id);
     });

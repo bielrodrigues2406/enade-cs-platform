@@ -6,7 +6,7 @@ import { requireStaff } from "./lessons.js";
 // Painel do professor (PROF-1): presença e desempenho da turma. O desempenho
 // usa só a primeira tentativa de cada questão, para não premiar quem repete
 // até acertar, e sempre traz o tamanho da amostra. Só entram alunos cujo
-// prontuário da conta está na lista da turma (D13).
+// matrícula da conta está na lista da turma (D13).
 
 const ID = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 
