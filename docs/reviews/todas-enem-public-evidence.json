@@ -1,0 +1,58 @@
+{
+  "scope": "Leitura de páginas/HTML públicos; navegador bloqueado por confiança TLS local; sem cadastro, compra, teste autenticado ou certificação de qualidade.",
+  "repository_base": "4d52593",
+  "home": {
+    "url": "https://www.todasdoenem.com.br/",
+    "http_status": 200,
+    "html_sha256": "0ff2f8862ce3627f62e21ae61569483c43ba4fb2b65b313ce9bddb8cafd0838f"
+  },
+  "routes": [
+    {
+      "path": "/questoes",
+      "url": "https://www.todasdoenem.com.br/questoes",
+      "status": 200
+    },
+    {
+      "path": "/provas",
+      "url": "https://www.todasdoenem.com.br/provas",
+      "status": 200
+    },
+    {
+      "path": "/simulados",
+      "url": "https://www.todasdoenem.com.br/simulados",
+      "status": 200
+    },
+    {
+      "path": "/redacao",
+      "url": "https://www.todasdoenem.com.br/redacao",
+      "status": 200
+    },
+    {
+      "path": "/planos",
+      "url": "https://www.todasdoenem.com.br/planos",
+      "status": 200
+    },
+    {
+      "path": "/blog",
+      "url": "https://www.todasdoenem.com.br/blog",
+      "status": 200
+    },
+    {
+      "path": "/termos-de-uso",
+      "url": "https://www.todasdoenem.com.br/termos-de-uso",
+      "status": 200
+    },
+    {
+      "path": "/privacidade",
+      "url": "https://www.todasdoenem.com.br/privacidade",
+      "status": 200
+    },
+    {
+      "path": "/llms.txt",
+      "url": "https://www.todasdoenem.com.br/llms.txt",
+      "status": 200
+    }
+  ],
+  "claims_are_supplier_statements": true,
+  "raw_third_party_pages_not_committed": true
+}
