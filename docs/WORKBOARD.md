@@ -18,6 +18,7 @@ Sem lote oficial conferido, R1 sai com conteúdo autoral identificado como tal. 
 
 | ID | Tarefa | Dono | Status | Depende de | Branch / PR | Arquivos principais |
 | --- | --- | --- | --- | --- | --- | --- |
+| PROD-CC1 | Analisar Todas do ENEM e cenários de formação em Computação, roadmaps, certificados e conteúdo licenciado | Codex | proposta revisada; entrega junto ao merge após CI final | pedido de Gabriel | [#70](https://github.com/bielrodrigues2406/enade-cs-platform/pull/70), `codex/docs-computing-vision` | análise, panorama, diário e pedidos a Claude/Gemini |
 | PROD-PAN1 | Consolidar panorama das outras frentes, analisar referências enviadas e registrar POSCOMP aprovado | Codex | panorama entregue junto ao merge após CI final; tarefas de execução separadas | pedido direto de Gabriel | [#68](https://github.com/bielrodrigues2406/enade-cs-platform/pull/68), `codex/docs-expansion-panorama` | PRODUCT-EXPANSION-PANORAMA.md, PRODUCT-EXPANSION.md e quadro |
 | PROD-EXP1 | Pesquisar mercado e planejar expansão POSCOMP, ENEM e verticais com professores | Codex | plano entregue no PR #67, merge `539e795`; POSCOMP aprovado depois por Gabriel | pedido de Gabriel | [#67](https://github.com/bielrodrigues2406/enade-cs-platform/pull/67), `codex/docs-market-expansion` | PRODUCT-EXPANSION.md; perguntas para Claude |
 | EXP-QA1 | Conferir últimos PRs do Claude e fechar versão para teste local | Codex | entregue no PR #65, merge `400b54c`; CI verde e 17 Chromium focados | pedido de Gabriel | [#65](https://github.com/bielrodrigues2406/enade-cs-platform/pull/65), `codex/fix-experimental-readiness` | lições, regressão de navegação e roteiro local |
@@ -149,6 +150,20 @@ Candidatas, sem dono até entrarem na tabela de tarefas. Não contradizem MASTER
 
 Cada dossiê deve trazer evidência, público/comprador, fontes/condições de uso, formato/taxonomia, amostra candidata, especialista/canal possível, custos a medir e próximo experimento. O estudo das capturas de Pazzei/Ferretto/Resmedica/MedQ e do Reddit está no panorama; recursos aparentes não equivalem a fluxo atual testado. **Fora do escopo automático:** copiar menus, gráficos de radar sem amostra, tutor universal, vídeos de todas as questões, marketplace e forks por cliente.
 
+## Formação em Computação e credenciais — preparação
+
+Pedido de Gabriel após o panorama: analisar Todas do ENEM e estudar referência nacional em Computação, áreas profissionais, materiais ricos, certificados e parcerias. [Análise e cenários](COMPUTING-PLATFORM-VISION.md). O parecer compara páginas públicas e registra os limites da consulta. **POSCOMP mantém execução aprovada (D18); esta preparação não o bloqueia.** Objetivo de liderança é ambição a medir, não alegação de maior plataforma já demonstrada.
+
+| ID | Próxima entrega | Dono | Estado | Critério / limite |
+| --- | --- | --- | --- | --- |
+| CC-UNIT1 | Desenhar uma unidade autoral sobre SQL, junções e valores ausentes, com pré-requisitos, exemplo executável, fonte e aplicação nova | Codex | proposta de preparação; não produzida | reaproveitar padrão da Biblioteca e separar contexto exame/fundamento/prática; não expandir todos os cursos |
+| CC-ROAD1 | Mapear fundamentos e um percurso curto candidato; distinguir backend, dados, mobile e análise de sistemas por tarefas e pré-requisitos | Codex | proposta de preparação | usar competência e evidência, não checklist universal; matriz/relatório curricular ainda precisam de leitura e conferência |
+| CC-CERT1 | Definir critérios e rubrica para participação, conclusão e competência avaliada; avaliar valor para aluno/professor | Codex | proposta; sem emissão ou motor implementado | depende da avaliação de CC-UNIT1; documento verificável, escopo e condições explícitos; não prometer diploma/emprego/reconhecimento |
+| CC-LIC1 | Preparar catálogo de fontes/licenças e um escopo de parceria com autor/professor/instituição ou editora | Codex | proposta de preparação; ninguém contatado | distinguir link, adaptação, redistribuição e uso comercial; não copiar obra gratuita presumindo licença nem atribuir marca/parceria sem acordo |
+| CC-REV1 | Parecer sobre matriz, unidade e avaliação: lacunas, correção, fontes, contraprovas e custos pedagógicos | Gemini | solicitação no diário; sem parecer recebido | revisão posterior, sem simular consultas, validação psicométrica ou revisão humana |
+
+**Claude:** o parecer PAN-CORE1 passa a considerar também competência → atividade → evidência e os menores contratos para estes percursos, com arquivos afetados. Reservar a entrega antes de implementar; não duplicar POSCOMP ou iniciar LMS, IDE remota, marketplace e certificados em paralelo. **Gemini:** registrar CC-REV1 e contrapontos no diário quando analisar. A pesquisa não representa resposta/concordância de nenhum dos dois.
+
 ## Reservas de migration
 
 | Número | Tarefa | Dono |
@@ -206,10 +221,13 @@ Cada dossiê deve trazer evidência, público/comprador, fontes/condições de u
 | D16 | **Decidida por Gabriel em 30/10:** hospedagem no Render | Resolve D1 |
 | D17 | **Decidida por Gabriel em 03/11:** descartar VPS compartilhada + Caddy; operar no servidor institucional do câmpus IFSP durante novembro (`deploy/campus/` com Docker e Nginx do câmpus), com scripts documentados de atualização, backup, desligamento limpo ao fim do mês 11 e restauração integral para próximas equipes | Atualiza D16 e define DEP-4 |
 | D18 | **Confirmada por Gabriel após o PR #67:** POSCOMP aprovado para execução; preparar agora o panorama das outras frentes (ENEM/vestibulares, concursos TI, outros ENADE, Medicina e oferta para professores/cursinhos) | POS-INV1/POS-IMP1 seguem sem nova autorização comercial; demais frentes entram em preparação, não lançamento simultâneo |
+| D19 | **Pedido de análise de Gabriel após o PR #69:** estudar referência nacional em Computação, roadmaps profissionais, certificados e conteúdo autoral/licenciado; registrar para Claude e Gemini | PROD-CC1 e preparação CC-UNIT1/ROAD1/CERT1/LIC1/REV1; não é autorização implícita de parceria, selo oficial ou lançamento simultâneo; D18 preservada |
 
 ## Diário (handoffs)
 
 Entradas mais novas no topo. Formato: data · agente · tarefa · branch@commit · estado · próximo passo.
+
+- **Codex · PROD-CC1 · PR #70 · `codex/docs-computing-vision`:** por pedido de Gabriel, [visão de formação em Computação](COMPUTING-PLATFORM-VISION.md) com análise do Todas do ENEM e cenários de exames, fundamentos, carreiras e parceria institucional. Lidas dez páginas/descrições públicas, com [recibo](reviews/todas-enem-public-evidence.json); Playwright bloqueado por confiança TLS local, sem teste autenticado/compra/correção de redação. Comparamos roadmap.sh, OSSU, Alura, DIO, Rocketseat e Full Stack Open por ofertas públicas; referências CC BY/NC, Open Badges e canal de direitos Pearson consultados. Recomendação: POSCOMP conforme D18, uma competência aplicada, depois avaliar percurso e credencial de escopo restrito. Revisão independente aprovada, incorporando timestamps da coleta e evitando sugerir inventário POSCOMP já iniciado. Documento em `81f037f`; fechamento de quadro/recibo enviado nesta branch antes da integração autorizada, condicionada à CI final. **Claude/Gemini:** registrar parecer crítico no diário (§10 do documento e CC-REV1); sem resposta, entrevista, parceria ou acreditação simuladas. Links locais/JSON/diff conferidos; nenhuma aplicação, material didático novo, certificado, questão, migration ou deploy alterado.
 
 - **Codex · PROD-PAN1 · PR #68:** Gabriel confirmou POSCOMP aprovado para execução (D18) e preparação imediata das outras frentes. [Panorama](PRODUCT-EXPANSION-PANORAMA.md) analisa as sete capturas e fontes públicas (Pazzei limitado ao título/captura; navegador falhou TLS), com limites de evidência do Reddit, métricas e custo de IA. POS-INV1/POS-IMP1 separados da pesquisa comercial; PAN-TI1/ENADE1/ENEM1/MED1/PROF1 prontos para preparação; PAN-CORE1 proposto a Claude, ainda sem resposta/reserva. Revisão independente aprovada; links locais e diff conferidos. Commits de conteúdo `9305cf2` e organização `5d3c47d` enviados; integração autorizada condicionada à CI final, com commits preservados. PRs #65/#67 marcados entregues e reserva 034 alinhada ao arquivo já integrado (não é conferência do banco). Nenhum arquivo da aplicação, questão, migration ou deploy alterado; inventário POSCOMP não iniciado por esta entrega documental.
 

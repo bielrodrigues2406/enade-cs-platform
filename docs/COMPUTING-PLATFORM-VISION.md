@@ -123,7 +123,7 @@ Um primeiro parceiro pode ser professor, grupo de pesquisa, autor de material ab
 **Arquitetura:** reaproveitar questão/versionamento, conceitos, lições, progresso e turmas. Desenhar vínculos entre competência, pré-requisito, recurso, atividade e evidência antes de implementar. Não criar simultaneamente LMS, IDE online, motor de certificados e marketplace. Execução de código de alunos exigiria isolamento/limites próprios; um piloto pode começar com consulta/caso controlado ou revisão de entrega, sem infraestrutura arbitrária de código remoto.
 
 **Sequência proposta:**
-1. Continuar POSCOMP conforme D18, com fidelidade e cobertura visíveis.
+1. Executar POSCOMP conforme D18, com fidelidade e cobertura visíveis.
 2. Desenhar matriz mínima e uma unidade SQL completa; registrar licença/procedência e rubrica de aplicação nova.
 3. Observar uso dessa unidade em grupo pequeno e comparar entendimento/transferência, com limites da amostra explícitos. Não alegar efeito causal comprovado por depoimentos.
 4. Decidir se a unidade sustenta percurso curto e credencial de escopo restrito; só então implementar emissão/verificação proporcional.
